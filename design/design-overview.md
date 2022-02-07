@@ -20,9 +20,7 @@ ArkUI跨平台项目则是扩展ArkUI开发框架到其他OS平台-Android/iOS/W
 
 ## 2.总体视图 
 
- ![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-overview.png)
-
- 
+![](png/arkui-overview.png) 
 
 从设计之初，**跨平台**就作为ArkUI最基本的设计目标之一，当前已支持基础的跨平台架构.相关的设计思路如下：
 
@@ -47,8 +45,7 @@ ArkUI声明式UI后端引擎，主要完成整体pipeline流程控制、视图�
 
 以Android平台为例，提供Android平台的SDK及工具，可以让开发者同时构建出Openharmony版本hap及Android版本的apk。
 
-![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-deploy.png)
-
+![](png/arkui-deploy.png)
 
 
 ## 4.方案设计
@@ -211,7 +208,7 @@ ArkUI for Android的SDK中包含的内容有：
 
 按照最新的分仓架构，adapter/aosp作为独立仓，在Android版本上使用aosp和ArkUI核心仓即可构建上述内容
 
-![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-repo-structure.png) 
+![](png/arkui-repo-structure.png)
 
 **4.3** **操作系统抽象层**
 
@@ -227,8 +224,7 @@ ArkUI for Android的SDK中包含的内容有：
 
 以Log调用流程为例，整体交互流程如下：
 
-![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-log-sequence.png)
-
+![输入图片说明](png/arkui-log-sequence.png)
  
 
 如上述流程，Core模块直接使用Base提供的接口，Base模块对接口进行定义，对于依赖平台的能力，在编译期就选择了对应OS的平台抽象层OSAL。运行时，直接通过OSAL的实现，调用到具体平台相关的库中。
@@ -253,8 +249,7 @@ ArkUI for Android的SDK中包含的内容有：
 
 以Android的启动流程为例，整体交互流程如下：
 
-![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-startup-android.png)
-
+![](png/arkui-startup-android.png)
  
 
  
@@ -273,8 +268,8 @@ ArkUI for Android的SDK中包含的内容有：
 
 以剪切板ClipBoard为例，整体交互流程如下：
 
-![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-clipboard.png)
 
+![](png/arkui-clipboard.png)
 
 
 如上图，例如在框架核心层的TextField组件中，需要用到剪切板的能力，通过Proxy创建具体的ClipBoard实现，返回抽象的ClipBoard接口。在组件实现层即可实现平台无关的调用。以Android平台为例，GetData的调用会通过JNI调用到平台实现的Plugin中，然后Plugin通过访问剪切板服务实现对应的功能。
@@ -289,7 +284,7 @@ ArkUI for Android的SDK中包含的内容有：
 
 对于不同平台，**JS API需要遵循OHOS的API定义**，在不同平台上通过NAPI的扩展机制进行扩展。
 
-![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-api-extension.png) 
+![](png/arkui-api-extension.png)
 
 NAPI需求列表如下：
 
