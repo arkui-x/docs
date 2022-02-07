@@ -20,7 +20,7 @@ ArkUI跨平台项目则是扩展ArkUI开发框架到其他OS平台-Android/iOS/W
 
 ## 2.总体视图 
 
- ![](.\png\arkui-overview.png)
+ ![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-overview.png)
 
  
 
@@ -47,7 +47,7 @@ ArkUI声明式UI后端引擎，主要完成整体pipeline流程控制、视图�
 
 以Android平台为例，提供Android平台的SDK及工具，可以让开发者同时构建出Openharmony版本hap及Android版本的apk。
 
-![](.\png\arkui-deploy.png)
+![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-deploy.png)
 
 
 
@@ -211,7 +211,7 @@ ArkUI for Android的SDK中包含的内容有：
 
 按照最新的分仓架构，adapter/aosp作为独立仓，在Android版本上使用aosp和ArkUI核心仓即可构建上述内容
 
-![](.\png\arkui-repo-structure.png) 
+![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-repo-structure.png) 
 
 **4.3** **操作系统抽象层**
 
@@ -227,7 +227,7 @@ ArkUI for Android的SDK中包含的内容有：
 
 以Log调用流程为例，整体交互流程如下：
 
-![](.\png\arkui-log-sequence.png)
+![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-log-sequence.png)
 
  
 
@@ -253,7 +253,7 @@ ArkUI for Android的SDK中包含的内容有：
 
 以Android的启动流程为例，整体交互流程如下：
 
-![](.\png\arkui-startup-android.png)
+![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-startup-android.png)
 
  
 
@@ -273,7 +273,7 @@ ArkUI for Android的SDK中包含的内容有：
 
 以剪切板ClipBoard为例，整体交互流程如下：
 
-![](.\png\arkui-clipboard.png)
+![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-clipboard.png)
 
 
 
@@ -289,7 +289,7 @@ ArkUI for Android的SDK中包含的内容有：
 
 对于不同平台，**JS API需要遵循OHOS的API定义**，在不同平台上通过NAPI的扩展机制进行扩展。
 
-![](.\png\arkui-api-extension.png) 
+![](https://gitee.com/arkui-crossplatform/doc/blob/master/design/png/arkui-api-extension.png) 
 
 NAPI需求列表如下：
 
