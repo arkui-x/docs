@@ -5,6 +5,7 @@
     - [如何下载代码](https://gitee.com/arkui-crossplatform/manifest/blob/master/README.md)
     - [怎样编译代码](https://gitee.com/arkui-crossplatform/build/blob/arkui-master/README.md)
     - [如何贡献代码](https://gitee.com/openharmony/docs/blob/master/zh-cn/contribute/Readme-CN.md)
+    - [代码工程结构及构建说明](project-structure-guide.md)
     - ArkUI跨平台应用工程介绍
         - [如何使用ACE-TOOLS跨平台应用构建工具](how-to-use-ace-tools.md)
         - [跨平台应用工程示例](https://gitee.com/arkui-crossplatform/samples)
