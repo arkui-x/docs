@@ -10,15 +10,15 @@
 
 [应用开发文档](application-dev)
 
-[跨平台设计文档](design)
+[跨平台设计文档](design/design-overview.md)
 
 ## ArkUI-CrossPlatform文档版本分支说明
 
 ### 最新版本
 
-master：最新开发版本。  
+master：最新开发版本。
 
-发布ArkUI-CrossPlatform 1.0 Beta版本，[了解版本详情](release-notes/ArkUI-CrossPlatform-v1.0-beta.md)。
+发布ArkUI-CrossPlatform 1.0 Alpha版本，[了解版本详情](release-notes/ArkUI-CrossPlatform-v1.0-Alpha.md)。
 
 
 ## 第三方开源软件及许可说明
@@ -29,9 +29,9 @@ master：最新开发版本。
 
 ## 贡献
 
-非常欢迎您参与[贡献](https://gitee.com/openharmony/docs/blob/master/zh-cn/contribute/参与贡献.md)，我们鼓励开发者以各种方式参与文档反馈和贡献。
+非常欢迎您[参与贡献](./contribute/参与贡献.md)，我们鼓励开发者以各种方式参与文档反馈和贡献。
 
-您可以对现有文档进行评价、简单更改、反馈文档质量问题、贡献您的原创内容，详细请参考[贡献文档](https://gitee.com/openharmony/docs/blob/master/zh-cn/contribute/贡献文档.md)。
+您可以对现有文档进行评价、简单更改、反馈文档质量问题、贡献您的原创内容，详细请参考[贡献文档](./contribute/贡献文档.md)。
 
 卓越贡献者将会在开发者社区文档贡献专栏表彰公示。 
 
