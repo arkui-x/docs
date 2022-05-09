@@ -1,0 +1,45 @@
+## 应用开发
+
+##### 快速入门
+
+- [如何下载代码](https://gitee.com/arkui-crossplatform/manifest/blob/master/README.md)
+- [如何编译代码](https://gitee.com/arkui-crossplatform/build/blob/arkui-master/README.md)
+- [如何贡献代码](https://gitee.com/arkui-crossplatform/doc/blob/master/contribute/README.md)
+- [代码工程结构及构建说明](./quick-start/project-structure-guide.md)
+
+##### ArkUI跨平台应用工程说明
+
+- [跨平台应用工程结构](./quick-start/package-structure-guide.md)
+- [跨平台应用工程示例](https://gitee.com/arkui-crossplatform/samples)
+- 应用工程模块库管理
+  - [应用工程模块库创建指南](https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ohos-adding-deleting-module-0000001218760594)
+  - [应用工程模块库共享指南](https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ohos-development-npm-package-0000001222578434)
+
+##### ArkUI工具链
+
+- [ArkUI声明式范式编译转换工具](./quick-start/start-with-ace-ets2bundle.md)
+- [ArkUI类Web范式编译转换工具](./quick-start/start-with-ace-js2bundle.md)
+- [跨平台应用构建指南](./quick-start/start-with-ace-tools.md)
+
+##### 组件支持列表
+
+- [ArkUI跨平台组件列表](https://gitee.com/arkui-crossplatform/doc/blob/master/application-dev/components/arkui-component-list.md)
+
+##### 开发参考
+
+- [基于JS扩展的类Web开发范式](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/arkui-js/Readme-CN.md)
+- [基于TS扩展的声明式开发范式](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/Readme-CN.md)
+- [JS接口](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/Readme-CN.md)
+- Native接口
+  - [Native XComponent接口](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/native-apis/_o_h___native_x_component.md)
+  - [Node-API接口](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/native-lib/third_party_napi/napi.md)
+  - [libuv接口](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/native-lib/third_party_libuv/libuv.md)
+
+##### 示例教程
+
+- [示例代码](https://gitee.com/arkui-crossplatform/samples)
+
+##### 贡献
+
+- [参与贡献](https://gitee.com/arkui-crossplatform/doc/blob/master/contribute/参与贡献.md)
+

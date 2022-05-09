@@ -10,7 +10,7 @@ ArkUI开发框架包含类Web开发范式和声明式开发范式，本项目支
 
 **接口范围**
 
-本项目最终目标是跨平台支持OpenHarmony接口，Android和iOS跨平台接口桥接时需遵循OpenHarmony接口规范，接口桥接机制通过[NAPI机制]()实现，[样例展示]()。
+ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android和iOS平台通过[NAPI机制](https://gitee.com/openharmony/arkui_napi)扩展JS接口和实现OpenHarmony接口。比如：[Android平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-Android.md)和[iOS平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-iOS.md)。
 
 >说明：Alpha版本为跨平台项目首次发布的预览版本，暂不提供OpenHarmony接口实现。
 
@@ -22,7 +22,7 @@ ArkUI开发框架包含类Web开发范式和声明式开发范式，本项目支
 ./build.sh --product-name arkui-cross --target-os android --ccache
 ```
 
-> 说明：编译结果输出在 out/arkui-cross目录下，编译输出件用于ArkUI跨平台Android侧应用开发，[输出件列表和使用指南]()。
+> 说明：编译结果输出在 out/arkui-cross目录下，编译输出件用于ArkUI跨平台Android侧应用开发，[输出件列表和使用指南](../contribute/tutorial/how-to-build-Android-app.md)。
 
 * ArkUI支持iOS平台
 
@@ -30,7 +30,7 @@ ArkUI开发框架包含类Web开发范式和声明式开发范式，本项目支
 ./build.sh --product-name arkui-cross --target-os ios --ccache
 ```
 
-> 说明：编译结果输出在 out/arkui-cross目录下，编译输出件用于ArkUI跨平台iOS侧应用开发，[输出件列表和使用指南]()。
+> 说明：编译结果输出在 out/arkui-cross目录下，编译输出件用于ArkUI跨平台iOS侧应用开发，[输出件列表和使用指南](../contribute/tutorial/how-to-build-Android-app.md)。
 
 ##### 应用构建工具链
 
