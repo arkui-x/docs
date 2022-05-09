@@ -1,4 +1,12 @@
 # 贡献指南
 
-详情请参考：https://gitee.com/openharmony/docs/blob/master/zh-cn/contribute/Readme-CN.md
+- [参与贡献](参与贡献.md)
+- [行为守则](行为守则.md)
+- [贡献代码](贡献代码.md)
+- [贡献流程](贡献流程.md)
+- [自测试验证（待完善）](测试指南.md)
+- [贡献文档](贡献文档.md)
+- [写作规范](写作规范.md)
+- [社区沟通与交流（待完善）](社区沟通与交流.md)
+- [FAQ](FAQ.md)
 

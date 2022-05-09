@@ -1,5 +1,6 @@
 # ArkUI-CrossPlatform Release Notes
 
-### Arkui-CrossPlatform 1.x Releases
+### ArkUI-CrossPlatform 1.x Releases
 
-* Arkui-CrossPlatform v1.0 Beta (2022-04-XX)
+* [ArkUI-CrossPlatform v1.0 Alpha (2022-05-13)](ArkUI-CrossPlatform-v1.0-Alpha.md)
+
