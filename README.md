@@ -8,7 +8,7 @@
 
 [快速入门](application-dev/quick-start/README.md)
 
-[应用开发文档](application-dev)
+[应用开发文档](application-dev/README.md)
 
 [跨平台设计文档](design/design-overview.md)
 
