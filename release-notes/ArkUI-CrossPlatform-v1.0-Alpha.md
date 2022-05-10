@@ -30,7 +30,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android
 ./build.sh --product-name arkui-cross --target-os ios --ccache
 ```
 
-> 说明：编译结果输出在 out/arkui-cross目录下，编译输出件用于ArkUI跨平台iOS侧应用开发，[输出件列表和使用指南](../contribute/tutorial/how-to-build-Android-app.md)。
+> 说明：编译结果输出在 out/arkui-cross目录下，编译输出件用于ArkUI跨平台iOS侧应用开发，[输出件列表和使用指南](../contribute/tutorial/how-to-build-iOS-app.md)。
 
 ##### 应用构建工具链
 
