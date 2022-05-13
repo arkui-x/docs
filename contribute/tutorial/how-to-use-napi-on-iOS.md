@@ -5,10 +5,10 @@ TODO:补充在iOS平台如何使用NAPI机制扩展JS API和实现OpenHarmony AP
 iOS端不支持动态加载静态和动态库，不能使用dlopen和dlsym相关动态加载库和符号的api，只能通过原生工程一起打包编译完成NAPI的相关功能的使用
 
 ## 步骤
-1.编写相关的NAPI功能的c/cpp文件，做好安卓/iOS/OHOS相关终端的源码实现适配
+1.编写相关的NAPI功能的c/cpp文件，做好Android/iOS/OHOS相关终端的源码实现适配
 比如拿`napi/sample/native_module_calc/napi_calc.cpp`做分析
 
-2.改造`native_module_calc`源文件
+2.改造`napi_calc`源文件
 针对`_binary_calc_js_start`和`_binary_calc_js_end`相关代码做好iOS平台编译区分
 ```
 #ifndef IOS_PLATFORM
@@ -32,7 +32,7 @@ extern "C" __attribute__((visibility("default"))) void NAPI_calc_GetJSCode(const
 针对IOS_PLATFORM终端而言，不支持动态加载符号表的功能，这块的代码需要做编译区分
 
 3.gn配置
-针对改造后的`native_module_calc`源文件，需要打包进`IOS_PLATFORM`平台编译链接成对应的framework
+针对改造后的`napi_calc`源文件，需要打包进`IOS_PLATFORM`平台编译链接成对应的framework
 ```
 /// 在ace/napi/BUILD.gn
 if (target_os == "ios") {
