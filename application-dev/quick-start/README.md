@@ -12,12 +12,12 @@
     - [跨平台应用构建指南](start-with-ace-tools.md)
     - [跨平台应用工程示例](https://gitee.com/arkui-crossplatform/samples/tree/master/eTSHelloWorld)
 
-##### ArkUI跨平台SDK指南
+##### ArkUI跨平台SDK使用指南
 
-- [ArkUI Android平台SDK说明](../../contribute/tutorial/how-to-build-Android-app.md)
-- [ArkUI iOS平台SDK说明](../../contribute/tutorial/how-to-build-Android-app.md)
+- [ArkUI Android平台SDK使用教程](../../contribute/tutorial/how-to-build-Android-app.md)
+- [ArkUI iOS平台SDK使用教程](../../contribute/tutorial/how-to-build-iOS-app.md)
 
-##### ArkUI接口扩展指南
+##### ArkUI JS接口扩展指南
 
 - [NAPI机制参考](https://gitee.com/openharmony/arkui_napi)
 - [Android平台接口实现示例](../../contribute/tutorial/how-to-use-napi-on-Android.md)

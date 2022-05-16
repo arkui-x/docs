@@ -2,13 +2,18 @@
 
 ## 版本概述
 
-首次发布ArkUI-CrossPlatform 1.0 Alpha版本，主要能力范围：
+首次发布ArkUI-CrossPlatform 1.0 Alpha版本，主要能力范围包括：
 
-**ArkUI 组件**
+- 基础的编译工具链，能够生成iOS/Android的SDK，编译出相应的应用并运行在目标平台上。
+- 基础的平台桥接能力，包括iOS/Android的应用加载入口，生命周期，事件处理，窗口系统等。
+- 基础的UI组件适配能力，包括常用的UI组件（请见相应的UI Sample示例）。
+- XTS基础设施，包括常用的UI测试。
+
+##### ArkUI 组件
 
 ArkUI开发框架包含类Web开发范式和声明式开发范式，本项目支持上述两种开发范式，详情参见：[组件列表](https://gitee.com/arkui-crossplatform/doc/blob/master/application-dev/components/arkui-component-list.md)。
 
-**接口范围**
+##### 接口范围
 
 ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android和iOS平台通过[NAPI机制](https://gitee.com/openharmony/arkui_napi)扩展JS接口和实现OpenHarmony接口。比如：[Android平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-Android.md)和[iOS平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-iOS.md)。
 
