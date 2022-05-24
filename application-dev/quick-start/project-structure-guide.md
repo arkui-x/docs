@@ -17,10 +17,10 @@ ArkUI作为OpenHarmony的开发框架，在本项目（ArkUI-CrossPlatform）中
 | community                                 | 社区运作管理                                          | [arkui-crossplatform/community](https://gitee.com/arkui-crossplatform/community) |
 | docs                                      | 说明文档                                              | [arkui-crossplatform/doc](https://gitee.com/arkui-crossplatform/doc) |
 | developtools/ace_tools                    | 跨平台命令行工具                                      | [arkui-crossplatform/cli](https://gitee.com/arkui-crossplatform/cli) |
-| foundation/ace/ace_engine/adapter/android | Android平台适配代码                                   | [arkui-crossplatform/android](https://gitee.com/arkui-crossplatform/android) |
-| foundation/ace/ace_engine/adapter/ios     | iOS平台适配代码                                       | [arkui-crossplatform/ios](https://gitee.com/arkui-crossplatform/ios) |
-| foundation/ace/ace_engine                 | ACE（Ability Cross-platform Environment）引擎核心代码 | [openharmony/ace_ace_engine](https://gitee.com/openharmony/ace_ace_engine) |
-| foundation/ace/napi                       | Native API扩展机制                                    | [openharmony/ace_napi](https://gitee.com/openharmony/ace_napi) |
+| foundation/arkui/ace_engine/adapter/android | Android平台适配代码                                   | [arkui-crossplatform/android](https://gitee.com/arkui-crossplatform/android) |
+| foundation/arkui/ace_engine/adapter/ios     | iOS平台适配代码                                       | [arkui-crossplatform/ios](https://gitee.com/arkui-crossplatform/ios) |
+| foundation/arkui/ace_engine                 | ArkUI 引擎核心代码 | [openharmony/arkui_ace_engine](https://gitee.com/openharmony/arkui_ace_engine) |
+| foundation/arkui/napi                       | Native API扩展机制                                    | [openharmony/arkui_napi](https://gitee.com/openharmony/arkui_napi) |
 | developtools/ace-ets2bundle               | ArkUI-声明式范式编译转换工具和跨平台应用构建工具      | [openharmony/ace-ets2bundle](https://gitee.com/openharmony/developtools_ace-ets2bundle) |
 | developtools/ace-js2bundle                | ArkUI-类Web范式编译转换工具和跨平台应用构建工具       | [openharmony/ace-js2bundle](https://gitee.com/openharmony/developtools_ace-js2bundle) |
 | interface/sdk-js                          | OpenHarmony API和ArkUI组件接口                        | [openharmony/interface_sdk-js](https://gitee.com/openharmony/interface_sdk-js) |
@@ -36,13 +36,13 @@ OpenHarmony相关代码仓，指向OpenHarmony master分支的固定tag点，定
 
 
 
-### 4、ACE目录结构
+### 4、ArkUI目录结构
 
-ace_engine的目录结构以及每个目录的内容如下：
+ArkUI引擎核心代码仓 `ace_engine` 的目录结构以及每个目录的内容如下：
 
 ```
 
-ace_engine
+foundation/arkui/ace_engine
 ├── ace_config.gni      // 全局配置文件
 ├── adapter             // 平台适配层
 │   ├── android         // Android平台适配
@@ -224,8 +224,8 @@ ace_engine
   ]
   
   platform_deps = [
-   "//foundation/ace/ace_engine/adapter/ohos/entrance:ace_ohos_standard_entrance",
-   "//foundation/ace/ace_engine/adapter/ohos/osal:ace_osal_ohos",
+   "//foundation/arkui/ace_engine/adapter/ohos/entrance:ace_ohos_standard_entrance",
+   "//foundation/arkui/ace_engine/adapter/ohos/osal:ace_osal_ohos",
   ]
   ```
   
@@ -235,7 +235,7 @@ ace_engine
 
   ```bash
   import("//build/ohos.gni")
-  import("//foundation/ace/ace_engine/ace_config.gni")
+  import("//foundation/arkui/ace_engine/ace_config.gni")
   
   template("ace_base_source_set") {
     forward_variables_from(invoker, "*")
