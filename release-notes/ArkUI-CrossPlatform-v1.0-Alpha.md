@@ -15,7 +15,7 @@ ArkUI开发框架包含类Web开发范式和声明式开发范式，本项目支
 
 ##### 接口范围
 
-ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android和iOS平台通过[NAPI机制](https://gitee.com/openharmony/arkui_napi)扩展JS接口和实现OpenHarmony接口。比如：[Android平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-Android.md)和[iOS平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-iOS.md)。
+ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android和iOS平台通过[NAPI机制](../application-dev/napi/napi-guidelines.md)扩展JS接口和实现OpenHarmony接口。比如：[Android平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-Android.md)和[iOS平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-iOS.md)。
 
 >说明：Alpha版本为跨平台项目首次发布的预览版本，暂不提供OpenHarmony接口实现。
 
