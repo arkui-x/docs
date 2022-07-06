@@ -25,7 +25,7 @@ master：最新开发版本。
 
 3rd-Party-License：[第三方开源软件及许可证说明](contribute/第三方开源软件及许可证说明.md)
 
-开源软件引入：[第三方开源软件引入指导](https://gitee.com/openharmony/docs/blob/master/zh-cn/contribute/第三方开源软件引入指导.md)
+开源软件引入：[第三方开源软件引入指导](./contribute/第三方开源软件引入指导.md)
 
 ## 贡献
 

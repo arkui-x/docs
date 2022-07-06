@@ -19,7 +19,7 @@
 
 ##### ArkUI JS接口扩展指南
 
-- [NAPI机制参考](https://gitee.com/openharmony/arkui_napi)
+- [NAPI机制参考](../napi/napi-guidelines.md)
 - [Android平台接口实现示例](../../contribute/tutorial/how-to-use-napi-on-Android.md)
 - [iOS平台接口实现示例](../../contribute/tutorial/how-to-use-napi-on-iOS.md)
 
