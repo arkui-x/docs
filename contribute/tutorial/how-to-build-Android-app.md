@@ -17,7 +17,7 @@
 
 | 版本源码                             | **版本信息** | **下载站点** | **SHA256校验码** |
 | ------------------------------------ | ------------ | ------------ | ---------------- |
-| ArkUI-CrossPlatform SDK包（Android） | 1.0 Alpha    | [站点]()     | [SHA256校验码]() |
+| ArkUI-CrossPlatform SDK包（Android） | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
 
 **方式二**
 
@@ -32,7 +32,7 @@
 ArkUI跨平台Android侧SDK主要有Java层和Native层两部分组成，Java层主要提供基于Activity和Application的ArkUI启动和JSBundle加载入口，Native层主要提供ArkUI渲染和NAPI实现等。
 
 ```
-out/arkui-cross
+ArkUI_Android_SDK
     ├── ace_android_adapter.jar              // ArkUI Android平台启动入口
     ├── arkui
     │   ├── ace_engine_cross
