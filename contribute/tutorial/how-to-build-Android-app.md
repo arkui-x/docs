@@ -2,26 +2,26 @@
 
 #### 总览
 
-本教程主要讲述如何利用ArkUI-CrossPlatform SDK完成Android应用开发，实现ArkUI开发范式在安卓平台显示。包括：
+本教程主要讲述如何利用ArkUI-X SDK完成Android应用开发，实现ArkUI开发范式在安卓平台显示。包括：
 
-* ArkUI-CrossPlatform SDK获取方法
-* ArkUI-CrossPlatform SDK内容组成
-* Android应用工程集成ArkUI-CrossPlatform SDK
+* ArkUI-X SDK获取方法
+* ArkUI-X SDK内容组成
+* Android应用工程集成ArkUI-X SDK
 * Android应用工程集成ArkUI JSBundle实例
 
 ##### 开发准备
 
 **方式一**
 
-* 通过镜像站点获取ArkUI-CrossPlatform SDK，适合ArkUI跨平台应用初学者。
+* 通过镜像站点获取ArkUI-X SDK，适合ArkUI跨平台应用初学者。
 
 | 版本源码                             | **版本信息** | **下载站点** | **SHA256校验码** |
 | ------------------------------------ | ------------ | ------------ | ---------------- |
-| ArkUI-CrossPlatform SDK包（Android） | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包（Android） | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
 
 **方式二**
 
-* 通过ArkUI-CrossPlatform跨平台项目源码编译出SDK，适用于ArkUI跨平台应用高阶开发者。完成跨平台项目[代码下载](https://gitee.com/arkui-crossplatform/doc/blob/master/application-dev/quick-start/README.md)后，执行如下命令编译ArkUI-CrossPlatform Android平台SDK。
+* 通过ArkUI-X跨平台项目源码编译出SDK，适用于ArkUI跨平台应用高阶开发者。完成跨平台项目[代码下载](../../application-dev/quick-start/README.md)后，执行如下命令编译ArkUI-X Android平台SDK。
 
 ```
 ./build.sh --product-name arkui-cross --target-os android --ccache
@@ -65,12 +65,12 @@ ArkUI_Android_SDK
 >![](../public_sys-resources/icon-note.gif) **说明：** 
 >
 >-   ArkUI跨平台提供的Native层接口，比如：napi、libuv和NativeXComponent接口，不在这里列举和描述。
->-   [Native层接口说明](https://gitee.com/arkui-crossplatform/doc/blob/master/application-dev/reference/README.md)
+>-   [Native层接口说明](../../application-dev/reference/README.md)
 
 ##### Android工程集成ArkUI跨平台SDK
 
 * Android工程集成ArkUI跨平台SDK遵循Android应用工程集成Jar和动态库规则，即SDK中libace_android.jar包拷贝到libs目录，动态库（libace_android.so\libace_napi.so\libace_napi_quickjs.so等）拷贝到libs/arm64-v8a目录。
-* Android应用的入口Application和Activity需要继承自ArkUI提供的基类，详情参见[使用说明](https://gitee.com/arkui-crossplatform/android#使用说明)，比如:
+* Android应用的入口Application和Activity需要继承自ArkUI提供的基类，详情参见[使用说明](https://gitee.com/arkui-x/android#使用说明)，比如:
 
 **Activity部分**
 
@@ -136,7 +136,7 @@ src/main/assets/js/MainAbility
 
 ##### 参考
 
-【1】[ArkUI跨平台应用Android侧示例](https://gitee.com/arkui-crossplatform/samples/tree/master/eTSHelloWorld/android)
+【1】[ArkUI跨平台应用Android侧示例](https://gitee.com/arkui-x/samples/tree/master/eTSHelloWorld/android)
 
 【2】[ArkUI JSBundle获取指南]()
 

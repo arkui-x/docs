@@ -2,16 +2,16 @@
 
 ## 目的
 
-OpenHarmony遵从 [Open Source Definition](https://opensource.org/docs/osd) ，满足这一定义的软件，被OpenHarmony社区认同为开源软件。
-提供易用、高质量的开源软件是OpenHarmony的重要目标，因第三方开源软件数量多，而社区开发人员同样数量多、分布广，为确保OpenHarmony项目的整体质量，特别拟定本指南，供社区贡献者参考。
+ArkUI-X遵从 [Open Source Definition](https://opensource.org/docs/osd) ，满足这一定义的软件，被ArkUI-X社区认同为开源软件。
+提供易用、高质量的开源软件是ArkUI-X的重要目标，因第三方开源软件数量多，而社区开发人员同样数量多、分布广，为确保ArkUI-X项目的整体质量，特别拟定本指南，供社区贡献者参考。
 
 ## 范围
 
-本指导适用于所有引入到OpenHarmony项目中的第三方开源软件。
+本指导适用于所有引入到ArkUI-X项目中的第三方开源软件。
 
 ## 本文的改进和修订说明
 
-1. 本文档由OpenHarmony SIG-QA主导起草和维护。本文档的最新版本总可以在 [这里](./第三方开源软件引入指导.md)
+1. 本文档由ArkUI-X SIG-QA主导起草和维护。本文档的最新版本总可以在 [这里](./introducing-third-party-open-source-software.md)
    找到。
 2. 任何对于本文中涉及的规则的增加，修改，删除都必须被追踪，请进入该追踪系统 。
 3. 最终规则经过社区充分的讨论后，由PMC评审定稿。
@@ -20,23 +20,23 @@ OpenHarmony遵从 [Open Source Definition](https://opensource.org/docs/osd) ，�
 
 ### 什么是软件引入
 
-一个软件的引入指的是为满足OpenHarmony中指定SIG的业务需求，申请将其引入到OpenHarmony项目中，具体的流程请参考的[SIG管理章程](https://gitee.com/arkui-crossplatform/community/tree/master/sig) 进行具体的开源软件引入，并确保整个引入的过程都必须可被追踪。
+一个软件的引入指的是为满足ArkUI-X中指定SIG的业务需求，申请将其引入到ArkUI-X项目中，具体的流程请参考的[SIG管理章程](https://gitee.com/arkui-x/community/tree/master/sig) 进行具体的开源软件引入，并确保整个引入的过程都必须可被追踪。
 
 ### 软件引入的基本要求
 
 为便于第三方开源软件的维护与演进，在引入第三方开源软件时请参考如下原则：
 
-1. 软件必须有明确的来源，引入到OpenHarmony的软件必须有清晰定义的上游社区。
-2. 必须有明确的引入理由，若需要引入的软件在OpenHarmony项目中已存在，请重用该版本，避免多版本共存增加维护的复杂性。
+1. 软件必须有明确的来源，引入到ArkUI-X的软件必须有清晰定义的上游社区。
+2. 必须有明确的引入理由，若需要引入的软件在ArkUI-X项目中已存在，请重用该版本，避免多版本共存增加维护的复杂性。
 3. 软件应该以源码方式引入，原则上二进制不应该被引入，应从源码构建。如果需要引入二进制，经由PMC评审后决定。
-4. 软件应该在OpenHarmony上可以被正确构建，若该软件有尚未被引入的依赖软件，或者软件的运行或者构建依赖一个不能引入OpenHarmony的组件，需由PMC评审后决定。
-5. 引入软件到OpenHarmony项目中必须将其放置到单独的代码仓或独立的目录，命名统一为third_party_软件名称，其中软件名称和其官网保持一致。
+4. 软件应该在ArkUI-X上可以被正确构建，若该软件有尚未被引入的依赖软件，或者软件的运行或者构建依赖一个不能引入ArkUI-X的组件，需由PMC评审后决定。
+5. 引入软件到ArkUI-X项目中必须将其放置到单独的代码仓或独立的目录，命名统一为third_party_软件名称，其中软件名称和其官网保持一致。
 6. 应当完整保留引入软件的官方代码仓目录结构、许可证及Copyright信息，不要修改第三方开源软件的原始许可证与Copyright信息。
 7. 不建议引入未发布正式版本（如只发布Beta版本）的开源软件。
 8. 不能引入有高危漏洞且无解决方案的版本。
 9. 若需针对引入的开源软件进行修改，请将修改的代码放在该开源软件仓中，并确保满足该开源软件的许可证要求，修改的文件应当保持其原始许可证条款，新增的文件也建议采用相同的许可证条款。
 10. 新引入的开源软件必须在其根目录提供README.OpenSource文件，在该文件中准确描述其软件名、许可证、许可文件位置、版本、对应版本的上游社区地址、软件的维护Owner、功能描述以及引入的原因。
-11. 引入新软件到OpenHarmony时必须有对应的SIG负责管理，原则上如果没有SIG-QA以及相应SIG的确认，PMC不批准相应软件的引入。当要批量引入多个软件时，可以求助PMC主持发起SIG间的临时评审会议，提升协调效率。 如因特殊原因不能满足上述要求但又需要引入，请请联系邮箱：law@openatom.org。
+11. 引入新软件到ArkUI-X时必须有对应的SIG负责管理，原则上如果没有SIG-QA以及相应SIG的确认，PMC不批准相应软件的引入。当要批量引入多个软件时，可以求助PMC主持发起SIG间的临时评审会议，提升协调效率。 如因特殊原因不能满足上述要求但又需要引入，请请联系邮箱：law@openatom.org。
 
 ### 软件引入流程
 
@@ -44,7 +44,7 @@ OpenHarmony遵从 [Open Source Definition](https://opensource.org/docs/osd) ，�
 
 | 检查项 | 说明 |
 | :----- | :----- |
-| 归一化 | 1、检查该软件在OpenHarmony中是否已存在，原则上一款软件只在OpenHarmony中引入一次。 |
+| 归一化 | 1、检查该软件在ArkUI-X中是否已存在，原则上一款软件只在ArkUI-X中引入一次。 |
 | 来源可靠 | 1、应该从开源软件官网获取或官网指定的代码托管地址获取。 |
 | 社区活跃 | 1、软件来自知名社区或组织，社区或组织通过发布公告、修改软件仓库状态、将仓库放到特定目录下等方式告知停止维护的，不建议引入。<br>2、软件来自个人、小型社区或组织，两年内未发布版本（含正式版本与测试版本），无明确版本计划，社区提交了有效的Bug或PR，但是半年以上未响应的，不建议引入。<br>3、社区运营状态不明确，通过Issue 或者邮件等方式询问社区是否继续维护，半年以上未响应或者答复停止维护的，不建议引入。|
 | 安全漏洞 | 1、检索业界已知公开的安全漏洞，如有高危漏洞需要有应对方案。|
@@ -54,11 +54,11 @@ OpenHarmony遵从 [Open Source Definition](https://opensource.org/docs/osd) ，�
 
 #### 提交申请
 
-如需要引入新的软件，请参考[SIG管理章程](https://gitee.com/arkui-crossplatform/community/tree/master/sig) 进行具体的开源软件引入，并在申请材料中包含如下内容：
+如需要引入新的软件，请参考[SIG管理章程](https://gitee.com/arkui-x/community/tree/master/sig) 进行具体的开源软件引入，并在申请材料中包含如下内容：
 
 1、自检表
 
-| 检查项 | 填写指导 | 自检结果示例 | 
+| 检查项 | 填写指导 | 自检结果示例 |
 | :----- | :----- | :----- |
 | 软件名 | 描述该软件官方名称以及引入后的仓名，仓名统一为third_party_加上官方软件名称 | third_party_softwarename |
 | 软件官网地址 | 描述该软件官方网站链接地址 | https://softwaresite |
@@ -75,7 +75,7 @@ OpenHarmony遵从 [Open Source Definition](https://opensource.org/docs/osd) ，�
 
 说明：
 
-- OAT工具的使用方式请参考 https://gitee.com/arkui-crossplatform-sig/tools_oat ，如对工具有改进建议请直接在社区提交ISSUE，也可Fork下来完善工具并提交PR。
+- OAT工具的使用方式请参考 https://gitee.com/arkui-x -sig/tools_oat ，如对工具有改进建议请直接在社区提交ISSUE，也可Fork下来完善工具并提交PR。
 - OAT报告原则上应当是清零，格式如下：
 
 ```
@@ -97,7 +97,7 @@ third_party_abcde/doc/ LICENSEFILE LICENSE Apache-2.0
 
 2、OAT.xml文件
 
-请参考 https://gitee.com/arkui-crossplatform-sig/tools_oat/blob/master/README_zh.md ，完成OAT扫描问题确认及OAT.xml文件配置，申请中附上此文件内容（如果无任何需确认问题则无需配置）。
+请参考 https://gitee.com/arkui-x -sig/tools_oat/blob/master/README_zh.md ，完成OAT扫描问题确认及OAT.xml文件配置，申请中附上此文件内容（如果无任何需确认问题则无需配置）。
 
 3、该仓的README.OpenSource文件内容，格式如下：
 
@@ -120,100 +120,31 @@ third_party_abcde/doc/ LICENSEFILE LICENSE Apache-2.0
 
 #### PMC评审
 
-参考[SIG管理章程](https://gitee.com/arkui-crossplatform/community/tree/master/sig)，PMC会根据收到的PR统一安排SIG申请评审以及建仓。
-
-### 第三方开源软件许可证要求
-
-1. 第三方开源软件许可证类型必须是[OSI](https://opensource.org/osd-annotated) 明确定义的。
-2. 第三方开源软件许可证必须与使用该开源软件的代码仓许可证兼容。
-3. 如下类型许可证可以引入到OpenHarmony项目中：
-
-* Apache License 2.0
-* Mulan Permissive Software License, Version 2
-* BSD 2-clause
-* BSD 3-clause
-* DOM4J License
-* PostgreSQL License
-* Eclipse Distribution License 1.0
-* MIT
-* ISC
-* ICU
-* University of Illinois/NCSA
-* W3C Software License
-* zlib/libpng
-* Academic Free License 3.0
-* Python Software Foundation License
-* Python Imaging Library Software License
-* Boost Software License Version 1.0
-* WTF Public License
-* UNICODE, INC. LICENSE AGREEMENT - DATA FILES AND SOFTWARE
-* Zope Public License 2.0
-
-4. 如下类型许可证不建议引入到OpenHarmony项目中:
-
-* GNU GPL 1, 2, 3
-* GNU Affero GPL 3
-* GNU LGPL 2, 2.1, 3
-* QPL
-* Sleepycat License
-* Server Side Public License (SSPL) version 1
-* Code Project Open License (CPOL)
-* BSD-4-Clause/BSD-4-Clause (University of California-Specific)
-* Facebook BSD+Patents license
-* NPL 1.0/NPL 1.1
-* The Solipsistic Eclipse Public License
-* The "Don't Be A Dick" Public License
-* JSON License
-* Binary Code License (BCL)
-* Intel Simplified Software License
-* JSR-275 License
-* Microsoft Limited Public License
-* Amazon Software License (ASL)
-* Java SDK for Satori RTM license
-* Redis Source Available License (RSAL)
-* Booz Allen Public License
-* Creative Commons Non-Commercial
-* Sun Community Source License 3.0
-* Common Development and Distribution Licenses: CDDL 1.0 and CDDL 1.1
-* Common Public License: CPL 1.0
-* Eclipse Public License: EPL 1.0
-* IBM Public License: IPL 1.0
-* Mozilla Public Licenses: MPL 1.0, MPL 1.1, and MPL 2.0
-* Sun Public License: SPL 1.0
-* Open Software License 3.0
-* Erlang Public License
-* UnRAR License
-* SIL Open Font License
-* Ubuntu Font License Version 1.0
-* IPA Font License Agreement v1.0
-* Ruby License
-* Eclipse Public License 2.0: EPL 2.0
-
-如要引入其它类型License或上述（4）所列License，请联系邮箱：law@openatom.org。
+参考[SIG管理章程](https://gitee.com/arkui-x/community/tree/master/sig)，PMC会根据收到的PR统一安排SIG申请评审以及建仓。
 
 ## 软件退出与退出原则
 
 ### 什么是软件退出
 
-1. 一个软件的退出指的是一个软件(项目)申请从OpenHarmony项目中删除，依照本文件描述的规则讨论，最终在OpenHarmony中移除的过程。
+1. 一个软件的退出指的是一个软件(项目)申请从ArkUI-X项目中删除，依照本文件描述的规则讨论，最终在ArkUI-X中移除的过程。
 2. 该软件相关的SIG负责申报议题到PMC评审，管理软件退出。
 
 ### 软件退出原则
 
-当满足以下两个条件时，OpenHarmony中软件的退出申请可以被立即执行，对应文件将从项目中直接删除。
+当满足以下两个条件时，ArkUI-X中软件的退出申请可以被立即执行，对应文件将从项目中直接删除。
 
-1. 软件的License变化，或者其他法律法规影响了目前正在使用的版本，导致OpenHarmony因为法务风险，不能继续集成该软件。
-2. 存在恶意代码或严重安全隐患且OpenHarmony社区无能力修复的，要求软件被立即移除。
+1. 软件的License变化，或者其他法律法规影响了目前正在使用的版本，导致ArkUI-X因为法务风险，不能继续集成该软件。
+2. 存在恶意代码或严重安全隐患且ArkUI-X社区无能力修复的，要求软件被立即移除。
 
-除以上描述两种场景外，其它场景OpenHarmony对软件的退出实行过程化管理：
+除以上描述两种场景外，其它场景ArkUI-X对软件的退出实行过程化管理：
 
 1. 随着技术演进与发展，软件因技术陈旧或架构落后，不能满足现有的应用场景被其他更优秀的软件所取代。
-2. OpenHarmony已经集成的版本过于老旧，且软件新版本License或其他法律法规限制导致OpenHarmony不能升级新版本。
+2. ArkUI-X已经集成的版本过于老旧，且软件新版本License或其他法律法规限制导致ArkUI-X不能升级新版本。
 3. 软件来自知名社区或组织，社区或组织通过发布公告、修改软件仓库状态、将仓库放到特定目录下等方式告知停止维护的。
 4. 软件来自个人、小型社区或组织，两年内未发布版本（含正式版本与测试版本），无明确版本计划，社区提交了有效的Bug或PR，社区半年以上未响应的。
 5. 社区运营状态不明确，通过Issue或者邮件等方式询问社区是否继续维护，社区半年以上未响应或者答复停止维护的。
 
-如果软件符合以上任何一条退出条件，PMC与相应SIG首先分析该软件在当前OpenHarmony社区中被依赖、被使用的情况。
+如果软件符合以上任何一条退出条件，PMC与相应SIG首先分析该软件在当前ArkUI-X社区中被依赖、被使用的情况。
 
-1. 如果OpenHarmony中存在依赖关系，且短时间内不能解除，我们建议SIG新建分支代码仓，并主动进行社区维护动作。
-2. 如果OpenHarmony中不存在依赖关系，或者短时间内可以解除，则责任SIG将软件从OpenHarmony正式发行中移出，并在相应的Release Notes中说明移除的原因及影响。
+1. 如果ArkUI-X中存在依赖关系，且短时间内不能解除，我们建议SIG新建分支代码仓，并主动进行社区维护动作。
+2. 如果ArkUI-X中不存在依赖关系，或者短时间内可以解除，则责任SIG将软件从ArkUI-X正式发行中移出，并在相应的Release Notes中说明移除的原因及影响。

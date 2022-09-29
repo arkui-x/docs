@@ -4,17 +4,17 @@
 
 **1.1** **范围**
 
-本文档描述ArkUI（即Openharmony下的ACE子系统）跨平台运行能力相关的总体技术方案。
+本文档描述ArkUI（即OpenHarmony下的ArkUI子系统）跨平台运行能力相关的总体技术方案。
 
 ArkUI是面向全设备的UI开发框架. 已通过OpenHarmony代码仓开放，其关键组成包括：1.开发模型; 2.应用界面&交互; 3.扩展机制-使能三方组件&平台API扩展机制。
 
-ArkUI跨平台项目则是扩展ArkUI开发框架到其他OS平台-Android/iOS/Windows等，让开发者基于ArkUI，复用绝大部分的应用代码（UI以及主要应用逻辑），并可以部署到相应的OS平台上。
+ArkUI-X项目则是扩展ArkUI开发框架到其他OS平台-Android/iOS/Windows等，让开发者基于ArkUI，复用绝大部分的应用代码（UI以及主要应用逻辑），并可以部署到相应的OS平台上。
 
  **1.2** **假设和约束**
 
 本文提到的跨平台是指UI部分的跨平台，其UI代码可以重用，其它应用对平台依赖的能力，需要应用层面进行适配，或通过JS API封装机制（NAPI），进行实现暴露到JS层。
 
-涉及平台能力的JS API（比如网络、存储等）请参考openharmony中的定义，需要通过在不同平台的封装实现达到复用的目的。
+涉及平台能力的JS API（比如网络、存储等）请参考OpenHarmony中的定义，需要通过在不同平台的封装实现达到复用的目的。
 
 本文主要是通用方案设计说明，并以Android平台做为示例说明，其他平台的基本设计思路类似，但相关设计需进一步细化补充。
 
@@ -43,7 +43,7 @@ ArkUI声明式UI后端引擎，主要完成整体pipeline流程控制、视图�
 
 整体的跨平台需求，就是扩展ArkUI开发框架到其他OS平台，帮助开发者降低多平台应用开发成本。
 
-以Android平台为例，提供Android平台的SDK及工具，可以让开发者同时构建出Openharmony版本hap及Android版本的apk。
+以Android平台为例，提供Android平台的SDK及工具，可以让开发者同时构建出OpenHarmony版本hap及Android版本的apk。
 
 ![](png/arkui-deploy.png)
 
@@ -52,7 +52,7 @@ ArkUI声明式UI后端引擎，主要完成整体pipeline流程控制、视图�
 
  **4.1** **跨平台应用结构设计**
 
-跨平台应用目录结构，包含一套为 ArkUI 开发者提供的工程应用模板，提供打包openharmony hap和以及其他OS应用包的能力。
+跨平台应用目录结构，包含一套为 ArkUI 开发者提供的工程应用模板，提供打包OpenHarmony hap和以及其他OS应用包的能力。
 
 ├── android // Android平台相关代码
 
@@ -347,7 +347,7 @@ ArkUI CLI，是一套为ArkUI开发者提供的命令行工具，包括开发环
     │      Sdk.js
     │      util.js
     │
-    ├─ace-config    // 实现 ace config 命令，配置 ace 的设置，包括openharmony sdk 的路径，编译输出的路径，开发证书路径等
+    ├─ace-config    // 实现 ace config 命令，配置 ace 的设置，包括OpenHarmony sdk 的路径，编译输出的路径，开发证书路径等
     │      index.js
     │
     ├─ace-create    // 实现 ace create 命令，创建一个 ace 应用工程，或 module，或 component

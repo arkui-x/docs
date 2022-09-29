@@ -2,7 +2,7 @@
 
 ### 1、背景
 
-ArkUI作为OpenHarmony的开发框架，在本项目（ArkUI-CrossPlatform）中需要做到一套代码同时支持多平台构建，所以会采取共仓开发的方式，部分仓直接指向OpenHarmony的仓。
+ArkUI作为OpenHarmony的开发框架，在本项目（ArkUI-X）中需要做到一套代码同时支持多平台构建，所以会采取共仓开发的方式，部分仓直接指向OpenHarmony的仓。
 
 
 
@@ -12,13 +12,13 @@ ArkUI作为OpenHarmony的开发框架，在本项目（ArkUI-CrossPlatform）中
 
 | 目录路径                                  | 描述                                                  | 代码仓位置                                                   |
 | ----------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------ |
-| build                                     | ArkUI跨平台项目构建和配置脚本                         | [arkui-crossplatform/build](https://gitee.com/arkui-crossplatform/build) |
-| samples                                   | 应用程序样例                                          | [arkui-crossplatform/samples](https://gitee.com/arkui-crossplatform/samples) |
-| community                                 | 社区运作管理                                          | [arkui-crossplatform/community](https://gitee.com/arkui-crossplatform/community) |
-| docs                                      | 说明文档                                              | [arkui-crossplatform/doc](https://gitee.com/arkui-crossplatform/doc) |
-| developtools/ace_tools                    | 跨平台命令行工具                                      | [arkui-crossplatform/cli](https://gitee.com/arkui-crossplatform/cli) |
-| foundation/arkui/ace_engine/adapter/android | Android平台适配代码                                   | [arkui-crossplatform/android](https://gitee.com/arkui-crossplatform/android) |
-| foundation/arkui/ace_engine/adapter/ios     | iOS平台适配代码                                       | [arkui-crossplatform/ios](https://gitee.com/arkui-crossplatform/ios) |
+| build                                     | ArkUI跨平台项目构建和配置脚本                         | [arkui-x/build](https://gitee.com/arkui-x/build) |
+| samples                                   | 应用程序样例                                          | [arkui-x/samples](https://gitee.com/arkui-x/samples) |
+| community                                 | 社区运作管理                                          | [arkui-x/community](https://gitee.com/arkui-x/community) |
+| docs                                      | 说明文档                                              | [arkui-x/doc](https://gitee.com/arkui-x/doc) |
+| developtools/ace_tools                    | 跨平台命令行工具                                      | [arkui-x/cli](https://gitee.com/arkui-x/cli) |
+| foundation/arkui/ace_engine/adapter/android | Android平台适配代码                                   | [arkui-x/android](https://gitee.com/arkui-x/android) |
+| foundation/arkui/ace_engine/adapter/ios     | iOS平台适配代码                                       | [arkui-x/ios](https://gitee.com/arkui-x/ios) |
 | foundation/arkui/ace_engine                 | ArkUI 引擎核心代码 | [openharmony/arkui_ace_engine](https://gitee.com/openharmony/arkui_ace_engine) |
 | foundation/arkui/napi                       | Native API扩展机制                                    | [openharmony/arkui_napi](https://gitee.com/openharmony/arkui_napi) |
 | developtools/ace-ets2bundle               | ArkUI-声明式范式编译转换工具和跨平台应用构建工具      | [openharmony/ace-ets2bundle](https://gitee.com/openharmony/developtools_ace-ets2bundle) |

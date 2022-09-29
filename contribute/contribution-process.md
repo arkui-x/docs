@@ -4,7 +4,7 @@
 
 -   针对Git的安装、环境配置及使用方法，请参考码云帮助中心的Git知识大全：[https://gitee.com/help/categories/43](https://gitee.com/help/categories/43)
 -   注册SSH公钥，请参考码云帮助中心的公钥管理：[https://gitee.com/help/articles/4191](https://gitee.com/help/articles/4191)
--   在开展Gitee的工作流之前，您需要先在ArkUI-CrossPlatform的代码托管平台上找到您感兴趣的Repository。
+-   在开展Gitee的工作流之前，您需要先在ArkUI-X的代码托管平台上找到您感兴趣的Repository。
 
 ## 代码下载
 
@@ -38,7 +38,7 @@
         -   您可以在仓库页面内复制远程仓库的拷贝地址，得到$remote\_link：
         
             **图 1**  复制远程仓库
-            ![](figures/复制远程仓库.png "复制远程仓库")
+            ![](figures/clone.png "复制远程仓库")
         
         -   在本地电脑执行拷贝命令：
         
@@ -62,7 +62,7 @@
 2.  下载\(注意没有repo branch参数\)：
 
     ```
-    repo init -u https://gitee.com/arkui-crossplatform/manifest.git -b master --no-repo-verify
+    repo init -u https://gitee.com/arkui-x/manifest.git -b master --no-repo-verify
     repo sync -c
     ```
 
@@ -125,7 +125,7 @@ repo config --global repo.token 211XXXXXXXXXXXXXXXXXXXXXXXX
 
 2. 在码云上任意一个此次要修改的仓下创建issue\(类似于gerrit的changeID功能，用来关联多个耦合仓修改\)，并记录下issue编号\(如下图中的issue编号是\#I1TVV4\)\(如果不涉及多个仓耦合修改，则此步骤不需要\)：
 
-![](figures/无标题1.png)
+![](figures/repo1.png)
 
 3. 在本地代码工作区新建分支，修改代码，并提交：
 
@@ -175,15 +175,15 @@ repo push --br="20200903" --d="master" --content="#I1TVV4"
 
 在弹出的编辑页面将需要提交仓、分支、commit的注释符打开：
 
-![](figures/无标题2.png)
+![](figures/repo2.png)
 
 保存退出，repo会自动将本地分支推送到远端fork仓\(如果没有fork仓，系统会自动创建fork仓\)里，并自动生成PR：
 
-![](figures/无标题3.png)
+<img src="figures/repo3.png"  style="zoom:80%;" />
 
 同时自动将PR和Issue关联：
 
-![](figures/无标题4.png)
+<img src="figures/repo3.png" style="zoom:80%;" />
 
 ## 创建Pull Request（如已通过repo工具自动创建PR，则此步忽略）
 
@@ -227,20 +227,18 @@ repo push --br="20200903" --d="master" --content="#I1TVV4"
 
 如果门禁通过，该Issue关联的所有PR均会自动标记“测试通过”。
 
-详细参考[代码门禁质量要求](https://gitee.com/arkui-crossplatform/community/blob/master/sig/sig-QA/%E4%BB%A3%E7%A0%81%E9%97%A8%E7%A6%81%E8%A6%81%E6%B1%82.md)。
+了解更多[PR评论支持命令](pr-command.md)。
 
 ## CI门户
 
-ArkUI-CrossPlatform通过持续集成（CI，Continuous Integration）及时发现代码问题，确保代码质量可靠和功能稳定，包括：
+ArkUI-X通过持续集成（CI，Continuous Integration）及时发现代码问题，确保代码质量可靠和功能稳定，包括：
 
-- 代码门禁：开发者向ArkUI-CrossPlatform提交代码合入申请后，会触发门禁检查，例如静态检查、代码编译、功能测试等，门禁通过后才能合入代码。
-- 每日构建：ArkUI-CrossPlatform的持续集成流水线每日自动执行，以便提前发现代码静态检查、编译、功能等方面的问题，及时修复问题，确保代码质量。
+- 代码门禁：开发者向ArkUI-X提交代码合入申请后，会触发门禁检查，例如静态检查、代码编译、功能测试等，门禁通过后才能合入代码。
+- 每日构建：ArkUI-X的持续集成流水线每日自动执行，以便提前发现代码静态检查、编译、功能等方面的问题，及时修复问题，确保代码质量。
 
 CI门户是为了便于开发者及时查看、分析每日构建和代码门禁的执行结果的一个可持续集成的门户。
 
-示例：[CI门户入口](http://ci.openharmony.cn/)
-
-![CI门户](figures/ci-portal.png)
+示例：[CI门户入口](http://ci.arkui-x.cn/)
 
 ## 代码审查
 
