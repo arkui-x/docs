@@ -2,26 +2,26 @@
 
 #### 总览
 
-本教程主要讲述如何利用ArkUI-CrossPlatform SDK完成iOS应用开发，实现ArkUI开发范式在iOS平台显示。包括：
+本教程主要讲述如何利用ArkUI-X SDK完成iOS应用开发，实现ArkUI开发范式在iOS平台显示。包括：
 
-* ArkUI-CrossPlatform SDK获取方法
-* ArkUI-CrossPlatform SDK内容组成
-* iOS应用工程集成ArkUI-CrossPlatform SDK
+* ArkUI-X SDK获取方法
+* ArkUI-X SDK内容组成
+* iOS应用工程集成ArkUI-X SDK
 * iOS应用工程集成ArkUI JSBundle实例
 
 ##### 开发准备
 
 **方式一**
 
-* 通过镜像站点获取ArkUI-CrossPlatform SDK，适合ArkUI跨平台应用初学者。
+* 通过镜像站点获取ArkUI-X SDK，适合ArkUI跨平台应用初学者。
 
 | 版本源码                             | **版本信息** | **下载站点** | **SHA256校验码** |
 | ------------------------------------ | ------------ | ------------ | ---------------- |
-| ArkUI-CrossPlatform SDK包（iOS） | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包（iOS） | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
 
 **方式二**
 
-* 通过ArkUI-CrossPlatform跨平台项目源码编译出SDK，适用于ArkUI跨平台应用高阶开发者。完成跨平台项目[代码下载](https://gitee.com/arkui-crossplatform/doc/blob/master/application-dev/quick-start/README.md)后，执行如下命令编译ArkUI-CrossPlatform iOS平台SDK。
+* 通过ArkUI-X跨平台项目源码编译出SDK，适用于ArkUI跨平台应用高阶开发者。完成跨平台项目[代码下载](../../application-dev/quick-start/README.md)后，执行如下命令编译ArkUI-X iOS平台SDK。
 
 ```
 ./build.sh --product-name arkui-cross --target-os ios
@@ -60,7 +60,7 @@ ArkUI_iOS_SDK
 >![](../public_sys-resources/icon-note.gif) **说明：**
 >
 >-   ArkUI跨平台提供的Native层接口，比如：napi、libuv和NativeXComponent接口，不在这里列举和描述。
->-   [Native层接口说明](https://gitee.com/arkui-crossplatform/doc/blob/master/application-dev/reference/README.md)
+>-   [Native层接口说明](../../application-dev/reference/README.md)
 
 ##### iOS工程集成ArkUI跨平台SDK
 

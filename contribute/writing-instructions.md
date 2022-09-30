@@ -1,6 +1,6 @@
 # 写作规范
 
-本文介绍ArkUI-CrossPlatform文档贡献的写作规范。
+本文介绍ArkUI-X文档贡献的写作规范。
 
 ## 命名规范
 
@@ -10,7 +10,7 @@
 
 ## 内容规范
 
-以简洁、直观地表达所述内容为目的，介绍性文档言简意赅介绍原理、架构、设计思路等，操作类文档写明关键步骤，以便能对其他开发者起到帮助。可以优先使用中文，建议中英文都支持，ArkUI-CrossPlatform也将持续更新，保证中英文的同步。
+以简洁、直观地表达所述内容为目的，介绍性文档言简意赅介绍原理、架构、设计思路等，操作类文档写明关键步骤，以便能对其他开发者起到帮助。可以优先使用中文，建议中英文都支持，ArkUI-X也将持续更新，保证中英文的同步。
 
 **标题**
 
@@ -54,9 +54,9 @@
 
 图片统一存放到文档同级目录下的pic文件夹中（英文文档对应pic-en），如：
 
-“ArkUI-CrossPlatform\_DOCUMENTS/docs/quick-start/write-standard.md“中使用的图片，统一放置到
+“ArkUI-X\_DOCUMENTS/docs/quick-start/write-standard.md“中使用的图片，统一放置到
 
-“ArkUI-CrossPlatform\_DOCUMENTS/docs/quick-start/pic“目录下，文档中使用相对路径引用图片。
+“ArkUI-X\_DOCUMENTS/docs/quick-start/pic“目录下，文档中使用相对路径引用图片。
 
 >![](public_sys-resources/icon-caution.gif) **注意：** 请使用原创图片，避免存在知识产权侵权风险。
 
@@ -84,8 +84,6 @@
 英文字体：首选Arial
 
 字体大小：10pt
-
-**图 2**  截图示例![](figures/截图示例.png "截图示例")
 
 **表格**
 

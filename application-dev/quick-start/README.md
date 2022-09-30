@@ -2,15 +2,15 @@
 
 ##### 快速入门
 
-- [概述](https://gitee.com/arkui-crossplatform)
-- [如何下载代码](https://gitee.com/arkui-crossplatform/manifest/blob/master/README.md)
-- [如何编译代码](https://gitee.com/arkui-crossplatform/build/blob/arkui-master/README.md)
-- [如何贡献代码](https://gitee.com/arkui-crossplatform/doc/blob/master/contribute/README.md)
+- [概述](https://gitee.com/arkui-x )
+- [如何下载代码](https://gitee.com/arkui-x/manifest/blob/master/README.md)
+- [如何编译代码](https://gitee.com/arkui-x/build/blob/arkui-master/README.md)
+- [如何贡献代码](../../contribute/README.md)
 - [代码工程结构及构建说明](project-structure-guide.md)
 - ArkUI跨平台应用工程说明
     - [跨平台应用工程结构](package-structure-guide.md)
     - [跨平台应用构建指南](start-with-ace-tools.md)
-    - [跨平台应用工程示例](https://gitee.com/arkui-crossplatform/samples/tree/master/eTSHelloWorld)
+    - [跨平台应用工程示例](https://gitee.com/arkui-x/samples/tree/master/eTSHelloWorld)
 
 ##### ArkUI跨平台SDK使用指南
 
@@ -25,5 +25,5 @@
 
 ##### PR FAQ
 
-- [PR提交说明](https://gitee.com/arkui-crossplatform/doc/blob/master/contribute/FAQ.md)
-- [PR评论命令](https://gitee.com/arkui-crossplatform/doc/blob/master/contribute/PR编译命令.md)
+- [PR提交说明](../../contribute/FAQ.md)
+- [PR评论命令](../../contribute/pr-command.md)

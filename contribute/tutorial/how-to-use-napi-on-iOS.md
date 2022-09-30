@@ -1,5 +1,5 @@
 TODO:补充在iOS平台如何使用NAPI机制扩展JS API和实现OpenHarmony API。
-# ArkUI-CrossPlatform iOS端NAPI
+# ArkUI-X iOS端NAPI
 
 ## 说明
 iOS端不能使用dlopen和dlsym加载相关动态so库和符号，只能通过源码一起打进ios的动态库里

@@ -99,7 +99,7 @@ struct BarPage {
   @State textColor:string = "red"
   build() {
     Column() {
-      Text("Hello ArkUI-CrossPlatform")
+      Text("Hello ArkUI-X")
         .fontColor(this.textColor)
         .fontSize(50)
         .onClick(() => {
