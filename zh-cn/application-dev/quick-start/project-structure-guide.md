@@ -1,12 +1,11 @@
-## **代码工程及构建介绍**
+# **代码工程及构建介绍**
 
-### 1、背景
+## 背景
 
 ArkUI作为OpenHarmony的开发框架，在本项目（ArkUI-X）中需要做到一套代码同时支持多平台构建，所以会采取共仓开发的方式，部分仓直接指向OpenHarmony的仓。
 
 
-
-###  2、代码结构及仓库结构
+##  代码结构及仓库结构
 
 具体的代码结构及指向，见下表：
 
@@ -21,27 +20,24 @@ ArkUI作为OpenHarmony的开发框架，在本项目（ArkUI-X）中需要做到
 | foundation/arkui/ace_engine/adapter/ios     | iOS平台适配代码                                       | [arkui-x/ios](https://gitee.com/arkui-x/ios) |
 | foundation/arkui/ace_engine                 | ArkUI 引擎核心代码 | [openharmony/arkui_ace_engine](https://gitee.com/openharmony/arkui_ace_engine) |
 | foundation/arkui/napi                       | Native API扩展机制                                    | [openharmony/arkui_napi](https://gitee.com/openharmony/arkui_napi) |
-| developtools/ace-ets2bundle               | ArkUI-声明式范式编译转换工具和跨平台应用构建工具      | [openharmony/ace-ets2bundle](https://gitee.com/openharmony/developtools_ace-ets2bundle) |
-| developtools/ace-js2bundle                | ArkUI-类Web范式编译转换工具和跨平台应用构建工具       | [openharmony/ace-js2bundle](https://gitee.com/openharmony/developtools_ace-js2bundle) |
+| developtools/ace_ets2bundle               | ArkUI-声明式范式编译转换工具和跨平台应用构建工具      | [openharmony/ace_ets2bundle](https://gitee.com/openharmony/developtools_ace-ets2bundle) |
+| developtools/ace_js2bundle                | ArkUI-类Web范式编译转换工具和跨平台应用构建工具       | [openharmony/ace_js2bundle](https://gitee.com/openharmony/developtools_ace_js2bundle) |
 | interface/sdk-js                          | OpenHarmony API和ArkUI组件接口                        | [openharmony/interface_sdk-js](https://gitee.com/openharmony/interface_sdk-js) |
 | prebuilts                                 | 预编译目录，python，nodejs，clang和cmake等            | 通过脚本预下载                                               |
 | third_party                               | 开源第三方组件（统一复用OpenHarmony代码仓）           | [openharmony/third_party](https://gitee.com/organizations/openharmony/projects) |
 | utils/native                              | 常用的工具集                                          | [openharmony/utils_native](https://gitee.com/openharmony/utils_native) |
 
 
-
-### 3、分支同步策略
+## 分支同步策略
 
 OpenHarmony相关代码仓，指向OpenHarmony master分支的固定tag点，定期同步，暂定每个月末前一周进行同步
 
 
-
-### 4、ArkUI目录结构
+## ArkUI目录结构
 
 ArkUI引擎核心代码仓 `ace_engine` 的目录结构以及每个目录的内容如下：
 
 ```
-
 foundation/arkui/ace_engine
 ├── ace_config.gni      // 全局配置文件
 ├── adapter             // 平台适配层
@@ -120,12 +116,10 @@ foundation/arkui/ace_engine
 ├── README.md
 ├── README_zh.md
 └── test                // 测试相关
-
 ```
 
 
-
-### 5、编译构建流程
+## 编译构建流程
 
 为了支持一套代码在OpenHarmony和其它平台同时构建，需要根据代码结构动态对编译配置进行调整，因为对外依赖可能不同，并且不同环境下可能依赖的外部源码都有差异，所以必须对编译目标(targets)都进行动态的定义，否则无法保持一致
 
@@ -331,8 +325,7 @@ foundation/arkui/ace_engine
 -  **依赖关系：** 依赖关系尽量清楚，按层次依赖，不可反向依赖
 
 
-
-### 6、开发原则
+## 开发原则
 
 - 所有功能实现遵循分层设计
 - frameworks目录下的所有模块都是平台无关的，不能依赖adapter目录下的模块，不能依赖除JS引擎相关的其它子系统
@@ -341,6 +334,3 @@ foundation/arkui/ace_engine
 - frameworks/core不允许依赖frameworks/bridge下的模块
 - 只有entrance下或flutter_xxx开头的文件可以依赖flutter和skia的接口
 - 修改OH仓中的内容要保证各平台都能编译通过，功能正常
-
-
-
