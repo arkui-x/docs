@@ -1,6 +1,6 @@
 # 快速开始
 
-##### 快速入门
+## 快速入门
 
 - [概述](https://gitee.com/arkui-x )
 - [如何下载代码](https://gitee.com/arkui-x/manifest/blob/master/README.md)
@@ -12,18 +12,18 @@
     - [跨平台应用构建指南](start-with-ace-tools.md)
     - [跨平台应用工程示例](https://gitee.com/arkui-x/samples/tree/master/eTSHelloWorld)
 
-##### ArkUI跨平台SDK使用指南
+## ArkUI跨平台SDK使用指南
 
 - [ArkUI Android平台SDK使用教程](../../contribute/tutorial/how-to-build-Android-app.md)
 - [ArkUI iOS平台SDK使用教程](../../contribute/tutorial/how-to-build-iOS-app.md)
 
-##### ArkUI JS接口扩展指南
+## ArkUI JS接口扩展指南
 
 - [NAPI机制参考](../napi/napi-guidelines.md)
 - [Android平台接口实现示例](../../contribute/tutorial/how-to-use-napi-on-Android.md)
 - [iOS平台接口实现示例](../../contribute/tutorial/how-to-use-napi-on-iOS.md)
 
-##### PR FAQ
+## PR FAQ
 
 - [PR提交说明](../../contribute/FAQ.md)
 - [PR评论命令](../../contribute/pr-command.md)
