@@ -21,7 +21,7 @@
 
 执行`git commit --amend --signoff`命令 。
 
-关于commit更多选项，请参考：[https://](https://git-scm.com/docs/git-commit)[git-scm.com/docs/git-commit](https://git-scm.com/docs/git-commit)
+关于commit更多选项，请参考：[https://git-scm.com/docs/git-commit](https://git-scm.com/docs/git-commit)
 
 ## DCO校验异常处理
 

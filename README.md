@@ -2,7 +2,7 @@
 
 欢迎访问ArkUI-X文档仓库，参与ArkUI-X开发者文档开源项目，与我们一起完善开发者文档。
 
-此仓库存放ArkUI-X项目提供的设备开发、应用开发对应的开发者文档。
+此仓库存放ArkUI-X项目提供的应用开发对应的开发者文档。
 
 ## 文档目录结构
 
@@ -25,7 +25,7 @@ master：最新开发版本。
 
 3rd-Party-License：[第三方开源软件及许可证说明](zh-cn/contribute/license-and-copyright-specifications.md)
 
-开源软件引入：[第三方开源软件引入指导](zh-cn//contribute/introducing-third-party-open-source-software.md)
+开源软件引入：[第三方开源软件引入指导](zh-cn/contribute/introducing-third-party-open-source-software.md)
 
 ## 贡献
 
