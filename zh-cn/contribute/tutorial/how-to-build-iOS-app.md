@@ -106,7 +106,7 @@ iOS应用工程
 ##### 注意事项
 **工程修改**
 XCode11之后，新建iOS工程为SceneDelegate类型工程，需删除SceneDelegate相关内容：
-1. 删除Info.plist中的Applicaton Scene Manifest选项。
+1. 删除Info.plist中的Application Scene Manifest选项。
 2. SceneDelegate代码文件删除，或注释掉文件中的所有代码。
 3. 删除或注释掉AppDelegate中关于Scene的方法。
 
