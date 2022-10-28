@@ -1,75 +1,209 @@
-TODO:补充在iOS平台如何使用NAPI机制扩展JS API和实现OpenHarmony API。
-# ArkUI-X iOS端NAPI
+# iOS平台@ohos接口扩展说明
 
-## 说明
-iOS端不能使用dlopen和dlsym加载相关动态so库和符号，只能通过源码一起打进ios的动态库里
+**说明:**
+iOS平台上扩展@ohos JS API，以testplugin.hello接口为例。
+
+## 导入模块
+```typescript
+// 方式一
+import testplugin from 'libtestplugin.so';
+
+// 方式二，非OpenHarmony的接口需要加@ts-ignore忽略编译报错（不推荐）
+// @ts-ignore
+import testplugin from '@ohos.testplugin';
+```
+
+**说明：**
+非OpenHarmony的接口推荐方式一引入，扩展OpenHarmony标准接口推荐方式二引入（非OpenHarmony的接口使用方式二会编译报错）。
+
+## 接口
+| 名称 | 参数 | 返回类型 | 描述 |
+| --- | --- | --- | --- |
+| hello | void | void | 在iOS侧打印日志"hello from ios" |
+
+```typescript
+// ets
+testplugin.hello();
+```
 
 ## 步骤
-1.编写相关的NAPI功能的c/cpp文件，做好Android/iOS/OHOS相关终端的源码实现适配
-比如拿`napi/sample/native_module_calc/napi_calc.cpp`做分析
+为了调用iOS Objective-C（OC） API，本质是要实现JS调用OC的能力。跨平台推荐JS -> C/C++ -> OC的调用路径，实现JS调用iOS OC API。即在iOS侧实现OC接口，通过C/C++直接封装OC接口，再通过NAPI机制实现C/C++模块注册，供应用侧JS调用。
 
-2.修改`napi_calc`源文件
-针对`_binary_calc_js_start`和`_binary_calc_js_end`相关代码做好iOS平台编译区分
-```
-#ifndef IOS_PLATFORM
-extern const char _binary_calc_js_start[];
-extern const char _binary_calc_js_end[];
-#endif
+### 一、iOS侧实现hello方法
 
-#ifndef IOS_PLATFORM
-extern "C" __attribute__((visibility("default"))) void NAPI_calc_GetJSCode(const char** buf, int* bufLen)
-{
-    if (buf != nullptr) {
-        *buf = _binary_calc_js_start;
-    }
+```C++
+// plugins/test_plugin/ios/ios_test_plugin.m
 
-    if (bufLen != nullptr) {
-        *bufLen = _binary_calc_js_end - _binary_calc_js_start;
-    }
+@implementation iOSTestPlugin
+
++ (instancetype)shareinstance{
+    static dispatch_once_t onceToken;
+    static iOSTestPlugin *instance = nil;
+    dispatch_once(&onceToken, ^{
+        instance = [iOSTestPlugin new];
+    });
+    return instance;
 }
-#endif
-```
-针对IOS_PLATFORM终端而言，不支持动态加载符号表的功能，这块的代码需要做编译区分
 
-3.gn配置
-对应的napi_calc.cpp文件的BUILD.gn，可参考https://gitee.com/openharmony/arkui_napi/blob/master/sample/native_module_calc/BUILD.gn
-核心代码如下：
+// 实现hello模块
+-(void)hello{
+    NSLog(@"TestPlugin: Hello from ios");
+}
+
+@end
 ```
-import("//build/ohos.gni")
-import("//foundation/ace/ace_engine/ace_config.gni")
-  config("ace_napi_config") {
-    include_dirs = [
-      "//third_party/node/src",
-      "//foundation/ace/napi/interfaces/kits",
+
+### 二、C/C++调用OC hello方法
+
+```C++
+// plugins/test_plugin/ios/test_plugin_impl.mm
+void TestPluginImpl::Hello()
+{
+    PluginUtils::RunTaskOnPlatform([]() {
+        // 直接调用OC hello方法
+        [[iOSTestPlugin shareinstance] hello];
+    });
+}
+```
+
+### 三、通过NAPI机制暴露JS hello方法
+
+#### 1、实现testplugin.hello对应的C/C++模块。
+
+```C++
+// plugins/test_plugin/js_test_plugin.cpp
+static napi_value JSTestPluginHello(napi_env env, napi_callback_info info)
+{
+    // 创建TestPlugin实例
+    auto plugin = TestPlugin::Create();
+
+    // 调用C++接口，Hello函数最终会调用iOSTestPlugin的hello方法
+    plugin->Hello();
+    return nullptr;
+}
+
+// plugins/test_plugin/test_plugin.h
+class TestPlugin {
+public:
+    TestPlugin() = default;
+    virtual ~TestPlugin() = default;
+
+    static std::unique_ptr<TestPlugin> Create();
+
+    virtual void Hello() = 0;
+};
+
+// plugins/test_plugin/ios/test_plugin_impl.mm
+std::unique_ptr<TestPlugin> TestPlugin::Create()
+{
+    return std::make_unique<TestPluginImpl>();
+}
+
+```
+#### 2、实现模块导出入口函数
+
+```C++
+// plugins/test_plugin/js_test_plugin.cpp
+static napi_value TestPluginExport(napi_env env, napi_value exports)
+{
+    static napi_property_descriptor desc[] = {
+        DECLARE_NAPI_FUNCTION("hello", JSTestPluginHello),
+    };
+    NAPI_CALL(env, napi_define_properties(env, exports, sizeof(desc) / sizeof(desc[0]), desc));
+    return exports;
+}
+```
+
+#### 3、注册模块
+
+```C++
+// plugins/test_plugin/js_test_plugin.cpp
+
+static napi_module testPluginModule = {
+    .nm_version = 1,
+    .nm_flags = 0,
+    .nm_filename = nullptr,
+    .nm_register_func = TestPluginExport,
+    .nm_modname = "testPlugin",
+    .nm_priv = ((void*)0),
+    .reserved = { 0 },
+};
+
+extern "C" __attribute__((constructor)) void TestPluginRegister()
+{
+    // 注册testPlugin模块，供JS调用
+    napi_module_register(&testPluginModule);
+}
+```
+
+### 附：GN配置
+
+#### 1、增加模块
+
+```C++
+// plugins/plugin_lib.gni
+common_plugin_libs = [
+  "test_plugin",
+]
+```
+
+#### 2、编译js_test_plugin模块
+
+```C++
+// plugins/test_plugin/BUILD.gn
+  ohos_source_set(target_name) {
+    defines += invoker.defines
+    cflags_cc += invoker.cflags_cc
+
+    sources = [ "js_test_plugin.cpp" ]
+
+    deps = [
+      "//foundation/arkui/napi:ace_napi",
+      "//plugins/interfaces/native:ace_plugin_util_${platform}",
     ]
-  }
 
-  ohos_source_set("calc") {
-    defines = [ "IOS_PLATFORM" ]
-    public_configs = [ ":ace_napi_config" ]
-    deps = [ "//foundation/ace/napi/:ace_napi" ]
-
-    sources = [ "napi_calc.cpp" ]
-
-    if (current_cpu == "arm64") {
-      defines += [ "_ARM64_" ]
+    if (platform == "ios") {
+      deps += [ "ios:test_plugin_ios" ]
     }
 
-    cflags_cc = [ "-Wno-missing-braces" ]
-
-    subsystem_name = "ace"
-    part_name = "napi"
+    subsystem_name = "plugins"
+    part_name = "test_plugin"
   }
-  ```
-
-4.前端调用
-```
-这个napi实现的功能前端可以用"requireInternal('calc')"来使用其内部提供的'add'方法能力，也可以使用"requireNapi('calc')"来使用，这2种调用方式针对iOS都可以完成js调用原生api的能力。
-```
-const calc1 = requireNapi('calc')
-const calc2 = requireInternal('calc')
-
-const result1 = calc1.add(1, 2)
-const result2 = calc2.add(1, 2)
 ```
 
+#### 3、编译iOS平台特有代码
+
+```C++
+// plugins/test_plugin/ios/BUILD.gn
+
+import("//build/ohos.gni")
+import("//foundation/arkui/ace_engine/ace_config.gni")
+
+ohos_source_set("test_plugin_ios") {
+  sources = [
+    "ios_test_plugin.m",
+    "test_plugin_impl.mm",
+  ]
+
+  defines = [ "IOS_PLATFORM" ]
+
+  if (target_cpu == "arm64") {
+    defines += [ "_ARM64_" ]
+  }
+
+  configs = [ "$ace_root:ace_config" ]
+
+  cflags_objc = [
+    "-fvisibility=default",
+    "-fobjc-arc",
+    "-fobjc-weak",
+  ]
+
+  cflags_objcc = cflags_objc
+
+  deps = [ "//plugins/interfaces/native:ace_plugin_util_ios" ]
+
+  subsystem_name = "plugins"
+  part_name = "test_plugin"
+}
+```
