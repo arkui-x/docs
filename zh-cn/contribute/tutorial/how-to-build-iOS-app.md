@@ -57,11 +57,6 @@ ArkUI_iOS_SDK
             └── module.modulemap  
 ```
 
->![](../public_sys-resources/icon-note.gif) **说明：**
->
->-   ArkUI跨平台提供的Native层接口，比如：napi、libuv和NativeXComponent接口，不在这里列举和描述。
->-   [Native层接口说明](../../application-dev/reference/README.md)
-
 ##### iOS工程集成ArkUI跨平台SDK
 
 iOS工程集成ArkUI跨平台SDK遵循iOS应用工程集成Framework规则，即将SDK中libace_ios.xcframework包拷贝到工程目录下，并引入到工程目录。
@@ -77,7 +72,7 @@ iOS工程集成ArkUI跨平台SDK遵循iOS应用工程集成Framework规则，即
 
 ```
 
-其中参数`version`为ArkUI开发范式，1:表示ArkUI类Web范式，2:ArkUI声明式范式；`instanceName`为ArkUI范式代码编译为JSBundle后在应用工程中存放的目录名。
+其中参数`version`为ArkUI开发范式，ACE_VERSION_JS:表示ArkUI类Web范式，ACE_VERSION_ETS:ArkUI声明式范式；`instanceName`为ArkUI范式代码编译为JSBundle后在应用工程中存放的目录名。
 
 ##### iOS工程集成ArkUI JSBundle实例
 

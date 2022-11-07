@@ -1,47 +1,39 @@
-## 应用开发
+# 应用开发
 
-##### 快速入门
+- [应用开发导读](application-dev-guide.md)
+- 了解ArkUI-X
+  - [了解ArkUI-X开源项目](../ArkUI-X-Overview-zh.md)
+  - [术语](../glossary.md)
+  - [版本说明](../release-notes/README.md)
 
-- [如何下载代码](https://gitee.com/arkui-x/manifest/blob/master/README.md)
-- [如何编译代码](https://gitee.com/arkui-x/build/blob/arkui-master/README.md)
-- [如何贡献代码](../contribute/README.md)
-- [代码工程结构及构建说明](quick-start/project-structure-guide.md)
+## 快速开始
 
-##### ArkUI跨平台应用工程说明
+### 快速入门
 
-- [跨平台应用工程结构](quick-start/package-structure-guide.md)
-- [跨平台应用工程示例](https://gitee.com/arkui-x/samples)
-- 应用工程模块库管理
-  - [应用工程模块库创建指南](https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ohos-adding-deleting-module-0000001218760594)
-  - [应用工程模块库共享指南](https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ohos-development-npm-package-0000001222578434)
+- [开发准备](quick-start/start-overview.md)
+- [使用ArkTS语言开发](quick-start/start-with-ets-fa.md)
 
-##### ArkUI工具链
+### 开发基础知识
 
-- [ArkUI声明式范式编译转换工具](quick-start/start-with-ace-ets2bundle.md)
-- [ArkUI类Web范式编译转换工具](quick-start/start-with-ace-js2bundle.md)
-- [跨平台应用构建指南](quick-start/start-with-ace-tools.md)
+- [应用工程包结构说明](quick-start/package-structure-guide.md)
+- [清单配置文件](quick-start/manifest-structure.md)
+- [资源分类与访问](quick-start/resource-categories-and-access.md)
+- [应用开发命令行工具](quick-start/start-with-ace-tools.md)
 
-##### 组件支持列表
+## UI组件支持列表
 
-- [ArkUI跨平台组件列表](components/arkui-component-list.md)
+- [组件列表](components/arkui-component-list.md)
 
-##### 开发参考
+## API参考
 
-- [基于JS扩展的类Web开发范式](reference/arkui-js/Readme-CN.md)
-- [基于TS扩展的声明式开发范式](reference/arkui-ts/Readme-CN.md)
-- [@ohos接口](reference/apis/Readme-CN.md)
-- [Java接口]()
-- [Objective-C接口]()
-- Native接口
-  - [Native XComponent接口](reference/native-apis/_o_h___native_x_component.md)
-  - [Node-API接口](reference/native-lib/third_party_napi/napi.md)
-  - [libuv接口](reference/native-lib/third_party_libuv/libuv.md)
+- [跨平台组件支持列表](components/arkui-component-list.md)
+- [组件参考（基于TS扩展的声明式开发范式）](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/Readme-CN.md)
+- [接口参考(JS及TS API)](reference/apis/readme.md)
+- 平台集成
+  - [Android](reference/arkui-for-android/readme.md)
+  - [iOS](reference/arkui-for-ios/readme.md)
 
-##### 示例教程
+## 示例教程
 
 - [示例代码](https://gitee.com/arkui-x/samples)
-
-##### 贡献
-
-- [参与贡献](../contribute/how-to-contribute.md)
 
