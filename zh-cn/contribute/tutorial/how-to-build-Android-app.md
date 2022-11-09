@@ -38,6 +38,8 @@ ArkUI_Android_SDK
     │   ├── ace_engine_cross
     │   │   ├── libace_android.so            // ArkUI引擎及Android适配层
     │   │   ├── libace_ndk.so                // ArkUI XComponent NDK接口
+    │   │   ├── libanimator.so
+    │   │   ├── libpromptaction.so
     │   │   ├── libmediaquery.so             // ArkUI媒体查询接口实现
     │   │   ├── libdevice.so
     │   │   ├── libconfiguration.so
@@ -45,7 +47,8 @@ ArkUI_Android_SDK
     │   │   └── librouter.so                 // ArkUI页面跳转路由接口实现
     │   └── napi
     │       ├── libace_napi.so               // napi接口实现层
-    │       └── libace_napi_quickjs.so       // napi适配quickjs引擎
+    │       ├── libace_container_scope.so
+    │       └── libace_napi_ark.so           // napi适配quickjs引擎
     └── lib.unstripped                       // 带符号动态库
         └── arkui
             ├── ace_engine_cross
@@ -62,14 +65,9 @@ ArkUI_Android_SDK
                 └── libace_napi_quickjs.so
 ```
 
->![](../public_sys-resources/icon-note.gif) **说明：** 
->
->-   ArkUI跨平台提供的Native层接口，比如：napi、libuv和NativeXComponent接口，不在这里列举和描述。
->-   [Native层接口说明](../../application-dev/reference/README.md)
-
 ##### Android工程集成ArkUI跨平台SDK
 
-* Android工程集成ArkUI跨平台SDK遵循Android应用工程集成Jar和动态库规则，即SDK中libace_android.jar包拷贝到libs目录，动态库（libace_android.so\libace_napi.so\libace_napi_quickjs.so等）拷贝到libs/arm64-v8a目录。
+* Android工程集成ArkUI跨平台SDK遵循Android应用工程集成Jar和动态库规则，即SDK中ace_android_adapter.jar包拷贝到libs目录，动态库（libace_android.so\libace_napi.so\libace_napi_quickjs.so等）拷贝到libs/arm64-v8a目录。
 * Android应用的入口Application和Activity需要继承自ArkUI提供的基类，详情参见[使用说明](https://gitee.com/arkui-x/android#使用说明)，比如:
 
 **Activity部分**
@@ -136,7 +134,7 @@ src/main/assets/js/MainAbility
 
 ##### 参考
 
-【1】[ArkUI跨平台应用Android侧示例](https://gitee.com/arkui-x/samples/tree/master/eTSHelloWorld/android)
+【1】[ArkUI跨平台应用Android侧示例](https://gitee.com/arkui-x/samples)
 
 【2】[ArkUI JSBundle获取指南]()
 

@@ -4,7 +4,7 @@
 
 ### 设计规范
 
-[ArkUI-X架构设计原则（待完善）]()
+[ArkUI-X架构设计原则](../framework-dev/design/design-overview.md)
 
 [ArkUI-X安全设计规范](./ArkUI-security-design-guide.md)
 
@@ -20,17 +20,17 @@
 -   [Python语言编程规范](https://pep8.org/)
 -   [C&C++语言安全编程指南](./ArkUI-c-cpp-secure-coding-guide.md)
 -   [Java语言安全编程指南](./ArkUI-Java-secure-coding-guide.md)
--   [Log打印规范](./ArkUI-Log-guide.md)
+-   [Log打印规范](./ArkUI-log-guide.md)
 
 ### 开源软件引入
 
 若要引入新的第三方开源软件到ArkUI-X项目中，请参考[第三方开源软件引入指导](./introducing-third-party-open-source-software.md)
 
+### 开源合规
+
+* [开发者代码贡献和许可证合规指南](./ArkUI-contribution-and-license-guide.md)
+* [许可证声明与版权声明规范](./ArkUI-license-notice-and-copyright-notice-sprcification.md)
+
 ## 贡献工作流
 
 有关详细信息，请参考[贡献流程](contribution-process.md)。
-
-## 社区安全问题披露
-
--   [安全问题处理和发布流程](https://gitee.com/arkui-x/security/blob/master/zh/security-process/README.md)
--   [安全和披露说明](https://gitee.com/arkui-x/security/blob/master/zh/security-process/security-disclosure.md)
