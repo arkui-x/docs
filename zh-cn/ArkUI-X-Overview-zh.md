@@ -54,7 +54,7 @@ Samples：[示例代码](https://gitee.com/arkui-x/samples)
 
 ArkUI-X主要遵循Apache License V2.0协议，详情请参考各代码仓LICENSE声明。
 
-ArkUI-X引用三方开源软件及许可证说明，请参考[第三方开源软件说明](contribute/license-and-copyright-specifications.md)。
+ArkUI-X引用三方开源软件及许可证说明，请参考[第三方开源软件说明](contribute/open-source-software-and-license-notice.md)。
 
 ## 联系方式
 

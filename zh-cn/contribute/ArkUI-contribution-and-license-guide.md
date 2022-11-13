@@ -2,7 +2,7 @@
 
 ## 目的
 
-本规范明确了ArkUI的代码贡献的贡献协议与许可证合规指南，包括如下几个部分：
+本规范明确了ArkUI-X的代码贡献的贡献协议与许可证合规指南，包括如下几个部分：
 **（1）开发者原创声明**
 **（2）贡献代码的许可证**
 **（3）贡献文档的许可证**
@@ -10,7 +10,7 @@
 
 ## 范围
 
-本规范仅适用于ArkUI社区，不适用于将ArkUI项目应用于个人或企业以开发其它产品的场景，也不适用分发第三方开源软件的场景（该场景参见第三方开源软件引入指导）。
+本规范仅适用于ArkUI-X社区，不适用于将ArkUI-X项目应用于个人或企业以开发其它产品的场景，也不适用分发第三方开源软件的场景（该场景参见第三方开源软件引入指导）。
 
 **（1）开发者原创声明**
 
@@ -34,7 +34,7 @@ DCO是由贡献者签署的对其贡献的作品原创性的声明和贡献者�
 
 **自由再分发原则**，许可证不支持再分发的第三方依赖不能被接纳。
 
-**许可证兼容原则**，若第三方依赖可能与OpenHarmony项目其它代码产生代码合并或混同，但该第三方依赖的许可证与混同/合并的代码的原许可证不兼容，不能接纳该第三方依赖。
+**许可证兼容原则**，若第三方依赖可能与ArkUI-X项目其它代码产生代码合并或混同，但该第三方依赖的许可证与混同/合并的代码的原许可证不兼容，不能接纳该第三方依赖。
 
 **许可证义务可履行原则**，许可证包含无法履行或不易履行的开源许可证义务的第三方依赖不能被接纳，例如广告条款，啤酒条款。
 
@@ -48,69 +48,69 @@ DCO是由贡献者签署的对其贡献的作品原创性的声明和贡献者�
 
 原则上，许可证条款等同于Apache-2.0且其开源许可证义务能够被无障碍履行的许可证可以被接纳，经项目PMC审批同意如下第三方依赖的开源许可证白名单：
 
-  Academic Free License 3.0 (AFL-3.0)
-  Apache License 2.0 (Apache-2.0)
-  Apache Software License 1.1. Including variants:
-o   PHP License 3.01
-o   MX4J License
-  Boost Software License (BSL-1.0)
-  BSD License:
-  3-clause BSD License
-  2-clause BSD License
-  DOM4J License
-  PostgreSQL License
-  ISC
-  ICU
-  MIT License (MIT) / X11
-  MIT No Attribution License (MIT-0)
-  Mulan Permissive Software License v2 (MulanPSL - 2.0)
-  The Unlicense
-  W3C License (W3C)
-  University of Illinois/NCSA
-  X.Net
-  zlib/libpng
-  FSF autoconf license
-  DejaVu Fonts (Bitstream Vera/Arev licenses)
-  OOXML XSD ECMA License
-  Microsoft Public License (MsPL)
-  Python Software Foundation License
-  Python Imaging Library Software License
-  Adobe Postcript(R) AFM files
-  Boost Software License Version 1.0
-  WTF Public License
-  The Romantic WTF public license
-  UNICODE, INC. LICENSE AGREEMENT - DATA FILES AND SOFTWARE
-  Zope Public License 2.0
-  ACE license
-  Oracle Universal Permissive License (UPL) Version 1.0
-  Open Grid Forum License
-  Google "Additional IP Rights Grant (Patents)" file
-  Historical Permission Notice and Disclaimer
+*  Academic Free License 3.0 (AFL-3.0)
+*  Apache License 2.0 (Apache-2.0)
+*  Apache Software License 1.1. Including variants:
+*   PHP License 3.01
+*   MX4J License
+*  Boost Software License (BSL-1.0)
+*  BSD License
+*  3-clause BSD License
+*  2-clause BSD License
+*  DOM4J License
+*  PostgreSQL License
+*  ISC
+*  ICU
+*  MIT License (MIT) / X11
+*  MIT No Attribution License (MIT-0)
+*  Mulan Permissive Software License v2 (MulanPSL - 2.0)
+*  The Unlicense
+*  W3C License (W3C)
+*  University of Illinois/NCSA
+*  X.Net
+*  zlib/libpng
+*  FSF autoconf license
+*  DejaVu Fonts (Bitstream Vera/Arev licenses)
+*  OOXML XSD ECMA License
+*  Microsoft Public License (MsPL)
+*  Python Software Foundation License
+*  Python Imaging Library Software License
+*  Adobe Postcript(R) AFM files
+*  Boost Software License Version 1.0
+*  WTF Public License
+*  The Romantic WTF public license
+*  UNICODE, INC. LICENSE AGREEMENT - DATA FILES AND SOFTWARE
+*  Zope Public License 2.0
+*  ACE license
+*  Oracle Universal Permissive License (UPL) Version 1.0
+*  Open Grid Forum License
+*  Google "Additional IP Rights Grant (Patents)" file
+*  Historical Permission Notice and Disclaimer
 
 **不建议接纳的第三方依赖的许可证**
 
 原则上，不遵从OSI的开源定义的许可证，不支持商用的许可证，传染性的许可证以及其它包含不合理限制或义务的许可证不建议被接纳，请参考如下不建议接纳的许可证名单：
 
-  Intel Simplified Software License
-  JSR-275 License
-  Microsoft Limited Public License
-  Amazon Software License (ASL) 
-  Java SDK for Satori RTM license
-  Redis Source Available License (RSAL) 
-  Booz Allen Public License
-  Confluent Community License Version 1.0
-  Any license including the Commons Clause License Condition v1.0
-  Creative Commons Non-Commercial variants
-  Sun Community Source License 3.0
-  GNU GPL 1, 2, 3
-  GNU Affero GPL 3
-  QPL 
-  Sleepycat License
-  Server Side Public License (SSPL) version 1
-  Code Project Open License (CPOL)
-  BSD-4-Clause/BSD-4-Clause (University of California-Specific)
-  Facebook BSD+Patents license
-  NPL 1.0/NPL 1.1
-  The Solipsistic Eclipse Public License 
-  The "Don't Be A Dick" Public License 
-  JSON License 
+*  Intel Simplified Software License
+*  JSR-275 License
+*  Microsoft Limited Public License
+*  Amazon Software License (ASL)
+*  Java SDK for Satori RTM license
+*  Redis Source Available License (RSAL)
+*  Booz Allen Public License
+*  Confluent Community License Version 1.0
+*  Any license including the Commons Clause License Condition v1.0
+*  Creative Commons Non-Commercial variants
+*  Sun Community Source License 3.0
+*  GNU GPL 1, 2, 3
+*  GNU Affero GPL 3
+*  QPL
+*  Sleepycat License
+*  Server Side Public License (SSPL) version 1
+*  Code Project Open License (CPOL)
+*  BSD-4-Clause/BSD-4-Clause (University of California-Specific)
+*  Facebook BSD+Patents license
+*  NPL 1.0/NPL 1.1
+*  The Solipsistic Eclipse Public License
+*  The "Don't Be A Dick" Public License
+*  JSON License

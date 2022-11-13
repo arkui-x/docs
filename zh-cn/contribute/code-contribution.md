@@ -29,8 +29,13 @@
 ### 开源合规
 
 * [开发者代码贡献和许可证合规指南](./ArkUI-contribution-and-license-guide.md)
-* [许可证声明与版权声明规范](./ArkUI-license-notice-and-copyright-notice-sprcification.md)
+* [许可证声明与版权声明规范](./ArkUI-license-notice-and-copyright-notice-specification.md)
 
 ## 贡献工作流
 
 有关详细信息，请参考[贡献流程](contribution-process.md)。
+
+## 社区安全问题披露
+
+-   [安全问题处理和发布流程](../security/security-process/readme.md)
+-   [安全和披露说明](../security/security-process/security-disclosure.md)
