@@ -11,7 +11,7 @@ ArkUI-X遵从 [Open Source Definition](https://opensource.org/docs/osd) ，满�
 
 ## 本文的改进和修订说明
 
-1. 本文档由ArkUI-X SIG-QA主导起草和维护。本文档的最新版本总可以在 [这里](./introducing-third-party-open-source-software.md)
+1. 本文档由ArkUI-X PMC主导起草和维护。本文档的最新版本总可以在 [这里](./introducing-third-party-open-source-software.md)
    找到。
 2. 任何对于本文中涉及的规则的增加，修改，删除都必须被追踪，请进入该追踪系统 。
 3. 最终规则经过社区充分的讨论后，由PMC评审定稿。
@@ -20,7 +20,7 @@ ArkUI-X遵从 [Open Source Definition](https://opensource.org/docs/osd) ，满�
 
 ### 什么是软件引入
 
-一个软件的引入指的是为满足ArkUI-X中指定SIG的业务需求，申请将其引入到ArkUI-X项目中，具体的流程请参考的[SIG管理章程](https://gitee.com/arkui-x/community/tree/master/sig) 进行具体的开源软件引入，并确保整个引入的过程都必须可被追踪。
+一个软件的引入指的是为满足ArkUI-X中指定的业务需求，申请将其引入到ArkUI-X项目中，并确保整个引入的过程都必须可被追踪。
 
 ### 软件引入的基本要求
 
@@ -36,7 +36,6 @@ ArkUI-X遵从 [Open Source Definition](https://opensource.org/docs/osd) ，满�
 8. 不能引入有高危漏洞且无解决方案的版本。
 9. 若需针对引入的开源软件进行修改，请将修改的代码放在该开源软件仓中，并确保满足该开源软件的许可证要求，修改的文件应当保持其原始许可证条款，新增的文件也建议采用相同的许可证条款。
 10. 新引入的开源软件必须在其根目录提供README.OpenSource文件，在该文件中准确描述其软件名、许可证、许可文件位置、版本、对应版本的上游社区地址、软件的维护Owner、功能描述以及引入的原因。
-11. 引入新软件到ArkUI-X时必须有对应的SIG负责管理，原则上如果没有SIG-QA以及相应SIG的确认，PMC不批准相应软件的引入。当要批量引入多个软件时，可以求助PMC主持发起SIG间的临时评审会议，提升协调效率。 如因特殊原因不能满足上述要求但又需要引入，请请联系邮箱：law@openatom.org。
 
 ### 软件引入流程
 
@@ -54,7 +53,7 @@ ArkUI-X遵从 [Open Source Definition](https://opensource.org/docs/osd) ，满�
 
 #### 提交申请
 
-如需要引入新的软件，请参考[SIG管理章程](https://gitee.com/arkui-x/community/tree/master/sig) 进行具体的开源软件引入，并在申请材料中包含如下内容：
+如需要引入新的软件，请向ArkUI-X PMC提交开源软件引入请求，并在申请材料中包含如下内容：
 
 1、自检表
 
@@ -70,34 +69,13 @@ ArkUI-X遵从 [Open Source Definition](https://opensource.org/docs/osd) ，满�
 | 软件安全漏洞 | 描述该软件存在的业界公开的安全漏洞列表，包括漏洞号、级别、漏洞链接地址、是否已有补丁或解决方案 | 无业界公开漏洞 |
 | 业务场景 | 描述该软件被哪些仓使用,解决什么业务场景的问题 | 被XX仓静态链接使用，提升YYY能力 |
 | 归一化 | 描述社区是否已有此软件或类似软件，业界类似软件有哪些，为什么要新引入该软件或该版本 | 本社区还未引入此软件，业界相似软件有B、C，只有本软件许可证友好，且该软件生态较好，X、Y等公司也在使用 |
-| 许可证兼容性 | 1、描述使用该软件有哪些进程，各进程的许可证是什么，与要引入软件的许可证是否兼容。<br>2、使用OAT工具扫描要引入软件的源代码，申请时附上OAT工具生成的扫描报告（扫描问题应当清零）、LicenseFile.txt内容 | 1、此软件在用户态X进程中，静态链接使用，该进程的许可证为Apache-2.0，与该软件许可证一致，无兼容性问题；<br>2、OAT工具扫描生成的Result.txt, LicenseFile.txt内容<br>  |
-| 责任人 | 描述该软件引入到本社区后的SIG名称及维护责任人的Gitee用名及邮箱 | SIG XXX，Zhangsan，Zhangsan@xyz.com |
+| 许可证兼容性 | 描述使用该软件有哪些进程，各进程的许可证是什么，与要引入软件的许可证是否兼容。 | 此软件在用户态X进程中，静态链接使用，该进程的许可证为Apache-2.0，与该软件许可证一致，无兼容性问题； |
+| 责任人 | 描述该软件引入到本社区后的维护责任人的Gitee用名及邮箱 | Zhangsan，Zhangsan@xyz.com |
 
-说明：
-
-- OAT工具的使用方式请参考 https://gitee.com/arkui-x -sig/tools_oat ，如对工具有改进建议请直接在社区提交ISSUE，也可Fork下来完善工具并提交PR。
-- OAT报告原则上应当是清零，格式如下：
-
-```
-Invalid File Type Total Count: 0
-License Not Compatible Total Count: 0
-License Header Invalid Total Count: 0
-Copyright Header Invalid Total Count: 0
-No License File Total Count: 0
-No Readme.OpenSource Total Count: 0
-No Readme Total Count: 0
-```
-
-- LicenseFile.txt位于OAT工具运行目录的log目录下，此文件记录扫描目录下所有疑似许可证的文件，格式如下：
-
-```
-third_party_abcde/ LICENSEFILE LICENSE Apache-2.0
-third_party_abcde/doc/ LICENSEFILE LICENSE Apache-2.0
-```
 
 2、OAT.xml文件
 
-请参考 https://gitee.com/arkui-x -sig/tools_oat/blob/master/README_zh.md ，完成OAT扫描问题确认及OAT.xml文件配置，申请中附上此文件内容（如果无任何需确认问题则无需配置）。
+请[参考](https://gitee.com/arkui-x/docs/blob/master/OAT.xml)，完成OAT.xml文件配置，申请中附上此文件内容（如果无任何需确认问题则无需配置）。
 
 3、该仓的README.OpenSource文件内容，格式如下：
 
@@ -120,14 +98,14 @@ third_party_abcde/doc/ LICENSEFILE LICENSE Apache-2.0
 
 #### PMC评审
 
-参考[SIG管理章程](https://gitee.com/arkui-x/community/tree/master/sig)，PMC会根据收到的PR统一安排SIG申请评审以及建仓。
+PMC会根据收到的PR统一安排ArkUI-X PMC申请评审以及建仓。
 
 ## 软件退出与退出原则
 
 ### 什么是软件退出
 
 1. 一个软件的退出指的是一个软件(项目)申请从ArkUI-X项目中删除，依照本文件描述的规则讨论，最终在ArkUI-X中移除的过程。
-2. 该软件相关的SIG负责申报议题到PMC评审，管理软件退出。
+2. 该软件相关的负责人申报议题到PMC评审，管理软件退出。
 
 ### 软件退出原则
 
@@ -144,7 +122,7 @@ third_party_abcde/doc/ LICENSEFILE LICENSE Apache-2.0
 4. 软件来自个人、小型社区或组织，两年内未发布版本（含正式版本与测试版本），无明确版本计划，社区提交了有效的Bug或PR，社区半年以上未响应的。
 5. 社区运营状态不明确，通过Issue或者邮件等方式询问社区是否继续维护，社区半年以上未响应或者答复停止维护的。
 
-如果软件符合以上任何一条退出条件，PMC与相应SIG首先分析该软件在当前ArkUI-X社区中被依赖、被使用的情况。
+如果软件符合以上任何一条退出条件，PMC与相应责任人首先分析该软件在当前ArkUI-X社区中被依赖、被使用的情况。
 
-1. 如果ArkUI-X中存在依赖关系，且短时间内不能解除，我们建议SIG新建分支代码仓，并主动进行社区维护动作。
-2. 如果ArkUI-X中不存在依赖关系，或者短时间内可以解除，则责任SIG将软件从ArkUI-X正式发行中移出，并在相应的Release Notes中说明移除的原因及影响。
+1. 如果ArkUI-X中存在依赖关系，且短时间内不能解除，我们建议责任人新建分支代码仓，并主动进行社区维护动作。
+2. 如果ArkUI-X中不存在依赖关系，或者短时间内可以解除，则责任人将软件从ArkUI-X正式发行中移出，并在相应的Release Notes中说明移除的原因及影响。

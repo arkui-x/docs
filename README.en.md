@@ -25,7 +25,7 @@ ArkUI-X 0.1.0 Beta版本：点击[此处](zh-cn/release-notes/ArkUI-X-v0.1.0-bet
 
 ## 第三方开源软件及许可说明
 
-3rd-Party-License：[第三方开源软件及许可证说明](zh-cn/contribute/license-and-copyright-specifications.md)
+3rd-Party-License：[第三方开源软件及许可证说明](zh-cn/contribute/open-source-software-and-license-notice.md)
 
 ## 贡献
 
