@@ -2,7 +2,7 @@
 
 #### 总览
 
-本教程主要讲述如何利用ArkUI-X SDK完成Android应用开发，实现ArkUI开发范式在安卓平台显示。包括：
+本教程主要讲述如何利用ArkUI-X SDK完成Android应用开发，实现基于ArkTS的声明式开发范式在Android平台显示。包括：
 
 * ArkUI-X SDK获取方法
 * ArkUI-X SDK内容组成
@@ -21,7 +21,7 @@
 
 **方式二**
 
-* 通过ArkUI-X跨平台项目源码编译出SDK，适用于ArkUI跨平台应用高阶开发者。完成跨平台项目[代码下载](../../application-dev/quick-start/README.md)后，执行如下命令编译ArkUI-X Android平台SDK。
+* 通过ArkUI-X跨平台项目源码编译出SDK，适用于ArkUI跨平台应用高阶开发者。完成跨平台项目[代码下载](../../framework-dev/quick-start/readme.md)后，执行如下命令编译ArkUI-X Android平台SDK。
 
 ```
 ./build.sh --product-name arkui-cross --target-os android --ccache
@@ -48,7 +48,7 @@ ArkUI_Android_SDK
     │   └── napi
     │       ├── libace_napi.so               // napi接口实现层
     │       ├── libace_container_scope.so
-    │       └── libace_napi_ark.so           // napi适配quickjs引擎
+    │       └── libace_napi_ark.so           // napi适配方舟js引擎
     └── lib.unstripped                       // 带符号动态库
         └── arkui
             ├── ace_engine_cross
@@ -62,12 +62,12 @@ ArkUI_Android_SDK
             │   └── librouter.so
             └── napi
                 ├── libace_napi.so
-                └── libace_napi_quickjs.so
+                └── libace_napi_ark.so
 ```
 
 ##### Android工程集成ArkUI跨平台SDK
 
-* Android工程集成ArkUI跨平台SDK遵循Android应用工程集成Jar和动态库规则，即SDK中ace_android_adapter.jar包拷贝到libs目录，动态库（libace_android.so\libace_napi.so\libace_napi_quickjs.so等）拷贝到libs/arm64-v8a目录。
+* Android工程集成ArkUI跨平台SDK遵循Android应用工程集成Jar和动态库规则，即SDK中ace_android_adapter.jar包拷贝到libs目录，动态库（libace_android.so\libace_napi.so\libace_napi_ark.so等）拷贝到libs/arm64-v8a目录。
 * Android应用的入口Application和Activity需要继承自ArkUI提供的基类，详情参见[使用说明](https://gitee.com/arkui-x/android#使用说明)，比如:
 
 **Activity部分**
@@ -83,12 +83,12 @@ import ohos.ace.adapter.AceActivity;
 
 import androidx.annotation.Nullable;
 
-public class HiHelloWorldActivity extends AceActivity {
+public class MainActivity extends AceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("HiHelloWorld", "HiHelloWorldActivity");
-        setVersion(VERSION_ETS); // ArkUI开发范式选择，VERSION_JS:ArkUI类Web范式，VERSION_ETS:ArkUI声明式范式。
-        setInstanceName("MainAbility"); // ArkUI JSBundle在应用工程assets中存放的目录名（即模块实例名）。
+        Log.d("HiHelloWorld", "MainActivity");
+        setVersion(VERSION_ETS);            // ArkUI开发范式类型，VERSION_JS:兼容JS的类Web开发范式，VERSION_ETS:基于ArkTS的声明式开发范式。
+        setInstanceName("MainAbility");     // ArkUI JSBundle在应用工程assets/js中存放的目录名（即模块实例名）。
         super.onCreate(savedInstanceState);
     }
 }
@@ -103,23 +103,23 @@ import android.util.Log;
 
 import ohos.ace.adapter.AceApplication;
 
-public class HiHelloWorldApplication extends AceApplication {
+public class MyApplication extends AceApplication {
     private static final String LOG_TAG = "HiHelloWorld";
 
     private static final String RES_NAME = "res";
 
     @Override
     public void onCreate() {
-        Log.d(LOG_TAG, "HiHelloWorldApplication");
+        Log.d(LOG_TAG, "MyApplication");
         super.onCreate();
-        Log.d(LOG_TAG, "HiHelloWorldApplication is onCreate");
+        Log.d(LOG_TAG, "MyApplication is onCreate");
     }
 }
 ```
 
 ##### Android工程集成ArkUI JSBundle实例
 
-ArkUI JSBundle生成后，拷贝到Android应用工程assets/js目录下，比如：assets/js/MainAbility。这里“js”目录名称是固定的，不能更改，MainAbility为模块实例名称，定义在config.json清单文件中。
+ArkUI JSBundle生成后，拷贝到Android应用工程assets/js目录下，比如：assets/js/MainAbility。这里“js”目录名称是固定的，不能更改；MainAbility为JSBundle模块实例名称，可以自定义名称。
 
 ```
 src/main/assets/js/MainAbility
@@ -134,7 +134,7 @@ src/main/assets/js/MainAbility
 
 ##### 参考
 
-【1】[ArkUI跨平台应用Android侧示例](https://gitee.com/arkui-x/samples)
+【1】[ArkUI跨平台应用示例](https://gitee.com/arkui-x/samples)
 
 【2】[ArkUI JSBundle获取指南]()
 

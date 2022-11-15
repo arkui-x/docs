@@ -1,7 +1,7 @@
 # 方舟调试器简介
 方舟调试器(ArkCompiler Debugger)为开发者提供了ArkUI-X应用程序调试的工具，目前可在Chrome上进行调试，后续将支持在HUAWEI DevEco Studio上进行调试，其功能包括单步调试、断点调试、Watch变量及表达式。
 
-## 调试运行在安卓系统上的应用
+## 调试运行在Android平台上的应用
 - 启动应用
 - 获取设备端debugger socket的端口号
 ```

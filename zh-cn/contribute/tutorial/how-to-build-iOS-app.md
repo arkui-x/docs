@@ -2,7 +2,7 @@
 
 #### 总览
 
-本教程主要讲述如何利用ArkUI-X SDK完成iOS应用开发，实现ArkUI开发范式在iOS平台显示。包括：
+本教程主要讲述如何利用ArkUI-X SDK完成iOS应用开发，实现基于ArkTS的声明式开发范式在iOS平台显示。包括：
 
 * ArkUI-X SDK获取方法
 * ArkUI-X SDK内容组成
@@ -72,7 +72,7 @@ iOS工程集成ArkUI跨平台SDK遵循iOS应用工程集成Framework规则，即
 
 ```
 
-其中参数`version`为ArkUI开发范式，ACE_VERSION_JS:表示ArkUI类Web范式，ACE_VERSION_ETS:ArkUI声明式范式；`instanceName`为ArkUI范式代码编译为JSBundle后在应用工程中存放的目录名。
+其中参数`version`为开发范式类型，ACE_VERSION_JS:兼容JS的类Web开发范式，ACE_VERSION_ETS:基于ArkTS的声明式开发范式；`instanceName`为ArkUI范式代码编译为JSBundle后在应用工程中存放的目录名。
 
 ##### iOS工程集成ArkUI JSBundle实例
 

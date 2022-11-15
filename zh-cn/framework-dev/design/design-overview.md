@@ -6,7 +6,7 @@
 
 本文档描述ArkUI开发框架跨平台运行能力相关的总体技术方案。
 
-ArkUI是面向全设备的UI开发框架，已通过OpenHarmony代码仓开放，其关键组成包括：开发模型; 应用界面&交互; 扩展机制-使能三方组件&平台API扩展机制。
+ArkUI是面向全设备的UI开发框架，已通过OpenHarmony代码仓开源，其关键组成包括：开发模型; 应用界面&交互; 扩展机制-使能三方组件&平台API扩展机制。
 
 ArkUI-X项目旨在将ArkUI开发框架扩展至其他OS平台（Android/iOS/Windows等），使开发者能够基于ArkUI开发框架，复用绝大部分的应用代码（UI以及主要应用逻辑），即可部署到不同OS平台上。
 
@@ -20,11 +20,11 @@ ArkUI-X项目旨在将ArkUI开发框架扩展至其他OS平台（Android/iOS/Win
 
 ## 总体视图 
 
-![](png/arkui-overview.png) 
+![](../../figures/ArkUI-X.png) 
 
 从设计之初，**跨平台**就作为ArkUI最基本的设计目标之一，当前已支持基础的跨平台架构.相关的设计思路如下：
 
-1. 采用**C++**编写整体后端引擎代码，保持在多平台的可移植性，最小化平台依赖，降低平台移植成本
+1. 采用 **C++** 编写整体后端引擎代码，保持在多平台的可移植性，最小化平台依赖，降低平台移植成本
 2. 整体绘制采用自渲染机制，降低平台依赖，同时进一步提升绘制效果的一致性
 3. 抽象出平台适配层以及平台桥接层，以便不同平台的适配
 
@@ -32,7 +32,7 @@ ArkUI-X项目旨在将ArkUI开发框架扩展至其他OS平台（Android/iOS/Win
 
 ArkUI主要包括以下几个模块：
 
-1. 前端框架层， 包括JavaScript前端框架，JS UI组件等，可跨平台
+1. 研发模型，支持基于ArkTS的声明式开发范式，可跨平台
 2. 声明式UI后端引擎，包括布局，渲染，C++ UI组件，事件机制等，可跨平台
 3. API扩展机制，基于NAPI机制，可跨平台。 不同平台需要各自扩展具体的API实现
 4. 工具链/SDK,  工具链可跨平台，SDK需基于不同平台构建
@@ -43,14 +43,14 @@ ArkUI声明式UI后端引擎，主要完成整体pipeline流程控制、视图�
 
 整体的跨平台需求，就是扩展ArkUI开发框架到其他OS平台，帮助开发者降低多平台应用开发成本。
 
-以Android平台为例，提供Android平台的SDK及工具，可以让开发者同时构建出OpenHarmony版本hap及Android版本的apk。
+以CLI命令行工具开发跨平台应用为例，开发者基于一套主代码，就可以构建支持多平台的精美、高性能应用。如下图所示：
 
 ![](png/arkui-deploy.png)
 
 
 ## 方案设计
 
-### 跨平台应用结构设计
+### 跨平台应用包结构设计
 
 跨平台应用目录结构，包含一套为ArkUI-X开发者提供的应用工程模板，提供构建OpenHarmony应用、Android应用、iOS应用的能力。跨平台应用工程0层结构设计如下：
 
@@ -66,7 +66,7 @@ ArkUI-X AppProject
       └── entry
 ```
 
-项目根目录包含：ohos、android、ios、source四个目录，分别对应OpenHarmony应用、Android应用、iOS应用，ArkUI源码模块。每个目录下的entry和app目录表示创建的模块（entry/app为默认创建的模块名），每个模块对应一个编译单元（hap/apk/app）。其中，source目录是OpenHarmony默认的结构，存放公共的代码，配合上述平台的代码构建出对应平台的应用。可以使用基于eTS的声明式范式或兼容JS的类Web范式进行开发。
+项目根目录包含：ohos、android、ios、source四个目录，分别对应OpenHarmony应用、Android应用、iOS应用，ArkUI源码模块。每个目录下的entry和app目录表示创建的模块（entry/app为默认创建的模块名），每个模块对应一个编译单元（hap/apk/app）。其中，source目录是OpenHarmony默认的结构，存放公共的基于ArkTS的声明式开发范式代码，配合上述平台的代码构建出对应平台的应用。
 
 * OpenHarmony平台工程结构（0-1）
 
@@ -100,7 +100,7 @@ Android平台代码
   │   │   └── arm64-v8a
   │   │       ├── libace_android.so                 // ArkUI引擎库，在SDK中发布
   │   │       ├── libace_napi.so                    // API接口扩展库，在SDK中发布
-  │   │       ├── libace_napi_quickjs.so            // JS引擎库，在SDK中发布
+  │   │       ├── libace_napi_ark.so                // 方舟JS引擎库，在SDK中发布
   │   │       └── libxxx.so                         // 其它功能模块库
   │   ├── src
   │   │   ├── androidTest
@@ -168,11 +168,8 @@ source
 ### 跨平台SDK结构设计
 ArkUI-X项目编译构建提供了一套基于GN和Ninja的编译构建框架，基础构建流程Fork OpenHarmony build仓，并在OpenHarmony构建基础上新增Android和iOS编译工具链，以支持ArkUI跨平台SDK编译输出。跨平台SDK主要用于支持CLI命令行跨平台应用构建和DevEco Studio\Android Studio\Xcode集成跨平台应用开发。内容范围主要包括：
 1. 提供ArkUI跨平台开发框架基础引擎动态库和JS运行时动态库。
-2. 提供ArkUI跨平台Native接口，比如：NAPI，XComponent，Plugins等。
-3. 提供ArkUI跨平台应用构建命令行工具。
-4. 提供ArkUI开发范式JS2Bundle编译解析工具链。
-5. 提供ArkUI组件渲染一致性系统资源包，应用资源编译工具。
-6. 提供@ohos基础接口跨平台适配动态库以及d.ts接口声明文件。
+2. 提供ArkUI跨平台应用构建命令行工具。
+3. 提供ArkUI组件渲染一致性系统资源包，应用资源编译工具。
 
 * ArkUI-X项目跨平台SDK组成示意图
 
@@ -214,19 +211,8 @@ ArkUI-X项目SDK组成
   │           │   └── framework
   │           │       └── libace_ohos_${module-name}.framework
   │           └── ${module-name2}
-  ├── ets                                                                // 基于eTS的声明式范式JSBundle编译工具链
-  │   ├── api
-  │   └── build-tools
-  ├── js                                                                 // 兼容JS的类Web范式JSBundle编译工具链
-  │   ├── api
-  │   └── build-tools
-  ├── native                                                             // ArkUI跨平台Android侧Native接口，比如NAPI和XComponent。
-  │   └── include
-  │       ├── napi
-  │       └── ace
   ├── toolchains                                                         // ArkUI-X项目跨平台应用构建命令行工具
-  │   ├── cli
-  │   └── restool
+  │   └── cli
   ├── systemres                                                          // ArkUI组件渲染一致性系统资源包
   ├── licenses
   └── readme.md
@@ -254,11 +240,9 @@ ArkUI-X项目SDK组成
  
 ### 跨平台启动入口
 
-对应平台语言实现的Entrance，提供不同平台的基础入口环境，功能列表：
+开发框架对应平台语言实现的Entrance，提供不同平台的基础入口环境，跨平台启动入口功能列表：
 
 提供多个平台的加载入口，如OpenHarmony侧为一个Ability，Android侧为一个Activity；
-
-声明式范式抽象Android的TS入口接口
 
 对接不同平台的生命周期、事件输入、Vsync；
 
@@ -296,21 +280,12 @@ ArkUI-X项目SDK组成
 
 ### API扩展机制
 
-1、JS API的通用封装机制，提供多JS引擎抽象封装，用于Native接口能力暴露到JS层的统一封装机制该能力直接复用OpenHarmony上的统一封装机制，扩展API （C++实现），并实现部分内置API，NAPI的整体结构如下图。
+1、JS API扩展机制，用于Native接口能力暴露到JS层，改机制直接复用OpenHarmony上的统一封装机制，扩展API （C++实现），并实现部分内置API，NAPI的整体结构如下图。
 
 对于不同平台，**JS API需要遵循OpenHarmony的API定义**，在不同平台上通过API扩展机制进行扩展。
 
 ![](png/arkui-api-extension.png)
 
-NAPI需求列表如下：
-
-NAPI的Android平台编译
-
-支持应用通过NAPI扩展接口，并通过apk运行时动态加载
-
-扩展部分内置API，支持apk运行时动态加载 (按照OpenHarmony的API定义实现)
-
-NAPI快速扩展Android平台系统API的能力（JS-&gt;C++-&gt;Java）
 
 ### 跨平台命令行工具CLI
 

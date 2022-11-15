@@ -57,7 +57,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
 
 ### 配置Android SDK环境
 
-  **SDK下载：** 通过[命令行工具](https://developer.android.google.cn/studio#command-tools)下载Android SDK。命令行工具使用说明详见[sdkmanager](https://developer.android.google.cn/studio/command-line/sdkmanager)官方指导，也可按照如下步骤进行下载。
+   **SDK下载：** 通过[Android Studio下载页面](https://developer.android.google.cn/studio)下载Android SDK命令行管理工具，命令行工具使用说明详见[sdkmanager](https://developer.android.google.cn/studio/command-line/sdkmanager)官方指导。SDK版本下载要求如下：
 
   ```shell
   ./sdkmanager --install "ndk-bundle" --sdk_root=/home/usrername/path-to-android-sdk
@@ -66,6 +66,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   ./sdkmanager --install "platforms;android-29" --sdk_root=/home/usrername/path-to-android-sdk
   ./sdkmanager --install "build-tools;28.0.3" --sdk_root=/home/usrername/path-to-android-sdk
   ```
+  **说明：** 如果您使用Android Studio，则无需使用此命令行工具，可直接通过[IDE管理SDK软件包](https://developer.android.google.cn/studio/intro/update#sdk-manager)。
 
   [Linux]
 
@@ -85,7 +86,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
 
 ### 配置iOS SDK环境
 
-  - Xcode和Command Line Tools for Xcode应用可前往苹果商店下载安装。
+  - Xcode和Command Line Tools for Xcode应用可前往Mac App Store应用商店下载安装。
   - Command Line Tools也可使用命令方式安装:
 
     ```shell

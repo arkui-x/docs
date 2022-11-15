@@ -1,6 +1,6 @@
 # 快速入门
 
-ACE Loader是一个用于ArkUI类Web范式语法编译转换的webpack loader，可以完成hml/css/js JsBundle化、UI布局、样式、事件和页面逻辑处理，并可以进行语法验证，同时拥有完善的语法报错提示能力。
+ACE Loader是一个用于兼容JS的类Web开发范式语法编译转换的webpack loader，可以完成hml/css/js JsBundle化、UI布局、样式、事件和页面逻辑处理，并可以进行语法验证，同时拥有完善的语法报错提示能力。
 
 #### 目录介绍
 

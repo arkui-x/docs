@@ -44,10 +44,10 @@
    ace create project
    ? Please enter the project name: demo
    ? Please enter the packages (com.example.demo):com.example.demo
-   ? Please enter the ACE version (1: 声明式范式, 2: 类Web范式): 1
+   ? Please enter the ACE version (1: 基于ArkTS的声明式开发范式, 2: 兼容JS的类Web开发范式): 1
    ```
 
-执行 `ace create project` 命令（project 可省略），接着输入项目名 demo ，包名直接回车默认即可。输入“1”代表创建ArkUI声明式范式应用项目。
+执行 `ace create project` 命令（project 可省略），接着输入项目名 demo ，包名直接回车默认即可。输入“1”代表创建基于ArkTS的声明式开发范式跨平台应用项目。
 
 一个名为 ‘demo’ 的项目就创建成功了。
 

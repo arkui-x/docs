@@ -11,7 +11,7 @@
 
 ### ArkUI 组件
 
-ArkUI开发框架包含类Web开发范式和声明式开发范式，本项目支持上述两种开发范式，详情参见：[组件列表](../application-dev/components/arkui-component-list.md)。
+开发范式支持基于ArkTS的声明式开发范式。
 
 ### 接口范围
 
