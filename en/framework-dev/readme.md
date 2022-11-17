@@ -4,7 +4,7 @@
 - ArkUI-X
   - [ArkUI-X Project](../ArkUI-X-Overview.md)
   - [Glossary](../glossary.md)
-  - [Release Notes](../release-notes/README.md)
+  - [ArkUI-X Release Notes](../release-notes/README.md)
 
 ## Getting Started
 
@@ -16,7 +16,7 @@
 
 ### Development Fundamentals
 
-- [Cross-Platform Overall Design](../design/design-overview.md)
+- [ArkUI Cross-Platform Overall Design](design/design-overview.md)
 - [ArkUI-X Project Code Structure and Building](quick-start/project-structure-guide.md)
 
 ## Development
@@ -27,7 +27,7 @@
 ## API References
 
 - [ArkTS-based Declarative Development Paradigm](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/arkui-ts/Readme-EN.md)
-- [API Reference (JS and TS APIs)](../application-dev/reference/apis/readme.md)
+- [OpenHarmony APIs with Cross-Platform Support](../application-dev/reference/apis/readme.md)
 - Platform Integration
   - [Android](../application-dev/reference/arkui-for-android/readme.md)
   - [iOS](../application-dev/reference/arkui-for-ios/readme.md)
