@@ -1,36 +1,36 @@
-# ArkUI-X文档
+# ArkUI-X Documentation
 
-欢迎访问ArkUI-X文档仓库，参与ArkUI-X开发者文档开源项目，与我们一起完善开发者文档。
+Welcome to the OpenHarmony documentation repository.
 
-此仓库存放ArkUI-X网站提供的应用开发、框架开发对应的开发者文档。
+This repository stores application and framework development documents provided by ArkUI-X. Your contribution to the ArkUI-X documentation will be highly appreciated.
 
-[简体中文](./README.md) | English
+[Chinese](./README.md) | English
 
-## 文档目录结构
+## Contents
 
-[访问官网](https://arkui-x.cn/)
+[Official Website](https://arkui-x.cn/)
 
-[中文文档](./zh-cn/readme.md) 
+[Chinese Documentation](zh-cn/readme.md)
 
-[英文文档](./en/readme.md)
+[English Documentation](./en/readme.md)
 
-## ArkUI-X文档版本分支说明
+## ArkUI-X Document Version Branches
 
-### 最新版本
+### Latest Versions
 
-master：最新开发版本。
+master: the latest version.
 
-ArkUI-X 0.1.0 Beta版本：点击[此处](zh-cn/release-notes/ArkUI-X-v0.1.0-beta.md)了解版本详情。
+ArkUI-X 0.1.0 Beta. [Learn more](en/release-notes/ArkUI-X-v0.1.0-beta.md)
 
 
-## 第三方开源软件及许可说明
+## Third-Party Open-Source Software and License Notice
 
-3rd-Party-License：[第三方开源软件及许可证说明](zh-cn/contribute/open-source-software-and-license-notice.md)
+Third-party license: [Open-Source Software and License Notice](en/contribute/open-source-software-and-license-notice.md)
 
-## 贡献
+## Contribution
 
-欢迎您参与[贡献](zh-cn/contribute/how-to-contribute.md)，我们鼓励开发者以各种方式参与文档反馈和贡献。
+A great open-source project wouldn't be possible without the hard work of many contributors. We'd like to invite anyone from around the world to [participate](en/contribute/how-to-contribute.md) in this exciting journey, and we're grateful for your time, passion, and efforts!
 
-您可以对现有文档进行评价、简单更改、反馈文档质量问题、贡献您的原创内容，详细请参考[贡献文档](zh-cn/contribute/documentation-contribution.md)。
+You can evaluate available documents, make simple modifications, provide feedback on document quality, and contribute your original content. For details, see [Documentation Contribution](en/contribute/documentation-contribution.md).
 
-卓越贡献者将会在开发者社区文档贡献专栏表彰公示。 
+Excellent contributors will be awarded and the contributions will be publicized in the developer community.
