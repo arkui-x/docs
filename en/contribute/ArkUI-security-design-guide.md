@@ -1,4 +1,4 @@
-# Security Design Specifications
+# ArkUI-X Security Design Specifications
 
 With reference to industry standards and best practices, this document provides security design specifications.
 

@@ -3,9 +3,13 @@
 ## Purpose
 
 This document specifies the contributor agreement and license compliance guide for the ArkUI-X project. It covers the following parts:
+
 **(1) Developer Certificate of Origin**
+
 **(2) Code Contribution License**
+
 **(3) Document Contribution License**
+
 **(4) Third-Party Open-Source Software Licenses**
 
 ## Scope

@@ -4,7 +4,7 @@
 
 ### Design Specifications
 
-[ArkUI-X Architecture Design Principles](../framework-dev/design/design-overview.md)
+[ArkUI Cross-Platform Design](../framework-dev/design/design-overview.md)
 
 [ArkUI-X Security Design Specifications](./ArkUI-security-design-guide.md)
 
@@ -16,7 +16,7 @@ Develop, review, and test code following the ArkUI-X coding standards. Make sure
 
 -   [C++ Coding Style Guide](./ArkUI-cpp-coding-style-guide.md)
 -   [C Coding Style Guide](./ArkUI-c-coding-style-guide.md)
--   [JavaScript  Coding Style Guide](./ArkUI-JavaScript-coding-style-guide.md)
+-   [JavaScript Coding Style Guide](./ArkUI-JavaScript-coding-style-guide.md)
 -   [Python Coding Style Guide](https://pep8.org/)
 -   [C&C++ Secure Coding Guide](./ArkUI-c-cpp-secure-coding-guide.md)
 -   [Java Secure Coding Guide](./ArkUI-Java-secure-coding-guide.md)
@@ -37,5 +37,5 @@ For details, see [Contribution Process](contribution-process.md).
 
 ## Security Issue Disclosure
 
--   [Security Issue Handling and Release Process](../security/security-process/readme.md)
--   [Security Vulnerability Notice](../security/security-process/security-disclosure.md)
+-   [ArkUI-X Community Vulnerability Governance](../security/security-process/readme.md)
+-   [ArkUI-X Security and Disclosure Statement](../security/security-process/security-disclosure.md)
