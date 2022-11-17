@@ -14,7 +14,7 @@ ArkUI-X AppProject
       └── entry
 ```
 
-项目根目录包含：ohos、android、ios、source四个目录，分别对应OpenHarmony应用、Android应用、iOS应用，ArkUI源码模块。每个目录下的entry和app目录表示创建的模块（entry/app为默认创建的模块名），每个模块对应一个编译单元（hap/apk/app）。其中，source目录是OpenHarmony默认的结构，存放公共的代码，配合上述平台的代码构建出对应平台的应用。可以使用基于eTS的声明式范式或兼容JS的类Web范式进行开发。
+项目根目录包含：ohos、android、ios、source四个目录，分别对应OpenHarmony应用、Android应用、iOS应用，ArkUI源码模块。每个目录下的entry和app目录表示创建的模块（entry/app为默认创建的模块名），每个模块对应一个编译单元（hap/apk/app）。其中，source目录是OpenHarmony默认的结构，存放公共的基于ArkTS的声明式开发范式代码，配合上述平台的代码构建出对应平台的应用。
 
 * OpenHarmony平台工程结构（0-1）
 
@@ -48,7 +48,7 @@ Android平台代码
   │   │   └── arm64-v8a
   │   │       ├── libace_android.so                 // ArkUI引擎库，在SDK中发布
   │   │       ├── libace_napi.so                    // API接口扩展库，在SDK中发布
-  │   │       ├── libace_napi_quickjs.so            // JS引擎库，在SDK中发布
+  │   │       ├── libace_napi_ark.so                // JS引擎库，在SDK中发布
   │   │       └── libxxx.so                         // 其它功能模块库
   │   ├── src
   │   │   ├── androidTest

@@ -20,13 +20,17 @@ ArkUI作为OpenHarmony的默认开发框架，在本项目（ArkUI-X）中需要
 | foundation/arkui/ace_engine/adapter/ios     | iOS平台适配代码                                       | [arkui-x/arkui_for_ios](https://gitee.com/arkui-x/arkui_for_ios) |
 | foundation/arkui/ace_engine                 | ArkUI 引擎核心代码 | [openharmony/arkui_ace_engine](https://gitee.com/openharmony/arkui_ace_engine) |
 | foundation/arkui/napi                       | Native API扩展机制                                    | [openharmony/arkui_napi](https://gitee.com/openharmony/arkui_napi) |
-| developtools/ace_ets2bundle               | ArkUI-声明式范式编译转换工具和跨平台应用构建工具      | [openharmony/ace_ets2bundle](https://gitee.com/openharmony/developtools_ace_ets2bundle) |
-| developtools/ace_js2bundle                | ArkUI-类Web范式编译转换工具和跨平台应用构建工具       | [openharmony/ace_js2bundle](https://gitee.com/openharmony/developtools_ace_js2bundle) |
-| interface/sdk-js                          | OpenHarmony API和ArkUI组件接口                        | [openharmony/interface_sdk-js](https://gitee.com/openharmony/interface_sdk-js) |
+| developtools/ace_ets2bundle               | 基于ArkTS的声明式开发范式编译转换工具和跨平台应用构建工具      | [openharmony/ace_ets2bundle](https://gitee.com/openharmony/developtools_ace_ets2bundle) |
+| developtools/ace_js2bundle                | 兼容JS的类Web开发范式编译转换工具和跨平台应用构建工具       | [openharmony/ace_js2bundle](https://gitee.com/openharmony/developtools_ace_js2bundle) |
+| arkcompiler/ets_frontend                          | 方舟前端工具                        | [arkcompiler/ets_frontend](https://gitee.com/openharmony/arkcompiler_ets_frontend) |
+| arkcompiler/ets_runtime                          | 方舟ArkTS运行时                        | [arkcompiler/ets_runtime](https://gitee.com/openharmony/arkcompiler_ets_runtime) |
+| arkcompiler/runtime_core                          | 方舟编译器运行时                        | [arkcompiler/runtime_core](https://gitee.com/openharmony/arkcompiler_runtime_core) |
+| arkcompiler/toolchain                          | 调试调优工具                        | [arkcompiler/toolchain](https://gitee.com/openharmony/arkcompiler_toolchain) |
 | prebuilts                                 | 预编译目录，python，nodejs，clang和cmake等            | 通过脚本预下载                                               |
-| third_party                               | 开源第三方组件（统一复用OpenHarmony代码仓）           | [openharmony/third_party](https://gitee.com/organizations/openharmony/projects) |
-| utils/native                              | 常用的工具集                                          | [openharmony/utils_native](https://gitee.com/openharmony/utils_native) |
-
+| third_party                               | 开源第三方组件（统一复用OpenHarmony代码仓）           | 引用开源三方库集合 |
+| commonlibrary/c_utils                              | C++公共基础类库                                          | [openharmony/commonlibrary_c_utils](https://gitee.com/openharmony/commonlibrary_c_utils) |
+| base/global/resource_managemen                              | 资源管理组件                                          | [openharmony/global_resource_management](https://gitee.com/openharmony/global_resource_management) |
+| plugins                              | API插件管理                                         | [arkui-x/plugins](https://gitee.com/arkui-x/plugins) |
 
 ## 分支同步策略
 
@@ -183,14 +187,6 @@ foundation/arkui/ace_engine
   ]
   
   js_engines = []
-  qjs_engine = {
-   engine_name = "qjs"
-   engine_path = "quickjs"
-   engine_defines = [ "USE_QUICKJS_ENGINE" ]
-   have_debug = true
-   declarative_default = true
-  }
-  js_engines += [ qjs_engine ]
   ark_engine = {
    engine_name = "ark"
    engine_path = "jsi"

@@ -1,6 +1,6 @@
 # 快速入门
 
-eTS Loader是一个用于ArkUI声明式范式语法编译转换的webpack loader，可以完成eTS/ts JsBundle化、UI布局、样式、事件和页面逻辑处理，并可以进行语法验证，同时拥有完善的语法报错提示能力。
+eTS Loader是一个用于基于ArkTS的声明式开发范式语法编译转换的webpack loader，可以完成eTS/ts JsBundle化、UI布局、样式、事件和页面逻辑处理，并可以进行语法验证，同时拥有完善的语法报错提示能力。
 
 #### 目录介绍
 
