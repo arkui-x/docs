@@ -37,11 +37,11 @@ ArkUI-X project: https://gitee.com/arkui-x
 
 ## Source Code Downloading
 
-For details about how to obtain the source code of ArkUI-X, see [ArkUI-X Source Code](https://gitee.com/arkui-x/manifest/blob/master/README.md).
+For details about how to obtain the source code of ArkUI-X, see [ArkUI-X Source Code](https://gitee.com/arkui-x/manifest/blob/master/README-EN.md).
 
 ## Hands-On Tutorials
 
-[Samples](https://gitee.com/arkui-x/samples)
+[ArkUI-X App Samples](https://gitee.com/arkui-x/samples)
 
 ## How to Participate
 
@@ -53,7 +53,7 @@ For details about how to contribute, see [How to Contribute](contribute/README.m
 
 ArkUI-X complies with Apache License Version 2.0. For details, see the LICENSE in each repository.
 
-ArkUI-X uses third-party open-source software and licenses. For details, see [Open-Source Software and License Notice](en/contribute/open-source-software-and-license-notice.md).
+ArkUI-X uses third-party open-source software and licenses. For details, see [Open-Source Software and License Notice](contribute/open-source-software-and-license-notice.md).
 
 ## Contact Info
 

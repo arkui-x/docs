@@ -40,7 +40,7 @@ By November 2022, the ArkUI-X project has released a Beta version, a milestone i
 
 - Basic compiler toolchain, which can generate ArkUI SDKs for iOS/Android to create applications that run on the target platform.
 - Basic platform bridging capabilities, including the iOS/Android application loading entry points, lifecycle, event processing, and window system.
-- Basic UI component adaptation capabilities, covering common UI components (for details, see [Samples](https://gitee.com/arkui-x/samples)).
+- Basic UI component adaptation capabilities, covering common UI components (for details, see [ArkUI-X App Samples](https://gitee.com/arkui-x/samples)).
 - XTS infrastructure, including common UI tests.
 
 This milestone would not have been possible without our amazing partners: **Midea IoT mobile technical team** and **Alibaba Xianyu (Idle Fish) technical team**. Although it is not yet ready for prime time, it already has the infrastructure of the cross-platform framework. In the coming future, we will launch a version every three months revolving around the preceding key characteristics to better accommodate service needs and improve the user experience. We would like to invite developers enthusiastic about application development to join us in building a better application ecosystem.
