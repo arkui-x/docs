@@ -19,6 +19,6 @@ The ArkUI-X project further extends the ArkUI framework to multiple OS platforms
 
 1. [Download the latest version of ArkUI-X Command Line Tools](https://gitee.com/arkui-x/cli/repository/archive/master.zip).
 
-2. Set up the development environment by following instructions in [Installing the Environment](https://gitee.com/arkui-x/cli/blob/master/README.md#installing-the-environment).
+2. Set up the development environment by following instructions in [Installing the Environment](./start-with-ace-tools.md#installing-the-environment) and [Installing Dependencies](./start-with-ace-tools.md#Installing-Dependencies).
 
-Now you are ready for ArkUI-X application development. Follow the instructions in [Creating an Application](https://gitee.com/arkui-x/cli/blob/master/README-EN.md#creating-an-application), [Building the Project](https://gitee.com/arkui-x/cli/blob/master/README-EN.md#building-the-project), and [Getting Started with ArkTS in FA Model](quick-start/start-with-ets-fa.md).
+Now you are ready for ArkUI-X application development. Follow the instructions in [Creating an Application](./start-with-ace-tools.md#creating-an-application), [Building the Project](./start-with-ace-tools.md#building-the-project), and [Getting Started with ArkTS in FA Model](quick-start/start-with-ets-fa.md).

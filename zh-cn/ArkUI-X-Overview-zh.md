@@ -31,6 +31,14 @@ ArkUI跨平台框架整体架构如下图所示，详细设计请参考[ArkUI跨
 
 ArkUI-X主库组织地址：https://gitee.com/arkui-x
 
+## 开发者文档
+
+[访问官网](https://arkui-x.cn/)
+
+简体中文：[ArkUI-X开发者文档](./readme.md) 
+
+[English Version](../en/readme.md)
+
 ## 演进路线
 
 [ArkUI跨平台框架演进路线图](roadmap/ArkUI-X-roadmap.md)

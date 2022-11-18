@@ -31,6 +31,12 @@ Below is the overall architecture of ArkUI-X. For details about the design, see 
 
 ArkUI-X project: https://gitee.com/arkui-x
 
+## ArkUI-X Documentation
+
+[Chinese version](../zh-cn/readme.md)
+
+[English version](./readme.md)
+
 ## Evolution Roadmap
 
 [ArkUI-X Roadmap](roadmap/ArkUI-X-roadmap.md)
