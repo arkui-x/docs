@@ -55,4 +55,4 @@ If a security vulnerability may generate public opinions or may be exploited, th
 The ArkUI-X community complies with the principle of responsible disclosure. After security vulnerabilities are fixed, [Security bulletins](../security-disclosure/readme.md) will be released.
 
 
-## [Acknowledgement](./Acknowledgements.md)
+## [Acknowledgement](./Acknowledgement.md)
