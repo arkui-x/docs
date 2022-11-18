@@ -68,7 +68,7 @@ ArkUI_Android_SDK
 ##### Integrating the ArkUI-X SDK into an Android Project
 
 * The integration complies with the JAR and dynamic library integration rules of Android application projects. Specifically, you need to copy the **ace_android_adapter.jar** package in the SDK to the **libs** directory and the dynamic libraries (such as **libace_android.so**, **libace_napi.so**, and **libace_napi_ark.so**) to the **libs/arm64-v8a** directory.
-* The entry application and activity of the Android application must be inherited from the base class provided by ArkUI. For details, see [How to Use](https://gitee.com/arkui-x/android#how-to-use). For example:
+* The entry application and activity of the Android application must be inherited from the base class provided by ArkUI. For details, see [How to Use](https://gitee.com/arkui-x/arkui_for_android/blob/master/README-EN.md#how-to-use). For example:
 
 **Activity part**
 
