@@ -17,7 +17,7 @@
 
 | 版本源码                             | **版本信息** | **下载站点** | **SHA256校验码** |
 | ------------------------------------ | ------------ | ------------ | ---------------- |
-| ArkUI-X SDK包（Android） | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包  | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
 
 **方式二**
 
@@ -33,41 +33,29 @@ ArkUI跨平台Android侧SDK主要有Java层和Native层两部分组成，Java层
 
 ```
 ArkUI_Android_SDK
-    ├── ace_android_adapter.jar              // ArkUI Android平台启动入口
-    ├── arkui
-    │   ├── ace_engine_cross
-    │   │   ├── libace_android.so            // ArkUI引擎及Android适配层
-    │   │   ├── libace_ndk.so                // ArkUI XComponent NDK接口
-    │   │   ├── libanimator.so
-    │   │   ├── libpromptaction.so
-    │   │   ├── libmediaquery.so             // ArkUI媒体查询接口实现
-    │   │   ├── libdevice.so
-    │   │   ├── libconfiguration.so
-    │   │   ├── libgrid.so
-    │   │   └── librouter.so                 // ArkUI页面跳转路由接口实现
-    │   └── napi
-    │       ├── libace_napi.so               // napi接口实现层
+    ├── engine
+    │   ├── ace_android_adapter.jar              // ArkUI Android平台启动入口
+    │   └── arm64-v8a
+    │       ├── libace_android.so                // ArkUI引擎及Android适配层
     │       ├── libace_container_scope.so
-    │       └── libace_napi_ark.so           // napi适配方舟js引擎
-    └── lib.unstripped                       // 带符号动态库
-        └── arkui
-            ├── ace_engine_cross
-            │   ├── libace_android.so
-            │   ├── libace_ndk.so
-            │   ├── libmediaquery.so
-            │   ├── libdevice.so
-            │   ├── libconfiguration.so
-            │   ├── libgrid.so
-            │   ├── libmediaquery.so
-            │   └── librouter.so
-            └── napi
-                ├── libace_napi.so
-                └── libace_napi_ark.so
+    │       ├── libace_napi.so
+    │       ├── libace_napi_ark.so
+    │       ├── libace_ndk.so
+    │       ├── libark_jsruntime.so
+    │       ├── libglobal_resmgr.so
+    │       ├── libhmicui18n.so
+    │       ├── libhmicuuc.so
+    │       └── libsec_shared.so
+    └── plugins                                  // OpenHarmony接口定义实现
+        ├── libanimator.so
+        ├── libmediaquery.so
+        ├── libpromptaction.so
+        └── librouter.so
 ```
 
 ##### Android工程集成ArkUI跨平台SDK
 
-* Android工程集成ArkUI跨平台SDK遵循Android应用工程集成Jar和动态库规则，即SDK中ace_android_adapter.jar包拷贝到libs目录，动态库（libace_android.so\libace_napi.so\libace_napi_ark.so等）拷贝到libs/arm64-v8a目录。
+* Android工程集成ArkUI跨平台SDK遵循Android应用工程集成Jar和动态库规则，即SDK组成清单中的ace_android_adapter.jar包拷贝到libs目录，动态库（libace_android.so\libace_napi.so\libace_napi_ark.so等）拷贝到libs/arm64-v8a目录。
 * Android应用的入口Application和Activity需要继承自ArkUI提供的基类，详情参见[使用说明](https://gitee.com/arkui-x/android#使用说明)，比如:
 
 **Activity部分**
@@ -135,6 +123,4 @@ src/main/assets/js/MainAbility
 ##### 参考
 
 【1】[ArkUI跨平台应用示例](https://gitee.com/arkui-x/samples)
-
-【2】[ArkUI JSBundle获取指南]()
 

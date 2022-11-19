@@ -100,8 +100,9 @@ Android平台代码
   │   │   └── arm64-v8a
   │   │       ├── libace_android.so                 // ArkUI引擎库，在SDK中发布
   │   │       ├── libace_napi.so                    // API接口扩展库，在SDK中发布
-  │   │       ├── libace_napi_ark.so                // 方舟JS引擎库，在SDK中发布
-  │   │       └── libxxx.so                         // 其它功能模块库
+  │   │       ├── libace_napi_ark.so                // NAPI Ark引擎适配层库，在SDK中发布
+  │   │       ├── libark_jsruntime.so               // Ark引擎运行时库，在SDK中发布
+  │   │       └── libxxx.so                         // 其它功能模块库，在SDK中发布
   │   ├── src
   │   │   ├── androidTest
   │   │   ├── main

@@ -24,12 +24,12 @@
 
 ## API参考
 
-API参考提供了ArkUI-X项目已支持的组件列表、JS接口参考文档和平台集成接口说明，可以帮助开发者快速查找到支持的指定接口的详细描述和调用方法。
+API参考提供了ArkUI-X项目已支持的组件列表、接口列表和平台集成接口的文档说明，可以帮助开发者快速查找到支持的指定接口的详细描述和调用方法。
 
 内容包括：
 
 - [组件参考（基于ArkTS的声明式开发范式）](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/Readme-CN.md)
-- [接口参考(JS及TS API)](../application-dev/reference/apis/readme.md)
+- [接口参考（ArkTS及JS API）](../application-dev/reference/apis/readme.md)
 - 平台集成
   - [Android](../application-dev/reference/arkui-for-android/readme.md)
   - [iOS](../application-dev/reference/arkui-for-ios/readme.md)
