@@ -17,7 +17,7 @@
 
 | 版本源码                             | **版本信息** | **下载站点** | **SHA256校验码** |
 | ------------------------------------ | ------------ | ------------ | ---------------- |
-| ArkUI-X SDK包（iOS） | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包 | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
 
 **方式二**
 
@@ -76,7 +76,7 @@ iOS工程集成ArkUI跨平台SDK遵循iOS应用工程集成Framework规则，即
 
 ##### iOS工程集成ArkUI JSBundle实例
 
-ArkUI JSBundle生成后，拷贝到iOS应用工程assets/js目录下，比如：js/jsdemo。这里“js”目录名称是固定的，不能更改。
+ArkUI JSBundle生成后，拷贝到iOS应用工程js目录下，比如：js/MainAbility。这里“js”目录名称是固定的，不能更改。
 
 ```
 iOS应用工程
@@ -119,5 +119,5 @@ XCode11之后，新建iOS工程为SceneDelegate类型工程，需删除SceneDele
 
 ##### 参考
 
-【1】[ArkUI JSBundle获取指南]()
+【1】[ArkUI跨平台应用示例](https://gitee.com/arkui-x/samples)
 

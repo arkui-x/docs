@@ -35,7 +35,8 @@
 
 有关详细信息，请参考[贡献流程](contribution-process.md)。
 
-## 社区安全问题披露
+## 社区安全问题
 
--   [安全问题处理和发布流程](../security/security-process/readme.md)
--   [安全和披露说明](../security/security-process/security-disclosure.md)
+- [安全问题响应工作组介绍](../security/README.md)
+- [安全问题处理和发布流程](../security/security-process/readme.md)
+- [安全和披露说明](../security/security-process/security-disclosure.md)

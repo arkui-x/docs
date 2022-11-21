@@ -6,10 +6,10 @@
 
 - 基础的编译工具链，能够生成iOS/Android的SDK，编译出相应的应用并运行在目标平台上。
 - 基础的平台桥接能力，包括iOS/Android的应用加载入口，生命周期，事件处理，窗口系统等。
-- 基础的UI组件适配能力，包括常用的UI组件（请见相应的UI Sample示例）。
+- 基础的UI组件适配能力，包括常用的UI组件。
 - XTS基础设施，包括常用的UI测试。
 
-### ArkUI 组件
+### 组件参考
 
 开发范式支持基于ArkTS的声明式开发范式。
 
@@ -17,7 +17,7 @@
 
 ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android和iOS平台通过[API扩展机制](../framework-dev/napi/napi-guidelines.md)扩展JS接口和实现OpenHarmony接口定义。比如：[Android平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-Android.md)和[iOS平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-iOS.md)。
 
->说明：Beta版本为跨平台项目首次发布的预览版本，暂不提供OpenHarmony接口实现。
+>说明：Beta版本为跨平台项目首次发布的预览版本，暂不提供OpenHarmony接口定义的跨平台实现。
 
 ### 项目编译
 
@@ -27,7 +27,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android
 ./build.sh --product-name arkui-cross --target-os android --ccache
 ```
 
-> 说明：编译结果输出在 out/arkui-cross目录下，编译输出件用于ArkUI跨平台Android侧应用开发，[输出件列表和使用指南](../contribute/tutorial/how-to-build-Android-app.md)。
+> 说明：编译结果输出在**out**目录下，编译输出件用于ArkUI跨平台Android侧应用开发，[输出件列表]()和[使用指南](../contribute/tutorial/how-to-build-Android-app.md)。
 
 * ArkUI支持iOS平台
 
@@ -35,11 +35,11 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android
 ./build.sh --product-name arkui-cross --target-os ios --ccache
 ```
 
-> 说明：编译结果输出在 out/arkui-cross目录下，编译输出件用于ArkUI跨平台iOS侧应用开发，[输出件列表和使用指南](../contribute/tutorial/how-to-build-iOS-app.md)。
+> 说明：编译结果输出在**out**目录下，编译输出件用于ArkUI跨平台iOS侧应用开发，[输出件列表]()和[使用指南](../contribute/tutorial/how-to-build-iOS-app.md)。
 
 ### 应用构建工具链
 
-ACE Command Tools，是一套为 ACE 开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见](https://gitee.com/arkui-x/cli/blob/master/README.md)。
+ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见](https://gitee.com/arkui-x/cli/blob/master/README.md)。
 
 
 ## 配套关系
@@ -48,14 +48,13 @@ ACE Command Tools，是一套为 ACE 开发者提供的命令行工具，包括�
 
 | 目标平台    | 项目编译使用OS SDK版本              | 备注 |
 | ----------- | ----------------------------------- | ---- |
-| OpenHarmony | 3.1 Release (API Version 8 Release) | NA   |
+| OpenHarmony | OpenHarmony 3.2 Beta (API level 9) | NA   |
 | Android     | Quince Tart 10 (API level 29)       | NA   |
 | iOS         | iOS 10                              | NA   |
 
->说明： Beta版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
+>说明：Beta版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
 
 ## 源码获取
-
 
 ### 前提条件
 
@@ -107,9 +106,8 @@ repo sync -c
 
 | 版本源码                                  | **版本信息** | **下载站点** | **SHA256校验码** |
 | ----------------------------------------- | ------------ | ------------ | ---------------- |
-| 全量代码（支持OpenHarmony、Android、iOS） | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
-| ArkUI-X SDK包（Android）      | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
-| ArkUI-X SDK包（iOS）          | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X全量代码 | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包  | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
 
 ## Samples
 
