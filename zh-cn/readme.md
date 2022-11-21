@@ -8,3 +8,4 @@
   - [版本说明](./release-notes/ArkUI-X-v0.1.0-beta.md)
 - ArkUI-X项目贡献者参考文档
   - [项目贡献指南](./contribute/README.md)
+  - [安全问题响应流程](./security/README.md)
