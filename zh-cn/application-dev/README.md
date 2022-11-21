@@ -18,7 +18,7 @@
 - [应用工程包结构说明](quick-start/package-structure-guide.md)
 - [清单配置文件](quick-start/manifest-structure.md)
 - [资源分类与访问](quick-start/resource-categories-and-access.md)
-- [应用开发命令行工具](quick-start/start-with-ace-tools.md)
+- [应用开发命令行工具说明](quick-start/start-with-ace-tools.md)
 
 ## API参考
 

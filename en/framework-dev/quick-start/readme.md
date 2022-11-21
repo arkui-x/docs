@@ -8,7 +8,7 @@
 
 ## Development Fundamentals
 
-- [Cross-Platform Overall Design](../design/design-overview.md)
+- [ArkUI Cross-Platform Overall Design](../design/design-overview.md)
 - [ArkUI-X Project Code Structure and Building](./project-structure-guide.md)
 
 ## PR FAQs

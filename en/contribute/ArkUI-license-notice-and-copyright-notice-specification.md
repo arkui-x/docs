@@ -23,7 +23,9 @@ In principle, files in the open-source repository must have proper copyright not
 **Copyright notice format:**
 
 **Copyright (C) [Year of the first release]-[Year of the current release] [Copyright holder]**
-or
+
+Or
+
 **Copyright (C) [Year of the initial release]-[Year of the current release] [Copyright holder]**
 
 If this is the first/initial release, enter [Year of the first/initial release]. If this is not the first/initial release, enter [Year of the first/initial release]-[Year of the current release] or simply [Year of the first/initial release].

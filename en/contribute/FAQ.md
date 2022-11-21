@@ -20,7 +20,7 @@ Execute the **git commit --amend --signoff** command.
 
 For more options about commit, see [https://git-scm.com/docs/git-commit](https://git-scm.com/docs/git-commit).
 
-## Handling Exceptions of DCO Verification
+## DCO Verification
 
 After developers submit Pull Request, commenting "**start build**" in the PR will trigger the gated commit. In this sense, you should consider:
 
@@ -65,7 +65,7 @@ The possible causes for a verification failure include:
 
 Visit [https://gitee.com/help/articles/4195](https://gitee.com/help/articles/4195).
 
-## Resolving Merge Conflicts
+## Merge Conflicts
 
 Visit [https://gitee.com/help/articles/4194](https://gitee.com/help/articles/4194).
 

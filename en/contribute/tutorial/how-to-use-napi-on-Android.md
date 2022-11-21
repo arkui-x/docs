@@ -14,6 +14,7 @@ import testplugin from '@ohos.testplugin';
 ```
 
 **NOTE**
+
 Method 1 is recommended for introducing non-OpenHarmony APIs, and method 2 is recommended for introducing extended OpenHarmony APIs. (If method 2 is used for introducing non-OpenHarmony APIs, build errors will be reported.)
 
 ## APIs
