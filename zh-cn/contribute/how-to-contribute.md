@@ -8,7 +8,7 @@
 
 您必须首先签署“开发者原创声明”，然后才能参与社区贡献。
 
-在“[docs/zh-cn/contribute](https://gitee.com/openharmony/docs/tree/master/zh-cn/contribute)“路径下获取Developer Certificate of Origin Markdown文件，将签署后的DCO Markdown文件发送至[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn) 。（线上签署待开放）
+在“[docs/zh-cn/contribute](https://gitee.com/openharmony/docs/tree/master/zh-cn/contribute)“路径下获取signing-dco（Developer Certificate of Origin）Markdown文件，将签署后的DCO Markdown文件发送至[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn) 。（线上签署待开放）
 
 #### 行为准则
 
