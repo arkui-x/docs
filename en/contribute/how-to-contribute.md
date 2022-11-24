@@ -8,7 +8,7 @@
 
 You must sign the Developer Certificate of Origin (DCO) before you can contribute to the community.
 
-Click [here](https://dco.arkui-x.cn) to sign the DCO, and click [here](https://dco.arkui-x.cn/check-sign-status) to check the signing status.
+Obtain the **signing-dco.md** file in [docs/en/contribute](https://gitee.com/openharmony/docs/tree/master/en/contribute), sign it, and send the signed file to [contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn). (The online mode for signing the DCO will be provided later.)
 
 **Code of Conduct**
 

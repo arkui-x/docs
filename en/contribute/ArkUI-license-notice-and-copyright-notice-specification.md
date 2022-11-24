@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document describes how code contributors, committers, and PMC members in the ArkUI-X community handle the license and copyright notices of repositories and source code files. It covers the following parts:
+This document describes how code contributors, committers, and PMC members in the ArkUI-X project handle the license and copyright notices of repositories and source code files. It covers the following parts:
 
 **(1) Copyright Notice**
 
