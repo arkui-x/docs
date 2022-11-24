@@ -44,9 +44,10 @@
 
    **解决办法**：
 
-   点击[这里](https://dco.arkui-x.cn)签署、查看签署状态。
+   在[docs/zh-cn/contribute](https://gitee.com/openharmony/docs/tree/master/zh-cn/contribute)路径下获取signing-dco（Developer Certificate of Origin）Markdown文件，将签署后的DCO Markdown文件发送至[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn) 。（线上签署待开放）
 
-   在PR的评论框输入`check dco`后，单击”评论”，系统将再次进行DCO校验。
+
+   签署成功后，在PR的评论框输入`check dco`后，单击”评论”，系统将再次进行DCO校验。
 
 2. Commits 中未包含 Signed-off-by信息，例如提示：
 
