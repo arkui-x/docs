@@ -22,7 +22,7 @@ You must sign the Developer Certificate of Origin (DCO) before you can contribut
 
 The DCO is a statement of originality and contribution of your work. The DCO to sign is fully quoted from the standard DCO version released by the Linux Foundation at https://developercertificate.org/.
 
-Before contributing to the community, you must sign the DCO at https://dco.arkui-x.cn. Then you can sign the DCO in the code commit process for every contribution.
+Before contributing to the community, you must obtain the **signing-dco.md** file in [docs/en/contribute](https://gitee.com/openharmony/docs/tree/master/en/contribute), sign it, and send the signed file to [contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn). Then you can include the Signed-off-by information for each commit. (The online mode for signing the DCO will be provided later.)
 
 **(2) Code Contribution License**
 

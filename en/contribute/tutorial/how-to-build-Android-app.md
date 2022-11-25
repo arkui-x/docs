@@ -15,9 +15,9 @@ This tutorial describes how to use the ArkUI-X SDK to develop Android applicatio
 
 * Obtain the ArkUI-X SDK from the mirror site. This method is suitable for beginners of ArkUI cross-platform applications.
 
-| Source Code                | Version| Mirror| SHA-256 Checksum|
-| ------------------------ | ------------ | ------------ | ---------------- |
-| ArkUI-X SDK (Android)| 0.1.0 Beta   | [Download]()    | [Download]()|
+| Source Code                            | Version| Mirror| SHA-256 Checksum|
+| ------------------------------------ | ------------ | ------------ | ---------------- |
+| ArkUI-X SDK | 0.1.0 Beta    | [Download]()    | [Download]()|
 
 **Method 2**
 
@@ -33,41 +33,29 @@ The Android-based ArkUI-X SDK consists of the Java layer and native layer. The J
 
 ```
 ArkUI_Android_SDK
-    ├── ace_android_adapter.jar              // Entry for starting the ArkUI Android platform
-    ├── arkui
-    │   ├── ace_engine_cross
-    │   │   ├── libace_android.so            // ArkUI engine and Android adaptation layer
-    │   │   ├── libace_ndk.so                // ArkUI XComponent NDK interface
-    │   │   ├── libanimator.so
-    │   │   ├── libpromptaction.so
-    │   │   ├── libmediaquery.so             // ArkUI media query interface
-    │   │   ├── libdevice.so
-    │   │   ├── libconfiguration.so
-    │   │   ├── libgrid.so
-    │   │   └── librouter.so                 // ArkUI page redirection interface
-    │   └── napi
-    │       ├── libace_napi.so               // NAPI implementation layer
+    ├── engine
+    │   ├── ace_android_adapter.jar              // Entry for starting the ArkUI Android platform
+    │   └── arm64-v8a
+    │       ├── libace_android.so                // ArkUI engine and Android adaptation layer
     │       ├── libace_container_scope.so
-    │       └── libace_napi_ark.so           // NAPI adaptation to the Ark JS engine.
-    └── lib.unstripped                       // Signed dynamic library
-        └── arkui
-            ├── ace_engine_cross
-            │   ├── libace_android.so
-            │   ├── libace_ndk.so
-            │   ├── libmediaquery.so
-            │   ├── libdevice.so
-            │   ├── libconfiguration.so
-            │   ├── libgrid.so
-            │   ├── libmediaquery.so
-            │   └── librouter.so
-            └── napi
-                ├── libace_napi.so
-                └── libace_napi_ark.so
+    │       ├── libace_napi.so
+    │       ├── libace_napi_ark.so
+    │       ├── libace_ndk.so
+    │       ├── libark_jsruntime.so
+    │       ├── libglobal_resmgr.so
+    │       ├── libhmicui18n.so
+    │       ├── libhmicuuc.so
+    │       └── libsec_shared.so
+    └── plugins                                  // OpenHarmony API implementation
+        ├── libanimator.so
+        ├── libmediaquery.so
+        ├── libpromptaction.so
+        └── librouter.so
 ```
 
 ##### Integrating the ArkUI-X SDK into an Android Project
 
-* The integration complies with the JAR and dynamic library integration rules of Android application projects. Specifically, you need to copy the **ace_android_adapter.jar** package in the SDK to the **libs** directory and the dynamic libraries (such as **libace_android.so**, **libace_napi.so**, and **libace_napi_ark.so**) to the **libs/arm64-v8a** directory.
+* The integration complies with the JAR and dynamic library integration rules of Android application projects. Specifically, you need to copy the **ace_android_adapter.jar** package in the SDK components to the **libs** directory and the dynamic libraries (such as **libace_android.so**, **libace_napi.so**, and **libace_napi_ark.so**) to the **libs/arm64-v8a** directory.
 * The entry application and activity of the Android application must be inherited from the base class provided by ArkUI. For details, see [How to Use](https://gitee.com/arkui-x/arkui_for_android/blob/master/README-EN.md#how-to-use). For example:
 
 **Activity part**
@@ -135,5 +123,3 @@ Now you can build an ArkUI Android application according to the Android applicat
 ##### References
 
 [1] [ArkUI-X App Samples](https://gitee.com/arkui-x/samples)
-
-[2] [Obtaining ArkUI JS Bundle]()

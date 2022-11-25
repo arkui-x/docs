@@ -15,9 +15,9 @@ This tutorial describes how to use the ArkUI-X SDK to develop iOS applications, 
 
 * Obtain the ArkUI-X SDK from the mirror site. This method is suitable for beginners of ArkUI cross-platform applications.
 
-| Source Code            | Version| Mirror| SHA-256 Checksum|
-| -------------------- | ------------ | ------------ | ---------------- |
-| ArkUI-X SDK (iOS)| 0.1.0 Beta   | [Download]()    | [Download]()|
+| Source Code                            | Version| Mirror| SHA-256 Checksum|
+| ------------------------------------ | ------------ | ------------ | ---------------- |
+| ArkUI-X SDK| 0.1.0 Beta    | [Download]()    | [Download]()|
 
 **Method 2**
 
@@ -76,7 +76,7 @@ The **version** parameter specifies the ArkUI development paradigm, which can be
 
 ##### Integrating an ArkUI JS Bundle Instance into an iOS Project
 
-Copy the generated ArkUI JS bundle to the **assets/js** directory of the iOS project, for example, **js/jsdemo**. The **js** directory name is fixed and cannot be changed.
+Copy the generated ArkUI JS bundle to the **js** directory of the iOS project, for example, **js/MainAbility**. The **js** directory name is fixed and cannot be changed.
 
 ```
 iOS application project
@@ -119,4 +119,4 @@ Now you can build an ArkUI iOS application according to the iOS application buil
 
 ##### References
 
-[1] [Obtaining ArkUI JS Bundle]()
+[1] [ArkUI-X App Samples](https://gitee.com/arkui-x/samples)

@@ -33,17 +33,17 @@ The possible causes for a verification failure include:
 
    ```
    The following commit users do not signed the DCO:
-
+   
    •345612
-
+   
    •213123
    ```
 
    **Solution**
 
-   Click [here](https://dco.arkui-x.cn) to sign the DCO or check the signing status. 
+   Obtain the **signing-dco.md** file in [docs/en/contribute](https://gitee.com/openharmony/docs/tree/master/en/contribute), sign it, and send the signed file to [contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn). (The online mode for signing the DCO will be provided later.)
 
-   Enter **check dco** in the Pull Requests comment box and click **Comment**. The system will check the DCO signing status again.
+   Then enter **check dco** in the Pull Requests comment box and click **Comment**. The system will check the DCO signing status again.
 
 2. The commits do not contain Signed-off-by information. The following messages will be displayed:
 
