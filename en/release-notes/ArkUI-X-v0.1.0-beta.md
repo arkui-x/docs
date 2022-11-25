@@ -6,7 +6,7 @@ This issue is the first official release of ArkUI-X 0.1.0 Beta. The version main
 
 - Basic compiler toolchain, which can generate ArkUI SDKs for iOS/Android to create applications that run on the target platform.
 - Basic platform bridging capabilities, including the iOS/Android application loading entry points, lifecycle, event processing, and window system.
-- Basic UI component adaptation capabilities, covering common UI components (for details, see [Samples](https://gitee.com/arkui-x/samples)).
+- Basic UI component adaptation capabilities, covering common UI components (for details, see [ArkUI-X App Samples](https://gitee.com/arkui-x/samples)).
 - XTS infrastructure, including common UI tests.
 
 ### ArkUI Components
@@ -43,9 +43,9 @@ ArkUI-X APIs include OpenHarmony APIs and custom extension APIs. You can impleme
 >
 > The build result is stored in the **out/arkui-cross** directory. The build output is used for iOS application development. For details, see [Building ArkUI Applications on iOS](../contribute/tutorial/how-to-build-iOS-app.md).
 
-### Application Compilation Toolchain
+### Application Compiler Toolchain
 
-ArkUI-X Command Line Tools is a command line (CLI) tool that allows developers to build applications runnable across the OpenHarmony, Android, and iOS platforms. Its functions include development environment check, project creation, building and packaging, and installation and debugging. For details, see [Quick Start Guide](https://gitee.com/arkui-x/cli/blob/master/README.md).
+ArkUI-X Command Line Tools is a command line (CLI) tool that allows developers to build applications runnable across the OpenHarmony, Android, and iOS platforms. Its functions include development environment check, project creation, building and packaging, and installation and debugging. For details, see [Quick Start Guide](https://gitee.com/arkui-x/cli/blob/master/README-EN.md).
 
 
 ## Mapping
