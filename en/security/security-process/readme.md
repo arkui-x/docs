@@ -19,10 +19,9 @@ The ArkUI-X community has multiple channels to collect security vulnerabilities 
 
 |Source|Channel|Reporting Method|  Description|
 | -------- |-------- | -------- | -------- |
-|Upstream open-source software|cve-manager|Security vulnerability issue*|cve-manager automatically collects security vulnerabilities of upstream open-source software every day and submits CVE issues using the OpenHarmony ci bot account.|
 |Upstream open-source software|Community contributor|Security vulnerability issue|Community contributors submit issues regarding security vulnerabilities detected in upstream open-source software.|
 |Upstream open-source software|Security vulnerability scanning tool|Security vulnerability issue|The release versions are scanned for security vulnerabilities every month, and issues will be submitted if security vulnerabilities are detected.|
-|Native open-source software|ArkUI-X Security Bounty Program or security researchers|scy@arkui-x.cn|Upon receiving the [email](./template-security-bug.md), the Security Issue Response Team will create a security issue in the community.|
+|Native open-source software|Security researchers|scy@mail.arkui-x.cn|Upon receiving the [email](./template-security-bug.md), the Security Issue Response Team will create a security issue in the community.|
 
 **Security vulnerability issue**: When finding a security vulnerability, create an issue in the repository where the issue is found, select **Private**, and label the issue **Security**.
 

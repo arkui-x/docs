@@ -10,7 +10,7 @@ We thank all security researchers and users who report security vulnerabilities 
 
 ### Internal Reporting
 
-If a bug in the SIG is confirmed as a security vulnerability, the community will change the corresponding issue to a private issue, add the security issue label, and add the priority label as needed. The community Security Issue Response Team (referred to as Team hereinafter) will periodically check the updates of such issues.
+If a bug in the ArkUI-X project is confirmed as a security vulnerability, the community will change the corresponding issue to a private issue, add the security issue label, and add the priority label as needed. The community Security Issue Response Team (referred to as Team hereinafter) will periodically check the updates of such issues.
 
 ### External Reporting
 
