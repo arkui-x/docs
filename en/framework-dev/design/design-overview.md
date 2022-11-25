@@ -100,8 +100,9 @@ Android platform code
   │   │   └── arm64-v8a
   │   │       ├── libace_android.so                 // ArkUI engine library, published in the SDK
   │   │       ├── libace_napi.so                    // API extension library, published in the SDK
-  │   │       ├── libace_napi_ark.so                // Ark JS engine library, published in the SDK.
-  │   │       └── libxxx.so                         // Other functional module library
+  │   │       ├── libace_napi_ark.so                // Ark JS engine library, published in the SDK
+  │   │       ├── libark_jsruntime.so               // Ark engine runtime library, published in the SDK
+  │   │       └── libxxx.so                         // Other module library, published in the SDK
   │   ├── src
   │   │   ├── androidTest
   │   │   ├── main
@@ -109,7 +110,7 @@ Android platform code
   │   │   │   │   ├── js
   │   │   │   │   │   └── entry_MainAbility         // JS bundle, generated after the compilation of the code in the source directory
   │   │   │   │   └── res                           // Resources
-   │   │   │   │       ├── appres                    // Application resources, generated after the compilation of the code in the source/resources directory
+  │   │   │   │       ├── appres                    // Application resources, generated after the compilation of the code in the source/resources directory
   │   │   │   │       └── systemres                 // System resources
   │   │   │   ├── java/com/example/myapp
   │   │   │   │   ├── MyApplication.java            // MyApplication extended from AceApplication
@@ -299,7 +300,7 @@ CLI code structure
   │   │   ├── ace-check        // Check whether the dependent libraries and toolchains are complete
   │   │   ├── ace-config       // Configure the ArkUI cross-platform application development environment
   │   │   ├── ace-devices      // List all the devices connected to the current PC
-  │   │   ├── ace-create       //  Create an ArkUI cross-platform application project
+  │   │   ├── ace-create       // Create an ArkUI cross-platform application project
   │   │   ├── ace-build        // Build a cross-platform application installation package
   │   │   ├── ace-install      // Install a cross-platform application to the connected device
   │   │   ├── ace-launch       // Run a cross-platform application on a device
