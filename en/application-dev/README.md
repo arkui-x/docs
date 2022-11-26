@@ -23,7 +23,7 @@
 ## API References
 
 - [Component Reference (ArkTS-based Declarative Development Paradigm)](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/arkui-ts/Readme-EN.md)
-- [API Reference (JS and TS APIs)](reference/apis/readme.md)
+- [API Reference (ArkTS and JS APIs)](reference/apis/readme.md)
 - Platform Integration
   - [Android](reference/arkui-for-android/readme.md)
   - [iOS](reference/arkui-for-ios/readme.md)

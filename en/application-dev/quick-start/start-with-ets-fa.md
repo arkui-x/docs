@@ -1,10 +1,8 @@
 # Getting Started with ArkTS in FA Model
 
-
 >  **NOTE**
 >
 >  This document is prepared based on the **ArkUI-X 0.1.0 Beta** version.
-
 
 ## Creating an ArkTS Cross-Platform Application Project
 
