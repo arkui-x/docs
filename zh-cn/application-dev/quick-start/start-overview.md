@@ -21,4 +21,10 @@ ArkUI-X项目进一步将ArkUI扩展到了多个OS平台：目前支持OpenHarmo
 
 2. 请参考[环境配置](./start-with-ace-tools.md#环境配置)和[命令安装](./start-with-ace-tools.md#命令安装)，完成**命令行**开发环境配置。
 
+3. 了解ArkUI-X SDK下载和使用方法
+
+   - [Android应用工程集成ArkUI跨平台SDK说明](../../contribute/tutorial/how-to-build-Android-app.md)。
+
+   - [iOS应用工程集成ArkUI跨平台SDK说明](../../contribute/tutorial/how-to-build-iOS-app.md)。
+
 完成上述操作及基本概念的理解后，即可参照[创建应用](./start-with-ace-tools.md#创建应用)、[编译应用](./start-with-ace-tools.md#项目编译)和[使用ArkTS语言开发](./start-with-ets-fa.md)中的章节进行下一步跨平台应用开发体验和学习。

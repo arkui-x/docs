@@ -15,9 +15,9 @@
 
 ### 接口范围
 
-ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android和iOS平台通过[API扩展机制](../framework-dev/napi/napi-guidelines.md)扩展JS接口和实现OpenHarmony接口定义。比如：[Android平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-Android.md)和[iOS平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-iOS.md)。
+ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android和iOS平台通过[API扩展机制](../framework-dev/napi/napi-guidelines.md)扩展自定义JS接口和实现OpenHarmony接口定义。比如：[Android平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-Android.md)和[iOS平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-iOS.md)。
 
->说明：Beta版本为跨平台项目首次发布的预览版本，暂不提供OpenHarmony接口定义的跨平台实现。
+>说明：ArkUI-X 0.1.0 Beta版本为ArkUI-X项目首次发布的预览版本，仅提供[UI页面相关的OpenHarmony接口定义实现](../application-dev/reference/apis/readme.md)，暂不提供其它OpenHarmony接口定义的跨平台实现。
 
 ### 项目编译
 
@@ -27,7 +27,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android
 ./build.sh --product-name arkui-cross --target-os android --ccache
 ```
 
-> 说明：编译结果输出在**out**目录下，编译输出件用于ArkUI跨平台Android侧应用开发，[输出件列表]()和[使用指南](../contribute/tutorial/how-to-build-Android-app.md)。
+> 说明：编译结果输出在**out**目录下，编译输出件用于ArkUI跨平台Android侧应用开发，详见[应用开发指南](../contribute/tutorial/how-to-build-Android-app.md)。
 
 * ArkUI支持iOS平台
 
@@ -35,7 +35,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android
 ./build.sh --product-name arkui-cross --target-os ios --ccache
 ```
 
-> 说明：编译结果输出在**out**目录下，编译输出件用于ArkUI跨平台iOS侧应用开发，[输出件列表]()和[使用指南](../contribute/tutorial/how-to-build-iOS-app.md)。
+> 说明：编译结果输出在**out**目录下，编译输出件用于ArkUI跨平台iOS侧应用开发，详见[应用开发指南](../contribute/tutorial/how-to-build-iOS-app.md)。
 
 ### 应用构建工具链
 
@@ -86,7 +86,7 @@ ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发�
 
 
 ```
-repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-0.1.0-Beta --no-repo-verify
+repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-0.1.0 --no-repo-verify
 repo sync -c
 ```
 
@@ -96,7 +96,7 @@ repo sync -c
 
 
 ```
-repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-0.1.0-Beta --no-repo-verify
+repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-0.1.0 --no-repo-verify
 repo sync -c
 ```
 
