@@ -281,7 +281,7 @@ ArkUI-X项目SDK组成
 
 ### API扩展机制
 
-1、JS API扩展机制，用于Native接口能力暴露到JS层，改机制直接复用OpenHarmony上的统一封装机制，扩展API （C++实现），并实现部分内置API，NAPI的整体结构如下图。
+1、JS API扩展机制，用于Native接口能力暴露到JS层，该机制直接复用OpenHarmony上的统一封装机制，扩展API （C++实现），并实现部分内置API，NAPI的整体结构如下图。
 
 对于不同平台，**JS API需要遵循OpenHarmony的API定义**，在不同平台上通过API扩展机制进行扩展。
 
