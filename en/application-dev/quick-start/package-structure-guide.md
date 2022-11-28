@@ -14,7 +14,7 @@ ArkUI-X AppProject
       └── entry
 ```
 
-The project root directory contains the **ohos**, **android**, **ios**, and **source** directories for OpenHarmony applications, Android applications, iOS applications, and ArkUI source code, respectively. The **entry** and **app** directories in each directory are directories for created modules (**entry** and **app** are default module names). Each module corresponds to a build unit (HAP, APK, or app). **source** is the default directory of OpenHarmony. It contains common code in the ArkTS-based declarative development paradigm. The command code and the OS platform code build applications for the target platform. You can use the ArkTS-based declarative development paradigm or JS-compatible web-like development paradigm.
+The project root directory contains the **ohos**, **android**, **ios**, and **source** directories for OpenHarmony applications, Android applications, iOS applications, and ArkUI source code, respectively. The **entry** and **app** directories in each directory are directories for created modules (**entry** and **app** are default module names). Each module corresponds to a build unit (hap, apk, or app). **source** is the default directory of OpenHarmony. It contains common code in the ArkTS-based declarative development paradigm. The command code and the OS platform code build applications for the target platform.
 
 * OpenHarmony platform project structure (0-1)
 
@@ -48,8 +48,9 @@ Android platform code
   │   │   └── arm64-v8a
   │   │       ├── libace_android.so                 // ArkUI engine library, published in the SDK
   │   │       ├── libace_napi.so                    // API extension library, published in the SDK
-  │   │       ├── libace_napi_ark.so            // JS engine library, published in the SDK
-  │   │       └── libxxx.so                         // Other functional module library
+  │   │       ├── libace_napi_ark.so                // NAPI Ark engine adaptation layer library, published in the SDK
+  │   │       ├── libark_jsruntime.so               // Ark engine runtime library, published in the SDK
+  │   │       └── libxxx.so                         // Library of other functional modules, published in the SDK
   │   ├── src
   │   │   ├── androidTest
   │   │   ├── main
@@ -57,7 +58,7 @@ Android platform code
   │   │   │   │   ├── js
   │   │   │   │   │   └── entry_MainAbility         // JS bundle, generated after the compilation of the code in the source directory
   │   │   │   │   └── res                           // Resources
-   │   │   │   │       ├── appres                    // Application resources, generated after the compilation of the code in the source/resources directory
+  │   │   │   │       ├── appres                    // Application resources, generated after the compilation of the code in the source/resources directory
   │   │   │   │       └── systemres                 // System resources
   │   │   │   ├── java/com/example/myapp
   │   │   │   │   ├── MyApplication.java            // MyApplication extended from AceApplication
