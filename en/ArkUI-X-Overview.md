@@ -29,7 +29,9 @@ Below is the overall architecture of ArkUI-X. For details about the design, see 
 
 ## Code Repository Addresses
 
-ArkUI-X project: https://gitee.com/arkui-x
+ArkUI-X main repository: https://gitee.com/arkui-x
+
+ArkUI-X repository mirror at GitHub: https://github.com/arkui-x 
 
 ## ArkUI-X Documentation
 

@@ -4,22 +4,22 @@
 
 This issue is the first official release of ArkUI-X 0.1.0 Beta. The version mainly packs the following capabilities:
 
-- Basic compiler toolchain, which can generate ArkUI SDKs for iOS/Android to create applications that run on the target platform.
-- Basic platform bridging capabilities, including the iOS/Android application loading entry points, lifecycle, event processing, and window system.
-- Basic UI component adaptation capabilities, covering common UI components (for details, see [ArkUI-X App Samples](https://gitee.com/arkui-x/samples)).
+- Basic compiler toolchain, which can generate ArkUI SDKs for iOS and Android to create applications that run on the target platform.
+- Basic platform bridging capabilities, including the iOS and Android application loading entry points, lifecycle, event processing, and window system.
+- Basic UI component adaptation capabilities, covering common UI components.
 - XTS infrastructure, including common UI tests.
 
-### ArkUI Components
+### Components
 
 The ArkTS-based declarative development paradigm is supported.
 
 ### APIs
 
-ArkUI-X APIs include OpenHarmony APIs and custom extension APIs. You can implement the OpenHarmony APIs and extend JS APIs through the [API extension mechanism](../framework-dev/napi/napi-guidelines.md) on Android and iOS. For details about the examples, see [@ohos API Extension on Android](../contribute/tutorial/how-to-use-napi-on-Android.md) and [@ohos API Extension on iOS](../contribute/tutorial/how-to-use-napi-on-iOS.md).
+ArkUI cross-platform APIs include OpenHarmony APIs and custom extension APIs. You can implement the OpenHarmony APIs and extend custom JS APIs through the [API extension mechanism](../framework-dev/napi/napi-guidelines.md) on Android and iOS. For details about the examples, see [@ohos API Extension on Android](../contribute/tutorial/how-to-use-napi-on-Android.md) and [@ohos API Extension on iOS](../contribute/tutorial/how-to-use-napi-on-iOS.md).
 
 >**NOTE**
 >
->The Beta version currently does not implement OpenHarmony APIs.
+>The ArkUI-X 0.1.0 Beta version is the first preview version for the ArkUI-X project. It only provides implementation for the APIs listed in [OpenHarmony APIs with Cross-Platform Support](../application-dev/reference/apis/readme.md).
 
 ### Project Build
 
@@ -31,7 +31,7 @@ ArkUI-X APIs include OpenHarmony APIs and custom extension APIs. You can impleme
 
 > **NOTE**
 >
-> The build result is stored in the **out/arkui-cross** directory. The build output is used for Android application development. For details, see [Building ArkUI Applications on Android](../contribute/tutorial/how-to-build-Android-app.md).
+> The build result is stored in the **out** directory. The build output is used for Android application development. For details, see [Building ArkUI Applications on Android](../contribute/tutorial/how-to-build-Android-app.md).
 
 * Building a project on iOS
 
@@ -41,11 +41,11 @@ ArkUI-X APIs include OpenHarmony APIs and custom extension APIs. You can impleme
 
 > **NOTE**
 >
-> The build result is stored in the **out/arkui-cross** directory. The build output is used for iOS application development. For details, see [Building ArkUI Applications on iOS](../contribute/tutorial/how-to-build-iOS-app.md).
+> The build result is stored in the **out** directory. The build output is used for Android application development. For details, see [Building ArkUI Applications on iOS](../contribute/tutorial/how-to-build-iOS-app.md).
 
 ### Application Compiler Toolchain
 
-ArkUI-X Command Line Tools is a command line (CLI) tool that allows developers to build applications runnable across the OpenHarmony, Android, and iOS platforms. Its functions include development environment check, project creation, building and packaging, and installation and debugging. For details, see [Quick Start Guide](https://gitee.com/arkui-x/cli/blob/master/README-EN.md).
+ACE Tools is a command line (CLI) tool that allows ArkUI-X project developers to build applications. Its functions include development environment check, project creation, building and packaging, and installation and debugging. For details, see [ACE Tools](https://gitee.com/arkui-x/cli/blob/master/README-EN.md).
 
 
 ## Mapping
@@ -54,16 +54,15 @@ ArkUI-X Command Line Tools is a command line (CLI) tool that allows developers t
 
 | Platform   | OS SDK Version             | Remarks|
 | ----------- | ----------------------------------- | ---- |
-| OpenHarmony | 3.1 Release (API Version 8 Release) | NA   |
+| OpenHarmony | OpenHarmony 3.2 Beta (API level 9) | NA   |
 | Android     | Quince Tart 10 (API level 29)       | NA   |
 | iOS         | iOS 10                              | NA   |
 
 >**NOTE**
 >
->The Beta version is a preliminary release open only to specific developers. It does not promise API stability and may require tolerance of instability.
+>The beta version is a preview version for trial use. The UI and APIs of this version may be unstable.
 
 ## Source Code Acquisition
-
 
 ### Prerequisites
 
@@ -95,7 +94,7 @@ Use the **repo** tool to download the source code over SSH. (You must have an SS
 
 
 ```
-repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-0.1.0-Beta --no-repo-verify
+repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-0.1.0 --no-repo-verify
 repo sync -c
 ```
 
@@ -105,7 +104,7 @@ Use the **repo** tool to download the source code over HTTPS.
 
 
 ```
-repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-0.1.0-Beta --no-repo-verify
+repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-0.1.0 --no-repo-verify
 repo sync -c
 ```
 
@@ -115,9 +114,8 @@ repo sync -c
 
 | Source Code                                 | Version| Mirror| SHA-256 Checksum|
 | ----------------------------------------- | ------------ | ------------ | ---------------- |
-| Full code (supporting OpenHarmony, Android, and iOS)| 0.1.0 Beta    | [Site]()    | [Download]()|
-| ArkUI-X SDK (Android)     | 0.1.0 Beta    | [Site]()    | [Download]()|
-| ArkUI-X SDK (iOS)         | 0.1.0 Beta    | [Site]()    | [Download]()|
+| ArkUI-X full code| 0.1.0 Beta    | [Site]()    | [Download]()|
+| ArkUI-X SDK | 0.1.0 Beta    | [Site]()    | [Download]()|
 
 ## Samples
 
