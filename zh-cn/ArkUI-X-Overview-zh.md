@@ -30,6 +30,7 @@ ArkUI跨平台框架整体架构如下图所示，详细设计请参考[ArkUI跨
 ## 代码仓地址
 
 ArkUI-X主库组织地址：https://gitee.com/arkui-x
+ArkUI-X GitHub镜像库地址：https://github.com/arkui-x 
 
 ## 开发者文档
 
