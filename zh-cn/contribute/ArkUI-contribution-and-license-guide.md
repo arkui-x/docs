@@ -19,7 +19,7 @@
 
 贡献者参与贡献，需要签署开发者原创声明。贡献者必须签署“开发者原创声明”（Developer Certificate of Origin，DCO），然后才能参与社区贡献。
 
-DCO是由贡献者签署的对其贡献的作品原创性的声明和贡献者表示同意贡献的声明，DCO文本将完整引用Linux基金会发布的标准版本，您可以去如下网址查看DCO全文：https://developercertificate.org/。
+DCO是由贡献者签署的对其贡献的作品原创性的声明和贡献者表示同意贡献的声明，DCO文本将完整引用Linux基金会发布的标准版本，您可以[查看DCO全文](https://developercertificate.org/)。
 
 贡献者在每次提交贡献时均需签署DCO，DCO的首次签署请在[docs/zh-cn/contribute](signing-dco.md)路径下获取[signing-dco（Developer Certificate of Origin）](signing-dco.md)Markdown文件，将签署后的DCO Markdown文件发送至[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn) 。（线上签署待开放）
 
@@ -27,11 +27,11 @@ DCO的后续签署将附随贡献提交流程进行。
 
 **（2）贡献代码的许可证**
 
-原则上，项目贡献代码均应提供源代码，并采用Apache License 2.0 (简称Apache-2.0)开源许可证进行分发。您可以通过如下地址了解Apache-2.0的原文：https://www.apache.org/licenses/LICENSE-2.0
+原则上，项目贡献代码均应提供源代码，并采用Apache License 2.0 (简称Apache-2.0)开源许可证进行分发，您可以[了解Apache-2.0原文](https://www.apache.org/licenses/LICENSE-2.0)。
 
 **（3）贡献文档的许可证**
 
-原则上，项目贡献文档应根据知识共享署名4.0 (Creative Commons Attribution 4.0，简称CC BY 4.0)国际公共许可协议进行版权许可。您可以通过访问如下地址了解CC BY 4.0的概要：https://creativecommons.org/licenses/by/4.0/ 。CC BY 4.0的完整协议内容您可以访问如下网址获取：https://creativecommons.org/licenses/by/4.0/legalcode。
+原则上，项目贡献文档应根据知识共享署名4.0 (Creative Commons Attribution 4.0，简称CC BY 4.0)国际公共许可协议进行版权许可，您[了解CC BY 4.0的概要](https://creativecommons.org/licenses/by/4.0/) ，[了解CC BY 4.0的完整协议内容](https://creativecommons.org/licenses/by/4.0/legalcode)。
 
 **（4）三方开源软件许可证要求和黑白名单建议**
 
