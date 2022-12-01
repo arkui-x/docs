@@ -31,7 +31,7 @@ DCO的后续签署将附随贡献提交流程进行。
 
 **（3）贡献文档的许可证**
 
-原则上，项目贡献文档应根据知识共享署名4.0 (Creative Commons Attribution 4.0，简称CC BY 4.0)国际公共许可协议进行版权许可。您可以通过访问如下地址了解CC BY 4.0的概要：https://creativecommons.org/licenses/by/4.0/。CC BY 4.0的完整协议内容您可以访问如下网址获取：https://creativecommons.org/licenses/by/4.0/legalcode。
+原则上，项目贡献文档应根据知识共享署名4.0 (Creative Commons Attribution 4.0，简称CC BY 4.0)国际公共许可协议进行版权许可。您可以通过访问如下地址了解CC BY 4.0的概要：https://creativecommons.org/licenses/by/4.0/ 。CC BY 4.0的完整协议内容您可以访问如下网址获取：https://creativecommons.org/licenses/by/4.0/legalcode。
 
 **（4）三方开源软件许可证要求和黑白名单建议**
 
