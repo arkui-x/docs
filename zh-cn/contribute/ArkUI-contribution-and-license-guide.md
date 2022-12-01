@@ -21,7 +21,7 @@
 
 DCO是由贡献者签署的对其贡献的作品原创性的声明和贡献者表示同意贡献的声明，DCO文本将完整引用Linux基金会发布的标准版本，您可以去如下网址查看DCO全文：https://developercertificate.org/。
 
-贡献者在每次提交贡献时均需签署DCO，DCO的首次签署请在[docs/zh-cn/contribute](https://gitee.com/openharmony/docs/tree/master/zh-cn/contribute)路径下获取signing-dco（Developer Certificate of Origin）Markdown文件，将签署后的DCO Markdown文件发送至[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn) 。（线上签署待开放）
+贡献者在每次提交贡献时均需签署DCO，DCO的首次签署请在[docs/zh-cn/contribute](signing-dco.md)路径下获取[signing-dco（Developer Certificate of Origin）](signing-dco.md)Markdown文件，将签署后的DCO Markdown文件发送至[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn) 。（线上签署待开放）
 
 DCO的后续签署将附随贡献提交流程进行。
 
