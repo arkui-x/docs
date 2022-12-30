@@ -21,4 +21,11 @@ The ArkUI-X project further extends the ArkUI framework to multiple OS platforms
 
 2. Set up the development environment by following instructions in [Installing the Environment](./start-with-ace-tools.md#installing-the-environment) and [Installing Dependencies](./start-with-ace-tools.md#installing-dependencies).
 
+3. Learn how to download and use the ArkUI-X SDKs.
+
+   - [Building ArkUI Applications on Android](../../contribute/tutorial/how-to-build-Android-app.md)
+
+   - [Building ArkUI Applications on iOS](../../contribute/tutorial/how-to-build-iOS-app.md)
+
 Now you are ready for ArkUI-X application development. Follow the instructions in [Creating an Application](./start-with-ace-tools.md#creating-an-application), [Building the Project](./start-with-ace-tools.md#building-the-project), and [Getting Started with ArkTS in FA Model](./start-with-ets-fa.md).
+
