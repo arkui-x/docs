@@ -57,7 +57,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
 
 ### 配置Android SDK环境
 
-   **SDK下载：** 通过[Android Studio下载页面](https://developer.android.google.cn/studio)下载Android SDK命令行管理工具，命令行工具使用说明详见[sdkmanager](https://developer.android.google.cn/studio/command-line/sdkmanager)官方指导。SDK版本下载要求如下：
+   **SDK下载：** 通过[Android SDK命令行工具](https://developer.android.google.cn/studio#command-line-tools-only)下载Android SDK，命令行工具使用说明详见[sdkmanager](https://developer.android.google.cn/studio/command-line/sdkmanager)官方指导。SDK版本下载要求如下：
 
   ```shell
   ./sdkmanager --install "ndk-bundle" --sdk_root=/home/usrername/path-to-android-sdk

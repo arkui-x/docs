@@ -57,7 +57,7 @@ API extension involves the following: You can use the OpenHarmony NAPI mechanism
 
 ### Configuring Android SDK Environment
 
-Download the Android SDK from [ANDROID STUDIO](https://developer.android.google.cn/studio). For details about how to use the SDK, see [sdkmanager](https://developer.android.google.cn/studio/command-line/sdkmanager). The SDK must meet the following version requirements:
+Download the Android SDK from [Command Line Tools](https://developer.android.google.cn/studio#command-line-tools-only). For details about how to use the SDK, see [sdkmanager](https://developer.android.google.cn/studio/command-line/sdkmanager). The SDK must meet the following version requirements:
 
   ```shell
   ./sdkmanager --install "ndk-bundle" --sdk_root=/home/usrername/path-to-android-sdk
