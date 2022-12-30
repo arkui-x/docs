@@ -20,17 +20,17 @@ This document applies only to the ArkUI-X community. It is not applicable to the
 
 You must sign the Developer Certificate of Origin (DCO) before you can contribute to the community.
 
-The DCO is a statement of originality and contribution of your work. The DCO to sign is fully quoted from the standard DCO version released by the Linux Foundation at https://developercertificate.org/.
+The DCO is a statement of originality and contribution of your work. The DCO to sign is fully quoted from the [standard DCO version](https://developercertificate.org/) released by the Linux Foundation.
 
-Before contributing to the community, you must obtain the **signing-dco.md** file in [docs/en/contribute](https://gitee.com/openharmony/docs/tree/master/en/contribute), sign it, and send the signed file to [contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn). Then you can include the Signed-off-by information for each commit. (The online mode for signing the DCO will be provided later.)
+Before contributing to the community, you must obtain the [signing-dco.md](signing-dco.md) file, sign it, and send the signed file to [contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn). Then you can include the Signed-off-by information for each commit. (The online mode for signing the DCO will be provided later.)
 
 **(2) Code Contribution License**
 
-In principle, for every code contribution, source code licensed under the Apache License 2.0 (Apache-2.0) must be provided. For details about Apache-2.0, visit https://www.apache.org/licenses/LICENSE-2.0.
+In principle, for every code contribution, source code licensed under the Apache License 2.0 (Apache-2.0) must be provided. For details about Apache-2.0, visit [the website](https://www.apache.org/licenses/LICENSE-2.0).
 
 **(3) Document Contribution License**
 
-In principle, for every document contribution, documents shall be licensed under the Creative Commons Attribution 4.0 International Public License (CC BY 4.0). For details about CC BY 4.0, visit https://creativecommons.org/licenses/by/4.0/. For the complete content, see [Creative Commons Attribution 4.0 International Public License](https://creativecommons.org/licenses/by/4.0/legalcode).
+In principle, for every document contribution, documents shall be licensed under the Creative Commons Attribution 4.0 International Public License (CC BY 4.0). For details about CC BY 4.0, visit [the website](https://creativecommons.org/licenses/by/4.0/). For the complete content, see [Creative Commons Attribution 4.0 International Public License](https://creativecommons.org/licenses/by/4.0/legalcode).
 
 **(4) Third-Party Open-Source Software Licenses**
 

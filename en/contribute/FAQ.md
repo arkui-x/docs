@@ -41,7 +41,7 @@ The possible causes for a verification failure include:
 
    **Solution**
 
-   Obtain the **signing-dco.md** file in [docs/en/contribute](https://gitee.com/openharmony/docs/tree/master/en/contribute), sign it, and send the signed file to [contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn). (The online mode for signing the DCO will be provided later.)
+   Obtain the [signing-dco.md](signing-dco.md) file, sign it, and send the signed file to [contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn). (The online mode for signing the DCO will be provided later.)
 
    Then enter **check dco** in the Pull Requests comment box and click **Comment**. The system will check the DCO signing status again.
 
