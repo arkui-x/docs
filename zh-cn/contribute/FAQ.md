@@ -44,8 +44,7 @@
 
    **解决办法**：
 
-   请在[docs/zh-cn/contribute](signing-dco.md)路径下获取[signing-dco（Developer Certificate of Origin）](signing-dco.md)Markdown文件，将签署后的DCO Markdown文件发送至[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn) 。（线上签署待开放）
-
+   点击[这里](https://dco.arkui-x.cn/#/sign)签署、查看签署状态。
 
    签署成功后，在PR的评论框输入`check dco`后，单击”评论”，系统将再次进行DCO校验。
 
