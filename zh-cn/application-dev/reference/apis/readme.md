@@ -4,3 +4,5 @@
   - [@ohos.promptAction (弹窗)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-promptAction.md)
   - [@ohos.router (页面路由)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-router.md)
   - [@ohos.animator](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-animator.md)
+- 平台通道
+  - [@arkui-x.bridge](#https://gitee.com/arkui-x/docs/tree/master/zh-cn/application-dev/reference/apis/js-apis-bridge.md)

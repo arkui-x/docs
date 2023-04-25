@@ -9,5 +9,4 @@
 | 类    | 描述               |
 | ----------- | ---------------------------------- |
 | [AceViewController](AceViewController.md) | UIViewController的子类 |
-
-
+| [BridgePlugin](BridgePlugin.md) | 平台Bridge |
