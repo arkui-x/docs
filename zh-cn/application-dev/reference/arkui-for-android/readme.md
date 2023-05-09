@@ -9,3 +9,4 @@
 | 类    | 描述               |
 | ----------- | ---------------------------------- |
 | [AceActivity](AceActivity.md) | Activity的子类 |
+| [BridgePlugin](BridgePlugin.md) | 平台Bridge |

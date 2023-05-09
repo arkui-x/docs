@@ -19,6 +19,7 @@
 - [清单配置文件](quick-start/manifest-structure.md)
 - [资源分类与访问](quick-start/resource-categories-and-access.md)
 - [应用开发命令行工具说明](quick-start/start-with-ace-tools.md)
+- [Bridge开发指南](quick-start/start-with-bridge.md)
 
 ## API参考
 
