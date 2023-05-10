@@ -2,7 +2,7 @@
 
 ## 简介
 
-ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工具，用于构建OpenHarmony、Android和iOS平台的应用程序， 其功能包括开发环境检查，新建项目，编译打包，安装调试等。
+ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工具，用于构建OpenHarmony、HarmonyOS、Android和iOS平台的应用程序， 其功能包括开发环境检查，新建项目，编译打包，安装调试等。
 
 ## 环境配置
 
@@ -14,7 +14,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
 2. OpenHarmony SDK
 
-   编译 hap 需要OpenHarmony SDK 支持，具体参考[DevEco Studio及SDK Manager下载地址](https://developer.harmonyos.com/cn/develop/deveco-studio)。
+   编译 OpenHarmony hap 需要OpenHarmony SDK 支持，具体参考[DevEco Studio及SDK Manager下载地址](https://developer.harmonyos.com/cn/develop/deveco-studio)。
 
    **SDK推荐环境变量配置：**
 
@@ -23,7 +23,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    ```shell
    // 配置环境变量
    export OpenHarmony_HOME=/home/usrername/path-to-ohsdk
-   export PATH=${OpenHarmony_HOME}/toolchains/versioncode:${PATH}
+   export PATH=${OpenHarmony_HOME}/versioncode/toolchains:${PATH}
    ```
 
    [Mac]
@@ -31,7 +31,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    ```shell
    // 配置环境变量
    export OpenHarmony_HOME=/Users/usrername/path-to-ohsdk
-   export PATH=$OpenHarmony_HOME/toolchains/versioncode:$PATH
+   export PATH=$OpenHarmony_HOME/versioncode/toolchains:$PATH
    ```
 
    [Windows]
@@ -39,10 +39,40 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    ```shell
    // 配置环境变量
    set OpenHarmony_HOME=/Users/usrername/path-to-ohsdk
-   set PATH=%PATH%;%OpenHarmony_HOME%/toolchains/versioncode
+   set PATH=%PATH%;%OpenHarmony_HOME%/versioncode/toolchains
    ```
 
-3. Android SDK
+3. HarmonyOS SDK
+
+   编译 HarmonyOS hap 需要HarmonyOS SDK 支持，具体参考[DevEco Studio及SDK Manager下载地址](https://developer.harmonyos.com/cn/develop/deveco-studio)。
+
+   **SDK推荐环境变量配置：**
+
+   [Linux]
+
+   ```shell
+   // 配置环境变量
+   export HarmonyOS_HOME=/home/usrername/path-to-ohsdk
+   export PATH=${HarmonyOS_HOME}/hmscore/versioncode/toolchains:${PATH}
+   ```
+
+   [Mac]
+
+   ```shell
+   // 配置环境变量
+   export HarmonyOS_HOME=/Users/usrername/path-to-ohsdk
+   export PATH=$HarmonyOS_HOME/hmscore/versioncode/toolchains:$PATH
+   ```
+
+   [Windows]
+
+   ```shell
+   // 配置环境变量
+   set HarmonyOS_HOME=/Users/usrername/path-to-ohsdk
+   set PATH=%PATH%;%HarmonyOS_HOME%/hmscore/versioncode/toolchains
+   ```
+
+4. Android SDK
 
    编译 apk 需要，Android SDK 支持通过安装Android Studio获得，具体参考[Android Studio及SDK Manager下载地址](https://developer.android.com/studio)。
 
@@ -72,7 +102,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    set PATH=%PATH%;%ANDROID_HOME%/tools;%ANDROID_HOME%/tools/bin;%ANDROID_HOME%/build-tools/28.0.3;%ANDROID_HOME%/platform-tools
    ```
 
-4. iOS应用开发环境
+5. iOS应用开发环境
 
    4.1 Xcode和Command Line Tools for Xcode应用可前往Mac App Store应用商店下载安装。Command Line Tools也可使用命令方式安装:
 
@@ -90,7 +120,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    brew install ios-deploy
-   ``` 
+   ```
 
 ## 命令安装
 
@@ -121,7 +151,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
 执行 `ace check` 命令可以检查上述的本地开发环境。对于必选项，需要检查通过，否则无法继续接下来的操作。
 
-*注：开发环境检查主要针对SDK和IDE的默认安装和下载路径；如果通过SDK Manager下载SDK，会检查默认环境变量：ANDROID_HOME和OpenHarmony_HOME是否配置。*
+*注：开发环境检查主要针对SDK和IDE的默认安装和下载路径；如果通过SDK Manager下载SDK，会检查默认环境变量：ANDROID_HOME、OpenHarmony_HOME和HarmonyOS_HOME是否配置。*
 
 #### 2. 检查设备连接
 
@@ -148,11 +178,13 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    ```shell
    ace create project
    ? Please enter the project name: demo
-   ? Please enter the packages (com.example.demo):com.example.demo
-   ? Please enter the ACE version (1: 基于ArkTS的声明式开发范式, 2: 兼容JS的类Web开发范式): 1
+   ? Please enter the bundle name (com.example.demo):com.example.demo
+   ? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 1
+   ? Please enter the template (1: Empty Ability, 2: Native C++): 1   //选择创建Empty Ability或者Native C++项目
+   ? Please enter the Ability Model Type (1: Stage, 2: FA):
    ```
 
-执行 `ace create project` 命令（project 可省略），接着输入项目名 demo ，包名直接回车默认即可。输入“1”代表创建基于ArkTS的声明式开发范式应用项目。
+执行 `ace create project` 命令（project 可省略），接着输入项目名 demo ，包名直接回车默认即可。输入“1”代表创建OpenHarmony，再次输入“1”代表Empty Ability，再次输入“1”代表stage模型的应用项目。
 
 一个名为 ‘demo’ 的项目就创建成功了。
 
@@ -160,9 +192,12 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
 ```shell
 demo/
-├── android		//用于编译跨平台应用Android工程
+├── android      //用于编译跨平台应用Android工程
 │   ├── app
-│   │   ├── libs
+│   │   ├── build.gradle
+│   │   ├── libs      //跨平台SDK中提供的Android jar包放置于此
+│   │   │   └── arm64-v8a      //跨平台SDK中提供的Android so库放置于此
+│   │   ├── proguard-rules.pro
 │   │   └── src
 │   │       ├── androidTest
 │   │       ├── main
@@ -172,39 +207,50 @@ demo/
 │   │       │   │   └── com
 │   │       │   │       └── example
 │   │       │   │           └── demo
-│   │       │   │               ├── MainActivity.java	//继承自ArkUI提供的AceActivity基类
-│   │       │   │               └── MyApplication.java	//继承自ArkUI提供的AceApplication基类
+│   │       │   │               ├── EntryMainActivity.java  //继承自ArkUI提供的StageActivity基类
+│   │       │   │               └── MyApplication.java     //继承自ArkUI提供的StageApplication基类
 │   │       │   └── res
 │   │       └── test
+│   ├── build.gradle
+│   ├── gradle
+│   ├── gradle.properties
+│   ├── gradlew
+│   ├── gradlew.bat
 │   └── settings.gradle
-├── ios		//用于编译跨平台应用ios工程
-│   ├── etsapp
+├── ios     //用于编译跨平台应用ios工程
+│   ├── app
 │   │   ├── AppDelegate.h
-│   │   ├── AppDelegate.mm	//实例化AceViewController，并加载ArkUI页面
+│   │   ├── AppDelegate.m
+│   │   ├── Assets.xcassets
+│   │   ├── Base.lproj
+│   │   ├── EntryMainViewController.h   //继承自ArkUI提供的StageViewController基类
+│   │   ├── EntryMainViewController.m
 │   │   ├── Info.plist
 │   │   └── main.m
-│   ├── etsapp.xcodeproj
-│   ├── frameworks
-│   └── js
-│   └── res
-├── ohos	//用于编译跨平台应用ohos工程
+│   ├── app.xcodeproj
+│   ├── arkui-x
+│   └── frameworks
+│       └── libarkui_ios.xcframework         //跨平台SDK中提供的iOS库放置于此
+├── ohos    //用于编译跨平台应用ohos工程
+│   ├── AppScope
 │   ├── build-profile.json5
-│   ├── entry
-│   │   └── src
-│   │       └── main
-│   │           ├── config.json
-│   │           └── resources
-└── source	//用于编写跨平台应用源码
+│   ├── hvigorfile.ts
+│   └── package.json
+└── source   //用于编写跨平台应用源码
     └── entry
+        ├── build-profile.json5
+        ├── hvigorfile.ts
+        ├── package.json
         └── src
             ├── main
             │   ├── ets
-            │   │   └── MainAbility
-            │   │       ├── app.ets
-            │   │       ├── manifest.json	//工程配置信息
-            │   │       └── pages
-            │   │           └── index
-            │   │               └── index.ets
+            │   │   ├── Application
+            │   │   │   └── AbilityStage.ts
+            │   │   ├── mainability
+            │   │   │   └── MainAbility.ts
+            │   │   └── pages
+            │   │       └── Index.ets
+            │   ├── module.json5
             │   └── resources
             └── ohosTest
 
@@ -456,3 +502,5 @@ ace build --help
 ## 参考
 
 - [命令行详情说明](https://gitee.com/arkui-x/cli/blob/master/README.md)
+
+<!--no_check-->
