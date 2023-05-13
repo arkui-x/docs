@@ -1,13 +1,10 @@
 # @ohos.app.ability.UIAbility (UIAbility)
 
-UIAbility是包含UI界面的应用组件，提供组件创建、销毁、前后台切换等生命周期回调，同时也具备组件协同的能力，组件协同主要提供如下常用功能：
-
-- [Caller](#caller)：由[startAbilityByCall](js-apis-inner-application-uiAbilityContext.md#uiabilitycontextstartabilitybycall)接口返回，CallerAbility(调用者)可使用Caller与CalleeAbility(被调用者)进行通信。
-- [Callee](#callee)：UIAbility的内部对象，CalleeAbility(被调用者)可以通过Callee与Caller进行通信。
+UIAbility是包含UI界面的应用组件，提供组件创建、销毁、前后台切换等生命周期回调。
 
 > **说明：**
 > 
-> 本模块首批接口从API version 9 开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  
+> 本模块首批接口从API version 9 开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 > 本模块接口仅可在Stage模型下使用。
 
 ## 导入模块
@@ -32,8 +29,8 @@ UIAbility创建时回调，执行初始化业务逻辑操作。
 
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------- | -------- | -------- |
-| want | [Want](js-apis-app-ability-want.md) | 是 | 当前UIAbility的Want类型信息，包括ability名称、bundle名称等。 |
-| param | [AbilityConstant.LaunchParam](js-apis-app-ability-abilityConstant.md#abilityconstantlaunchparam) | 是 | 创建&nbsp;ability、上次异常退出的原因信息。 |
+| want | [Want](js-apis-application-want.md) | 是 | 当前UIAbility的Want类型信息，包括ability名称、bundle名称等。 |
+| param | AbilityConstant.LaunchParam | 是 | 创建&nbsp;ability、上次异常退出的原因信息。 |
 
 **示例：**
 
@@ -56,7 +53,7 @@ onWindowStageCreate(windowStage: window.WindowStage): void
 
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------- | -------- | -------- |
-| windowStage | [window.WindowStage](js-apis-window.md#windowstage9) | 是 | WindowStage相关信息。 |
+| windowStage | window.WindowStage | 是 | WindowStage相关信息。 |
 
 **示例：**
     
@@ -158,8 +155,8 @@ onNewWant(want: Want, launchParams: AbilityConstant.LaunchParam): void;
 
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------- | -------- | -------- |
-| want | [Want](js-apis-app-ability-want.md) | 是 | Want类型参数，如ability名称，包名等。 |
-| launchParams | [AbilityConstant.LaunchParam](js-apis-app-ability-abilityConstant.md#abilityconstantlaunchparam) | 是 | UIAbility启动的原因、上次异常退出的原因信息。 |
+| want | [Want](js-apis-application-want.md) | 是 | Want类型参数，如ability名称，包名等。 |
+| launchParams | AbilityConstant.LaunchParam | 是 | UIAbility启动的原因、上次异常退出的原因信息。 |
 
 **示例：**
     

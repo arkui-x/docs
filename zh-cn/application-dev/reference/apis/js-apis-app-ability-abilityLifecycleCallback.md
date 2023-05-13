@@ -45,7 +45,7 @@ onWindowStageCreate(ability: UIAbility, windowStage: window.WindowStage): void;
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------- | -------- | -------- |
 | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | 是 | 当前Ability对象 |
-| windowStage | [window.WindowStage](js-apis-window.md#windowstage9) | 是 | 当前WindowStage对象 |
+| windowStage | window.WindowStage | 是 | 当前WindowStage对象 |
 
 **示例：**
 ```ts
@@ -67,7 +67,7 @@ onWindowStageDestroy(ability: UIAbility, windowStage: window.WindowStage): void;
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------- | -------- | -------- |
 | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | 是 | 当前Ability对象 |
-| windowStage | [window.WindowStage](js-apis-window.md#windowstage9) | 是 | 当前WindowStage对象 |
+| windowStage | window.WindowStage | 是 | 当前WindowStage对象 |
 
 **示例：**
 ```ts
