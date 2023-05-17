@@ -10,7 +10,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
 1. Node.js
 
-   命令行运行 `node -v` 查看本地nodejs版本。如不存在，请自行下载安装新的稳定版本：[NodeJS下载地址](https://nodejs.org/en/download/)。建议下载14.19.1以上版本。
+   命令行运行 `node -v` 查看本地nodejs版本。如不存在，请自行下载安装新的稳定版本：[NodeJS下载地址](https://nodejs.org/en/download/)。建议下载14.19.1及以上版本，且只支持14系列版本。`npm -v` 查看本地npm版本，建议下载6.14.16及以上，且低于7.0.0版本。
 
 2. OpenHarmony SDK
 
