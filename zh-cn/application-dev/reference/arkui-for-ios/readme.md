@@ -10,3 +10,4 @@
 | ----------- | ---------------------------------- |
 | [AceViewController](AceViewController.md) | UIViewController的子类 |
 | [BridgePlugin](BridgePlugin.md) | 平台Bridge |
+| [StageViewController](StageViewController.md) | 平台Bridge |
