@@ -10,3 +10,6 @@
 | ----------- | ---------------------------------- |
 | [AceActivity](AceActivity.md) | Activity的子类 |
 | [BridgePlugin](BridgePlugin.md) | 平台Bridge |
+| [StageApplication](StageApplication.md) | Stage模型Application |
+| [StageApplicationDelegate](StageApplicationDelegate.md) | Stage模型Application代理类 |
+| [StageActivity](StageActivity.md) | Stage模型Activity |
