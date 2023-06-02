@@ -182,7 +182,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    OpenHarmony [SDK命令行工具](https://developer.harmonyos.com/cn/develop/deveco-studio#download_cli_openharmony)自带ohpm，下载后进入到命令行目录后，执行：
    ```shell
    cd command-line-tools/ohpm    //按实进入package.json所在目录
-   npm install
+   ./bin/init                    //执行init命令
    npm install . -g
    ```
    **说明：** 如果您使用DevEco Studio，则无需额外下载ohpm，可在DevEco Studio设置中查看其安装路径，并配置到环境变量中。
