@@ -10,7 +10,7 @@
 
 [访问官网](https://arkui-x.cn/)
 
-[中文文档](./zh-cn/readme.md) 
+[中文文档](./zh-cn/README.md) 
 
 [English Documentation](./en/readme.md)
 

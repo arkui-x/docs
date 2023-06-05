@@ -51,7 +51,7 @@ ArkUI-X社区针对上游开源软件以及社区内原创开源软件，建立�
 
 ### 安全漏洞披露
 
-ArkUI-X社区遵循负责任的披露原则，安全漏洞修复后发布[安全公告](../security-disclosure/readme.md)。
+ArkUI-X社区遵循负责任的披露原则，安全漏洞修复后发布[安全公告](../security-disclosure/README.md)。
 
 
 ## [致谢](./Acknowledgements.md)

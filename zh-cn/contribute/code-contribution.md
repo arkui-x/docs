@@ -37,5 +37,5 @@
 
 ## 社区安全问题
 
-- [安全问题处理和发布流程](../security/security-process/readme.md)
+- [安全问题处理和发布流程](../security/security-process/README.md)
 - [安全和披露说明](../security/security-process/security-disclosure.md)

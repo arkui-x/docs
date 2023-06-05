@@ -21,7 +21,7 @@
 
 **方式二**
 
-* 通过ArkUI-X跨平台项目源码编译出SDK，适用于ArkUI跨平台应用高阶开发者。完成跨平台项目[代码下载](../../framework-dev/quick-start/readme.md)后，执行如下命令编译ArkUI-X Android平台SDK。
+* 通过ArkUI-X跨平台项目源码编译出SDK，适用于ArkUI跨平台应用高阶开发者。完成跨平台项目[代码下载](../../framework-dev/quick-start/README.md)后，执行如下命令编译ArkUI-X Android平台SDK。
 
 ```
 ./build.sh --product-name arkui-cross --target-os android --ccache

@@ -1,4 +1,4 @@
-# 使用ArkTS语言开发（FA模型）
+# 使用ArkTS语言开发（stage）
 
 >  **说明：**
 >
@@ -330,6 +330,6 @@ demo/
 
 效果如下图所示：
 
-   ![ArkTS-FA](figures/start-with-ets-fa-0.png)
+   ![ArkTS-FA](figures/start-with-ets-stage-0.png)
 
-恭喜您已经使用ArkTS语言开发（FA模型）完成了第一个ArkUI跨平台应用，快来[探索更多的ArkUI-X功能](../application-dev-guide.md)吧。
+恭喜您已经使用ArkTS语言开发（Stage模型）完成了第一个ArkUI跨平台应用，快来[探索更多的ArkUI-X功能](../application-dev-guide.md)吧。
