@@ -10,8 +10,6 @@
 
   ArkUI-X项目，是扩展ArkUI开发框架到多个OS平台，让开发者基于一套主代码，构建出精美的多平台应用。
 
-## C
+- ### ACE Tools
 
-- ### CLI
-
-    Command Line Interface，跨平台应用构建命令行工具。
+  一个跨平台命令行工具(Command Line Interface)，用于开发、构建、运行、调试和卸载ArkUI-X应用。

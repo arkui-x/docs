@@ -15,31 +15,14 @@
 
 ### 接口范围
 
-ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，在Android和iOS平台通过[API扩展机制](../framework-dev/napi/napi-guidelines.md)扩展自定义JS接口和实现OpenHarmony接口定义。比如：[Android平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-Android.md)和[iOS平台接口实现示例](../contribute/tutorial/how-to-use-napi-on-iOS.md)。
+ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmony接口以Public接口为基础，范围为API10+，具体支持列表详见[API参考](../application-dev/reference/README.md)。
 
->说明：ArkUI-X 0.1.0 Beta版本为ArkUI-X项目首次发布的预览版本，仅提供[UI页面相关的OpenHarmony接口定义实现](../application-dev/reference/apis/readme.md)，暂不提供其它OpenHarmony接口定义的跨平台实现。
+>说明：ArkUI-X 0.1.0 Beta版本为ArkUI-X项目首次发布的预览版本，除提供[ArkUI控件](../application-dev/reference/arkui-ts/README.md)和部分[@ohos接口](../application-dev/reference/apis/README.md)之外，暂不提供其它OpenHarmony接口定义的跨平台实现。
 
-### 项目编译
+### 应用开发工具
 
-* ArkUI支持Android平台
-
-```
-./build.sh --product-name arkui-cross --target-os android --ccache
-```
-
-> 说明：编译结果输出在**out**目录下，编译输出件用于ArkUI跨平台Android侧应用开发，详见[应用开发指南](../contribute/tutorial/how-to-build-Android-app.md)。
-
-* ArkUI支持iOS平台
-
-```
-./build.sh --product-name arkui-cross --target-os ios --ccache
-```
-
-> 说明：编译结果输出在**out**目录下，编译输出件用于ArkUI跨平台iOS侧应用开发，详见[应用开发指南](../contribute/tutorial/how-to-build-iOS-app.md)。
-
-### 应用构建工具链
-
-ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见](https://gitee.com/arkui-x/cli/blob/master/README.md)。
+ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见](../application-dev/quick-start/start-with-ace-tools.md)。
+DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序开发工具，同时支持ArkUI-X应用创建，构建，安装，运行，调试和卸载等功能。[详情参加](../application-dev/quick-start/start-with-deveco-studio.md)
 
 
 ## 配套关系
@@ -48,8 +31,8 @@ ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发�
 
 | 目标平台    | 项目编译使用OS SDK版本              | 备注 |
 | ----------- | ----------------------------------- | ---- |
-| OpenHarmony | OpenHarmony 3.2 Beta (API level 9) | NA   |
-| Android     | Quince Tart 10 (API level 29)       | NA   |
+| OpenHarmony | OpenHarmony 4.0 Release (API level 10) | NA   |
+| Android     | Quince Tart 8 (API level 26)       | NA   |
 | iOS         | iOS 10                              | NA   |
 
 >说明：Beta版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。

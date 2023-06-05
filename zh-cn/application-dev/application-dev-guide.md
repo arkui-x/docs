@@ -6,15 +6,11 @@
 
 ## 快速开始
 
-[快速开始](quick-start/README.md)可以帮助开发者了解跨平台应用开发的基本方法。
-
-这一部分包含了快速构建首个应用的快速入门，以及开发跨平台应用所必备的基础知识。
-
-开发的基础知识包含了跨平台应用工程的包结构设计、清单配置文件说明，以及资源文件的使用指导和命令行工具使用说明。
+[快速开始](README.md#快速开始)可以帮助开发者快速了解跨平台应用开发的基础流程，主要包含跨平台应用快速入门，开发基础知识，开发指南以及开发调试工具。开发的基础知识包含了应用工程结构介绍，资源分类与访问和跨语言调用等内容。
 
 ## 工具
 
-[ACE Tools](quick-start/start-with-ace-tools.md)工具是跨平台应用开发的默认开发工具。在命令行工具[仓](https://gitee.com/arkui-x/cli/blob/master/cli/README.md)，讲解了命令行工具的详细用法，包括使用该工具链进行工程创建、编译、安装、运行调试、卸载等说明。
+[ACE Tools](quick-start/start-with-ace-tools.md)是一套跨平台命令行工具(Command Line Interface)，用于开发、构建、运行、调试和卸载ArkUI-X应用。
 
 ## 示例教程
 
@@ -26,8 +22,9 @@ API参考提供了ArkUI-X支持的组件列表、接口参考文档和平台集�
 
 内容包括：
 
-- [组件参考（基于ArkTS的声明式开发范式）](reference/arkui-ts/readme.md)
-- [接口参考（ArkTS及JS API）](reference/apis/readme.md)
+- [组件参考（基于ArkTS的声明式开发范式）](reference/arkui-ts/README.md)
+- [接口参考（ArkTS及JS API）](reference/apis/README.md)
+- [接口参考（Native API）](reference/native-apis/README.md)
 - 平台集成
-  - [Android](reference/arkui-for-android/readme.md)
-  - [iOS](reference/arkui-for-ios/readme.md)
+  - [Android](reference/arkui-for-android/README.md)
+  - [iOS](reference/arkui-for-ios/README.md)

@@ -2,7 +2,7 @@
 
 ## 安全公告
 
-您可以从ArkUI-X的[安全公告和披露页面](../security-disclosure/readme.md)获取ArkUI-X产品安全公告和安全披露的信息。
+您可以从ArkUI-X的[安全公告和披露页面](../security-disclosure/README.md)获取ArkUI-X产品安全公告和安全披露的信息。
 
 ## 上报漏洞
 
