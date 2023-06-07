@@ -1,115 +1,168 @@
-# ArkUI跨平台应用工程结构
+# 1. 简介
 
-ArkUI跨平台应用目录结构，包含一套为ArkUI-X开发者提供的应用工程模板，提供构建OpenHarmony应用、Android应用、iOS应用的能力。跨平台应用工程0层结构设计如下：
+本文档配套ArkUI-X项目，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台， 让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
+
+# 2. 跨平台应用工程介绍
+
+跨平台应用工程目录结构，包含一套为ArkUI开发者提供的应用工程模板，提供构建OpenHarmony应用，HarmonyOS应用，Android应用，iOS应用的能力。
+
+## 2.1 基于DevEco的ArkUI-X应用工程目录结构
 
 ```
-ArkUI-X AppProject
-  ├── ohos              // OpenHarmony平台相关代码 0-1
+ArkUI-X应用工程目录结构
+  ├── .arkui-x
+  │   ├── android                 // Android平台相关代码
+  │   └── ios                     // iOS平台相关代码
+  ├── .hvigor
+  ├── .idea
+  ├── AppScope
+  ├── entry
+  ├── hvigor
+  ├── oh_modules
+  ├── build-profile.json5
+  ├── hvigorfile.ts
+  ├── local.properties
+  └── oh-package.json5
+```
+
+此应用目录结构设计思想是从OpenHarmony应用工程原生支持跨平台角度出发，在OpenHarmony应用工程之上叠加Android和iOS应用工程，ArkUI代码和resources资源编辑在OpenHarmony侧完成，Native代码仍在各自平台应用工程中完成。
+
+## 2.2 基于ACE Tools命令行的应用工程目录结构
+
+```
+ArkUI-X应用工程目录结构
+  ├── ohos
   │   └── entry
-  ├── android           // Android平台相关代码 0-2
+  ├── android                     // Android平台相关代码
   │   └── app
-  ├── ios               // iOS平台相关代码 0-3
+  ├── ios                         // iOS平台相关代码
   │   └── app
-  └── source            // ArkUI页面源码 0-4
+  └── source                      // ArkUI页面
       └── entry
 ```
 
-项目根目录包含：ohos、android、ios、source四个目录，分别对应OpenHarmony应用、Android应用、iOS应用，ArkUI源码模块。每个目录下的entry和app目录表示创建的模块（entry/app为默认创建的模块名），每个模块对应一个编译单元（hap/apk/app）。其中，source目录是OpenHarmony默认的结构，存放公共的基于ArkTS的声明式开发范式代码，配合上述平台的代码构建出对应平台的应用。
+应用根目录包含：ohos、android、ios、source四个目录，分别对应OpenHarmony应用，Android应用，iOS应用，ArkUI源码。每个目录下的entry和app目录表示创建的模块（entry/app为默认创建的模块），每个模块对应一个编译单元（hap/apk/app/aar/framework）。
 
-* OpenHarmony平台工程结构（0-1）
+### 2.1.1 source目录介绍
 
-```
-OpenHarmony平台代码
-  ├── .hvigor
-  ├── entry
-  │   ├── src
-  │   │   ├── main
-  │   │   │   ├── ets
-  │   │   │   ├── resources
-  │   │   │   └── config.json
-  │   │   └── ohosTest
-  │   ├── build-profile.json5
-  │   ├── hvigorfile.js
-  │   └── package.json
-  ├── node_modules
-  ├── build-profile.json5
-  ├── hvigorfile.js
-  ├── local.properties
-  └── package.json
-```
-
-* Android平台工程结构（0-2）
-
-```
-Android平台代码
-  ├── app
-  │   ├── libs
-  │   │   ├── ace_android_adapter.jar               // ArkUI跨平台适配层，在SDK中发布
-  │   │   └── arm64-v8a
-  │   │       ├── libace_android.so                 // ArkUI引擎库，在SDK中发布
-  │   │       ├── libace_napi.so                    // API接口扩展库，在SDK中发布
-  │   │       ├── libace_napi_ark.so                // NAPI Ark引擎适配层库，在SDK中发布
-  │   │       ├── libark_jsruntime.so               // Ark引擎运行时库，在SDK中发布
-  │   │       └── libxxx.so                         // 其它功能模块库，在SDK中发布
-  │   ├── src
-  │   │   ├── androidTest
-  │   │   ├── main
-  │   │   │   ├── assets                            // ArkUI编译后的JSBundle和Resources，作为资源文件存放在assets
-  │   │   │   │   ├── js
-  │   │   │   │   │   └── entry_MainAbility         // JSBundle，来自source目录ArkUI源码编译结果。
-  │   │   │   │   └── res                           // resources资源
-  │   │   │   │       ├── appres                    // 应用资源，来自source目录resources资源编译结果。
-  │   │   │   │       └── systemres                 // 系统资源
-  │   │   │   ├── java/com/example/myapp
-  │   │   │   │   ├── MyApplication.java            // 基于AceApplication扩展MyApplication
-  │   │   │   │   └── MainActivity.java             // 基于AceActivity扩展MainActivity
-  │   │   │   ├── res
-  │   │   │   └── AndroidManifest.xml
-  │   │   └── test
-  │   ├── build.gradle
-  │   └── proguard-rules.pro
-  ├── gradle/wrapper
-  ├── build.gradle
-  ├── gradle.properties
-  ├── gradlew
-  ├── gradlew.bat
-  └── settings.gradle
-```
-
-* iOS平台工程结构（0-3）
-
-```
-iOS平台代码
-  ├── myapp.xcodeproj
-  │   ├── project.xcworkspace
-  │   └── project.pbxproj
-  ├── myapp
-  │   ├── Assets.xcassets
-  │   ├── base.Iproj
-  │   ├── AppDelegate.h
-  │   ├── AppDelegate.mm              // 实例化AceViewController, 并加载JSBundle和Resources资源。
-  │   ├── Info.plist
-  │   └── main.m
-  ├── js                              // ArkUI JSBundle，来自source目录ArkUI源码编译结果。
-  │   └── entry_MainAbility
-  ├── res                             // Resources资源
-  │   ├── appres                      // 应用资源，来自source目录resources资源编译结果。
-  │   └── systemres                   // 系统资源
-  └── framework                       // ArkUI跨平台Framework动态库
-      └── libace_ios.xcframework
-```
-
-* ArkUI源码目录（0-4）
+source目录主要用于ArkUI代码编辑和资源访问，entry目录为ArkUI代码编辑区，resources目录为资源编辑区。这里，资源管理遵循OpenHarmony资源分类与访问规则，用于提升OH应用代码跨平台复用度。借助资源文件能力，开发者在应用中自定义资源，自行管理这些资源在不同的设备或配置中的表现。
 
 ```
 source
-  └── entry/src
-      ├── main
-      │   ├── ets
-      │   │   └── MainAbility
-      │   │       ├── app.ets
-      │   │       ├── manifest.json
-      │   │       └── pages
-      │   └── resources
-      └── ohosTest
-``` 
+└── entry/src
+    ├── main
+    │   ├── ets
+    │   │   ├── Application
+    │   │   │   └── MyAbilityStage.ts
+    │   │   ├── MainAbility
+    │   │   │   └── MainAbility.ts
+    │   │   └── pages
+    │   └── resources
+    │       ├── base
+    │       │   ├── element
+    │       │   ├── media
+    │       │   └── profile
+    │       │       └── main_pages.json
+    │       ├── rawfile
+    │       └── qualifier
+    └── ohosTest
+```
+
+### 2.1.2 路由配置
+
+main_pages.json文件主要用于页面路由配置，如下：
+
+```
+{
+  "src": [
+    "pages/index/index",
+    "pages/detail/detail"
+  ]
+}
+```
+
+# 4. 编译构建说明
+
+* JSBundle编译和拷贝方案
+
+ArkUI源码通过OpenHarmony应用工程的Bundle Task编译，生成的JSBundle分别拷贝到Android和iOS应用工程中，作为应用资源的一部分。由于ArkUI源码编译依赖OpenHarmony应用工程，那么Android和iOS的应用构建会依赖OpenHarmony应用工程编译生成的中间件。
+
+* 应用resources资源编译和拷贝方案
+
+ArkUI的resources资源编译，同JSBundle编译一样，也依赖OpenHarmony应用工程。编译后的resources资源，在Android和iOS平台上由原生平台的资源管理进行管理。例如：
+
+Android应用通过assets和res进行资源管理，ArkUI编译后的resources资源直接作为assets资源的一部。
+
+iOS应用通过Bundle Resources进行资源管理，ArkUI编译后的resources资源直接作为Resources资源项进行管理。
+
+* 系统资源
+
+OpenHarmony的系统资源采用分层管理，并预置到OpenHarmony系统中，应用运行时直接读取系统资源。ArkUI-X为了确保各平台渲染一致性，需要把OpenHarmony的系统资源打包Android和iOS应用中。ArkUI-X跨平台设计时，使系统资源存于ArkUI-X跨平台SDK中，在Android和iOS应用构建时打包到应用中。
+
+## 4.1 Android应用工程结构
+
+```
+ArkUI-X Android应用工程
+├── app
+│   ├── libs
+│   │   ├── arkui_android_adapter.jar            // ArkUI-X跨平台适配层，在SDK中发布
+│   │   └── arm64-v8a
+│   │       └── libarkui_android.so                 // ArkUI-X跨平台引擎库，在SDK中发布
+│   ├── src
+│   │   ├── androidTest
+│   │   ├── main
+│   │   │   ├── assets                            // ArkUI源码和OH资源编译后的JSBundle和资源文件，作为平台资源存放在assets中。
+│   │   │   │   └── arkui-x
+│   │   │   │       ├── entry                     // JSBundle&resources资源
+│   │   │   │       │   ├── ets
+│   │   │   │       │   │   ├── sourceMaps.map
+│   │   │   │       │   │   └── modules.abc
+│   │   │   │       │   ├── resources.index
+│   │   │   │       │   ├── resources
+│   │   │   │       │   └── module.json
+│   │   │   │       ├── entryTest                 // ohosTest，仅仅Debug模式构建包含。
+│   │   │   │       └── systemres                 // OpenHarmony系统资源
+│   │   │   ├── java/com/example/mayapp
+│   │   │   │   ├── MyApplication.java            // 基于StageApplication扩展MyApplication
+│   │   │   │   └── EntryMainAbilityActivity.java             // 基于StageActivity扩展EntryMainAbilityActivity
+│   │   │   ├── res
+│   │   │   └── AndroidManifest.xml
+│   │   └── test
+│   ├── build.gradle
+│   └── proguard-rules.pro
+├── gradle/wrapper
+├── build.gradle
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+└── settings.gradle
+```
+
+## 4.2 iOS应用工程结构
+
+```
+ArkUI-X iOS应用工程
+├── app.xcodeproj
+│   ├── project.xcworkspace
+│   └── project.pbxproj
+├── app
+│   ├── Assets.xcassets
+│   ├── Base.Iproj
+│   ├── AppDelegate.h
+│   ├── AppDelegate.m
+│   ├── EntryMainAbilityViewController.m
+│   ├── Info.plist
+│   └── main.m
+├── arkui-x                                   // ArkUI JSBundle和Resources
+│   ├── entry
+│   │   ├── ets
+│   │   │   ├── sourceMaps.map
+│   │   │   └── modules.abc
+│   │   ├── resources.index
+│   │   ├── resources
+│   │   └── module.json
+│   ├── entryTest                            // ohosTest，仅仅Debug模式构建包含。
+│   └── systemres                            // 系统资源
+└── frameworks                               // ArkUI跨平台framework
+    └── libace_ios.xcframework
+```
