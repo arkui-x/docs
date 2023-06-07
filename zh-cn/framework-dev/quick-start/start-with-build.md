@@ -1,32 +1,36 @@
 # ArkUI-X项目编译
 
-- 编译命令支持选项
+- 使用build.sh编译脚本进行编译，编译脚本常用选项
 
   ```shell
   --product-name    # 必须  编译的产品名称，如：arkui-cross
   --target-os       # 必须  编译的跨平台目标，如：android或ios
+  --target-cpu      # 可选  指定target侧CPU架构，如：arm或arm64
   --build-target    # 可选  指定编译目标，可以指定多个
   --gn-args         # 可选  gn参数，支持指定多个
-  --ccache          # 可选  编译使用ccache，需要本地安装ccache
+  --ninja-args      # 可选  ninja参数，如：--ninja-args=-dkeeprsp
+  --log-level       # 可选  指定log等级，如：info或debug
   --help, -h        # 可选  命令行help辅助命令
   ```
-  - 命令行辅助查询
 
-  ```shell
+- 新下载代码或更新代码时，需要下载或更新预编译工具链，命令如下
+  ```
+  ./build/prebuilts_download.sh --build-arkuix
+  ```
+- 编译命令示例
+  - 查看编译脚本支持的选项
+  ```
   ./build.sh -h
   ```
-   ![编译帮助命令](figures/build.PNG)
-
-- 示例展示
 
   - ArkUI-X项目Android平台编译命令：
 
   ```shell
-  ./build.sh --product-name arkui-cross --target-os android --ccache
+  ./build.sh --product-name arkui-cross --target-os android
   ```
 
   - ArkUI-X项目iOS平台编译命令：
 
   ```shell
-  ./build.sh --product-name arkui-cross --target-os ios --ccache
+  ./build.sh --product-name arkui-cross --target-os ios
   ```
