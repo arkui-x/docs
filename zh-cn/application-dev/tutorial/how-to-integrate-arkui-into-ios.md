@@ -4,79 +4,165 @@
 
 本教程主要讲述如何利用ArkUI-X SDK完成iOS应用开发，实现基于ArkTS的声明式开发范式在iOS平台显示。包括：
 
-* ArkUI-X SDK获取方法
-* ArkUI-X SDK内容组成
 * iOS应用工程集成ArkUI-X SDK
 * iOS应用工程集成ArkUI JSBundle实例
-
-##### 开发准备
-
-**方式一**
-
-* 通过镜像站点获取ArkUI-X SDK，适合ArkUI跨平台应用初学者。
-
-| 版本源码                             | **版本信息** | **下载站点** | **SHA256校验码** |
-| ------------------------------------ | ------------ | ------------ | ---------------- |
-| ArkUI-X SDK包 | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
-
-**方式二**
-
-* 通过ArkUI-X跨平台项目源码编译出SDK，适用于ArkUI跨平台应用高阶开发者。完成跨平台项目[代码下载](../../application-dev/quick-start/README.md)后，执行如下命令编译ArkUI-X iOS平台SDK。
-
-```
-./build.sh --product-name arkui-cross --target-os ios
-```
-
-##### SDK组成清单
-
-ArkUI跨平台iOS侧SDK提供`libace_ios.framework`和`libace_ios.xcframework`两种Framework类型；Framework文件的Header包含`Ace.h`、`AceViewController.h`、`FlutterPlugin.h`，其中`AceViewController`实现了ArkUI启动和JSBundle加载等功能。
-
-```
-ArkUI_iOS_SDK
-    ├── libace_ios.framework                 // ArkUI iOS framework
-    │   ├── Headers                          // ArkUI framework头文件
-    │   │   ├── Ace.h                          
-    │   │   ├── AceViewController.h   
-    │   │   └── FlutterPlugin.h        
-    |   ├── info.plist
-    │   ├── libace_ios                       // 二进制可执行文件
-    |   ├── libace_ios.podspec               // CocoPods配置文件
-    |   ├── LICENSE
-    │   └── Modules
-    │       └── module.modulemap            
-    └── libace_ios.xcframework/ios-arm64/libace_ios.framework    // ArkUI iOS xcframework           
-        ├── Headers                          // ArkUI framework头文件
-        │   ├── Ace.h            
-        │   ├── AceViewController.h      
-        │   └── FlutterPlugin.h            
-        ├── info.plist
-        ├── libace_ios                       // 二进制可执行文件
-        ├── libace_ios.podspec               // CocoPods配置文件
-        ├── LICENSE
-        └── Modules
-            └── module.modulemap  
-```
+* 使用ace tool和DevEco Studio IDE集成ArkUI-X SDK进行iOS应用开发
 
 ##### iOS工程集成ArkUI跨平台SDK
 
-iOS工程集成ArkUI跨平台SDK遵循iOS应用工程集成Framework规则，即将SDK中libace_ios.xcframework包拷贝到工程目录下，并引入到工程目录。
+iOS工程集成ArkUI跨平台SDK遵循iOS应用工程集成Framework规则，即将SDK中libarkui_ios.xcframework等包拷贝到工程目录下，并引入到工程目录。
 
-* AppDelegate.mm中实例化AceViewController，并加载ArkUI页面
+
+**ViewController部分**
+* EntryMainViewController.h
+```
+#ifndef EntryMainViewController_h
+#define EntryMainViewController_h
+#import <UIKit/UIKit.h>
+#import <libarkui_ios/StageViewController.h>
+@interface EntryMainViewController : StageViewController
+
+
+@end
+
+#endif /* EntryMainViewController_h */
+```
+* EntryMainViewController.m
+```
+#import "EntryMainViewController.h"
+
+@interface EntryMainViewController ()
+
+@end
+
+@implementation EntryMainViewController
+- (instancetype)initWithInstanceName:(NSString *)instanceName {
+    self = [super initWithInstanceName:instanceName];
+    if (self) {
+
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = YES;
+}
+@end
 
 ```
- #import <libace_ios/Ace.h>
+**AppDelegate部分**
+* AppDelegate.m中实例化EntryMainViewController，并加载ArkUI页面
 
- AceViewController *controller = [[AceViewController alloc] initWithVersion:(ACE_VERSION_ETS) instanceName:@"MainAbility"];
- controller.view.frame = [UIScreen mainScreen].bounds;
- [self.view addSubview:controller.view];
+```
+#import "AppDelegate.h"
+#import "EntryMainViewController.h"
+#import <libarkui_ios/StageApplication.h>
+
+#define BUNDLE_DIRECTORY @"arkui-x"
+#define BUNDLE_NAME @"com.example.newdemo"
+
+@interface AppDelegate ()
+
+@end
+
+@implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [StageApplication configModuleWithBundleDirectory:BUNDLE_DIRECTORY];
+    [StageApplication launchApplication];
+    
+    NSString *instanceName = [NSString stringWithFormat:@"%@:%@:%@",BUNDLE_NAME, @"entry", @"MainAbility"];
+    EntryMainViewController *mainView = [[EntryMainViewController alloc] initWithInstanceName:instanceName];
+    [self setNavRootVC:mainView];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    NSLog(@"appdelegate openUrl callback, url : %@", url.absoluteString); // eg: (com.entry.arkui://entry?OtherAbility)
+    
+    NSString *bundleName = url.scheme;
+    NSString *moduleName = url.host;
+    NSString *abilityName, *params;
+
+    NSURLComponents * urlComponents = [NSURLComponents componentsWithString:url.absoluteString];
+    NSArray <NSURLQueryItem *> *array = urlComponents.queryItems;
+    for (NSURLQueryItem * item in array) {
+        if ([item.name isEqualToString:@"abilityName"]) {
+            abilityName = item.value;
+        } else if ([item.name isEqualToString:@"params"]) {
+            params = item.value;
+        }
+    }
+
+    [self handleOpenUrlWithBundleName:bundleName
+                           moduleName:moduleName
+                          abilityName:abilityName
+                               params:params, nil];
+    
+    return YES;
+}
+
+- (BOOL)handleOpenUrlWithBundleName:(NSString *)bundleName
+                         moduleName:(NSString *)moduleName
+                        abilityName:(NSString *)abilityName
+                             params:(NSString *)params, ...NS_REQUIRES_NIL_TERMINATION {
+    
+    id rootVC = [[UIApplication sharedApplication].delegate window].rootViewController;
+    BOOL hasRoot = NO;
+    if ([rootVC isKindOfClass:[UINavigationController class]]) {
+        hasRoot = YES;
+    }
+    
+    id subStageVC = nil;
+    
+    if ([moduleName isEqualToString:@"entry"] && [abilityName isEqualToString:@"MainAbility"]) {
+        NSString *instanceName = [NSString stringWithFormat:@"%@:%@:%@",bundleName, moduleName, abilityName];
+        EntryMainViewController *entryOtherVC = [[EntryMainViewController alloc] initWithInstanceName:instanceName];
+        entryOtherVC.params = params;
+        subStageVC = (EntryMainViewController *)entryOtherVC;
+    } // other ViewController
+    
+    if (!subStageVC) {
+        return NO;
+    }
+    
+    if (!hasRoot) {
+        [self setNavRootVC:subStageVC];
+    } else {
+        UINavigationController *rootNav = (UINavigationController *)self.window.rootViewController;
+        [rootNav pushViewController:subStageVC animated:YES];
+    }
+    return YES;
+}
+
+- (void)setNavRootVC:(id)viewController {
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:viewController];
+    [self setNaviAppearance:navi];
+    self.window.rootViewController = navi;
+}
+
+- (void)setNaviAppearance:(UINavigationController *)navi {
+    UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
+    [appearance configureWithOpaqueBackground];
+    appearance.backgroundColor = UIColor.whiteColor;
+    navi.navigationBar.standardAppearance = appearance;
+    navi.navigationBar.scrollEdgeAppearance = navi.navigationBar.standardAppearance;
+}
+
+@end
 
 ```
 
-其中参数`version`为开发范式类型，ACE_VERSION_JS:兼容JS的类Web开发范式，ACE_VERSION_ETS:基于ArkTS的声明式开发范式；`instanceName`为ArkUI范式代码编译为JSBundle后在应用工程中存放的目录名。
+其中参数`instanceName`为ArkUI范式代码编译为JSBundle后在应用工程中存放的目录名。
 
 ##### iOS工程集成ArkUI JSBundle实例
 
-ArkUI JSBundle生成后，拷贝到iOS应用工程js目录下，比如：js/MainAbility。这里“js”目录名称是固定的，不能更改。
+ArkUI JSBundle生成后，拷贝到iOS应用工程arkui-x目录下。这里“arkui-x”目录名称是固定的，不能更改；entry为模块实例名称，可以自定义名称；entryTest为测试模块，可按照实际需求拷贝；systemres是JSBundle必须的系统资源，需从ArkUI-X SDK中拷贝。
 
 ```
 iOS应用工程
@@ -84,17 +170,21 @@ iOS应用工程
 ├── myapp
 │   ├── Assets.xcassets
 │   ├── Base.Iproj
+|   ├──EntryMainViewController.h
+|   ├──EntryMainViewController.m
 │   ├── AppDelegate.h
 │   ├── AppDelegate.mm
 │   ├── Info.plist
 │   └── main.m
-├── js
-│   └── MainAbility
-│       ├── app.js
-│       ├── manifest.json
-│       └── pages
+├── arkui-x
+│   ├── entry
+│   │   └── ets
+│   │       ├── modules.abc
+│   │       └── sourceMaps.map
+│   ├── entryTest
+|   └── systemres
 └── frameworks
-    └── libace_ios.xcframework
+    └── libarkui_ios.xcframework
 ```
 
 
@@ -116,7 +206,14 @@ XCode11之后，新建iOS工程为SceneDelegate类型工程，需删除SceneDele
 
 按照注意事项配置后，即可按照iOS应用构建流程，构建ArkUI iOS应用。
 
-
+##### 使用ace tool和DevEco Studio IDE集成ArkUI-X SDK进行iOS应用开发
+上述步骤我们可以很方便地通过ace tool或DevEco Studio IDE完成
+* ace tool
+1. ace create 命令创建一个跨平台应用工程
+2. 进入工程目录，执行ace build app命令，就会执行上述步骤。对jsbundle的生成与拷贝，以及其所依赖的动态库文件和jar包的拷贝，并且最后构建出一个iOS应用包。
+* DevEco Studio IDE
+1. 创建跨平台工程
+2. 通过执行build app选项，即可执行上述步骤，并且构建出iOS应用
 ##### 参考
 
 【1】[ArkUI跨平台应用示例](https://gitee.com/arkui-x/samples)
