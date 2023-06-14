@@ -4,26 +4,23 @@
 
 首次发布ArkUI-X 0.1.0 Beta版本，主要能力范围包括：
 
-- 基础的编译工具链，能够生成iOS/Android的SDK，编译出相应的应用并运行在目标平台上。
-- 基础的平台桥接能力，包括iOS/Android的应用加载入口，生命周期，事件处理，窗口系统等。
-- 基础的UI组件适配能力，包括常用的UI组件。
-- XTS基础设施，包括常用的UI测试。
-
-### 组件参考
-
-开发范式支持基于ArkTS的声明式开发范式。
+- 应用开发范式：支持基于ArkTS的声明式开发范式。
+- 应用开发模型：支持Stage开发模型。
+- 开发者工具：提供DevEco Studio(IDE)和ACE Tools(命令行)两种ArkUI-X应用构建工具。
+- 混合开发能力：ArkTS声明式开发范式和Stage模型支持集成在现有iOS/Android应用中，通过现有应用加载，解析和运行。
+- 跨语言调用能力：提供[FFI(Node-API)](../application-dev/quick-start/ffi-napi-introduction.md)和[平台桥接](../application-dev/quick-start/platform-bridge-introduction.md)两种机制，用于API扩展和平台插件开发。
+- 基础测试调试：支持单元/UI调试和ArkTS断点调试。
 
 ### 接口范围
 
-ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmony接口以Public接口为基础，范围为API10+，具体支持列表详见[API参考](../application-dev/reference/README.md)。
+ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmony接口以Public接口为基础，接口范围为API10<sup>+</sup>，具体支持列表详见[API参考](../application-dev/reference/README.md)。
 
 >说明：ArkUI-X 0.1.0 Beta版本为ArkUI-X项目首次发布的预览版本，除提供[ArkUI控件](../application-dev/reference/arkui-ts/README.md)和部分[@ohos接口](../application-dev/reference/apis/README.md)之外，暂不提供其它OpenHarmony接口定义的跨平台实现。
 
 ### 应用开发工具
 
-ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见](../application-dev/quick-start/start-with-ace-tools.md)。
-DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序开发工具，同时支持ArkUI-X应用创建，构建，安装，运行，调试和卸载等功能。[详情参加](../application-dev/quick-start/start-with-deveco-studio.md)
-
+- ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见](../application-dev/quick-start/start-with-ace-tools.md)。
+- DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序开发工具，同时支持ArkUI-X应用创建，构建，安装，运行，调试和卸载等功能。[详情参加](../application-dev/quick-start/start-with-deveco-studio.md)
 
 ## 配套关系
 
@@ -32,8 +29,8 @@ DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序开发工具，�
 | 目标平台    | 项目编译使用OS SDK版本              | 备注 |
 | ----------- | ----------------------------------- | ---- |
 | OpenHarmony | OpenHarmony 4.0 Release (API level 10) | NA   |
-| Android     | Quince Tart 8 (API level 26)       | NA   |
-| iOS         | iOS 10                              | NA   |
+| Android     | Quince Tart 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
+| iOS         | iOS 10<sup>+</sup>                             | NA   |
 
 >说明：Beta版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
 
@@ -61,7 +58,7 @@ DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序开发工具，�
    ```
 
 
-### 通过repo获取
+### 通过repo获取(TODO)
 
 **方式一（推荐）**
 
@@ -85,12 +82,14 @@ repo sync -c
 
 ### 从镜像站点获取
 
-**表2** 获取源码和SDK路径
+**表2** 获取源码和SDK路径(TODO)
 
 | 版本源码                                  | **版本信息** | **下载站点** | **SHA256校验码** |
 | ----------------------------------------- | ------------ | ------------ | ---------------- |
 | ArkUI-X全量代码 | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
-| ArkUI-X SDK包  | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包（Windows）  | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包（macOS）  | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包（Linux）  | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
 
 ## Samples
 
@@ -100,6 +99,6 @@ repo sync -c
 
 | 项目名称      | 简介                                                         |
 | ------------- | ------------------------------------------------------------ |
-| HelloWorld | 使用ACE Tools命令行工具生成的HellWorld应用工程示例，支持编译Android、iOS和OpenHarmony应用。 |
-| Shopping | 使用ACE Tools命令行工具生成的仿购物应用工程示例，支持编译Android、iOS和OpenHarmony应用。   |
-| HealthyDiet | 使用ACE Tools命令行工具生成的健康饮食应用工程示例，支持编译Android、iOS和OpenHarmony应用。|
+| HelloWorld | 使用ACE Tools命令行工具生成的HellWorld应用工程示例，支持Android、iOS和OpenHarmony/HarmonyOS应用构建。 |
+| Shopping | 使用ACE Tools命令行工具生成的仿购物应用工程示例，支持Android、iOS和OpenHarmony/HarmonyOS应用构建。   |
+| HealthyDiet | 使用ACE Tools命令行工具生成的健康饮食应用工程示例，支持Android、iOS和OpenHarmony/HarmonyOS应用构建。|
