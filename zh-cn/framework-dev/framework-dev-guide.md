@@ -10,11 +10,11 @@
 
 ## 框架开发
 
-统一的API扩展机制复用OpenHarmony的[NAPI机制](../application-dev/quick-start/ffi-napi-introduction.md)和ArkTS接口定义，通过提供JS->C++/Java/ObjectC互调机制，即可在Android和iOS平台上扩展JS接口和实现OpenHarmony接口定义，并且支持开发者开发三方插件。
+统一的API扩展机制复用OpenHarmony的[Node-API机制](../application-dev/quick-start/ffi-napi-introduction.md)和ArkTS接口定义，通过提供JS->C++/Java/ObjectC互调机制，即可在Android和iOS平台上扩展JS接口和实现OpenHarmony接口定义，并且支持开发者开发三方插件。
 
 ## API参考
 
-API参考仅提供ArkUI-X项目已支持的组件列表、接口列表和平台集成接口列表，可以帮助开发者快速查找到支持的指定接口的详细描述和调用方法。
+API参考提供了ArkUI-X支持的组件列表、接口参考文档和平台集成接口说明，可以帮助开发者快速查找到支持的指定接口的详细描述和调用方法。
 
 内容包括：
 
