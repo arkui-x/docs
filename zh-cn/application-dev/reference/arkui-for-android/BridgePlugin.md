@@ -1,4 +1,4 @@
-# BridgePlugin (平台通道)
+# BridgePlugin (平台桥接)
 
 本模块提供ArkUI端和Platform平台端消息通信的功能，包括数据传输、方法调用和事件调用。
 
@@ -20,14 +20,14 @@ BridgePlugin(Context context, String bridgeName, int instanceId);
 | 参数名     | 类型    | 必填 | 说明               |
 | ---------- | ------- | ---- | ------------------ |
 | context    | Context | 是   | 应用程序的上下文。 |
-| bridgeName | string  | 是   | 定义通道名称。     |
+| bridgeName | string  | 是   | 定义桥接名称。     |
 | instanceId | int     | 是   | 实例ID。     |
 
 **返回值：** 
 
 | 类型                              | 说明           |
 | --------------------------------- | -------------- |
-| BridgePlugin | 通道结果接口。 |
+| BridgePlugin | 桥接结果接口。 |
 
 **示例：** 
 
@@ -43,7 +43,7 @@ BridgeImpl bridgeImpl = new BridgeImpl(this, "Bridge", getInstanceId());
 
 public void callMethod(MethodData methodData);
 
-调用js方法。
+调用ArkUI端的方法。
 
 **参数：** 
 
@@ -74,7 +74,7 @@ bridgeImpl.callMethod(methodData);
 
 public void sendMessage(Object data);
 
-向js侧发送数据。
+向ArkUI端发送数据。
 
 **参数：** 
 
@@ -103,12 +103,12 @@ public void setMessageListener(IMessageListener messageListener);
 | --------------- | ---------------- | ---- | -------------- |
 | messageListener | IMessageListener | 是   | 信息监听接口类。 |
 
-### **IMessageListen**
+### **IMessageListener**
 
-| IMessageListen | 参数     | 参数描述 | 返回值 | 说明            |
+| IMessageListener | 参数     | 参数描述 | 返回值 | 说明            |
 | ------------------  |------------- | -------- | ---------- | -------------------- |
-| onMessage          | data: Object | 数据信息 | Object     | 等待js端发送信息。     |
-| onMessageResponse  | data: Object | 数据信息 | 无         | 等待js端发送信息应答。 |
+| onMessage          | data: Object | 数据信息。 | Object     | 等待ArkUI端发送信息。     |
+| onMessageResponse  | data: Object | 数据信息。 | 无         | 等待ArkUI端发送信息应答。 |
 
 **示例：**
 
@@ -145,11 +145,11 @@ public void setMethodResultListener(IMethodResult methodResultListener);
 
 ### IMethodResult
 
-| IMethodResult  | **参数**                                                     | 参数描述                         | 返回值 | **说明**         |
+| IMethodResult  | 参数                                                     | 参数描述                         | 返回值 | 说明         |
 | -------------- | ------------------------------------------------------------ | -------------------------------- | ------ | ---------------- |
-| onSuccess      | resultValue：Object                                          | 返回值信息                       | 无     | 调用方法返回成功。 |
-| onError        | methodName : String<br/>errorCode : int<br/>errorMessage : string | 方法名<br/>错误类型<br/>错误信息 | 无     | 调用方法返回失败。 |
-| onMethodCancel | methodName : string                                          | 方法名                           | 无     | 监听取消方法注册。 |
+| onSuccess      | resultValue：Object                                          | 返回值信息。                       | 无     | 调用方法返回成功。 |
+| onError        | methodName : String<br/>errorCode : int<br/>errorMessage : string | 方法名。<br/>错误类型。<br/>错误信息。 | 无     | 调用方法返回失败。 |
+| onMethodCancel | methodName : string                                          | 方法名。                           | 无     | 监听取消方法注册。 |
 
 ```java
 public BridgeImpl(Context context, String name, int id) {

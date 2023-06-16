@@ -1,4 +1,4 @@
-# BridgePlugin (平台通道)
+# BridgePlugin (平台桥接)
 
 本模块提供ArkUI端和Platform平台端消息通信的功能，包括数据传输、方法调用和事件调用。
 
@@ -19,14 +19,14 @@
 
 | 参数名     | 类型   | 必填 | 说明           |
 | ---------- | ------ | ---- | -------------- |
-| bridgeName | string | 是   | 定义通道名称。 |
+| bridgeName | string | 是   | 定义桥接名称。 |
 | instanceId | int    | 是   | 实例ID。   |
 
 **返回值：** 
 
 | 类型                              | 说明           |
 | --------------------------------- | -------------- |
-| BridgePlugin | 通道结果接口。 |
+| BridgePlugin | 桥接结果接口。 |
 
 **示例：** 
 
@@ -38,7 +38,7 @@ BridgePlugin * plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instan
 
 (void)callMethod:(MethodData *)method;
 
-调用js方法。
+调用ArkUI端的方法。
 
 **参数：** 
 
@@ -68,7 +68,7 @@ MethodData * method = [[MethodData alloc] initMethodWithName:@"method" parameter
 
 (void)sendMessage:(id)data;
 
-向js侧发送数据。
+向ArkUI端发送数据。
 
 **参数：** 
 
@@ -96,7 +96,7 @@ MethodData * method = [[MethodData alloc] initMethodWithName:@"method" parameter
 
 
 
-### **IMessageListen**
+### **IMessageListener**
 
 @protocol IMessageListener \<NSObject\>
 
@@ -104,10 +104,10 @@ MethodData * method = [[MethodData alloc] initMethodWithName:@"method" parameter
 
 (void)onMessageResponse:(id)data;
 
-| **IMessageListen** | **参数**  | 参数描述 | **返回值** | **说明**             |
+| IMessageListener | 参数  | 参数描述 | 返回值 | 说明             |
 | ------------------ | --------- | -------- | ---------- | -------------------- |
-| onMessage          | data : id | 数据信息 | id         | 等待Js端发送信息。     |
-| onMessageResponse  | data : id | 数据信息 | 无         | 等待Js端发送信息应答。 |
+| onMessage          | data : id | 数据信息。 | id         | 等待ArkUI端发送信息。     |
+| onMessageResponse  | data : id | 数据信息。 | 无         | 等待ArkUI端发送信息应答。 |
 
 **示例：**
 
@@ -137,7 +137,7 @@ MethodData * method = [[MethodData alloc] initMethodWithName:@"method" parameter
 
 | 参数名         | 类型 | 必填 | 说明               |
 | ------------- | ---- | ---- | ------------------ |
-| IMethodResult | id   | 是   | 方法返回监听接口类 |
+| IMethodResult | id   | 是   | 方法返回监听接口类。 |
 
 ### IMethodResult
 
@@ -149,11 +149,11 @@ MethodData * method = [[MethodData alloc] initMethodWithName:@"method" parameter
 
 (void)onMethodCancel:(NSString *)methodName;
 
-| IMethodResult  | **参数**                                                     | 参数描述                         | 返回值 | **说明**         |
+| IMethodResult  | 参数                                                     | 参数描述                         | 返回值 | 说明         |
 | -------------- | ------------------------------------------------------------ | -------------------------------- | ------ | ---------------- |
-| onSuccess      | resultValue：Object                                          | 返回值信息                       | 无     | 调用方法返回成功 |
-| onError        | methodName : NSString<br/>errorCode : int<br/>errorMessage : NSString | 方法名<br/>错误类型<br/>错误信息 | 无     | 调用方法返回失败 |
-| onMethodCancel | methodName : NSString                                        | 方法名                           | 无     | 监听取消方法注册 |
+| onSuccess      | resultValue：Object                                          | 返回值信息。                       | 无     | 调用方法返回成功。 |
+| onError        | methodName : NSString<br/>errorCode : int<br/>errorMessage : NSString | 方法名。<br/>错误类型。<br/>错误信息。 | 无     | 调用方法返回失败。 |
+| onMethodCancel | methodName : NSString                                        | 方法名。                           | 无     | 监听取消方法注册。 |
 
 ```objective-c
 - (void)onSuccess:(NSString *)methodName

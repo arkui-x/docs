@@ -1,638 +1,275 @@
-# Native API在应用工程中的使用指导
+# Android平台扩展@ohos接口
 
-OpenHarmony的应用必须用js来桥接native。需要使用[ace_napi](https://gitee.com/openharmony/arkui_napi/tree/master)仓中提供的napi接口来处理js交互。napi提供的接口名与三方Node.js一致，目前支持部分接口，符号表见仓下的该文件`libnapi.ndk.json`。
+> **说明：**
+>
+> Android平台上扩展@ohos接口，以testplugin.hello接口为例（假定@ohos.testplugin是OpenHarmony跨平台API）。
 
-## 开发流程
+## 导入模块
+```typescript
+// xxx.ets
 
-IDE中会包含使用Native API的默认工程，使用`File`->`New`->`Create Project`创建`Native C++`模板工程。创建后在`main`目录下会包含`cpp`目录，可以使用ace_napi仓下提供的napi接口进行开发。
-
-js侧通过`import`引入native侧包含处理js逻辑的so，如：`import hello from 'libhello.so'`，意为使用libhello.so的能力，native侧通过napi接口创建的js对象会给到应用js侧的`hello`对象。
-
-## 开发建议
-
-### 1. 注册建议
-
-* nm_register_func对应的函数需要加上static，防止与其他so里的符号冲突。
-* 模块注册的入口，即使用\_\_attribute\_\_((constructor))修饰的函数的函数名需要确保不与其他模块重复。
-### 2. so命名规则
-
-* 每个模块对应一个so
-* 如模块名为`hello`，则so的名字为`libhello.so`，`napi_module`中`nm_modname`字段应为`hello`，大小写与模块名保持一致，应用使用时写作：`import hello from 'libhello.so'`
-
-### 3. js对象线程限制
-
-ark引擎会对js对象线程使用进行保护，不正确使用会引起应用crash。
-
-* napi接口只能在js线程使用。
-* env与线程绑定，不能跨线程使用。native侧js对象只能在创建时的线程使用，即与线程所持有的env绑定。
-
-### 4. napi_create_async_work接口说明
-
-napi_create_async_work里有两个回调：
-
-* execute：用于异步处理业务逻辑。因为不在JS线程中，所以不允许调用napi的接口。业务逻辑的返回值可以返回到complete回调中处理。
-
-* complete：可以调用napi的接口，将execute中的返回值封装成JS对象返回。此回调在JS线程中执行。
-
-```c++
-napi_status napi_create_async_work(napi_env env,
-                                   napi_value async_resource,
-                                   napi_value async_resource_name,
-                                   napi_async_execute_callback execute,
-                                   napi_async_complete_callback complete,
-                                   void* data,
-                                   napi_async_work* result)
+import testplugin from '@ohos.testplugin';
 ```
 
-
-
-## 示例一 storage 模块——同步异步接口封装
-
-### 模块简介
-
-本例通过实现 `storage` 模块展示了同步和异步方法的封装。`storage ` 模块实现了数据的保存、获取、删除、清除功能。
-
-### 接口声明
+## 接口
+| 名称 | 参数 | 返回类型 | 描述 |
+| --- | --- | --- | --- |
+| hello | void | void | 在Android侧打印日志"hello from java" |
 
 ```typescript
-import { AsyncCallback } from './basic';
-declare namespace storage {
-  function get(key: string, callback: AsyncCallback<string>): void;
-  function get(key: string, defaultValue: string, callback: AsyncCallback<string>): void;
-  function get(key: string, defaultValue?: string): Promise<string>;
-  function set(key: string, value: string, callback: AsyncCallback<string>): void;
-  function remove(key: string, callback: AsyncCallback<void>): void;
-  function clear(callback: AsyncCallback<void>): void;
-  function getSync(key: string, defaultValue?: string): string;
-  function setSync(key: string, value: string): void;
-  function removeSync(key: string): void;
-  function clearClear(): void;
-}
-export default storage;
+// xxx.ets
+
+testplugin.hello();
 ```
 
+## 步骤
+为了调用Android Java API，本质是要实现JS调用Java的能力。跨平台推荐JS -> C/C++ -> Java的调用路径，实现JS调用Android Java API。即在Android侧实现Java接口，再通过JNI机制注册Java模块；通过NAPI机制实现C/C++模块注册，供应用侧JS调用。
 
+### 一、Android侧实现hello方法
 
-### 具体实现
+```Java
+// plugins/test_plugin/android/java/src/TestPlugin.java
 
-完整代码参见仓下路径：[OpenHarmony/arkui_napi](https://gitee.com/openharmony/arkui_napi/tree/master)仓库`sample/native_module_storage/`
+package ohos.ace.plugin.testplugin;
 
-#### 模块注册
+import android.content.Context;
+import android.util.Log;
 
-如下，注册了4个同步接口（`getSync`、`setSync`、`removeSync`、`clearSync`）、4个异步接口（`get`、`set`、`remove`、`clear`）。
+public class TestPlugin {
+    private static final String LOG_TAG = "TestPlugin";
 
-```c++
-/***********************************************
- * Module export and register
- ***********************************************/
-static napi_value StorgeExport(napi_env env, napi_value exports)
-{
-    napi_property_descriptor desc[] = {
-        DECLARE_NAPI_FUNCTION("get", JSStorageGet),
-        DECLARE_NAPI_FUNCTION("set", JSStorageSet),
-        DECLARE_NAPI_FUNCTION("remove", JSStorageDelete),
-        DECLARE_NAPI_FUNCTION("clear", JSStorageClear),
-
-        DECLARE_NAPI_FUNCTION("getSync", JSStorageGetSync),
-        DECLARE_NAPI_FUNCTION("setSync", JSStorageSetSync),
-        DECLARE_NAPI_FUNCTION("deleteSync", JSStorageDeleteSync),
-        DECLARE_NAPI_FUNCTION("clearSync", JSStorageClearSync),
-    };
-    NAPI_CALL(env, napi_define_properties(env, exports, sizeof(desc) / sizeof(desc[0]), desc));
-    return exports;
-}
-
-// storage module
-static napi_module storage_module = {.nm_version = 1,
-                                     .nm_flags = 0,
-                                     .nm_filename = nullptr,
-                                     .nm_register_func = StorgeExport,
-                                     .nm_modname = "storage",
-                                     .nm_priv = ((void*)0),
-                                     .reserved = {0}};
-
-// storage module register
-extern "C" __attribute__((constructor)) void StorageRegister()
-{
-    napi_module_register(&storage_module);
-}
-```
-
-#### getSync 函数实现
-
-如上注册时所写，`getSync` 对应的函数是 `JSStorageGetSync` 。从 `gKeyValueStorage` 中获取数据后，创建一个字符串对象并返回。
-
-```c
-static napi_value JSStorageGetSync(napi_env env, napi_callback_info info)
-{
-    GET_PARAMS(env, info, 2);
-    NAPI_ASSERT(env, argc >= 1, "requires 1 parameter");
-    char key[32] = {0};
-    size_t keyLen = 0;
-    char value[128] = {0};
-    size_t valueLen = 0;
-
-    // 参数解析
-    for (size_t i = 0; i < argc; i++) {
-        napi_valuetype valueType;
-        napi_typeof(env, argv[i], &valueType);
-
-        if (i == 0 && valueType == napi_string) {
-            napi_get_value_string_utf8(env, argv[i], key, 31, &keyLen);
-        } else if (i == 1 && valueType == napi_string) {
-            napi_get_value_string_utf8(env, argv[i], value, 127, &valueLen);
-            break;
-        } else {
-            NAPI_ASSERT(env, false, "type mismatch");
-        }
+    // 插件构造函数，供插件注册模块调用
+    public TestPlugin(Context context) {
+        // 调用注册插件的初始化方法
+        nativeInit();
     }
 
-    // 获取数据的业务逻辑，这里简单地从一个全局变量中获取
-    auto itr = gKeyValueStorage.find(key);
-    napi_value result = nullptr;
-    if (itr != gKeyValueStorage.end()) {
-        // 获取到数据后创建一个string类型的JS对象
-        napi_create_string_utf8(env, itr->second.c_str(), itr->second.length(), &result);
-    } else if (valueLen > 0) {
-        // 没有获取到数据使用默认值创建JS对象
-        napi_create_string_utf8(env, value, valueLen, &result);
-    } else {
-        NAPI_ASSERT(env, false, "key does not exist");
-    }
-    // 返回结果
-    return result;
-}
-```
-
-#### get 函数实现
-
-如上注册时所写，`get`对应的函数式`JSStorageGet`。
-
-```c
-static napi_value JSStorageGet(napi_env env, napi_callback_info info)
-{
-    GET_PARAMS(env, info, 3);
-    NAPI_ASSERT(env, argc >= 1, "requires 1 parameter");
-
-    // StorageAsyncContext是自己定义的一个类，用于保存执行过程中的数据
-    StorageAsyncContext* asyncContext = new StorageAsyncContext();
-
-    asyncContext->env = env;
-
-    // 获取参数
-    for (size_t i = 0; i < argc; i++) {
-        napi_valuetype valueType;
-        napi_typeof(env, argv[i], &valueType);
-
-        if (i == 0 && valueType == napi_string) {
-            napi_get_value_string_utf8(env, argv[i], asyncContext->key, 31, &asyncContext->keyLen);
-        } else if (i == 1 && valueType == napi_string) {
-            napi_get_value_string_utf8(env, argv[i], asyncContext->value, 127, &asyncContext->valueLen);
-        } else if (i == 1 && valueType == napi_function) {
-            napi_create_reference(env, argv[i], 1, &asyncContext->callbackRef);
-            break;
-        } else if (i == 2 && valueType == napi_function) {
-            napi_create_reference(env, argv[i], 1, &asyncContext->callbackRef);
-        } else {
-            NAPI_ASSERT(env, false, "type mismatch");
-        }
+    // 实现hello模块
+    public void hello() {
+        Log.i(LOG_TAG, "TestPlugin: hello from java");
     }
 
-    napi_value result = nullptr;
-
-    // 根据参数判断开发者使用的是promise还是callback
-    if (asyncContext->callbackRef == nullptr) {
-        // 创建promise
-        napi_create_promise(env, &asyncContext->deferred, &result);
-    } else {
-        napi_get_undefined(env, &result);
-    }
-
-    napi_value resource = nullptr;
-    napi_create_string_utf8(env, "JSStorageGet", NAPI_AUTO_LENGTH, &resource);
-
-    napi_create_async_work(
-        env, nullptr, resource,
-        // 回调1：此回调由napi异步执行，里面就是需要异步执行的业务逻辑。由于是异步线程执行，所以不要在此通过napi接口操作JS对象。
-        [](napi_env env, void* data) {
-            StorageAsyncContext* asyncContext = (StorageAsyncContext*)data;
-            auto itr = gKeyValueStorage.find(asyncContext->key);
-            if (itr != gKeyValueStorage.end()) {
-                strncpy_s(asyncContext->value, 127, itr->second.c_str(), itr->second.length());
-                asyncContext->status = 0;
-            } else {
-                asyncContext->status = 1;
-            }
-        },
-        // 回调2：此回调在上述异步回调执行完后执行，此时回到了JS线程来回调开发者传入的回调
-        [](napi_env env, napi_status status, void* data) {
-            StorageAsyncContext* asyncContext = (StorageAsyncContext*)data;
-            napi_value result[2] = {0};
-            if (!asyncContext->status) {
-                napi_get_undefined(env, &result[0]);
-                napi_create_string_utf8(env, asyncContext->value, strlen(asyncContext->value), &result[1]);
-            } else {
-                napi_value message = nullptr;
-                napi_create_string_utf8(env, "key does not exist", NAPI_AUTO_LENGTH, &message);
-                napi_create_error(env, nullptr, message, &result[0]);
-                napi_get_undefined(env, &result[1]);
-            }
-            if (asyncContext->deferred) {
-                // 如果走的是promise，那么判断回调1的结果
-                if (!asyncContext->status) {
-                    // 回调1执行成功（status为1）时触发，也就是触发promise里then里面的回调
-                    napi_resolve_deferred(env, asyncContext->deferred, result[1]);
-                } else {
-                    // 回调1执行失败（status为0）时触发，也就是触发promise里catch里面的回调
-                    napi_reject_deferred(env, asyncContext->deferred, result[0]);
-                }
-            } else {
-                // 如果走的是callback，则通过napi_call_function调用callback回调返回结果
-                napi_value callback = nullptr;
-                napi_value returnVal;
-                napi_get_reference_value(env, asyncContext->callbackRef, &callback);
-                napi_call_function(env, nullptr, callback, 2, result, &returnVal);
-                napi_delete_reference(env, asyncContext->callbackRef);
-            }
-            napi_delete_async_work(env, asyncContext->work);
-            delete asyncContext;
-        },
-        (void*)asyncContext, &asyncContext->work);
-    napi_queue_async_work(env, asyncContext->work);
-
-    return result;
+    // 注册插件的初始化方法，供插件构造函数调用
+    protected native void nativeInit();
 }
 ```
 
-### JS Sample Code
+### 二、通过JNI调用Java hello方法
 
-```js
-import storage from 'libstorage.so';
+#### 1、JNI（Java Native Interface）允许Java代码和C/C++代码交互，通过在C/C++侧注册Java模块，实现C/C++调用Java。
 
-export default {
-  testGetSync() {
-  	const name = storage.getSync('name');
-    console.log('name is ' + name);
-  },
-  testGet() {
-    storage.get('name')
-    .then(date => {
-    	console.log('name is ' + data);
-    })
-    .catch(error => {
-    	console.log('error: ' + error);
-    });
-  }
+```C++
+// plugins/test_plugin/android/java/jni/test_plugin_jni.cpp
+
+static const JNINativeMethod METHODS[] = {
+    { "nativeInit", "()V", reinterpret_cast<void*>(TestPluginJni::NativeInit) },
+};
+
+struct {
+    jmethodID hello;
+    jobject globalRef;
+} g_pluginClass;
+
+bool TestPluginJni::Register(void* env) {
+    auto* jniEnv = static_cast<JNIEnv*>(env);
+    jclass cls = jniEnv->FindClass("ohos/ace/plugin/testplugin/TestPlugin");
+
+    // 注册nativeInit函数
+    return jniEnv->RegisterNatives(cls, METHODS, sizeof(METHODS) / sizeof(METHODS[0]));
 }
-```
 
+// Called by Java
+void TestPluginJni::NativeInit(JNIEnv* env, jobject jobj) {
+    jclass cls = env->GetObjectClass(jobj);
 
-
-## 示例二 NetServer 模块——native与js对象绑定
-
-### 模块简介
-
-本例展示了`on/off/once`订阅方法的实现，同时也包含了 C++ 与 JS 对象通过 wrap 接口的绑定。NetServer 模块实现了一个网络服务。
-
-### 接口声明
-
-```typescript
-export class NetServer {
-  function start(port: number): void;
-  function stop(): void;
-  function on('start' | 'stop', callback: Function): void;
-  function once('start' | 'stop', callback: Function): void;
-  function off('start' | 'stop', callback: Function): void;
+    // 获取hello方法的Method ID
+    g_pluginClass.hello = env->GetMethodID(cls, "hello", "()V");
 }
-```
 
-### 具体实现
-
-完整代码参见：[OpenHarmony/arkui_napi](https://gitee.com/openharmony/arkui_napi/tree/master)仓库`sample/native_module_netserver/`
-
-#### 模块注册
-
-```c
-static napi_value NetServer::Export(napi_env env, napi_value exports)
+// Called by C++
+void TestPluginJni::Hello()
 {
-    const char className[] = "NetServer";
-    napi_property_descriptor properties[] = {
-        DECLARE_NAPI_FUNCTION("start", JS_Start),
-        DECLARE_NAPI_FUNCTION("stop", JS_Stop),
-        DECLARE_NAPI_FUNCTION("on", JS_On),
-        DECLARE_NAPI_FUNCTION("once", JS_Once),
-        DECLARE_NAPI_FUNCTION("off", JS_Off),
-    };
-    napi_value netServerClass = nullptr;
+    auto env = OH_Plugin_GetJniEnv();
 
-    napi_define_class(env, className, sizeof(className), JS_Constructor, nullptr, countof(properties), properties,
-                      &netServerClass);
-
-    napi_set_named_property(env, exports, "NetServer", netServerClass);
-
-    return exports;
+    // 通过JNI调用Java hello方法
+    env->CallVoidMethod(g_pluginClass.globalRef, g_pluginClass.hello);
 }
 ```
 
-#### 在构造函数中绑定 C++ 与 JS 对象
+#### 2、对JNI方法进行封装。
 
-```c
-napi_value NetServer::JS_Constructor(napi_env env, napi_callback_info cbinfo)
+```C++
+// plugins/test_plugin/android/java/jni/test_plugin_impl.cpp
+
+// 定义了插件注册常用的接口
+#include "plugin_utils.h"
+
+// RunTaskOnPlatform是框架提供的接口，将JNI方法抛到Platform线程异步执行
+void TestPluginImpl::Hello()
 {
-    napi_value thisVar = nullptr;
-    void* data = nullptr;
-    napi_get_cb_info(env, cbinfo, nullptr, nullptr, &thisVar, &data);
-
-    // C++ Native对象，准备与JS对象映射在一起
-    NetServer* netServer = new NetServer(env, thisVar);
-
-    // 使用napi_wrap将netServer与thisVar（即当前创建的这个JS对象）做绑定
-    napi_wrap(
-        env, thisVar, netServer,
-        // JS对象由引擎自动回收释放，当JS对象释放时触发该回调，在改回调中释放netServer
-        [](napi_env env, void* data, void* hint) {
-            printf("NetServer::Destructor\n");
-            NetServer* netServer = (NetServer*)data;
-            delete netServer;
-        },
-        nullptr, nullptr);
-
-    return thisVar;
+    PluginUtilsInner::RunTaskOnPlatform([]() { TestPluginJni::Hello(); });
 }
 ```
 
-#### 从 JS 对象中取出 C++ 对象
+### 三、通过插件机制注册Java方法，通过NAPI机制暴露JS hello方法
 
-```c
-napi_value NetServer::JS_Start(napi_env env, napi_callback_info cbinfo)
+#### 1、实现testplugin.hello对应的C/C++模块。
+
+```C++
+// plugins/test_plugin/js_test_plugin.cpp
+static napi_value JSTestPluginHello(napi_env env, napi_callback_info info)
 {
-    size_t argc = 1;
-    napi_value argv[1] = {0};
-    napi_value thisVar = nullptr;
-    void* data = nullptr;
-    napi_get_cb_info(env, cbinfo, &argc, argv, &thisVar, &data);
+    // 创建TestPlugin实例
+    auto plugin = TestPlugin::Create();
 
-    NetServer* netServer = nullptr;
-    // 通过napi_unwrap从thisVar中取出C++对象
-    napi_unwrap(env, thisVar, (void**)&netServer);
-
-    NAPI_ASSERT(env, argc >= 1, "requires 1 parameter");
-
-    napi_valuetype valueType;
-    napi_typeof(env, argv[0], &valueType);
-    NAPI_ASSERT(env, valueType == napi_number, "type mismatch for parameter 1");
-
-    int32_t port = 0;
-    napi_get_value_int32(env, argv[0], &port);
-
-    // 开启服务
-    netServer->Start(port);
-
-    napi_value result = nullptr;
-    napi_get_undefined(env, &result);
-    return result;
+    // 调用C++接口，Hello函数最终会调用TestPluginJni::Hello
+    plugin->Hello();
+    return nullptr;
 }
-```
 
-`netServer->Start`后回调通过`on`注册的`start`事件。
+// plugins/test_plugin/test_plugin.h
+class TestPlugin {
+public:
+    TestPlugin() = default;
+    virtual ~TestPlugin() = default;
 
-```c
-int NetServer::Start(int port)
+    static std::unique_ptr<TestPlugin> Create();
+
+    virtual void Hello() = 0;
+};
+
+// plugins/test_plugin/android/java/jni/test_plugin_impl.cpp
+std::unique_ptr<TestPlugin> TestPlugin::Create()
 {
-    printf("NetServer::Start thread_id: %ld \n", uv_thread_self());
-
-    struct sockaddr_in addr;
-    int r;
-
-    uv_ip4_addr("0.0.0.0", port, &addr);
-
-    r = uv_tcp_init(loop_, &tcpServer_);
-    if (r) {
-        fprintf(stderr, "Socket creation error\n");
-        return 1;
-    }
-
-    r = uv_tcp_bind(&tcpServer_, (const struct sockaddr*)&addr, 0);
-    if (r) {
-        fprintf(stderr, "Bind error\n");
-        return 1;
-    }
-
-    r = uv_listen((uv_stream_t*)&tcpServer_, SOMAXCONN, OnConnection);
-    if (r) {
-        fprintf(stderr, "Listen error %s\n", uv_err_name(r));
-        return 1;
-    }
-
-    // 服务启动后触发“start”事件
-    Emit("start", nullptr);
-
-    return 0;
+    return std::make_unique<TestPluginImpl>();
 }
 ```
+#### 2、实现模块导出入口函数
 
-#### 注册或释放（on/off/once）事件，以 on 为例
-
-```c
-napi_value NetServer::JS_On(napi_env env, napi_callback_info cbinfo)
-{
-    size_t argc = 2;
-    napi_value argv[2] = {0};
-    napi_value thisVar = 0;
-    void* data = nullptr;
-    napi_get_cb_info(env, cbinfo, &argc, argv, &thisVar, &data);
-
-    NetServer* netServer = nullptr;
-    // 通过napi_unwrap取出NetServer指针
-    napi_unwrap(env, thisVar, (void**)&netServer);
-
-    NAPI_ASSERT(env, argc >= 2, "requires 2 parameter");
-
-    // 参数类型校验
-    napi_valuetype eventValueType;
-    napi_typeof(env, argv[0], &eventValueType);
-    NAPI_ASSERT(env, eventValueType == napi_string, "type mismatch for parameter 1");
-
-    napi_valuetype eventHandleType;
-    napi_typeof(env, argv[1], &eventHandleType);
-    NAPI_ASSERT(env, eventHandleType == napi_function, "type mismatch for parameter 2");
-
-    char type[64] = {0};
-    size_t typeLen = 0;
-
-    napi_get_value_string_utf8(env, argv[0], type, 63, &typeLen);
-
-    // 注册事件handler
-    netServer->On((const char*)type, argv[1]);
-
-    napi_value result = nullptr;
-    napi_get_undefined(env, &result);
-    return result;
-}
-```
-
-### JS Sample Code
-
-```javascript
-import { NetServer } from 'libnetserver.so';
-
-export default {
-  testNetServer() {
-  	var netServer = new NetServer();
-  	netServer.on('start', (event) => {});
-  	netServer.start(1000); // 端口号1000, start完成后回调上面注册的 “start” 回调
-  }
-}
-```
-
-
-
-## 示例三 在非JS线程中回调JS接口
-
-### 模块简介
-
-本模块介绍如何在非JS线程中回调JS应用的回调函数。例如JS应用中注册了某个sensor的监听，这个sensor的数据是由一个SA服务来上报的，当SA通过IPC调到客户端时，此时的执行线程是一个IPC通信线程，与应用的JS线程是两个不同的线程。这时就需要将执行JS回调的任务抛到JS线程中才能执行，否则会出现崩溃。
-
-### 具体实现
-
-完整代码参见：[OpenHarmony/arkui_napi](https://gitee.com/openharmony/arkui_napi/tree/master)仓库`sample/native_module_callback/`
-
-#### 模块注册
-
-如下，注册了1个接口`test`，会传入一个参数，类型为包含一个参数的函数。
-
-```c++
-/***********************************************
- * Module export and register
- ***********************************************/
-static napi_value CallbackExport(napi_env env, napi_value exports)
+```C++
+// plugins/test_plugin/js_test_plugin.cpp
+static napi_value TestPluginExport(napi_env env, napi_value exports)
 {
     static napi_property_descriptor desc[] = {
-        DECLARE_NAPI_FUNCTION("test", JSTest)
+        DECLARE_NAPI_FUNCTION("hello", JSTestPluginHello),
     };
     NAPI_CALL(env, napi_define_properties(env, exports, sizeof(desc) / sizeof(desc[0]), desc));
     return exports;
 }
+```
 
-// callback module define
-static napi_module callbackModule = {
+#### 3、实现插件JNI注册函数
+
+```C++
+// plugins/test_plugin/js_test_plugin.cpp
+
+// ANDROID_PLATFORM是针对Android平台特有的宏
+#ifdef ANDROID_PLATFORM
+static void TestPluginJniRegister()
+{
+    // OH_Plugin_RegisterPlugin是框架提供的接口，实现插件JNI环境的注册
+    OH_Plugin_RegisterJavaPlugin(&TestPluginJni::Register, "ohos.ace.plugin.testplugin.TestPlugin");
+}
+#endif
+```
+
+#### 4、注册模块
+
+```C++
+// plugins/test_plugin/js_test_plugin.cpp
+
+static napi_module testPluginModule = {
     .nm_version = 1,
     .nm_flags = 0,
     .nm_filename = nullptr,
-    .nm_register_func = CallbackExport,
-    .nm_modname = "callback",
+    .nm_register_func = TestPluginExport,
+    .nm_modname = "testPlugin",
     .nm_priv = ((void*)0),
     .reserved = { 0 },
 };
 
-// callback module register
-extern "C" __attribute__((constructor)) void CallbackTestRegister()
+extern "C" __attribute__((constructor)) void TestPluginRegister()
 {
-    napi_module_register(&callbackModule);
+    // 注册testPlugin模块，供JS调用
+    napi_module_register(&testPluginModule);
+#ifdef ANDROID_PLATFORM
+    // JNI插件注册函数需要在Platform线程运行
+    OH_Plugin_RunAsyncTask(&TestPluginJniRegister, OH_PLUGIN_PLATFORM_THREAD);
+#endif
 }
 ```
 
-#### 获取env中的loop，抛任务回JS线程
+### 附：GN配置
 
-```c++
-#include <thread>
+#### 1、增加模块
 
-#include "napi/native_api.h"
-#include "napi/native_node_api.h"
+```C++
+// plugins/plugin_lib.gni
+common_plugin_libs = [
+  "test_plugin",
+]
+```
 
-#include "uv.h"
+#### 2、编译js_test_plugin模块
 
-struct CallbackContext {
-    napi_env env = nullptr;
-    napi_ref callbackRef = nullptr;
-    int retData = 0;
-};
+```C++
+// plugins/test_plugin/BUILD.gn
+  ohos_source_set(target_name) {
+    defines += invoker.defines
+    cflags_cc += invoker.cflags_cc
 
-void callbackTest(CallbackContext* context)
-{
-    uv_loop_s* loop = nullptr;
-    // 此处的env需要在注册JS回调时保存下来。从env中获取对应的JS线程的loop。
-    napi_get_uv_event_loop(context->env, &loop);
-    
-    // 创建uv_work_t用于传递私有数据，注意回调完成后需要释放内存,此处省略生成回传数据的逻辑，传回int类型1。
-    uv_work_t* work = new uv_work_t;
-    context->retData = 1;
-    work->data = (void*)context;
-    
-    // 调用libuv接口抛JS任务到loop中执行。
-    uv_queue_work(
-        loop,
-        work,
-        // 此回调在另一个普通线程中执行，用于处理异步任务，回调执行完后执行下面的回调。本场景下该回调不需要执行任务。
-        [](uv_work_t* work) {},
-        // 此回调会在env对应的JS线程中执行。
-        [](uv_work_t* work, int status) {
-            CallbackContext* context = (CallbackContext*)work->data;
-            napi_handle_scope scope = nullptr;
-            // 打开handle scope用于管理napi_value的生命周期，否则会内存泄露。
-            napi_open_handle_scope(context->env, &scope);
-            if (scope == nullptr) {
-                return;
-            }
+    sources = [ "js_test_plugin.cpp" ]
 
-            // 调用napi。
-            napi_value callback = nullptr;
-            napi_get_reference_value(context->env, context->callbackRef, &callback);
-            napi_value retArg;
-            napi_create_int32(context->env, context->retData, &retArg);
-            napi_value ret;
-            napi_call_function(context->env, nullptr, callback, 1, &retArg, &ret);
-            napi_delete_reference(context->env, context->callbackRef);
+    deps = [
+      "//plugins/interfaces/native:ace_plugin_util_${platform}",
+      "//plugins/libs/napi:napi_${target_os}",
+    ]
 
-            // 关闭handle scope释放napi_value。
-            napi_close_handle_scope(context->env, scope);
-
-            // 释放work指针。
-            if (work != nullptr) {
-                delete work;
-            }
-
-            delete context;
-        }
-    );
-}
-
-static napi_value JSTest(napi_env env, napi_callback_info info)
-{
-    size_t argc = 1;
-    napi_value argv[1] = { 0 };
-    napi_value thisVar = nullptr;
-    void* data = nullptr;
-    napi_get_cb_info(env, info, &argc, argv, &thisVar, &data);
-
-    // 获取第一个入参，即需要后续触发的回调函数
-    napi_valuetype valueType = napi_undefined;
-    napi_typeof(env, argv[0], &valueType);
-    if (valueType != napi_function) {
-        return nullptr;
+    if (platform == "android") {
+      deps += [ "android/java:test_plugin_android_jni" ]
     }
-    // 存下env与回调函数，用于传递
-    auto asyncContext = new CallbackContext();
-    asyncContext->env = env;
-    napi_create_reference(env, argv[0], 1, &asyncContext->callbackRef);
-    // 模拟抛到非js线程执行逻辑
-    std::thread testThread(callbackTest, asyncContext);
-    testThread.detach();
 
-    return nullptr;
-}
+    subsystem_name = "plugins"
+    part_name = "test_plugin"
+  }
 ```
 
-### JS Sample Code
+#### 3、编译Android平台特有代码
 
-```js
-import callback from 'libcallback.so';
+```C++
+// plugins/test_plugin/android/java/BUILD.gn
 
-export default {
-  testcallback() {
-  	callback.test((data) => {
-      console.error('test result = ' + data)
-    })
-  }
+import("//build/ohos.gni")
+
+java_library("test_plugin_android_java") {
+  java_files = [ "src/TestPlugin.java" ]
+  subsystem_name = "plugins"
+  part_name = "test_plugin"
+}
+
+// 编译jar包
+ohos_combine_jars("test_plugin_java") {
+  deps = [ ":test_plugin_android_java" ]
+
+  subsystem_name = "plugins"
+  part_name = "test_plugin"
+  jar_path = "${root_out_dir}/plugins/test_plugin/ace_test_plugin_android.jar"
+}
+
+ohos_source_set("test_plugin_android_jni") {
+  sources = [
+    "jni/test_plugin_impl.cpp",
+    "jni/test_plugin_jni.cpp",
+  ]
+
+  defines = [ "ANDROID_PLATFORM" ]
+
+  deps = [
+    ":test_plugin_java",
+    "//plugins/interfaces/native:ace_plugin_util_android",
+  ]
+
+  subsystem_name = "plugins"
+  part_name = "test_plugin"
 }
 ```

@@ -35,16 +35,16 @@
 
 - [将ArkUI-X添加到现有Android应用](./tutorial/how-to-integrate-arkui-into-android.md)
 - [Node-API开发指南](./tutorial/how-to-use-napi-on-android.md)
-- [API扩展指南](./tutorial/how-to-explore-native-interface-on-android.md)
-- [插件开发指南](./tutorial/how-to-use-bridge-on-android.md)
+- [平台接口扩展指南](./tutorial/how-to-explore-native-interface-on-android.md)
+- [平台桥接开发指南](./tutorial/how-to-use-bridge-on-android.md)
 - [Module开发指南](./tutorial/how-to-use-library-on-android.md)
 
 #### iOS平台开发
 
 - [将ArkUI-X添加到现有iOS应用](./tutorial/how-to-integrate-arkui-into-ios.md)
 - [Node-API开发指南](./tutorial/how-to-use-napi-on-ios.md)
-- [API扩展指南](./tutorial/how-to-explore-native-interface-on-ios.md)
-- [插件开发指南](./tutorial/how-to-use-bridge-on-ios.md)
+- [平台接口扩展指南](./tutorial/how-to-explore-native-interface-on-ios.md)
+- [平台桥接开发指南](./tutorial/how-to-use-bridge-on-ios.md)
 - [Module开发指南](./tutorial/how-to-use-library-on-ios.md)
 
 ### 开发工具
