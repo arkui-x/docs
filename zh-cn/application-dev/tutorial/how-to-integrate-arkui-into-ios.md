@@ -170,8 +170,8 @@ iOS应用工程
 ├── myapp
 │   ├── Assets.xcassets
 │   ├── Base.Iproj
-|   ├──EntryMainViewController.h
-|   ├──EntryMainViewController.m
+|   ├── EntryMainViewController.h
+|   ├── EntryMainViewController.m
 │   ├── AppDelegate.h
 │   ├── AppDelegate.mm
 │   ├── Info.plist

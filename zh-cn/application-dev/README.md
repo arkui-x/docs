@@ -18,6 +18,7 @@
 ### 开发基础知识
 
 - [应用工程结构介绍](quick-start/package-structure-guide.md)
+- [ArkUI-X SDK目录结构介绍](quick-start/sdk-structure-guide.md)
 - [资源分类与访问](quick-start/resource-categories-and-access.md)
 - Ability开发说明
   - [Android平台](quick-start/start-with-ability-on-android.md)
@@ -25,6 +26,8 @@
 - 跨语言调用说明
   - [平台桥接(@arkui-x.bridge)](quick-start/platform-bridge-introduction.md)
   - [FFI能力(Node-API)](quick-start/ffi-napi-introduction.md)
+- 一次开发多平台部署
+  - [条件编译](quick-start/conditional-compile-introduction.md)
 
 ### 开发指南
 

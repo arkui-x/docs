@@ -8,9 +8,10 @@
 
 [快速开始](README.md#快速开始)可以帮助开发者快速了解跨平台应用开发的基础流程，主要包含跨平台应用快速入门，开发基础知识，开发指南以及开发调试工具。开发的基础知识包含了应用工程结构介绍，资源分类与访问和跨语言调用等内容。
 
-## 工具
+## 开发者工具
 
-[ACE Tools](quick-start/start-with-ace-tools.md)是一套跨平台命令行工具(Command Line Interface)，用于开发、构建、运行、调试和卸载ArkUI-X应用。
+- ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见](quick-start/start-with-ace-tools.md)。
+- DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序开发工具，同时支持ArkUI-X应用创建，构建，安装，运行，调试和卸载等功能。[详情参加](quick-start/start-with-deveco-studio.md)
 
 ## 示例教程
 
