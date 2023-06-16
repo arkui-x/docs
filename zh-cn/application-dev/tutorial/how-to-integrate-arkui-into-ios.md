@@ -1,21 +1,21 @@
-## iOS平台构建ArkUI应用
+# iOS平台构建ArkUI应用
 
-#### 总览
+## 总览
 
 本教程主要讲述如何利用ArkUI-X SDK完成iOS应用开发，实现基于ArkTS的声明式开发范式在iOS平台显示。包括：
 
 * iOS应用工程集成ArkUI-X SDK
 * iOS应用工程集成ArkUI JSBundle实例
-* 使用ace tool和DevEco Studio IDE集成ArkUI-X SDK进行iOS应用开发
+* 使用ace tool和DevEco Studio集成ArkUI-X SDK进行iOS应用开发
 
-##### iOS工程集成ArkUI跨平台SDK
+### iOS工程集成ArkUI跨平台SDK
 
 iOS工程集成ArkUI跨平台SDK遵循iOS应用工程集成Framework规则，即将SDK中libarkui_ios.xcframework等包拷贝到工程目录下，并引入到工程目录。
 
 
 **ViewController部分**
 * EntryMainViewController.h
-```
+``` objective-c
 #ifndef EntryMainViewController_h
 #define EntryMainViewController_h
 #import <UIKit/UIKit.h>
@@ -28,7 +28,7 @@ iOS工程集成ArkUI跨平台SDK遵循iOS应用工程集成Framework规则，即
 #endif /* EntryMainViewController_h */
 ```
 * EntryMainViewController.m
-```
+``` objective-c
 #import "EntryMainViewController.h"
 
 @interface EntryMainViewController ()
@@ -55,7 +55,7 @@ iOS工程集成ArkUI跨平台SDK遵循iOS应用工程集成Framework规则，即
 **AppDelegate部分**
 * AppDelegate.m中实例化EntryMainViewController，并加载ArkUI页面
 
-```
+```objective-c
 #import "AppDelegate.h"
 #import "EntryMainViewController.h"
 #import <libarkui_ios/StageApplication.h>
@@ -160,7 +160,7 @@ iOS工程集成ArkUI跨平台SDK遵循iOS应用工程集成Framework规则，即
 
 其中参数`instanceName`为ArkUI范式代码编译为JSBundle后在应用工程中存放的目录名。
 
-##### iOS工程集成ArkUI JSBundle实例
+### iOS工程集成ArkUI JSBundle实例
 
 ArkUI JSBundle生成后，拷贝到iOS应用工程arkui-x目录下。这里“arkui-x”目录名称是固定的，不能更改；entry为模块实例名称，可以自定义名称；entryTest为测试模块，可按照实际需求拷贝；systemres是JSBundle必须的系统资源，需从ArkUI-X SDK中拷贝。
 
@@ -188,7 +188,7 @@ iOS应用工程
 ```
 
 
-##### 注意事项
+### 注意事项
 **工程修改**
 XCode11之后，新建iOS工程为SceneDelegate类型工程，需删除SceneDelegate相关内容：
 1. 删除Info.plist中的Application Scene Manifest选项。
@@ -206,15 +206,15 @@ XCode11之后，新建iOS工程为SceneDelegate类型工程，需删除SceneDele
 
 按照注意事项配置后，即可按照iOS应用构建流程，构建ArkUI iOS应用。
 
-##### 使用ace tool和DevEco Studio IDE集成ArkUI-X SDK进行iOS应用开发
-上述步骤我们可以很方便地通过ace tool或DevEco Studio IDE完成
-* ace tool
+### 使用ace tool和DevEco Studio集成ArkUI-X SDK进行iOS应用开发
+上述步骤均可通过ACE tools或DevEco Studio完成
+* ACE tools
 1. ace create 命令创建一个跨平台应用工程
-2. 进入工程目录，执行ace build app命令，就会执行上述步骤。对jsbundle的生成与拷贝，以及其所依赖的动态库文件和jar包的拷贝，并且最后构建出一个iOS应用包。
-* DevEco Studio IDE
+2. 进入工程目录，执行ace build app命令，就会执行上述步骤，并且构建出一个iOS应用包。
+* DevEco Studio
 1. 创建跨平台工程
 2. 通过执行build app选项，即可执行上述步骤，并且构建出iOS应用
-##### 参考
+### 参考
 
 【1】[ArkUI跨平台应用示例](https://gitee.com/arkui-x/samples)
 
