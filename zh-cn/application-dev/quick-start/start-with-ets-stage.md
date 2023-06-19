@@ -2,7 +2,7 @@
 
 >  **说明：**
 >
->  为确保运行效果，本文以使用**ArkUI-X 0.1.0 Beta**版本为例。
+>  为确保运行效果，本文以使用**ArkUI-X 4.0.8.2**版本为例。
 
 ## 创建ArkTS跨平台应用工程
 
@@ -42,10 +42,12 @@
    ace create project
    ? Please enter the project name: demo
    ? Please enter the packages (com.example.demo):com.example.demo
-   ? Please enter the ACE version (1: 基于ArkTS的声明式开发范式, 2: 兼容JS的类Web开发范式): 1
+   ? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 1
+   ? Please enter the template (1: Empty Ability, 2: Native C++): 1
+   ? Please enter the Ability Model Type (1: Stage(基于Stage开发模型), 2: FA(基于FA开发模型)): 1
    ```
 
-执行 `ace create project` 命令（project 可省略），接着输入项目名 demo ，包名直接回车默认即可。输入“1”代表创建基于ArkTS的声明式开发范式跨平台应用项目。
+执行 `ace create project` 命令（project 可省略），接着输入项目名 demo ，包名直接回车默认即可。输入“1”代表创建基于OpenHarmony且是stage模型的声明式开发范式跨平台应用项目。
 
 一个名为 ‘demo’ 的项目就创建成功了。
 
@@ -65,42 +67,51 @@ demo/
 │   │       │   │   └── com
 │   │       │   │       └── example
 │   │       │   │           └── demo
-│   │       │   │               ├── MainActivity.java	//继承自ArkUI提供的AceActivity基类
-│   │       │   │               └── MyApplication.java	//继承自ArkUI提供的AceApplication基类
+│   │       │   │               ├── EntryMainAbilityActivity.java	   //继承自ArkUI提供的StageActivity基类
+│   │       │   │               └── MyApplication.java	           //继承自ArkUI提供的StageApplication基类
 │   │       │   └── res
 │   │       └── test
+│   ├── gradle
 │   └── settings.gradle
 ├── ios		//用于编译跨平台应用ios工程
-│   ├── etsapp
+│   ├── app
 │   │   ├── AppDelegate.h
-│   │   ├── AppDelegate.mm	//实例化AceViewController，并加载ArkUI页面
+│   │   ├── AppDelegate.m	//实例化EntryMainViewController，并加载ArkUI页面
 │   │   ├── Info.plist
 │   │   └── main.m
-│   ├── etsapp.xcodeproj
+│   ├── app.xcodeproj
 │   ├── frameworks
-│   └── js
-│   └── res
+│   └── arkui-x
 ├── ohos	//用于编译跨平台应用ohos工程
 │   ├── build-profile.json5
+│   ├── oh-package.json5
+│   ├── hvigorfile.ts
 │   ├── entry
 │   │   └── src
 │   │       └── main
 │   │           ├── config.json
 │   │           └── resources
+│   ├── AppScope
+│   ├── hvigor
+│   └── oh_modules
 └── source	//用于编写跨平台应用源码
     └── entry
-        └── src
-            ├── main
-            │   ├── ets
-            │   │   └── MainAbility
-            │   │       ├── app.ets
-            │   │       ├── manifest.json	//工程配置信息
-            │   │       └── pages
-            │   │           └── index
-            │   │               └── index.ets
-            │   └── resources
-            └── ohosTest
-
+        ├── src
+        │   ├── main
+        │   │   ├── ets
+        │   │   │   └── MainAbility
+        │   │   │       └── MainAbility.ts
+        │   │   │   └── Application
+        │   │   │       └── AbilityStage.ts
+        │   │   │   └── pages
+        │   │   │       ├── index.ets             // 模板首页
+        │   │   │       └── Second.ets            // 跳转的第二个页面        
+        │   │   ├── resources
+        │   │   └── module.json5                  // 工程配置信息
+        │   └── ohosTest
+        ├── build-profile.json5
+        ├── hvigorfile.ts
+        └── oh-package.json5
 ```
 
 ## 编写代码
@@ -111,7 +122,7 @@ demo/
 
 1. 包含Text和Button组件。
 
-   工程同步完成后，在“**source**”目录，点击“**entry &gt; src &gt; main &gt; ets &gt; MainAbility &gt; pages &gt; index**”，打开“**index.ets**”文件，可以看到页面由Text和Button组件组成。“**index.ets**”文件的示例如下：
+   工程同步完成后，在“**source**”目录，点击“**entry &gt; src &gt; main &gt; ets &gt; pages &gt; index**”，打开“**index.ets**”文件，可以看到页面由Text和Button组件组成。“**index.ets**”文件的示例如下：
    
     ```ts
     // index.ets
@@ -151,18 +162,14 @@ demo/
 
 1. 创建第二个页面。
 
-   - 新建第二个页面文件。在“**source**”目录，打开“**entry &gt; src &gt; main &gt; ets &gt; MainAbility**”，右键点击“**pages**”文件夹，新增“**second**”目录和“**ArkTS**”文件，文件命名为“**second.ets**”。
-   - 配置第二个页面的路由。在manifest.json文件中的“js - pages”下配置第二个页面的路由“pages/second/second.ets”。示例如下：
+   - 新建第二个页面文件。在“**source**”目录，打开“**entry &gt; src &gt; main &gt; ets &gt; pages**”，右键点击“**pages**”文件夹，新增“**second**”目录和“**ArkTS**”文件，文件命名为“**second.ets**”。
+   - 配置第二个页面的路由。在main_pages.json文件中的“src”下配置第二个页面的路由“pages/Second”。示例如下：
      
     ```json
     {
-      "js": [
-        {
-          "pages": [
-              "pages/index/index",
-              "pages/second/second"
-          ]
-        }
+      "src": [
+        "pages/Index",
+        "pages/Second"
       ]
     }
       ```
@@ -331,5 +338,23 @@ demo/
 效果如下图所示：
 
    ![ArkTS-FA](figures/start-with-ets-stage-0.png)
+
+* Android平台展示效果
+
+| 首页                                          | 点击跳转后页面                            |
+|---------------------------------------------|------------------------------------------|
+| ![](figures/android_main.jpg) | ![](figures/android_state.jpg) |
+
+* iOS平台展示效果
+
+| 首页                        | 点击跳转后页面                                 |
+|---------------------------|-----------------------------------------|
+| ![](figures/ios_main.png) | ![](figures/ios_state.png) |
+
+* OpenHarmomy平台展示效果
+
+| 首页                                     | 点击跳转后页面                            |
+|----------------------------------------|------------------------------------------|
+| ![](figures/oh_main.jpeg) | ![](figures/oh_state.jpeg)|
 
 恭喜您已经使用ArkTS语言开发（Stage模型）完成了第一个ArkUI跨平台应用，快来[探索更多的ArkUI-X功能](../application-dev-guide.md)吧。
