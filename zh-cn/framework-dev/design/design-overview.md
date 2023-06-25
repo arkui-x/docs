@@ -6,7 +6,10 @@
 
 本文档描述ArkUI开发框架跨平台运行能力相关的总体技术方案。
 
-ArkUI是面向全设备的UI开发框架，已通过OpenHarmony代码仓开源，其关键组成包括：开发模型; 应用界面&交互; 扩展机制-使能三方组件&平台API扩展机制。
+ArkUI是面向全设备的UI开发框架，已通过OpenHarmony代码仓开源，其关键组成包括：
+  - 开发模型;
+  - 应用界面&交互;
+  - 扩展机制-使能三方组件&平台API扩展机制。
 
 ArkUI-X项目旨在将ArkUI开发框架扩展至其他OS平台（Android/iOS/Windows等），使开发者能够基于ArkUI开发框架，复用绝大部分的应用代码（UI以及主要应用逻辑），即可部署到不同OS平台上。
 
@@ -32,7 +35,7 @@ ArkUI-X项目旨在将ArkUI开发框架扩展至其他OS平台（Android/iOS/Win
 
 ArkUI主要包括以下几个模块：
 
-1. 研发模型，支持基于ArkTS的声明式开发范式，可跨平台
+1. 研发模型，兼容OpenHarmony应用的Stage开发模型，支持基于ArkTS的声明式开发范式，可跨平台
 2. 声明式UI后端引擎，包括布局，渲染，C++ UI组件，事件机制等，可跨平台
 3. API扩展机制，基于NAPI机制，可跨平台。 不同平台需要各自扩展具体的API实现
 4. 工具链/SDK,  工具链可跨平台，SDK需基于不同平台构建
@@ -43,9 +46,7 @@ ArkUI声明式UI后端引擎，主要完成整体pipeline流程控制、视图�
 
 整体的跨平台需求，就是扩展ArkUI开发框架到其他OS平台，帮助开发者降低多平台应用开发成本。
 
-以CLI命令行工具开发跨平台应用为例，开发者基于一套主代码，就可以构建支持多平台的精美、高性能应用。如下图所示：
-
-![](png/arkui-deploy.png)
+通过ACE Tools命令行工具创建跨平台应用工程，开发者基于一套主代码，就可以构建支持多平台的精美、高性能应用。
 
 
 ## 方案设计
@@ -73,21 +74,24 @@ ArkUI-X AppProject
 ```
 OpenHarmony平台代码
   ├── .hvigor
+  ├── AppScope
   ├── entry
   │   ├── src
   │   │   ├── main
   │   │   │   ├── ets
-  │   │   │   ├── resources
-  │   │   │   └── config.json
+  │   │   │   └── resources
   │   │   └── ohosTest
   │   ├── build-profile.json5
   │   ├── hvigorfile.js
   │   └── package.json
-  ├── node_modules
+  ├── hvigor
+  ├── oh_modules
   ├── build-profile.json5
-  ├── hvigorfile.js
+  ├── hvigorfile.ts
+  ├── hvigorw
+  ├── hvigorw.bat
   ├── local.properties
-  └── package.json
+  └── oh-package.json5
 ```
 
 * Android平台工程结构（0-2）
@@ -98,23 +102,21 @@ Android平台代码
   │   ├── libs
   │   │   ├── ace_android_adapter.jar               // ArkUI跨平台适配层，在SDK中发布
   │   │   └── arm64-v8a
-  │   │       ├── libace_android.so                 // ArkUI引擎库，在SDK中发布
-  │   │       ├── libace_napi.so                    // API接口扩展库，在SDK中发布
-  │   │       ├── libace_napi_ark.so                // NAPI Ark引擎适配层库，在SDK中发布
-  │   │       ├── libark_jsruntime.so               // Ark引擎运行时库，在SDK中发布
+  │   │       ├── libarkui_android.so               // ArkUI引擎库，在SDK中发布
   │   │       └── libxxx.so                         // 其它功能模块库，在SDK中发布
   │   ├── src
   │   │   ├── androidTest
   │   │   ├── main
-  │   │   │   ├── assets                            // ArkUI编译后的JSBundle和Resources，作为资源文件存放在assets
-  │   │   │   │   ├── js
-  │   │   │   │   │   └── entry_MainAbility         // JSBundle，来自source目录ArkUI源码编译结果。
-  │   │   │   │   └── res                           // resources资源
-  │   │   │   │       ├── appres                    // 应用资源，来自source目录resources资源编译结果。
-  │   │   │   │       └── systemres                 // 系统资源
+  │   │   │   ├── assets
+  │   │   │   │     └─arkui-x                       // ArkUI应用编译后的字节码文件和Resources，作为资源文件存放在assets/arkui-x中
+  │   │   │   │        ├─entry                      // ArkUI单个模块的编译结果
+  │   │   │   │        │   ├─ets                    // ArkUI单个模块代码的编译结果：包括字节码文件以及sourceMap文件
+  │   │   │   │        │   └─resources              // ArkUI单个模块资源的编译结果：source目录下resources资源的编译结果
+  │   │   │   │        └─systemres                  // ArkUI框架自带的系统资源
+  │   │   │   │             └─resources
   │   │   │   ├── java/com/example/myapp
-  │   │   │   │   ├── MyApplication.java            // 基于AceApplication扩展MyApplication
-  │   │   │   │   └── MainActivity.java             // 基于AceActivity扩展MainActivity
+  │   │   │   │   ├── MyApplication.java            // 基于StageApplication扩展MyApplication
+  │   │   │   │   └── EntryMainAbilityActivity.java // 基于StageActivity扩展EntryMainAbilityActivity
   │   │   │   ├── res
   │   │   │   └── AndroidManifest.xml
   │   │   └── test
@@ -132,23 +134,25 @@ Android平台代码
 
 ```
 iOS平台代码
-  ├── myapp.xcodeproj
+  ├── app.xcodeproj
   │   ├── project.xcworkspace
   │   └── project.pbxproj
-  ├── myapp
+  ├── app
   │   ├── Assets.xcassets
   │   ├── base.Iproj
   │   ├── AppDelegate.h
-  │   ├── AppDelegate.mm              // 实例化AceViewController, 并加载JSBundle和Resources资源。
+  │   ├── AppDelegate.mm              // 应用入口, 驱动StageApplication的生命周期
+  │   ├── EntryMainViewController.h
+  │   ├── EntryMainViewController.mm  // 基于StageViewController扩展EntryMainViewController
   │   ├── Info.plist
   │   └── main.m
-  ├── js                              // ArkUI JSBundle，来自source目录ArkUI源码编译结果。
-  │   └── entry_MainAbility
-  ├── res                             // Resources资源
-  │   ├── appres                      // 应用资源，来自source目录resources资源编译结果。
-  │   └── systemres                   // 系统资源
-  └── framework                       // ArkUI跨平台Framework动态库
-      └── libace_ios.xcframework
+  ├─arkui-x                           // ArkUI应用编译后的字节码文件和Resources，作为资源文件存放在arkui-x目录
+  │  ├─entry                          // ArkUI单个模块的编译结果    
+  │  │  ├─ets                         // ArkUI单个模块代码的编译结果：包括字节码文件以及sourceMap文件
+  │  │  └─resources                   // ArkUI单个模块资源的编译结果：source目录下resources资源的编译结果
+  │  └─systemres                      // ArkUI框架自带的系统资源
+  │      └─resources
+  └─frameworks                        // ArkUI跨平台Framework动态库：包含ArkUI-X的框架以及插件
 ```
 
 * ArkUI源码目录（0-4）
@@ -158,17 +162,19 @@ source
   └── entry/src
       ├── main
       │   ├── ets
-      │   │   └── MainAbility
-      │   │       ├── app.ets
-      │   │       ├── manifest.json
-      │   │       └── pages
+      │   │    ├─Application
+      │   │    ├─mainability
+      │   │    └─pages
       │   └── resources
       └── ohosTest
 ``` 
 
+### 跨平台框架构建系统
+ArkUI-X项目编译构建提供了一套基于GN和Ninja的编译构建框架，基础构建基于OpenHarmony的build仓，并在OpenHarmony构建基础上新增Android和iOS编译工具链，以支持ArkUI跨平台SDK编译输出。
+
 ### 跨平台SDK结构设计
-ArkUI-X项目编译构建提供了一套基于GN和Ninja的编译构建框架，基础构建流程Fork OpenHarmony build仓，并在OpenHarmony构建基础上新增Android和iOS编译工具链，以支持ArkUI跨平台SDK编译输出。跨平台SDK主要用于支持CLI命令行跨平台应用构建和DevEco Studio\Android Studio\Xcode集成跨平台应用开发。内容范围主要包括：
-1. 提供ArkUI跨平台开发框架基础引擎动态库和JS运行时动态库。
+跨平台SDK主要用于支持ACE Tools命令行跨平台应用构建和DevEco Studio\Android Studio\Xcode集成跨平台应用开发。内容范围主要包括：
+1. 提供ArkUI跨平台开发框架基础引擎动态库。
 2. 提供ArkUI跨平台应用构建命令行工具。
 3. 提供ArkUI组件渲染一致性系统资源包，应用资源编译工具。
 
@@ -176,47 +182,49 @@ ArkUI-X项目编译构建提供了一套基于GN和Ninja的编译构建框架，
 
 ```
 ArkUI-X项目SDK组成
-  ├── libs                                                               // ArkUI跨平台引擎及平台适配层
-  │   ├── android-arm64
-  │   │   ├── engine
-  │   │   │   ├── ace_android.jar                                        // ArkUI-X Android平台适配层
-  │   │   │   ├── arm64-v8a
-  │   │   │   └── libace_android.so                                      // ArkUI跨平台引擎动态库
-  │   │   └── plugins
-  │   │       ├── ${module-name}
-  │   │       │   ├── ace_ohos_${module-name}.jar
-  │   │       │   └── libace_ohos_${module-name}.so
-  │   │       └── ${module-name2}
-  │   └── ios-arm64
-  │       ├── engine
-  │       │   ├── xcframework                                            // ArkUI跨平台XCFramework动态库
-  │       │   │   └── libace_ios.xcframework
-  │       │   │       ├── Info.plist
-  │       │   │       └── ios-arm64
-  │       │   │           └── libace_ios.framework
-  │       │   │               ├── Headers
-  │       │   │               │   ├── Ace.h
-  │       │   │               │   ├── AceViewController.h
-  │       │   │               │   └── FlutterPlugin.h
-  │       │   │               ├── Info.plist
-  │       │   │               ├── libace_ios
-  │       │   │               ├── libace_ios.podspec
-  │       │   │               └── Modules
-  │       │   │                   └── module.modulemap
-  │       │   └── framework
-  │       │       └── libace_ios.framework
-  │       └── plugins
-  │           ├── ${module-name}
-  │           │   ├── xcframework
-  │           │   │   └── libace_ohos_${module-name}.xcframework
-  │           │   └── framework
-  │           │       └── libace_ohos_${module-name}.framework
-  │           └── ${module-name2}
-  ├── toolchains                                                         // ArkUI-X项目跨平台应用构建命令行工具
-  │   └── cli
-  ├── systemres                                                          // ArkUI组件渲染一致性系统资源包
-  ├── licenses
-  └── readme.md
+arkui-x
+  ├─engine                                           // ArkUI-X的引擎库
+  │  ├─ets
+  │  ├─lib                                           // ArkUI-X的引擎库：包括Android平台及架构的动态库
+  │  │  ├─arkui
+  │  │  │  └─android-${target-arch}-${build_type}
+  │  │  ├─include
+  │  │  │  └─napi
+  │  │  ├─third_party
+  │  │  └─utils
+  |  ├── framework                                   // ArkUI-X的引擎库：包括iOS平台及架构的framework库
+  │  |  └── arkui
+  │  |      └── ios-${target-arch}-${build_type}
+  │  |          └── libarkui_ios.framework
+  │  ├─systemres                                    // ArkUI-X框架自带的资源
+  │  |   └─resources
+  |  └── xcframework                                // ArkUI-X的引擎库：包括iOS平台及架构的xcframework库
+  |      └── arkui
+  |        └── ios-${build_type}
+  |             └── libarkui_ios.xcframework
+  ├─plugins                                         // ArkUI-X官方提供的插件库
+  │  ├─api
+  │  │  ├─lib
+  │  │  │   ├─${module-name}
+  │  │  │   │  └─android-${target-arch}-${build_type}
+  │  │  │   ├─...
+  │  │  │   └─...
+  |  |  ├─framework
+  │  │  | └── ios-${target-arch}-${build_type}
+  │  │  |     ├── ${module-name}.framework
+  │  │  │     └─...
+  |  |  └─xcframework
+  │  │    └── ios-${build_type}
+  │  │        ├── ${module-name}.xcframework
+  │  │        └─...
+  │  └─component
+  ├─toolchains                                      // ArkUI-X应用开发工具
+  │   └─ace_tools
+  │       ├─src
+  │       └─templates
+  ├── arkui-x.json
+  ├── NOTICE.txt
+  └── sdkConfig.json
 ```
 
 ### 操作系统抽象层
@@ -264,10 +272,7 @@ ArkUI-X项目SDK组成
 
 - 剪切板抽象接口，及不同平台的实现；
 - 输入法抽象接口，及不同平台的实现；
-- 视频媒体、Camera抽象接口，及不同平台的实现；
-- WebView抽象接口，及不同平台的实现；
-- RichText抽象接口，及不同平台的实现；
-- XComponent不同平台的实现；
+- 视频媒体等抽象接口，及不同平台的实现；
 - 其它框架内部需要用到的不同的平台能力模块
 
 以剪切板ClipBoard为例，整体交互流程如下：
@@ -288,30 +293,36 @@ ArkUI-X项目SDK组成
 ![](png/arkui-api-extension.png)
 
 
-### 跨平台命令行工具CLI
+### 跨平台命令行工具ACE Tools
 
-CLI作为ArkUI-X项目跨平台应用构建工具，具有创建/编译/安装/运行调试OpenHarmony、Android和iOS应用的能力。
+ACE Tools命令行工具作为ArkUI-X项目跨平台应用构建工具，具有创建/编译/安装/运行调试OpenHarmony、Android和iOS应用的能力。
 
 ```
-CLI代码结构
-  ├── cli
-  │   ├── src                  // 各命令行代码实现
-  │   │   ├── ace-check        // 查验ArkUI跨平台应用开发依赖的的库和工具链是否完整
-  │   │   ├── ace-config       // 配置ArkUI跨平台应用开发环境
-  │   │   ├── ace-devices      // 列出当前PC所链接的各平台设备
-  │   │   ├── ace-create       // 创建ArkUI跨平台应用工程
-  │   │   ├── ace-build        // 构建跨平台应用安装包
-  │   │   ├── ace-install      // 将跨平台应用安装到连接的设备上
-  │   │   ├── ace-launch       // 在设备上运行跨平台应用。
-  │   │   ├── ace-run          // 运行跨平台应用包。
-  │   │   ├── ace-clean        // 清理跨平台应用编译结果。
-  │   │   ├── ace-uninstall    // 将跨平台应用从设备上卸载。
-  │   │   └── ace-log          // 滚动展示正在运行的跨平台应用的 log。
-  │   ├── templates            // 跨平台模板，包含OH、Android、iOS、source。
-  │   ├── bin                  // 命令行入口脚本
-  │   ├── package.json
-  │   ├── rollup.config.js
-  │   └── README.md
-  ├── README.md
-  └── LICENSE
+ACE Tools代码结构
+ cli
+  ├─node_modules
+  ├─src
+  │  ├─ace-build                 // 构建跨平台应用安装包
+  │  │  ├─ace-compiler
+  │  │  └─ace-packager
+  │  ├─ace-check                 // 查验ArkUI跨平台应用开发依赖的的库和工具链是否完整
+  │  ├─ace-clean                 // 清理跨平台应用编译结果
+  │  ├─ace-config                // 配置ArkUI跨平台应用开发环境
+  │  ├─ace-create                // 创建ArkUI跨平台应用工程
+  │  │  ├─aar
+  │  │  ├─ability
+  │  │  ├─component
+  │  │  ├─framework
+  │  │  ├─module
+  │  │  └─project
+  │  ├─ace-devices               // 列出当前PC所链接的各平台设备
+  │  ├─ace-install               // 将跨平台应用安装到连接的设备上
+  │  ├─ace-launch                // 在设备上运行跨平台应用
+  │  ├─ace-log                   // 滚动展示正在运行的跨平台应用的日志
+  │  ├─ace-run                   // 运行跨平台应用包
+  │  ├─ace-test                  // 执行测试代码
+  │  ├─ace-uninstall             // 将跨平台应用从设备上卸载
+  │  ├─bin                       // 命令行入口脚本
+  │  └─util
+  └─templates                    // 跨平台应用工程模板
 ```
