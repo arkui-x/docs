@@ -1,4 +1,4 @@
-# Plugin C Utils
+# Plugin Utils
 
 
 描述ArkUI-X Plugin开发涉及的工具库，包括插件注册、任务执行等。
@@ -16,27 +16,27 @@
 
 | 文件名称                                                     | 描述                                 |
 | ------------------------------------------------------------ | ------------------------------------ |
-| [plugin_c_utils.h](plugin__c__utils_8h.md)                  | 声明用于ArkUI-X Plugin开发的工具API。   |
+| [plugin_utils.h](plugin__utils_8h.md)                  | 声明用于ArkUI-X Plugin开发的工具API。   |
 
 
 ### 类型定义
 
 | 类型定义名称                                                 | 描述                                |
 | ------------------------------------------------------------ | ----------------------------------- |
-| [OH_Plugin_Task](#oh_plugin_task)                           | 提供线程调度的任务类型。               |
+| [ARKUI_X_Plugin_Task](#arkui_x_plugin_task)                           | 提供线程调度的任务类型。               |
 
 ### 枚举
 | 枚举名称                                                      | 描述                                |
 | ------------------------------------------------------------ | ----------------------------------- |
-| [OH_Plugin_Thread_Mode](_plugin_c_utils.md#oh_plugin_thread_mode) { <br/>OH_PLUGIN_PLATFORM_THREAD = 1, <br/>OH_PLUGIN_JS_THREAD = 2 }         | 枚举线程类型。                       |
+| [ARKUI_X_Plugin_Thread_Mode](_plugin_utils.md#arkui_x_plugin_thread_mode) { <br/>ARKUI_X_PLUGIN_PLATFORM_THREAD = 1, <br/>ARKUI_X_PLUGIN_JS_THREAD = 2 }         | 枚举线程类型。                       |
 
 ### 函数
 
 | 函数名称                                                     | 描述                                               |
 | ------------------------------------------------------------ | -------------------------------------------------- |
-| [OH_Plugin_GetJniEnv](#oh_plugin_getjnienv) () | 在Android平台上，获取JNI环境。      |
-| [OH_Plugin_RegisterJavaPlugin](#oh_plugin_registerjavaplugin) (bool (\*func)(void\*), const char\* name) | 在Android平台上，注册给定的Plugin。      |
-| [OH_Plugin_RunAsyncTask](#oh_plugin_runasynctask) ([OH_Plugin_Task](#oh_plugin_task) task, [OH_Plugin_Thread_Mode](#oh_plugin_thread_mode) mode) | 将传入的任务抛到指定线程异步执行。  |
+| [ARKUI_X_Plugin_GetJniEnv](#arkui_x_plugin_getjnienv) () | 在Android平台上，获取JNI环境。      |
+| [ARKUI_X_Plugin_RegisterJavaPlugin](#arkui_x_plugin_registerjavaplugin) (bool (\*func)(void\*), const char\* name) | 在Android平台上，注册给定的Plugin。      |
+| [ARKUI_X_Plugin_RunAsyncTask](#arkui_x_plugin_runasynctask) ([ARKUI_X_Plugin_Task](#arkui_x_plugin_task) task, [ARKUI_X_Plugin_Thread_Mode](#arkui_x_plugin_thread_mode) mode) | 将传入的任务抛到指定线程异步执行。  |
 
 
 ## 详细描述
@@ -45,11 +45,11 @@
 ## 类型定义说明
 
 
-### OH_Plugin_Task
+### ARKUI_X_Plugin_Task
 
 
 ```
-typedef void (*OH_Plugin_Task)();
+typedef void (*ARKUI_X_Plugin_Task)();
 ```
 
 **描述：**
@@ -64,11 +64,11 @@ typedef void (*OH_Plugin_Task)();
 ## 枚举定义说明
 
 
-### OH_Plugin_Thread_Mode
+### ARKUI_X_Plugin_Thread_Mode
 
 
 ```
-enum OH_Plugin_Thread_Mode
+enum ARKUI_X_Plugin_Thread_Mode
 ```
 
 **描述：**
@@ -77,8 +77,8 @@ enum OH_Plugin_Thread_Mode
 
 | 枚举值                      | 描述         |
 | -------------------------- | ------------- |
-| OH_PLUGIN_PLATFORM_THREAD  | Platform线程。|
-| OH_PLUGIN_JS_THREAD        | JS线程。      |
+| ARKUI_X_PLUGIN_PLATFORM_THREAD  | Platform线程。|
+| ARKUI_X_PLUGIN_JS_THREAD        | JS线程。      |
 
 **起始版本：**
 
@@ -87,11 +87,11 @@ enum OH_Plugin_Thread_Mode
 
 ## 函数说明
 
-### OH_Plugin_GetJniEnv()
+### ARKUI_X_Plugin_GetJniEnv()
 
 
 ```
-JNIEnv* OH_Plugin_GetJniEnv();
+JNIEnv* ARKUI_X_Plugin_GetJniEnv();
 ```
 
 **描述：**
@@ -113,11 +113,11 @@ JNIEnv* OH_Plugin_GetJniEnv();
 10
 
 
-### OH_Plugin_RegisterJavaPlugin()
+### ARKUI_X_Plugin_RegisterJavaPlugin()
 
 
 ```
-void OH_Plugin_RegisterJavaPlugin(bool (*func)(void*), const char* name);
+void ARKUI_X_Plugin_RegisterJavaPlugin(bool (*func)(void*), const char* name);
 ```
 
 **描述：**
@@ -140,11 +140,11 @@ void OH_Plugin_RegisterJavaPlugin(bool (*func)(void*), const char* name);
 10
 
 
-### OH_Plugin_RunAsyncTask()
+### ARKUI_X_Plugin_RunAsyncTask()
 
 
 ```
-void OH_Plugin_RunAsyncTask(OH_Plugin_Task task, OH_Plugin_Thread_Mode mode);
+void ARKUI_X_Plugin_RunAsyncTask(ARKUI_X_Plugin_Task task, ARKUI_X_Plugin_Thread_Mode mode);
 ```
 
 **描述：**

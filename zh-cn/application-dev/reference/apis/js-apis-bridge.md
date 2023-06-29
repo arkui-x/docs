@@ -1,6 +1,6 @@
-# @arkui-x.bridge.d.ts (平台通道)
+# @arkui-x.bridge.d.ts (平台桥接)
 
-本模块提供ArkUI端和Platform平台端消息通信的功能，包括数据传输、方法调用和事件调用。
+本模块提供ArkUI端和Android或iOS平台端消息通信的功能，包括数据传输、方法调用和事件调用。
 
 > **说明：**
 >
@@ -9,8 +9,7 @@
 
 ## 导入模块
 
-```js
-// @ts-ignore
+```javaScript
 import bridge from '@arkui-x.bridge';
 ```
 ## createBridge
@@ -25,23 +24,23 @@ createBridge(bridgeName: string): BridgeObject
 
 | 参数名     | 类型   | 必填 | 说明           |
 | ---------- | ------ | ---- | -------------- |
-| bridgeName | string | 是   | 定义通道名称。 |
+| bridgeName | string | 是   | 定义桥接名称。 |
 
 **返回值：** 
 
 | 类型                              | 说明           |
 | --------------------------------- | -------------- |
-| [BridgeObject](#bridgeobject) | 通道结果接口。 |
+| [BridgeObject](#bridgeobject) | 桥接的接口类。 |
 
 **示例：** 
 
-  ```js
+  ```javaScript
   const bridgeObj: BridgeObject = bridge.createBridge('Bridge');
   ```
 
 ## BridgeObject
 
-定义通道结果接口。
+桥接的接口类。
 
 ### callMethod
 
@@ -79,7 +78,7 @@ callMethod(methodName: string, ...parameters: Array\<any\>): Promise\<ResultValu
 
 **示例：**
 
-```js
+```javaScript
 const bridgeObj = bridge.createBridge('Bridge');
 
 bridgeObj.callMethod('nativeMethod').then((data)=>{
@@ -95,7 +94,7 @@ registerMethod(method: MethodData, callback: AsyncCallback\<void\>): void
 
 registerMethod(method: MethodData): Promise\<void\>
 
-注册JS侧方法，供Platform平台侧调用。
+注册ArkUI端方法，供Android或iOS平台端调用。
 
 **系统能力：**  SystemCapability.ArkUI.ArkUI.Full
 
@@ -115,7 +114,7 @@ registerMethod(method: MethodData): Promise\<void\>
 
 **示例：**
 
-```js
+```javaScript
 function jsMethod() {
   return 'ts return：jsMethod';
 }
@@ -130,7 +129,7 @@ unRegisterMethod(methodName: string, callback: AsyncCallback\<void\>): void
 
 unRegisterMethod(methodName: string): Promise\<void\>
 
-移除已注册的JS方法。
+移除已注册的ArkUI端的方法。
 
 **参数：** 
 
@@ -143,7 +142,7 @@ unRegisterMethod(methodName: string): Promise\<void\>
 
 **示例：**
 
-```js
+```javaScript
 const bridgeObj = bridge.createBridge('Bridge');
 
 bridgeObj.unRegisterMethod('jsMethod');
@@ -174,7 +173,7 @@ sendMessage(message: Message): Promise\<Response\>
 
 **示例：**
 
-```js
+```javaScript
 const bridgeObj = bridge.createBridge('Bridge');
 
 bridgeObj.sendMessage('jsMessage').then((data)=>{
@@ -201,7 +200,7 @@ setMessageListener(callback: (message: Message) => Response)
 
 **示例：**
 
-```js
+```javaScript
 const bridgeObj = bridge.createBridge('Bridge');
 
 bridgeObj.setMessageListener((data) => {
@@ -215,19 +214,19 @@ bridgeObj.setMessageListener((data) => {
 
 type S = number | boolean | string | null
 
-**说明：** 定义通道使用的基础数据类型。
+**说明：** 定义桥接使用的基础数据类型。
 
 ## T
 
 type T  = S | Array\<number\> | Array\<boolean\> | Array\<string\>
 
-**说明：** 定义通道使用的基础数据类型的数组类型。
+**说明：** 定义桥接使用的基础数据类型的数组类型。
 
 ## Message
 
 type Message = T | Record\<string, T\>
 
-**说明：** 定义通道使用结构数据类型。
+**说明：** 定义桥接使用结构数据类型。
 
 ## Parameter
 
