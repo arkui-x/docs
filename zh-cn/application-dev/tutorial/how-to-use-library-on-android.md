@@ -5,13 +5,14 @@
 
 * Android AAR工程集成ArkUI-X SDK
 * Android AAR工程集成ArkUI JSBundle实例
-* 使用ace tool和DevEco Studio集成ArkUI-X SDK进行Android AAR开发
-* AAR在android应用工程的使用
+* 使用ACE tool和DevEco Studio集成ArkUI-X SDK进行Android AAR开发
+* AAR在Android应用工程的使用
 ### Android AAR工程集成ArkUI跨平台SDK
 * Android AAR工程集成ArkUI跨平台SDK遵循Android应用工程集成Jar和动态库规则，即SDK组成清单中的arkui_android_adapter.jar包拷贝到libs目录，动态库（libarkui_android.so\libace_napi.so\libace_napi_ark.so等）拷贝到libs/arm64-v8a目录。
 
 **Activity部分**
-* 注意该Activity类名EntryMainAbilityActivity通过module名和ability名拼接规则命名，不能随意改动，详情参见[多module]()
+* 一个ability对应一个Android工程侧的Activity类。
+* 该Activity类名EntryMainAbilityActivity是通过module名加ability名拼接而得，不能随意改动。
 ```java
 package com.example.myaar;
 
@@ -50,6 +51,58 @@ public class MyApplication extends StageApplication {
         Log.e(LOG_TAG, "MyApplication onCreate");
     }
 }
+```
+**build.gradle**
+*  添加ndk和编译依赖目录
+```gradle
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+
+        minSdkVersion 26
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "arm64-v8a", "armeabi-v7a"
+        }//ndk
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])//编译依赖目录
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
 ```
 ### Android AAR程集成ArkUI JSBundle实例
 ArkUI JSBundle生成后，拷贝到Android应用工程assets/arkui-x目录下。这里“arkui-x”目录名称是固定的，不能更改；entry为模块实例名称，可以自定义名称；entryTest为测试模块，可按照实际需求拷贝；systemres是JSBundle必须的系统资源，需从ArkUI-X SDK中拷贝。
@@ -130,14 +183,14 @@ public class MainApplication extends Application {
          android:label="@string/app_name"
          android:roundIcon="@mipmap/ic_launcher_round"
          android:supportsRtl="true"
-         android:theme="@style/Theme.Helloworld">
+         android:name=".MainApplication"
+         android:theme="@style/Theme.Helloworld"><!-- 将name设为MainApplication-->
      <activity android:name="com.example.myaar.EntryMainAbilityActivity" 
          android:windowSoftInputMode="adjustResize |stateHidden"
          android:configChanges="orientation|keyboard|layoutDirection|screenSize|uiMode|smallestScreenSize"
-         ><!-- 只需将name设为aar中的EntryMainAbilityActivity -->
+         ><!-- 将name设为aar中的EntryMainAbilityActivity -->
              <intent-filter>
                  <action android:name="android.intent.action.MAIN" />
-
                  <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
          </activity>
@@ -145,4 +198,7 @@ public class MainApplication extends Application {
 
  </manifest>
 ```
+**build.gradle**
+* 添加ndk和编译依赖目录,这部分配置项与Android平台构建ArkUI应用内容一致。
+
 完成上述步骤后即可按照Android应用构建流程，构建ArkUI Android应用。

@@ -15,7 +15,8 @@
 * Android应用的入口Application和Activity，其中Activity需要继承自ArkUI提供的基类，Application可以通过代理类使用，详情参见[使用说明](https://gitee.com/arkui-x/android#使用说明)，比如:
 
 **Activity部分** 
-* 注意该Activity类名EntryMainAbilityActivity通过module名和ability名拼接规则命名，不能随意改动，详情参见[多module]()
+* 一个ability对应一个Android工程侧的Activity类。
+* 该Activity类名EntryMainAbilityActivity是通过module名加ability名拼接而得，不能随意改动。
 ```java
 package com.example.helloworld;
 
@@ -45,7 +46,7 @@ import android.util.Log;
 
 import ohos.stage.ability.adapter.StageApplication;
 
-public class MyApplication extends StageApplication {
+public class MainApplication extends StageApplication {
     private static final String LOG_TAG = "HiHelloWorld";
 
     private static final String RES_NAME = "res";
@@ -100,6 +101,88 @@ src/main/assets/arkui-x
     |       └── sourceMaps.map
     ├── entryTest
     └── systemres
+```
+**AndroidManifest.xml**
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.demo">
+
+<uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:name=".MainApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/arkuix"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:extractNativeLibs="true"
+        android:theme="@android:style/Theme.Light.NoTitleBar"><!-- 将name设为MainApplication-->
+	<activity android:exported="true" android:name=".EntryMainAbilityActivity"
+		android:windowSoftInputMode="adjustResize |stateHidden"
+		android:configChanges="orientation|keyboard|layoutDirection|screenSize|uiMode|smallestScreenSize|density"
+		>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity><!-- 将name设为EntryMainAbilityActivity-->
+    </application>
+
+</manifest>
+
+```
+**build.gradle**
+* 添加ndk和编译依赖目录
+```gradle
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.example.demo"
+        minSdkVersion 26
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "arm64-v8a", "armeabi-v7a"
+        }//ndk
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dynamicFeatures = []
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])//编译依赖目录
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
 ```
 
 完成上述步骤后即可按照Android应用构建流程，构建ArkUI Android应用。
