@@ -23,7 +23,7 @@ createNetConnection(netSpecifier?: NetSpecifier, timeout?: number): NetConnectio
 
 | 参数名       | 类型                          | 必填 | 说明                                                         |
 | ------------ | ----------------------------- | ---- | ------------------------------------------------------------ |
-| netSpecifier | [NetSpecifier](#netspecifier) | 否   | 指定网络的各项特征，不指定或为undefined时关注默认网络。                   |
+| netSpecifier | [NetSpecifier](#netspecifier) | 否   | 指定网络的各项特征，不指定或为undefined时关注默认网络（目前只支持默认网络）。                   |
 | timeout      | number                        | 否   | 获取netSpecifier指定的网络时的超时时间，仅netSpecifier存在时生效，undefined时默认值为0。 |
 
 **返回值：**
@@ -50,7 +50,7 @@ let netConnectionCellular = connection.createNetConnection({
 
 hasDefaultNet(callback: AsyncCallback\<boolean>): void
 
-检查默认数据网络是否被激活，使用callback方式作为异步方法。如果有默认数据网路，可以使用[getDefaultNet](#connectiongetdefaultnet)去获取。
+检查默认数据网络是否被激活，使用callback方式作为异步方法。如果有默认数据网路，可以使用[getDefaultNet](#getdefaultnet)去获取。
 
 **需要权限**：ohos.permission.GET_NETWORK_INFO
 
@@ -84,7 +84,7 @@ connection.hasDefaultNet(function (error, data) {
 
 hasDefaultNet(): Promise\<boolean>
 
-检查默认数据网络是否被激活，使用Promise方式作为异步方法。如果有默认数据网路，可以使用[getDefaultNet](#connectiongetdefaultnet)去获取。
+检查默认数据网络是否被激活，使用Promise方式作为异步方法。如果有默认数据网路，可以使用[getDefaultNet](#getdefaultnet)去获取。
 
 **需要权限**：ohos.permission.GET_NETWORK_INFO
 
@@ -358,6 +358,17 @@ netCon.unregister(function (error) {
 | 名称    | 类型   | 必填 | 说明                      |
 | ------ | ------ | --- |------------------------- |
 | netId  | number | 是  |  网络ID，取值为0代表没有默认网络，其余取值必须大于等于100。 |
+
+## NetSpecifier<sup>10+</sup>
+
+提供承载数据网络能力的实例，暂不支持。
+
+**系统能力**：SystemCapability.Communication.NetManager.Core
+
+| 名称                     | 类型                                | 必填  | 说明                                                         |
+| ----------------------- | ----------------------------------- | ---- | ------------------------------------------------------------ |
+| netCapabilities         | [NetCapabilities](#netcapabilities) |  是  | 存储数据网络的传输能力和承载类型。                                |
+| bearerPrivateIdentifier | string                              |  否  |  网络标识符，Wi-Fi网络的标识符是"wifi"，蜂窝网络的标识符是"slot0"（对应SIM卡1）。 |
 
 ## NetBearType<sup>10+</sup>
 
