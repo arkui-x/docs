@@ -50,7 +50,7 @@ let netConnectionCellular = connection.createNetConnection({
 
 hasDefaultNet(callback: AsyncCallback\<boolean>): void
 
-检查默认数据网络是否被激活，使用callback方式作为异步方法。如果有默认数据网路，可以使用[getDefaultNet](#getdefaultnet)去获取。
+检查默认数据网络是否被激活，使用callback方式作为异步方法。
 
 **需要权限**：ohos.permission.GET_NETWORK_INFO
 
@@ -84,7 +84,7 @@ connection.hasDefaultNet(function (error, data) {
 
 hasDefaultNet(): Promise\<boolean>
 
-检查默认数据网络是否被激活，使用Promise方式作为异步方法。如果有默认数据网路，可以使用[getDefaultNet](#getdefaultnet)去获取。
+检查默认数据网络是否被激活，使用Promise方式作为异步方法。
 
 **需要权限**：ohos.permission.GET_NETWORK_INFO
 
