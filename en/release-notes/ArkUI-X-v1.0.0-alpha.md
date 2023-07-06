@@ -1,8 +1,8 @@
-# ArkUI-X 0.1.0 Beta
+# ArkUI-X 1.0.0 Alpha
 
 ## Version Description
 
-This issue is the first official release of ArkUI-X 0.1.0 Beta. The version mainly packs the following capabilities:
+This issue is the first official release of ArkUI-X 1.0.0 Alpha. The version mainly packs the following capabilities:
 
 - Basic compiler toolchain, which can generate ArkUI SDKs for iOS and Android to create applications that run on the target platform.
 - Basic platform bridging capabilities, including the iOS and Android application loading entry points, lifecycle, event processing, and window system.
@@ -19,7 +19,7 @@ ArkUI cross-platform APIs include OpenHarmony APIs and custom extension APIs. Yo
 
 >**NOTE**
 >
->The ArkUI-X 0.1.0 Beta version is the first preview version for the ArkUI-X project. It only provides implementation for the APIs listed in [OpenHarmony APIs with Cross-Platform Support](../application-dev/reference/apis/readme.md).
+>The ArkUI-X 1.0.0 Alpha version is the first preview version for the ArkUI-X project. It only provides implementation for the APIs listed in [OpenHarmony APIs with Cross-Platform Support](../application-dev/reference/apis/readme.md).
 
 ### Project Build
 
@@ -60,7 +60,7 @@ ACE Tools is a command line (CLI) tool that allows ArkUI-X project developers to
 
 >**NOTE**
 >
->The beta version is a preview version for trial use. The UI and APIs of this version may be unstable.
+>The alpha version is a preview version for trial use. The UI and APIs of this version may be unstable.
 
 ## Source Code Acquisition
 
@@ -94,7 +94,7 @@ Use the **repo** tool to download the source code over SSH. (You must have an SS
 
 
 ```
-repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-0.1.0 --no-repo-verify
+repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Alpha --no-repo-verify
 repo sync -c
 ```
 
@@ -104,7 +104,7 @@ Use the **repo** tool to download the source code over HTTPS.
 
 
 ```
-repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-0.1.0 --no-repo-verify
+repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Alpha --no-repo-verify
 repo sync -c
 ```
 
@@ -114,8 +114,8 @@ repo sync -c
 
 | Source Code                                 | Version| Mirror| SHA-256 Checksum|
 | ----------------------------------------- | ------------ | ------------ | ---------------- |
-| ArkUI-X full code| 0.1.0 Beta    | [Site]()    | [Download]()|
-| ArkUI-X SDK | 0.1.0 Beta    | [Site]()    | [Download]()|
+| ArkUI-X full code| 1.0.0 Alpha    | [Site]()    | [Download]()|
+| ArkUI-X SDK | 1.0.0 Alpha    | [Site]()    | [Download]()|
 
 ## Samples
 

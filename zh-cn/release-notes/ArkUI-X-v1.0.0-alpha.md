@@ -1,8 +1,8 @@
-# ArkUI-X 0.1.0 Beta
+# ArkUI-X 1.0.0 Alpha
 
 ## 版本概述
 
-首次发布ArkUI-X 0.1.0 Beta版本，主要能力范围包括：
+首次发布ArkUI-X 1.0.0 Alpha版本，主要能力范围包括：
 
 - 应用开发范式：支持基于ArkTS的声明式开发范式。
 - 应用开发模型：支持Stage开发模型。
@@ -15,12 +15,12 @@
 
 ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmony接口以Public接口为基础，接口范围为API10<sup>+</sup>，具体支持列表详见[API参考](../application-dev/reference/README.md)。
 
->说明：ArkUI-X 0.1.0 Beta版本为ArkUI-X项目首次发布的预览版本，除提供[ArkUI控件](../application-dev/reference/arkui-ts/README.md)和部分[@ohos接口](../application-dev/reference/apis/README.md)之外，暂不提供其它OpenHarmony接口定义的跨平台实现。
+>说明：ArkUI-X 1.0.0 Alpha版本为ArkUI-X项目首次发布的预览版本，除提供[ArkUI控件](../application-dev/reference/arkui-ts/README.md)和部分[@ohos接口](../application-dev/reference/apis/README.md)之外，暂不提供其它OpenHarmony接口定义的跨平台实现。
 
 ### 应用开发工具
 
-- ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见](../application-dev/quick-start/start-with-ace-tools.md)。
-- DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序开发工具，同时支持ArkUI-X应用创建，构建，安装，运行，调试和卸载等功能。[详情参加](../application-dev/quick-start/start-with-deveco-studio.md)
+- ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见ACE Tools快速入门](../application-dev/quick-start/start-with-ace-tools.md)。
+- DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序IDE开发工具，同时支持ArkUI-X应用创建，构建，安装，运行和调试等功能。[详情参见IDE快速入门](../application-dev/quick-start/start-with-deveco-studio.md)
 
 ## 配套关系
 
@@ -32,7 +32,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 | Android     | Quince Tart 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
 | iOS         | iOS 10<sup>+</sup>                             | NA   |
 
->说明：Beta版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
+>说明：Alpha版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
 
 ## 源码获取
 
@@ -66,7 +66,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 
 
 ```
-repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-0.1.0 --no-repo-verify
+repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Alpha --no-repo-verify
 repo sync -c
 ```
 
@@ -76,7 +76,7 @@ repo sync -c
 
 
 ```
-repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-0.1.0 --no-repo-verify
+repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Alpha --no-repo-verify
 repo sync -c
 ```
 
@@ -86,19 +86,19 @@ repo sync -c
 
 | 版本源码                                  | **版本信息** | **下载站点** | **SHA256校验码** |
 | ----------------------------------------- | ------------ | ------------ | ---------------- |
-| ArkUI-X全量代码 | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
-| ArkUI-X SDK包（Windows）  | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
-| ArkUI-X SDK包（macOS）  | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
-| ArkUI-X SDK包（Linux）  | 0.1.0 Beta    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X全量代码 | 1.0.0 Alpha    | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包（Windows）  | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包（macOS）    | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |
+| ArkUI-X SDK包（Linux）    | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |
 
 ## Samples
 
-### Samples列表
-
-**表5** [Samples](https://gitee.com/arkui-x/samples)列表
+**表3** Samples列表
 
 | 项目名称      | 简介                                                         |
 | ------------- | ------------------------------------------------------------ |
 | HelloWorld | 使用ACE Tools命令行工具生成的HellWorld应用工程示例，支持Android、iOS和OpenHarmony/HarmonyOS应用构建。 |
 | Shopping | 使用ACE Tools命令行工具生成的仿购物应用工程示例，支持Android、iOS和OpenHarmony/HarmonyOS应用构建。   |
 | HealthyDiet | 使用ACE Tools命令行工具生成的健康饮食应用工程示例，支持Android、iOS和OpenHarmony/HarmonyOS应用构建。|
+
+请访问[Samples](https://gitee.com/arkui-x/samples)仓了解更多消息。
