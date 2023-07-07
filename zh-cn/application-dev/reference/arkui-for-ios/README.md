@@ -1,8 +1,8 @@
-# ArkUI-X iOS平台集成接口
+# iOS平台集成ArkUI-X接口类
 
 ## 概述
 
-实现OH平台与iOS平台的对接，可以帮助开发者将基于ArkUI开发的应用运行在标准的iOS设备上。
+实现OpenHarmony平台与iOS平台的对接，可以帮助开发者将基于ArkUI开发的应用运行在标准的iOS设备上。
 
 ## 类概述
 

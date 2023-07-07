@@ -1,4 +1,4 @@
-# Stage模型Android端开发文档
+# Stage模型Android端开发指导
 
 ## 简介
 
@@ -8,13 +8,13 @@
 
 ### 关键依赖集成
 
-* ArkUI源码和OH资源编译后的JSBundle和资源文件，作为平台资源存放在assets中
-* ArkUI-X跨平台SDK中的适配层arkui_android_adapter.jar包
-  **注:** AndroidStudio:Android应用的开发工具
+* ArkUI源码和OpenHarmony资源编译后的JSBundle和资源文件，作为平台资源存放在assets中。
+* ArkUI-X编译SDK时生成的arkui_android_adapter.jar包。
+**注:** AndroidStudio:Android应用的开发工具。
 
 ### AndroidStudio配置
 
-* 使用AndroidStudio所创建Android工程的PackageName需要与OH工程的BundleName一致
+* 使用AndroidStudio所创建Android工程的PackageName需要与OpenHarmony工程的BundleName一致。
 
 ### ArkUI-X和Android平台集成所用关键类
 
@@ -48,9 +48,13 @@ public class EntryMainAbilityActivity extends StageActivity {
 }
 ```
 
-需要重写StageActivity中的onCreate事件，在super.onCreate(savedInstanceState)之前设置instanceName，规则如下
+需要重写StageActivity中的onCreate事件，在super.onCreate(savedInstanceState)之前设置instanceName，规则如下：
 
-“bundleName:moduleName:abilityName:”，其中bundleName、moduleName、abilityName来自OpenHarmony应用的module.json5配置文件中对应字段的值
+```
+bundleName:moduleName:abilityName:
+```
+
+其中bundleName、moduleName、abilityName的值来自于OpenHarmony应用中的module.json5配置文件。
 
 ## Ability与Activity对应规则
   ![stage_android](figures/stage_android.png)

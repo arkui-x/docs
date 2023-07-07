@@ -1,33 +1,33 @@
-# Stage模型iOS端开发文档
+# Stage模型iOS端开发指导
 
 ## 简介
 
-本文介绍将OpenHarmony开发框架扩展到iOS平台所需要的必要的类及其使用说明，开发者基于OpenHarmony，可复用大部分的应用代码（生命周期等）并可以部署到iOS平台，降低跨平台应用开发成本。
+本文介绍将OpenHarmony开发框架扩展到iOS平台所需要的必要类及其使用说明，开发者可以参照该指南，基于OpenHarmony中的Stage模型能力，高效、低成本开发跨平台iOS端应用。
 
 ## iOS端APP开发指南
 
 ### 关键依赖集成
 
-* Deveco-Studio构建的hap包, 导入到iOS应用所在的bundle路径内
-* 跨平台arkui工程构建的libarkui_ios.xcframework库（iOS应用依赖的静态库）
-  **注:** Xcode:iOS应用的开发工具，Mac环境
-  **注:** Xcode链接库需设置Embed&Sign
-  
+* Deveco-Studio构建的hap包, 导入到iOS应用所在的bundle路径内。
+* 跨平台arkui工程构建的libarkui_ios.xcframework库（iOS应用依赖的静态库）。
+**注:** Xcode:iOS应用的开发工具，Mac环境。
+**注:** Xcode链接库需设置Embed&Sign。
+
 ### Xcode配置
 
-* info文件内的URL Types、Queried URL Schemes需正确配置对应应用的bundleName，用于应用路由模式页面跳转
-* Build Setting -> Enable Bitcode -> NO
-* General -> Minmum Deployments -> iOS10及以上
+* info文件内的URL Types、Queried URL Schemes需正确配置对应应用的bundleName，用于应用路由模式页面跳转。
+* Build Setting -> Enable Bitcode -> NO。
+* General -> Minmum Deployments -> iOS10及以上。
 
 ### ArkUI-X和iOS平台集成所用关键类
 
 #### StageViewController
 
-StageViewController是stage模型iOS端视图控制器基类，若要实现跨平台基础能力及触发对应ability生命周期，所有iOS端应用级别的视图控制器均要继承于StageViewController。
+StageViewController是Stage模型iOS端视图控制器基类，若要实现跨平台基础能力及触发对应ability生命周期，所有iOS端应用级别的视图控制器均要继承于StageViewController。
 
 ##### 公共属性
 
-* instanceName：StageViewController唯一标识，拼接规则为bundleName:moduleName:abilityName
+* instanceName：StageViewController唯一标识，拼接规则为bundleName:moduleName:abilityName。
 
 ```objc
 @property (nonatomic, readonly) NSString *instanceName;
@@ -51,43 +51,43 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 
 ##### 公共方法
 
-* 配置本地hap包路径
+* 配置本地hap包路径。
 
 ```objc
 + (void)configModuleWithBundleDirectory:(NSString *_Nonnull)bundleDirectory;
 ```
 
-* iOS应用启动ability、配置进程id、本地化信息、configuration等
+* iOS应用启动ability、配置进程id、本地化信息、configuration等。
 
 ```objc
 + (void)launchApplication;
 ```
 
-* 触发ability进入前台生命周期事件
+* 触发ability进入前台生命周期事件。
 
 ```objc
 + (void)callCurrentAbilityOnForeground;
 ```
 
-* 触发ability进入后台生命周期事件
+* 触发ability进入后台生命周期事件。
 
 ```objc
 + (void)callCurrentAbilityOnBackground;
 ```
 
-* 处理单/多实例ability
+* 处理单/多实例ability。
 
 ```objc
 + (BOOL)handleSingleton:(NSString *)bundleName moduleName:(NSString *)moduleName abilityName:(NSString *)abilityName;
 ```
 
-* 释放导航视图栈内的所有viewcontroller，触发OnDestory事件
+* 释放导航视图栈内的所有viewcontroller，触发OnDestory事件。
 
 ```objc
 + (void)releaseViewControllers;
 ```
 
-* 获取导航视图栈最顶层viewcontroller
+* 获取导航视图栈最顶层viewcontroller。
 
 ```objc
 + (StageViewController *)getApplicationTopViewController;
@@ -188,7 +188,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 
 #### 其它程序级生命周期回调相应处理
 
-* iOS应用程序进入后台，触发对应生命周期事件
+* iOS应用程序进入后台，触发对应生命周期事件。
 
 ```objc
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -196,7 +196,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 }
 ```
 
-* iOS应用程序进入前台，触发对应生命周期事件
+* iOS应用程序进入前台，触发对应生命周期事件。
 
 ```objc
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -204,7 +204,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 }
 ```
 
-* 终止iOS应用程序进程
+* 终止iOS应用程序进程。
 
 ```objc
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -214,7 +214,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 
 #### 其它私有方法(选择性实现)
 
-* 设置根视图
+* 设置根视图。
 
 ```objc
 - (void)setNavRootVC:(id)viewController {
