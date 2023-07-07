@@ -1,4 +1,4 @@
-# 快速指南
+# ACE tools快速指南
 
 ## 简介
 
@@ -34,7 +34,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
 **3. 配置ohpm环境**
 
-   OHPM CLI（OpenHarmony Package Manager Command-line Interface）是鸿蒙生态三方库的包管理工具，可通过DevEco Studio > File > Settings > Build, Execution, Deployment > Ohpm 查看ohpm home的安装路径，并配置到环境变量中。
+   OHPM CLI（OpenHarmony Package Manager Command-line Interface）是OpenHarmony应用工程的三方库的包管理工具，可通过DevEco Studio > File > Settings > Build, Execution, Deployment > Ohpm 查看ohpm home的安装路径，并配置到环境变量中。
 
 ## 命令安装
 ### 安装ace命令
@@ -75,7 +75,6 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    ? Please enter the bundle name (com.example.demo):com.example.demo
    ? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 2
    ? Please enter the template (1: Empty Ability, 2: Native C++): 1   //选择创建Empty Ability或者Native C++项目
-   ? Please enter the Ability Model Type (1: Stage, 2: FA):
    ```
 
 执行 `ace create project` 命令，接着输入项目名 demo ，包名直接回车默认即可。输入“2”代表创建HarmonyOS，再次输入“1”代表Empty Ability，再次输入“1”代表stage模型的应用项目。至此，一个名为 ‘demo’ 的项目就创建成功了。
@@ -86,153 +85,65 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
 ### 项目编译
 
-开始对 'demo' 项目进行编译。编译分为hap 、apk和app：
+开始对 'demo' 项目进行编译。编译目标产物为hap 、apk和app，分别对应OpenHarmony/HarmonyOS、Android和iOS应用工程，下述命令以hap为例，并且可将hap参数替换为apk或app，其分别对应Android应用和iOS应用，功能一致：
 
 ```shell
 cd demo
 ```
 
-1. 编译hap，默认编译所有Module
+ 编译hap，默认编译所有Module
 
-```shell
-ace build hap
-```
+   ```shell
+   ace build hap
+   ```
 
-最终会生成一个hap应用文件，默认路径为 demo/ohos/entry/build/default/outputs/default/。
+   最终会生成一个hap应用文件，默认路径为 demo/ohos/entry/build/default/outputs/default/。
 
-2. 编译apk，默认编译Module为app的模块
-
-```shell
-ace build apk
-```
-
-最终会生成一个apk应用文件，默认路径为：demo/android/app/build/outputs/apk/debug/。
-
-3. 编译app，默认编译Module为app的模块
-
-```shell
-ace build app
-```
-   
-最终生成一个app应用文件，默认路径为：demo/ios/build/outputs/app/
+**注：** apk文件的默认路径为demo/android/app/build/outputs/apk/debug/。app文件的默认路径为demo/ios/build/outputs/app/。
 
 ### 应用安装和卸载
 
-开始对编译出的应用包进行安装，先进入到demo工程目录下
+开始对编译出的hap应用包进行安装，先进入到demo工程目录下
 
 ```shell
 cd demo
 ```
+1. 安装hap应用包
 
-1. 安装hap应用安装包
-
-```shell
-ace install hap
-```
+   ```shell
+   ace install hap
+   ```
 
 2. 安装hap应用到指定的设备上
 
-```shell
-ace install hap -d deviceId
-```
+   ```shell
+   ace install hap -d deviceId
+   ```
+3. 卸载hap应用包
 
-3. 安装apk应用安装包
+   ```shell
+   ace uninstall hap --bundle bundleName
+   ```
 
-```shell
-ace install apk
-```
+4. 卸载指定设备上的hap应用安装包
 
-4. 安装apk应用安装包到指定的设备上
-
-```shell
-ace install apk -d deviceId
-```
-
-5. 安装app应用安装包
-
-```shell
-ace install app
-```
-
-6. 安装app应用安装包到指定的设备上
-
-```shell
-ace install app -d deviceId
-```
-
-7. 卸载hap应用安装包
-
-```shell
-ace uninstall hap --bundle bundleName
-```
-
-8. 卸载指定设备上的hap应用安装包
-
-```shell
-ace uninstall hap --bundle bundleName -d deviceId
-```
-
-9. 卸载apk应用安装包
-
-```shell
-ace uninstall apk --bundle bundleName
-```
-
-10. 卸载指定设备上的apk应用安装包
-
-```shell
-ace uninstall apk --bundle bundleName -d deviceId
-```
-
-11. 卸载app应用安装包
-
-```shell
-ace uninstall app --bundle bundleName
-```
-
-12. 卸载指定设备上的app应用安装包
-
-```shell
-ace uninstall app --bundle bundleName -d deviceId
-```
+   ```shell
+   ace uninstall hap --bundle bundleName -d deviceId
+   ```
 
 ###  运行应用
 
 1. 运行hap应用
 
-```shell
-ace run hap
-```
+   ```shell
+   ace run hap
+   ```
 
 2. 在指定的设备上运行hap应用
 
-```shell
-ace run hap -d deviceId
-```
-
-3. 运行apk应用
-
-```shell
-ace run apk
-```
-
-4. 在指定的设备上运行apk应用
-
-```shell
-ace run apk -d deviceId
-```
-
-5. 运行app应用
-
-```shell
-ace run app
-```
-
-6. 在指定的设备上运行app应用
-
-```shell
-ace run app -d deviceId
-```
+   ```shell
+   ace run hap -d deviceId
+   ```
 
 ### 清理编译结果
 
@@ -248,39 +159,15 @@ ace clean
 
 1. 输出hap应用日志
 
-```shell
-ace log hap
-```
+   ```shell
+   ace log hap
+   ```
 
 2. 输出指定的设备上运行hap应用日志
 
-```shell
-ace log hap -d deviceId
-```
-
-3. 输出apk应用日志
-
-```shell
-ace log apk
-```
-
-4. 输出指定的设备上运行apk应用日志
-
-```shell
-ace log apk -d deviceId
-```
-
-5. 输出app应用日志
-
-```shell
-ace log app
-```
-
-6. 输出指定的设备上运行app应用日志
-
-```shell
-ace log app -d deviceId
-```
+   ```shell
+   ace log hap -d deviceId
+   ```
 
 ### 帮助工具
 
