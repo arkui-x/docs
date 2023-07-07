@@ -1,12 +1,12 @@
 # @ohos.i18n (国际化-I18n)
 
- 本模块提供系统相关的或者增强的国际化能力，包括区域管理、电话号码处理、日历等，相关接口为ECMA 402标准中未定义的补充接口。
+ 本模块提供系统相关的或者增强的国际化能力，包括区域管理、日历等，相关接口为ECMA 402标准中未定义的补充接口。
 [Intl模块](js-apis-intl.md)提供了ECMA 402标准定义的基础国际化接口，与本模块共同使用可提供完整地国际化支持能力。 
 
 >  **说明：**
 >  - 本模块首批接口从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 >
->  - I18N模块包含国际化能力增强接口（未在ECMA 402中定义），包括区域管理、电话号码处理、日历等，国际化基础能力请参考[Intl模块](js-apis-intl.md)。
+>  - I18N模块包含国际化能力增强接口（未在ECMA 402中定义），包括区域管理、日历等，国际化基础能力请参考[Intl模块](js-apis-intl.md)。
 
 
 ## 导入模块
@@ -100,7 +100,7 @@ static getDisplayLanguage(language: string, locale: string, sentenceCase?: boole
 
 static getSystemLanguage(): string
 
-获取系统语言。语言的详细说明参见[实例化Locale对象](../../internationalization/intl-guidelines.md#开发步骤)。
+获取系统语言。
 
 **系统能力**：SystemCapability.Global.I18n
 
@@ -131,7 +131,7 @@ static getSystemLanguage(): string
 
 static getSystemRegion(): string
 
-获取系统地区。地区的详细说明参见[实例化Locale对象](../../internationalization/intl-guidelines.md#开发步骤)。
+获取系统地区。
 
 **系统能力**：SystemCapability.Global.I18n
 
@@ -162,7 +162,7 @@ static getSystemRegion(): string
 
 static getSystemLocale(): string
 
-获取系统区域。区域的详细说明参见[实例化Locale对象](../../internationalization/intl-guidelines.md#开发步骤)。
+获取系统区域。
 
 **系统能力**：SystemCapability.Global.I18n
 

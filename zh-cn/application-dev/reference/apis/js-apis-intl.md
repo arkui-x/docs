@@ -66,7 +66,7 @@ constructor(locale: string, options?: LocaleOptions)
 
 | 参数名                  | 类型                               | 必填   | 说明                           |
 | -------------------- | -------------------------------- | ---- | ---------------------------- |
-| locale               | string                           | 是    | 包含区域信息的字符串，包括语言以、脚本、国家或地区。语言、脚本、国家或地区的国际标准及组合方式请见[Intl开发指导](../../internationalization/intl-guidelines.md#设置区域信息) |
+| locale               | string                           | 是    | 包含区域信息的字符串，包括语言以、脚本、国家或地区。 |
 | options             | [LocaleOptions](#localeoptions6) | 否    | 用于创建区域对象的选项。                 |
 
 **示例：** 
