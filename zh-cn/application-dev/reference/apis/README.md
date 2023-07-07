@@ -3,18 +3,14 @@
   - [@arkui-x.bridge](js-apis-bridge.md)
   
 - UI界面
-  - [@ohos.animator (动画)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-animator.md)
-  - [@ohos.arkui.componentSnapshot (组件截图)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-arkui-componentSnapshot.md)
-  - [@ohos.arkui.drawableDescriptor (DrawableDescriptor)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-arkui-drawableDescriptor.md)
-  - [@ohos.arkui.UIContext (UIContext)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-arkui-UIContext.md)
-  - [@ohos.curves (插值计算)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-curve.md)
-  - [@ohos.font (注册自定义字体)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-font.md)
-  - [@ohos.matrix4 (矩阵变换)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-matrix4.md)
-  - [@ohos.mediaquery (媒体查询)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-mediaquery.md)
-  - [@ohos.promptAction (弹窗)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-promptAction.md)
-  - [@ohos.router (页面路由)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-router.md)
-  - [@ohos.measure (文本计算)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-measure.md)
-
+  - [@ohos.animator (动画)](js-apis-animator.md)
+  - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
+  - [@ohos.curves (插值计算)](js-apis-curve.md)
+  - [@ohos.matrix4 (矩阵变换)](js-apis-matrix4.md)
+  - [@ohos.mediaquery (媒体查询)](js-apis-mediaquery.md)
+  - [@ohos.promptAction (弹窗)](js-apis-promptAction.md)
+  - [@ohos.router (页面路由)](js-apis-router.md)
+  
 - Ability框架
   - Stage模型能力的接口(推荐)
     - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-font.md)
