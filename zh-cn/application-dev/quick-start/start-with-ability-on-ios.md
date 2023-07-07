@@ -2,29 +2,30 @@
 
 ## 简介
 
-本文介绍将OpenHarmony开发框架扩展到Ios平台所需要的必要的类及其使用说明，开发者基于OpenHarmony，可复用大部分的应用代码（生命周期等）并可以部署到Ios平台，降低跨平台应用开发成本。
+本文介绍将OpenHarmony开发框架扩展到iOS平台所需要的必要的类及其使用说明，开发者基于OpenHarmony，可复用大部分的应用代码（生命周期等）并可以部署到iOS平台，降低跨平台应用开发成本。
 
 ## iOS端APP开发指南
 
 ### 关键依赖集成
 
-* hap包, 导入到程序bundle路径内
-* arkui-X构建的libarkui_ios.xcframework库
-  **注** Xcode链接库需设置Embed&Sign
-
+* Deveco-Studio构建的hap包, 导入到iOS应用所在的bundle路径内
+* 跨平台arkui工程构建的libarkui_ios.xcframework库（iOS应用依赖的静态库）
+  **注:** Xcode:iOS应用的开发工具，Mac环境
+  **注:** Xcode链接库需设置Embed&Sign
+  
 ### Xcode配置
 
 * info文件内的URL Types、Queried URL Schemes需正确配置对应应用的bundleName，用于应用路由模式页面跳转
 * Build Setting -> Enable Bitcode -> NO
-* Minmum Deployments -> iOS10及以上
+* General -> Minmum Deployments -> iOS10及以上
 
-### 关键类
+### ArkUI-X和iOS平台集成所用关键类
 
 #### StageViewController
 
-StageViewController是stage模型iOS端视图控制器基类，若要实现跨平台基础能力及触发对应ability生命周期，所有iOS端视图控制器均要继承于StageViewController。
+StageViewController是stage模型iOS端视图控制器基类，若要实现跨平台基础能力及触发对应ability生命周期，所有iOS端应用级别的视图控制器均要继承于StageViewController。
 
-##### 公共属性：
+##### 公共属性
 
 * instanceName：StageViewController唯一标识，拼接规则为bundleName:moduleName:abilityName
 
@@ -38,16 +39,15 @@ StageViewController是stage模型iOS端视图控制器基类，若要实现跨�
 @property (nonatomic, strong) NSString *params;
 ```
 
-##### 初始化方法：
+##### 初始化方法
 
 ```objc
 - (instancetype)initWithInstanceName:(NSString *_Nonnull)instanceName;
 ```
 
-
 #### StageApplication
 
-StageApplication本质上是一个调度类，其作用主要用于触发内部相关类实现路径解析与配置、注册相关configuration信息、触发ability部分生命周期事件等。
+StageApplication本质上是一个调度类，其作用主要用于触发内部相关类实现路径解析与配置、注册应用相关的configuration信息、触发ability部分生命周期事件等。
 
 ##### 公共方法
 
@@ -57,7 +57,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 + (void)configModuleWithBundleDirectory:(NSString *_Nonnull)bundleDirectory;
 ```
 
-* 启动ability、配置进程id、本地化信息、configuration等
+* iOS应用启动ability、配置进程id、本地化信息、configuration等
 
 ```objc
 + (void)launchApplication;
@@ -93,10 +93,9 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 + (StageViewController *)getApplicationTopViewController;
 ```
 
-
 ### AppDelegate内关键实现参考
 
-#### 程序启动及初始化：
+#### iOS应用程序启动及初始化
 
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -116,7 +115,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 }
 ```
 
-#### 通过路由模式（openURL:）实现的页面跳转回调：
+#### 通过路由模式（openURL:）实现的iOS应用页面跳转回调
 
 ```objc
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
@@ -187,9 +186,9 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 }
 ```
 
-#### 其它程序级生命周期回调相应处理：
+#### 其它程序级生命周期回调相应处理
 
-* 程序进入后台，触发对应生命周期事件
+* iOS应用程序进入后台，触发对应生命周期事件
 
 ```objc
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -197,7 +196,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 }
 ```
 
-* 程序进入前台，触发对应生命周期事件
+* iOS应用程序进入前台，触发对应生命周期事件
 
 ```objc
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -205,7 +204,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 }
 ```
 
-* 终止程序进程
+* 终止iOS应用程序进程
 
 ```objc
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -213,7 +212,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 }
 ```
 
-#### 其它私有方法
+#### 其它私有方法(选择性实现)
 
 * 设置根视图
 
@@ -225,17 +224,5 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
     UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:viewController];
     [self setNaviAppearance:navi];
     self.window.rootViewController = navi;
-}
-```
-
-* 调整导航栏样式
-
-```objc
-- (void)setNaviAppearance:(UINavigationController *)navi {
-    UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
-    [appearance configureWithOpaqueBackground];
-    appearance.backgroundColor = UIColor.whiteColor;
-    navi.navigationBar.standardAppearance = appearance;
-    navi.navigationBar.scrollEdgeAppearance = navi.navigationBar.standardAppearance;
 }
 ```

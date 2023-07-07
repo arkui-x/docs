@@ -4,9 +4,23 @@
 
 本文介绍将OpenHarmony开发框架扩展到Android平台所需要的必要的类及其使用说明，开发者基于OpenHarmony，可复用大部分的应用代码（生命周期等）并可以部署到Android平台，降低跨平台应用开发成本。
 
-## 应用工程OpenHarmony逻辑部分的StageApplication
+## Android端APP开发指南
 
-应用需要继承继承存于ArkUI-X跨平台SDK中的arkui_android_adapter.jar包所提供的StageApplication，例如：
+### 关键依赖集成
+
+* ArkUI源码和OH资源编译后的JSBundle和资源文件，作为平台资源存放在assets中
+* ArkUI-X跨平台SDK中的适配层arkui_android_adapter.jar包
+  **注:** AndroidStudio:Android应用的开发工具
+
+### AndroidStudio配置
+
+* 使用AndroidStudio所创建Android工程的PackageName需要与OH工程的BundleName一致
+
+### ArkUI-X和Android平台集成所用关键类
+
+#### 应用工程Android逻辑部分的StageApplication
+
+应用需要继承arkui_android_adapter.jar包所提供的StageApplication，例如：
 
 ```
 package com.example.myapplication;
@@ -17,9 +31,9 @@ public class HiStageApplication extends StageApplication {
 }
 ```
 
-## 应用工程Android逻辑部分的StageActivity
+### 应用工程Android逻辑部分的StageActivity
 
-Activity需要继承存于ArkUI-X跨平台SDK中的arkui_android_adapter.jar包所提供的StageActivity，例如：
+Activity需要继承arkui_android_adapter.jar包所提供的StageActivity，例如：
 
 ```
 package com.example.myapplication;
@@ -40,7 +54,3 @@ public class EntryMainAbilityActivity extends StageActivity {
 
 ## Ability与Activity对应规则
   ![stage_android](figures/stage_android.png)
-
-
-
-
