@@ -1,34 +1,45 @@
 # Android平台接口扩展指南
 
-本文介绍在Android平台上基于NAPI机制和插件管理机制编写平台接口。
-
-> **说明：**
->
-> Android平台上扩展平台接口，以testplugin.hello接口为例。
-
-## ArkUI侧接口使用
-```typescript
-// xxx.ets
-
-import testplugin from 'libtestplugin.so';
-```
+本文介绍在Android平台上基于[N-API](../quick-start/ffi-napi-introduction.md)机制和插件管理机制，实现ArkUI侧调用Android侧方法。
 
 ## 接口定义
-| 名称 | 参数 | 返回类型 | 描述 |
+
+本文实现如下testplugin模块的log方法，功能为调用Android日志系统，打印来自ArkUI侧的数据。
+
+| 名称 | 参数类型 | 返回类型 | 描述 |
 | --- | --- | --- | --- |
-| hello | void | void | 在Android侧打印日志"hello from java" |
+| log | string | void | 在Android侧打印来自ArkUI侧的数据。|
 
-```typescript
-// xxx.ets
+## 开发流程
 
-testplugin.hello();
+1、利用[ACE Tools工具](../quick-start/start-overview.md)或IDE创建Native工程。
+
+```
+// Ace Tools 创建Native工程
+ace create project
+? Please enter the project name: testplugin
+? Please enter the bundle name (com.example.testplugin):
+? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 1
+? Please enter the template (1: Empty Ability, 2: Native C++): 2
 ```
 
-## 步骤
+2、通过Ace Tools或IDE创建Native模板后，ArkUI侧通过`import`引入Native侧的so文件，在创建出的`testplugin\source\entry\src\main\ets\pages\Index.ets`中，`import testplugin from 'libtestplugin.so'`，意为使用libtestplugin.so的能力，并将名为`testplugin`的ArkUI侧对象给到应用侧，开发者可通过该对象，基于插件管理机制开发Java插件，最终调用到在`testplugin\android\app\src\main\java\com\example\testplugin\TestPlugin.java`中开发的Java `log`方法。
 
-为了调用Android Java API，本质是要实现JS调用Java的能力。跨平台推荐JS -> C/C++ -> Java的调用路径，实现JS调用Android Java API。即在Android侧实现Java接口，再通过JNI机制注册Java模块；通过NAPI机制实现C/C++模块注册，供应用侧JS调用。
+```typescript
+// Index.ets
 
-### 1、Android侧实现hello方法
+import testplugin from 'libtestplugin.so';
+
+testplugin.log("log from ArkUI to Android");
+```
+
+3、按如下步骤实现testplugin模块的log方法，即可实现ArkTS调用Android日志系统，打印来自ArkUI侧的数据。
+
+## 模块实现步骤
+
+ArkTS调用Android Java API，本质上是要实现ArkTS调用Java的能力。跨平台推荐ArkTS -> C/C++ -> Java的调用路径，实现ArkTS调用Android Java API。即在Android侧实现Java接口，再通过JNI机制注册Java模块；通过[N-API](../quick-start/ffi-napi-introduction.md#n-api)机制实现C/C++模块注册，供应用侧ArkTS调用。
+
+### 1、实现Java log方法
 
 ```Java
 // android\app\src\main\java\com\example\testplugin\TestPlugin.java
@@ -47,9 +58,9 @@ public class TestPlugin {
         nativeInit();
     }
 
-    // 实现hello模块
-    public void hello() {
-        Log.i(LOG_TAG, "TestPlugin: hello from java");
+    // 实现log模块
+    public void log(String log) {
+        Log.i(LOG_TAG, log);
     }
 
     // 注册插件的初始化方法，供插件构造函数调用
@@ -57,13 +68,13 @@ public class TestPlugin {
 }
 ```
 
-### 2、通过JNI调用Java hello方法
+### 2、通过JNI调用Java log方法
 
 JNI（Java Native Interface）允许Java代码和C/C++代码交互，通过在C/C++侧注册Java模块，实现C/C++调用Java。
 
 > **说明：**
 >
-> SDK arkui-x\engine\lib\include路径下的文件需放在android\app\src\main\cpp\include目录中。
+> Ace Tools或IDE的Native模板中，SDK arkui-x\engine\lib\include路径下的文件会放在android\app\src\main\cpp\include目录中。
 
 ```C++
 // android\app\src\main\cpp\test_plugin_jni.cpp
@@ -82,11 +93,11 @@ namespace {
             { "nativeInit", "()V", reinterpret_cast<void*>(TestPluginJni::NativeInit) },
     };
 
-    const char METHOD_HELLO[] = "hello";
-    const char SIGNATURE_HELLO[] = "()V";
+    const char METHOD_LOG[] = "log";
+    const char SIGNATURE_LOG[] = "(Ljava/lang/String;)V";
 
     struct {
-        jmethodID hello;
+        jmethodID log;
         jobject globalRef;
     } g_pluginClass;
 
@@ -112,18 +123,24 @@ void TestPluginJni::NativeInit(JNIEnv* env, jobject jobj)
     g_pluginClass.globalRef = env->NewGlobalRef(jobj);
     jclass cls = env->GetObjectClass(jobj);
 
-    // 获取hello方法的Method ID
-    g_pluginClass.hello = env->GetMethodID(cls, METHOD_HELLO, SIGNATURE_HELLO);
+    // 获取log方法的Method ID
+    g_pluginClass.log = env->GetMethodID(cls, METHOD_LOG, SIGNATURE_LOG);
     env->DeleteLocalRef(cls);
 }
 
 // Called by C++
-void TestPluginJni::Hello()
+void TestPluginJni::Log(std::string log)
 {
     auto env = ARKUI_X_Plugin_GetJniEnv();
+    jstring jLog = env->NewStringUTF(log.c_str());
 
-    // 通过JNI调用Java hello方法
-    env->CallVoidMethod(g_pluginClass.globalRef, g_pluginClass.hello);
+    // 通过JNI调用Java log方法
+    env->CallVoidMethod(g_pluginClass.globalRef, g_pluginClass.log, jLog);
+
+    if (jLog != nullptr) {
+        env->DeleteLocalRef(jLog);
+    }
+
     if (env->ExceptionCheck()) {
         env->ExceptionDescribe();
         env->ExceptionClear();
@@ -139,6 +156,7 @@ void TestPluginJni::Hello()
 
 #include <jni.h>
 #include <memory>
+#include <string>
 
 class TestPluginJni {
 public:
@@ -148,7 +166,7 @@ public:
     // Called by Java
     static void NativeInit(JNIEnv* env, jobject jobj);
     // Called by C++
-    static void Hello();
+    static void Log(std::string log);
 };
 
 #endif
@@ -171,15 +189,9 @@ std::unique_ptr<TestPlugin> TestPlugin::Create()
     return std::make_unique<TestPluginImpl>();
 }
 
-void HelloTask()
+void TestPluginImpl::Log(std::string log)
 {
-    TestPluginJni::Hello();
-}
-
-// ARKUI_X_Plugin_RunAsyncTask是框架提供的接口，将JNI方法抛到Platform线程异步执行
-void TestPluginImpl::Hello()
-{
-    ARKUI_X_Plugin_RunAsyncTask(&HelloTask, ARKUI_X_PLUGIN_PLATFORM_THREAD);
+    TestPluginJni::Log(log);
 }
 ```
 
@@ -198,15 +210,15 @@ public:
     TestPluginImpl() = default;
     ~TestPluginImpl() override = default;
 
-    void Hello() override;
+    void Log(std::string log) override;
 };
 
 #endif
 ```
 
-### 3、通过插件机制注册Java方法，通过NAPI机制暴露JS hello方法
+### 3、通过插件机制注册Java方法，通过N-API机制注册testplugin模块，提供ArkTS log方法
 
-实现testplugin.hello对应的C/C++模块。
+实现testplugin.log对应的C/C++模块。
 
 ```C++
 // android\app\src\main\cpp\js_test_plugin.cpp
@@ -223,15 +235,36 @@ public:
 #include "test_plugin_jni.h"
 #endif
 
-static napi_value JSTestPluginHello(napi_env env, napi_callback_info info)
+#define NAPI_CALL_BASE(env, theCall, retVal) \
+    do {                                     \
+        if ((theCall) != napi_ok) {          \
+            return retVal;                   \
+        }                                    \
+    } while (0)
+
+#define NAPI_CALL(env, theCall) NAPI_CALL_BASE(env, theCall, nullptr)
+
+static napi_value JSTestPluginLog(napi_env env, napi_callback_info info)
 {
     // 创建TestPlugin实例
     auto plugin = TestPlugin::Create();
     if (!plugin) {
         return nullptr;
     }
-    // 调用C++接口，Hello函数最终会调用TestPluginJni::Hello
-    plugin->Hello();
+
+    size_t argc = 1;
+    napi_value args[1];
+    NAPI_CALL(env, napi_get_cb_info(env, info, &argc, args, NULL, NULL));
+    char buffer[128];
+    size_t buffer_size = 128;
+    size_t copied;
+    NAPI_CALL(env, napi_get_value_string_utf8(env, args[0], buffer, buffer_size, &copied));
+
+    std::string log;
+    log = buffer;
+
+    // 调用C++接口，Log函数最终会调用TestPluginJni::Log
+    plugin->Log(log);
     return nullptr;
 }
 ```
@@ -243,6 +276,7 @@ static napi_value JSTestPluginHello(napi_env env, napi_callback_info info)
 #define ANDROID_APP_SRC_MAIN_CPP_TEST_PLUGIN_H
 
 #include <memory>
+#include <string>
 
 class TestPlugin {
 public:
@@ -251,7 +285,7 @@ public:
 
     static std::unique_ptr<TestPlugin> Create();
 
-    virtual void Hello() = 0;
+    virtual void Log(std::string log) = 0;
 };
 
 #endif
@@ -262,15 +296,6 @@ public:
 ```C++
 // android\app\src\main\cpp\js_test_plugin.cpp
 
-#define NAPI_CALL_BASE(env, theCall, retVal) \
-    do {                                     \
-        if ((theCall) != napi_ok) {          \
-            return retVal;                   \
-        }                                    \
-    } while (0)
-
-#define NAPI_CALL(env, theCall) NAPI_CALL_BASE(env, theCall, nullptr)
-
 #define DECLARE_NAPI_FUNCTION(name, func)                                         \
     {                                                                             \
         (name), nullptr, (func), nullptr, nullptr, nullptr, napi_default, nullptr \
@@ -279,7 +304,7 @@ public:
 static napi_value TestPluginExport(napi_env env, napi_value exports)
 {
     static napi_property_descriptor desc[] = {
-        DECLARE_NAPI_FUNCTION("hello", JSTestPluginHello),
+        DECLARE_NAPI_FUNCTION("log", JSTestPluginLog),
     };
     NAPI_CALL(env, napi_define_properties(env, exports, sizeof(desc) / sizeof(desc[0]), desc));
     return exports;
@@ -320,7 +345,7 @@ static napi_module testPluginModule = {
 
 extern "C" __attribute__((constructor)) void TestPluginRegister()
 {
-    // 注册testPlugin模块，供JS调用
+    // 注册testPlugin模块，供ArkTS调用
     napi_module_register(&testPluginModule);
 #ifdef ANDROID_PLATFORM
     // JNI插件注册函数需要在Platform线程运行
@@ -343,15 +368,17 @@ project("testplugin")
 // 增加ANDROID_PLATFORM宏
 add_definitions(-DANDROID_PLATFORM)
 
+// Native模板默认配置
 set(TESTPLUGIN_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
+// Native模板默认配置
 include_directories(
         ${TESTPLUGIN_ROOT_PATH}
         ${TESTPLUGIN_ROOT_PATH}/include
 )
 
 // 构建libtestplugin.so
-add_library(testplugin SHARED test_plugin_impl.cpp test_plugin_jni.cpp js_test_plugin.cpp )
+add_library(testplugin SHARED test_plugin_impl.cpp test_plugin_jni.cpp js_test_plugin.cpp)
 
 add_library(arkui_android SHARED IMPORTED GLOBAL)
 set_target_properties(
