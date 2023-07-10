@@ -18,7 +18,6 @@
 
 - [框架总体设计说明](design/design-overview.md)
 - [工程结构与编译构建说明](quick-start/project-structure-guide.md)
-- [OpenHarmony部件引入说明](quick-start/oh-component-guide.md)
 
 ## 开发指南
 

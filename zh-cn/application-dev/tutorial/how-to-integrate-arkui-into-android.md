@@ -12,7 +12,7 @@
 ### Android应用工程集成ArkUI跨平台SDK
 
 * Android工程集成ArkUI跨平台SDK遵循Android应用工程集成Jar和动态库规则，即SDK组成清单中的arkui_android_adapter.jar包拷贝到libs目录，动态库（libarkui_android.so\libace_napi.so\libace_napi_ark.so等）拷贝到libs/arm64-v8a目录。
-* Android应用的入口Application和Activity，其中Activity需要继承自ArkUI提供的基类，Application可以通过代理类使用，详情参见[使用说明](https://gitee.com/arkui-x/android#使用说明)，比如:
+* Android应用的入口Application和Activity，其中Activity需要继承自ArkUI提供的基类，Application可以通过代理类使用，详情参见[使用说明](https://gitee.com/arkui-x/arkui_for_android#使用说明)，比如:
 
 **Activity部分** 
 * 一个ability对应一个Android工程侧的Activity类。

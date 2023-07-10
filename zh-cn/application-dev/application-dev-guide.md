@@ -10,8 +10,8 @@
 
 ## 开发者工具
 
-- ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见](quick-start/start-with-ace-tools.md)。
-- DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序开发工具，同时支持ArkUI-X应用创建，构建，安装，运行，调试和卸载等功能。[详情参加](quick-start/start-with-deveco-studio.md)
+- ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见ACE Tools快速入门](quick-start/start-with-ace-tools.md)。
+- DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序开发工具，同时支持ArkUI-X应用创建，构建，安装，运行，调试和卸载等功能。[详情参见IDE快速入门](quick-start/start-with-deveco-studio.md)
 
 ## 示例教程
 
