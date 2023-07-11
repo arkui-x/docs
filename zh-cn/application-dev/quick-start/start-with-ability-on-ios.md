@@ -185,4 +185,4 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 **注** 具体方法使用参考samples示例
 
 ## Ability与ViewController对应规则
-  ![stage_iOS](figures/stage_iOS.png)
+  ![stage_iOS](../../figures/StageIos.png)
