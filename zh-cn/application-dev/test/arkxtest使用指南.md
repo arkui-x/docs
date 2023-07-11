@@ -1,11 +1,11 @@
 # 跨平台单元测试脚本开发指南
 
 ## 创建跨平台工程
-### 创建跨平台工程
-- 通过Ace create命令[创建](../quick-start/start-with-ace-tools.md#创建应用)跨平台项目，Ace工具具体使用方法请见[Ace工具使用指南](../quick-start/start-with-ace-tools.md#使用说明)。
+创建跨平台工程
 
+- 通过Ace create命令[创建](../quick-start/start-with-ace-tools.md#创建应用)跨平台项目，ACE工具具体使用方法请见[ACE工具使用指南](../quick-start/start-with-ace-tools.md#使用说明)。
 
-### 跨平台工程目录
+跨平台工程目录
 
 ```
 ace_project 
@@ -40,7 +40,7 @@ ace_project
 
 - 进入ohosTest\ets\test目录，创建demo.test.ets文件。测试代码编写可参考创建工程时自动生成的Ability.test.ets中内容。
 
-![32342](./pic/语法说明.PNG)
+![32342](./pic/语法说明.png)
 
 测试用例采用通用语法，describe定义测试套， it定义测试用例。
 
@@ -56,7 +56,7 @@ ace_project
 
 ### 导入依赖模块
 
-- 在测试文件导入依赖模块，如被测试模块或辅助模块等，如下为导入ohos.util示例。
+在测试文件导入依赖模块，如被测试模块或辅助模块等，如下为导入ohos.util示例。
 
 ```js
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium'
@@ -99,9 +99,9 @@ export default function UtilFunTest() {
 
 | 测试用例编号       |   测试API  | 测试目的                                              |
 | ---- | ---------- | ------------------------------------------------------------ |
-|testIsNumberObject001    | isNumberObject   | 测试当传入Number对象类型的参数`new Number(0)`时，返回值为true    |
-|testIsNumberObject002    | isNumberObject  | 测试当传入Number对象类型的参数`new Number(10)`时，返回值为true    |
-| testIsNumberObject003   | isNumberObject | 测试当传入Number类型的参数`15`时，返回值为false   |
+|testIsNumberObject001    | isNumberObject   | 当传入Number对象类型的参数`new Number(0)`时，返回值为true    |
+|testIsNumberObject002    | isNumberObject  | 当传入Number对象类型的参数`new Number(10)`时，返回值为true    |
+| testIsNumberObject003   | isNumberObject | 当传入Number类型的参数`15`时，返回值为false   |
 
 ### 使用断言
 
@@ -154,7 +154,7 @@ export default function testsuite() {
 - 测试执行过程中，上述执行测试用例的窗口会显示测试执行信息。
 - 测试结束后，上述执行测试用例的窗口会显示所有的测试结果信息。
 
-![32342](./pic/acetest执行结果.PNG)
+![32342](./pic/acetest执行结果.png)
 
 图中run表示测试的用例总数，Failure表示测试的用例失败数，Error表示测试的用例错误数，Pass表示测试的用例通过数，Ignore表示测试的用例忽略数。
 
@@ -166,7 +166,7 @@ export default function testsuite() {
 
 ace test 运行异常终止，未能获取到最终结果，如下图所示：
 
-![32342](./pic/acetest运行截图.PNG)
+![32342](./pic/acetest运行截图.png)
 
 **可能原因**
 
