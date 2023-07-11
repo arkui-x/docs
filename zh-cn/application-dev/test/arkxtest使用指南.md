@@ -2,7 +2,7 @@
 
 ## 创建跨平台工程
 ### 创建跨平台工程
-- 通过Ace create命令[创建](../quick-start/start-with-ace-tools.md#创建应用)跨平台项目，Ace工具具体使用方法请见[Ace工具使用指南#使用说明](../quick-start/start-with-ace-tools.md#使用说明)。
+- 通过Ace create命令[创建](../quick-start/start-with-ace-tools.md#创建应用)跨平台项目，Ace工具具体使用方法请见[Ace工具使用指南](../quick-start/start-with-ace-tools.md#使用说明)。
 
 
 ### 跨平台工程目录
@@ -38,9 +38,8 @@ ace_project
 ## 编写测试代码
 ### 创建测试代码文件
 
-进入ohosTest\ets\test目录，创建demo.test.ets文件。
+- 进入ohosTest\ets\test目录，创建demo.test.ets文件。测试代码编写可参考创建工程时自动生成的Ability.test.ets中内容。
 
-测试代码编写可参考创建工程时自动生成的Ability.test.ets中内容。
 ![32342](./pic/语法说明.PNG)
 
 测试用例采用通用语法，describe定义测试套， it定义测试用例。
