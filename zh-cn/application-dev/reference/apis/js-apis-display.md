@@ -74,7 +74,7 @@ try {
 ## Display
 屏幕实例。描述display对象的属性和方法。
 
-下列API示例中都需先使用[getAllDisplays()](#displaygetalldisplays9)、[getDefaultDisplaySync()](#displaygetdefaultdisplaysync9)中的任一方法获取到Display实例，再通过此实例调用对应方法。
+下列API示例中都需先使用[getDefaultDisplaySync()](#displaygetdefaultdisplaysync9)中的任一方法获取到Display实例，再通过此实例调用对应方法。
 
 ### 属性
 

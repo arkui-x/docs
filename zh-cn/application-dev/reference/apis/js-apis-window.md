@@ -1327,6 +1327,20 @@ try {
     console.error('Failed to set the screen to be always on. Cause: ' + JSON.stringify(exception));
 }
 ```
+## WindowStageEventType<sup>9+</sup>
+
+WindowStage生命周期。
+
+**模型约束：** 此接口仅可在Stage模型下使用。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+| 名称       | 值 | 说明       |
+| ---------- | ------ | ---------- |
+| SHOWN      | 1      | 切到前台。 |
+| ACTIVE     | 2      | 获焦状态。 |
+| INACTIVE   | 3      | 失焦状态。 |
+| HIDDEN     | 4      | 切到后台。 |
 
 ## WindowStage<sup>9+</sup>
 
