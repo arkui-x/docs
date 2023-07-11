@@ -40,7 +40,7 @@ ace_project
 
 - 进入ohosTest\ets\test目录，创建demo.test.ets文件。测试代码编写可参考创建工程时自动生成的Ability.test.ets中内容。
 
-![32342](./pic/语法说明.png)
+![32342](./pic/语法_说明.png)
 
 测试用例采用通用语法，describe定义测试套， it定义测试用例。
 
@@ -154,7 +154,7 @@ export default function testsuite() {
 - 测试执行过程中，上述执行测试用例的窗口会显示测试执行信息。
 - 测试结束后，上述执行测试用例的窗口会显示所有的测试结果信息。
 
-![32342](./pic/acetest执行结果.png)
+![32342](./pic/acetest_执行结果.png)
 
 图中run表示测试的用例总数，Failure表示测试的用例失败数，Error表示测试的用例错误数，Pass表示测试的用例通过数，Ignore表示测试的用例忽略数。
 
@@ -166,7 +166,7 @@ export default function testsuite() {
 
 ace test 运行异常终止，未能获取到最终结果，如下图所示：
 
-![32342](./pic/acetest运行截图.png)
+![32342](./pic/acetest_运行截图.png)
 
 **可能原因**
 
@@ -176,7 +176,7 @@ so文件缺失导致异常
 
 使用 adb logcat > E:/xxx.txt 命令抓取ace test命令运行时的日志，在日志中搜索dlopen，查看缺失的so文件，如下图所示。其中，" xxx.z.so "文件非缺失文件， " xxx.so "文件为缺失文件，依次将缺失文件添加到 demotest\android\app\libs\arm64-v8a 和 demotest\android\app\libs\armeabi-v7a 文件夹中，再次进行测试。
 
-![32342](./pic/related_so.png)	
+![32342](./pic/relatedso.png)	
 
 
 
