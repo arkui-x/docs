@@ -2,7 +2,7 @@
 
 ## 创建跨平台工程
 ### 创建跨平台工程
-- 通过Ace create命令创建跨平台项目[Ace工具使用指南#创建应用](../quick-start/start-with-ace-tools.md#%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8)，Ace工具使用请见[Ace工具使用指南#使用说明](../quick-start/start-with-ace-tools.md#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)。
+- 通过Ace create命令[创建](../quick-start/start-with-ace-tools.md#创建应用)跨平台项目，Ace工具具体使用方法请见[Ace工具使用指南#使用说明](../quick-start/start-with-ace-tools.md#使用说明)。
 
 
 ### 跨平台工程目录
@@ -38,11 +38,12 @@ ace_project
 ## 编写测试代码
 ### 创建测试代码文件
 
-- 进入ohosTest\ets\test目录，创建demo.test.ets工程/文件。
-- 测试代码编写可参考创建工程时自动生成的Ability.test.ets中内容。
+进入ohosTest\ets\test目录，创建demo.test.ets文件。
+
+测试代码编写可参考创建工程时自动生成的Ability.test.ets中内容。
+![32342](./pic/语法说明.PNG)
 
 测试用例采用通用语法，describe定义测试套， it定义测试用例。
-![32342](./pic/语法说明.PNG)
 
 | No.  | API        | 功能说明                                                     |
 | ---- | ---------- | ------------------------------------------------------------ |
@@ -58,7 +59,7 @@ ace_project
 
 - 在测试文件导入依赖模块，如被测试模块或辅助模块等，如下为导入ohos.util示例。
 
-```javascript
+```js
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium'
 import util from '@ohos.util'
 
@@ -71,7 +72,7 @@ export default function abilityTest() {
 
 ### 编写测试代码
 
-```javascript
+```js
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium'
 import util from '@ohos.util'
 export default function UtilFunTest() {
@@ -105,7 +106,7 @@ export default function UtilFunTest() {
 
 ### 使用断言
 
-```javascript
+```js
 import { describe, it, expect } from '@ohos/hypium'
 export default function UtilFunTest() {
   describe('UtilTest', function () {
@@ -122,14 +123,14 @@ export default function UtilFunTest() {
 | ---- | ---------- | ------------------------------------------------------------ |
 |testIsNumberObject001    | isNumberObject   | isNumberObject方法传入Number对象类型的参数' new Number(0) '时，返回值为true，使用expect断言result值为true |
 
-- 更多断言使用方式可参考[单元测试框架断言说明](https://gitee.com/openharmony/testfwk_arkxtest#%E6%96%AD%E8%A8%80%E5%BA%93)。
+- 更多断言使用方式可参考[单元测试框架断言说明](https://gitee.com/openharmony/testfwk_arkxtest#断言库)。
 
 ### 修改List.test.ets文件
 
-- 在ohosTest\ets\test\List.test.ets中，import创建的测试文件
+- 在ohosTest\ets\test\List.test.ets中，导入创建的测试文件
 
 
-```javascript
+```js
 import abilityTest from './Ability.test'
 
 export default function testsuite() {
@@ -156,6 +157,8 @@ export default function testsuite() {
 
 ![32342](./pic/acetest执行结果.PNG)
 
+图中run表示测试的用例总数，Failure表示测试的用例失败数，Error表示测试的用例错误数，Pass表示测试的用例通过数，Ignore表示测试的用例忽略数。
+
 ##  常见问题
 
 **so文件缺失导致异常**
@@ -174,7 +177,7 @@ so文件缺失导致异常
 
 使用 adb logcat > E:/xxx.txt 命令抓取ace test命令运行时的日志，在日志中搜索dlopen，查看缺失的so文件，如下图所示。其中，" xxx.z.so "文件非缺失文件， " xxx.so "文件为缺失文件，依次将缺失文件添加到 demotest\android\app\libs\arm64-v8a 和 demotest\android\app\libs\armeabi-v7a 文件夹中，再次进行测试。
 
-![32342](./pic/so_related.png)	
+![32342](./pic/related_so.png)	
 
 
 
