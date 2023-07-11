@@ -1,8 +1,13 @@
-# 使用ArkTS语言开发（stage）
+# 使用ArkTS语言开发（Stage模型）
 
 >  **说明：**
 >
->  为确保运行效果，本文以使用**ArkUI-X 4.0.8.2**版本为例。
+>  本文以**ArkUI-X 4.0.8.2**版本为例，如果使用其它版本，可能存在文档与产品功能界面、操作不一致的情况，请以实际功能界面为准。
+
+### 应用介绍：
+
+通过构建一个多页面间跳转的示例，快速了解如何通过页面路由实现页面跳转，熟悉ArkTS跨平台开发流程。
+
 
 ## 创建ArkTS跨平台应用工程
 
@@ -14,9 +19,64 @@
 
 执行 `ace check` 命令可以检查上述的本地开发环境。对于必选项，需要检查通过，否则无法继续接下来的操作。
 
-*注：开发环境检查主要针对SDK和IDE的默认安装和下载路径；如果通过SDK Manager下载SDK，会检查默认环境变量：ANDROID_HOME和OpenHarmony_HOME是否配置。*
+Windows系统中的开发环境：检查SDK和IDE的默认安装和下载路径；如果通过SDK Manager下载SDK，会检查默认环境变量：ANDROID_HOME和OpenHarmony_HOME是否配置。  
 
-### 2. 检查设备连接
+在MAC系统中需要配置npm与nodejs环境配置即可。
+
+以下是需要检查的项：  
+
+| 检查内容 | 说明  | Windows | Linux | Mac |
+|------|-----|---------|-------|-----|
+|Node.js|Node.js 路径| 是       | 是     |是|
+|OpenHarmony SDK|OpenHarmony SDK路径| 是       | 是     |是|
+|HarmonyOS SDK|HarmonyOS SDK路径| 是       | 是     |是|
+|Android SDK|Android SDK路径| 是       | 是     |是|
+|DevEco Studio|DevEco Studio安装路径| 是       | 否     |是|
+|Android Studio|Android Studio安装路径| 是       | 是     |是|
+|连接设备|当前连接的所有设备| 是       | 是     |是|
+|Xcode|当前Xcode的版本号| 否       | 否     |是|
+|libimobiledevice|当前libimobiledevice的版本号	| 否       | 否     |是|
+|ios-deploy|当前ios-deploy的版本号	| 否       | 否     |是|
+|ArkUI-X SDK|ArkUI-X SDK路径	| 是       | 是     |是|
+|ohpm|ohpm路径	| 是       | 是     |是|
+
+执行成功结果参考：
+```shell
+ohos@user ~ % ace check
+[√] ArkUI-X toolchains - develop for ArkUI-X devices
+  • ArkUI-X SDK at /Users/ohos/ARKUI-X
+  • Node.js Runtime Environment at /usr/local/bin/node
+  • Java Sdk at /Library/Java/JavaVirtualMachines/jdk-18.0.2.1.jdk/Contents/Home
+  • Ohpm at /Users/ohos/Library/Huawei/ohpm/bin
+[√] OpenHarmony toolchains - develop for OpenHarmony devices
+  • OpenHarmony SDK at /Users/ohos/openharmony/sdk
+  • Node.js Runtime Environment at /usr/local/bin/node
+  • Java Sdk at /Library/Java/JavaVirtualMachines/jdk-18.0.2.1.jdk/Contents/Home
+  • Ohpm at /Users/ohos/Library/Huawei/ohpm/bin
+[√] HarmonyOS toolchains - develop for HarmonyOS devices
+  • HarmonyOS SDK at /Users/ohos/harmonyos/sdk
+  • Node.js Runtime Environment at /usr/local/bin/node
+  • Java Sdk at /Library/Java/JavaVirtualMachines/jdk-18.0.2.1.jdk/Contents/Home
+  • Ohpm at /Users/ohos/Library/Huawei/ohpm/bin
+[√] Android toolchains - develop for Android devices
+  • Android SDK at /Users/ohos/Library/Android/sdk
+[√] DevEco Studio [Requires DevEco Studio 3.1 Release, API Version 9+]
+  • DevEco Studio at /Applications/deveco-studio.app
+[!] Android Studio
+  ! Android Studio is not installed, you can install in https://developer.android.google.cn/studio
+[√] iOS toolchains - develop for iOS devices
+  • Xcode 13.3Build version 13E113
+  • idevicesyslog 1.3.0
+  • 1.11.4
+Tools info :[√] OpenHarmony hdc installed [√] HarmonyOS hdc installed [√] adb installed [√] ios-deploy installed
+[√] Connected device (1 available)
+  • iOS Devices	[....] Found 00008020-001C0D92146A002E (N841AP, iPhone XR, iphoneos, arm64e, 15.0, 19A346) a.k.a. 'iPhone Xr 15.0' connected through USB.
+
+  √ Ace-check found no issues.
+```
+
+
+### 2. 检查设备连接（可选）
 
    ```shell
    ace devices
@@ -118,11 +178,13 @@ demo/
 
 在上述工程创建完成后，开发者可在项目中的source目录下进行代码开发。
 
-### 模板默认页面
+### 构建第一个页面
 
-1. 包含Text和Button组件。
+创建第一个页面。 
 
-   工程同步完成后，在“**source**”目录，点击“**entry &gt; src &gt; main &gt; ets &gt; pages &gt; index**”，打开“**index.ets**”文件，可以看到页面由Text和Button组件组成。“**index.ets**”文件的示例如下：
+   - 在第一个页面添加Text组件、Button组件等，并设置其样式。
+
+   - 工程同步完成后，在“**source**”目录，点击“**entry &gt; src &gt; main &gt; ets &gt; pages &gt; index**”，打开“**index.ets**”文件，可以看到页面由Text和Button组件组成。“**index.ets**”文件的示例如下：
    
     ```ts
     // index.ets
@@ -302,37 +364,22 @@ demo/
 
 ## 项目编译
 
-开始对 'demo' 项目进行编译。编译分为hap 、apk和app：
+开始对 'demo' 项目进行编译。编译目标产物为hap 、apk和app，分别对应OpenHarmony/HarmonyOS、Android和iOS应用工程，
+下述命令以hap为例，并且可将hap参数替换为apk或app，其分别对应Android应用和iOS应用，功能一致：
 
    ```shell
    cd demo
    ```
 
-1. 编译hap，默认编译所有Module
+   编译hap，默认编译所有Module
 
    ```shell
    ace build hap
    ```
 
-   生成hap应用文件，默认路径为 demo/ohos/entry/build/default/outputs/default/。
+   最终会生成hap应用文件，默认路径为 demo/ohos/entry/build/default/outputs/default/。
 
-2. 编译apk，默认编译Module为app的模块
-
-   ```shell
-   ace build apk
-   ```
-
-   生成apk应用文件，默认路径为：demo/android/app/build/outputs/apk/debug/。
-
-3. 编译app，默认编译Module为app的模块
-
-   ```shell
-   ace build app
-   ```
-   
-   生成app应用文件，默认路径为：demo/ios/build/outputs/app/。
-
-
+   **注**： apk文件的默认路径为demo/android/app/build/outputs/apk/debug/。app文件的默认路径为demo/ios/build/outputs/app/。
 ## 使用真机运行应用
 
 效果如下图所示：
