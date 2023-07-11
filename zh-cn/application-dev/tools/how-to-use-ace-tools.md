@@ -20,7 +20,7 @@
 demo
 ├── android             //android应用工程            
 ├── ios                 //iOS应用工程                              
-├── ohos                // 鸿蒙应用工程
+├── ohos                //OpenHarmony/HarmonyOS应用工程
 └── source              //保存ArkTS源码
     └── entry 
 ```
