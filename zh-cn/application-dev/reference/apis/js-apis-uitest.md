@@ -528,39 +528,6 @@ async function demo() {
 }
 ```
 
-### getBounds<sup>9+</sup>
-
-getBounds(): Promise\<Rect>
-
-获取控件对象的边框信息。
-
-**系统能力**：SystemCapability.Test.UiTest
-
-**返回值：**
-
-| 类型                     | 说明                                  |
-| ------------------------ | ------------------------------------- |
-| Promise\<[Rect](#rect9)> | 以Promise形式返回控件对象的边框信息。 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[uitest测试框架错误码](../errorcodes/errorcode-uitest.md)。
-
-| 错误码ID | 错误信息                               |
-| -------- | ---------------------------------------- |
-| 17000002 | if the async function was not called with await. |
-| 17000004 | if the component is invisible or destroyed.           |
-
-**示例：**
-
-```js
-async function demo() {
-    let driver = Driver.create();
-    let button = await driver.findComponent(ON.type('button'));
-    let rect = await button.getBounds();
-}
-```
-
 ### getBoundsCenter<sup>9+</sup>
 
 getBoundsCenter(): Promise\<Point>
