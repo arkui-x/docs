@@ -16,4 +16,4 @@
   - [iOS平台](start-with-ability-on-ios.md)
 - 跨语言调用说明
   - [平台桥接(@arkui-x.bridge)](platform-bridge-introduction.md)
-  - [FFI能力(Node-API)](ffi-napi-introduction.md)
+  - [FFI能力(N-API)](ffi-napi-introduction.md)
