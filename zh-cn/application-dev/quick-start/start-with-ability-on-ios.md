@@ -1,33 +1,18 @@
-# Stage模型iOS端开发指导
+# 通过Stage模型开发iOS端应用指南
 
 ## 简介
 
-本文介绍将OpenHarmony开发框架扩展到iOS平台所需要的必要类及其使用说明，开发者可以参照该指南，基于OpenHarmony中的Stage模型能力，高效、低成本开发跨平台iOS端应用。
+本文介绍将OpenHarmony开发框架扩展到iOS平台所需要的必要类及其使用说明，开发者可以参照该指南，基于OpenHarmony中的Stage模型能力，高效、快速、低成本开发跨平台iOS端应用。
 
-## iOS端APP开发指南
+## ArkUI-X和iOS平台集成所用关键类
 
-### 关键依赖集成
-
-* Deveco-Studio构建的hap包, 导入到iOS应用所在的bundle路径内。
-* 跨平台arkui工程构建的libarkui_ios.xcframework库（iOS应用依赖的静态库）。
-**注:** Xcode:iOS应用的开发工具，Mac环境。
-**注:** Xcode链接库需设置Embed&Sign。
-
-### Xcode配置
-
-* info文件内的URL Types、Queried URL Schemes需正确配置对应应用的bundleName，用于应用路由模式页面跳转。
-* Build Setting -> Enable Bitcode -> NO。
-* General -> Minmum Deployments -> iOS10及以上。
-
-### ArkUI-X和iOS平台集成所用关键类
-
-#### StageViewController
+### StageViewController
 
 StageViewController是Stage模型iOS端视图控制器基类，若要实现跨平台基础能力及触发对应ability生命周期，所有iOS端应用级别的视图控制器均要继承于StageViewController。
 
-##### 公共属性
+#### 公共属性
 
-* instanceName：StageViewController唯一标识，拼接规则为bundleName:moduleName:abilityName。
+* instanceName：StageViewController唯一标识，拼接规则为**bundleName:moduleName:abilityName**，其中bundleName、moduleName、abilityName来自ohos的module.json里的名字。
 
 ```objc
 @property (nonatomic, readonly) NSString *instanceName;
@@ -39,17 +24,17 @@ StageViewController是Stage模型iOS端视图控制器基类，若要实现跨�
 @property (nonatomic, strong) NSString *params;
 ```
 
-##### 初始化方法
+#### 初始化方法
 
 ```objc
 - (instancetype)initWithInstanceName:(NSString *_Nonnull)instanceName;
 ```
 
-#### StageApplication
+### StageApplication
 
 StageApplication本质上是一个调度类，其作用主要用于触发内部相关类实现路径解析与配置、注册应用相关的configuration信息、触发ability部分生命周期事件等。
 
-##### 公共方法
+#### 公共方法
 
 * 配置本地hap包路径。
 
@@ -57,7 +42,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 + (void)configModuleWithBundleDirectory:(NSString *_Nonnull)bundleDirectory;
 ```
 
-* iOS应用启动ability、配置进程id、本地化信息、configuration等。
+* iOS应用触发StartAbility、配置进程id、本地化信息、configuration等。
 
 ```objc
 + (void)launchApplication;
@@ -93,9 +78,9 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 + (StageViewController *)getApplicationTopViewController;
 ```
 
-### AppDelegate内关键实现参考
+## AppDelegate内关键实现参考
 
-#### iOS应用程序启动及初始化
+### iOS应用程序启动及初始化
 
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -109,13 +94,16 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
     if (!launchOptions.count) { 
         NSString *instanceName = [NSString stringWithFormat:@"%@:%@:%@",@"com.example.iosabilitystage", @"entry", @"MainAbility"];
         EntryMainViewController *mainView = [[EntryMainViewController alloc] initWithInstanceName:instanceName];
-        [self setNavRootVC:mainView];
+    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:mainView];
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.window.rootViewController = navi;
+        [self.window makeKeyAndVisible];
     }
     return YES;
 }
 ```
 
-#### 通过路由模式（openURL:）实现的iOS应用页面跳转回调
+### 通过路由模式（openURL:）实现的iOS应用页面跳转回调，获取传递参数
 
 ```objc
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
@@ -134,7 +122,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
             params = item.value;
         }
     }
-    
+    //单实例ability处理
     if ([StageApplication handleSingleton:bundleName moduleName:moduleName abilityName:abilityName] == YES) {
         return YES;
     }
@@ -144,49 +132,31 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
                                params:params, nil];
     return YES;
 }
+```
 
+### 通过解析url得到的参数，映射ability对应的viewcontroller
+
+```objc
 - (BOOL)handleOpenUrlWithBundleName:(NSString *)bundleName
                          moduleName:(NSString *)moduleName
                         abilityName:(NSString *)abilityName
                              params:(NSString *)params, ...NS_REQUIRES_NIL_TERMINATION {
-    
-    UIViewController *rootVC = [[UIApplication sharedApplication].delegate window].rootViewController;
-    
-    BOOL hasRoot = NO;
-    if ([rootVC isKindOfClass:[UINavigationController class]]) {
-        hasRoot = YES;
-    }
-    
-    id subStageVC = nil;
+                             
     NSString *instanceName = [NSString stringWithFormat:@"%@:%@:%@",bundleName, moduleName, abilityName];
     
-    // 跳转ability对应的viewtroller
     if ([bundleName isEqualToString:BUNDLE_NAME] &&
                [abilityName isEqualToString:@"MainAbility"]) {
         EntryMainAbilityViewController *entryMainVC = [[EntryMainAbilityViewController alloc] initWithInstanceName:instanceName];
         entryMainVC.params = params;
-        subStageVC = (EntryMainAbilityViewController *)entryMainVC;
     }else if ([bundleName isEqualToString:BUNDLE_NAME] && [abilityName isEqualToString:@"Other"]) {
         EntryOtherViewController *entryOtherVC = [[EntryOtherViewController alloc] initWithInstanceName:instanceName];
         entryOtherVC.params = params;
-        subStageVC = (EntryOtherViewController *)entryOtherVC;
-    }
-
-    if (!subStageVC) {
-        return NO;
-    }
-    
-    if (!hasRoot) {
-        [self setNavRootVC:subStageVC];
-    } else {
-        UINavigationController *rootNav = (UINavigationController *)self.window.rootViewController;
-        [rootNav pushViewController:subStageVC animated:YES];
     }
     return YES;
 }
 ```
 
-#### 其它程序级生命周期回调相应处理
+### 其它程序级生命周期回调相应处理
 
 * iOS应用程序进入后台，触发对应生命周期事件。
 
@@ -212,17 +182,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 }
 ```
 
-#### 其它私有方法(选择性实现)
+**注** 具体方法使用参考samples示例
 
-* 设置根视图。
-
-```objc
-- (void)setNavRootVC:(id)viewController {
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:viewController];
-    [self setNaviAppearance:navi];
-    self.window.rootViewController = navi;
-}
-```
+## Ability与ViewController对应规则
+  ![stage_iOS](figures/stage_iOS.png)
