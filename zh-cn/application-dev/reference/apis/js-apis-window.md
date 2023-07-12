@@ -37,7 +37,7 @@ import window from '@ohos.window';
 | ---------- | -------------------------- | -- |-----------------------------------------------------------------------------|
 | name       | string                     | 是 | 窗口名字。                                                                       |
 | windowType | [WindowType](#windowtype7) | 是 | 窗口类型。                                                                       |
-| ctx        | [BaseContext](js-apis-inner-application-baseContext.md) | 否 | 当前应用上下文信息。不设置，则默认为空。<br>FA模型下不需要使用该参数，即可创建子窗口。<br>Stage模型下需要使用该参数，用于创建系统窗口。 |
+| ctx        | BaseContext | 否 | 当前应用上下文信息。不设置，则默认为空。<br>FA模型下不需要使用该参数，即可创建子窗口。<br>Stage模型下需要使用该参数，用于创建系统窗口。 |
 | displayId  | number                     | 否 | 当前物理屏幕id。不设置，则默认为-1，该参数应为整数。                                             |
 | parentId   | number                     | 否 | 父窗口id。不设置，则默认为-1，该参数应为整数。                                                           |
 
@@ -237,7 +237,7 @@ getLastWindow(ctx: BaseContext, callback: AsyncCallback&lt;Window&gt;): void
 
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------------------------------------- | -- | ---------------------------------------- |
-| ctx      | [BaseContext](js-apis-inner-application-baseContext.md) | 是 | 当前应用上下文信息。 |
+| ctx      | BaseContext | 是 | 当前应用上下文信息。 |
 | callback | AsyncCallback&lt;[Window](#window)&gt; | 是 | 回调函数。返回当前应用内最后显示的窗口对象。 |
 
 **错误码：**
@@ -279,7 +279,7 @@ getLastWindow(ctx: BaseContext): Promise&lt;Window&gt;
 
 | 参数名 | 类型 | 必填 | 说明 |
 | ------ | ----------- | ---- | ------------------------------------------------------------ |
-| ctx    | [BaseContext](js-apis-inner-application-baseContext.md) | 是   | 当前应用上下文信息。 |
+| ctx    | BaseContext | 是   | 当前应用上下文信息。 |
 
 **返回值：**
 
@@ -865,7 +865,7 @@ getUIContext(): UIContext
 
 | 类型       | 说明                   |
 | ---------- | ---------------------- |
-| [UIContext](./js-apis-arkui-UIContext.md#uicontext) | 返回UIContext实例对象。 |
+| UIContext | 返回UIContext实例对象。 |
 
 **错误码：**
 
@@ -1005,7 +1005,7 @@ loadContent(path: string, storage: LocalStorage, callback: AsyncCallback&lt;void
 | 参数名   | 类型                                            | 必填 | 说明                                                         |
 | -------- | ----------------------------------------------- | ---- | ------------------------------------------------------------ |
 | path     | string                                          | 是   | 设置加载页面的路径。                                         |
-| storage  | [LocalStorage](../../quick-start/arkts-localstorage.md) | 是   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
+| storage  | LocalStorage                                    | 是   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
 | callback | AsyncCallback&lt;void&gt;                       | 是   | 回调函数。                                                   |
 
 **错误码：**
@@ -1051,7 +1051,7 @@ loadContent(path: string, storage: LocalStorage): Promise&lt;void&gt;
 | 参数名  | 类型                                            | 必填 | 说明                                                         |
 | ------- | ----------------------------------------------- | ---- | ------------------------------------------------------------ |
 | path    | string                                          | 是   | 设置加载页面的路径。                                         |
-| storage | [LocalStorage](../../quick-start/arkts-localstorage.md) | 是   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
+| storage | LocalStorage                                    | 是   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
 
 **返回值：**
 
@@ -1327,6 +1327,7 @@ try {
     console.error('Failed to set the screen to be always on. Cause: ' + JSON.stringify(exception));
 }
 ```
+
 ## WindowStageEventType<sup>9+</sup>
 
 WindowStage生命周期。
@@ -1346,7 +1347,7 @@ WindowStage生命周期。
 
 窗口管理器。管理各个基本窗口单元，即[Window](#window)实例。
 
-下列API示例中都需在[onWindowStageCreate()](js-apis-app-ability-uiAbility.md#uiabilityonwindowstagecreate)函数中使用WindowStage的实例调用对应方法。
+下列API示例中都需在onWindowStageCreate()函数中使用WindowStage的实例调用对应方法。
 
 ### getMainWindow<sup>9+</sup>
 
@@ -1704,7 +1705,7 @@ loadContent(path: string, storage: LocalStorage, callback: AsyncCallback&lt;void
 | 参数名   | 类型                                            | 必填 | 说明                                                         |
 | -------- | ----------------------------------------------- | ---- | ------------------------------------------------------------ |
 | path     | string                                          | 是   | 设置加载页面的路径。                                         |
-| storage  | [LocalStorage](../../quick-start/arkts-localstorage.md) | 是   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
+| storage  | LocalStorage                                    | 是   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
 | callback | AsyncCallback&lt;void&gt;                       | 是   | 回调函数。                                                   |
 
 **错误码：**
@@ -1759,7 +1760,7 @@ loadContent(path: string, storage?: LocalStorage): Promise&lt;void&gt;
 | 参数名  | 类型                                            | 必填 | 说明                                                         |
 | ------- | ----------------------------------------------- | ---- | ------------------------------------------------------------ |
 | path    | string                                          | 是   | 设置加载页面的路径。                                         |
-| storage | [LocalStorage](../../quick-start/arkts-localstorage.md) | 否   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
+| storage | LocalStorage                                    | 否   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
 
 **返回值：**
 
