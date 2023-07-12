@@ -53,8 +53,8 @@
   - [@ohos.multimedia.image (图片处理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-image.md)
 
 - 资源管理
-  - [@ohos.intl (国际化-Intl)](js-apis-intl.md)
   - [@ohos.i18n (国际化-I18n)](js-apis-i18n.md)
+  - [@ohos.intl (国际化-Intl)](js-apis-intl.md)
   - [@ohos.resourceManager (资源管理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-resource-manager.md)
 
 - 网络管理
