@@ -55,7 +55,7 @@
 - 资源管理
   - [@ohos.i18n (国际化-I18n)](js-apis-i18n.md)
   - [@ohos.intl (国际化-Intl)](js-apis-intl.md)
-  - [@ohos.resourceManager (资源管理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-resource-manager.md)
+  - [@ohos.resourceManager (资源管理)](js-apis-resource-manager.md)
 
 - 网络管理
   - [@ohos.request (上传下载)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-request.md)
