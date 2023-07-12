@@ -53,10 +53,9 @@
 - [DevEco Studio](tools/how-to-use-deveco-studio.md)
 - [ACE Tools](tools/how-to-use-ace-tools.md)
 
-### 测试和调试(TODO)
+### 测试
 
-- [单元/UI测试](./test/)
-- [ArkTS测试](./tutorial/ark_compiler/ark-debugger-guidelines.md)
+- [单元/UI测试](./test/arkxtest.md)
 
 ## API参考
 
