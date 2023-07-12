@@ -26,8 +26,6 @@
     - [@ohos.app.ability.Configuration (Configuration)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-app-ability-configuration.md)
     - [@ohos.app.ability.ConfigurationConstant (ConfigurationConstant)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-app-ability-configurationConstant.md)
     - [@ohos.app.ability.Want (Want)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-app-ability-want.md)
-    - [@ohos.intl (国际化-Intl)](js-apis-intl.md)
-    - [@ohos.i18n (国际化-I18n)](js-apis-i18n.md)
   - 接口依赖的元素及定义
     - ability
     - app
@@ -55,8 +53,8 @@
   - [@ohos.multimedia.image (图片处理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-image.md)
 
 - 资源管理
-  - [@ohos.i18n (国际化-I18n)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-i18n.md)
-  - [@ohos.intl (国际化-Intl)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-intl.md)
+  - [@ohos.intl (国际化-Intl)](js-apis-intl.md)
+  - [@ohos.i18n (国际化-I18n)](js-apis-i18n.md)
   - [@ohos.resourceManager (资源管理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-resource-manager.md)
 
 - 网络管理
