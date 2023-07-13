@@ -1,4 +1,4 @@
-# 通过[Stage模型](start-with-ets-stage.md)开发iOS端应用指南
+# 通过Stage模型开发iOS端应用指南
 
 ## 简介
 

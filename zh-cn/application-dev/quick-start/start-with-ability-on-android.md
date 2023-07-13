@@ -1,13 +1,8 @@
-# 通过[Stage模型](start-with-ets-stage.md)开发Android端应用指南
+# 通过Stage模型开发Android端应用指南
 
 ## 简介
 
 本文介绍将ArkUI框架扩展到Android平台所需要的必要的类及其使用说明，开发者基于OpenHarmony，可复用大部分的应用代码（生命周期等）并可以部署到Android平台，降低跨平台应用开发成本。
-
-## 关键依赖集成
-
-* ArkUI源码和OpenHarmony资源编译后的JSBundle和资源文件，作为平台资源存放在assets中。
-* ArkUI-X编译SDK时生成的arkui_android_adapter.jar包。
 
 ## AndroidStudio配置
 
