@@ -31,7 +31,7 @@ public class HiStageApplication extends StageApplication {
 
 ### 应用工程Android逻辑部分的StageActivity
 
-Activity需要继承arkui_android_adapter.jar包所提供的StageActivity。StageActivity主要功能是将安卓Activity的生命周期与OpenHarmony中Ability的生命周期进行映射，例如：
+Activity需要继承arkui_android_adapter.jar包所提供的StageActivity。StageActivity主要功能是将Android中Activity的生命周期与OpenHarmony中Ability的生命周期进行映射，例如：
 
 ```
 package com.example.myapplication;
