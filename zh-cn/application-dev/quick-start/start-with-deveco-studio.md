@@ -134,7 +134,7 @@ MyApplication
 │   │   │   │   │   │       │   └── module.json
 │   │   │   │   │   │       ├── feature1
 │   │   │   │   │   │       ├── feature2
-│   │   │   │   │   │       ├── entryTest                 // ohosTest，仅仅Debug模式构建包含。
+│   │   │   │   │   │       ├── entryTest                 // ohosTest，仅Debug模式构建包含
 │   │   │   │   │   │       └── systemres                 // OpenHarmony系统资源
 │   │   │   │   │   ├── java/com/example/myapplication
 │   │   │   │   │   │   ├── EntryEntyAbilityActibity.java // 基于AceActivity扩展EntryActivity
@@ -182,7 +182,7 @@ DevEco Studio可打包生成不同平台的应用包，在Windows平台上同时
 1. 在主菜单栏，单击**Build &gt; Build Hap(s)/APP(s) &gt; Build APP(s)**。
    ![zh-cn_image_0000001580152768](figures/zh-cn_image_0000001580152768.png)
 
-   构建完成后，在**.arkui-x &gt; android &gt; app &gt; build &gt; outputs**目录下生成可运行在Andorid设备上的apk包。如果是使用macOS平台，还将在ios目录下构建出可运行在iOS设备上的app包。
+   构建完成后，在 **.arkui-x &gt; android &gt; app &gt; build &gt; outputs** 目录下生成可运行在Andorid设备上的apk包。如果是使用macOS平台，还将在ios目录下构建出可运行在iOS设备上的app包。
 
    ![zh-cn_image_0000001580312688](figures/zh-cn_image_0000001580312688.png)
 
@@ -199,7 +199,7 @@ DevEco Studio可打包生成不同平台的应用包，在Windows平台上同时
 
 ### 创建Library
 
-1. 根据工程创建向导，选择创建Application，选择所需要的ArkUI-X模板**[ArkUI-X] Library**，点击**Next**。
+1. 根据工程创建向导，选择创建Application，选择所需要的ArkUI-X模板 **[ArkUI-X] Library**，点击**Next**。
    ![zh-cn_image_0000001624998937](figures/zh-cn_image_0000001624998937.png)
 
 2. 在工程配置页面，填写工程的基本信息，点击**Finish**。
@@ -214,7 +214,7 @@ DevEco Studio可打包生成不同平台的应用包，在Windows平台上同时
 
 ![zh-cn_image_0000001580313452](figures/zh-cn_image_0000001580313452.png)
 
-构建完成后，在**.arkui-x &gt; android &gt; library &gt; build &gt; outputs**目录下生成可集成在Andorid应用上的aar包。如果是使用macOS平台，还将ios目录下构建出可集成在iOS应用上的.xcframwork包。
+构建完成后，在 **.arkui-x &gt; android &gt; library &gt; build &gt; outputs**目录下生成可集成在Andorid应用上的aar包。如果是使用macOS平台，还将ios目录下构建出可集成在iOS应用上的.xcframwork包。
 
 ![zh-cn_image_0000001579994524](figures/zh-cn_image_0000001579994524.png)
 
