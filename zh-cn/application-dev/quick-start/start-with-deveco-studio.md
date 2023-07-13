@@ -1,12 +1,13 @@
-# 配置开发环境
+# 使用DevEco Studio开发ArkUI-X项目
+## 配置开发环境
 
 
-## 准备工作
+### 准备工作
 
 请参考[搭建开发环境](https://developer.harmonyos.com/cn/docs/documentation/doc-guides-V3/installation_process-0000001071425528-V3)完成DevEco Studio的下载与安装。
 
 
-## 使用DevEco Studio开发ArkUI-X约束说明
+### 使用DevEco Studio开发ArkUI-X约束说明
 
 - DevEco Studio仅支持ArkUI-X源码开发和调试，各平台Native代码请使用对应平台的IDE编辑器进行开发和调试；
 
@@ -18,7 +19,7 @@
   - iOS平台：iOS 10+
 
 
-## 依赖环境准备
+### 依赖环境准备
 
 在开发应用/服务前，请先完成依赖环境准备。
 
@@ -42,21 +43,21 @@
 | Xcode | iOS应用开发环境，请参考官方环境搭建指导。 | 
 
 
-## 安装HarmonyOS SDK
+### 安装HarmonyOS SDK
 
 1. 在**File &gt; Settings &gt; SDK**（macOS为**DevEco Studio &gt; Preferences &gt; SDK**）下，点击Location右侧的**Edit**，为SDK选择存储路径。
 
 2. 在弹出的SDK Setup页面选择存储路径，一直点击**Next**，直到完成SDK的安装后，点击**Finish**。![zh-cn_image_0000001579836532](figures/zh-cn_image_0000001579836532.png)
 
 
-## 安装ArkUI-X SDK
+### 安装ArkUI-X SDK
 
 1. 在**File &gt; Settings &gt; ArkUI-X**（macOS为**DevEco Studio &gt; Preferences &gt; ArkUI-X**）下，点击Location右侧的**Edit**，为SDK选择存储路径。
 
 2. 在弹出的SDK Setup页面选择存储路径，一直点击**Next**，直到完成SDK的安装后，点击**Finish**。![zh-cn_image_0000001579996808](figures/zh-cn_image_0000001579996808.png)
 
 
-## 配置Android SDK安装目录环境变量
+### 配置Android SDK安装目录环境变量
 
 配置环境变量ANDROID_HOME，设置Android SDK安装目录。
 
@@ -86,10 +87,10 @@
       source ~/.bash_profile
       ```
   6. 环境变量配置完成后，关闭并重启DevEco Studio。
-# 开发跨平台应用
+## 开发跨平台应用
 
 
-## 创建工程
+### 创建工程
 
 Deveco Studio提供ArkUI-X模板快速创建跨平台工程，支持基于Stage模型HarmonyOS应用生成跨平台Android和iOS应用。
 
@@ -104,7 +105,7 @@ Deveco Studio提供ArkUI-X模板快速创建跨平台工程，支持基于Stage�
 如弹窗提示Android SDK检查结果报错，请确认环境变量是否已完成配置。![zh-cn_image_0000001642806197](figures/zh-cn_image_0000001642806197.png)
 
 
-## 工程目录结构
+### 工程目录结构
 
   
 ```
@@ -174,7 +175,7 @@ MyApplication
 ```
 
 
-## 编译构建生成跨平台应用
+### 编译构建生成跨平台应用
 
 DevEco Studio可打包生成不同平台的应用包，在Windows平台上同时生成可运行在HarmonyOS设备上的app包和运行在Andorid设备上的apk包，在macOS平台上还将生成可运行在iOS设备上的app包。
 
@@ -190,13 +191,13 @@ DevEco Studio可打包生成不同平台的应用包，在Windows平台上同时
    ![zh-cn_image_0000001630032705](figures/zh-cn_image_0000001630032705.png)
 
 2. 在Android Studio打开android目录，通过Android Studio将构建产物推包到Android真机设备上，查看应用运行效果。
-# 开发跨平台依赖包
+## 开发跨平台依赖包
 
 
 基于HarmonyOS应用，构建Android和iOS应用的依赖包。依赖包支持添加到已有的Android和iOS应用中。
 
 
-## 创建Library
+### 创建Library
 
 1. 根据工程创建向导，选择创建Application，选择所需要的ArkUI-X模板**[ArkUI-X] Library**，点击**Next**。
    ![zh-cn_image_0000001624998937](figures/zh-cn_image_0000001624998937.png)
@@ -205,7 +206,7 @@ DevEco Studio可打包生成不同平台的应用包，在Windows平台上同时
    ![arkUI-x-属性配置](figures/arkUI-x-属性配置.PNG)
 
 
-## 编译构建生成跨平台依赖包
+### 编译构建生成跨平台依赖包
 
 基于HarmonyOS应用，DevEco Studio可打包生成不同平台的依赖包，在Windows平台上同时生成集成Andorid应用的aar包，在macOS平台上还将生成集成在iOS应用的.xcframwork包。
 
