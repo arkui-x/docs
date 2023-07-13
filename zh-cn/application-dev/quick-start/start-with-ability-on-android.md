@@ -1,4 +1,4 @@
-# 通过Stage模型开发Android端应用指南
+# 通过[Stage模型](start-with-ets-stage.md)开发Android端应用指南
 
 ## 简介
 
@@ -11,7 +11,8 @@
 
 ## AndroidStudio配置
 
-* 使用AndroidStudio所创建Android工程的PackageName需要与OpenHarmony工程的BundleName一致。
+使用AndroidStudio所创建Android工程的PackageName需要与OpenHarmony工程的BundleName一致。
+
 **注:** AndroidStudio:Android应用的开发工具。
 
 ## ArkUI-X和Android平台集成所用关键类
@@ -31,7 +32,7 @@ public class HiStageApplication extends StageApplication {
 
 ### 应用工程Android逻辑部分的StageActivity
 
-Activity需要继承arkui_android_adapter.jar包所提供的StageActivity。StageActivity主要功能是将Android中Activity的生命周期与OpenHarmony中Ability的生命周期进行映射，例如：
+Activity需要继承arkui_android_adapter.jar包所提供的StageActivity，StageActivity主要功能是将Android中Activity的生命周期与OpenHarmony中Ability的生命周期进行映射，例如：
 
 ```
 package com.example.myapplication;

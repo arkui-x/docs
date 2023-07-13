@@ -1,8 +1,8 @@
-# 通过Stage模型开发iOS端应用指南
+# 通过[Stage模型](start-with-ets-stage.md)开发iOS端应用指南
 
 ## 简介
 
-本文介绍将ArkUI框架扩展到iOS平台所需要的必要类及其使用说明，开发者可以参照该指南，基于OpenHarmony中的Stage模型能力，高效、快速、低成本开发跨平台iOS端应用。
+本文介绍将ArkUI框架扩展到iOS平台所需要的必要类及其使用说明，开发者基于OpenHarmony，可复用大部分的应用代码（生命周期等）并可以部署到iOS平台，降低跨平台应用开发成本。
 
 ## ArkUI-X和iOS平台集成所用关键类
 
@@ -32,7 +32,7 @@ StageViewController是Stage模型iOS端视图控制器基类，若要实现跨�
 
 ### StageApplication
 
-StageApplication本质上是一个调度类，其作用主要用于触发内部相关类实现路径解析与配置、注册应用相关的configuration信息、触发ability部分生命周期事件等。
+StageApplication本质上是一个调度类，主要用于触发内部相关类实现路径解析与配置、注册应用相关的configuration信息、触发ability部分生命周期事件等。
 
 #### 公共方法
 
@@ -66,13 +66,13 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 + (BOOL)handleSingleton:(NSString *)bundleName moduleName:(NSString *)moduleName abilityName:(NSString *)abilityName;
 ```
 
-* 释放导航视图栈内的所有viewcontroller，触发OnDestory事件。
+* 释放导航视图栈内的所有viewController，触发OnDestory事件。
 
 ```objc
 + (void)releaseViewControllers;
 ```
 
-* 获取导航视图栈最顶层viewcontroller。
+* 获取导航视图栈最顶层viewController。
 
 ```objc
 + (StageViewController *)getApplicationTopViewController;
@@ -134,7 +134,7 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 }
 ```
 
-### 通过解析url得到的参数，映射ability对应的viewcontroller
+### 通过解析url得到的参数，映射ability对应的viewController
 
 ```objc
 - (BOOL)handleOpenUrlWithBundleName:(NSString *)bundleName
@@ -185,4 +185,9 @@ StageApplication本质上是一个调度类，其作用主要用于触发内部�
 **注** 具体方法使用参考samples示例
 
 ## Ability与ViewController对应规则
-  ![stage_iOS](../../figures/StageIos.png)
+
+iOS端应用内的viewController的packageName需要与Ability的bundleName一致。
+
+iOS端应用内的viewController的viewControllerName组成规则：Ability的moduleName + Ability的abilityName + “viewController”。
+
+  ![stage_iOS](figures/StageiOS.png)
