@@ -64,7 +64,7 @@
   - [@ohos.file.fs (文件管理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-file-fs.md)
 
 - 设备管理
-  - [@ohos.deviceInfo (设备信息)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-device-info.md)
+  - [@ohos.deviceInfo (设备信息)](js-apis-device_Info.md)
 
 - 数据管理
   - [@ohos.data.preferences (用户首选项)](js-apis-data-preferences.md)
