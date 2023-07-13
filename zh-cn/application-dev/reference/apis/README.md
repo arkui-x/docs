@@ -67,8 +67,8 @@
   - [@ohos.deviceInfo (设备信息)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-device-info.md)
 
 - 数据管理
-  - [@ohos.data.preferences (用户首选项)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-data-preferences.md)
-  - [@ohos.data.relationalStore (关系型数据库)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-data-relationalStore.md)
+  - [@ohos.data.preferences (用户首选项)](js-apis-data-preferences.md)
+  - [@ohos.data.relationalStore (关系型数据库)](js-apis-data-relationalStore.md)
 
 - 安全
   - [@ohos.abilityAccessCtrl (程序访问控制管理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-abilityAccessCtrl.md)
