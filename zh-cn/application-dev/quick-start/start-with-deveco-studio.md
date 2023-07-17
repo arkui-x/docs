@@ -11,7 +11,7 @@
 
 - DevEco Studio仅支持ArkUI-X源码开发和调试，各平台Native代码请使用对应平台的IDE编辑器进行开发和调试；
 
-- ArkUI-X目前支持在Android和iOS真机上运行，暂时不支持模拟器；
+- ArkUI-X支持在Android/iOS平台真机和模拟器上运行调试；
 
 - 平台版本及构建工具要求：
   - OpenHarmony平台：支持API 10+；

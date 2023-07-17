@@ -18,12 +18,15 @@ ArkUI跨平台框架(ArkUI-X)进一步将ArkUI开发框架扩展到了多个OS�
 ## 开发工具
 
 ### IDE工具（DevEco Studio）
-TODO：
+
+1. DevEco Studio版本要求为：V4.0 Beta1版本，请参考[搭建开发环境](https://developer.harmonyos.com/cn/docs/documentation/doc-guides-V3/installation_process-0000001071425528-V3)完成DevEco Studio的下载和安装。
+
+2. 请参考[跨平台环境配置](./start-with-deveco-studio.md#配置开发环境)，完成**DevEco Studio**跨平台开发环境配置。
 
 ### 命令行工具（ACE Tools）
 
-1. 下载最新版**命令行**工具，请点击[此处](https://gitee.com/arkui-x/cli/repository/archive/master.zip)下载。
+1. 下载ACE Tools命令行工具，请点击[此处](https://gitee.com/arkui-x/cli/repository/archive/master.zip)进行下载。
 
-2. 请参考[环境配置](./start-with-ace-tools.md#环境准备)和[命令安装](./start-with-ace-tools.md#命令安装)，完成**ACE命令行**开发环境配置。
+2. 请参考[环境配置](./start-with-ace-tools.md#环境准备)和[命令安装](./start-with-ace-tools.md#命令安装)，完成ACE Tools开发环境配置。
 
-完成上述操作和基本概念的理解后，即可参照[DevEco Studio使用说明](./start-with-deveco-studio.md)或[ACE Tools使用说明](./start-with-ace-tools.md#使用说明)，以及[使用ArkTS语言开发](./start-with-ets-stage.md)中的章节进行下一步跨平台应用开发体验和学习。
+完成上述操作和基本概念的理解后，即可参照[DevEco Studio使用说明](./start-with-deveco-studio.md#开发跨平台应用)或[ACE Tools使用说明](./start-with-ace-tools.md#使用说明)，以及[使用ArkTS语言开发](./start-with-ets-stage.md)中的章节进行下一步跨平台应用开发体验和学习。

@@ -11,8 +11,7 @@
 ### 快速入门
 
 - [开发准备](quick-start/start-overview.md)
-- [ArkUI-X之初体验(命令行)](quick-start/start-with-ace-tools.md#使用说明)
-- [ArkUI-X之初体验(IDE)](quick-start/start-with-deveco-studio.md)
+- [ArkUI-X之初体验](quick-start/start-with-deveco-studio.md)
 - [编写第一个ArkUI-X应用](quick-start/start-with-ets-stage.md)
 
 ### 开发基础知识
@@ -27,7 +26,7 @@
   - [平台桥接(@arkui-x.bridge)](quick-start/platform-bridge-introduction.md)
   - [FFI能力(Node-API)](quick-start/ffi-napi-introduction.md)
 - 一次开发多平台部署
-  - [条件编译](quick-start/conditional-compile-introduction.md)
+  - [平台判断](quick-start/conditional-compile-introduction.md)
 
 ### 开发指南
 
@@ -37,7 +36,7 @@
 - [Node-API开发指南](./tutorial/how-to-use-napi-on-android.md)
 - [平台接口扩展指南](./tutorial/how-to-explore-native-interface-on-android.md)
 - [平台桥接开发指南](./tutorial/how-to-use-bridge-on-android.md)
-- [Module开发指南](./tutorial/how-to-use-library-on-android.md)
+- [Library库开发指南](./tutorial/how-to-use-library-on-android.md)
 
 #### iOS平台开发
 
@@ -45,7 +44,7 @@
 - [Node-API开发指南](./tutorial/how-to-use-napi-on-ios.md)
 - [平台接口扩展指南](./tutorial/how-to-explore-native-interface-on-ios.md)
 - [平台桥接开发指南](./tutorial/how-to-use-bridge-on-ios.md)
-- [Module开发指南](./tutorial/how-to-use-library-on-ios.md)
+- [Library库开发指南](./tutorial/how-to-use-library-on-ios.md)
 
 ### 开发工具
 
@@ -61,7 +60,9 @@
 
 - [组件参考（基于ArkTS的声明式开发范式）](reference/arkui-ts/README.md)
 - [接口参考（ArkTS及JS API）](reference/apis/README.md)
-- [接口参考（Native API）](reference/native-apis/README.md)
+- 接口参考（Native API）
+  - [ArkUI-X Native API](reference/native-apis/README.md)
+  - [Native API标准库](./reference/native-lib/third_party_napi/napi.md)
 - 平台集成
   - [Android](reference/arkui-for-android/README.md)
   - [iOS](reference/arkui-for-ios/README.md)
