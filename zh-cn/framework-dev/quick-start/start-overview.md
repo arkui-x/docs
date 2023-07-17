@@ -57,18 +57,15 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
 
 ### 配置Android SDK环境
 
-   **SDK下载：** 通过[Android SDK命令行工具](https://developer.android.google.cn/studio#command-line-tools-only)下载Android SDK，命令行工具使用说明详见[sdkmanager](https://developer.android.google.cn/studio/command-line/sdkmanager)官方指导。SDK版本下载要求如下：
+  [Linux]
+
+  通过[命令行工具](https://developer.android.google.cn/studio#command-line-tools-only)下载和管理Android SDK，命令行工具使用说明详见[sdkmanager](https://developer.android.google.cn/studio/command-line/sdkmanager)官方指导。SDK版本下载要求如下：
 
   ```shell
-  ./sdkmanager --install "ndk-bundle" --sdk_root=/home/usrername/path-to-android-sdk
   ./sdkmanager --install "ndk;21.3.6528147" --sdk_root=/home/usrername/path-to-android-sdk
-  ./sdkmanager --install "cmake;3.10.2.4988404" --sdk_root=/home/usrername/path-to-android-sdk
-  ./sdkmanager --install "platforms;android-29" --sdk_root=/home/usrername/path-to-android-sdk
+  ./sdkmanager --install "platforms;android-26" --sdk_root=/home/usrername/path-to-android-sdk
   ./sdkmanager --install "build-tools;28.0.3" --sdk_root=/home/usrername/path-to-android-sdk
   ```
-  **说明：** 如果您使用Android Studio，则无需使用此命令行工具，可直接通过[IDE管理SDK软件包](https://developer.android.google.cn/studio/intro/update#sdk-manager)。
-
-  [Linux]
 
   ```shell
   // 配置环境变量
@@ -77,6 +74,8 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   ```
 
   [Mac]
+
+  通过IDE [SDK管理器](https://developer.android.google.cn/studio/intro/update#sdk-manager)下载和管理Android SDK，NDK版本要求为：21.3.6528147，SDK Platform版本为：26。
 
   ```shell
   // 配置环境变量
