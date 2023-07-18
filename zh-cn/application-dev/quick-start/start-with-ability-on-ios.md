@@ -12,7 +12,7 @@ StageViewController是Stage模型iOS端视图控制器基类，若要实现跨�
 
 #### 公共属性
 
-* instanceName：StageViewController唯一标识，拼接规则为**bundleName:moduleName:abilityName**，其中bundleName、moduleName、abilityName来自ohos的module.json里的名字。
+* instanceName：StageViewController唯一标识，拼接规则为**bundleName:moduleName:abilityName**，其中bundleName的值来自于OpenHarmony应用中app.json5配置文件，moduleName、abilityName的值来自于OpenHarmony应用中的module.json5配置文件。
 
 ```objc
 @property (nonatomic, readonly) NSString *instanceName;
@@ -186,7 +186,7 @@ StageApplication本质上是一个调度类，主要用于触发内部相关类�
 
 ## Ability与ViewController对应规则
 
-iOS端应用内的viewController的packageName需要与Ability的bundleName一致。
+iOS端应用info.plist里的URL Schemes需要与Ability的bundleName一致。
 
 iOS端应用内的viewController的viewControllerName组成规则：Ability的moduleName + Ability的abilityName + “viewController”。
 
