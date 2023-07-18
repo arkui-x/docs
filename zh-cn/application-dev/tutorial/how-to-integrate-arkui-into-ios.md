@@ -6,7 +6,7 @@
 
 * iOS应用工程集成ArkUI-X SDK
 * iOS应用工程集成ArkUI JSBundle实例
-* 使用ace tool和DevEco Studio集成ArkUI-X SDK进行iOS应用开发
+* 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行iOS应用开发
 
 ### iOS工程集成ArkUI跨平台SDK
 
@@ -206,9 +206,9 @@ XCode11之后，新建iOS工程为SceneDelegate类型工程，需删除SceneDele
 
 按照注意事项配置后，即可按照iOS应用构建流程，构建ArkUI iOS应用。
 
-### 使用ace tool和DevEco Studio集成ArkUI-X SDK进行iOS应用开发
-上述步骤均可通过ACE tools或DevEco Studio完成
-* ACE tools
+### 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行iOS应用开发
+上述步骤均可通过ACE Tools或DevEco Studio完成
+* ACE Tools
 1. ace create 命令创建一个跨平台应用工程
 2. 进入工程目录，执行ace build app命令，就会执行上述步骤，并且构建出一个iOS应用包。
 * DevEco Studio
