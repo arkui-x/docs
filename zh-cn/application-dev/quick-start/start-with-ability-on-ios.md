@@ -186,7 +186,7 @@ StageApplication本质上是一个调度类，主要用于触发内部相关类�
 
 ## Ability与ViewController对应规则
 
-iOS端应用info配置里的Bundle name需要与Ability的bundleName一致。
+iOS端应用info配置里的bundleName需要与Ability的bundleName一致。
 
 iOS端应用内的viewController的viewControllerName组成规则：Ability的moduleName + Ability的abilityName + “viewController”。
 
