@@ -6,7 +6,7 @@
 
 * Android应用工程集成ArkUI-X SDK
 * Android应用工程集成ArkUI JSBundle实例
-* 使用ace tool和DevEco Studio集成ArkUI-X SDK进行Android应用开发
+* 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行Android应用开发
 
 
 ### Android应用工程集成ArkUI跨平台SDK
@@ -186,9 +186,9 @@ dependencies {
 ```
 
 完成上述步骤后即可按照Android应用构建流程，构建ArkUI Android应用。
-### 使用ace tool和DevEco Studio集成ArkUI-X SDK进行Android应用开发
-上述步骤均可通过ACE tools或DevEco Studio完成
-* ACE tools
+### 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行Android应用开发
+上述步骤均可通过ACE Tools或DevEco Studio完成
+* ACE Tools
 1. ace create 命令创建一个跨平台应用工程
 2. 进入工程目录，执行ace build apk命令，就会执行上述步骤，并且构建出一个Android应用包。
 * DevEco Studio

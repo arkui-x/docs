@@ -2,7 +2,7 @@
 
 ## 总览
 
-本教程主要讲述如何通过ACE tools将OpenHarmony开发范式扩展到跨平台进行开发，包括：
+本教程主要讲述如何通过ACE Tools将OpenHarmony开发范式扩展到跨平台进行开发，包括：
 
 * 基本工程开发
 * Native C++开发
@@ -27,7 +27,7 @@ demo
 * 工程创建时，source目录下默认生成一个Module，名称为entry。与通过DevEco Studio构建的项目中的module一致
 * 执行ace build命令，即可完成对ArkTS源码编译和打包，构建出相应的跨平台应用。
 ### Native C++开发
-ACE tools支持开发者进行Native C++开发跨平台。
+ACE Tools支持开发者进行Native C++开发跨平台。
 * 需要在创建工程时，指定template类型为Native C++，也就是在基本工程开发中的第4步选择Native C++，其他选项保持一致。此操作会生成相应的c++模块。
 **注：** iOS工程结构没有变化，通过iOS工程配置，便会将source目录下的hello.cpp文件编译到应用当中。 
 ```
