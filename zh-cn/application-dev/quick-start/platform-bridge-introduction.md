@@ -49,4 +49,4 @@
 ## 开发指南
 
 [平台桥接开发指南（Android）](../tutorial/how-to-use-bridge-on-android.md)<br />
-[平台桥接开发指南（iOS）]((../tutorial/how-to-use-bridge-on-ios.md))
+[平台桥接开发指南（iOS）](../tutorial/how-to-use-bridge-on-ios.md)
