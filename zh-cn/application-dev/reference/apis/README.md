@@ -13,33 +13,36 @@
   
 - Ability框架
   - Stage模型能力的接口(推荐)
-    - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-font.md)
-    - [@ohos.app.ability.AbilityConstant (AbilityConstant)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-app-ability-abilityConstant.md)
-    - [@ohos.app.ability.AbilityStage (AbilityStage)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-app-ability-abilityStage.md)
-    - [@ohos.app.ability.UIAbility (UIAbility)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-app-ability-uiAbility.md)
-    - [@ohos.app.ability.common (应用上下文Context)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-app-ability-common.md)
+    - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](js-apis-app-ability-abilityLifecycleCallback)
+    - [@ohos.app.ability.AbilityConstant (AbilityConstant)](js-apis-app-ability-abilityConstant)
+    - [@ohos.app.ability.AbilityStage (AbilityStage)](js-apis-app-ability-abilityStage)
+    - [@ohos.app.ability.UIAbility (UIAbility)](js-apis-app-ability-uiAbility)
+    - [@ohos.app.ability.common (应用上下文Context)](js-apis-app-ability-common.md)
   - 通用能力的接口(推荐)
-    - [@ohos.app.ability.Configuration (Configuration)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-app-ability-configuration.md)
-    - [@ohos.app.ability.ConfigurationConstant (ConfigurationConstant)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-app-ability-configurationConstant.md)
-    - [@ohos.app.ability.Want (Want)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-app-ability-want.md)
+    - [@ohos.app.ability.Configuration (Configuration)](js-apis-app-ability-configuration.md)
+    - [@ohos.app.ability.ConfigurationConstant (ConfigurationConstant)](js-apis-app-ability-configurationConstant.md)
+    - [@ohos.app.ability.Want (Want)](js-apis-app-ability-want.md)
   - 接口依赖的元素及定义
     - ability
     - app
     - application
-      - [AbilityStageContext](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-inner-application-abilityStageContext.md)
-      - [ApplicationContext](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-inner-application-applicationContext.md)
-      - [BaseContext](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-inner-application-baseContext.md)
-      - [Context](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-inner-application-context.md)
-      - [ProcessInformation](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-inner-application-processInformation.md)
-      - [UIAbilityContext](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-inner-application-uiAbilityContext.md)
+      - [abilityDelegator](js-apis-inner-application-abilityDelegator.md)
+      - [abilityDelegatorArgs](js-apis-inner-application-abilityDelegatorArgs.md)
+      - [abilityMonitor](js-apis-inner-application-abilityMonitor.md)
+      - [AbilityStageContext](js-apis-inner-application-abilityStageContext.md)
+      - [abilityStageMonitor](js-apis-inner-application-abilityStageMonitor.md)
+      - [ApplicationContext](js-apis-inner-application-applicationContext.md)
+      - [BaseContext](js-apis-inner-application-baseContext.md)
+      - [Context](js-apis-inner-application-context.md)
+      - [UIAbilityContext](js-apis-inner-application-uiAbilityContext.md)
 
 - 包管理
-  - [@ohos.bundle.bundleManager (bundleManager模块)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-bundleManager.md)
+  - [@ohos.bundle.bundleManager (bundleManager模块)](js-apis-bundleManager.md)
   - bundleManager
-    - [abilityInfo](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-bundleManager-abilityInfo.md)
-    - [applicationInfo](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-bundleManager-applicationInfo.md)
-    - [hapModuleInfo](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-bundleManager-hapModuleInfo.md)
-    - [metadata](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-bundleManager-metadata.md)
+    - [abilityInfo](js-apis-bundleManager-abilityInfo.md)
+    - [applicationInfo](js-apis-bundleManager-applicationInfo.md)
+    - [hapModuleInfo](js-apis-bundleManager-hapModuleInfo.md)
+    - [metadata](js-apis-bundleManager-metadata.md)
 
 - 图形图像
   - [@ohos.window (窗口)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-window.md)

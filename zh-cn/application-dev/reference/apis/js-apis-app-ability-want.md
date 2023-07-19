@@ -25,7 +25,7 @@ import Want from '@ohos.app.ability.Want';
 
 **示例：**
 
-- 基础用法：在UIAbility对象中调用。
+- 基础用法：在UIAbility对象中调用，示例中的context的获取方式请参见[获取UIAbility的上下文信息](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/application-models/uiability-usage.md#%E8%8E%B7%E5%8F%96uiability%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF)。
 
   ```ts
   import common from '@ohos.app.ability.common';
