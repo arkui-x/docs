@@ -58,10 +58,10 @@
 
 - 网络管理
   - [@ohos.request (上传下载)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-request.md)
-  - [@ohos.net.webSocket (WebSocket连接)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-webSocket.md)
-  - [@ohos.net.socket (Socket连接)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-socket.md)
-  - [@ohos.net.http (数据请求)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-http.md)
-  - [@ohos.net.connection (网络连接管理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-net-connection.md)
+  - [@ohos.net.webSocket (WebSocket连接)](js-apis-webSocket.md)
+  - [@ohos.net.socket (Socket连接)](js-apis-socket.md)
+  - [@ohos.net.http (数据请求)](js-apis-http.md)
+  - [@ohos.net.connection (网络连接管理)](js-apis-net-connection.md)
 
 - 文件管理
   - [@ohos.file.fs (文件管理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-file-fs.md)
