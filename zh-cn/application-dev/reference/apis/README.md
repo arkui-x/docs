@@ -74,7 +74,7 @@
   - [@ohos.data.relationalStore (关系型数据库)](js-apis-data-relationalStore.md)
 
 - 安全
-  - [@ohos.abilityAccessCtrl (程序访问控制管理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-abilityAccessCtrl.md)
+  - [@ohos.abilityAccessCtrl (程序访问控制管理)](js-apis-abilityAccessCtrl.md)
 
 - 语言基础类库
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
