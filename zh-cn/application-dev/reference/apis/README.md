@@ -64,7 +64,7 @@
   - [@ohos.net.connection (网络连接管理)](js-apis-net-connection.md)
 
 - 文件管理
-  - [@ohos.file.fs (文件管理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-file-fs.md)
+  - [@ohos.file.fs (文件管理)](js-apis-file-fs.md)
 
 - 设备管理
   - [@ohos.deviceInfo (设备信息)](js-apis-device_Info.md)
