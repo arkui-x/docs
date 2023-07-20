@@ -57,7 +57,7 @@
   - [@ohos.resourceManager (资源管理)](js-apis-resource-manager.md)
 
 - 网络管理
-  - [@ohos.request (上传下载)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-request.md)
+  - [@ohos.request (上传下载)](https://gitee.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-request.md)
   - [@ohos.net.webSocket (WebSocket连接)](js-apis-webSocket.md)
   - [@ohos.net.socket (Socket连接)](js-apis-socket.md)
   - [@ohos.net.http (数据请求)](js-apis-http.md)
