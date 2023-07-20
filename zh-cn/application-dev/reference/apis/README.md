@@ -49,7 +49,7 @@
   - [@ohos.display (屏幕属性)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-display.md)
 
 - 媒体
-  - [@ohos.multimedia.image (图片处理)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-image.md)
+  - [@ohos.multimedia.image (图片处理)](js-apis-image.md)
 
 - 资源管理
   - [@ohos.i18n (国际化-I18n)](js-apis-i18n.md)
