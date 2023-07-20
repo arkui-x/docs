@@ -24,7 +24,7 @@ This tutorial describes how to use the ArkUI-X SDK to develop iOS applications, 
 * Build the SDK using the source code of the ArkUI-X project. This method is applicable to high-level developers of ArkUI cross-platform applications. After [downloading the source code](../../application-dev/quick-start/README.md), run the following command to build the iOS-based ArkUI-X SDK:
 
 ```
-./build.sh --product-name arkui-cross --target-os ios
+./build.sh --product-name arkui-x --target-os ios
 ```
 
 ##### ArkUI-X SDK Components

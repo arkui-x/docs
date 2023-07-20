@@ -3,7 +3,7 @@
 - The build command supports the following options:
 
   ```shell
-  --product-name    # (Mandatory) Product name, for example, **arkui-cross**
+  --product-name    # (Mandatory) Product name, for example, **arkui-x**
   --target-os       # (Mandatory) Target platform, for example, Android or iOS
   --build-target    # (Optional) One or more targets to build
   --gn-args         # (Optional) One or more GN parameters
@@ -22,11 +22,11 @@
   - Build on the Android platform:
 
   ```shell
-  ./build.sh --product-name arkui-cross --target-os android --ccache
+  ./build.sh --product-name arkui-x --target-os android --ccache
   ```
 
   - Build on the iOS platform:
 
   ```shell
-  ./build.sh --product-name arkui-cross --target-os ios --ccache
+  ./build.sh --product-name arkui-x --target-os ios --ccache
   ```

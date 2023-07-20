@@ -137,17 +137,17 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 
 - 构建ArkUI-X Debug，Release和Profile全量版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-cross --target-os android --gn-args enable_auto_pack=true
+./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true
 ```
 
 - 构建ArkUI-X Debug和Release版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-cross --target-os android --gn-args enable_auto_pack=true build_type=no_profile
+./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true build_type=no_profile
 ```
 
 - 构建ArkUI-X Release版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-cross --target-os android --gn-args enable_auto_pack=true build_type=release
+./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true build_type=release
 ```
 
 ### Mac平台编译
@@ -156,56 +156,56 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 
 - 构建ArkUI-X Debug，Release和Profile全量版本，可用于Android和iOS平台。
 ```
-./build.sh --product-name arkui-cross --target-os ios --gn-args enable_auto_pack=true build_android=true
+./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_android=true
 ```
 
 - 构建ArkUI-X Debug和Release版本，可用于Android和iOS平台。
 ```
-./build.sh --product-name arkui-cross --target-os ios --gn-args enable_auto_pack=true build_type=no_profile build_android=true
+./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_type=no_profile build_android=true
 ```
 
 - 构建ArkUI-X Release版本，可用于Android和iOS平台。
 ```
-./build.sh --product-name arkui-cross --target-os ios --gn-args enable_auto_pack=true build_type=release build_android=true
+./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_type=release build_android=true
 ```
 
 #### iOS
 
 - 构建ArkUI-X Debug，Profile和Release全量版本，仅用于iOS平台。
 ```
-./build.sh --product-name arkui-cross --target-os ios --gn-args enable_auto_pack=true
+./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true
 ```
 
 - 构建ArkUI-X Debug和Release版本，仅用于iOS平台。
 ```
-./build.sh --product-name arkui-cross --target-os ios --gn-args enable_auto_pack=true build_type=no_profile
+./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_type=no_profile
 ```
 
 - 构建ArkUI-X Release版本，仅用于iOS平台。
 ```
-./build.sh --product-name arkui-cross --target-os ios --gn-args enable_auto_pack=true build_type=release
+./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_type=release
 ```
 
 #### Android
 
 - 构建ArkUI-X Debug，Profile和Release全量版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-cross --target-os android --gn-args enable_auto_pack=true
+./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true
 ```
 
 - 构建ArkUI-X Debug和Release版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-cross --target-os android --gn-args enable_auto_pack=true build_type=no_profile
+./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true build_type=no_profile
 ```
 
 - 构建ArkUI-X Release版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-cross --target-os android --gn-args enable_auto_pack=true build_type=release
+./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true build_type=release
 ```
 
 ## ArkUI-SDK调试说明
 
-- ArkUI-X SDK编译输出目录为：out/arkui-cross/packages/arkui-cross
+- ArkUI-X SDK编译输出目录为：out/arkui-x/packages/arkui-x
 
 - 替换当前PC上已安装的ArkUI-X SDK。注意：如果使用ACE Tools进行应用工程构建和调试，需重新下载ACE命令依赖，可[参考](../../application-dev/quick-start/start-with-ace-tools.md#安装ace命令)。
 
