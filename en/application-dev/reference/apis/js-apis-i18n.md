@@ -100,7 +100,7 @@ For details about the error codes, see [I18N Error Codes](../errorcodes/errorcod
 
 static getSystemLanguage(): string
 
-Obtains the system language. For details about languages, see [Instantiating the Locale Object](../../internationalization/intl-guidelines.md#how-to-develop).
+Obtains the system language.
 
 **System capability**: SystemCapability.Global.I18n
 
@@ -131,7 +131,7 @@ For details about the error codes, see [I18N Error Codes](../errorcodes/errorcod
 
 static getSystemRegion(): string
 
-Obtains the system region. For details about system regions, see [Instantiating the Locale Object](../../internationalization/intl-guidelines.md#how-to-develop).
+Obtains the system region.
 
 **System capability**: SystemCapability.Global.I18n
 
@@ -162,7 +162,7 @@ For details about the error codes, see [I18N Error Codes](../errorcodes/errorcod
 
 static getSystemLocale(): string
 
-Obtains the system locale. For details about system locales, see [Instantiating the Locale Object](../../internationalization/intl-guidelines.md#how-to-develop).
+Obtains the system locale.
 
 **System capability**: SystemCapability.Global.I18n
 

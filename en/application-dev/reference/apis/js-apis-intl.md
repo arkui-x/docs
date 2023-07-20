@@ -66,7 +66,7 @@ Creates a **Locale** object.
 
 | Name                 | Type                              | Mandatory  | Description                          |
 | -------------------- | -------------------------------- | ---- | ---------------------------- |
-| locale               | string                           | Yes   | A string containing locale information, including the language, optional script, and region. For details about the international standards and combination modes for the language, script, and country or region, see [intl Development](../../internationalization/intl-guidelines.md#setting-locale-information).|
+| locale               | string                           | Yes   | A string containing locale information, including the language, optional script, and region.|
 | options             | [LocaleOptions](#localeoptions6) | No   | Options for creating the **Locale** object.                |
 
 **Example**
