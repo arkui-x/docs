@@ -186,34 +186,34 @@ arkui-x
   │  ├─ets
   │  ├─lib                                           // ArkUI-X的引擎库：包括Android平台及架构的动态库
   │  │  ├─arkui
-  │  │  │  └─android-${target-arch}-${build_type}
+  │  │  │  └─android-${target-arch}-${runtime_mode}
   │  │  ├─include
   │  │  │  └─napi
   │  │  ├─third_party
   │  │  └─utils
   |  ├── framework                                   // ArkUI-X的引擎库：包括iOS平台及架构的framework库
   │  |  └── arkui
-  │  |      └── ios-${target-arch}-${build_type}
+  │  |      └── ios-${target-arch}-${runtime_mode}
   │  |          └── libarkui_ios.framework
   │  ├─systemres                                    // ArkUI-X框架自带的资源
   │  |   └─resources
   |  └── xcframework                                // ArkUI-X的引擎库：包括iOS平台及架构的xcframework库
   |      └── arkui
-  |        └── ios-${build_type}
+  |        └── ios-${runtime_mode}
   |             └── libarkui_ios.xcframework
   ├─plugins                                         // ArkUI-X官方提供的插件库
   │  ├─api
   │  │  ├─lib
   │  │  │   ├─${module-name}
-  │  │  │   │  └─android-${target-arch}-${build_type}
+  │  │  │   │  └─android-${target-arch}-${runtime_mode}
   │  │  │   ├─...
   │  │  │   └─...
   |  |  ├─framework
-  │  │  | └── ios-${target-arch}-${build_type}
+  │  │  | └── ios-${target-arch}-${runtime_mode}
   │  │  |     ├── ${module-name}.framework
   │  │  │     └─...
   |  |  └─xcframework
-  │  │    └── ios-${build_type}
+  │  │    └── ios-${runtime_mode}
   │  │        ├── ${module-name}.xcframework
   │  │        └─...
   │  └─component
