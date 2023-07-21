@@ -220,6 +220,31 @@ static is24HourClock(): boolean
   }
   ```
 
+## I18n.isRTL<sup>7+</sup>
+
+isRTL(locale: string): boolean
+
+获取该区域是否为从右至左显示语言。
+
+**系统能力**：SystemCapability.Global.I18n
+
+**参数：** 
+
+| 参数名    | 类型     | 必填   | 说明      |
+| ------ | ------ | ---- | ------- |
+| locale | string | 是    | 指定区域ID。 |
+
+**返回值：** 
+
+| 类型      | 说明                                       |
+| ------- | ---------------------------------------- |
+| boolean | true表示该locale从右至左显示语言；false表示该locale从左至右显示语言。 |
+
+**示例：** 
+  ```js
+  I18n.isRTL("zh-CN");// 中文不是RTL语言，返回false
+  I18n.isRTL("ar-EG");// 阿语是RTL语言，返回true
+  ```
 
 ## I18n.getCalendar<sup>8+</sup>
 
