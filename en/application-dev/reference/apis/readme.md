@@ -10,3 +10,6 @@
   - [@ohos.net.http (Data Request)](js-apis-http.md)
   - [@ohos.net.socket (Socket Connection)](js-apis-socket.md)
   - [@ohos.net.webSocket (WebSocket Connection)](js-apis-webSocket.md)
+
+- Multimedia
+  - [@ohos.multimedia.image (Image Processing)](js-apis-image.md)

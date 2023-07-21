@@ -29,6 +29,7 @@ They are organized as follows:
 
 - [Component Reference (ArkTS-based Declarative Development Paradigm)](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/arkui-ts/Readme-EN.md)
 - [API Reference (ArkTS and JS APIs)](reference/apis/readme.md)
+- [API Reference (Native API)](reference/native-apis/Readme-EN.md)
 - Platform Integration
   - [Android](reference/arkui-for-android/readme.md)
   - [iOS](reference/arkui-for-ios/readme.md)
