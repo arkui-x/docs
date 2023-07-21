@@ -7,3 +7,6 @@
 
 - Multimedia
   - [@ohos.multimedia.image (Image Processing)](js-apis-image.md)
+
+- File Management
+  - [@ohos.file.fs (File Management)](js-apis-file-fs.md)
