@@ -26,7 +26,7 @@ ArkUI cross-platform APIs include OpenHarmony APIs and custom extension APIs. Yo
 * Building a project on Android
 
 ```
-./build.sh --product-name arkui-cross --target-os android --ccache
+./build.sh --product-name arkui-x --target-os android --ccache
 ```
 
 > **NOTE**
@@ -36,7 +36,7 @@ ArkUI cross-platform APIs include OpenHarmony APIs and custom extension APIs. Yo
 * Building a project on iOS
 
 ```
-./build.sh --product-name arkui-cross --target-os ios --ccache
+./build.sh --product-name arkui-x --target-os ios --ccache
 ```
 
 > **NOTE**

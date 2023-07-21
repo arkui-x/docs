@@ -81,11 +81,11 @@ try {
 }
 ```
 
-### checkAccessTokenSync<sup>9+</sup>
+### checkAccessTokenSync<sup>10+</sup>
 
 checkAccessTokenSync(tokenID: number, permissionName: Permissions): GrantStatus;
 
-校验应用是否被授予权限，同步返回结果。
+校验应用是否被授予权限，同步返回结果。当前跨平台上仅支持校验当前应用的自己的授权状态。
 
 **系统能力：** SystemCapability.Security.AccessToken
 
@@ -141,7 +141,7 @@ requestPermissionsFromUser(context: Context, permissionList: Array&lt;Permission
 
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------- | -------- | -------- |
-| context | Context | 是 | 该参数为请求权限的UIAbility的UIAbilityContext。在跨平台上，该参数可传一个undefined。 |
+| context | Context | 是 | 该参数为请求权限的UIAbility的UIAbilityContext。 |
 | permissionList | Array&lt;Permissions&gt; | 是 | 权限名列表，合法的权限名取值可在[系统权限定义列表](../../../security/security-permission/permission-list.md)中查询。 |
 | callback | AsyncCallback&lt;[PermissionRequestResult](js-apis-permissionrequestresult.md)&gt; | 是 | 回调函数，返回接口调用是否成功的结果。 |
 
@@ -179,7 +179,7 @@ requestPermissionsFromUser(context: Context, permissionList: Array&lt;Permission
 
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------- | -------- | -------- |
-| context | Context | 是 | 请求权限的UIAbility的UIAbilityContext。在跨平台上，该参数可传一个undefined。 |
+| context | Context | 是 | 请求权限的UIAbility的UIAbilityContext。 |
 | permissionList | Array&lt;Permissions&gt; | 是 | 需要校验的权限名称，合法的权限名取值可在[系统权限定义列表](../../../security/security-permission/permission-list.md)中查询。 |
 
 **返回值：**

@@ -2199,7 +2199,7 @@ PixelMap的初始化选项。
 | ERR_IMAGE_DECODE_HEAD_ABNORMAL      | 62980122 | 图像解码头错误。                                    |
 | ERR_IMAGE_DECODE_EXIF_UNSUPPORT     | 62980123 | 图像解码exif取消支持。                              |
 | ERR_IMAGE_PROPERTY_NOT_EXIST        | 62980124 | 图像属性不存在；错误代码被媒体占用，图像从150开始。 |
-| ERR_IMAGE_READ_PIXELMAP_FAILED      | 62980246 | 读取像素地图失败。                                  |
+| ERR_IMAGE_READ_PIXELMAP_FAILED      | 62980246 | 读取像素位图失败。                                  |
 | ERR_IMAGE_WRITE_PIXELMAP_FAILED     | 62980247 | 写入像素映射失败。                                  |
 | ERR_IMAGE_PIXELMAP_NOT_ALLOW_MODIFY | 62980248 | pixelmap不允许修改。                                |
 | ERR_IMAGE_CONFIG_FAILED             | 62980259 | 配置错误。                                          |

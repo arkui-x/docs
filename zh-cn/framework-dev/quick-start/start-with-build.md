@@ -3,7 +3,7 @@
 - 使用build.sh编译脚本进行编译，编译脚本常用选项
 
   ```shell
-  --product-name    # 必须  编译的产品名称，如：arkui-cross
+  --product-name    # 必须  编译的产品名称，如：arkui-x
   --target-os       # 必须  编译的跨平台目标，如：android或ios
   --target-cpu      # 可选  指定target侧CPU架构，如：arm或arm64
   --build-target    # 可选  指定编译目标，可以指定多个
@@ -26,11 +26,11 @@
   - ArkUI-X项目Android平台编译命令：
 
   ```shell
-  ./build.sh --product-name arkui-cross --target-os android
+  ./build.sh --product-name arkui-x --target-os android
   ```
 
   - ArkUI-X项目iOS平台编译命令：
 
   ```shell
-  ./build.sh --product-name arkui-cross --target-os ios
+  ./build.sh --product-name arkui-x --target-os ios
   ```
