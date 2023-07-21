@@ -1,4 +1,4 @@
-# # @ohos.net.socket (Socket Connection)
+# @ohos.net.socket (Socket Connection)
 
 The **socket** module implements data transfer over TCPSocket, UDPSocket, WebSocket, and TLSSocket connections.
 
