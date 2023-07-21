@@ -24,7 +24,7 @@ This tutorial describes how to use the ArkUI-X SDK to develop Android applicatio
 * Build the SDK using the source code of the ArkUI-X project. This method is applicable to high-level developers of ArkUI cross-platform applications. After [downloading the source code](../../framework-dev/quick-start/readme.md), run the following command to build the Android-based ArkUI-X SDK:
 
 ```
-./build.sh --product-name arkui-cross --target-os android --ccache
+./build.sh --product-name arkui-x --target-os android --ccache
 ```
 
 ##### ArkUI-X SDK Components
