@@ -9,7 +9,7 @@
 - 开发者工具：提供DevEco Studio(IDE)和ACE Tools(命令行)两种ArkUI-X应用构建工具。
 - 混合开发能力：ArkTS声明式开发范式和Stage模型支持集成在现有iOS/Android应用中，通过现有应用加载，解析和运行。
 - 跨语言调用能力：提供[FFI(Node-API)](../application-dev/quick-start/ffi-napi-introduction.md)和[平台桥接](../application-dev/quick-start/platform-bridge-introduction.md)两种机制，用于API扩展和平台插件开发。
-- 基础测试调试：支持单元/UI调试和ArkTS断点调试。
+- 基础测试调试：支持单元/UI/XTS集成测试和ArkTS断点调试。
 
 ### 接口范围
 
@@ -64,32 +64,48 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 
 通过repo + ssh 下载（需注册公钥，请参考[码云帮助中心](https://gitee.com/help/articles/4191)）。
 
-
-```
-repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Alpha --no-repo-verify
-repo sync -c
-```
+- 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
+   ```
+   repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-v1.0.0-Alpha --no-repo-verify
+   repo sync -c
+   repo forall -c 'git lfs pull'
+   ```
+   
+- 从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
+   ```
+   repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Alpha --no-repo-verify
+   repo sync -c
+   repo forall -c 'git lfs pull'
+   ```
 
 **方式二**
 
 通过repo + https 下载。
 
-
-```
-repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Alpha --no-repo-verify
-repo sync -c
-```
+- 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
+   ```
+   repo init -u https://gitee.com/arkui-x/manifest.git -b ArkUI-X-v1.0.0-Alpha --no-repo-verify
+   repo sync -c
+   repo forall -c 'git lfs pull'
+   ```
+   
+- 从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
+   ```
+   repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Alpha --no-repo-verify
+   repo sync -c
+   repo forall -c 'git lfs pull'
+   ```
 
 ### 从镜像站点获取
 
 **表2** 获取源码和SDK路径(TODO)
 
-| 版本源码                                  | **版本信息** | **下载站点** | **SHA256校验码** |
-| ----------------------------------------- | ------------ | ------------ | ---------------- |
-| ArkUI-X全量代码 | 1.0.0 Alpha    | [站点]()     | [SHA256校验码]() |
-| ArkUI-X SDK包（Windows）  | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |
-| ArkUI-X SDK包（macOS）    | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |
-| ArkUI-X SDK包（Linux）    | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |
+| 版本源码                                  | **版本信息** | **下载站点** | **SHA256校验码** | **软件包容量**|
+| -----------------------------------------| ------------ | ------------ | ---------------- | ---------------- |
+| ArkUI-X全量代码 | 1.0.0 Alpha    | [站点]()     | [SHA256校验码]() |            |
+| ArkUI-X SDK包（Windows）  | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |               |
+| ArkUI-X SDK包（macOS）    | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |               |
+| ArkUI-X SDK包（Linux）    | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |               |
 
 ## Samples
 
@@ -97,8 +113,8 @@ repo sync -c
 
 | 项目名称      | 简介                                                         |
 | ------------- | ------------------------------------------------------------ |
-| HelloWorld | 使用ACE Tools命令行工具生成的HellWorld应用工程示例，支持Android、iOS和OpenHarmony/HarmonyOS应用构建。 |
-| Shopping | 使用ACE Tools命令行工具生成的仿购物应用工程示例，支持Android、iOS和OpenHarmony/HarmonyOS应用构建。   |
-| HealthyDiet | 使用ACE Tools命令行工具生成的健康饮食应用工程示例，支持Android、iOS和OpenHarmony/HarmonyOS应用构建。|
+| HelloWorld | HellWorld应用工程示例，支持Android、iOS和OpenHarmony应用构建。 |
+| Shopping | 仿购物应用工程示例，支持Android、iOS和OpenHarmony应用构建。   |
+| HealthyDiet | 健康饮食应用工程示例，支持Android、iOS和OpenHarmony应用构建。|
 
 请访问[Samples](https://gitee.com/arkui-x/samples)仓了解更多消息。
