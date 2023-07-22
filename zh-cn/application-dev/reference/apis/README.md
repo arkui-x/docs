@@ -13,10 +13,10 @@
   
 - Ability框架
   - Stage模型能力的接口(推荐)
-    - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](js-apis-app-ability-abilityLifecycleCallback)
-    - [@ohos.app.ability.AbilityConstant (AbilityConstant)](js-apis-app-ability-abilityConstant)
-    - [@ohos.app.ability.AbilityStage (AbilityStage)](js-apis-app-ability-abilityStage)
-    - [@ohos.app.ability.UIAbility (UIAbility)](js-apis-app-ability-uiAbility)
+    - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](js-apis-app-ability-abilityLifecycleCallback.md)
+    - [@ohos.app.ability.AbilityConstant (AbilityConstant)](js-apis-app-ability-abilityConstant.md)
+    - [@ohos.app.ability.AbilityStage (AbilityStage)](js-apis-app-ability-abilityStage.md)
+    - [@ohos.app.ability.UIAbility (UIAbility)](js-apis-app-ability-uiAbility.md)
     - [@ohos.app.ability.common (应用上下文Context)](js-apis-app-ability-common.md)
   - 通用能力的接口(推荐)
     - [@ohos.app.ability.Configuration (Configuration)](js-apis-app-ability-configuration.md)

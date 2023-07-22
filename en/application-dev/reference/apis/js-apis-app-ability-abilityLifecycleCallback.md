@@ -1,13 +1,13 @@
 # @ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)
 
-AbilityLifecycleCallback模块提供应用上下文[ApplicationContext](js-apis-inner-application-applicationContext.md)的生命周期发生变化时触发相应回调的能力，包括[onAbilityCreate](#abilitylifecyclecallbackonabilitycreate)、[onWindowStageCreate](#abilitylifecyclecallbackonwindowstagecreate)、[onWindowStageDestroy](#abilitylifecyclecallbackonwindowstagedestroy)、[onAbilityDestroy](#abilitylifecyclecallbackonabilitydestroy)、[onAbilityForeground](#abilitylifecyclecallbackonabilityforeground)、[onAbilityBackground](#abilitylifecyclecallbackonabilitybackground)。
+The **AbilityLifecycleCallback** module defines the callbacks to receive lifecycle changes of [ApplicationContext](js-apis-inner-application-applicationContext.md). The callbacks include [onAbilityCreate](#abilitylifecyclecallbackonabilitycreate), [onWindowStageCreate](#abilitylifecyclecallbackonwindowstagecreate), [onWindowStageDestroy](#abilitylifecyclecallbackonwindowstagedestroy), [onAbilityDestroy](#abilitylifecyclecallbackonabilitydestroy), [onAbilityForeground](#abilitylifecyclecallbackonabilityforeground), [onAbilityBackground](#abilitylifecyclecallbackonabilitybackground).
 
-> **说明：**
+> **NOTE**
 > 
-> 本模块首批接口从API version 9 开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  
-> 本模块接口仅可在Stage模型下使用。
+> The initial APIs of this module are supported since API version 9. Newly added APIs will be marked with a superscript to indicate their earliest API version. 
+> The APIs of this module can be used only in the stage model.
 
-## 导入模块
+## Modules to Import
 
 ```ts
 import AbilityLifecycleCallback from '@ohos.app.ability.AbilityLifecycleCallback';
@@ -17,17 +17,17 @@ import AbilityLifecycleCallback from '@ohos.app.ability.AbilityLifecycleCallback
 
 onAbilityCreate(ability: UIAbility): void;
 
-注册监听应用上下文的生命周期后，在ability创建时触发回调。
+Called when an ability is created.
 
-**系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
+**System capability**: SystemCapability.Ability.AbilityRuntime.AbilityCore
 
-**参数：**
+**Parameters**
 
-  | 参数名 | 类型 | 必填 | 说明 | 
+  | Name| Type| Mandatory| Description| 
   | -------- | -------- | -------- | -------- |
-  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | 是 | 当前Ability对象 | 
+  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | Yes| **Ability** object.| 
 
-**示例：**
+**Example**
 ```ts
 let abilityLifecycleCallback =  {
     onAbilityCreate(ability){
@@ -40,18 +40,18 @@ let abilityLifecycleCallback =  {
 
 onWindowStageCreate(ability: UIAbility, windowStage: window.WindowStage): void;
 
-注册监听应用上下文的生命周期后，在windowStage创建时触发回调。
+Called when the window stage of an ability is created.
 
-**系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
+**System capability**: SystemCapability.Ability.AbilityRuntime.AbilityCore
 
-**参数：**
+**Parameters**
 
-  | 参数名 | 类型 | 必填 | 说明 | 
+  | Name| Type| Mandatory| Description| 
   | -------- | -------- | -------- | -------- |
-  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | 是 | 当前Ability对象 |  
-  | windowStage | [window.WindowStage](js-apis-window.md#windowstage9) | 是 | 当前WindowStage对象 |    
+  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | Yes| **Ability** object.|  
+  | windowStage | [window.WindowStage] | Yes| **WindowStage** object.|    
 
-**示例：**
+**Example**
 ```ts
 let abilityLifecycleCallback =  {
     onWindowStageCreate(ability, windowStage){
@@ -64,18 +64,18 @@ let abilityLifecycleCallback =  {
 
 onWindowStageDestroy(ability: UIAbility, windowStage: window.WindowStage): void;
 
-注册监听应用上下文的生命周期后，在windowStage销毁时触发回调。
+Called when the window stage of an ability is destroyed.
 
-**系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
+**System capability**: SystemCapability.Ability.AbilityRuntime.AbilityCore
 
-**参数：**
+**Parameters**
 
-  | 参数名 | 类型 | 必填 | 说明 | 
+  | Name| Type| Mandatory| Description| 
   | -------- | -------- | -------- | -------- |
-  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | 是 | 当前Ability对象 |  
-  | windowStage | [window.WindowStage](js-apis-window.md#windowstage9) | 是 | 当前WindowStage对象 |  
+  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | Yes| **Ability** object.|  
+  | windowStage | [window.WindowStage] | Yes| **WindowStage** object.|  
 
-**示例：**
+**Example**
 ```ts
 let abilityLifecycleCallback =  {
     onWindowStageDestroy(ability, windowStage){
@@ -88,17 +88,17 @@ let abilityLifecycleCallback =  {
 
 onAbilityDestroy(ability: UIAbility): void;
 
-注册监听应用上下文的生命周期后，在ability销毁时触发回调。
+Called when an ability is destroyed.
 
-**系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
+**System capability**: SystemCapability.Ability.AbilityRuntime.AbilityCore
 
-**参数：**
+**Parameters**
 
-  | 参数名 | 类型 | 必填 | 说明 | 
+  | Name| Type| Mandatory| Description| 
   | -------- | -------- | -------- | -------- |
-  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | 是 | 当前Ability对象 | 
+  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | Yes| **Ability** object.| 
 
-**示例：**
+**Example**
 ```ts
 let abilityLifecycleCallback =  {
     onAbilityDestroy(ability){
@@ -111,17 +111,17 @@ let abilityLifecycleCallback =  {
 
 onAbilityForeground(ability: UIAbility): void;
 
-注册监听应用上下文的生命周期后，在ability的状态从后台转到前台时触发回调。
+Called when an ability is switched from the background to the foreground.
 
-**系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
+**System capability**: SystemCapability.Ability.AbilityRuntime.AbilityCore
 
-**参数：**
+**Parameters**
 
-  | 参数名 | 类型 | 必填 | 说明 | 
+  | Name| Type| Mandatory| Description| 
   | -------- | -------- | -------- | -------- |
-  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | 是 | 当前Ability对象 | 
+  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | Yes| **Ability** object.| 
 
-**示例：**
+**Example**
 ```ts
 let abilityLifecycleCallback =  {
     onAbilityForeground(ability){
@@ -134,17 +134,17 @@ let abilityLifecycleCallback =  {
 
 onAbilityBackground(ability: UIAbility): void;
 
-注册监听应用上下文的生命周期后，在ability的状态从前台转到后台时触发回调。
+Called when an ability is switched from the foreground to the background.
 
-**系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
+**System capability**: SystemCapability.Ability.AbilityRuntime.AbilityCore
 
-**参数：**
+**Parameters**
 
-  | 参数名 | 类型 | 必填 | 说明 | 
+  | Name| Type| Mandatory| Description| 
   | -------- | -------- | -------- | -------- |
-  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | 是 | 当前Ability对象 | 
+  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | Yes| **Ability** object.| 
 
-**示例：**
+**Example**
 ```ts
 let abilityLifecycleCallback =  {
     onAbilityBackground(ability){
@@ -153,9 +153,9 @@ let abilityLifecycleCallback =  {
 };
 ```
 
-## AbilityLifecycleCallback使用
+## Usage of AbilityLifecycleCallback
 
-**示例：**
+**Example**
 
 MyFirstAbility.ts
 ```ts
@@ -163,7 +163,7 @@ import AbilityLifecycleCallback from '@ohos.app.ability.AbilityLifecycleCallback
 import AbilityStage from '@ohos.app.ability.AbilityStage';
 import UIAbility from '@ohos.app.ability.UIAbility';
 
-// 声明ability生命周期回调，需配置所有回调后才可以在applicationContext注册
+// Declare the ability lifecycle callbacks. A listener can be registered in applicationContext only after all the callbacks are configured.
 let abilityLifecycleCallback = {
     onAbilityCreate(ability){
         console.log('AbilityLifecycleCallback onAbilityCreate.');  
@@ -188,9 +188,9 @@ let abilityLifecycleCallback = {
 export default class MyFirstAbility extends UIAbility {
     onCreate() {
         console.log('MyAbilityStage onCreate');
-        // 1.通过context属性获取applicationContext
+        // 1. Obtain applicationContext through the context attribute.
         let applicationContext = this.context.getApplicationContext();
-        // 2.通过applicationContext注册监听应用内生命周期
+        // 2. Register the listener for the ability lifecycle changes through the applicationContext object.
         try {
             globalThis.lifecycleId = applicationContext.on('abilityLifecycle', abilityLifecycleCallback);
             console.log('registerAbilityLifecycleCallback lifecycleId: ${globalThis.lifecycleId}');
@@ -208,7 +208,7 @@ import UIAbility from '@ohos.app.ability.UIAbility';
 export default class MySecondAbility extends UIAbility {
     onDestroy() {
         let applicationContext = this.context.getApplicationContext();
-        // 3.通过applicationContext注销监听应用内生命周期
+        // 3. Deregister the listener for the ability lifecycle changes through the applicationContext object.
         applicationContext.off('abilityLifecycle', globalThis.lifecycleId, (error) => {
             if (error && error.code !== 0) {
                 console.error('unregisterAbilityLifecycleCallback fail, error: ${JSON.stringify(error)}');

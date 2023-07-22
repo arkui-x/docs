@@ -1,21 +1,21 @@
 # ApplicationContext
 
-ApplicationContext模块提供开发者应用级别的的上下文的能力，包括提供注册及取消注册应用内组件生命周期的监听接口。
+The **ApplicationContext** module provides application-level context. You can use the APIs of this module to register and deregister the ability lifecycle listener in an application.
 
-> **说明：**
+> **NOTE**
 > 
-> 本模块首批接口从API version 9开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  
-> 本模块接口仅可在Stage模型下使用。
+> The initial APIs of this module are supported since API version 9. Newly added APIs will be marked with a superscript to indicate their earliest API version. 
+> The APIs of this module can be used only in the stage model.
 
-## 导入模块
+## Modules to Import
 
 ```ts
 import common from '@ohos.app.ability.common';
 ```
 
-## 使用说明
+## Usage
 
-在使用ApplicationContext的功能前，需要通过context的实例获取。
+Before calling any APIs in **ApplicationContext**, obtain an **ApplicationContext** instance through the **context** instance.
 
 ```ts
 let applicationContext: common.ApplicationContext = this.context.getApplicationContext();
@@ -25,24 +25,24 @@ let applicationContext: common.ApplicationContext = this.context.getApplicationC
 
 on(type: 'abilityLifecycle', callback: AbilityLifecycleCallback): **number**;
 
-注册监听应用内生命周期
+Registers a listener to monitor the ability lifecycle of the application.
 
-**系统能力**：SystemCapability.Ability.AbilityRuntime.Core
+**System capability**: SystemCapability.Ability.AbilityRuntime.Core
 
-**参数：**
+**Parameters**
 
-| 参数名                   | 类型     | 必填 | 说明                           |
+| Name                  | Type    | Mandatory| Description                          |
 | ------------------------ | -------- | ---- | ------------------------------ |
-| type | 'abilityLifecycle' | 是   | 监听事件的类型。 |
-| callback | [AbilityLifecycleCallback](js-apis-app-ability-abilityLifecycleCallback.md) | 是   | 回调方法，返回注册监听事件的ID。 |
+| type | 'abilityLifecycle' | Yes  | Event type.|
+| callback | [AbilityLifecycleCallback](js-apis-app-ability-abilityLifecycleCallback.md) | Yes  | Callback used to return the ID of the registered listener.|
 
-**返回值：**
+**Return value**
 
-| 类型   | 说明                           |
+| Type  | Description                          |
 | ------ | ------------------------------ |
-| number | 返回的此次注册监听生命周期的ID（每次注册该ID会自增+1，当超过监听上限数量2^63-1时，返回-1）。|
+| number | ID of the registered listener. The ID is incremented by 1 each time the listener is registered. When the ID exceeds 2^63-1, **-1** is returned.|
 
-**示例：**
+**Example**
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
@@ -74,9 +74,9 @@ export default class EntryAbility extends UIAbility {
                 console.log('AbilityLifecycleCallback onAbilityBackground ability: ${ability}');
             }
         }
-        // 1.通过context属性获取applicationContext
+        // 1. Obtain applicationContext through the context attribute.
         let applicationContext = this.context.getApplicationContext();
-        // 2.通过applicationContext注册监听应用内生命周期
+        // 2. Use applicationContext to register a listener for the ability lifecycle in the application.
         lifecycleId = applicationContext.on('abilityLifecycle', AbilityLifecycleCallback);
         console.log('registerAbilityLifecycleCallback lifecycleId: ${lifecycleId)}');
     }
@@ -87,19 +87,19 @@ export default class EntryAbility extends UIAbility {
 
 off(type: 'abilityLifecycle', callbackId: **number**,  callback: AsyncCallback<**void**>): **void**;
 
-取消监听应用内生命周期
+Deregisters the listener that monitors the ability lifecycle of the application.
 
-**系统能力**：SystemCapability.Ability.AbilityRuntime.Core
+**System capability**: SystemCapability.Ability.AbilityRuntime.Core
 
-**参数：**
+**Parameters**
 
-| 参数名        | 类型     | 必填 | 说明                       |
+| Name       | Type    | Mandatory| Description                      |
 | ------------- | -------- | ---- | -------------------------- |
-| type | 'abilityLifecycle' | 是   | 取消监听事件的类型。 |
-| callbackId    | number   | 是   | 注册监听应用内生命周期的ID。 |
-| callback | AsyncCallback\<void> | 是   | 回调方法。                   |
+| type | 'abilityLifecycle' | Yes  | Event type.|
+| callbackId    | number   | Yes  | ID of the listener to deregister.|
+| callback | AsyncCallback\<void> | Yes  | Callback used to return the result.                  |
 
-**示例：**
+**Example**
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
@@ -125,30 +125,30 @@ export default class EntryAbility extends UIAbility {
 
 getRunningProcessInformation(): Promise\<Array\<ProcessInformation>>;
 
-获取有关运行进程的信息。
+Obtains information about the running processes. This API uses a promise to return the result.
 
-**需要权限**：ohos.permission.GET_RUNNING_INFO
+**Required permissions**: ohos.permission.GET_RUNNING_INFO
 
-**系统能力**：SystemCapability.Ability.AbilityRuntime.Core
+**System capability**: SystemCapability.Ability.AbilityRuntime.Core
 
-**系统API**: 此接口为系统接口，三方应用不支持调用。
+**System API**: This is a system API and cannot be called by third-party applications.
 
-**返回值：**
+**Return value**
 
-| 类型 | 说明 |
+| Type| Description|
 | -------- | -------- |
-| Promise\<Array\<[ProcessInformation](js-apis-inner-application-processInformation.md)>> | 以Promise方式返回接口运行结果及有关运行进程的信息，可进行错误处理或其他自定义处理。 |
+| Promise\<Array\<[ProcessInformation](js-apis-inner-application-processInformation.md)>> | Promise used to return the API call result and the process running information. You can perform error handling or custom processing in this callback.|
 
-**错误码**：
+**Error codes**
 
-| 错误码ID | 错误信息 |
+| ID| Error Message|
 | ------- | -------- |
 | 16000011 | The context does not exist. |
 | 16000050 | Internal error. |
 
-以上错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)。
+For details about the error codes, see [Ability Error Codes](../errorcodes/errorcode-ability.md).
 
-**示例：**
+**Example**
 
 ```ts
 applicationContext.getRunningProcessInformation().then((data) => {
@@ -162,30 +162,30 @@ applicationContext.getRunningProcessInformation().then((data) => {
 
 getRunningProcessInformation(callback: AsyncCallback\<Array\<ProcessInformation>>): void;
 
-获取有关运行进程的信息。
+Obtains information about the running processes. This API uses an asynchronous callback to return the result.
 
-**需要权限**：ohos.permission.GET_RUNNING_INFO
+**Required permissions**: ohos.permission.GET_RUNNING_INFO
 
-**系统能力**：SystemCapability.Ability.AbilityRuntime.Core
+**System capability**: SystemCapability.Ability.AbilityRuntime.Core
 
-**系统API**: 此接口为系统接口，三方应用不支持调用。
+**System API**: This is a system API and cannot be called by third-party applications.
 
-**返回值：**
+**Return value**
 
-| 类型 | 说明 |
+| Type| Description|
 | -------- | -------- |
-|AsyncCallback\<Array\<[ProcessInformation](js-apis-inner-application-processInformation.md)>> | 以回调方式返回接口运行结果及有关运行进程的信息，可进行错误处理或其他自定义处理。 |
+|AsyncCallback\<Array\<[ProcessInformation](js-apis-inner-application-processInformation.md)>> | Callback used to return the API call result and the process running information. You can perform error handling or custom processing in this callback.|
 
-**错误码**：
+**Error codes**
 
-| 错误码ID | 错误信息 |
+| ID| Error Message|
 | ------- | -------- |
 | 16000011 | The context does not exist. |
 | 16000050 | Internal error. |
 
-以上错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)。
+For details about the error codes, see [Ability Error Codes](../errorcodes/errorcode-ability.md).
 
-**示例：**
+**Example**
 
 ```ts
 applicationContext.getRunningProcessInformation((err, data) => {
