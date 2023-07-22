@@ -6,23 +6,23 @@ ArkUI-SDK包含ArkUI跨平台运行时，组件和接口插件包，以及ACE To
 
 ```
 ArkUI-X SDK
-├── engine                   // ArkUI-X SDK引擎部分
-│   ├── lib                  // ArkUI-X Android平台应用集成依赖库。
-│   ├── framework            // ArkUI-X iOS平台应用集成依赖库。
-│   ├── xcframework          // ArkUI-X iOS平台应用集成依赖库。
+├── engine                   // ArkUI-X的引擎库
+│   ├── lib                  // ArkUI-X的引擎库：包括Android平台及架构的动态库。
+│   ├── framework            // ArkUI-X的引擎库：包括iOS平台及架构的Framework库。
+│   ├── xcframework          // ArkUI-X的引擎库：包括iOS平台及架构的XCFramework库。
 │   ├── ets                  // ArkUI-X增量接口，比如：@arkui-x.bridge
 │   ├── apiConfig.json       // engine库配置文件，用于IDE和ACE Tools解析，以支持应用构建按需打包。
-│   └── systemres            // OpenHarmony/HarmonyOS应用系统资源，支持ArkUI-X跨平台UX一致性。
-├── plugins                  // ArkUI-X SDK插件部分
+│   └── systemres            // ArkUI-X框架自带的资源。
+├── plugins                  // ArkUI-X官方提供的插件库
 │   ├── component            // ArkUI组件插件库，apiConfig.json
 │   └── api                  // @ohos接口插件库，apiConfig.json
-├── toolchains               // 工具链，比如ACE Tools
+├── toolchains               // ArkUI-X应用开发工具，比如：ACE Tools。
 ├── sdkConfig.json           // 增量d.ts路径和接口前缀配置
 ├── arkui-x.json             // SDK管理配置，流水线自动生成
 └── NOTICE.txt
 ```
 
->说明：ArkUI-X SDK内部详细结构请参考[ArkUI-X目录结构](../../application-dev/quick-start/sdk-structure-guide.md)。
+>说明：ArkUI-X SDK内部详细结构请参考[ArkUI-X SDK目录结构介绍](../../application-dev/quick-start/sdk-structure-guide.md)。
 
 下面将分别讲述：如何配置ArkUI-X SDK内容白名单，如何编译生成ArkUI-X SDK包，以及如何验证调试生成的ArkUI-X SDK包。
 
@@ -45,9 +45,7 @@ ArkUI-X SDK
 
 ### @ohos.i18n接口SDK白名单配置
 
-@ohos.i18n接口定义跨平台实现后，需通过白名单配置输出到ArkUI-X SDK包中，涉及代码仓为：
-- https://gitee.com/arkui-x/build_plugins
-- https://gitee.com/arkui-x/interface_sdk
+@ohos.i18n接口定义跨平台实现后，需通过白名单配置输出到ArkUI-X SDK包中，涉及代码仓为：https://gitee.com/arkui-x/build_plugins
 
 [Android平台白名单配置](https://gitee.com/arkui-x/build_plugins/blob/master/sdk/arkui_cross_sdk_description_std.json)
 ```json
@@ -84,26 +82,7 @@ ArkUI-X SDK
             "darwin"
             ]
     },
-    {
-        "install_dir": "arkui-x/plugins/api/xcframework/platform_type/libi18n.xcframework",  // 用于指定输出到ArkUI-X SDK哪个目录下。
-        "module_label": "//interface/sdk:copy_libi18n_xcframework",                          // 需要打包到ArkUI-X SDK的内容(XCFramework动态库)
-        "target_os": [
-            "darwin"
-            ]
-    },
     ...
-```
-
-其中，libi18n.xcframework需要在[interface_sdk仓](https://gitee.com/arkui-x/interface_sdk/blob/master/BUILD.gn)完成GN Targets编写。
-
-```GN
-  copy_xcframework("copy_libi18n_xcframework") {
-    deps = [ "//foundation/arkui/ace_engine/adapter/ios/build:libi18n" ]
-    sources = [
-      "${root_out_dir}/lib.ios.framework/arkui/plugins/libi18n.xcframework",
-    ]
-    outputs = [ "${root_out_dir}/lib.xcframework/${target_name}" ]
-  }
 ```
 
 ### @ohos.i18n接口调用解析

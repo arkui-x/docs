@@ -33,28 +33,28 @@ path_操作系统类型_CPU架构类型_版本号_releaseType.zip
 | 操作系统类型 | 可选值：windows，darwin，linux。 |
 | CPU架构类型 | 可选值："x64"-x86架构，"arm64"-arm架构。 |
 | 版本号 | 构建版本号与OpenHarmony SDK版本号规则保持一致。 |
-| releaseType | 可选值：Canary，Beta，Release三种可选取值。releaseType后面加数字，标识迭代次数，比如Canary1、Beta1。|
+| releaseType | 可选值：Alpha，Beta，Release三种可选取值。releaseType后面加数字，标识迭代次数，比如：Beta1。|
 
 **示例：**
-arkui-x_windows_x64_0.0.8.6_Beta.zip
+arkui-x_windows_x64_1.0.0.0_Alpha.zip
 
 ## SDK压缩包内部结构
 这里，以Mac平台上的ArkUI-X SDK包为例，对SDK目录结构和内容规格进行说明。更详细的ArkUI-X SDK内容规格会在第五节进行介绍。
 
 ```
-arkui-x_darwin_x64_0.0.8.6_Beta.zip
+arkui-x_darwin_x64_1.0.0.0_Alpha.zip
 └── arkui-x
-    ├── engine                   // ArkUI-X SDK引擎部分
-    │   ├── lib
-    │   ├── framework
-    │   ├── xcframework
-    │   ├── ets
-    │   ├── apiConfig.json
-    │   └── systemres
-    ├── plugins                  // ArkUI-X SDK插件部分
+    ├── engine                   // ArkUI-X的引擎库
+    │   ├── lib                  // ArkUI-X的引擎库：包括Android平台及架构的动态库
+    │   ├── framework            // ArkUI-X的引擎库：包括iOS平台及架构的Framework库
+    │   ├── xcframework          // ArkUI-X的引擎库：包括iOS平台及架构的XCFramework库
+    │   ├── ets                  // ArkUI-X增量接口，比如：@arkui-x.bridge
+    │   ├── apiConfig.json       // engine库配置文件，用于IDE和ACE Tools解析，以支持应用构建按需打包。
+    │   └── systemres            // ArkUI-X框架自带的资源
+    ├── plugins                  // ArkUI-X官方提供的插件库
     │   ├── component            // ArkUI组件插件库
-    │   └── api                  // @ohos接口插件库
-    ├── toolchains               // 工具链，比如ACE Tools
+    │   └── api                  // @ohos接口插件库，apiConfig.json
+    ├── toolchains               // ArkUI-X应用开发工具，比如：ACE Tools。
     ├── sdkConfig.json           // 增量d.ts路径和接口前缀配置
     ├── arkui-x.json             // SDK管理配置，流水线自动生成
     └── NOTICE.txt
@@ -62,7 +62,7 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip
 
 ### ArkUI-X SDK引擎目录结构
 
-ArkUI-X应用构建最小依赖集合，位于arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/engine目录：
+ArkUI-X应用构建最小依赖集合，位于arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/engine目录：
 
 ```
 engine
@@ -94,20 +94,17 @@ engine
 │   │   │   └── libarkui_ios.xcframework
 │   │   │       ├── Info.plist
 │   │   │       ├── ios-arm64
-│   │   │       ├── ios-arm64-simulator
-│   │   │       └── ios-x86_64-simulator
+│   │   │       └── ios-arm64_x86_64-simulator
 │   │   ├── ios-profile
 │   │   │   └── libarkui_ios.xcframework
 │   │   │       ├── Info.plist
 │   │   │       ├── ios-arm64
-│   │   │       ├── ios-arm64-simulator
-│   │   │       └── ios-x86_64-simulator
+│   │   │       └── ios-arm64_x86_64-simulator
 │   │   └── ios-release
 │   │       └── libarkui_ios.xcframework
 │   │           ├── Info.plist
 │   │           ├── ios-arm64
-│   │           ├── ios-arm64-simulator
-│   │           └── ios-x86_64-simulator
+│   │           └── ios-arm64_x86_64-simulator
 │   ├── third_party                          // 内部目录同arkui
 │   └── utils                                // 内部目录同arkui
 ├── ets
@@ -118,7 +115,7 @@ engine
 
 ### ArkUI-X SDK插件目录结构
 
-ArkUI-X应用按需打包插件库集合，位于arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/plugins目录：
+ArkUI-X应用按需打包插件库集合，位于arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/plugins目录：
 
 ```
 plugins
@@ -147,20 +144,17 @@ plugins
 │   │   │   └── lib${ui-name}.xcframework
 │   │   │       ├── Info.plist
 │   │   │       ├── ios-arm64
-│   │   │       ├── ios-arm64-simulator
-│   │   │       └── ios-x86_64-simulator
+│   │   │       └── ios-arm64_x86_64-simulator
 │   │   ├── ios-profile
 │   │   │   └── lib${ui-name}.xcframework
 │   │   │       ├── Info.plist
 │   │   │       ├── ios-arm64
-│   │   │       ├── ios-arm64-simulator
-│   │   │       └── ios-x86_64-simulator
+│   │   │       └── ios-arm64_x86_64-simulator
 │   │   └── ios-release
 │   │       └── lib${ui-name}.xcframework
 │   │           ├── Info.plist
 │   │           ├── ios-arm64
-│   │           ├── ios-arm64-simulator
-│   │           └── ios-x86_64-simulator
+│   │           └── ios-arm64_x86_64-simulator
 │   └── apiConfig.json
 └── api
     ├── lib
@@ -187,20 +181,17 @@ plugins
     │   │   └── lib${module-name}_${submodule-name}.xcframework
     │   │       ├── Info.plist
     │   │       ├── ios-arm64
-    │   │       ├── ios-arm64-simulator
-    │   │       └── ios-x86_64-simulator
+    │   │       └── ios-arm64_x86_64-simulator
     │   ├── ios-profile
     │   │   └── lib${module-name}_${submodule-name}.xcframework
     │   │       ├── Info.plist
     │   │       ├── ios-arm64
-    │   │       ├── ios-arm64-simulator
-    │   │       └── ios-x86_64-simulator
+    │   │       └── ios-arm64_x86_64-simulator
     │   └── ios-release
     │       └── lib${module-name}_${submodule-name}.xcframework
     │           ├── Info.plist
     │           ├── ios-arm64
-    │           ├── ios-arm64-simulator
-    │           └── ios-x86_64-simulator
+    │           └── ios-arm64_x86_64-simulator
     └── apiConfig.json
 ```
 
@@ -215,7 +206,7 @@ plugins
   },
   "path": "arkui-x",              // ArkUI-X SDK下载的后的路径名称。
   "releaseType": "Beta",
-  "version": "0.0.8.6"            // ArkUI-X SDK编译构建版本号，用于转测试。
+  "version": "1.0.0.0"            // ArkUI-X SDK编译构建版本号，用于转测试。
 }
 ```
 
@@ -230,7 +221,7 @@ plugins
 * systemres目录：ArkUI渲染一致性资源主题包。
 
 ```
-arkui-x_windows_x64_0.0.8.6_Beta.zip/arkui-x/engine
+arkui-x_windows_x64_1.0.0.0_Alpha.zip/arkui-x/engine
 ├── lib                                           // ArkUI跨平台引擎及平台适配层
 │   ├── include                                   // NAPI和相关辅助C接口
 │   ├── arkui
@@ -257,7 +248,7 @@ arkui-x_windows_x64_0.0.8.6_Beta.zip/arkui-x/engine
 * api目录：ArkTS接口插件化动态库。
 
 ```
-arkui-x_windows_x64_0.0.8.6_Beta.zip/arkui-x/plugins
+arkui-x_windows_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
 ├── component                                                   // ArkUI组件插件化动态库。
 │   ├── lib
 │   │   ├── include
@@ -297,7 +288,7 @@ arkui-x_windows_x64_0.0.8.6_Beta.zip/arkui-x/plugins
 * systemres目录：ArkUI渲染一致性资源主题包。
 
 ```
-arkui-x_linux_x64_0.0.8.6_Beta.zip/arkui-x/engine
+arkui-x_linux_x64_1.0.0.0_Alpha.zip/arkui-x/engine
 ├── lib                                           // ArkUI跨平台引擎及平台适配层
 │   ├── include                                   // NAPI和相关辅助C接口
 │   ├── arkui
@@ -324,7 +315,7 @@ arkui-x_linux_x64_0.0.8.6_Beta.zip/arkui-x/engine
 * api目录：ArkTS接口插件化动态库。
 
 ```
-arkui-x_linux_x64_0.0.8.6_Beta.zip/arkui-x/plugins
+arkui-x_linux_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
 ├── component                                                   // ArkUI组件插件化动态库。
 │   ├── lib
 │   │   ├── include
@@ -364,7 +355,7 @@ arkui-x_linux_x64_0.0.8.6_Beta.zip/arkui-x/plugins
 * systemres目录：ArkUI渲染一致性资源主题包。
 
 ```
-arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/engine
+arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/engine
 ├── lib                                                 // ArkUI跨平台引擎及平台适配层
 │   ├── include                                         // NAPI和相关辅助C接口
 │   ├── arkui
@@ -414,8 +405,7 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/engine
 │   │   │       │       ├── libarkui_ios.podspec
 │   │   │       │       └── Modules
 │   │   │       │           └── module.modulemap
-│   │   │       ├── ios-arm64-simulator
-│   │   │       └── ios-x86_64-simulator
+│   │   │       └── ios-arm64_x86_64-simulator
 │   │   ├── ios-profile
 │   │   │   └── libarkui_ios.xcframework                     // ArkUI跨平台引擎及平台适配层
 │   │   │       ├── Info.plist
@@ -430,8 +420,7 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/engine
 │   │   │       │       ├── libarkui_ios.podspec
 │   │   │       │       └── Modules
 │   │   │       │           └── module.modulemap
-│   │   │       ├── ios-arm64-simulator
-│   │   │       └── ios-x86_64-simulator
+│   │   │       └── ios-arm64_x86_64-simulator
 │   │   └── ios-release
 │   │       └── libarkui_ios.xcframework                     // ArkUI跨平台引擎及平台适配层
 │   │           ├── Info.plist
@@ -446,8 +435,7 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/engine
 │   │           │       ├── libarkui_ios.podspec
 │   │           │       └── Modules
 │   │           │           └── module.modulemap
-│   │           ├── ios-arm64-simulator
-│   │           └── ios-x86_64-simulator
+│   │           └── ios-arm64_x86_64-simulator
 │   ├── third_party
 │   └── utils
 ├── ets                                                 // ArkUI-X独有接口定义和ArkUI跨平台Stage模型相关基础接口配置说明。
@@ -462,7 +450,7 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/engine
 * api目录：ArkTS接口插件化动态库。
 
 ```
-arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/plugins
+arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
 ├── component                                                  // ArkUI组件插件化动态库。
 │   ├── lib
 │   │   ├── include
@@ -501,8 +489,7 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/plugins
 │   │   │       │       ├── lib${ui-name}.podspec
 │   │   │       │       └── Modules
 │   │   │       │           └── module.modulemap
-│   │   │       ├── ios-arm64-simulator
-│   │   │       └── ios-x86_64-simulator
+│   │   │       └── ios-arm64_x86_64-simulator
 │   │   ├── ios-profile
 │   │   │   └── lib${ui-name}.xcframework                          // ArkUI组件实现。
 │   │   │       ├── Info.plist
@@ -514,8 +501,7 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/plugins
 │   │   │       │       ├── lib${ui-name}.podspec
 │   │   │       │       └── Modules
 │   │   │       │           └── module.modulemap
-│   │   │       ├── ios-arm64-simulator
-│   │   │       └── ios-x86_64-simulator
+│   │   │       └── ios-arm64_x86_64-simulator
 │   │   └── ios-release
 │   │       └── lib${ui-name}.xcframework                          // ArkUI组件实现。
 │   │           ├── Info.plist
@@ -527,8 +513,7 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/plugins
 │   │           │       ├── lib${ui-name}.podspec
 │   │           │       └── Modules
 │   │           │           └── module.modulemap
-│   │           ├── ios-arm64-simulator
-│   │           └── ios-x86_64-simulator
+│   │           └── ios-arm64_x86_64-simulator
 │   └── apiConfig.json                                         // ArkTS UI组件跨平台实现配置说明。
 └── api                                                        // ArkTS接口插件化动态库。
     ├── lib
@@ -568,8 +553,7 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/plugins
     │   │       │       ├── lib${module-name}_${submodule-name}.podspec
     │   │       │       └── Modules
     │   │       │           └── module.modulemap
-    │   │       ├── ios-arm64-simulator
-    │   │       └── ios-x86_64-simulator
+    │   │       └── ios-arm64_x86_64-simulator
     │   ├── ios-profile
     │   │   └── lib${module-name}_${submodule-name}.xcframework    // ArkTS接口实现。
     │   │       ├── Info.plist
@@ -581,8 +565,7 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/plugins
     │   │       │       ├── lib${module-name}_${submodule-name}.podspec
     │   │       │       └── Modules
     │   │       │           └── module.modulemap
-    │   │       ├── ios-arm64-simulator
-    │   │       └── ios-x86_64-simulator
+    │   │       └── ios-arm64_x86_64-simulator
     │   └── ios-release
     │       └── lib${module-name}_${submodule-name}.xcframework    // ArkTS接口实现。
     │           ├── Info.plist
@@ -594,7 +577,6 @@ arkui-x_darwin_x64_0.0.8.6_Beta.zip/arkui-x/plugins
     │           │       ├── lib${module-name}_${submodule-name}.podspec
     │           │       └── Modules
     │           │           └── module.modulemap
-    │           ├── ios-arm64-simulator
-    │           └── ios-x86_64-simulator
+    │           └── ios-arm64_x86_64-simulator
     └── apiConfig.json                                         // ArkTS @ohos接口跨平台实现配置说明。
 ```

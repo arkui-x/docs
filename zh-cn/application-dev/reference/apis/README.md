@@ -45,8 +45,8 @@
     - [metadata](js-apis-bundleManager-metadata.md)
 
 - 图形图像
-  - [@ohos.window (窗口)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-window.md)
-  - [@ohos.display (屏幕属性)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-display.md)
+  - [@ohos.window (窗口)](js-apis-window.md)
+  - [@ohos.display (屏幕属性)](js-apis-display.md)
 
 - 媒体
   - [@ohos.multimedia.image (图片处理)](js-apis-image.md)
@@ -101,4 +101,4 @@
   - [@ohos.xml (xml解析与生成)](js-apis-xml.md)
 
 - 系统基础能力
-  - [@ohos.hilog (HiLog日志打印)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-hilog.md)
+  - [@ohos.hilog (HiLog日志打印)](js-apis-hilog.md)
