@@ -140,14 +140,9 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 ./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true
 ```
 
-- 构建ArkUI-X Debug和Release版本，仅用于Android平台。
-```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true build_type=no_profile
-```
-
 - 构建ArkUI-X Release版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true build_type=release
+./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true runtime_mode=release
 ```
 
 ### Mac平台编译
@@ -159,14 +154,9 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 ./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_android=true
 ```
 
-- 构建ArkUI-X Debug和Release版本，可用于Android和iOS平台。
-```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_type=no_profile build_android=true
-```
-
 - 构建ArkUI-X Release版本，可用于Android和iOS平台。
 ```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_type=release build_android=true
+./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true runtime_mode=release build_android=true
 ```
 
 #### iOS
@@ -176,14 +166,9 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 ./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true
 ```
 
-- 构建ArkUI-X Debug和Release版本，仅用于iOS平台。
-```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_type=no_profile
-```
-
 - 构建ArkUI-X Release版本，仅用于iOS平台。
 ```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_type=release
+./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true runtime_mode=release
 ```
 
 #### Android
@@ -193,14 +178,9 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 ./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true
 ```
 
-- 构建ArkUI-X Debug和Release版本，仅用于Android平台。
-```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true build_type=no_profile
-```
-
 - 构建ArkUI-X Release版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true build_type=release
+./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true runtime_mode=release
 ```
 
 ## ArkUI-SDK调试说明
