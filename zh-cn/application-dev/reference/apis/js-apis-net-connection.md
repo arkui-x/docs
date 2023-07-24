@@ -363,7 +363,7 @@ netCon.unregister(function (error) {
 | netCapabilities         | [NetCapabilities](#netcapabilities) |  是  | 存储数据网络的传输能力和承载类型。                                |
 | bearerPrivateIdentifier | string                              |  否  |  网络标识符，Wi-Fi网络的标识符是"wifi"，蜂窝网络的标识符是"slot0"（对应SIM卡1）。 |
 
-## NetBearType<sup>10+</sup>
+## NetBearType<sup>8+</sup>
 
 网络类型。
 
