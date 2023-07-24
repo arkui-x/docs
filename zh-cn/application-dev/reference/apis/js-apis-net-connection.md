@@ -3,7 +3,7 @@
 网络连接管理提供管理网络一些基础能力，包括获取默认激活的数据网络、监听网络变化等功能。
 
 > **说明：**
-> 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+> 本模块首批接口从API version 8开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 
 ## 导入模块
 
@@ -11,11 +11,11 @@
 import connection from '@ohos.net.connection'
 ```
 
-## connection.createNetConnection<sup>10+</sup>
+## connection.createNetConnection<sup>8+</sup>
 
 createNetConnection(netSpecifier?: NetSpecifier, timeout?: number): NetConnection
 
-返回一个NetConnection对象，目前只支持netSpecifier为默认网络和timeout为0。
+返回一个NetConnection对象，目前只支持默认网络和timeout为0，即netSpecifier和timeout不输入。
 
 **系统能力**：SystemCapability.Communication.NetManager.Core
 
@@ -37,16 +37,9 @@ createNetConnection(netSpecifier?: NetSpecifier, timeout?: number): NetConnectio
 ```js
 // 关注默认网络, 不需要传参
 let netConnection = connection.createNetConnection()
-
-// 关注蜂窝网络，需要传入相关网络特征，timeout参数未传入说明未使用超时时间，此时timeout为0
-let netConnectionCellular = connection.createNetConnection({
-  netCapabilities: {
-    bearerTypes: [connection.NetBearType.BEARER_CELLULAR]
-  }
-})
 ```
 
-## connection.hasDefaultNet<sup>10+</sup>
+## connection.hasDefaultNet<sup>8+</sup>
 
 hasDefaultNet(callback: AsyncCallback\<boolean>): void
 
@@ -80,7 +73,7 @@ connection.hasDefaultNet(function (error, data) {
 })
 ```
 
-## connection.hasDefaultNet<sup>10+</sup>
+## connection.hasDefaultNet<sup>8+</sup>
 
 hasDefaultNet(): Promise\<boolean>
 
@@ -122,7 +115,7 @@ connection.hasDefaultNet().then(function (data) {
 > 设备从有网络到无网络状态会触发netLost事件；
 > 设备从WiFi到蜂窝会触发netLost事件（WiFi丢失）之后触发 netAvaliable事件（蜂窝可用）；
 
-### register<sup>10+</sup>
+### register<sup>8+</sup>
 
 register(callback: AsyncCallback\<void>): void
 
@@ -157,7 +150,7 @@ netConnection.register(function (error) {
 })
 ```
 
-### unregister<sup>10+</sup>
+### unregister<sup>8+</sup>
 
 unregister(callback: AsyncCallback\<void>): void
 
@@ -189,7 +182,7 @@ netConnection.unregister(function (error) {
 })
 ```
 
-### on('netAvailable')<sup>10+</sup>
+### on('netAvailable')<sup>8+</sup>
 
 on(type: 'netAvailable', callback: Callback\<NetHandle>): void
 
@@ -228,7 +221,7 @@ netCon.unregister(function (error) {
 })
 ```
 
-### on('netCapabilitiesChange')<sup>10+</sup>
+### on('netCapabilitiesChange')<sup>8+</sup>
 
 on(type: 'netCapabilitiesChange', callback: Callback<{ netHandle: NetHandle, netCap: NetCapabilities }>): void
 
@@ -267,7 +260,7 @@ netCon.unregister(function (error) {
 })
 ```
 
-### on('netLost')<sup>10+</sup>
+### on('netLost')<sup>8+</sup>
 
 on(type: 'netLost', callback: Callback\<NetHandle>): void
 
@@ -306,7 +299,7 @@ netCon.unregister(function (error) {
 })
 ```
 
-### on('netUnavailable')<sup>10+</sup>
+### on('netUnavailable')<sup>8+</sup>
 
 on(type: 'netUnavailable', callback: Callback\<void>): void
 
@@ -345,7 +338,7 @@ netCon.unregister(function (error) {
 })
 ```
 
-## NetHandle<sup>10+</sup>
+## NetHandle<sup>8+</sup>
 
 数据网络的句柄。
 
@@ -359,7 +352,7 @@ netCon.unregister(function (error) {
 | ------ | ------ | --- |------------------------- |
 | netId  | number | 是  |  网络ID，取值为0代表没有默认网络，其余取值必须大于等于100。 |
 
-## NetSpecifier<sup>10+</sup>
+## NetSpecifier<sup>8+</sup>
 
 提供承载数据网络能力的实例，暂不支持。
 
@@ -381,7 +374,7 @@ netCon.unregister(function (error) {
 | BEARER_CELLULAR | 0    | 蜂窝网络。  |
 | BEARER_WIFI     | 1    | Wi-Fi网络。 |
 
-## NetCapabilities<sup>10+</sup>
+## NetCapabilities<sup>8+</sup>
 
 网络的能力集。
 
