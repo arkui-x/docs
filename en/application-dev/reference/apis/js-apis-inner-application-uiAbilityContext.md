@@ -48,6 +48,7 @@ Starts an ability. This API uses an asynchronous callback to return the result.
 | ------- | -------------------------------- |
 | 16000001 | The specified ability does not exist. |
 | 16000011 | The context does not exist. |
+| 16000050 | Internal error. |
 
 For details about the error codes, see [Ability Error Codes](../errorcodes/errorcode-ability.md).
 
@@ -102,6 +103,7 @@ Starts an ability. This API uses a promise to return the result.
 | ------- | -------------------------------- |
 | 16000001 | The specified ability does not exist. |
 | 16000011 | The context does not exist. |
+| 16000050 | Internal error. |
 
 For details about the error codes, see [Ability Error Codes](../errorcodes/errorcode-ability.md).
 
