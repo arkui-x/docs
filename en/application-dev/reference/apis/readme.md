@@ -21,6 +21,9 @@
 - File Management
   - [@ohos.file.fs (File Management)](js-apis-file-fs.md)
 
+- Security
+  - [@ohos.abilityAccessCtrl (Ability Access Control)](js-apis-abilityAccessCtrl.md)
+
 - Common Library
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
   - [@ohos.convertxml (XML-to-JavaScript Conversion)](js-apis-convertxml.md)
