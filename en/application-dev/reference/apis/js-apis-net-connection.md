@@ -15,7 +15,7 @@ import connection from '@ohos.net.connection'
 
 createNetConnection(netSpecifier?: NetSpecifier, timeout?: number): NetConnection
 
-Creates a **NetConnection** object. only netSpecifier is supported as the default network and timeout is 0.
+Creates a **NetConnection** object. Only supports default networks. So netSpecifier and timeout are not inputted.
 
 **System capability**: SystemCapability.Communication.NetManager.Core
 
