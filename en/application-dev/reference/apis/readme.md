@@ -21,6 +21,9 @@
 - File Management
   - [@ohos.file.fs (File Management)](js-apis-file-fs.md)
 
+- Device Management
+  - [@ohos.deviceInfo (Device Information)](js-apis-device_Info.md)
+
 - Common Library
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
   - [@ohos.convertxml (XML-to-JavaScript Conversion)](js-apis-convertxml.md)
