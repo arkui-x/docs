@@ -85,7 +85,6 @@ struct SpanExample {
           .decoration({ type: TextDecorationType.Underline, color: Color.Red }).fontSize(50)
       }
       .width('100%')
-      .backgroundColor(Color.Orange)
       .textIndent(50)
     }.width('100%').height('100%').padding({ left: 0, right: 0, top: 0 })
   }

@@ -32,11 +32,14 @@
     - [hapModuleInfo](js-apis-bundleManager-hapModuleInfo.md)
     - [metadata](js-apis-bundleManager-metadata.md)
 - UI
-  - [@ohos.mediaquery](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-mediaquery.md)
-  - [@ohos.promptAction](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-promptAction.md)
-  - [@ohos.router](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-router.md)
-  - [@ohos.animator](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-animator.md)
-
+  - [@ohos.animator (Animator)](js-apis-animator.md)
+  - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
+  - [@ohos.curves (Interpolation Calculation)](js-apis-curve.md)
+  - [@ohos.matrix4 (Matrix Transformation)](js-apis-matrix4.md)
+  - [@ohos.mediaquery (Media Query)](js-apis-mediaquery.md)
+  - [@ohos.promptAction (Prompt)](js-apis-promptAction.md)
+  - [@ohos.router (Page Routing)](js-apis-router.md)
+  
 - Network Management
   - [@ohos.net.connection (Network Connection Management)](js-apis-net-connection.md)
   - [@ohos.net.http (Data Request)](js-apis-http.md)
