@@ -199,16 +199,23 @@ plugins
 
 ```json
 {
-  "apiVersion": "10",             // ArkUI-X SDK依赖OpenHarmony SDK的版本。
-  "displayName": "ArkUI-X",       // ArkUI-X SDK在DevEco的显示名称。
+  "apiVersion": "10",
+  "displayName": "ArkUI-X",
   "meta": {
     "metaVersion": "1.0.0"
   },
-  "path": "arkui-x",              // ArkUI-X SDK下载的后的路径名称。
+  "path": "arkui-x",
   "releaseType": "Beta",
-  "version": "1.0.0.0"            // ArkUI-X SDK编译构建版本号，用于转测试。
+  "version": "1.0.0.0"
 }
 ```
+
+字段解释如下：
+
+- **apiVersion:** ArkUI-X SDK依赖OpenHarmony SDK的版本。
+- **displayName:** ArkUI-X SDK在DevEco的显示名称。
+- **path:** ArkUI-X SDK下载的后的路径名称。
+- **version:** ArkUI-X SDK编译构建版本号，用于转测试。
 
 # ArkUI-X SDK内容详细规格
 

@@ -21,6 +21,10 @@ ArkUI跨平台框架整体架构如下图所示，详细设计请参考[ArkUI跨
 
 <img src="figures/ArkUI-X.png" alt="ArkUI跨平台架构图" style="zoom:80%;" />
 
+## 演进路线
+
+[2023 Roadmap](roadmap/ArkUI-X-roadmap-2023.md)
+
 ## 快速入门
 
 * [应用开发快速入门](application-dev/quick-start/start-overview.md)
@@ -30,6 +34,7 @@ ArkUI跨平台框架整体架构如下图所示，详细设计请参考[ArkUI跨
 ## 代码仓地址
 
 ArkUI-X主库组织地址：https://gitee.com/arkui-x
+
 ArkUI-X GitHub镜像库地址：https://github.com/arkui-x 
 
 ## 开发者文档
@@ -37,10 +42,6 @@ ArkUI-X GitHub镜像库地址：https://github.com/arkui-x
 简体中文：[ArkUI-X开发者文档](README.md) 
 
 [English Version](../en/readme.md)
-
-## 演进路线（TODO）
-
-[ArkUI跨平台框架演进路线图](roadmap/ArkUI-X-roadmap.md)
 
 ## 源码下载
 
