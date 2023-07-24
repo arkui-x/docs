@@ -21,28 +21,3 @@ import Configuration from '@ohos.app.ability.Configuration';
 
 具体字段描述参考ohos.app.ability.Configuration.d.ts文件
 
-**示例：**
-
-  ```ts
-import UIAbility from '@ohos.app.ability.UIAbility';
-
-export default class EntryAbility extends UIAbility {
-    onCreate(want, launchParam) {
-        let envCallback = {
-            onConfigurationUpdated(config) {
-                console.info(`envCallback onConfigurationUpdated success: ${JSON.stringify(config)}`);
-                let colorMode = config.colorMode;
-                let direction = config.direction;
-            }
-        };
-        try {
-            let applicationContext = this.context.getApplicationContext();
-            let callbackId = applicationContext.on('environment', envCallback);
-            console.log('callbackId: ${callbackId}');
-        } catch (paramError) {
-            console.error('error: ${paramError.code}, ${paramError.message}');
-        }
-    }
-}
-  ```
-

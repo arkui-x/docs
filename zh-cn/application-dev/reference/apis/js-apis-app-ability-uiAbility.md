@@ -162,7 +162,7 @@ UIAbility生命周期回调，当应用从前台转到后台时触发。
 
 onNewWant(want: Want, launchParams: AbilityConstant.LaunchParam): void;
 
-当传入新的Want，ability再次被拉起时会回调执行该方法。
+当传入新的Want，单实例ability再次被拉起时会回调执行该方法。
 
 **系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
 

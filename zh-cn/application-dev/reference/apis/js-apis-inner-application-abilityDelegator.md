@@ -939,7 +939,7 @@ let abilityDelegator: AbilityDelegatorRegistry.AbilityDelegator;
 
 let monitor = {
     moduleName: 'moduleName',
-    srcEntrance: 'srcEntrance',
+    srcEntrance: './ets/Application/MyAbilityStage.ts',
 };
 
 abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator();
@@ -983,7 +983,7 @@ let abilityDelegator: AbilityDelegatorRegistry.AbilityDelegator;
 
 let monitor = {
     moduleName: 'moduleName',
-    srcEntrance: 'srcEntrance',
+    srcEntrance: './ets/Application/MyAbilityStage.ts',
 };
 
 abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator();
@@ -1022,7 +1022,7 @@ let abilityDelegator: AbilityDelegatorRegistry.AbilityDelegator;
 
 let monitor = {
     moduleName: 'moduleName',
-    srcEntrance: 'srcEntrance',
+    srcEntrance: './ets/Application/MyAbilityStage.ts',
 };
 
 abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator();
@@ -1066,7 +1066,7 @@ let abilityDelegator: AbilityDelegatorRegistry.AbilityDelegator;
 
 let monitor = {
     moduleName: 'moduleName',
-    srcEntrance: 'srcEntrance',
+    srcEntrance: './ets/Application/MyAbilityStage.ts',
 };
 
 abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator();
@@ -1109,7 +1109,7 @@ function onAbilityCreateCallback(data) {
 
 let monitor = {
     moduleName: 'moduleName',
-    srcEntrance: 'srcEntrance',
+    srcEntrance: './ets/Application/MyAbilityStage.ts',
 };
 
 abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator();
@@ -1158,7 +1158,7 @@ function onAbilityCreateCallback(data) {
 
 let monitor = {
     moduleName: 'moduleName',
-    srcEntrance: 'srcEntrance',
+    srcEntrance: './ets/Application/MyAbilityStage.ts',
 };
 
 abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator();
@@ -1203,7 +1203,7 @@ function onAbilityCreateCallback(data) {
 
 let monitor = {
     moduleName: 'moduleName',
-    srcEntrance: 'srcEntrance',
+    srcEntrance: './ets/Application/MyAbilityStage.ts',
 };
 
 abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator();

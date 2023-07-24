@@ -1,4 +1,36 @@
 # OpenHarmony APIs with Cross-Platform Support
+- Ability Framework
+  - Stage Model (Recommended)
+    - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](js-apis-app-ability-abilityLifecycleCallback.md)
+    - [@ohos.app.ability.AbilityConstant (AbilityConstant)](js-apis-app-ability-abilityConstant.md)
+    - [@ohos.app.ability.AbilityStage (AbilityStage)](js-apis-app-ability-abilityStage.md)
+    - [@ohos.app.ability.UIAbility (UIAbility)](js-apis-app-ability-uiAbility.md)
+    - [@ohos.app.ability.common (Context)](js-apis-app-ability-common.md)
+  - Both Models (Recommended)
+    - [@ohos.app.ability.Configuration (Configuration)](js-apis-app-ability-configuration.md)
+    - [@ohos.app.ability.ConfigurationConstant (ConfigurationConstant)](js-apis-app-ability-configurationConstant.md)
+    - [@ohos.app.ability.Want (Want)](js-apis-app-ability-want.md)
+  - Dependent Elements and Definitions
+    - ability
+    - app
+    - application
+      - [abilityDelegator](js-apis-inner-application-abilityDelegator.md)
+      - [abilityDelegatorArgs](js-apis-inner-application-abilityDelegatorArgs.md)
+      - [abilityMonitor](js-apis-inner-application-abilityMonitor.md)
+      - [AbilityStageContext](js-apis-inner-application-abilityStageContext.md)
+      - [abilityStageMonitor](js-apis-inner-application-abilityStageMonitor.md)
+      - [ApplicationContext](js-apis-inner-application-applicationContext.md)
+      - [BaseContext](js-apis-inner-application-baseContext.md)
+      - [Context](js-apis-inner-application-context.md)
+      - [UIAbilityContext](js-apis-inner-application-uiAbilityContext.md)
+
+- Bundle Management
+  - [@ohos.bundle.bundleManager (bundleManager)](js-apis-bundleManager.md)
+  - bundleManager
+    - [abilityInfo](js-apis-bundleManager-abilityInfo.md)
+    - [applicationInfo](js-apis-bundleManager-applicationInfo.md)
+    - [hapModuleInfo](js-apis-bundleManager-hapModuleInfo.md)
+    - [metadata](js-apis-bundleManager-metadata.md)
 - UI
   - [@ohos.mediaquery](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-mediaquery.md)
   - [@ohos.promptAction](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-promptAction.md)
