@@ -46,8 +46,6 @@ Line(value?: {width?: string | number, height?: string | number})
 | strokeWidth | Length | 1 | 设置线条宽度。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 <br/>**说明：**<br/>该属性若为string类型, 暂不支持百分比。<br/>异常值按照默认值处理。 |
 | antiAlias | boolean | true | 是否开启抗锯齿效果。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
 
-
-
 ## 示例
 
 ### 示例1

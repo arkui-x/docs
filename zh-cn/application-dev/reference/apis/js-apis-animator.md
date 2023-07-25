@@ -71,12 +71,11 @@ reset(options: AnimatorOptions): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[ohos.animator(动画)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/errorcodes/errorcode-animator.md)错误码。
+以下错误码的详细介绍请参见[ohos.animator(动画)](../errorcodes/errorcode-animator.md)错误码。
 
 | 错误码ID   | 错误信息 |
 | --------- | ------- |
 | 100001    | if no page is found for pageId or fail to get object property list. |
-
 
 **示例：**
 

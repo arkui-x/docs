@@ -150,8 +150,6 @@ setCurrentTime(value: number, seekMode: SeekMode)
 | ClosestKeyframe  | 跳转到最近的关键帧。     |
 | Accurate         | 精准跳转，不论是否为关键帧。 |
 
-
-
 ## 示例
 
 ```ts
