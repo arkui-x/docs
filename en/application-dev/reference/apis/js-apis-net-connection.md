@@ -15,7 +15,7 @@ import connection from '@ohos.net.connection'
 
 createNetConnection(netSpecifier?: NetSpecifier, timeout?: number): NetConnection
 
-Creates a **NetConnection** object. Only supports default networks. So netSpecifier and timeout are not inputted.
+Creates a **NetConnection** object. Currently, this API accepts only netSpecifier and timeout at their default values.
 
 **System capability**: SystemCapability.Communication.NetManager.Core
 
@@ -23,8 +23,8 @@ Creates a **NetConnection** object. Only supports default networks. So netSpecif
 
 | Name      | Type                         | Mandatory| Description                                                        |
 | ------------ | ----------------------------- | ---- | ------------------------------------------------------------ |
-| netSpecifier | [NetSpecifier](#netspecifier) | No  | Network specifier, which specifies the characteristics of a network. only netSpecifier is supported as the default network.                  |
-| timeout      | number                        | No  | Timeout duration for obtaining the network specified by **netSpecifier**. Only timeout is 0.|
+| netSpecifier | [NetSpecifier](#netspecifier) | No  | Network specifier, which specifies the characteristics of a network. If this parameter is not set or is set to undefined, the default network is used. Currently, only the default value is supported.                  |
+| timeout      | number                        | No  | Timeout duration for obtaining the network specified by netSpecifier. This parameter is valid only when netSpecifier is specified. The default value 0 is used if netSpecifier is undefined. Currently, only the default value is supported.|
 
 **Return value**
 
