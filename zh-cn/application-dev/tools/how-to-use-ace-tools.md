@@ -47,7 +47,7 @@ demo
 ```
 * 执行ace build命令，即可构建出带有Native C++的跨平台应用。
 ### AAR开发
-ACE tools支持开发者针对Android平台开发AAR。
+ACE Tools支持开发者针对Android平台开发AAR。
 * 进入ace工程目录下，执行 ace create aar，按照提示填写AAR name，执行该命令后会在android目录下创建一个AAR工程，示例名称为myaar。
 ```
 demo
@@ -60,7 +60,7 @@ demo
 ```
 * 执行ace build aar，即可完成对ArkTS源码编译和打包，构建出相应的AAR产物。
 ### Framework开发
-ACE tools支持开发者针iOS平台开发Framework。
+ACE Tools支持开发者针iOS平台开发Framework。
 * 进入ace工程目录下，执行 ace create framework，按照提示填写framework name，执行该命令后会在ios目录下创建一个Framework工程，示例名称为myframework。
 * 执行ace build framework，即可完成对ArkTS源码编译和打包，构建出相应的framework产物。
 ```
@@ -73,7 +73,7 @@ demo
     └── entry 
 ```
 ### 多Ability开发
-ACE tools支持开发者针跨平台进行多Ability开发。
+ACE Tools支持开发者针跨平台进行多Ability开发。
 * 按照上述demo为例，执行 cd demo/source/entry 命令，进入工程的entry目录。
 * 执行ace create ability 目录，按照提示输入ability name，示例名称为Second。该命令会在entry、android和ios目录下增加相应的ability代码
 ```
@@ -90,7 +90,7 @@ demo
 ```
 * 执行ace build app/apk 命令，即可完成对多Ability场景下ArkTS源码编译和打包，构建出相应的iOS或Android应用。
 ### 多Module开发
-ACE tools支持开发者针跨平台进行多Module开发。
+ACE Tools支持开发者针跨平台进行多Module开发。
 * 按照上述demo为例，执行 cd demo/source 命令，进入工程的source目录。
 * 执行ace create module 命令，按照提示输入module name，示例名称为feature1。该命令会在entry、android和ios目录下增加相应的ability代码
 ```
