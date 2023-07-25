@@ -20,7 +20,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export JAVA_HOME=/Users/usrername/path-to-java-sdk
+   export JAVA_HOME=/path-to-java-sdk
    export PATH=$JAVA_HOME/bin:$PATH
    ```
 
@@ -28,7 +28,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   set JAVA_HOME=/Users/usrername/path-to-java-sdk
+   set JAVA_HOME=/path-to-java-sdk
    set PATH=%PATH%;%JAVA_HOME%/bin
    ```
 
@@ -44,14 +44,14 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export ARKUIX_SDK_HOME=/Users/usrername/path-to-arkui-x-sdk
+   export ARKUIX_SDK_HOME=/path-to-arkui-x-sdk
    ```
 
    [Windows]
 
    ```shell
    // 配置环境变量
-   set ARKUIX_SDK_HOME=/Users/usrername/path-to-arkui-x-sdk
+   set ARKUIX_SDK_HOME=/path-to-arkui-x-sdk
    ```
 
 ## 命令安装
@@ -66,7 +66,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    - 全局安装ACE命令
 
    ```shell
-   cd arkui-x/toolchains/ace_tools    // 根据ArkUI-X SDK下载路径，按实进入ACE Tools所在目录。
+   cd arkui-x/toolchains/ace_tools    // 根据ArkUI-X SDK下载路径，进入ACE Tools实际所在目录。
    npm install
    npm install . -g
    ```
@@ -91,7 +91,8 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    ace create project
    ? Please enter the project name: demo
    ? Please enter the bundle name (com.example.demo):com.example.demo
-   ? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 2
+   ? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 1
+   ? Please enter the project type (1: Application, 2: Library): 1
    ? Please enter the template (1: Empty Ability, 2: Native C++): 1   //选择创建Empty Ability或者Native C++项目
    ```
 
