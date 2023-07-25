@@ -16,7 +16,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export NodeJS_HOME=/home/usrername/path-to-nodejs-sdk
+   export NodeJS_HOME=/path-to-nodejs-sdk
    export PATH=${NodeJS_HOME}/bin:${PATH}
    ```
 
@@ -24,7 +24,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export NodeJS_HOME=/Users/usrername/path-to-nodejs-sdk
+   export NodeJS_HOME=/path-to-nodejs-sdk
    export PATH=$NodeJS_HOME/bin:$PATH
    ```
 
@@ -32,7 +32,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   set NodeJS_HOME=/Users/usrername/path-to-nodejs-sdk
+   set NodeJS_HOME=/path-to-nodejs-sdk
    set PATH=%PATH%;%NodeJS_HOME%/bin
    ```
 
@@ -44,7 +44,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export OHPM_HOME=/home/usrername/path-to-ohpm-sdk
+   export OHPM_HOME=/path-to-ohpm-sdk
    export PATH=${OHPM_HOME}/bin:${PATH}
    ```
 
@@ -52,7 +52,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export OHPM_HOME=/Users/usrername/path-to-ohpm-sdk
+   export OHPM_HOME=/path-to-ohpm-sdk
    export PATH=$OHPM_HOME/bin:$PATH
    ```
 
@@ -60,7 +60,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   set OHPM_HOME=/Users/usrername/path-to-ohpm-sdk
+   set OHPM_HOME=/path-to-ohpm-sdk
    set PATH=%PATH%;%OHPM_HOME%/bin
    ```
 
@@ -78,7 +78,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export JAVA_HOME=/home/usrername/path-to-java-sdk
+   export JAVA_HOME=/path-to-java-sdk
    export PATH=${JAVA_HOME}/bin:${PATH}
    ```
 
@@ -86,7 +86,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export JAVA_HOME=/Users/usrername/path-to-java-sdk
+   export JAVA_HOME=/path-to-java-sdk
    export PATH=$JAVA_HOME/bin:$PATH
    ```
 
@@ -94,7 +94,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   set JAVA_HOME=/Users/usrername/path-to-java-sdk
+   set JAVA_HOME=/path-to-java-sdk
    set PATH=%PATH%;%JAVA_HOME%/bin
    ```
 
@@ -106,7 +106,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export OpenHarmony_HOME=/home/usrername/path-to-ohsdk
+   export OpenHarmony_HOME=/path-to-openharmony-sdk
    export PATH=${OpenHarmony_HOME}/versioncode/toolchains:${PATH}
    ```
 
@@ -114,7 +114,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export OpenHarmony_HOME=/Users/usrername/path-to-ohsdk
+   export OpenHarmony_HOME=/path-to-openharmony-sdk
    export PATH=$OpenHarmony_HOME/versioncode/toolchains:$PATH
    ```
 
@@ -122,7 +122,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   set OpenHarmony_HOME=/Users/usrername/path-to-ohsdk
+   set OpenHarmony_HOME=/path-to-openharmony-sdk
    set PATH=%PATH%;%OpenHarmony_HOME%/versioncode/toolchains
    ```
 
@@ -136,7 +136,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export HarmonyOS_HOME=/home/usrername/path-to-hossdk
+   export HarmonyOS_HOME=/path-to-harmonyos-sdk
    export PATH=${HarmonyOS_HOME}/hmscore/versioncode/toolchains:${PATH}
    ```
 
@@ -144,7 +144,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export HarmonyOS_HOME=/Users/usrername/path-to-hossdk
+   export HarmonyOS_HOME=/path-to-harmonyos-sdk
    export PATH=$HarmonyOS_HOME/hmscore/versioncode/toolchains:$PATH
    ```
 
@@ -152,7 +152,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   set HarmonyOS_HOME=/Users/usrername/path-to-hossdk
+   set HarmonyOS_HOME=/path-to-harmonyos-sdk
    set PATH=%PATH%;%HarmonyOS_HOME%/hmscore/versioncode/toolchains
    ```
 
@@ -167,7 +167,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export ANDROID_HOME=/home/usrername/path-to-android-sdk
+   export ANDROID_HOME=/path-to-android-sdk
    export PATH=${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/build-tools/28.0.3:${ANDROID_HOME}/platform-tools:${PATH}
    ```
 
@@ -175,7 +175,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   export ANDROID_HOME=/Users/usrername/path-to-android-sdk
+   export ANDROID_HOME=/path-to-android-sdk
    export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/build-tools/28.0.3:$ANDROID_HOME/platform-tools:$PATH
    ```
 
@@ -183,7 +183,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ```shell
    // 配置环境变量
-   set ANDROID_HOME=/home/usrername/path-to-android-sdk
+   set ANDROID_HOME=/path-to-android-sdk
    set PATH=%PATH%;%ANDROID_HOME%/tools;%ANDROID_HOME%/tools/bin;%ANDROID_HOME%/build-tools/28.0.3;%ANDROID_HOME%/platform-tools
    ```
 
@@ -223,7 +223,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    - 全局安装ACE命令
 
    ```shell
-   cd ace_tools/cli    // 按实进入package.json所在目录
+   cd arkui-x/toolchains/ace_tools    // 根据ArkUI-X SDK下载路径，进入ACE Tools实际所在目录。
    npm install
    npm install . -g
    ```

@@ -28,7 +28,7 @@ ArkUI跨平台所支持的API Level从OpenHarmony API 10开始。相应的UI组�
 
 - 能力/架构演进
 
-能力维度的演进，主要包括进一步增强DevEco的能力（包括设备管理，Module级跨平台配置，ArkTS调试等）； 资源管理增强（包括在Android/iOS平台上可访问ArkUI的资源等），UI组件以及相关API能力的完善等。
+能力维度的演进，主要包括进一步增强DevEco Studio的能力（包括设备管理，Module级跨平台配置，ArkTS调试等）； 资源管理增强（包括在Android/iOS平台上可访问ArkUI的资源等），UI组件以及相关API能力的完善等。
 
 架构维度的演进，主要包括架构解耦-组件API的按需加载，方舟编译器的AOT+PGO能力在跨平台上的使能，以及在性能、内存、包体积的持续优化。
 
