@@ -56,6 +56,9 @@
 - File Management
   - [@ohos.file.fs (File Management)](js-apis-file-fs.md)
 
+- Data Management
+  - [@ohos.data.relationalStore (RDB Store)](js-apis-data-relationalStore.md)
+
 - Security
   - [@ohos.abilityAccessCtrl (Ability Access Control)](js-apis-abilityAccessCtrl.md)
 
