@@ -20,7 +20,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 ### 应用开发工具
 
 - ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。[详情参见ACE Tools快速入门](../application-dev/quick-start/start-with-ace-tools.md)。
-- DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序IDE开发工具，同时支持ArkUI-X应用创建，构建，安装，运行和调试等功能。[详情参见IDE快速入门](../application-dev/quick-start/start-with-deveco-studio.md)
+- DevEco Studio，是OpenHarmony和HarmonyOS默认的应用程序IDE开发工具，同时支持ArkUI-X应用创建和构建等功能。[详情参见DevEco Studio使用说明](../application-dev/tools/how-to-use-deveco-studio.md)。
 
 ## 配套关系
 
@@ -28,11 +28,12 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 
 | 目标平台    | 项目编译使用OS SDK版本              | 备注 |
 | ----------- | ----------------------------------- | ---- |
-| OpenHarmony | OpenHarmony 4.0 Release (API level 10) | NA   |
+| OpenHarmony | 4.0 (API Version 10) |  Beta2  |
+| HarmonyOS   | 4.0.0 (API 10) | NA  |
 | Android     | Quince Tart 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
 | iOS         | iOS 10<sup>+</sup>                             | NA   |
 
->说明：Alpha版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
+>说明：Alpha版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。由于HarmonyOS 4.0.0未发布，暂不支持HarmonyOS设备体验。
 
 ## 源码获取
 
