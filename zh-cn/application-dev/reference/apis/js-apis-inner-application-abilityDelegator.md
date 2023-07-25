@@ -498,20 +498,13 @@ startAbility(want: Want, callback: AsyncCallback\<void>): void;
 | 错误码ID | 错误信息 |
 | ------- | -------- |
 | 16000001 | The specified ability does not exist. |
-| 16000002 | Incorrect ability type. |
-| 16000004 | Can not start invisible component. |
-| 16000005 | The specified process does not have the permission. |
-| 16000006 | Cross-user operations are not allowed. |
-| 16000008 | The crowdtesting application expires. |
-| 16000009 | An ability cannot be started or stopped in Wukong mode. |
-| 16000010 | The call with the continuation flag is forbidden. |
 | 16000011 | The context does not exist. |
 | 16000050 | Internal error. |
-| 16000053 | The ability is not on the top of the UI. |
-| 16000055 | Installation-free timed out. |
-| 16200001 | The caller has been released. |
 
 以上错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)。
+
+>  **说明：**
+>  当在iOS平台上使用此接口时，无法从返回结果中判断参数[Want](js-apis-app-ability-want.md)中moduleName或者abilityName是否错误，需要参考[ArkUI应用实现页面跳转](../../quick-start/start-with-ability-on-ios.md#arkui应用实现页面跳转)识别错误。
 
 **示例：**
 
@@ -553,20 +546,12 @@ startAbility(want: Want): Promise\<void>;
 | 错误码ID | 错误信息 |
 | ------- | -------- |
 | 16000001 | The specified ability does not exist. |
-| 16000002 | Incorrect ability type. |
-| 16000004 | Can not start invisible component. |
-| 16000005 | The specified process does not have the permission. |
-| 16000006 | Cross-user operations are not allowed. |
-| 16000008 | The crowdtesting application expires. |
-| 16000009 | An ability cannot be started or stopped in Wukong mode. |
-| 16000010 | The call with the continuation flag is forbidden. |
 | 16000011 | The context does not exist. |
-| 16000050 | Internal error. |
-| 16000053 | The ability is not on the top of the UI. |
-| 16000055 | Installation-free timed out. |
-| 16200001 | The caller has been released. |
 
 以上错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)。
+
+>  **说明：**
+>  当在iOS平台上使用此接口时，无法从返回结果中判断参数[Want](js-apis-app-ability-want.md)中moduleName或者abilityName是否错误，需要参考[ArkUI应用实现页面跳转](../../quick-start/start-with-ability-on-ios.md#arkui应用实现页面跳转)识别错误。
 
 **示例：**
 
