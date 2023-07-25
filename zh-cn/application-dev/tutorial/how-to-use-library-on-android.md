@@ -1,4 +1,4 @@
-# Android平台基于ArkUI的AAR的构建与使用
+# Android平台基于ArkUI-X的AAR的构建与使用
 
 ## 简介
 本教程主要讲述如何利用ArkUI-X SDK完成Android AAR开发，实现基于ArkTS的声明式开发范式在android平台显示。包括：
@@ -10,16 +10,11 @@
 ### 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行Android AAR开发
 可以通过通过ACE Tools或DevEco Studio完成
 * ACE Tools
-1. ace create 命令创建一个跨平台应用工程，示例工程名为demo
+1. ace create 命令创建一个跨平台应用工程，示例工程名为demo,选择工程类型为library：
     ```
     ace create [project]
     ```
-2. 进入工程后，通过ace create aar命令创建一个aar工程，按照步骤提示填写aar工程名
-    ```
-    cd demo
-    ace create aar
-    ```
-3. 执行ace build aar命令，构建Android aar包。
+2. 执行ace build aar命令，构建Android aar包。
     ```
     ace build aar
     ```
