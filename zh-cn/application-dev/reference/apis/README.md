@@ -1,7 +1,7 @@
 # OpenHarmony接口定义跨平台支持列表
 - 平台桥接
-  - [@arkui-x.bridge](js-apis-bridge.md)
-  
+  - [@arkui-x.bridge (平台桥接)](js-apis-bridge.md)
+
 - UI界面
   - [@ohos.animator (动画)](js-apis-animator.md)
   - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)

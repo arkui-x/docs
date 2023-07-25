@@ -1,6 +1,6 @@
 # @arkui-x.bridge.d.ts (平台桥接)
 
-本模块提供ArkUI端和Android或iOS平台端消息通信的功能，包括数据传输、方法调用和事件调用。
+本模块提供ArkUI端和Android或iOS平台端消息通信的功能，包括数据传输、方法调用和事件调用。需配套平台端API使用，Android侧请参考[BridgePlugin](../arkui-for-android/BridgePlugin.md)，iOS侧参考[BridgePlugin](../arkui-for-ios/BridgePlugin.md)。
 
 > **说明：**
 >
@@ -245,3 +245,9 @@ type Response = Message
 type ResultValue = T | Map\<string, T\>
 
 **说明：** 定义方法返回值的类型。
+
+
+## 完整示例
+
+[完整示例（Android）](../../tutorial/how-to-use-bridge-on-android.md#场景示例)<br />
+[完整示例（iOS）](../../tutorial/how-to-use-bridge-on-ios.md#场景示例)
