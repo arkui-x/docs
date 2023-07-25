@@ -85,3 +85,7 @@
   - [@ohos.util.TreeSet (Nonlinear Container TreeSet)](js-apis-treeset.md)
   - [@ohos.worker (Worker Startup)](js-apis-worker.md)
   - [@ohos.xml (XML Parsing and Generation)](js-apis-xml.md)
+  
+- Data Management
+  - [@ohos.data.preferences (User Preferences)](js-apis-data-preferences.md)
+  - [@ohos.data.relationalStore (RDB Store)](js-apis-data-relationalStore.md)
