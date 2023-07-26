@@ -42,7 +42,7 @@ import Want from '@ohos.app.ability.Want';
   });
   ```
 
-- Currently, the following data types are supported by want: string, number, Boolean.
+- Currently, the following data types are supported by parameters: string, number, Boolean.
 
     * String
         ```ts
