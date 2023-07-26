@@ -42,7 +42,7 @@ import Want from '@ohos.app.ability.Want';
   });
   ```
 
-- 目前want支持的数据类型有：字符串、数字、布尔等。
+- 目前parameters支持的数据类型有：字符串、数字、布尔等。
 
     * 字符串（String）
         ```ts

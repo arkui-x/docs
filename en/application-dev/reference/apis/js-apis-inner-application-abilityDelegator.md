@@ -1,6 +1,6 @@
 # AbilityDelegator
 
-The **AbilityDelegator** module provides APIs for managing **AbilityMonitor** instances that are used to monitor the lifecycle state changes of a specified ability. You can use the APIs to add and remove **AbilityMonitor** instances, wait for an ability to reach the **OnCreate** lifecycle state, set the waiting time, obtain the lifecycle state of an ability, obtain the top ability of the current application, and start an ability.
+The **AbilityDelegator** module provides APIs for managing **AbilityMonitor** instances that are used to monitor the lifecycle state changes of a specified ability. You can use the APIs to add and remove **AbilityMonitor** instances, wait for an ability to reach the **onCreate** lifecycle state, set the waiting time, obtain the lifecycle state of an ability, obtain the top ability of the current application, and start an ability.
 
 > **NOTE**
 > 
@@ -207,7 +207,7 @@ abilityDelegator.removeAbilityMonitor(monitor).then(() => {
 
 waitAbilityMonitor(monitor: AbilityMonitor, callback: AsyncCallback\<UIAbility>): void;
 
-Waits for the **Ability** instance that matches the **AbilityMonitor** instance to reach the **OnCreate** lifecycle state and returns the **Ability** instance. This API uses an asynchronous callback to return the result.
+Waits for the **Ability** instance that matches the **AbilityMonitor** instance to reach the **onCreate** lifecycle state and returns the **Ability** instance. This API uses an asynchronous callback to return the result.
 
 **System capability**: SystemCapability.Ability.AbilityRuntime.Core
 
@@ -254,7 +254,7 @@ abilityDelegator.waitAbilityMonitor(monitor, (error : any, data : any) => {
 
 waitAbilityMonitor(monitor: AbilityMonitor, timeout: number, callback: AsyncCallback\<UIAbility>): void;
 
-Waits a period of time for the **Ability** instance that matches the **AbilityMonitor** instance to reach the **OnCreate** lifecycle state and returns the **Ability** instance. This API uses an asynchronous callback to return the result.
+Waits a period of time for the **Ability** instance that matches the **AbilityMonitor** instance to reach the **onCreate** lifecycle state and returns the **Ability** instance. This API uses an asynchronous callback to return the result.
 
 **System capability**: SystemCapability.Ability.AbilityRuntime.Core
 
@@ -305,7 +305,7 @@ abilityDelegator.waitAbilityMonitor(monitor, timeout, (error : any, data : any) 
 
 waitAbilityMonitor(monitor: AbilityMonitor, timeout?: number): Promise\<UIAbility>;
 
-Waits a period of time for the **Ability** instance that matches the **AbilityMonitor** instance to reach the **OnCreate** lifecycle state and returns the **Ability** instance. This API uses a promise to return the result.
+Waits a period of time for the **Ability** instance that matches the **AbilityMonitor** instance to reach the **onCreate** lifecycle state and returns the **Ability** instance. This API uses a promise to return the result.
 
 **System capability**: SystemCapability.Ability.AbilityRuntime.Core
 
@@ -543,18 +543,8 @@ Starts an ability. This API uses a promise to return the result.
 | ID| Error Message|
 | ------- | -------- |
 | 16000001 | The specified ability does not exist. |
-| 16000002 | Incorrect ability type. |
-| 16000004 | Can not start invisible component. |
-| 16000005 | The specified process does not have the permission. |
-| 16000006 | Cross-user operations are not allowed. |
-| 16000008 | The crowdtesting application expires. |
-| 16000009 | An ability cannot be started or stopped in Wukong mode. |
-| 16000010 | The call with the continuation flag is forbidden. |
 | 16000011 | The context does not exist. |
 | 16000050 | Internal error. |
-| 16000053 | The ability is not on the top of the UI. |
-| 16000055 | Installation-free timed out. |
-| 16200001 | The caller has been released. |
 
 For details about the error codes, see [Ability Error Codes](../errorcodes/errorcode-ability.md).
 

@@ -1,6 +1,6 @@
 # AbilityDelegator
 
-AbilityDelegator提供添加用于监视指定ability的生命周期状态更改的AbilityMonitor对象的能力，包括对AbilityMonitor实例的添加、删除、等待ability到达OnCreate生命周期、设置等待时间等、获取指定ability的生命周期状态、获取当前应用顶部ability、启动指定ability等。
+AbilityDelegator提供添加用于监视指定ability的生命周期状态更改的AbilityMonitor对象的能力，包括对AbilityMonitor实例的添加、删除、等待ability到达onCreate生命周期、设置等待时间等、获取指定ability的生命周期状态、获取当前应用顶部ability、启动指定ability等。
 
 > **说明：**
 > 
@@ -207,7 +207,7 @@ abilityDelegator.removeAbilityMonitor(monitor).then(() => {
 
 waitAbilityMonitor(monitor: AbilityMonitor, callback: AsyncCallback\<UIAbility>): void;
 
-等待与AbilityMonitor实例匹配的ability到达OnCreate生命周期，并返回ability实例（callback形式）
+等待与AbilityMonitor实例匹配的ability到达onCreate生命周期，并返回ability实例（callback形式）
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -254,7 +254,7 @@ abilityDelegator.waitAbilityMonitor(monitor, (error : any, data : any) => {
 
 waitAbilityMonitor(monitor: AbilityMonitor, timeout: number, callback: AsyncCallback\<UIAbility>): void;
 
-设置等待时间，等待与AbilityMonitor实例匹配的ability到达OnCreate生命周期，并返回ability实例（callback形式）
+设置等待时间，等待与AbilityMonitor实例匹配的ability到达onCreate生命周期，并返回ability实例（callback形式）
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -305,7 +305,7 @@ abilityDelegator.waitAbilityMonitor(monitor, timeout, (error : any, data : any) 
 
 waitAbilityMonitor(monitor: AbilityMonitor, timeout?: number): Promise\<UIAbility>;
 
-设置等待时间，等待与AbilityMonitor实例匹配的ability到达OnCreate生命周期，并返回ability实例（promise形式）
+设置等待时间，等待与AbilityMonitor实例匹配的ability到达onCreate生命周期，并返回ability实例（promise形式）
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -547,6 +547,7 @@ startAbility(want: Want): Promise\<void>;
 | ------- | -------- |
 | 16000001 | The specified ability does not exist. |
 | 16000011 | The context does not exist. |
+| 16000050 | Internal error. |
 
 以上错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)。
 

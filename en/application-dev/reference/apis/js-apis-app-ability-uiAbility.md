@@ -1,9 +1,6 @@
 # @ohos.app.ability.UIAbility (UIAbility)
 
-UIAbility is an application component that has the UI. The **UIAbility** module provides lifecycle callback such as component creation, destruction, and foreground/background switching. It also provides the following capabilities related to component collaboration:
-
-- [Caller](#caller): an object returned by **startAbilityByCall**. The CallerAbility (caller) uses this object to communicate with the CalleeAbility (callee).
-- [Callee](#callee): an internal object of UIAbility. The CalleeAbility (callee) uses this object to communicate with the CallerAbility (caller).
+UIAbility is an application component that has the UI. The **UIAbility** module provides lifecycle callback such as component creation, destruction, and foreground/background switching. 
 
 > **NOTE**
 > 
