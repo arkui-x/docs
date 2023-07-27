@@ -8,7 +8,7 @@
 
 您必须首先签署“开发者原创声明”，然后才能参与社区贡献。
 
-请在[docs/zh-cn/contribute](signing-dco.md)路径下获取`signing-dco.md` Markdown文件，将签署后的DCO Markdown文件发送至[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn) 。（线上签署待开放）
+点击[这里](https://dco.openharmony.cn/#/sign)签署，点击[这里](https://dco.openharmony.cn/#/check-sign-status)查询签署状态。
 
 #### 行为准则
 
@@ -32,5 +32,3 @@ ArkUI-X是一个开源社区。它完全依赖于社区提供友好的开发和�
 ## 社区沟通与交流
 
 有关详细信息，请参考[社区沟通与交流](communication-in-community.md)。
-
-<!--no_check-->
