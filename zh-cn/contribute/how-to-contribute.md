@@ -32,3 +32,5 @@ ArkUI-X是一个开源社区。它完全依赖于社区提供友好的开发和�
 ## 社区沟通与交流
 
 有关详细信息，请参考[社区沟通与交流](communication-in-community.md)。
+
+<!--no_check-->
