@@ -26,6 +26,9 @@
 
 若要引入新的第三方开源软件到ArkUI-X项目中，请参考[第三方开源软件引入指导](./introducing-third-party-open-source-software.md)
 
+### 测试规范
+[安全测试规范](https://gitee.com/openharmony/docs/blob/master/zh-cn/contribute/OpenHarmony-security-test-guide.md)
+
 ### 开源合规
 
 * [开发者代码贡献和许可证合规指南](./ArkUI-contribution-and-license-guide.md)
@@ -34,6 +37,12 @@
 ## 贡献工作流
 
 有关详细信息，请参考[贡献流程](contribution-process.md)。
+[代码门禁详细质量要求](https://gitee.com/openharmony/community/blob/master/sig/sig_qa/%E4%BB%A3%E7%A0%81%E9%97%A8%E7%A6%81%E8%A6%81%E6%B1%82.md)。
+
+[需求类Issue处理指导](https://gitee.com/openharmony/community/blob/master/sig/sig_qa/issue%EF%BC%88%E9%9C%80%E6%B1%82%E7%B1%BB%EF%BC%89%E5%A4%84%E7%90%86%E6%8C%87%E5%AF%BC.md)
+
+[缺陷类Issue处理指导](https://gitee.com/openharmony/community/blob/master/sig/sig_qa/issue_%E7%BC%BA%E9%99%B7%E7%B1%BB_%E5%A4%84%E7%90%86%E6%8C%87%E5%AF%BC.md)
+
 
 ## 社区安全问题
 
