@@ -72,9 +72,6 @@ export default class EntryAbility extends UIAbility {
             },
             onAbilityBackground(ability) {
                 console.log('AbilityLifecycleCallback onAbilityBackground ability: ${ability}');
-            },
-            onAbilityContinue(ability) {
-                console.log('AbilityLifecycleCallback onAbilityContinue ability: ${ability}');
             }
         }
         // 1.通过context属性获取applicationContext

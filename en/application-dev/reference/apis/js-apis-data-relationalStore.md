@@ -30,7 +30,7 @@ Obtains an RDB store. This API uses an asynchronous callback to return the resul
 
 | Name  | Type                                          | Mandatory| Description                                                        |
 | -------- | ---------------------------------------------- | ---- | ------------------------------------------------------------ |
-| context  | Context                                        | Yes  | Application context.<br>For details about the application context of the stage model, see [Context](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-inner-application-uiAbilityContext.md).|
+| context  | Context                                        | Yes  | Application context.<br>For details about the application context of the stage model, see [Context](js-apis-inner-application-uiAbilityContext.md).|
 | config   | [StoreConfig](#storeconfig)               | Yes  | Configuration of the RDB store.                               |
 | callback | AsyncCallback&lt;[RdbStore](#rdbstore)&gt; | Yes  | Callback invoked to return the RDB store obtained.                  |
 
@@ -81,7 +81,7 @@ Obtains an RDB store. This API uses a promise to return the result. You can set 
 
 | Name | Type                            | Mandatory| Description                                                        |
 | ------- | -------------------------------- | ---- | ------------------------------------------------------------ |
-| context | Context                          | Yes  | Application context.<br>For details about the application context of the stage model, see [Context](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-inner-application-uiAbilityContext.md).|
+| context | Context                          | Yes  | Application context.<br>For details about the application context of the stage model, see [Context](js-apis-inner-application-uiAbilityContext.md).|
 | config  | [StoreConfig](#storeconfig) | Yes  | Configuration of the RDB store.                               |
 
 **Return value**
@@ -136,7 +136,7 @@ Deletes an RDB store. This API uses an asynchronous callback to return the resul
 
 | Name  | Type                     | Mandatory| Description                                                        |
 | -------- | ------------------------- | ---- | ------------------------------------------------------------ |
-| context  | Context                   | Yes  | Application context.<br>For details about the application context of the stage model, see [Context](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-inner-application-uiAbilityContext.md).|
+| context  | Context                   | Yes  | Application context.<br>For details about the application context of the stage model, see [Context](js-apis-inner-application-uiAbilityContext.md).|
 | name     | string                    | Yes  | Name of the RDB store to delete.                                                |
 | callback | AsyncCallback&lt;void&gt; | Yes  | Callback invoked to return the result.                                      |
 
@@ -179,7 +179,7 @@ Deletes an RDB store. This API uses a promise to return the result.
 
 | Name | Type   | Mandatory| Description                                                        |
 | ------- | ------- | ---- | ------------------------------------------------------------ |
-| context | Context | Yes  | Application context.<br>For details about the application context of the stage model, see [Context](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-inner-application-uiAbilityContext.md).|
+| context | Context | Yes  | Application context.<br>For details about the application context of the stage model, see [Context](js-apis-inner-application-uiAbilityContext.md).|
 | name    | string  | Yes  | Name of the RDB store to delete.                                                |
 
 **Return value**
@@ -228,10 +228,6 @@ Defines the RDB store configuration.
 ## SecurityLevel
 
 Enumerates the RDB store security levels.
-
-> **NOTE**
->
-> To perform data synchronization operations, the RDB store security level must be lower than or equal to that of the peer device. For details, see the [Access Control Mechanism in Cross-Device Synchronization]( ../../database/access-control-by-device-and-data-level.md#access-control-mechanism-in-cross-device-synchronization).
 
 **System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
 

@@ -42,11 +42,6 @@ export default class EntryAbility extends UIAbility {
 | 名称                   | 值  | 说明   |
 | -------------------- | ---- | ---- |
 | DEVICE_TYPE_PHONE    | 0x00 | 手机   |
-| DEVICE_TYPE_TABLET   | 0x01 | 平板   |
-| DEVICE_TYPE_CAR      | 0x02 | 汽车   |
-| DEVICE_TYPE_PC       | 0x03 | 电脑   |
-| DEVICE_TYPE_TV       | 0x04 | 电视   |
-| DEVICE_TYPE_WEARABLE | 0x06 | 穿戴   |
 
 
 ## ScreenDensity

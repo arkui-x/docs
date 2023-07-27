@@ -1,6 +1,6 @@
 # @ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)
 
-AbilityLifecycleCallback模块提供应用上下文[ApplicationContext](js-apis-inner-application-applicationContext.md)的生命周期发生变化时触发相应回调的能力，包括[onAbilityCreate](#abilitylifecyclecallbackonabilitycreate)、[onWindowStageCreate](#abilitylifecyclecallbackonwindowstagecreate)、[onWindowStageDestroy](#abilitylifecyclecallbackonwindowstagedestroy)、[onAbilityDestroy](#abilitylifecyclecallbackonabilitydestroy)、[onAbilityForeground](#abilitylifecyclecallbackonabilityforeground)、[onAbilityBackground](#abilitylifecyclecallbackonabilitybackground)、[onAbilityContinue](#abilitylifecyclecallbackonabilitycontinue)方法。
+AbilityLifecycleCallback模块提供应用上下文[ApplicationContext](js-apis-inner-application-applicationContext.md)的生命周期发生变化时触发相应回调的能力，包括[onAbilityCreate](#abilitylifecyclecallbackonabilitycreate)、[onWindowStageCreate](#abilitylifecyclecallbackonwindowstagecreate)、[onWindowStageDestroy](#abilitylifecyclecallbackonwindowstagedestroy)、[onAbilityDestroy](#abilitylifecyclecallbackonabilitydestroy)、[onAbilityForeground](#abilitylifecyclecallbackonabilityforeground)、[onAbilityBackground](#abilitylifecyclecallbackonabilitybackground)。
 
 > **说明：**
 > 
@@ -153,29 +153,6 @@ let abilityLifecycleCallback =  {
 };
 ```
 
-## AbilityLifecycleCallback.onAbilityContinue
-
-onAbilityContinue(ability: UIAbility): void;
-
-注册监听应用上下文的生命周期后，在ability迁移时触发回调。
-
-**系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
-
-**参数：**
-
-  | 参数名 | 类型 | 必填 | 说明 | 
-  | -------- | -------- | -------- | -------- |
-  | ability | [UIAbility](js-apis-app-ability-uiAbility.md) | 是 | 当前Ability对象 | 
-
-**示例：**
-```ts
-let abilityLifecycleCallback =  {
-    onAbilityContinue(ability){
-        console.log('AbilityLifecycleCallback onAbilityContinue.');
-    }
-};
-```
-
 ## AbilityLifecycleCallback使用
 
 **示例：**
@@ -205,9 +182,6 @@ let abilityLifecycleCallback = {
     },
     onAbilityBackground(ability){
         console.log('AbilityLifecycleCallback onAbilityBackground.');
-    },
-    onAbilityContinue(ability){
-        console.log('AbilityLifecycleCallback onAbilityContinue.');
     }
 };
 

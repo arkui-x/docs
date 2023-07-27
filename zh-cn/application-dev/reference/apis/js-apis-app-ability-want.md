@@ -18,9 +18,9 @@ import Want from '@ohos.app.ability.Want';
 
 | 名称        | 类型                 | 必填 | 说明                                                         |
 | ----------- | -------------------- | ---- | ------------------------------------------------------------ |
-| bundleName   | string               | 否   | 表示待启动Ability所在的应用Bundle名称。 |
-| moduleName | string | 否 | 表示待启动的Ability所属的模块名称。 |
-| abilityName  | string               | 否   | 表示待启动Ability名称。如果在Want中该字段同时指定了BundleName和AbilityName，则Want可以直接匹配到指定的Ability。AbilityName需要在一个应用的范围内保证唯一。 |
+| bundleName   | string               | 是   | 表示待启动Ability所在的应用Bundle名称。 |
+| moduleName | string | 是 | 表示待启动的Ability所属的模块名称。 |
+| abilityName  | string               | 是   | 表示待启动Ability名称。 |
 | parameters   | {[key: string]: any} | 否   | 表示WantParams描述，由开发者自行决定传入的键值对。|
 
 **示例：**
@@ -31,7 +31,6 @@ import Want from '@ohos.app.ability.Want';
   import common from '@ohos.app.ability.common';
   let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
   let want = {
-    'deviceId': '', // deviceId为空表示本设备
     'bundleName': 'com.example.myapplication',
     'abilityName': 'FuncAbility',
     'moduleName': 'entry' // moduleName非必选
@@ -43,7 +42,7 @@ import Want from '@ohos.app.ability.Want';
   });
   ```
 
-- 目前支持的数据类型有：字符串、数字、布尔等。
+- 目前parameters支持的数据类型有：字符串、数字、布尔等。
 
     * 字符串（String）
         ```ts
@@ -94,34 +93,3 @@ import Want from '@ohos.app.ability.Want';
           console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
         });
         ```
-    - parameter参数用法：以ability.params.backToOtherMissionStack为例，ServiceExtension在拉起UIAbility的时候，可以支持跨任务链返回。
-
-    ```ts
-        // (1) UIAbility1启动一个ServiceExtension
-        let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
-        let want = {
-          bundleName: 'com.example.myapplication1',
-          abilityName: 'ServiceExtensionAbility',
-        };
-        context.startAbility(want, (err) => {
-          console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
-        });
-      ```
-    ```ts
-
-        // (2) 该ServiceExtension去启动另一个UIAbility2，并在启动的时候携带参数ability.params.backToOtherMissionStack为true
-        let context ; // ServiceExtensionContext
-        let want = {
-          bundleName: 'com.example.myapplication2',
-          abilityName: 'MainAbility',
-          parameters: {
-            "ability.params.backToOtherMissionStack": true,
-          },
-        };
-
-        context.startAbility(want, (err) => {
-          console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
-        });
-    ```
-
-    说明：上例中，如果ServiceExtension启动UIAbility2时不携带ability.params.backToOtherMissionStack参数，或者携带的ability.params.backToOtherMissionStack参数为false，则UIAbility1和UIAbility2不在同一个任务栈里面，在UIAbility2的界面点back键，不会回到UIAbility1的界面。如果携带的ability.params.backToOtherMissionStack参数为true，则表示支持跨任务链返回，此时在UIAbility2的界面点back键，会回到UIAbility1的界面。

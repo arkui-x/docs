@@ -1,6 +1,6 @@
 # UIAbilityContext
 
-UIAbilityContext是[UIAbility](js-apis-app-ability-uiAbility.md)的上下文环境，继承自[Context](js-apis-inner-application-context.md)，提供UIAbility的相关配置信息以及操作UIAbility和ServiceExtensionAbility的方法，如启动UIAbility，停止当前UIAbilityContext所属的UIAbility，启动、停止、连接、断开连接ServiceExtensionAbility等。
+UIAbilityContext是[UIAbility](js-apis-app-ability-uiAbility.md)的上下文环境，继承自[Context](js-apis-inner-application-context.md)，提供UIAbility的相关配置信息以及操作UIAbility的方法，如启动UIAbility，停止当前UIAbilityContext所属的UIAbility，启动、停止、连接等。
 
 > **说明：**
 >
@@ -25,17 +25,13 @@ import common from '@ohos.app.ability.common';
 
 > **关于示例代码的说明：**
 >
-> 在本文档的示例中，通过`this.context`来获取`UIAbilityContext`，其中`this`代表继承自`UIAbility`的`UIAbility`实例。
+> 在本文档的示例中，通过`this.context`来获取`UIAbilityContext`，其中`this`代表继承自`UIAbility`的`UIAbility`实例。如需要在页面中使用`UIAbilityContext`提供的能力，请参见[获取UIAbility的上下文信息](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/application-models/uiability-usage.md#%E8%8E%B7%E5%8F%96uiability%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF)
 
 ## UIAbilityContext.startAbility
 
 startAbility(want: Want, callback: AsyncCallback&lt;void&gt;): void;
 
 启动Ability（callback形式）。
-
-使用规则：
- - 调用方应用位于后台时，使用该接口启动Ability需申请`ohos.permission.START_ABILITIES_FROM_BACKGROUND`权限
- - 跨应用场景下，目标Ability的exported属性若配置为false，调用方应用需申请`ohos.permission.START_INVISIBLE_ABILITY`权限
 
 **系统能力**：SystemCapability.Ability.AbilityRuntime.Core
 
@@ -51,20 +47,13 @@ startAbility(want: Want, callback: AsyncCallback&lt;void&gt;): void;
 | 错误码ID | 错误信息 |
 | ------- | -------------------------------- |
 | 16000001 | The specified ability does not exist. |
-| 16000002 | Incorrect ability type. |
-| 16000004 | Can not start invisible component. |
-| 16000005 | The specified process does not have the permission. |
-| 16000006 | Cross-user operations are not allowed. |
-| 16000008 | The crowdtesting application expires. |
-| 16000009 | An ability cannot be started or stopped in Wukong mode. |
-| 16000010 | The call with the continuation flag is forbidden. |
 | 16000011 | The context does not exist. |
 | 16000050 | Internal error. |
-| 16000053 | The ability is not on the top of the UI. |
-| 16000055 | Installation-free timed out. |
-| 16200001 | The caller has been released. |
 
-错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)
+错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)。
+
+>  **说明：**
+>  当在iOS平台上使用此接口时，无法从返回结果中判断参数[Want](js-apis-app-ability-want.md)中moduleName或者abilityName是否错误，需要参考[ArkUI应用实现页面跳转](../../quick-start/start-with-ability-on-ios.md#arkui应用实现页面跳转)识别错误。
 
 **示例：**
 
@@ -96,10 +85,6 @@ startAbility(want: Want, options?: StartOptions): Promise&lt;void&gt;;
 
 启动Ability（promise形式）。
 
-使用规则：
- - 调用方应用位于后台时，使用该接口启动Ability需申请`ohos.permission.START_ABILITIES_FROM_BACKGROUND`权限
- - 跨应用场景下，目标Ability的exported属性若配置为false，调用方应用需申请`ohos.permission.START_INVISIBLE_ABILITY`权限
-
 **系统能力**：SystemCapability.Ability.AbilityRuntime.Core
 
 **参数：**
@@ -120,20 +105,13 @@ startAbility(want: Want, options?: StartOptions): Promise&lt;void&gt;;
 | 错误码ID | 错误信息 |
 | ------- | -------------------------------- |
 | 16000001 | The specified ability does not exist. |
-| 16000002 | Incorrect ability type. |
-| 16000004 | Can not start invisible component. |
-| 16000005 | The specified process does not have the permission. |
-| 16000006 | Cross-user operations are not allowed. |
-| 16000008 | The crowdtesting application expires. |
-| 16000009 | An ability cannot be started or stopped in Wukong mode. |
-| 16000010 | The call with the continuation flag is forbidden. |
 | 16000011 | The context does not exist. |
 | 16000050 | Internal error. |
-| 16000053 | The ability is not on the top of the UI. |
-| 16000055 | Installation-free timed out. |
-| 16200001 | The caller has been released. |
 
 错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)
+
+>  **说明：**
+>  当在iOS平台上使用此接口时，无法从返回结果中判断参数[Want](js-apis-app-ability-want.md)中moduleName或者abilityName是否错误，需要参考[ArkUI应用实现页面跳转](../../quick-start/start-with-ability-on-ios.md#arkui应用实现页面跳转)识别错误。
 
 **示例：**
 
@@ -176,19 +154,6 @@ terminateSelf(callback: AsyncCallback&lt;void&gt;): void;
 | -------- | -------- | -------- | -------- |
 | callback | AsyncCallback&lt;void&gt; | 是 | 停止Ability自身的回调函数。 |
 
-**错误码：**
-
-| 错误码ID | 错误信息 |
-| ------- | -------------------------------- |
-| 16000001 | The specified ability does not exist. |
-| 16000004 | Can not start invisible component. |
-| 16000005 | The specified process does not have the permission. |
-| 16000009 | An ability cannot be started or stopped in Wukong mode. |
-| 16000011 | The context does not exist. |
-| 16000050 | Internal error. |
-
-错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)
-
 **示例：**
 
   ```ts
@@ -222,19 +187,6 @@ terminateSelf(): Promise&lt;void&gt;;
 | 类型 | 说明 |
 | -------- | -------- |
 | Promise&lt;void&gt; | 停止Ability自身的回调函数。 |
-
-**错误码：**
-
-| 错误码ID | 错误信息 |
-| ------- | -------------------------------- |
-| 16000001 | The specified ability does not exist. |
-| 16000004 | Can not start invisible component. |
-| 16000005 | The specified process does not have the permission. |
-| 16000009 | An ability cannot be started or stopped in Wukong mode. |
-| 16000011 | The context does not exist. |
-| 16000050 | Internal error. |
-
-错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)
 
 **示例：**
 

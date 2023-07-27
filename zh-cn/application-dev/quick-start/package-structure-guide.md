@@ -2,7 +2,7 @@
 
 # 简介
 
-本文档配套ArkUI-X项目，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台， 让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
+本文档配套ArkUI-X项目，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台，让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
 
 # 应用工程目录结构介绍
 
@@ -25,25 +25,23 @@ ArkUI-X应用工程目录结构
   └── oh-package.json5
 ```
 
-此应用目录结构设计思想是从OpenHarmony应用工程原生支持跨平台角度出发，在OpenHarmony应用工程之上叠加Android和iOS应用工程，ArkUI代码和resources资源编辑在OpenHarmony侧完成，Native代码仍在各自平台应用工程中完成。
+此应用目录结构设计思想是从OpenHarmony应用工程原生支持跨平台角度出发，在OpenHarmony应用工程之上叠加Android和iOS应用工程，ArkTS代码和resources资源在OpenHarmony侧完成编译，Native代码仍在各自平台应用工程中完成编译。
 
 # 编译构建说明
 
-* JSBundle编译和拷贝方案
+* ArkTS源码
 
-ArkUI源码通过OpenHarmony应用工程的Bundle Task编译，生成的JSBundle分别拷贝到Android和iOS应用工程中，作为应用资源的一部分。由于ArkUI源码编译依赖OpenHarmony应用工程，那么Android和iOS的应用构建会依赖OpenHarmony应用工程编译生成的中间件。
+ArkTS源码通过OpenHarmony SDK工具链生成abc（Ark Byte Code），并分别拷贝到Android和iOS应用工程，作为平台应用资源进行管理。
 
-* 应用resources资源编译和拷贝方案
+* ArkUI应用资源
 
-ArkUI的resources资源编译，同JSBundle编译一样，也依赖OpenHarmony应用工程。编译后的resources资源，在Android和iOS平台上由原生平台的资源管理进行管理。例如：
+ArkUI Resources资源也通过OpenHarmony SDK工具链进行编译，编译后的ArkUI资源分别拷贝到Android和iOS应用工程，作为平台应用资源进行管理。
 
-Android应用通过assets和res进行资源管理，ArkUI编译后的resources资源直接作为assets资源的一部。
+* ArkUI框架资源
 
-iOS应用通过Bundle Resources进行资源管理，ArkUI编译后的resources资源直接作为Resources资源项进行管理。
+ArkUI框架资源随ArkUI-X SDK进行发布，应用构建时会自动打包到ArkUI-X应用中，可保证ArkUI-X应用在各平台上UX渲染一致性。
 
-* 系统资源
-
-OpenHarmony的系统资源采用分层管理，并预置到OpenHarmony系统中，应用运行时直接读取系统资源。ArkUI-X为了确保各平台渲染一致性，需要把OpenHarmony的系统资源打包Android和iOS应用中。ArkUI-X跨平台设计时，使系统资源存于ArkUI-X跨平台SDK中，在Android和iOS应用构建时打包到应用中。
+综上所述，Android平台上通过assets管理ArkTS编译产物、ArkUI应用资源和ArkUI框架资源，iOS平台上通过Bundle Resources管理ArkTS编译产物、ArkUI应用资源和ArkUI框架资源。
 
 ## Android应用工程结构
 

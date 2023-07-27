@@ -6,7 +6,7 @@ ArkUI is a UI development framework for building OpenHarmony applications. It pr
 
 The ArkUI-X project extends the ArkUI development framework to multiple OS platforms, enabling developers to develop multi-platform applications based on a set of main code.
 
-[ArkUI-X project master repository](https://gitee.com/arkui-x](https://gitee.com/arkui-x)
+[ArkUI-X project master repository](https://gitee.com/arkui-x)
 
 ## Prerequisites
 

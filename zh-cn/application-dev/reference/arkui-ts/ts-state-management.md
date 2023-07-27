@@ -833,10 +833,7 @@ static PersistProp&lt;T&gt;(key: string, defaultValue: T): void
 | key          | string | 是    | 属性名。                                     |
 | defaultValue | T      | 是    | 在PersistentStorage和AppStorage未查询到时，则使用默认值初始化初始化它。不允许为undefined和null。 |
 
-
-**示例：**
-
-
+**示例：** 
 
 ```ts
 PersistentStorage.PersistProp('highScore', '0');
