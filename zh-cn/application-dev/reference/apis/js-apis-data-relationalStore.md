@@ -213,6 +213,110 @@ class EntryAbility extends UIAbility {
 }
 ```
 
+## relationalStore.deleteRdbStore<sup>10+</sup>
+
+deleteRdbStore(context: Context, config: StoreConfig, callback: AsyncCallback\<void>): void
+
+使用指定的数据库文件配置删除数据库，使用callback异步回调。
+
+**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
+
+**参数：**
+
+| 参数名   | 类型                        | 必填 | 说明                                                         |
+| -------- | --------------------------- | ---- | ------------------------------------------------------------ |
+| context  | Context                     | 是   | 应用的上下文。<br>Stage模型的应用Context定义见[Context](js-apis-inner-application-uiAbilityContext.md)。 |
+| config   | [StoreConfig](#storeconfig) | 是   | 与此RDB存储相关的数据库配置。                                |
+| callback | AsyncCallback&lt;void&gt;   | 是   | 指定callback回调函数。                                       |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[关系型数据库错误码](../errorcodes/errorcode-data-rdb.md)。
+
+| **错误码ID** | **错误信息**                                                |
+| ------------ | ----------------------------------------------------------- |
+| 14800010     | Failed to open or delete database by invalid database path. |
+| 14800000     | Inner error.                                                |
+| 14801001     | Only supported in stage mode.                               |
+| 14801002     | The data group id is not valid.                             |
+
+**Stage模型示例：**
+
+```ts
+import UIAbility from '@ohos.app.ability.UIAbility'
+
+class EntryAbility extends UIAbility {
+  onWindowStageCreate(windowStage){
+    const STORE_CONFIG = {
+      name: "RdbTest.db",
+      securityLevel: relationalStore.SecurityLevel.S1
+    };
+    relationalStore.deleteRdbStore(this.context, STORE_CONFIG, function (err) {
+      if (err) {
+        console.error(`Delete RdbStore failed, code is ${err.code},message is ${err.message}`);
+        return;
+      }
+      store = null;
+      console.info(`Delete RdbStore successfully.`);
+    })
+  }
+}
+```
+
+## relationalStore.deleteRdbStore<sup>10+</sup>
+
+deleteRdbStore(context: Context, config: StoreConfig): Promise\<void>
+
+使用指定的数据库文件配置删除数据库，使用Promise异步回调。
+
+**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
+
+**参数**
+
+| 参数名  | 类型                        | 必填 | 说明                                                         |
+| ------- | --------------------------- | ---- | ------------------------------------------------------------ |
+| context | Context                     | 是   | 应用的上下文。<br>Stage模型的应用Context定义见[Context](js-apis-inner-application-uiAbilityContext.md)。 |
+| config  | [StoreConfig](#storeconfig) | 是   | 与此RDB存储相关的数据库配置。                                |
+
+**返回值**：
+
+| 类型                | 说明                      |
+| ------------------- | ------------------------- |
+| Promise&lt;void&gt; | 无返回结果的Promise对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[关系型数据库错误码](../errorcodes/errorcode-data-rdb.md)。
+
+| **错误码ID** | **错误信息**                                                |
+| ------------ | ----------------------------------------------------------- |
+| 14800010     | Failed to open or delete database by invalid database path. |
+| 14800000     | Inner error.                                                |
+| 14801001     | Only supported in stage mode.                               |
+| 14801002     | The data group id is not valid.                             |
+
+**Stage模型示例：**
+
+```ts
+import UIAbility from '@ohos.app.ability.UIAbility'
+
+class EntryAbility extends UIAbility {
+  onWindowStageCreate(windowStage){
+    const STORE_CONFIG = {
+      name: "RdbTest.db",
+      securityLevel: relationalStore.SecurityLevel.S1
+    };
+    let promise = relationalStore.deleteRdbStore(this.context, STORE_CONFIG);
+    promise.then(()=>{
+      store = null;
+      console.info(`Delete RdbStore successfully.`);
+    }).catch((err) => {
+      console.error(`Delete RdbStore failed, code is ${err.code},message is ${err.message}`);
+    })
+  }
+}
+```
+
 ## StoreConfig
 
 管理关系数据库配置。
@@ -1695,7 +1799,7 @@ promise.then((rows) => {
 })
 ```
 
-### query
+### query<sup>10+</sup>
 
 query(predicates: RdbPredicates, callback: AsyncCallback&lt;ResultSet&gt;):void
 
@@ -1842,7 +1946,7 @@ promise.then((resultSet) => {
 })
   ```
 
-### querySql
+### querySql<sup>10+</sup>
 
 querySql(sql: string, callback: AsyncCallback&lt;ResultSet&gt;):void
 
@@ -1983,7 +2087,7 @@ promise.then((resultSet) => {
 })
 ```
 
-### executeSql
+### executeSql<sup>10+</sup>
 
 executeSql(sql: string, callback: AsyncCallback&lt;void&gt;):void
 
