@@ -7,7 +7,7 @@
 
 Deveco Studio提供ArkUI-X模板快速创建跨平台工程，支持基于Stage模型HarmonyOS应用生成跨平台Android和iOS应用。
 
-1. 根据工程创建向导，选择创建Application，选择ArkUI-X模板**[ArkUI-X] Empty Ability**，点击**Next**。
+1. 根据工程创建向导，选择创建Application，选择ArkUI-X模板 **[ArkUI-X] Empty Ability**，点击**Next**。
    ![zh-cn_image_0000001580417686](figures/zh-cn_image_0000001580417686.png)
 
 2. 在工程配置页面，填写工程的基本信息，点击**Finish**。
