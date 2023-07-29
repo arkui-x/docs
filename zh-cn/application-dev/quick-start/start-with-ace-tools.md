@@ -16,7 +16,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    Android和OpenHarmony/HarmonyOS应用打包需Java环境支持，建议下载JDK11.0.2以上版本，下载请点击[此处](https://repo.huaweicloud.com/openjdk/)。推荐环境变量配置如下：
 
-   [Mac]
+   [macOS]
 
    ```shell
    // 配置环境变量
@@ -40,7 +40,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ArkUI-X SDK下载路径，可通过DevEco Studio > File > Settings > ArkUI-X（macOS为DevEco Studio > Preferences > ArkUI-X）查看ArkUI-X的下载路径，并配置到环境变量中。推荐环境变量配置如下：
 
-   [Mac]
+   [macOS]
 
    ```shell
    // 配置环境变量
@@ -106,8 +106,22 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 cd demo
 ace run apk
 ```
-最终会完成应用的编译，并且安装至目标设备开始运行。
 
+* 安装运行到iOS设备
+
+```shell
+cd demo
+ace run app
+```
+
+* 安装运行到OpenHarmony设备
+
+```shell
+cd demo
+ace run hap
+```
+
+上述命令会完成应用构建打包，并安装到目标平台设备运行。
 
 ## 参考
 

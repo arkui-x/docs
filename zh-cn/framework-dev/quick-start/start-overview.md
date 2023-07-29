@@ -29,7 +29,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   sudo apt-get install binutils git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache libgl1-mesa-dev libxml2-utils xsltproc unzip m4
   ```
 
-  [Mac]
+  [macOS]
 
   ```shell
   brew install wget coreutils
@@ -46,7 +46,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   export PATH=${JAVA_HOME}/bin:${PATH}
   ```
 
-  [Mac]
+  [macOS]
 
   ```shell
   // 配置环境变量
@@ -72,7 +72,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   export PATH=${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/build-tools/28.0.3:${ANDROID_HOME}/platform-tools:${PATH}
   ```
 
-  [Mac]
+  [macOS]
 
   通过IDE [SDK管理器](https://developer.android.google.cn/studio/intro/update#sdk-manager)下载和管理Android SDK，NDK版本要求为：21.3.6528147，SDK Platform版本为：26。
 
