@@ -122,7 +122,7 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 ./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true runtime_mode=release
 ```
 
-### Mac平台编译
+### macOS平台编译
 
 #### Android和iOS联合打包
 

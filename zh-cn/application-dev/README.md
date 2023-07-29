@@ -25,8 +25,6 @@
 - 跨语言调用说明
   - [平台桥接(@arkui-x.bridge)](quick-start/platform-bridge-introduction.md)
   - [FFI能力(Node-API)](quick-start/ffi-napi-introduction.md)
-- 一次开发多平台部署
-  - [平台判断](quick-start/conditional-compile-introduction.md)
 
 ### 开发指南
 

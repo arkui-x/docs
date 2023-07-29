@@ -20,7 +20,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    export PATH=${NodeJS_HOME}/bin:${PATH}
    ```
 
-   [Mac]
+   [macOS]
 
    ```shell
    // 配置环境变量
@@ -48,7 +48,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    export PATH=${OHPM_HOME}/bin:${PATH}
    ```
 
-   [Mac]
+   [macOS]
 
    ```shell
    // 配置环境变量
@@ -82,7 +82,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    export PATH=${JAVA_HOME}/bin:${PATH}
    ```
 
-   [Mac]
+   [macOS]
 
    ```shell
    // 配置环境变量
@@ -110,7 +110,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    export PATH=${OpenHarmony_HOME}/versioncode/toolchains:${PATH}
    ```
 
-   [Mac]
+   [macOS]
 
    ```shell
    // 配置环境变量
@@ -140,7 +140,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    export PATH=${HarmonyOS_HOME}/hmscore/versioncode/toolchains:${PATH}
    ```
 
-   [Mac]
+   [macOS]
 
    ```shell
    // 配置环境变量
@@ -171,7 +171,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    export PATH=${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/build-tools/28.0.3:${ANDROID_HOME}/platform-tools:${PATH}
    ```
 
-   [Mac]
+   [macOS]
 
    ```shell
    // 配置环境变量
