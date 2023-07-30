@@ -13,7 +13,6 @@
 2. 在左上方的下拉框中选择OpenHarmony，选择ArkUI-X/ArkUI-X_Application，点击**Next**。
 
 3. 在工程配置页面，填写Project name和Project location，点击**Finish**，等待Sample工程导入完成。
-   ![zh-cn_image_0000001630496961](figures/zh-cn_image_0000001630496961.png)
 
 ### 编译构建生成跨平台应用
 
