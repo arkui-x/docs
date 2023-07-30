@@ -5,7 +5,7 @@
 
 ### 创建工程
 
-在Deveco Studio中导入ArkUI-X Sample，快速创建跨平台工程。
+在DevEco Studio中导入ArkUI-X Sample，快速创建跨平台工程。
 
 1. 点击File > New > Import > Import Sample。
    ![import_sample](figures/import_sample.png)
