@@ -119,24 +119,6 @@ Data is added, deleted, and modified continuously without closing the read trans
 1. Check for unclosed result sets or transactions.
 2. Closes all result sets or transactions.
 
-## 14800050 Failed to Obtain the Subscription Service
-
-**Error Message**
-
-Failed to obtain subscription service.
-
-**Description**
-
-The error code is returned when the subscription service failed to be obtained.
-
-**Possible Causes**
-
-The platform does not support service subscription.
-
-**Solution**
-
-Deploy the subscription service on the platform.
-
 ## 14801001 Stage Model Required
 
 **Error Message**
