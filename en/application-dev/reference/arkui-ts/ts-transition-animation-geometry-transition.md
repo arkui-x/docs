@@ -9,9 +9,7 @@
 ## Attributes
 
 | Name              | Type| Description                                                    |
-
 | ------------------ | -------- | ------------------------------------------------------------ |
-
 | geometryTransition | string   | ID of **geometryTransition**, which is used to set up a binding relationship. If this attribute is set to an empty string **""**, the binding relationship is cleared, and the components will not participate in the shared element transition. The value can be dynamically changed to refresh the binding relationship. One ID can be bound to only two components, which function as in and out components.|
 
 **NOTE**

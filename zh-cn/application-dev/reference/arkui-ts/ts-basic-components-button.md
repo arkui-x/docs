@@ -20,8 +20,8 @@
 
 | 参数名      | 参数类型   | 必填 | 参数描述                                                                                                                                                                                         |
 | ----------- | ---------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| type        | ButtonType | 否   | 描述按钮显示样式。``默认值：ButtonType.Capsule                                                                                                                                                   |
-| stateEffect | boolean    | 否   | 按钮按下时是否开启按压态显示效果，当设置为false时，按压效果关闭。``默认值：true``**说明：** ``当开启按压态显示效果，开发者设置状态样式时，会基于状态样式设置完成后的背景色再进行颜色叠加。 |
+| type        | ButtonType | 否   | 描述按钮显示样式。<br/>``默认值：ButtonType.Capsule``                                                                                                                                                   |
+| stateEffect | boolean    | 否   | 按钮按下时是否开启按压态显示效果，当设置为false时，按压效果关闭。<br/>``默认值：true``<br/>**说明：** <br/>当开启按压态显示效果，开发者设置状态样式时，会基于状态样式设置完成后的背景色再进行颜色叠加。 |
 
 **方法2：** Button(label?: ResourceStr, options?: { type?: ButtonType, stateEffect?: boolean })
 
@@ -42,9 +42,9 @@
 
 | 名称                              | 参数类型                         | 描述                                                                                                                                |
 | --------------------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| type                              | ButtonType                       | 设置Button样式。``默认值：ButtonType.Capsule``从API version 9开始，该接口支持在ArkTS卡片中使用。                                    |
-| stateEffect                       | boolean                          | 按钮按下时是否开启按压态显示效果，当设置为false时，按压效果关闭。``默认值：true``从API version 9开始，该接口支持在ArkTS卡片中使用。 |
-| labelStyle `<sup>`10+`</sup>` | [LabelStyle](#labelstyle10对象说明) | 设置Button组件label文本和字体的样式。                                                                                               |
+| type  | ButtonType  | 设置Button样式。<br/>默认值：ButtonType.Capsule<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
+| stateEffect  | boolean  | 按钮按下时是否开启按压态显示效果，当设置为false时，按压效果关闭。<br/>默认值：true<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
+| labelStyle<sup>10+</sup> | [LabelStyle](#labelstyle10对象说明) | 设置Button组件label文本和字体的样式。 |
 
 ## ButtonType枚举说明
 
@@ -79,3 +79,94 @@
 
 支持[通用事件](ts-universal-events-click.md)。
 
+## 示例
+
+### 示例1
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct ButtonExample {
+  build() {
+    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Start, justifyContent: FlexAlign.SpaceBetween }) {
+      Text('Normal button').fontSize(9).fontColor(0xCCCCCC)
+      Flex({ alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween }) {
+        Button('OK', { type: ButtonType.Normal, stateEffect: true })
+          .borderRadius(8)
+          .backgroundColor(0x317aff)
+          .width(90)
+          .onClick(() => {
+            console.log('ButtonType.Normal')
+          })
+        Button({ type: ButtonType.Normal, stateEffect: true }) {
+          Row() {
+            LoadingProgress().width(20).height(20).margin({ left: 12 }).color(0xFFFFFF)
+            Text('loading').fontSize(12).fontColor(0xffffff).margin({ left: 5, right: 12 })
+          }.alignItems(VerticalAlign.Center)
+        }.borderRadius(8).backgroundColor(0x317aff).width(90).height(40)
+
+        Button('Disable', { type: ButtonType.Normal, stateEffect: false }).opacity(0.4)
+          .borderRadius(8).backgroundColor(0x317aff).width(90)
+      }
+
+      Text('Capsule button').fontSize(9).fontColor(0xCCCCCC)
+      Flex({ alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween }) {
+        Button('OK', { type: ButtonType.Capsule, stateEffect: true }).backgroundColor(0x317aff).width(90)
+        Button({ type: ButtonType.Capsule, stateEffect: true }) {
+          Row() {
+            LoadingProgress().width(20).height(20).margin({ left: 12 }).color(0xFFFFFF)
+            Text('loading').fontSize(12).fontColor(0xffffff).margin({ left: 5, right: 12 })
+          }.alignItems(VerticalAlign.Center).width(90).height(40)
+        }.backgroundColor(0x317aff)
+
+        Button('Disable', { type: ButtonType.Capsule, stateEffect: false }).opacity(0.4)
+          .backgroundColor(0x317aff).width(90)
+      }
+
+      Text('Circle button').fontSize(9).fontColor(0xCCCCCC)
+      Flex({ alignItems: ItemAlign.Center, wrap: FlexWrap.Wrap }) {
+        Button({ type: ButtonType.Circle, stateEffect: true }) {
+          LoadingProgress().width(20).height(20).color(0xFFFFFF)
+        }.width(55).height(55).backgroundColor(0x317aff)
+
+        Button({ type: ButtonType.Circle, stateEffect: true }) {
+          LoadingProgress().width(20).height(20).color(0xFFFFFF)
+        }.width(55).height(55).margin({ left: 20 }).backgroundColor(0xF55A42)
+      }
+    }.height(400).padding({ left: 35, right: 35, top: 35 })
+  }
+}
+```
+
+![button](figures/button.gif)
+
+### 示例2 
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct SwipeGestureExample {
+  @State count: number = 0
+
+  build() {
+    Column() {
+      Text(`${this.count}`)
+        .fontSize(30)
+        .onClick(() => {
+          this.count++
+        })
+      if (this.count <= 0) {
+        Button('count is negative').fontSize(30).height(50)
+      } else if (this.count % 2 === 0) {
+        Button('count is even').fontSize(30).height(50)
+      } else {
+        Button('count is odd').fontSize(30).height(50)
+      }
+    }.height('100%').width('100%').justifyContent(FlexAlign.Center)
+  }
+}
+```
+
+![ifButton](figures/ifButton.gif)

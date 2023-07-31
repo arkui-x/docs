@@ -4,7 +4,7 @@
   - Universal Events
     - [Click Event](ts-universal-events-click.md)
     - [Touch Event](ts-universal-events-touch.md)
-    - [Drag/Drop Event](ts-universal-events-show-hide.md)
+    - [Show/Hide Event](ts-universal-events-show-hide.md)
     - [Visible Area Change Event](ts-universal-component-visible-area-change-event.md)
   - Universal Attributes
     - [Size](ts-universal-attributes-size.md)
