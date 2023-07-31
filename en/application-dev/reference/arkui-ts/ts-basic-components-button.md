@@ -40,7 +40,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 
 ## Attributes
 
-In addition to the [universal attributes](ts-universal-attributes-size.md), the following attributes are supported.
+Among the [universal attributes](ts-universal-attributes-size.md) and [universal text attributes](ts-universal-attributes-text-style.md), **fontColor**, **fontSize**, **fontStyle**, **fontWeight**, and **fontFamily** are supported. In addition, the following attributes are supported.
 
 | Name         | Type          | Description                               |
 | ----------- | ----------- | --------------------------------- |
