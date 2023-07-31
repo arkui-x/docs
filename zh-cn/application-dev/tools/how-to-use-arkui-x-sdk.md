@@ -6,27 +6,32 @@ ArkUI-SDK包含用来开发ArkUI-X应用的引擎库，插件库和命令行工�
 
 ## ArkUI-X SDK内容组成
 
-以下是ArkUI-X SDK提供的内容，主要包括ArkUI-X SDK基础引擎库、插件库、工具链和SDK配置说明文件等。
+ArkUI-X SDK提供的内容，主要包括ArkUI-X SDK基础引擎库、插件库、工具链和SDK配置说明等文件。当通过DevEco Studio或ACE Tools命令行工具集成使用时，需按照如下目录结构配置ArkUI-X SDK。
 
 ```
-ArkUI-X SDK
-├── engine                   // ArkUI-X SDK引擎部分
-│   ├── lib                  // ArkUI-X Android平台应用集成依赖库。
-│   ├── framework            // ArkUI-X iOS平台应用集成依赖库。
-│   ├── xcframework          // ArkUI-X iOS平台应用集成依赖库。
-│   ├── ets                  // ArkUI-X增量接口，比如：@arkui-x.bridge
-│   ├── apiConfig.json       // engine库配置文件，用于IDE和ACE Tools解析，以支持应用构建按需打包。
-│   └── systemres            // OpenHarmony/HarmonyOS应用系统资源，支持ArkUI-X跨平台UX一致性。
-├── plugins                  // ArkUI-X SDK插件部分
-│   ├── component            // ArkUI组件插件库，apiConfig.json
-│   └── api                  // @ohos接口插件库，apiConfig.json
-├── toolchains               // 工具链，比如ACE Tools
-├── sdkConfig.json           // 增量d.ts路径和接口前缀配置
-├── arkui-x.json             // SDK管理配置，流水线自动生成
-└── NOTICE.txt
+Path-to-arkui-x-sdk
+├── versioncode                      // arkui-x.json中的apiVersion字段值，文件位于ArkUI-X SDK根目录中，当前取值为：10。
+│   └── arkui-x
+│       ├── engine                   // ArkUI-X SDK引擎部分
+│       │   ├── lib                  // ArkUI-X Android平台应用集成依赖库。
+│       │   ├── framework            // ArkUI-X iOS平台应用集成依赖库。
+│       │   ├── xcframework          // ArkUI-X iOS平台应用集成依赖库。
+│       │   ├── ets                  // ArkUI-X增量接口，比如：@arkui-x.bridge
+│       │   ├── apiConfig.json       // engine库配置文件，用于IDE和ACE Tools解析，以支持应用构建按需打包。
+│       │   └── systemres            // OpenHarmony/HarmonyOS应用系统资源，支持ArkUI-X跨平台UX一致性。
+│       ├── plugins                  // ArkUI-X SDK插件部分
+│       │   ├── component            // ArkUI组件插件库，apiConfig.json
+│       │   └── api                  // @ohos接口插件库，apiConfig.json
+│       ├── toolchains               // 工具链，比如ACE Tools
+│       ├── sdkConfig.json           // 增量d.ts路径和接口前缀配置
+│       ├── arkui-x.json             // SDK管理配置，流水线自动生成。
+│       └── NOTICE.txt
+└── licenses                         // DevEco Studio下载ArkUI-X SDK时，用户同意的ArkUI-X SDK协议。
+    ├── ArkUI-X-SDK
+    └── ArkUI-X-SDK.sha256
 ```
 
->说明：ArkUI-X SDK内部详细文件目录结构请参考[ArkUI-X目录结构](../quick-start/sdk-structure-guide.md)。
+>说明：ArkUI-X SDK内部详细文件目录结构请参考[ArkUI-X SDK目录结构介绍](../quick-start/sdk-structure-guide.md)。
 
 ## ArkUI-X命令行工具
 
