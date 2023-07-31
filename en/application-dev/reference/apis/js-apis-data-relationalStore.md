@@ -214,6 +214,118 @@ class EntryAbility extends UIAbility {
 }
 ```
 
+## relationalStore.deleteRdbStore<sup>10+</sup>
+
+deleteRdbStore(context: Context, config: StoreConfig, callback: AsyncCallback\<void>): void
+
+Deletes an RDB store. This API uses an asynchronous callback to return the result.
+
+After the deletion, you are advised to set the database object to null. If the database file is in the public sandbox directory, you must use this API to delete the database. If the database is accessed by multiple processes at the same time, you are advised to send a database deletion notification to other processes.
+
+**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
+
+**Parameters**
+
+| Name  | Type                       | Mandatory| Description                                                        |
+| -------- | --------------------------- | ---- | ------------------------------------------------------------ |
+| context  | Context                     | Yes  | Application context.<br>For details about the application context of the stage model, see [Context](js-apis-inner-application-uiAbilityContext.md).|
+| config   | [StoreConfig](#storeconfig) | Yes  | Configuration of the RDB store.                               |
+| callback | AsyncCallback&lt;void&gt;   | Yes  | Callback invoked to return the result.                                      |
+
+**Error codes**
+
+For details about the error codes, see [RDB Error Codes](../errorcodes/errorcode-data-rdb.md).
+
+| **ID**| **Error Message**                                               |
+| ------------ | ----------------------------------------------------------- |
+| 14800010     | Failed to open or delete database by invalid database path. |
+| 14800000     | Inner error.                                                |
+| 14801001     | Only supported in stage mode.                               |
+| 14801002     | The data group id is not valid.                             |
+
+**Example**
+
+Stage model:
+
+```ts
+import UIAbility from '@ohos.app.ability.UIAbility'
+
+class EntryAbility extends UIAbility {
+  onWindowStageCreate(windowStage){
+    const STORE_CONFIG = {
+      name: "RdbTest.db",
+      securityLevel: relationalStore.SecurityLevel.S1
+    };
+    relationalStore.deleteRdbStore(this.context, STORE_CONFIG, function (err) {
+      if (err) {
+        console.error(`Delete RdbStore failed, code is ${err.code},message is ${err.message}`);
+        return;
+      }
+      store = null;
+      console.info(`Delete RdbStore successfully.`);
+    })
+  }
+}
+```
+
+## relationalStore.deleteRdbStore<sup>10+</sup>
+
+deleteRdbStore(context: Context, config: StoreConfig): Promise\<void>
+
+Deletes an RDB store. This API uses a promise to return the result.
+
+After the deletion, you are advised to set the database object to null. If the database file is in the public sandbox directory, you must use this API to delete the database. If the database is accessed by multiple processes at the same time, you are advised to send a database deletion notification to other processes.
+
+**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
+
+**Parameters**
+
+| Name | Type                       | Mandatory| Description                                                        |
+| ------- | --------------------------- | ---- | ------------------------------------------------------------ |
+| context | Context                     | Yes  | Application context.<br>For details about the application context of the stage model, see [Context](js-apis-inner-application-uiAbilityContext.md).|
+| config  | [StoreConfig](#storeconfig) | Yes  | Configuration of the RDB store.                               |
+
+**Return value**
+
+| Type               | Description                     |
+| ------------------- | ------------------------- |
+| Promise&lt;void&gt; | Promise that returns no value.|
+
+**Error codes**
+
+For details about the error codes, see [RDB Error Codes](../errorcodes/errorcode-data-rdb.md).
+
+| **ID**| **Error Message**                                               |
+| ------------ | ----------------------------------------------------------- |
+| 14800010     | Failed to open or delete database by invalid database path. |
+| 14800000     | Inner error.                                                |
+| 14801001     | Only supported in stage mode.                               |
+| 14801002     | The data group id is not valid.                             |
+
+**Example**
+
+Stage model:
+
+```ts
+import UIAbility from '@ohos.app.ability.UIAbility'
+
+class EntryAbility extends UIAbility {
+  onWindowStageCreate(windowStage){
+    const STORE_CONFIG = {
+      name: "RdbTest.db",
+      securityLevel: relationalStore.SecurityLevel.S1
+    };
+    let promise = relationalStore.deleteRdbStore(this.context, STORE_CONFIG);
+    promise.then(()=>{
+      store = null;
+      console.info(`Delete RdbStore successfully.`);
+    }).catch((err) => {
+      console.error(`Delete RdbStore failed, code is ${err.code},message is ${err.message}`);
+    })
+  }
+}
+```
+
 ## StoreConfig
 
 Defines the RDB store configuration.
@@ -1698,6 +1810,53 @@ promise.then((rows) => {
 })
 ```
 
+### query<sup>10+</sup>
+
+query(predicates: RdbPredicates, callback: AsyncCallback&lt;ResultSet&gt;):void
+
+Queries data from the RDB store based on specified conditions. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
+
+**Parameters**
+
+| Name    | Type                                                        | Mandatory| Description                                                       |
+| ---------- | ------------------------------------------------------------ | ---- | ----------------------------------------------------------- |
+| predicates | [RdbPredicates](#rdbpredicates)                         | Yes  | Query conditions specified by the **RdbPredicates** object.                  |
+| callback   | AsyncCallback&lt;[ResultSet](#resultset)&gt; | Yes  | Callback invoked to return the result. If the operation is successful, a **ResultSet** object will be returned.|
+
+**Error codes**
+
+For details about the error codes, see [RDB Error Codes](../errorcodes/errorcode-data-rdb.md).
+
+| **ID**| **Error Message**                |
+| ------------ | ---------------------------- |
+| 14800000     | Inner error.                 |
+
+**Example**
+
+```js
+let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
+predicates.equalTo("NAME", "Rose");
+store.query(predicates, function (err, resultSet) {
+  if (err) {
+    console.error(`Query failed, code is ${err.code},message is ${err.message}`);
+    return;
+  }
+  console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
+  // resultSet is a cursor of a data set. By default, the cursor points to the -1st record. Valid data starts from 0.
+  while(resultSet.goToNextRow()) {
+    const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
+    const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
+    const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
+    const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
+    console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
+  }
+  // Release the dataset memory.
+  resultSet.close();
+})
+```
+
 ### query
 
 query(predicates: RdbPredicates, columns: Array&lt;string&gt;, callback: AsyncCallback&lt;ResultSet&gt;):void
@@ -1798,6 +1957,51 @@ promise.then((resultSet) => {
 })
   ```
 
+### querySql<sup>10+</sup>
+
+querySql(sql: string, callback: AsyncCallback&lt;ResultSet&gt;):void
+
+Queries data using the specified SQL statement. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
+
+**Parameters**
+
+| Name  | Type                                        | Mandatory| Description                                                        |
+| -------- | -------------------------------------------- | ---- | ------------------------------------------------------------ |
+| sql      | string                                       | Yes  | SQL statement to run.                                       |
+| callback | AsyncCallback&lt;[ResultSet](#resultset)&gt; | Yes  | Callback invoked to return the result. If the operation is successful, a **ResultSet** object will be returned.   |
+
+**Error codes**
+
+For details about the error codes, see [RDB Error Codes](../errorcodes/errorcode-data-rdb.md).
+
+| **ID**| **Error Message**                |
+| ------------ | ---------------------------- |
+| 14800000     | Inner error.                 |
+
+**Example**
+
+```js
+store.querySql("SELECT * FROM EMPLOYEE CROSS JOIN BOOK WHERE BOOK.NAME = 'sanguo'", function (err, resultSet) {
+  if (err) {
+    console.error(`Query failed, code is ${err.code},message is ${err.message}`);
+    return;
+  }
+  console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
+  // resultSet is a cursor of a data set. By default, the cursor points to the -1st record. Valid data starts from 0.
+  while(resultSet.goToNextRow()) {
+    const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
+    const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
+    const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
+    const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
+    console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
+  }
+  // Release the dataset memory.
+  resultSet.close();
+})
+```
+
 ### querySql
 
 querySql(sql: string, bindArgs: Array&lt;ValueType&gt;, callback: AsyncCallback&lt;ResultSet&gt;):void
@@ -1891,6 +2095,43 @@ promise.then((resultSet) => {
   resultSet.close();
 }).catch((err) => {
   console.error(`Query failed, code is ${err.code},message is ${err.message}`);
+})
+```
+
+### executeSql<sup>10+</sup>
+
+executeSql(sql: string, callback: AsyncCallback&lt;void&gt;):void
+
+Executes an SQL statement that contains specified arguments but returns no value. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
+
+**Parameters**
+
+| Name  | Type                                | Mandatory| Description                                                        |
+| -------- | ------------------------------------ | ---- | ------------------------------------------------------------ |
+| sql      | string                               | Yes  | SQL statement to run.                                       |
+| callback | AsyncCallback&lt;void&gt;            | Yes  | Callback invoked to return the result.                                      |
+
+**Error codes**
+
+For details about the error codes, see [RDB Error Codes](../errorcodes/errorcode-data-rdb.md).
+
+| **ID**| **Error Message**                                |
+| ------------ | -------------------------------------------- |
+| 14800047     | The WAL file size exceeds the default limit. |
+| 14800000     | Inner error.                                 |
+
+**Example**
+
+```js
+const SQL_DELETE_TABLE = "DELETE FROM test WHERE name = 'zhangsan'"
+store.executeSql(SQL_DELETE_TABLE, function(err) {
+  if (err) {
+    console.error(`ExecuteSql failed, code is ${err.code},message is ${err.message}`);
+    return;
+  }
+  console.info(`Delete table done.`);
 })
 ```
 
