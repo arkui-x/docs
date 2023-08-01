@@ -167,6 +167,22 @@ Scrolls by the specified amount.
 | dx | Length | Yes   | Amount to scroll by in the horizontal direction. The percentage format is not supported.|
 | dy | Length | Yes   | Amount to scroll by in the vertical direction. The percentage format is not supported.|
 
+### isAtEnd<sup>10+</sup>
+
+isAtEnd(): boolean
+
+Check if the component scrolls to the bottom.
+
+> **NOTE**
+>
+> This API only works for the **\<Scroll>**, **\<List>**, **\<Grid>**, and **\<WaterFlow>** components.
+
+**Return value**
+
+| Type    | Description                                                      |
+| ------- | --------------------------------------------------------- |
+| boolean | **true** indicates that the component has scrolled to the bottom, **false** indicates not. |
+
 ## ScrollAlign<sup>10+ </sup>
 
 | Name    | Description                            |

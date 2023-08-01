@@ -11,9 +11,15 @@
 
 | 名称 | 参数   | 参数描述 |
 | -------- | -------- | -------- |
-| bindSheet | isShow: boolean,<br>builder: [CustomBuilder](ts-types.md#custombuilder8),<br>sheetStyle?: [SheetStyle](#sheetstyle10) | 给组件绑定半模态页面，点击后显示模态页面。isShow: 必填，是否显示半模态页面。<br/>builder: 必填，配置半模态页面内容。<br/> sheetStyle: 非必填，配置半模态页面高度和是否显示控制条，默认高度是Large，默认显示控制条。 |
+| bindSheet | isShow: boolean,<br>builder: [CustomBuilder](ts-types.md#custombuilder8),<br>options?: [SheetOptions](#sheetoptions) | 给组件绑定半模态页面，点击后显示模态页面。isShow: 必填，是否显示半模态页面。<br/>builder: 必填，配置半模态页面内容。<br/> options: 非必填，配置半模态页面的可选属性。 |
 
-## SheetStyle<sup>10+</sup>
+> **说明：**
+>
+> 在非双向绑定情况下，以拖拽方式关闭半模态页面不会改变isShow参数的值。
+>
+> 为了使isShow参数值与半模态界面的状态同步，建议使用[$$](../../quick-start/arkts-two-way-sync.md)双向绑定isShow参数。
+
+## SheetOptions
 
 | 名称               | 类型                                   | 必填 | 描述                   |
 | ------------------ | -------------------------------------- | ---- | ---------------------- |

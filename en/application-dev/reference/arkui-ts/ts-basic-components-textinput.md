@@ -90,6 +90,8 @@ In addition to the [universal events](ts-universal-events-click.md), the followi
 | onCopy(callback:(value: string) =&gt; void)<sup>8+</sup>     | Triggered when the copy button on the pasteboard, which displays when the text box is long pressed, is clicked.<br>**value**: text to be copied. |
 | onCut(callback:(value: string) =&gt; void)<sup>8+</sup>      | Triggered when the cut button on the pasteboard, which displays when the text box is long pressed, is clicked.<br>**value**: text to be cut. |
 | onPaste(callback:(value: string) =&gt; void)<sup>8+</sup>    | Triggered when the paste button on the pasteboard, which displays when the text box is long pressed, is clicked.<br>**value**: text to be pasted. |
+| onTextSelectionChange(callback: (selectionStart: number, selectionEnd: number) => void)<sup>10+</sup> | Triggered when the text selection position changes.<br>**selectionStart**: start position of the text selection area. The start position of text in the text box is **0**.<br>**selectionEnd**: end position of the text selection area.|
+| onContentScroll(callback: (totalOffsetX: number, totalOffsetY: number) => void)<sup>10+</sup> | Triggered when the text content is scrolled.<br>**totalOffsetX**: X coordinate offset of the text in the content area.<br>**totalOffsetY**: Y coordinate offset of the text in the content area.|
 
 ## TextInputController<sup>8+</sup>
 
@@ -122,6 +124,12 @@ Sets the text selection area, which will be highlighted.
 | -------------- | -------- | ---- | ---------------------- |
 | selectionStart | number   | Yes  | Start position of the text selection area. The start position of the text in the text box is 0.|
 | selectionEnd   | number   | Yes  | End position of the text selection area.|
+
+### stopEditing<sup>10+</sup>
+
+stopEditing(): void
+
+Exits the editing state.
 
 ## Example
 

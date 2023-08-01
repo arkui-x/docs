@@ -11,7 +11,6 @@ A drag event is triggered when a component is dragged.
 In addition to the [universal attributes](ts-universal-attributes-size.md), the following attributes are supported.
 | Name| Type| Description|
 | -------- | -------- | -------- |
-| allowDrop<sup>10+</sup> | Array\<UnifiedData> | Type of data that can be dropped to the component.<br>Default value: empty<br>|
 | draggable<sup>10+</sup> | boolean | Whether the widget is draggable.<br>Default value: **false**<br>|
 ## Events
 

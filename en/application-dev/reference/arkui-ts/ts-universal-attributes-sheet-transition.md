@@ -11,9 +11,15 @@ You can bind a sheet to a component through the **bindSheet** attribute. You can
 
 | Name| Parameter  | Description|
 | -------- | -------- | -------- |
-| bindSheet | isShow: boolean,<br>builder: [CustomBuilder](ts-types.md#custombuilder8),<br>sheetStyle?: [SheetStyle](#sheetstyle10) | Binds a sheet to the component, which can be displayed when the component is touched. **isShow**: whether to display the sheet. Mandatory.<br>**builder**: content of the sheet. Mandatory.<br> **sheetStyle**: height and control bar visibility of the sheet. Optional. By default, the default height is **Large** and the control bar is visible.|
+| bindSheet | isShow: boolean,<br>builder: [CustomBuilder](ts-types.md#custombuilder8),<br>options?: [SheetOptions](#sheetoptions) | Binds a sheet to the component, which can be displayed when the component is touched. **isShow**: whether to display the sheet.<br>Since API version 10, this parameter supports two-way binding through [$$](../../quick-start/arkts-two-way-sync.md).<br>**builder**: content of the sheet.<br> **options**: optional attributes of the sheet.|
 
-## SheetStyle<sup>10+</sup>
+> **NOTE**
+>
+> When no two-way binding is set up for the **isShow** parameter, closing the sheet by dragging does not change the parameter value.
+>
+> To synchronize the value of **isShow** with the actual state of the sheet, it is recommended that you use the [$$](../../quick-start/arkts-two-way-sync.md) to set up two-way binding for **isShow**.
+
+## SheetOptions
 
 | Name              | Type                                  | Mandatory| Description                  |
 | ------------------ | -------------------------------------- | ---- | ---------------------- |

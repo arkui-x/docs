@@ -13,7 +13,7 @@ This component can contain child components.
 
 >  **NOTE**
 >
->  Built-in components and custom components are allowed, with support for ([if/else](../../quick-start/arkts-rendering-control-ifelse.md), [ForEach](../../quick-start/arkts-rendering-control-foreach.md), and [LazyForEach](../../quick-start/arkts-rendering-control-lazyforeach.md)) rendering control.
+>  Built-in components and custom components are allowed, with support for (if/else, ForEach, and LazyForEach) rendering control.
 
 
 ## APIs
@@ -42,7 +42,7 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | vertical                    | boolean                                  | Whether vertical swiping is used.<br>Default value: **false**                                |
 | itemSpace                   | number \| string          | Space between child components.<br>Default value: **0**<br>**NOTE**<br>This parameter cannot be set in percentage.|
 | displayMode                 | SwiperDisplayMode                        | Mode in which elements are displayed along the main axis. This attribute takes effect only when **displayCount** is not set.<br>Default value: **SwiperDisplayMode.Stretch**|
-| cachedCount<sup>8+</sup>    | number                                   | Number of child components to be cached.<br>Default value: **1**<br>**NOTE**<br>**cachedCount** has caching optimized. You are advised not to use it together with [LazyForEach](../../quick-start/arkts-rendering-control-lazyforeach.md).|
+| cachedCount<sup>8+</sup>    | number                                   | Number of child components to be cached.<br>Default value: **1**<br>**NOTE**<br>**cachedCount** has caching optimized. You are advised not to use it together with LazyForEach.|
 | disableSwipe<sup>8+</sup>   | boolean                                  | Whether to disable the swipe feature.<br>Default value: **false**                             |
 | curve<sup>8+</sup>          | [Curve](ts-appendix-enums.md#curve)  \| string | Animation curve. The ease-in/ease-out curve is used by default. For details about common curves, see [Curve](ts-appendix-enums.md#curve). You can also create custom curves (interpolation curve objects) by using the API provided by the [interpolation calculation](../apis/js-apis-curve.md) module.<br>Default value: **Curve.Linear**|
 | displayCount<sup>8+</sup>   | number \| string                                               | Number of elements to display per page.<br>Default value: **1**<br>**NOTE**<br>If the value is of the string type, it can only be **'auto'**, whose display effect is the same as that of **SwiperDisplayMode.AutoLinear**.<br>If the value is of the number type, child components stretch (shrink) on the main axis after the swiper width [deducting the result of itemSpace x (displayCount – 1)] is evenly distributed among them on the main axis.|
@@ -142,6 +142,7 @@ In addition to the [universal events](ts-universal-events-click.md), the followi
 | onChange(event: (index: number) => void)                     | Triggered when the index of the currently displayed child component changes.<br>- **index**: index of the currently displayed element.<br>**NOTE**<br>When the **\<Swiper>** component is used together with **LazyForEach**, the subpage UI update cannot be triggered in the **onChange** event.|
 | onAnimationStart<sup>9+</sup>(event: (index: number) => void) | Triggered when the switching animation starts.<br>- **index**: index of the currently displayed element.<br>**NOTE**<br>The **index** parameter indicates the index before the animation starts (not the one after). When the **\<Swiper>** component contains multiple columns, the index is of the leftmost element.|
 | onAnimationEnd<sup>9+</sup>(event: (index: number) => void)  | Triggered when the switching animation ends.<br>- **index**: index of the currently displayed element.<br>**NOTE**<br>This event is triggered when the animation ends regardless of whether it is due to a user gesture or invocation of **finishAnimation** through **SwiperController**. The **index** parameter indicates the index after the animation ends. When the **\<Swiper>** component contains multiple columns, the index is of the leftmost element.|
+| onGestureSwipe<sup>10+</sup>(event: (index: number) => void) | Triggered on a frame-by-frame basis when the page is turned by a swipe.<br>- **index**: index of the currently displayed element.<br>**NOTE**<br>If there are multiple columns, **index** indicates the index of the leftmost component.|
 
 ## Example
 

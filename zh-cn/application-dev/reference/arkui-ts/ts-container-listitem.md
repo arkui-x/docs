@@ -13,9 +13,19 @@
 
 ## 接口
 
-ListItem(value?: string)<sup>(deprecated)</sup>
-
 从API version 9开始，该接口支持在ArkTS卡片中使用。
+
+**方法1：** ListItem(value?: ListItemOptions)<sup>10+</sup>
+
+**参数：**
+
+| 参数名 | 参数类型                                      | 必填 | 参数描述                                                     |
+| ------ | --------------------------------------------- | ---- | ------------------------------------------------------------ |
+| value  | [ListItemOptions](#listitemoptions10对象说明) | 否   | 为ListItem提供可选参数, 该对象内含有ListItemStyle枚举类型的style参数。 |
+
+**方法2：** ListItem(value?: string)<sup>(deprecated)</sup>
+
+从API version 10开始, 该接口不再维护，推荐使用方法1。
 
 **参数：**
 
@@ -30,6 +40,7 @@ ListItem(value?: string)<sup>(deprecated)</sup>
 | 名称 | 参数类型 | 描述 |
 | -------- | -------- | -------- |
 | selectable<sup>8+</sup> | boolean | 当前ListItem元素是否可以被鼠标框选。<br/>**说明：**<br/>外层List容器的鼠标框选开启时，ListItem的框选才生效。<br/>默认值：true |
+| selected<sup>10+</sup>   | boolean  | 设置当前GridItem选中状态。该属性支持[$$](../../quick-start/arkts-two-way-sync.md)双向绑定变量。<br />**说明：**<br />该属性需要在设置[选中态样式](ts-universal-attributes-polymorphic-style.md)前使用才能生效选中态样式。<br />默认值：false  |
 | swipeAction<sup>9+</sup> | {<br/>start?:&nbsp;CustomBuilder&nbsp;\|&nbsp;[SwipeActionItem](#swipeactionitem10对象说明),<br/>end?:CustomBuilder&nbsp;\|&nbsp;[SwipeActionItem](#swipeactionitem10对象说明),<br/>edgeEffect?:&nbsp;[SwipeEdgeEffect](#swipeedgeeffect9枚举说明),<br/>} | 用于设置ListItem的划出组件。<br/>- start:&nbsp;ListItem向右划动时item左边的组件（List垂直布局时）或ListItem向下划动时item上方的组件（List水平布局时）。<br/>- end:&nbsp;ListItem向左划动时item右边的组件（List垂直布局时）或ListItem向上划动时item下方的组件（List水平布局时）。<br/>- edgeEffect:&nbsp;滑动效果。<br/>**说明：** <br/>- start和end对应的@builder函数中顶层必须是单个组件，不能是if/else、ForEach、LazyForEach语句。<br/> - 滑动手势只在listItem区域上，如果子组件划出ListItem区域外，在ListItem以外部分不会响应划动手势。所以在多列模式下，建议不要将划出组件设置太宽。 |
 
 ## SwipeEdgeEffect<sup>9+</sup>枚举说明
@@ -50,6 +61,20 @@ List垂直布局，ListItem向右滑动，item左边的长距离滑动删除选�
 | onExitDeleteArea | () => void | 否 |当滑动条目退出删除区域时调用，只触发一次，当再次退出时仍触发。 |
 | builder |  CustomBuilder | 否 |当列表项向右或向右滑动（当列表方向为“垂直”时），向下或向下滑动（当列方向为“水平”时）时显示的操作项。 |
 | useDefaultDeleteAnimation | boolean | 否 |设置是否使用默认的删除动画。<br/>默认值：true |
+
+## ListItemOptions<sup>10+</sup>对象说明
+
+| 名称  | 参数类型                                  | 必填 | 描述                                                         |
+| ----- | ----------------------------------------- | ---- | ------------------------------------------------------------ |
+| style | [ListItemStyle](#listitemstyle10枚举说明) | 否   | 设置List组件卡片样式。<br/>默认值: ListItemStyle.NONE<br/>设置为ListItemStyle.NONE时无样式。<br/>设置为ListItemStyle.CARD时，必须配合[ListItemGroup](ts-container-listitemgroup.md)的ListItemGroupStyle.CARD同时使用，显示默认卡片样式。  <br/>卡片样式下，ListItem默认规格：高度48vp，宽度100%。<br/>卡片样式下, 为卡片内的列表选项提供了默认的focus、hover、press、selected和disable样式。<br/>**说明：**<br/>当前卡片模式下，不支持listDirection属性设置，使用默认Axis.Vertical排列方向。<br/>当前卡片模式下，List属性alignListItem默认为ListItemAlign.Center，居中对齐显示。 |
+
+## ListItemStyle<sup>10+</sup>枚举说明
+
+| 名称 | 描述               |
+| ---- | ------------------ |
+| NONE | 无样式。           |
+| CARD | 显示默认卡片样式。 |
+
 ## 事件
 
 | 名称 | 功能描述 |

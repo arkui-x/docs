@@ -228,7 +228,7 @@ The **CustomBuilder** type is used to define custom UI descriptions in component
 
 | Name           | Type                  | Description                                      |
 | ------------- | ---------------------- | ---------------------------------------- |
-| CustomBuilder | () =&gt; any | Must be decorated by **@Builder**. For details, see [@Builder](../../quick-start/arkts-builder.md).|
+| CustomBuilder | () =&gt; any | Must be decorated by **@Builder**. For details, see @Builder.|
 
 ## PixelStretchEffectOptions<sup>10+</sup>
 

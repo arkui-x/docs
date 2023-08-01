@@ -38,6 +38,7 @@ Slider(options?: {value?: number, min?: number, max?: number, step?: number, sty
 | -------- | -------- |
 | OutSet | 滑块在滑轨上。 |
 | InSet | 滑块在滑轨内。 |
+## 属性
 
 支持除触摸热区以外的通用属性设置。
 
