@@ -8,6 +8,5 @@
 
 | 类    | 描述               |
 | ----------- | ---------------------------------- |
-| [AceViewController](AceViewController.md) | UIViewController的子类 |
 | [BridgePlugin](BridgePlugin.md) | 平台Bridge |
 | [StageViewController](StageViewController.md) | Stage模型UIViewController，将iOS中UIViewController的生命周期与OpenHarmony中Ability的生命周期进行映射 |
