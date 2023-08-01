@@ -2,12 +2,11 @@
 
 ## 简介
 
-Node-API是用于封装JavaScript能力为Native插件的API，独立于底层JavaScript，并作为Node.js的一部分。
-
+Node-API是封装底层JavaScript运行时能力的一套Native接口。
 
 ## 支持的能力
 
-Node-API可以去除底层的JavaScript引擎的差异，提供一套稳定的接口。
+Node-API屏蔽了底层不同JavaScript引擎的差异，提供一套稳定的接口。
 
 OpenHarmony的N-API组件对Node-API的接口进行了重新实现，ArkUI-X在此基础上进行了跨平台扩展，N-API接口可以在OpenHarmony/HarmonyOS/Android/iOS多个平台上使用。当前支持[Node-API](https://nodejs.org/docs/v14.9.0/api/n-api.html)标准库中的部分接口，如下表所示。
 
