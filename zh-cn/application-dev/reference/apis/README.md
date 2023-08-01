@@ -23,8 +23,6 @@
     - [@ohos.app.ability.ConfigurationConstant (ConfigurationConstant)](js-apis-app-ability-configurationConstant.md)
     - [@ohos.app.ability.Want (Want)](js-apis-app-ability-want.md)
   - 接口依赖的元素及定义
-    - ability
-    - app
     - application
       - [abilityDelegator](js-apis-inner-application-abilityDelegator.md)
       - [abilityDelegatorArgs](js-apis-inner-application-abilityDelegatorArgs.md)
