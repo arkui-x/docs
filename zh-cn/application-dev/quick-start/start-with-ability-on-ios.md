@@ -80,8 +80,7 @@ StageApplication本质上是一个调度类，主要用于触发内部相关类�
 
 ## AppDelegate内关键实现参考
 
-### iOS应用程序启动及初始化
-
+### ArkUI应用启动及初始化
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
@@ -103,7 +102,10 @@ StageApplication本质上是一个调度类，主要用于触发内部相关类�
 }
 ```
 
-### 通过路由模式（openURL:）实现的iOS应用页面跳转回调，获取传递参数
+### ArkUI应用实现页面跳转
+当在iOS平台上使用[startability](../reference/apis/js-apis-inner-application-uiAbilityContext.md#uiabilitycontextstartability)接口实现页面跳转时，需要参考下述示例进行开发。
+
+- 通过路由模式（openURL:）实现的iOS应用页面跳转回调，获取传递参数
 
 ```objc
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
@@ -122,7 +124,7 @@ StageApplication本质上是一个调度类，主要用于触发内部相关类�
             params = item.value;
         }
     }
-    //单实例ability处理
+    // 单实例ability处理
     if ([StageApplication handleSingleton:bundleName moduleName:moduleName abilityName:abilityName] == YES) {
         return YES;
     }
@@ -133,32 +135,33 @@ StageApplication本质上是一个调度类，主要用于触发内部相关类�
     return YES;
 }
 ```
-
-### 通过解析url得到的参数，映射ability对应的viewController
+- 通过解析url得到的参数，映射ability对应的viewController
 
 ```objc
 - (BOOL)handleOpenUrlWithBundleName:(NSString *)bundleName
                          moduleName:(NSString *)moduleName
                         abilityName:(NSString *)abilityName
                              params:(NSString *)params, ...NS_REQUIRES_NIL_TERMINATION {
-                             
+                                               
     NSString *instanceName = [NSString stringWithFormat:@"%@:%@:%@",bundleName, moduleName, abilityName];
     
-    if ([bundleName isEqualToString:BUNDLE_NAME] &&
-               [abilityName isEqualToString:@"MainAbility"]) {
+    // 根据moduleName和abilityName映射对应的viewController
+    // 注意：传入的moduleName或者abilityName错误，则无法找到对应的viewController，此时无法打开页面。
+    if ([moduleName isEqualToString:@"entry"] && [abilityName isEqualToString:@"MainAbility"]) {
         EntryMainAbilityViewController *entryMainVC = [[EntryMainAbilityViewController alloc] initWithInstanceName:instanceName];
         entryMainVC.params = params;
-    }else if ([bundleName isEqualToString:BUNDLE_NAME] && [abilityName isEqualToString:@"Other"]) {
+    } else if ([moduleName isEqualToString:@"entry"] && [abilityName isEqualToString:@"Other"]) {
         EntryOtherViewController *entryOtherVC = [[EntryOtherViewController alloc] initWithInstanceName:instanceName];
         entryOtherVC.params = params;
     }
+
     return YES;
 }
 ```
 
-### 其它程序级生命周期回调相应处理
+### ArkUI应用生命周期回调相应处理
 
-* iOS应用程序进入后台，触发对应生命周期事件。
+* ArkUI应用进入后台，触发对应生命周期事件。
 
 ```objc
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -166,7 +169,7 @@ StageApplication本质上是一个调度类，主要用于触发内部相关类�
 }
 ```
 
-* iOS应用程序进入前台，触发对应生命周期事件。
+* ArkUI应用进入前台，触发对应生命周期事件。
 
 ```objc
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -174,7 +177,7 @@ StageApplication本质上是一个调度类，主要用于触发内部相关类�
 }
 ```
 
-* 终止iOS应用程序进程。
+* 终止ArkUI应用程序进程。
 
 ```objc
 - (void)applicationWillTerminate:(UIApplication *)application {

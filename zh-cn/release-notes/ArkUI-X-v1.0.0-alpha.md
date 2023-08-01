@@ -59,7 +59,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
    ```
 
 
-### 通过repo获取(TODO)
+### 通过repo获取
 
 **方式一（推荐）**
 
@@ -99,7 +99,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 
 ### 从镜像站点获取
 
-**表2** 获取源码和SDK路径(TODO)
+**表2** 获取源码和SDK路径
 
 | 版本源码                                  | **版本信息** | **下载站点** | **SHA256校验码** | **软件包容量**|
 | -----------------------------------------| ------------ | ------------ | ---------------- | ---------------- |
@@ -117,5 +117,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 | HelloWorld | HellWorld应用工程示例，支持Android、iOS和OpenHarmony应用构建。 |
 | Shopping | 仿购物应用工程示例，支持Android、iOS和OpenHarmony应用构建。   |
 | HealthyDiet | 健康饮食应用工程示例，支持Android、iOS和OpenHarmony应用构建。|
+| Native | NAPI应用工程示例，支持Android、iOS和OpenHarmony应用构建。|
+| Library | 平台库应用工程示例，支持Android、iOS和OpenHarmony应用构建。|
 
 请访问[Samples](https://gitee.com/arkui-x/samples)仓了解更多消息。

@@ -2,7 +2,7 @@
 
 # 简介
 
-本文档配套ArkUI-X项目，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台， 让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
+本文档配套ArkUI-X项目，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台，让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
 
 # SDK获取
 
@@ -39,7 +39,7 @@ path_操作系统类型_CPU架构类型_版本号_releaseType.zip
 arkui-x_windows_x64_1.0.0.0_Alpha.zip
 
 ## SDK压缩包内部结构
-这里，以Mac平台上的ArkUI-X SDK包为例，对SDK目录结构和内容规格进行说明。更详细的ArkUI-X SDK内容规格会在第五节进行介绍。
+这里，以macOS平台上的ArkUI-X SDK包为例，对SDK目录结构和内容规格进行说明。更详细的ArkUI-X SDK内容规格会在第五节进行介绍。
 
 ```
 arkui-x_darwin_x64_1.0.0.0_Alpha.zip
@@ -353,7 +353,7 @@ arkui-x_linux_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
     └── apiConfig.json                                          // ArkTS @ohos接口跨平台实现配置说明。
 ```
 
-## Mac平台
+## macOS平台
 
 ### ArkUI-X SDK引擎目录结构
 

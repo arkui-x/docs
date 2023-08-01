@@ -2,13 +2,12 @@
 
 本文档适用于ArkUI-X项目框架开发的初学者。通过环境搭建、代码下载、代码编译、API扩展和使用，快速了解跨平台项目开发流程。
 
-在开始之前，您需要了解有关跨平台应用的一些基本概念：ArkUI框架的简单说明、ArkUI-X的基本概念。
 
 ## 基本概念
 
 ### ArkUI框架
 
-ArkUI是一套构建分布式应用的声明式UI开发框架。它具备简洁自然的UI信息语法、丰富的UI组件、多维的状态管理，以及实时界面预览工具，帮助您提升应用开发效率，并能在多种设备上实现生动而流畅的用户体验。
+ArkUI是一套构建分布式应用的声明式UI开发框架。它具备简洁自然的UI信息语法、丰富的UI组件、多维的状态管理，以及实时界面预览工具，帮助您提升应用开发效率，并能在多种设备上实现生动而流畅的用户体验。详情可参考[ArkUI框架介绍](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkui-overview.md)
 
 ### ArkUI-X项目
 
@@ -30,7 +29,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   sudo apt-get install binutils git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache libgl1-mesa-dev libxml2-utils xsltproc unzip m4
   ```
 
-  [Mac]
+  [macOS]
 
   ```shell
   brew install wget coreutils
@@ -47,7 +46,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   export PATH=${JAVA_HOME}/bin:${PATH}
   ```
 
-  [Mac]
+  [macOS]
 
   ```shell
   // 配置环境变量
@@ -73,7 +72,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   export PATH=${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/build-tools/28.0.3:${ANDROID_HOME}/platform-tools:${PATH}
   ```
 
-  [Mac]
+  [macOS]
 
   通过IDE [SDK管理器](https://developer.android.google.cn/studio/intro/update#sdk-manager)下载和管理Android SDK，NDK版本要求为：21.3.6528147，SDK Platform版本为：26。
 

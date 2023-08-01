@@ -5,13 +5,14 @@
 
 ### 创建工程
 
-Deveco Studio提供ArkUI-X模板快速创建跨平台工程，支持基于Stage模型HarmonyOS应用生成跨平台Android和iOS应用。
+在Deveco Studio中导入ArkUI-X Sample，快速创建跨平台工程。
 
-1. 根据工程创建向导，选择创建Application，选择ArkUI-X模板**[ArkUI-X] Empty Ability**，点击**Next**。
-   ![zh-cn_image_0000001580417686](figures/zh-cn_image_0000001580417686.png)
+1. 点击File > New > Import > Import Sample。
+   ![import_sample](figures/import_sample.png)
 
-2. 在工程配置页面，填写工程的基本信息，点击**Finish**。
-   ![zh-cn_image_0000001630496961](figures/zh-cn_image_0000001630496961.png)
+2. 在左上方的下拉框中选择OpenHarmony，选择ArkUI-X/ArkUI-X_Application，点击**Next**。
+
+3. 在工程配置页面，填写Project name和Project location，点击**Finish**，等待Sample工程导入完成。
 
 为了您开发应用的良好体验，DevEco Studio提供了ArkUI-X开发环境诊断的功能，帮助您识别开发环境是否完备。创建工程完成后，会进行环境检查，如果环境配置有问题，会弹窗提示环境检查不通过，请根据具体的错误项进行检查并完成相应的配置。
 
@@ -111,12 +112,14 @@ DevEco Studio可打包生成不同平台的应用包，在Windows平台上同时
 
 ### 创建Library
 
-1. 根据工程创建向导，选择创建Application，选择所需要的ArkUI-X模板 **[ArkUI-X] Library**，点击**Next**。
-   ![zh-cn_image_0000001624998937](figures/zh-cn_image_0000001624998937.png)
+在Deveco Studio中导入ArkUI-X Sample，快速创建跨平台工程。
 
-2. 在工程配置页面，填写工程的基本信息，点击**Finish**。
-   ![ArkUI-X-属性配置](figures/app-project-configuration.PNG)
+1. 点击File > New > Import > Import Sample。
+   ![import_sample](figures/import_sample.png)
 
+2. 在左上方的下拉框中选择OpenHarmony，选择ArkUI-X/ArkUI-X_Library，点击**Next**。
+
+3. 在工程配置页面，填写Project name和Project location，点击**Finish**，等待Sample工程导入完成。
 
 ### 编译构建生成跨平台依赖包
 
@@ -129,5 +132,3 @@ DevEco Studio可打包生成不同平台的应用包，在Windows平台上同时
 构建完成后，在 **.arkui-x &gt; android &gt; library &gt; build &gt; outputs**目录下生成可集成在Andorid应用上的aar包。如果是使用macOS平台，还将ios目录下构建出可集成在iOS应用上的.xcframwork包。
 
 ![zh-cn_image_0000001579994524](figures/zh-cn_image_0000001579994524.png)
-
-

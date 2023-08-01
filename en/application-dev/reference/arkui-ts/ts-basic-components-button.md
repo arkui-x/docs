@@ -40,7 +40,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 
 ## Attributes
 
-In addition to the [universal attributes](ts-universal-attributes-size.md), the following attributes are supported.
+Among the [universal attributes](ts-universal-attributes-size.md) and [universal text attributes](ts-universal-attributes-text-style.md), **fontColor**, **fontSize**, **fontStyle**, **fontWeight**, and **fontFamily** are supported. In addition, the following attributes are supported.
 
 | Name         | Type          | Description                               |
 | ----------- | ----------- | --------------------------------- |
@@ -73,8 +73,8 @@ Since API version 9, this API is supported in ArkTS widgets.
 | maxLines             | number                                                       | No  | Maximum number of lines in the label text. By default, text is automatically folded. If this attribute is specified, the text will not exceed the specified number of lines. If there is extra text, you can use **textOverflow** to specify how it is displayed.|
 | minFontSize          | number \| [ResourceStr](ts-types.md#resourcestr)             | No  | Minimum font size of the label text. For the setting to take effect, this attribute must be used together with **maxFontSize**, **maxLines**, or layout constraint settings.|
 | maxFontSize          | number \| [ResourceStr](ts-types.md#resourcestr)             | No  | Maximum font size of the label text. For the setting to take effect, this attribute must be used together with **minFontSize**, **maxLines**, or layout constraint settings.|
-| heightAdaptivePolicy | [TextHeightAdaptivePolicy](ts-appendix-enums.md#TextHeightAdaptivePolicy10) | No  | How the adaptive height is determined for the label text.                             |
-| font                 | [Font](ts-types.md#Font)                                     | No  | Font of the label text.                                     |
+| heightAdaptivePolicy | [TextHeightAdaptivePolicy](ts-appendix-enums.md#textheightadaptivepolicy10) | No  | How the adaptive height is determined for the label text.                             |
+| font                 | [Font](ts-types.md#font)                                     | No  | Font of the label text.                                     |
 ## Events
 
 The [universal events](ts-universal-events-click.md) are supported.

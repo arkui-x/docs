@@ -56,7 +56,10 @@
 - File Management
   - [@ohos.file.fs (File Management)](js-apis-file-fs.md)
 
+- Device Management
+  - [@ohos.deviceInfo (Device Information)](js-apis-device_Info.md)
 - Data Management
+  - [@ohos.data.preferences (User Preferences)](js-apis-data-preferences.md)
   - [@ohos.data.relationalStore (RDB Store)](js-apis-data-relationalStore.md)
 
 - Security
@@ -86,6 +89,3 @@
   - [@ohos.worker (Worker Startup)](js-apis-worker.md)
   - [@ohos.xml (XML Parsing and Generation)](js-apis-xml.md)
   
-- Data Management
-  - [@ohos.data.preferences (User Preferences)](js-apis-data-preferences.md)
-  - [@ohos.data.relationalStore (RDB Store)](js-apis-data-relationalStore.md)

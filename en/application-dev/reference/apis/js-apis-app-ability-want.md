@@ -18,9 +18,9 @@ import Want from '@ohos.app.ability.Want';
 
 | Name       | Type                | Mandatory| Description                                                        |
 | ----------- | -------------------- | ---- | ------------------------------------------------------------ |
-| bundleName   | string               | No  | Bundle name of the ability.|
-| moduleName | string | No| Name of the module to which the ability belongs.|
-| abilityName  | string               | No  | Name of the ability. If both **bundleName** and **abilityName** are specified in a **Want** object, the **Want** object can match a specific ability. The value of **abilityName** must be unique in an application.|
+| bundleName   | string               | Yes  | Bundle name of the ability.|
+| moduleName | string | Yes| Name of the module to which the ability belongs.|
+| abilityName  | string               | Yes  | Name of the ability. |
 | parameters   | {[key: string]: any} | No  | Want parameters in the form of custom key-value (KV) pairs. |
 
 **Example**
@@ -42,7 +42,7 @@ import Want from '@ohos.app.ability.Want';
   });
   ```
 
-- Currently, the following data types are supported by want: string, number, Boolean.
+- Currently, the following data types are supported by parameters: string, number, Boolean.
 
     * String
         ```ts

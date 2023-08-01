@@ -16,7 +16,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    Android和OpenHarmony/HarmonyOS应用打包需Java环境支持，建议下载JDK11.0.2以上版本，下载请点击[此处](https://repo.huaweicloud.com/openjdk/)。推荐环境变量配置如下：
 
-   [Mac]
+   [macOS]
 
    ```shell
    // 配置环境变量
@@ -40,7 +40,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
    ArkUI-X SDK下载路径，可通过DevEco Studio > File > Settings > ArkUI-X（macOS为DevEco Studio > Preferences > ArkUI-X）查看ArkUI-X的下载路径，并配置到环境变量中。推荐环境变量配置如下：
 
-   [Mac]
+   [macOS]
 
    ```shell
    // 配置环境变量
@@ -79,7 +79,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    ace check
    ```
 
-执行 `ace check` 命令可以检查ArkUI-X应用本地开发环境是否完备。对于必选项，需要检查通过，否则无法继续接下来的操作。
+执行 `ace check` 命令可以检查ArkUI-X应用本地开发环境是否完备。
 
 *注：开发环境检查主要针对Android/iOS/OpenHarmony/HarmonyOS IDE以及对应SDK的默认安装和下载路径进行检查。如果提示结果与实际不符，请您通过ace config命令指定实际的IDE安装和SDK下载路径。*
 
@@ -96,114 +96,36 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
    ? Please enter the template (1: Empty Ability, 2: Native C++): 1   //选择创建Empty Ability或者Native C++项目
    ```
 
-执行 `ace create project` 命令，接着输入项目名 demo ，包名直接回车默认即可。输入“2”代表创建HarmonyOS，再次输入“1”代表Empty Ability，再次输入“1”代表stage模型的应用项目。至此，一个名为 ‘demo’ 的项目就创建成功了。
+执行 `ace create project` 命令，接着输入工程名 demo。
 
-### 编写代码
+### 应用运行
 
-在上述工程创建完成后，开发者可在项目中的source目录下进行代码开发。
-
-### 项目编译
-
-开始对 'demo' 项目进行编译。编译目标产物为hap 、apk和app，分别对应OpenHarmony/HarmonyOS、Android和iOS应用工程，下述命令以hap为例，并且可将hap参数替换为apk或app，其分别对应Android应用和iOS应用，功能一致：
+* 安装运行到Android设备
 
 ```shell
 cd demo
+ace run apk
 ```
 
- 编译hap，默认编译所有Module
-
-   ```shell
-   ace build hap
-   ```
-
-   最终会生成一个hap应用文件，默认路径为 demo/ohos/entry/build/default/outputs/default/。
-
-**注：** apk文件的默认路径为demo/android/app/build/outputs/apk/debug/。app文件的默认路径为demo/ios/build/outputs/app/。
-
-### 应用安装和卸载
-
-开始对编译出的hap应用包进行安装，先进入到demo工程目录下
+* 安装运行到iOS设备
 
 ```shell
 cd demo
+ace run app
 ```
-1. 安装hap应用包
 
-   ```shell
-   ace install hap
-   ```
-
-2. 安装hap应用到指定的设备上
-
-   ```shell
-   ace install hap -d deviceId
-   ```
-3. 卸载hap应用包
-
-   ```shell
-   ace uninstall hap --bundle bundleName
-   ```
-
-4. 卸载指定设备上的hap应用安装包
-
-   ```shell
-   ace uninstall hap --bundle bundleName -d deviceId
-   ```
-
-###  运行应用
-
-1. 运行hap应用
-
-   ```shell
-   ace run hap
-   ```
-
-2. 在指定的设备上运行hap应用
-
-   ```shell
-   ace run hap -d deviceId
-   ```
-
-### 清理编译结果
-
-清除所有编译结果(hap、apk、app)
+* 安装运行到OpenHarmony设备
 
 ```shell
-ace clean
+cd demo
+ace run hap
 ```
 
-### 输出日志文件
-
-滚动输出正在运行的应用日志信息
-
-1. 输出hap应用日志
-
-   ```shell
-   ace log hap
-   ```
-
-2. 输出指定的设备上运行hap应用日志
-
-   ```shell
-   ace log hap -d deviceId
-   ```
-
-### 帮助工具
-
-展示可以支持的命令信息
-
-```shell
-ace help
-```
-
-支持单个指令支持查询
-
-```shell
-ace build --help
-```
+上述命令会完成应用构建打包，并安装到目标平台设备运行。
 
 ## 参考
 
-- [命令行详情说明](https://gitee.com/arkui-x/cli/blob/master/README.md)
+- [ACE Tools命令行详情说明](https://gitee.com/arkui-x/cli/blob/master/README.md)
+- [Ubuntu环境配置说明](https://gitee.com/arkui-x/docs/blob/master/zh-cn/application-dev/tutorial/how-to-configure-dev-environment.md)
 
 <!--no_check-->
