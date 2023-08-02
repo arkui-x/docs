@@ -14,9 +14,6 @@
 
 ArkUI-X是一个开源社区。它完全依赖于社区提供友好的开发和协作环境，所以在参与社区贡献之前，请先阅读并遵守ArkUI-X社区的[行为守则](code-of-conduct.md)。
 
-### 找到感兴趣的SIG
-如何参与SIG（Special Interest Group）特别兴趣小组，请参考[SIG治理章程](https://gitee.com/openharmony/community/tree/master/sig)。
-
 ### 开始贡献
 
 如何贡献代码，请参考[贡献代码](code-contribution.md)。
