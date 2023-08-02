@@ -41,7 +41,6 @@ ArkUI-X GitHub镜像库地址：https://github.com/arkui-x
 
 简体中文：[ArkUI-X开发者文档](README.md) 
 
-[English Version](../en/readme.md)
 
 ## 源码下载
 
