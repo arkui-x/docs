@@ -44,7 +44,7 @@
 
    **解决办法**：
 
-   点击[这里](https://dco.arkui-x.cn/#/sign)签署、查看签署状态。
+   点击[这里](https://dco.openharmony.cn/sign#/sign)签署、查看签署状态。
 
    签署成功后，在PR的评论框输入`check dco`后，单击”评论”，系统将再次进行DCO校验。
 

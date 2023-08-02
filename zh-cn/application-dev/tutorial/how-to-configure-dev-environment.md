@@ -38,7 +38,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
 **2. 配置ohpm环境**
 
-   OHPM CLI（OpenHarmony Package Manager Command-line Interface）鸿蒙生态三方库的包管理工具，位于OpenHarmony [SDK命令行工具](https://developer.harmonyos.com/cn/develop/deveco-studio#download_cli_openharmony)中。推荐环境变量配置如下：
+   OHPM CLI（OpenHarmony Package Manager Command-line Interface）OpenHarmony生态三方库的包管理工具，位于OpenHarmony [SDK命令行工具](https://developer.harmonyos.com/cn/develop/deveco-studio#download_cli_openharmony)中。推荐环境变量配置如下：
 
    [Linux]
 
