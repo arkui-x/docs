@@ -4,13 +4,11 @@
 
 此仓库存放ArkUI-X网站提供的应用开发、框架开发对应的开发者文档。
 
-简体中文 | [English](./README.en.md)
 
 ## 文档目录结构
 
 [中文文档](./zh-cn/README.md) 
 
-[English Documentation](./en/readme.md)
 
 ## ArkUI-X文档版本分支说明
 
