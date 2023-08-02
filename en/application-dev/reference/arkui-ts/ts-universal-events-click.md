@@ -19,8 +19,6 @@ Since API version 9, this API is supported in ArkTS widgets.
 
 | Name           | Type                                | Description                                                    |
 | ------------------- | ------------------------------------ | -------------------------------------------------------- |
-| screenX             | number                               | X coordinate of the click relative to the upper left corner of the application window.                     |
-| screenY             | number                               | Y coordinate of the click relative to the upper left corner of the application window.                     |
 | x                   | number                               | X coordinate of the click relative to the upper left corner of the component being clicked.                   |
 | y                   | number                               | Y coordinate of the click relative to the upper left corner of the component being clicked.                   |
 | timestamp<sup>8+</sup> | number | Timestamp of the event. It is the interval between the time when the event is triggered and the time when the system starts, in nanoseconds.|

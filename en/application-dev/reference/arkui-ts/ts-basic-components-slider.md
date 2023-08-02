@@ -39,6 +39,8 @@ Since API version 9, this API is supported in ArkTS widgets.
 | OutSet | The slider is on the slider track.|
 | InSet | The slider is in the slider track.|
 
+## Attributes
+
 Except touch target attributes, the universal attributes are supported.
 
 | Name| Type| Description|

@@ -23,7 +23,7 @@ TextClock(options?: { timeZoneOffset?: number, controller?: TextClockController 
 
 ## 属性
 
-除支持[通用属性](ts-universal-attributes-size.md)外，还支持以下属性：
+除支持[通用属性](ts-universal-attributes-size.md)和[文本通用](ts-universal-attributes-text-style.md)中的fontColor、fontSize、fontWeight、fontStyle、fontFamily外，还支持以下属性：
 
 | 名称   | 参数类型    | 描述                                                         |
 | ------ | --------------- | ------------------------------------------------------------ |

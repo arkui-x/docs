@@ -9,7 +9,7 @@ You can apply foreground blur effects to a component.
 ## Attributes
 | Name| Type| Description|
 | -------- | -------- | -------- |
-| foregroundBlurStyle | value:[BlurStyle](ts-appendix-enums.md#blurstyle9),<br>options?:[ForegroundBlurStyleOptions](#foregroundblurstyleoptions10) | Foreground blur style applied to the component.<br>**value**: settings of the foreground blur style, including the blur radius, mask color, mask opacity, saturation, and brightness.<br>**options**: foreground blur options. This parameter is optional.|
+| foregroundBlurStyle | value:[BlurStyle](ts-appendix-enums.md#blurstyle9),<br>options?:[ForegroundBlurStyleOptions](#foregroundblurstyleoptions) | Foreground blur style applied to the component.<br>**value**: settings of the foreground blur style, including the blur radius, mask color, mask opacity, saturation, and brightness.<br>**options**: foreground blur options. This parameter is optional.|
 
 ## ForegroundBlurStyleOptions
 

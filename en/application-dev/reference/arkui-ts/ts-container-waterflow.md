@@ -69,7 +69,7 @@ In addition to the [universal events](ts-universal-events-click.md), the followi
 | -------- | -------- |
 | onReachStart(event: () => void) | Triggered when the component reaches the start.|
 | onReachEnd(event: () => void)   | Triggered when the component reaches the end.|
-
+| onScrollFrameBegin<sup>10+</sup>(event: (offset: number, state: ScrollState) => { offsetRemain }) | Triggered when the component flow starts to sliding, the Parameters is passed in to the upcoming sliding amount. In the function, the actual sliding amount can be calculated based on the application scenario and returned as the return value. The waterfall flow will slide according to the actual sliding amount of the return value.<br/>\- **offset**: The amount of sliding that is about to occur, Unit: vp.<br/>\- **state**: Current sliding state.<br/>- **offsetRemain**: Actual sliding amount, Unit: vp.<br/>The conditions that trigger the event: Triggered when the beginning of each frame when finger dragging WaterFlow and WaterFlow inertial stroke. List rebounds beyond the edge, and scrolling using a scrolling controller will not trigger.|
 
 ## auto-fill
 

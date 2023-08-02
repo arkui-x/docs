@@ -24,6 +24,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 | disabled | ()=&gt;void | No| Style of the component in disabled state.|
 | focused | ()=&gt;void | No| Style of the component in focused state.|
 | clicked | ()=&gt;void | No| Style of the component in clicked state.|
+| selected<sup>10+</sup> | ()=&gt;void | No| Style of the component in the selected state.|
 
 
 ## Example
