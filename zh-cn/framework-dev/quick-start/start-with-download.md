@@ -10,7 +10,7 @@ ArkUI-X项目主库地址：[https://gitee.com/arkui-x](https://gitee.com/arkui-
 
 ## 前提条件
 
-1. 注册码云gitee账号。
+1. 注册码云gitee帐号。
 
 2. 注册码云SSH公钥，请参考[码云帮助中心](https://gitee.com/help/articles/4191)。
 
