@@ -26,12 +26,13 @@ GridItem()
 | columnStart | number | 指定当前元素起始列号。 |
 | columnEnd | number | 指定当前元素终点列号。 |
 | selectable<sup>8+</sup> | boolean | 当前GridItem元素是否可以被鼠标框选。<br/>>&nbsp;&nbsp;**说明：**<br/>>&nbsp;外层Grid容器的鼠标框选开启时，GridItem的框选才生效。<br/>默认值：true |
+| selected<sup>10+</sup>  | boolean  | 设置当前GridItem选中状态。该属性支持[$$](../../quick-start/arkts-two-way-sync.md)双向绑定变量。<br />**说明：**<br />该属性需要在设置[选中态样式](ts-universal-attributes-polymorphic-style.md)前使用才能生效选中态样式。<br />默认值：false |
 
 >  **说明：**
 >
 >  起始行号、终点行号、起始列号、终点列号生效规则如下：
 >
->  rowStart/rowEnd合理取值范围为0~总行数-1，columnStart/columnEnd合理取值范围为0~总列数-1。
+>  rowStart/rowEnd合理取值范围为0&sim;总行数-1，columnStart/columnEnd合理取值范围为0&sim;总列数-1。
 >
 >  只有在设置columnTemplate和rowTemplate的Grid中，设置合理的rowStart/rowEnd/columnStart/columnEnd四个属性的GridItem才能按照指定的行列号布局。
 >

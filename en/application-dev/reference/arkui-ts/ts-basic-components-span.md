@@ -29,7 +29,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 
 ## Attributes
 
-In addition to the [universal text style](ts-universal-attributes-text-style.md) attributes, the following attributes are supported.
+Supported [universal text style](ts-universal-attributes-text-style.md) other than lineHeight , as well as the following attributes are supported.
 
 | Name| Type| Description|
 | -------- | -------- | -------- |

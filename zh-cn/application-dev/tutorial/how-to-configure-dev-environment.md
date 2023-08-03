@@ -2,7 +2,7 @@
 
 ## 简介
 
-ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工具，支持在Windows/Ubuntu/macOS平台运行，用于构建OpenHarmony、HarmonyOS、Android和iOS平台的应用程序， 其功能包括开发环境检查，新建项目，编译打包，安装调试等。
+ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在Windows/Ubuntu/macOS平台运行，用于构建OpenHarmony、HarmonyOS、Android和iOS平台的应用程序， 其功能包括开发环境检查，新建项目，编译打包，安装调试等。
 
 ## 环境准备
 
@@ -38,7 +38,7 @@ ACE Tools是一套为ArkUI-X项目跨平台应用开发者提供的命令行工�
 
 **2. 配置ohpm环境**
 
-   OHPM CLI（OpenHarmony Package Manager Command-line Interface）鸿蒙生态三方库的包管理工具，位于OpenHarmony [SDK命令行工具](https://developer.harmonyos.com/cn/develop/deveco-studio#download_cli_openharmony)中。推荐环境变量配置如下：
+   OHPM CLI（OpenHarmony Package Manager Command-line Interface）OpenHarmony生态三方库的包管理工具，位于OpenHarmony [SDK命令行工具](https://developer.harmonyos.com/cn/develop/deveco-studio#download_cli_openharmony)中。推荐环境变量配置如下：
 
    [Linux]
 

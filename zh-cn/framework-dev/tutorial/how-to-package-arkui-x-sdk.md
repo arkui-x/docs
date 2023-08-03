@@ -1,6 +1,6 @@
 # 简介
 
-本文档配套ArkUI-X项目，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台，让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
+本文档配套ArkUI-X，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台，让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
 
 ArkUI-X SDK包含ArkUI跨平台运行时，组件和接口插件包，以及ACE Tools命令行工具，用于开发ArkUI-X应用，并布置到Android和iOS平台。详细内容如下：
 

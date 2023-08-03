@@ -1,10 +1,10 @@
-# ArkUI-X项目概览
+# ArkUI-X概览
 
 ## 项目介绍
 
 ArkUI是一套构建分布式应用的声明式UI开发框架。它具备简洁自然的UI信息语法、丰富的UI组件、多维的状态管理，以及实时界面预览等相关能力，帮助您提升应用开发效率，并能在多种设备上实现生动而流畅的用户体验。详情可参考[ArkUI框架介绍](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkui-overview.md)
 
-ArkUI-X项目进一步将ArkUI扩展到了多个OS平台：目前支持OpenHarmony、HarmonyOS、Android、 iOS，后续会逐步增加更多平台支持。开发者基于一套主代码，就可以构建支持多平台的精美、高性能应用。
+ArkUI-X进一步将ArkUI扩展到了多个OS平台：目前支持OpenHarmony、HarmonyOS、Android、 iOS，后续会逐步增加更多平台支持。开发者基于一套主代码，就可以构建支持多平台的精美、高性能应用。
 
 ## 关键特征
 
@@ -41,7 +41,6 @@ ArkUI-X GitHub镜像库地址：https://github.com/arkui-x
 
 简体中文：[ArkUI-X开发者文档](README.md) 
 
-[English Version](../en/readme.md)
 
 ## 源码下载
 

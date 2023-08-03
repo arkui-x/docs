@@ -13,7 +13,7 @@
 
 >  **说明：** 
 >
->  子组件类型：系统组件和自定义组件，支持渲染控制类型（[if/else](../../quick-start/arkts-rendering-control-ifelse.md)、[ForEach](../../quick-start/arkts-rendering-control-foreach.md)和[LazyForEach](../../quick-start/arkts-rendering-control-lazyforeach.md)）。
+> 子组件类型：系统组件和自定义组件，支持渲染控制类型（if/else、ForEach和LazyForEach）。
 
 
 ## 接口
@@ -42,7 +42,7 @@ Swiper(controller?: SwiperController)
 | vertical                    | boolean                                  | 是否为纵向滑动。<br/>默认值：false                                 |
 | itemSpace                   | number&nbsp;\|&nbsp;string          | 设置子组件与子组件之间间隙。<br/>默认值：0<br/>**说明：** <br/>不支持设置百分比。 |
 | displayMode                 | SwiperDisplayMode                        | 主轴方向上元素排列的模式，优先以displayCount设置的个数显示，displayCount未设置时本属性生效。<br/>默认值：SwiperDisplayMode.Stretch |
-| cachedCount<sup>8+</sup>    | number                                   | 设置预加载子组件个数。<br/>默认值：1<br/>**说明：** <br/>cachedCount已经做了预加载的优化，不建议与[LazyForEach](../../quick-start/arkts-rendering-control-lazyforeach.md)一起使用。 |
+| cachedCount<sup>8+</sup>    | number                                   | 设置预加载子组件个数。<br/>默认值：1<br/>**说明：** <br/>cachedCount已经做了预加载的优化，不建议与LazyForEach一起使用。 |
 | disableSwipe<sup>8+</sup>   | boolean                                  | 禁用组件滑动切换功能。<br/>默认值：false                              |
 | curve<sup>8+</sup>          | [Curve](ts-appendix-enums.md#curve)  \| string | 设置Swiper的动画曲线，默认为淡入淡出曲线，常用曲线参考[Curve枚举说明](ts-appendix-enums.md#curve)，也可以通过[插值计算](../apis/js-apis-curve.md)模块提供的接口创建自定义的插值曲线对象。<br/>默认值：Curve.Linear |
 | displayCount<sup>8+</sup>   | number\|string                                               | 设置一页内元素显示个数。<br/>默认值：1<br/>**说明：** <br/>字符串类型仅支持设置为'auto'，显示效果同SwiperDisplayMode.AutoLinear。<br/>使用number类型且设置小于等于0时，按默认值1显示。<br/>使用number类型时，子组件按照主轴均分Swiper宽度（减去displayCount-1的itemSpace）的方式进行主轴拉伸（收缩）布局。 |
@@ -128,6 +128,7 @@ finishAnimation(callback?: () => void): void
 | onChange(event: (index: number) => void)                     | 当前显示的子组件索引变化时触发该事件,返回值为当前显示的子组件的索引值。<br/>-&nbsp;index:当前显示元素的索引。<br/>**说明：** <br>Swiper组件结合LazyForEach使用时，不能在onChange事件里触发子页面UI的刷新。 |
 | onAnimationStart<sup>9+</sup>(event: (index: number) => void) | 切换动画开始时触发该回调。<br/>-&nbsp;index:当前显示元素的索引。<br/>**说明：** <br/>参数为动画开始前的index值（不是最终结束动画的index值），多列Swiper时，index为最左侧组件的索引。 |
 | onAnimationEnd<sup>9+</sup>(event: (index: number) => void)  | 切换动画结束时触发该回调。<br/>-&nbsp;index:当前显示元素的索引。<br/>**说明：** <br/>当Swiper切换动效结束时触发，包括动画过程中手势中断，通过SwiperController调用finishAnimatio。参数为动画结束后的index值，多列Swiper时，index为最左侧组件的索引。 |
+| onGestureSwipe<sup>10+</sup>(event: (index: number) => void)  | 在页面跟手滑动过程中，逐帧触发该回调。<br/>-&nbsp;index:当前显示元素的索引。<br/>**说明：** <br/>多列Swiper时，index为最左侧组件的索引。 |
 
 ## 示例
 

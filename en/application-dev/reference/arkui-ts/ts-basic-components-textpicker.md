@@ -14,7 +14,7 @@ Not supported
 
 ## APIs
 
-TextPicker(options?: {range: string[] | string[][] | Resource | TextPickerRangeContent[] | TextCascadePickerRangeContent[], selected?: number, value?: string})
+TextPicker(options?: {range: string[] | string[][] | Resource | [TextPickerRangeContent](#textpickerrangecontent10)[], selected?: number, value?: string})
 
 Creates a text picker based on the selection range specified by **range**.
 
@@ -25,6 +25,13 @@ Creates a text picker based on the selection range specified by **range**.
 | range | string[] \| string[][]<sup>10+</sup> \| [Resource](ts-types.md#resource) | Yes| Data selection range of the picker. This parameter cannot be set to an empty array. If set to an empty array, it will not be displayed. If it is dynamically changed to an empty array, the current value remains displayed.<br>**NOTE**<br>For a single-column picker, use a value of the string[] or Resource type.<br>For a multi-column picker, use a value of the string[] type.<br>The Resource type supports only [strarray.json](../../quick-start/resource-categories-and-access.md#resource-group-subdirectories). |
 | selected | number \| number[]<sup>10+</sup> | No| Index of the default item in the range.<br>Default value: **0**<br>**NOTE**<br>For a single-column picker, use a value of the number type.<br>For a multi-column (linked) picker, use a value of the number[] type.<br>Since API version 10, this parameter supports [$$](../../quick-start/arkts-two-way-sync.md) for two-way binding of variables.|
 | value | string \| string[]<sup>10+</sup> | No| Value of the default item in the range. The priority of this parameter is lower than that of **selected**.<br>Default value: value of the first item<br>**NOTE**<br>This parameter works only when the picker contains text only.  <br>For a single-column picker, use a value of the string type.<br>For a multi-column (linked) picker, use a value of the string[] type.<br>Since API version 10, this parameter supports [$$](../../quick-start/arkts-two-way-sync.md) for two-way binding of variables. |
+
+## TextPickerRangeContent<sup>10+</sup>
+
+| Name| Type                                                | Mandatory| Description  |
+| ------ | -------------------------------------------------------- | ---- | ---------- |
+| icon   | string \| [Resource](ts-types.md#resource) | Yes  | Image resource.|
+| text   | string \| [Resource](ts-types.md#resource) | No  | Text information.|
 
 ## Attributes
 

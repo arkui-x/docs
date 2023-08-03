@@ -49,6 +49,7 @@ Progress(options: {value: number, total?: number, type?: ProgressType})
 | value           | number                                     | 设置当前进度值。设置小于0的数值时置为0，设置大于total的数值时置为total。非法数值不生效。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
 | color           | [ResourceColor](ts-types.md#resourcecolor) | 设置进度条前景色。从API version 10开始支持利用LinearGradient设置Ring样式的渐变色。<br/>默认值（API version 9）：'\#ff007dff'<br/>默认值（API version 10）：<br/>- Capsule：'\#33006cde'<br/>- Ring：起始端：'\#ff3b61f7'，结束端：'\#ff6591bf'<br/>- 其他样式：'\#ff007dff'<br/>从API version 9开始，该接口支持在ArkTS卡片中使用，暂不支持LinearGradient。 |
 | backgroundColor | [ResourceColor](ts-types.md#resourcecolor) | 设置进度条底色。<br/>默认值（API version 9）：'\#19182431'<br/>默认值（API version 10）：<br/>- Capsule：'\#33ffffff'<br/>- Ring：'\#08182431'<br/>- 其他样式：'\#19182431'<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。<br/>**说明：** <br/>当设置[通用属性backgroundColor](./ts-universal-attributes-background.md)时，生效的是进度条的底色，而不是整个Progress组件的背景色。 |
+| style<sup>8+</sup> | {<br />strokeWidth?: [Length](ts-types.md#length),<br />scaleCount?: number,<br />scaleWidth?: [Length](ts-types.md#length)<br />} | 定义组件的样式。<br />- strokeWidth: 设置进度条宽度（不支持百分比设置）。从API version9开始，环形进度条设置宽度大于等于半径时，默认修改宽度至半径值的二分之一。<br />默认值：4.0Vp<br />- scaleCount: 设置环形进度条总刻度数。<br />默认值：120<br />- scaleWidth: 设置环形进度条刻度粗细（不支持百分比设置），刻度粗细大于进度条宽度时，为系统默认粗细。<br />默认值：2.0Vp<br />从API version 9开始，该接口支持在ArkTS卡片中使用。 |
 
 ## 事件
 

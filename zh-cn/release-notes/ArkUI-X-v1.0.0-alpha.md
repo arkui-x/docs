@@ -15,7 +15,7 @@
 
 ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmony接口以Public接口为基础，接口范围为API10<sup>+</sup>，具体支持列表详见[API参考](../application-dev/reference/README.md)。
 
->说明：ArkUI-X 1.0.0 Alpha版本为ArkUI-X项目首次发布的预览版本，除提供[ArkUI控件](../application-dev/reference/arkui-ts/README.md)和部分[@ohos接口](../application-dev/reference/apis/README.md)之外，暂不提供其它OpenHarmony接口定义的跨平台实现。
+>说明：ArkUI-X 1.0.0 Alpha版本为ArkUI-X首次发布的预览版本，除提供[ArkUI控件](../application-dev/reference/arkui-ts/README.md)和部分[@ohos接口](../application-dev/reference/apis/README.md)之外，暂不提供其它OpenHarmony接口定义的跨平台实现。
 
 ### 应用开发工具
 
@@ -29,17 +29,16 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 | 目标平台    | 项目编译使用OS SDK版本              | 备注 |
 | ----------- | ----------------------------------- | ---- |
 | OpenHarmony | 4.0 (API Version 10) |  Beta2  |
-| HarmonyOS   | 4.0.0 (API 10) | NA  |
 | Android     | Quince Tart 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
 | iOS         | iOS 10<sup>+</sup>                             | NA   |
 
->说明：Alpha版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。由于HarmonyOS 4.0.0未发布，暂不支持HarmonyOS设备体验。
+>说明：Alpha版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
 
 ## 源码获取
 
 ### 前提条件
 
-1. 注册码云gitee账号。
+1. 注册码云gitee帐号。
 
 2. 注册码云SSH公钥，请参考[码云帮助中心](https://gitee.com/help/articles/4191)。
 

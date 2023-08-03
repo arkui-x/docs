@@ -1,4 +1,4 @@
-# ArkUI-X项目之初体验(IDE)
+# ArkUI-X之初体验
 
 ## 开发跨平台应用
 
@@ -10,7 +10,7 @@
 1. 点击File > New > Import > Import Sample。
    ![import_sample](figures/import_sample.png)
 
-2. 在左上方的下拉框中选择OpenHarmony，选择ArkUI-X/ArkUI-X_Application，点击**Next**。
+2. 在左上方的下拉框中选择OpenHarmony，选择ArkUI-X/HelloWorld，点击**Next**。
 
 3. 在工程配置页面，填写Project name和Project location，点击**Finish**，等待Sample工程导入完成。
 

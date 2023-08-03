@@ -322,32 +322,6 @@ AppStorage.SetOrCreate('PropA', 47);
 let res: boolean = AppStorage.Clear(); // true, there are no subscribers
 ```
 
-
-### IsMutable
-
-static IsMutable(propName: string): boolean
-
-返回AppStorage中propName对应的属性是否是可变的。
-
-**参数：**
-
-| 参数名      | 类型     | 必填   | 参数描述             |
-| -------- | ------ | ---- | ---------------- |
-| propName | string | 是    | AppStorage中的属性名。 |
-
-**返回值：**
-
-| 类型      | 描述                               |
-| ------- | -------------------------------- |
-| boolean | 返回AppStorage中propNam对应的属性是否是可变的。 |
-
-
-```ts
-AppStorage.SetOrCreate('PropA', 47);
-let res: boolean = AppStorage.IsMutable('simpleProp');
-```
-
-
 ### Size
 
 static Size(): number

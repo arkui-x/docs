@@ -24,6 +24,8 @@ TextTimer(options?: { isCountDown?: boolean, count?: number, controller?: TextTi
 
 ## Attributes
 
+Among the [universal text attributes](ts-universal-attributes-text-style.md), **fontColor**, **fontSize**, **fontStyle**, **fontWeight**, and **fontFamily** are supported. In addition, the following attributes are supported.
+
 | Name       | Type      | Description                            |
 | -------- | ---------------------- | ---------------------- |
 | format   | string   | Custom format. The value must contain at least one of the following keywords: **HH**, **mm**, **ss**, and **SS**. If the specified date format is yy, MM, or dd, the default value is used instead.<br>Default value: **'HH:mm:ss.SS'**|
