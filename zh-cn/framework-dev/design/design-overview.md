@@ -11,7 +11,7 @@ ArkUI是面向全设备的UI开发框架，已通过OpenHarmony代码仓开源�
   - 应用界面&交互;
   - 扩展机制-使能三方组件&平台API扩展机制。
 
-ArkUI-X项目旨在将ArkUI开发框架扩展至其他OS平台（Android/iOS/Windows等），使开发者能够基于ArkUI开发框架，复用绝大部分的应用代码（UI以及主要应用逻辑），即可部署到不同OS平台上。
+ArkUI-X旨在将ArkUI开发框架扩展至其他OS平台（Android/iOS/Windows等），使开发者能够基于ArkUI开发框架，复用绝大部分的应用代码（UI以及主要应用逻辑），即可部署到不同OS平台上。
 
 ### 假设和约束
 
@@ -75,7 +75,7 @@ ArkUI-X应用工程
 ArkUI-X应用目录结构设计思想是从OpenHarmony应用工程原生支持跨平台角度出发，在OpenHarmony应用工程之上叠加Android和iOS应用工程，ArkTS代码和resources资源编辑仍在OpenHarmony侧完成，Native代码在各自平台应用工程中完成。详细包结构设计，请参见[应用工程结构说明](../../application-dev/quick-start/package-structure-guide.md)。
 
 ### 跨平台框架构建系统
-ArkUI-X项目编译构建提供了一套基于GN和Ninja的编译构建框架，基础构建基于OpenHarmony的build仓，并在OpenHarmony构建基础上新增Android和iOS编译工具链，以支持ArkUI跨平台SDK编译输出。
+ArkUI-X编译构建提供了一套基于GN和Ninja的编译构建框架，基础构建基于OpenHarmony的build仓，并在OpenHarmony构建基础上新增Android和iOS编译工具链，以支持ArkUI跨平台SDK编译输出。
 
 ### 跨平台SDK结构设计
 跨平台SDK主要用于支持ACE Tools命令行跨平台应用构建和DevEco Studio\Android Studio\Xcode集成跨平台应用开发。内容范围主要包括：
@@ -83,7 +83,7 @@ ArkUI-X项目编译构建提供了一套基于GN和Ninja的编译构建框架，
 2. 提供ArkUI跨平台应用构建命令行工具。
 3. 提供ArkUI组件渲染一致性系统资源包，应用资源编译工具。
 
-ArkUI-X项目跨平台SDK组成结构如下：
+ArkUI-X SDK组成结构如下：
 
 ```
 arkui-x
@@ -209,7 +209,7 @@ sequenceDiagram
 
 ### 跨平台命令行工具ACE Tools
 
-ACE Tools命令行工具作为ArkUI-X项目跨平台应用构建工具，具有创建/编译/安装/运行调试OpenHarmony、Android和iOS应用的能力。
+ACE Tools命令行工具作为ArkUI-X跨平台应用构建工具，具有创建/编译/安装/运行调试OpenHarmony、Android和iOS应用的能力。
 
 ```
 ACE Tools代码结构

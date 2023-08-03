@@ -1,4 +1,4 @@
-# 使用DevEco Studio开发ArkUI-X项目
+# 使用DevEco Studio开发ArkUI-X应用
 
 ## 开发跨平台应用
 
