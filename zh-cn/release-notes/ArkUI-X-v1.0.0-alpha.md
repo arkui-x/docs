@@ -29,11 +29,10 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 | 目标平台    | 项目编译使用OS SDK版本              | 备注 |
 | ----------- | ----------------------------------- | ---- |
 | OpenHarmony | 4.0 (API Version 10) |  Beta2  |
-| HarmonyOS   | 4.0.0 (API 10) | NA  |
 | Android     | Quince Tart 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
 | iOS         | iOS 10<sup>+</sup>                             | NA   |
 
->说明：Alpha版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。由于HarmonyOS 4.0.0未发布，暂不支持HarmonyOS设备体验。
+>说明：Alpha版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
 
 ## 源码获取
 
