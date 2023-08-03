@@ -2,7 +2,7 @@
 
 # 简介
 
-本文档配套ArkUI-X项目，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台，让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
+本文档配套ArkUI-X，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台，让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
 
 # SDK获取
 
@@ -19,7 +19,7 @@
 
 ## SDK压缩包命名规则
 
-ArkUI-X项目编译构建流水线出包时，需按照SDK命名规则进行打包，命名规则如下：
+ArkUI-X编译构建流水线出包时，需按照SDK命名规则进行打包，命名规则如下：
 
 ```
 path_操作系统类型_CPU架构类型_版本号_releaseType.zip

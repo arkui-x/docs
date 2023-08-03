@@ -1,12 +1,12 @@
-# ArkUI-X项目代码下载
+# ArkUI-X代码下载
 
-## ArkUI-X项目介绍
+## ArkUI-X介绍
 
 方舟开发框架（简称：ArkUI），是一套构建OpenHarmony应用界面的UI开发框架，它提供了简洁自然的UI语法与包括UI组件、动画机制、事件交互等在内的UI开发基础设施，以满足应用开发者的可视化界面开发需求。
 
-ArkUI-X项目，是扩展ArkUI开发框架到多个OS平台，让开发者基于一套主代码，构建出精美的多平台应用。
+ArkUI-X，是扩展ArkUI开发框架到多个OS平台，让开发者基于一套主代码，构建出精美的多平台应用。
 
-ArkUI-X项目主库地址：[https://gitee.com/arkui-x](https://gitee.com/arkui-x)。
+ArkUI-X主库地址：[https://gitee.com/arkui-x](https://gitee.com/arkui-x)。
 
 ## 前提条件
 
@@ -32,7 +32,7 @@ ArkUI-X项目主库地址：[https://gitee.com/arkui-x](https://gitee.com/arkui-
 
 ## 下载方法
 
-- **ArkUI-X项目主干代码获取**
+- **ArkUI-X主干代码获取**
 
   方式一（推荐）：通过repo + ssh下载（需注册公钥，请参考[码云帮助中心](https://gitee.com/help/articles/4191)）。
 
@@ -53,7 +53,7 @@ ArkUI-X项目主库地址：[https://gitee.com/arkui-x](https://gitee.com/arkui-
   repo forall -c 'git lfs pull'
   ```
 
-- **ArkUI-X项目开发分支代码获取**
+- **ArkUI-X开发分支代码获取**
 
   方式一（推荐）：通过repo + ssh下载（需注册公钥，请参考[码云帮助中心](https://gitee.com/help/articles/4191)）。
 

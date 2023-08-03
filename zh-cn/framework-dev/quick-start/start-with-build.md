@@ -1,4 +1,4 @@
-# ArkUI-X项目编译
+# ArkUI-X编译
 
 - 使用build.sh编译脚本进行编译，编译脚本常用选项
 
@@ -23,13 +23,13 @@
   ./build.sh -h
   ```
 
-  - ArkUI-X项目Android平台编译命令：
+  - ArkUI-X Android平台编译命令：
 
   ```shell
   ./build.sh --product-name arkui-x --target-os android
   ```
 
-  - ArkUI-X项目iOS平台编译命令：
+  - ArkUI-X iOS平台编译命令：
 
   ```shell
   ./build.sh --product-name arkui-x --target-os ios

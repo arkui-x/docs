@@ -24,7 +24,7 @@
 
 ### 开源软件引入
 
-若要引入新的第三方开源软件到ArkUI-X项目中，请参考[第三方开源软件引入指导](./introducing-third-party-open-source-software.md)
+若要引入新的第三方开源软件到ArkUI-X中，请参考[第三方开源软件引入指导](./introducing-third-party-open-source-software.md)
 
 ### 测试规范
 [安全测试规范](https://gitee.com/openharmony/docs/blob/master/zh-cn/contribute/OpenHarmony-security-test-guide.md)
