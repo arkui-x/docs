@@ -13,29 +13,27 @@
 
 ## 依赖环境准备
 
-在开发应用/服务前，请先完成依赖环境准备。
+在开发应用前，请先完成依赖环境准备。
 
   **表1** Windows平台环境要求
 
 | 组件包名 | 说明 | 
 | -------- | -------- |
-| HarmonyOS&nbsp;SDK | HarmonyOS的SDK包。 | 
-| ArkUI-X&nbsp;SDK | ArkUI-X的SDK包。 | 
-| Android&nbsp;SDK | Android的SDK包。 | 
-| Android&nbsp;Studio | Android应用开发环境，请参考官方环境搭建指导。 | 
+| OpenHarmony&nbsp;SDK | OpenHarmony的SDK包。 |
+| ArkUI-X&nbsp;SDK | ArkUI-X的SDK包。 |
+| Android&nbsp;SDK | Android的SDK包。 |
 
   **表2** macOS平台环境要求
 
 | 组件包名 | 说明 | 
 | -------- | -------- |
-| HarmonyOS&nbsp;SDK | HarmonyOS的SDK包。 | 
-| ArkUI-X&nbsp;SDK | ArkUI-X的SDK包。 | 
-| Android&nbsp;SDK | Android的SDK包。 | 
-| Android&nbsp;Studio | Android应用开发环境。 | 
-| Xcode | iOS应用开发环境，请参考官方环境搭建指导。 | 
+| OpenHarmony&nbsp;SDK | OpenHarmony的SDK包。 |
+| ArkUI-X&nbsp;SDK | ArkUI-X的SDK包。 |
+| Android&nbsp;SDK | Android的SDK包。 |
+| Xcode | iOS应用开发环境，请参考官方环境搭建指导。 |
 
 
-## 安装HarmonyOS SDK
+## OpenHarmony SDK
 
 1. 在**File &gt; Settings &gt; SDK**（macOS为**DevEco Studio &gt; Preferences &gt; SDK**）下，点击Location右侧的**Edit**，为SDK选择存储路径。
 
