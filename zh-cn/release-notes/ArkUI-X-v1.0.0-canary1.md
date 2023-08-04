@@ -1,8 +1,8 @@
-# ArkUI-X 1.0.0 Alpha
+# ArkUI-X 1.0.0 Canary1
 
 ## 版本概述
 
-首次发布ArkUI-X 1.0.0 Alpha版本，主要能力范围包括：
+首次发布ArkUI-X 1.0.0 Canary1版本，主要能力范围包括：
 
 - 应用开发范式：支持基于ArkTS的声明式开发范式。
 - 应用开发模型：支持Stage开发模型。
@@ -15,7 +15,7 @@
 
 ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmony接口以Public接口为基础，接口范围为API10<sup>+</sup>，具体支持列表详见[API参考](../application-dev/reference/README.md)。
 
->说明：ArkUI-X 1.0.0 Alpha版本为ArkUI-X首次发布的预览版本，除提供[ArkUI控件](../application-dev/reference/arkui-ts/README.md)和部分[@ohos接口](../application-dev/reference/apis/README.md)之外，暂不提供其它OpenHarmony接口定义的跨平台实现。
+>说明：ArkUI-X 1.0.0 Canary1版本为ArkUI-X首次发布的预览版本，除提供[ArkUI控件](../application-dev/reference/arkui-ts/README.md)和部分[@ohos接口](../application-dev/reference/apis/README.md)之外，暂不提供其它OpenHarmony接口定义的跨平台实现。
 
 ### 应用开发工具
 
@@ -29,10 +29,10 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 | 目标平台    | 项目编译使用OS SDK版本              | 备注 |
 | ----------- | ----------------------------------- | ---- |
 | OpenHarmony | 4.0 (API Version 10) |  Beta2  |
-| Android     | Quince Tart 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
+| Android     | Oreo 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
 | iOS         | iOS 10<sup>+</sup>                             | NA   |
 
->说明：Alpha版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
+>说明：Canary1版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
 
 ## 源码获取
 
@@ -66,14 +66,14 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 
 - 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
    ```
-   repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-v1.0.0-Alpha --no-repo-verify
+   repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-v1.0.0-Canary1 --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
    
 - 从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
    ```
-   repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Alpha --no-repo-verify
+   repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Canary1 --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
@@ -84,14 +84,14 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 
 - 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
    ```
-   repo init -u https://gitee.com/arkui-x/manifest.git -b ArkUI-X-v1.0.0-Alpha --no-repo-verify
+   repo init -u https://gitee.com/arkui-x/manifest.git -b ArkUI-X-v1.0.0-Canary1 --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
    
 - 从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
    ```
-   repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Alpha --no-repo-verify
+   repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Canary1 --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
@@ -102,10 +102,10 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 
 | 版本源码                                  | **版本信息** | **下载站点** | **SHA256校验码** | **软件包容量**|
 | -----------------------------------------| ------------ | ------------ | ---------------- | ---------------- |
-| ArkUI-X全量代码 | 1.0.0 Alpha    | [站点]()     | [SHA256校验码]() |            |
-| ArkUI-X SDK包（Windows）  | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |               |
-| ArkUI-X SDK包（macOS）    | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |               |
-| ArkUI-X SDK包（Linux）    | 1.0.0 Alpha | [站点]()     | [SHA256校验码]() |               |
+| ArkUI-X全量代码 | 1.0.0 Canary1    | [站点]()     | [SHA256校验码]() |            |
+| ArkUI-X SDK包（macOS）  | 1.0.0 Canary1 | [站点]()     | [SHA256校验码]() |               |
+| ArkUI-X SDK包（macOS-M1）    | 1.0.0 Canary1 | [站点]()     | [SHA256校验码]() |               |
+| ArkUI-X SDK包（Windows/Linux）    | 1.0.0 Canary1 | [站点]()     | [SHA256校验码]() |               |
 
 ## Samples
 
