@@ -7,5 +7,4 @@
 - [贡献文档](documentation-contribution.md)
 - [写作规范](writing-instructions.md)
 - [社区沟通与交流](communication-in-community.md)
-- [FAQ](FAQ.md)
 

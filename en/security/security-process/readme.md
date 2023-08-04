@@ -36,19 +36,6 @@ The ArkUI-X Security Issue Response Team organizes maintainers to review the sec
 |Medium|4.0 - 6.9|
 |Low|0.1 - 3.9|
 
-### Fixing Security Vulnerabilities
-
-The maximum handling time is set based on the vulnerability severity level to ensure that security vulnerabilities of higher severity levels can be handled in a timely manner.
-
-|Severity Rating|Maximum Handling Time (Days)|
-|--------------------------|-----------------|
-|Critical|7|
-|High|14|
-|Medium|30|
-|Low|30|
-
-If a security vulnerability may generate public opinions or may be exploited, the handling time will be reduced to one to three days to minimize the impact. However, it cannot be guaranteed that all security vulnerabilities will be fixed within the specified time due to complexity in vulnerability fixing.
-
 ### Disclosing Security Vulnerabilities
 
 The ArkUI-X community complies with the principle of responsible disclosure. After security vulnerabilities are fixed, [Security bulletins](../security-disclosure/readme.md) will be released.
