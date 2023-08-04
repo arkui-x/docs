@@ -36,25 +36,6 @@ Your feedback matters. Submit issues and leave as detailed information as possib
 >-   Search the list of existing issues to see if any related or similar issues have been submitted.
 >-   If an issue is associated with another issue or a pull request (PR), you can use its full URL or the combination of the number sign (#) and PR number to reference it.
 
-### Editing Existing Documents
-
-You can perform the following steps to modify or supplement a file:
-
-1.  In the upper right corner of the document page, click **Edit** to go to the source file page in the Gitee project.
-2.  On the page of the source file in .md format, modify or supplement the file.
-3.  After the modification, click **Preview** to confirm the modification result.
-4.  Enter your comments, supplementary information, and Signed-off-by information in the **Extended Information** text box, and click **Commit**.
-
-    Format of Signed-off-by information is as follows:
-
-    Signed-off-by: user.name &lt;user.email&gt; // Note that *user.name* and *user.email* must be the same as those used for DCO signing.
-
-![](figures/Signed-off-by-example.png)
-
-The Docs team will review your edits and update the file accordingly.
-
-
-For more information, see [Contribution Process](contribution-process.md).
 
 ### Contributing Documents to a Release
 
