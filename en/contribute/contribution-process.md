@@ -199,51 +199,6 @@ For details, visit [https://gitee.com/help/articles/4128](https://gitee.com/help
 >2.  Associate PRs that need to be built and merged at the same time with the issue. For details, visit  [https://gitee.com/help/articles/4142](https://gitee.com/help/articles/4142).
 >3.  After the build is triggered, the build center identifies the PRs associated with the same issue, downloads the build, and merges the PRs into the code library after the code is approved.
 
-## Building Access Control
-
-## Creating an Issue
-
-1.  Go to the homepage of the repository.
-2.  Click the  **Issues**  tab in the upper left corner. Then, click the issue creation button on the right, and create a dedicated task as prompted to execute continuous integration \(CI\) access control for associated code \(feature development/bug fixing\).
-
-## Associating the Issue with the PR
-
-When creating a PR or compiling an existing PR, enter  **\#+I+_five-digit issue ID_**  in the description box to associate the issue with the PR.
-
-**Constraints**
-
--   One PR can be associated with only one issue. Otherwise, CI cannot be triggered.
--   If feature development or bug fixing involves multiple code repositories, multiple PRs can be associated with the same issue.
--   Among the PRs associated with the issue, no PR that has been merged or closed is allowed. Otherwise, the CI cannot be triggered.
--   If an issue has been associated with a merged or closed PR, the issue cannot be reused. In this case, create another issue and associate it with an open PR.
-
-## Triggering Code Access Control
-
-Comment "start build" in the PR to trigger CI access control.
-
-If multiple PRs are associated with the same issue, the comment "start build" on any PR can trigger the CI access control of the issue.
-
-After the access control is executed, the execution result will be automatically commented in all the PRs associated with the issue.
-
-If the access control is passed, all PRs associated with the issue will be automatically marked as "Passed".
-For details, see [Supported Commands for PR Comments in ArkUI-X](pr-command.md).
-
-## CI Portal
-
-The continuous integration (CI) portal is a platform where you can promptly view and analyze the execution results of code access control and daily build.
-
-On the CI portal, you can detect code bugs in a timely manner to ensure code reliability and function stability. The CI portal provides the following functions:
-
-- Code Access Control: After submitting a merge request to commit code, code access checks, such as the static code check, code build, and function test, are triggered. Code can be committed only after all checks are passed.
-
-
-- Daily Build: The continuous integration pipeline is automatically executed every day to detect issues with static code, code build, and functions in advance, thereby allowing you to resolve these issues in time to ensure high code quality.
-
-Visit [CI portal](http://ci.arkui-x.cn/).
-
 ## Reviewing Code
 
 For details, visit [https://gitee.com/help/articles/4304](https://gitee.com/help/articles/4304).
-
-Related topic: [FAQs](FAQ.md)
-
