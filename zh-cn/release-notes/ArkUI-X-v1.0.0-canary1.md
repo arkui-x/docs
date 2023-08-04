@@ -29,7 +29,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 | 目标平台    | 项目编译使用OS SDK版本              | 备注 |
 | ----------- | ----------------------------------- | ---- |
 | OpenHarmony | 4.0 (API Version 10) |  Beta2  |
-| Android     | Oreo 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
+| Android     | Android 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
 | iOS         | iOS 10<sup>+</sup>                             | NA   |
 
 >说明：Canary1版本为面向特定开发者发布的早期预览版本，不承诺UI和API稳定性。
@@ -100,12 +100,13 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 
 **表2** 获取源码和SDK路径
 
-| 版本源码                                  | **版本信息** | **下载站点** | **SHA256校验码** | **软件包容量**|
-| -----------------------------------------| ------------ | ------------ | ---------------- | ---------------- |
-| ArkUI-X全量代码 | 1.0.0 Canary1    | [站点]()     | [SHA256校验码]() |            |
-| ArkUI-X SDK包（macOS）  | 1.0.0 Canary1 | [站点]()     | [SHA256校验码]() |               |
-| ArkUI-X SDK包（macOS-M1）    | 1.0.0 Canary1 | [站点]()     | [SHA256校验码]() |               |
-| ArkUI-X SDK包（Windows/Linux）    | 1.0.0 Canary1 | [站点]()     | [SHA256校验码]() |               |
+| 版本源码                                  | **版本信息** | **下载站点** | **SHA256校验码** |
+| -----------------------------------------| ------------ | ------------ | ---------------- |
+| ArkUI-X全量代码 | 1.0.0 Canary1    | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/code/code-v1.0.0-Canary1.tar.gz)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/code/code-v1.0.0-Canary1.tar.gz.sha256) |            |
+| ArkUI-X SDK包（macOS）  | 1.0.0 Canary1 | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-x64-0.0.9.6-Canary1.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-x64-0.0.9.6-Canary1.zip.sha256) |
+| ArkUI-X SDK包（macOS-M1）    | 1.0.0 Canary1 | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-arm64-0.0.9.6-Canary1.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-arm64-0.0.9.6-Canary1.zip.sha256) |
+| ArkUI-X SDK包（Windows）    | 1.0.0 Canary1 | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/windows/arkui-x-windows-x64-0.0.9.6-Canary1.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/windows/arkui-x-windows-x64-0.0.9.6-Canary1.zip.sha256) |
+| ArkUI-X SDK包（Linux）    | 1.0.0 Canary1 | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/linux/arkui-x-linux-x64-0.0.9.6-Canary1.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/linux/arkui-x-linux-x64-0.0.9.6-Canary1.zip.sha256) |
 
 ## Samples
 

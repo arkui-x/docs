@@ -55,7 +55,7 @@ ACE Tools is a command line (CLI) tool that allows ArkUI-X project developers to
 | Platform   | OS SDK Version             | Remarks|
 | ----------- | ----------------------------------- | ---- |
 | OpenHarmony | 4.0 (API Version 10) |  Beta2  |
-| Android     | Oreo 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
+| Android     | Android 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
 | iOS         | iOS 10<sup>+</sup>                             | NA   |
 
 >**NOTE**
@@ -110,15 +110,15 @@ repo sync -c
 
 ### Acquiring Source Code from Mirrors
 
-**Table 2** Mirrors for acquiring source code and SDKs
+**Table 2** Acquiring Source Code from Mirrors
 
-| Source Code                                 | Version| Mirror| SHA-256 Checksum| Software Package Size|
-| ----------------------------------------- | ------------ | ------------ | ---------------- | ----------|
-| ArkUI-X full code| 1.0.0 Canary1    | [Download]()    | [Download]()|         |
-| ArkUI-X SDK(macOS) | 1.0.0 Canary1    | [Download]()    | [Download]()|       |
-| ArkUI-X SDK(macOS-M1) | 1.0.0 Canary1    | [Download]()    | [Download]()|      |
-| ArkUI-X SDK(Windows\Linux) | 1.0.0 Canary1    | [Download]()    | [Download]()|    |
-
+| Source Code                                 | Version| Mirror| SHA-256 Checksum|
+| ----------------------------------------- | ------------ | ------------ | ---------------- |
+| ArkUI-X full code| 1.0.0 Canary1    | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/code/code-v1.0.0-Canary1.tar.gz)    | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/code/code-v1.0.0-Canary1.tar.gz.sha256)|         |
+| ArkUI-X SDK package（macOS）  | 1.0.0 Canary1 | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-x64-0.0.9.6-Canary1.zip)   | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-x64-0.0.9.6-Canary1.zip.sha256) |
+| ArkUI-X SDK package（macOS-M1）    | 1.0.0 Canary1 | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-arm64-0.0.9.6-Canary1.zip)   | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-arm64-0.0.9.6-Canary1.zip.sha256) |
+| ArkUI-X SDK package（Windows）    | 1.0.0 Canary1 | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/windows/arkui-x-windows-x64-0.0.9.6-Canary1.zip)   | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/windows/arkui-x-windows-x64-0.0.9.6-Canary1.zip.sha256) |
+| ArkUI-X SDK package（Linux）    | 1.0.0 Canary1 | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/linux/arkui-x-linux-x64-0.0.9.6-Canary1.zip)     | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/linux/arkui-x-linux-x64-0.0.9.6-Canary1.zip.sha256) |
 ## Samples
 
 ### Samples List
