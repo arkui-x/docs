@@ -1,8 +1,8 @@
-# ArkUI-X 1.0.0 Alpha
+# ArkUI-X 1.0.0 Canary1
 
 ## Version Description
 
-This issue is the first official release of ArkUI-X 1.0.0 Alpha. The version mainly packs the following capabilities:
+This issue is the first official release of ArkUI-X 1.0.0 Canary1. The version mainly packs the following capabilities:
 
 - Basic compiler toolchain, which can generate ArkUI SDKs for iOS and Android to create applications that run on the target platform.
 - Basic platform bridging capabilities, including the iOS and Android application loading entry points, lifecycle, event processing, and window system.
@@ -19,7 +19,7 @@ ArkUI cross-platform APIs include OpenHarmony APIs and custom extension APIs. Yo
 
 >**NOTE**
 >
->The ArkUI-X 1.0.0 Alpha version is the first preview version for the ArkUI-X project. It only provides implementation for the APIs listed in [OpenHarmony APIs with Cross-Platform Support](../application-dev/reference/apis/readme.md).
+>The ArkUI-X 1.0.0 Canary1 version is the first preview version for the ArkUI-X project. It only provides implementation for the APIs listed in [OpenHarmony APIs with Cross-Platform Support](../application-dev/reference/apis/readme.md).
 
 ### Project Build
 
@@ -54,13 +54,13 @@ ACE Tools is a command line (CLI) tool that allows ArkUI-X project developers to
 
 | Platform   | OS SDK Version             | Remarks|
 | ----------- | ----------------------------------- | ---- |
-| OpenHarmony | OpenHarmony 3.2 Beta (API level 9) | NA   |
-| Android     | Quince Tart 10 (API level 29)       | NA   |
-| iOS         | iOS 10                              | NA   |
+| OpenHarmony | 4.0 (API Version 10) |  Beta2  |
+| Android     | Oreo 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
+| iOS         | iOS 10<sup>+</sup>                             | NA   |
 
 >**NOTE**
 >
->The alpha version is a preview version for trial use. The UI and APIs of this version may be unstable.
+>The canary1 version is a preview version for trial use. The UI and APIs of this version may be unstable.
 
 ## Source Code Acquisition
 
@@ -94,7 +94,7 @@ Use the **repo** tool to download the source code over SSH. (You must have an SS
 
 
 ```
-repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Alpha --no-repo-verify
+repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Canary1 --no-repo-verify
 repo sync -c
 ```
 
@@ -104,7 +104,7 @@ Use the **repo** tool to download the source code over HTTPS.
 
 
 ```
-repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Alpha --no-repo-verify
+repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Canary1 --no-repo-verify
 repo sync -c
 ```
 
@@ -112,10 +112,12 @@ repo sync -c
 
 **Table 2** Mirrors for acquiring source code and SDKs
 
-| Source Code                                 | Version| Mirror| SHA-256 Checksum|
-| ----------------------------------------- | ------------ | ------------ | ---------------- |
-| ArkUI-X full code| 1.0.0 Alpha    | [Site]()    | [Download]()|
-| ArkUI-X SDK | 1.0.0 Alpha    | [Site]()    | [Download]()|
+| Source Code                                 | Version| Mirror| SHA-256 Checksum| Software Package Size|
+| ----------------------------------------- | ------------ | ------------ | ---------------- | ----------|
+| ArkUI-X full code| 1.0.0 Canary1    | [Download]()    | [Download]()|         |
+| ArkUI-X SDK(macOS) | 1.0.0 Canary1    | [Download]()    | [Download]()|       |
+| ArkUI-X SDK(macOS-M1) | 1.0.0 Canary1    | [Download]()    | [Download]()|      |
+| ArkUI-X SDK(Windows\Linux) | 1.0.0 Canary1    | [Download]()    | [Download]()|    |
 
 ## Samples
 
