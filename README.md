@@ -16,7 +16,7 @@
 
 master：最新开发版本。
 
-ArkUI-X 1.0.0 Alpha版本：点击[此处](zh-cn/release-notes/ArkUI-X-v1.0.0-alpha.md)了解版本详情。
+ArkUI-X 1.0.0 Canary1版本：点击[此处](zh-cn/release-notes/ArkUI-X-v1.0.0-canary1.md)了解版本详情。
 
 
 ## 第三方开源软件及许可说明
