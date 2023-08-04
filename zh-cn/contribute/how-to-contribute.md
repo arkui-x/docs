@@ -8,7 +8,7 @@
 
 您必须首先签署“开发者原创声明”，然后才能参与社区贡献。
 
-点击[这里](https://dco.openharmony.cn/#/sign)签署，点击[这里](https://dco.openharmony.cn/#/check-sign-status)查询签署状态。
+请在docs/zh-cn/contribute路径下获取signing-dco（Developer Certificate of Origin）Markdown文件，将签署后的DCO Markdown文件发送至contact@mail.arkui-x.cn 。（线上签署待开放）
 
 #### 行为准则
 

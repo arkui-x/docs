@@ -199,50 +199,7 @@ repo push --br="20200903" --d="master" --content="#I1TVV4"
 >2.  将多个需要同时构建、同时合入的PR关联上述Issue，具体操作请参考码云帮助中心：[https://gitee.com/help/articles/4142](https://gitee.com/help/articles/4142)。
 >3.  触发构建\(详见触发构建的操作帮助\)后，构建中心会识别关联了同一Issue的PR，同时下载构建，并在代码审核通过后，同时进行合并入代码库。
 
-## 门禁构建
-
-### 创建Issue
-
-1.  找到并打开对应Repository的首页
-2.  选择左上角的Issues页签，点击右侧新建Issue按钮，按照指引建立一个专属的任务，用于相关联的代码（开发特性/修改bug）执行CI门禁。
-
-### 将Issue与PR关联
-
-创建PR或编辑已有的PR时，描述框输入\#+I+五位Issue ID，即可将Issue与PR关联。
-
-**约束：**
-
--   一个PR只允许关联一个Issue，关联多个Issue时无法触发CI。
--   相关特性开发或bug修复涉及多个代码仓联合修改时，多个PR可关联同一个Issue。
--   Issue关联的PR中，不允许存在已被合入或关闭的PR，否则无法触发CI。
--   若Issue已被合入或关闭的PR关联，则该Issue无法被重复使用，需重新创建Issue并进行OPEN的PR关联。
-
-### 触发代码门禁
-
-在PR中评论“start build“即可触发CI门禁。
-
-多个PR关联同一个Issue时，在任一PR中评论“start build”均可触发该Issue的CI门禁。
-
-门禁执行完成，会在该Issue关联的所有PR中自动评论门禁执行结果。
-
-如果门禁通过，该Issue关联的所有PR均会自动标记“测试通过”。
-
-了解更多[PR评论支持命令](pr-command.md)。
-
-## CI门户
-
-ArkUI-X通过持续集成（CI，Continuous Integration）及时发现代码问题，确保代码质量可靠和功能稳定，包括：
-
-- 代码门禁：开发者向ArkUI-X提交代码合入申请后，会触发门禁检查，例如静态检查、代码编译、功能测试等，门禁通过后才能合入代码。
-- 每日构建：ArkUI-X的持续集成流水线每日自动执行，以便提前发现代码静态检查、编译、功能等方面的问题，及时修复问题，确保代码质量。
-
-CI门户是为了便于开发者及时查看、分析每日构建和代码门禁的执行结果的一个可持续集成的门户。
-
-示例：[CI门户入口](http://ci.arkui-x.cn/)
-
 ## 代码审查
 
 请参考码云帮助中心：[https://gitee.com/help/articles/4304](https://gitee.com/help/articles/4304)
-
-**相关主题：[FAQ](FAQ.md)**
 
