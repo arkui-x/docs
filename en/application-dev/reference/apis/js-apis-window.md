@@ -17,17 +17,6 @@ This module provides the following common window-related functions:
 import window from '@ohos.window';
 ```
 
-## WindowType<sup>7+</sup>
-
-Enumerates the window types.
-
-**System capability**: SystemCapability.WindowManager.WindowManager.Core
-
-| Name             | Value| Description              |
-| ----------------- | ------ | ------------------ |
-| TYPE_APP          | 0      | Application subwindow.<br>**Model restriction**: This API can be used only in the FA model.|
-
-
 ## Configuration<sup>9+</sup>
 
 Defines the parameters for creating a subwindow or system window.
@@ -37,8 +26,7 @@ Defines the parameters for creating a subwindow or system window.
 | Name| Type| Mandatory| Description                                                                         |
 | ---------- | -------------------------- | -- |-----------------------------------------------------------------------------|
 | name       | string                     | Yes| Name of the window.                                                                      |
-| windowType | [WindowType](#windowtype7) | Yes| Type of the window.                                                                      |
-| ctx        | BaseContext                | No| Current application context. If no value is passed, no context is used.<br>You do not need to set this parameter to create a subwindow in the FA model or a system window in the stage model.|
+| ctx        | BaseContext                | No| Current application context. If no value is passed, no context is used.<br>You do not need to set this parameter to create a system window in the stage model.|
 | displayId  | number                     | No| ID of the current physical screen. If no value is passed, the default value **-1** is used. The value must be an integer.                                            |
 | parentId   | number                     | No| ID of the parent window. If no value is passed, the default value **-1** is used. The value must be an integer.                                                          |
 
@@ -90,7 +78,6 @@ Describes the window properties.
 | Name                                 | Type                 | Readable| Writable| Description                                                                                                    |
 | ------------------------------------- | ------------------------- | ---- | ---- |--------------------------------------------------------------------------------------------------------|
 | windowRect<sup>7+</sup>               | [Rect](#rect7)             | Yes  | Yes  | Window size.                                                                                                 |
-| type<sup>7+</sup>                     | [WindowType](#windowtype7) | Yes  | Yes  | Window type.                                                                                                 |
 | brightness                            | number                    | Yes  | Yes  | Screen brightness. The value is a floating point number in the range [0.0, 1.0], and the value **1.0** means the brightest. If no value is passed, the brightness follows the system. In this case, the obtained brightness value is **-1**.                     |
 | isKeepScreenOn                        | boolean                   | Yes  | Yes  | Whether the screen is always on. The default value is **false**. The value **true** means that the screen is always on, and **false** means the opposite.                                                                  |
 ## window.createWindow<sup>9+</sup>
@@ -123,7 +110,7 @@ For details about the error codes, see [Window Error Codes](../errorcodes/errorc
 
 ```js
 let windowClass = null;
-let config = {name: "alertWindow", windowType: window.WindowType.TYPE_SYSTEM_ALERT, ctx: this.context};
+let config = {name: "alertWindow", ctx: this.context};
 try {
     window.createWindow(config, (err, data) => {
         if (err.code) {
@@ -174,7 +161,7 @@ For details about the error codes, see [Window Error Codes](../errorcodes/errorc
 
 ```js
 let windowClass = null;
-let config = {name: "alertWindow", windowType: window.WindowType.TYPE_SYSTEM_ALERT, ctx: this.context};
+let config = {name: "alertWindow", ctx: this.context};
 try {
     let promise = window.createWindow(config);
     promise.then((data)=> {

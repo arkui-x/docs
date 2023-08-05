@@ -108,13 +108,12 @@ repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-C
 repo sync -c
 ```
 
-### Acquiring Source Code from Mirrors
+## Acquiring SDK from Mirrors
 
-**Table 2** Acquiring Source Code from Mirrors
+**Table 2** Acquiring SDK from Mirrors
 
-| Source Code                                 | Version| Mirror| SHA-256 Checksum|
+| SDK Version                                 | Version| Mirror| SHA-256 Checksum|
 | ----------------------------------------- | ------------ | ------------ | ---------------- |
-| ArkUI-X full code| 1.0.0 Canary1    | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/code/code-v1.0.0-Canary1.tar.gz)    | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/code/code-v1.0.0-Canary1.tar.gz.sha256)|         |
 | ArkUI-X SDK package（macOS）  | 1.0.0 Canary1 | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-x64-0.0.9.6-Canary1.zip)   | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-x64-0.0.9.6-Canary1.zip.sha256) |
 | ArkUI-X SDK package（macOS-M1）    | 1.0.0 Canary1 | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-arm64-0.0.9.6-Canary1.zip)   | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-arm64-0.0.9.6-Canary1.zip.sha256) |
 | ArkUI-X SDK package（Windows）    | 1.0.0 Canary1 | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/windows/arkui-x-windows-x64-0.0.9.6-Canary1.zip)   | [Download](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/windows/arkui-x-windows-x64-0.0.9.6-Canary1.zip.sha256) |
