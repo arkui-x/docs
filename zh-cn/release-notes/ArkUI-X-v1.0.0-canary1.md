@@ -96,13 +96,12 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
    repo forall -c 'git lfs pull'
    ```
 
-### 从镜像站点获取
+## SDK获取
 
-**表2** 获取源码和SDK路径
+**表2** 获取SDK路径列表
 
-| 版本源码                                  | **版本信息** | **下载站点** | **SHA256校验码** |
+| SDK版本                                  | **版本信息** | **下载站点** | **SHA256校验码** |
 | -----------------------------------------| ------------ | ------------ | ---------------- |
-| ArkUI-X全量代码 | 1.0.0 Canary1    | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/code/code-v1.0.0-Canary1.tar.gz)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/code/code-v1.0.0-Canary1.tar.gz.sha256) |            |
 | ArkUI-X SDK包（macOS）  | 1.0.0 Canary1 | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-x64-0.0.9.6-Canary1.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-x64-0.0.9.6-Canary1.zip.sha256) |
 | ArkUI-X SDK包（macOS-M1）    | 1.0.0 Canary1 | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-arm64-0.0.9.6-Canary1.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/darwin/arkui-x-darwin-arm64-0.0.9.6-Canary1.zip.sha256) |
 | ArkUI-X SDK包（Windows）    | 1.0.0 Canary1 | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/windows/arkui-x-windows-x64-0.0.9.6-Canary1.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/0.0.9.6/windows/arkui-x-windows-x64-0.0.9.6-Canary1.zip.sha256) |
