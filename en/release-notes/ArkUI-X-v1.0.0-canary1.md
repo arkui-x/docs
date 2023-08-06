@@ -94,7 +94,7 @@ Use the **repo** tool to download the source code over SSH. (You must have an SS
 
 
 ```
-repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Canary1 --no-repo-verify
+repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Canary1 --no-repo-verify
 repo sync -c
 ```
 
@@ -104,7 +104,7 @@ Use the **repo** tool to download the source code over HTTPS.
 
 
 ```
-repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-1.0.0-Canary1 --no-repo-verify
+repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Canary1 --no-repo-verify
 repo sync -c
 ```
 
