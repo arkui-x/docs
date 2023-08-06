@@ -41,4 +41,3 @@
 ## Contribution
 
 - [Contribution Guide](../contribute/README.md)
-- [Supported Commands for PR Comments in ArkUI-X](../contribute/pr-command.md)

@@ -35,8 +35,6 @@ ArkUI跨平台框架整体架构如下图所示，详细设计请参考[ArkUI跨
 
 ArkUI-X主库组织地址：https://gitee.com/arkui-x
 
-ArkUI-X GitHub镜像库地址：https://github.com/arkui-x 
-
 ## 开发者文档
 
 简体中文：[ArkUI-X开发者文档](README.md) 
@@ -60,7 +58,7 @@ Samples：[示例代码](https://gitee.com/arkui-x/samples)
 
 ArkUI-X主要遵循Apache License V2.0协议，详情请参考各代码仓LICENSE声明。
 
-ArkUI-X引用三方开源软件及许可证说明，请参考[第三方开源软件说明](contribute/open-source-software-and-license-notice.md)。
+ArkUI-X引用的三方开源软件遵从其原始许可证。
 
 ## 联系方式
 
