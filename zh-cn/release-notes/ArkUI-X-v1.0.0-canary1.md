@@ -66,7 +66,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 
 - 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
    ```
-   repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-v1.0.0-Canary1 --no-repo-verify
+   repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-1.0.0-Canary1 --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
@@ -84,7 +84,7 @@ ArkUI跨平台接口包含OpenHarmony接口和自定义扩展接口，OpenHarmon
 
 - 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
    ```
-   repo init -u https://gitee.com/arkui-x/manifest.git -b ArkUI-X-v1.0.0-Canary1 --no-repo-verify
+   repo init -u https://gitee.com/arkui-x/manifest.git -b ArkUI-X-1.0.0-Canary1 --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
