@@ -16,24 +16,24 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 
    ```shell
    // 配置环境变量
-   export NodeJS_HOME=/path-to-nodejs-sdk
-   export PATH=${NodeJS_HOME}/bin:${PATH}
+   export NODE_HOME=/path-to-nodejs-sdk
+   export PATH=${NODE_HOME}/bin:${PATH}
    ```
 
    [macOS]
 
    ```shell
    // 配置环境变量
-   export NodeJS_HOME=/path-to-nodejs-sdk
-   export PATH=$NodeJS_HOME/bin:$PATH
+   export NODE_HOME=/path-to-nodejs-sdk
+   export PATH=$NODE_HOME/bin:$PATH
    ```
 
    [Windows]
 
    ```shell
    // 配置环境变量
-   set NodeJS_HOME=/path-to-nodejs-sdk
-   set PATH=%PATH%;%NodeJS_HOME%/bin
+   set NODE_HOME=/path-to-nodejs-sdk
+   set PATH=%PATH%;%NODE_HOME%/bin
    ```
 
 **2. 配置ohpm环境**
@@ -210,6 +210,31 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
    brew install ios-deploy
    ```
 
+**8. 配置ArkUI-X SDK环境**
+
+   ArkUI-SDK获取和配置目录要求，请参考[ArkUI-X SDK介绍](../tools/how-to-use-arkui-x-sdk.md)。推荐环境变量配置如下：
+
+   [Linux]
+
+   ```shell
+   // 配置环境变量
+   export ARKUIX_SDK_HOME=/path-to-arkui-x-sdk
+   ```
+
+   [macOS]
+
+   ```shell
+   // 配置环境变量
+   export ARKUIX_SDK_HOME=/path-to-arkui-x-sdk
+   ```
+
+   [Windows]
+
+   ```shell
+   // 配置环境变量
+   set ARKUIX_SDK_HOME=/path-to-arkui-x-sdk
+   ```
+
 ## 命令安装
 
 ### 安装ace命令
@@ -235,5 +260,3 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
    ```
 
 执行 `ace check` 命令可以检查上述的本地开发环境配置情况。对于必选项，需要检查通过，否则无法继续接下来的操作。
-
-<!--no_check-->
