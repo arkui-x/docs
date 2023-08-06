@@ -39,4 +39,3 @@
 ## 贡献
 
 - [参与贡献](../contribute/README.md)
-- [PR评论命令清单](../contribute/pr-command.md)
