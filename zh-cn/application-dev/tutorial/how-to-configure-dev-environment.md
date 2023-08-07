@@ -10,7 +10,7 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 
 **1. 配置Node.js环境**
 
-   运行ACE Tools和OpenHarmony SDK需Node.js环境支持，建议下载14.19.1 - 16.19.1版本。可命令行运行 `node -v` 查看本地Node.js版本，如不存在或版本不符合要求，请自行下载安装稳定版本：[Node.js下载地址](https://nodejs.org/en/download/)。推荐环境变量配置如下：
+   运行ACE Tools和OpenHarmony SDK需Node.js环境支持，建议下载16.20.1版本。可命令行运行 `node -v` 查看本地Node.js版本，如不存在或版本不符合要求，请自行下载安装稳定版本：[Node.js下载地址](https://nodejs.org/en/download/)。推荐环境变量配置如下：
 
    [Linux]
 
