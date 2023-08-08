@@ -20,10 +20,11 @@ ace create project
 ? Please enter the project name: testplugin
 ? Please enter the bundle name (com.example.testplugin):
 ? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 1
+? Please enter the project type (1: Application, 2: Library): 1
 ? Please enter the template (1: Empty Ability, 2: Native C++): 2
 ```
 
-2、通过Ace Tools或IDE创建Native模板后，ArkUI侧通过`import`引入Native侧的so文件，在创建出的`testplugin\source\entry\src\main\ets\pages\Index.ets`中，`import testplugin from 'libtestplugin.so'`，意为使用libtestplugin.so的能力，并将名为`testplugin`的ArkUI侧对象给到应用侧，开发者可通过该对象，基于插件管理机制开发Java插件，最终调用到在`testplugin\android\app\src\main\java\com\example\testplugin\TestPlugin.java`中开发的Java `log`方法。
+2、通过Ace Tools或IDE创建Native模板后，ArkUI侧通过`import`引入Native侧的so文件，在创建出的`testplugin\entry\src\main\ets\pages\Index.ets`中，`import testplugin from 'libtestplugin.so'`，意为使用libtestplugin.so的能力，并将名为`testplugin`的ArkUI侧对象给到应用侧，开发者可通过该对象，基于插件管理机制开发Java插件，最终调用到在`testplugin\.arkui-x\android\app\src\main\java\com\example\testplugin\TestPlugin.java`中开发的Java `log`方法。
 
 ```typescript
 // Index.ets
