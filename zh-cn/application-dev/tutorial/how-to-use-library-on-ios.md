@@ -38,7 +38,7 @@
 * AppDelegate.m
 ```objective-c
  #import "AppDelegate.h"
-s
+
  @interface AppDelegate ()
 
  @end
