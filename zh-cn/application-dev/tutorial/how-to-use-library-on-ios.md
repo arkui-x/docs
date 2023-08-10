@@ -23,7 +23,7 @@
 
 ### Framework在应用工程的使用
 
-通过xcode创建一个应用工程，删除其他xcode自动生成的的代码头文件和源文件(参考[ios工程集成 ArkUI sdk](https://gitee.com/arkui-x/docs/blob/master/zh-cn/application-dev/tutorial/how-to-integrate-arkui-into-ios.md))。将上述myframework.framework与libarkui_ios.framework引入到工程中。
+通过xcode创建一个应用工程，删除其他xcode自动生成的的代码头文件和源文件(参考[ios工程集成 ArkUI sdk](../tutorial/how-to-integrate-arkui-into-ios.md))。将上述myframework.framework与libarkui_ios.framework引入到工程中。
 **AppDelegate部分**
 * AppDelegate.h
 ```objective-c
@@ -38,7 +38,7 @@
 * AppDelegate.m
 ```objective-c
  #import "AppDelegate.h"
-
+s
  @interface AppDelegate ()
 
  @end
