@@ -1613,9 +1613,9 @@ imageSourceApi.createPixelMap(decodeOpts, pixelmaplist => {
 })
 ```
 
-### getDelayTime<sup>10+</sup>
+### getDelayTimeList<sup>10+</sup>
 
-getDelayTime(callback: AsyncCallback<Array\<number>>): void;
+getDelayTimeList(callback: AsyncCallback<Array\<number>>): void;
 
 Obtains an array of delay times. This API uses an asynchronous callback to return the result.
 
@@ -1630,14 +1630,14 @@ Obtains an array of delay times. This API uses an asynchronous callback to retur
 **Example**
 
 ```js
-imageSourceApi.getDelayTime( delayTimes => {
+imageSourceApi.getDelayTimeList( delayTimes => {
     console.log('Succeeded in getting delay time.');
 });
 ```
 
-### getDelayTime<sup>10+</sup>
+### getDelayTimeList<sup>10+</sup>
 
-getDelayTime(): Promise<Array\<number>>;
+getDelayTimeList(): Promise<Array\<number>>;
 
 Obtains an array of delay times. This API uses a promise to return the result.
 
@@ -1652,7 +1652,7 @@ Obtains an array of delay times. This API uses a promise to return the result.
 **Example**
 
 ```js
-let delayTimes = imageSourceApi.getDelayTime();
+let delayTimes = imageSourceApi.getDelayTimeList();
 ```
 
 ### getFrameCount<sup>10+</sup>
