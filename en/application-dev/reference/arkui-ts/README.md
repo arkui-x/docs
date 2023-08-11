@@ -1,4 +1,4 @@
-# ArkTS-based Declarative Development Paradigm
+# ArkTS-based Declarative Development Paradigm with Cross-Platform Support
 
 - Universal Component Information
   - Universal Events
