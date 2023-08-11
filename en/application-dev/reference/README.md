@@ -1,9 +1,9 @@
-# ArkUI-X Project References
+# ArkUI-X Development References
 
-- [Component Reference (ArkTS-based Declarative Development Paradigm)](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/arkui-ts/Readme-EN.md)
-- [API Reference (ArkTS and JS APIs)](./apis/readme.md)
-- API Reference（Native API）
-  - [Native API](./native-apis/Readme-EN.md)
+- [Component Reference (ArkTS-based Declarative Development Paradigm)](./arkui-ts/README.md)
+- [API Reference (ArkTS and JS APIs)](./apis/README.md)
+- API Reference (Native APIs)
+  - [Native APIs](./native-apis/README.md)
 - Platform Integration
-  - [Android](./arkui-for-android/readme.md)
-  - [iOS](./arkui-for-ios/readme.md)
+  - [Android](./arkui-for-android/README.md)
+  - [iOS](./arkui-for-ios/README.md)

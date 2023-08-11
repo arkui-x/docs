@@ -38,7 +38,7 @@ The ArkUI-X Security Issue Response Team organizes maintainers to review the sec
 
 ### Disclosing Security Vulnerabilities
 
-The ArkUI-X community complies with the principle of responsible disclosure. After security vulnerabilities are fixed, [Security bulletins](../security-disclosure/readme.md) will be released.
+The ArkUI-X community complies with the principle of responsible disclosure. After security vulnerabilities are fixed, [Security bulletins](../security-disclosure/README.md) will be released.
 
 
-## [Acknowledgement](./Acknowledgement.md)
+## [Acknowledgement](./Acknowledgements.md)

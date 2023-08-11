@@ -2,226 +2,112 @@
 
 ## Overview
 
-### Scope
-
 This document describes the overall technical solution related to the cross-platform running capabilities of the ArkUI development framework.
 
-ArkUI is a UI development framework oriented to all devices and has been opened up through the OpenHarmony code repository. This framework includes development models, application interfaces & interactions, and the extension mechanism that enables extension of third-party component and platform APIs.
+### Scope
 
-The ArkUI-X project aims to extend the ArkUI development framework to other OS platforms (such as Android, iOS, and Windows) so that developers can reuse most application code (UI and main application logic) on the target OS platforms.
+ArkUI is a UI development framework oriented to all devices and has been opened up through OpenHarmony. It consists of the following:
+  - Development models
+  - Application interface & interaction
+  - Mechanisms that extend third-party component and platform APIs
+
+ArkUI-X extends the ArkUI development framework to other OS platforms (such as Android, iOS, and Windows). This way, you can reuse most of the application code (UI and main application logic) based on ArkUI and deploy the code on different OS platforms.
 
 ### Assumptions and Constraints
 
-The cross-platform capabilities mentioned in this document refer to the UI capabilities, which allow reuse of the UI code. The platform-specific capabilities on which applications depend must be adapted at the application layer or exposed to the JS layer through the Native API (NAPI), the JS API encapsulation mechanism.
+The cross-platform capabilities mentioned in this document refer to UI capabilities (that is, reuse of the UI code). The platform capabilities on which applications depend must be adapted at the application layer or exposed to the JS layer through the Native API (NAPI), the JS API encapsulation mechanism.
 
-For details about the JS APIs related to platform capabilities (such as network and storage APIs), see the definitions in OpenHarmony. The JS APIs must be encapsulated on different platforms for reuse.
+For details about the JS APIs related to platform capabilities (such as network and storage APIs), see definitions in OpenHarmony. The JS APIs must be encapsulated on different platforms for reuse.
 
-This document uses the Android platform as an example to describe the general solution design. The design ideas for other platforms are similar.
+This document uses the Android OS as an example to describe the general solution design of ArkUI. The design ideas for other platforms are similar.
 
 ## Overall ArkUI Design
 
 ![](../../figures/ArkUI-X.png) 
 
-Cross-platform is one of the objectives of ArkUI from the beginning of the design. Currently, the basic cross-platform architecture is available. The design ideas are as follows:
+Cross-platform is one of the most basic design objectives of ArkUI from the beginning. Currently, the basic cross-platform architecture is available. The design ideas are as follows:
 
-- C++ is used to write the backend engine code to ensure multi-platform portability, minimize platform dependency, and reduce porting costs.
-- Custom rendering is used to reduce platform dependency and further improve drawing effect consistency.
-- The platform adaptation layer and platform bridging layer are abstracted for adaptation to different platforms.
+1. Write the backend engine code in C++ to ensure multi-platform portability, minimize platform dependence, and reduce porting costs.
+2. Use custom rendering to reduce platform dependence and further improve drawing effect consistency.
+3. Abstract the platform adaptation layer and platform bridging layer for adaptation to different platforms.
 
 ## Modules
 
 ArkUI consists of the following modules:
 
-- R&D model, supporting ArkTS-based declarative development paradigm. It is platform independent.
-- Declarative UI backend engine, including layout, rendering, C++ UI components, and event mechanism. It is platform independent.
-- NAPI-based API extension mechanism, which is platform independent. Developers must implement the extended APIs on the target platform.
-- Toolchain/SDK. The toolchain is platform independent, but the SDK must be built based on the target platform.
+1. Cross-platform development models: compatible with the stage model of OpenHarmony applications and support the declarative development paradigm based on ArkTS.
+2. Platform-independent declarative UI backend engines: include engines for layout, rendering, C++ UI components, and event mechanism.
+3. NAPI-based API extension mechanism: You need to implement the APIs for the target platform.
+4. Toolchain/SDK: The toolchain is platform independent, but the SDK must be built based on the target platform.
 
-The JS/TS engine and graphics engine on which ArkUI depends are also platform independent.
+In addition, the ArkTS engine and graphics engine on which ArkUI depends can be used across platforms.
 
-The ArkUI declarative UI backend engine provides pipeline process control, view update, layout system, multi-page management, event distribution and callback, focus management, animation mechanism, theme mechanism, and resource management/cache/provider. The UI components are flexibly assembled to meet different frontend needs through fine-grained display components and combination of animation, event, and focus mechanisms.
+The ArkUI declarative UI backend engines provide pipeline process control, view update, layout system, multi-page management, event distribution and callback, focus management, animation mechanism, theme mechanism, and resource management/cache/provider. The UI components are flexibly assembled to meet different frontend needs through fine-grained display components and combination of animation, event, and focus mechanisms.
 
-The cross-platform capabilities are implemented by extending the ArkUI development framework to other OS platforms. This helps reduce multi-platform application development costs.
+The cross-platform capabilities are implemented by extending the ArkUI development framework to other OS platforms to reduce multi-platform application development costs.
 
-The figure below illustrates how the CLI tool helps develop high-performance applications across different OS platforms based on a set of code.
-
-![](png/arkui-deploy.png)
+You can use ACE Tools to create a cross-platform application project and develop applications that support multiple platforms based on a set of main code.
 
 
 ## Solution Design
 
-### Cross-Platform Application Package Structure
+### Cross-Platform Application Structure
 
-The cross-platform application directory provides a set of application project templates for ArkUI-X developers to build OpenHarmony, Android, and iOS applications. The directory structure of cross-platform application project layer 0 is as follows:
-
-```
-ArkUI-X AppProject
-  ├── ohos              // OpenHarmony code 0-1
-  │   └── entry
-  ├── android           // Android code 0-2
-  │   └── app
-  ├── ios               // iOS code 0-3
-  │   └── app
-  └── source            // ArkUI source code 0-4
-      └── entry
-```
-
-The project root directory contains the **ohos**, **android**, **ios**, and **source** directories for OpenHarmony applications, Android applications, iOS applications, and ArkUI source code, respectively. The **entry** and **app** directories in each directory are directories for created modules (**entry** and **app** are default module names). Each module corresponds to a build unit (hap, apk, or app). **source** is the default directory of OpenHarmony. It contains common code in the ArkTS-based declarative development paradigm. The command code and the OS platform code build applications for the target platform.
-
-* OpenHarmony platform project structure (0-1)
+The cross-platform application directory consists of a set of application project templates that help build OpenHarmony, Android, and iOS applications. The application project structure is designed as follows:
 
 ```
-OpenHarmony platform code
+ArkUI-X application project
+  ├── .arkui-x
+  │   ├── android                 // Android-related code
+  │   └── ios                     // iOS-related code
   ├── .hvigor
+  ├── .idea
+  ├── AppScope
   ├── entry
-  │   ├── src
-  │   │   ├── main
-  │   │   │   ├── ets
-  │   │   │   ├── resources
-  │   │   │   └── config.json
-  │   │   └── ohosTest
-  │   ├── build-profile.json5
-  │   ├── hvigorfile.js
-  │   └── package.json
-  ├── node_modules
+  ├── hvigor
+  ├── oh_modules
   ├── build-profile.json5
-  ├── hvigorfile.js
+  ├── hvigorfile.ts
   ├── local.properties
-  └── package.json
+  └── oh-package.json5
 ```
 
-* Android platform project structure (0-2)
+The ArkUI-X application directory structure is based on the following design idea:<br>OpenHarmony application projects + Android/iOS application projects<br>The OpenHarmony application projects support cross-platform development by nature. The ArkTS code and resources are developed on OpenHarmony, and Native code is developed in the application project of each platform. For details about the application project structure design, see [ArkUI-X Application Project Structure] (../../application-dev/quick-start/package-structure-guide.md).
 
-```
-Android platform code
-  ├── app
-  │   ├── libs
-  │   │   ├── ace_android_adapter.jar               // ArkUI cross-platform adaptation layer, published in the SDK
-  │   │   └── arm64-v8a
-  │   │       ├── libace_android.so                 // ArkUI engine library, published in the SDK
-  │   │       ├── libace_napi.so                    // API extension library, published in the SDK
-  │   │       ├── libace_napi_ark.so                // Ark JS engine library, published in the SDK
-  │   │       ├── libark_jsruntime.so               // Ark engine runtime library, published in the SDK
-  │   │       └── libxxx.so                         // Other module library, published in the SDK
-  │   ├── src
-  │   │   ├── androidTest
-  │   │   ├── main
-  │   │   │   ├── assets                            // Resource files, including JS bundle and resources generated after ArkUI compilation
-  │   │   │   │   ├── js
-  │   │   │   │   │   └── entry_MainAbility         // JS bundle, generated after the compilation of the code in the source directory
-  │   │   │   │   └── res                           // Resources
-  │   │   │   │       ├── appres                    // Application resources, generated after the compilation of the code in the source/resources directory
-  │   │   │   │       └── systemres                 // System resources
-  │   │   │   ├── java/com/example/myapp
-  │   │   │   │   ├── MyApplication.java            // MyApplication extended from AceApplication
-  │   │   │   │   └── MainActivity.java             // MainActivity extended from AceActivity
-  │   │   │   ├── res
-  │   │   │   └── AndroidManifest.xml
-  │   │   └── test
-  │   ├── build.gradle
-  │   └── proguard-rules.pro
-  ├── gradle/wrapper
-  ├── build.gradle
-  ├── gradle.properties
-  ├── gradlew
-  ├── gradlew.bat
-  └── settings.gradle
-```
-
-* iOS platform project structure (0-3)
-
-```
-iOS platform code
-  ├── myapp.xcodeproj
-  │   ├── project.xcworkspace
-  │   └── project.pbxproj
-  ├── myapp
-  │   ├── Assets.xcassets
-  │   ├── base.Iproj
-  │   ├── AppDelegate.h
-  │   ├── AppDelegate.mm              // AceViewController instance, loaded with JS bundle and resources
-  │   ├── Info.plist
-  │   └── main.m
-  ├── js                              // ArkUI JS bundle, generated after compilation of the ArkUI source code in the source directory
-  │   └── entry_MainAbility
-  ├── res                             // Resources
-  │   ├── appres                      // Application resources, generated after the compilation of the code in the source/resources directory.
-  │   └── systemres                   // System resources
-  └── framework                       // ArkUI cross-platform framework dynamic library
-      └── libace_ios.xcframework
-```
-
-* ArkUI source code directory (0-4)
-
-```
-source
-  └── entry/src
-      ├── main
-      │   ├── ets
-      │   │   └── MainAbility
-      │   │       ├── app.ets
-      │   │       ├── manifest.json
-      │   │       └── pages
-      │   └── resources
-      └── ohosTest
-```
+### Cross-Platform Building System
+The ArkUI-X build is based on GN and Ninja. It consists of the basic building (implemented by the OpenHarmony build repository) and Android/iOS compilation toolchains (facilitating ArkUI cross-platform SDK compilation).
 
 ### Cross-Platform SDK Structure
-The ArkUI-X project provides a compilation and building framework based on GN and Ninja. The basic building process (a fork of OpenHarmony build repository) and Android and iOS compilation toolchains implement cross-platform compilation and build via the SDK. The cross-platform SDK is used to build cross-platform applications on the CLI and integrate DevEco Studio, Android Studio, and Xcode for cross-platform application development. The cross-platform SDK provides:
-1. Basic engine dynamic library and JS runtime dynamic library of the ArkUI cross-platform development framework
-2. A CLI tool for building cross-platform applications
-3. A system resource package for ArkUI component rendering consistency and an application resource compilation tool
+The cross-platform SDK is used to build cross-platform applications using ACE Tools and integrate DevEco Studio, Android Studio, and Xcode for cross-platform application development. The cross-platform SDK provides:
+1. Dynamic libraries of the ArkUI basic engines and API plug-in dynamic library.
+2. A CLI tool (ACE Tools) for building cross-platform applications.
+3. A system resource package for ArkUI component rendering consistency and an application resource compilation tool.
 
-* ArkUI-X project cross-platform SDK directory structure
+The ArkUI-X SDK structure is as follows:
 
 ```
-ArkUI-X project SDK 
-  ├── libs                                                               // ArkUI cross-platform engine and platform adaptation layer
-  │   ├── android-arm64
-  │   │   ├── engine
-  │   │   │   ├── ace_android.jar                                        // ArkUI-X Android platform adaptation layer
-  │   │   │   ├── arm64-v8a
-  │   │   │   └── libace_android.so                                      // Dynamic library of the ArkUI cross-platform engine
-  │   │   └── plugins
-  │   │       ├── ${module-name}
-  │   │       │   ├── ace_ohos_${module-name}.jar
-  │   │       │   └── libace_ohos_${module-name}.so
-  │   │       └── ${module-name2}
-  │   └── ios-arm64
-  │       ├── engine
-  │       │   ├── xcframework                                            // ArkUI cross-platform XCFramework dynamic library
-  │       │   │   └── libace_ios.xcframework
-  │       │   │       ├── Info.plist
-  │       │   │       └── ios-arm64
-  │       │   │           └── libace_ios.framework
-  │       │   │               ├── Headers
-  │       │   │               │   ├── Ace.h
-  │       │   │               │   ├── AceViewController.h
-  │       │   │               │   └── FlutterPlugin.h
-  │       │   │               ├── Info.plist
-  │       │   │               ├── libace_ios
-  │       │   │               ├── libace_ios.podspec
-  │       │   │               └── Modules
-  │       │   │                   └── module.modulemap
-  │       │   └── framework
-  │       │       └── libace_ios.framework
-  │       └── plugins
-  │           ├── ${module-name}
-  │           │   ├── xcframework
-  │           │   │   └── libace_ohos_${module-name}.xcframework
-  │           │   └── framework
-  │           │       └── libace_ohos_${module-name}.framework
-  │           └── ${module-name2}
-  ├── toolchains                                                         // ArkUI-X cross-platform application build command line tools
-  │   └── cli
-  ├── systemres                                                          // System resource package for ArkUI component rendering consistency.
-  ├── licenses
-  └── readme.md
+arkui-x
+  ├── engine                   // ArkUI-X engines
+  │   ├── lib                  // Dynamic library of the Android platform and architecture
+  │   ├── framework            // Framework library of the iOS platform and architecture
+  │   ├── xcframework          // XCFramework library of the iOS platform and architecture
+  │   ├── ets                  // ArkUI-X incremental APIs, for example, @arkui-x.bridge
+  │   ├── apiConfig.json       // Engine library configuration file, which is parsed by DevEco Studio and ACE Tools to support on-demand packing during application build
+  │   └── systemres            // Resources provided by ArkUI-X
+  ├── plugins                  // Plug-ins provided by ArkUI-X
+  │   ├── component            // ArkUI component plug-in library and engine library configuration file apiConfig.json
+  │   └── api                  // @ohos API plug-in library and the apiConfig.json file
+  ├── toolchains               // ArkUI-X application development tool, for example, ACE Tools
+  ├── sdkConfig.json           // Incremental d.ts path and API prefix configuration
+  ├── arkui-x.json             // SDK management configuration, which is automatically generated by the pipeline
+  └── NOTICE.txt
 ```
+
+For details about the ArkUI-X SDK structure, see [ArkUI-X SDK Directory Structure](../../application-dev/quick-start/sdk-structure-guide.md).
 
 ### OSAL
 
-The OS abstract layer (OSAL), implemented based on C++, shields OS-related implementations of different platforms and provides the following:
+The OS abstract layer (OSAL) implemented based on C++ shields OS-related implementations of different platforms. It provides the following functions:
 
 - Log and trace abstraction layer
 - Network interface abstraction layer
@@ -233,12 +119,17 @@ The OS abstract layer (OSAL), implemented based on C++, shields OS-related imple
 
 The figure below illustrates the log interaction process.
 
-![](png/arkui-log-sequence.png)
-
+```mermaid
+sequenceDiagram
+    Core->>Base: LOGD
+    Base->>OSAL: LOGD
+    OSAL->>OSAL: LogWrapper.LogD
+    OSAL->>liblog/libhilog: android_log_print/HiLog.debug()
+```
 
 The Core module uses the APIs provided by the Base module. The Base module defines APIs. The OSAL of the related OS is selected during compilation for platform-dependent capabilities. During the OSAL implementation, the platform library is called to provide the related capabilities. 
 
-
+ 
 ### Cross-Platform Startup Entry
 
 The development framework provides basic entry environments for different platforms based on the entrance implemented in the platform's programming language. The cross-platform startup entry provides the following functions:
@@ -253,10 +144,31 @@ The development framework provides basic entry environments for different platfo
 
 - Converts native languages of different platforms to C++ backend for reuse of the common code.
 
-
 The figure below illustrates the interactions for the Android startup process.
 
-![](png/arkui-startup-android.png)
+```mermaid
+sequenceDiagram
+    StageActivity->>StageActivity: onCreate
+    StageActivity->>WindowView: create
+    StageActivity->>StageActivityDelegate: setWindowView
+    StageActivity->>StageActivityDelegate: dispatchOnCreate
+    StageActivityDelegate-->>Application: HandleAbilityStage
+    Application->>AbilityStage: LaunchAbility
+    AbilityStage->>JsAbility: OnCreate
+    StageActivity->>StageActivity: onResume
+    StageActivity->>StageActivityDelegate: dispatchOnForeground
+    StageActivityDelegate-->>Application: DispatchOnForeground
+    Application->>AbilityStage: DispatchOnForeground
+    AbilityStage->>JsAbility: OnForeground
+    JsAbility->>JsAbility: OnWindowStageCreated
+    JsAbility->>WindowStage: loadContent
+    WindowStage->>Winodw: loadContent
+    Winodw->>UIContent: create
+    UIContent->>AceContainer: create
+    AceContainer->>Pipeline: create
+```
+
+In the stage model, the entry of the ability lifecycle is **StageAbility**. The JsAbility is notified of the lifecycle to execute the lifecycle callback of the user. When **loadContent()** of **Window** in the **onWindowStageCreated** lifecycle is called, the UI page is loaded. Then, an ArkUI instance is created and the rendering pipeline is initialized to render the page.
 
 
 ### Cross-Platform Capability Bridging
@@ -265,16 +177,22 @@ Cross-platform capability bridging streamlines capability modules of different p
 
 - Clipboard abstract interface and implementations for different platforms
 - Input method abstract interface and implementations for different platforms
-- Video media and camera abstract interfaces, and implementations for different platforms
-- WebView abstract interface and implementations for different platforms
-- RichText abstract interface and implementations for different platforms
-- Implementation of XComponent for different platforms
+- Video media abstract interfaces, and implementations for different platforms
 - Capability modules of different platforms required by other frameworks
 
 The figure below illustrates the clipboard interaction process.
 
-
-![](png/arkui-clipboard.png)
+```mermaid
+sequenceDiagram
+    ClipBoardJNI->>ClipBoardJNI: Register
+    Core (Text) ->>ClipBoardProxy: Create
+    ClipBoardProxy->>ClipBoardImpl: Create
+    ClipBoardImpl-->>Core (Text): Returns the ClipBoard interface.
+    Core (Text) ->>ClipBoardImpl: GetData
+    ClipBoardImpl->>ClipBoardJNI: GetData
+    ClipBoardJNI-->>ClipBoardPlugin: GetData
+    ClipBoardPlugin-->>ClipBoardService: GetData
+```
 
 
 The TextField component at the framework core layer uses the clipboard capability. The proxy creates the clipboard implementation and returns the abstract clipboard interface. Then, platform-independent invoking can be implemented at the component implementation layer. Take the Android platform as an example. **GetData()** is called to the plug-in implemented by the platform through JNI. Then the plug-in accesses the clipboard service to implement related functions.
@@ -282,37 +200,43 @@ The TextField component at the framework core layer uses the clipboard capabilit
 
 ### API Extension Mechanism
 
-The JS API extension mechanism is used to expose native interface capabilities to the JS layer. This mechanism reuses the unified encapsulation mechanism of OpenHarmony. It extends APIs (implemented by C++) and implements some built-in APIs. The figure below shows the overall structure of the NAPI.
+The JS API extension mechanism is used to expose Native APIs to the JS layer. This mechanism reuses the unified encapsulation mechanism of OpenHarmony. It extends APIs (implemented by C++) and implements some built-in APIs. The figure below shows the overall structure of the NAPI.
 
 The JS APIs must comply with OpenHarmony API definitions and be extended on different platforms using the API extension mechanism.
 
 ![](png/arkui-api-extension.png)
 
 
-### Cross-Platform CLI
+### ACE Tools
 
-As a cross-platform application building tool for the ArkUI-X project, the CLI can be used to create, compile, install, run, and debug OpenHarmony, Android, and iOS applications.
+As an ArkUI-X cross-platform application building tool, ACE Tools can be used to create, build, install, run, and debug OpenHarmony, Android, and iOS applications.
 
 ```
-CLI code structure
-  ├── cli
-  │   ├── src                  // CLI code implementation
-  │   │   ├── ace-check        // Check whether the dependent libraries and toolchains are complete
-  │   │   ├── ace-config       // Configure the ArkUI cross-platform application development environment
-  │   │   ├── ace-devices      // List all the devices connected to the current PC
-  │   │   ├── ace-create       // Create an ArkUI cross-platform application project
-  │   │   ├── ace-build        // Build a cross-platform application installation package
-  │   │   ├── ace-install      // Install a cross-platform application to the connected device
-  │   │   ├── ace-launch       // Run a cross-platform application on a device
-  │   │   ├── ace-run          // Run a cross-platform application package
-  │   │   ├── ace-clean        // Clear the build result of a cross-platform application
-  │   │   ├── ace-uninstall    // Uninstall a cross-platform application from a device
-  │   │   └── ace-log          // Display the logs of the running cross-platform application in scrolling mode
-  │   ├── templates            // Cross-platform templates, including templates of OpenHarmony, Android, iOS, and source
-  │   ├── bin                  // CLI entry script
-  │   ├── package.json
-  │   ├── rollup.config.js
-  │   └── README.md
-  ├── README.md
-  └── LICENSE
+ACE Tools code structure
+ cli
+  ├─node_modules
+  ├─src
+  │  ├─ace-build                 // Build a cross-platform application installation package.
+  │  │  ├─ace-compiler
+  │  │  └─ace-packager
+  │  ├─ace-check                 // Check whether the libraries and toolchains on which the ArkUI cross-platform application development depends are complete.
+  │  ├─ace-clean                 // Clear the cross-platform application build result.
+  │  ├─ace-config                // Configure the ArkUI cross-platform application development environment.
+  │  ├─ace-create                // Create an ArkUI cross-platform application project.
+  │  │  ├─aar
+  │  │  ├─ability
+  │  │  ├─component
+  │  │  ├─framework
+  │  │  ├─module
+  │  │  └─project
+  │  ├─ace-devices               // List the platform devices connected to the current PC.
+  │  ├─ace-install               // Install the cross-platform application to the connected device.
+  │  ├─ace-launch                // Run the cross-platform application on the device.
+  │  ├─ace-log                   // Display the log of the application in running in scrolling mode.
+  │  ├─ace-run                   // Run the cross-platform application package.
+  │  ├─ace-test                  // Run the test code.
+  │  ├─ace-uninstall             // Uninstall the cross-platform application from the device.
+  │  ├─bin                       // CLI entry script.
+  │  └─util
+  └─templates                    // Cross-platform application project templates.
 ```
