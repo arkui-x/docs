@@ -32,7 +32,7 @@ showToast(options: ShowToastOptions): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[ohos.promptAction(弹窗)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/errorcodes/errorcode-promptAction.md)错误码。
+以下错误码的详细介绍请参见[ohos.promptAction(弹窗)](../errorcodes/errorcode-promptAction.md)错误码。
 
 | 错误码ID   | 错误信息 |
 | --------- | ------- |
@@ -88,7 +88,7 @@ showDialog(options: ShowDialogOptions): Promise&lt;ShowDialogSuccessResponse&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[ohos.promptAction(弹窗)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/errorcodes/errorcode-promptAction.md)错误码。
+以下错误码的详细介绍请参见[ohos.promptAction(弹窗)](../errorcodes/errorcode-promptAction.md)错误码。
 
 | 错误码ID   | 错误信息 |
 | --------- | ------- |
@@ -142,7 +142,7 @@ showDialog(options: ShowDialogOptions, callback: AsyncCallback&lt;ShowDialogSucc
 
 **错误码：**
 
-以下错误码的详细介绍请参见[ohos.promptAction(弹窗)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/errorcodes/errorcode-promptAction.md)错误码。
+以下错误码的详细介绍请参见[ohos.promptAction(弹窗)](../errorcodes/errorcode-promptAction.md)错误码。
 
 | 错误码ID   | 错误信息 |
 | --------- | ------- |
@@ -218,7 +218,7 @@ showActionMenu(options: ActionMenuOptions, callback: AsyncCallback&lt;ActionMenu
 
 **错误码：**
 
-以下错误码的详细介绍请参见[ohos.promptAction(弹窗)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/errorcodes/errorcode-promptAction.md)错误码。
+以下错误码的详细介绍请参见[ohos.promptAction(弹窗)](../errorcodes/errorcode-promptAction.md)错误码。
 
 | 错误码ID   | 错误信息 |
 | --------- | ------- |
@@ -276,7 +276,7 @@ showActionMenu(options: ActionMenuOptions): Promise&lt;ActionMenuSuccessResponse
 
 **错误码：**
 
-以下错误码的详细介绍请参见[ohos.promptAction(弹窗)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/errorcodes/errorcode-promptAction.md)错误码。
+以下错误码的详细介绍请参见[ohos.promptAction(弹窗)](../errorcodes/errorcode-promptAction.md)错误码。
 
 | 错误码ID   | 错误信息 |
 | --------- | ------- |

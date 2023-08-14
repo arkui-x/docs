@@ -118,3 +118,40 @@ WAL文件大小超过默认上限（200M）。
 
 1. 检查结果集或者事务是否未关闭。
 2. 关闭所有的结果集或者事务。
+
+## 14801001 上下文环境非Stage模型
+
+**错误信息**
+
+ Only supported in stage mode.
+
+**错误描述**
+
+该操作仅支持Stage模型。
+
+**可能原因**
+
+当前上下文环境非Stage模型。
+
+**处理步骤**
+
+切换当前上下文环境，使用Stage模型。
+
+## 14801002 storeConfig中传入的dataGroupId参数非法
+
+**错误信息**
+
+The data group id is not valid.
+
+**错误描述**
+
+使用非法dataGroupId参数。
+
+**可能原因**
+
+使用的dataGroupId不是从应用市场正常申请的。
+
+**处理步骤**
+
+从应用市场申请dataGroupId，并正确传入该参数。
+

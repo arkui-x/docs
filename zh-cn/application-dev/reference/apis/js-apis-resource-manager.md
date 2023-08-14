@@ -42,11 +42,6 @@ export default class EntryAbility extends UIAbility {
 | 名称                   | 值  | 说明   |
 | -------------------- | ---- | ---- |
 | DEVICE_TYPE_PHONE    | 0x00 | 手机   |
-| DEVICE_TYPE_TABLET   | 0x01 | 平板   |
-| DEVICE_TYPE_CAR      | 0x02 | 汽车   |
-| DEVICE_TYPE_PC       | 0x03 | 电脑   |
-| DEVICE_TYPE_TV       | 0x04 | 电视   |
-| DEVICE_TYPE_WEARABLE | 0x06 | 穿戴   |
 
 
 ## ScreenDensity
@@ -1658,86 +1653,6 @@ getRawFd(path: string): Promise&lt;RawFileDescriptor&gt;
   } catch (error) {
     console.error(`promise getRawFd failed, error code: ${error.code}, message: ${error.message}.`);
   };
-  ```
-
-### getRawFileList<sup>10+</sup>
-
-getRawFileList(path: string, callback: AsyncCallback&lt;Array\<string\>&gt;): void;
-
-用户获取resources/rawfile目录下文件夹及文件列表，使用callback形式返回文件列表的字符串数组。
-
-**系统能力**：SystemCapability.Global.ResourceManager
-
-**参数：** 
-
-| 参数名      | 类型                              | 必填   | 说明                      |
-| -------- | ------------------------------- | ---- | ----------------------- |
-| path     | string                          | 是    | rawfile文件夹路径             |
-| callback | AsyncCallback&lt;Array\<string\>&gt; | 是 | 异步回调，用于返回获取rawfile文件目录下的文件列表 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[资源管理错误码](../errorcodes/errorcode-resource-manager.md)。
-
-| 错误码ID | 错误信息 |
-| -------- | ---------------------------------------- |
-| 9001005  | If the resource not found by path.       |
-
-**示例：** 
-  ```ts
-  try { // 传入""表示获取rawfile根目录下的文件列表
-    this.context.resourceManager.getRawFileList("", (error, value) => {
-        if (error != null) {
-            console.error(`callback getRawFileList failed, error code: ${error.code}, message: ${error.message}.`)
-        } else {
-            let rawFile = value;
-        }
-    });
-  } catch (error) {
-    console.error(`callback getRawFileList failed, error code: ${error.code}, message: ${error.message}.`)
-  }
-      
-  ```
-
-### getRawFileList<sup>10+</sup>
-
-getRawFileList(path: string): Promise&lt;Array\<string\>&gt;
-
-用户获取resources/rawfile目录下文件夹及文件列表，使用Promise形式返回文件列表字符串数组。
-
-**系统能力**：SystemCapability.Global.ResourceManager
-
-**参数：** 
-
-| 参数名  | 类型     | 必填   | 说明          |
-| ---- | ------ | ---- | ----------- |
-| path | string | 是    | rawfile文件夹路径 |
-
-**返回值：**
-
-| 类型                        | 说明          |
-| ------------------------- | ----------- |
-| Promise&lt;Array\<string\>&gt; | rawfile文件目录下的文件列表 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[资源管理错误码](../errorcodes/errorcode-resource-manager.md)。
-
-| 错误码ID | 错误信息 |
-| -------- | ---------------------------------------- |
-| 9001005  | If the resource not found by path.          |
-
-**示例：** 
-  ```ts
-  try { // 传入""表示获取rawfile根目录下的文件列表
-    this.context.resourceManager.getRawFileList("").then(value => {
-        let rawFile = value;
-    }).catch(error => {
-        console.error(`promise getRawFileList failed, error code: ${error.code}, message: ${error.message}.`)
-    });
-  } catch (error) {
-    console.error(`promise getRawFileList failed, error code: ${error.code}, message: ${error.message}.`)
-  }
   ```
 
 ### closeRawFileDescriptor<sup>8+</sup>

@@ -1,31 +1,34 @@
 # Before You Start
 
-This document is intended for novices at ArkUI cross-platform application development. It helps you get started with the ArkUI cross-platform application development process as well as the main files in the project directory, by walking you through creating a simple HelloWorld application.
+This document is intended for novices at ArkUI-X application development. It will introduce you to the ArkUI-X application development process, from setting up the environment to creating, building, and running a project.
 
-Before you start, you need to understand the basic concepts about the ArkUI framework and the ArkUI-X project.
+Before you start, you may want to acquaint yourself with the basic concepts about ArkUI and ArkUI-X.
 
 ## Basic Concepts
 
 ### ArkUI
 
-ArkUI is a declarative UI development framework for building distributed applications. It provides simple and natural UI syntax, diverse array of UI components, multi-dimensional status management, and real-time UI preview tools, helping you improve application development efficiency and achieve vivid and smooth user experience across devices.
+ArkUI is a declarative UI development framework for building distributed applications. It provides simple and natural UI syntax, diverse array of UI components, multi-dimensional status management, and real-time UI preview tools, helping you improve application development efficiency and achieve vivid and smooth user experience across devices. For details, see [ArkUI Overview](https://gitee.com/openharmony/docs/blob/master/en/application-dev/ui/arkui-overview.md).
 
 ### ArkUI-X
 
-The ArkUI-X project further extends the ArkUI framework to multiple OS platforms. Currently, it supports OpenHarmony, Android, and iOS. More OS platforms will be supported in the future. The ArkUI-X project allows you to develop high-performance applications supporting multiple platforms by using a set of main code.
+ArkUI-X is a cross-platform framework that extends ArkUI to multiple OS platforms – OpenHarmony, Android, and iOS, with more to come. With ArkUI-X, you can use one set of common code to develop high-performance applications supporting multiple platforms.
 
 
-## Preparations
+## Development Tools
 
-1. [Download the latest version of ACE Tools](https://gitee.com/arkui-x/cli/repository/archive/master.zip).
+You can develop an ArkUI-X application with a combination of your preferred text editor and the command line tool ACE Tools, or, more efficiently, with DevEco Studio – an IDE that provides cross-platform filtering and usage tips for ArkTS APIs, as well as various other useful features such as intelligent code editing and bidirectional preview.
 
-2. Set up the development environment by following instructions in [Installing the Environment](./start-with-ace-tools.md#installing-the-environment) and [Installing Dependencies](./start-with-ace-tools.md#installing-dependencies).
+### IDE: DevEco Studio
 
-3. Learn how to download and use the ArkUI-X SDKs.
+1. To work with ArkUI-X, your DevEco Studio must be V4.0 Beta2. For details about how to download DevEco Studio, see [Version Mapping](https://gitee.com/openharmony/docs/blob/master/en/release-notes/OpenHarmony-v4.0-beta2.md#version-mapping).
 
-   - [Building ArkUI Applications on Android](../../contribute/tutorial/how-to-build-Android-app.md)
+2. With DevEco Studio installed, [configure the ArkUI-X development environment](./start-with-dev-environment.md).
 
-   - [Building ArkUI Applications on iOS](../../contribute/tutorial/how-to-build-iOS-app.md)
+### Command Line Tool: ACE Tools
 
-Now you are ready for ArkUI-X application development. Follow the instructions in [Creating an Application](./start-with-ace-tools.md#creating-an-application), [Building the Project](./start-with-ace-tools.md#building-the-project), and [Getting Started with ArkTS in FA Model](./start-with-ets-fa.md).
+1. By default, ACE Tools is released with the ArkUI-X SDK. For details about how to obtain the ArkUI-X SDK, see [ArkUI-X SDK](../tools/how-to-use-arkui-x-sdk.md).
 
+2. Configure the ArkUI-X development environment by following instructions in [Environment Setup](./start-with-ace-tools.md#environment-setup) and [Command Execution](./start-with-ace-tools.md#command-execution).
+
+With a knowledge of the basic concepts and the required tools at hand, you can set out to develop your ArkUI-X application in the [ArkTS programming language](./start-with-ets-stage.md) with [DevEco Studio](./start-with-deveco-studio.md) or [ACE Tools](./start-with-ace-tools.md#how-to-use).

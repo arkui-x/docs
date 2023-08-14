@@ -1,6 +1,6 @@
 # BridgePlugin (平台桥接)
 
-本模块提供ArkUI端和Platform平台端消息通信的功能，包括数据传输、方法调用和事件调用。
+本模块提供ArkUI端和iOS平台端消息通信的功能，包括数据传输、方法调用和事件调用。需配套ArkUI端API使用，ArkUI侧具体用法请参考[Bridge API](../apis/js-apis-bridge.md)。
 
 > **说明：**
 >
@@ -175,3 +175,7 @@ MethodData * method = [[MethodData alloc] initMethodWithName:@"method" parameter
 }
 ```
 
+
+## 完整示例
+
+[完整示例](../../tutorial/how-to-use-bridge-on-ios.md#场景示例)

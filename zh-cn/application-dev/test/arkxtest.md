@@ -59,8 +59,8 @@ ace_project
 在测试文件导入依赖模块，如被测试模块或辅助模块等，如下为导入ohos.util示例。
 
 ```js
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium'
-import util from '@ohos.util'
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import util from '@ohos.util';
 
 export default function abilityTest() {
   describe('ActsDemoTest', function () {
@@ -72,23 +72,23 @@ export default function abilityTest() {
 ### 编写测试代码
 
 ```js
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium'
-import util from '@ohos.util'
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import util from '@ohos.util';
 export default function UtilFunTest() {
   describe('UtilTest', function () {
-    it("testIsNumberObject001", 0, function () {
+    it('testIsNumberObject001', 0, function () {
       let proc = new util.types();
       let result = proc.isNumberObject(new Number(0));
       expect(result).assertEqual(true);
     });
 
-    it("testIsNumberObject002", 0, function () {
+    it('testIsNumberObject002', 0, function () {
       let proc = new util.types();
       let result = proc.isNumberObject(new Number(10));
       expect(result).assertEqual(true);
     });
 
-    it("testIsNumberObject003", 0, function () {
+    it('testIsNumberObject003', 0, function () {
       let proc = new util.types();
       let result = proc.isNumberObject(15);
       expect(result).assertEqual(false);
@@ -106,10 +106,10 @@ export default function UtilFunTest() {
 ### 使用断言
 
 ```js
-import { describe, it, expect } from '@ohos/hypium'
+import { describe, it, expect } from '@ohos/hypium';
 export default function UtilFunTest() {
   describe('UtilTest', function () {
-    it("testIsNumberObject001", 0, function () {
+    it('testIsNumberObject001', 0, function () {
       let proc = new util.types();
       let result = proc.isNumberObject(new Number(0));
       expect(result).assertEqual(true);
@@ -126,20 +126,20 @@ export default function UtilFunTest() {
 
 ### 修改List.test.ets文件
 
-- 在ohosTest\ets\test\List.test.ets中，导入创建的测试文件
+- 在ohosTest\ets\test\List.test.ets中，导入创建的测试文件。
 
 
 ```js
-import abilityTest from './Ability.test'
+import abilityTest from './Ability.test';
 
 export default function testsuite() {
-  abilityTest()
+  abilityTest();
 }
 ```
 
 ### 执行测试代码
 
-- 支持在Android和IOS平台执行测试用例，两平台的测试运行指令如下。    
+- 支持在Android和iOS平台执行测试用例，两平台的测试运行指令如下。    
 
 
 | 平台    | 测试运行指令                                                 |

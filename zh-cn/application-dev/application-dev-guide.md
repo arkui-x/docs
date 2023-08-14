@@ -1,6 +1,6 @@
 # 应用开发导读
 
-应用开发文档用于指导开发者通过ArkUI-X提供的接口完成跨平台应用开发。当前应用开发文档提供了在Android/iOS/OpenHarmony平台上开发应用的JS接口。
+应用开发文档用于指导开发者通过ArkUI-X提供的接口完成跨平台应用开发。当前应用开发文档提供了在OpenHarmony，Android和iOS平台上开发应用的ArkTS接口和平台集成接口。
 
 在应用开发的文档中，您可以获取到如下几方面的内容：
 
@@ -25,7 +25,9 @@ API参考提供了ArkUI-X支持的组件列表、接口参考文档和平台集�
 
 - [组件参考（基于ArkTS的声明式开发范式）](reference/arkui-ts/README.md)
 - [接口参考（ArkTS及JS API）](reference/apis/README.md)
-- [接口参考（Native API）](reference/native-apis/README.md)
+- 接口参考（Native API）
+  - [ArkUI-X Native API](reference/native-apis/README.md)
+  - [Native API标准库](reference/native-lib/third_party_napi/napi.md)
 - 平台集成
   - [Android](reference/arkui-for-android/README.md)
   - [iOS](reference/arkui-for-ios/README.md)

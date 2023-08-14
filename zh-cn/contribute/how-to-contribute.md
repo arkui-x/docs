@@ -8,7 +8,7 @@
 
 您必须首先签署“开发者原创声明”，然后才能参与社区贡献。
 
-请在[docs/zh-cn/contribute](signing-dco.md)路径下获取[signing-dco（Developer Certificate of Origin）](signing-dco.md)Markdown文件，将签署后的DCO Markdown文件发送至[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn) 。（线上签署待开放）
+请在docs/zh-cn/contribute路径下获取signing-dco（Developer Certificate of Origin）Markdown文件，将签署后的DCO Markdown文件发送至contact@mail.arkui-x.cn 。（线上签署待开放）
 
 #### 行为准则
 
@@ -20,7 +20,7 @@ ArkUI-X是一个开源社区。它完全依赖于社区提供友好的开发和�
 
 ## 自测试验证
 
-TODO:如何根据测试需求开发相关测试用例，待补充。
+如何根据测试需求开发相关测试用例，请参考[跨平台单元测试脚本开发指南](../application-dev/test/arkxtest.md)。
 
 ## 贡献文档
 

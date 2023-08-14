@@ -1794,7 +1794,7 @@ public void xsltTrans(String src, String dst, String xslt) {
 }
 ```
 
-TransformerFactory可以添加安全策略防护，Java对xslt内置了黑名单，这里通过将[http://javax.xml.XMLConstants/feature/secure-processing属性设置为true开启防护，可以禁用一些不安全的方法。](http://javax.xml.xmlconstants/feature/secure-processing属性设置为true开启防护，可以禁用一些不安全的方法。)  
+TransformerFactory可以添加安全策略防护，Java对xslt内置了黑名单，这里通过将[http://javax.xml.XMLConstants/feature/secure-processing](http://javax.xml.xmlconstants/feature/secure-processing)属性设置为true开启防护，可以禁用一些不安全的方法。
 
 ## 正则表达式应该尽量简单，防止ReDos攻击
 

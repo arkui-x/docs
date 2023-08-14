@@ -17,16 +17,6 @@
 import window from '@ohos.window';
 ```
 
-## WindowType<sup>7+</sup>
-
-窗口类型枚举。
-
-**系统能力：** SystemCapability.WindowManager.WindowManager.Core
-
-| 名称              | 值 | 说明               |
-| ----------------- | ------ | ------------------ |
-| TYPE_APP          | 0      | 表示应用子窗口。<br>**模型约束：** 此接口仅可在FA模型下使用。 |
-
 ## Configuration<sup>9+</sup>
 
 创建子窗口或系统窗口时的参数。
@@ -36,8 +26,7 @@ import window from '@ohos.window';
 | 名称 | 类型 | 必填 | 说明                                                                          |
 | ---------- | -------------------------- | -- |-----------------------------------------------------------------------------|
 | name       | string                     | 是 | 窗口名字。                                                                       |
-| windowType | [WindowType](#windowtype7) | 是 | 窗口类型。                                                                       |
-| ctx        | BaseContext | 否 | 当前应用上下文信息。不设置，则默认为空。<br>FA模型下不需要使用该参数，即可创建子窗口。<br>Stage模型下需要使用该参数，用于创建系统窗口。 |
+| ctx        | BaseContext | 否 | 当前应用上下文信息。不设置，则默认为空。<br>Stage模型下不需要使用该参数，用于创建系统窗口。 |
 | displayId  | number                     | 否 | 当前物理屏幕id。不设置，则默认为-1，该参数应为整数。                                             |
 | parentId   | number                     | 否 | 父窗口id。不设置，则默认为-1，该参数应为整数。                                                           |
 
@@ -88,7 +77,6 @@ import window from '@ohos.window';
 | 名称                                  | 类型                  | 可读 | 可写 | 说明                                                                                                     |
 | ------------------------------------- | ------------------------- | ---- | ---- |--------------------------------------------------------------------------------------------------------|
 | windowRect<sup>7+</sup>               | [Rect](#rect7)             | 是   | 是   | 窗口尺寸。                                                                                                  |
-| type<sup>7+</sup>                     | [WindowType](#windowtype7) | 是   | 是   | 窗口类型。                                                                                                  |
 | brightness                            | number                    | 是   | 是   | 屏幕亮度。该参数为浮点数，可设置的亮度范围为[0.0, 1.0]，其取1.0时表示最大亮度值。如果窗口没有设置亮度值，表示亮度跟随系统，此时获取到的亮度值为-1。                      |
 | isKeepScreenOn                        | boolean                   | 是   | 是   | 屏幕是否常亮，默认为false。true表示常亮；false表示不常亮。                                                                   |
 ## window.createWindow<sup>9+</sup>
@@ -121,7 +109,7 @@ createWindow(config: Configuration, callback: AsyncCallback&lt;Window&gt;): void
 
 ```js
 let windowClass = null;
-let config = {name: "alertWindow", windowType: window.WindowType.TYPE_SYSTEM_ALERT, ctx: this.context};
+let config = {name: "alertWindow", ctx: this.context};
 try {
     window.createWindow(config, (err, data) => {
         if (err.code) {
@@ -172,7 +160,7 @@ createWindow(config: Configuration): Promise&lt;Window&gt;
 
 ```js
 let windowClass = null;
-let config = {name: "alertWindow", windowType: window.WindowType.TYPE_SYSTEM_ALERT, ctx: this.context};
+let config = {name: "alertWindow", ctx: this.context};
 try {
     let promise = window.createWindow(config);
     promise.then((data)=> {

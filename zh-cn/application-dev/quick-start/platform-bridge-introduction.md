@@ -42,11 +42,11 @@
 
 > **说明**
 >
-> S表示stirng、number、boolean类型，T表示S及其对应的数组类型；
+> S表示string、number、boolean类型，T表示S及其对应的数组类型；
 > Map类型仅支持string类型的key，且仅用于方法返回。
 
 
 ## 开发指南
 
 [平台桥接开发指南（Android）](../tutorial/how-to-use-bridge-on-android.md)<br />
-[平台桥接开发指南（iOS）]((../tutorial/how-to-use-bridge-on-ios.md))
+[平台桥接开发指南（iOS）](../tutorial/how-to-use-bridge-on-ios.md)

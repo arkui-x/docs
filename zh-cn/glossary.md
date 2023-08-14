@@ -8,15 +8,15 @@
 
 - ### ArkUI-X
 
-  ArkUI-X项目，是扩展ArkUI开发框架到多个OS平台，目前支持OpenHarmony、HarmonyOS、Android、 iOS，后续会逐步增加更多平台支持。开发者基于一套主代码，就可以构建支持多平台的精美、高性能应用。
+  ArkUI-X，是扩展ArkUI开发框架到多个OS平台，目前支持OpenHarmony、HarmonyOS、Android、 iOS，后续会逐步增加更多平台支持。开发者基于一套主代码，就可以构建支持多平台的精美、高性能应用。
 
-- ### ACE Tools
+- ### ACE
 
-  一个跨平台命令行工具(Command Line Interface)，用于开发、构建、运行、调试和卸载ArkUI-X应用。
+  ArkUI跨平台开发环境（简称：ACE，ArkUI Cross-Platform Environment）是一套为ArkUI-X应用开发者提供的命令行工具包（ACE Tools），包括开发环境检查，新建项目，编译打包，安装调试等功能。
 
 ## N
 
-- ### N-API
+- ### Node-API
 
   Node-API是用于封装JavaScript能力为Native插件的API，独立于底层JavaScript，并作为Node.js的一部分。ArkUI-X的N-API组件对Node-API的接口进行了重新实现，当前支持Node-API标准库中的[部分接口](./application-dev/reference/native-lib/third_party_napi/napi.md)。
 

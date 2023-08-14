@@ -7,5 +7,3 @@
 - [Documentation Contribution](documentation-contribution.md)
 - [Writing Instructions](writing-instructions.md)
 - [Communication in Community](communication-in-community.md)
-- [FAQs](FAQ.md)
-

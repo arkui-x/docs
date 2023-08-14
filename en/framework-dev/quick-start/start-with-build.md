@@ -1,32 +1,36 @@
 # Building an ArkUI-X Project
 
-- The build command supports the following options:
+- Use the **build.sh** script to build an ArkUI-X project. Common options of the build script are as follows:
 
   ```shell
-  --product-name    # (Mandatory) Product name, for example, **arkui-cross**
-  --target-os       # (Mandatory) Target platform, for example, Android or iOS
-  --build-target    # (Optional) One or more targets to build
-  --gn-args         # (Optional) One or more GN parameters
-  --ccache          # (Optional) Compiler cache (ccache) used for the build. A local ccache must be installed.
-  --help, -h        # (Optional) Help command
+  --product-name    # (Mandatory) Product name, for example, arkui-x.
+  --target-os       # (Mandatory) Target OS platform, for example, android or ios.
+  --target-cpu      # (Optional) CPU architecture of the target OS, for example, arm or arm64.
+  --build-target    # (Optional) One or more targets to build.
+  --gn-args         # (Optional) One or more GN parameters.
+  --ninja-args      # (Optional) Ninja parameters, for example, --ninja-args=-dkeeprsp.
+  --log-level       # (Optional) Log level, for example, info or debug.
+  --help, -h        # (Optional) Help command.
   ```
-  - Obtain help information
 
-  ```shell
+- If new code is downloaded or code is updated, run the following command to download or update the prebuilt toolchain:
+  ```
+  ./build/prebuilts_download.sh --build-arkuix
+  ```
+- Build command examples
+  - Display options supported by the build script:
+  ```
   ./build.sh -h
   ```
-   ![](figures/build.PNG)
 
-- Examples
-
-  - Build on the Android platform:
+  - Build an ArkUI-X project on Android:
 
   ```shell
-  ./build.sh --product-name arkui-cross --target-os android --ccache
+  ./build.sh --product-name arkui-x --target-os android
   ```
 
-  - Build on the iOS platform:
+  - Build an ArkUI-X project on iOS:
 
   ```shell
-  ./build.sh --product-name arkui-cross --target-os ios --ccache
+  ./build.sh --product-name arkui-x --target-os ios
   ```

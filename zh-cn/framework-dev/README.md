@@ -29,7 +29,9 @@
 
 - [组件参考（基于ArkTS的声明式开发范式）](../application-dev/reference/arkui-ts/README.md)
 - [接口参考（ArkTS及JS API）](../application-dev/reference/apis/README.md)
-- [接口参考（Native API）](../application-dev/reference/native-apis/README.md)
+- 接口参考（Native API）
+  - [ArkUI-X Native API](../application-dev/reference/native-apis/README.md)
+  - [Native API标准库](../application-dev/reference/native-lib/third_party_napi/napi.md)
 - 平台集成
   - [Android](../application-dev/reference/arkui-for-android/README.md)
   - [iOS](../application-dev/reference/arkui-for-ios/README.md)
@@ -37,4 +39,3 @@
 ## 贡献
 
 - [参与贡献](../contribute/README.md)
-- [PR评论命令清单](../contribute/pr-command.md)

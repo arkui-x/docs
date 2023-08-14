@@ -48,7 +48,7 @@ public class EntryMainAbilityActivity extends StageActivity {
 bundleName:moduleName:abilityName:
 ```
 
-其中bundleName、moduleName、abilityName的值来自于OpenHarmony应用中的module.json5配置文件。
+其中bundleName的值来自于OpenHarmony应用中app.json5配置文件，moduleName、abilityName的值来自于OpenHarmony应用中的module.json5配置文件。
 
 ## Ability与Activity对应规则
 

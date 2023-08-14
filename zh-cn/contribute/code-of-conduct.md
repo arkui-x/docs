@@ -2,7 +2,7 @@
 
 ArkUI-X社区遵守开源社区[《贡献者公约》](https://contributor-covenant.org/)V1.4中规定的行为守则，请参考[V1.4版本](https://www.contributor-covenant.org/zh-cn/version/1/4/code-of-conduct.html)
 
-如需举报侮辱、骚扰或其他不可接受的行为，您可以发送邮件至`contact@mail.arkui-x.n`，联系ArkUI-X社区处理。
+如需举报侮辱、骚扰或其他不可接受的行为，您可以发送邮件至[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn)，联系ArkUI-X社区处理。
 
 **贡献者们的承诺**
 
@@ -46,7 +46,7 @@ ArkUI-X社区遵守开源社区[《贡献者公约》](https://contributor-coven
 
 本行为标准适用于本项目。当有人代表本项目或本社区时，本标准亦适用于此人所处的公共平台。
 
-代表本项目或本社区的情形包括但不限于：使用项目的官方电子邮件、通过官方媒体账号发布消息、作为指定代表参与在线或线下活动等。
+代表本项目或本社区的情形包括但不限于：使用项目的官方电子邮件、通过官方媒体帐号发布消息、作为指定代表参与在线或线下活动等。
 
 代表本项目的行为可由项目维护者进一步定义及解释。
 

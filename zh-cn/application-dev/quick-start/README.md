@@ -3,9 +3,9 @@
 ## 快速入门
 
 - [开发准备](start-overview.md)
-- [ArkUI-X之初体验(命令行)](start-with-ace-tools.md)
 - [ArkUI-X之初体验(IDE)](start-with-deveco-studio.md)
-- [编写第一个ArkUI-X应用](start-with-ets-stage.md)（TODO）
+- [ArkUI-X之初体验(命令行)](start-with-ace-tools.md)
+- [编写第一个ArkUI-X应用](start-with-ets-stage.md)
 
 ## 开发基础知识
 

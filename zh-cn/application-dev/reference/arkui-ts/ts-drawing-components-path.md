@@ -25,8 +25,6 @@ Path(value?: { width?: number | string; height?: number | string; commands?: str
 | height   | number \| string | 否   | 路径所在矩形的高度<br/>默认值：0<br/>**说明：**<br/>异常值按照默认值处理。 |
 | commands | string           | 否   | 路径绘制的命令字符串<br/>默认值：''<br/>**说明：**<br/>异常值按照默认值处理。 |
 
-
-
 ## 属性
 
 除支持[通用属性](ts-universal-attributes-size.md)外，还支持以下属性：

@@ -85,7 +85,7 @@ pushUrl(options: RouterOptions, callback: AsyncCallback&lt;void&gt;): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[ohos.router(页面路由)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/errorcodes/errorcode-router.md)错误码。
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
 
 | 错误码ID   | 错误信息 |
 | --------- | ------- |
@@ -135,7 +135,7 @@ pushUrl(options: RouterOptions, mode: RouterMode): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[ohos.router(页面路由)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/errorcodes/errorcode-router.md)错误码。
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
 
 | 错误码ID   | 错误信息 |
 | --------- | ------- |
@@ -181,7 +181,7 @@ pushUrl(options: RouterOptions, mode: RouterMode, callback: AsyncCallback&lt;voi
 
 **错误码：**
 
-以下错误码的详细介绍请参见[ohos.router(页面路由)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/errorcodes/errorcode-router.md)错误码。
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
 
 | 错误码ID   | 错误信息 |
 | --------- | ------- |
@@ -315,7 +315,7 @@ showAlertBeforeBackPage(options: EnableAlertOptions): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[ohos.router(页面路由)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/errorcodes/errorcode-router.md)错误码。
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
 
 | 错误码ID   | 错误信息 |
 | --------- | ------- |

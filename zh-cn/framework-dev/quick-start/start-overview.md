@@ -1,18 +1,17 @@
 # 开发准备
 
-本文档适用于ArkUI-X项目框架开发的初学者。通过环境搭建、代码下载、代码编译、API扩展和使用，快速了解跨平台项目开发流程。
+本文档适用于ArkUI-X框架开发的初学者。通过环境搭建、代码下载、代码编译、API扩展和使用，快速了解跨平台项目开发流程。
 
-在开始之前，您需要了解有关跨平台应用的一些基本概念：ArkUI框架的简单说明、ArkUI-X的基本概念。
 
 ## 基本概念
 
 ### ArkUI框架
 
-ArkUI是一套构建分布式应用的声明式UI开发框架。它具备简洁自然的UI信息语法、丰富的UI组件、多维的状态管理，以及实时界面预览工具，帮助您提升应用开发效率，并能在多种设备上实现生动而流畅的用户体验。
+ArkUI是一套构建分布式应用的声明式UI开发框架。它具备简洁自然的UI信息语法、丰富的UI组件、多维的状态管理，以及实时界面预览工具，帮助您提升应用开发效率，并能在多种设备上实现生动而流畅的用户体验。详情可参考[ArkUI框架介绍](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkui-overview.md)
 
-### ArkUI-X项目
+### ArkUI-X
 
-ArkUI-X项目进一步将ArkUI扩展到了多个OS平台：目前支持OpenHarmony、Android、 iOS，后续会逐步增加更多平台支持。开发者基于一套主代码，就可以构建支持多平台的精美、高性能应用。
+ArkUI-X进一步将ArkUI扩展到了多个OS平台：目前支持OpenHarmony、Android、 iOS，后续会逐步增加更多平台支持。开发者基于一套主代码，就可以构建支持多平台的精美、高性能应用。
 
 ### API扩展
 
@@ -30,7 +29,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   sudo apt-get install binutils git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache libgl1-mesa-dev libxml2-utils xsltproc unzip m4
   ```
 
-  [Mac]
+  [macOS]
 
   ```shell
   brew install wget coreutils
@@ -47,7 +46,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   export PATH=${JAVA_HOME}/bin:${PATH}
   ```
 
-  [Mac]
+  [macOS]
 
   ```shell
   // 配置环境变量
@@ -57,18 +56,15 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
 
 ### 配置Android SDK环境
 
-   **SDK下载：** 通过[Android SDK命令行工具](https://developer.android.google.cn/studio#command-line-tools-only)下载Android SDK，命令行工具使用说明详见[sdkmanager](https://developer.android.google.cn/studio/command-line/sdkmanager)官方指导。SDK版本下载要求如下：
+  [Linux]
+
+  通过[命令行工具](https://developer.android.google.cn/studio#command-line-tools-only)下载和管理Android SDK，命令行工具使用说明详见[sdkmanager](https://developer.android.google.cn/studio/command-line/sdkmanager)官方指导。SDK版本下载要求如下：
 
   ```shell
-  ./sdkmanager --install "ndk-bundle" --sdk_root=/home/usrername/path-to-android-sdk
   ./sdkmanager --install "ndk;21.3.6528147" --sdk_root=/home/usrername/path-to-android-sdk
-  ./sdkmanager --install "cmake;3.10.2.4988404" --sdk_root=/home/usrername/path-to-android-sdk
-  ./sdkmanager --install "platforms;android-29" --sdk_root=/home/usrername/path-to-android-sdk
+  ./sdkmanager --install "platforms;android-26" --sdk_root=/home/usrername/path-to-android-sdk
   ./sdkmanager --install "build-tools;28.0.3" --sdk_root=/home/usrername/path-to-android-sdk
   ```
-  **说明：** 如果您使用Android Studio，则无需使用此命令行工具，可直接通过[IDE管理SDK软件包](https://developer.android.google.cn/studio/intro/update#sdk-manager)。
-
-  [Linux]
 
   ```shell
   // 配置环境变量
@@ -76,7 +72,9 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   export PATH=${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/build-tools/28.0.3:${ANDROID_HOME}/platform-tools:${PATH}
   ```
 
-  [Mac]
+  [macOS]
+
+  通过IDE [SDK管理器](https://developer.android.google.cn/studio/intro/update#sdk-manager)下载和管理Android SDK，NDK版本要求为：21.3.6528147，SDK Platform版本为：26。
 
   ```shell
   // 配置环境变量

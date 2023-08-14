@@ -4,15 +4,11 @@
 
 此仓库存放ArkUI-X网站提供的应用开发、框架开发对应的开发者文档。
 
-简体中文 | [English](./README.en.md)
 
 ## 文档目录结构
 
-[访问官网](https://arkui-x.cn/)
-
 [中文文档](./zh-cn/README.md) 
 
-[English Documentation](./en/readme.md)
 
 ## ArkUI-X文档版本分支说明
 
@@ -20,7 +16,7 @@
 
 master：最新开发版本。
 
-ArkUI-X 1.0.0 Alpha版本：点击[此处](zh-cn/release-notes/ArkUI-X-v1.0.0-alpha.md)了解版本详情。
+ArkUI-X 1.0.0 Canary1版本：点击[此处](zh-cn/release-notes/ArkUI-X-v1.0.0-canary1.md)了解版本详情。
 
 
 ## 第三方开源软件及许可说明

@@ -24,6 +24,7 @@ TextTimer(options?: { isCountDown?: boolean, count?: number, controller?: TextTi
 
 ## 属性
 
+除支持[文本通用](ts-universal-attributes-text-style.md)中的fontColor、fontSize、fontWeight、fontStyle、fontFamily外，还支持以下属性：
 | 名称        | 参数类型       | 描述                             |
 | -------- | ---------------------- | ---------------------- |
 | format   | string   | 自定义格式，需至少包含一个HH、mm、ss、SS中的关键字。如使用yy、MM、dd等日期格式，则使用默认值。<br/>默认值：'HH:mm:ss.SS' |

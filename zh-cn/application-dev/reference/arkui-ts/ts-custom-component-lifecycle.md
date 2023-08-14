@@ -24,6 +24,17 @@ aboutToDisappear函数在自定义组件析构销毁之前执行。不允许在a
 
 从API version 9开始，该接口支持在ArkTS卡片中使用。
 
+## onPageShow
+
+onPageShow?(): void
+
+页面每次显示时触发一次，包括路由过程、应用进入前台等场景，仅@Entry装饰的自定义组件生效。
+
+## onPageHide
+
+onPageHide?(): void
+
+页面每次隐藏时触发一次，包括路由过程、应用进入前后台等场景，仅@Entry装饰的自定义组件生效。
 
 ## onBackPress
 
@@ -31,4 +42,153 @@ onBackPress?(): void
 
 当用户点击返回按钮时触发，仅\@Entry装饰的自定义组件生效。
 
-<!--no_check-->
+```ts
+// xxx.ets
+@Entry
+@Component
+struct IndexComponent {
+  @State textColor: Color = Color.Black;
+
+  onPageShow() {
+    this.textColor = Color.Blue;
+    console.info('IndexComponent onPageShow');
+  }
+
+  onPageHide() {
+    this.textColor = Color.Transparent;
+    console.info('IndexComponent onPageHide');
+  }
+
+  onBackPress() {
+    this.textColor = Color.Red;
+    console.info('IndexComponent onBackPress');
+  }
+
+  build() {
+    Column() {
+      Text('Hello World')
+        .fontColor(this.textColor)
+        .fontSize(30)
+        .margin(30)
+    }.width('100%')
+  }
+}
+```
+
+![zh-cn_image_0000001563060749](figures/zh-cn_image_0000001563060749.png)
+
+## onLayout<sup>9+</sup>
+
+onLayout?(children: Array&lt;LayoutChild&gt;, constraint: ConstraintSizeOptions): void
+
+框架会在自定义组件布局时，将该自定义组件的子节点信息和自身的尺寸范围通过onLayout传递给该自定义组件。不允许在onLayout函数中改变状态变量。
+
+从API version 9开始，该接口支持在ArkTS卡片中使用。
+
+**参数：**
+
+| 参数名     | 类型                                                    | 说明                   |
+| :--------- | :------------------------------------------------------ | :--------------------- |
+| children   | Array&lt;[LayoutChild](#layoutchild9) &gt;                  | 子组件布局信息。       |
+| constraint | [ConstraintSizeOptions](ts-types.md#constraintsizeoptions) | 父组件constraint信息。 |
+
+## onMeasure<sup>9+</sup>
+
+onMeasure?(children: Array&lt;LayoutChild&gt;, constraint: ConstraintSizeOptions): void
+
+框架会在自定义组件确定尺寸时，将该自定义组件的子节点信息和自身的尺寸范围通过onMeasure传递给该自定义组件。不允许在onMeasure函数中改变状态变量。
+
+从API version 9开始，该接口支持在ArkTS卡片中使用。
+
+**参数：**
+
+| 参数名     | 类型                                                    | 说明                   |
+| :--------- | :------------------------------------------------------ | :--------------------- |
+| children   | Array&lt;[LayoutChild](#layoutchild9) &gt;                  | 子组件布局信息。       |
+| constraint | [ConstraintSizeOptions](ts-types.md#constraintsizeoptions) | 父组件constraint信息。 |
+
+## LayoutChild<sup>9+</sup>
+
+子组件布局信息。
+
+从API version 9开始，该接口支持在ArkTS卡片中使用。
+
+| 参数       | 参数类型                                                | 描述                                   |
+| ---------- | ------------------------------------------------------- | -------------------------------------- |
+| name       | string                                                  | 子组件名称。                           |
+| id         | string                                                  | 子组件id。                             |
+| constraint | [ConstraintSizeOptions](ts-types.md#constraintsizeoptions) | 子组件约束尺寸。                       |
+| borderInfo | [LayoutBorderInfo](#layoutborderinfo9)                     | 子组件border信息。                     |
+| position   | [Position](ts-types.md#position8)                         | 子组件位置坐标。                       |
+| measure    | (childConstraint:[ConstraintSizeOptions](ts-types.md#constraintsizeoptions)) => void  | 调用此方法对子组件的尺寸范围进行限制。 |
+| layout     | (LayoutInfo：[LayoutInfo](#layoutinfo9)) => void           | 调用此方法对子组件的位置信息进行限制。 |
+
+## LayoutBorderInfo<sup>9+</sup>
+
+子组件border信息。
+
+从API version 9开始，该接口支持在ArkTS卡片中使用。
+
+| 参数        | 参数类型                          | 描述                                           |
+| ----------- | --------------------------------- | ---------------------------------------------- |
+| borderWidth | [EdgeWidths](ts-types.md#edgewidths9) | 边框宽度类型，用于描述组件边框不同方向的宽度。 |
+| margin      | [Margin](ts-types.md#margin)         | 外边距类型，用于描述组件不同方向的外边距。     |
+| padding     | [Padding](ts-types.md#padding)       | 内边距类型，用于描述组件不同方向的内边距。     |
+
+## LayoutInfo<sup>9+</sup>
+
+子组件layout信息。
+
+从API version 9开始，该接口支持在ArkTS卡片中使用。
+
+| 参数       | 参数类型                                                | 描述             |
+| ---------- | ------------------------------------------------------- | ---------------- |
+| position   | [Position](ts-types.md#position8)                           | 子组件位置坐标。 |
+| constraint | [ConstraintSizeOptions](ts-types.md#constraintsizeoptions) | 子组件约束尺寸。 |
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct Index {
+  build() {
+    Column() {
+      CustomLayout() {
+        ForEach([1, 2, 3], (index) => {
+          Text('Sub' + index)
+            .fontSize(30)
+            .borderWidth(2)
+        })
+      }
+    }
+  }
+}
+
+
+@Component
+struct CustomLayout {
+  @BuilderParam builder: () => {};
+
+  onLayout(children: Array<LayoutChild>, constraint: ConstraintSizeOptions) {
+    let pos = 0;
+    children.forEach((child) => {
+      child.layout({ position: { x: pos, y: pos }, constraint: constraint })
+      pos += 100;
+    })
+  }
+
+  onMeasure(children: Array<LayoutChild>, constraint: ConstraintSizeOptions) {
+    let size = 100;
+    children.forEach((child) => {
+      child.measure({ minHeight: size, minWidth: size, maxWidth: size, maxHeight: size })
+      size += 50;
+    })
+  }
+
+  build() {
+    this.builder()
+  }
+}
+```
+
+![zh-cn_image_0000001511900496](figures/zh-cn_image_0000001511900496.png)
