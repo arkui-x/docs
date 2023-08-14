@@ -126,6 +126,6 @@ ace run hap
 ## 参考
 
 - [ACE Tools命令行详情说明](https://gitee.com/arkui-x/cli/blob/master/README.md)
-- [Ubuntu环境配置说明](https://gitee.com/arkui-x/docs/blob/master/zh-cn/application-dev/tutorial/how-to-configure-dev-environment.md)
+- [Ubuntu环境配置说明](../tutorial/how-to-configure-dev-environment.md)
 
 <!--no_check-->
