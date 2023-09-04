@@ -82,7 +82,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 | ------- | ------- |
 | Press   | The mouse button is pressed.|
 | Release | The mouse button is released.|
-| Move    | The mouse moves.  |
+| Move    | The mouse cursor moves.  |
 | Hover   | The mouse pointer is hovered on an element.  |
 
 ## Curve
@@ -157,11 +157,8 @@ Since API version 9, this API is supported in ArkTS widgets.
 | Name                              | Description                                      |
 | -------------------------------- | ---------------------------------------- |
 | Top                              | Top edge in the vertical direction.<br>Since API version 9, this API is supported in ArkTS widgets.|
-| Center<sup>(deprecated) </sup>   | Center position in the vertical direction.<br> This API is deprecated since API version 9.        |
 | Bottom                           | Bottom edge in the vertical direction.<br>Since API version 9, this API is supported in ArkTS widgets.|
-| Baseline<sup>(deprecated) </sup> | Text baseline position in the cross axis direction.<br> This API is deprecated since API version 9.     |
 | Start                            | Start position in the horizontal direction.<br>Since API version 9, this API is supported in ArkTS widgets.|
-| Middle<sup>(deprecated) </sup>   | Center position in the horizontal direction.<br> This API is deprecated since API version 9.        |
 | End                              | End position in the horizontal direction.<br>Since API version 9, this API is supported in ArkTS widgets.|
 
 ## Week
@@ -509,6 +506,7 @@ This API is supported in ArkTS widgets.
 | BACKGROUND_REGULAR    | Material that creates a medium shallow depth of field effect.  |
 | BACKGROUND_THICK      | Material that creates a high shallow depth of field effect.  |
 | BACKGROUND_ULTRA_THICK | Material that creates the maximum depth of field effect. |
+| NONE<sup>10+</sup> | No blur. |
 
 ## ThemeColorMode<sup>10+</sup>
 
