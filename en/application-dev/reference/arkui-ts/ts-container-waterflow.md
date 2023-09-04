@@ -44,6 +44,7 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | columnsGap | Length |Gap between columns.<br>Default value: **0**|
 | rowsGap | Length |Gap between rows.<br> Default value: **0**|
 | layoutDirection | [FlexDirection](ts-appendix-enums.md#flexdirection) |Main axis direction of the layout.<br>Default value: **FlexDirection.Column**|
+| enableScrollInteraction<sup>10+</sup>  |  boolean  |   Whether to support scroll gestures. When this attribute is set to **false**, scrolling by finger or mouse is not supported, but the scrolling controller API is not affected.<br>Default value: **true**     |
 
 The priority of **layoutDirection** is higher than that of **rowsTemplate** and **columnsTemplate**. Depending on the **layoutDirection** settings, there are three layout modes:
 
@@ -68,8 +69,8 @@ In addition to the [universal events](ts-universal-events-click.md), the followi
 | Name| Description|
 | -------- | -------- |
 | onReachStart(event: () => void) | Triggered when the component reaches the start.|
-| onReachEnd(event: () => void)   | Triggered when the component reaches the end.|
-| onScrollFrameBegin<sup>10+</sup>(event: (offset: number, state: ScrollState) => { offsetRemain }) | Triggered when the component flow starts to sliding, the Parameters is passed in to the upcoming sliding amount. In the function, the actual sliding amount can be calculated based on the application scenario and returned as the return value. The waterfall flow will slide according to the actual sliding amount of the return value.<br/>\- **offset**: The amount of sliding that is about to occur, Unit: vp.<br/>\- **state**: Current sliding state.<br/>- **offsetRemain**: Actual sliding amount, Unit: vp.<br/>The conditions that trigger the event: Triggered when the beginning of each frame when finger dragging WaterFlow and WaterFlow inertial stroke. List rebounds beyond the edge, and scrolling using a scrolling controller will not trigger.|
+| onReachEnd(event: () => void)   | Triggered when the component reaches the end position.|
+| onScrollFrameBegin<sup>10+</sup>(event: (offset: number, state: ScrollState) => { offsetRemain }) | Triggered when the component starts to scroll. The input parameters indicate the amount by which the component will scroll. The event handler then works out the amount by which the component needs to scroll based on the real-world situation and returns the result.<br>\- **offset**: amount to scroll by, in vp.<br>\- **state**: current scrolling state.<br>- **offsetRemain**: actual amount by which the component scrolls, in vp.<br>This event is triggered when the user starts dragging the component or the component starts inertial scrolling. This event is not triggered when the component rebounds or the scrolling controller is used.|
 
 ## auto-fill
 

@@ -18,6 +18,8 @@ Since API version 9, this API is supported in ArkTS widgets.
 | ------ | -------- | ---- | ------ | ------------------------------------------------------------ |
 | src    | string   | Yes  | -      | Image source.<br>**NOTE**<br>ArkTS widgets do not support the **http://**, **datashare://**, or **file://data/storage** path prefixes.|
 
+
+
 ## Attributes
 
 | Name| Type| Description|

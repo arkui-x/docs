@@ -49,7 +49,7 @@ Among the [universal attributes](ts-universal-attributes-size.md) and [universal
 
 >  **NOTE**
 >
->  The default value of the universal attribute [padding](ts-universal-attributes-size.md) is as follows: { top: 8 vp, right: 16 vp, bottom: 8 vp, left: 16 vp }
+>  The default value of the universal attribute [padding](ts-universal-attributes-size.md) is as follows: <br>{<br> top: 8 vp,<br> right: 16 vp,<br> bottom: 8 vp,<br> left: 16 vp<br> }
 
 ## EnterKeyType
 
@@ -66,7 +66,7 @@ Among the [universal attributes](ts-universal-attributes-size.md) and [universal
 | Name                | Description           |
 | ------------------ | ------------- |
 | Normal   | Normal input mode.<br>The value can contain digits, letters, underscores (_), spaces, and special characters.|
-| Password | Password input mode. The value can contain digits, letters, underscores (_), spaces, and special characters. An eye icon is used to show or hide the password, and the password is hidden behind dots by default.|
+| Password | Password input mode. The value can contain digits, letters, underscores (_), spaces, and special characters. An eye icon is used to show or hide the password, and the password is hidden behind dots by default. The password input mode does not support underlines.|
 | Email    | Email address input mode. The value can contain digits, letters, underscores (_), and at signs (@). Only one at sign (@) is allowed.|
 | Number   | Digit input mode.     |
 | PhoneNumber<sup>9+</sup> | Phone number input mode.<br>The value can contain digits, plus signs (+), hyphens (-), asterisks (*), and number signs (#). The length is not limited.|
@@ -84,9 +84,9 @@ In addition to the [universal events](ts-universal-events-click.md), the followi
 
 | Name                                                         | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| onChange(callback: (value: string) =&gt; void)               | Triggered when the input changes.<br>**value**: text content.<br>This event is triggered when any of the following conditions is met:<br>1. Keyboard input is received.<br>2. Paste and cut is performed.<br>3. Ctrl+V is pressed. |
+| onChange(callback: (value: string) =&gt; void)               | Triggered when the input in the text box changes.<br>**value**: text content.<br>This event is triggered when any of the following conditions is met:<br>1. Keyboard input is received.<br>2. Paste and cut is performed.<br>3. Ctrl+V is pressed. |
 | onSubmit(callback: (enterKey: EnterKeyType) =&gt; void)      | Triggered when the Enter key on the keyboard is pressed. The return value is the current type of the Enter key.<br>**enterKeyType**: type of the Enter key. For details, see [EnterKeyType](#enterkeytype). |
-| onEditChange(callback: (isEditing: boolean) =&gt; void)<sup>8+</sup> | Triggered when the input status changes.                     |
+| onEditChange(callback: (isEditing: boolean) =&gt; void)<sup>8+</sup> | Triggered when the input status changes. When the cursor is placed in the text box, it is in the editing state. Otherwise, it is in the non-editing state. If the value of **isEditing** is **true**, text input is in progress.|
 | onCopy(callback:(value: string) =&gt; void)<sup>8+</sup>     | Triggered when the copy button on the pasteboard, which displays when the text box is long pressed, is clicked.<br>**value**: text to be copied. |
 | onCut(callback:(value: string) =&gt; void)<sup>8+</sup>      | Triggered when the cut button on the pasteboard, which displays when the text box is long pressed, is clicked.<br>**value**: text to be cut. |
 | onPaste(callback:(value: string) =&gt; void)<sup>8+</sup>    | Triggered when the paste button on the pasteboard, which displays when the text box is long pressed, is clicked.<br>**value**: text to be pasted. |
@@ -122,8 +122,8 @@ Sets the text selection area, which will be highlighted.
 
 | Name        | Type| Mandatory| Description              |
 | -------------- | -------- | ---- | ---------------------- |
-| selectionStart | number   | Yes  | Start position of the text selection area. The start position of the text in the text box is 0.|
-| selectionEnd   | number   | Yes  | End position of the text selection area.|
+| selectionStart | number   | Yes  | Start position of the text selection range. The start position of text in the text box is 0.|
+| selectionEnd   | number   | Yes  | End position of the text selection range.|
 
 ### stopEditing<sup>10+</sup>
 

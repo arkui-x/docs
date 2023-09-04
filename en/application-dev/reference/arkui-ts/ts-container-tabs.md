@@ -71,7 +71,7 @@ In addition to the [universal events](ts-universal-events-click.md), the followi
 
 | Name                                      | Description                                    |
 | ---------------------------------------- | ---------------------------------------- |
-| onChange(event: (index: number) =&gt; void) | Triggered when a tab is switched.<br>- **index**: index of the active tab. The index starts from 0.<br>This event is triggered when any of the following conditions is met:<br>1. The **\<TabContent>** component supports sliding, and the user slides on the tab bar.<br>2. The [Controller](#tabscontroller) API is called.<br>3. The attribute value is updated using a [state variable](../../quick-start/arkts-state.md).<br>4. A tab is clicked.|
+| onChange(event: (index: number) =&gt; void) | Triggered when a tab is switched.<br>- **index**: index of the active tab. The index starts from 0.<br>This event is triggered when any of the following conditions is met:<br>1. The **\<TabContent>** component supports sliding, and the user slides on the tab bar.<br>2. The [Controller](#tabscontroller) API is called.<br>3. The attribute value is updated using a [state variable](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-state.md).<br>4. A tab is clicked.|
 
 ## TabsController
 

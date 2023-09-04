@@ -18,9 +18,6 @@ You can bind a full-screen modal to a component through the **bindContentCover**
 | Name             | Type                                      | Mandatory  | Description           |
 | --------------- | ---------------------------------------- | ---- | ------------- |
 | modalTransition | [ModalTransition](ts-types.md#modaltransition10) | No   | Transition mode of the modal. |
-| backgroundColor | [ResourceColor](ts-types.md#resourcecolor) | No   | Background color of the modal. |
-| onAppear        | () => void                               | No   | Callback invoked when the modal appears.|
-| onDisappear     | () => void                               | No   | Callback invoked when the modal disappears.|
 
 ## Example
 
