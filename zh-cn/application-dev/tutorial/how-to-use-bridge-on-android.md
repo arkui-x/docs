@@ -16,6 +16,8 @@ import bridge from '@arkui-x.bridge';
 
 // 创建平台桥接实例
 const bridgeImpl = bridge.createBridge('Bridge');
+// 创建平台桥接实例(二进制格式)
+const bridgeImpl = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
 ```
 
 2、在Android侧创建BridgePlugin类。指定名称，该名称应与ArkUI侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
@@ -24,6 +26,8 @@ const bridgeImpl = bridge.createBridge('Bridge');
 // xxx.java
 
 Bridge bridge = new Bridge(this, "Bridge", getInstanceId());
+// 创建平台桥接实例(二进制格式)
+Bridge bridge = new Bridge(this, "Bridge", getInstanceId()， BridgePlugin.BridgeType.BINARY_TYPE);
 ```
 
 ### 场景一：ArkUI侧向Android侧传递数据

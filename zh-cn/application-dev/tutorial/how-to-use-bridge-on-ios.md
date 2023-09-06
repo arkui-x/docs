@@ -1,6 +1,6 @@
 # 平台桥接开发指南
 
-​平台桥接用于客户端（ArkUI）和平台（Android或iOS）之间传递消息，即用于ArkUI与平台双向数据传递、ArkUI侧调用平台的方法、平台调用ArkUI侧的方法。本文主要介绍iOS平台与ArkUI交互，ArkUI侧具体用法请参考[Bridge API](../reference/apis/js-apis-bridge.md)，iOS侧参考[BridgePlugin](../reference/arkui-for-ios/BridgePlugin.md)。
+平台桥接用于客户端（ArkUI）和平台（Android或iOS）之间传递消息，即用于ArkUI与平台双向数据传递、ArkUI侧调用平台的方法、平台调用ArkUI侧的方法。本文主要介绍iOS平台与ArkUI交互，ArkUI侧具体用法请参考[Bridge API](../reference/apis/js-apis-bridge.md)，iOS侧参考[BridgePlugin](../reference/arkui-for-ios/BridgePlugin.md)。
 
 ## iOS平台与ArkUI交互
 
@@ -16,6 +16,8 @@ import bridge from '@arkui-x.bridge';
 
 // 创建平台桥接实例
 const bridgeImpl = bridge.createBridge('Bridge');
+// 创建平台桥接实例(二进制格式)
+const bridgeImpl = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
 ```
 
 2、在iOS侧创建BridgePlugin类。指定名称，该名称应与ArkUI侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
@@ -24,6 +26,8 @@ const bridgeImpl = bridge.createBridge('Bridge');
 // xxx.mm
 
 BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId];
+// 创建平台桥接实例(二进制格式)
+BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId bridgeType：BINARY_TYPE];
 ```
 
 ### 场景一：ArkUI侧向iOS侧传递数据
