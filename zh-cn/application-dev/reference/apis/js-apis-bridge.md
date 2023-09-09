@@ -38,6 +38,31 @@ createBridge(bridgeName: string): BridgeObject
   const bridgeObj: BridgeObject = bridge.createBridge('Bridge');
   ```
 
+ createBridge(bridgeName: string, type: BridgeType): BridgeObject;
+
+定义BridgeObject类(编解码模式)。
+
+**系统能力：**   SystemCapability.ArkUI.ArkUI.Full
+
+**参数：** 
+
+| 参数名     | 类型       | 必填 | 说明                                 |
+| ---------- | ---------- | ---- | ------------------------------------ |
+| bridgeName | string     | 是   | 定义桥接名称。                       |
+| bridgeType | BridgeType | 否   | 编解码类型（可不填，默认为json格式） |
+
+**返回值：** 
+
+| 类型                          | 说明           |
+| ----------------------------- | -------------- |
+| [BridgeObject](#bridgeobject) | 桥接的接口类。 |
+
+**示例：** 
+
+  ```javaScript
+  const bridgeObj: BridgeObject = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
+  ```
+
 ## BridgeObject
 
 桥接的接口类。
@@ -208,11 +233,16 @@ bridgeObj.setMessageListener((data) => {
 });
 ```
 
+## **BridgeType**
 
+| 参数名      | 说明                   |
+| ----------- | ---------------------- |
+| JSON_TYPE   | JSON格式序列化编解码   |
+| BINARY_TYPE | 二进制格式序列化编解码 |
 
 ## S 
 
-type S = number | boolean | string | null
+type S = number | boolean | string | null | ArrayBuffer;
 
 **说明：** 定义桥接使用的基础数据类型。
 
