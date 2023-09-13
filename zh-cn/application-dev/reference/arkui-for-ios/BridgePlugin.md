@@ -34,6 +34,37 @@
 BridgePlugin * plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId];
   ```
 
+(instancetype)initBridgePlugin:(NSString *_Nonnull)bridgeName	instanceId:(int32_t)instanceId   bridgeType:(BridgeType)type;;
+
+创建BridgePlugin类(编解码模式)。
+
+**BridgeType:**
+
+| 参数名      | 说明                   |
+| ----------- | ---------------------- |
+| JSON_TYPE   | JSON格式序列化编解码   |
+| BINARY_TYPE | 二进制格式序列化编解码 |
+
+**参数：** 
+
+| 参数名     | 类型       | 必填 | 说明                                 |
+| ---------- | ---------- | ---- | ------------------------------------ |
+| bridgeName | string     | 是   | 定义桥接名称。                       |
+| instanceId | int        | 是   | 实例ID。                             |
+| bridgeType | BridgeType | 否   | 编解码类型（可不填，默认为json格式） |
+
+**返回值：** 
+
+| 类型         | 说明           |
+| ------------ | -------------- |
+| BridgePlugin | 桥接结果接口。 |
+
+**示例：** 
+
+  ```objective-c
+BridgePlugin * plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId bridgeType：BINARY_TYPE];
+  ```
+
 ## callMethod
 
 (void)callMethod:(MethodData *)method;

@@ -35,6 +35,7 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | scrollBarColor | string \| number \| [Color](ts-appendix-enums.md#color)   | Color of the scrollbar.|
 | scrollBarWidth | string \| number         | Width of the scrollbar. This attribute cannot be set in percentage.<br>Default value: **4**<br>Unit: vp<br>**NOTE**<br>If the width of the scrollbar exceeds its height, it will change to the default value.|
 | edgeEffect     | [EdgeEffect](ts-appendix-enums.md#edgeeffect)            | Scroll effect. For details, see **EdgeEffect**.<br>Default value: **EdgeEffect.None**|
+| enableScrollInteraction<sup>10+</sup>  |  boolean  |   Whether to support scroll gestures. When this attribute is set to **false**, scrolling by finger or mouse is not supported, but the scrolling controller API is not affected.<br>Default value: **true**     |
 
 ## ScrollDirection
 | Name      | Description                    |
@@ -71,7 +72,7 @@ scroller: Scroller = new Scroller()
 
 ### scrollTo
 
-scrollTo(value: { xOffset: number | string, yOffset: number | string, animation?: { duration: number, curve: Curve } }): void
+scrollTo(value: { xOffset: number | string, yOffset: number | string, animation?: { duration?: number, curve?: Curve | ICurve } | boolean }): void
 
 
 Scrolls to the specified position.
@@ -82,7 +83,7 @@ Scrolls to the specified position.
 | --------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
 | xOffset   | number \| string                                   | Yes  | Horizontal scrolling offset.<br>**NOTE**<br>This parameter cannot be set in percentage.<br>This parameter is valid only when the scroll axis is the x-axis.|
 | yOffset   | number \| string                                   | Yes  | Vertical scrolling offset.<br>**NOTE**<br>This parameter cannot be set in percentage.<br>This parameter is valid only when the scroll axis is the y-axis.|
-| animation | {<br>duration: number,<br>curve: [Curve](ts-appendix-enums.md#curve)<br>} | No  | Animation configuration, which includes the following:<br>- **duration**: scrolling duration.<br>- **curve**: scrolling curve.<br>Default value:<br>{<br>duration: 0,<br>curve: Curve.Ease<br>}<br>**NOTE**<br>A value less than 0 evaluates to the default value.|
+| animation | {duration?: number, curve?: [Curve](ts-appendix-enums.md#curve) \| [ICurve](../apis/js-apis-curve.md#icurve)<sup>10+ </sup>} \| boolean<sup>10+ </sup> | No  | Animation configuration, which includes the following:<br>- **duration**: scrolling duration.<br>- **curve**: scrolling curve.<br>- **boolean**: whether to enable the default spring animation.<br>Default value:<br>{<br>duration: 1000,<br>curve: Curve.Ease<br>}<br>boolean: false<br>**NOTE**<br>A value less than 0 evaluates to the default value.<br>Currently, the **\<List>**, **\<Scroll>**, **\<Grid>**, and **\<WaterFlow>** support the **Boolean** type and **ICurve**.|
 
 
 ### scrollEdge
@@ -144,7 +145,7 @@ When **smooth** is set to **true**, all passed items are loaded and counted in l
 
 | Name               | Type| Mandatory| Description                                                    |
 | --------------------- | -------- | ---- | ------------------------------------------------------------ |
-| value                 | number   | Yes  | Index of the item to be scrolled to in the list.                          |
+| value                 | number   | Yes  | Index of the item to be scrolled to in the list.<br>**NOTE**<br>If the value set is a negative value or greater than the maximum index of the list items, the value is abnormal, and no scrolling will be performed.                    |
 | smooth<sup>10+ </sup> | boolean  | No  | Whether to enable the smooth animation for scrolling to the item with the specified index. The value **true** means to enable that the smooth animation, and **false** means the opposite.<br>Default value: **false**<br>**NOTE**<br>Currently, only the **\<List>** component supports this parameter.|
 | align<sup>10+ </sup> | [ScrollAlign](#scrollalign10)  | No  | How the list item to scroll to is aligned with the list.<br>Default value: **ScrollAlign.START**<br>**NOTE**<br>Currently, only the **\<List>** component supports this parameter.|
 
@@ -171,7 +172,7 @@ Scrolls by the specified amount.
 
 isAtEnd(): boolean
 
-Check if the component scrolls to the bottom.
+Checks whether the component has scrolled to the bottom.
 
 > **NOTE**
 >
@@ -181,7 +182,7 @@ Check if the component scrolls to the bottom.
 
 | Type    | Description                                                      |
 | ------- | --------------------------------------------------------- |
-| boolean | **true** indicates that the component has scrolled to the bottom, **false** indicates not. |
+| boolean | The value **true** means that the component has scrolled to the bottom, and **false** means the opposite.|
 
 ## ScrollAlign<sup>10+ </sup>
 
