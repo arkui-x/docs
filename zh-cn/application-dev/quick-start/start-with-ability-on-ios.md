@@ -195,9 +195,9 @@ iOS端应用内的viewController的viewControllerName组成规则：Ability的mo
 
   ![stage_iOS](figures/StageiOS.png)
 
-## 启动时机增强
+## StageApplication初始化支持以下两种方式
 
-### StageApplication在didFinishLaunchingWithOptions函数中进行初始化
+### 在didFinishLaunchingWithOptions函数中进行初始化
 
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -220,7 +220,7 @@ iOS端应用内的viewController的viewControllerName组成规则：Ability的mo
 }
 ```
 
-### StageApplication在openURL回调函数中进行初始化
+### 在openURL回调函数中进行初始化
 
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
