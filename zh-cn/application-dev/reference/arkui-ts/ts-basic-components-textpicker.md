@@ -14,7 +14,7 @@
 
 ## 接口
 
-TextPicker(options?: {range: string[] | string[][] | Resource | [TextPickerRangeContent](#textpickerrangecontent10类型说明)[], selected?: number, value?: string})
+TextPicker(options?: {range: string[] | string[][] | Resource | TextPickerRangeContent[] | TextCascadePickerRangeContent[], selected?: number, value?: string})
 
 根据range指定的选择范围创建文本选择器。
 
@@ -22,7 +22,7 @@ TextPicker(options?: {range: string[] | string[][] | Resource | [TextPickerRange
 
 | 参数名 | 参数类型 | 必填 | 参数描述 |
 | -------- | -------- | -------- | -------- |
-| range | string[]&nbsp;\|&nbsp;string[][]<sup>10+</sup>&nbsp;\|&nbsp;[Resource](ts-types.md#resource类型) | 是 | 选择器的数据选择列表。不可设置为空数组，若设置为空数组，则不显示；若动态变化为空数组，则保持当前正常值显示。<br/>**说明**：单列数据选择器使用string[]，Resource。<br/>多列数据选择器使用string[][]类型。 <br/>Resource类型只支持[strarray.json](../../quick-start/resource-categories-and-access.md#资源组目录)。 |
+| range | string[]&nbsp;\|&nbsp;string[][]<sup>10+</sup>&nbsp;\|&nbsp;[Resource](ts-types.md#resource类型)&nbsp;\|<br/>[TextPickerRangeContent](#textpickerrangecontent10类型说明)[]<sup>10+</sup> | 是 | 选择器的数据选择列表。不可设置为空数组，若设置为空数组，则不显示；若动态变化为空数组，则保持当前正常值显示。<br/>**说明**：单列数据选择器使用string[]，Resource，TextPickerRangeContent[]类型。<br/>多列数据选择器使用string[][]类型。 <br/>Resource类型只支持[strarray.json](../../quick-start/resource-categories-and-access.md#资源组目录)。 |
 | selected | number&nbsp;\|&nbsp;number[]<sup>10+</sup> | 否 | 设置默认选中项在数组中的索引值。<br/>默认值：0 <br/>**说明**：单列数据选择器使用number类型。<br/>多列、多列联动数据选择器使用number[]类型。<br />从API version 10开始，该参数支持[$$](../../quick-start/arkts-two-way-sync.md)双向绑定变量。|
 | value | string&nbsp;\|&nbsp;string[]<sup>10+</sup> | 否 | 设置默认选中项的值，优先级低于selected。<br/>默认值：第一个元素值<br/>**说明**：只有显示文本列表时该值有效。显示图片或图片加文本的列表时，该值无效。 <br/>单列数据选择器使用string类型。<br/>多列、多列联动数据选择器使用string[]类型。<br />从API version 10开始，该参数支持[$$](../../quick-start/arkts-two-way-sync.md)双向绑定变量。|
 ## TextPickerRangeContent<sup>10+</sup>类型说明
@@ -66,12 +66,15 @@ struct TextPickerExample {
   build() {
     Column() {
       TextPicker({ range: this.fruits, selected: this.select })
-        .onChange((value: string, index: number) => {
+        .onChange((value: string | string[], index: number | number[]) => {
           console.info('Picker item changed, value: ' + value + ', index: ' + index)
         })
-    }
+        .disappearTextStyle({color: Color.Red, font: {size: 15, weight: FontWeight.Lighter}})
+        .textStyle({color: Color.Black, font: {size: 20, weight: FontWeight.Normal}})
+        .selectedTextStyle({color: Color.Blue, font: {size: 30, weight: FontWeight.Bolder}})
+    }.width('100%').height('100%')
   }
 }
 ```
 
-![zh-cn_image_0000001219662657](figures/zh-cn_image_0000001219662657.png)
+![textpicker](figures/textpicker1.gif)

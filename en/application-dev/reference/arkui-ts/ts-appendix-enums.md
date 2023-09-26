@@ -556,9 +556,22 @@ This API is supported in ArkTS widgets.
 | MIDDLE | Medium area (stable)| Spring effect, with stiffness of 350, damping of 35, and initial velocity of 0.5.| 95% |
 | HEAVY  | Large area (heavy)| Spring effect, with stiffness of 240, damping of 28, and initial velocity of 0.| 95% |
 
-## TextContentStyle<sup>10+</sup>
+## ImageSmoothingQuality<sup>8+</sup>
 
-| Name   | Description                                                        |
-| ------- | ------------------------------------------------------------ |
-| DEFAULT | Default style. The caret width is fixed at 1.5 vp, and the caret height is subject to the background height and font size of the selected text.|
-| INLINE  | Inline input style. The background height of the selected text is the same as the height of the text box.            |
+Since API version 9, this API is supported in ArkTS widgets.
+
+| Name       | Description            |
+| -------- | -------------- |
+| low      | Low quality.|
+| medium   | Medium quality.|
+| high     | High quality.|
+
+## CanvasDirection<sup>8+</sup>
+
+Since API version 9, this API is supported in ArkTS widgets.
+
+| Name       | Description            |
+| -------- | -------------- |
+| inherit | The text direction is inherited from the **\<Canvas>** component.|
+| ltr     | The text direction is from left to right.|
+| rtl     | The text direction is from right to left.|

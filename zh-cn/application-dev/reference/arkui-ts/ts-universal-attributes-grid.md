@@ -6,6 +6,7 @@
 >
 >  - 栅格布局的列宽、列间距由距离最近的GridContainer父组件决定。使用栅格属性的组件树上至少需要有1个GridContainer容器组件。
 
+>  - gridSpan、gridOffset属性调用时其父组件或祖先组件必须是GridContainer。
 
 ## 属性
 
@@ -25,45 +26,6 @@
 struct GridContainerExample1 {
   build() {
     Column() {
-      Text('useSizeType').fontSize(15).fontColor(0xCCCCCC).width('90%')
-      GridContainer() {
-        Row({}) {
-          Row() {
-            Text('Left').fontSize(25)
-          }
-          .useSizeType({
-            xs: { span: 1, offset: 0 }, sm: { span: 1, offset: 0 },
-            md: { span: 1, offset: 0 }, lg: { span: 2, offset: 0 }
-          })
-          .height("100%")
-          .backgroundColor(0x66bbb2cb)
-
-          Row() {
-            Text('Center').fontSize(25)
-          }
-          .useSizeType({
-            xs: { span: 1, offset: 0 }, sm: { span: 2, offset: 1 },
-            md: { span: 5, offset: 1 }, lg: { span: 7, offset: 2 }
-          })
-          .height("100%")
-          .backgroundColor(0x66b6c5d1)
-
-          Row() {
-            Text('Right').fontSize(25)
-          }
-          .useSizeType({
-            xs: { span: 1, offset: 0 }, sm: { span: 1, offset: 3 },
-            md: { span: 2, offset: 6 }, lg: { span: 3, offset: 9 }
-          })
-          .height("100%")
-          .backgroundColor(0x66bbb2cb)
-        }
-        .height(200)
-
-      }
-      .backgroundColor(0xf1f3f5)
-      .margin({ top: 10 })
-
       // 单独设置组件的span和offset,在sm尺寸大小的设备上使用useSizeType中sm的数据实现一样的效果
       Text('gridSpan,gridOffset').fontSize(15).fontColor(0xCCCCCC).width('90%')
       GridContainer() {
@@ -108,7 +70,3 @@ struct GridContainerExample1 {
 **图3** 设备宽度为LG
 
 ![zh-cn_image_0000001219982727](figures/zh-cn_image_0000001219982727.png)
-
-**图4** 单独设置gridSpan和gridOffset在特定屏幕大小下的效果与useSizeType效果一致
-
-![gridSpan](figures/gridSpan.png)

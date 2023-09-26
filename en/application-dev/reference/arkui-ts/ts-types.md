@@ -321,3 +321,24 @@ Describes the animation information of the \<Swiper> component.
 | currentOffset | number | Offset of the currently displayed element relative to the start position of the **\<Swiper>** along the main axis. Unit: vp<br>Default value: **0**|
 | targetOffset | number | Offset of the target element relative to the start position of the **\<Swiper>** along the main axis. Unit: vp<br>Default value: **0**|
 | velocity | number | Hands-off velocity at the beginning of the animation. Unit: vp/s<br>Default value: **0**|
+
+## SafeAreaType<sup>10+</sup>
+
+The **SafeAreaType** type is used to describe the types of expanded safe areas.
+
+| Name    | Description                                      |
+| -------- | ------------------------------------------ |
+| SYSTEM   | Default non-safe area of the system, including the status bar and navigation bar.  |
+| CUTOUT   | Non-safe area of the device, for example, the notch area.|
+| KEYBOARD | Soft keyboard area.                              |
+
+## SafeAreaEdge<sup>10+</sup>
+
+The **SafeAreaEdge** type is used to define the edge for expanding the safe area.
+
+| Name  | Description      |
+| ------ | ---------- |
+| TOP    | Top edge.|
+| BOTTOM | Bottom edge.|
+| START  | Start edge.|
+| END    | End edge.|
