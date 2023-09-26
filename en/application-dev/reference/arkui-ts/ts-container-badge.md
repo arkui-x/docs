@@ -13,7 +13,7 @@ This component supports only one child component.
 
 >  **NOTE**
 >
->  Built-in components and custom components are allowed, with support for ([if/else](../../quick-start/arkts-rendering-control-ifelse.md), [ForEach](../../quick-start/arkts-rendering-control-foreach.md), and [LazyForEach](../../quick-start/arkts-rendering-control-lazyforeach.md)) rendering control.
+>  Built-in components and custom components are allowed, with support for ([if/else](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-ifelse.md), [ForEach](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-foreach.md), and [LazyForEach](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-lazyforeach.md)) rendering control.
 
 
 ## APIs
@@ -29,7 +29,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 | Name| Type| Mandatory| Description|
 | -------- | -------- | -------- | -------- |
 | count | number | Yes| Number of notifications.<br>**NOTE**<br>If the value is less than or equal to 0, no badge is displayed.<br>Value range: [-2147483648, 2147483647]<br>If the value is not an integer, it is rounded off to the nearest integer. For example, 5.5 is rounded off to 5.|
-| position | [BadgePosition](#badgeposition) | No| Position to display the badge relative to the parent component.<br>Default value: **BadgePosition.RightTop**|
+| position | [BadgePosition](#badgeposition)\|[Position<sup>10+</sup>](ts-types.md#position8) | No| Position to display the badge relative to the parent component.<br>Default value: **BadgePosition.RightTop**<br>**NOTE**<br> This parameter cannot be set in percentage. If it is set to an invalid value, the default value **(0,0)** will be used.|
 | maxCount | number | No| Maximum number of notifications. When the maximum number is reached, only **maxCount+** is displayed.<br>Default value: **99**<br>Value range: [-2147483648, 2147483647]<br>If the value is not an integer, it is rounded off to the nearest integer. For example, 5.5 is rounded off to 5.|
 | style | [BadgeStyle](#badgestyle) | Yes| Style of the badge, including the font color, font size, badge color, and badge size.|
 
@@ -44,7 +44,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 | Name| Type| Mandatory| Default Value| Description|
 | -------- | -------- | -------- | -------- | -------- |
 | value | string | Yes| - | Prompt content.|
-| position | [BadgePosition](#badgeposition) | No| BadgePosition.RightTop | Position to display the badge relative to the parent component.|
+| position | [BadgePosition](#badgeposition)\|[Position<sup>10+</sup>](ts-types.md#position8) | No| BadgePosition.RightTop | Position to display the badge relative to the parent component.|
 | style | [BadgeStyle](#badgestyle) | Yes| - | Style of the badge, including the font color, font size, badge color, and badge size.|
 
 ## BadgePosition

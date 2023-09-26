@@ -84,8 +84,9 @@ For a list in horizontal layout, it refers to the delete item displayed below (o
 | -------- | -------- |
 | onSelect(event: (isSelected: boolean) =&gt; void)<sup>8+</sup> | Triggered when the selected state of the **\<ListItem>** changes.<br>**isSelected**: Returns **true** if the **\<ListItem>** is selected by mouse drag; returns **false** otherwise.|
 
-
 ## Example
+
+### Example 1
 
 ```ts
 // xxx.ets
@@ -112,6 +113,8 @@ struct ListItemExample {
 ```
 
 ![en-us_image_0000001219864159](figures/en-us_image_0000001219864159.gif)
+
+### Example 2
 
 
 ```ts

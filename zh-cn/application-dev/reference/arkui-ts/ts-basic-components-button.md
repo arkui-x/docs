@@ -12,7 +12,9 @@
 
 ## 接口
 
-**方法1：** Button(options?: {type?: ButtonType, stateEffect?: boolean})
+### Button
+
+Button(options?: {type?: ButtonType, stateEffect?: boolean})
 
 从API version 9开始，该接口支持在ArkTS卡片中使用。
 
@@ -20,10 +22,11 @@
 
 | 参数名      | 参数类型   | 必填 | 参数描述                                                                                                                                                                                         |
 | ----------- | ---------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| type        | ButtonType | 否   | 描述按钮显示样式。<br/>默认值：ButtonType.Capsule``                                                                                                                                                   |
+| type        | ButtonType | 否   | 描述按钮显示样式。<br/>默认值：`ButtonType.Capsule`                                                                                                                                                   |
 | stateEffect | boolean    | 否   | 按钮按下时是否开启按压态显示效果，当设置为false时，按压效果关闭。<br/>默认值：true<br/>**说明：** <br/>当开启按压态显示效果，开发者设置状态样式时，会基于状态样式设置完成后的背景色再进行颜色叠加。 |
+### Button
 
-**方法2：** Button(label?: ResourceStr, options?: { type?: ButtonType, stateEffect?: boolean })
+Button(label?: ResourceStr, options?: { type?: ButtonType, stateEffect?: boolean })
 
   使用文本内容创建相应的按钮组件，此时Button无法包含子组件。
 
@@ -34,11 +37,11 @@
 | 参数名  | 参数类型                                     | 必填 | 参数描述          |
 | ------- | -------------------------------------------- | ---- | ----------------- |
 | label   | [ResourceStr](ts-types.md#resourcestr)          | 否   | 按钮文本内容。    |
-| options | { type?: ButtonType, stateEffect?: boolean } | 否   | 见方法1参数说明。 |
+| options | { type?: ButtonType, stateEffect?: boolean } | 否   | 见[Button](#button-1)参数说明。 |
 
 ## 属性
 
-除支持[通用属性](ts-universal-attributes-size.md)和[文本通用](ts-universal-attributes-text-style.md)中的fontColor、fontSize、fontWeight、fontStyle、fontFamily外，还支持以下属性：
+除支持[通用属性](ts-universal-attributes-size.md)外，还支持以下属性：
 
 | 名称                              | 参数类型                         | 描述                                                                                                                                |
 | --------------------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -70,8 +73,8 @@
 | -------------------- | ------------------------------------------------------------------------ | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | overflow             | [TextOverflow](ts-appendix-enums.md#textoverflow)                           | 否   | 设置Label文本超长时的显示方式。文本截断是按字截断。例如，英文以单词为最小单位进行截断，若需要以字母为单位进行截断，可在字母间添加零宽空格。               |
 | maxLines             | number                                                                   | 否   | 设置Label文本的最大行数。默认情况下，文本是自动折行的，如果指定此参数，则文本最多不会超过指定的行。如果有多余的文本，可以通过textOverflow来指定截断方式。 |
-| minFontSize          | number\| [ResourceStr](ts-types.md#resourcestr)                             | 否   | 设置Label文本最小显示字号。需配合maxFontSize以及maxLines或布局大小限制使用。                                                                              |
-| maxFontSize          | number\| [ResourceStr](ts-types.md#resourcestr)                             | 否   | 设置Label文本最大显示字号。需配合minFontSize以及maxLines或布局大小限制使用。                                                                              |
+| minFontSize          | number \| [ResourceStr](ts-types.md#resourcestr)                             | 否   | 设置Label文本最小显示字号。需配合maxFontSize以及maxLines或布局大小限制使用。                                                                              |
+| maxFontSize          | number \| [ResourceStr](ts-types.md#resourcestr)                             | 否   | 设置Label文本最大显示字号。需配合minFontSize以及maxLines或布局大小限制使用。                                                                              |
 | heightAdaptivePolicy | [TextHeightAdaptivePolicy](ts-appendix-enums.md#textheightadaptivepolicy10) | 否   | 设置Label文本自适应高度的方式。                                                                                                                           |
 | font                 | [Font](ts-types.md#font)                                                    | 否   | 设置Label文本字体样式。                                                                                                                                   |
 
@@ -170,3 +173,41 @@ struct SwipeGestureExample {
 ```
 
 ![ifButton](figures/ifButton.gif)
+
+### 示例3 
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct buttonTestDemo {
+  @State txt: string = 'overflowTextOverlengthTextOverflow.Clip';
+  @State widthShortSize: number = 200;
+
+  build() {
+    Row() {
+      Column() {
+        Button(this.txt)
+          .width(this.widthShortSize)
+          .height(100)
+          .labelStyle({ overflow: TextOverflow.Clip,
+            maxLines: 1,
+            minFontSize: 20,
+            maxFontSize: 20,
+            font: {
+              size: 20,
+              weight: FontWeight.Bolder,
+              family: 'cursive',
+              style: FontStyle.Italic
+            }
+          })
+          .fontSize(40)
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+![image-20230711171138661](figures/imageButtonLabelStyle.png)

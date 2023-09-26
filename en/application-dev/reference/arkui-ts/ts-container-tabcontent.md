@@ -13,7 +13,7 @@ This component supports only one child component.
 
 >  **NOTE**
 >
->  Built-in components and custom components are allowed, with support for ([if/else](../../quick-start/arkts-rendering-control-ifelse.md), [ForEach](../../quick-start/arkts-rendering-control-foreach.md), and [LazyForEach](../../quick-start/arkts-rendering-control-lazyforeach.md)) rendering control.
+>  Built-in components and custom components are allowed, with support for ([if/else](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-ifelse.md), [ForEach](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-foreach.md), and [LazyForEach](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-lazyforeach.md)) rendering control.
 
 
 ## APIs
@@ -27,7 +27,7 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 
 | Name| Type| Description|
 | -------- | -------- | -------- |
-| tabBar | string \| [Resource](ts-types.md#resource) \| {<br>icon?: string \| [Resource](ts-types.md#resource),<br>text?: string \| [Resource](ts-types.md#resource)<br>}<br>\| [CustomBuilder](ts-types.md)<sup>8+</sup> | Content displayed on the tab bar.<br>**CustomBuilder**: builder, to which components can be passed (applicable to API version 8 and later versions).<br>**NOTE**<br>If an icon uses an SVG image, the width and height attributes of the SVG image must be deleted. Otherwise, the icon size will be determined by the width and height attributes of the SVG image.<br>If the content set exceeds the space provided by the tab bar, it will be clipped.|
+| tabBar | string \| [Resource](ts-types.md#resource) \| {<br>icon?: string \| [Resource](ts-types.md#resource),<br>text?: string \| [Resource](ts-types.md#resource)<br>}<br>\| [CustomBuilder](ts-types.md#custombuilder8)<sup>8+</sup> | Content displayed on the tab bar.<br>**CustomBuilder**: builder, to which components can be passed (applicable to API version 8 and later versions).<br>**NOTE**<br>If an icon uses an SVG image, the width and height attributes of the SVG image must be deleted. Otherwise, the icon size will be determined by the width and height attributes of the SVG image.<br>If the content set exceeds the space provided by the tab bar, it will be clipped.|
 | tabBar<sup>9+</sup> | [SubTabBarStyle](#subtabbarstyle9) \| [BottomTabBarStyle](#bottomtabbarstyle9) | Content displayed on the tab bar.<br>**SubTabBarStyle**: subtab style. It takes text as its input parameter.<br>**BottomTabBarStyle**: bottom and side tab style. It takes text and images as its input parameters.<br>**NOTE**<br>The bottom tab style does not include an underline.<br>When an icon display error occurs, a gray blank block is displayed.|
 
 >  **NOTE**
@@ -74,7 +74,7 @@ The following attributes are supported.
 | indicator<sup>10+</sup> | [IndicatorStyle](#indicatorstyle10)| Underline indicator style of the selected subtab. It is valid only in the horizontal layout.<br>               |
 | selectedMode<sup>10+</sup> | [SelectedMode](#selectedmode10)   | Display mode of the selected subtab.<br>Default value: **SelectedMode.INDICATOR**|
 | board<sup>10+</sup> | [BoardStyle](#boardstyle10)   | Board style of the selected subtab.|
-| labelStyle<sup>10+</sup> | [LabelStyle](#labelstyle10) | Label text and font style of the selected subtab.|
+| labelStyle<sup>10+</sup> | [LabelStyle](#labelstyle10) | Label text and font of the subtab.|
 
 ## IndicatorStyle<sup>10+</sup>
 
@@ -82,7 +82,7 @@ The following attributes are supported.
 | -------- | -------- | -------- | -------------------------------- |
 | color | [ResourceColor](ts-types.md#resourcecolor) | No| Underline indicator color and board color.<br>Default value: **#FF007DFF**|
 | height | [Length](ts-types.md#length) | No| Height of the underline indicator. It cannot be set in percentage.<br>Default value: **2.0**<br>Unit: vp|
-| width | [Length](ts-types.md#length) | No| Width of the underline indicator. It cannot be set in percentage.<br>Default value: **0.0**<br>Unit: vp|
+| width | [Length](ts-types.md#length) | No| Width of the underline indicator. It cannot be set in percentage.<br>Default value: **0.0**<br>Unit: vp<br>**NOTE**<br>If this parameter is set to **0**, the tab text width is used.|
 | borderRadius | [Length](ts-types.md#length) | No| Radius of the rounded corner of the underline indicator. It cannot be set in percentage.<br>Default value: **0.0**<br>Unit: vp|
 | marginTop | [Length](ts-types.md#length) | No| Spacing between the underline indicator and text. It cannot be set in percentage.<br>Default value: **8.0**<br>Unit: vp|
 
@@ -104,10 +104,10 @@ The following attributes are supported.
 | -------------------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
 | overflow             | [TextOverflow](ts-appendix-enums.md#textoverflow)            | No  | Display mode when the label text is too long. By default, an ellipsis (...) is used to represent text overflow.|
 | maxLines             | number                                                       | No  | Maximum number of lines in the label text. If this attribute is specified, the text will not exceed the specified number of lines. You can use **textOverflow** to specify how to represent text overflow. Default value: **1**|
-| minFontSize          | number \| [ResourceStr](ts-types.md#resourcestr)             | No  | Minimum font size of the label text. For the setting to take effect, this attribute must be used together with **maxFontSize**, **maxLines**, or layout constraint settings. When the adaptive text size is set, **font.size** does not take effect. Default value: **0.0fp**|
-| maxFontSize          | number \| [ResourceStr](ts-types.md#resourcestr)             | No  | Maximum font size of the label text. For the setting to take effect, this attribute must be used together with **minFontSize**, **maxLines**, or layout constraint settings. When the adaptive text size is set, **font.size** does not take effect. Default value: **0.0fp**|
+| minFontSize          | number \| [ResourceStr](ts-types.md#resourcestr)             | No  | Minimum font size of the label text. It cannot be set in percentage. For the setting to take effect, this attribute must be used together with **maxFontSize**, **maxLines**, or layout constraint settings. When the adaptive text size is set, **font.size** does not take effect. Default value: **0.0fp**|
+| maxFontSize          | number \| [ResourceStr](ts-types.md#resourcestr)             | No  | Maximum font size of the label text. It cannot be set in percentage. For the setting to take effect, this attribute must be used together with **minFontSize**, **maxLines**, or layout constraint settings. When the adaptive text size is set, **font.size** does not take effect. Default value: **0.0fp**|
 | heightAdaptivePolicy | [TextHeightAdaptivePolicy](ts-appendix-enums.md#textheightadaptivepolicy10) | No  | How the adaptive height is determined for the label text. By default, the **maxLines** settings are prioritized.                             |
-| font                 | [Font](ts-types.md#font)                                     | No  | Font of the label text. By default, the font size is 16.0fp,  the font style is normal, and the font weight is normal.     |
+| font                 | [Font](ts-types.md#font)                                     | No  | Font of the label text. By default, the font size is 16.0fp, the font type is HarmonyOS Sans, the font style is normal, and the font weight is normal.     |
 
 ## BottomTabBarStyle<sup>9+</sup>
 
@@ -399,3 +399,290 @@ struct TabBarStyleExample {
 ```
 
 ![tabbarStyle](figures/TabBarStyle.jpeg)
+
+Example 4
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct TabsAttr {
+  private controller: TabsController = new TabsController()
+  @State indicatorColor: Color = Color.Blue;
+  @State indicatorWidth: number = 40;
+  @State indicatorHeight: number = 10;
+  @State indicatorBorderRadius: number = 5;
+  @State indicatorSpace: number = 10;
+  @State subTabBorderRadius: number = 20;
+  @State selectedMode: SelectedMode = SelectedMode.INDICATOR;
+  private colorFlag: boolean = true;
+  private widthFlag: boolean = true;
+  private heightFlag: boolean = true;
+  private borderFlag: boolean = true;
+  private spaceFlag: boolean = true;
+  build() {
+    Column() {
+      Button ("Underline Indicator Color Change").width ('100%').margin ({bottom:'12vp'})
+        .onClick((event: ClickEvent) => {
+          // Animation configuration for the width and height attributes of the <Button> component
+          if (this.colorFlag) {
+            animateTo({
+              duration: 1000, // Animation duration.
+              curve: Curve.Linear, // Animation curve.
+              delay: 200, // Animation delay.
+              iterations: 1, // Number of playback times.
+              playMode: PlayMode.Normal, // Animation playback mode.
+              onFinish: () => {
+                console.info('play end')
+              }
+            }, () => {
+              this.indicatorColor = Color.Red
+            })
+          } else {
+            animateTo({
+              duration: 1000, // Animation duration.
+              curve: Curve.Linear, // Animation curve.
+              delay: 200, // Animation delay.
+              iterations: 1, // Number of playback times.
+              playMode: PlayMode.Normal, // Animation playback mode.
+              onFinish: () => {
+                console.info('play end')
+              }
+            }, () => {
+              this.indicatorColor = Color.Yellow
+            })
+          }
+          this.colorFlag = !this.colorFlag
+        })
+      Button ("Underline Indicator Height Change").width ('100%').margin ({bottom:'12vp'})
+        .onClick((event: ClickEvent) => {
+          // Animation configuration for the width and height attributes of the <Button> component
+          if (this.heightFlag) {
+            animateTo({
+              duration: 1000, // Animation duration.
+              curve: Curve.Linear, // Animation curve.
+              delay: 200, // Animation delay.
+              iterations: 1, // Number of playback times.
+              playMode: PlayMode.Normal, // Animation playback mode.
+              onFinish: () => {
+                console.info('play end')
+              }
+            }, () => {
+              this.indicatorHeight = 20
+            })
+          } else {
+            animateTo({
+              duration: 1000, // Animation duration.
+              curve: Curve.Linear, // Animation curve.
+              delay: 200, // Animation delay.
+              iterations: 1, // Number of playback times.
+              playMode: PlayMode.Normal, // Animation playback mode.
+              onFinish: () => {
+                console.info('play end')
+              }
+            }, () => {
+              this.indicatorHeight = 10
+            })
+          }
+          this.heightFlag = !this.heightFlag
+        })
+      Button ("Underline Indicator Width Change").width ('100%').margin ({bottom:'12vp'})
+        .onClick((event: ClickEvent) => {
+          // Animation configuration for the width and height attributes of the <Button> component
+          if (this.widthFlag) {
+            animateTo({
+              duration: 1000, // Animation duration.
+              curve: Curve.Linear, // Animation curve.
+              delay: 200, // Animation delay.
+              iterations: 1, // Number of playback times.
+              playMode: PlayMode.Normal, // Animation playback mode.
+              onFinish: () => {
+                console.info('play end')
+              }
+            }, () => {
+              this.indicatorWidth = 30
+            })
+          } else {
+            animateTo({
+              duration: 1000, // Animation duration.
+              curve: Curve.Linear, // Animation curve.
+              delay: 200, // Animation delay.
+              iterations: 1, // Number of playback times.
+              playMode: PlayMode.Normal, // Animation playback mode.
+              onFinish: () => {
+                console.info('play end')
+              }
+            }, () => {
+              this.indicatorWidth = 50
+            })
+          }
+          this.widthFlag = !this.widthFlag
+        })
+      Button ("Underline Indicator Rounded Corner Change").width ('100%').margin ({bottom:'12vp'})
+        .onClick((event: ClickEvent) => {
+          // Animation configuration for the width and height attributes of the <Button> component
+          if (this.borderFlag) {
+            animateTo({
+              duration: 1000, // Animation duration.
+              curve: Curve.Linear, // Animation curve.
+              delay: 200, // Animation delay.
+              iterations: 1, // Number of playback times.
+              playMode: PlayMode.Normal, // Animation playback mode.
+              onFinish: () => {
+                console.info('play end')
+              }
+            }, () => {
+              this.indicatorBorderRadius = 0
+            })
+          } else {
+            animateTo({
+              duration: 1000, // Animation duration.
+              curve: Curve.Linear, // Animation curve.
+              delay: 200, // Animation delay.
+              iterations: 1, // Number of playback times.
+              playMode: PlayMode.Normal, // Animation playback mode.
+              onFinish: () => {
+                console.info('play end')
+              }
+            }, () => {
+              this.indicatorBorderRadius = 5
+            })
+          }
+          this.borderFlag = !this.borderFlag
+        })
+      Button ("Underline Indicator Spacing Change").width ('100%').margin ({bottom:'12vp'})
+        .onClick((event: ClickEvent) => {
+          // Animation configuration for the width and height attributes of the <Button> component
+          if (this.spaceFlag) {
+            animateTo({
+              duration: 1000, // Animation duration.
+              curve: Curve.Linear, // Animation curve.
+              delay: 200, // Animation delay.
+              iterations: 1, // Number of playback times.
+              playMode: PlayMode.Normal, // Animation playback mode.
+              onFinish: () => {
+                console.info('play end')
+              }
+            }, () => {
+              this.indicatorSpace = 20
+            })
+          } else {
+            animateTo({
+              duration: 1000, // Animation duration.
+              curve: Curve.Linear, // Animation curve.
+              delay: 200, // Animation delay.
+              iterations: 1, // Number of playback times.
+              playMode: PlayMode.Normal, // Animation playback mode.
+              onFinish: () => {
+                console.info('play end')
+              }
+            }, () => {
+              this.indicatorSpace = 10
+            })
+          }
+          this.spaceFlag = !this.spaceFlag
+        })
+      Tabs({ barPosition: BarPosition.End, controller: this.controller }) {
+        TabContent() {
+          Column().width('100%').height('100%').backgroundColor(Color.Pink).borderRadius('12vp')
+        }.tabBar(SubTabBarStyle.of('pink')
+          .indicator({
+            color: this.indicatorColor, // Underline indicator color.
+            height: this.indicatorHeight, // Underline indicator height.
+            width: this.indicatorWidth, // nderline indicator width.
+            borderRadius: this.indicatorBorderRadius, // Radius of the rounded corner of the underline indicator.
+            marginTop: this.indicatorSpace // Spacing between the underline indicatorand text.
+          })
+          .selectedMode(this.selectedMode)
+          .board({ borderRadius: this.subTabBorderRadius })
+          .labelStyle({})
+        )
+        TabContent() {
+          Column().width('100%').height('100%').backgroundColor(Color.Yellow).borderRadius('12vp')
+        }.tabBar('yellow')
+        TabContent() {
+          Column().width('100%').height('100%').backgroundColor(Color.Blue).borderRadius('12vp')
+        }.tabBar('blue')
+        TabContent() {
+          Column().width('100%').height('100%').backgroundColor(Color.Green).borderRadius('12vp')
+        }.tabBar('green')
+        TabContent() {
+          Column().width('100%').height('100%').backgroundColor(Color.Gray).borderRadius('12vp')
+        }.tabBar('gray')
+        TabContent() {
+          Column().width('100%').height('100%').backgroundColor(Color.Orange).borderRadius('12vp')
+        }.tabBar('orange')
+      }
+      .vertical(false).scrollable(true)
+      .barMode(BarMode.Scrollable)
+      .barHeight(140).animationDuration(400)
+      .onChange((index: number) => {
+        console.info(index.toString())
+      })
+      .backgroundColor(0xF5F5F5).height(320)
+    }.width('100%').height(250).padding({top: '24vp', left: '24vp', right: '24vp'})
+  }
+}
+```
+
+![tabContent3](figures/tabContent3.gif)
+
+Example 5
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct TabsTextOverflow {
+  @State message: string = 'Hello World'
+  private controller: TabsController = new TabsController()
+  @State subTabOverflowOpaque: boolean = true;
+  build() {
+    Column() {
+      Tabs({ barPosition: BarPosition.Start, controller: this.controller }) {
+        TabContent() {
+          Column(){
+            Text('Use an ellipsis').fontSize(30).fontColor(0xFF000000)
+          }.width('100%').height('100%').backgroundColor(Color.Pink)
+        }.tabBar (SubTabBarStyle.of ('Start [Use an ellipsis] End')
+          .labelStyle({ overflow: TextOverflow.Ellipsis, maxLines: 1, minFontSize: 10, heightAdaptivePolicy: TextHeightAdaptivePolicy.MAX_LINES_FIRST,
+            font: { size: 20 } }))
+        TabContent() {
+          Column()
+          {
+            Text('Scale down and then clip').fontSize(30).fontColor(0xFF000000)
+          }.width('100%').height('100%').backgroundColor(Color.Pink)
+        }.tabBar (SubTabBarStyle.of ('Start [Scale down and then clip] End')
+          .labelStyle({ overflow: TextOverflow.Clip, maxLines: 1, minFontSize: 15, maxFontSize: 15, heightAdaptivePolicy: TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST,
+            font: { size: 20 } }))
+        TabContent() {
+          Column(){
+            Text('Scale down, start a new line, and then clip').fontSize(30).fontColor(0xFF000000)
+          }.width('100%').height('100%').backgroundColor(Color.Pink)
+        }.tabBar (SubTabBarStyle.of ('Start [Scale down, start a new line, and then clip] End')
+          .labelStyle({ overflow: TextOverflow.Clip, maxLines: 2, minFontSize: 15, maxFontSize: 15, heightAdaptivePolicy: TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST,
+            font: { size: 20 } }))
+        TabContent() {
+          Column() {
+            Text('Start a new line').fontSize(30).fontColor(0xFF000000)
+          }
+          .width('100%').height('100%').backgroundColor(Color.Pink)
+        }.tabBar(SubTabBarStyle.of('Start [Start a new line] End')
+          .labelStyle({ overflow: TextOverflow.Clip, maxLines: 10, minFontSize: 10, heightAdaptivePolicy: TextHeightAdaptivePolicy.MAX_LINES_FIRST,
+            font: { size: 20 } }))
+      }
+      .vertical(true).scrollable(true)
+      .barMode(BarMode.Fixed)
+      .barHeight(720)
+      .barWidth(200).animationDuration(400)
+      .onChange((index: number) => {
+        console.info(index.toString())
+      })
+      .height('100%').width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+![tabContent4](figures/tabContent4.png)

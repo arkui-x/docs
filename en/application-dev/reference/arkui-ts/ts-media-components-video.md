@@ -8,7 +8,7 @@ The **\<Video>** component is used to play a video and control its playback.
 
 ## Required Permissions
 
-To use online videos, you must apply for the **ohos.permission.INTERNET** permission. For details about how to apply for the permission, see [Declaring Permissions](../../security/accesstoken-guidelines.md).
+To use online videos, you must apply for the **ohos.permission.INTERNET** permission. For details about how to apply for the permission, see [Declaring Permissions](https://gitee.com/openharmony/docs/blob/master/en/application-dev/security/accesstoken-guidelines.md).
 
 
 ## Child Components
@@ -24,7 +24,7 @@ Video(value: {src?: string | Resource, currentProgressRate?: number | string | P
 
 | Name             | Type                                                    | Mandatory| Description                                                    |
 | ------------------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
-| src                 | string \| [Resource](ts-types.md)                            | No  | Path of the video source, which can be a local path or a URL.<br>The video resources can be stored in the **video** or **rawfile** folder under **resources**.<br>The path can include a **dataability://** prefix, which indicates that the path is provided by a Data ability. For details about the path, see [Data Ability Development](../../application-models/dataability-overview.md).<br>- Strings with the **file:///data/storage** prefix are supported, which are used to read resources in the application sandbox. Ensure that the application has the read permission to the files in the specified path.<br>**NOTE**<br>The supported video formats are MP4, MKV, WebM, and TS. |
+| src                 | string \| [Resource](ts-types.md)                            | No  | Path of the video source, which can be a local path or a URL.<br>The video resources can be stored in the **video** or **rawfile** folder under **resources**.<br>The path can include a **dataability://** prefix, which indicates that the path is provided by a Data ability. For details about the path, see [Data Ability Development](https://gitee.com/openharmony/docs/blob/master/en/application-dev/application-models/dataability-overview.md).<br>- Strings with the **file:///data/storage** prefix are supported, which are used to read resources in the application sandbox. Ensure that the application has the read permission to the files in the specified path.<br>**NOTE**<br>The supported video formats are MP4, MKV, WebM, and TS. |
 | currentProgressRate | number \| string \| PlaybackSpeed<sup>8+</sup> | No  | Video playback speed.<br>**NOTE**<br>The value of the number type can only be **0.75**, **1.0**, **1.25**, **1.75**, or **2.0**.<br>Default value: 1.0 \| PlaybackSpeed.Speed_Forward_1_00_X |
 | previewUri          | string \|PixelMap \| [Resource](ts-types.md)  | No  | Path of the preview image.                                |
 | controller          | [VideoController](#videocontroller)                          | No  | Video controller.                                            |
@@ -149,6 +149,8 @@ Sets the video playback position with the specified seek mode.
 | NextKeyframe     | Seeks to the nearest next keyframe. |
 | ClosestKeyframe  | Seeks to the nearest keyframe.    |
 | Accurate         | Seeks to a specific frame, regardless of whether the frame is a keyframe.|
+
+
 
 ## Example
 

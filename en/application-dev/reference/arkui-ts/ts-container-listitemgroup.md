@@ -8,9 +8,9 @@ The **\<ListItemGroup>** component is used to display list item groups. It must 
 
 ## Usage Guidelines
 
-If the **listDirection** attribute of the parent **\<List>** component is set to **Axis.Vertical**, the **height** attribute of the **\<ListItemGroup>** component cannot be set. The height of a **\<ListItemGroup>** component is the sum of its header height, footer height, and total height of the list items. If the **listDirection** attribute of the parent **\<List>** component is set to **Axis.Horizontal**, the **width** attribute of the **\<ListItemGroup>** component cannot be set. The width of a **\<ListItemGroup>** component is the sum of its header width, footer width, and total width of the list items.
+If the **listDirection** attribute of the parent **\<List>** component is set to **Axis.Vertical**, the **height** attribute of the **\<ListItemGroup>** component is fixed at the sum of the component's header height, footer height, and total height of the list items. If the **listDirection** attribute of the parent **\<List>** component is set to **Axis.Horizontal**, the **width** attribute of the **\<ListItemGroup>** component is fixed at the sum of the component's header width, footer width, and total width of the list items.
 
-The list items in the **\<ListItemGroup>** component cannot be edited, selected, or dragged. That is, the **editable** and **selectable** attributes of these list items do not take effect.
+The list items in the **\<ListItemGroup>** component cannot be edited or dragged. That is, their **editable** attribute does not take effect.
 
 ## Child Components
 
@@ -27,7 +27,7 @@ ListItemGroup(options?: {header?: CustomBuilder, footer?: CustomBuilder, space?:
 | ------------------- | --------------------------------------------------- | ---- | ------------------------------------------------------------ |
 | header              | [CustomBuilder](ts-types.md#custombuilder8)         | No  | Header of the list item group.                                 |
 | footer              | [CustomBuilder](ts-types.md#custombuilder8)         | No  | Footer of the list item group.                                 |
-| space               | number \| string                          | No  | Spacing between list items. This parameter is valid only between list items, but not between a header and list item or between a footer and list item.|
+| space               | number \| string                          | No  | Spacing between list items. This parameter is valid only between list items, but not between the header and list item or between the footer and list item.|
 
 ## Attributes
 
@@ -37,7 +37,7 @@ ListItemGroup(options?: {header?: CustomBuilder, footer?: CustomBuilder, space?:
 
 > **NOTE** 
 >
-> The **\<ListItemGroup>** component does not support the universal attribute **[aspectRatio](ts-universal-attributes-layout-constraints.md)**.
+> The **\<ListItemGroup>** component does not support the universal attribute [aspectRatio](ts-universal-attributes-layout-constraints.md).
 >
 > If the main axis of **\<ListItemGroup>** runs in the vertical direction, the [height](ts-universal-attributes-size.md) setting does not take effect.
 >
@@ -66,7 +66,7 @@ struct ListItemGroupExample {
     },
     {
       title: 'Thursday',
-      projects: ['Draw', 'Music', 'Sports']
+      projects: ['Art', 'Music', 'Sports']
     }
   ]
 

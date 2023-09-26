@@ -40,7 +40,7 @@ Among the [universal attributes](ts-universal-attributes-size.md) and [universal
 | inputFilter<sup>8+</sup> | {<br>value: [ResourceStr](ts-types.md#resourcestr),<br>error?: (value: string) =&gt; void<br>} | Regular expression for input filtering. Only inputs that comply with the regular expression can be displayed. Other inputs are filtered out. The regular expression can match single characters, but not strings.<br>- **value**: regular expression to set.<br>- **error**: filtered-out content to return when regular expression matching fails.|
 | copyOption<sup>9+</sup>  | [CopyOptions](ts-appendix-enums.md#copyoptions9) | Whether copy and paste is allowed.<br>Default value: **CopyOptions.LocalDevice**<br>If this attribute is set to **CopyOptions.None**, the paste operation is allowed, but not the copy or cut operation.|
 | showPasswordIcon<sup>9+</sup> | boolean | Whether to display the password icon at the end of the password text box.<br>Default value: **true**|
-| style<sup>9+</sup> | [TextInputStyle](#textinputstyle9) \| [TextContentStyle](ts-appendix-enums.md#textcontentstyle10) | Text input style.<br>Default value: **TextInputStyle.Default**|
+| style<sup>9+</sup> | [TextInputStyle](#textinputstyle9) | Text input style.<br>Default value: **TextInputStyle.Default**|
 | textAlign<sup>9+</sup>   | [TextAlign](ts-appendix-enums.md#textalign) | Horizontal alignment of the text.<br>Default value: **TextAlign.Start**<br>**NOTE**<br>Available options are **TextAlign.Start**, **TextAlign.Center**, and **TextAlign.End**.<br>To set vertical alignment for the text, use the [align](ts-universal-attributes-location.md) attribute. The **align** attribute alone does not control the horizontal position of the text. In other words, **Alignment.TopStart**, **Alignment.Top**, and **Alignment.TopEnd** produce the same effect, top-aligning the text; **Alignment.Start**, **Alignment.Center**, and **Alignment.End** produce the same effect, centered-aligning the text vertically; **Alignment.BottomStart**, **Alignment.Bottom**, and **Alignment.BottomEnd** produce the same effect, bottom-aligning the text. |
 | selectedBackgroundColor<sup>10+</sup> | [ResourceColor](ts-types.md#resourcecolor) | Background color of the selected text.<br>If the opacity is not set, the color is opaque. For example, **0x80000000** indicates black with 50% opacity.|
 | caretStyle<sup>10+</sup> | {<br>width: [Length](ts-types.md#length)<br>} | Caret style.                                       |
@@ -49,7 +49,7 @@ Among the [universal attributes](ts-universal-attributes-size.md) and [universal
 
 >  **NOTE**
 >
->  The default value of the universal attribute [padding](ts-universal-attributes-size.md) is as follows: { top: 8 vp, right: 16 vp, bottom: 8 vp, left: 16 vp }
+>  The default value of the universal attribute [padding](ts-universal-attributes-size.md) is as follows: <br>{<br> top: 8 vp,<br> right: 16 vp,<br> bottom: 8 vp,<br> left: 16 vp<br> }
 
 ## EnterKeyType
 
@@ -66,7 +66,7 @@ Among the [universal attributes](ts-universal-attributes-size.md) and [universal
 | Name                | Description           |
 | ------------------ | ------------- |
 | Normal   | Normal input mode.<br>The value can contain digits, letters, underscores (_), spaces, and special characters.|
-| Password | Password input mode. The value can contain digits, letters, underscores (_), spaces, and special characters. An eye icon is used to show or hide the password, and the password is hidden behind dots by default.|
+| Password | Password input mode. The value can contain digits, letters, underscores (_), spaces, and special characters. An eye icon is used to show or hide the password, and the password is hidden behind dots by default. The password input mode does not support underlines.|
 | Email    | Email address input mode. The value can contain digits, letters, underscores (_), and at signs (@). Only one at sign (@) is allowed.|
 | Number   | Digit input mode.     |
 | PhoneNumber<sup>9+</sup> | Phone number input mode.<br>The value can contain digits, plus signs (+), hyphens (-), asterisks (*), and number signs (#). The length is not limited.|
@@ -84,9 +84,9 @@ In addition to the [universal events](ts-universal-events-click.md), the followi
 
 | Name                                                         | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| onChange(callback: (value: string) =&gt; void)               | Triggered when the input changes.<br>**value**: text content.<br>This event is triggered when any of the following conditions is met:<br>1. Keyboard input is received.<br>2. Paste and cut is performed.<br>3. Ctrl+V is pressed. |
+| onChange(callback: (value: string) =&gt; void)               | Triggered when the input in the text box changes.<br>**value**: text content.<br>This event is triggered when any of the following conditions is met:<br>1. Keyboard input is received.<br>2. Paste and cut is performed.<br>3. Ctrl+V is pressed. |
 | onSubmit(callback: (enterKey: EnterKeyType) =&gt; void)      | Triggered when the Enter key on the keyboard is pressed. The return value is the current type of the Enter key.<br>**enterKeyType**: type of the Enter key. For details, see [EnterKeyType](#enterkeytype). |
-| onEditChange(callback: (isEditing: boolean) =&gt; void)<sup>8+</sup> | Triggered when the input status changes.                     |
+| onEditChange(callback: (isEditing: boolean) =&gt; void)<sup>8+</sup> | Triggered when the input status changes. When the cursor is placed in the text box, it is in the editing state. Otherwise, it is in the non-editing state. If the value of **isEditing** is **true**, text input is in progress.|
 | onCopy(callback:(value: string) =&gt; void)<sup>8+</sup>     | Triggered when the copy button on the pasteboard, which displays when the text box is long pressed, is clicked.<br>**value**: text to be copied. |
 | onCut(callback:(value: string) =&gt; void)<sup>8+</sup>      | Triggered when the cut button on the pasteboard, which displays when the text box is long pressed, is clicked.<br>**value**: text to be cut. |
 | onPaste(callback:(value: string) =&gt; void)<sup>8+</sup>    | Triggered when the paste button on the pasteboard, which displays when the text box is long pressed, is clicked.<br>**value**: text to be pasted. |
@@ -122,8 +122,8 @@ Sets the text selection area, which will be highlighted.
 
 | Name        | Type| Mandatory| Description              |
 | -------------- | -------- | ---- | ---------------------- |
-| selectionStart | number   | Yes  | Start position of the text selection area. The start position of the text in the text box is 0.|
-| selectionEnd   | number   | Yes  | End position of the text selection area.|
+| selectionStart | number   | Yes  | Start position of the text selection range. The start position of text in the text box is 0.|
+| selectionEnd   | number   | Yes  | End position of the text selection range.|
 
 ### stopEditing<sup>10+</sup>
 
