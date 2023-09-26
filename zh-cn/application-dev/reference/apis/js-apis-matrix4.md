@@ -27,7 +27,7 @@ Matrix的构造函数，可以通过传入的参数创建一个四阶矩阵，�
 
 | 参数名 | 类型                                                         | 必填 | 说明                                                         |
 | ------ | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
-| option | [number,number,number,number,number,number,number,number,number,number,number,number,number,number,number,number] | 是   | 参数为长度为16（4\*4）的number数组,&nbsp;详情见四阶矩阵说明。<br/>默认值：<br/>[1,&nbsp;0,&nbsp;0,&nbsp;0,<br/>0,&nbsp;1,&nbsp;0,&nbsp;0,<br/>0,&nbsp;0,&nbsp;1,&nbsp;0,<br/>0,&nbsp;0,&nbsp;0,&nbsp;1] |
+| option | [number,number,number,number,<br/>number,number,number,number,<br/>number,number,number,number,<br/>number,number,number,number] | 是   | 参数为长度为16（4\*4）的number数组,&nbsp;详情见四阶矩阵说明。<br/>默认值：<br/>[1,&nbsp;0,&nbsp;0,&nbsp;0,<br/>0,&nbsp;1,&nbsp;0,&nbsp;0,<br/>0,&nbsp;0,&nbsp;1,&nbsp;0,<br/>0,&nbsp;0,&nbsp;0,&nbsp;1] |
 
 **返回值：**
 
@@ -179,7 +179,7 @@ struct Test {
 combine(option: Matrix4Transit): Matrix4Transit
 
 
-Matrix的叠加函数，可以将两个矩阵的效果叠加起来生成一个新的矩阵对象。
+Matrix的叠加函数，可以将两个矩阵的效果叠加起来生成一个新的矩阵对象。会改变调用该函数的原始矩阵。
 
 **系统能力：**  SystemCapability.ArkUI.ArkUI.Full
 
@@ -232,7 +232,7 @@ struct Test {
 
 invert(): Matrix4Transit
 
-Matrix的逆函数，可以返回一个当前矩阵对象的逆矩阵，即效果正好相反。
+Matrix的逆函数，可以返回一个当前矩阵对象的逆矩阵，即效果正好相反。会改变调用该函数的原始矩阵。
 
 **系统能力：**  SystemCapability.ArkUI.ArkUI.Full
 
@@ -275,7 +275,7 @@ struct Tests {
 
 translate(option: TranslateOption): Matrix4Transit
 
-Matrix的平移函数，可以为当前矩阵增加x轴/y轴/z轴平移效果。
+Matrix的平移函数，可以为当前矩阵增加x轴/y轴/z轴平移效果。会改变调用该函数的原始矩阵。
 
 **系统能力：**  SystemCapability.ArkUI.ArkUI.Full
 
@@ -320,7 +320,7 @@ struct Test {
 scale(option: ScaleOption): Matrix4Transit
 
 
-Matrix的缩放函数，可以为当前矩阵增加x轴/y轴/z轴缩放效果。
+Matrix的缩放函数，可以为当前矩阵增加x轴/y轴/z轴缩放效果。会改变调用该函数的原始矩阵。
 
 **系统能力：**  SystemCapability.ArkUI.ArkUI.Full
 
@@ -365,7 +365,7 @@ struct Test {
 rotate(option: RotateOption): Matrix4Transit
 
 
-Matrix的旋转函数，可以为当前矩阵增加x轴/y轴/z轴旋转效果。
+Matrix的旋转函数，可以为当前矩阵增加x轴/y轴/z轴旋转效果。会改变调用该函数的原始矩阵。
 
 **系统能力：**  SystemCapability.ArkUI.ArkUI.Full
 
