@@ -21,15 +21,19 @@
 ## AppStorage
 
 
-### Link
+AppStorage具体UI使用说明，详见[AppStorage(应用全局的UI状态存储)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-appstorage.md)
 
-static Link(propName: string): any
+
+### link<sup>10+</sup>
+
+static link<T>(propName: string): SubscribedAbstractProperty<T>
 
 与AppStorage中对应的propName建立双向数据绑定。如果给定的propName在AppStorage中存在，返回与AppStorage中propName对应属性的双向绑定数据。
 
 双向绑定数据的修改会同步回AppStorage中，AppStorage会将变化同步到所有绑定该propName的数据和自定义组件中。
 
 如果AppStorage中不存在propName，则返回undefined。
+
 
 **参数：**
 
@@ -41,20 +45,20 @@ static Link(propName: string): any
 
 | 类型   | 描述                                       |
 | ---- | ---------------------------------------- |
-| any  | 返回双向绑定的数据，如果AppStorage不存在对应的propName，在返回undefined。 |
+| SubscribedAbstractProperty&lt;T&gt; | 返回双向绑定的数据，如果AppStorage不存在对应的propName，则返回undefined。 |
 
 
 ```ts
-AppStorage.SetOrCreate('PropA', 47);
-let linkToPropA1 = AppStorage.Link('PropA');
-let linkToPropA2 = AppStorage.Link('PropA'); // linkToPropA2.get() == 47
+AppStorage.setOrCreate('PropA', 47);
+let linkToPropA1:SubscribedAbstractProperty<number> = AppStorage.link('PropA');
+let linkToPropA2:SubscribedAbstractProperty<number> = AppStorage.link('PropA'); // linkToPropA2.get() == 47
 linkToPropA1.set(48); // 双向同步: linkToPropA1.get() == linkToPropA2.get() == 48
 ```
 
 
-### SetAndLink
+### setAndLink<sup>10+</sup>
 
-static SetAndLink&lt;T&gt;(propName: string, defaultValue: T): SubscribedAbstractProperty&lt;T&gt;
+static setAndLink&lt;T&gt;(propName: string, defaultValue: T): SubscribedAbstractProperty&lt;T&gt;
 
 与Link接口类似，如果给定的propName在AppStorage中存在，则返回该propName对应的属性的双向绑定数据。如果不存在，则使用defaultValue在AppStorage创建和初始化propName，返回其双向绑定数据。
 
@@ -73,15 +77,15 @@ static SetAndLink&lt;T&gt;(propName: string, defaultValue: T): SubscribedAbstrac
 
 
 ```ts
-AppStorage.SetOrCreate('PropA', 47);
-let link1: SubscribedAbstractProperty<number> = AppStorage.SetAndLink('PropB', 49); // Create PropB 49
-let link2: SubscribedAbstractProperty<number> = AppStorage.SetAndLink('PropA', 50); // PropA exists, remains 47
+AppStorage.setOrCreate('PropA', 47);
+let link1: SubscribedAbstractProperty<number> = AppStorage.setAndLink('PropB', 49); // Create PropB 49
+let link2: SubscribedAbstractProperty<number> = AppStorage.setAndLink('PropA', 50); // PropA exists, remains 47
 ```
 
 
-### Prop
+### prop<sup>10+</sup>
 
-static Prop(propName: string): any
+static prop&lt;T&gt;(propName: string): SubscribedAbstractProperty&lt;T&gt;
 
 与AppStorage中对应的propName建立单向属性绑定。如果给定的propName在AppStorage中存在，则返回与AppStorage中propName对应属性的单向绑定数据。如果AppStorage中不存在propName，则返回undefined。单向绑定数据的修改不会被同步回AppStorage中。
 
@@ -98,46 +102,47 @@ static Prop(propName: string): any
 
 | 类型   | 描述                                       |
 | ---- | ---------------------------------------- |
-| any  | 返回单向绑定的数据，如果AppStorage不存在对应的propName，在返回undefined。 |
+| SubscribedAbstractProperty&lt;T&gt; | 返回单向绑定的数据，如果AppStorage不存在对应的propName，则返回undefined。 |
 
 
 ```ts
-AppStorage.SetOrCreate('PropA', 47);
-let prop1 = AppStorage.Prop('PropA');
-let prop2 = AppStorage.Prop('PropA');
+AppStorage.setOrCreate('PropA', 47);
+let prop1: SubscribedAbstractProperty<number> = AppStorage.prop('PropA');
+let prop2: SubscribedAbstractProperty<number> = AppStorage.prop('PropA');
 prop1.set(1); // one-way sync: prop1.get()=1; but prop2.get() == 47
 ```
 
 
-### SetAndProp
+### setAndProp<sup>10+</sup>
 
-static SetAndProp&lt;S&gt;(propName: string, defaultValue: S): SubscribedAbstractProperty&lt;S&gt;
+static setAndProp&lt;T&gt;(propName: string, defaultValue: T): SubscribedAbstractProperty&lt;T&gt;
 
 与Prop接口类似。如果给定的propName在AppStorage存在，则返回该propName对应的属性的单向绑定数据。如果不存在，则使用defaultValue在AppStorage创建和初始化propName对应的属性，返回其单向绑定数据。
+
 
 **参数：**
 
 | 参数名          | 类型     | 必填   | 参数描述                                     |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | propName     | string | 是    | AppStorage中的属性名。                         |
-| defaultValue | S      | 是    | 当propName在AppStorage中不存在时，使用default在AppStorage中初始化对应的propName。 |
+| defaultValue | T      | 是    | 当propName在AppStorage中不存在时，使用default在AppStorage中初始化对应的propName。 |
 
 **返回值：**
 
 | 类型                                  | 描述                                      |
 | ----------------------------------- | --------------------------------------- |
-| SubscribedAbstractProperty&lt;S&gt; | SubscribedAbstractProperty&lt;S&gt;的实例。 |
+| SubscribedAbstractProperty&lt;T&gt; | SubscribedAbstractProperty&lt;T&gt;的实例。 |
 
 
 ```ts
-AppStorage.SetOrCreate('PropA', 47);
-let prop: SubscribedAbstractProperty<number> = AppStorage.SetAndProp('PropB', 49); // PropA -> 47, PropB -> 49
+AppStorage.setOrCreate('PropA', 47);
+let prop: SubscribedAbstractProperty<number> = AppStorage.setAndProp('PropB', 49); // PropA -> 47, PropB -> 49
 ```
 
 
-### Has
+### has<sup>10+</sup>
 
-static Has(propName: string): boolean
+static has(propName: string): boolean
 
 判断propName对应的属性是否在AppStorage中存在。
 
@@ -155,13 +160,13 @@ static Has(propName: string): boolean
 
 
 ```ts
-AppStorage.Has('simpleProp');
+AppStorage.has('simpleProp');
 ```
 
 
-### Get
+### get<sup>10+</sup>
 
-static Get&lt;T&gt;(propName: string): T | undefined
+static get&lt;T&gt;(propName: string): T | undefined
 
 获取propName在AppStorage中对应的属性。如果不存在返回undefined。
 
@@ -179,16 +184,16 @@ static Get&lt;T&gt;(propName: string): T | undefined
 
 
 ```ts
-AppStorage.SetOrCreate('PropA', 47);
-let value: number = AppStorage.Get('PropA'); // 47
+AppStorage.setOrCreate('PropA', 47);
+let value: number = AppStorage.get('PropA') as number; // 47
 ```
 
 
-### Set
+### set<sup>10+</sup>
 
-static Set&lt;T&gt;(propName: string, newValue: T): boolean
+static set&lt;T&gt;(propName: string, newValue: T): boolean
 
-在AppStorage中设置propName对应属性的值。
+在AppStorage中设置propName对应属性的值。如果newValue的值和propName对应属性的值相同，即不需要做赋值操作，状态变量不会通知UI刷新propName对应属性的值。
 
 **参数：**
 
@@ -205,17 +210,18 @@ static Set&lt;T&gt;(propName: string, newValue: T): boolean
 
 
 ```ts
-AppStorage.SetOrCreate('PropA', 48);
-let res: boolean = AppStorage.Set('PropA', 47) // true
-let res1: boolean = AppStorage.Set('PropB', 47) // false
+AppStorage.setOrCreate('PropA', 48);
+let res: boolean = AppStorage.set('PropA', 47) // true
+let res1: boolean = AppStorage.set('PropB', 47) // false
 ```
 
 
-### SetOrCreate
+### setOrCreate<sup>10+</sup>
 
-static SetOrCreate&lt;T&gt;(propName: string, newValue: T): void
+static setOrCreate&lt;T&gt;(propName: string, newValue: T): void
 
-propName如果已经在AppStorage中存在，则设置propName对应是属性的值为newValue。如果不存在，则创建propName属性，值为newValue。
+如果propName已经在AppStorage中存在，并且newValue和propName对应属性的值不同，则设置propName对应属性的值为newValue，否则状态变量不会通知UI刷新propName对应属性的值。
+如果propName不存在，则创建propName属性，值为newValue。
 
 **参数：**
 
@@ -226,13 +232,13 @@ propName如果已经在AppStorage中存在，则设置propName对应是属性的
 
 
 ```ts
-AppStorage.SetOrCreate('simpleProp', 121);
+AppStorage.setOrCreate('simpleProp', 121);
 ```
 
 
-### Delete
+### delete<sup>10+</sup>
 
-static Delete(propName: string): boolean
+static delete(propName: string): boolean
 
 在AppStorage中删除propName对应的属性。
 
@@ -254,18 +260,18 @@ static Delete(propName: string): boolean
 
 
 ```ts
-AppStorage.SetOrCreate('PropA', 47);
-AppStorage.Link('PropA');
-let res: boolean = AppStorage.Delete('PropA'); // false, PropA still has a subscriber
+AppStorage.setOrCreate('PropA', 47);
+AppStorage.link<number>('PropA');
+let res: boolean = AppStorage.delete('PropA'); // false, PropA still has a subscriber
 
-AppStorage.SetOrCreate('PropB', 48);
-let res1: boolean = AppStorage.Delete('PropB'); // true, PropB is deleted from AppStorage successfully
+AppStorage.setOrCreate('PropB', 48);
+let res1: boolean = AppStorage.delete('PropB'); // true, PropB is deleted from AppStorage successfully
 ```
 
 
-### Keys
+### keys<sup>10+</sup>
 
-static Keys(): IterableIterator&lt;string&gt;
+static keys(): IterableIterator&lt;string&gt;
 
 返回AppStorage中所有的属性名。
 
@@ -277,34 +283,14 @@ static Keys(): IterableIterator&lt;string&gt;
 
 
 ```ts
-AppStorage.SetOrCreate('PropB', 48);
-let keys: IterableIterator<string> = AppStorage.Keys();
+AppStorage.setOrCreate('PropB', 48);
+let keys: IterableIterator<string> = AppStorage.keys();
 ```
 
 
-### staticClear
+### clear<sup>10+</sup>
 
-static staticClear(): boolean
-
-删除所有的属性。
-
-从API version 9开始废弃，推荐使用[Clear9+](#clear9)。
-
-**返回值：**
-
-| 类型      | 描述                                |
-| ------- | --------------------------------- |
-| boolean | 删除所有的属性，如果当前有状态变量依旧引用此属性，返回false。 |
-
-
-```ts
-let simple = AppStorage.staticClear();
-```
-
-
-### Clear<sup>9+</sup>
-
-static Clear(): boolean
+static clear(): boolean
 
 清除AppStorage的所有的属性。在AppStorage中清除所有属性的前提是，已经没有任何订阅者。如果有，则什么都不做返回false；删除成功返回true。
 
@@ -317,14 +303,15 @@ static Clear(): boolean
 | boolean | 如果AppStorage中的属性已经没有订阅者，则清除成功，返回true。否则返回false。 |
 
 
-```typescript
-AppStorage.SetOrCreate('PropA', 47);
-let res: boolean = AppStorage.Clear(); // true, there are no subscribers
+```ts
+AppStorage.setOrCreate('PropA', 47);
+let res: boolean = AppStorage.clear(); // true, there are no subscribers
 ```
 
-### Size
 
-static Size(): number
+### size<sup>10+</sup>
+
+static size(): number
 
 返回AppStorage中的属性数量。
 
@@ -336,14 +323,16 @@ static Size(): number
 
 
 ```ts
-AppStorage.SetOrCreate('PropB', 48);
-let res: number = AppStorage.Size(); // 1
+AppStorage.setOrCreate('PropB', 48);
+let res: number = AppStorage.size(); // 1
 ```
+
 
 
 ## LocalStorage<sup>9+</sup>
 
 
+LocalStorage具体UI使用说明，详见[LocalStorage(页面级UI状态存储)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-localstorage.md)
 ### constructor<sup>9+</sup>
 
 constructor(initializingProperties?: Object)
@@ -364,9 +353,9 @@ let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
 ```
 
 
-### GetShared<sup>9+</sup>
+### getShared<sup>10+</sup>
 
-static GetShared(): LocalStorage
+static getShared(): LocalStorage
 
 获取当前stage共享的LocalStorage实例。
 
@@ -381,9 +370,7 @@ static GetShared(): LocalStorage
 | [LocalStorage](#localstorage9) | 返回LocalStorage实例。 |
 
 
-```ts
-let storage: LocalStorage = LocalStorage.GetShared();
-```
+getShared具体使用，见[在UI页面通过getShared接口获取在通过loadContent共享的LocalStorage实例](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-localstorage.md#将localstorage实例从uiability共享到一个或多个视图)
 
 
 ### has<sup>9+</sup>
@@ -444,7 +431,7 @@ let value: number = storage.get('PropA'); // 47
 
 set&lt;T&gt;(propName: string, newValue: T): boolean
 
-在LocalStorage中设置propName对应属性的值。
+在LocalStorage中设置propName对应属性的值。如果newValue的值和propName对应属性的值相同，即不需要做赋值操作，状态变量不会通知UI刷新propName对应属性的值。
 
 从API version 9开始，该接口支持在ArkTS卡片中使用。
 
@@ -473,7 +460,8 @@ let res1: boolean = storage.set('PropB', 47); // false
 
 setOrCreate&lt;T&gt;(propName: string, newValue: T): boolean
 
-propName如果已经在LocalStorage中存在，则设置propName对应是属性的值为newValue。如果不存在，则创建propName属性，初始化为newValue。
+如果propName已经在LocalStorage中存在，并且newValue和propName对应属性的值不同，则设置propName对应属性的值为newValue，否则状态变量不会通知UI刷新propName对应属性的值。
+如果propName不存在，则创建propName属性，值为newValue。
 
 从API version 9开始，该接口支持在ArkTS卡片中使用。
 
@@ -784,9 +772,19 @@ link.set(50); // PropB -> 49, link.get() --> undefined
 ## PersistentStorage
 
 
-### PersistProp
+PersistentStorage具体UI使用说明，详见[PersistentStorage(持久化存储UI状态)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-persiststorage.md)
 
-static PersistProp&lt;T&gt;(key: string, defaultValue: T): void
+### PersistPropsOptions
+
+| 参数名       | 类型                    | 必填 | 参数描述                                                     |
+| ------------ | ----------------------- | ---- | ------------------------------------------------------------ |
+| key          | string                  | 是   | 属性名。                                                     |
+| defaultValue | number\|string\|boolean | 是   | 在PersistentStorage和AppStorage未查询到时，则使用默认值初始化初始化它。不允许为undefined和null。 |
+
+
+### persistProp<sup>10+</sup>
+
+static persistProp&lt;T&gt;(key: string, defaultValue: T): void
 
 将AppStorage中key对应的属性持久化到文件中。该接口的调用通常在访问AppStorage之前。
 
@@ -807,16 +805,16 @@ static PersistProp&lt;T&gt;(key: string, defaultValue: T): void
 | key          | string | 是    | 属性名。                                     |
 | defaultValue | T      | 是    | 在PersistentStorage和AppStorage未查询到时，则使用默认值初始化初始化它。不允许为undefined和null。 |
 
-**示例：** 
 
-```ts
-PersistentStorage.PersistProp('highScore', '0');
-```
+**示例：**
 
 
-### DeleteProp
+persistProp具体使用，见[从AppStorage中访问PersistentStorage初始化的属性](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-persiststorage.md#从appstorage中访问persistentstorage初始化的属性)
 
-static DeleteProp(key: string): void
+
+### deleteProp<sup>10+</sup>
+
+static deleteProp(key: string): void
 
 PersistProp的逆向操作。将key对应的属性从PersistentStorage删除，后续AppStorage的操作，对PersistentStorage不会再有影响。
 
@@ -828,13 +826,13 @@ PersistProp的逆向操作。将key对应的属性从PersistentStorage删除，�
 
 
 ```ts
-PersistentStorage.DeleteProp('highScore');
+PersistentStorage.deleteProp('highScore');
 ```
 
 
-### PersistProps
+### persistProps<sup>10+</sup>
 
-static PersistProps(properties: {key: string, defaultValue: any;}[]): void
+static persistProps(props: PersistPropsOptions[]): void
 
 行为和PersistProp类似，不同在于可以一次性持久化多个数据，适合在应用启动的时候初始化。
 
@@ -842,17 +840,17 @@ static PersistProps(properties: {key: string, defaultValue: any;}[]): void
 
 | 参数名        | 类型                                       | 必填   | 参数描述                                     |
 | ---------- | ---------------------------------------- | ---- | ---------------------------------------- |
-| properties | {key:&nbsp;string,&nbsp;defaultValue:&nbsp;any}[] | 是    | 持久化数组，启动key为属性名，defaultValue为默认值。规则同PersistProp。 |
+| props | [PersistPropsOptions](#persistpropsoptions)[] | 是 | 持久化数组。 |
 
 
 ```ts
-PersistentStorage.PersistProps([{ key: 'highScore', defaultValue: '0' }, { key: 'wightScore', defaultValue: '1' }]);
+PersistentStorage.persistProps([{ key: 'highScore', defaultValue: '0' }, { key: 'wightScore', defaultValue: '1' }]);
 ```
 
 
-### Keys
+### keys<sup>10+</sup>
 
-static Keys(): Array&lt;string&gt;
+static keys(): Array&lt;string&gt;
 
 返回所有持久化属性的key的数组。
 
@@ -864,16 +862,26 @@ static Keys(): Array&lt;string&gt;
 
 
 ```ts
-let keys: Array<string> = PersistentStorage.Keys();
+let keys: Array<string> = PersistentStorage.keys();
 ```
+
 
 
 ## Environment
 
+Environment具体使用说明，详见[Environment(设备环境查询)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-environment.md)
 
-### EnvProp
+### EnvPropsOptions
 
-static EnvProp&lt;S&gt;(key: string, value: S): boolean
+| 参数名       | 类型                    | 必填 | 参数描述                                                     |
+| ------------ | ----------------------- | ---- | ------------------------------------------------------------ |
+| key          | string                  | 是   | 环境变量名称，支持的范围详见[内置环境变量说明](#内置环境变量说明)。 |
+| defaultValue | number\|string\|boolean | 是   | 查询不到环境变量key，则使用defaultValue作为默认值存入AppStorage中。 |
+
+
+### envProp<sup>10+</sup>
+
+static envProp&lt;S&gt;(key: string, value: S): boolean
 
 将Environment的内置环境变量key存入AppStorage中。如果系统中未查询到Environment环境变量key的值，则使用默认值value，存入成功，返回true。如果AppStorage已经有对应的key，则返回false。
 
@@ -896,27 +904,14 @@ static EnvProp&lt;S&gt;(key: string, value: S): boolean
 
 **示例：**
 
-
-```ts
-Environment.EnvProp('accessibilityEnabled', 'default');
-```
+EnvProp具体使用，见[从UI中访问Environment参数](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-environment.md#从ui中访问environment参数)
 
 
-### 内置环境变量说明
-
-| key                  | 类型              | 说明                                       |
-| -------------------- | --------------- | ---------------------------------------- |
-| accessibilityEnabled | string          | 无障碍屏幕朗读是否启用。                             |
-| colorMode            | ColorMode       | 深浅色模式，可选值为：<br/>-&nbsp;ColorMode.LIGHT：浅色模式；<br/>-&nbsp;ColorMode.DARK：深色模式。 |
-| fontScale            | number          | 字体大小比例。                                  |
-| fontWeightScale      | number          | 字重比例。                                    |
-| layoutDirection      | LayoutDirection | 布局方向类型，可选值为：<br/>-&nbsp;LayoutDirection.LTR：从左到右；<br/>-&nbsp;LayoutDirection.RTL：从右到左。 |
-| languageCode         | string          | 当前系统语言，小写字母，例如zh。                        |
 
 
-### EnvProps
+### envProps<sup>10+</sup>
 
-static EnvProps(props: {key: string; defaultValue: any;}[]): void
+static envProps(props: EnvPropsOptions[]): void
 
 和EnvProp类似，不同点在于参数为数组，可以一次性初始化多个数据。建议在应用启动时调用，将系统环境变量批量存入AppStorage中。
 
@@ -924,20 +919,20 @@ static EnvProps(props: {key: string; defaultValue: any;}[]): void
 
 | 参数名   | 类型                                       | 必填   | 参数描述               |
 | ----- | ---------------------------------------- | ---- | ------------------ |
-| props | {key:&nbsp;string,&nbsp;defaultValue:&nbsp;any}[] | 是    | 系统环境变量和默认值的键值对的数组。 |
+| props  | [EnvPropsOptions](#envpropsoptions)[] | 是   | 系统环境变量和默认值的键值对的数组。 |
 
 
 ```ts
-Environment.EnvProps([{ key: 'accessibilityEnabled', defaultValue: 'default' }, {
+Environment.envProps([{ key: 'accessibilityEnabled', defaultValue: 'default' }, {
   key: 'languageCode',
   defaultValue: 'en'
 }, { key: 'prop', defaultValue: 'hhhh' }]);
 ```
 
 
-### Keys
+### keys<sup>10+</sup>
 
-static Keys(): Array&lt;string&gt;
+static keys(): Array&lt;string&gt;
 
 返回环境变量的属性key的数组。
 
@@ -949,10 +944,21 @@ static Keys(): Array&lt;string&gt;
 
 
 ```ts
-Environment.EnvProps([{ key: 'accessibilityEnabled', defaultValue: 'default' }, {
+Environment.envProps([{ key: 'accessibilityEnabled', defaultValue: 'default' }, {
   key: 'languageCode',
   defaultValue: 'en'
 }, { key: 'prop', defaultValue: 'hhhh' }]);
 
-let keys: Array<string> = Environment.Keys(); // accessibilityEnabled, languageCode, prop
+let keys: Array<string> = Environment.keys(); // accessibilityEnabled, languageCode, prop
 ```
+
+## 内置环境变量说明
+
+| key                  | 类型              | 说明                                       |
+| -------------------- | --------------- | ---------------------------------------- |
+| accessibilityEnabled | string          | 无障碍屏幕朗读是否启用。                             |
+| colorMode            | ColorMode       | 深浅色模式，可选值为：<br/>-&nbsp;ColorMode.LIGHT：浅色模式；<br/>-&nbsp;ColorMode.DARK：深色模式。 |
+| fontScale            | number          | 字体大小比例。                                  |
+| fontWeightScale      | number          | 字重比例。                                    |
+| layoutDirection      | LayoutDirection | 布局方向类型，可选值为：<br/>-&nbsp;LayoutDirection.LTR：从左到右；<br/>-&nbsp;LayoutDirection.RTL：从右到左。 |
+| languageCode         | string          | 当前系统语言，小写字母，例如zh。                        |

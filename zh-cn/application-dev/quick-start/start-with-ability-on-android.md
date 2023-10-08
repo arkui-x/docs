@@ -58,3 +58,55 @@ Android端应用内的Activity的activityName组成规则：Ability的moduleName
 
 示例如图：
   ![stage_android](figures/stage_android.png)
+
+## StageApplication初始化支持以下三种方式
+
+### 通过继承StageApplication的方式进行初始化
+
+```
+import ohos.stage.ability.adapter.StageApplication;
+
+public class HiStageApplication extends StageApplication {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+}
+```
+
+### 继承Android原生Application方式，在onCreate方法中创建StageApplicationDelegate实例进行初始化
+
+```
+import android.app.Application;
+import ohos.stage.ability.adapter.StageApplicationDelegate;
+
+public class HiStageApplication extends Application {
+    private StageApplicationDelegate appDelegate_ = null;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        appDelegate_ = new StageApplicationDelegate();
+        appDelegate_.initApplication(this);
+    }
+}
+```
+
+### 在Activity中创建StageApplicationDelegate实例进行初始化
+
+```
+import android.app.Activity;
+import ohos.stage.ability.adapter.StageApplicationDelegate;
+
+public class EntryEntryAbilityActivity extends Activity {
+
+    private StageApplicationDelegate appDelegate_ = null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        appDelegate_ = new StageApplicationDelegate();
+        appDelegate_.initApplication(this.getApplication());
+        super.onCreate(savedInstanceState);
+    }
+}
+```

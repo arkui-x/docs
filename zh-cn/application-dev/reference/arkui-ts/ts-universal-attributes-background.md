@@ -123,3 +123,35 @@ struct BackgroundBlurStyleDemo {
 ```
 
 ![zh-cn_image_background_blur_style](figures/zh-cn_image_background_blur_style.png)
+
+### 示例3
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct BackgroundExample {
+  @Builder renderBackground() {
+    Column() {
+      Progress({value : 50})
+    }
+  }
+
+  build() {
+    Column() {
+      Text("content")
+        .width(100)
+        .height(40)
+        .fontColor("#FFF")
+        .position({x:50, y:80})
+        .textAlign(TextAlign.Center)
+        .backgroundColor(Color.Green)
+    }
+    .width(200).height(200)
+    .background(this.renderBackground)
+    .backgroundColor(Color.Gray)
+  }
+}
+```
+
+![zh-cn_image_background](figures/zh-cn_image_background.png)

@@ -79,7 +79,7 @@ struct ListItemGroupExample {
   }
 
   @Builder itemFoot(num:number) {
-    Text(''Total lessons:'+ num")
+    Text('Total lessons:'+ num)
       .fontSize(16)
       .backgroundColor(0xAABBCC)
       .width("100%")
