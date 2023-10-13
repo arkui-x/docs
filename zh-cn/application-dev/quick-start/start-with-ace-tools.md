@@ -88,15 +88,27 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
    以创建一个 Stage模型‘demo’项目为例：
 
    ```shell
-   ace create project
-   ? Please enter the project name: demo
-   ? Please enter the bundle name (com.example.demo):com.example.demo
-   ? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 1
-   ? Please enter the project type (1: Application, 2: Library): 1
-   ? Please enter the template (1: Empty Ability, 2: Native C++): 1   //选择创建Empty Ability或者Native C++项目
+   ohos@user Desktop % ace create demo
+   ? Please enter the project name(demo): # 输入工程名称，不输入默认为文件夹名称
+   ? Please enter the bundleName (com.example.demo):  # 输入包名，不输入默认为com.example.工程名
+   ? Please enter the runtimeOS (1: OpenHarmony, 2: HarmonyOS): 1 # 输入RuntimeOS系统
+   Check summary (to see all details, run ace check -v)
+   [√] ArkUI-X (ArkUI-X SDK version 0.0.9.6)
+   [√] OpenHarmony toolchains - develop for OpenHarmony devices (OpenHarmony SDK version 4.0.9.6)
+   [√] HarmonyOS toolchains - develop for HarmonyOS devices (HarmonyOS SDK version 3.1.0)
+   [√] Android toolchains - develop for Android devices (Android SDK version 34.0.0)
+   [√] DevEco Studio (version 4.0.3)
+   [√] Android Studio (version 2022.3)
+   [√] Xcode - develop for iOS (Xcode 14.3.1)
+   Tools info :[√] OpenHarmony hdc installed
+               [√] HarmonyOS hdc installed
+               [√] adb installed
+               [√] ios-deploy installed
+   [√] Connected device (1 available)
+   •  iPhone 14 Pro Max (1058643C-A725-4E19-AA62-781588C94A7F) [iOS Simulator]
+   √ ACE Tools found no issues.
+   Project created successfully!
    ```
-
-执行 `ace create project` 命令，接着输入工程名 demo。
 
 ### 应用运行
 
@@ -111,7 +123,7 @@ ace run apk
 
 ```shell
 cd demo
-ace run app
+ace run ios
 ```
 
 * 安装运行到OpenHarmony设备
