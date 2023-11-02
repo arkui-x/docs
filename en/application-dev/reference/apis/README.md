@@ -46,6 +46,10 @@
   - [@ohos.window (Window)](js-apis-window.md)
   - [@ohos.display (Display)](js-apis-display.md)
 
+
+- Multimedia
+  - [@ohos.multimedia.image (Image Processing)](js-apis-image.md)
+
 - Resource Management
   - [@ohos.i18n (Internationalization)](js-apis-i18n.md)
   - [@ohos.intl (Internationalization)](js-apis-intl.md)
