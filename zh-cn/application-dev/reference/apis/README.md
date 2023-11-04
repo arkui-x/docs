@@ -36,6 +36,7 @@
 
 - 包管理
   - [@ohos.bundle.bundleManager (bundleManager模块)](js-apis-bundleManager.md)
+  - [@ohos.zlib (Zip模块)](js-apis-zlib.md)
   - bundleManager
     - [abilityInfo](js-apis-bundleManager-abilityInfo.md)
     - [applicationInfo](js-apis-bundleManager-applicationInfo.md)
