@@ -3,8 +3,8 @@
 The **AbilityConstant** module defines the ability-related enums, including the initial launch reasons, reasons for the last exit, ability continuation results, and window modes.
 
 > **NOTE**
-> 
-> The initial APIs of this module are supported since API version 9. Newly added APIs will be marked with a superscript to indicate their earliest API version. 
+>
+> The initial APIs of this module are supported since API version 9. Newly added APIs will be marked with a superscript to indicate their earliest API version.
 > The APIs of this module can be used only in the stage model.
 
 ## Modules to Import
@@ -40,9 +40,10 @@ Enumerates the initial ability launch reasons. You can use it together with [onC
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import Want from '@ohos.app.ability.Want';
 
 class MyAbility extends UIAbility {
-    onCreate(want, launchParam) {
+    onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
         if (launchParam.launchReason === AbilityConstant.LaunchReason.UNKNOWN) {
             console.log('The ability has been started.');
         }
@@ -64,9 +65,10 @@ Enumerates the reasons for the last exit. You can use it together with [onCreate
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import Want from '@ohos.app.ability.Want';
 
 class MyAbility extends UIAbility {
-    onCreate(want, launchParam) {
+    onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
         if (launchParam.lastExitReason === AbilityConstant.LastExitReason.UNKNOWN) {
             console.log('The ability has exit last.');
         }
