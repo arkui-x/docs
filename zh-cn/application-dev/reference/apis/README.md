@@ -96,3 +96,7 @@
 
 - 系统基础能力
   - [@ohos.hilog (HiLog日志打印)](js-apis-hilog.md)
+
+- 公共事件与通知
+  - [系统公共事件定义](commonEventManager-definitions.md)
+  - [@ohos.commonEventManager (公共事件模块)](js-apis-commonEventManager.md)
