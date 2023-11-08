@@ -47,6 +47,9 @@
   - [@ohos.window (窗口)](js-apis-window.md)
   - [@ohos.display (屏幕属性)](js-apis-display.md)
 
+- 图形图像
+  - [@ohos.multimedia.image (图片处理)](js-apis-image.md)
+
 - 资源管理
   - [@ohos.i18n (国际化-I18n)](js-apis-i18n.md)
   - [@ohos.intl (国际化-Intl)](js-apis-intl.md)
