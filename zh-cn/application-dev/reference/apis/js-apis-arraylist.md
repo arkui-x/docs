@@ -2,6 +2,8 @@
 
 ArrayList是一种线性数据结构，底层基于数组实现。ArrayList会根据实际需要动态调整容量，每次扩容增加50%。
 
+ArrayList和[Vector](js-apis-vector.md)相似，都是基于数组实现。它们都可以动态调整容量，但Vector每次扩容增加1倍。
+
 ArrayList和[LinkedList](js-apis-linkedlist.md)相比，ArrayList的随机访问效率更高。但由于ArrayList的增删操作会影响数组内其他元素的移动，LinkedList的增加和删除操作效率更高。
 
 **推荐使用场景：** 当需要频繁读取集合中的元素时，推荐使用ArrayList。
@@ -50,7 +52,7 @@ ArrayList的构造函数。
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<string | number> = new ArrayList();
 ```
 
 
@@ -85,14 +87,19 @@ add(element: T): boolean
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
-let result = arrayList.add("a");
-let result1 = arrayList.add(1);
+class C1 {
+  name: string = ""
+  age: string = ""
+}
+let arrayList: ArrayList<string | number | boolean | Array<number> | C1> = new ArrayList();
+let result1 = arrayList.add("a");
+let arrayList1: ArrayList<number> = new ArrayList();
+let result2 = arrayList.add(1);
 let b = [1, 2, 3];
-let result2 = arrayList.add(b);
-let c = {name: "Dylon", age: "13"};
-let result3 = arrayList.add(c);
-let result4 = arrayList.add(false);
+let result3 = arrayList.add(b);
+let c : C1 = {name: "Dylon", age: "13"}
+let result4 = arrayList.add(c);
+let result5 = arrayList.add(false);
 ```
 
 ### insert
@@ -122,7 +129,7 @@ insert(element: T, index: number): void
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number | string | boolean> = new ArrayList();
 arrayList.insert("A", 0);
 arrayList.insert(0, 1);
 arrayList.insert(true, 2);
@@ -159,9 +166,9 @@ has(element: T): boolean
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<string> = new ArrayList();
 arrayList.add("squirrel");
-let result = arrayList.has("squirrel");
+let result: boolean = arrayList.has("squirrel");
 ```
 
 ### getIndexOf
@@ -195,7 +202,7 @@ getIndexOf(element: T): number
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
@@ -203,7 +210,7 @@ arrayList.add(2);
 arrayList.add(1);
 arrayList.add(2);
 arrayList.add(4);
-let result = arrayList.getIndexOf(2);
+let result: number = arrayList.getIndexOf(2);
 ```
 
 ### getLastIndexOf
@@ -237,7 +244,7 @@ getLastIndexOf(element: T): number
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
@@ -245,7 +252,7 @@ arrayList.add(2);
 arrayList.add(1);
 arrayList.add(2);
 arrayList.add(4);
-let result = arrayList.getLastIndexOf(2);
+let result: number = arrayList.getLastIndexOf(2);
 ```
 
 ### removeByIndex
@@ -280,13 +287,13 @@ removeByIndex(index: number): T
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
 arrayList.add(2);
 arrayList.add(4);
-let result = arrayList.removeByIndex(2);
+let result: number = arrayList.removeByIndex(2);
 ```
 
 ### remove
@@ -320,12 +327,12 @@ remove(element: T): boolean
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
 arrayList.add(4);
-let result = arrayList.remove(2);
+let result: boolean = arrayList.remove(2);
 ```
 
 ### removeByRange
@@ -355,7 +362,7 @@ removeByRange(fromIndex: number, toIndex: number): void
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
@@ -398,14 +405,14 @@ callbackfn的参数说明：
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
 arrayList.add(4);
-arrayList.replaceAllElements((value) => {
-    // 用户操作逻辑根据实际场景进行添加。
-    return value;
+arrayList.replaceAllElements((value: number): number => {
+  // 用户操作逻辑根据实际场景进行添加。
+  return value;
 });
 ```
 
@@ -444,13 +451,13 @@ callbackfn的参数说明：
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
 arrayList.add(4);
-arrayList.forEach((value, index) => {
-    console.log("value:" + value, "index:" + index);
+arrayList.forEach((value: number, index?: number) => {
+  console.log("value:" + value, "index:" + index);
 });
 ```
 
@@ -486,7 +493,7 @@ comparator的参数说明：
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
@@ -529,12 +536,12 @@ subArrayList(fromIndex: number, toIndex: number): ArrayList&lt;T&gt;
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
 arrayList.add(4);
-let result = arrayList.subArrayList(2, 4);
+let result: ArrayList<number> = arrayList.subArrayList(2, 4);
 ```
 
 ### clear
@@ -556,7 +563,7 @@ clear(): void
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
@@ -590,12 +597,12 @@ clone(): ArrayList&lt;T&gt;
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
 arrayList.add(4);
-let result = arrayList.clone();
+let result:  ArrayList<number> = arrayList.clone();
 ```
 
 ### getCapacity
@@ -623,12 +630,12 @@ getCapacity(): number
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
 arrayList.add(4);
-let result = arrayList.getCapacity();
+let result: number = arrayList.getCapacity();
 ```
 
 ### convertToArray
@@ -656,12 +663,12 @@ convertToArray(): Array&lt;T&gt;
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
 arrayList.add(4);
-let result = arrayList.convertToArray();
+let result: Array<number> = arrayList.convertToArray();
 ```
 
 ### isEmpty
@@ -689,12 +696,12 @@ isEmpty(): boolean
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
 arrayList.add(4);
-let result = arrayList.isEmpty();
+let result: boolean = arrayList.isEmpty();
 ```
 
 ### increaseCapacityTo
@@ -722,7 +729,7 @@ increaseCapacityTo(newCapacity: number): void
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
@@ -750,7 +757,7 @@ trimToCurrentLength(): void
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
@@ -763,6 +770,10 @@ arrayList.trimToCurrentLength();
 [Symbol.iterator]\(): IterableIterator&lt;T&gt;
 
 返回一个迭代器，迭代器的每一项都是一个 JavaScript 对象，并返回该对象。
+
+> **说明：**
+>
+> 本接口不支持在.ets文件中使用
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -783,22 +794,23 @@ arrayList.trimToCurrentLength();
 **示例：**
 
 ```ts
-let arrayList = new ArrayList();
+let arrayList: ArrayList<number> = new ArrayList();
 arrayList.add(2);
 arrayList.add(4);
 arrayList.add(5);
 arrayList.add(4);
 
 // 使用方法一：
-for (let item of arrayList) { 
-    console.log(`value:${item}`); 
-} 
+let numbers: Array<number> = arrayList.convertToArray()
+for (let item of numbers) {
+  console.log(`value : ${item}`);
+}
 
 // 使用方法二：
 let iter = arrayList[Symbol.iterator]();
-let temp = iter.next().value;
-while(temp != undefined) {
-    console.log(`value:${temp}`);
-    temp = iter.next().value;
+let temp: IteratorResult<number> = iter.next().value;
+while(!temp.done) {
+    console.log(`value:${temp.value}`);
+    temp = iter.next();
 }
 ```

@@ -4,6 +4,8 @@ Deque（double ended queue）根据循环队列的数据结构实现，符合先
 
 Deque和[Queue](js-apis-queue.md)相比，Queue的特点是先进先出，只能在头部删除元素，尾部增加元素。
 
+与[Vector](js-apis-vector.md)相比，它们都支持在两端增删元素，但Deque不能进行中间插入的操作。对头部元素的插入删除效率高于Vector，而Vector访问元素的效率高于Deque。
+
 **推荐使用场景：** 需要频繁在集合两端进行增删元素的操作时，推荐使用Deque。
 
 文档中存在泛型的使用，涉及以下泛型标记符：<br>
@@ -49,7 +51,7 @@ Deque的构造函数。
 **示例：**
 
 ```ts
-let deque = new Deque();
+let deque: Deque<string | number | boolean | Object> = new Deque();
 ```
 
 ### insertFront
@@ -77,12 +79,16 @@ insertFront(element: T): void
 **示例：**
 
 ```ts
-let deque = new Deque();
+class C1 {
+  name: string = ""
+  age: string = ""
+}
+let deque: Deque<string | number | boolean | Array<number> | C1> = new Deque();
 deque.insertFront("a");
 deque.insertFront(1);
 let b = [1, 2, 3];
 deque.insertFront(b);
-let c = {name : "Dylon", age : "13"};
+let c: C1 = {name : "Dylon", age : "13"};
 deque.insertFront(c);
 deque.insertFront(false);
 ```
@@ -112,12 +118,17 @@ insertEnd(element: T): void
 **示例：**
 
 ```ts
-let deque = new Deque();
+class C1 {
+  name: string = ""
+  age: string = ""
+}
+
+let deque: Deque<string | number | boolean | Array<number> | C1> = new Deque();
 deque.insertEnd("a");
 deque.insertEnd(1);
 let b = [1, 2, 3];
 deque.insertEnd(b);
-let c = {name : "Dylon", age : "13"};
+let c: C1 = {name : "Dylon", age : "13"};
 deque.insertEnd(c);
 deque.insertEnd(false);
 ```
@@ -153,7 +164,7 @@ has(element: T): boolean
 **示例：**
 
 ```ts
-let deque = new Deque();
+let deque: Deque<string> = new Deque();
 deque.insertFront("squirrel");
 let result = deque.has("squirrel");
 ```
@@ -183,7 +194,7 @@ popFirst(): T
 **示例：**
 
 ```ts
-let deque = new Deque();
+let deque: Deque<number> = new Deque();
 deque.insertFront(2);
 deque.insertFront(4);
 deque.insertEnd(5);
@@ -217,7 +228,7 @@ popLast(): T
 **示例：**
 
 ```ts
-let deque = new Deque();
+let deque: Deque<number> = new Deque();
 deque.insertFront(2);
 deque.insertEnd(4);
 deque.insertFront(5);
@@ -261,13 +272,13 @@ callbackfn的参数说明：
 **示例：**
 
 ```ts
-let deque = new Deque();
+let deque: Deque<number> = new Deque();
 deque.insertFront(2);
 deque.insertEnd(4);
 deque.insertFront(5);
 deque.insertEnd(4);
-deque.forEach((value, index) => {
-    console.log("value:" + value, "index:" + index);
+deque.forEach((value: number, index?: number | undefined, deque?: Deque<number> | undefined):void => {
+  console.log("value:" + value, "index:" + index);
 });
 ```
 
@@ -283,7 +294,7 @@ getFirst(): T
 
 | 类型 | 说明 |
 | -------- | -------- |
-| T | 返回T型 |
+| T | 返回T类型的头元素 |
 
 **错误码：**
 
@@ -296,7 +307,7 @@ getFirst(): T
 **示例：**
 
 ```ts
-let deque = new Deque();
+let deque: Deque<number> = new Deque();
 deque.insertEnd(2);
 deque.insertEnd(4);
 deque.insertFront(5);
@@ -316,7 +327,7 @@ getLast(): T
 
 | 类型 | 说明 |
 | -------- | -------- |
-| T | 返回T型 |
+| T | 返回T类型的尾元素 |
 
 **错误码：**
 
@@ -329,7 +340,7 @@ getLast(): T
 **示例：**
 
 ```ts
-let deque = new Deque();
+let deque: Deque<number> = new Deque();
 deque.insertFront(2);
 deque.insertFront(4);
 deque.insertFront(5);
@@ -342,6 +353,10 @@ let result = deque.getLast();
 [Symbol.iterator]\(): IterableIterator&lt;T&gt;
 
 返回一个迭代器，迭代器的每一项都是一个 JavaScript 对象,并返回该对象。
+
+> **说明：**
+>
+> 本接口不支持在.ets文件中使用
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -361,22 +376,23 @@ let result = deque.getLast();
 
 **示例：**
 ```ts
-let deque = new Deque();
+let deque: Deque<number> = new Deque();
 deque.insertFront(2);
 deque.insertFront(4);
 deque.insertFront(5);
 deque.insertFront(4);
 
 // 使用方法一：
-for (let item of deque) { 
-  console.log("value:" + item); 
+let nums: Array<number> = Array.from(deque)
+for (let item of nums) {
+  console.log("value:" + item);
 }
 
 // 使用方法二：
 let iter = deque[Symbol.iterator]();
-let temp = iter.next().value;
-while(temp != undefined) {
-  console.log("value:" + temp);
-  temp = iter.next().value;
+let temp:IteratorResult<number> = iter.next();
+while(!temp.done) {
+  console.log("value:" + temp.value);
+  temp = iter.next();
 }
 ```
