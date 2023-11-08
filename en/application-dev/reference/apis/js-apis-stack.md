@@ -50,7 +50,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let stack = new Stack();
+let stack : Stack<number | string | Object> = new Stack();
 ```
 
 
@@ -84,14 +84,16 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 **Example**
 
-```ts
-let stack = new Stack();
+```
+class C1 {
+  name: string = ""
+  age: string = ""
+}
+let stack : Stack<number | string | C1> = new Stack();
 let result = stack.push("a");
 let result1 = stack.push(1);
-let b = [1, 2, 3];
-let result2 = stack.push(b);
-let c = {name : "Dylon", age : "13"};
-let result3 = stack.push(c);
+let c : C1  = {name : "Dylon", age : "13"};
+let result2 = stack.push(c);
 ```
 
 ### pop
@@ -119,7 +121,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let stack = new Stack();
+let stack : Stack<number> = new Stack();
 stack.push(2);
 stack.push(4);
 stack.push(5);
@@ -153,7 +155,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let stack = new Stack();
+let stack : Stack<number> = new Stack();
 stack.push(2);
 stack.push(4);
 stack.push(5);
@@ -192,7 +194,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let stack = new Stack();
+let stack : Stack<number> = new Stack();
 stack.push(2);
 stack.push(4);
 stack.push(5);
@@ -235,13 +237,13 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let stack = new Stack();
+let stack : Stack<number> = new Stack();
 stack.push(2);
 stack.push(4);
 stack.push(5);
 stack.push(4);
-stack.forEach((value, index) => {
-    console.log("value:" + value, "index:" + index);
+stack.forEach((value : number, index ?: number) :void => {
+  console.log("value:" + value, "index:" + index);
 });
 ```
 
@@ -270,7 +272,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let stack = new Stack();
+let stack : Stack<number> = new Stack();
 stack.push(2);
 stack.push(4);
 stack.push(5);
@@ -283,6 +285,10 @@ let result = stack.isEmpty();
 [Symbol.iterator]\(): IterableIterator&lt;T&gt;
 
 Obtains an iterator, each item of which is a JavaScript object.
+
+> **NOTE**
+>
+> This API cannot be used in .ets files.
 
 **System capability**: SystemCapability.Utils.Lang
 
@@ -302,20 +308,22 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 **Example**
 ```ts
-let stack = new Stack();
+let stack : Stack<number> = new Stack();
 stack.push(2);
 stack.push(4);
 stack.push(5);
 stack.push(4);
 
 // Method 1:
-for (let item of stack) { 
-  console.log("value:" + item); 
+while(!stack.isEmpty()) {
+  // Service logic
+  let item = stack.pop()
+  console.log("value:" + item);
 }
 
 // Method 2:
 let iter = stack[Symbol.iterator]();
-let temp = iter.next().value;
+let temp: IteratorResult<number> = iter.next().value;
 while(temp != undefined) {
   console.log("value:" + temp);
   temp = iter.next().value;

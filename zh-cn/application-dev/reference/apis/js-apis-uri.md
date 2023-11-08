@@ -1,5 +1,7 @@
 # @ohos.uri (URI字符串解析)
 
+本模块提供URI字符串解析的相关功能。
+
 > **说明：**
 >
 > 本模块首批接口从API version 8开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
@@ -7,11 +9,13 @@
 
 ## 导入模块
 
-```js
+```ts
 import uri from '@ohos.uri'  
 ```
 
 ## URI
+
+构造URI对象，提供判断对象相等、规范路径等方法。
 
 ### 属性
 
@@ -47,7 +51,7 @@ import uri from '@ohos.uri'
 
 **URI示例：**
 
-```js
+```ts
 const result1 = new uri.URI("ftp://ftp.aaa.bbb.ccc/dddd/eee.txt");
 console.log(result1.host) // ftp.aaa.bbb.ccc
 console.log(result1.fragment) // null
@@ -118,12 +122,12 @@ constructor是URI的构造函数。
 
 **示例：**
 
-```js
+```ts
 let mm = 'https://username:password@host:8080/directory/file?foo=1&bar=2#fragment';
-new uri.URI(mm); // Output 'https://username:password@host:8080/directory/file?foo=1&bar=2#fragment';
+new uri.URI(mm);
 ```
-```js
-new uri.URI('https://username:password@host:8080'); // Output 'https://username:password@host:8080';
+```ts
+new uri.URI('https://username:password@host:8080');
 ```
 
 
@@ -143,12 +147,43 @@ toString(): string
 
 **示例：**
 
-```js
+```ts
 const result = new uri.URI('https://username:password@host:8080/directory/file?query=pppppp#qwer=da');
 let result1 = result.toString();
 ```
 
 
+### equals<sup>(deprecated)</sup>
+
+equals(other: URI): boolean
+
+判断此URI是否与其他URI对象相等。
+
+> **说明：**
+>
+> 从API version 8开始支持，从API version 9开始废弃，建议使用[equalsTo<sup>9+</sup>](#equalsto9)替代。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| -------- | -------- | -------- | -------- |
+| other | [URI](#uri) | 是 | 需要比较的URI对象。 |
+
+**返回值：**
+
+| 类型 | 说明 |
+| -------- | -------- |
+| boolean | 返回true表示相等，否则返回false。 |
+
+**示例：**
+
+```ts
+const uriInstance = new uri.URI('https://username:password@host:8080/directory/file?query=pppppp#qwer=da');
+const uriInstance1 = new uri.URI('https://username:password@host:8080/directory/file?query=pppppp#qwer=da');
+uriInstance.equals(uriInstance1);
+```
 ### equalsTo<sup>9+</sup>
 
 equalsTo(other: URI): boolean
@@ -171,7 +206,7 @@ equalsTo(other: URI): boolean
 
 **示例：**
 
-```js
+```ts
 const uriInstance = new uri.URI('https://username:password@host:8080/directory/file?query=pppppp#qwer=da');
 const uriInstance1 = new uri.URI('https://username:password@host:8080/directory/file?query=pppppp#qwer=da');
 let result = uriInstance.equalsTo(uriInstance1);
@@ -193,7 +228,7 @@ checkIsAbsolute(): boolean
 
 **示例：**
 
-```js
+```ts
 const uriInstance = new uri.URI('https://username:password@www.qwer.com:8080?query=pppppp');
 console.log(`${uriInstance.checkIsAbsolute()}`); // true
 const uriInstance1 = new uri.URI('xxx.com/suppliers.htm');
@@ -217,7 +252,7 @@ normalize(): URI
 
 **示例：**
 
-```js
+```ts
 const uriInstance = new uri.URI('https://username:password@www.qwer.com:8080/path/path1/../path2/./path3?query=pppppp');
 console.log(uriInstance.path); // /path/path1/../path2/./path3
 let uriInstance1 = uriInstance.normalize();
