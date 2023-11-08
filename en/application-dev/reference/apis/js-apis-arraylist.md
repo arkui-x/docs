@@ -2,8 +2,6 @@
 
 **ArrayList** is a linear data structure that is implemented based on arrays. **ArrayList** can dynamically adjust the capacity based on project requirements. It increases the capacity by 50% each time.
 
-Similar to **ArrayList**, **[Vector](js-apis-vector.md)** is also implemented based on arrays and can dynamically adjust the capacity. It increases the capability by 100% each time.
-
 When compared with **[LinkedList](js-apis-linkedlist.md)**, **ArrayList** is more efficient in random access but less efficient in the addition or removal operation, because its addition or removal operation affects the position of other elements in the container.
 
 **Recommended use case**: Use **ArrayList** when elements in a container need to be frequently read.
