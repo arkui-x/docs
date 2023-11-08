@@ -59,3 +59,21 @@ The context is not a stage model.
 **Solution**
 
 Perform the operation on the stage model.
+
+## 15501002 The dataGroupId parameter in Options is invalid.
+
+**Error Message**
+
+The data group id is not valid.
+
+**Description**
+
+The **dataGroupId** parameter is invalid.
+
+**Possible Causes**
+
+The **dataGroupId** is not obtained from the AppGallery.
+
+**Solution**
+
+Obtain **dataGroupId** from the AppGallery and pass it correctly.
