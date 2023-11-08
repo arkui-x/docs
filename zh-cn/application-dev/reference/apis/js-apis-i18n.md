@@ -108,7 +108,7 @@ static getDisplayLanguage(language: string, locale: string, sentenceCase?: boole
 
 static getSystemLanguage(): string
 
-获取系统语言。语言的详细说明参见[实例化Locale对象](../../internationalization/intl-guidelines.md#开发步骤)。
+获取系统语言。
 
 **系统能力**：SystemCapability.Global.I18n
 
@@ -160,7 +160,7 @@ static getSystemRegion(): string
 
 static getSystemLocale(): string
 
-获取系统区域。区域的详细说明参见[实例化Locale对象](../../internationalization/intl-guidelines.md#开发步骤)。
+获取系统区域。
 
 **系统能力**：SystemCapability.Global.I18n
 
