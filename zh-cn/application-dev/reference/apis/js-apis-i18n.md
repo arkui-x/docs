@@ -134,7 +134,7 @@ static getSystemLanguage(): string
 
 static getSystemRegion(): string
 
-获取系统地区。地区的详细说明参见[实例化Locale对象](../../internationalization/intl-guidelines.md#开发步骤)。
+获取系统地区。
 
 **系统能力**：SystemCapability.Global.I18n
 
