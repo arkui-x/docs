@@ -171,7 +171,7 @@ Initiates an HTTP request to a given URL. This API uses an asynchronous callback
 
 > **NOTE**
 > For details about the error codes, see [HTTP Error Codes](../errorcodes/errorcode-net-http.md).
-> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see [Curl Error Codes](https://curl.se/libcurl/c/libcurl-errors.html).
+> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see Curl Error Codes: https://curl.se/libcurl/c/libcurl-errors.html.
 
 **Example**
 
@@ -250,7 +250,7 @@ Initiates an HTTP request containing specified options to a given URL. This API 
 
 > **NOTE**
 > For details about the error codes, see [HTTP Error Codes](../errorcodes/errorcode-net-http.md).
-> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see [Curl Error Codes](https://curl.se/libcurl/c/libcurl-errors.html).
+> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see Curl Error Codes: https://curl.se/libcurl/c/libcurl-errors.html.
 
 **Example**
 
@@ -350,7 +350,7 @@ Initiates an HTTP request containing specified options to a given URL. This API 
 
 > **NOTE**
 > For details about the error codes, see [HTTP Error Codes](../errorcodes/errorcode-net-http.md).
-> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see [Curl Error Codes](https://curl.se/libcurl/c/libcurl-errors.html).
+> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see Curl Error Codes: https://curl.se/libcurl/c/libcurl-errors.html.
 
 **Example**
 
@@ -456,7 +456,7 @@ Initiates an HTTP request containing specified options to a given URL. This API 
 
 > **NOTE**
 > For details about the error codes, see [HTTP Error Codes](../errorcodes/errorcode-net-http.md).
-> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see [Curl Error Codes](https://curl.se/libcurl/c/libcurl-errors.html).
+> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see Curl Error Codes: https://curl.se/libcurl/c/libcurl-errors.html.
 
 **Example**
 
@@ -530,7 +530,7 @@ Initiates an HTTP request containing specified options to a given URL. This API 
 
 > **NOTE**
 > For details about the error codes, see [HTTP Error Codes](../errorcodes/errorcode-net-http.md).
-> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see [Curl Error Codes](https://curl.se/libcurl/c/libcurl-errors.html).
+> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see Curl Error Codes: https://curl.se/libcurl/c/libcurl-errors.html.
 
 **Example**
 
@@ -617,7 +617,7 @@ Initiates an HTTP request containing specified options to a given URL. This API 
 
 > **NOTE**
 > For details about the error codes, see [HTTP Error Codes](../errorcodes/errorcode-net-http.md).
-> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see [Curl Error Codes](https://curl.se/libcurl/c/libcurl-errors.html).
+> The HTTP error code mapping is in the format of 2300000 + Curl error code. For more common error codes, see Curl Error Codes: https://curl.se/libcurl/c/libcurl-errors.html.
 
 **Example**
 
