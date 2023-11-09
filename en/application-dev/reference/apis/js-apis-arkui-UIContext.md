@@ -14,6 +14,26 @@ In the stage model, a window stage or window can use the **loadContent** API to 
 
 In the following API examples, you must first use **getUIContext** in **@ohos.window** to obtain a **UIContext** instance, and then call the APIs using the obtained instance. In this document, the **UIContext** instance is represented by **uiContext**.
 
+### getUIInspector
+
+getUIInspector(): UIInspector
+
+Obtains the **UIInspector** object.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+**Return value**
+
+| Type                        | Description             |
+| --------------------------- | ----------------------- |
+| [UIInspector](#uiinspector) | **UIInspector** object. |
+
+**Example**
+
+```ts
+uiContext.getUIInspector();
+```
+
 ### getMediaQuery
 
 getMediaQuery(): MediaQuery
@@ -442,6 +462,38 @@ uiContext.runScopedTask(
 );
 ```
 
+## UIInspector
+
+In the following API examples, you must first use [getUIInspector()](#getuiinspector) in **UIContext** to obtain a **UIInspector** instance, and then call the APIs using the obtained instance.
+
+### createComponentObserver
+
+createComponentObserver(id: string): inspector.ComponentObserver
+
+Creates an observer for the specified component.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+**Parameters**
+
+| Name | Type   | Mandatory | Description   |
+| ---- | ------ | --------- | ------------- |
+| id   | string | Yes       | Component ID. |
+
+**Return value**
+
+| Type                                                         | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [ComponentObserver](js-apis-arkui-inspector.md#componentobserver) | Component observer, which is used to register and unregister listeners for completion of component layout or drawing. |
+
+**Example**
+
+```ts
+import { ComponentUtils, Font, PromptAction, Router, UIInspector, MediaQuery } from '@ohos.arkui.UIContext';
+let inspector:UIInspector = uiContext.getUIInspector();
+let listener = inspector.createComponentObserver('COMPONENT_ID');
+```
+
 ## MediaQuery
 
 In the following API examples, you must first use [getMediaQuery()](#getmediaquery) in **UIContext** to obtain a **MediaQuery** instance, and then call the APIs using the obtained instance.
@@ -458,7 +510,7 @@ Sets the media query criteria and returns the corresponding listening handle.
 
 | Name      | Type    | Mandatory  | Description                                      |
 | --------- | ------ | ---- | ---------------------------------------- |
-| condition | string | Yes   | Media query condition. For details, see [Syntax](../../ui/arkts-layout-development-media-query.md#syntax). |
+| condition | string | Yes   | Media query condition. |
 
 **Return value**
 

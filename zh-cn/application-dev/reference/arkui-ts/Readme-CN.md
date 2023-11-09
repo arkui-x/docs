@@ -5,6 +5,9 @@
     - [点击事件](ts-universal-events-click.md)
     - [触摸事件](ts-universal-events-touch.md)
     - [挂载卸载事件](ts-universal-events-show-hide.md)
+    - [按键事件](ts-universal-events-key.md)
+    - [焦点事件](ts-universal-focus-event.md)
+    - [组件快捷键事件](ts-universal-events-keyboardshortcut.md)
     - [组件区域变化事件](ts-universal-component-area-change-event.md)
     - [组件可见区域变化事件](ts-universal-component-visible-area-change-event.md)
   - 通用属性
@@ -31,8 +34,10 @@
     - [组件标识](ts-universal-attributes-component-id.md)
     - [多态样式](ts-universal-attributes-polymorphic-style.md)
     - [前景色设置](ts-universal-attributes-foreground-color.md)
+    - [分布式迁移标识](ts-universal-attributes-restoreId.md)
     - [组件内容模糊](ts-universal-attributes-foreground-blur-style.md)
     - [点击回弹效果](ts-universal-attributes-click-effect.md)
+    - [无障碍属性](ts-universal-attributes-accessibility.md)
     - 触摸交互控制
       - [触摸热区设置](ts-universal-attributes-touch-target.md)
       - [触摸测试控制](ts-universal-attributes-hit-test-behavior.md)
@@ -41,6 +46,7 @@
       - [半模态转场](ts-universal-attributes-sheet-transition.md)
     - [隐私遮罩](ts-universal-attributes-obscured.md)
     - [文本通用](ts-universal-attributes-text-style.md)
+    - [拖拽控制](ts-universal-attributes-drag-drop.md)
     - [安全区域](ts-universal-attributes-expand-safe-area.md)
     - [组件内容填充方式](ts-universal-attributes-renderfit.md)
   - 手势处理
@@ -153,14 +159,17 @@
     - [共享元素转场](ts-transition-animation-shared-elements.md)
     - [组件内隐式共享元素转场](ts-transition-animation-geometrytransition.md)
   - [路径动画](ts-motion-path-animation.md)
+  - [粒子动画](ts-particle-animation.md)
 - 全局UI方法
   - 弹窗
     - [警告弹窗](ts-methods-alert-dialog-box.md)
     - [列表选择弹窗](ts-methods-action-sheet.md)
     - [自定义弹窗](ts-methods-custom-dialog-box.md)
+    - [日历选择器弹窗](ts-methods-calendarpicker-dialog.md)
     - [日期滑动选择器弹窗](ts-methods-datepicker-dialog.md)
     - [时间滑动选择器弹窗](ts-methods-timepicker-dialog.md)
     - [文本滑动选择器弹窗](ts-methods-textpicker-dialog.md)
+  - [菜单](ts-methods-menu.md)
 - [自定义组件的生命周期](ts-custom-component-lifecycle.md)
 - 页面级变量的状态管理
   - [\@Builder装饰器：自定义构建函数](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-builder.md)
@@ -175,6 +184,10 @@
   - [\@Provide装饰器和\@Consume装饰器：与后代组件双向同步](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-provide-and-consume.md)
   - [\@Observed装饰器和\@ObjectLink装饰器：嵌套类对象属性变化](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-observed-and-objectlink.md)
 - [应用级变量的状态管理](ts-state-management.md)
+- 渲染控制
+  - [if/else：条件渲染](arkts-rendering-control-ifelse.md)
+  - [ForEach：循环渲染](arkts-rendering-control-foreach.md)
+  - [LazyForEach：数据懒加载](arkts-rendering-control-lazyforeach.md)
 - [像素单位](ts-pixel-units.md)
 - [枚举说明](ts-appendix-enums.md)
 - [类型定义](ts-types.md)

@@ -1,9 +1,11 @@
 # OpenHarmony APIs with Cross-Platform Support
 - Platform Bridge
-  - [@arkui-x.bridge (Platform Bridget)](js-apis-bridge.md)
+  - [@arkui-x.bridge (Platform Bridget)]()
 
 - UI Page
   - [@ohos.animator (Animator)](js-apis-animator.md)
+  - [@ohos.arkui.componentSnapshot (Component Snapshot)](js-apis-arkui-componentSnapshot.md)
+  - [@ohos.arkui.inspector (Layout Callback)](js-apis-arkui-inspector.md)
   - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
   - [@ohos.curves (Interpolation Calculation)](js-apis-curve.md)
   - [@ohos.matrix4 (Matrix Transformation)](js-apis-matrix4.md)

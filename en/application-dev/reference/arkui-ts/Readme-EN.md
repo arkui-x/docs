@@ -5,8 +5,11 @@
     - [Click Event](ts-universal-events-click.md)
     - [Touch Event](ts-universal-events-touch.md)
     - [Show/Hide Event](ts-universal-events-show-hide.md)
+    - [Key Event](ts-universal-events-key.md)
+    - [Focus Event](ts-universal-focus-event.md)
     - [Component Area Change Event](ts-universal-component-area-change-event.md)
     - [Visible Area Change Event](ts-universal-component-visible-area-change-event.md)
+    - [Component Keyboard Shortcut Event](ts-universal-events-keyboardshortcut.md)
   - Universal Attributes
     - [Size](ts-universal-attributes-size.md)
     - [Location](ts-universal-attributes-location.md)
@@ -33,15 +36,18 @@
     - [Foreground Color](ts-universal-attributes-foreground-color.md)
     - [Foreground Blur](ts-universal-attributes-foreground-blur-style.md)
     - [Click Effect](ts-universal-attributes-click-effect.md)
+    - [Accessibility](ts-universal-attributes-accessibility.md)
     - Touch Interactions
       - [Touch Target](ts-universal-attributes-touch-target.md)
       - [Hit Test Control](ts-universal-attributes-hit-test-behavior.md)
     - Transition
       - [Modal Transition](ts-universal-attributes-modal-transition.md)
       - [Sheet Transition](ts-universal-attributes-sheet-transition.md)
-    - [Obscuring](ts-universal-attributes-obscured.md)
+  	- [Obscuring](ts-universal-attributes-obscured.md)
   	- [Universal Text Attributes](ts-universal-attributes-text-style.md)
+  	- [Drag and Drop Control](ts-universal-attributes-drag-drop.md)
   	- [Safe Area](ts-universal-attributes-expand-safe-area.md)
+  	- [Render Fit](ts-universal-attributes-renderfit.md)
   - Gesture Handling
     - [Gesture Binding Methods](ts-gesture-settings.md)
     - Basic Gestures
@@ -151,15 +157,21 @@
     - [Transition of Shared Elements](ts-transition-animation-shared-elements.md)
     - [Implicit Shared Element Transition](ts-transition-animation-geometrytransition.md)
   - [Motion Path Animation](ts-motion-path-animation.md)
+  - [Particle Animation](ts-particle-animation.md)
 - Global UI Methods
   - Pop-up Window
     - [Alert Dialog Box](ts-methods-alert-dialog-box.md)
     - [Action Sheet](ts-methods-action-sheet.md)
     - [Custom Dialog Box](ts-methods-custom-dialog-box.md)
+    - [Calendar Picker Dialog Box](ts-methods-calendarpicker-dialog.md)
     - [Date Picker Dialog Box](ts-methods-datepicker-dialog.md)
     - [Time Picker Dialog Box](ts-methods-timepicker-dialog.md)
     - [Text Picker Dialog Box](ts-methods-textpicker-dialog.md)
 - [Custom Component Lifecycle](ts-custom-component-lifecycle.md)
+- Rendering Control
+  - [if/else: Conditional Rendering](arkts-rendering-control-ifelse.md)
+  - [ForEach: Rendering of Repeated Content](arkts-rendering-control-foreach.md)
+  - [LazyForEach: Lazy Data Loading](arkts-rendering-control-lazyforeach.md)
 - State Management with Page-level Variables
   - [\@Builder Decorator: Custom Builder Function](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-builder.md)
   - [\@BuilderParam Decorator: \@Builder Function Reference](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-builderparam.md)
