@@ -59,3 +59,21 @@ Failed to obtain subscription service.
 **处理步骤**
 
 请切换当前上下文环境，使用Stage模型。
+
+## 15501002 Options中传入的dataGroupId参数非法
+
+**错误信息**
+
+The data group id is not valid.
+
+**错误描述**
+
+使用非法dataGroupId参数。
+
+**可能原因**
+
+使用的dataGroupId不是从应用市场正常申请的。
+
+**处理步骤**
+
+应用从应用市场申请dataGroupId，并正确传入该参数。
