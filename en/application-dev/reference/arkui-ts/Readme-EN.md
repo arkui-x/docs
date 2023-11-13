@@ -152,13 +152,14 @@
     - [Implicit Shared Element Transition](ts-transition-animation-geometrytransition.md)
   - [Motion Path Animation](ts-motion-path-animation.md)
 - Global UI Methods
-  - Pop-up Window
+  - Dialog Boxes
     - [Alert Dialog Box](ts-methods-alert-dialog-box.md)
     - [Action Sheet](ts-methods-action-sheet.md)
     - [Custom Dialog Box](ts-methods-custom-dialog-box.md)
     - [Date Picker Dialog Box](ts-methods-datepicker-dialog.md)
     - [Time Picker Dialog Box](ts-methods-timepicker-dialog.md)
     - [Text Picker Dialog Box](ts-methods-textpicker-dialog.md)
+  - [Menu](ts-methods-menu.md)
 - [Custom Component Lifecycle](ts-custom-component-lifecycle.md)
 - State Management with Page-level Variables
   - [\@Builder Decorator: Custom Builder Function](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-builder.md)

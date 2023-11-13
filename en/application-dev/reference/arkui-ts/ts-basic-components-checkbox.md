@@ -41,7 +41,7 @@ In addition to the [universal events](ts-universal-events-click.md), the followi
 
 | Name                                         | Description                                                  |
 | -------------------------------------------- | ------------------------------------------------------------ |
-| onChange(callback: (value: boolean) => void) | Triggered when the selected status of the check box changes.<br>- The value **true** means that the check box is selected.<br>- The value **false** means that the check box is not selected.<br>Since API version 9, this API is supported in ArkTS widgets. |
+| onChange(callback: (value: boolean) => void) | Triggered when the selected status of the check box changes.<br>- The value **true** means that the check box is selected.<br>- The value **false** means that the check box is not selected.<br>Since API version 9, this API is supported in ArkTS widgets.|
 
 ## MarkStyle<sup>10+</sup>
 
@@ -52,6 +52,8 @@ In addition to the [universal events](ts-universal-events-click.md), the followi
 | strokeWidth | number \| string                 | No  | 2           | Stroke width of the internal mark, in vp. This parameter cannot be set in percentage. If it is set to an invalid value, the default value is used.|
 
 ## Example
+
+### Example 1
 
 ```ts
 // xxx.ets
@@ -79,4 +81,52 @@ struct CheckboxExample {
 ```
 
 
-![](figures/checkbox.gif)
+![checkbox](figures/checkbox.gif)
+
+### Example 2
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct Index {
+
+  build() {
+    Row() {
+      Column() {
+        Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+          Checkbox({ name: 'checkbox1', group: 'checkboxGroup' })
+            .selectedColor(0x39a2db)
+            .onChange((value: boolean) => {
+              console.info('Checkbox1 change is'+ value)
+            })
+            .mark({
+              strokeColor:Color.Black,
+              size: 50,
+              strokeWidth: 5
+            })
+            .unselectedColor(Color.Red)
+            .width(30)
+            .height(30)
+          Text('Checkbox1').fontSize(20)
+        }
+        Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+          Checkbox({ name: 'checkbox2', group: 'checkboxGroup' })
+            .selectedColor(0x39a2db)
+            .onChange((value: boolean) => {
+              console.info('Checkbox2 change is' + value)
+            })
+            .width(30)
+            .height(30)
+          Text('Checkbox2').fontSize(20)
+        }
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+
+![checkbox2](figures/checkbox2.gif)

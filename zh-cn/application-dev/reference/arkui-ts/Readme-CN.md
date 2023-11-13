@@ -95,6 +95,7 @@
   - [TextTimer](ts-basic-components-texttimer.md)
   - [TimePicker](ts-basic-components-timepicker.md)
   - [Toggle](ts-basic-components-toggle.md)
+  - [Web](ts-basic-components-web.md)
 - 容器组件
   - [Badge](ts-container-badge.md)
   - [Column](ts-container-column.md)
@@ -161,6 +162,7 @@
     - [日期滑动选择器弹窗](ts-methods-datepicker-dialog.md)
     - [时间滑动选择器弹窗](ts-methods-timepicker-dialog.md)
     - [文本滑动选择器弹窗](ts-methods-textpicker-dialog.md)
+  - [菜单](ts-methods-menu.md)
 - [自定义组件的生命周期](ts-custom-component-lifecycle.md)
 - 页面级变量的状态管理
   - [\@Builder装饰器：自定义构建函数](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-builder.md)

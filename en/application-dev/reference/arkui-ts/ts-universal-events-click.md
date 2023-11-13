@@ -24,6 +24,10 @@ Since API version 9, this API is supported in ArkTS widgets.
 | timestamp<sup>8+</sup> | number | Timestamp of the event. It is the interval between the time when the event is triggered and the time when the system starts, in nanoseconds.|
 | target<sup>8+</sup> | [EventTarget](#eventtarget8) | Display area of the object that triggers the event.|
 | source<sup>8+</sup> | [SourceType](ts-gesture-settings.md#sourcetype)| Event input device.|
+| windowX<sup>10+</sup> | number                             | X coordinate of the click relative to the upper left corner of the application window.|
+| windowY<sup>10+</sup> | number                             | Y coordinate of the click relative to the upper left corner of the application window.|
+| displayX<sup>10+</sup> | number                            | X coordinate of the click relative to the upper left corner of the application screen.|
+| displayY<sup>10+</sup> | number                            | Y coordinate of the click relative to the upper left corner of the application screen.|
 
 ## EventTarget<sup>8+</sup>
 
@@ -48,18 +52,22 @@ struct ClickExample {
     Column() {
       Row({ space: 20 }) {
         Button('Click').width(100).height(40)
-          .onClick((event: ClickEvent) => {
-            this.text = 'Click Point:' + '\n  screenX:' + event.screenX + '\n  screenY:' + event.screenY
-            + '\n  x:' + event.x + '\n  y:' + event.y + '\ntarget:' + '\n  component globalPos:('
-            + event.target.area.globalPosition.x + ',' + event.target.area.globalPosition.y + ')\n  width:'
-            + event.target.area.width + '\n  height:' + event.target.area.height + '\ntimestamp' + event.timestamp;
+          .onClick((event?: ClickEvent) => {
+            if(event){
+              this.text = 'Click Point:' + '\n  windowX:' + event.windowX + '\n  windowY:' + event.windowY
+              + '\n  x:' + event.x + '\n  y:' + event.y + '\ntarget:' + '\n  component globalPos:('
+              + event.target.area.globalPosition.x + ',' + event.target.area.globalPosition.y + ')\n  width:'
+              + event.target.area.width + '\n  height:' + event.target.area.height + '\ntimestamp' + event.timestamp;
+            }
           })
         Button('Click').width(200).height(50)
-          .onClick((event: ClickEvent) => {
-            this.text = 'Click Point:' + '\n  screenX:' + event.screenX + '\n  screenY:' + event.screenY
-            + '\n  x:' + event.x + '\n  y:' + event.y + '\ntarget:' + '\n  component globalPos:('
-            + event.target.area.globalPosition.x + ',' + event.target.area.globalPosition.y + ')\n  width:'
-            + event.target.area.width + '\n  height:' + event.target.area.height + '\ntimestamp' + event.timestamp;
+          .onClick((event?: ClickEvent) => {
+            if(event){
+              this.text = 'Click Point:' + '\n  windowX:' + event.windowX + '\n  windowY:' + event.windowY
+              + '\n  x:' + event.x + '\n  y:' + event.y + '\ntarget:' + '\n  component globalPos:('
+              + event.target.area.globalPosition.x + ',' + event.target.area.globalPosition.y + ')\n  width:'
+              + event.target.area.width + '\n  height:' + event.target.area.height + '\ntimestamp' + event.timestamp;
+            }
           })
       }.margin(20)
 
@@ -70,4 +78,4 @@ struct ClickExample {
 ```
 
 
-![en-us_image_0000001256858383](figures/en-us_image_0000001256858383.gif)
+![en-us_image_0000001210353788](figures/en-us_image_0000001210353788.gif)

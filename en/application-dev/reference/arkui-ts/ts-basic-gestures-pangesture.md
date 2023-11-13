@@ -19,7 +19,7 @@ PanGesture(value?: { fingers?: number; direction?: PanDirection; distance?: numb
 | -------- | -------- | -------- | -------- |
 | fingers | number | No| Minimum number of fingers to trigger a pan gesture. The value ranges from 1 to 10.<br>Default value: **1**<br>Value range: 1 to 10<br>**NOTE**<br>If the value is less than 1 or is not set, the default value is used.|
 | direction | PanDirection | No| Pan direction. The enumerated value supports the AND (&amp;) and OR (\|) operations.<br>Default value: **PanDirection.All**|
-| distance | number | No| Minimum pan distance to trigger the gesture, in vp.<br>Default value: **5**<br>**NOTE**<br>If a pan gesture and [tab](ts-container-tabs.md) swipe occur at the same time, set **distance** to **1** so that the gesture can be more easily recognized.|
+| distance | number | No| Minimum pan distance to trigger the gesture, in vp.<br>Default value: **5**<br>**NOTE**<br>If a pan gesture and [tab](ts-container-tabs.md) swipe occur at the same time, set **distance** to **1** so that the gesture can be more easily recognized.<br>If the value is less than or equal to 0, it will be converted to the default value.|
 
 ## PanDirection
 
@@ -47,7 +47,7 @@ PanGestureOptions(value?: { fingers?: number; direction?: PanDirection; distance
 | --------- | ------------ | ---- | ------------------------------------------------------------ |
 | fingers   | number       | No  | Minimum number of fingers to trigger a pan gesture. The value ranges from 1 to 10.<br>Default value: **1**|
 | direction | PanDirection | No  | Pan direction. The enumerated value supports the AND (&amp;) and OR (\|) operations.<br>Default value: **All**|
-| distance  | number       | No  | Minimum pan distance to trigger the gesture, in vp.<br>Default value: **5.0**<br>**NOTE**<br>If a pan gesture and [tab](ts-container-tabs.md) swipe occur at the same time, set **distance** to **1** so that the gesture can be more easily recognized.|
+| distance  | number       | No  | Minimum pan distance to trigger the gesture, in vp.<br>Default value: **5.0**<br>**NOTE**<br>If a pan gesture and [tab](ts-container-tabs.md) swipe occur at the same time, set **distance** to **1** so that the gesture can be more easily recognized.<br>If the value is less than or equal to 0, it will be converted to the default value.|
 
 **APIs**
 
@@ -91,16 +91,18 @@ struct PanGestureExample {
       .padding(20)
       .border({ width: 3 })
       .margin(50)
-      .translate({ x: this.offsetX, y: this.offsetY, z: 0 })
+      .translate({ x: this.offsetX, y: this.offsetY, z: 0}) // Move the component with its upper left corner as the coordinate origin.
       // Pan left or right to trigger the gesture event.
       .gesture(
       PanGesture(this.panOption)
-        .onActionStart((event: GestureEvent) => {
+        .onActionStart((event?: GestureEvent) => {
           console.info('Pan start')
         })
-        .onActionUpdate((event: GestureEvent) => {
-          this.offsetX = this.positionX + event.offsetX
-          this.offsetY = this.positionY + event.offsetY
+        .onActionUpdate((event?: GestureEvent) => {
+          if (event) {
+            this.offsetX = this.positionX + event.offsetX
+            this.offsetY = this.positionY + event.offsetY
+          }
         })
         .onActionEnd(() => {
           this.positionX = this.offsetX

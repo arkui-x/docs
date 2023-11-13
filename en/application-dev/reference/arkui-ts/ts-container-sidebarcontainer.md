@@ -13,7 +13,7 @@ Supported
 
 >  **NOTE**
 >
->  - Built-in components and custom components are allowed, without support for ([if/else](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-ifelse.md), [ForEach](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-foreach.md), and [LazyForEach](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-lazyforeach.md)) rendering control.
+>  - Built-in components and custom components are allowed, without support for ([if/else](arkts-rendering-control-ifelse.md), [ForEach](arkts-rendering-control-foreach.md), and [LazyForEach](arkts-rendering-control-lazyforeach.md)) rendering control.
 >  - This component must contain two child components.
 >  - If there are three or more child components, only the first and second child components are displayed. If there is only one child component, the sidebar is displayed, and the content area is blank.
 
@@ -32,7 +32,7 @@ SideBarContainer( type?: SideBarContainerType )
 
 | Name| Description|
 | -------- | -------- |
-| Embed | The sidebar is embedded in the component and displayed side by side with the content area.|
+| Embed | The sidebar is embedded in the component and displayed side by side with the content area.<br>When the component size is less than the sum of **minContentWidth** and **minSideBarWidth** and **showSideBar** is not set, the sidebar is automatically hidden.<br>If **minSideBarWidth** or **minContentWidth** is not set, the default value will be used for calculation.<br>The user can bring out the sidebar in Overlay mode by clicking the control button.|
 | Overlay | The sidebar is displayed overlaid on the content area.|
 | AUTO | The sidebar is displayed in Embed mode when the component size is greater than or equal to the sum of **minSideBarWidth** and **minContentWidth**<br>and in Overlay mode otherwise.<br>If **minSideBarWidth** or **minContentWidth** is not set, the default value will be used for calculation. If the calculation result is less than 600 vp, 600 vp will be used as the breakpoint value for mode switching.|
 
@@ -45,13 +45,13 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | showSideBar | boolean | Whether to display the sidebar.<br>Default value: **true**<br>Since API version 10, this attribute supports [$$](../../quick-start/arkts-two-way-sync.md) for two-way binding of variables.|
 | controlButton | [ButtonStyle](#buttonstyle)                            | Attributes of the sidebar control button.|
 | showControlButton | boolean | Whether to display the sidebar control button.<br>Default value: **true**|
-| sideBarWidth | number \| [Length](ts-types.md#length)<sup>9+</sup> | Width of the sidebar.<br>Default value: **240vp**<br>Unit: vp<br>**NOTE**<br>In API version 9 and earlier versions, the default value is **200vp**. In API version 10, the default value is **240vp**.<br>A value less than 0 evaluates to the default value.<br>The value must comply with the width constraints. If it is not within the valid range, the value closest to the set one is used.<br>The width of the sidebar, whether it is specified or kept at the default value, takes precedence over that of the sidebar child components.|
+| sideBarWidth | number \| [Length](ts-types.md#length)<sup>9+</sup> | Width of the sidebar.<br>Default value: **240vp**<br>Unit: vp<br>**NOTE**<br>In API version 9 and earlier versions, the default value is **200vp**. In API version 10, the default value is **240vp**.<br>A value less than 0 evaluates to the default value.<br>The value must comply with the width constraints. If it is not within the valid range, the valid value closest to the set one is used.<br>The width of the sidebar, whether it is specified or kept at the default value, takes precedence over that of the sidebar child components.|
 | minSideBarWidth | number \| [Length](ts-types.md#length)<sup>9+</sup> | Minimum width of the sidebar.<br>Default value: **240vp**<br>Unit: vp<br>**NOTE**<br>In API version 9 and earlier versions, the default value is **200vp**. In API version 10, the default value is **240vp**.<br>A value less than 0 evaluates to the default value.<br>The value cannot exceed the width of the sidebar container itself. Otherwise, the width of the sidebar container itself is used.<br>**minSideBarWidth**, whether it is specified or kept at the default value, takes precedence over **minWidth** of the sidebar child components.|
 | maxSideBarWidth | number \| [Length](ts-types.md#length)<sup>9+</sup> | Maximum width of the sidebar.<br>Default value: **280vp**<br>Unit: vp<br>**NOTE**<br>A value less than 0 evaluates to the default value.<br>The value cannot exceed the width of the sidebar container itself. Otherwise, the width of the sidebar container itself is used.<br>**maxSideBarWidth**, whether it is specified or kept at the default value, takes precedence over **maxWidth** of the sidebar child components.|
 | autoHide<sup>9+</sup> | boolean | Whether to automatically hide the sidebar when it is dragged to be smaller than the minimum width.<br>Default value: **true**<br>**NOTE**<br>The value is subject to the **minSideBarWidth** attribute method. If it is not set in **minSideBarWidth**, the default value is used.<br>Whether the sidebar should be hidden is determined when it is being dragged. When its width is less than the minimum width, the damping effect is required to trigger hiding (a distance out of range).|
 | sideBarPosition<sup>9+</sup> | [SideBarPosition](#sidebarposition9) | Position of the sidebar.<br>Default value: **SideBarPosition.Start**|
 | divider<sup>10+</sup>        | [DividerStyle](#dividerstyle10) \| null | Divider style.<br>- **DividerStyle** (default): The divider is displayed.<br>- **null**: The divider is not displayed.|
-| minContentWidth<sup>10+</sup> | [Dimension](ts-types.md#dimension10) | Minimum width of the content area of the sidebar container.<br>Default value: **360vp**<br>Unit: vp<br>**NOTE**<br>If this attribute is set to a value less than 0, the default value is used. If this attribute is not set, the value **0vp** is used.<br>In Embed mode, when the component size is increased, only the content area is enlarged; when the component size is decreased, the content area is shrunk until its width reaches the value defined by **minContentWidth**, and then the sidebar is shrunk until its width reaches the value defined by **minSideBarWidth**; if the component size is further decreased, while respecting the minimum width of the sidebar, the content area is further shrunk, with the content clipped, until it is 0 vp large.<br>**minContentWidth**, whether it is specified or kept at the default value, takes precedence over **minSideBarWidth** and **sideBarWidth** of the sidebar. |
+| minContentWidth<sup>10+</sup> | [Dimension](ts-types.md#dimension10) | Minimum content area width of the sidebar container.<br>Default value: **360vp**<br>Unit: vp<br>**NOTE**<br>If this attribute is set to a value less than 0, the default value **360vp** will be used. If this attribute is not set, the width of the content area can shrink to 0.<br>In Embed mode, when the component size is increased, only the content area is enlarged; when the component size is decreased, the content area is shrunk until its width reaches the value defined by **minContentWidth**; if the component size is further decreased, while respecting the **minContentWidth** settings, the sidebar is shrunk until its width reaches the value defined by **minSideBarWidth**; if the component size is further decreased, then:<br>- If **autoHide** is set to **false**, while respecting the **minSideBarWidth** and **minContentWidth** settings, the content area has its content clipped.<br>- If **autoHide** is set to **true**, the sidebar is hidden first, and then the content area is shrunk. After its width reaches the value defined by **minContentWidth**, the content area has its content clipped.<br>**minContentWidth**, whether it is specified or kept at the default value, takes precedence over **minSideBarWidth** and **sideBarWidth** of the sidebar.|
 
 ## ButtonStyle
 
@@ -74,7 +74,7 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 
 | Name       | Type     | Mandatory| Description                                    |
 | ----------- | ------------- | ---- | ---------------------------------------- |
-| strokeWidth | [Length](ts-types.md#length)        | Yes  | Stroke width of the divider.<br>Default value: **1vp**<br>Unit: vp|
+| strokeWidth | [Length](ts-types.md#length)        | Yes  | Stroke width of the divider.|
 | color       | [ResourceColor](ts-types.md#resourcecolor) | No  | Color of the divider.<br>Default value: **#000000, 3%**  |
 | startMargin | [Length](ts-types.md#length)        | No  | Distance between the divider and the top of the sidebar.<br>Default value: **0**|
 | endMargin   | [Length](ts-types.md#length)        | No  | Distance between the divider and the bottom of the sidebar.<br>Default value: **0**|
@@ -112,7 +112,7 @@ struct SideBarContainerExample {
   build() {
     SideBarContainer(SideBarContainerType.Embed) {
       Column() {
-        ForEach(this.arr, (item, index) => {
+        ForEach(this.arr, (item: number) => {
           Column({ space: 5 }) {
             Image(this.current === item ? this.selectedIcon : this.normalIcon).width(64).height(64)
             Text("Index0" + item)
@@ -123,10 +123,11 @@ struct SideBarContainerExample {
           .onClick(() => {
             this.current = item
           })
-        }, item => item)
+        }, (item: string) => item)
       }.width('100%')
       .justifyContent(FlexAlign.SpaceEvenly)
       .backgroundColor('#19000000')
+
       Column() {
         Text('SideBarContainer content text1').fontSize(25)
         Text('SideBarContainer content text2').fontSize(25)
@@ -143,10 +144,11 @@ struct SideBarContainerExample {
     .sideBarWidth(150)
     .minSideBarWidth(50)
     .maxSideBarWidth(300)
+    .minContentWidth(0)
     .onChange((value: boolean) => {
       console.info('status:' + value)
     })
-    .divider({strokeWidth: '1vp', color: Color.Gray, startMargin: '4vp', endMargin: '4vp'})
+    .divider({ strokeWidth: '1vp', color: Color.Gray, startMargin: '4vp', endMargin: '4vp' })
   }
 }
 ```

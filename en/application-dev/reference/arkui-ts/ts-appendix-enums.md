@@ -83,7 +83,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 | Press   | The mouse button is pressed.|
 | Release | The mouse button is released.|
 | Move    | The mouse cursor moves.  |
-| Hover   | The mouse pointer is hovered on an element.  |
+| Hover   | The mouse pointer is hovered on an element.<br>**NOTE**<br>This value has no effect. |
 
 ## Curve
 
@@ -555,6 +555,20 @@ This API is supported in ArkTS widgets.
 | LIGHT  | Small area (light)| Spring effect, with stiffness of 410, damping of 38, and initial velocity of 1.| 90% |
 | MIDDLE | Medium area (stable)| Spring effect, with stiffness of 350, damping of 35, and initial velocity of 0.5.| 95% |
 | HEAVY  | Large area (heavy)| Spring effect, with stiffness of 240, damping of 28, and initial velocity of 0.| 95% |
+
+## TextContentStyle<sup>10+</sup>
+
+| Name   | Description                                                        |
+| ------- | ------------------------------------------------------------ |
+| DEFAULT | Default style. The caret width is fixed at 1.5 vp, and the caret height is subject to the background height and font size of the selected text.|
+| INLINE  | Inline input style. The background height of the selected text is the same as the height of the text box.<br>The **showError** attribute is not supported for this style.|
+
+## MenuPreviewMode <sup>11+</sup>
+
+| Name | Description                                  |
+| ----- | -------------------------------------- |
+| NONE  | No preview is displayed.                      |
+| IMAGE | The preview is a screenshot of the component on which a long-press triggers the context menu.|
 
 ## ImageSmoothingQuality<sup>8+</sup>
 

@@ -16,7 +16,7 @@ PinchGesture(value?: { fingers?: number, distance?: number })
 | Name| Type| Mandatory| Description|
 | -------- | -------- | -------- | -------- |
 | fingers | number | No| Minimum number of fingers to trigger a pinch. The value ranges from 2 to 5.<br>Default value: **2**|
-| distance | number | No| Minimum recognition distance, in vp.<br>Default value: **3**|
+| distance | number | No| Minimum recognition distance, in vp.<br>Default value: **3**<br>**NOTE**<br>If the value is less than or equal to 0, it will be converted to the default value. |
 
 
 ## Events
@@ -56,13 +56,15 @@ struct PinchGestureExample {
       // The gesture event is triggered by pinching three fingers together.
       .gesture(
       PinchGesture({ fingers: 3 })
-        .onActionStart((event: GestureEvent) => {
+        .onActionStart((event?: GestureEvent) => {
           console.info('Pinch start')
         })
-        .onActionUpdate((event: GestureEvent) => {
-          this.scaleValue = this.pinchValue * event.scale
-          this.pinchX = event.pinchCenterX
-          this.pinchY = event.pinchCenterY
+        .onActionUpdate((event?: GestureEvent) => {
+          if (event) {
+            this.scaleValue = this.pinchValue * event.scale
+            this.pinchX = event.pinchCenterX
+            this.pinchY = event.pinchCenterY
+          }
         })
         .onActionEnd(() => {
           this.pinchValue = this.scaleValue

@@ -13,12 +13,14 @@ This component supports only one child component.
 
 >  **NOTE**
 >
->  Built-in components and custom components are allowed, with support for ([if/else](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-ifelse.md), [ForEach](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-foreach.md), and [LazyForEach](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-lazyforeach.md)) rendering control.
+>  Built-in components and custom components are allowed, with support for ([if/else](arkts-rendering-control-ifelse.md), [ForEach](arkts-rendering-control-foreach.md), and [LazyForEach](arkts-rendering-control-lazyforeach.md)) rendering control.
 
 
 ## APIs
 
-**API 1**: Badge(value: {count: number, position?: BadgePosition, maxCount?: number, style: BadgeStyle})
+### Badge
+
+Badge(value: {count: number, position?: BadgePosition \| Position, maxCount?: number, style: BadgeStyle})
 
 Creates a badge.
 
@@ -33,7 +35,9 @@ Since API version 9, this API is supported in ArkTS widgets.
 | maxCount | number | No| Maximum number of notifications. When the maximum number is reached, only **maxCount+** is displayed.<br>Default value: **99**<br>Value range: [-2147483648, 2147483647]<br>If the value is not an integer, it is rounded off to the nearest integer. For example, 5.5 is rounded off to 5.|
 | style | [BadgeStyle](#badgestyle) | Yes| Style of the badge, including the font color, font size, badge color, and badge size.|
 
-**API 2**: Badge(value: {value: string, position?: BadgePosition, style: BadgeStyle})
+### Badge
+
+Badge(value: {value: string, position?: BadgePosition \| Position, style: BadgeStyle})
 
 Creates a badge based on the given string.
 

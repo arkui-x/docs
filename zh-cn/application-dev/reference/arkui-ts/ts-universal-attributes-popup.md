@@ -29,6 +29,7 @@
 | targetSpace<sup>10+</sup>    | [Length](ts-types.md#length)                                 | 否   | 设置popup与目标的间隙。                                      |
 | placement<sup>10+</sup>      | [Placement](ts-appendix-enums.md#placement8)                 | 否   | 设置popup组件相对于目标的显示位置，默认值为Placement.Bottom。 |
 | offset<sup>10+</sup>         | [Position](ts-types.md#position8)                            | 否   | 设置popup组件相对于placement设置的显示位置的偏移。<br />**说明：**<br />不支持设置百分比。 |
+| enableArrow<sup>10+</sup>    | boolean                                                      | 否   | 设置是否显示箭头。<br/>默认值：true                          |
 
 ## PopupMessageOptions<sup>10+</sup>类型说明
 
@@ -159,6 +160,7 @@ struct PopupExample {
             }
           },
           placement: Placement.Bottom,
+          enableArrow: false,
           targetSpace: '15vp',
           onStateChange: (e) => {
             console.info(JSON.stringify(e.isVisible))

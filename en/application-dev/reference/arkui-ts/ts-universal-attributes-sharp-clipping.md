@@ -13,7 +13,7 @@ Shape clipping changes the visible portion of a component through clipping or ma
 | Name   | Type                                    | Description                                 |
 | -----| ------------------------------------------ | ------------------------------------ |
 | clip | [Circle](ts-drawing-components-circle.md) \| [Ellipse](ts-drawing-components-ellipse.md) \| [Path](ts-drawing-components-path.md) \| [Rect](ts-drawing-components-rect.md) \| boolean | Clip mode. If the value is a shape, the component is clipped based on the specified shape. If the value is of the Boolean type, it specifies whether to clip the component based on the edge outline of the parent container.<br>Default value: **false**<br>Since API version 9, this API is supported in ArkTS widgets.|
-| mask | [Circle](ts-drawing-components-circle.md) \| [Ellipse](ts-drawing-components-ellipse.md) \| [Path](ts-drawing-components-path.md) \| [Rect](ts-drawing-components-rect.md)\| [ProgressMask](##progressmask10)  | Mask of the specified shape to add to the component.<br>Since API version 9, this API is supported in ArkTS widgets.<br>Since API version 10, this API supports the **ProgressMask** parameter.|
+| mask | [Circle](ts-drawing-components-circle.md) \| [Ellipse](ts-drawing-components-ellipse.md) \| [Path](ts-drawing-components-path.md) \| [Rect](ts-drawing-components-rect.md)\| [ProgressMask](#progressmask10)  | Mask of the specified shape to add to the component.<br>Since API version 9, this API is supported in ArkTS widgets.<br>Since API version 10, this API supports the **ProgressMask** parameter.|
 
 ## ProgressMask<sup>10+</sup>
 
@@ -127,14 +127,14 @@ struct ProgressMaskExample {
 
       // Update the progress value of the progress mask.
       Button('updateProgress')
-        .onClick((event: ClickEvent) => {
+        .onClick((event?: ClickEvent) => {
           this.value += 10;
           this.progress.updateProgress(this.value);
         }).width(200).height(50).margin(20)
 
       // Update the color of the progress mask.
       Button('updateColor')
-        .onClick((event: ClickEvent) => {
+        .onClick((event?: ClickEvent) => {
           if (this.progressflag1) {
             this.progress.updateColor(0x9fff0000);
           } else {
@@ -145,7 +145,7 @@ struct ProgressMaskExample {
 
       // Restores the progress mask.
       Button('click reset!')
-        .onClick((event: ClickEvent) => {
+        .onClick((event?: ClickEvent) => {
           this.value = 0;
           this.progress.updateProgress(this.value);
         }).width(200).height(50).margin(20)

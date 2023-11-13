@@ -152,7 +152,7 @@ struct Index {
 @Reusable
 @Component
 struct Child {
-  aboutToReuse(params) {
+  aboutToReuse(params: Object) {
     console.info("Recycle Child")
   }
 
@@ -189,7 +189,7 @@ struct Child {
 
 | 参数         | 参数类型                                                    | 描述                  |
 |------------|---------------------------------------------------------|---------------------|
-| measureResult| [MeasureResult](#measureresult10+) | 子组件测量后的尺寸信息。<br>单位：vp        |
+| measureResult| [MeasureResult](#measureresult10) | 子组件测量后的尺寸信息。<br>单位：vp        |
 | layout     | ([Position](ts-types.md#position))&nbsp;=&gt;&nbsp;void | 调用此方法对子组件的位置信息进行限制。 |
 
 ## Measurable<sup>10+</sup>
@@ -200,7 +200,7 @@ struct Child {
 
 | 参数         | 参数类型                                                                             | 描述                                    |
 |------------|----------------------------------------------------------------------------------|---------------------------------------|
-| measure    | (childConstraint:)&nbsp;=&gt;&nbsp;[MeasureResult](#measureresult10+) | 调用此方法对子组件的尺寸范围进行限制。<br/>返回值：子组件测量后的尺寸。 |
+| measure    | (childConstraint:)&nbsp;=&gt;&nbsp;[MeasureResult](#measureresult10) | 调用此方法对子组件的尺寸范围进行限制。<br/>返回值：子组件测量后的尺寸。 |
 
 ## MeasureResult<sup>10+</sup>
 
@@ -271,7 +271,7 @@ struct CustomLayout {
   };
 
   onPlaceChildren(selfLayoutInfo: GeometryInfo, children: Array<Layoutable>, constraint: ConstraintSizeOptions) {
-    let startPos = 400;
+    let startPos = 300;
     children.forEach((child) => {
       let pos = startPos - child.measureResult.height;
       child.layout({ x: pos, y: pos })
