@@ -25,9 +25,13 @@ const bridgeImpl = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
 ```java
 // xxx.java
 
+// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
 Bridge bridge = new Bridge(this, "Bridge", getInstanceId());
-// 创建平台桥接实例(二进制格式)
 Bridge bridge = new Bridge(this, "Bridge", getInstanceId()， BridgePlugin.BridgeType.BINARY_TYPE);
+
+// 创建平台桥接实例(新)
+Bridge bridge = new Bridge(this, "Bridge", getBridgeManager());
+Bridge bridge = new Bridge(this, "Bridge", getBridgeManager()， BridgePlugin.BridgeType.BINARY_TYPE);
 ```
 
 ### 场景一：ArkUI侧向Android侧传递数据
@@ -50,8 +54,15 @@ bridgeImpl.sendMessage('text').then((res)=>{
 ```java
 // xxx.java
 
+// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
 public Bridge(Context context, String name, int id) {
     super(context, name, id);
+    setMessageListener(this);
+}
+
+// 创建平台桥接实例(新)
+public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    super(context, name, bridgeManager);
     setMessageListener(this);
 }
 
@@ -91,8 +102,15 @@ bridgeImpl.setMessageListener((message) => {
 ```java
 // xxx.java
 
+// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
 public Bridge(Context context, String name, int id) {
     super(context, name, id);
+    setMessageListener(this);
+}
+
+// 创建平台桥接实例(新)
+public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    super(context, name, bridgeManager);
     setMessageListener(this);
 }
 
@@ -120,7 +138,7 @@ bridgeImpl.callMethod('platformCallMethod').then((res)=>{
 ```java
 // xxx.java
 
-public platformCallMethod() {
+public String platformCallMethod() {
   return "call java platformCallMethod success";
 }
 ```
@@ -173,6 +191,10 @@ bridgeImpl.unRegisterMethod('getString');
 
 public Bridge(Context context, String name, int id) {
     super(context, name, id);
+}
+
+public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    super(context, name, bridgeManager);
     setMethodResultListener(this);
 }
 
@@ -185,6 +207,40 @@ public void onError(String s, int i, String s1) {}
 @Override
 public void onMethodCancel(String s) {}
 ```
+
+### 场景六：ArkUI侧注册callBack且调用Android侧的方法
+
+1、在ArkUI侧注册callBack且调用Android侧的方法。
+
+```javascript
+// xxx.ets
+function testCallBack() {
+  console.log("bridge js testCallBack run")
+}
+
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBack).then((res)=>{
+    console.log('result: ' + res);
+}).catch((err) => {
+    console.error('error: ' + JSON.stringify(err));
+});
+```
+
+2、在Android侧实现被调用的方法，调用ArkUI侧的方法。
+
+```java
+// xxx.java
+
+public void testCallBack() {
+  return "call android testCallBack success";
+}
+
+Object[] paramObject = {};
+MethodData methodData = new MethodData("testCallBack", paramObject);
+bridge.callMethod(methodData);
+```
+
+
+### 
 
 ## 场景示例
 
@@ -258,9 +314,15 @@ import ohos.ace.adapter.capability.bridge.BridgePlugin;
 import ohos.ace.adapter.capability.bridge.IMessageListener;
 
 public class Bridge extends BridgePlugin implements IMessageListener {
+	// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
     public Bridge(Context context, String name, int id) {
-        super(context, name, id);
-
+    	super(context, name, id);
+        setMessageListener(this);
+    }
+    
+    // 创建平台桥接实例
+    public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    	super(context, name, bridgeManager);
         setMessageListener(this);
     }
 
