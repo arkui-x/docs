@@ -273,7 +273,7 @@ struct MiterLimit {
 struct Fonts {
   private settings: RenderingContextSettings = new RenderingContextSettings(true)
   private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings)
-  
+
   build() {
     Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
       Canvas(this.context)
@@ -2425,7 +2425,7 @@ getImageData(sx: number, sy: number, sw: number, sh: number): ImageData
           .backgroundColor('#ffff00')
           .onReady(() =>{
             this.context.drawImage(this.img,0,0,130,130)
-            var imagedata = this.context.getImageData(50,50,130,130)
+            let imagedata = this.context.getImageData(50,50,130,130)
             this.context.putImageData(imagedata,150,150)
           })
       }
@@ -2477,8 +2477,8 @@ putImageData(imageData: ImageData, dx: number | string, dy: number | string, dir
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var imageData = this.context.createImageData(100, 100)
-            for (var i = 0; i < imageData.data.length; i += 4) {
+            let imageData = this.context.createImageData(100, 100)
+            for (let i = 0; i < imageData.data.length; i += 4) {
               imageData.data[i + 0] = 255
               imageData.data[i + 1] = 0
               imageData.data[i + 2] = 255
@@ -2630,15 +2630,15 @@ transferFromImageBitmap(bitmap: ImageBitmap): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var imageData = this.offContext.createImageData(100, 100)
-            for (var i = 0; i < imageData.data.length; i += 4) {
+            let imageData = this.offContext.createImageData(100, 100)
+            for (let i = 0; i < imageData.data.length; i += 4) {
               imageData.data[i + 0] = 255
               imageData.data[i + 1] = 0
               imageData.data[i + 2] = 255
               imageData.data[i + 3] = 255
             }
             this.offContext.putImageData(imageData, 10, 10)
-            var image = this.offContext.transferToImageBitmap()
+            let image = this.offContext.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2688,7 +2688,7 @@ toDataURL(type?: string, quality?: number): string
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var dataURL = this.context.toDataURL()
+            let dataURL = this.context.toDataURL()
           })
       }
       .width('100%')
@@ -2812,7 +2812,7 @@ createLinearGradient(x0: number, y0: number, x1: number, y1: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var grad = this.context.createLinearGradient(50,0, 300,100)
+            let grad = this.context.createLinearGradient(50,0, 300,100)
             grad.addColorStop(0.0, '#ff0000')
             grad.addColorStop(0.5, '#ffffff')
             grad.addColorStop(1.0, '#00ff00')
@@ -2865,7 +2865,7 @@ createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number,
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var grad = this.context.createRadialGradient(200,200,50, 200,200,200)
+            let grad = this.context.createRadialGradient(200,200,50, 200,200,200)
             grad.addColorStop(0.0, '#ff0000')
             grad.addColorStop(0.5, '#ffffff')
             grad.addColorStop(1.0, '#00ff00')
@@ -2912,7 +2912,7 @@ struct CanvasExample {
         .height('100%')
         .backgroundColor('#ffffff')
         .onReady(() => {
-          var grad = this.context.createConicGradient(0, 50, 80)
+          let grad = this.context.createConicGradient(0, 50, 80)
           grad.addColorStop(0.0, '#ff0000')
           grad.addColorStop(0.5, '#ffffff')
           grad.addColorStop(1.0, '#00ff00')
@@ -2928,6 +2928,16 @@ struct CanvasExample {
 
   ![zh-cn_image_0000001239032419](figures/zh-cn_image_0000001239032420.png)
 
+
+## CanvasDirection
+
+从API version 9开始，该接口支持在ArkTS卡片中使用。
+
+| 名称        | 描述             |
+| -------- | -------------- |
+| inherit | 继承canvas组件已设定的文本方向。 |
+| ltr     | 从左往右。 |
+| rtl     | 从右往左。 |
 
 ## CanvasFillRule
 
@@ -2982,3 +2992,13 @@ struct CanvasExample {
 | ideographic   | 文字基线是表意字基线；如果字符本身超出了alphabetic基线，那么ideograhpic基线位置在字符本身的底部。 |
 | middle   | 文本基线在文本块的中间。 |
 | top   | 文本基线在文本块的顶部。 |
+
+## ImageSmoothingQuality
+
+从API version 9开始，该接口支持在ArkTS卡片中使用。
+
+| 名称        | 描述             |
+| -------- | -------------- |
+| low      | 低画质 |
+| medium   | 中画质 |
+| high     | 高画质 |

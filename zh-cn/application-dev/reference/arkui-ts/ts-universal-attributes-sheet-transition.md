@@ -2,10 +2,12 @@
 
 通过bindSheet属性为组件绑定半模态页面，在组件插入时可通过设置自定义或默认的内置高度确定半模态大小。
 
->  **说明：** 
+>  **说明：**
 >
-> 从API Version 10开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
-> 不支持横竖屏切换。
+>  从API Version 10开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+>
+>  不支持横竖屏切换。
+>
 >  不支持路由跳转。
 
 ## 属性
@@ -60,7 +62,7 @@ struct SheetTransitionExample {
         .margin(10)
         .fontSize(20)
         .onClick(()=>{
-          this.sheetHeight = null;
+          this.sheetHeight = -1;
         })
 
       Button("close dragBar")
