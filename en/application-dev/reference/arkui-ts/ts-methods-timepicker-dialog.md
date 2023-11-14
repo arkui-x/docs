@@ -29,9 +29,9 @@ Shows a time picker dialog box.
 | alignment<sup>10+</sup>  | [DialogAlignment](ts-methods-alert-dialog-box.md#dialogalignment) | No  | Alignment mode of the dialog box in the vertical direction.<br>Default value: **DialogAlignment.Default**|
 | offset<sup>10+</sup>     | [Offset](ts-types.md#offset) | No    | Offset of the dialog box based on the **alignment** settings.<br>Default value: **{ dx: 0 , dy: 0 }**|
 | maskRect<sup>10+</sup>| [Rectangle](ts-methods-alert-dialog-box.md#rectangle10) | No    | Mask area of the dialog box. Events outside the mask area are transparently transmitted, and events within the mask area are not.<br>Default value: **{ x: 0, y: 0, width: '100%', height: '100%' }**|
-| onAccept | (value: [TimePickerResult](ts-basic-components-timepicker.md#TimePickerResult)) => void | No| Callback invoked when the OK button in the dialog box is clicked.|
+| onAccept | (value: [TimePickerResult](ts-basic-components-timepicker.md#timepickerresult)) => void | No| Callback invoked when the OK button in the dialog box is clicked.|
 | onCancel | () => void | No| Callback invoked when the Cancel button in the dialog box is clicked.|
-| onChange | (value: [TimePickerResult](ts-basic-components-timepicker.md#TimePickerResult)) => void | No| Callback invoked when the selected time changes.|
+| onChange | (value: [TimePickerResult](ts-basic-components-timepicker.md#timepickerresult)) => void | No| Callback invoked when the selected time changes.|
 
 ## Example
 

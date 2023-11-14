@@ -119,6 +119,17 @@
 | dx   | [Length](#length) | 是    | 水平方向偏移量。 |
 | dy   | [Length](#length) | 是    | 竖直方向偏移量。 |
 
+## RectResult<sup>10+</sup>
+
+位置和尺寸类型，用于描述组件的位置和宽高。
+
+| 参数      | 类型     | 描述 |
+| ------- | ------ | ----------------------- |
+| x     | number | 水平方向横坐标。|
+| y     | number | 竖直方向纵坐标。|
+| width | number | 内容宽度大小。|
+| height | number | 内容高度大小。|
+
 ## ResourceColor
 
 颜色类型，用于描述资源颜色类型。
@@ -226,7 +237,7 @@
 
 | 名称            | 类型定义                   | 描述                                       |
 | ------------- | ---------------------- | ---------------------------------------- |
-| CustomBuilder | ()&nbsp;=&gt;&nbsp;any | 生成用户自定义组件，在使用时结合@Builder使用。具体用法见[@Builder](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-builder.md#builder)。 |
+| CustomBuilder | ()&nbsp;=&gt;&nbsp;any | 生成用户自定义组件，在使用时结合@Builder使用。具体用法见[@Builder](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-builder.md)。 |
 
 ## PixelStretchEffectOptions<sup>10+</sup>
 
@@ -309,6 +320,16 @@
 | 类型                    | 说明                                     |
 | --------------------- | -------------------------------------- |
 | {number}deg               | 需要指定以deg像素单位，如'10deg'。 |
+
+## SwiperAnimationEvent<sup>10+</sup>
+
+Swiper组件动画相关信息集合。
+
+| 名称            | 类型定义                   | 描述                                       |
+| ------------- | ---------------------- | ---------------------------------------- |
+| currentOffset | number | Swiper当前显示元素在主轴方向上，相对于Swiper起始位置的位移。单位VP，默认值为0.|
+| targetOffset | number | Swiper动画目标元素在主轴方向上，相对于Swiper起始位置的位移。单位VP，默认值为0.|
+| velocity | number | Swiper离手动画开始时的离手速度。单位VP/S，默认值为0.|
 
 ## SafeAreaType<sup>10+</sup>
 

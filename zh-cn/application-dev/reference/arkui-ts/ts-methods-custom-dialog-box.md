@@ -60,13 +60,39 @@ close(): void
 ```ts
 // xxx.ets
 @CustomDialog
+struct CustomDialogExampleTwo {
+  controllerTwo?: CustomDialogController
+
+  build() {
+    Column() {
+      Text('我是第二个弹窗')
+        .fontSize(30)
+        .height(100)
+      Button('点我关闭第二个弹窗')
+        .onClick(() => {
+          if (this.controllerTwo != undefined) {
+            this.controllerTwo.close()
+          }
+        })
+        .margin(20)
+    }
+  }
+}
+
+@CustomDialog
 struct CustomDialogExample {
   @Link textValue: string
   @Link inputValue: string
+  dialogControllerTwo: CustomDialogController | null = new CustomDialogController({
+    builder: CustomDialogExampleTwo(),
+    alignment: DialogAlignment.Bottom,
+    offset: { dx: 0, dy: -25 } })
   controller?: CustomDialogController
-  // 若尝试在CustomDialog中传入多个其他的Controller，以实现在CustomDialog中打开另一个或另一些CustomDialog，那么此处需要将指向自己的controller放在最后
-  cancel: () => void = () => {}
-  confirm: () => void = () => {}
+  // 若尝试在CustomDialog中传入多个其他的Controller，以实现在CustomDialog中打开另一个或另一些CustomDialog，那么此处需要将指向自己的controller放在所有controller的后面
+  cancel: () => void = () => {
+  }
+  confirm: () => void = () => {
+  }
 
   build() {
     Column() {
@@ -93,6 +119,14 @@ struct CustomDialogExample {
             }
           }).backgroundColor(0xffffff).fontColor(Color.Red)
       }.margin({ bottom: 10 })
+
+      Button('点我打开第二个弹窗')
+        .onClick(() => {
+          if (this.dialogControllerTwo != null) {
+            this.dialogControllerTwo.open()
+          }
+        })
+        .margin(20)
     }.borderRadius(10)
     // 如果需要使用border属性或cornerRadius属性，请和borderRadius属性一起使用。
   }

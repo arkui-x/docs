@@ -167,6 +167,7 @@
     - [Date Picker Dialog Box](ts-methods-datepicker-dialog.md)
     - [Time Picker Dialog Box](ts-methods-timepicker-dialog.md)
     - [Text Picker Dialog Box](ts-methods-textpicker-dialog.md)
+  - [Menu](ts-methods-menu.md)
 - [Custom Component Lifecycle](ts-custom-component-lifecycle.md)
 - Rendering Control
   - [if/else: Conditional Rendering](arkts-rendering-control-ifelse.md)

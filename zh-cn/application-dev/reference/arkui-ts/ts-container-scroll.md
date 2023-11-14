@@ -167,6 +167,7 @@ scrollBy(dx: Length, dy: Length): void
 | ----- | ------ | ---- | ----------------- |
 | dx | Length | 是    | 水平方向滚动距离，不支持百分比形式。 |
 | dy | Length | 是    | 竖直方向滚动距离，不支持百分比形式。 |
+
 ### isAtEnd<sup>10+</sup>
 
 isAtEnd(): boolean
@@ -208,7 +209,7 @@ struct ScrollExample {
     Stack({ alignContent: Alignment.TopStart }) {
       Scroll(this.scroller) {
         Column() {
-          ForEach(this.arr, (item) => {
+          ForEach(this.arr, (item: number) => {
             Text(item.toString())
               .width('90%')
               .height(150)
@@ -217,7 +218,7 @@ struct ScrollExample {
               .fontSize(16)
               .textAlign(TextAlign.Center)
               .margin({ top: 10 })
-          }, item => item)
+          }, (item: string) => item)
         }.width('100%')
       }
       .scrollable(ScrollDirection.Vertical)  // 滚动方向纵向
@@ -288,20 +289,27 @@ struct NestedScroll {
       Scroll(this.scrollerForScroll) {
         Column() {
           Text("Scroll Area")
-            .width("100%").height("40%").backgroundColor(0X330000FF)
-            .fontSize(16).textAlign(TextAlign.Center)
+            .width("100%")
+            .height("40%")
+            .backgroundColor(0X330000FF)
+            .fontSize(16)
+            .textAlign(TextAlign.Center)
             .onClick(() => {
               this.scrollerForList.scrollToIndex(5)
             })
 
           List({ space: 20, scroller: this.scrollerForList }) {
-            ForEach(this.arr, (item) => {
+            ForEach(this.arr, (item: number) => {
               ListItem() {
                 Text("ListItem" + item)
-                  .width("100%").height("100%").borderRadius(15)
-                  .fontSize(16).textAlign(TextAlign.Center).backgroundColor(Color.White)
+                  .width("100%")
+                  .height("100%")
+                  .borderRadius(15)
+                  .fontSize(16)
+                  .textAlign(TextAlign.Center)
+                  .backgroundColor(Color.White)
               }.width("100%").height(100)
-            }, item => item)
+            }, (item: string) => item)
           }
           .width("100%")
           .height("50%")
@@ -323,8 +331,11 @@ struct NestedScroll {
           })
 
           Text("Scroll Area")
-            .width("100%").height("40%").backgroundColor(0X330000FF)
-            .fontSize(16).textAlign(TextAlign.Center)
+            .width("100%")
+            .height("40%")
+            .backgroundColor(0X330000FF)
+            .fontSize(16)
+            .textAlign(TextAlign.Center)
         }
       }
       .width("100%").height("100%")

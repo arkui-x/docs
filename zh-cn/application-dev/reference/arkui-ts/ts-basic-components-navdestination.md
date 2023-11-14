@@ -11,7 +11,7 @@
 
 > **说明：**
 >
-> - 子组件类型：系统组件和自定义组件，支持渲染控制类型（[if/else](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-rendering-control-ifelse.md)、[ForEach](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-rendering-control-foreach.md)和[LazyForEach](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-rendering-control-lazyforeach.md)）。
+> - 子组件类型：系统组件和自定义组件，支持渲染控制类型（[if/else](arkts-rendering-control-ifelse.md)、[ForEach](arkts-rendering-control-foreach.md)和[LazyForEach](arkts-rendering-control-lazyforeach.md)）。
 > - 子组件个数：多个。
 
 

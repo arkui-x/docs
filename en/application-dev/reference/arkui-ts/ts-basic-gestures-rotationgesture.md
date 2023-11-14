@@ -16,7 +16,7 @@ RotationGesture(value?: { fingers?: number, angle?: number })
 | Name| Type| Mandatory| Description|
 | -------- | -------- | -------- | -------- |
 | fingers | number | No| Minimum number of fingers to trigger a rotation. The value ranges from 2 to 5.<br>Default value: **2**|
-| angle | number | No| Minimum degree that can trigger the rotation gesture.<br>Default value: **1**|
+| angle | number | No| Minimum degree that can trigger the rotation gesture.<br>Default value: **1**<br>**NOTE**<br>If the value is less than or equal to 0, it will be converted to the default value.|
 
 
 ## Events
@@ -53,11 +53,13 @@ struct RotationGestureExample {
       // The gesture event is triggered by rotating with two fingers.
       .gesture(
       RotationGesture()
-        .onActionStart((event: GestureEvent) => {
+        .onActionStart((event?: GestureEvent) => {
           console.info('Rotation start')
         })
-        .onActionUpdate((event: GestureEvent) => {
-          this.angle = this.rotateValue + event.angle
+        .onActionUpdate((event?: GestureEvent) => {
+          if (event) {
+            this.angle = this.rotateValue + event.angle
+          }
         })
         .onActionEnd(() => {
           this.rotateValue = this.angle

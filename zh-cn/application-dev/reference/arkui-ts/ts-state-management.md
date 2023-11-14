@@ -221,7 +221,7 @@ let res1: boolean = AppStorage.set('PropB', 47) // false
 static setOrCreate&lt;T&gt;(propName: string, newValue: T): void
 
 如果propName已经在AppStorage中存在，并且newValue和propName对应属性的值不同，则设置propName对应属性的值为newValue，否则状态变量不会通知UI刷新propName对应属性的值。
-如果propName不存在，则创建propName属性，值为newValue。
+如果propName不存在，则创建propName属性，值为newValue。setOrCreate只可以创建单个AppStorage的键值对，如果想创建多个AppStrage键值对，可以多次调用此方法。
 
 **参数：**
 
@@ -349,7 +349,8 @@ constructor(initializingProperties?: Object)
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 ```
 
 
@@ -394,8 +395,9 @@ has(propName: string): boolean
 | boolean | 如果propName对应的属性在AppStorage中存在，则返回true。不存在则返回false。 |
 
 
-```
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+```ts
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 storage.has('PropA'); // true
 ```
 
@@ -422,8 +424,9 @@ get&lt;T&gt;(propName: string): T | undefined
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
-let value: number = storage.get('PropA'); // 47
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
+let value: number = storage.get('PropA') as number; // 47
 ```
 
 
@@ -450,7 +453,8 @@ set&lt;T&gt;(propName: string, newValue: T): boolean
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 let res: boolean = storage.set('PropA', 47); // true
 let res1: boolean = storage.set('PropB', 47); // false
 ```
@@ -461,7 +465,7 @@ let res1: boolean = storage.set('PropB', 47); // false
 setOrCreate&lt;T&gt;(propName: string, newValue: T): boolean
 
 如果propName已经在LocalStorage中存在，并且newValue和propName对应属性的值不同，则设置propName对应属性的值为newValue，否则状态变量不会通知UI刷新propName对应属性的值。
-如果propName不存在，则创建propName属性，值为newValue。
+如果propName不存在，则创建propName属性，值为newValue。setOrCreate只可以创建单个LocalStorage的键值对，如果想创建多个LocalStorage键值对，可以多次调用此方法。
 
 从API version 9开始，该接口支持在ArkTS卡片中使用。
 
@@ -480,10 +484,11 @@ setOrCreate&lt;T&gt;(propName: string, newValue: T): boolean
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 let res: boolean =storage.setOrCreate('PropA', 121); // true
 let res1: boolean =storage.setOrCreate('PropB', 111); // true
-let res2: boolean =storage.setOrCreate('PropB', undefined); // false
+let res2: boolean =storage.setOrCreate('PropB', null); // false
 ```
 
 
@@ -513,7 +518,8 @@ link&lt;T&gt;(propName: string): SubscribedAbstractProperty&lt;T&gt;
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 let linkToPropA1: SubscribedAbstractProperty<number> = storage.link('PropA');
 let linkToPropA2: SubscribedAbstractProperty<number> = storage.link('PropA'); // linkToPropA2.get() == 47
 linkToPropA1.set(48); // 双向同步: linkToPropA1.get() == linkToPropA2.get() == 48
@@ -543,9 +549,10 @@ setAndLink&lt;T&gt;(propName: string, defaultValue: T): SubscribedAbstractProper
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 let link1: SubscribedAbstractProperty<number> = storage.setAndLink('PropB', 49); // Create PropB 49
-var link2: SubscribedAbstractProperty<number> = storage.setAndLink('PropA', 50); // PropA exists, remains 47
+let link2: SubscribedAbstractProperty<number> = storage.setAndLink('PropA', 50); // PropA exists, remains 47
 ```
 
 
@@ -571,7 +578,8 @@ prop&lt;S&gt;(propName: string): SubscribedAbstractProperty&lt;S&gt;
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 let prop1: SubscribedAbstractProperty<number> = storage.prop('PropA');
 let prop2: SubscribedAbstractProperty<number> = storage.prop('PropA');
 prop1.set(1); // one-way sync: prop1.get()=1; but prop2.get() == 47
@@ -601,7 +609,8 @@ propName在LocalStorage存在，则返回该propName对应的属性的单向绑�
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 let prop: SubscribedAbstractProperty<number> = storage.setAndProp('PropB', 49); // PropA -> 47, PropB -> 49
 ```
 
@@ -630,8 +639,9 @@ delete(propName: string): boolean
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
-storage.link('PropA');
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
+storage.link<number>('PropA');
 let res: boolean = storage.delete('PropA'); // false, PropA still has a subscriber
 let res1: boolean = storage.delete('PropB'); // false, PropB is not in storage
 storage.setOrCreate('PropB', 48);
@@ -655,7 +665,8 @@ keys(): IterableIterator&lt;string&gt;
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 let keys: IterableIterator<string> = storage.keys();
 ```
 
@@ -676,7 +687,8 @@ size(): number
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 let res: number = storage.size(); // 1
 ```
 
@@ -700,7 +712,8 @@ clear(): boolean
 
 
 ```ts
-let storage: LocalStorage = new LocalStorage({ 'PropA': 47 });
+let para:Record<string,number> = { 'PropA': 47 };
+let storage: LocalStorage = new LocalStorage(para);
 let res: boolean = storage.clear(); // true, there are no subscribers
 ```
 
@@ -725,7 +738,7 @@ abstract get(): T
 
 ```ts
 AppStorage.SetOrCreate('PropA', 47); 
-let prop1 = AppStorage.Prop('PropA');    
+let prop1:SubscribedAbstractProperty<number> = AppStorage.Prop('PropA');    
 prop1.get(); //  prop1.get()=47
 ```
 
@@ -748,9 +761,9 @@ abstract set(newValue: T): void
 
 
 
-```
+```ts
 AppStorage.SetOrCreate('PropA', 47);
-let prop1 = AppStorage.Prop('PropA');
+let prop1:SubscribedAbstractProperty<number> = AppStorage.Prop('PropA');
 prop1.set(1); //  prop1.get()=1
 ```
 
