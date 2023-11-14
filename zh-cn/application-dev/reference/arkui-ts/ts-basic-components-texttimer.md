@@ -24,7 +24,6 @@ TextTimer(options?: { isCountDown?: boolean, count?: number, controller?: TextTi
 
 ## 属性
 
-除支持[文本通用](ts-universal-attributes-text-style.md)中的fontColor、fontSize、fontWeight、fontStyle、fontFamily外，还支持以下属性：
 | 名称        | 参数类型       | 描述                             |
 | -------- | ---------------------- | ---------------------- |
 | format   | string   | 自定义格式，需至少包含一个HH、mm、ss、SS中的关键字。如使用yy、MM、dd等日期格式，则使用默认值。<br/>默认值：'HH:mm:ss.SS' |
@@ -33,7 +32,7 @@ TextTimer(options?: { isCountDown?: boolean, count?: number, controller?: TextTi
 
 | 名称                                       | 功能描述                                     |
 | ---------------------------------------- | ---------------------------------------- |
-| onTimer(event:&nbsp;(utc:&nbsp;number,&nbsp;elapsedTime:&nbsp;number)&nbsp;=&gt;&nbsp;void) | 时间文本发生变化时触发。<br/>utc：Linux时间戳，即自1970年1月1日起经过的毫秒数。<br/>elapsedTime：计时器经过的时间，单位为毫秒。 |
+| onTimer(event:&nbsp;(utc:&nbsp;number,&nbsp;elapsedTime:&nbsp;number)&nbsp;=&gt;&nbsp;void) | 时间文本发生变化时触发。<br/>utc：Linux时间戳，即自1970年1月1日起经过的时间，单位为设置格式的最小单位。<br/>elapsedTime：计时器经过的时间，单位为设置格式的最小单位。 <br/> **说明：** <br/>锁屏状态和应用后台状态下不会触发该事件。|
 
 ## TextTimerController
 

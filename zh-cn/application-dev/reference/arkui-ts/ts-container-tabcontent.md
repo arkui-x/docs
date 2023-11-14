@@ -13,7 +13,7 @@
 
 >  **说明：**
 >
->  可内置系统组件和自定义组件，支持渲染控制类型（[if/else](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-rendering-control-ifelse.md)、[ForEach](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-rendering-control-foreach.md)和[LazyForEach](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-rendering-control-lazyforeach.md)）。
+>  可内置系统组件和自定义组件，支持渲染控制类型（[if/else](arkts-rendering-control-ifelse.md)、[ForEach](arkts-rendering-control-foreach.md)和[LazyForEach](arkts-rendering-control-lazyforeach.md)）。
 
 
 ## 接口
@@ -442,10 +442,11 @@ struct TabsAttr {
   private heightFlag: boolean = true;
   private borderFlag: boolean = true;
   private spaceFlag: boolean = true;
+
   build() {
     Column() {
-      Button("下划线颜色变化").width('100%').margin({bottom: '12vp'})
-        .onClick((event: ClickEvent) => {
+      Button("下划线颜色变化").width('100%').margin({ bottom: '12vp' })
+        .onClick((event?: ClickEvent) => {
           // 对Button组件的宽高属性进行动画配置
           if (this.colorFlag) {
             animateTo({
@@ -476,8 +477,8 @@ struct TabsAttr {
           }
           this.colorFlag = !this.colorFlag
         })
-      Button("下划线高度变化").width('100%').margin({bottom: '12vp'})
-        .onClick((event: ClickEvent) => {
+      Button("下划线高度变化").width('100%').margin({ bottom: '12vp' })
+        .onClick((event?: ClickEvent) => {
           // 对Button组件的宽高属性进行动画配置
           if (this.heightFlag) {
             animateTo({
@@ -508,8 +509,8 @@ struct TabsAttr {
           }
           this.heightFlag = !this.heightFlag
         })
-      Button("下划线宽度变化").width('100%').margin({bottom: '12vp'})
-        .onClick((event: ClickEvent) => {
+      Button("下划线宽度变化").width('100%').margin({ bottom: '12vp' })
+        .onClick((event?: ClickEvent) => {
           // 对Button组件的宽高属性进行动画配置
           if (this.widthFlag) {
             animateTo({
@@ -540,8 +541,8 @@ struct TabsAttr {
           }
           this.widthFlag = !this.widthFlag
         })
-      Button("下划线圆角半径变化").width('100%').margin({bottom: '12vp'})
-        .onClick((event: ClickEvent) => {
+      Button("下划线圆角半径变化").width('100%').margin({ bottom: '12vp' })
+        .onClick((event?: ClickEvent) => {
           // 对Button组件的宽高属性进行动画配置
           if (this.borderFlag) {
             animateTo({
@@ -572,8 +573,8 @@ struct TabsAttr {
           }
           this.borderFlag = !this.borderFlag
         })
-      Button("下划线间距变化").width('100%').margin({bottom: '12vp'})
-        .onClick((event: ClickEvent) => {
+      Button("下划线间距变化").width('100%').margin({ bottom: '12vp' })
+        .onClick((event?: ClickEvent) => {
           // 对Button组件的宽高属性进行动画配置
           if (this.spaceFlag) {
             animateTo({
@@ -619,18 +620,23 @@ struct TabsAttr {
           .board({ borderRadius: this.subTabBorderRadius })
           .labelStyle({})
         )
+
         TabContent() {
           Column().width('100%').height('100%').backgroundColor(Color.Yellow).borderRadius('12vp')
         }.tabBar('yellow')
+
         TabContent() {
           Column().width('100%').height('100%').backgroundColor(Color.Blue).borderRadius('12vp')
         }.tabBar('blue')
+
         TabContent() {
           Column().width('100%').height('100%').backgroundColor(Color.Green).borderRadius('12vp')
         }.tabBar('green')
+
         TabContent() {
           Column().width('100%').height('100%').backgroundColor(Color.Gray).borderRadius('12vp')
         }.tabBar('gray')
+
         TabContent() {
           Column().width('100%').height('100%').backgroundColor(Color.Orange).borderRadius('12vp')
         }.tabBar('orange')
@@ -645,7 +651,7 @@ struct TabsAttr {
       })
       .backgroundColor(0xF5F5F5)
       .height(320)
-    }.width('100%').height(250).padding({top: '24vp', left: '24vp', right: '24vp'})
+    }.width('100%').height(250).padding({ top: '24vp', left: '24vp', right: '24vp' })
   }
 }
 ```

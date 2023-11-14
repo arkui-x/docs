@@ -35,7 +35,7 @@ Menu()
 | -------- | ------------------------- | ---------------------------------------------------------------- |
 | font<sup>10+</sup> | [Font](ts-types.md#font) | 统一设置Menu中所有文本的字体样式。 |
 | fontColor<sup>10+</sup> | [ResourceColor](ts-types.md#resourcecolor) | 统一设置Menu中所有文本的颜色。 |
-| radius<sup>10+</sup> | [Dimension](ts-types.md#dimension10) \| [BorderRadiuses](ts-types.md#borderradiuses9) | 设置Menu边框圆角半径。<br/> 默认值跟随主题。数值低于menu宽度的一半时，走默认值。 |
+| radius<sup>10+</sup> | [Dimension](ts-types.md#dimension10) \| [BorderRadiuses](ts-types.md#borderradiuses9) | 设置Menu边框圆角半径。<br/> 默认值跟随主题。数值高于menu宽度的一半时，走默认值。 |
 
 ## 示例
 

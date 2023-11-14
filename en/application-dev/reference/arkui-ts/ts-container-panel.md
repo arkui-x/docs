@@ -13,7 +13,7 @@ Supported
 
 >  **NOTE**
 >
->  Built-in components and custom components are allowed, with support for ([if/else](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-ifelse.md), [ForEach](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-foreach.md), and [LazyForEach](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-rendering-control-lazyforeach.md)) rendering control.
+>  Built-in components and custom components are allowed, with support for ([if/else](arkts-rendering-control-ifelse.md), [ForEach](arkts-rendering-control-foreach.md), and [LazyForEach](arkts-rendering-control-lazyforeach.md)) rendering control.
 
 
 ## APIs
@@ -35,11 +35,12 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | type | [PanelType](#paneltype)| Type of the panel.<br>Default value: **PanelType.Foldable**|
 | mode | [PanelMode](#panelmode) | Initial status of the panel.<br>Default value for the Minibar type: **PanelMode.Mini**<br/>Default value for other types: **PanelMode.Half**<br>Since API version 10, this attribute supports [$$](../../quick-start/arkts-two-way-sync.md) for two-way binding of variables.|
 | dragBar | boolean | Whether to enable a drag bar. The value **true** means that the drag bar will be displayed, and **false** means the opposite.<br>Default value: **true**|
-| fullHeight | string \| number | Panel height in the **PanelMode.Full** mode.<br>Default value: main axis height of the panel minus 8 vp<br>**NOTE**<br>This attribute cannot be set in percentage.|
-| halfHeight | string \| number | Panel height in the **PanelMode.Half** mode.<br>Default value: half of the main axis height of the panel<br>**NOTE**<br>This attribute cannot be set in percentage.|
+| customHeight<sup>10+</sup> | [Dimension](ts-types.md#dimension10) \| [PanelHeight](#panelheight10) | Height of the panel in the **PanelType.CUSTOM** type.<br>Default value: **0**<br>**NOTE**<br>This attribute cannot be set in percentage.|
+| fullHeight | string \| number | Height of the panel in **PanelMode.Full** mode.<br>Default value: main axis height of the panel minus 8 vp<br>**NOTE**<br>This attribute cannot be set in percentage.|
+| halfHeight | string \| number | Height of the panel in **PanelMode.Half** mode.<br>Default value: half of the main axis height of the panel<br>**NOTE**<br>This attribute cannot be set in percentage.|
 | miniHeight | string \| number | Panel height in the **PanelMode.Mini** mode.<br>Default value: **48**<br>Unit: vp<br>**NOTE**<br>This attribute cannot be set in percentage.|
-| show | boolean | Whether to show the panel.|
-| backgroundMask<sup>9+</sup>|[ResourceColor](ts-types.md#resourcecolor)|Background mask of the panel.|
+| show | boolean | Whether to show the panel.<br>Default value: **true**|
+| backgroundMask<sup>9+</sup>|[ResourceColor](ts-types.md#resourcecolor)|Background mask of the panel.<br>Default value: **'#08182431'**|
 
 ## PanelType
 
@@ -48,6 +49,7 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | Minibar | A minibar panel displays content in the minibar area or a large (fullscreen-like) area.|
 | Foldable | A foldable panel displays permanent content in a large (fullscreen-like), medium-sized (halfscreen-like), or small area.|
 | Temporary | A temporary panel displays content in a large (fullscreen-like) or medium-sized (halfscreen-like) area.|
+| CUSTOM<sup>10+</sup> | A custom panel automatically adapts its height to the content, without support for manual size switching.|
 
 ## PanelMode
 
@@ -57,6 +59,11 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | Half | Displays a **foldable** or **temporary** panel in a medium-sized (halfscreen-like) area. This attribute does not take effect for **minibar** panels.|
 | Full | Displays a panel in a large (fullscreen-like) area.|
 
+## PanelHeight<sup>10+</sup>
+
+| Name| Description|
+| -------- | -------- | 
+| WRAP_CONTENT | When the type is **CUSTOM**, the panel automatically adapts its height to the content.|
 ## Events
 
 In addition to the [universal events](ts-universal-events-click.md), the following events are supported.
@@ -78,8 +85,11 @@ struct PanelExample {
   build() {
     Column() {
       Text('2021-09-30    Today Calendar: 1.afternoon......Click for details')
-        .width('90%').height(50).borderRadius(10)
-        .backgroundColor(0xFFFFFF).padding({ left: 20 })
+        .width('90%')
+        .height(50)
+        .borderRadius(10)
+        .backgroundColor(0xFFFFFF)
+        .padding({ left: 20 })
         .onClick(() => {
           this.show = !this.show
         })
@@ -90,7 +100,8 @@ struct PanelExample {
           Text('1. afternoon 4:00 The project meeting')
         }
       }
-      .type(PanelType.Foldable).mode(PanelMode.Half)
+      .type(PanelType.Foldable)
+      .mode(PanelMode.Half)
       .dragBar(true) // The drag bar is enabled by default.
       .halfHeight(500) // The panel height is half of the screen height by default.
       .onChange((width: number, height: number, mode: PanelMode) => {
@@ -101,4 +112,4 @@ struct PanelExample {
 }
 ```
 
-![en-us_image_0000001256978381](figures/en-us_image_0000001256978381.gif)
+![en-us_image_0000001174422896](figures/en-us_image_0000001174422896.gif)

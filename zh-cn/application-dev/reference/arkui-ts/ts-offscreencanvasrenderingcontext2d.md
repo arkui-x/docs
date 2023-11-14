@@ -27,9 +27,9 @@ OffscreenCanvasRenderingContext2D(width: number, height: number, settings?: Rend
 
 | 名称                                       | 类型                                       | 描述                                       |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| [fillStyle](#fillstyle)                  | string \| number<sup>10+</sup> \|</br>[CanvasGradient](ts-components-canvas-canvasgradient.md) \|</br>[CanvasPattern](ts-components-canvas-canvaspattern.md#canvaspattern) | 指定绘制的填充色。<br/>-&nbsp;类型为string时，表示设置填充区域的颜色。<br/>- 类型为number时，表示设置填充区域的颜色。<br/>-&nbsp;类型为CanvasGradient时，表示渐变对象，使用[createLinearGradient](#createlineargradient)方法创建。<br/>-&nbsp;类型为CanvasPattern时，使用[createPattern](#createpattern)方法创建。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
+| [fillStyle](#fillstyle)                  | string&nbsp;\|number<sup>10+</sup>&nbsp;\|[CanvasGradient](ts-components-canvas-canvasgradient.md)&nbsp;\|&nbsp;[CanvasPattern](ts-components-canvas-canvaspattern.md#canvaspattern) | 指定绘制的填充色。<br/>-&nbsp;类型为string时，表示设置填充区域的颜色。<br/>- 类型为number时，表示设置填充区域的颜色。<br/>-&nbsp;类型为CanvasGradient时，表示渐变对象，使用[createLinearGradient](#createlineargradient)方法创建。<br/>-&nbsp;类型为CanvasPattern时，使用[createPattern](#createpattern)方法创建。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
 | [lineWidth](#linewidth)                  | number                                   | 设置绘制线条的宽度。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
-| [strokeStyle](#strokestyle)              | string \| number<sup>10+</sup> \|</br>[CanvasGradient](ts-components-canvas-canvasgradient.md) \|</br>[CanvasPattern](ts-components-canvas-canvaspattern.md#canvaspattern) | 设置描边的颜色。<br/>-&nbsp;类型为string时，表示设置描边使用的颜色。<br/>- 类型为number时，表示设置描边使用的颜色。<br/>-&nbsp;类型为CanvasGradient时，表示渐变对象，使用[createLinearGradient](#createlineargradient)方法创建。<br/>-&nbsp;类型为CanvasPattern时，使用[createPattern](#createpattern)方法创建。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
+| [strokeStyle](#strokestyle)              | string&nbsp;\|number<sup>10+</sup>&nbsp;\|[CanvasGradient](ts-components-canvas-canvasgradient.md)&nbsp;\|&nbsp;[CanvasPattern](ts-components-canvas-canvaspattern.md#canvaspattern) | 设置描边的颜色。<br/>-&nbsp;类型为string时，表示设置描边使用的颜色。<br/>- 类型为number时，表示设置描边使用的颜色。<br/>-&nbsp;类型为CanvasGradient时，表示渐变对象，使用[createLinearGradient](#createlineargradient)方法创建。<br/>-&nbsp;类型为CanvasPattern时，使用[createPattern](#createpattern)方法创建。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
 | [lineCap](#linecap)                      | CanvasLineCap                            | 指定线端点的样式，可选值为：<br/>-&nbsp;'butt'：线端点以方形结束。<br/>-&nbsp;'round'：线端点以圆形结束。<br/>-&nbsp;'square'：线端点以方形结束，该样式下会增加一个长度和线段厚度相同，宽度是线段厚度一半的矩形。<br/>-&nbsp;默认值：'butt'。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
 | [lineJoin](#linejoin)                    | CanvasLineJoin                           | 指定线段间相交的交点样式，可选值为：<br/>-&nbsp;'round'：在线段相连处绘制一个扇形，扇形的圆角半径是线段的宽度。<br/>-&nbsp;'bevel'：在线段相连处使用三角形为底填充，&nbsp;每个部分矩形拐角独立。<br/>-&nbsp;'miter'：在相连部分的外边缘处进行延伸，使其相交于一点，形成一个菱形区域，该属性可以通过设置miterLimit属性展现效果。<br/>-&nbsp;默认值：'miter'。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
 | [miterLimit](#miterlimit)                | number                                   | 设置斜接面限制值，该值指定了线条相交处内角和外角的距离。  <br/>-&nbsp;默认值：10。<br/>从API version 9开始，该接口支持在ArkTS卡片中使用。 |
@@ -70,10 +70,10 @@ struct FillStyleExample {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.fillStyle = '#0000ff'
           offContext.fillRect(20, 20, 150, 100)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
         })
     }
@@ -101,10 +101,10 @@ struct FillStyleExample {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.fillStyle = 0x0000FF
           offContext.fillRect(20, 20, 150, 100)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
         })
     }
@@ -135,10 +135,10 @@ struct LineWidthExample {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.lineWidth = 5
           offContext.strokeRect(25, 25, 85, 105)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -169,11 +169,11 @@ struct StrokeStyleExample {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.lineWidth = 10
           offContext.strokeStyle = '#0000ff'
           offContext.strokeRect(25, 25, 155, 105)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
         })
     }
@@ -201,11 +201,11 @@ struct StrokeStyleExample {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.lineWidth = 10
           offContext.strokeStyle = 0x0000ff
           offContext.strokeRect(25, 25, 155, 105)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
         })
     }
@@ -236,14 +236,14 @@ struct LineCapExample {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.lineWidth = 8
           offContext.beginPath()
           offContext.lineCap = 'round'
           offContext.moveTo(30, 50)
           offContext.lineTo(220, 50)
           offContext.stroke()
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
         })
     }
@@ -274,7 +274,7 @@ struct LineJoinExample {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.beginPath()
           offContext.lineWidth = 8
           offContext.lineJoin = 'miter'
@@ -282,7 +282,7 @@ struct LineJoinExample {
           offContext.lineTo(120, 60)
           offContext.lineTo(30, 110)
           offContext.stroke()
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -313,7 +313,7 @@ struct MiterLimit {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.lineWidth = 8
           offContext.lineJoin = 'miter'
           offContext.miterLimit = 3
@@ -321,7 +321,7 @@ struct MiterLimit {
           offContext.lineTo(60, 35)
           offContext.lineTo(30, 37)
           offContext.stroke()
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -352,10 +352,10 @@ struct Fonts {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.font = '30px sans-serif'
           offContext.fillText("Hello World", 20, 60)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -386,7 +386,7 @@ struct CanvasExample {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-        var offContext = this.offCanvas.getContext("2d", this.settings)
+        let offContext = this.offCanvas.getContext("2d", this.settings)
         offContext.strokeStyle = '#0000ff'
         offContext.moveTo(140, 10)
         offContext.lineTo(140, 160)
@@ -404,7 +404,7 @@ struct CanvasExample {
         offContext.fillText('textAlign=center',140, 120)
         offContext.textAlign = 'right'
         offContext.fillText('textAlign=right',140, 140)
-        var image = this.offCanvas.transferToImageBitmap()
+        let image = this.offCanvas.transferToImageBitmap()
         this.context.transferFromImageBitmap(image)
       })
     }
@@ -435,7 +435,7 @@ struct TextBaseline {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.strokeStyle = '#0000ff'
           offContext.moveTo(0, 120)
           offContext.lineTo(400, 120)
@@ -453,7 +453,7 @@ struct TextBaseline {
           offContext.fillText('Alphabetic', 195, 120)
           offContext.textBaseline = 'hanging'
           offContext.fillText('Hanging', 295, 120)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -484,13 +484,13 @@ struct GlobalAlpha {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.fillStyle = 'rgb(0,0,255)'
           offContext.fillRect(0, 0, 50, 50)
           offContext.globalAlpha = 0.4
           offContext.fillStyle = 'rgb(0,0,255)'
           offContext.fillRect(50, 50, 50, 50)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -521,12 +521,12 @@ struct LineDashOffset {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.arc(100, 75, 50, 0, 6.28)
           offContext.setLineDash([10,20])
           offContext.lineDashOffset = 10.0
           offContext.stroke()
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -571,7 +571,7 @@ struct GlobalCompositeOperation {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.fillStyle = 'rgb(255,0,0)'
           offContext.fillRect(20, 20, 50, 50)
           offContext.globalCompositeOperation = 'source-over'
@@ -582,7 +582,7 @@ struct GlobalCompositeOperation {
           offContext.globalCompositeOperation = 'destination-over'
           offContext.fillStyle = 'rgb(0,0,255)'
           offContext.fillRect(150, 50, 50, 50)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -613,12 +613,12 @@ struct ShadowBlur {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.shadowBlur = 30
           offContext.shadowColor = 'rgb(0,0,0)'
           offContext.fillStyle = 'rgb(255,0,0)'
           offContext.fillRect(20, 20, 100, 80)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -649,12 +649,12 @@ struct ShadowColor {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.shadowBlur = 30
           offContext.shadowColor = 'rgb(0,0,255)'
           offContext.fillStyle = 'rgb(255,0,0)'
           offContext.fillRect(30, 30, 100, 100)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -685,13 +685,13 @@ struct ShadowOffsetX {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.shadowBlur = 10
           offContext.shadowOffsetX = 20
           offContext.shadowColor = 'rgb(0,0,0)'
           offContext.fillStyle = 'rgb(255,0,0)'
           offContext.fillRect(20, 20, 100, 80)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -702,6 +702,7 @@ struct ShadowOffsetX {
 ```
 
 ![zh-cn_image_0000001194032478](figures/zh-cn_image_0000001194032478.png)
+
 
 ### shadowOffsetY
 
@@ -721,13 +722,13 @@ struct ShadowOffsetY {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.shadowBlur = 10
           offContext.shadowOffsetY = 20
           offContext.shadowColor = 'rgb(0,0,0)'
           offContext.fillStyle = 'rgb(255,0,0)'
           offContext.fillRect(30, 30, 100, 100)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -759,10 +760,10 @@ struct ImageSmoothingEnabled {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           offContext.imageSmoothingEnabled = false
           offContext.drawImage(this.img,0,0,400,200)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
       })
     }
@@ -813,9 +814,9 @@ fillRect(x: number, y: number, w: number, h: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.fillRect(30,30,100,100)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
          })
         }
@@ -863,9 +864,9 @@ strokeRect(x: number, y: number, w: number, h: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.strokeRect(30, 30, 200, 150)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
         })
       }
@@ -913,11 +914,11 @@ clearRect(x: number, y: number, w: number, h: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.fillStyle = 'rgb(0,0,255)'
             offContext.fillRect(20,20,200,200)
             offContext.clearRect(30,30,150,100)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
         })
       }
@@ -965,10 +966,10 @@ fillText(text: string, x: number, y: number, maxWidth?: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.font = '30px sans-serif'
             offContext.fillText("Hello World!", 20, 100)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
         })
       }
@@ -1016,10 +1017,10 @@ strokeText(text: string, x: number, y: number, maxWidth?: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.font = '55px sans-serif'
             offContext.strokeText("Hello World!", 20, 60)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
         })
       }
@@ -1088,11 +1089,11 @@ measureText(text: string): TextMetrics
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.font = '50px sans-serif'
             offContext.fillText("Hello World!", 20, 100)
             offContext.fillText("width:" + this.context.measureText("Hello World!").width, 20, 200)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
         })
       }
@@ -1137,14 +1138,14 @@ stroke(path?: Path2D): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.moveTo(25, 25)
             offContext.lineTo(25, 105)
             offContext.lineTo(75, 105)
             offContext.lineTo(75, 25)
             offContext.strokeStyle = 'rgb(0,0,255)'
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1183,14 +1184,14 @@ beginPath(): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.beginPath()
             offContext.lineWidth = 6
             offContext.strokeStyle = '#0000ff'
             offContext.moveTo(15, 80)
             offContext.lineTo(280, 160)
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1236,12 +1237,12 @@ moveTo(x: number, y: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.beginPath()
             offContext.moveTo(10, 10)
             offContext.lineTo(280, 160)
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1287,12 +1288,12 @@ lineTo(x: number, y: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.beginPath()
             offContext.moveTo(10, 10)
             offContext.lineTo(280, 160)
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1331,14 +1332,14 @@ closePath(): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-              var offContext = this.offCanvas.getContext("2d", this.settings)
+              let offContext = this.offCanvas.getContext("2d", this.settings)
               offContext.beginPath()
               offContext.moveTo(30, 30)
               offContext.lineTo(110, 30)
               offContext.lineTo(70, 90)
               offContext.closePath()
               offContext.stroke()
-              var image = this.offCanvas.transferToImageBitmap()
+              let image = this.offCanvas.transferToImageBitmap()
               this.context.transferFromImageBitmap(image)
           })
       }
@@ -1391,11 +1392,11 @@ createPattern(image: ImageBitmap, repetition: string | null): CanvasPattern | nu
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
-            var pattern = offContext.createPattern(this.img, 'repeat')
+            let offContext = this.offCanvas.getContext("2d", this.settings)
+            let pattern = offContext.createPattern(this.img, 'repeat')
             offContext.fillStyle = pattern as CanvasPattern
             offContext.fillRect(0, 0, 200, 200)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1445,12 +1446,12 @@ bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number,
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.beginPath()
             offContext.moveTo(10, 10)
             offContext.bezierCurveTo(20, 100, 200, 100, 200, 20)
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1498,12 +1499,12 @@ quadraticCurveTo(cpx: number, cpy: number, x: number, y: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.beginPath()
             offContext.moveTo(20, 20)
             offContext.quadraticCurveTo(100, 100, 200, 20)
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
         })
       }
@@ -1553,11 +1554,11 @@ arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, 
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.beginPath()
             offContext.arc(100, 75, 50, 0, 6.28)
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1606,11 +1607,11 @@ arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.moveTo(100, 20)
             offContext.arcTo(150, 20, 150, 70, 50)
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1661,11 +1662,11 @@ ellipse(x: number, y: number, radiusX: number, radiusY: number, rotation: number
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.beginPath()
             offContext.ellipse(200, 200, 50, 100, Math.PI * 0.25, Math.PI * 0.5, Math.PI * 2)
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1713,10 +1714,10 @@ rect(x: number, y: number, w: number, h: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.rect(20, 20, 100, 100) // Create a 100*100 rectangle at (20, 20)
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1759,11 +1760,11 @@ fill(fillRule?: CanvasFillRule): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
-            offContext.fillStyle = '#ffffff'
+            let offContext = this.offCanvas.getContext("2d", this.settings)
+            offContext.fillStyle = '#000000'
             offContext.rect(20, 20, 100, 100) // Create a 100*100 rectangle at (20, 20)
             offContext.fill()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1808,7 +1809,7 @@ struct Fill {
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
           let region = new Path2D()
           region.moveTo(30, 90)
           region.lineTo(110, 20)
@@ -1820,7 +1821,7 @@ struct Fill {
           // Fill path
           offContext.fillStyle = '#00ff00'
           offContext.fill(region, "evenodd")
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
         })
     }
@@ -1866,13 +1867,13 @@ clip(fillRule?: CanvasFillRule): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.rect(0, 0, 100, 200)
             offContext.stroke()
             offContext.clip()
             offContext.fillStyle = "rgb(255,0,0)"
             offContext.fillRect(0, 0, 200, 200)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1916,7 +1917,7 @@ clip(path:Path2D, fillRule?: CanvasFillRule): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             let region = new Path2D()
             region.moveTo(30, 90)
             region.lineTo(110, 20)
@@ -1928,7 +1929,7 @@ clip(path:Path2D, fillRule?: CanvasFillRule): void
             offContext.clip(region,"evenodd")
             offContext.fillStyle = "rgb(0,255,0)"
             offContext.fillRect(0, 0, 600, 600)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -1974,7 +1975,7 @@ filter(filter: string): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             let offctx = offContext
             let img = this.img
 
@@ -2007,7 +2008,7 @@ filter(filter: string): void
             offctx.filter = 'blur(5px)';
             offctx.drawImage(img, 0, 300, 100, 100);
 
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2054,7 +2055,7 @@ direction(direction: CanvasDirection): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             let offctx = offContext
             offctx.font = '48px serif';
             offctx.textAlign = 'start'
@@ -2063,7 +2064,7 @@ direction(direction: CanvasDirection): void
             offctx.direction = "rtl";
             offctx.fillText("Hi rtl!", 200, 100);
 
-            var image = offctx.transferToImageBitmap()
+            let image = offctx.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2109,10 +2110,10 @@ rotate(angle: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.rotate(45 * Math.PI / 180)
             offContext.fillRect(70, 20, 50, 50)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2158,12 +2159,12 @@ scale(x: number, y: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.lineWidth = 3
             offContext.strokeRect(30, 30, 50, 50)
             offContext.scale(2, 2) // Scale to 200%
             offContext.strokeRect(30, 30, 50, 50)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2220,7 +2221,7 @@ transform方法对应一个变换矩阵，想对一个图形进行变化的时�
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.fillStyle = 'rgb(0,0,0)'
             offContext.fillRect(0, 0, 100, 100)
             offContext.transform(1, 0.5, -0.5, 1, 10, 10)
@@ -2229,7 +2230,7 @@ transform方法对应一个变换矩阵，想对一个图形进行变化的时�
             offContext.transform(1, 0.5, -0.5, 1, 10, 10)
             offContext.fillStyle = 'rgb(0,0,255)'
             offContext.fillRect(0, 0, 100, 100)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2279,13 +2280,13 @@ setTransform方法使用的参数和transform()方法相同，但setTransform()�
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.fillStyle = 'rgb(255,0,0)'
             offContext.fillRect(0, 0, 100, 100)
             offContext.setTransform(1,0.5, -0.5, 1, 10, 10)
             offContext.fillStyle = 'rgb(0,0,255)'
             offContext.fillRect(0, 0, 100, 100)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2350,7 +2351,7 @@ getTransform(): Matrix2D
             this.offcontext1.fillRect(50, 50, 50, 50);
             this.offcontext1.setTransform(1.2, Math.PI/8, Math.PI/6, 0.5, 30, -25);
             this.offcontext1.fillRect(50, 50, 50, 50);
-            var image = this.offcontext1.transferToImageBitmap();
+            let image = this.offcontext1.transferToImageBitmap();
             this.context1.transferFromImageBitmap(image);
           })
         Text('context2');
@@ -2366,7 +2367,7 @@ getTransform(): Matrix2D
             ", translateX = " + storedTransform.translateX + ", translateY = " + storedTransform.translateY + "]")
             this.offcontext2.setTransform(storedTransform);
             this.offcontext2.fillRect(50,50,50,50);
-            var image = this.offcontext2.transferToImageBitmap();
+            let image = this.offcontext2.transferToImageBitmap();
             this.context2.transferFromImageBitmap(image);
           })
       }
@@ -2411,11 +2412,11 @@ translate(x: number, y: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.fillRect(10, 10, 50, 50)
             offContext.translate(70, 70)
             offContext.fillRect(10, 10, 50, 50)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2442,17 +2443,17 @@ drawImage(image: ImageBitmap | PixelMap, sx: number, sy: number, sw: number, sh:
 
  **参数：**
 
-| 参数  | 类型                                                         | 必填 | 默认值 | 描述                                    |
-| ----- | ------------------------------------------------------------ | ---- | ------ | --------------------------------------- |
-| image | [ImageBitmap](ts-components-canvas-imagebitmap.md) 或[PixelMap](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-image.md#pixelmap7) | 是   | null   | 图片资源，请参考ImageBitmap或PixelMap。 |
-| sx    | number                                                       | 否   | 0      | 裁切源图像时距离源图像左上角的x坐标值。 |
-| sy    | number                                                       | 否   | 0      | 裁切源图像时距离源图像左上角的y坐标值。 |
-| sw    | number                                                       | 否   | 0      | 裁切源图像时需要裁切的宽度。            |
-| sh    | number                                                       | 否   | 0      | 裁切源图像时需要裁切的高度。            |
-| dx    | number                                                       | 是   | 0      | 绘制区域左上角在x轴的位置。             |
-| dy    | number                                                       | 是   | 0      | 绘制区域左上角在y&nbsp;轴的位置。       |
-| dw    | number                                                       | 否   | 0      | 绘制区域的宽度。                        |
-| dh    | number                                                       | 否   | 0      | 绘制区域的高度。                        |
+| 参数    | 类型                                       | 必填   | 默认值  | 描述                            |
+| ----- | ---------------------------------------- | ---- | ---- | ----------------------------- |
+| image | [ImageBitmap](ts-components-canvas-imagebitmap.md) 或[PixelMap](../apis/js-apis-image.md#pixelmap7) | 是    | null | 图片资源，请参考ImageBitmap或PixelMap。 |
+| sx    | number                                   | 否    | 0    | 裁切源图像时距离源图像左上角的x坐标值。          |
+| sy    | number                                   | 否    | 0    | 裁切源图像时距离源图像左上角的y坐标值。          |
+| sw    | number                                   | 否    | 0    | 裁切源图像时需要裁切的宽度。                |
+| sh    | number                                   | 否    | 0    | 裁切源图像时需要裁切的高度。                |
+| dx    | number                                   | 是    | 0    | 绘制区域左上角在x轴的位置。                |
+| dy    | number                                   | 是    | 0    | 绘制区域左上角在y&nbsp;轴的位置。          |
+| dw    | number                                   | 否    | 0    | 绘制区域的宽度。                      |
+| dh    | number                                   | 否    | 0    | 绘制区域的高度。                      |
 
 
  **示例：**
@@ -2473,9 +2474,9 @@ drawImage(image: ImageBitmap | PixelMap, sx: number, sy: number, sw: number, sh:
         .height('100%')
         .backgroundColor('#ffff00')
         .onReady(() => {
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.drawImage( this.img,0,0,400,200)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
         })
       }
@@ -2526,7 +2527,7 @@ createImageData(imageData: ImageData): ImageData
 
 getPixelMap(sx: number, sy: number, sw: number, sh: number): PixelMap
 
-以当前canvas指定区域内的像素创建[PixelMap](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-image.md#pixelmap7)对象。
+以当前canvas指定区域内的像素创建[PixelMap](../apis/js-apis-image.md#pixelmap7)对象。
 
  **参数：**
 
@@ -2539,15 +2540,15 @@ getPixelMap(sx: number, sy: number, sw: number, sh: number): PixelMap
 
 **返回值：**
 
-| 类型                                                         | 说明             |
-| ------------------------------------------------------------ | ---------------- |
-| [PixelMap](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-image.md#pixelmap7) | 新的PixelMap对象 |
+| 类型                                       | 说明           |
+| ---------------------------------------- | ------------ |
+| [PixelMap](../apis/js-apis-image.md#pixelmap7) | 新的PixelMap对象 |
 
 ### setPixelMap
 
 setPixelMap(value?: PixelMap): void
 
-将当前传入[PixelMap](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-image.md#pixelmap7)对象绘制在画布上。
+将当前传入[PixelMap](../apis/js-apis-image.md#pixelmap7)对象绘制在画布上。
 
  **参数：**
 
@@ -2560,9 +2561,9 @@ setPixelMap(value?: PixelMap): void
 
 **返回值：**
 
-| 类型                                                         | 说明             |
-| ------------------------------------------------------------ | ---------------- |
-| [PixelMap](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-image.md#pixelmap7) | 新的PixelMap对象 |
+| 类型                                       | 说明           |
+| ---------------------------------------- | ------------ |
+| [PixelMap](../apis/js-apis-image.md#pixelmap7) | 新的PixelMap对象 |
 
 
 ### getImageData
@@ -2608,11 +2609,11 @@ getImageData(sx: number, sy: number, sw: number, sh: number): ImageData
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.drawImage(this.img,0,0,130,130)
-            var imagedata = offContext.getImageData(50,50,130,130)
+            let imagedata = offContext.getImageData(50,50,130,130)
             offContext.putImageData(imagedata,150,150)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2664,16 +2665,16 @@ putImageData(imageData: Object, dx: number | string, dy: number | string, dirtyX
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
-            var imageData = offContext.createImageData(100, 100)
-            for (var i = 0; i < imageData.data.length; i += 4) {
+            let offContext = this.offCanvas.getContext("2d", this.settings)
+            let imageData = offContext.createImageData(100, 100)
+            for (let i = 0; i < imageData.data.length; i += 4) {
               imageData.data[i + 0] = 255
               imageData.data[i + 1] = 0
               imageData.data[i + 2] = 255
               imageData.data[i + 3] = 255
             }
             offContext.putImageData(imageData, 10, 10)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2716,11 +2717,11 @@ setLineDash(segments: number[]): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.arc(100, 75, 50, 0, 6.28)
             offContext.setLineDash([10,20])
             offContext.stroke()
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
         })
       }
@@ -2742,8 +2743,8 @@ getLineDash(): number[]
 
 **返回值：** 
 
-| 类型     | 说明                                             |
-| -------- | ------------------------------------------------ |
+| 类型       | 说明                       |
+| -------- | ------------------------ |
 | number[] | 返回数组，该数组用来描述线段如何交替和间距长度。 |
 
 **示例：** 
@@ -2765,7 +2766,7 @@ getLineDash(): number[]
             .fontWeight(FontWeight.Bold)
             .onClick(()=>{
               console.error('before getlinedash clicked')
-              var offContext = this.offCanvas.getContext("2d", this.settings)
+              let offContext = this.offCanvas.getContext("2d", this.settings)
               let res = offContext.getLineDash()
               console.error(JSON.stringify(res))
             })
@@ -2774,12 +2775,12 @@ getLineDash(): number[]
             .height('100%')
             .backgroundColor('#ffff00')
             .onReady(() => {
-              var offContext = this.offCanvas.getContext("2d", this.settings)
+              let offContext = this.offCanvas.getContext("2d", this.settings)
               offContext.arc(100, 75, 50, 0, 6.28)
               offContext.setLineDash([10,20])
               offContext.stroke()
               let res = offContext.getLineDash()
-              var image = this.offCanvas.transferToImageBitmap()
+              let image = this.offCanvas.transferToImageBitmap()
               this.context.transferFromImageBitmap(image)
             })
         }
@@ -2832,8 +2833,8 @@ toDataURL(type?: string, quality?: number): string
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
-            var dataURL = offContext.toDataURL()
+            let offContext = this.offCanvas.getContext("2d", this.settings)
+            let dataURL = offContext.toDataURL()
           })
       }
       .width('100%')
@@ -2875,13 +2876,13 @@ imageSmoothingQuality(quality: imageSmoothingQuality)
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             let offctx = offContext
             offctx.imageSmoothingEnabled = true
             offctx.imageSmoothingQuality = 'high'
             offctx.drawImage(this.img, 0, 0, 400, 200)
 
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2901,8 +2902,8 @@ transferToImageBitmap(): ImageBitmap
 
 **返回值：** 
 
-| 类型                                               | 说明                           |
-| -------------------------------------------------- | ------------------------------ |
+| 类型                                       | 说明              |
+| ---------------------------------------- | --------------- |
 | [ImageBitmap](ts-components-canvas-imagebitmap.md) | 存储离屏画布上渲染的像素数据。 |
 
 
@@ -2924,16 +2925,16 @@ transferToImageBitmap(): ImageBitmap
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
-            var imageData = offContext.createImageData(100, 100)
-            for (var i = 0; i < imageData.data.length; i += 4) {
+            let offContext = this.offCanvas.getContext("2d", this.settings)
+            let imageData = offContext.createImageData(100, 100)
+            for (let i = 0; i < imageData.data.length; i += 4) {
               imageData.data[i + 0] = 255
               imageData.data[i + 1] = 0
               imageData.data[i + 2] = 255
               imageData.data[i + 3] = 255
             }
             offContext.putImageData(imageData, 10, 10)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -2970,13 +2971,13 @@ restore(): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.save() // save the default state
             offContext.fillStyle = "#00ff00"
             offContext.fillRect(20, 20, 100, 100)
             offContext.restore() // restore to the default state
             offContext.fillRect(150, 75, 100, 100)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -3014,13 +3015,13 @@ save(): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
             offContext.save() // save the default state
             offContext.fillStyle = "#00ff00"
             offContext.fillRect(20, 20, 100, 100)
             offContext.restore() // restore to the default state
             offContext.fillRect(150, 75, 100, 100)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -3067,14 +3068,14 @@ createLinearGradient(x0: number, y0: number, x1: number, y1: number): void
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
-            var grad = offContext.createLinearGradient(50,0, 300,100)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
+            let grad = offContext.createLinearGradient(50,0, 300,100)
             grad.addColorStop(0.0, '#ff0000')
             grad.addColorStop(0.5, '#ffffff')
             grad.addColorStop(1.0, '#00ff00')
             offContext.fillStyle = grad
             offContext.fillRect(0, 0, 400, 400)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -3124,14 +3125,14 @@ createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number,
           .height('100%')
           .backgroundColor('#ffff00')
           .onReady(() =>{
-            var offContext = this.offCanvas.getContext("2d", this.settings)
-            var grad = offContext.createRadialGradient(200,200,50, 200,200,200)
+            let offContext = this.offCanvas.getContext("2d", this.settings)
+            let grad = offContext.createRadialGradient(200,200,50, 200,200,200)
             grad.addColorStop(0.0, '#ff0000')
             grad.addColorStop(0.5, '#ffffff')
             grad.addColorStop(1.0, '#00ff00')
             offContext.fillStyle = grad
             offContext.fillRect(0, 0, 440, 440)
-            var image = this.offCanvas.transferToImageBitmap()
+            let image = this.offCanvas.transferToImageBitmap()
             this.context.transferFromImageBitmap(image)
           })
       }
@@ -3175,14 +3176,14 @@ struct OffscreenCanvasConicGradientPage {
         .height('100%')
         .backgroundColor('#ffffff')
         .onReady(() =>{
-          var offContext = this.offCanvas.getContext("2d", this.settings)
-          var grad = offContext.createConicGradient(0, 50, 80)
+          let offContext = this.offCanvas.getContext("2d", this.settings)
+          let grad = offContext.createConicGradient(0, 50, 80)
           grad.addColorStop(0.0, '#ff0000')
           grad.addColorStop(0.5, '#ffffff')
           grad.addColorStop(1.0, '#00ff00')
           offContext.fillStyle = grad
           offContext.fillRect(0, 30, 100, 100)
-          var image = this.offCanvas.transferToImageBitmap()
+          let image = this.offCanvas.transferToImageBitmap()
           this.context.transferFromImageBitmap(image)
         })
     }

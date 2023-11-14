@@ -13,7 +13,7 @@
 
 >  **说明：**
 >
->  子组件类型：系统组件和自定义组件，支持渲染控制类型（[if/else](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-rendering-control-ifelse.md)、[ForEach](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-rendering-control-foreach.md)和[LazyForEach](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-rendering-control-lazyforeach.md)）。
+>  子组件类型：系统组件和自定义组件，支持渲染控制类型（[if/else](arkts-rendering-control-ifelse.md)、[ForEach](arkts-rendering-control-foreach.md)和[LazyForEach](arkts-rendering-control-lazyforeach.md)）。
 
 
 ## 接口
@@ -85,8 +85,11 @@ struct PanelExample {
   build() {
     Column() {
       Text('2021-09-30    Today Calendar: 1.afternoon......Click for details')
-        .width('90%').height(50).borderRadius(10)
-        .backgroundColor(0xFFFFFF).padding({ left: 20 })
+        .width('90%')
+        .height(50)
+        .borderRadius(10)
+        .backgroundColor(0xFFFFFF)
+        .padding({ left: 20 })
         .onClick(() => {
           this.show = !this.show
         })
@@ -97,7 +100,8 @@ struct PanelExample {
           Text('1. afternoon 4:00 The project meeting')
         }
       }
-      .type(PanelType.Foldable).mode(PanelMode.Half)
+      .type(PanelType.Foldable)
+      .mode(PanelMode.Half)
       .dragBar(true) // 默认开启
       .halfHeight(500) // 默认一半
       .onChange((width: number, height: number, mode: PanelMode) => {
