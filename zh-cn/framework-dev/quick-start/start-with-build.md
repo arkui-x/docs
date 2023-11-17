@@ -5,7 +5,6 @@
   ```shell
   --product-name    # 必须  编译的产品名称，如：arkui-x
   --target-os       # 必须  编译的跨平台目标，如：android或ios
-  --target-cpu      # 可选  指定target侧CPU架构，如：arm或arm64
   --build-target    # 可选  指定编译目标，可以指定多个
   --gn-args         # 可选  gn参数，支持指定多个
   --ninja-args      # 可选  ninja参数，如：--ninja-args=-dkeeprsp

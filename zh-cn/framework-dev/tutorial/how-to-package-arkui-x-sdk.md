@@ -114,12 +114,12 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 
 - 构建ArkUI-X Debug，Release和Profile全量版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true
+./build.sh --product-name arkui-x --target-os android --gn-args gen_full_sdk=true
 ```
 
 - 构建ArkUI-X Release版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true runtime_mode=release
+./build.sh --product-name arkui-x --target-os android
 ```
 
 ### macOS平台编译
@@ -128,36 +128,36 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 
 - 构建ArkUI-X Debug，Release和Profile全量版本，可用于Android和iOS平台。
 ```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_android=true
+./build.sh --product-name arkui-x --target-os ios --gn-args gen_full_sdk=true build_android=true
 ```
 
 - 构建ArkUI-X Release版本，可用于Android和iOS平台。
 ```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true runtime_mode=release build_android=true
+./build.sh --product-name arkui-x --target-os ios build_android=true
 ```
 
 #### iOS
 
 - 构建ArkUI-X Debug，Profile和Release全量版本，仅用于iOS平台。
 ```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true
+./build.sh --product-name arkui-x --target-os ios --gn-args gen_full_sdk=true
 ```
 
 - 构建ArkUI-X Release版本，仅用于iOS平台。
 ```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true runtime_mode=release
+./build.sh --product-name arkui-x --target-os ios
 ```
 
 #### Android
 
 - 构建ArkUI-X Debug，Profile和Release全量版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true
+./build.sh --product-name arkui-x --target-os android --gn-args gen_full_sdk=true
 ```
 
 - 构建ArkUI-X Release版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true runtime_mode=release
+./build.sh --product-name arkui-x --target-os android
 ```
 
 ## ArkUI-SDK调试说明
