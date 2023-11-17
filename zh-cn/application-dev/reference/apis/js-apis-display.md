@@ -62,12 +62,14 @@ getDefaultDisplaySync(): Display
 
 **示例：**
 
-```js
-let displayClass = null;
+```ts
+import display from '@ohos.display';
+
+let displayClass: display.Display | null = null;
 try {
-    displayClass = display.getDefaultDisplaySync();
+  displayClass = display.getDefaultDisplaySync();
 } catch (exception) {
-    console.error('Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
+  console.error('Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
 }
 ```
 
