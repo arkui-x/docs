@@ -175,6 +175,43 @@ bridgeImpl.unRegisterMethod('getString');
 - (void)onMethodCancel:(NSString*)methodName {}
 ```
 
+### 场景六：ArkUI侧注册callBack且调用iOS侧的方法
+
+1、在ArkUI侧注册callBack且调用iOS侧的方法。
+
+```javascript
+// xxx.ets
+function testCallBack() {
+  console.log("bridge js testCallBack run")
+}
+
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBack).then((res)=>{
+    console.log('result: ' + res);
+}).catch((err) => {
+    console.error('error: ' + JSON.stringify(err));
+});
+```
+
+2、在iOS侧实现被调用的方法，调用ArkUI侧的方法。
+
+```objective-c
+// xxx.mm
+@interface Bridge : BridgePlugin
+- (NSString*)platformCallMethod;
+@end
+
+@implementation Bridge
+- (NSString*)platformCallMethod {
+    return @"call objective-c platformCallMethod success";
+}
+@end
+
+MethodData* method = [[MethodData alloc] initMethodWithName:@"testCallBack" parameter:nil];
+[self.plugin callMethod:method];
+```
+
+
+
 ## 场景示例
 
 ##### ArkUI用例
@@ -297,10 +334,12 @@ NS_ASSUME_NONNULL_END
     EntryMainViewController *mainView = [[EntryMainViewController alloc] initWithInstanceName:instanceName];
     [self setNavRootVC:mainView];
 
-    int32_t instanceId = [mainView getInstanceId];
-
     // 建立与ArkUI侧同名的平台桥接，即可用于消息传递
+	// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
     self.plugin = [[BridgeClass alloc] initBridgePlugin:@"Bridge" instanceId:instanceId];
+    // 创建平台桥接实例
+    self.plugin = [[BridgeClass alloc] initBridgePlugin:@"Bridge" bridgeManager:[mainView getBridgeManager]];
+
     self.plugin.messageListener = self;
     return YES;
 }
