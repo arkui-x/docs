@@ -110,3 +110,54 @@ public class EntryEntryAbilityActivity extends Activity {
     }
 }
 ```
+
+## 通过原生Activity拉起Ability并传递参数
+
+使用原生Activity拉起Ability时，需使用原生应用的startActivity方法，参数的传递需要通过Intent中的putExtra()进行设置，规则如下：
+
+key值为params  
+value为json格式
+
+```
+{
+    "params":[
+        {
+            "key":键,
+            "type":参数类型值,
+            "value":值
+        },
+        {
+            ...
+        }
+    ]
+}
+```
+
+### 支持的参数类型列表
+
+| 参数类型 | 参数类型值 |
+| ------- | --------- |
+| boolean |     1     |
+| int     |     5     |
+| double  |     9     |
+| string  |    10     |
+
+### 示例代码
+
+```
+public class EntryEntryAbilityActivity extends AppCompatActivity {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Intent intent = new Intent();
+        intent.setClass(this, EntryEntryAbilityTwoActivity.class);
+        intent.putExtra("params",
+                "{\"params\":[{\"key\":\"bool\",\"type\":1,\"value\":\"true\"}," +
+                "{\"key\":\"double\",\"type\":9,\"value\":\"2.3\"}," +
+                "{\"key\":\"int\",\"type\":5,\"value\":\"2\"}," +
+                "{\"key\":\"string\",\"type\":10,\"value\":\"test\"}]}");
+        startActivity(intent);
+    }
+}
+```
