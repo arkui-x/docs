@@ -55,7 +55,7 @@ ArkUI-X SDK
 ```json
     {
         "install_dir": "arkui-x/plugins/api/lib/i18n/arch_type",                     // 用于指定输出到ArkUI-X SDK哪个目录下。
-        "module_label": "//foundation/arkui/ace_engine/adapter/android/build:i18n",  // 需要打包到ArkUI-X SDK的内容(SO动态库)
+        "module_label": "//foundation/arkui/ace_engine/adapter/android/build:i18n",  // 需要打包到ArkUI-X SDK的内容(动态库)
         "target_os": [
             "linux",
             "windows",
@@ -63,8 +63,8 @@ ArkUI-X SDK
         ]
     },
     {
-        "install_dir": "arkui-x/plugins/api/lib/i18n",                               // 用于指定输出到ArkUI-X SDK哪个目录下。
-        "module_label": "//plugins/i18n/android/java:i18n_plugin_java",              // 需要打包到ArkUI-X SDK的内容(Jar包)
+        "install_dir": "arkui-x/plugins/api/lib/i18n",                               // 用于指定输出到ArkUI-X SDK哪个目录下，如果不依赖平台接口，则不需要。
+        "module_label": "//plugins/i18n/android/java:i18n_plugin_java",              // 需要打包到ArkUI-X SDK的内容(Jar包)，如果不依赖平台接口，则不需要。
         "target_os": [
             "linux",
             "windows",
@@ -100,7 +100,7 @@ ArkUI-X SDK中engine和plugins目录都会包含apiConfig.json配置文件，用
             "ios":[ "xcframework/build_modes/libi18n.xcframework" ]      // 表示i18n在iOS平台进行应用开发时，哪些库需打包到iOS应用安装包中。
         },
         "deps": {
-            "android": [],                                               // 表示i18n在Android平台进行应用开发时，哪些依赖库需打包到Android安装包中。
+            "android": [],                                               // 表示i18n在Android平台进行应用开发时，哪些依赖库需打包到Android安装包中，空代表没有依赖。
             "ios":[]                                                     // 表示i18n在iOS平台进行应用开发时，哪些依赖库需打包到iOS安装包中，空代表没有依赖。
         }
     },
@@ -164,6 +164,5 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 
 - ArkUI-X SDK编译输出目录为：out/arkui-x/packages/arkui-x
 
-- 替换当前Windows\macOS\Linux平台上已安装的ArkUI-X SDK。注意：如果使用ACE Tools进行应用工程构建和调试，则需要重新下载ACE命令依赖，可[参考](../../application-dev/quick-start/start-with-ace-tools.md#安装ace命令)。
-
+- 替换当前Windows\macOS\Linux平台上已安装的ArkUI-X SDK。
 

@@ -103,6 +103,7 @@
 
 - Basic Features
   - [@ohos.hilog (HiLog)](js-apis-hilog.md)
+  - [@ohos.web.webview (Webview)](js-apis-webview.md)
 
 - Common Event and Notification
   - [System Common Events](commonEventManager-definitions.md)

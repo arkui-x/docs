@@ -49,7 +49,7 @@
   - [@ohos.window (窗口)](js-apis-window.md)
   - [@ohos.display (屏幕属性)](js-apis-display.md)
 
-- 图形图像
+- 媒体
   - [@ohos.multimedia.image (图片处理)](js-apis-image.md)
 
 - 资源管理
@@ -103,6 +103,7 @@
 
 - 系统基础能力
   - [@ohos.hilog (HiLog日志打印)](js-apis-hilog.md)
+  - [@ohos.web.webview(Webview)](js-apis-webview.md)
 
 - 公共事件与通知
   - [系统公共事件定义](commonEventManager-definitions.md)
