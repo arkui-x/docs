@@ -26,6 +26,11 @@
   - [平台桥接(@arkui-x.bridge)](quick-start/platform-bridge-introduction.md)
   - [FFI能力(Node-API)](quick-start/ffi-napi-introduction.md)
 
++ 平台差异化
+  - [运行态差异化(@ohos.deviceInfo)](quick-start/platform-different-introduction.md)
+
++ [动态化](quick-start/dynamic-introduction.md)
+
 ### 开发指南
 
 #### Android平台开发
@@ -35,6 +40,7 @@
 - [平台接口扩展指南](./tutorial/how-to-explore-native-interface-on-android.md)
 - [平台桥接开发指南](./tutorial/how-to-use-bridge-on-android.md)
 - [Library库开发指南](./tutorial/how-to-use-library-on-android.md)
+- [动态化指南](./tutorial/how-to-use-dynamic-on-android.md)
 
 #### iOS平台开发
 
@@ -43,6 +49,7 @@
 - [平台接口扩展指南](./tutorial/how-to-explore-native-interface-on-ios.md)
 - [平台桥接开发指南](./tutorial/how-to-use-bridge-on-ios.md)
 - [Library库开发指南](./tutorial/how-to-use-library-on-ios.md)
+- [动态化指南](./tutorial/how-to-use-dynamic-on-ios.md)
 
 ### 开发工具
 
