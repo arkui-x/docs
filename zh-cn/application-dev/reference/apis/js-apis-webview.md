@@ -928,12 +928,6 @@ static configCookie(url: string, value: string): Promise<void>
 | url    | string | 是   | 要获取的cookie所属的url，建议使用完整的url。 |
 | value  | string | 是   | 要设置的cookie的值。                         |
 
-**返回值：**
-
-| 类型            | 说明                                                   |
-| --------------- | ------------------------------------------------------ |
-| Promise<string> | Promise实例，用于获取指定url设置单个cookie值是否成功。 |
-
 **错误码：**
 
 | 错误码ID | 错误信息                 |

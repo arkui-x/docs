@@ -847,6 +847,537 @@ onControllerAttached(callback: () => void)
   </html>
 ```
 
+### onAlert
+
+onAlert(callback: (event?: { url: string; message: string; result: JsResult }) => boolean)
+
+网页触发alert()告警弹窗时触发回调。
+
+**参数：**
+
+| 参数名  | 参数类型              | 参数描述                                                     |
+| ------- | --------------------- | ------------------------------------------------------------ |
+| url     | string                | 当前显示弹窗所在网页的URL。                                  |
+| message | string                | 弹窗中显示的信息。                                           |
+| result  | [JsResult](#jsresult) | 通知Web组件用户操作行为，iOS端时result.handleCancel行为和result.handleConfirm一致。 |
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | 当回调返回true时，应用可以调用系统弹窗能力（包括确认和取消），并且需要根据用户的确认或取消操作调用JsResult通知Web组件最终是否离开当前页面。当回调返回false时，web组件暂不支持触发默认弹窗。 |
+
+**示例：**
+
+```ts
+  // xxx.ets
+  import web_webview from '@ohos.web.webview'
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: web_webview.WebviewController = new web_webview.WebviewController()
+    build() {
+      Column() {
+        Web({ src: $rawfile("index.html"), controller: this.controller })
+          .onAlert((event) => {
+            if (event) {
+              console.log("event.url:" + event.url)
+              console.log("event.message:" + event.message)
+              AlertDialog.show({
+                title: 'onAlert',
+                message: 'text',
+                primaryButton: {
+                  value: 'cancel',
+                  action: () => {
+                    event.result.handleCancel()
+                  }
+                },
+                secondaryButton: {
+                  value: 'ok',
+                  action: () => {
+                    event.result.handleConfirm()
+                  }
+                },
+                cancel: () => {
+                  event.result.handleCancel()
+                }
+              })
+            }
+            return true
+          })
+      }
+    }
+  }
+```
+
+### onConfirm
+
+onConfirm(callback: (event?: { url: string; message: string; result: JsResult }) => boolean)
+
+网页调用confirm()告警时触发此回调。
+
+**参数：**
+
+| 参数名  | 参数类型              | 参数描述                    |
+| ------- | --------------------- | --------------------------- |
+| url     | string                | 当前显示弹窗所在网页的URL。 |
+| message | string                | 弹窗中显示的信息。          |
+| result  | [JsResult](#jsresult) | 通知Web组件用户操作行为。   |
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | 当回调返回true时，应用可以调用系统弹窗能力（包括确认和取消），并且需要根据用户的确认或取消操作调用JsResult通知Web组件。当回调返回false时，web组件暂不支持触发默认弹窗，跨平台目前这个返回值没有作用。 |
+
+**示例：**
+
+```ts
+  // xxx.ets
+  import web_webview from '@ohos.web.webview'
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: web_webview.WebviewController = new web_webview.WebviewController()
+
+    build() {
+      Column() {
+        Web({ src: $rawfile("index.html"), controller: this.controller })
+          .onConfirm((event) => {
+            if (event) {
+              console.log("event.url:" + event.url)
+              console.log("event.message:" + event.message)
+              AlertDialog.show({
+                title: 'onConfirm',
+                message: 'text',
+                primaryButton: {
+                  value: 'cancel',
+                  action: () => {
+                    event.result.handleCancel()
+                  }
+                },
+                secondaryButton: {
+                  value: 'ok',
+                  action: () => {
+                    event.result.handleConfirm()
+                  }
+                },
+                cancel: () => {
+                  event.result.handleCancel()
+                }
+              })
+            }
+            return true
+          })
+      }
+    }
+  }
+```
+
+### onPrompt<sup>9+</sup>
+
+onPrompt(callback: (event?: { url: string; message: string; value: string; result: JsResult }) => boolean)
+
+**参数：**
+
+| 参数名  | 参数类型              | 参数描述                    |
+| ------- | --------------------- | --------------------------- |
+| url     | string                | 当前显示弹窗所在网页的URL。 |
+| message | string                | 弹窗中显示的信息。          |
+| result  | [JsResult](#jsresult) | 通知Web组件用户操作行为。   |
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | 当回调返回true时，应用可以调用系统弹窗能力（包括确认和取消），并且需要根据用户的确认或取消操作调用JsResult通知Web组件。当回调返回false时，web组件暂不支持触发默认弹窗，跨平台目前这个返回值没有作用。 |
+
+**示例：**
+
+```ts
+  // xxx.ets
+  import web_webview from '@ohos.web.webview'
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: web_webview.WebviewController = new web_webview.WebviewController()
+
+    build() {
+      Column() {
+        Web({ src: $rawfile("index.html"), controller: this.controller })
+          .onPrompt((event) => {
+            if (event) {
+              console.log("url:" + event.url)
+              console.log("message:" + event.message)
+              console.log("value:" + event.value)
+              AlertDialog.show({
+                title: 'onPrompt',
+                message: 'text',
+                primaryButton: {
+                  value: 'cancel',
+                  action: () => {
+                    event.result.handleCancel()
+                  }
+                },
+                secondaryButton: {
+                  value: 'ok',
+                  action: () => {
+                    event.result.handlePromptConfirm(event.value)
+                  }
+                },
+                cancel: () => {
+                  event.result.handleCancel()
+                }
+              })
+            }
+            return true
+          })
+      }
+    }
+  }
+```
+
+### onHttpAuthRequest<sup>9+</sup>
+
+onHttpAuthRequest(callback: (event?: { handler: HttpAuthHandler, host: string, realm: string}) => boolean)
+
+通知收到http auth认证请求。
+
+Android加载页面不会直接触发该回调，iOS加载页面会直接触发该回调。
+
+**参数：**
+
+| 参数名  | 参数类型                             | 参数描述                     |
+| ------- | ------------------------------------ | ---------------------------- |
+| handler | [HttpAuthHandler](#httpauthhandler9) | 通知Web组件用户操作行为。    |
+| host    | string                               | HTTP身份验证凭据应用的主机。 |
+| realm   | string                               | HTTP身份验证凭据应用的域。   |
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | 返回false表示此次认证失败，否则成功，跨平台目前这个返回值没有作用。 |
+
+**示例：**
+
+```ts
+// xxx.ets
+import web_webview from '@ohos.web.webview'
+
+@Entry
+@Component
+struct WebComponent {
+  controller: web_webview.WebviewController = new web_webview.WebviewController()
+  httpAuth: boolean = false
+
+  build() {
+    Column() {
+      Web({ src: 'https://www.example.com', controller: this.controller })
+        .onHttpAuthRequest((event) => {
+          if (event) {
+            AlertDialog.show({
+              title: 'onHttpAuthRequest',
+              message: 'text',
+              primaryButton: {
+                value: 'cancel',
+                action: () => {
+                  event.handler.cancel()
+                }
+              },
+              secondaryButton: {
+                value: 'ok',
+                action: () => {
+                  event.handler.confirm("2222", "2222");
+                }
+              },
+              cancel: () => {
+                event.handler.cancel()
+              }
+            })
+          }
+          return true
+        })
+    }
+  }
+}
+```
+
+### onGeolocationShow
+
+onGeolocationShow(callback: (event?: { origin: string, geolocation: JsGeolocation }) => void)
+
+通知用户收到地理位置信息获取请求。
+
+目前iOS不支持。
+
+**参数：**
+
+| 参数名      | 参数类型                        | 参数描述                  |
+| ----------- | ------------------------------- | ------------------------- |
+| origin      | string                          | 指定源的字符串索引。      |
+| geolocation | [JsGeolocation](#jsgeolocation) | 通知Web组件用户操作行为。 |
+
+**示例：**
+
+```ts
+  // xxx.ets
+  import web_webview from '@ohos.web.webview'
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: web_webview.WebviewController = new web_webview.WebviewController()
+    build() {
+      Column() {
+        Web({ src:'https://www.example.com', controller:this.controller })
+        .geolocationAccess(true)
+        .onGeolocationShow((event) => {
+          if (event) {
+            AlertDialog.show({
+              title: 'title',
+              message: 'text',
+              confirm: {
+                value: 'onConfirm',
+                action: () => {
+                  event.geolocation.invoke(event.origin, true, true)
+                }
+              },
+              cancel: () => {
+                event.geolocation.invoke(event.origin, false, true)
+              }
+            })
+          }
+        })
+      }
+    }
+  }
+```
+
+### onGeolocationHide
+
+onGeolocationHide(callback: () => void)
+
+通知用户先前被调用[onGeolocationShow](#ongeolocationshow)时收到地理位置信息获取请求已被取消。
+
+目前iOS不支持。
+
+**参数：**
+
+| 参数名   | 参数类型   | 参数描述                                 |
+| -------- | ---------- | ---------------------------------------- |
+| callback | () => void | 地理位置信息获取请求已被取消的回调函数。 |
+
+**示例：**
+
+```ts
+  // xxx.ets
+  import web_webview from '@ohos.web.webview'
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: web_webview.WebviewController = new web_webview.WebviewController()
+    build() {
+      Column() {
+        Web({ src:'https://www.example.com', controller:this.controller })
+        .geolocationAccess(true)
+        .onGeolocationHide(() => {
+          console.log("onGeolocationHide...")
+        })
+      }
+    }
+  }
+```
+
+### onPermissionRequest<sup>9+</sup>
+
+onPermissionRequest(callback: (event?: { request: PermissionRequest }) => void)
+
+通知收到获取权限请求。
+
+iOS监听到webview权限申请的前提是要在plist设置app获取权限选项，并且在首次打开应用，系统弹出获取权限窗口时选择授予。
+
+Android监听到webview权限申请的前提是要在Manifest中静态配置。
+
+getOrigin返回值以各平台行为为准。
+
+**参数：**
+
+| 参数名  | 参数类型                                 | 参数描述                  |
+| ------- | ---------------------------------------- | ------------------------- |
+| request | [PermissionRequest](#permissionrequest9) | 通知Web组件用户操作行为。 |
+
+**示例：**
+
+```ts
+  // xxx.ets
+  import web_webview from '@ohos.web.webview'
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: web_webview.WebviewController = new web_webview.WebviewController()
+    build() {
+      Column() {
+        Web({ src: 'https://www.example.com', controller: this.controller })
+          .onPermissionRequest((event) => {
+            if (event) {
+              AlertDialog.show({
+                title: 'title',
+                message: 'text',
+                primaryButton: {
+                  value: 'deny',
+                  action: () => {
+                    event.request.deny()
+                  }
+                },
+                secondaryButton: {
+                  value: 'onConfirm',
+                  action: () => {
+                    event.request.grant(event.request.getAccessibleResource())
+                  }
+                },
+                cancel: () => {
+                  event.request.deny()
+                }
+              })
+            }
+          })
+      }
+    }
+  }
+```
+
+### onPageVisible<sup>9+</sup>
+
+onPageVisible(callback: (event: {url: string}) => void)
+
+设置新页面内容即将可见时触发的回调函数。
+
+获取的url以各平台行为为准。
+
+**参数：**
+
+| 参数名 | 参数类型 | 参数描述                              |
+| ------ | -------- | ------------------------------------- |
+| url    | string   | 新页面内容即将可见时新页面的url地址。 |
+
+**示例：**
+
+```ts
+  // xxx.ets
+  import web_webview from '@ohos.web.webview'
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: web_webview.WebviewController = new web_webview.WebviewController()
+    build() {
+      Column() {
+        Web({ src:'https://www.example.com', controller: this.controller })
+         .onPageVisible((event) => {
+          console.log('onPageVisible url:' + event.url)
+        })
+      }
+    }
+  }
+```
+
+### onDownloadStart
+
+onDownloadStart(callback: (event?: { url: string, userAgent: string, contentDisposition: string, mimetype: string, contentLength: number }) => void)
+
+通知主应用开始下载一个文件
+
+返回信息以各平台行为为准，跨平台目前只支持获取url, userAgent, mimetype, contentLength。
+
+**参数：**
+
+| 参数名        | 参数类型      | 参数描述                             |
+| ------------- | ------------- | ------------------------------------ |
+| url           | string        | 文件下载的URL。                      |
+| userAgent     | string        | 用于下载的用户代理。                 |
+| mimetype      | string        | 服务器返回内容媒体类型（MIME）信息。 |
+| contentLength | contentLength | 服务器返回文件的长度。               |
+
+**示例：**
+
+```ts
+  // xxx.ets
+  import web_webview from '@ohos.web.webview'
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: web_webview.WebviewController = new web_webview.WebviewController()
+
+    build() {
+      Column() {
+        Web({ src: 'https://www.example.com', controller: this.controller })
+          .onDownloadStart((event) => {
+            if (event) {
+              console.log('url:' + event.url)
+              console.log('userAgent:' + event.userAgent)
+              console.log('mimetype:' + event.mimetype)
+              console.log('contentLength:' + event.contentLength)
+            }
+          })
+      }
+    }
+  }
+```
+
+### onShowFileSelector<sup>9+</sup>
+
+onShowFileSelector(callback: (event?: { result: FileSelectorResult, fileSelector: FileSelectorParam }) => boolean)
+
+调用此函数以处理具有“文件”输入类型的HTML表单，以响应用户按下的“选择文件”按钮。
+
+目前iOS不支持。
+
+**参数：**
+
+| 参数名       | 参数类型                                   | 参数描述                        |
+| ------------ | ------------------------------------------ | ------------------------------- |
+| result       | [FileSelectorResult](#fileselectorresult9) | 用于通知Web组件文件选择的结果。 |
+| fileSelector | [FileSelectorParam](#fileselectorparam9)   | 文件选择器的相关信息。          |
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | 当返回值为true时，用户可以调用系统提供的弹窗能力。当回调返回false时，web组件暂不支持触发默认弹窗。 |
+
+**示例：**
+
+```ts
+  // xxx.ets
+  import web_webview from '@ohos.web.webview';
+  import picker from '@ohos.file.picker';
+  import { BusinessError } from '@ohos.base';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: web_webview.WebviewController = new web_webview.WebviewController()
+    @State uri: string = "file:///data/user/0/com.example.helloworld";
+
+    build() {
+      Column() {
+        Web({ src: $rawfile('index.html'), controller: this.controller })
+          .onShowFileSelector((event) => {
+            console.log('MyFileUploader onShowFileSelector invoked')
+            event.result.handleFileList([this.uri]);
+            return true
+          })
+      }
+    }
+  }
+```
+
 ## WebResourceError
 
 web组件资源管理错误信息对象。示例代码参考[onErrorReceive事件](#onerrorreceive)。
@@ -974,3 +1505,213 @@ getMessageLevel(): MessageLevel
 | Info  | 消息级别。 |
 | Log   | 日志级别。 |
 | Warn  | 警告级别。 |
+
+## JsResult
+
+Web组件返回的弹窗确认或弹窗取消功能对象。示例代码参考[onAlert事件](#onalert)。
+
+### handleCancel
+
+handleCancel(): void
+
+通知Web组件用户取消弹窗操作。
+
+### handleConfirm
+
+handleConfirm(): void
+
+通知Web组件用户确认弹窗操作。
+
+### handlePromptConfirm<sup>9+</sup>
+
+handlePromptConfirm(result: string): void
+
+通知Web组件用户确认弹窗操作及对话框内容。
+
+**参数：**
+
+| 参数名 | 参数类型 | 必填 | 默认值 | 参数描述               |
+| ------ | -------- | ---- | ------ | ---------------------- |
+| result | string   | 是   | -      | 用户输入的对话框内容。 |
+
+## HttpAuthHandler<sup>9+</sup>
+
+Web组件返回的http auth认证请求确认或取消和使用缓存密码认证功能对象。示例代码参考[onHttpAuthRequest事件](#onhttpauthrequest9)。
+
+### cancel<sup>9+</sup>
+
+cancel(): void
+
+通知Web组件用户取消HTTP认证操作。
+
+### confirm<sup>9+</sup>
+
+confirm(userName: string, pwd: string): boolean
+
+使用用户名和密码进行HTTP认证操作。
+
+**参数：**
+
+| 参数名   | 参数类型 | 必填 | 默认值 | 参数描述         |
+| -------- | -------- | ---- | ------ | ---------------- |
+| userName | string   | 是   | -      | HTTP认证用户名。 |
+| pwd      | string   | 是   | -      | HTTP认证密码。   |
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | 认证成功返回true，失败返回false。跨平台Android和iOS底层不会有返回值，所以都返回true。 |
+
+### isHttpAuthInfoSaved<sup>9+</sup>
+
+isHttpAuthInfoSaved(): boolean
+
+通知Web组件用户使用服务器缓存的帐号密码认证。
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | 存在密码认证成功返回true，其他返回false。iOS底层不会有返回值，所以暂时在获取不到服务器缓存帐号密码的时候返回false，如果能获取到就进行认证并返回true。 |
+
+## JsGeolocation
+
+Web组件返回授权或拒绝权限功能的对象。示例代码参考[onGeolocationShow事件](#ongeolocationshow)。
+
+### invoke
+
+invoke(origin: string, allow: boolean, retain: boolean): void
+
+设置网页地理位置权限状态。
+
+**参数：**
+
+| 参数名 | 参数类型 | 必填 | 默认值 | 参数描述                                 |
+| ------ | -------- | ---- | ------ | ---------------------------------------- |
+| origin | string   | 是   | -      | 指定源的字符串索引。                     |
+| allow  | boolean  | 是   | -      | 设置的地理位置权限状态。                 |
+| retain | boolean  | 是   | -      | 是否允许将地理位置权限状态保存到系统中。 |
+
+## PermissionRequest<sup>9+</sup>
+
+Web组件返回授权或拒绝权限功能的对象。示例代码参考[onPermissionRequest事件](#onpermissionrequest9)。
+
+### deny<sup>9+</sup>
+
+deny(): void
+
+拒绝网页所请求的权限。
+
+### getOrigin<sup>9+</sup>
+
+getOrigin(): string
+
+获取网页来源。
+
+**返回值：**
+
+| 类型   | 说明                     |
+| ------ | ------------------------ |
+| string | 当前请求权限网页的来源。 |
+
+### getAccessibleResource<sup>9+</sup>
+
+getAccessibleResource(): Array\<string\>
+
+获取网页所请求的权限资源列表，跨平台资源列表支持的类型有RESOURCE_VIDEO_CAPTURE和RESOURCE_AUDIO_CAPTURE。
+
+**返回值：**
+
+| 类型            | 说明                       |
+| --------------- | -------------------------- |
+| Array\<string\> | 网页所请求的权限资源列表。 |
+
+### grant<sup>9+</sup>
+
+grant(resources: Array\<string\>): void
+
+对网页访问的给定权限进行授权，跨平台iOS不支持授予某一种类型的权限，只支持授予当前申请的权限，或拒绝当前申请的权限。
+
+**参数：**
+
+| 参数名    | 参数类型        | 必填 | 默认值 | 参数描述                                                |
+| --------- | --------------- | ---- | ------ | ------------------------------------------------------- |
+| resources | Array\<string\> | 是   | -      | 授予网页请求的权限的资源列表，跨平台iOS此参数没有作用。 |
+
+## FileSelectorResult<sup>9+</sup>
+
+通知Web组件的文件选择结果。示例代码参考[onShowFileSelector事件](#onshowfileselector9)。
+
+### handleFileList<sup>9+</sup>
+
+handleFileList(fileList: Array\<string\>): void
+
+通知Web组件进行文件选择操作。
+
+**参数：**
+
+| 参数名   | 参数类型        | 必填 | 默认值 | 参数描述                 |
+| -------- | --------------- | ---- | ------ | ------------------------ |
+| fileList | Array\<string\> | 是   | -      | 需要进行操作的文件列表。 |
+
+## FileSelectorParam<sup>9+</sup>
+
+web组件获取文件对象。示例代码参考[onShowFileSelector事件](#onshowfileselector9)。
+
+### getTitle<sup>9+</sup>
+
+getTitle(): string
+
+获取文件选择器标题。
+
+**返回值：**
+
+| 类型   | 说明                 |
+| ------ | -------------------- |
+| string | 返回文件选择器标题。 |
+
+### getMode<sup>9+</sup>
+
+getMode(): FileSelectorMode
+
+获取文件选择器的模式。
+
+**返回值：**
+
+| 类型                                          | 说明                   |
+| --------------------------------------------- | ---------------------- |
+| [FileSelectorMode](#fileselectormode枚举说明) | 返回文件选择器的模式。 |
+
+### getAcceptType<sup>9+</sup>
+
+getAcceptType(): Array\<string\>
+
+获取文件过滤类型。
+
+**返回值：**
+
+| 类型            | 说明               |
+| --------------- | ------------------ |
+| Array\<string\> | 返回文件过滤类型。 |
+
+### isCapture<sup>9+</sup>
+
+isCapture(): boolean
+
+获取是否调用多媒体能力。
+
+**返回值：**
+
+| 类型    | 说明                     |
+| ------- | ------------------------ |
+| boolean | 返回是否调用多媒体能力。 |
+
+## FileSelectorMode枚举说明
+
+| 名称                 | 描述                 |
+| -------------------- | -------------------- |
+| FileOpenMode         | 打开上传单个文件。   |
+| FileOpenMultipleMode | 打开上传多个文件。   |
+| FileOpenFolderMode   | 打开上传文件夹模式。 |
+| FileSaveMode         | 文件保存模式。       |
