@@ -175,17 +175,17 @@ bridgeImpl.unRegisterMethod('getString');
 - (void)onMethodCancel:(NSString*)methodName {}
 ```
 
-### 场景六：ArkUI侧注册callBack且调用iOS侧的方法
+### 场景六：ArkUI侧注册callBack且调用iOS侧的方法（无参）
 
 1、在ArkUI侧注册callBack且调用iOS侧的方法。
 
 ```javascript
 // xxx.ets
-function testCallBack() {
+function testCallBackOfJs() {
   console.log("bridge js testCallBack run")
 }
 
-this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBack).then((res)=>{
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs).then((res)=>{
     console.log('result: ' + res);
 }).catch((err) => {
     console.error('error: ' + JSON.stringify(err));
@@ -197,11 +197,11 @@ this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBack).then((res)
 ```objective-c
 // xxx.mm
 @interface Bridge : BridgePlugin
-- (NSString*)platformCallMethod;
+- (NSString*)testCallBack;
 @end
 
 @implementation Bridge
-- (NSString*)platformCallMethod {
+- (NSString*)testCallBack {
     return @"call objective-c platformCallMethod success";
 }
 @end
@@ -210,7 +210,45 @@ MethodData* method = [[MethodData alloc] initMethodWithName:@"testCallBack" para
 [self.plugin callMethod:method];
 ```
 
+### 场景七：ArkUI侧注册callBack且调用iOS侧的方法（有参）
 
+1、在ArkUI侧注册callBack且调用iOS侧的方法。
+
+```javascript
+// xxx.ets
+function testCallBackOfJs(stringParam) {
+  console.log("Js received a parameter of " + stringParam)
+  return "js testCallBackReturn call success."
+}
+
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
+    console.log('result: ' + res);
+}).catch((err) => {
+    console.error('error: ' + JSON.stringify(err));
+});
+```
+
+2、在iOS侧实现被调用的方法，调用ArkUI侧的方法。
+
+```objective-c
+// xxx.mm
+@interface Bridge : BridgePlugin
+- (NSString*)testCallBack:(id)param;
+@end
+
+@implementation Bridge
+- (NSString*)testCallBack:(id)param {
+    return @"call objective-c platformCallMethod success";
+}
+@end
+
+MethodData* method = [[MethodData alloc] initMethodWithName:@"testCallBack" parameter:@[@"ios sends parameter"]];
+[self.plugin callMethod:method];
+```
+
+
+
+## 
 
 ## 场景示例
 

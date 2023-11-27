@@ -27,11 +27,11 @@ const bridgeImpl = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
 
 // 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
 Bridge bridge = new Bridge(this, "Bridge", getInstanceId());
-Bridge bridge = new Bridge(this, "Bridge", getInstanceId()， BridgePlugin.BridgeType.BINARY_TYPE);
+Bridge bridge = new Bridge(this, "Bridge", getInstanceId(),  BridgePlugin.BridgeType.BINARY_TYPE);
 
 // 创建平台桥接实例(新)
 Bridge bridge = new Bridge(this, "Bridge", getBridgeManager());
-Bridge bridge = new Bridge(this, "Bridge", getBridgeManager()， BridgePlugin.BridgeType.BINARY_TYPE);
+Bridge bridge = new Bridge(this, "Bridge", getBridgeManager(), BridgePlugin.BridgeType.BINARY_TYPE);
 ```
 
 ### 场景一：ArkUI侧向Android侧传递数据
@@ -208,17 +208,17 @@ public void onError(String s, int i, String s1) {}
 public void onMethodCancel(String s) {}
 ```
 
-### 场景六：ArkUI侧注册callBack且调用Android侧的方法
+### 场景六：ArkUI侧注册callBack且调用Android侧的方法（无参）
 
 1、在ArkUI侧注册callBack且调用Android侧的方法。
 
 ```javascript
 // xxx.ets
-function testCallBack() {
-  console.log("bridge js testCallBack run")
+function testCallBackOfJs() {
+  console.log("bridge js testCallBackOfJs run")
 }
 
-this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBack).then((res)=>{
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs).then((res)=>{
     console.log('result: ' + res);
 }).catch((err) => {
     console.error('error: ' + JSON.stringify(err));
@@ -230,7 +230,7 @@ this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBack).then((res)
 ```java
 // xxx.java
 
-public void testCallBack() {
+public String testCallBack() {
   return "call android testCallBack success";
 }
 
@@ -239,6 +239,38 @@ MethodData methodData = new MethodData("testCallBack", paramObject);
 bridge.callMethod(methodData);
 ```
 
+### 场景七：ArkUI侧注册callBack且调用Android侧的方法（有参）
+
+1、在ArkUI侧注册callBack且调用Android侧的方法。
+
+```javascript
+// xxx.ets
+function testCallBackOfJs(stringParam) {
+  console.log("Js received a parameter of " + stringParam)
+  return "js testCallBackReturn call success."
+}
+
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
+    console.log('result: ' + res);
+}).catch((err) => {
+    console.error('error: ' + JSON.stringify(err));
+});
+```
+
+2、在Android侧实现被调用的方法，调用ArkUI侧的方法。
+
+```java
+// xxx.java
+
+public String testCallBack(String sParam) {
+	ALog.i("Android received a parameter of ", sParam);
+    return "call android testCallBack success";
+}
+
+Object[] paramObject = {"android sends parameter"};
+MethodData methodData = new MethodData("testCallBack", paramObject);
+bridge.callMethod(methodData);
+```
 
 ### 
 
