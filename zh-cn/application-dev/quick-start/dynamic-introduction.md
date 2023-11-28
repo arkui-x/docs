@@ -12,6 +12,6 @@ ArkUI-X框架支持动态化，使用者可以根据自己需要动态发布跨�
 
 ## 实践参考
 
-+ [Android平台参考]()
-+ [iOS平台参考]()
++ [Android平台参考](../tutorial/how-to-use-dynamic-on-android.md)
++ [iOS平台参考](../tutorial/how-to-use-dynamic-on-ios.md)
 
