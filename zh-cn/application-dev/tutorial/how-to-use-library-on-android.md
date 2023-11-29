@@ -10,21 +10,22 @@
 ### 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行Android AAR开发
 可以通过通过ACE Tools或DevEco Studio完成
 * ACE Tools
-1. ace create 命令创建一个跨平台应用工程，示例工程名为demo,选择工程类型为library：
+1. ace create 命令创建一个跨平台的library模版工程：
     ```
-    ace create [project]
+    ace create [project] -t library
     ```
 2. 执行ace build aar命令，构建Android aar包。
     ```
     ace build aar
     ```
 * DevEco Studio
-1. 创建跨平台library工程
-2. 通过执行build app选项，构建出Android aar包
+1. 导入跨平台的Sample工程Library
+2. 通过执行Build APP(s)选项，构建出Android aar包
 ### AAR在应用工程的使用
 
 通过Android studio 创建一个应用工程，将我们上述的aar包添加到工程目录下的libs目录中
 **Application部分**
+
 * 继承调用
 ```java
 package com.example.helloworld;
@@ -72,6 +73,7 @@ public class MainApplication extends Application {
 
  <uses-permission android:name="android.permission.INTERNET"/>
      <application
+         android:extractNativeLibs="true"
          android:name="com.example.test_aar_demo.MainApplication"
          android:allowBackup="true"
          android:icon="@drawable/hihelloworld"
