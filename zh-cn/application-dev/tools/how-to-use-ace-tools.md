@@ -111,7 +111,7 @@ ACE Tools支持开发者针对跨平台进行多Ability开发。
 ACE Tools支持开发者针对跨平台进行多Module范式开发。
 * 执行如下命令，按提示填写Module名称:
     ```
-    cd <跨平台工程根目录>
+    cd <跨平台应用工程根目录>
     ace new module
     ? Please enter the module name: feature1
     ```
@@ -133,4 +133,3 @@ ACE Tools支持开发者针对跨平台进行多Module范式开发。
 ##  参考
 
 - [ACE Tools命令行详情说明](https://gitee.com/arkui-x/cli/blob/master/README.md)
-- [ACE Tools环境配置详细说明](../tutorial/how-to-configure-dev-environment.md)

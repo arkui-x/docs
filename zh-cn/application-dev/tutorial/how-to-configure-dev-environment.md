@@ -17,6 +17,7 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
    ```shell
    // 配置环境变量
    export NODE_HOME=/path-to-nodejs-sdk
+   export PATH=${NODE_HOME}/bin:${PATH}
    ```
 
    [macOS]
@@ -24,6 +25,7 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
    ```shell
    // 配置环境变量
    export NODE_HOME=/path-to-nodejs-sdk
+   export PATH=$NODE_HOME/bin:$PATH
    ```
 
    [Windows]
@@ -35,7 +37,7 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 
 **2. 配置ohpm环境**
 
-   OHPM CLI（OpenHarmony Package Manager Command-line Interface）是OpenHarmony应用工程的三方库的包管理工具，可通过DevEco Studio > File > Settings > Build, Execution, Deployment > Ohpm 查看ohpm home的安装路径，并配置到环境变量中。推荐环境变量配置如下：
+   OHPM CLI（OpenHarmony Package Manager Command-line Interface）OpenHarmony生态三方库的包管理工具，位于OpenHarmony [SDK命令行工具](https://developer.harmonyos.com/cn/develop/deveco-studio#download_cli_openharmony)中。推荐环境变量配置如下：
 
    [Linux]
 
@@ -252,7 +254,7 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 ## 环境检查
 
    ```shell
-   ace check
+   ace check -v
    ```
 
-执行 `ace check` 命令可以检查上述的本地开发环境配置情况。对于必选项，需要检查通过，否则无法继续接下来的操作。
+执行 `ace check -v` 命令可以检查上述的本地开发环境配置情况。对于必选项，需要检查通过，否则无法继续接下来的操作。

@@ -73,7 +73,6 @@ public class MainApplication extends Application {
 
  <uses-permission android:name="android.permission.INTERNET"/>
      <application
-         android:extractNativeLibs="true"
          android:name="com.example.test_aar_demo.MainApplication"
          android:allowBackup="true"
          android:icon="@drawable/hihelloworld"
