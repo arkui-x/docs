@@ -60,7 +60,7 @@
 * 集成ArkUI-X SDK 
     Android工程集成ArkUI-X SDK遵循Android应用工程集成Jar和动态库规则，即SDK组成清单中的arkui_android_adapter.jar包拷贝到libs目录，动态库（libarkui_android.so\libhilog.so\libresourcemanager.so）会自动拷贝到libs/arm64-v8a目录。
 * 集成ArkUI-X应用编译产物 
-  ArkUI-X编译产物生成后，拷贝到Android应用工程assets/arkui-x目录下。这里“arkui-x”目录名称是固定的，不能更改；详情参见[ArkUI-X应用工程结构说明](../quick-start/package-structure-guide.md)
+    ArkUI-X编译产物生成后，拷贝到Android应用工程assets/arkui-x目录下。这里“arkui-x”目录名称是固定的，不能更改；详情参见[ArkUI-X应用工程结构说明](../quick-start/package-structure-guide.md)
 
     ```
     src/main/assets/arkui-x

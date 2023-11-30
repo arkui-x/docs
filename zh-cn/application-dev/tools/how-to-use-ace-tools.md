@@ -85,7 +85,7 @@ ACE Tools支持开发者针对Android平台开发AAR，针对iOS平台开发Fram
     ace build ios-xcframework  //构建iOS平台的xcframework产物
     ```
 ## 多Ability开发
-ACE Tools支持开发者针跨平台进行多Ability开发。
+ACE Tools支持开发者针对跨平台进行多Ability开发。
 * 执行如下命令，按提示填写Ability名称即可创建Ability模块
     ```
     cd entry
