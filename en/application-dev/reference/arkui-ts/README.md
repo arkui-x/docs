@@ -7,9 +7,9 @@
     - [Show/Hide Event](ts-universal-events-show-hide.md)
     - [Key Event](ts-universal-events-key.md)
     - [Focus Event](ts-universal-focus-event.md)
+    - [Component Keyboard Shortcut Event](ts-universal-events-keyboardshortcut.md)
     - [Component Area Change Event](ts-universal-component-area-change-event.md)
     - [Visible Area Change Event](ts-universal-component-visible-area-change-event.md)
-    - [Component Keyboard Shortcut Event](ts-universal-events-keyboardshortcut.md)
   - Universal Attributes
     - [Size](ts-universal-attributes-size.md)
     - [Location](ts-universal-attributes-location.md)
@@ -34,6 +34,7 @@
     - [Component ID](ts-universal-attributes-component-id.md)
     - [Polymorphic Style](ts-universal-attributes-polymorphic-style.md)
     - [Foreground Color](ts-universal-attributes-foreground-color.md)
+    - [restoreId](ts-universal-attributes-restoreId.md)
     - [Foreground Blur](ts-universal-attributes-foreground-blur-style.md)
     - [Click Effect](ts-universal-attributes-click-effect.md)
     - [Accessibility](ts-universal-attributes-accessibility.md)
@@ -62,6 +63,7 @@
   - [AlphabetIndexer](ts-container-alphabet-indexer.md)
   - [Blank](ts-basic-components-blank.md)
   - [Button](ts-basic-components-button.md)
+  - [CalendarPicker](ts-basic-components-calendarpicker.md)
   - [Checkbox](ts-basic-components-checkbox.md)
   - [CheckboxGroup](ts-basic-components-checkboxgroup.md)
   - [DataPanel](ts-basic-components-datapanel.md)
@@ -169,10 +171,6 @@
     - [Text Picker Dialog Box](ts-methods-textpicker-dialog.md)
   - [Menu](ts-methods-menu.md)
 - [Custom Component Lifecycle](ts-custom-component-lifecycle.md)
-- Rendering Control
-  - [if/else: Conditional Rendering](arkts-rendering-control-ifelse.md)
-  - [ForEach: Rendering of Repeated Content](arkts-rendering-control-foreach.md)
-  - [LazyForEach: Lazy Data Loading](arkts-rendering-control-lazyforeach.md)
 - State Management with Page-level Variables
   - [\@Builder Decorator: Custom Builder Function](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-builder.md)
   - [\@BuilderParam Decorator: \@Builder Function Reference](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-builderparam.md)
@@ -186,6 +184,10 @@
   - [\@Provide and \@Consume Decorators: Two-Way Synchronization with Descendant Components](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-provide-and-consume.md)
   - [\@Observed and \@ObjectLink Decorators: Observing Attribute Changes in Nested Class Objects](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-observed-and-objectlink.md)
 - [State Management with Application-level Variables](ts-state-management.md)
+- Rendering Control
+  - [if/else: Conditional Rendering](arkts-rendering-control-ifelse.md)
+  - [ForEach: Rendering of Repeated Content](arkts-rendering-control-foreach.md)
+  - [LazyForEach: Lazy Data Loading](arkts-rendering-control-lazyforeach.md)
 - [Pixel Units](ts-pixel-units.md)
 - [Enums](ts-appendix-enums.md)
 - [Types](ts-types.md)

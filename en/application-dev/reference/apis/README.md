@@ -1,6 +1,6 @@
 # OpenHarmony APIs with Cross-Platform Support
 - Platform Bridge
-  - [@arkui-x.bridge (Platform Bridget)]()
+  - [@arkui-x.bridge (Platform Bridget)](js-apis-bridge.md)
 
 - UI Page
   - [@ohos.animator (Animator)](js-apis-animator.md)
@@ -38,6 +38,7 @@
 
 - Bundle Management
   - [@ohos.bundle.bundleManager (bundleManager)](js-apis-bundleManager.md)
+  - [@ohos.zlib (Zip)](js-apis-zlib.md)
   - bundleManager
     - [abilityInfo](js-apis-bundleManager-abilityInfo.md)
     - [applicationInfo](js-apis-bundleManager-applicationInfo.md)
@@ -47,6 +48,9 @@
 - Graphics
   - [@ohos.window (Window)](js-apis-window.md)
   - [@ohos.display (Display)](js-apis-display.md)
+
+- Media
+  - [@ohos.multimedia.image (Image Processing)](js-apis-image.md)
 
 - Resource Management
   - [@ohos.i18n (Internationalization)](js-apis-i18n.md)
@@ -71,6 +75,7 @@
 
 - Security
   - [@ohos.abilityAccessCtrl (Ability Access Control)](js-apis-abilityAccessCtrl.md)
+  - [@ohos.security.cryptoFramework (Crypto Framework)](js-apis-cryptoFramework.md)
 
 - Common Library
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
@@ -98,3 +103,7 @@
 
 - Basic Features
   - [@ohos.hilog (HiLog)](js-apis-hilog.md)
+
+- Common Event and Notification
+  - [System Common Events](commonEventManager-definitions.md)
+  - [@ohos.commonEventManager (Common Event)](js-apis-commonEventManager.md)
