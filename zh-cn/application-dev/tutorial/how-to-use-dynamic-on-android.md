@@ -31,17 +31,16 @@
 │       ├── armeabi-v7a
 │       └── x86_64  
 ├── systemres                   # ArkUI公共资源
-│   
 └── libs                        # 根目录下libs库
     ├── arm64-v8a               
-    │    └──arkui_android.so    # ArkUI-X引擎
+    │    └──libarkui_android.so    # ArkUI-X引擎
     ├── armeabi-v7a           
     └── x86_64
 ```
 
 1. `/data/data/应用/files/arkui-x `可以视为ArkUI-X动态加载的沙箱根目录，框架和特性Bundle均需要放在这个目录下；
 
-2. 根目录下的libs文件夹放置引擎（arkui_android.so），及其他公共库；
+2. 根目录下的libs文件夹放置引擎（libarkui_android.so），及其他公共库；
 
 3. 根目录下要求按照module级别组织，**不可以重名**；
 
@@ -63,7 +62,7 @@
 
  目录，之后再打开对应跨平台界面时初始化框架：
 
-```
+```ts
 appDelegate = new StageApplicationDelegate();
 appDelegate.initApplication(this)
 ```

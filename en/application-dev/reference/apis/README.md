@@ -58,6 +58,7 @@
   - [@ohos.resourceManager (Resource Manager)](js-apis-resource-manager.md)
 
 - Network Management
+  - [@ohos.request (Upload and Download)](js-apis-request.md)
   - [@ohos.net.webSocket (WebSocket Connection)](js-apis-webSocket.md)
   - [@ohos.net.socket (Socket Connection)](js-apis-socket.md)
   - [@ohos.net.http (Data Request)](js-apis-http.md)

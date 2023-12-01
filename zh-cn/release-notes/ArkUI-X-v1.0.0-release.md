@@ -14,32 +14,31 @@ ArkUI-X 1.0.0正式版本如期而至，配套OpenHarmony SDK API 10。相比1.0
 
 ### 应用包管理
 
-这里，应用包管理特指OpenHarmony应用工程结构跨平台编译适配，不包括OpenHarmony包管理运行时，编译后的应用程序包内容在Android和iOS平台仍然有原生包管理进行管理。
+应用包管理特指OpenHarmony应用工程结构跨平台编译适配，不包括OpenHarmony包管理运行时，编译后的应用程序包内容在Android和iOS平台仍然有原生包管理进行管理。
 
-* 支持OpenHarmony应用程序结构和编译打包后的应用程序包结构：Module分为“Ability”和“Library”两种类型，“Ability”类型的Module对应于编译后的HAP（Harmony Ability Package）；“Library”类型的Module对应于HAR（Harmony Archive），或者HSP（Harmony Shared Package）。
+* 支持OpenHarmony应用程序结构和编译打包后的应用程序包结构：Module分为“Ability”和“Library”两种类型，“Ability”类型的Module对应于编译后的HAP；“Library”类型的Module对应于HAR，或者HSP。
 
 * 支持多module和UIAbility开发：在开发态，可以在跨平台工程中创建一个或者多个Module。一个Module可以包含一个或多个UIAbility组件。
 
 ### 动态化能力
 
-* 支持业务内容快速部署和更新，即ArkTS编译产物和资源支持动态下发和加载。另外，Android平台支持ArkUI-X基础库和插件库动态下发。
-* 动态化内容(Bundle)涵盖HAP（Harmony Ability Package）和HSP（Harmony Shared Package）两种应用程序包结构内容。
+* 动态化内容(Bundle)涵盖HAP和HSP两种应用程序包结构内容，支持业务特性快速部署和更新，即ArkTS编译产物和资源支持动态下发和加载。详情可参见：[动态化介绍](../application-dev/quick-start/dynamic-introduction.md)。
 
 ### 接口范围
 
-* 完善ArkUI API 10组件跨平台适配，包括：组件通用信息(事件/属性/手势)，基础组件，容器组件，媒体组件，绘制组件，画布组件，动画，全局UI和页面方法，以及状态管理和渲染控制等能力。详情参见：[组件参考](../application-dev/reference/arkui-ts/README.md)。
+* 完善ArkUI API 10组件跨平台适配，包括：组件通用信息(事件/属性/手势)、基础组件、容器组件、媒体组件、绘制组件、画布组件、动画、全局UI和页面方法，以及状态管理和渲染控制等能力。详情可参见：[组件跨平台列表](../application-dev/reference/arkui-ts/README.md)。
 
 * 提供Web组件基础能力跨平台适配，包括网页显示、手势操作和输入法等基础能力，更多接口能力后续版本逐步开放。
 
-* 完善ArkTS接口跨平台适配，基础API初步完成跨平台适配，主要包括：Ability框架、包管理（静态包信息）、图形图像（窗口/屏幕属性）、媒体（图片处理）、资源管理、全球化、网络管理（WebSocket连接/Socket连接/Http数据请求/网络连接管理/上传下载）、文件IO、设备信息、数据管理（用户首选项/关系型数据库）、程序访问控制管理、语言基础库和日志打印等接口。详情参见：[ArkTS接口参考](../application-dev/reference/apis/README.md)。
+* 完善ArkTS接口跨平台适配，基础API初步完成跨平台适配，主要包括：Ability框架、包管理（静态包信息）、图形图像（窗口/屏幕属性）、媒体（图片处理）、资源管理、全球化、网络管理（WebSocket连接/Socket连接/Http数据请求/网络连接管理/上传下载）、文件IO、设备信息、数据管理（用户首选项/关系型数据库）、程序访问控制管理、语言基础库和日志打印等接口。详情可参见：[ArkTS接口跨平台列表](../application-dev/reference/apis/README.md)。
 
 > 说明：跨平台接口以OpenHarmony Public接口为基础，接口范围为API 10，支持列表详见：[API参考](../application-dev/reference/README.md)，列表之外的接口会在后续ArkUI-X版本逐步开放。
 
 
 ### 应用开发工具
 
-- ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。相比ArkUI-X 1.0.0 Canary版本，用户体验全面升级，比如：新增了模拟器管理、工程创建增强、辅助命令优化、环境检查优化、安装运行优化等，并提供运行命令Shell脚本，省略NPM依赖安装，支持直接运行或环境变量配置。[详情参见ACE Tools快速入门](../application-dev/quick-start/start-with-ace-tools.md)。
-- DevEco Studio，是HarmonyOS默认的应用程序开发集成工具，当前仅支持ArkUI-X应用工程导入和编译构建。跨平台工程创建、安装运行和调试等功能在后续版本逐步开放。[详情参见DevEco Studio使用说明](../application-dev/tools/how-to-use-deveco-studio.md)。
+- ACE Tools，是一套为ArkUI-X开发者提供的命令行工具，包括开发环境检查，新建项目，编译打包，安装调试。相比ArkUI-X 1.0.0 Canary版本，用户体验全面升级，比如：新增了模拟器管理、工程创建增强、辅助命令优化、环境检查优化、安装运行优化等，并提供运行命令Shell脚本，省略NPM依赖安装，支持直接运行或环境变量配置。详情参见：[ACE Tools快速入门](../application-dev/quick-start/start-with-ace-tools.md)。
+- DevEco Studio，是HarmonyOS默认的应用程序开发集成工具，当前仅支持ArkUI-X应用工程导入和编译构建。跨平台工程创建、安装运行和调试等功能在后续版本逐步开放。详情参见：[DevEco Studio使用说明](../application-dev/tools/how-to-use-deveco-studio.md)。
 
 ## 配套关系
 
@@ -48,6 +47,7 @@ ArkUI-X 1.0.0正式版本如期而至，配套OpenHarmony SDK API 10。相比1.0
 | 目标平台     | 兼容OS版本              | 备注 |
 | ----------- | ----------------------------------- | ---- |
 | OpenHarmony | 4.0 Release (API Version 10) |  HUAWEI DevEco Studio获取方式：<br />[Windows(64-bit)](https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/9a/v3/HBD3TfhiT_GFqeX44Qcwtg/devecostudio-windows-4.0.0.600.zip?HW-CC-KV=V1&HW-CC-Date=20231027T004333Z&HW-CC-Expire=315360000&HW-CC-Sign=279824A013505EFC063997614DC1B6AB1C3A2EE5AC48CEF15DDB3E1F79DA435A)  <br />SHA256校验码：2c88cf43e1ef6ba722aac31eccc8ef92f07a9b72e43a9c1df127017828a22137<br />[Mac(X86)](https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/e0/v3/y3Qc4UHsTn6i1M7yr3hVYg/devecostudio-mac-4.0.0.600.zip?HW-CC-KV=V1&HW-CC-Date=20231027T004531Z&HW-CC-Expire=315360000&HW-CC-Sign=07F14E7173D87ABF73777BA0CF7ADF1C1264A7D94909976471AC420C1932E8A6)  <br />SHA256校验码：25e491458eec50b4abddf5bed6aa85893801d70afbce02958f17bd904619405a<br />[Mac(ARM)](https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/94/v3/b0yynFMFSGGvbe--AQQR9w/devecostudio-mac-arm-4.0.0.600.zip?HW-CC-KV=V1&HW-CC-Date=20231027T004429Z&HW-CC-Expire=315360000&HW-CC-Sign=451E5B5C6B6E721A6C35E96FD67791D50ADEC56E987D87CD61E9E5152F8D6626)  <br />SHA256校验码：284cb01f7b819e0da1d4fcacbbbbe8017ba220b5e3b9b1d5e4cc59ea30456acc |
+| HarmonyOS     | 4.0.0 Release (API Version 10)       | 当前仅面向HarmonyOS Next合作企业开发者，2024Q1面向所有开发者。   |
 | Android     | Android 8<sup>+</sup> (API level 26<sup>+</sup>)       | NA   |
 | iOS         | iOS 10<sup>+</sup>                             | NA   |
 
@@ -131,10 +131,20 @@ ArkUI-X 1.0.0正式版本如期而至，配套OpenHarmony SDK API 10。相比1.0
 
 | 项目名称      | 简介                                                         |
 | ------------- | ------------------------------------------------------------ |
-| HelloWorld | HellWorld应用工程示例，支持Android、iOS和OpenHarmony应用构建。 |
+| HelloWorld | HelloWorld应用工程示例，支持Android、iOS和OpenHarmony应用构建。 |
 | Shopping | 仿购物应用工程示例，支持Android、iOS和OpenHarmony应用构建。   |
 | HealthyDiet | 健康饮食应用工程示例，支持Android、iOS和OpenHarmony应用构建。|
 | Native | NAPI应用工程示例，支持Android、iOS和OpenHarmony应用构建。|
 | Library | 平台库应用工程示例，支持Android、iOS和OpenHarmony应用构建。|
 
 请访问[Samples](https://gitee.com/arkui-x/samples)仓了解更多消息。
+
+## 修复缺陷列表
+
+**表4** 修复缺陷ISSUE列表
+
+| ISSUE单 | 问题描述 |
+| -------- | -------- |
+| I7UHCD | ArkTS代码或资源更新后，应用不卸载情况下无法加载最新内容，原因是启动性能优化模块没有考虑应用升级和Debug调试场景。 重复ISSUE有：I8DOLT|
+| I8I31X | DevEco Studio 4.0 Release版本无法下载ArkUI-X SDK，原因是DevEco Studio 4.0 Release版本配套的ArkUI-X SDK发布时间不一致。重复ISSUE有：I8G3MS、I8G3LZ、I8G3LY、I8DAPB |
+| I7W9UJ | @ohos接口插件，运行时报：xxx.so NOT FOUND，原因是@ohos接口插件库dlopen动态加载路径只支持lib/arm和lib/arm64，Android应用工程需配置原生库压缩行为。 |

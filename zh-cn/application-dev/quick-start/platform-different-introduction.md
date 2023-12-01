@@ -23,18 +23,18 @@
 
 示例如下:
 
-```
-  test() {
-    let osName: string = deviceInfo.osFullName;
-    console.log('osName = ' + osName);
-    if (osName.startsWith('OpenHarmony')) {
-      // 鸿蒙设备上业务逻辑
-    } else if (osName.startsWith('Android')) {
-      // Android设备上业务逻辑
-    } else if (osName.startsWith('iOS')) {
-      // iOS设备上业务逻辑
-    }
+```ts
+test() {
+  let osName: string = deviceInfo.osFullName;
+  console.log('osName = ' + osName);
+  if (osName.startsWith('OpenHarmony')) {
+    // OpenHarmony应用平台上业务逻辑
+  } else if (osName.startsWith('Android')) {
+    // Android应用平台上业务逻辑
+  } else if (osName.startsWith('iOS')) {
+    // iOS应用平台上业务逻辑
   }
+}
 ```
 
 ### 非跨平台API处理
@@ -43,7 +43,7 @@
 
 示例代码：
 
-```
+```ts
   test2(){
    let isActive = wifiManager.isWifiActive();
   }
@@ -51,7 +51,7 @@
 
 IDE报错：
 
-```
+```shell
 > hvigor ERROR: Failed :feature:default@CompileArkTS... 
 > hvigor ERROR: ArkTS Compiler Error
 ERROR: ArkTS:ERROR File: D:/work/git/play-arkuix/Test_ACE/feature/src/main/ets/pages/Index.ets:64:31
@@ -61,11 +61,11 @@ COMPILE RESULT:FAIL {ERROR:2}
 > hvigor ERROR: BUILD FAILED in 10 s 753 ms 
 ```
 
-此时可以将涉及到的API写到一个后缀为**.ts**文件，然后在不支持的API上面增加`// @ts-ignore`或`// @ts-nocheck`屏蔽告警，开发者需要保证只在OpenHarmony设备上才运行这一段逻辑，Android和iOS可以借用Bridge桥接机制处理，示例代码如下：
+此时可以将涉及到的API写到一个后缀为**.ts**文件，然后在不支持的API上面增加`// @ts-ignore`或`// @ts-nocheck`屏蔽告警，开发者需要保证只在OpenHarmony应用平台上才运行这一段逻辑，Android和iOS应用平台上可以借用Bridge桥接机制处理，示例代码如下：
 
 1. 新建一个`WiFiUtil.ts`，并忽略告警：
 
-```
+```ts
 import wifiManager from '@ohos.wifiManager'
 
 export class WiFiUtil {
@@ -76,24 +76,25 @@ export class WiFiUtil {
 }
 ```
 
-2. 根据不同平台差异化逻辑，Android和iOS上通过Bridge桥接到原生实现：
+2. 根据不同平台差异化逻辑，Android和iOS应用平台上通过[Bridge机制](platform-bridge-introduction.md)桥接到对应平台的业务逻辑实现上：
 
-   ```
-     checkTestWiFi(): void {
-       let osName: string = deviceInfo.osFullName;
-       console.log('osName = ' + osName);
-       if (osName.startsWith('OpenHarmony')) {
-         // OpenHarmony手机
-         let isActive = WiFiUtil.isActive();
-         this.message = isActive ? '已连接' : '未连接';
-       } else {
-         // Android、iOS手机,中转到原生
-         let bridge = Bridge.createBridge('Bridge');
-         bridge.callMethod('isWiFiActive').then((res) => {
-           // 业务逻辑处理...
-         }).catch(() => {
-   
-         })
-       }
-     }
-   ```
+```ts
+checkTestWiFi(): void {
+  let osName: string = deviceInfo.osFullName;
+  console.log('osName = ' + osName);
+  if (osName.startsWith('OpenHarmony')) {
+    // OpenHarmony应用平台
+    let isActive = WiFiUtil.isActive();
+    this.message = isActive ? '已连接' : '未连接';
+  } else {
+    // Android和iOS应用平台上,中转到原生
+    let bridge = Bridge.createBridge('Bridge');
+    bridge.callMethod('isWiFiActive').then((res) => {
+      // 业务逻辑处理...
+    }).catch(() => {
+
+    })
+  }
+}
+```
+

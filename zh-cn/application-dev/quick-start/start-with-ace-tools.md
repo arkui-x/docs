@@ -6,7 +6,7 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 
 ## 使用说明
 
-针对Windows和macOS的平台环境，使用ACE Tools前，建议优先下载DevEco Studio，请参考[社区版本软件和工具配套关系](https://gitee.com/openharmony/docs/blob/master/zh-cn/release-notes/OpenHarmony-v4.0-release.md#配套关系)完成DevEco Studio的下载和安装。Linux环境用户请参考[Ubuntu环境配置说明](../tutorial/how-to-configure-dev-environment.md)。
+针对Windows和macOS的平台环境，使用ACE Tools前，建议优先下载DevEco Studio，请参考[社区版本软件和工具配套关系](../../release-notes/ArkUI-X-v1.0.0-release.md#配套关系)完成DevEco Studio的下载和安装。Ubuntu环境用户请参考[Ubuntu环境配置说明](../tutorial/how-to-configure-dev-environment.md)。
 
 ### 环境准备
 
@@ -14,51 +14,40 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 
 **1. 配置ohpm环境**
 
-   OHPM CLI（OpenHarmony Package Manager Command-line Interface）是OpenHarmony应用工程的三方库的包管理工具，可通过DevEco Studio > File > Settings > Build, Execution, Deployment > Ohpm 查看ohpm home的安装路径，并配置到环境变量中。
+   OHPM CLI作为鸿蒙生态三方库的包管理工具，支持OpenHarmony共享包的发布、安装和依赖管理。可通过DevEco Studio > File > Settings > Build, Execution, Deployment > Ohpm 查看ohpm home的安装路径，并配置到环境变量中（macOS为DevEco Studio > Preferences > Build, Execution, Deployment > Ohpm）。
 
 **2. 配置ArkUI-X SDK环境**
 
-   ArkUI-X SDK下载路径，可通过DevEco Studio > File > Settings > ArkUI-X（macOS为DevEco Studio > Preferences > ArkUI-X）查看ArkUI-X的下载路径，并配置到环境变量中。
+   ArkUI-X SDK下载路径，可通过DevEco Studio > File > Settings > ArkUI-X查看ArkUI-X的安装路径，并配置到环境变量中（macOS为DevEco Studio > Preferences > ArkUI-X）。推荐如下配置方法：
 
    [macOS]
 
    ```shell
    // 配置环境变量
    export ARKUIX_SDK_HOME=/path-to-arkui-x-sdk
+   export PATH=${ARKUIX_SDK_HOME}/10/arkui-x/toolchains/bin:$PATH
    ```
 
    [Windows]
+
+   可在桌面工具栏**搜索框**键入"环境变量"，然后选择**编辑系统环境变量**，进行环境变量配置。另外，也可在控制台通过如下命令进行配置。
 
    ```shell
    // 配置环境变量
    set ARKUIX_SDK_HOME=/path-to-arkui-x-sdk
+   set PATH=%PATH%;%ARKUIX_SDK_HOME%/10/arkui-x/toolchains/bin
    ```
-
-### 命令安装
-
-   [macOS]
-
-   ```shell
-   // 配置环境变量
-   export PATH=/path-to-arkui-x-sdk/10/arkui-x/toolchains/bin:$PATH
-   ```
-
-   [Windows]
-
-   ```shell
-   // 配置环境变量
-   set PATH=%PATH%;/path-to-arkui-x-sdk/10/arkui-x/toolchains/bin
-   ```
+   > **说明**：配置环境变量时，由于ARKUIX_SDK_HOME是ACE Tools要求的固定变量名，不允许自定义。
 
 ### 开发环境检查
 
    ```shell
-   ace check -v
+   ace check
    ```
 
-执行 `ace check -v` 命令可以检查ArkUI-X应用本地开发环境是否完备。
+执行 `ace check` 命令可以检查ArkUI-X应用开发环境是否完备。
 
-*注：开发环境检查主要针对Android/iOS/OpenHarmony/HarmonyOS IDE和对应SDK，以及ArkUI-X SDK的默认安装和下载路径进行检查。如果提示结果与实际不符，请您通过[ace config命令](https://gitee.com/arkui-x/cli#ace-config)指定实际的IDE安装和SDK下载路径。*
+> **说明**：开发环境检查只识别IDE和SDK默认的安装路径，如果提示结果与实际不符，请您通过[ace config命令](https://gitee.com/arkui-x/cli#ace-config)指定实际的IDE安装和SDK下载路径。
 
 ### 创建应用
 
@@ -66,18 +55,18 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 
  ```shell
  ohos@user Desktop % ace create demo
- ? Please enter the project name(demo): # 输入工程名称，不输入默认为文件夹名称
- ? Please enter the bundleName (com.example.demo):  # 输入包名，不输入默认为com.example.工程名
- ? Please enter the runtimeOS (1: OpenHarmony, 2: HarmonyOS): 1 # 输入RuntimeOS系统
+ ? Enter the project name(demo): # 输入工程名称，不输入默认为文件夹名称
+ ? Enter the bundleName (com.example.demo):  # 输入包名，不输入默认为com.example.工程名
+ ? Enter the runtimeOS (1: OpenHarmony, 2: HarmonyOS): 1 # 输入RuntimeOS系统
 
- Project created successfully! Target directory:  ${当前目录}/demo.
+ Project created. Target directory:  ${当前目录}/demo.
 
- In order to run your application, type:
+ In order to run your app, type:
 
     $ cd demo
     $ ace run
 
- Your application code is in demo/entry.
+ Your app code is in demo/entry.
  ```
 
 ### 应用运行
@@ -93,6 +82,4 @@ ace run
 
 ## 常用命令参考
 
-- [ACE Tools命令行详情说明](https://gitee.com/arkui-x/cli/blob/master/README.md)
-
-<!--no_check-->
+- [ACE Tools使用说明](https://gitee.com/arkui-x/cli/blob/master/README.md)

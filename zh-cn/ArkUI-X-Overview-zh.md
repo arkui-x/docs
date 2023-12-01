@@ -14,6 +14,7 @@ ArKUI跨平台框架关键特征如下：
 2. 高效的渲染管线以及平台一致性的渲染机制。
 3. 高效的方舟编译器以及运行时。
 4. 统一的跨平台API能力集以及扩展机制。
+5. 动态化特性
 
 ## 技术架构
 
@@ -37,8 +38,9 @@ ArkUI-X主库组织地址：https://gitee.com/arkui-x
 
 ## 开发者文档
 
-简体中文：[ArkUI-X开发者文档](README.md) 
+简体中文：[ArkUI-X开发者文档](README.md)
 
+[English Version](../en/README.md)
 
 ## 源码下载
 
