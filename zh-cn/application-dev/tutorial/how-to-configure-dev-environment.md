@@ -237,6 +237,13 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 ## 命令安装
 
 ### 安装ace命令
+   [Linux]
+
+   ```shell
+   // 配置环境变量
+   export PATH=/path-to-arkui-x-sdk/10/arkui-x/toolchains/bin:${PATH}
+   ```
+
    [macOS]
 
    ```shell

@@ -40,25 +40,11 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 
 ### 应用运行
 
-* 安装运行到Android设备
+* 安装运行到Android/iOS/OpenHarmony设备（注：iOS设备执行ace run前请先打开Xcode完成应用签名）
 
 ```shell
 cd demo
-ace run apk
-```
-
-* 安装运行到iOS设备（注：执行ace run前请先打开Xcode完成应用签名）
-
-```shell
-cd demo
-ace run ios
-```
-
-* 安装运行到OpenHarmony设备
-
-```shell
-cd demo
-ace run hap
+ace run
 ```
 
 上述命令会完成应用构建打包，并安装到目标平台设备运行。
