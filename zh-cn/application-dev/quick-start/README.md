@@ -17,3 +17,10 @@
 - 跨语言调用说明
   - [平台桥接(@arkui-x.bridge)](platform-bridge-introduction.md)
   - [FFI能力(N-API)](ffi-napi-introduction.md)
+
++ 平台差异化
+  - [运行态差异化(@ohos.deviceInfo)](platform-different-introduction.md)
+
++ [动态化介绍](dynamic-introduction.md)
+
+  
