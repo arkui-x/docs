@@ -37,38 +37,49 @@ ArkUI-X主库地址：[https://gitee.com/arkui-x](https://gitee.com/arkui-x)。
   方式一（推荐）：通过repo + ssh下载（需注册公钥，请参考[码云帮助中心](https://gitee.com/help/articles/4191)）。
 
   ```shell
-  mkdir arkui
-  cd arkui
   repo init -u git@gitee.com:arkui-x/manifest.git -b master --no-repo-verify
   repo sync -c --no-tags -j12
+  repo forall -c 'git lfs pull'
   ```
 
   方式二：通过repo + https下载。
 
   ```shell
-  mkdir arkui
-  cd arkui
   repo init -u https://gitee.com/arkui-x/manifest.git -b master --no-repo-verify
   repo sync -c
   repo forall -c 'git lfs pull'
   ```
 
-- **ArkUI-X开发分支代码获取**
+- **ArkUI-X 1.0.0 Release分支代码获取**
 
   方式一（推荐）：通过repo + ssh下载（需注册公钥，请参考[码云帮助中心](https://gitee.com/help/articles/4191)）。
 
+  从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
   ```shell
-  mkdir arkui
-  cd arkui
-  repo init -u git@gitee.com:arkui-x/manifest.git -b master --no-repo-verify -m arkui-dev.xml
-  repo sync -c --no-tags -j12
+  repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-1.0.0-Release --no-repo-verify
+  repo sync -c
+  repo forall -c 'git lfs pull'
+  ```
+   
+  从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
+  ```shell
+  repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Release --no-repo-verify
+  repo sync -c
+  repo forall -c 'git lfs pull'
   ```
 
   方式二：通过repo + https下载。
 
+  从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
   ```shell
-  mkdir arkui
-  cd arkui
-  repo init -u https://gitee.com/arkui-x/manifest.git -b master --no-repo-verify -m arkui-dev.xml
-  repo sync -c --no-tags -j12
+  repo init -u https://gitee.com/arkui-x/manifest.git -b ArkUI-X-1.0.0-Release --no-repo-verify
+  repo sync -c
+  repo forall -c 'git lfs pull'
+  ```
+   
+  从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
+  ```shell
+  repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Release --no-repo-verify
+  repo sync -c
+  repo forall -c 'git lfs pull'
   ```

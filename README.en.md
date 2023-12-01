@@ -8,11 +8,9 @@ This repository stores application and framework development documents provided 
 
 ## Contents
 
-[Official Website](https://arkui-x.cn/)
+[Chinese Documentation](zh-cn/README.md)
 
-[Chinese Documentation](zh-cn/readme.md)
-
-[English Documentation](./en/readme.md)
+[English Documentation](en/README.md)
 
 ## ArkUI-X Document Version Branches
 
@@ -20,12 +18,12 @@ This repository stores application and framework development documents provided 
 
 master: the latest version.
 
-ArkUI-X 0.1.0 Beta. [Learn more](en/release-notes/ArkUI-X-v0.1.0-beta.md)
+ArkUI-X 1.0.0 Canary1. [Learn more](en/release-notes/ArkUI-X-v1.0.0-canary1.md)
 
 
 ## Third-Party Open-Source Software and License Notice
 
-Third-party license: [Open-Source Software and License Notice](en/contribute/open-source-software-and-license-notice.md)
+Third-party license: [Open-Source Software and License Notice](en/contribute/introducing-third-party-open-source-software.md)
 
 ## Contribution
 

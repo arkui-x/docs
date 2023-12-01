@@ -101,6 +101,7 @@
   - [TextTimer](ts-basic-components-texttimer.md)
   - [TimePicker](ts-basic-components-timepicker.md)
   - [Toggle](ts-basic-components-toggle.md)
+  - [Web](ts-basic-components-web.md)
 - 容器组件
   - [Badge](ts-container-badge.md)
   - [Column](ts-container-column.md)
