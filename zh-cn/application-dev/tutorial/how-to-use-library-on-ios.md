@@ -11,19 +11,19 @@
 * ACE Tools
 1. ace create 命令创建一个跨平台应用工程，示例工程名为demo,选择工程类型为library：
     ```
-    ace create [project]
+    ace create [project] -t library
     ```
-2. 执行ace build framework命令，构建得到iOS Framework包。
+2. 执行ace build ios-framework命令，构建得到iOS Framework包。
     ```
-    ace build framework
+    ace build ios-framework
     ```
 * DevEco Studio
-1. 创建跨平台library工程
-2. 通过执行build app选项，构建得到iOS Framework包
+1. 导入跨平台的Sample工程Library
+2. 通过执行Build APP(s)选项，构建得到iOS Framework包
 
 ### Framework在应用工程的使用
 
-通过xcode创建一个应用工程，删除其他xcode自动生成的的代码头文件和源文件(参考[ios工程集成 ArkUI sdk](../tutorial/how-to-integrate-arkui-into-ios.md))。将上述myframework.framework与libarkui_ios.framework引入到工程中。
+通过xcode创建一个应用工程，删除其他xcode自动生成的的代码头文件和源文件(参考[ios工程集成 ArkUI sdk](../tutorial/how-to-integrate-arkui-into-ios.md))。将上述myframework.framework与libarkui_ios.framework以及其他framework引入到工程中。
 **AppDelegate部分**
 * AppDelegate.h
 ```objective-c

@@ -2,7 +2,7 @@
 
 ## 简介
 
-ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在Windows/Ubuntu/macOS平台运行，用于构建OpenHarmony、HarmonyOS、Android和iOS平台的应用程序， 其功能包括开发环境检查，新建项目，编译打包，安装调试等。
+ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在Windows/Ubuntu/macOS平台运行，用于构建OpenHarmony、HarmonyOS、Android和iOS平台的应用程序， 其功能包括开发环境检查，新建项目，编译打包，安装调试等，以下是详细的环境配置指导。
 
 ## 环境准备
 
@@ -33,7 +33,6 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
    ```shell
    // 配置环境变量
    set NODE_HOME=/path-to-nodejs-sdk
-   set PATH=%PATH%;%NODE_HOME%/bin
    ```
 
 **2. 配置ohpm环境**
@@ -238,25 +237,31 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 ## 命令安装
 
 ### 安装ace命令
-   - 修改npm源，前往用户目录，在.npmrc文件中添加如下内容：
+   [Linux]
 
    ```shell
-   @ohos:registry=https://repo.harmonyos.com/npm/
-   registry=https://repo.huaweicloud.com/repository/npm/
+   // 配置环境变量
+   export PATH=/path-to-arkui-x-sdk/10/arkui-x/toolchains/bin:${PATH}
    ```
 
-   - 全局安装ACE命令
+   [macOS]
 
    ```shell
-   cd arkui-x/toolchains/ace_tools    // 根据ArkUI-X SDK下载路径，进入ACE Tools实际所在目录。
-   npm install
-   npm install . -g
+   // 配置环境变量
+   export PATH=/path-to-arkui-x-sdk/10/arkui-x/toolchains/bin:$PATH
+   ```
+
+   [Windows]
+
+   ```shell
+   // 配置环境变量
+   set PATH=%PATH%;/path-to-arkui-x-sdk/10/arkui-x/toolchains/bin
    ```
 
 ## 环境检查
 
    ```shell
-   ace check
+   ace check -v
    ```
 
-执行 `ace check` 命令可以检查上述的本地开发环境配置情况。对于必选项，需要检查通过，否则无法继续接下来的操作。
+执行 `ace check -v` 命令可以检查上述的本地开发环境配置情况。对于必选项，需要检查通过，否则无法继续接下来的操作。

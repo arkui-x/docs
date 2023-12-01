@@ -21,7 +21,7 @@ ArkUI跨平台框架(ArkUI-X)进一步将ArkUI开发框架扩展到了多个OS�
 
 ### IDE工具（DevEco Studio）
 
-1. DevEco Studio为ArkUI-X应用构建提供了简单的集成开发环境，版本要求：V4.0 Beta2。请参考[社区版本软件和工具配套关系](https://gitee.com/openharmony/docs/blob/master/zh-cn/release-notes/OpenHarmony-v4.0-beta2.md#配套关系)完成DevEco Studio下载和安装。
+1. DevEco Studio为ArkUI-X应用构建提供了简单的集成开发环境，版本要求：V4.0 Release。请参考[社区版本软件和工具配套关系](https://gitee.com/openharmony/docs/blob/master/zh-cn/release-notes/OpenHarmony-v4.0-release.md#配套关系)完成DevEco Studio下载和安装。
 
 2. 请参考[环境配置](./start-with-dev-environment.md)，完成基于**DevEco Studio**的ArkUI-X开发环境配置。
 
