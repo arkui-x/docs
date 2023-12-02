@@ -37,14 +37,14 @@
 
 1. 在**File &gt; Settings &gt; SDK**（macOS为**DevEco Studio &gt; Preferences &gt; SDK**）下，点击Location右侧的**Edit**，为SDK选择存储路径。
 
-2. 在弹出的SDK Setup页面选择存储路径，一直点击**Next**，直到完成SDK的安装后，点击**Finish**。![zh-cn_image_0000001579836532](figures/zh-cn_image_0000001579836532.png)
+2. 在弹出的SDK Setup页面选择存储路径，一直点击**Next**，直到完成SDK的安装后，点击**Finish**。![OpenHarmonySDK-IDE](figures/OpenHarmonySDK-IDE.png)
 
 
 ## 安装ArkUI-X SDK
 
 1. 在**File &gt; Settings &gt; ArkUI-X**（macOS为**DevEco Studio &gt; Preferences &gt; ArkUI-X**）下，点击Location右侧的**Edit**，为SDK选择存储路径。
 
-2. 在弹出的SDK Setup页面选择存储路径，一直点击**Next**，直到完成SDK的安装后，点击**Finish**。![zh-cn_image_0000001579996808](figures/zh-cn_image_0000001579996808.png)
+2. 在弹出的SDK Setup页面选择存储路径，一直点击**Next**，直到完成SDK的安装后，点击**Finish**。![arkui-xSDK-IDE](figures/arkui-xSDK-IDE.png)
 
 
 ## 配置Android SDK安装目录环境变量
@@ -60,19 +60,19 @@
 
 - macOS环境变量设置方法：
   1. 打开终端工具，执行以下命令，打开.bash_profile文件。
-        
+     
       ```
       vi ~/.bash_profile
       ```
   2. 单击字母“i”，进入**Insert**模式。
   3. 输入以下内容，配置Android SDK安装目录。
-        
+     
       ```
       export ANDROID_HOME=/Users/xxx/Library/Android/sdk
       ```
   4. 编辑完成后，单击**Esc**键，退出编辑模式，然后输入“:wq”，单击**Enter**键保存。
   5. 执行以下命令，使配置的环境变量生效。
-        
+     
       ```
       source ~/.bash_profile
       ```
