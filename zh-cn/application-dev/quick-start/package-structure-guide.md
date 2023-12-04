@@ -13,14 +13,13 @@ ArkUI-X应用工程目录结构
   ├── .arkui-x
   │   ├── android                 // Android平台相关代码
   │   └── ios                     // iOS平台相关代码
-  ├── .hvigor
-  ├── .idea
   ├── AppScope
   ├── entry
   ├── hvigor
-  ├── oh_modules
   ├── build-profile.json5
   ├── hvigorfile.ts
+  ├── hvigorw
+  ├── hvigorw.bat
   ├── local.properties
   └── oh-package.json5
 ```
@@ -52,6 +51,8 @@ ArkUI-X Android应用工程
 │   │   ├── arkui_android_adapter.jar                   // ArkUI-X跨平台适配层，在SDK中发布
 │   │   └── arm64-v8a
 │   │       └── libarkui_android.so                     // ArkUI-X跨平台引擎库，在SDK中发布
+│   │       └── libhilog.so                             // ArkUI-X日志库，在SDK中发布
+│   │       └── libresourcemanager.so                   // ArkUI-X资源管理库，在SDK中发布
 │   ├── src
 │   │   ├── androidTest
 │   │   ├── main
@@ -88,12 +89,14 @@ ArkUI-X Android应用工程
 ArkUI-X iOS应用工程
 ├── app.xcodeproj
 │   ├── project.xcworkspace
+│   ├── xcuserdata
 │   └── project.pbxproj
 ├── app
 │   ├── Assets.xcassets
 │   ├── Base.Iproj
 │   ├── AppDelegate.h
 │   ├── AppDelegate.m                               // 应用入口, 驱动StageApplication的生命周期
+│   ├── EntryEntryAbilityViewController.h           
 │   ├── EntryEntryAbilityViewController.m           // 基于StageViewController扩展EntryEntryViewController
 │   ├── Info.plist
 │   └── main.m
