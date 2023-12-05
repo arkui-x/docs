@@ -148,3 +148,4 @@ ArkUI-X 1.0.0正式版本如期而至，配套OpenHarmony SDK API 10。相比1.0
 | I7UHCD | ArkTS代码或资源更新后，应用不卸载情况下无法加载最新内容，原因是启动性能优化模块没有考虑应用升级和Debug调试场景。 重复ISSUE有：I8DOLT|
 | I8I31X | DevEco Studio 4.0 Release版本无法下载ArkUI-X SDK，原因是DevEco Studio 4.0 Release版本配套的ArkUI-X SDK发布时间不一致。重复ISSUE有：I8G3MS、I8G3LZ、I8G3LY、I8DAPB |
 | I7W9UJ | @ohos接口插件，运行时报：xxx.so NOT FOUND，原因是@ohos接口插件库dlopen动态加载路径只支持lib/arm和lib/arm64，Android应用工程需配置原生库压缩行为。 |
+| I8M1HQ | 32位Android设备，运行时报：libshared_libz.so NOT FOUND，原因是zlib部件在32位库libarkui_android.so编译时，进行了动态依赖。 |
