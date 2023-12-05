@@ -14,7 +14,7 @@
 
 - 新下载代码或更新代码时，需要下载或更新预编译工具链，命令如下
   ```
-  ./build/prebuilts_download.sh --build-arkuix
+  ./build/prebuilts_download.sh --build-arkuix --skip-ssl
   ```
 - 编译命令示例
   - 查看编译脚本支持的选项
