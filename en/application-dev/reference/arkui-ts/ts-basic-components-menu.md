@@ -37,6 +37,7 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | font<sup>10+</sup> | [Font](ts-types.md#font) | Font style of the menu text.|
 | fontColor<sup>10+</sup> | [ResourceColor](ts-types.md#resourcecolor) | Font color of the menu text.|
 | radius<sup>10+</sup> | [Dimension](ts-types.md#dimension10) \| [BorderRadiuses](ts-types.md#borderradiuses9) | Radius of the menu border corners.<br> The default value follows the theme. If the value is greater than half of the menu width, the default value is used.|
+| width<sup>10+</sup> | [Length](ts-types.md#length) | Menu border width.<br> The minimum width is 64 vp.|
 
 ## Example
 

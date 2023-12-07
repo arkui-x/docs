@@ -57,7 +57,7 @@ TreeSet的构造函数。
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string | number | boolean | Object> = new TreeSet();
+let treeSet = new TreeSet();
 ```
 
 
@@ -86,7 +86,7 @@ isEmpty(): boolean
 **示例：**
 
 ```ts
-const treeSet : TreeSet<string | number | boolean | Object>  = new TreeSet();
+const treeSet = new TreeSet();
 let result = treeSet.isEmpty();
 ```
 
@@ -122,10 +122,11 @@ has(value: T): boolean
 **示例：**
 
 ```ts
-let treeSet : TreeSet<number> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add(123);
 let result = treeSet.has(123);
 ```
+
 
 ### getFirstValue
 
@@ -152,7 +153,7 @@ getFirstValue(): T
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
 let result = treeSet.getFirstValue();
@@ -184,7 +185,7 @@ getLastValue(): T
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
 let result = treeSet.getLastValue();
@@ -222,7 +223,7 @@ add(value: T): boolean
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 let result = treeSet.add("squirrel");
 ```
 
@@ -258,7 +259,7 @@ remove(value: T): boolean
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
 let result = treeSet.remove("sparrow");
@@ -296,7 +297,7 @@ getLowerValue(key: T): T
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
 treeSet.add("gander");
@@ -335,7 +336,7 @@ getHigherValue(key: T): T
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
 treeSet.add("gander");
@@ -368,7 +369,7 @@ popFirst(): T
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
 let result = treeSet.popFirst();
@@ -400,7 +401,7 @@ popLast(): T
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
 let result = treeSet.popLast();
@@ -426,7 +427,7 @@ clear(): void
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
 treeSet.clear();
@@ -458,14 +459,14 @@ values(): IterableIterator&lt;T&gt;
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
-let it = treeSet.values();
-let t: IteratorResult<string> = it.next();
-while(!t.done) {
-  console.log("TreeSet: " + t.value);
-  t = it.next()
+let iter = treeSet.values();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("value:" + temp);
+  temp = iter.next().value;
 }
 ```
 
@@ -503,11 +504,11 @@ callbackFn的参数说明：
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("sparrow");
 treeSet.add("gull");
-treeSet.forEach((value ?: string, key ?: string) :void => {
-  console.log("value:" + value, "key:" + key);
+treeSet.forEach((value, key) => {
+    console.log("value:" + value, "key:" + key);
 });
 ```
 
@@ -537,14 +538,15 @@ entries(): IterableIterator<[T, T]>
 **示例：**
 
 ```ts
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
-let it = treeSet.entries();
-let t: IteratorResult<Object[]> = it.next();
-while(!t.done) {
-  console.log("TreeSet: " + t.value);
-  t = it.next()
+let iter = treeSet.entries();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("key:" + temp[0]);
+  console.log("value:" + temp[1]);
+  temp = iter.next().value;
 }
 ```
 
@@ -554,10 +556,6 @@ while(!t.done) {
 [Symbol.iterator]\(): IterableIterator&lt;T&gt;
 
 返回一个迭代器，迭代器的每一项都是一个JavaScript对象，并返回该对象。
-
-> **说明：**
->
-> 本接口不支持在.ets文件中使用
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -578,18 +576,18 @@ while(!t.done) {
 **示例：**
 
 ```ts
-
-let treeSet : TreeSet<string> = new TreeSet();
+let treeSet = new TreeSet();
 treeSet.add("squirrel");
 treeSet.add("sparrow");
-let numbers = Array.from(treeSet.values())
+  
 // 使用方法一：
-for (let item of numbers) {
+for (let item of treeSet) { 
   console.log("value:" + item);
 }
+
 // 使用方法二：
 let iter = treeSet[Symbol.iterator]();
-let temp: IteratorResult<string> = iter.next().value;
+let temp = iter.next().value;
 while(temp != undefined) {
   console.log("value:" + temp);
   temp = iter.next().value;

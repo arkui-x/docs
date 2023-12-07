@@ -1,8 +1,6 @@
-# 简介
+# ArkUI-X SDK配置和构建说明
 
-本文档配套ArkUI-X，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台，让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
-
-ArkUI-X SDK包含ArkUI跨平台运行时，组件和接口插件包，以及ACE Tools命令行工具，用于开发ArkUI-X应用，并布置到Android和iOS平台。详细内容如下：
+ArkUI-X SDK是ArkUI-X开源项目的编译产物，可将ArkUI-X SDK集成到现有Android和iOS应用工程中，使开发者基于一套ArkTS主代码，就可以构建支持多平台的精美、高性能应用。SDK内容包含ArkUI跨平台运行时，组件和接口插件库，以及ACE Tools命令行工具。主要目录结构如下，内部详细结构请参考[ArkUI-X SDK目录结构介绍](../../application-dev/quick-start/sdk-structure-guide.md)。
 
 ```
 ArkUI-X SDK
@@ -21,8 +19,6 @@ ArkUI-X SDK
 ├── arkui-x.json             // SDK管理配置，流水线自动生成
 └── NOTICE.txt
 ```
-
->说明：ArkUI-X SDK内部详细结构请参考[ArkUI-X SDK目录结构介绍](../../application-dev/quick-start/sdk-structure-guide.md)。
 
 下面将分别讲述：如何配置ArkUI-X SDK内容白名单，如何编译生成ArkUI-X SDK包，以及如何验证调试生成的ArkUI-X SDK包。
 
@@ -55,7 +51,7 @@ ArkUI-X SDK
 ```json
     {
         "install_dir": "arkui-x/plugins/api/lib/i18n/arch_type",                     // 用于指定输出到ArkUI-X SDK哪个目录下。
-        "module_label": "//foundation/arkui/ace_engine/adapter/android/build:i18n",  // 需要打包到ArkUI-X SDK的内容(SO动态库)
+        "module_label": "//foundation/arkui/ace_engine/adapter/android/build:i18n",  // 需要打包到ArkUI-X SDK的内容(动态库)
         "target_os": [
             "linux",
             "windows",
@@ -63,8 +59,8 @@ ArkUI-X SDK
         ]
     },
     {
-        "install_dir": "arkui-x/plugins/api/lib/i18n",                               // 用于指定输出到ArkUI-X SDK哪个目录下。
-        "module_label": "//plugins/i18n/android/java:i18n_plugin_java",              // 需要打包到ArkUI-X SDK的内容(Jar包)
+        "install_dir": "arkui-x/plugins/api/lib/i18n",                               // 用于指定输出到ArkUI-X SDK哪个目录下，如果不依赖平台接口，则不需要。
+        "module_label": "//plugins/i18n/android/java:i18n_plugin_java",              // 需要打包到ArkUI-X SDK的内容(Jar包)，如果不依赖平台接口，则不需要。
         "target_os": [
             "linux",
             "windows",
@@ -100,7 +96,7 @@ ArkUI-X SDK中engine和plugins目录都会包含apiConfig.json配置文件，用
             "ios":[ "xcframework/build_modes/libi18n.xcframework" ]      // 表示i18n在iOS平台进行应用开发时，哪些库需打包到iOS应用安装包中。
         },
         "deps": {
-            "android": [],                                               // 表示i18n在Android平台进行应用开发时，哪些依赖库需打包到Android安装包中。
+            "android": [],                                               // 表示i18n在Android平台进行应用开发时，哪些依赖库需打包到Android安装包中，空代表没有依赖。
             "ios":[]                                                     // 表示i18n在iOS平台进行应用开发时，哪些依赖库需打包到iOS安装包中，空代表没有依赖。
         }
     },
@@ -114,12 +110,12 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 
 - 构建ArkUI-X Debug，Release和Profile全量版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true
+./build.sh --product-name arkui-x --target-os android --gn-args gen_full_sdk=true
 ```
 
 - 构建ArkUI-X Release版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true runtime_mode=release
+./build.sh --product-name arkui-x --target-os android
 ```
 
 ### macOS平台编译
@@ -128,42 +124,41 @@ ArkU-SDK构建在ArkUI-X框架[基础构建](../quick-start/start-with-build.md)
 
 - 构建ArkUI-X Debug，Release和Profile全量版本，可用于Android和iOS平台。
 ```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true build_android=true
+./build.sh --product-name arkui-x --target-os ios --gn-args gen_full_sdk=true build_android=true
 ```
 
 - 构建ArkUI-X Release版本，可用于Android和iOS平台。
 ```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true runtime_mode=release build_android=true
+./build.sh --product-name arkui-x --target-os ios build_android=true
 ```
 
 #### iOS
 
 - 构建ArkUI-X Debug，Profile和Release全量版本，仅用于iOS平台。
 ```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true
+./build.sh --product-name arkui-x --target-os ios --gn-args gen_full_sdk=true
 ```
 
 - 构建ArkUI-X Release版本，仅用于iOS平台。
 ```
-./build.sh --product-name arkui-x --target-os ios --gn-args enable_auto_pack=true runtime_mode=release
+./build.sh --product-name arkui-x --target-os ios
 ```
 
 #### Android
 
 - 构建ArkUI-X Debug，Profile和Release全量版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true
+./build.sh --product-name arkui-x --target-os android --gn-args gen_full_sdk=true
 ```
 
 - 构建ArkUI-X Release版本，仅用于Android平台。
 ```
-./build.sh --product-name arkui-x --target-os android --gn-args enable_auto_pack=true runtime_mode=release
+./build.sh --product-name arkui-x --target-os android
 ```
 
 ## ArkUI-SDK调试说明
 
 - ArkUI-X SDK编译输出目录为：out/arkui-x/packages/arkui-x
 
-- 替换当前Windows\macOS\Linux平台上已安装的ArkUI-X SDK。注意：如果使用ACE Tools进行应用工程构建和调试，则需要重新下载ACE命令依赖，可[参考](../../application-dev/quick-start/start-with-ace-tools.md#安装ace命令)。
-
+- 替换当前Windows\macOS\Linux平台上已安装的ArkUI-X SDK。
 

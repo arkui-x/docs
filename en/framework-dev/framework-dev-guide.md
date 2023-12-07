@@ -28,8 +28,8 @@ The API references encompass the components and APIs available in ArkUI-X, helpi
 
 They are organized as follows:
 
-- [ArkTS-based Declarative Development Paradigm](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/arkui-ts/Readme-EN.md)
-- [API Reference (ArkTS and JS APIs)](../application-dev/reference/apis/readme.md)
+- [ArkTS-based Declarative Development Paradigm](../application-dev/reference/arkui-ts/README.md)
+- [API Reference (ArkTS and JS APIs)](../application-dev/reference/apis/README.md)
 - Platform Integration
-  - [Android](../application-dev/reference/arkui-for-android/readme.md)
-  - [iOS](../application-dev/reference/arkui-for-ios/readme.md)
+  - [Android](../application-dev/reference/arkui-for-android/README.md)
+  - [iOS](../application-dev/reference/arkui-for-ios/README.md)

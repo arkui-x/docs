@@ -1,16 +1,18 @@
 # ArkUI-X SDK介绍
 
-本文档配套ArkUI-X，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台，让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
+ArkUI-X SDK是ArkUI-X开源项目的编译产物，可将ArkUI-X SDK集成到现有Android和iOS应用工程中，使开发者基于一套ArkTS主代码，就可以构建支持多平台的精美、高性能应用。获取渠道如下：
 
-ArkUI-SDK包含用来开发ArkUI-X应用的引擎库，插件库和命令行工具。请从ArkUI-X SDK版本介绍中[获取](../../release-notes/ArkUI-X-v1.0.0-canary1.md#从镜像站点获取)。
+* 通过DevEco Studio下载ArkUI-X SDK，Windows平台进入DevEco Studio > File > Settings > ArkUI-X选项进行下载（macOS平台为DevEco Studio > Preferences > ArkUI-X）。
+* 通过开源社区Release Notes下载ArkUI-X SDK，参见：[ArkUI-X Release Notes](../../release-notes/README.md)
+* 通过ArkUI-X源码自行编译ArkUI-X SDK，编译方法参见：[ArkUI-X SDK构建说明](../../framework-dev/tutorial/how-to-package-arkui-x-sdk.md#arkui-sdk构建说明)。
 
 ## ArkUI-X SDK内容组成
 
-ArkUI-X SDK提供的内容，主要包括ArkUI-X SDK基础引擎库、插件库、工具链和SDK配置说明等文件。当通过DevEco Studio或ACE Tools命令行工具集成使用时，需按照如下目录结构配置ArkUI-X SDK。
+ArkUI-X SDK提供的内容，主要包括ArkUI-X SDK基础引擎库、插件库、工具链和SDK配置说明等文件。通过DevEco Studio或ACE Tools命令行工具集成使用时，需按照特定目录结构进行配置，如下示例为macOS平台上DevEco Studio中ArkUI-X SDK的默认下载路径。
 
 ```
-Path-to-arkui-x-sdk
-├── versioncode                      // arkui-x.json中的apiVersion字段值，文件位于ArkUI-X SDK根目录中，当前取值为：10。
+/Users/用户名/Library/ArkUI-X/Sdk
+├── {versioncode}                    // arkui-x.json中的apiVersion字段值，文件位于ArkUI-X SDK根目录中，ArkUI-X 1.0.0 Release版本versioncode取值为：10。
 │   └── arkui-x
 │       ├── engine                   // ArkUI-X SDK引擎部分
 │       │   ├── lib                  // ArkUI-X Android平台应用集成依赖库。

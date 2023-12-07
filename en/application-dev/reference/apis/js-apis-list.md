@@ -51,7 +51,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<string | number | boolean | object> = new List();
+let list = new List();
 ```
 
 
@@ -86,16 +86,12 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<string | number | boolean | object> = new List();
+let list = new List();
 let result1 = list.add("a");
 let result2 = list.add(1);
 let b = [1, 2, 3];
 let result3 = list.add(b);
-class C {
-  name: string = ''
-  age: string = ''
-}
-let c: C = {name : "Dylon", age : "13"};
+let c = {name : "Dylon", age : "13"};
 let result4 = list.add(c);
 let result5 = list.add(false);
 ```
@@ -127,7 +123,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<string | number | boolean> = new List();
+let list = new List();
 list.insert("A", 0);
 list.insert(0, 1);
 list.insert(true, 2);
@@ -164,7 +160,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<string> = new List();
+let list = new List();
 list.add("squirrel");
 let result = list.has("squirrel");
 ```
@@ -200,7 +196,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -242,7 +238,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -284,7 +280,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -326,11 +322,11 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
-let obj: List<number> = new List();
+let obj = new List();
 obj.add(2);
 obj.add(4);
 obj.add(5);
@@ -369,7 +365,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -409,7 +405,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -452,12 +448,12 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
 list.add(4);
-list.replaceAllElements((value: number) => {
+list.replaceAllElements((value) => {
   // Add the user operation logic based on the actual scenario.
   return value;
 });
@@ -498,13 +494,13 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
 list.add(4);
-list.forEach((value: number, index?: number) => {
-  console.log("value:" + value, "index:" + index);
+list.forEach((value, index) => {
+    console.log("value:" + value, "index:" + index);
 });
 ```
 
@@ -540,7 +536,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -582,7 +578,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -609,7 +605,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -650,7 +646,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number | string> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -683,7 +679,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -716,7 +712,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -749,7 +745,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -782,7 +778,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
@@ -795,10 +791,6 @@ let result = list.getLast();
 [Symbol.iterator]\(): IterableIterator&lt;T&gt;
 
 Obtains an iterator, each item of which is a JavaScript object.
-
-> **NOTE**
->
-> This API cannot be used in .ets files.
 
 **System capability**: SystemCapability.Utils.Lang
 
@@ -819,23 +811,22 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let list: List<number> = new List();
+let list = new List();
 list.add(2);
 list.add(4);
 list.add(5);
 list.add(4);
 
 // Method 1:
-let items = Array.from(list)
-for (let item of items) {
-  console.log("value: " + item);
+for (let item of list) { 
+  console.log("value: " + item); 
 }
 
 // Method 2:
 let iter = list[Symbol.iterator]();
-let temp: IteratorResult<number> = iter.next();
-while(!temp.done) {
-  console.log("value: " + temp.value);
-  temp = iter.next();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("value: " + temp);
+  temp = iter.next().value;
 }
 ```

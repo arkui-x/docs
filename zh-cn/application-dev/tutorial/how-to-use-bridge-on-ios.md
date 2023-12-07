@@ -1,6 +1,6 @@
 # 平台桥接开发指南
 
-​平台桥接用于客户端（ArkUI）和平台（Android或iOS）之间传递消息，即用于ArkUI与平台双向数据传递、ArkUI侧调用平台的方法、平台调用ArkUI侧的方法。本文主要介绍iOS平台与ArkUI交互，ArkUI侧具体用法请参考[Bridge API](../reference/apis/js-apis-bridge.md)，iOS侧参考[BridgePlugin](../reference/arkui-for-ios/BridgePlugin.md)。
+平台桥接用于客户端（ArkUI）和平台（Android或iOS）之间传递消息，即用于ArkUI与平台双向数据传递、ArkUI侧调用平台的方法、平台调用ArkUI侧的方法。本文主要介绍iOS平台与ArkUI交互，ArkUI侧具体用法请参考[Bridge API](../reference/apis/js-apis-bridge.md)，iOS侧参考[BridgePlugin](../reference/arkui-for-ios/BridgePlugin.md)。
 
 ## iOS平台与ArkUI交互
 
@@ -16,6 +16,8 @@ import bridge from '@arkui-x.bridge';
 
 // 创建平台桥接实例
 const bridgeImpl = bridge.createBridge('Bridge');
+// 创建平台桥接实例(二进制格式)
+const bridgeImpl = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
 ```
 
 2、在iOS侧创建BridgePlugin类。指定名称，该名称应与ArkUI侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
@@ -24,6 +26,8 @@ const bridgeImpl = bridge.createBridge('Bridge');
 // xxx.mm
 
 BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId];
+// 创建平台桥接实例(二进制格式)
+BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId bridgeType：BINARY_TYPE];
 ```
 
 ### 场景一：ArkUI侧向iOS侧传递数据
@@ -171,6 +175,81 @@ bridgeImpl.unRegisterMethod('getString');
 - (void)onMethodCancel:(NSString*)methodName {}
 ```
 
+### 场景六：ArkUI侧注册callBack且调用iOS侧的方法（无参）
+
+1、在ArkUI侧注册callBack且调用iOS侧的方法。
+
+```javascript
+// xxx.ets
+function testCallBackOfJs() {
+  console.log("bridge js testCallBack run")
+}
+
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs).then((res)=>{
+    console.log('result: ' + res);
+}).catch((err) => {
+    console.error('error: ' + JSON.stringify(err));
+});
+```
+
+2、在iOS侧实现被调用的方法，调用ArkUI侧的方法。
+
+```objective-c
+// xxx.mm
+@interface Bridge : BridgePlugin
+- (NSString*)testCallBack;
+@end
+
+@implementation Bridge
+- (NSString*)testCallBack {
+    return @"call objective-c platformCallMethod success";
+}
+@end
+
+MethodData* method = [[MethodData alloc] initMethodWithName:@"testCallBack" parameter:nil];
+[self.plugin callMethod:method];
+```
+
+### 场景七：ArkUI侧注册callBack且调用iOS侧的方法（有参）
+
+1、在ArkUI侧注册callBack且调用iOS侧的方法。
+
+```javascript
+// xxx.ets
+function testCallBackOfJs(stringParam) {
+  console.log("Js received a parameter of " + stringParam)
+  return "js testCallBackReturn call success."
+}
+
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
+    console.log('result: ' + res);
+}).catch((err) => {
+    console.error('error: ' + JSON.stringify(err));
+});
+```
+
+2、在iOS侧实现被调用的方法，调用ArkUI侧的方法。
+
+```objective-c
+// xxx.mm
+@interface Bridge : BridgePlugin
+- (NSString*)testCallBack:(id)param;
+@end
+
+@implementation Bridge
+- (NSString*)testCallBack:(id)param {
+    return @"call objective-c platformCallMethod success";
+}
+@end
+
+MethodData* method = [[MethodData alloc] initMethodWithName:@"testCallBack" parameter:@[@"ios sends parameter"]];
+[self.plugin callMethod:method];
+```
+
+
+
+## 
+
 ## 场景示例
 
 ##### ArkUI用例
@@ -293,10 +372,12 @@ NS_ASSUME_NONNULL_END
     EntryMainViewController *mainView = [[EntryMainViewController alloc] initWithInstanceName:instanceName];
     [self setNavRootVC:mainView];
 
-    int32_t instanceId = [mainView getInstanceId];
-
     // 建立与ArkUI侧同名的平台桥接，即可用于消息传递
+	// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
     self.plugin = [[BridgeClass alloc] initBridgePlugin:@"Bridge" instanceId:instanceId];
+    // 创建平台桥接实例
+    self.plugin = [[BridgeClass alloc] initBridgePlugin:@"Bridge" bridgeManager:[mainView getBridgeManager]];
+
     self.plugin.messageListener = self;
     return YES;
 }

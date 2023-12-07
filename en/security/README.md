@@ -57,7 +57,7 @@ You are welcome to report any potential security issue in the ArkUI-X community.
 
 ## Handling Security Vulnerabilities
 
-The Team will assign specialists to track and handle security vulnerabilities. For more information, see [ArkUI-X Community Vulnerability Governance](./security-process/readme.md).
+The Team will assign specialists to track and handle security vulnerabilities. For more information, see [ArkUI-X Community Vulnerability Governance](./security-process/README.md).
 
 ## Disclosing Security Vulnerabilities
 
@@ -69,4 +69,4 @@ Learn more about the ArkUI-X project and how to take part in security activities
 
 ## Acknowledgment
 
-Learn about the individuals and teams that have contributed to the security of the ArkUI-X community at [Acknowledgment](./security-process/Acknowledgement.md).
+Learn about the individuals and teams that have contributed to the security of the ArkUI-X community at [Acknowledgment](./security-process/Acknowledgements.md).

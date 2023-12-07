@@ -14,6 +14,26 @@
 
 以下API需先使用ohos.window中的[getUIContext()](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-window.md#getuicontext10)方法获取UIContext实例，再通过此实例调用对应方法。本文中UIContext对象以uiContext表示。
 
+### getUIInspector
+
+getUIInspector(): UIInspector
+
+获取UIInspector对象。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**返回值：**
+
+| 类型                        | 说明                      |
+| --------------------------- | ------------------------- |
+| [UIInspector](#uiinspector) | 返回UIInspector实例对象。 |
+
+**示例：**
+
+```ts
+uiContext.getUIInspector();
+```
+
 ### getMediaQuery
 
 getMediaQuery(): MediaQuery
@@ -440,6 +460,38 @@ uiContext.runScopedTask(
     console.log('Succeeded in runScopedTask');
   }
 );
+```
+
+## UIInspector
+
+以下API需先使用UIContext中的[getUIInspector()](#getuiinspector)方法获取到UIInspector对象，再通过该对象调用对应方法。
+
+### createComponentObserver
+
+createComponentObserver(id: string): inspector.ComponentObserver
+
+注册组件布局和绘制完成回调通知。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明         |
+| ------ | ------ | ---- | ------------ |
+| id     | string | 是   | 指定组件id。 |
+
+**返回值：** 
+
+| 类型                                                         | 说明                                               |
+| ------------------------------------------------------------ | -------------------------------------------------- |
+| [ComponentObserver](js-apis-arkui-inspector.md#componentobserver) | 组件回调事件监听句柄，用于注册和取消注册监听回调。 |
+
+**示例：**
+
+```ts
+import { ComponentUtils, Font, PromptAction, Router, UIInspector, MediaQuery } from '@ohos.arkui.UIContext';
+let inspector:UIInspector = uiContext.getUIInspector();
+let listener = inspector.createComponentObserver('COMPONENT_ID');
 ```
 
 ## MediaQuery

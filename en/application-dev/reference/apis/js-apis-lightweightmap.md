@@ -56,7 +56,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 ```
 
 
@@ -85,7 +85,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-const lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+const lightWeightMap = new LightWeightMap();
 let result = lightWeightMap.isEmpty();
 ```
 
@@ -121,10 +121,10 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
-let map: LightWeightMap<string, number> = new LightWeightMap();
+let map = new LightWeightMap();
 map.set("sparrow", 356);
 let result = lightWeightMap.hasAll(map);
 ```
@@ -161,7 +161,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 let result = lightWeightMap.hasKey("squirrel");
 ```
@@ -198,7 +198,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 let result = lightWeightMap.hasValue(123);
 ```
@@ -229,7 +229,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.increaseCapacityTo(10);
 ```
 
@@ -265,7 +265,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 let result = lightWeightMap.get("sparrow");
@@ -303,7 +303,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 let result = lightWeightMap.getIndexOfKey("sparrow");
@@ -341,7 +341,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 let result = lightWeightMap.getIndexOfValue(123);
@@ -380,7 +380,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 let result = lightWeightMap.getKeyAt(1);
@@ -412,10 +412,10 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
-let map: LightWeightMap<string, number> = new LightWeightMap();
+let map = new LightWeightMap();
 map.setAll(lightWeightMap); // Add all elements in lightWeightMap to the map.
 ```
 
@@ -451,7 +451,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 let result = lightWeightMap.set("squirrel", 123);
 ```
 
@@ -487,7 +487,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 lightWeightMap.remove("sparrow");
@@ -525,7 +525,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 let result = lightWeightMap.removeAt(1);
@@ -565,7 +565,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 lightWeightMap.setValueAt(1, 3546);
@@ -604,7 +604,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 let result = lightWeightMap.getValueAt(1);
@@ -630,7 +630,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 lightWeightMap.clear();
@@ -662,14 +662,14 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 let iter = lightWeightMap.keys();
-let temp: IteratorResult<string, number> = iter.next();
-while(!temp.done) {
-  console.log("value:" + temp.value);
-  temp = iter.next();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("value:" + temp);
+  temp = iter.next().value;
 }
 ```
 
@@ -699,14 +699,14 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 let iter = lightWeightMap.values();
-let temp: IteratorResult<number> = iter.next();
-while(!temp.done) {
-  console.log("value:" + temp.value);
-  temp = iter.next();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("value:" + temp);
+  temp = iter.next().value;
 }
 ```
 
@@ -744,11 +744,11 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("sparrow", 123);
 lightWeightMap.set("gull", 357);
-lightWeightMap.forEach((value?: number, key?: string) => {
-  console.log("value:" + value, "key:" + key);
+lightWeightMap.forEach((value, key) => {
+    console.log("value:" + value, "key:" + key);
 });
 ```
 
@@ -778,15 +778,15 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 let iter = lightWeightMap.entries();
-let temp: IteratorResult<Object[]> = iter.next();
-while(!temp.done) {
-  console.log("key:" + temp.value[0]);
-  console.log("value:" + temp.value[1]);
-  temp = iter.next();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("key:" + temp[0]);
+  console.log("value:" + temp[1]);
+  temp = iter.next().value;
 }
 ```
 
@@ -815,7 +815,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 let result = lightWeightMap.toString();
@@ -826,10 +826,6 @@ let result = lightWeightMap.toString();
 [Symbol.iterator]\(): IterableIterator&lt;[K, V]&gt;
 
 Obtains an iterator, each item of which is a JavaScript object.
-
-> **NOTE**
->
-> This API cannot be used in .ets files.
 
 **System capability**: SystemCapability.Utils.Lang
 
@@ -850,27 +846,22 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 **Example**
 
 ```ts
-let lightWeightMap: LightWeightMap<string, number> = new LightWeightMap();
+let lightWeightMap = new LightWeightMap();
 lightWeightMap.set("squirrel", 123);
 lightWeightMap.set("sparrow", 356);
 
 // Method 1:
-let nums = Array.from(lightWeightMap.values());
-for (let item1 of nums) {
-  console.log("value:" + item1);
-}
-
-let key = Array.from(lightWeightMap.keys());
-for (let item2 of key) {
-  console.log("key:" + item2);
+for (let item of lightWeightMap) { 
+  console.log("key:" + item[0]);
+  console.log("value:" + item[1]);
 }
 
 // Method 2:
 let iter = lightWeightMap[Symbol.iterator]();
-let temp: IteratorResult<Object[]> = iter.next();
-while(!temp.done) {
-  console.log("key:" + temp.value[0]);
-  console.log("value:" + temp.value[1]);
-  temp = iter.next();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("key:" + temp[0]);
+  console.log("value:" + temp[1]);
+  temp = iter.next().value;
 }
 ```

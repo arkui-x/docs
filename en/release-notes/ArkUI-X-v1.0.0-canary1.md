@@ -15,11 +15,11 @@ The ArkTS-based declarative development paradigm is supported.
 
 ### APIs
 
-ArkUI cross-platform APIs include OpenHarmony APIs and custom extension APIs. You can implement the OpenHarmony APIs and extend custom JS APIs through the [API extension mechanism](../framework-dev/napi/napi-guidelines.md) on Android and iOS. For details about the examples, see [@ohos API Extension on Android](../contribute/tutorial/how-to-use-napi-on-Android.md) and [@ohos API Extension on iOS](../contribute/tutorial/how-to-use-napi-on-iOS.md).
+ArkUI cross-platform APIs include OpenHarmony APIs and custom extension APIs. You can implement the OpenHarmony APIs and extend custom JS APIs through the [API extension mechanism](../framework-dev/napi/napi-guidelines.md) on Android and iOS. For details about the examples, see [@ohos API Extension on Android](../application-dev/tutorial/how-to-use-napi-on-android.md) and [@ohos API Extension on iOS](../application-dev/tutorial/how-to-use-napi-on-ios.md).
 
 >**NOTE**
 >
->The ArkUI-X 1.0.0 Canary1 version is the first preview version for the ArkUI-X project. It only provides implementation for the APIs listed in [OpenHarmony APIs with Cross-Platform Support](../application-dev/reference/apis/readme.md).
+>The ArkUI-X 1.0.0 Canary1 version is the first preview version for the ArkUI-X project. It only provides implementation for the APIs listed in [OpenHarmony APIs with Cross-Platform Support](../application-dev/reference/apis/README.md).
 
 ### Project Build
 
@@ -31,7 +31,7 @@ ArkUI cross-platform APIs include OpenHarmony APIs and custom extension APIs. Yo
 
 > **NOTE**
 >
-> The build result is stored in the **out** directory. The build output is used for Android application development. For details, see [Building ArkUI Applications on Android](../contribute/tutorial/how-to-build-Android-app.md).
+> The build result is stored in the **out** directory. The build output is used for Android application development. For details, see [Building ArkUI Applications on Android](../application-dev/tutorial/how-to-integrate-arkui-into-android.md).
 
 * Building a project on iOS
 
@@ -41,7 +41,7 @@ ArkUI cross-platform APIs include OpenHarmony APIs and custom extension APIs. Yo
 
 > **NOTE**
 >
-> The build result is stored in the **out** directory. The build output is used for Android application development. For details, see [Building ArkUI Applications on iOS](../contribute/tutorial/how-to-build-iOS-app.md).
+> The build result is stored in the **out** directory. The build output is used for Android application development. For details, see [Building ArkUI Applications on iOS](../application-dev/tutorial/how-to-integrate-arkui-into-ios.md).
 
 ### Application Compiler Toolchain
 

@@ -16,23 +16,23 @@ import buffer from '@ohos.buffer';
 
 ## BufferEncoding
 
-Enumerates the supported encoding formats.
+Enumerates the supported encoding formats of strings.
 
 **System capability**: SystemCapability.Utils.Lang
 
-| Type   | Description                |
+| Encoding Format   | Description                |
 | ------- | -------------------- |
-| 'ascii' | ASCII format.|
-| 'utf8' | UTF-8 format.|
-| 'utf-8' | UTF-8 format.|
-| 'utf16le' | UTF-16LE format.|
-| 'ucs2' | Alias of UTF-16LE.|
-| 'ucs-2' | Alias of UTF-16LE.|
-| 'base64' | Base64 format.|
-| 'base64url' | Base64URL format.|
-| 'latin1' | ASCII format.|
-| 'binary' | Binary format.|
-| 'hex' | Hexadecimal format.|
+| 'ascii' | ASCII format, which is case insensitive.|
+| 'utf8' | UTF-8 format, which is case insensitive.|
+| 'utf-8' | UTF-8 format, which is case insensitive.|
+| 'utf16le' | UTF-16 little-endian format, which is case insensitive.|
+| 'ucs2' | UTF-16 little-endian format, which is case insensitive.|
+| 'ucs-2' | UTF-16 little-endian format, which is case insensitive.|
+| 'base64' | Base64 format, which is case insensitive.|
+| 'base64url' | Base64 format, which is case insensitive.|
+| 'latin1' | ASCII format, which is case insensitive.|
+| 'binary' | Binary format, which is case insensitive.|
+| 'hex' | Hexadecimal format, which is case insensitive.|
 
 ## buffer.alloc
 
@@ -218,7 +218,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "length" is out of range. It must be >= 0 and <= uint32 max. Received value is: [length] |
+| 10200001 | The value of "totalLength" is out of range. |
 
 **Example**
 
@@ -604,7 +604,7 @@ let buf1 = buffer.allocUninitializedFromPool(26);
 let buf2 = buffer.allocUninitializedFromPool(26).fill('!');
 
 for (let i = 0; i < 26; i++) {
-  buf1.writeInt8(i + 97, i);
+  buf1[i] = i + 97;
 }
 
 buf1.copy(buf2, 8, 16, 20);
@@ -633,11 +633,8 @@ Creates and returns an iterator that contains key-value pairs of this **Buffer**
 import buffer from '@ohos.buffer';
 
 let buf = buffer.from('buffer');
-let pair = buf.entries()
-let next: IteratorResult<Object[]> = pair.next()
-while (!next.done) {
-  console.info("buffer: " + next.value)
-  next = pair.next()
+for (let pair of buf.entries()) {
+  console.log(pair.toString());
 }
 ```
 
@@ -799,8 +796,7 @@ Creates and returns an iterator that contains the keys of this **Buffer** instan
 import buffer from '@ohos.buffer';
 
 let buf = buffer.from('buffer');
-let numbers = Array.from(buf.values())
-for (const key of numbers) {
+for (const key of buf.keys()) {
   console.log(key.toString());
 }
 ```
@@ -1166,7 +1162,7 @@ let result = buf1.writeFloatLE(0xcabcbcbc, 0);
 
 readInt8(offset?: number): number
 
-Reads an 8-bit signed integer from this **Buffer** instance at the specified offset.
+Reads a 8-bit signed integer from this **Buffer** instance at the specified offset.
 
 **System capability**: SystemCapability.Utils.Lang
 
@@ -1391,7 +1387,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[offset/byteLength]" is out of range. |
 
 **Example**
 
@@ -1435,7 +1431,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[offset/byteLength]" is out of range. |
 
 **Example**
 
@@ -1453,7 +1449,7 @@ let result = buf1.writeIntLE(0x123456789011, 0, 6);
 
 readUInt8(offset?: number): number
 
-Reads an 8-bit unsigned integer from this **Buffer** instance at the specified offset.
+Reads a 8-bit unsigned integer from this **Buffer** instance at the specified offset.
 
 **System capability**: SystemCapability.Utils.Lang
 
@@ -1685,7 +1681,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[offset/byteLength]" is out of range. |
 
 **Example**
 
@@ -1727,7 +1723,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[offset/byteLength]" is out of range. |
 
 **Example**
 
@@ -1770,7 +1766,7 @@ import buffer from '@ohos.buffer';
 let buf1 = buffer.allocUninitializedFromPool(26);
 
 for (let i = 0; i < 26; i++) {
-  buf1.writeInt8(i + 97, i);
+  buf1[i] = i + 97;
 }
 const buf2 = buf1.subarray(0, 3);
 console.log(buf2.toString('ascii', 0, buf2.length));
@@ -1936,7 +1932,7 @@ import buffer from '@ohos.buffer';
 
 let buf1 = buffer.allocUninitializedFromPool(26);
 for (let i = 0; i < 26; i++) {
-  buf1.writeInt8(i + 97, i);
+  buf1[i] = i + 97;
 }
 console.log(buf1.toString('utf-8'));
 // Print: abcdefghijklmnopqrstuvwxyz
@@ -1962,11 +1958,8 @@ Creates and returns an iterator that contains the values of this **Buffer** inst
 import buffer from '@ohos.buffer';
 
 let buf1 = buffer.from('buffer');
-let pair = buf1.values()
-let next:IteratorResult<number> = pair.next()
-while (!next.done) {
-  console.log(next.value.toString());
-  next = pair.next()
+for (let value of buf1.values()) {
+  console.log(value.toString());
 }
 ```
 
@@ -2044,7 +2037,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2083,7 +2076,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2122,7 +2115,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2161,7 +2154,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2200,7 +2193,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2239,7 +2232,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2278,7 +2271,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2318,7 +2311,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2333,7 +2326,7 @@ let result = buf.writeFloatLE(0xcafebabe, 0);
 
 writeInt8(value: number, offset?: number): number
 
-Writes an 8-bit signed integer to this **Buffer** instance at the specified offset.
+Writes a 8-bit signed integer to this **Buffer** instance at the specified offset.
 
 **System capability**: SystemCapability.Utils.Lang
 
@@ -2357,7 +2350,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2398,7 +2391,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2438,7 +2431,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2477,7 +2470,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2517,7 +2510,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2557,7 +2550,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset/byteLength]" is out of range. |
 
 **Example**
 
@@ -2598,7 +2591,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset/byteLength]" is out of range. |
 
 **Example**
 
@@ -2613,7 +2606,7 @@ let result = buf.writeIntLE(0x1234567890ab, 0, 6);
 
 writeUInt8(value: number, offset?: number): number
 
-Writes an 8-bit unsigned integer to this **Buffer** instance at the specified offset.
+Writes a 8-bit unsigned integer to this **Buffer** instance at the specified offset.
 
 **System capability**: SystemCapability.Utils.Lang
 
@@ -2637,7 +2630,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2679,7 +2672,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2719,7 +2712,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2759,7 +2752,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2798,7 +2791,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset]" is out of range. |
 
 **Example**
 
@@ -2838,7 +2831,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset/byteLength]" is out of range. |
 
 **Example**
 
@@ -2878,7 +2871,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
+| 10200001 | The value of "[value/offset/byteLength]" is out of range. |
 
 **Example**
 
@@ -2920,14 +2913,8 @@ A constructor used to create a **Blob** instance.
 ```ts
 import buffer from '@ohos.buffer';
 
-let blob: buffer.Blob  = new buffer.Blob(['a', 'b', 'c']);
-
-class option {
-  endings: string = ""
-  type: string = ""
-}
-let o1: option = {endings:'native', type: 'MIME'}
-let blob1: buffer.Blob = new buffer.Blob(['a', 'b', 'c'], o1);
+let blob = new buffer.Blob(['a', 'b', 'c']);
+let blob1 = new buffer.Blob(['a', 'b', 'c'], {endings:'native', type: 'MIME'});
 ```
 
 ### arrayBuffer
@@ -2945,12 +2932,10 @@ Puts the **Blob** data into an **ArrayBuffer** instance. This API uses a promise
 
 **Example**
 ```ts
-import buffer from '@ohos.buffer';
-
-let blob: buffer.Blob = new buffer.Blob(['a', 'b', 'c']);
+let blob = new buffer.Blob(['a', 'b', 'c']);
 let pro = blob.arrayBuffer();
-pro.then((val: ArrayBuffer) => {
-  let uintarr: Uint8Array = new Uint8Array(val);
+pro.then(val => {
+  let uintarr = new Uint8Array(val);
   console.log(uintarr.toString());
 });
 ```
@@ -2977,9 +2962,7 @@ Creates a **Blob** instance by copying specified data from this **Blob** instanc
 
 **Example**
 ```ts
-import buffer from '@ohos.buffer';
-
-let blob: buffer.Blob = new buffer.Blob(['a', 'b', 'c']);
+let blob = new buffer.Blob(['a', 'b', 'c']);
 let blob2 = blob.slice(0, 2);
 let blob3 = blob.slice(0, 2, "MIME");
 ```
@@ -2999,11 +2982,9 @@ Returns text in UTF-8 format. This API uses a promise to return the result.
 
 **Example**
 ```ts
-import buffer from '@ohos.buffer';
-
-let blob: buffer.Blob = new buffer.Blob(['a', 'b', 'c']);
+let blob = new buffer.Blob(['a', 'b', 'c']);
 let pro = blob.text();
-pro.then((val: string) => {
-  console.log(val)
+pro.then(val => {
+    console.log(val)
 });
 ```

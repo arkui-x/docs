@@ -5,6 +5,9 @@
     - [Click Event](ts-universal-events-click.md)
     - [Touch Event](ts-universal-events-touch.md)
     - [Show/Hide Event](ts-universal-events-show-hide.md)
+    - [Key Event](ts-universal-events-key.md)
+    - [Focus Event](ts-universal-focus-event.md)
+    - [Component Keyboard Shortcut Event](ts-universal-events-keyboardshortcut.md)
     - [Component Area Change Event](ts-universal-component-area-change-event.md)
     - [Visible Area Change Event](ts-universal-component-visible-area-change-event.md)
   - Universal Attributes
@@ -31,17 +34,21 @@
     - [Component ID](ts-universal-attributes-component-id.md)
     - [Polymorphic Style](ts-universal-attributes-polymorphic-style.md)
     - [Foreground Color](ts-universal-attributes-foreground-color.md)
+    - [restoreId](ts-universal-attributes-restoreId.md)
     - [Foreground Blur](ts-universal-attributes-foreground-blur-style.md)
     - [Click Effect](ts-universal-attributes-click-effect.md)
+    - [Accessibility](ts-universal-attributes-accessibility.md)
     - Touch Interactions
       - [Touch Target](ts-universal-attributes-touch-target.md)
       - [Hit Test Control](ts-universal-attributes-hit-test-behavior.md)
     - Transition
       - [Modal Transition](ts-universal-attributes-modal-transition.md)
       - [Sheet Transition](ts-universal-attributes-sheet-transition.md)
-    - [Obscuring](ts-universal-attributes-obscured.md)
+  	- [Obscuring](ts-universal-attributes-obscured.md)
   	- [Universal Text Attributes](ts-universal-attributes-text-style.md)
+  	- [Drag and Drop Control](ts-universal-attributes-drag-drop.md)
   	- [Safe Area](ts-universal-attributes-expand-safe-area.md)
+  	- [Render Fit](ts-universal-attributes-renderfit.md)
   - Gesture Handling
     - [Gesture Binding Methods](ts-gesture-settings.md)
     - Basic Gestures
@@ -56,6 +63,7 @@
   - [AlphabetIndexer](ts-container-alphabet-indexer.md)
   - [Blank](ts-basic-components-blank.md)
   - [Button](ts-basic-components-button.md)
+  - [CalendarPicker](ts-basic-components-calendarpicker.md)
   - [Checkbox](ts-basic-components-checkbox.md)
   - [CheckboxGroup](ts-basic-components-checkboxgroup.md)
   - [DataPanel](ts-basic-components-datapanel.md)
@@ -93,6 +101,7 @@
   - [TextTimer](ts-basic-components-texttimer.md)
   - [TimePicker](ts-basic-components-timepicker.md)
   - [Toggle](ts-basic-components-toggle.md)
+  - [Web](ts-basic-components-web.md)
 - Container Components
   - [Badge](ts-container-badge.md)
   - [Column](ts-container-column.md)
@@ -151,11 +160,13 @@
     - [Transition of Shared Elements](ts-transition-animation-shared-elements.md)
     - [Implicit Shared Element Transition](ts-transition-animation-geometrytransition.md)
   - [Motion Path Animation](ts-motion-path-animation.md)
+  - [Particle Animation](ts-particle-animation.md)
 - Global UI Methods
-  - Dialog Boxes
+  - Pop-up Window
     - [Alert Dialog Box](ts-methods-alert-dialog-box.md)
     - [Action Sheet](ts-methods-action-sheet.md)
     - [Custom Dialog Box](ts-methods-custom-dialog-box.md)
+    - [Calendar Picker Dialog Box](ts-methods-calendarpicker-dialog.md)
     - [Date Picker Dialog Box](ts-methods-datepicker-dialog.md)
     - [Time Picker Dialog Box](ts-methods-timepicker-dialog.md)
     - [Text Picker Dialog Box](ts-methods-textpicker-dialog.md)
@@ -174,6 +185,10 @@
   - [\@Provide and \@Consume Decorators: Two-Way Synchronization with Descendant Components](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-provide-and-consume.md)
   - [\@Observed and \@ObjectLink Decorators: Observing Attribute Changes in Nested Class Objects](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-observed-and-objectlink.md)
 - [State Management with Application-level Variables](ts-state-management.md)
+- Rendering Control
+  - [if/else: Conditional Rendering](arkts-rendering-control-ifelse.md)
+  - [ForEach: Rendering of Repeated Content](arkts-rendering-control-foreach.md)
+  - [LazyForEach: Lazy Data Loading](arkts-rendering-control-lazyforeach.md)
 - [Pixel Units](ts-pixel-units.md)
 - [Enums](ts-appendix-enums.md)
 - [Types](ts-types.md)

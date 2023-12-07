@@ -37,5 +37,5 @@ For details, see [Contribution Process](contribution-process.md).
 
 ## Security Issue Disclosure
 
--   [ArkUI-X Community Vulnerability Governance](../security/security-process/readme.md)
+-   [ArkUI-X Community Vulnerability Governance](../security/security-process/README.md)
 -   [ArkUI-X Security and Disclosure Statement](../security/security-process/security-disclosure.md)

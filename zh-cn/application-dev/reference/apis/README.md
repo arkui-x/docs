@@ -4,6 +4,8 @@
 
 - UI界面
   - [@ohos.animator (动画)](js-apis-animator.md)
+  - [@ohos.arkui.componentSnapshot (组件截图)](js-apis-arkui-componentSnapshot.md)
+  - [@ohos.arkui.inspector (布局回调)](js-apis-arkui-inspector.md)
   - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
   - [@ohos.curves (插值计算)](js-apis-curve.md)
   - [@ohos.matrix4 (矩阵变换)](js-apis-matrix4.md)
@@ -36,6 +38,7 @@
 
 - 包管理
   - [@ohos.bundle.bundleManager (bundleManager模块)](js-apis-bundleManager.md)
+  - [@ohos.zlib (Zip模块)](js-apis-zlib.md)
   - bundleManager
     - [abilityInfo](js-apis-bundleManager-abilityInfo.md)
     - [applicationInfo](js-apis-bundleManager-applicationInfo.md)
@@ -55,6 +58,7 @@
   - [@ohos.resourceManager (资源管理)](js-apis-resource-manager.md)
 
 - 网络管理
+  - [@ohos.request (上传下载)](js-apis-request.md)
   - [@ohos.net.webSocket (WebSocket连接)](js-apis-webSocket.md)
   - [@ohos.net.socket (Socket连接)](js-apis-socket.md)
   - [@ohos.net.http (数据请求)](js-apis-http.md)
@@ -72,6 +76,7 @@
 
 - 安全
   - [@ohos.abilityAccessCtrl (程序访问控制管理)](js-apis-abilityAccessCtrl.md)
+  - [@ohos.security.cryptoFramework (加解密算法库框架)](js-apis-cryptoFramework.md)
 
 - 语言基础类库
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
@@ -99,3 +104,8 @@
 
 - 系统基础能力
   - [@ohos.hilog (HiLog日志打印)](js-apis-hilog.md)
+  - [@ohos.web.webview(Webview)](js-apis-webview.md)
+
+- 公共事件与通知
+  - [系统公共事件定义](commonEventManager-definitions.md)
+  - [@ohos.commonEventManager (公共事件模块)](js-apis-commonEventManager.md)

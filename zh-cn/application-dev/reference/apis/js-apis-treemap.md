@@ -61,7 +61,7 @@ TreeMap的构造函数。
 **示例：**
 
 ```ts
-let treeMap : TreeMap<number, number> = new TreeMap();
+let treeMap = new TreeMap();
 ```
 
 
@@ -90,7 +90,7 @@ isEmpty(): boolean
 **示例：**
 
 ```ts
-let treeMap : TreeMap<number, number> = new TreeMap();
+const treeMap = new TreeMap();
 let result = treeMap.isEmpty();
 ```
 
@@ -126,7 +126,7 @@ hasKey(key: K): boolean
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 let result = treeMap.hasKey("squirrel");
 ```
@@ -163,7 +163,7 @@ hasValue(value: V): boolean
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 let result = treeMap.hasValue(123);
 ```
@@ -200,7 +200,7 @@ get(key: K): V
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
 let result = treeMap.get("sparrow");
@@ -232,7 +232,7 @@ getFirstKey(): K
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
 let result = treeMap.getFirstKey();
@@ -264,7 +264,7 @@ getLastKey(): K
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
 let result = treeMap.getLastKey();
@@ -296,13 +296,13 @@ setAll(map: TreeMap<K, V>): void
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
-let map : TreeMap<string, number> = new TreeMap();
+let map = new TreeMap();
 map.set("demo", 12);
 map.setAll(treeMap); // 将treeMap中的所有元素添加到map中
-map.forEach((value ?: number, key ?: string) : void => {
+map.forEach((value, key) => {
   console.log("value" + value, "key" + key); // 打印结果 12 demo、356 sparrow、123 squirrel
 })
 ```
@@ -340,7 +340,7 @@ set(key: K, value: V): Object
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 ```
 
@@ -376,7 +376,7 @@ remove(key: K): V
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
 let result = treeMap.remove("sparrow");
@@ -414,7 +414,7 @@ getLowerKey(key: K): K
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
 treeMap.set("gander", 356);
@@ -453,7 +453,7 @@ getHigherKey(key: K): K
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
 treeMap.set("gander", 356);
@@ -492,7 +492,7 @@ replace(key: K, newValue: V): boolean
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("sparrow", 123);
 let result = treeMap.replace("sparrow", 357);
 ```
@@ -517,7 +517,7 @@ clear(): void
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
 treeMap.clear();
@@ -549,14 +549,14 @@ keys(): IterableIterator&lt;K&gt;
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
-let it = treeMap.values();
-let t: IteratorResult<number> = it.next();
-while(!t.done) {
-  console.log("TreeMap" + t.value);
-  t = it.next()
+let iter = treeMap.keys();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("value:" + temp);
+  temp = iter.next().value;
 }
 ```
 
@@ -586,14 +586,14 @@ values(): IterableIterator&lt;V&gt;
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
-let it = treeMap.values();
-let t: IteratorResult<number> = it.next();
-while(!t.done) {
-  console.log("TreeMap" + t.value);
-  t = it.next()
+let iter = treeMap.values();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("value:" + temp);
+  temp = iter.next().value;
 }
 ```
 
@@ -631,11 +631,11 @@ callbackFn的参数说明：
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("sparrow", 123);
 treeMap.set("gull", 357);
-treeMap.forEach((value ?: number, key ?: string) : void => {
-  console.log("value:" + value, "key:" + key);
+treeMap.forEach((value, key) => {
+    console.log("value:" + value, "key:" + key);
 });
 ```
 
@@ -665,14 +665,15 @@ entries(): IterableIterator<[K, V]>
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
-let it = treeMap.entries();
-let t: IteratorResult<Object[]> = it.next();
-while(!t.done) {
-  console.log("TreeMap" + t.value);
-  t = it.next()
+let iter = treeMap.entries();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("key:" + temp[0]);
+  console.log("value:" + temp[1]);
+  temp = iter.next().value;
 }
 ```
 
@@ -682,10 +683,6 @@ while(!t.done) {
 [Symbol.iterator]\(): IterableIterator&lt;[K, V]&gt;
 
 返回一个迭代器，迭代器的每一项都是一个JavaScript对象，并返回该对象。
-
-> **说明：**
->
-> 本接口不支持在.ets文件中使用
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -705,21 +702,19 @@ while(!t.done) {
 **示例：**
 
 ```ts
-let treeMap : TreeMap<string, number> = new TreeMap();
+let treeMap = new TreeMap();
 treeMap.set("squirrel", 123);
 treeMap.set("sparrow", 356);
 
 // 使用方法一：
-let it = treeMap.entries();
-let t: IteratorResult<Object[]> = it.next();
-while(!t.done) {
-  console.log("TreeMap" + t.value);
-  t = it.next()
+for (let item of treeMap) { 
+  console.log("key:" + item[0]);
+  console.log("value:" + item[1]);
 }
 
 // 使用方法二：
 let iter = treeMap[Symbol.iterator]();
-let temp: IteratorResult<Object[]> = iter.next().value;
+let temp = iter.next().value;
 while(temp != undefined) {
   console.log("key:" + temp[0]);
   console.log("value:" + temp[1]);

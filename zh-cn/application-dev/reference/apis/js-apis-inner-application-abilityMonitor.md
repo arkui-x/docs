@@ -3,8 +3,8 @@
 AbilityMonitor模块提供匹配满足指定条件的受监视能力对象的方法的能力，最近匹配的ability对象将保存在AbilityMonitor对象中。
 
 > **说明：**
-> 
-> 本模块首批接口从API version 9 开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  
+>
+> 本模块首批接口从API version 9 开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 
 ## 导入模块
 
@@ -37,21 +37,23 @@ Ability监听器
 
 ```ts
 import AbilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
+import UIAbility from '@ohos.app.ability.UIAbility';
+import { BusinessError } from '@ohos.base';
 
-function onAbilityCreateCallback(data) {
-    console.info('onAbilityCreateCallback, data: ${JSON.stringify(data)}');
+function onAbilityCreateCallback(data: UIAbility) {
+    console.info(`onAbilityCreateCallback, data: ${JSON.stringify(data)}`);
 }
 
-let monitor = {
+let monitor: AbilityDelegatorRegistry.AbilityMonitor = {
     abilityName: 'abilityname',
     moduleName: "moduleName",
     onAbilityCreate: onAbilityCreateCallback
-};
+}
 
 let abilityDelegator: AbilityDelegatorRegistry.AbilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator();
-abilityDelegator.addAbilityMonitor(monitor, (error : any) => {
+abilityDelegator.addAbilityMonitor(monitor, (error : BusinessError) => {
     if (error) {
-        console.error('addAbilityMonitor fail, error: ${JSON.stringify(error)}');
+        console.error(`addAbilityMonitor fail, error: ${JSON.stringify(error)}`);
     }
 });
 ```

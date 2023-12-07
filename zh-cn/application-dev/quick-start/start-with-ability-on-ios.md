@@ -194,3 +194,55 @@ iOS端应用info配置里的bundleName需要与Ability的bundleName一致。
 iOS端应用内的viewController的viewControllerName组成规则：Ability的moduleName + Ability的abilityName + “viewController”。
 
   ![stage_iOS](figures/StageiOS.png)
+
+## StageApplication初始化支持以下两种方式
+
+### 在didFinishLaunchingWithOptions函数中进行初始化
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    // 配置hap包路径
+    [StageApplication configModuleWithBundleDirectory:@"arkui-x"];
+    // 启动ability
+    [StageApplication launchApplication];
+
+    // APP自启动,初始化StageViewController子类VC，并设置为APP根视图控制器
+    if (!launchOptions.count) { 
+        NSString *instanceName = [NSString stringWithFormat:@"%@:%@:%@",@"com.example.iosabilitystage", @"entry", @"MainAbility"];
+        EntryMainViewController *mainView = [[EntryMainViewController alloc] initWithInstanceName:instanceName];
+        UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:mainView];
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.window.rootViewController = navi;
+        [self.window makeKeyAndVisible];
+    }
+    return YES;
+}
+```
+
+### 在openURL回调函数中进行初始化
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // 不在此处进行初始化
+
+    ExampleViewController *mainView = [[ExampleViewController alloc] init];
+    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:mainView];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = navi;
+    [self.window makeKeyAndVisible];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+
+    // 初始化StageApplication
+    [StageApplication configModuleWithBundleDirectory:@"arkui-x"];
+    [StageApplication launchApplication];
+    
+    /*
+    other code
+    */
+    return YES;
+}
+```

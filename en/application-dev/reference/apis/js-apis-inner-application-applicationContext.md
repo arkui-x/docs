@@ -3,8 +3,8 @@
 The **ApplicationContext** module provides application-level context. You can use the APIs of this module to register and deregister the ability lifecycle listener in an application.
 
 > **NOTE**
-> 
-> The initial APIs of this module are supported since API version 9. Newly added APIs will be marked with a superscript to indicate their earliest API version. 
+>
+> The initial APIs of this module are supported since API version 9. Newly added APIs will be marked with a superscript to indicate their earliest API version.
 > The APIs of this module can be used only in the stage model.
 
 ## Modules to Import
@@ -46,39 +46,43 @@ Registers a listener to monitor the ability lifecycle of the application.
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import AbilityLifecycleCallback from '@ohos.app.ability.AbilityLifecycleCallback';
 
-let lifecycleId;
+let lifecycleId: number;
 
 export default class EntryAbility extends UIAbility {
     onCreate() {
         console.log('MyAbility onCreate');
-        let AbilityLifecycleCallback = {
+        let AbilityLifecycleCallback: AbilityLifecycleCallback = {
             onAbilityCreate(ability) {
-                console.log('AbilityLifecycleCallback onAbilityCreate ability: ${ability}');
+                console.log(`AbilityLifecycleCallback onAbilityCreate ability: ${ability}`);
             },
             onWindowStageCreate(ability, windowStage) {
-                console.log('AbilityLifecycleCallback onWindowStageCreate ability: ${ability}');
-                console.log('AbilityLifecycleCallback onWindowStageCreate windowStage: ${windowStage}');
+                console.log(`AbilityLifecycleCallback onWindowStageCreate ability: ${ability}`);
+                console.log(`AbilityLifecycleCallback onWindowStageCreate windowStage: ${windowStage}`);
             },
             onWindowStageDestroy(ability, windowStage) {
-                console.log('AbilityLifecycleCallback onWindowStageDestroy ability: ${ability}');
-                console.log('AbilityLifecycleCallback onWindowStageDestroy windowStage: ${windowStage}');
+                console.log(`AbilityLifecycleCallback onWindowStageDestroy ability: ${ability}`);
+                console.log(`AbilityLifecycleCallback onWindowStageDestroy windowStage: ${windowStage}`);
             },
             onAbilityDestroy(ability) {
-                console.log('AbilityLifecycleCallback onAbilityDestroy ability: ${ability}');
+                console.log(`AbilityLifecycleCallback onAbilityDestroy ability: ${ability}`);
             },
             onAbilityForeground(ability) {
-                console.log('AbilityLifecycleCallback onAbilityForeground ability: ${ability}');
+                console.log(`AbilityLifecycleCallback onAbilityForeground ability: ${ability}`);
             },
             onAbilityBackground(ability) {
-                console.log('AbilityLifecycleCallback onAbilityBackground ability: ${ability}');
+                console.log(`AbilityLifecycleCallback onAbilityBackground ability: ${ability}`);
+            },
+            onAbilityContinue(ability) {
+                console.log(`AbilityLifecycleCallback onAbilityContinue ability: ${ability}`);
             }
         }
         // 1. Obtain applicationContext through the context attribute.
         let applicationContext = this.context.getApplicationContext();
-        // 2. Use applicationContext to register a listener for the ability lifecycle in the application.
+        // 2. Use applicationContext.on to subscribe to the 'abilityLifecycle' event.
         lifecycleId = applicationContext.on('abilityLifecycle', AbilityLifecycleCallback);
-        console.log('registerAbilityLifecycleCallback lifecycleId: ${lifecycleId)}');
+        console.log(`registerAbilityLifecycleCallback lifecycleId: ${lifecycleId}`);
     }
 }
 ```
@@ -104,17 +108,17 @@ Deregisters the listener that monitors the ability lifecycle of the application.
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
 
-let lifecycleId;
+let lifecycleId: number;
 
 export default class EntryAbility extends UIAbility {
     onDestroy() {
         let applicationContext = this.context.getApplicationContext();
-        console.log('stage applicationContext: ${applicationContext}');
+        console.log(`stage applicationContext: ${applicationContext}`);
         applicationContext.off('abilityLifecycle', lifecycleId, (error, data) => {
             if (error) {
-                console.error('unregisterAbilityLifecycleCallback fail, err: ${JSON.stringify(error)}');    
+                console.error(`unregisterAbilityLifecycleCallback fail, err: ${JSON.stringify(error)}`);
             } else {
-                console.log('unregisterAbilityLifecycleCallback success, data: ${JSON.stringify(data)}');
+                console.log(`unregisterAbilityLifecycleCallback success, data: ${JSON.stringify(data)}`);
             }
         });
     }
@@ -151,11 +155,19 @@ For details about the error codes, see [Ability Error Codes](../errorcodes/error
 **Example**
 
 ```ts
-applicationContext.getRunningProcessInformation().then((data) => {
-    console.log('The process running information is: ${JSON.stringify(data)}');
-}).catch((error) => {
-    console.error('error: ${JSON.stringify(error)}');
-});
+import UIAbility from '@ohos.app.ability.UIAbility';
+import { BusinessError } from '@ohos.base';
+
+export default class MyAbility extends UIAbility {
+    onForeground() {
+        let applicationContext = this.context.getApplicationContext();
+        applicationContext.getRunningProcessInformation().then((data) => {
+            console.log(`The process running information is: ${JSON.stringify(data)}`);
+        }).catch((error: BusinessError) => {
+            console.error(`error: ${JSON.stringify(error)}`);
+        });
+    }
+}
 ```
 
 ## ApplicationContext.getRunningProcessInformation<sup>9+</sup>
@@ -188,11 +200,18 @@ For details about the error codes, see [Ability Error Codes](../errorcodes/error
 **Example**
 
 ```ts
-applicationContext.getRunningProcessInformation((err, data) => {
-    if (err) {
-        console.error('getRunningProcessInformation faile, err: ${JSON.stringify(err)}');
-    } else {
-        console.log('The process running information is: ${JSON.stringify(data)}');
+import UIAbility from '@ohos.app.ability.UIAbility';
+
+export default class MyAbility extends UIAbility {
+    onForeground() {
+        let applicationContext = this.context.getApplicationContext();
+        applicationContext.getRunningProcessInformation((err, data) => {
+            if (err) {
+                console.error(`getRunningProcessInformation faile, err: ${JSON.stringify(err)}`);
+            } else {
+                console.log(`The process running information is: ${JSON.stringify(data)}`);
+            }
+        })
     }
-})
+}
 ```

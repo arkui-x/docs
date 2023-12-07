@@ -4,6 +4,8 @@
 
 - UI Page
   - [@ohos.animator (Animator)](js-apis-animator.md)
+  - [@ohos.arkui.componentSnapshot (Component Snapshot)](js-apis-arkui-componentSnapshot.md)
+  - [@ohos.arkui.inspector (Layout Callback)](js-apis-arkui-inspector.md)
   - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
   - [@ohos.curves (Interpolation Calculation)](js-apis-curve.md)
   - [@ohos.matrix4 (Matrix Transformation)](js-apis-matrix4.md)
@@ -36,6 +38,7 @@
 
 - Bundle Management
   - [@ohos.bundle.bundleManager (bundleManager)](js-apis-bundleManager.md)
+  - [@ohos.zlib (Zip)](js-apis-zlib.md)
   - bundleManager
     - [abilityInfo](js-apis-bundleManager-abilityInfo.md)
     - [applicationInfo](js-apis-bundleManager-applicationInfo.md)
@@ -46,8 +49,7 @@
   - [@ohos.window (Window)](js-apis-window.md)
   - [@ohos.display (Display)](js-apis-display.md)
 
-
-- Multimedia
+- Media
   - [@ohos.multimedia.image (Image Processing)](js-apis-image.md)
 
 - Resource Management
@@ -56,6 +58,7 @@
   - [@ohos.resourceManager (Resource Manager)](js-apis-resource-manager.md)
 
 - Network Management
+  - [@ohos.request (Upload and Download)](js-apis-request.md)
   - [@ohos.net.webSocket (WebSocket Connection)](js-apis-webSocket.md)
   - [@ohos.net.socket (Socket Connection)](js-apis-socket.md)
   - [@ohos.net.http (Data Request)](js-apis-http.md)
@@ -73,6 +76,7 @@
 
 - Security
   - [@ohos.abilityAccessCtrl (Ability Access Control)](js-apis-abilityAccessCtrl.md)
+  - [@ohos.security.cryptoFramework (Crypto Framework)](js-apis-cryptoFramework.md)
 
 - Common Library
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
@@ -100,3 +104,8 @@
 
 - Basic Features
   - [@ohos.hilog (HiLog)](js-apis-hilog.md)
+  - [@ohos.web.webview (Webview)](js-apis-webview.md)
+
+- Common Event and Notification
+  - [System Common Events](commonEventManager-definitions.md)
+  - [@ohos.commonEventManager (Common Event)](js-apis-commonEventManager.md)
