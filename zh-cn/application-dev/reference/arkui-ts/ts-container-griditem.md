@@ -149,7 +149,7 @@ struct GridItemExample {
       Grid() {
         ForEach(this.Number, (day: string) => {
           ForEach(this.Number, (day: string) => {
-            GridItem({style:GridItemStyle.NONE}) {
+            GridItem() {
               Text(day)
                 .fontSize(16)
                 .width('100%')
@@ -173,7 +173,7 @@ struct GridItemExample {
       Grid() {
         ForEach(this.Number, (day: string) => {
           ForEach(this.Number, (day: string) => {
-            GridItem({style:GridItemStyle.PLAIN}) {
+            GridItem() {
               Text(day)
                 .fontSize(16)
                 .width('100%')
