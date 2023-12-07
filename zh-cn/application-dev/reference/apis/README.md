@@ -38,7 +38,6 @@
 
 - 包管理
   - [@ohos.bundle.bundleManager (bundleManager模块)](js-apis-bundleManager.md)
-  - [@ohos.zlib (Zip模块)](js-apis-zlib.md)
   - bundleManager
     - [abilityInfo](js-apis-bundleManager-abilityInfo.md)
     - [applicationInfo](js-apis-bundleManager-applicationInfo.md)
@@ -76,7 +75,6 @@
 
 - 安全
   - [@ohos.abilityAccessCtrl (程序访问控制管理)](js-apis-abilityAccessCtrl.md)
-  - [@ohos.security.cryptoFramework (加解密算法库框架)](js-apis-cryptoFramework.md)
 
 - 语言基础类库
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
@@ -105,7 +103,3 @@
 - 系统基础能力
   - [@ohos.hilog (HiLog日志打印)](js-apis-hilog.md)
   - [@ohos.web.webview(Webview)](js-apis-webview.md)
-
-- 公共事件与通知
-  - [系统公共事件定义](commonEventManager-definitions.md)
-  - [@ohos.commonEventManager (公共事件模块)](js-apis-commonEventManager.md)

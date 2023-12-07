@@ -38,7 +38,6 @@
 
 - Bundle Management
   - [@ohos.bundle.bundleManager (bundleManager)](js-apis-bundleManager.md)
-  - [@ohos.zlib (Zip)](js-apis-zlib.md)
   - bundleManager
     - [abilityInfo](js-apis-bundleManager-abilityInfo.md)
     - [applicationInfo](js-apis-bundleManager-applicationInfo.md)
@@ -76,7 +75,6 @@
 
 - Security
   - [@ohos.abilityAccessCtrl (Ability Access Control)](js-apis-abilityAccessCtrl.md)
-  - [@ohos.security.cryptoFramework (Crypto Framework)](js-apis-cryptoFramework.md)
 
 - Common Library
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
@@ -105,7 +103,3 @@
 - Basic Features
   - [@ohos.hilog (HiLog)](js-apis-hilog.md)
   - [@ohos.web.webview (Webview)](js-apis-webview.md)
-
-- Common Event and Notification
-  - [System Common Events](commonEventManager-definitions.md)
-  - [@ohos.commonEventManager (Common Event)](js-apis-commonEventManager.md)
