@@ -19,7 +19,7 @@ LinkedList和[ArrayList](js-apis-arraylist.md)相比，插入数据效率LinkedL
 ## 导入模块
 
 ```ts
-import LinkedList from '@ohos.util.LinkedList';
+import LinkedList from '@ohos.util.LinkedList';  
 ```
 
 ## LinkedList
@@ -53,7 +53,7 @@ LinkedList的构造函数。
 **示例：**
 
 ```ts
-let linkedList: LinkedList<string | number | boolean | object> = new LinkedList();
+let linkedList = new LinkedList();
 ```
 
 
@@ -88,16 +88,12 @@ add(element: T): boolean
 **示例：**
 
 ```ts
-let linkedList: LinkedList<string | number | boolean | object> = new LinkedList();
+let linkedList = new LinkedList();
 let result = linkedList.add("a");
 let result1 = linkedList.add(1);
 let b = [1, 2, 3];
 let result2 = linkedList.add(b);
-class C {
-  name: string = ''
-  age: string = ''
-}
-let c: C = {name : "Dylon", age : "13"};
+let c = {name : "Dylon", age : "13"};
 let result3 = linkedList.add(c);
 let result4 = linkedList.add(false);
 ```
@@ -127,16 +123,12 @@ addFirst(element: T): void
 **示例：**
 
 ```ts
-let linkedList: LinkedList<string | number | boolean | object> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.addFirst("a");
 linkedList.addFirst(1);
 let b = [1, 2, 3];
 linkedList.addFirst(b);
-class C {
-  name: string = ''
-  age: string = ''
-}
-let c: C = {name : "Dylon", age : "13"};
+let c = {name : "Dylon", age : "13"};
 linkedList.addFirst(c);
 linkedList.addFirst(false);
 ```
@@ -153,8 +145,8 @@ insert(index: number, element: T): void
 
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------- | -------- | -------- |
-| index | number | 是 | 插入位置索引。 |
 | element | T | 是 | 插入元素。 |
+| index | number | 是 | 插入位置索引。 |
 
 **错误码：**
 
@@ -168,7 +160,7 @@ insert(index: number, element: T): void
 **示例：**
 
 ```ts
-let linkedList: LinkedList<string | number | boolean | object> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.insert(0, "A");
 linkedList.insert(1, 0);
 linkedList.insert(2, true);
@@ -205,7 +197,7 @@ has(element: T): boolean
 **示例：**
 
 ```ts
-let linkedList: LinkedList<string> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add("squirrel");
 let result = linkedList.has("squirrel");
 ```
@@ -241,7 +233,7 @@ get(index: number): T
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -283,7 +275,7 @@ getLastIndexOf(element: T): number
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -325,7 +317,7 @@ getIndexOf(element: T): number
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -368,7 +360,7 @@ removeByIndex(index: number): T
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -403,7 +395,7 @@ removeFirst(): T
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -438,7 +430,7 @@ removeLast(): T
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -478,7 +470,7 @@ remove(element: T): boolean
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -519,7 +511,7 @@ removeFirstFound(element: T): boolean
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -560,7 +552,7 @@ removeLastFound(element: T): boolean
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -593,7 +585,7 @@ clone(): LinkedList&lt;T&gt;
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -636,13 +628,13 @@ callbackfn的参数说明：
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
 linkedList.add(4);
-linkedList.forEach((value: number, index?: number) => {
-  console.log("value:" + value, "index:" + index);
+linkedList.forEach((value, index) => {
+    console.log("value:" + value, "index:" + index);
 });
 ```
 
@@ -665,7 +657,7 @@ clear(): void
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -706,7 +698,7 @@ set(index: number, element: T): T
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number | string> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -738,7 +730,7 @@ convertToArray(): Array&lt;T&gt;
 
 **示例：**
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -771,7 +763,7 @@ getFirst(): T
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -804,7 +796,7 @@ getLast(): T
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
@@ -817,10 +809,6 @@ let result = linkedList.getLast();
 [Symbol.iterator]\(): IterableIterator&lt;T&gt;
 
 返回一个迭代器，迭代器的每一项都是一个 JavaScript 对象，并返回该对象。
-
-> **说明：**
->
-> 本接口不支持在.ets文件中使用
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -841,23 +829,22 @@ let result = linkedList.getLast();
 **示例：**
 
 ```ts
-let linkedList: LinkedList<number> = new LinkedList();
+let linkedList = new LinkedList();
 linkedList.add(2);
 linkedList.add(4);
 linkedList.add(5);
 linkedList.add(4);
 
 // 使用方法一：
-let items = Array.from(linkedList)
-for (let item of items) { 
+for (let item of linkedList) { 
   console.log("value:" + item); 
 } 
 
 // 使用方法二：
 let iter = linkedList[Symbol.iterator]();
-let temp: IteratorResult<number> = iter.next();
-while(!temp.done) {
-  console.log("value:" + temp.value);
-  temp = iter.next();
+let temp = iter.next().value;
+while(temp != undefined) {
+  console.log("value:" + temp);
+  temp = iter.next().value;
 }
 ```

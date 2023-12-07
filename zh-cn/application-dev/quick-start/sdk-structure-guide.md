@@ -33,16 +33,16 @@ path_操作系统类型_CPU架构类型_版本号_releaseType.zip
 | 操作系统类型 | 可选值：windows，darwin，linux。 |
 | CPU架构类型 | 可选值："x64"-x86架构，"arm64"-arm架构。 |
 | 版本号 | 构建版本号与OpenHarmony SDK版本号规则保持一致。 |
-| releaseType | 可选值：Alpha，Beta，Release三种可选取值。releaseType后面加数字，标识迭代次数，比如：Beta1。|
+| releaseType | 可选值：Canary，Beta，Release三种可选取值。releaseType后面加数字，标识迭代次数，比如：Beta1。|
 
 **示例：**
-arkui-x_windows_x64_1.0.0.0_Alpha.zip
+arkui-x_windows_x64_1.0.0.0_Release.zip
 
 ## SDK压缩包内部结构
 这里，以macOS平台上的ArkUI-X SDK包为例，对SDK目录结构和内容规格进行说明。更详细的ArkUI-X SDK内容规格会在第五节进行介绍。
 
 ```
-arkui-x_darwin_x64_1.0.0.0_Alpha.zip
+arkui-x_darwin_x64_1.0.0.0_Release.zip
 └── arkui-x
     ├── engine                   // ArkUI-X的引擎库
     │   ├── lib                  // ArkUI-X的引擎库：包括Android平台及架构的动态库
@@ -62,7 +62,7 @@ arkui-x_darwin_x64_1.0.0.0_Alpha.zip
 
 ### ArkUI-X SDK引擎目录结构
 
-ArkUI-X应用构建最小依赖集合，位于arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/engine目录：
+ArkUI-X应用构建最小依赖集合，位于arkui-x_darwin_x64_1.0.0.0_Release.zip/arkui-x/engine目录：
 
 ```
 engine
@@ -115,7 +115,7 @@ engine
 
 ### ArkUI-X SDK插件目录结构
 
-ArkUI-X应用按需打包插件库集合，位于arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/plugins目录：
+ArkUI-X应用按需打包插件库集合，位于arkui-x_darwin_x64_1.0.0.0_Release.zip/arkui-x/plugins目录：
 
 ```
 plugins
@@ -205,7 +205,7 @@ plugins
     "metaVersion": "1.0.0"
   },
   "path": "arkui-x",
-  "releaseType": "Beta",
+  "releaseType": "Release",
   "version": "1.0.0.0"
 }
 ```
@@ -228,7 +228,7 @@ plugins
 * systemres目录：ArkUI渲染一致性资源主题包。
 
 ```
-arkui-x_windows_x64_1.0.0.0_Alpha.zip/arkui-x/engine
+arkui-x_windows_x64_1.0.0.0_Release.zip/arkui-x/engine
 ├── lib                                           // ArkUI跨平台引擎及平台适配层
 │   ├── include                                   // NAPI和相关辅助C接口
 │   ├── arkui
@@ -255,7 +255,7 @@ arkui-x_windows_x64_1.0.0.0_Alpha.zip/arkui-x/engine
 * api目录：ArkTS接口插件化动态库。
 
 ```
-arkui-x_windows_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
+arkui-x_windows_x64_1.0.0.0_Release.zip/arkui-x/plugins
 ├── component                                                   // ArkUI组件插件化动态库。
 │   ├── lib
 │   │   ├── include
@@ -295,7 +295,7 @@ arkui-x_windows_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
 * systemres目录：ArkUI渲染一致性资源主题包。
 
 ```
-arkui-x_linux_x64_1.0.0.0_Alpha.zip/arkui-x/engine
+arkui-x_linux_x64_1.0.0.0_Release.zip/arkui-x/engine
 ├── lib                                           // ArkUI跨平台引擎及平台适配层
 │   ├── include                                   // NAPI和相关辅助C接口
 │   ├── arkui
@@ -322,7 +322,7 @@ arkui-x_linux_x64_1.0.0.0_Alpha.zip/arkui-x/engine
 * api目录：ArkTS接口插件化动态库。
 
 ```
-arkui-x_linux_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
+arkui-x_linux_x64_1.0.0.0_Release.zip/arkui-x/plugins
 ├── component                                                   // ArkUI组件插件化动态库。
 │   ├── lib
 │   │   ├── include
@@ -362,7 +362,7 @@ arkui-x_linux_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
 * systemres目录：ArkUI渲染一致性资源主题包。
 
 ```
-arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/engine
+arkui-x_darwin_x64_1.0.0.0_Release.zip/arkui-x/engine
 ├── lib                                                 // ArkUI跨平台引擎及平台适配层
 │   ├── include                                         // NAPI和相关辅助C接口
 │   ├── arkui
@@ -381,17 +381,14 @@ arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/engine
 │   ├── arkui
 │   │   ├── ios-arm64
 │   │   ├── ios-arm64-profile
+│   │   ├── ios-arm64-release
 │   │   │   └── libarkui_ios.framework                    // ArkUI跨平台引擎及平台适配层
 │   │   │       ├── Headers
-│   │   │       │   ├── Ace.h
-│   │   │       │   ├── AceViewController.h
-│   │   │       │   └── include
 │   │   │       ├── Info.plist
 │   │   │       ├── libarkui_ios
 │   │   │       ├── libarkui_ios.podspec
 │   │   │       └── Modules
 │   │   │           └── module.modulemap
-│   │   ├── ios-arm64-release
 │   │   ├── ios-arm64-simulator
 │   │   └── ios-x86_64-simulator
 │   ├── third_party
@@ -402,31 +399,11 @@ arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/engine
 │   │   │   └── libarkui_ios.xcframework                     // ArkUI跨平台引擎及平台适配层
 │   │   │       ├── Info.plist
 │   │   │       ├── ios-arm64
-│   │   │       │   └── libarkui_ios.framework
-│   │   │       │       ├── Headers
-│   │   │       │       │   ├── Ace.h
-│   │   │       │       │   ├── AceViewController.h
-│   │   │       │       │   └── include
-│   │   │       │       ├── Info.plist
-│   │   │       │       ├── libarkui_ios
-│   │   │       │       ├── libarkui_ios.podspec
-│   │   │       │       └── Modules
-│   │   │       │           └── module.modulemap
 │   │   │       └── ios-arm64_x86_64-simulator
 │   │   ├── ios-profile
 │   │   │   └── libarkui_ios.xcframework                     // ArkUI跨平台引擎及平台适配层
 │   │   │       ├── Info.plist
 │   │   │       ├── ios-arm64
-│   │   │       │   └── libarkui_ios.framework
-│   │   │       │       ├── Headers
-│   │   │       │       │   ├── Ace.h
-│   │   │       │       │   ├── AceViewController.h
-│   │   │       │       │   └── include
-│   │   │       │       ├── Info.plist
-│   │   │       │       ├── libarkui_ios
-│   │   │       │       ├── libarkui_ios.podspec
-│   │   │       │       └── Modules
-│   │   │       │           └── module.modulemap
 │   │   │       └── ios-arm64_x86_64-simulator
 │   │   └── ios-release
 │   │       └── libarkui_ios.xcframework                     // ArkUI跨平台引擎及平台适配层
@@ -434,9 +411,6 @@ arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/engine
 │   │           ├── ios-arm64
 │   │           │   └── libarkui_ios.framework
 │   │           │       ├── Headers
-│   │           │       │   ├── Ace.h
-│   │           │       │   ├── AceViewController.h
-│   │           │       │   └── include
 │   │           │       ├── Info.plist
 │   │           │       ├── libarkui_ios
 │   │           │       ├── libarkui_ios.podspec
@@ -457,7 +431,7 @@ arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/engine
 * api目录：ArkTS接口插件化动态库。
 
 ```
-arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
+arkui-x_darwin_x64_1.0.0.0_Release.zip/arkui-x/plugins
 ├── component                                                  // ArkUI组件插件化动态库。
 │   ├── lib
 │   │   ├── include
@@ -489,25 +463,11 @@ arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
 │   │   │   └── lib${ui-name}.xcframework                          // ArkUI组件实现。
 │   │   │       ├── Info.plist
 │   │   │       ├── ios-arm64
-│   │   │       │   └── lib${ui-name}.framework
-│   │   │       │       ├── Headers
-│   │   │       │       ├── Info.plist
-│   │   │       │       ├── lib${ui-name}
-│   │   │       │       ├── lib${ui-name}.podspec
-│   │   │       │       └── Modules
-│   │   │       │           └── module.modulemap
 │   │   │       └── ios-arm64_x86_64-simulator
 │   │   ├── ios-profile
 │   │   │   └── lib${ui-name}.xcframework                          // ArkUI组件实现。
 │   │   │       ├── Info.plist
 │   │   │       ├── ios-arm64
-│   │   │       │   └── lib${ui-name}.framework
-│   │   │       │       ├── Headers
-│   │   │       │       ├── Info.plist
-│   │   │       │       ├── lib${ui-name}
-│   │   │       │       ├── lib${ui-name}.podspec
-│   │   │       │       └── Modules
-│   │   │       │           └── module.modulemap
 │   │   │       └── ios-arm64_x86_64-simulator
 │   │   └── ios-release
 │   │       └── lib${ui-name}.xcframework                          // ArkUI组件实现。
@@ -553,25 +513,11 @@ arkui-x_darwin_x64_1.0.0.0_Alpha.zip/arkui-x/plugins
     │   │   └── lib${module-name}_${submodule-name}.xcframework    // ArkTS接口实现。
     │   │       ├── Info.plist
     │   │       ├── ios-arm64
-    │   │       │   └── lib${module-name}_${submodule-name}.framework
-    │   │       │       ├── Headers
-    │   │       │       ├── Info.plist
-    │   │       │       ├── lib${module-name}_${submodule-name}
-    │   │       │       ├── lib${module-name}_${submodule-name}.podspec
-    │   │       │       └── Modules
-    │   │       │           └── module.modulemap
     │   │       └── ios-arm64_x86_64-simulator
     │   ├── ios-profile
     │   │   └── lib${module-name}_${submodule-name}.xcframework    // ArkTS接口实现。
     │   │       ├── Info.plist
     │   │       ├── ios-arm64
-    │   │       │   └── lib${module-name}_${submodule-name}.framework
-    │   │       │       ├── Headers
-    │   │       │       ├── Info.plist
-    │   │       │       ├── lib${module-name}_${submodule-name}
-    │   │       │       ├── lib${module-name}_${submodule-name}.podspec
-    │   │       │       └── Modules
-    │   │       │           └── module.modulemap
     │   │       └── ios-arm64_x86_64-simulator
     │   └── ios-release
     │       └── lib${module-name}_${submodule-name}.xcframework    // ArkTS接口实现。

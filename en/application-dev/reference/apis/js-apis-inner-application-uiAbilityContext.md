@@ -55,24 +55,35 @@ For details about the error codes, see [Ability Error Codes](../errorcodes/error
 **Example**
 
   ```ts
-let want = {
-  bundleName: 'com.example.myapplication',
-  abilityName: 'EntryAbility'
-};
+import UIAbility from '@ohos.app.ability.UIAbility';
+import Want from '@ohos.app.ability.Want';
+import { BusinessError } from '@ohos.base';
 
-try {
-  this.context.startAbility(want, (err) => {
-    if (err.code) {
-      // Process service logic errors.
-      console.error(`startAbility failed, code is ${err.code}, message is ${err.message}`);
-      return;
+export default class EntryAbility extends UIAbility {
+
+  onForeground() {
+    let want: Want = {
+      bundleName: 'com.example.myapplication',
+      abilityName: 'EntryAbility'
+    };
+
+    try {
+      this.context.startAbility(want, (err: BusinessError) => {
+        if (err.code) {
+          // Process service logic errors.
+          console.error(`startAbility failed, code is ${err.code}, message is ${err.message}`);
+          return;
+        }
+        // Carry out normal service processing.
+        console.info('startAbility succeed');
+      });
+    } catch (err) {
+      // Process input parameter errors.
+      let code = (err as BusinessError).code;
+      let message = (err as BusinessError).message;
+      console.error(`startAbility failed, code is ${code}, message is ${message}`);
     }
-    // Carry out normal service processing.
-    console.info('startAbility succeed');
-  });
-} catch (err) {
-  // Process input parameter errors.
-  console.error(`startAbility failed failed, code is ${err.code}, message is ${err.message}`);
+  }
 }
   ```
 
@@ -110,27 +121,39 @@ For details about the error codes, see [Ability Error Codes](../errorcodes/error
 **Example**
 
   ```ts
-let want = {
-  bundleName: 'com.example.myapplication',
-  abilityName: 'EntryAbility'
-};
-let options = {
-  windowMode: 0,
-};
+import UIAbility from '@ohos.app.ability.UIAbility';
+import Want from '@ohos.app.ability.Want';
+import StartOptions from '@ohos.app.ability.StartOptions';
+import { BusinessError } from '@ohos.base';
 
-try {
-  this.context.startAbility(want, options)
-    .then(() => {
-      // Carry out normal service processing.
-      console.info('startAbility succeed');
-    })
-    .catch((err) => {
-      // Process service logic errors.
-      console.error(`startAbility failed, code is ${err.code}, message is ${err.message}`);
-    });
-} catch (err) {
-  // Process input parameter errors.
-  console.error(`startAbility failed, code is ${err.code}, message is ${err.message}`);
+export default class EntryAbility extends UIAbility {
+
+  onForeground() {
+    let want: Want = {
+      bundleName: 'com.example.myapplication',
+      abilityName: 'EntryAbility'
+    };
+    let options: StartOptions = {
+      windowMode: 0,
+    };
+
+    try {
+      this.context.startAbility(want, options)
+        .then(() => {
+          // Carry out normal service processing.
+          console.info('startAbility succeed');
+        })
+        .catch((err: BusinessError) => {
+          // Process service logic errors.
+          console.error(`startAbility failed, code is ${err.code}, message is ${err.message}`);
+        });
+    } catch (err) {
+      // Process input parameter errors.
+      let code = (err as BusinessError).code;
+      let message = (err as BusinessError).message;
+      console.error(`startAbility failed, code is ${code}, message is ${message}`);
+    }
+  }
 }
   ```
 
@@ -151,20 +174,30 @@ Terminates this ability. This API uses an asynchronous callback to return the re
 **Example**
 
   ```ts
-  try {
-    this.context.terminateSelf((err) => {
-      if (err.code) {
-        // Process service logic errors.
-        console.error(`terminateSelf failed, code is ${err.code}, message is ${err.message}`);
-        return;
-      }
-      // Carry out normal service processing.
-      console.info('terminateSelf succeed');
-    });
-  } catch (err) {
-    // Capture the synchronization parameter error.
-    console.error(`terminateSelf failed, code is ${err.code}, message is ${err.message}`);
+import UIAbility from '@ohos.app.ability.UIAbility';
+import { BusinessError } from '@ohos.base';
+
+export default class EntryAbility extends UIAbility {
+
+  onForeground() {
+    try {
+      this.context.terminateSelf((err: BusinessError) => {
+        if (err.code) {
+          // Process service logic errors.
+          console.error(`terminateSelf failed, code is ${err.code}, message is ${err.message}`);
+          return;
+        }
+        // Carry out normal service processing.
+        console.info('terminateSelf succeed');
+      });
+    } catch (err) {
+      // Capture the synchronization parameter error.
+      let code = (err as BusinessError).code;
+      let message = (err as BusinessError).message;
+      console.error(`terminateSelf failed, code is ${code}, message is ${message}`);
+    }
   }
+}
   ```
 
 
@@ -185,18 +218,28 @@ Terminates this ability. This API uses a promise to return the result.
 **Example**
 
   ```ts
-  try {
-    this.context.terminateSelf()
-      .then(() => {
-        // Carry out normal service processing.
-        console.info('terminateSelf succeed');
-      })
-      .catch((err) => {
-        // Process service logic errors.
-        console.error(`terminateSelf failed, code is ${err.code}, message is ${err.message}`);
-      });
-  } catch (error) {
-    // Capture the synchronization parameter error.
-    console.error(`terminateSelf failed, code is ${err.code}, message is ${err.message}`);
+import UIAbility from '@ohos.app.ability.UIAbility';
+import { BusinessError } from '@ohos.base';
+
+export default class EntryAbility extends UIAbility {
+
+  onForeground() {
+    try {
+      this.context.terminateSelf()
+        .then(() => {
+          // Carry out normal service processing.
+          console.info('terminateSelf succeed');
+        })
+        .catch((err: BusinessError) => {
+          // Process service logic errors.
+          console.error(`terminateSelf failed, code is ${err.code}, message is ${err.message}`);
+        });
+    } catch (err) {
+      // Capture the synchronization parameter error.
+      let code = (err as BusinessError).code;
+      let message = (err as BusinessError).message;
+      console.error(`terminateSelf failed, code is ${code}, message is ${message}`);
+    }
   }
+}
   ```

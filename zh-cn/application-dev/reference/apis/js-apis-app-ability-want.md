@@ -29,13 +29,15 @@ import Want from '@ohos.app.ability.Want';
 
   ```ts
   import common from '@ohos.app.ability.common';
+  import Want from '@ohos.app.ability.Want';
+
   let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
-  let want = {
-    'bundleName': 'com.example.myapplication',
-    'abilityName': 'FuncAbility',
-    'moduleName': 'entry' // moduleName非必选
+  let want: Want = {
+    bundleName: 'com.example.myapplication',
+    abilityName: 'FuncAbility',
+    moduleName: 'entry' // moduleName非必选
   };
-  
+
   context.startAbility(want, (err) => {
     // 显式拉起Ability，通过bundleName、abilityName和moduleName可以唯一确定一个Ability
     console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
@@ -47,15 +49,17 @@ import Want from '@ohos.app.ability.Want';
     * 字符串（String）
         ```ts
         import common from '@ohos.app.ability.common';
+        import Want from '@ohos.app.ability.Want';
+
         let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
-        let want = {
+        let want: Want = {
           bundleName: 'com.example.myapplication',
           abilityName: 'FuncAbility',
           parameters: {
             keyForString: 'str',
           },
         };
-        
+
         context.startAbility(want, (err) => {
           console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
         });
@@ -63,8 +67,10 @@ import Want from '@ohos.app.ability.Want';
     * 数字（Number）
         ```ts
         import common from '@ohos.app.ability.common';
+        import Want from '@ohos.app.ability.Want';
+
         let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
-        let want = {
+        let want: Want = {
           bundleName: 'com.example.myapplication',
           abilityName: 'FuncAbility',
           parameters: {
@@ -72,23 +78,20 @@ import Want from '@ohos.app.ability.Want';
             keyForDouble: 99.99,
           },
         };
-        
-        context.startAbility(want, (err) => {
-          console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
-        });
         ```
     * 布尔（Boolean）
         ```ts
-        import common from '@ohos.app.ability.common';
+        import Want from '@ohos.app.ability.Want';
+
         let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
-        let want = {
+        let want: Want = {
           bundleName: 'com.example.myapplication',
           abilityName: 'FuncAbility',
           parameters: {
             keyForBool: true,
           },
         };
-        
+
         context.startAbility(want, (err) => {
           console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
         });

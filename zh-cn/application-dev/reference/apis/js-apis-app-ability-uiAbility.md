@@ -3,8 +3,8 @@
 UIAbility是包含UI界面的应用组件，提供组件创建、销毁、前后台切换等生命周期回调。
 
 > **说明：**
-> 
-> 本模块首批接口从API version 9 开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  
+>
+> 本模块首批接口从API version 9 开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 > 本模块接口仅可在Stage模型下使用。
 
 ## 导入模块
@@ -39,8 +39,12 @@ UIAbility创建时回调，执行初始化业务逻辑操作。
 **示例：**
 
   ```ts
+  import UIAbility from '@ohos.app.ability.UIAbility';
+  import AbilityConstant from '@ohos.app.ability.AbilityConstant';
+  import Want from '@ohos.app.ability.Want';
+
   class MyUIAbility extends UIAbility {
-      onCreate(want, param) {
+      onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
           console.log('onCreate, want: ${want.abilityName}');
       }
   }
@@ -62,10 +66,13 @@ onWindowStageCreate(windowStage: window.WindowStage): void
 | windowStage | [window.WindowStage](js-apis-window.md#windowstage9) | 是 | WindowStage相关信息。 |
 
 **示例：**
-    
+
   ```ts
+  import UIAbility from '@ohos.app.ability.UIAbility';
+  import window from '@ohos.window';
+
   class MyUIAbility extends UIAbility {
-      onWindowStageCreate(windowStage) {
+      onWindowStageCreate(windowStage: window.WindowStage) {
           console.log('onWindowStageCreate');
       }
   }
@@ -81,8 +88,10 @@ onWindowStageDestroy(): void
 **系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
 
 **示例：**
-    
+
   ```ts
+  import UIAbility from '@ohos.app.ability.UIAbility';
+
   class MyUIAbility extends UIAbility {
       onWindowStageDestroy() {
           console.log('onWindowStageDestroy');
@@ -100,9 +109,10 @@ UIAbility生命周期回调，在销毁时回调，执行资源清理等操作�
 **系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
 
 **示例：**
-    
 
   ```ts
+  import UIAbility from '@ohos.app.ability.UIAbility';
+
   class MyUIAbility extends UIAbility {
       onDestroy() {
           console.log('onDestroy');
@@ -113,6 +123,8 @@ UIAbility生命周期回调，在销毁时回调，执行资源清理等操作�
 在执行完onDestroy生命周期回调后，应用可能会退出，从而可能导致onDestroy中的异步函数未能正确执行，比如异步写入数据库。可以使用异步生命周期，以确保异步onDestroy完成后再继续后续的生命周期。
 
   ```ts
+import UIAbility from '@ohos.app.ability.UIAbility';
+
 class MyUIAbility extends UIAbility {
     async onDestroy() {
         console.log('onDestroy');
@@ -130,8 +142,10 @@ UIAbility生命周期回调，当应用从后台转到前台时触发。
 **系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
 
 **示例：**
-    
+
   ```ts
+  import UIAbility from '@ohos.app.ability.UIAbility';
+
   class MyUIAbility extends UIAbility {
       onForeground() {
           console.log('onForeground');
@@ -149,8 +163,10 @@ UIAbility生命周期回调，当应用从前台转到后台时触发。
 **系统能力**：SystemCapability.Ability.AbilityRuntime.AbilityCore
 
 **示例：**
-    
+
   ```ts
+  import UIAbility from '@ohos.app.ability.UIAbility';
+
   class MyUIAbility extends UIAbility {
       onBackground() {
           console.log('onBackground');
@@ -174,12 +190,16 @@ onNewWant(want: Want, launchParams: AbilityConstant.LaunchParam): void;
 | launchParams | [AbilityConstant.LaunchParam](js-apis-app-ability-abilityConstant.md#abilityconstantlaunchparam) | 是 | UIAbility启动的原因、上次异常退出的原因信息。 |
 
 **示例：**
-    
+
   ```ts
+  import UIAbility from '@ohos.app.ability.UIAbility';
+  import AbilityConstant from '@ohos.app.ability.AbilityConstant';
+  import Want from '@ohos.app.ability.Want';
+
   class MyUIAbility extends UIAbility {
-      onNewWant(want, launchParams) {
-          console.log('onNewWant, want: ${want.abilityName}');
-          console.log('onNewWant, launchParams: ${JSON.stringify(launchParams)}');
+      onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam) {
+          console.log(`onNewWant, want: ${want.abilityName}`);
+          console.log(`onNewWant, launchParam: ${JSON.stringify(launchParam)}`);
       }
   }
   ```

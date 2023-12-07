@@ -3,8 +3,8 @@
 The **AbilityMonitor** module provides monitors for abilities that meet specified conditions. The latest matched abilities are stored in an **AbilityMonitor** object.
 
 > **NOTE**
-> 
-> The initial APIs of this module are supported since API version 9. Newly added APIs will be marked with a superscript to indicate their earliest API version. 
+>
+> The initial APIs of this module are supported since API version 9. Newly added APIs will be marked with a superscript to indicate their earliest API version.
 
 ## Modules to Import
 
@@ -37,21 +37,23 @@ Describes an ability monitor.
 
 ```ts
 import AbilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
+import UIAbility from '@ohos.app.ability.UIAbility';
+import { BusinessError } from '@ohos.base';
 
-function onAbilityCreateCallback(data) {
-    console.info('onAbilityCreateCallback, data: ${JSON.stringify(data)}');
+function onAbilityCreateCallback(data: UIAbility) {
+    console.info(`onAbilityCreateCallback, data: ${JSON.stringify(data)}`);
 }
 
-let monitor = {
+let monitor: AbilityDelegatorRegistry.AbilityMonitor = {
     abilityName: 'abilityname',
     moduleName: "moduleName",
     onAbilityCreate: onAbilityCreateCallback
-};
+}
 
 let abilityDelegator: AbilityDelegatorRegistry.AbilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator();
-abilityDelegator.addAbilityMonitor(monitor, (error : any) => {
+abilityDelegator.addAbilityMonitor(monitor, (error : BusinessError) => {
     if (error) {
-        console.error('addAbilityMonitor fail, error: ${JSON.stringify(error)}');
+        console.error(`addAbilityMonitor fail, error: ${JSON.stringify(error)}`);
     }
 });
 ```

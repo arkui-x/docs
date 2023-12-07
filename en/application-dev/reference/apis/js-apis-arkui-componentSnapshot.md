@@ -11,7 +11,7 @@ The **componentSnapshot** module provides APIs for obtaining component snapshots
 
 ## Modules to Import
 
-```js
+```ts
 import componentSnapshot from "@ohos.arkui.componentSnapshot";
 ```
 
@@ -42,14 +42,14 @@ Obtains the snapshot of a component that has been loaded. This API uses an async
 
 **Example**
 
-```js
+```ts
 import componentSnapshot from '@ohos.arkui.componentSnapshot'
 import image from '@ohos.multimedia.image'
 
 @Entry
 @Component
 struct SnapshotExample {
-  @State pixmap: image.PixelMap = undefined
+  @State pixmap: image.PixelMap|undefined = undefined
 
   build() {
     Column() {
@@ -108,14 +108,14 @@ Obtains the snapshot of a component that has been loaded. This API uses a promis
 
 **Example**
 
-```js
+```ts
 import componentSnapshot from '@ohos.arkui.componentSnapshot'
 import image from '@ohos.multimedia.image'
 
 @Entry
 @Component
 struct SnapshotExample {
-  @State pixmap: image.PixelMap = undefined
+  @State pixmap: image.PixelMap|undefined = undefined
 
   build() {
     Column() {
@@ -147,7 +147,7 @@ struct SnapshotExample {
 
 createFromBuilder(builder: CustomBuilder, callback: AsyncCallback<image.PixelMap>): void
 
-Renders a custom component in the application background and outputs its snapshot. This API uses an asynchronous callback to return the result.
+Renders a custom component in the application background and outputs its snapshot. This API uses an asynchronous callback to return the result. The coordinates and size of the offscreen component's drawing area can be obtained through the callback.
 
 > **NOTE**
 >
@@ -163,7 +163,7 @@ Renders a custom component in the application background and outputs its snapsho
 | Name     | Type                                      | Mandatory  | Description        |
 | -------- | ---------------------------------------- | ---- | ---------- |
 | builder  | [CustomBuilder](../arkui-ts/ts-types.md#custombuilder8) | Yes   | Builder of the custom component.|
-| callback | AsyncCallback&lt;image.PixelMap&gt;      | Yes   | Callback used to return the result.|
+| callback | AsyncCallback&lt;image.PixelMap&gt;      | Yes   | Callback used to return the result. The coordinates and size of the offscreen component's drawing area can be obtained through the callback.|
 
 **Error codes**
 
@@ -176,11 +176,12 @@ Renders a custom component in the application background and outputs its snapsho
 ```ts
 import componentSnapshot from '@ohos.arkui.componentSnapshot'
 import image from '@ohos.multimedia.image'
+import componentUtils from '@ohos.arkui.componentUtils'
 
 @Entry
 @Component
 struct OffscreenSnapshotExample {
-  @State pixmap: image.PixelMap = undefined
+  @State pixmap: image.PixelMap | undefined = undefined
 
   @Builder
   RandomBuilder() {
@@ -196,18 +197,23 @@ struct OffscreenSnapshotExample {
         .width(100)
         .height(50)
         .textAlign(TextAlign.Center)
-    }.width(100)
+    }
+    .width(100)
+    .id("builder")
   }
 
   build() {
     Column() {
       Button("click to generate offscreen UI snapshot")
         .onClick(() => {
-          componentSnapshot.createFromBuilder(this.RandomBuilder.bind(this),
+          componentSnapshot.createFromBuilder(()=>{this.RandomBuilder()},
             (error: Error, pixmap: image.PixelMap) => {
               this.pixmap = pixmap
               // save pixmap to file
               // ....
+              // get component size and location
+              let info = componentUtils.getRectangleById("builder")
+              console.log(info.size.width + ' ' + info.size.height + ' ' + info.localOffset.x + ' ' + info.localOffset.y + ' ' + info.windowOffset.x + ' ' + info.windowOffset.y)
             })
         })
     }.width('80%').margin({ left: 10, top: 5, bottom: 5 }).height(200)
@@ -220,7 +226,7 @@ struct OffscreenSnapshotExample {
 
 createFromBuilder(builder: CustomBuilder): Promise<image.PixelMap>
 
-Renders a custom component in the application background and outputs its snapshot. This API uses a promise to return the result.
+Renders a custom component in the application background and outputs its snapshot. This API uses a promise to return the result. The coordinates and size of the offscreen component's drawing area can be obtained through the callback.
 
 > **NOTE**
 >
@@ -253,11 +259,12 @@ Renders a custom component in the application background and outputs its snapsho
 ```ts
 import componentSnapshot from '@ohos.arkui.componentSnapshot'
 import image from '@ohos.multimedia.image'
+import componentUtils from '@ohos.arkui.componentUtils'
 
 @Entry
 @Component
 struct OffscreenSnapshotExample {
-  @State pixmap: image.PixelMap = undefined
+  @State pixmap: image.PixelMap | undefined = undefined
 
   @Builder
   RandomBuilder() {
@@ -273,18 +280,23 @@ struct OffscreenSnapshotExample {
         .width(100)
         .height(50)
         .textAlign(TextAlign.Center)
-    }.width(100)
+    }
+    .width(100)
+    .id("builder")
   }
 
   build() {
     Column() {
       Button("click to generate offscreen UI snapshot")
         .onClick(() => {
-          componentSnapshot.createFromBuilder(this.RandomBuilder.bind(this))
+          componentSnapshot.createFromBuilder(()=>{this.RandomBuilder()})
             .then((pixmap: image.PixelMap) => {
               this.pixmap = pixmap
               // save pixmap to file
               // ....
+              // get component size and location
+              let info = componentUtils.getRectangleById("builder")
+              console.log(info.size.width + ' ' + info.size.height + ' ' + info.localOffset.x + ' ' + info.localOffset.y + ' ' + info.windowOffset.x + ' ' + info.windowOffset.y)
             })
         })
     }.width('80%').margin({ left: 10, top: 5, bottom: 5 }).height(200)

@@ -51,7 +51,7 @@ Queue的构造函数。
 **示例：**
 
 ```ts
-let queue : Queue<number | string | Object> = new Queue();
+let queue = new Queue();
 ```
 
 
@@ -86,16 +86,12 @@ add(element: T): boolean
 **示例：**
 
 ```ts
-class C1 {
-  name: string = ""
-  age: string = ""
-}
-let queue : Queue<number | string | C1 | number[]> = new Queue();
+let queue = new Queue();
 let result = queue.add("a");
 let result1 = queue.add(1);
 let b = [1, 2, 3];
 let result2 = queue.add(b);
-let c : C1 = {name : "Dylon", age : "13"};
+let c = {name : "Dylon", age : "13"};
 let result3 = queue.add(c);
 ```
 
@@ -124,7 +120,7 @@ pop(): T
 **示例：**
 
 ```ts
-let queue : Queue<number> = new Queue();
+let queue = new Queue();
 queue.add(2);
 queue.add(4);
 queue.add(5);
@@ -158,7 +154,7 @@ getFirst(): T
 **示例：**
 
 ```ts
-let queue : Queue<number> = new Queue();
+let queue = new Queue();
 queue.add(2);
 queue.add(4);
 queue.add(5);
@@ -201,13 +197,13 @@ callbackfn的参数说明：
 **示例：**
 
 ```ts
-let queue : Queue<number> = new Queue();
+let queue = new Queue();
 queue.add(2);
 queue.add(4);
 queue.add(5);
 queue.add(4);
-queue.forEach((value : number, index ?: number) : void => {
-  console.log("value:" + value, "index:" + index);
+queue.forEach((value, index) => {
+    console.log("value:" + value, "index:" + index);
 });
 ```
 
@@ -216,10 +212,6 @@ queue.forEach((value : number, index ?: number) : void => {
 [Symbol.iterator]\(): IterableIterator&lt;T&gt;
 
 返回一个迭代器，迭代器的每一项都是一个 JavaScript 对象,并返回该对象。
-
-> **说明：**
->
-> 本接口不支持在.ets文件中使用
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -239,21 +231,20 @@ queue.forEach((value : number, index ?: number) : void => {
 
 **示例：**
 ```ts
-let queue : Queue<number> = new Queue();
+let queue = new Queue();
 queue.add(2);
 queue.add(4);
 queue.add(5);
 queue.add(4);
 
 // 使用方法一：
-while(queue.length) {
-  let item = queue.pop()
-  console.log("value:" + item);
+for (let item of queue) { 
+  console.log("value:" + item); 
 }
 
 // 使用方法二：
 let iter = queue[Symbol.iterator]();
-let temp: IteratorResult<number> = iter.next().value;
+let temp = iter.next().value;
 while(temp != undefined) {
   console.log("value:" + temp);
   temp = iter.next().value;

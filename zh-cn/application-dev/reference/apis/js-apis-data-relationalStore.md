@@ -14,7 +14,7 @@
 
 ## 导入模块
 
-```js
+```ts
 import relationalStore from '@ohos.data.relationalStore'
 ```
 
@@ -46,17 +46,20 @@ getRdbStore(context: Context, config: StoreConfig, callback: AsyncCallback&lt;Rd
 
 **Stage模型示例：**
 ```ts
-import UIAbility from '@ohos.app.ability.UIAbility'
+import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from "@ohos.base";
+
+let store: relationalStore.RdbStore | undefined = undefined;
 
 class EntryAbility extends UIAbility {
-  onWindowStageCreate(windowStage) {
-    var store;
-    const STORE_CONFIG = {
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    const STORE_CONFIG: relationalStore.StoreConfig = {
       name: "RdbTest.db",
       securityLevel: relationalStore.SecurityLevel.S1
     };
         
-    relationalStore.getRdbStore(this.context, STORE_CONFIG, function (err, rdbStore) {
+    relationalStore.getRdbStore(this.context, STORE_CONFIG, (err: BusinessError, rdbStore: relationalStore.RdbStore) => {
       store = rdbStore;
       if (err) {
         console.error(`Get RdbStore failed, code is ${err.code},message is ${err.message}`);
@@ -102,21 +105,23 @@ getRdbStore(context: Context, config: StoreConfig): Promise&lt;RdbStore&gt;
 **Stage模型示例：**
 
 ```ts
-import UIAbility from '@ohos.app.ability.UIAbility'
+import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from "@ohos.base";
+
+let store: relationalStore.RdbStore | undefined = undefined;
 
 class EntryAbility extends UIAbility {
-  onWindowStageCreate(windowStage) {
-    var store;
-    const STORE_CONFIG = {
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    const STORE_CONFIG: relationalStore.StoreConfig = {
       name: "RdbTest.db",
       securityLevel: relationalStore.SecurityLevel.S1
     };
-        
-    let promise = relationalStore.getRdbStore(this.context, STORE_CONFIG);
-    promise.then(async (rdbStore) => {
+
+    relationalStore.getRdbStore(this.context, STORE_CONFIG).then(async (rdbStore: relationalStore.RdbStore) => {
       store = rdbStore;
       console.info(`Get RdbStore successfully.`)
-    }).catch((err) => {
+    }).catch((err: BusinessError) => {
       console.error(`Get RdbStore failed, code is ${err.code},message is ${err.message}`);
     })
   }
@@ -151,15 +156,20 @@ deleteRdbStore(context: Context, name: string, callback: AsyncCallback&lt;void&g
 **Stage模型示例：**
 
 ```ts
-import UIAbility from '@ohos.app.ability.UIAbility'
+import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from "@ohos.base";
+
+let store: relationalStore.RdbStore | undefined = undefined;
 
 class EntryAbility extends UIAbility {
-  onWindowStageCreate(windowStage){
-    relationalStore.deleteRdbStore(this.context, "RdbTest.db", function (err) {
+  onWindowStageCreate(windowStage: window.WindowStage){
+    relationalStore.deleteRdbStore(this.context, "RdbTest.db", (err: BusinessError) => {
       if (err) {
         console.error(`Delete RdbStore failed, code is ${err.code},message is ${err.message}`);
         return;
       }
+      store = undefined;
       console.info(`Delete RdbStore successfully.`);
     })
   }
@@ -199,14 +209,18 @@ deleteRdbStore(context: Context, name: string): Promise&lt;void&gt;
 **Stage模型示例：**
 
 ```ts
-import UIAbility from '@ohos.app.ability.UIAbility'
+import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from "@ohos.base";
+
+let store: relationalStore.RdbStore | undefined = undefined;
 
 class EntryAbility extends UIAbility {
-  onWindowStageCreate(windowStage){
-    let promise = relationalStore.deleteRdbStore(this.context, "RdbTest.db");
-    promise.then(()=>{
+  onWindowStageCreate(windowStage: window.WindowStage){
+    relationalStore.deleteRdbStore(this.context, "RdbTest.db").then(()=>{
+      store = undefined;
       console.info(`Delete RdbStore successfully.`);
-    }).catch((err) => {
+    }).catch((err: BusinessError) => {
       console.error(`Delete RdbStore failed, code is ${err.code},message is ${err.message}`);
     })
   }
@@ -243,20 +257,24 @@ deleteRdbStore(context: Context, config: StoreConfig, callback: AsyncCallback\<v
 **Stage模型示例：**
 
 ```ts
-import UIAbility from '@ohos.app.ability.UIAbility'
+import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from "@ohos.base";
+
+let store: relationalStore.RdbStore | undefined = undefined;
 
 class EntryAbility extends UIAbility {
-  onWindowStageCreate(windowStage){
-    const STORE_CONFIG = {
+  onWindowStageCreate(windowStage: window.WindowStage){
+    const STORE_CONFIG: relationalStore.StoreConfig = {
       name: "RdbTest.db",
       securityLevel: relationalStore.SecurityLevel.S1
     };
-    relationalStore.deleteRdbStore(this.context, STORE_CONFIG, function (err) {
+    relationalStore.deleteRdbStore(this.context, STORE_CONFIG, (err: BusinessError) => {
       if (err) {
         console.error(`Delete RdbStore failed, code is ${err.code},message is ${err.message}`);
         return;
       }
-      store = null;
+      store = undefined;
       console.info(`Delete RdbStore successfully.`);
     })
   }
@@ -298,19 +316,22 @@ deleteRdbStore(context: Context, config: StoreConfig): Promise\<void>
 **Stage模型示例：**
 
 ```ts
-import UIAbility from '@ohos.app.ability.UIAbility'
+import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from "@ohos.base";
+
+let store: relationalStore.RdbStore | undefined = undefined;
 
 class EntryAbility extends UIAbility {
-  onWindowStageCreate(windowStage){
-    const STORE_CONFIG = {
+  onWindowStageCreate(windowStage: window.WindowStage){
+    const STORE_CONFIG: relationalStore.StoreConfig = {
       name: "RdbTest.db",
       securityLevel: relationalStore.SecurityLevel.S1
     };
-    let promise = relationalStore.deleteRdbStore(this.context, STORE_CONFIG);
-    promise.then(()=>{
-      store = null;
+    relationalStore.deleteRdbStore(this.context, STORE_CONFIG).then(()=>{
+      store = undefined;
       console.info(`Delete RdbStore successfully.`);
-    }).catch((err) => {
+    }).catch((err: BusinessError) => {
       console.error(`Delete RdbStore failed, code is ${err.code},message is ${err.message}`);
     })
   }
@@ -327,6 +348,9 @@ class EntryAbility extends UIAbility {
 | ------------- | ------------- | ---- | ---------------------------------------------------- |
 | name          | string        | 是   | 数据库文件名。                                          |
 | securityLevel | [SecurityLevel](#securitylevel) | 是   | 设置数据库安全级别                     |
+| encrypt       | boolean       | 否   | 指定数据库是否加密，默认不加密。<br/> true:加密。<br/> false:非加密。 |
+| dataGroupId<sup>10+</sup> | string | 否 | 应用组ID，需要向应用市场获取。<br/>**模型约束：** 此属性仅在Stage模型下可用。<br/>从API version 10开始，支持此可选参数。指定在此dataGroupId对应的沙箱路径下创建RdbStore实例，当此参数不填时，默认在本应用沙箱目录下创建RdbStore实例。 |
+| customDir<sup>11+</sup> | string | 否 | 数据库自定义路径。<br/>**使用约束：** 数据库路径大小限制为128字节，如果超过该大小会开库失败，返回错误。<br/>从API version 11开始，支持此可选参数。数据库将在如下的目录结构中被创建：context.databaseDir + "/rdb/" + customDir，其中context.databaseDir是应用沙箱对应的路径，"/rdb/"表示创建的是关系型数据库，customDir表示自定义的路径。当此参数不填时，默认在本应用沙箱目录下创建RdbStore实例。 |
 
 ## SecurityLevel
 
@@ -441,7 +465,7 @@ constructor(name: string)
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 ```
 
@@ -468,7 +492,7 @@ equalTo(field: string, value: ValueType): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "lisi");
 ```
@@ -497,7 +521,7 @@ notEqualTo(field: string, value: ValueType): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.notEqualTo("NAME", "lisi");
 ```
@@ -520,7 +544,7 @@ beginWrap(): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "lisi")
     .beginWrap()
@@ -546,7 +570,7 @@ endWrap(): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "lisi")
     .beginWrap()
@@ -572,7 +596,7 @@ or(): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Lisa")
     .or()
@@ -595,7 +619,7 @@ and(): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Lisa")
     .and()
@@ -625,7 +649,7 @@ contains(field: string, value: string): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.contains("NAME", "os");
 ```
@@ -653,7 +677,7 @@ beginsWith(field: string, value: string): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.beginsWith("NAME", "os");
 ```
@@ -681,7 +705,7 @@ endsWith(field: string, value: string): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.endsWith("NAME", "se");
 ```
@@ -708,7 +732,7 @@ isNull(field: string): RdbPredicates
 
 **示例**：
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.isNull("NAME");
 ```
@@ -735,7 +759,7 @@ isNotNull(field: string): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.isNotNull("NAME");
 ```
@@ -763,7 +787,7 @@ like(field: string, value: string): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.like("NAME", "%os%");
 ```
@@ -791,7 +815,7 @@ glob(field: string, value: string): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.glob("NAME", "?h*g");
 ```
@@ -820,7 +844,7 @@ between(field: string, low: ValueType, high: ValueType): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.between("AGE", 10, 50);
 ```
@@ -849,7 +873,7 @@ notBetween(field: string, low: ValueType, high: ValueType): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.notBetween("AGE", 10, 50);
 ```
@@ -877,7 +901,7 @@ greaterThan(field: string, value: ValueType): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.greaterThan("AGE", 18);
 ```
@@ -905,7 +929,7 @@ lessThan(field: string, value: ValueType): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.lessThan("AGE", 20);
 ```
@@ -933,7 +957,7 @@ greaterThanOrEqualTo(field: string, value: ValueType): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.greaterThanOrEqualTo("AGE", 18);
 ```
@@ -961,7 +985,7 @@ lessThanOrEqualTo(field: string, value: ValueType): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.lessThanOrEqualTo("AGE", 20);
 ```
@@ -988,7 +1012,7 @@ orderByAsc(field: string): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.orderByAsc("NAME");
 ```
@@ -1015,7 +1039,7 @@ orderByDesc(field: string): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.orderByDesc("AGE");
 ```
@@ -1036,7 +1060,7 @@ distinct(): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Rose").distinct();
 ```
@@ -1063,7 +1087,7 @@ limitAs(value: number): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Rose").limitAs(3);
 ```
@@ -1090,7 +1114,7 @@ offsetAs(rowOffset: number): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Rose").offsetAs(3);
 ```
@@ -1117,7 +1141,7 @@ groupBy(fields: Array&lt;string&gt;): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.groupBy(["AGE", "NAME"]);
 ```
@@ -1145,7 +1169,7 @@ indexedBy(field: string): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.indexedBy("SALARY_INDEX");
 ```
@@ -1173,7 +1197,7 @@ in(field: string, value: Array&lt;ValueType&gt;): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.in("AGE", [18, 20]);
 ```
@@ -1201,7 +1225,7 @@ notIn(field: string, value: Array&lt;ValueType&gt;): RdbPredicates
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.notIn("NAME", ["Lisa", "Rose"]);
 ```
@@ -1222,11 +1246,13 @@ predicates.notIn("NAME", ["Lisa", "Rose"]);
 
 **示例：**
 
-```js
+```ts
 // 设置数据库版本
-store.version = 3;
-// 获取数据库版本
-console.info(`RdbStore version is ${store.version}`);
+if(store != undefined) {
+  (store as relationalStore.RdbStore).version = 3;
+  // 获取数据库版本
+  console.info(`RdbStore version is ${store.version}`);
+}
 ```
 
 ### insert
@@ -1256,20 +1282,32 @@ insert(table: string, values: ValuesBucket, callback: AsyncCallback&lt;number&gt
 
 **示例：**
 
-```js
-const valueBucket = {
-  "NAME": "Lisa",
-  "AGE": 18,
-  "SALARY": 100.5,
-  "CODES": new Uint8Array([1, 2, 3, 4, 5]),
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+
+let key1 = "NAME";
+let key2 = "AGE";
+let key3 = "SALARY";
+let key4 = "CODES";
+let value1 = "Lisa";
+let value2 = 18;
+let value3 = 100.5;
+let value4 = new Uint8Array([1, 2, 3, 4, 5]);
+const valueBucket: ValuesBucket = {
+  key1: value1,
+  key2: value2,
+  key3: value3,
+  key4: value4,
 };
-store.insert("EMPLOYEE", valueBucket, function (err, rowId) {
-  if (err) {
-    console.error(`Insert is failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`Insert is successful, rowId = ${rowId}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).insert("EMPLOYEE", valueBucket, (err: BusinessError, rowId: number) => {
+    if (err) {
+      console.error(`Insert is failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`Insert is successful, rowId = ${rowId}`);
+  })
+}
 ```
 
 ### insert<sup>10+</sup>
@@ -1300,20 +1338,33 @@ insert(table: string, values: ValuesBucket,  conflict: ConflictResolution, callb
 
 **示例：**
 
-```js
-const valueBucket = {
-  "NAME": "Lisa",
-  "AGE": 18,
-  "SALARY": 100.5,
-  "CODES": new Uint8Array([1, 2, 3, 4, 5]),
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+
+let key1 = "NAME";
+let key2 = "AGE";
+let key3 = "SALARY";
+let key4 = "CODES";
+let value1 = "Lisa";
+let value2 = 18;
+let value3 = 100.5;
+let value4 = new Uint8Array([1, 2, 3, 4, 5]);
+const valueBucket: ValuesBucket = {
+  key1: value1,
+  key2: value2,
+  key3: value3,
+  key4: value4,
 };
-store.insert("EMPLOYEE", valueBucket, relationalStore.ConflictResolution.ON_CONFLICT_REPLACE, function (err, rowId) {
-  if (err) {
-    console.error(`Insert is failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`Insert is successful, rowId = ${rowId}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).insert("EMPLOYEE", valueBucket, relationalStore.ConflictResolution.ON_CONFLICT_REPLACE,
+    (err: BusinessError, rowId: number) => {
+      if (err) {
+        console.error(`Insert is failed, code is ${err.code},message is ${err.message}`);
+        return;
+      }
+      console.info(`Insert is successful, rowId = ${rowId}`);
+  })
+}
 ```
 
 ### insert
@@ -1348,19 +1399,31 @@ insert(table: string, values: ValuesBucket):Promise&lt;number&gt;
 
 **示例：**
 
-```js
-const valueBucket = {
-  "NAME": "Lisa",
-  "AGE": 18,
-  "SALARY": 100.5,
-  "CODES": new Uint8Array([1, 2, 3, 4, 5]),
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+import { BusinessError } from "@ohos.base";
+
+let key1 = "NAME";
+let key2 = "AGE";
+let key3 = "SALARY";
+let key4 = "CODES";
+let value1 = "Lisa";
+let value2 = 18;
+let value3 = 100.5;
+let value4 = new Uint8Array([1, 2, 3, 4, 5]);
+const valueBucket: ValuesBucket = {
+  key1: value1,
+  key2: value2,
+  key3: value3,
+  key4: value4,
 };
-let promise = store.insert("EMPLOYEE", valueBucket);
-promise.then((rowId) => {
-  console.info(`Insert is successful, rowId = ${rowId}`);
-}).catch((err) => {
-  console.error(`Insert is failed, code is ${err.code},message is ${err.message}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).insert("EMPLOYEE", valueBucket).then((rowId: number) => {
+    console.info(`Insert is successful, rowId = ${rowId}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Insert is failed, code is ${err.code},message is ${err.message}`);
+  })
+}
 ```
 
 ### insert<sup>10+</sup>
@@ -1396,19 +1459,31 @@ insert(table: string, values: ValuesBucket,  conflict: ConflictResolution):Promi
 
 **示例：**
 
-```js
-const valueBucket = {
-  "NAME": "Lisa",
-  "AGE": 18,
-  "SALARY": 100.5,
-  "CODES": new Uint8Array([1, 2, 3, 4, 5]),
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+import { BusinessError } from "@ohos.base";
+
+let key1 = "NAME";
+let key2 = "AGE";
+let key3 = "SALARY";
+let key4 = "CODES";
+let value1 = "Lisa";
+let value2 = 18;
+let value3 = 100.5;
+let value4 = new Uint8Array([1, 2, 3, 4, 5]);
+const valueBucket: ValuesBucket = {
+  key1: value1,
+  key2: value2,
+  key3: value3,
+  key4: value4,
 };
-let promise = store.insert("EMPLOYEE", valueBucket, relationalStore.ConflictResolution.ON_CONFLICT_REPLACE);
-promise.then((rowId) => {
-  console.info(`Insert is successful, rowId = ${rowId}`);
-}).catch((err) => {
-  console.error(`Insert is failed, code is ${err.code},message is ${err.message}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).insert("EMPLOYEE", valueBucket, relationalStore.ConflictResolution.ON_CONFLICT_REPLACE).then((rowId: number) => {
+    console.info(`Insert is successful, rowId = ${rowId}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Insert is failed, code is ${err.code},message is ${err.message}`);
+  })
+}
 ```
 
 ### batchInsert
@@ -1438,34 +1513,54 @@ batchInsert(table: string, values: Array&lt;ValuesBucket&gt;, callback: AsyncCal
 
 **示例：**
 
-```js
-const valueBucket1 = {
-  "NAME": "Lisa",
-  "AGE": 18,
-  "SALARY": 100.5,
-  "CODES": new Uint8Array([1, 2, 3, 4, 5])
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+
+let key1 = "NAME";
+let key2 = "AGE";
+let key3 = "SALARY";
+let key4 = "CODES";
+let value1 = "Lisa";
+let value2 = 18;
+let value3 = 100.5;
+let value4 = new Uint8Array([1, 2, 3, 4, 5]);
+let value5 = "Jack";
+let value6 = 19;
+let value7 = 101.5;
+let value8 = new Uint8Array([6, 7, 8, 9, 10]);
+let value9 = "Tom";
+let value10 = 20;
+let value11 = 102.5;
+let value12 = new Uint8Array([11, 12, 13, 14, 15]);
+const valueBucket1: ValuesBucket = {
+  key1: value1,
+  key2: value2,
+  key3: value3,
+  key4: value4,
 };
-const valueBucket2 = {
-  "NAME": "Jack",
-  "AGE": 19,
-  "SALARY": 101.5,
-  "CODES": new Uint8Array([6, 7, 8, 9, 10])
+const valueBucket2: ValuesBucket = {
+  key1: value5,
+  key2: value6,
+  key3: value7,
+  key4: value8,
 };
-const valueBucket3 = {
-  "NAME": "Tom",
-  "AGE": 20,
-  "SALARY": 102.5,
-  "CODES": new Uint8Array([11, 12, 13, 14, 15])
+const valueBucket3: ValuesBucket = {
+  key1: value9,
+  key2: value10,
+  key3: value11,
+  key4: value12,
 };
 
 let valueBuckets = new Array(valueBucket1, valueBucket2, valueBucket3);
-store.batchInsert("EMPLOYEE", valueBuckets, function(err, insertNum) {
-  if (err) {
-    console.error(`batchInsert is failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`batchInsert is successful, the number of values that were inserted = ${insertNum}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).batchInsert("EMPLOYEE", valueBuckets, (err, insertNum) => {
+    if (err) {
+      console.error(`batchInsert is failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`batchInsert is successful, the number of values that were inserted = ${insertNum}`);
+  })
+}
 ```
 
 ### batchInsert
@@ -1500,33 +1595,53 @@ batchInsert(table: string, values: Array&lt;ValuesBucket&gt;):Promise&lt;number&
 
 **示例：**
 
-```js
-const valueBucket1 = {
-  "NAME": "Lisa",
-  "AGE": 18,
-  "SALARY": 100.5,
-  "CODES": new Uint8Array([1, 2, 3, 4, 5])
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+import { BusinessError } from "@ohos.base";
+
+let key1 = "NAME";
+let key2 = "AGE";
+let key3 = "SALARY";
+let key4 = "CODES";
+let value1 = "Lisa";
+let value2 = 18;
+let value3 = 100.5;
+let value4 = new Uint8Array([1, 2, 3, 4, 5]);
+let value5 = "Jack";
+let value6 = 19;
+let value7 = 101.5;
+let value8 = new Uint8Array([6, 7, 8, 9, 10]);
+let value9 = "Tom";
+let value10 = 20;
+let value11 = 102.5;
+let value12 = new Uint8Array([11, 12, 13, 14, 15]);
+const valueBucket1: ValuesBucket = {
+  key1: value1,
+  key2: value2,
+  key3: value3,
+  key4: value4,
 };
-const valueBucket2 = {
-  "NAME": "Jack",
-  "AGE": 19,
-  "SALARY": 101.5,
-  "CODES": new Uint8Array([6, 7, 8, 9, 10])
+const valueBucket2: ValuesBucket = {
+  key1: value5,
+  key2: value6,
+  key3: value7,
+  key4: value8,
 };
-const valueBucket3 = {
-  "NAME": "Tom",
-  "AGE": 20,
-  "SALARY": 102.5,
-  "CODES": new Uint8Array([11, 12, 13, 14, 15])
+const valueBucket3: ValuesBucket = {
+  key1: value9,
+  key2: value10,
+  key3: value11,
+  key4: value12,
 };
 
 let valueBuckets = new Array(valueBucket1, valueBucket2, valueBucket3);
-let promise = store.batchInsert("EMPLOYEE", valueBuckets);
-promise.then((insertNum) => {
-  console.info(`batchInsert is successful, the number of values that were inserted = ${insertNum}`);
-}).catch((err) => {
-  console.error(`batchInsert is failed, code is ${err.code},message is ${err.message}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).batchInsert("EMPLOYEE", valueBuckets).then((insertNum: number) => {
+    console.info(`batchInsert is successful, the number of values that were inserted = ${insertNum}`);
+  }).catch((err: BusinessError) => {
+    console.error(`batchInsert is failed, code is ${err.code},message is ${err.message}`);
+  })
+}
 ```
 
 ### update
@@ -1556,22 +1671,34 @@ update(values: ValuesBucket, predicates: RdbPredicates, callback: AsyncCallback&
 
 **示例：**
 
-```js
-const valueBucket = {
-  "NAME": "Rose",
-  "AGE": 22,
-  "SALARY": 200.5,
-  "CODES": new Uint8Array([1, 2, 3, 4, 5]),
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+
+let key1 = "NAME";
+let key2 = "AGE";
+let key3 = "SALARY";
+let key4 = "CODES";
+let value1 = "Rose";
+let value2 = 22;
+let value3 = 200.5;
+let value4 = new Uint8Array([1, 2, 3, 4, 5]);
+const valueBucket: ValuesBucket = {
+  key1: value1,
+  key2: value2,
+  key3: value3,
+  key4: value4,
 };
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Lisa");
-store.update(valueBucket, predicates, function (err, rows) {
-  if (err) {
-    console.error(`Updated failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`Updated row count: ${rows}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).update(valueBucket, predicates,(err, rows) => {
+    if (err) {
+      console.error(`Updated failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`Updated row count: ${rows}`);
+  })
+}
 ```
 
 ### update<sup>10+</sup>
@@ -1602,22 +1729,34 @@ update(values: ValuesBucket, predicates: RdbPredicates, conflict: ConflictResolu
 
 **示例：**
 
-```js
-const valueBucket = {
-  "NAME": "Rose",
-  "AGE": 22,
-  "SALARY": 200.5,
-  "CODES": new Uint8Array([1, 2, 3, 4, 5]),
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+
+let key1 = "NAME";
+let key2 = "AGE";
+let key3 = "SALARY";
+let key4 = "CODES";
+let value1 = "Rose";
+let value2 = 22;
+let value3 = 200.5;
+let value4 = new Uint8Array([1, 2, 3, 4, 5]);
+const valueBucket: ValuesBucket = {
+  key1: value1,
+  key2: value2,
+  key3: value3,
+  key4: value4,
 };
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Lisa");
-store.update(valueBucket, predicates, relationalStore.ConflictResolution.ON_CONFLICT_REPLACE, function (err, rows) {
-  if (err) {
-    console.error(`Updated failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`Updated row count: ${rows}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).update(valueBucket, predicates, relationalStore.ConflictResolution.ON_CONFLICT_REPLACE, (err, rows) => {
+    if (err) {
+      console.error(`Updated failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`Updated row count: ${rows}`);
+  })
+}
 ```
 
 ### update
@@ -1652,21 +1791,33 @@ update(values: ValuesBucket, predicates: RdbPredicates):Promise&lt;number&gt;
 
 **示例：**
 
-```js
-const valueBucket = {
-  "NAME": "Rose",
-  "AGE": 22,
-  "SALARY": 200.5,
-  "CODES": new Uint8Array([1, 2, 3, 4, 5]),
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+import { BusinessError } from "@ohos.base";
+
+let key1 = "NAME";
+let key2 = "AGE";
+let key3 = "SALARY";
+let key4 = "CODES";
+let value1 = "Rose";
+let value2 = 22;
+let value3 = 200.5;
+let value4 = new Uint8Array([1, 2, 3, 4, 5]);
+const valueBucket: ValuesBucket = {
+  key1: value1,
+  key2: value2,
+  key3: value3,
+  key4: value4,
 };
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Lisa");
-let promise = store.update(valueBucket, predicates);
-promise.then(async (rows) => {
-  console.info(`Updated row count: ${rows}`);
-}).catch((err) => {
-  console.error(`Updated failed, code is ${err.code},message is ${err.message}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).update(valueBucket, predicates).then(async (rows: Number) => {
+    console.info(`Updated row count: ${rows}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Updated failed, code is ${err.code},message is ${err.message}`);
+  })
+}
 ```
 
 ### update<sup>10+</sup>
@@ -1702,21 +1853,33 @@ update(values: ValuesBucket, predicates: RdbPredicates, conflict: ConflictResolu
 
 **示例：**
 
-```js
-const valueBucket = {
-  "NAME": "Rose",
-  "AGE": 22,
-  "SALARY": 200.5,
-  "CODES": new Uint8Array([1, 2, 3, 4, 5]),
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+import { BusinessError } from "@ohos.base";
+
+let key1 = "NAME";
+let key2 = "AGE";
+let key3 = "SALARY";
+let key4 = "CODES";
+let value1 = "Rose";
+let value2 = 22;
+let value3 = 200.5;
+let value4 = new Uint8Array([1, 2, 3, 4, 5]);
+const valueBucket: ValuesBucket = {
+  key1: value1,
+  key2: value2,
+  key3: value3,
+  key4: value4,
 };
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Lisa");
-let promise = store.update(valueBucket, predicates, relationalStore.ConflictResolution.ON_CONFLICT_REPLACE);
-promise.then(async (rows) => {
-  console.info(`Updated row count: ${rows}`);
-}).catch((err) => {
-  console.error(`Updated failed, code is ${err.code},message is ${err.message}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).update(valueBucket, predicates, relationalStore.ConflictResolution.ON_CONFLICT_REPLACE).then(async (rows: Number) => {
+    console.info(`Updated row count: ${rows}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Updated failed, code is ${err.code},message is ${err.message}`);
+  })
+}
 ```
 
 ### delete
@@ -1745,16 +1908,18 @@ delete(predicates: RdbPredicates, callback: AsyncCallback&lt;number&gt;):void
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Lisa");
-store.delete(predicates, function (err, rows) {
-  if (err) {
-    console.error(`Delete failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`Delete rows: ${rows}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).delete(predicates, (err, rows) => {
+    if (err) {
+      console.error(`Delete failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`Delete rows: ${rows}`);
+  })
+}
 ```
 
 ### delete
@@ -1788,15 +1953,18 @@ delete(predicates: RdbPredicates):Promise&lt;number&gt;
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from "@ohos.base";
+
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Lisa");
-let promise = store.delete(predicates);
-promise.then((rows) => {
-  console.info(`Delete rows: ${rows}`);
-}).catch((err) => {
-  console.error(`Delete failed, code is ${err.code},message is ${err.message}`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).delete(predicates).then((rows: Number) => {
+    console.info(`Delete rows: ${rows}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Delete failed, code is ${err.code},message is ${err.message}`);
+  })
+}
 ```
 
 ### query<sup>10+</sup>
@@ -1824,26 +1992,28 @@ query(predicates: RdbPredicates, callback: AsyncCallback&lt;ResultSet&gt;):void
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Rose");
-store.query(predicates, function (err, resultSet) {
-  if (err) {
-    console.error(`Query failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
-  // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
-  while(resultSet.goToNextRow()) {
-    const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
-    const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
-    const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
-    const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
-    console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
-  }
-  // 释放数据集的内存
-  resultSet.close();
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).query(predicates, (err, resultSet) => {
+    if (err) {
+      console.error(`Query failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
+    // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
+    while (resultSet.goToNextRow()) {
+      const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
+      const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
+      const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
+      const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
+      console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
+    }
+    // 释放数据集的内存
+    resultSet.close();
+  })
+}
 ```
 
 ### query
@@ -1872,26 +2042,28 @@ query(predicates: RdbPredicates, columns: Array&lt;string&gt;, callback: AsyncCa
 
 **示例：**
 
-```js
+```ts
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Rose");
-store.query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"], function (err, resultSet) {
-  if (err) {
-    console.error(`Query failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
-  // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
-  while(resultSet.goToNextRow()) {
-    const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
-    const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
-    const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
-    const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
-    console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
-  }
-  // 释放数据集的内存
-  resultSet.close();
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"], (err, resultSet) => {
+    if (err) {
+      console.error(`Query failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
+    // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
+    while (resultSet.goToNextRow()) {
+      const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
+      const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
+      const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
+      const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
+      console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
+    }
+    // 释放数据集的内存
+    resultSet.close();
+  })
+}
 ```
 
 ### query
@@ -1925,26 +2097,29 @@ query(predicates: RdbPredicates, columns?: Array&lt;string&gt;):Promise&lt;Resul
 
 **示例：**
 
-  ```js
+```ts
+import { BusinessError } from "@ohos.base";
+
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("NAME", "Rose");
-let promise = store.query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"]);
-promise.then((resultSet) => {
-  console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
-  // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
-  while(resultSet.goToNextRow()) {
-    const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
-    const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
-    const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
-    const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
-    console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
-  }
-  // 释放数据集的内存
-  resultSet.close();
-}).catch((err) => {
-  console.error(`Query failed, code is ${err.code},message is ${err.message}`);
-})
-  ```
+if(store != undefined) {
+  (store as relationalStore.RdbStore).query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"]).then((resultSet: relationalStore.ResultSet) => {
+    console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
+    // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
+    while (resultSet.goToNextRow()) {
+      const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
+      const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
+      const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
+      const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
+      console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
+    }
+    // 释放数据集的内存
+    resultSet.close();
+  }).catch((err: BusinessError) => {
+    console.error(`Query failed, code is ${err.code},message is ${err.message}`);
+  })
+}
+```
 
 ### querySql<sup>10+</sup>
 
@@ -1971,24 +2146,26 @@ querySql(sql: string, callback: AsyncCallback&lt;ResultSet&gt;):void
 
 **示例：**
 
-```js
-store.querySql("SELECT * FROM EMPLOYEE CROSS JOIN BOOK WHERE BOOK.NAME = 'sanguo'", function (err, resultSet) {
-  if (err) {
-    console.error(`Query failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
-  // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
-  while(resultSet.goToNextRow()) {
-    const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
-    const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
-    const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
-    const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
-    console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
-  }
-  // 释放数据集的内存
-  resultSet.close();
-})
+```ts
+if(store != undefined) {
+  (store as relationalStore.RdbStore).querySql("SELECT * FROM EMPLOYEE CROSS JOIN BOOK WHERE BOOK.NAME = 'sanguo'", (err, resultSet) => {
+    if (err) {
+      console.error(`Query failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
+    // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
+    while (resultSet.goToNextRow()) {
+      const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
+      const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
+      const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
+      const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
+      console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
+    }
+    // 释放数据集的内存
+    resultSet.close();
+  })
+}
 ```
 
 ### querySql
@@ -2017,24 +2194,26 @@ querySql(sql: string, bindArgs: Array&lt;ValueType&gt;, callback: AsyncCallback&
 
 **示例：**
 
-```js
-store.querySql("SELECT * FROM EMPLOYEE CROSS JOIN BOOK WHERE BOOK.NAME = ?", ['sanguo'], function (err, resultSet) {
-  if (err) {
-    console.error(`Query failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
-  // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
-  while(resultSet.goToNextRow()) {
-    const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
-    const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
-    const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
-    const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
-    console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
-  }
-  // 释放数据集的内存
-  resultSet.close();
-})
+```ts
+if(store != undefined) {
+  (store as relationalStore.RdbStore).querySql("SELECT * FROM EMPLOYEE CROSS JOIN BOOK WHERE BOOK.NAME = ?", ['sanguo'], (err, resultSet) => {
+    if (err) {
+      console.error(`Query failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
+    // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
+    while (resultSet.goToNextRow()) {
+      const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
+      const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
+      const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
+      const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
+      console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
+    }
+    // 释放数据集的内存
+    resultSet.close();
+  })
+}
 ```
 
 ### querySql
@@ -2068,23 +2247,26 @@ querySql(sql: string, bindArgs?: Array&lt;ValueType&gt;):Promise&lt;ResultSet&gt
 
 **示例：**
 
-```js
-let promise = store.querySql("SELECT * FROM EMPLOYEE CROSS JOIN BOOK WHERE BOOK.NAME = 'sanguo'");
-promise.then((resultSet) => {
-  console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
-  // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
-  while(resultSet.goToNextRow()) {
-    const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
-    const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
-    const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
-    const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
-    console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
-  }
-  // 释放数据集的内存
-  resultSet.close();
-}).catch((err) => {
-  console.error(`Query failed, code is ${err.code},message is ${err.message}`);
-})
+```ts
+import { BusinessError } from "@ohos.base";
+
+if(store != undefined) {
+  (store as relationalStore.RdbStore).querySql("SELECT * FROM EMPLOYEE CROSS JOIN BOOK WHERE BOOK.NAME = 'sanguo'").then((resultSet: relationalStore.ResultSet) => {
+    console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
+    // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
+    while (resultSet.goToNextRow()) {
+      const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
+      const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
+      const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
+      const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
+      console.info(`id=${id}, name=${name}, age=${age}, salary=${salary}`);
+    }
+    // 释放数据集的内存
+    resultSet.close();
+  }).catch((err: BusinessError) => {
+    console.error(`Query failed, code is ${err.code},message is ${err.message}`);
+  })
+}
 ```
 
 ### executeSql<sup>10+</sup>
@@ -2113,15 +2295,17 @@ executeSql(sql: string, callback: AsyncCallback&lt;void&gt;):void
 
 **示例：**
 
-```js
+```ts
 const SQL_DELETE_TABLE = "DELETE FROM test WHERE name = 'zhangsan'"
-store.executeSql(SQL_DELETE_TABLE, function(err) {
-  if (err) {
-    console.error(`ExecuteSql failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`Delete table done.`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).executeSql(SQL_DELETE_TABLE, (err) => {
+    if (err) {
+      console.error(`ExecuteSql failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`Delete table done.`);
+  })
+}
 ```
 
 ### executeSql
@@ -2151,15 +2335,17 @@ executeSql(sql: string, bindArgs: Array&lt;ValueType&gt;, callback: AsyncCallbac
 
 **示例：**
 
-```js
+```ts
 const SQL_DELETE_TABLE = "DELETE FROM test WHERE name = ?"
-store.executeSql(SQL_DELETE_TABLE, ['zhangsan'], function(err) {
-  if (err) {
-    console.error(`ExecuteSql failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`Delete table done.`);
-})
+if(store != undefined) {
+  (store as relationalStore.RdbStore).executeSql(SQL_DELETE_TABLE, ['zhangsan'], (err) => {
+    if (err) {
+      console.error(`ExecuteSql failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`Delete table done.`);
+  })
+}
 ```
 
 ### executeSql
@@ -2194,14 +2380,17 @@ executeSql(sql: string, bindArgs?: Array&lt;ValueType&gt;):Promise&lt;void&gt;
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from "@ohos.base";
+
 const SQL_DELETE_TABLE = "DELETE FROM test WHERE name = 'zhangsan'"
-let promise = store.executeSql(SQL_DELETE_TABLE);
-promise.then(() => {
+if(store != undefined) {
+  (store as relationalStore.RdbStore).executeSql(SQL_DELETE_TABLE).then(() => {
     console.info(`Delete table done.`);
-}).catch((err) => {
+  }).catch((err: BusinessError) => {
     console.error(`ExecuteSql failed, code is ${err.code},message is ${err.message}`);
-})
+  })
+}
 ```
 
 ### beginTransaction
@@ -2223,24 +2412,35 @@ beginTransaction():void
 
 **示例：**
 
-```js
+```ts
 import featureAbility from '@ohos.ability.featureAbility'
-let context = featureAbility.getContext();
-const STORE_CONFIG = { 
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+
+let context = getContext(this);
+
+let key1 = "name";
+let key2 = "age";
+let key3 = "SALARY";
+let key4 = "blobType";
+let value1 = "Lisi";
+let value2 = 18;
+let value3 = 100.5;
+let value4 = new Uint8Array([1, 2, 3]);
+const STORE_CONFIG: relationalStore.StoreConfig = {
   name: "RdbTest.db",
   securityLevel: relationalStore.SecurityLevel.S1
 };
-relationalStore.getRdbStore(context, STORE_CONFIG, async function (err, store) {
+relationalStore.getRdbStore(context, STORE_CONFIG, async (err, store) => {
   if (err) {
     console.error(`GetRdbStore failed, code is ${err.code},message is ${err.message}`);
     return;
   }
   store.beginTransaction();
-  const valueBucket = {
-    "name": "lisi",
-	"age": 18,
-	"salary": 100.5,
-	"blobType": new Uint8Array([1, 2, 3]),
+  const valueBucket: ValuesBucket = {
+    key1: value1,
+    key2: value2,
+    key3: value3,
+    key4: value4,
   };
   await store.insert("test", valueBucket);
   store.commit();
@@ -2257,24 +2457,34 @@ commit():void
 
 **示例：**
 
-```js
-import featureAbility from '@ohos.ability.featureAbility'
-let context = featureAbility.getContext();
-const STORE_CONFIG = { 
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+
+let context = getContext(this);
+
+let key1 = "name";
+let key2 = "age";
+let key3 = "SALARY";
+let key4 = "blobType";
+let value1 = "Lisi";
+let value2 = 18;
+let value3 = 100.5;
+let value4 = new Uint8Array([1, 2, 3]);
+const STORE_CONFIG: relationalStore.StoreConfig = {
   name: "RdbTest.db",
   securityLevel: relationalStore.SecurityLevel.S1
 };
-relationalStore.getRdbStore(context, STORE_CONFIG, async function (err, store) {
+relationalStore.getRdbStore(context, STORE_CONFIG, async (err, store) => {
   if (err) {
-     console.error(`GetRdbStore failed, code is ${err.code},message is ${err.message}`);
-     return;
+    console.error(`GetRdbStore failed, code is ${err.code},message is ${err.message}`);
+    return;
   }
   store.beginTransaction();
-  const valueBucket = {
-	"name": "lisi",
-	"age": 18,
-	"salary": 100.5,
-	"blobType": new Uint8Array([1, 2, 3]),
+  const valueBucket: ValuesBucket = {
+    key1: value1,
+    key2: value2,
+    key3: value3,
+    key4: value4,
   };
   await store.insert("test", valueBucket);
   store.commit();
@@ -2291,31 +2501,42 @@ rollBack():void
 
 **示例：**
 
-```js
-import featureAbility from '@ohos.ability.featureAbility'
-let context = featureAbility.getContext();
-const STORE_CONFIG = { 
+```ts
+import { ValuesBucket } from '@ohos.data.ValuesBucket';
+
+let context = getContext(this);
+
+let key1 = "name";
+let key2 = "age";
+let key3 = "SALARY";
+let key4 = "blobType";
+let value1 = "Lisi";
+let value2 = 18;
+let value3 = 100.5;
+let value4 = new Uint8Array([1, 2, 3]);
+const STORE_CONFIG: relationalStore.StoreConfig = {
   name: "RdbTest.db",
   securityLevel: relationalStore.SecurityLevel.S1
 };
-relationalStore.getRdbStore(context, STORE_CONFIG, async function (err, store) {
+relationalStore.getRdbStore(context, STORE_CONFIG, async (err, store) => {
   if (err) {
     console.error(`GetRdbStore failed, code is ${err.code},message is ${err.message}`);
     return;
   }
   try {
     store.beginTransaction()
-    const valueBucket = {
-	  "id": 1,
-	  "name": "lisi",
-	  "age": 18,
-	  "salary": 100.5,
-	  "blobType": new Uint8Array([1, 2, 3]),
-	};
-	await store.insert("test", valueBucket);
+    const valueBucket: ValuesBucket = {
+      key1: value1,
+      key2: value2,
+      key3: value3,
+      key4: value4,
+    };
+    await store.insert("test", valueBucket);
     store.commit();
   } catch (err) {
-    console.error(`Transaction failed, code is ${err.code},message is ${err.message}`);
+    let code = (err as BusinessError).code;
+    let message = (err as BusinessError).message
+    console.error(`Transaction failed, code is ${code},message is ${message}`);
     store.rollBack();
   }
 })
@@ -2346,14 +2567,16 @@ backup(destName:string, callback: AsyncCallback&lt;void&gt;):void
 
 **示例：**
 
-```js
-store.backup("dbBackup.db", function(err) {
-  if (err) {
-    console.error(`Backup failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`Backup success.`);
-})
+```ts
+if(store != undefined) {
+  (store as relationalStore.RdbStore).backup("dbBackup.db", (err) => {
+    if (err) {
+      console.error(`Backup failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`Backup success.`);
+  })
+}
 ```
 
 ### backup
@@ -2386,13 +2609,17 @@ backup(destName:string): Promise&lt;void&gt;
 
 **示例：**
 
-```js
-let promiseBackup = store.backup("dbBackup.db");
-promiseBackup.then(()=>{
-  console.info(`Backup success.`);
-}).catch((err)=>{
-  console.error(`Backup failed, code is ${err.code},message is ${err.message}`);
-})
+```ts
+import { BusinessError } from "@ohos.base";
+
+if(store != undefined) {
+  let promiseBackup = (store as relationalStore.RdbStore).backup("dbBackup.db");
+  promiseBackup.then(() => {
+    console.info(`Backup success.`);
+  }).catch((err: BusinessError) => {
+    console.error(`Backup failed, code is ${err.code},message is ${err.message}`);
+  })
+}
 ```
 
 ### restore
@@ -2420,14 +2647,16 @@ restore(srcName:string, callback: AsyncCallback&lt;void&gt;):void
 
 **示例：**
 
-```js
-store.restore("dbBackup.db", function(err) {
-  if (err) {
-    console.error(`Restore failed, code is ${err.code},message is ${err.message}`);
-    return;
-  }
-  console.info(`Restore success.`);
-})
+```ts
+if(store != undefined) {
+  (store as relationalStore.RdbStore).restore("dbBackup.db", (err) => {
+    if (err) {
+      console.error(`Restore failed, code is ${err.code},message is ${err.message}`);
+      return;
+    }
+    console.info(`Restore success.`);
+  })
+}
 ```
 
 ### restore
@@ -2460,13 +2689,17 @@ restore(srcName:string): Promise&lt;void&gt;
 
 **示例：**
 
-```js
-let promiseRestore = store.restore("dbBackup.db");
-promiseRestore.then(()=>{
-  console.info(`Restore success.`);
-}).catch((err)=>{
-  console.error(`Restore failed, code is ${err.code},message is ${err.message}`);
-})
+```ts
+import { BusinessError } from "@ohos.base";
+
+if(store != undefined) {
+  let promiseRestore = (store as relationalStore.RdbStore).restore("dbBackup.db");
+  promiseRestore.then(() => {
+    console.info(`Restore success.`);
+  }).catch((err: BusinessError) => {
+    console.error(`Restore failed, code is ${err.code},message is ${err.message}`);
+  })
+}
 ```
 
 ## ResultSet
@@ -2477,16 +2710,17 @@ promiseRestore.then(()=>{
 
 首先需要获取resultSet对象。
 
-```js
-let resultSet = null;
+```ts
+let resultSet: relationalStore.ResultSet | undefined = undefined;
 let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.equalTo("AGE", 18);
-let promise = store.query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"]);
-promise.then((result) => {
-  resultSet = result;
-  console.info(`resultSet columnNames: ${resultSet.columnNames}`);
-  console.info(`resultSet columnCount: ${resultSet.columnCount}`);
-});
+if(store != undefined) {
+  (store as relationalStore.RdbStore).query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"]).then((result: relationalStore.ResultSet) => {
+    resultSet = result;
+    console.info(`resultSet columnNames: ${resultSet.columnNames}`);
+    console.info(`resultSet columnCount: ${resultSet.columnCount}`);
+  });
+}
 ```
 
 ### 属性
@@ -2535,13 +2769,14 @@ getColumnIndex(columnName: string): number
 
 **示例：**
 
-  ```js
-resultSet.goToFirstRow();
-const id = resultSet.getLong(resultSet.getColumnIndex("ID"));
-const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
-const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
-const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
-  ```
+```ts
+if(resultSet != undefined) {
+  const id = (resultSet as relationalStore.ResultSet).getLong((resultSet as relationalStore.ResultSet).getColumnIndex("ID"));
+  const name = (resultSet as relationalStore.ResultSet).getString((resultSet as relationalStore.ResultSet).getColumnIndex("NAME"));
+  const age = (resultSet as relationalStore.ResultSet).getLong((resultSet as relationalStore.ResultSet).getColumnIndex("AGE"));
+  const salary = (resultSet as relationalStore.ResultSet).getDouble((resultSet as relationalStore.ResultSet).getColumnIndex("SALARY"));
+}
+```
 
 ### getColumnName
 
@@ -2573,11 +2808,13 @@ getColumnName(columnIndex: number): string
 
 **示例：**
 
-  ```js
-const id = resultSet.getColumnName(0);
-const name = resultSet.getColumnName(1);
-const age = resultSet.getColumnName(2);
-  ```
+```ts
+if(resultSet != undefined) {
+const id = (resultSet as relationalStore.ResultSet).getColumnName(0);
+const name = (resultSet as relationalStore.ResultSet).getColumnName(1);
+const age = (resultSet as relationalStore.ResultSet).getColumnName(2);
+}
+```
 
 ### goTo
 
@@ -2609,16 +2846,11 @@ goTo(offset:number): boolean
 
 **示例：**
 
-  ```js
-let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
-let promise= store.query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"]);
-promise.then((resultSet) => {
-  resultSet.goTo(1);
-  resultSet.close();
-}).catch((err) => {
-  console.error(`query failed, code is ${err.code},message is ${err.message}`);
-});
-  ```
+```ts
+if(resultSet != undefined) {
+(resultSet as relationalStore.ResultSet).goTo(1);
+}
+```
 
 ### goToRow
 
@@ -2650,16 +2882,11 @@ goToRow(position: number): boolean
 
 **示例：**
 
-  ```js
-let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
-let promise = store.query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"]);
-promise.then((resultSet) => {
-  resultSet.goToRow(5);
-  resultSet.close();
-}).catch((err) => {
-  console.error(`query failed, code is ${err.code},message is ${err.message}`);
-});
-  ```
+```ts
+if(resultSet != undefined) {
+(resultSet as relationalStore.ResultSet).goToRow(5);
+}
+```
 
 ### goToFirstRow
 
@@ -2686,16 +2913,11 @@ goToFirstRow(): boolean
 
 **示例：**
 
-  ```js
-let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
-let promise = store.query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"]);
-promise.then((resultSet) => {
-  resultSet.goToFirstRow();
-  resultSet.close();
-}).catch((err) => {
-  console.error(`query failed, code is ${err.code},message is ${err.message}`);
-});
-  ```
+```ts
+if(resultSet != undefined) {
+(resultSet as relationalStore.ResultSet).goToFirstRow();
+}
+```
 
 ### goToLastRow
 
@@ -2721,16 +2943,11 @@ goToLastRow(): boolean
 
 **示例：**
 
-  ```js
-let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
-let promise = store.query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"]);
-promise.then((resultSet) => {
-  resultSet.goToLastRow();
-  resultSet.close();
-}).catch((err) => {
-  console.error(`query failed, code is ${err.code},message is ${err.message}`);
-});
-  ```
+```ts
+if(resultSet != undefined) {
+(resultSet as relationalStore.ResultSet).goToLastRow();
+}
+```
 
 ### goToNextRow
 
@@ -2756,16 +2973,11 @@ goToNextRow(): boolean
 
 **示例：**
 
-  ```js
-let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
-let promise = store.query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"]);
-promise.then((resultSet) => {
-  resultSet.goToNextRow();
-  resultSet.close();
-}).catch((err) => {
-  console.error(`query failed, code is ${err.code},message is ${err.message}`);
-});
-  ```
+```ts
+if(resultSet != undefined) {
+(resultSet as relationalStore.ResultSet).goToNextRow();
+}
+```
 
 ### goToPreviousRow
 
@@ -2791,16 +3003,11 @@ goToPreviousRow(): boolean
 
 **示例：**
 
-  ```js
-let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
-let promise = store.query(predicates, ["ID", "NAME", "AGE", "SALARY", "CODES"]);
-promise.then((resultSet) => {
-  resultSet.goToPreviousRow();
-  resultSet.close();
-}).catch((err) => {
-  console.error(`query failed, code is ${err.code},message is ${err.message}`);
-});
-  ```
+```ts
+if(resultSet != undefined) {
+(resultSet as relationalStore.ResultSet).goToPreviousRow();
+}
+```
 
 ### getBlob
 
@@ -2832,9 +3039,11 @@ getBlob(columnIndex: number): Uint8Array
 
 **示例：**
 
-  ```js
-const codes = resultSet.getBlob(resultSet.getColumnIndex("CODES"));
-  ```
+```ts
+if(resultSet != undefined) {
+const codes = (resultSet as relationalStore.ResultSet).getBlob((resultSet as relationalStore.ResultSet).getColumnIndex("CODES"));
+}
+```
 
 ### getString
 
@@ -2866,9 +3075,11 @@ getString(columnIndex: number): string
 
 **示例：**
 
-  ```js
-const name = resultSet.getString(resultSet.getColumnIndex("NAME"));
-  ```
+```ts
+if(resultSet != undefined) {
+const name = (resultSet as relationalStore.ResultSet).getString((resultSet as relationalStore.ResultSet).getColumnIndex("NAME"));
+}
+```
 
 ### getLong
 
@@ -2900,9 +3111,11 @@ getLong(columnIndex: number): number
 
 **示例：**
 
-  ```js
-const age = resultSet.getLong(resultSet.getColumnIndex("AGE"));
-  ```
+```ts
+if(resultSet != undefined) {
+const age = (resultSet as relationalStore.ResultSet).getLong((resultSet as relationalStore.ResultSet).getColumnIndex("AGE"));
+}
+```
 
 ### getDouble
 
@@ -2934,9 +3147,11 @@ getDouble(columnIndex: number): number
 
 **示例：**
 
-  ```js
-const salary = resultSet.getDouble(resultSet.getColumnIndex("SALARY"));
-  ```
+```ts
+if(resultSet != undefined) {
+const salary = (resultSet as relationalStore.ResultSet).getDouble((resultSet as relationalStore.ResultSet).getColumnIndex("SALARY"));
+}
+```
 
 ### getAsset<sup>10+</sup>
 
@@ -2968,8 +3183,10 @@ getAsset(columnIndex: number): Asset
 
 **示例：**
 
-```js
-const doc = resultSet.getAsset(resultSet.getColumnIndex("DOC"));
+```ts
+if(resultSet != undefined) {
+const doc = (resultSet as relationalStore.ResultSet).getAsset((resultSet as relationalStore.ResultSet).getColumnIndex("DOC"));
+}
 ```
 
 ### getAssets<sup>10+</sup>
@@ -3002,8 +3219,10 @@ getAssets(columnIndex: number): Assets
 
 **示例：**
 
-```js
-const docs = resultSet.getAssets(resultSet.getColumnIndex("DOCS"));
+```ts
+if(resultSet != undefined) {
+const docs = (resultSet as relationalStore.ResultSet).getAssets((resultSet as relationalStore.ResultSet).getColumnIndex("DOCS"));
+}
 ```
 
 ### isColumnNull
@@ -3036,9 +3255,11 @@ isColumnNull(columnIndex: number): boolean
 
 **示例：**
 
-  ```js
-const isColumnNull = resultSet.isColumnNull(resultSet.getColumnIndex("CODES"));
-  ```
+```ts
+if(resultSet != undefined) {
+const isColumnNull = (resultSet as relationalStore.ResultSet).isColumnNull((resultSet as relationalStore.ResultSet).getColumnIndex("CODES"));
+}
+```
 
 ### close
 
@@ -3050,15 +3271,11 @@ close(): void
 
 **示例：**
 
-  ```js
-let predicatesClose = new relationalStore.RdbPredicates("EMPLOYEE");
-let promiseClose = store.query(predicatesClose, ["ID", "NAME", "AGE", "SALARY", "CODES"]);
-promiseClose.then((resultSet) => {
-  resultSet.close();
-}).catch((err) => {
-  console.error(`resultset close failed, code is ${err.code},message is ${err.message}`);
-});
-  ```
+```ts
+if(resultSet != undefined) {
+(resultSet as relationalStore.ResultSet).close();
+}
+```
 
 **错误码：**
 

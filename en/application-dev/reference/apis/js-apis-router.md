@@ -356,6 +356,452 @@ Disables the display of a confirm dialog box before returning to the previous pa
 router.hideAlertBeforeBackPage();    
 ```
 
+## router.pushNamedRoute<sup>10+</sup>
+
+pushNamedRoute(options: NamedRouterOptions): Promise&lt;void&gt;
+
+Navigates to a page using the named route. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+**Parameters**
+
+| Name    | Type                                        | Mandatory | Description              |
+| ------- | ------------------------------------------- | --------- | ------------------------ |
+| options | [NamedRouterOptions](#namedrouteroptions10) | Yes       | Page routing parameters. |
+
+**Return value**
+
+| Type                | Description                        |
+| ------------------- | ---------------------------------- |
+| Promise&lt;void&gt; | Promise used to return the result. |
+
+**Error codes**
+
+For details about the error codes, see [Router Error Codes](../errorcodes/errorcode-router.md).
+
+| ID     | Error Message                      |
+| ------ | ---------------------------------- |
+| 100001 | if UI execution context not found. |
+| 100003 | if the pages are pushed too much.  |
+| 100004 | if the named route is not exist.   |
+
+**Example**
+
+```ts
+import { BusinessError } from '@ohos.base';
+
+class innerParams {
+  data3:number[]
+
+  constructor(tuple:number[]) {
+    this.data3 = tuple
+  }
+}
+
+class routerParams {
+  data1:string
+  data2:innerParams
+
+  constructor(str:string, tuple:number[]) {
+    this.data1 = str
+    this.data2 = new innerParams(tuple)
+  }
+}
+
+try {
+  router.pushNamedRoute({
+    name: 'myPage',
+    params: new routerParams('message' ,[123,456,789])
+  })
+} catch (err) {
+  console.error(`pushNamedRoute failed, code is ${(err as BusinessError).code}, message is ${(err as BusinessError).message}`);
+}
+```
+
+## router.pushNamedRoute<sup>10+</sup>
+
+pushNamedRoute(options: NamedRouterOptions, callback: AsyncCallback&lt;void&gt;): void
+
+Navigates to a page using the named route. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+**Parameters**
+
+| Name     | Type                                        | Mandatory | Description                         |
+| -------- | ------------------------------------------- | --------- | ----------------------------------- |
+| options  | [NamedRouterOptions](#namedrouteroptions10) | Yes       | Page routing parameters.            |
+| callback | AsyncCallback&lt;void&gt;                   | Yes       | Callback used to return the result. |
+
+**Error codes**
+
+For details about the error codes, see [Router Error Codes](../errorcodes/errorcode-router.md).
+
+| ID     | Error Message                      |
+| ------ | ---------------------------------- |
+| 100001 | if UI execution context not found. |
+| 100003 | if the pages are pushed too much.  |
+| 100004 | if the named route is not exist.   |
+
+**Example**
+
+```ts
+class innerParams {
+  data3:number[]
+
+  constructor(tuple:number[]) {
+    this.data3 = tuple
+  }
+}
+
+class routerParams {
+  data1:string
+  data2:innerParams
+
+  constructor(str:string, tuple:number[]) {
+    this.data1 = str
+    this.data2 = new innerParams(tuple)
+  }
+}
+
+router.pushNamedRoute({
+  name: 'myPage',
+  params: new routerParams('message' ,[123,456,789])
+}, (err) => {
+  if (err) {
+    console.error(`pushNamedRoute failed, code is ${err.code}, message is ${err.message}`);
+    return;
+  }
+  console.info('pushNamedRoute success');
+})
+```
+
+## router.pushNamedRoute<sup>10+</sup>
+
+pushNamedRoute(options: NamedRouterOptions, mode: RouterMode): Promise&lt;void&gt;
+
+Navigates to a page using the named route. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+**Parameters**
+
+| Name    | Type                                        | Mandatory | Description              |
+| ------- | ------------------------------------------- | --------- | ------------------------ |
+| options | [NamedRouterOptions](#namedrouteroptions10) | Yes       | Page routing parameters. |
+| mode    | [RouterMode](#routermode9)                  | Yes       | Routing mode.            |
+
+**Return value**
+
+| Type                | Description                        |
+| ------------------- | ---------------------------------- |
+| Promise&lt;void&gt; | Promise used to return the result. |
+
+**Error codes**
+
+For details about the error codes, see [Router Error Codes](../errorcodes/errorcode-router.md).
+
+| ID     | Error Message                      |
+| ------ | ---------------------------------- |
+| 100001 | if UI execution context not found. |
+| 100003 | if the pages are pushed too much.  |
+| 100004 | if the named route is not exist.   |
+
+**Example**
+
+```ts
+import { BusinessError } from '@ohos.base';
+
+class innerParams {
+  data3:number[]
+
+  constructor(tuple:number[]) {
+    this.data3 = tuple
+  }
+}
+
+class routerParams {
+  data1:string
+  data2:innerParams
+
+  constructor(str:string, tuple:number[]) {
+    this.data1 = str
+    this.data2 = new innerParams(tuple)
+  }
+}
+
+try {
+  router.pushNamedRoute({
+    name: 'myPage',
+    params: new routerParams('message' ,[123,456,789])
+  }, router.RouterMode.Standard)
+} catch (err) {
+  console.error(`pushNamedRoute failed, code is ${(err as BusinessError).code}, message is ${(err as BusinessError).message}`);
+}
+```
+
+## router.pushNamedRoute<sup>10+</sup>
+
+pushNamedRoute(options: NamedRouterOptions, mode: RouterMode, callback: AsyncCallback&lt;void&gt;): void
+
+Navigates to a page using the named route. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+**Parameters**
+
+| Name     | Type                                        | Mandatory | Description                         |
+| -------- | ------------------------------------------- | --------- | ----------------------------------- |
+| options  | [NamedRouterOptions](#namedrouteroptions10) | Yes       | Page routing parameters.            |
+| mode     | [RouterMode](#routermode9)                  | Yes       | Routing mode.                       |
+| callback | AsyncCallback&lt;void&gt;                   | Yes       | Callback used to return the result. |
+
+**Error codes**
+
+For details about the error codes, see [Router Error Codes](../errorcodes/errorcode-router.md).
+
+| ID     | Error Message                      |
+| ------ | ---------------------------------- |
+| 100001 | if UI execution context not found. |
+| 100003 | if the pages are pushed too much.  |
+| 100004 | if the named route is not exist.   |
+
+**Example**
+
+```ts
+class innerParams {
+  data3:number[]
+
+  constructor(tuple:number[]) {
+    this.data3 = tuple
+  }
+}
+
+class routerParams {
+  data1:string
+  data2:innerParams
+
+  constructor(str:string, tuple:number[]) {
+    this.data1 = str
+    this.data2 = new innerParams(tuple)
+  }
+}
+
+router.pushNamedRoute({
+  name: 'myPage',
+  params: new routerParams('message' ,[123,456,789])
+}, router.RouterMode.Standard, (err) => {
+  if (err) {
+    console.error(`pushNamedRoute failed, code is ${err.code}, message is ${err.message}`);
+    return;
+  }
+  console.info('pushNamedRoute success');
+})
+```
+
+## router.replaceNamedRoute<sup>10+</sup>
+
+replaceNamedRoute(options: NamedRouterOptions): Promise&lt;void&gt;
+
+Replaces the current page with another one using the named route and destroys the current page. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+**Parameters**
+
+| Name    | Type                                        | Mandatory | Description                  |
+| ------- | ------------------------------------------- | --------- | ---------------------------- |
+| options | [NamedRouterOptions](#namedrouteroptions10) | Yes       | Description of the new page. |
+
+**Return value**
+
+| Type                | Description                        |
+| ------------------- | ---------------------------------- |
+| Promise&lt;void&gt; | Promise used to return the result. |
+
+**Error codes**
+
+For details about the error codes, see [Router Error Codes](../errorcodes/errorcode-router.md).
+
+| ID     | Error Message                                                |
+| ------ | ------------------------------------------------------------ |
+| 100001 | if UI execution context not found, only throw in standard system. |
+| 100004 | if the named route is not exist.                             |
+
+**Example**
+
+```ts
+import { BusinessError } from '@ohos.base';
+
+class routerParams {
+  data1:string
+
+  constructor(str:string) {
+    this.data1 = str
+  }
+}
+
+try {
+  router.replaceNamedRoute({
+    name: 'myPage',
+    params: new routerParams('message')
+  })
+} catch (err) {
+  console.error(`replaceNamedRoute failed, code is ${(err as BusinessError).code}, message is ${(err as BusinessError).message}`);
+}
+```
+
+## router.replaceNamedRoute<sup>10+</sup>
+
+replaceNamedRoute(options: NamedRouterOptions, callback: AsyncCallback&lt;void&gt;): void
+
+Replaces the current page with another one using the named route and destroys the current page. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+**Parameters**
+
+| Name     | Type                                        | Mandatory | Description                         |
+| -------- | ------------------------------------------- | --------- | ----------------------------------- |
+| options  | [NamedRouterOptions](#namedrouteroptions10) | Yes       | Description of the new page.        |
+| callback | AsyncCallback&lt;void&gt;                   | Yes       | Callback used to return the result. |
+
+**Error codes**
+
+For details about the error codes, see [Router Error Codes](../errorcodes/errorcode-router.md).
+
+| ID     | Error Message                                                |
+| ------ | ------------------------------------------------------------ |
+| 100001 | if UI execution context not found, only throw in standard system. |
+| 100004 | if the named route is not exist.                             |
+
+**Example**
+
+```ts
+class routerParams {
+  data1:string
+
+  constructor(str:string) {
+    this.data1 = str
+  }
+}
+
+router.replaceNamedRoute({
+  name: 'myPage',
+  params: new routerParams('message')
+}, (err) => {
+  if (err) {
+    console.error(`replaceNamedRoute failed, code is ${err.code}, message is ${err.message}`);
+    return;
+  }
+  console.info('replaceNamedRoute success');
+})
+```
+
+## router.replaceNamedRoute<sup>10+</sup>
+
+replaceNamedRoute(options: NamedRouterOptions, mode: RouterMode): Promise&lt;void&gt;
+
+Replaces the current page with another one using the named route and destroys the current page. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+**Parameters**
+
+| Name    | Type                                        | Mandatory | Description                  |
+| ------- | ------------------------------------------- | --------- | ---------------------------- |
+| options | [NamedRouterOptions](#namedrouteroptions10) | Yes       | Description of the new page. |
+| mode    | [RouterMode](#routermode9)                  | Yes       | Routing mode.                |
+
+
+**Return value**
+
+| Type                | Description                        |
+| ------------------- | ---------------------------------- |
+| Promise&lt;void&gt; | Promise used to return the result. |
+
+**Error codes**
+
+For details about the error codes, see [Router Error Codes](../errorcodes/errorcode-router.md).
+
+| ID     | Error Message                                               |
+| ------ | ----------------------------------------------------------- |
+| 100001 | if can not get the delegate, only throw in standard system. |
+| 100004 | if the named route is not exist.                            |
+
+**Example**
+
+```ts
+import { BusinessError } from '@ohos.base';
+
+class routerParams {
+  data1:string
+
+  constructor(str:string) {
+    this.data1 = str
+  }
+}
+
+try {
+  router.replaceNamedRoute({
+    name: 'myPage',
+    params: new routerParams('message')
+  }, router.RouterMode.Standard)
+} catch (err) {
+  console.error(`replaceNamedRoute failed, code is ${(err as BusinessError).code}, message is ${(err as BusinessError).message}`);
+}
+```
+
+## router.replaceNamedRoute<sup>10+</sup>
+
+replaceNamedRoute(options: NamedRouterOptions, mode: RouterMode, callback: AsyncCallback&lt;void&gt;): void
+
+Replaces the current page with another one using the named route and destroys the current page. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+**Parameters**
+
+| Name     | Type                                        | Mandatory | Description                         |
+| -------- | ------------------------------------------- | --------- | ----------------------------------- |
+| options  | [NamedRouterOptions](#namedrouteroptions10) | Yes       | Description of the new page.        |
+| mode     | [RouterMode](#routermode9)                  | Yes       | Routing mode.                       |
+| callback | AsyncCallback&lt;void&gt;                   | Yes       | Callback used to return the result. |
+
+**Error codes**
+
+For details about the error codes, see [Router Error Codes](../errorcodes/errorcode-router.md).
+
+| ID     | Error Message                                                |
+| ------ | ------------------------------------------------------------ |
+| 100001 | if UI execution context not found, only throw in standard system. |
+| 100004 | if the named route is not exist.                             |
+
+**Example**
+
+```ts
+class routerParams {
+  data1:string
+
+  constructor(str:string) {
+    this.data1 = str
+  }
+}
+
+router.replaceNamedRoute({
+  name: 'myPage',
+  params: new routerParams('message')
+}, router.RouterMode.Standard, (err) => {
+  if (err) {
+    console.error(`replaceNamedRoute failed, code is ${err.code}, message is ${err.message}`);
+    return;
+  }
+  console.info('replaceNamedRoute success');
+});
+
+```
+
 ##  router.getParams
 
 getParams(): Object
@@ -401,6 +847,17 @@ Enumerates the routing modes.
 | -------- | ------------------------------------------------------------ |
 | Standard | Multi-instance mode. It is the default routing mode.<br>The target page is added to the top of the page stack, regardless of whether a page with the same URL exists in the stack.<br>**NOTE**<br>If the routing mode is not used, the page is redirected to in multi-instance mode.|
 | Single   | Singleton mode.<br>If the URL of the target page already exists in the page stack, the page closest to the top of the stack is moved to the top and becomes a new page.<br>If the URL of the target page does not exist in the page stack, the page is redirected to in multi-instance mode.|
+
+## NamedRouterOptions<sup>10+</sup>
+
+Describes the named route options.
+
+**System capability**: SystemCapability.ArkUI.ArkUI.Full
+
+| Name   | Type   | Mandatory | Description                                                  |
+| ------ | ------ | --------- | ------------------------------------------------------------ |
+| name   | string | Yes       | Name of the target named route.                              |
+| params | object | No        | Data that needs to be passed to the target page during redirection. The target page can use **router.getParams()** to obtain the passed parameters, for example, **this.keyValue** (**keyValue** is the value of a key in **params**). In the web-like paradigm, these parameters can be directly used on the target page. If the field specified by **key** already exists on the target page, the passed value of the key will be displayed. |
 
 ## Examples
 

@@ -204,12 +204,12 @@ findWindow(name: string): Window
 
 **示例：**
 
-```js
-let windowClass = null;
+```ts
+let windowClass: window.Window | undefined = undefined;
 try {
-    windowClass = window.findWindow('alertWindow');
+  windowClass = window.findWindow('alertWindow');
 } catch (exception) {
-    console.error('Failed to find the Window. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to find the Window. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -225,7 +225,7 @@ getLastWindow(ctx: BaseContext, callback: AsyncCallback&lt;Window&gt;): void
 
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------------------------------------- | -- | ---------------------------------------- |
-| ctx      | BaseContext | 是 | 当前应用上下文信息。 |
+| ctx      | [BaseContext](js-apis-inner-application-baseContext.md) | 是 | 当前应用上下文信息。 |
 | callback | AsyncCallback&lt;[Window](#window)&gt; | 是 | 回调函数。返回当前应用内最后显示的窗口对象。 |
 
 **错误码：**
@@ -239,19 +239,26 @@ getLastWindow(ctx: BaseContext, callback: AsyncCallback&lt;Window&gt;): void
 
 **示例：**
 
-```js
-let windowClass = null;
+```ts
+import { BusinessError } from '@ohos.base';
+
+let windowClass: window.Window | undefined = undefined;
 try {
-    window.getLastWindow(this.context, (err, data) => {
-        if (err.code) {
-            console.error('Failed to obtain the top window. Cause: ' + JSON.stringify(err));
-            return;
-        }
-        windowClass = data;
-        console.info('Succeeded in obtaining the top window. Data: ' + JSON.stringify(data));
-    });
+  class BaseContext {
+      stageMode: boolean = false;
+    }
+    let context: BaseContext = { stageMode: false };
+  window.getLastWindow(context, (err: BusinessError, data) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to obtain the top window. Cause: ' + JSON.stringify(err));
+      return;
+    }
+    windowClass = data;
+    console.info('Succeeded in obtaining the top window. Data: ' + JSON.stringify(data));
+  });
 } catch (exception) {
-    console.error('Failed to obtain the top window. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to obtain the top window. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -267,7 +274,7 @@ getLastWindow(ctx: BaseContext): Promise&lt;Window&gt;
 
 | 参数名 | 类型 | 必填 | 说明 |
 | ------ | ----------- | ---- | ------------------------------------------------------------ |
-| ctx    | BaseContext | 是   | 当前应用上下文信息。 |
+| ctx    | [BaseContext](js-apis-inner-application-baseContext.md) | 是   | 当前应用上下文信息。 |
 
 **返回值：**
 
@@ -286,18 +293,24 @@ getLastWindow(ctx: BaseContext): Promise&lt;Window&gt;
 
 **示例：**
 
-```js
-let windowClass = null;
+```ts
+import { BusinessError } from '@ohos.base';
+
+let windowClass: window.Window | undefined = undefined;
+class BaseContext {
+  stageMode: boolean = false;
+}
+let context: BaseContext = { stageMode: false };
 try {
-    let promise = window.getLastWindow(this.context);
-    promise.then((data)=> {
-        windowClass = data;
-        console.info('Succeeded in obtaining the top window. Data: ' + JSON.stringify(data));
-    }).catch((err)=>{
-        console.error('Failed to obtain the top window. Cause: ' + JSON.stringify(err));
-    });
+  let promise = window.getLastWindow(context);
+  promise.then((data) => {
+    windowClass = data;
+    console.info('Succeeded in obtaining the top window. Data: ' + JSON.stringify(data));
+  }).catch((err: BusinessError) => {
+    console.error('Failed to obtain the top window. Cause: ' + JSON.stringify(err));
+  });
 } catch (exception) {
-    console.error('Failed to obtain the top window. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to obtain the top window. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -331,13 +344,17 @@ showWindow(callback: AsyncCallback&lt;void&gt;): void
 
 **示例：**
 
-```js
-windowClass.showWindow((err) => {
-    if (err.code) {
-        console.error('Failed to show the window. Cause: ' + JSON.stringify(err));
-        return;
-    }
-    console.info('Succeeded in showing the window.');
+```ts
+import { BusinessError } from '@ohos.base';
+
+let windowClass: window.Window = window.findWindow("test");
+windowClass.showWindow((err: BusinessError) => {
+  const errCode: number = err.code;
+  if (errCode) {
+    console.error('Failed to show the window. Cause: ' + JSON.stringify(err));
+    return;
+  }
+  console.info('Succeeded in showing the window.');
 });
 ```
 
@@ -365,12 +382,15 @@ showWindow(): Promise&lt;void&gt;
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
+let windowClass: window.Window = window.findWindow("test");
 let promise = windowClass.showWindow();
-promise.then(()=> {
-    console.info('Succeeded in showing the window.');
-}).catch((err)=>{
-    console.error('Failed to show the window. Cause: ' + JSON.stringify(err));
+promise.then(() => {
+  console.info('Succeeded in showing the window.');
+}).catch((err: BusinessError) => {
+  console.error('Failed to show the window. Cause: ' + JSON.stringify(err));
 });
 ```
 
@@ -399,13 +419,17 @@ destroyWindow(callback: AsyncCallback&lt;void&gt;): void
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
+let windowClass: window.Window = window.findWindow("test");
 windowClass.destroyWindow((err) => {
-    if (err.code) {
-        console.error('Failed to destroy the window. Cause:' + JSON.stringify(err));
-        return;
-    }
-    console.info('Succeeded in destroying the window.');
+  const errCode: number = err.code;
+  if (errCode) {
+    console.error('Failed to destroy the window. Cause:' + JSON.stringify(err));
+    return;
+  }
+  console.info('Succeeded in destroying the window.');
 });
 ```
 
@@ -434,12 +458,15 @@ destroyWindow(): Promise&lt;void&gt;
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
+let windowClass: window.Window = window.findWindow("test");
 let promise = windowClass.destroyWindow();
-promise.then(()=> {
-    console.info('Succeeded in destroying the window.');
-}).catch((err)=>{
-    console.error('Failed to destroy the window. Cause: ' + JSON.stringify(err));
+promise.then(() => {
+  console.info('Succeeded in destroying the window.');
+}).catch((err: BusinessError) => {
+  console.error('Failed to destroy the window. Cause: ' + JSON.stringify(err));
 });
 ```
 
@@ -472,17 +499,21 @@ moveWindowTo(x: number, y: number, callback: AsyncCallback&lt;void&gt;): void
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
 try {
-    windowClass.moveWindowTo(300, 300, (err)=>{
-        if (err.code) {
-            console.error('Failed to move the window. Cause:' + JSON.stringify(err));
-            return;
-        }
-        console.info('Succeeded in moving the window.');
-    });
+  let windowClass: window.Window = window.findWindow("test");
+  windowClass.moveWindowTo(300, 300, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to move the window. Cause:' + JSON.stringify(err));
+      return;
+    }
+    console.info('Succeeded in moving the window.');
+  });
 } catch (exception) {
-    console.error('Failed to move the window. Cause:' + JSON.stringify(exception));
+  console.error('Failed to move the window. Cause:' + JSON.stringify(exception));
 }
 ```
 
@@ -520,16 +551,19 @@ moveWindowTo(x: number, y: number): Promise&lt;void&gt;
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
 try {
-    let promise = windowClass.moveWindowTo(300, 300);
-    promise.then(()=> {
-        console.info('Succeeded in moving the window.');
-    }).catch((err)=>{
-        console.error('Failed to move the window. Cause: ' + JSON.stringify(err));
-    });
+  let windowClass: window.Window = window.findWindow("test");
+  let promise = windowClass.moveWindowTo(300, 300);
+  promise.then(() => {
+    console.info('Succeeded in moving the window.');
+  }).catch((err: BusinessError) => {
+    console.error('Failed to move the window. Cause: ' + JSON.stringify(err));
+  });
 } catch (exception) {
-    console.error('Failed to move the window. Cause:' + JSON.stringify(exception));
+  console.error('Failed to move the window. Cause:' + JSON.stringify(exception));
 }
 ```
 
@@ -539,11 +573,14 @@ resize(width: number, height: number, callback: AsyncCallback&lt;void&gt;): void
 
 改变当前窗口大小，使用callback异步回调。
 
-应用主窗口与子窗口存在大小限制，宽度范围：[320, 2560]，高度范围：[240, 2560]，单位为vp。
+应用主窗口与子窗口存在大小限制，默认宽度范围：[320, 2560]，默认高度范围：[240, 2560]，单位为vp。
+应用主窗口与子窗口的最小宽度与最小高度可由产品端进行配置，配置后的最小宽度与最小高度以产品段配置值为准。
 
 系统窗口存在大小限制，宽度范围：[0, 2560]，高度范围：[0, 2560]，单位为vp。
 
-设置的宽度与高度受到此约束限制。
+设置的宽度与高度受到此约束限制，规则：
+若所设置的窗口宽/高尺寸小于窗口最小宽/高限值，则窗口最小宽/高限值生效；
+若所设置的窗口宽/高尺寸大于窗口最大宽/高限值，则窗口最大宽/高限值生效。
 
 全屏模式窗口不支持该操作。
 
@@ -568,17 +605,21 @@ resize(width: number, height: number, callback: AsyncCallback&lt;void&gt;): void
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
 try {
-    windowClass.resize(500, 1000, (err) => {
-        if (err.code) {
-            console.error('Failed to change the window size. Cause:' + JSON.stringify(err));
-            return;
-        }
-        console.info('Succeeded in changing the window size.');
-    });
+  let windowClass: window.Window = window.findWindow("test");
+  windowClass.resize(500, 1000, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to change the window size. Cause:' + JSON.stringify(err));
+      return;
+    }
+    console.info('Succeeded in changing the window size.');
+  });
 } catch (exception) {
-    console.error('Failed to change the window size. Cause:' + JSON.stringify(exception));
+  console.error('Failed to change the window size. Cause:' + JSON.stringify(exception));
 }
 ```
 
@@ -588,11 +629,14 @@ resize(width: number, height: number): Promise&lt;void&gt;
 
 改变当前窗口大小，使用Promise异步回调。
 
-应用主窗口与子窗口存在大小限制，宽度范围：[320, 2560]，高度范围：[240, 2560]，单位为vp。
+应用主窗口与子窗口存在大小限制，默认宽度范围：[320, 2560]，默认高度范围：[240, 2560]，单位为vp。
+应用主窗口与子窗口的最小宽度与最小高度可由产品端进行配置，配置后的最小宽度与最小高度以产品段配置值为准。
 
 系统窗口存在大小限制，宽度范围：[0, 2560]，高度范围：[0, 2560]，单位为vp。
 
-设置的宽度与高度受到此约束限制。
+设置的宽度与高度受到此约束限制，规则：
+若所设置的窗口宽/高尺寸小于窗口最小宽/高限值，则窗口最小宽/高限值生效；
+若所设置的窗口宽/高尺寸大于窗口最大宽/高限值，则窗口最大宽/高限值生效。
 
 全屏模式窗口不支持该操作。
 
@@ -622,16 +666,19 @@ resize(width: number, height: number): Promise&lt;void&gt;
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
 try {
-    let promise = windowClass.resize(500, 1000);
-    promise.then(()=> {
-        console.info('Succeeded in changing the window size.');
-    }).catch((err)=>{
-        console.error('Failed to change the window size. Cause: ' + JSON.stringify(err));
-    });
+  let windowClass: window.Window = window.findWindow("test");
+  let promise = windowClass.resize(500, 1000);
+  promise.then(() => {
+    console.info('Succeeded in changing the window size.');
+  }).catch((err: BusinessError) => {
+    console.error('Failed to change the window size. Cause: ' + JSON.stringify(err));
+  });
 } catch (exception) {
-    console.error('Failed to change the window size. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to change the window size. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -659,11 +706,12 @@ getWindowProperties(): WindowProperties
 
 **示例：**
 
-```js
+```ts
 try {
-    let properties = windowClass.getWindowProperties();
+  let windowClass: window.Window = window.findWindow("test");
+  let properties = windowClass.getWindowProperties();
 } catch (exception) {
-    console.error('Failed to obtain the window properties. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to obtain the window properties. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -693,19 +741,23 @@ setWindowSystemBarEnable(names: Array<'status' | 'navigation'>, callback: AsyncC
 
 **示例：**
 
-```js
+```ts
 // 此处以不显示导航栏、状态栏为例
-let names = [];
+import { BusinessError } from '@ohos.base';
+
+let names: Array<'status' | 'navigation'> = [];
 try {
-    windowClass.setWindowSystemBarEnable(names, (err) => {
-        if (err.code) {
-            console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(err));
-            return;
-        }
-        console.info('Succeeded in setting the system bar to be invisible.');
-    });
+  let windowClass: window.Window = window.findWindow("test");
+  windowClass.setWindowSystemBarEnable(names, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(err));
+      return;
+    }
+    console.info('Succeeded in setting the system bar to be invisible.');
+  });
 } catch (exception) {
-    console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(exception));
+  console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(exception));
 }
 ```
 
@@ -740,18 +792,21 @@ setWindowSystemBarEnable(names: Array<'status' | 'navigation'>): Promise&lt;void
 
 **示例：**
 
-```js
+```ts
 // 此处以不显示导航栏、状态栏为例
-let names = [];
+import { BusinessError } from '@ohos.base';
+
+let names: Array<'status' | 'navigation'> = [];
 try {
-    let promise = windowClass.setWindowSystemBarEnable(names);
-    promise.then(()=> {
-        console.info('Succeeded in setting the system bar to be invisible.');
-    }).catch((err)=>{
-        console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(err));
-    });
+  let windowClass: window.Window = window.findWindow("test");
+  let promise = windowClass.setWindowSystemBarEnable(names);
+  promise.then(() => {
+    console.info('Succeeded in setting the system bar to be invisible.');
+  }).catch((err: BusinessError) => {
+    console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(err));
+  });
 } catch (exception) {
-    console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(exception));
+  console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(exception));
 }
 ```
 
@@ -780,18 +835,22 @@ setPreferredOrientation(orientation: Orientation, callback: AsyncCallback&lt;voi
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
 let orientation = window.Orientation.AUTO_ROTATION;
 try {
-    windowClass.setPreferredOrientation(orientation, (err) => {
-        if (err.code) {
-            console.error('Failed to set window orientation. Cause: ' + JSON.stringify(err));
-            return;
-        }
-        console.info('Succeeded in setting window orientation.');
-    });
+  let windowClass: window.Window = window.findWindow("test");
+  windowClass.setPreferredOrientation(orientation, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to set window orientation. Cause: ' + JSON.stringify(err));
+      return;
+    }
+    console.info('Succeeded in setting window orientation.');
+  });
 } catch (exception) {
-    console.error('Failed to set window orientation. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to set window orientation. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -825,17 +884,20 @@ setPreferredOrientation(orientation: Orientation): Promise&lt;void&gt;
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
 let orientation = window.Orientation.AUTO_ROTATION;
 try {
-    let promise = windowClass.setPreferredOrientation(orientation);
-    promise.then(()=> {
-        console.info('Succeeded in setting the window orientation.');
-    }).catch((err)=>{
-        console.error('Failed to set the window orientation. Cause: ' + JSON.stringify(err));
-    });
+  let windowClass: window.Window = window.findWindow("test");
+  let promise = windowClass.setPreferredOrientation(orientation);
+  promise.then(() => {
+    console.info('Succeeded in setting the window orientation.');
+  }).catch((err: BusinessError) => {
+    console.error('Failed to set the window orientation. Cause: ' + JSON.stringify(err));
+  });
 } catch (exception) {
-    console.error('Failed to set window orientation. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to set window orientation. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -853,7 +915,7 @@ getUIContext(): UIContext
 
 | 类型       | 说明                   |
 | ---------- | ---------------------- |
-| UIContext | 返回UIContext实例对象。 |
+| [UIContext](./js-apis-arkui-UIContext.md#uicontext) | 返回UIContext实例对象。 |
 
 **错误码：**
 
@@ -867,30 +929,36 @@ getUIContext(): UIContext
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
+import { UIContext } from '@ohos.arkui.UIContext';
 
 export default class EntryAbility extends UIAbility {
-    onWindowStageCreate(windowStage) {
-        // 为主窗口加载对应的目标页面。
-        windowStage.loadContent("pages/page2", (err) => {
-            if (err.code) {
-                console.error('Failed to load the content. Cause:' + JSON.stringify(err));
-                return;
-            }
-            console.info('Succeeded in loading the content.');
-        });
-        // 获取应用主窗口。
-        let windowClass = null;
-        windowStage.getMainWindow((err, data) => {
-            if (err.code) {
-                console.error('Failed to obtain the main window. Cause: ' + JSON.stringify(err));
-                return;
-            }
-            windowClass = data;
-            console.info('Succeeded in obtaining the main window. Data: ' + JSON.stringify(data));
-            // 获取UIContext实例。
-            globalThis.uiContext = windowClass.getUIContext();
-        })
-    }
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    // 为主窗口加载对应的目标页面。
+    windowStage.loadContent("pages/page2", (err: BusinessError) => {
+      let errCode: number = err.code;
+      if (errCode) {
+        console.error('Failed to load the content. Cause:' + JSON.stringify(err));
+        return;
+      }
+      console.info('Succeeded in loading the content.');
+      // 获取应用主窗口。
+      let windowClass: window.Window = window.findWindow("test");
+      windowStage.getMainWindow((err: BusinessError, data) => {
+        let errCode: number = err.code;
+        if (errCode) {
+          console.error('Failed to obtain the main window. Cause: ' + JSON.stringify(err));
+          return;
+        }
+        windowClass = data;
+        console.info('Succeeded in obtaining the main window. Data: ' + JSON.stringify(data));
+        // 获取UIContext实例。
+        let uiContext: UIContext | null = null;
+        uiContext = windowClass.getUIContext();
+      })
+    });
+  }
 };
 ```
 
@@ -898,7 +966,7 @@ export default class EntryAbility extends UIAbility {
 
 setUIContent(path: string, callback: AsyncCallback&lt;void&gt;): void
 
-为当前窗口加载具体页面内容，使用callback异步回调。
+根据当前工程中某个页面的路径为窗口加载具体页面内容，使用callback异步回调。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
@@ -906,7 +974,7 @@ setUIContent(path: string, callback: AsyncCallback&lt;void&gt;): void
 
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | ------------------------- | -- | -------------------- |
-| path     | string                    | 是 | 设置加载页面的路径。 |
+| path     | string                    | 是 | 要加载到窗口中的页面内容的路径，Stage模型下该路径需添加到工程的main_pages.json文件中，FA模型下该路径需添加到工程的config.json文件中。 |
 | callback | AsyncCallback&lt;void&gt; | 是 | 回调函数。          |
 
 **错误码：**
@@ -920,17 +988,21 @@ setUIContent(path: string, callback: AsyncCallback&lt;void&gt;): void
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
 try {
-    windowClass.setUIContent('pages/page2/page2', (err) => {
-    if (err.code) {
-            console.error('Failed to load the content. Cause:' + JSON.stringify(err));
-            return;
+  let windowClass: window.Window = window.findWindow("test");
+  windowClass.setUIContent('pages/page2/page2', (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to load the content. Cause:' + JSON.stringify(err));
+      return;
     }
     console.info('Succeeded in loading the content.');
-    });
+  });
 } catch (exception) {
-    console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
+  console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
 }
 ```
 
@@ -938,7 +1010,7 @@ try {
 
 setUIContent(path: string): Promise&lt;void&gt;
 
-为当前窗口加载具体页面内容，使用Promise异步回调。
+根据当前工程中某个页面的路径为窗口加载具体页面内容，使用Promise异步回调。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
@@ -946,7 +1018,7 @@ setUIContent(path: string): Promise&lt;void&gt;
 
 | 参数名 | 类型 | 必填 | 说明 |
 | ---- | ------ | -- | ------------------ |
-| path | string | 是 | 设置加载页面的路径。 |
+| path | string | 是 | 要加载到窗口中的页面内容的路径，Stage模型下该路径需添加到工程的main_pages.json文件中，FA模型下该路径需添加到工程的config.json文件中。 |
 
 **返回值：**
 
@@ -965,16 +1037,19 @@ setUIContent(path: string): Promise&lt;void&gt;
 
 **示例：**
 
-```js
+```ts
+import { BusinessError } from '@ohos.base';
+
 try {
-    let promise = windowClass.setUIContent('pages/page2/page2');
-    promise.then(()=> {
-        console.info('Succeeded in loading the content.');
-    }).catch((err)=>{
-        console.error('Failed to load the content. Cause: ' + JSON.stringify(err));
-    });
+  let windowClass: window.Window = window.findWindow("test");
+  let promise = windowClass.setUIContent('pages/page2/page2');
+  promise.then(() => {
+    console.info('Succeeded in loading the content.');
+  }).catch((err: BusinessError) => {
+    console.error('Failed to load the content. Cause: ' + JSON.stringify(err));
+  });
 } catch (exception) {
-    console.error('Failed to load the content. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to load the content. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -982,7 +1057,7 @@ try {
 
 loadContent(path: string, storage: LocalStorage, callback: AsyncCallback&lt;void&gt;): void
 
-为当前窗口加载与LocalStorage相关联的具体页面内容，使用callback异步回调。
+根据当前工程中某个页面的路径为窗口加载具体页面内容，通过LocalStorage传递状态属性给加载的页面，使用callback异步回调。
 
 **模型约束：** 此接口仅可在Stage模型下使用。
 
@@ -992,8 +1067,8 @@ loadContent(path: string, storage: LocalStorage, callback: AsyncCallback&lt;void
 
 | 参数名   | 类型                                            | 必填 | 说明                                                         |
 | -------- | ----------------------------------------------- | ---- | ------------------------------------------------------------ |
-| path     | string                                          | 是   | 设置加载页面的路径。                                         |
-| storage  | LocalStorage                                    | 是   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
+| path     | string                                          | 是   | 要加载到窗口中的页面内容的路径，该路径需添加到工程的main_pages.json文件中。                                         |
+| storage | LocalStorage                                    | 是   | 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。 |
 | callback | AsyncCallback&lt;void&gt;                       | 是   | 回调函数。                                                   |
 
 **错误码：**
@@ -1008,27 +1083,44 @@ loadContent(path: string, storage: LocalStorage, callback: AsyncCallback&lt;void
 **示例：**
 
 ```ts
-let storage = new LocalStorage();
-storage.setOrCreate('storageSimpleProp',121);
-console.log('onWindowStageCreate');
-try {
-    windowClass.loadContent('pages/page2', storage, (err) => {
-        if (err.code) {
+import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
+
+export default class EntryAbility extends UIAbility {
+  // ...
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    let windowClass: window.Window = window.findWindow("test");
+    let storage: LocalStorage = new LocalStorage();
+    storage.setOrCreate('storageSimpleProp', 121);
+    try {
+      if (!windowClass) {
+        console.info('Failed to load the content. Cause: windowClass is null');
+      }
+      else {
+        (windowClass as window.Window).loadContent('pages/page2', storage, (err: BusinessError) => {
+          const errCode: number = err.code;
+          if (errCode) {
             console.error('Failed to load the content. Cause:' + JSON.stringify(err));
             return;
-        }
-        console.info('Succeeded in loading the content.');
-    });
-} catch (exception) {
-    console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
-}
+          }
+          console.info('Succeeded in loading the content.');
+        });
+      }
+    } catch (exception) {
+      console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
+    }
+  }
+};
 ```
 
 ### loadContent<sup>9+</sup>
 
 loadContent(path: string, storage: LocalStorage): Promise&lt;void&gt;
 
-为当前窗口加载与LocalStorage相关联的具体页面内容，使用Promise异步回调。
+根据当前工程中某个页面的路径为窗口加载具体页面内容，通过LocalStorage传递状态属性给加载的页面，使用Promise异步回调。
 
 **模型约束：** 此接口仅可在Stage模型下使用。
 
@@ -1038,8 +1130,8 @@ loadContent(path: string, storage: LocalStorage): Promise&lt;void&gt;
 
 | 参数名  | 类型                                            | 必填 | 说明                                                         |
 | ------- | ----------------------------------------------- | ---- | ------------------------------------------------------------ |
-| path    | string                                          | 是   | 设置加载页面的路径。                                         |
-| storage | LocalStorage                                    | 是   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
+| path    | string                                          | 是   | 要加载到窗口中的页面内容的路径，该路径需添加到工程的main_pages.json文件中。                                        |
+| storage | LocalStorage                                    | 是   | 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。 |
 
 **返回值：**
 
@@ -1059,19 +1151,35 @@ loadContent(path: string, storage: LocalStorage): Promise&lt;void&gt;
 **示例：**
 
 ```ts
-let storage = new LocalStorage();
-storage.setOrCreate('storageSimpleProp',121);
-console.log('onWindowStageCreate');
-try {
-    let promise = windowClass.loadContent('pages/page2', storage);
-    promise.then(() => {
-        console.info('Succeeded in loading the content.');
-    }).catch((err) => {
-        console.error('Failed to load the content. Cause:' + JSON.stringify(err));
-    });
-} catch (exception) {
-    console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
-}
+import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
+
+export default class EntryAbility extends UIAbility {
+  // ...
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    let windowClass: window.Window = window.findWindow("test");
+    let storage: LocalStorage = new LocalStorage();
+    storage.setOrCreate('storageSimpleProp', 121);
+    try {
+      if (!windowClass) {
+        console.info('Failed to load the content. Cause: windowClass is null');
+      }
+      else {
+        let promise = (windowClass as window.Window).loadContent('pages/page2', storage);
+        promise.then(() => {
+          console.info('Succeeded in loading the content.');
+        }).catch((err: BusinessError) => {
+          console.error('Failed to load the content. Cause:' + JSON.stringify(err));
+        });
+      }
+    } catch (exception) {
+      console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
+    }
+  }
+};
 ```
 
 ### isWindowShowing<sup>9+</sup>
@@ -1098,12 +1206,13 @@ isWindowShowing(): boolean
 
 **示例：**
 
-```js
+```ts
 try {
-    let data = windowClass.isWindowShowing();
-    console.info('Succeeded in checking whether the window is showing. Data: ' + JSON.stringify(data));
+  let windowClass: window.Window = window.findWindow("test");
+  let data = windowClass.isWindowShowing();
+  console.info('Succeeded in checking whether the window is showing. Data: ' + JSON.stringify(data));
 } catch (exception) {
-    console.error('Failed to check whether the window is showing. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to check whether the window is showing. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -1131,12 +1240,13 @@ setWindowBackgroundColor(color: string): void
 
 **示例：**
 
-```js
-let color = '#00ff33';
+```ts
+let color: string = '#00ff33';
+let windowClass: window.Window = window.findWindow("test");
 try {
-    windowClass.setWindowBackgroundColor(color);
+  windowClass.setWindowBackgroundColor(color);
 } catch (exception) {
-    console.error('Failed to set the background color. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to set the background color. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -1154,7 +1264,7 @@ setWindowBrightness(brightness: number, callback: AsyncCallback&lt;void&gt;): vo
 
 | 参数名 | 类型 | 必填 | 说明                                        |
 | ---------- | ------------------------- | -- |-------------------------------------------|
-| brightness | number                    | 是 | 屏幕亮度值。该参数为浮点数，取值范围为[0.0, 1.0]。其取1.0时表示最亮。 |
+| brightness | number                    | 是 | 屏幕亮度值。该参数为浮点数，取值范围为[0.0, 1.0]或-1.0。1.0表示最亮，-1.0表示默认亮度。 |
 | callback   | AsyncCallback&lt;void&gt; | 是 | 回调函数。                                     |
 
 **错误码：**
@@ -1168,18 +1278,22 @@ setWindowBrightness(brightness: number, callback: AsyncCallback&lt;void&gt;): vo
 
 **示例：**
 
-```js
-let brightness = 1;
+```ts
+import { BusinessError } from '@ohos.base';
+
+let brightness: number = 1;
+let windowClass: window.Window = window.findWindow("test");
 try {
-    windowClass.setWindowBrightness(brightness, (err) => {
-        if (err.code) {
-            console.error('Failed to set the brightness. Cause: ' + JSON.stringify(err));
-            return;
-        }
-        console.info('Succeeded in setting the brightness.');
-    });
+  windowClass.setWindowBrightness(brightness, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to set the brightness. Cause: ' + JSON.stringify(err));
+      return;
+    }
+    console.info('Succeeded in setting the brightness.');
+  });
 } catch (exception) {
-    console.error('Failed to set the brightness. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to set the brightness. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -1197,7 +1311,7 @@ setWindowBrightness(brightness: number): Promise&lt;void&gt;
 
 | 参数名 | 类型 | 必填 | 说明                                     |
 | ---------- | ------ | -- |----------------------------------------|
-| brightness | number | 是 | 屏幕亮度值。该参数为浮点数，取值范围为[0.0, 1.0]。1.0表示最亮。 |
+| brightness | number | 是 | 屏幕亮度值。该参数为浮点数，取值范围为[0.0, 1.0]或-1.0。1.0表示最亮，-1.0表示默认亮度。 |
 
 **返回值：**
 
@@ -1216,17 +1330,20 @@ setWindowBrightness(brightness: number): Promise&lt;void&gt;
 
 **示例：**
 
-```js
-let brightness = 1;
+```ts
+import { BusinessError } from '@ohos.base';
+
+let brightness: number = 1;
+let windowClass: window.Window = window.findWindow("test");
 try {
-    let promise = windowClass.setWindowBrightness(brightness);
-    promise.then(()=> {
-        console.info('Succeeded in setting the brightness.');
-    }).catch((err)=>{
-        console.error('Failed to set the brightness. Cause: ' + JSON.stringify(err));
-    });
+  let promise = windowClass.setWindowBrightness(brightness);
+  promise.then(() => {
+    console.info('Succeeded in setting the brightness.');
+  }).catch((err: BusinessError) => {
+    console.error('Failed to set the brightness. Cause: ' + JSON.stringify(err));
+  });
 } catch (exception) {
-    console.error('Failed to set the brightness. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to set the brightness. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -1256,18 +1373,22 @@ setWindowKeepScreenOn(isKeepScreenOn: boolean, callback: AsyncCallback&lt;void&g
 
 **示例：**
 
-```js
-let isKeepScreenOn = true;
+```ts
+import { BusinessError } from '@ohos.base';
+
+let isKeepScreenOn: boolean = true;
+let windowClass: window.Window = window.findWindow("test");
 try {
-    windowClass.setWindowKeepScreenOn(isKeepScreenOn, (err) => {
-        if (err.code) {
-            console.error('Failed to set the screen to be always on. Cause: ' + JSON.stringify(err));
-            return;
-        }
-        console.info('Succeeded in setting the screen to be always on.');
-    });
+  windowClass.setWindowKeepScreenOn(isKeepScreenOn, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to set the screen to be always on. Cause: ' + JSON.stringify(err));
+      return;
+    }
+    console.info('Succeeded in setting the screen to be always on.');
+  });
 } catch (exception) {
-    console.error('Failed to set the screen to be always on. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to set the screen to be always on. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -1302,17 +1423,20 @@ setWindowKeepScreenOn(isKeepScreenOn: boolean): Promise&lt;void&gt;
 
 **示例：**
 
-```js
-let isKeepScreenOn = true;
+```ts
+import { BusinessError } from '@ohos.base';
+
+let isKeepScreenOn: boolean = true;
+let windowClass: window.Window = window.findWindow("test");
 try {
-    let promise = windowClass.setWindowKeepScreenOn(isKeepScreenOn);
-    promise.then(() => {
-        console.info('Succeeded in setting the screen to be always on.');
-    }).catch((err)=>{
-        console.info('Failed to set the screen to be always on. Cause:  ' + JSON.stringify(err));
-    });
+  let promise = windowClass.setWindowKeepScreenOn(isKeepScreenOn);
+  promise.then(() => {
+    console.info('Succeeded in setting the screen to be always on.');
+  }).catch((err: BusinessError) => {
+    console.info('Failed to set the screen to be always on. Cause:  ' + JSON.stringify(err));
+  });
 } catch (exception) {
-    console.error('Failed to set the screen to be always on. Cause: ' + JSON.stringify(exception));
+  console.error('Failed to set the screen to be always on. Cause: ' + JSON.stringify(exception));
 }
 ```
 
@@ -1366,22 +1490,25 @@ getMainWindow(callback: AsyncCallback&lt;Window&gt;): void
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    onWindowStageCreate(windowStage) {
-        console.log('onWindowStageCreate');
-        let windowClass = null;
-        windowStage.getMainWindow((err, data) => {
-            if (err.code) {
-                console.error('Failed to obtain the main window. Cause: ' + JSON.stringify(err));
-                return;
-            }
-            windowClass = data;
-            console.info('Succeeded in obtaining the main window. Data: ' + JSON.stringify(data));
-        });
-    }
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    let windowClass: window.Window | undefined = undefined;
+    windowStage.getMainWindow((err: BusinessError, data) => {
+      const errCode: number = err.code;
+      if (errCode) {
+        console.error('Failed to obtain the main window. Cause: ' + JSON.stringify(err));
+        return;
+      }
+      windowClass = data;
+      console.info('Succeeded in obtaining the main window. Data: ' + JSON.stringify(data));
+    });
+  }
 };
 ```
 
@@ -1414,21 +1541,23 @@ getMainWindow(): Promise&lt;Window&gt;
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    onWindowStageCreate(windowStage) {
-        console.log('onWindowStageCreate');
-        let windowClass = null;
-        let promise = windowStage.getMainWindow();
-        promise.then((data) => {
-        windowClass = data;
-            console.info('Succeeded in obtaining the main window. Data: ' + JSON.stringify(data));
-        }).catch((err) => {
-            console.error('Failed to obtain the main window. Cause: ' + JSON.stringify(err));
-        });
-    }
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    let windowClass: window.Window | undefined = undefined;
+    let promise = windowStage.getMainWindow();
+    promise.then((data) => {
+      windowClass = data;
+      console.info('Succeeded in obtaining the main window. Data: ' + JSON.stringify(data));
+    }).catch((err: BusinessError) => {
+      console.error('Failed to obtain the main window. Cause: ' + JSON.stringify(err));
+    });
+  }
 };
 ```
 
@@ -1461,18 +1590,19 @@ getMainWindowSync(): Window
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    onWindowStageCreate(windowStage) {
-        console.log('onWindowStageCreate');
-        try {
-            let windowClass = windowStage.getMainWindowSync();
-        } catch (exception) {
-            console.error('Failed to obtain the main window. Cause: ' + JSON.stringify(exception));
-        };
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    try {
+      let windowClass = windowStage.getMainWindowSync();
+    } catch (exception) {
+      console.error('Failed to obtain the main window. Cause: ' + JSON.stringify(exception));
     }
+  }
 };
 ```
 
@@ -1506,27 +1636,36 @@ createSubWindow(name: string, callback: AsyncCallback&lt;Window&gt;): void
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    onWindowStageCreate(windowStage) {
-        console.log('onWindowStageCreate');
-        let windowClass = null;
-        try {
-            windowStage.createSubWindow('mySubWindow', (err, data) => {
-                if (err.code) {
-                    console.error('Failed to create the subwindow. Cause: ' + JSON.stringify(err));
-                    return;
-                }
-                windowClass = data;
-                console.info('Succeeded in creating the subwindow. Data: ' + JSON.stringify(data));
-                windowClass.resetSize(500, 1000);
-            });
-        } catch (exception) {
-            console.error('Failed to create the subwindow. Cause: ' + JSON.stringify(exception));
-        };
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    let windowClass: window.Window | undefined = undefined;
+    try {
+      windowStage.createSubWindow('mySubWindow', (err: BusinessError, data) => {
+        const errCode: number = err.code;
+        if (errCode) {
+          console.error('Failed to create the subwindow. Cause: ' + JSON.stringify(err));
+          return;
+        }
+        windowClass = data;
+        console.info('Succeeded in creating the subwindow. Data: ' + JSON.stringify(data));
+        if (!windowClass) {
+          console.info('Failed to load the content. Cause: windowClass is null');
+        }
+        else {
+          (windowClass as window.Window).resetSize(500, 1000);
+        }
+      });
+
+    } catch (exception) {
+      console.error('Failed to create the subwindow. Cause: ' + JSON.stringify(exception));
     }
+  }
 };
 ```
 ### createSubWindow<sup>9+</sup>
@@ -1564,25 +1703,27 @@ createSubWindow(name: string): Promise&lt;Window&gt;
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    onWindowStageCreate(windowStage) {
-        console.log('onWindowStageCreate');
-        let windowClass = null;
-        try {
-            let promise = windowStage.createSubWindow('mySubWindow');
-            promise.then((data) => {
-                windowClass = data;
-                console.info('Succeeded in creating the subwindow. Data: ' + JSON.stringify(data));
-            }).catch((err) => {
-                console.error('Failed to create the subwindow. Cause: ' + JSON.stringify(err));
-            });
-        } catch (exception) {
-            console.error('Failed to create the subwindow. Cause: ' + JSON.stringify(exception));
-        };
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    let windowClass: window.Window | undefined = undefined;
+    try {
+      let promise = windowStage.createSubWindow('mySubWindow');
+      promise.then((data) => {
+        windowClass = data;
+        console.info('Succeeded in creating the subwindow. Data: ' + JSON.stringify(data));
+      }).catch((err: BusinessError) => {
+        console.error('Failed to create the subwindow. Cause: ' + JSON.stringify(err));
+      });
+    } catch (exception) {
+      console.error('Failed to create the subwindow. Cause: ' + JSON.stringify(exception));
     }
+  }
 };
 ```
 
@@ -1614,22 +1755,25 @@ getSubWindow(callback: AsyncCallback&lt;Array&lt;Window&gt;&gt;): void
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    onWindowStageCreate(windowStage) {
-        console.log('onWindowStageCreate');
-        let windowClass = null;
-        windowStage.getSubWindow((err, data) => {
-            if (err.code) {
-                console.error('Failed to obtain the subwindow. Cause: ' + JSON.stringify(err));
-                return;
-            }
-            windowClass = data;
-            console.info('Succeeded in obtaining the subwindow. Data: ' + JSON.stringify(data));
-        });
-    }
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    let windowClass: window.Window[] = [];
+    windowStage.getSubWindow((err: BusinessError, data) => {
+      const errCode: number = err.code;
+      if (errCode) {
+        console.error('Failed to obtain the subwindow. Cause: ' + JSON.stringify(err));
+        return;
+      }
+      windowClass = data;
+      console.info('Succeeded in obtaining the subwindow. Data: ' + JSON.stringify(data));
+    });
+  }
 };
 ```
 ### getSubWindow<sup>9+</sup>
@@ -1660,21 +1804,23 @@ getSubWindow(): Promise&lt;Array&lt;Window&gt;&gt;
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    onWindowStageCreate(windowStage) {
-        console.log('onWindowStageCreate');
-        let windowClass = null;
-        let promise = windowStage.getSubWindow();
-        promise.then((data) => {
-            windowClass = data;
-            console.info('Succeeded in obtaining the subwindow. Data: ' + JSON.stringify(data));
-        }).catch((err) => {
-            console.error('Failed to obtain the subwindow. Cause: ' + JSON.stringify(err));
-        })
-    }
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    let windowClass: window.Window[] = [];
+    let promise = windowStage.getSubWindow();
+    promise.then((data) => {
+      windowClass = data;
+      console.info('Succeeded in obtaining the subwindow. Data: ' + JSON.stringify(data));
+    }).catch((err: BusinessError) => {
+      console.error('Failed to obtain the subwindow. Cause: ' + JSON.stringify(err));
+    })
+  }
 };
 ```
 
@@ -1682,7 +1828,7 @@ export default class EntryAbility extends UIAbility {
 
 loadContent(path: string, storage: LocalStorage, callback: AsyncCallback&lt;void&gt;): void
 
-为当前WindowStage的主窗口加载与LocalStorage相关联的具体页面内容，使用callback异步回调。
+为当前WindowStage的主窗口加载具体页面内容，通过LocalStorage传递状态属性给加载的页面，使用callback异步回调。
 
 **模型约束：** 此接口仅可在Stage模型下使用。
 
@@ -1692,8 +1838,8 @@ loadContent(path: string, storage: LocalStorage, callback: AsyncCallback&lt;void
 
 | 参数名   | 类型                                            | 必填 | 说明                                                         |
 | -------- | ----------------------------------------------- | ---- | ------------------------------------------------------------ |
-| path     | string                                          | 是   | 设置加载页面的路径。                                         |
-| storage  | LocalStorage                                    | 是   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
+| path     | string                                          | 是   | 要加载到窗口中的页面内容的路径，该路径需添加到工程的main_pages.json文件中。                                         |
+| storage | LocalStorage                                    | 是   | 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。 |
 | callback | AsyncCallback&lt;void&gt;                       | 是   | 回调函数。                                                   |
 
 **错误码：**
@@ -1709,27 +1855,30 @@ loadContent(path: string, storage: LocalStorage, callback: AsyncCallback&lt;void
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    storage : LocalStorage
-    onWindowStageCreate(windowStage) {
-        this.storage = new LocalStorage();
-        this.storage.setOrCreate('storageSimpleProp',121);
-        console.log('onWindowStageCreate');
-        try {
-            windowStage.loadContent('pages/page2',this.storage,(err) => {
-                if (err.code) {
-                    console.error('Failed to load the content. Cause:' + JSON.stringify(err));
-                    return;
-                }
-                console.info('Succeeded in loading the content.');
-            });
-        } catch (exception) {
-            console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
-        };
+  storage: LocalStorage = new LocalStorage();
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    this.storage.setOrCreate('storageSimpleProp', 121);
+    console.log('onWindowStageCreate');
+    try {
+      windowStage.loadContent('pages/page2', this.storage, (err: BusinessError) => {
+        const errCode: number = err.code;
+        if (errCode) {
+          console.error('Failed to load the content. Cause:' + JSON.stringify(err));
+          return;
+        }
+        console.info('Succeeded in loading the content.');
+      });
+    } catch (exception) {
+      console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
     }
+  }
 };
 ```
 
@@ -1747,8 +1896,8 @@ loadContent(path: string, storage?: LocalStorage): Promise&lt;void&gt;
 
 | 参数名  | 类型                                            | 必填 | 说明                                                         |
 | ------- | ----------------------------------------------- | ---- | ------------------------------------------------------------ |
-| path    | string                                          | 是   | 设置加载页面的路径。                                         |
-| storage | LocalStorage                                    | 否   | 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。 |
+| path    | string                                          | 是   | 要加载到窗口中的页面内容的路径，该路径需添加到工程的main_pages.json文件中。                                         |
+| storage  | LocalStorage                                    | 否   | 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。 |
 
 **返回值：**
 
@@ -1769,26 +1918,29 @@ loadContent(path: string, storage?: LocalStorage): Promise&lt;void&gt;
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    storage : LocalStorage
-    onWindowStageCreate(windowStage) {
-        this.storage = new LocalStorage();
-        this.storage.setOrCreate('storageSimpleProp',121);
-        console.log('onWindowStageCreate');
-        try {
-            let promise = windowStage.loadContent('pages/page2',this.storage);
-            promise.then(() => {
-                console.info('Succeeded in loading the content.');
-            }).catch((err) => {
-                console.error('Failed to load the content. Cause:' + JSON.stringify(err));
-            });
-        } catch (exception) {
-            console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
-        };
+  storage: LocalStorage = new LocalStorage();
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    this.storage.setOrCreate('storageSimpleProp', 121);
+    console.log('onWindowStageCreate');
+    try {
+      let promise = windowStage.loadContent('pages/page2', this.storage);
+      promise.then(() => {
+        console.info('Succeeded in loading the content.');
+      }).catch((err: BusinessError) => {
+        console.error('Failed to load the content. Cause:' + JSON.stringify(err));
+      });
+    } catch (exception) {
+      console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
     }
+    ;
+  }
 };
 ```
 
@@ -1806,7 +1958,7 @@ loadContent(path: string, callback: AsyncCallback&lt;void&gt;): void
 
 | 参数名   | 类型                      | 必填 | 说明                 |
 | -------- | ------------------------- | ---- | -------------------- |
-| path     | string                    | 是   | 设置加载页面的路径。 |
+| path     | string                    | 是   | 要加载到窗口中的页面内容的路径，该路径需添加到工程的main_pages.json文件中。 |
 | callback | AsyncCallback&lt;void&gt; | 是   | 回调函数。           |
 
 **错误码：**
@@ -1822,24 +1974,27 @@ loadContent(path: string, callback: AsyncCallback&lt;void&gt;): void
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    onWindowStageCreate(windowStage) {
-        console.log('onWindowStageCreate');
-        try {
-            windowStage.loadContent('pages/page2', (err) => {
-                if (err.code) {
-                    console.error('Failed to load the content. Cause:' + JSON.stringify(err));
-                    return;
-                }
-                console.info('Succeeded in loading the content.');
-            });
-        } catch (exception) {
-            console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
-        };
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    try {
+      windowStage.loadContent('pages/page2', (err: BusinessError) => {
+        const errCode: number = err.code;
+        if (errCode) {
+          console.error('Failed to load the content. Cause:' + JSON.stringify(err));
+          return;
+        }
+        console.info('Succeeded in loading the content.');
+      });
+    } catch (exception) {
+      console.error('Failed to load the content. Cause:' + JSON.stringify(exception));
     }
+  }
 };
 ```
 
@@ -1873,22 +2028,23 @@ on(eventType: 'windowStageEvent', callback: Callback&lt;WindowStageEventType&gt;
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    onWindowStageCreate(windowStage) {
-        console.log('onWindowStageCreate');
-        try {
-            windowStage.on('windowStageEvent', (data) => {
-                console.info('Succeeded in enabling the listener for window stage event changes. Data: ' +
-                    JSON.stringify(data));
-            });
-        } catch (exception) {
-            console.error('Failed to enable the listener for window stage event changes. Cause:' +
-                JSON.stringify(exception));
-        };
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    try {
+      windowStage.on('windowStageEvent', (data) => {
+        console.info('Succeeded in enabling the listener for window stage event changes. Data: ' +
+        JSON.stringify(data));
+      });
+    } catch (exception) {
+      console.error('Failed to enable the listener for window stage event changes. Cause:' +
+      JSON.stringify(exception));
     }
+  }
 };
 ```
 
@@ -1907,7 +2063,7 @@ off(eventType: 'windowStageEvent', callback?: Callback&lt;WindowStageEventType&g
 | 参数名   | 类型                                                         | 必填 | 说明                                                         |
 | -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
 | type     | string                                                       | 是   | 监听事件，固定为'windowStageEvent'，即WindowStage生命周期变化事件。 |
-| callback | Callback&lt;[WindowStageEventType](#windowstageeventtype9)&gt; | 否   | 回调函数。返回当前的WindowStage生命周期状态。                |
+| callback | Callback&lt;[WindowStageEventType](#windowstageeventtype9)&gt; | 否   | 回调函数。返回当前的WindowStage生命周期状态。若传入参数，则关闭该监听。若未传入参数，则关闭所有WindowStage生命周期变化的监听。                |
 
 **错误码：**
 
@@ -1922,19 +2078,20 @@ off(eventType: 'windowStageEvent', callback?: Callback&lt;WindowStageEventType&g
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import window from '@ohos.window';
 
 export default class EntryAbility extends UIAbility {
-    // ...
+  // ...
 
-    onWindowStageCreate(windowStage) {
-        console.log('onWindowStageCreate');
-        try {
-            windowStage.off('windowStageEvent');
-        } catch (exception) {
-            console.error('Failed to disable the listener for window stage event changes. Cause:' +
-                JSON.stringify(exception));
-        };
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    try {
+      windowStage.off('windowStageEvent');
+    } catch (exception) {
+      console.error('Failed to disable the listener for window stage event changes. Cause:' +
+      JSON.stringify(exception));
     }
+  }
 };
 ```
 

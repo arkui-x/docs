@@ -13,7 +13,7 @@ import Url from '@ohos.url'
 
 ### constructor<sup>9+</sup>
 
-constructor(init?: string[][] | Record&lt;string, string&gt; | string | URLParams)
+constructor(init?: string[][] | Record&lt;string, string&gt; | string | URLSearchParams)
 
 A constructor used to create a **URLParams** instance.
 
@@ -23,11 +23,11 @@ A constructor used to create a **URLParams** instance.
 
 | Name| Type| Mandatory| Description|
 | -------- | -------- | -------- | -------- |
-| init | string[][] \| Record&lt;string, string&gt; \| string \| URLParams | No| Input parameter objects, which include the following:<br>- **string[][]**: two-dimensional string array<br>- **Record&lt;string, string&gt;**: list of objects<br>- **string**: string<br>- **URLParams**: object<br>The default value is **null**.|
+| init | string[][] \| Record&lt;string, string&gt; \| string \| URLSearchParams | No| Input parameter objects, which include the following:<br>- **string[][]**: two-dimensional string array<br>- **Record&lt;string, string&gt;**: list of objects<br>- **string**: string<br>- **URLSearchParams**: object<br>The default value is **null**.|
 
 **Example**
 
-```ts
+```js
 let objectParams = new Url.URLParams([ ['user1', 'abc1'], ['query2', 'first2'], ['query3', 'second3'] ]);
 let objectParams1 = new Url.URLParams({"fod" : '1' , "bard" : '2'});
 let objectParams2 = new Url.URLParams('?fod=1&bard=2');
@@ -53,7 +53,7 @@ Appends a key-value pair into the query string.
 
 **Example**
 
-```ts
+```js
 let urlObject = Url.URL.parseURL('https://developer.exampleUrl/?fod=1&bard=2');
 let paramsObject = new Url.URLParams(urlObject.search.slice(1));
 paramsObject.append('fod', '3');
@@ -76,7 +76,7 @@ Deletes key-value pairs of the specified key.
 
 **Example**
 
-```ts
+```js
 let urlObject = Url.URL.parseURL('https://developer.exampleUrl/?fod=1&bard=2');
 let paramsObject = new Url.URLParams(urlObject.search.slice(1));
 paramsObject.delete('fod');
@@ -105,7 +105,7 @@ Obtains all the values based on the specified key.
 
 **Example**
 
-```ts
+```js
 let urlObject = Url.URL.parseURL('https://developer.exampleUrl/?fod=1&bard=2');
 let params = new Url.URLParams(urlObject.search.slice(1));
 params.append('fod', '3'); // Add a second value for the fod parameter.
@@ -129,12 +129,10 @@ Obtains an ES6 iterator. Each item of the iterator is a JavaScript array, and th
 
 **Example**
 
-```ts
-let searchParamsObject = new Url.URLParams("keyName1=valueName1&keyName2=valueName2");
-let pair:Iterable<Object[]> = searchParamsObject.entries();
-let arrayValue = Array.from(pair);
-for (let pair of arrayValue) { // Show keyName/valueName pairs
-  console.log(pair[0]+ ', '+ pair[1]);
+```js
+let searchParamsObject = new Url.URLParams("keyName1=valueName1&keyName2=valueName2"); 
+for (var pair of searchParamsObject.entries()) { // Show keyName/valueName pairs
+    console.log(pair[0]+ ', '+ pair[1]);
 }
 ```
 
@@ -164,7 +162,7 @@ Traverses the key-value pairs in the **URLSearchParams** instance by using a cal
 
 **Example**
 
-```ts
+```js
 const myURLObject = Url.URL.parseURL('https://developer.exampleUrl/?fod=1&bard=2'); 
 myURLObject.params.forEach((value, name, searchParams) => {  
     console.log(name, value, myURLObject.params === searchParams);
@@ -195,10 +193,10 @@ Obtains the value of the first key-value pair based on the specified key.
 
 **Example**
 
-```ts
+```js
 let paramsObject = new Url.URLParams('name=Jonathan&age=18'); 
 let name = paramsObject.get("name"); // is the string "Jonathan" 
-let age = paramsObject.get("age"); // is the string "18"
+let age = parseInt(paramsObject.get("age"), 10); // is the number 18
 ```
 
 
@@ -224,7 +222,7 @@ Checks whether a key has a value.
 
 **Example**
 
-```ts
+```js
 let urlObject = Url.URL.parseURL('https://developer.exampleUrl/?fod=1&bard=2');
 let paramsObject = new Url.URLParams(urlObject.search.slice(1)); 
 let result = paramsObject.has('bard');
@@ -248,7 +246,7 @@ Sets the value for a key. If key-value pairs matching the specified key exist, t
 
 **Example**
 
-```ts
+```js
 let urlObject = Url.URL.parseURL('https://developer.exampleUrl/?fod=1&bard=2');
 let paramsObject = new Url.URLParams(urlObject.search.slice(1));
 paramsObject.set('baz', '3'); // Add a third parameter.
@@ -265,10 +263,10 @@ Sorts all key-value pairs contained in this object based on the Unicode code poi
 
 **Example**
 
-```ts
+```js
 let searchParamsObject = new Url.URLParams("c=3&a=9&b=4&d=2"); // Create a test URLSearchParams object
 searchParamsObject.sort(); // Sort the key/value pairs
-console.log(searchParamsObject.toString()); // Display the sorted query string // Output a=9&b=4&c=3&d=2
+console.log(searchParamsObject.toString()); // Display the sorted query string // Output a=9&b=2&c=3&d=4
 ```
 
 
@@ -288,11 +286,10 @@ Obtains an ES6 iterator that contains the keys of all the key-value pairs.
 
 **Example**
 
-```ts
+```js
 let searchParamsObject = new Url.URLParams("key1=value1&key2=value2"); // Create a URLSearchParamsObject object for testing
-let keys = Array.from(searchParamsObject.keys());
-for (let key of keys) { // Output key-value pairs
-  console.log(key);
+for (var key of searchParamsObject .keys()) { // Output key-value pairs
+    console.log(key);
 }
 ```
 
@@ -313,11 +310,10 @@ Obtains an ES6 iterator that contains the values of all the key-value pairs.
 
 **Example**
 
-```ts
+```js
 let searchParams = new Url.URLParams("key1=value1&key2=value2"); // Create a URLSearchParamsObject object for testing
-let values = Array.from(searchParams.values());
-for (let value of values) {
-  console.log(value);
+for (var value of searchParams.values()) {
+    console.log(value);
 }
 ```
 
@@ -338,13 +334,11 @@ Obtains an ES6 iterator. Each item of the iterator is a JavaScript array, and th
 
 **Example**
 
-```ts
+```js
 const paramsObject = new Url.URLParams('fod=bay&edg=bap');
-let iter: Iterable<Object[]> = paramsObject[Symbol.iterator]();
-let pairs = Array.from(iter);
-for (let pair of pairs) {
-  console.log(pair[0] + ', ' + pair[1]);
-}
+for (const [name, value] of paramsObject[Symbol.iterator]()) {
+    console.log(name, value); 
+} 
 ```
 
 
@@ -364,7 +358,7 @@ Obtains search parameters that are serialized as a string and, if necessary, per
 
 **Example**
 
-```ts
+```js
 let url = Url.URL.parseURL('https://developer.exampleUrl/?fod=1&bard=2');
 let params = new Url.URLParams(url.search.slice(1)); 
 params.append('fod', '3');
@@ -389,45 +383,8 @@ console.log(params.toString());
 | port | string | Yes| Yes| Port in a URL.|
 | protocol | string | Yes| Yes| Protocol in a URL.|
 | search | string | Yes| Yes| Serialized query string in a URL.|
-| searchParams<sup>(deprecated)</sup> | [URLSearchParams](#urlsearchparamsdeprecated) | Yes| No| **URLSearchParams** object allowing access to the query parameters in a URL.<br>- **NOTE**: This attribute is supported since API version 7 and is deprecated since API version 9. You are advised to use params<sup>9+</sup> instead.|
 | params<sup>9+</sup> | [URLParams](#urlparams9) | Yes| No| **URLParams** object allowing access to the query parameters in a URL.|
 | username | string | Yes| Yes| Username in a URL.|
-
-### constructor<sup>(deprecated)</sup>
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [parseURL<sup>9+</sup>](#parseurl9) instead.
-
-constructor(url: string, base?: string | URL)
-
-Creates a URL.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Parameters**
-
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| url | string | Yes| Input object.|
-| base | string \| URL | No| Input parameter, which can be any of the following:<br>- **string**: string<br>- **URL**: string or object<br>The default value is an empty string or an empty object.|
-
-**Example**
-
-```ts
-let mm = 'https://username:password@host:8080';
-let a = new Url.URL("/", mm); // Output 'https://username:password@host:8080/';
-let b = new Url.URL(mm); // Output 'https://username:password@host:8080/';
-new Url.URL('path/path1', b); // Output 'https://username:password@host:8080/path/path1';
-let c = new Url.URL('/path/path1', b);  // Output 'https://username:password@host:8080/path/path1'; 
-new Url.URL('/path/path1', c); // Output 'https://username:password@host:8080/path/path1';
-new Url.URL('/path/path1', a); // Output 'https://username:password@host:8080/path/path1';
-new Url.URL('/path/path1', "https://www.exampleUrl/fr-FR/toto"); // Output https://www.exampleUrl/path/path1
-new Url.URL('/path/path1', ''); // Raises a TypeError exception as '' is not a valid URL
-new Url.URL('/path/path1'); // Raises a TypeError exception as '/path/path1' is not a valid URL
-new Url.URL('https://www.example.com', ); // Output https://www.example.com/
-new Url.URL('https://www.example.com', b); // Output https://www.example.com/
-```
 
 ### constructor<sup>9+</sup>
 
@@ -463,7 +420,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 **Example**
 
-```ts
+```js
 let mm = 'https://username:password@host:8080';
 let url = Url.URL.parseURL(mm); 
 let result = url.toString(); // Output 'https://username:password@host:8080/'
@@ -485,7 +442,7 @@ Converts the parsed URL into a string.
 
 **Example**
 
-```ts
+```js
 const url = Url.URL.parseURL('https://username:password@host:8080/directory/file?query=pppppp#qwer=da');
 let result = url.toString();
 ```
@@ -505,421 +462,7 @@ Converts the parsed URL into a JSON string.
 | string | Website address in a serialized string.|
 
 **Example**
-```ts
+```js
 const url = Url.URL.parseURL('https://username:password@host:8080/directory/file?query=pppppp#qwer=da');
 let result = url.toJSON();
 ```
-
-## URLSearchParams<sup>(deprecated)</sup>
-
-### constructor<sup>(deprecated)</sup>
-
-constructor(init?: string[][] | Record&lt;string, string&gt; | string | URLSearchParams)
-
-A constructor used to create a **URLSearchParams** instance.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.constructor<sup>9+</sup>](#constructor9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Parameters**
-
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| init | string[][] \| Record&lt;string, string&gt; \| string \| URLSearchParams | No| Input parameter objects, which include the following:<br>- **string[][]**: two-dimensional string array<br>- **Record&lt;string, string&gt;**: list of objects<br>- **string**: string<br>- **URLSearchParams**: object<br>The default value is **null**.|
-
-**Example**
-
-```ts
-let objectParams = new Url.URLSearchParams([ ['user1', 'abc1'], ['query2', 'first2'], ['query3', 'second3'] ]);
-let objectParams1 = new Url.URLSearchParams({"fod" : '1' , "bard" : '2'});
-let objectParams2 = new Url.URLSearchParams('?fod=1&bard=2');
-let urlObject = new Url.URL('https://developer.mozilla.org/?fod=1&bard=2');
-let params = new Url.URLSearchParams(urlObject.search);
-```
-
-### append<sup>(deprecated)</sup>
-
-append(name: string, value: string): void
-
-Appends a key-value pair into the query string.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.append<sup>9+</sup>](#append9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Parameters**
-
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| name | string | Yes| Key of the key-value pair to append.|
-| value | string | Yes| Value of the key-value pair to append.|
-
-**Example**
-
-```ts
-let urlObject = new Url.URL('https://developer.exampleUrl/?fod=1&bard=2');
-let paramsObject = new Url.URLSearchParams(urlObject.search.slice(1));
-paramsObject.append('fod', '3');
-```
-
-### delete<sup>(deprecated)</sup>
-
-delete(name: string): void
-
-Deletes key-value pairs of the specified key.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.delete<sup>9+</sup>](#delete9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Parameters**
-
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| name | string | Yes| Key of the key-value pairs to delete.|
-
-**Example**
-
-```ts
-let urlObject = new Url.URL('https://developer.exampleUrl/?fod=1&bard=2');
-let paramsobject = new Url.URLSearchParams(urlObject.search.slice(1));
-paramsobject.delete('fod');
-```
-
-### getAll<sup>(deprecated)</sup>
-
-getAll(name: string): string[]
-
-Obtains all the key-value pairs based on the specified key.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.getAll<sup>9+</sup>](#getall9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Parameters**
-
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| name | string | Yes| Target key.|
-
-**Return value**
-
-| Type| Description|
-| -------- | -------- |
-| string[] | All key-value pairs matching the specified key.|
-
-**Example**
-
-```ts
-let urlObject = new Url.URL('https://developer.exampleUrl/?fod=1&bard=2');
-let params = new Url.URLSearchParams(urlObject.search.slice(1));
-params.append('fod', '3'); // Add a second value for the fod parameter.
-console.log(params.getAll('fod').toString()) // Output ["1","3"].
-```
-
-### entries<sup>(deprecated)</sup>
-
-entries(): IterableIterator<[string, string]>
-
-Obtains an ES6 iterator. Each item of the iterator is a JavaScript array, and the first and second fields of each array are the key and value respectively.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.entries<sup>9+</sup>](#entries9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Return value**
-
-| Type| Description|
-| -------- | -------- |
-| IterableIterator&lt;[string, string]&gt; | ES6 iterator.|
-
-**Example**
-
-```ts
-let searchParamsObject = new Url.URLSearchParams("keyName1=valueName1&keyName2=valueName2");
-let iter: Iterable<Object[]> = searchParamsObject.entries();
-let pairs = Array.from(iter);
-for (let pair of pairs) { // Show keyName/valueName pairs
-  console.log(pair[0]+ ', '+ pair[1]);
-}
-```
-
-
-### forEach<sup>(deprecated)</sup>
-
-forEach(callbackFn: (value: string, key: string, searchParams: this) => void, thisArg?: Object): void
-
-Traverses the key-value pairs in the **URLSearchParams** instance by using a callback.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.forEach<sup>9+</sup>](#foreach9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Parameters**
-
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| callbackFn | function | Yes| Callback invoked to traverse the key-value pairs in the **URLSearchParams** instance.|
-| thisArg | Object | No| Value of **this** to use when **callbackFn** is invoked. The default value is this object.|
-
-**Table 1** callbackFn parameter description
-
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| value | string | Yes| Value that is currently traversed.|
-| key | string | Yes| Key that is currently traversed.|
-| searchParams | Object | Yes| Instance that invokes the **forEach** method.|
-
-**Example**
-
-```ts
-const myURLObject = new Url.URL('https://developer.exampleUrl/?fod=1&bard=2'); 
-myURLObject.searchParams.forEach((value, name, searchParams) => {  
-    console.log(name, value, myURLObject.searchParams === searchParams);
-});
-```
-
-
-### get<sup>(deprecated)</sup>
-
-get(name: string): string | null
-
-Obtains the value of the first key-value pair based on the specified key.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.get<sup>9+</sup>](#get9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Parameters**
-
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| name | string | Yes| Key specified to obtain the value.|
-
-**Return value**
-
-| Type| Description|
-| -------- | -------- |
-| string | Returns the value of the first key-value pair if obtained.|
-| null | Returns **null** if no value is obtained.|
-
-**Example**
-
-```ts
-let paramsObject = new Url.URLSearchParams('name=Jonathan&age=18');
-let name = paramsObject.get("name"); // is the string "Jonathan"
-let age = paramsObject.get("age"); // is the string '18'
-```
-
-
-### has<sup>(deprecated)</sup>
-
-has(name: string): boolean
-
-Checks whether a key has a value.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.has<sup>9+</sup>](#has9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Parameters**
-
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| name | string | Yes| Key specified to search for its value.|
-
-**Return value**
-
-| Type| Description|
-| -------- | -------- |
-| boolean | Returns **true** if the value exists; returns **false** otherwise.|
-
-**Example**
-
-```ts
-let urlObject = new Url.URL('https://developer.exampleUrl/?fod=1&bard=2');
-let paramsObject = new Url.URLSearchParams(urlObject.search.slice(1)); 
-paramsObject.has('bard') === true;
-```
-
-
-### set<sup>(deprecated)</sup>
-
-set(name: string, value: string): void
-
-Sets the value for a key. If key-value pairs matching the specified key exist, the value of the first key-value pair will be set to the specified value and other key-value pairs will be deleted. Otherwise, the key-value pair will be appended to the query string.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.set<sup>9+</sup>](#set9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Parameters**
-
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| name | string | Yes| Key of the value to set.|
-| value | string | Yes| Value to set.|
-
-**Example**
-
-```ts
-let urlObject = new Url.URL('https://developer.exampleUrl/?fod=1&bard=2');
-let paramsObject = new Url.URLSearchParams(urlObject.search.slice(1));
-paramsObject.set('baz', '3'); // Add a third parameter.
-```
-
-
-### sort<sup>(deprecated)</sup>
-
-sort(): void
-
-Sorts all key-value pairs contained in this object based on the Unicode code points of the keys and returns undefined.  This method uses a stable sorting algorithm, that is, the relative order between key-value pairs with equal keys is retained.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.sort<sup>9+</sup>](#sort9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Example**
-
-```ts
-let searchParamsObject = new Url.URLSearchParams("c=3&a=9&b=4&d=2"); // Create a test URLSearchParams object
-searchParamsObject.sort(); // Sort the key/value pairs
-console.log(searchParamsObject.toString()); // Display the sorted query string // Output a=9&b=4&c=3&d=2
-```
-
-
-### keys<sup>(deprecated)</sup>
-
-keys(): IterableIterator&lt;string&gt;
-
-Obtains an ES6 iterator that contains the keys of all the key-value pairs.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.keys<sup>9+</sup>](#keys9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Return value**
-
-| Type| Description|
-| -------- | -------- |
-| IterableIterator&lt;string&gt; | ES6 iterator that contains the keys of all the key-value pairs.|
-
-**Example**
-
-```ts
-let searchParamsObject = new Url.URLSearchParams("key1=value1&key2=value2"); // Create a URLSearchParamsObject object for testing
-let keys = Array.from(searchParamsObject.keys());
-for (let key of keys) { // Output key-value pairs
-  console.log(key);
-}
-```
-
-
-### values<sup>(deprecated)</sup>
-
-values(): IterableIterator&lt;string&gt;
-
-Obtains an ES6 iterator that contains the values of all the key-value pairs.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.values<sup>9+</sup>](#values9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Return value**
-
-| Type| Description|
-| -------- | -------- |
-| IterableIterator&lt;string&gt; | ES6 iterator that contains the values of all the key-value pairs.|
-
-**Example**
-
-```ts
-let searchParams = new Url.URLSearchParams("key1=value1&key2=value2"); // Create a URLSearchParamsObject object for testing
-let values = Array.from(searchParams.values());
-for (let value of values) {
-  console.log(value);
-}
-```
-
-
-### [Symbol.iterator]<sup>(deprecated)</sup>
-
-[Symbol.iterator]\(): IterableIterator&lt;[string, string]&gt;
-
-Obtains an ES6 iterator. Each item of the iterator is a JavaScript array, and the first and second fields of each array are the key and value respectively.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.[Symbol.iterator]<sup>9+</sup>](#symboliterator9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Return value**
-
-| Type| Description|
-| -------- | -------- |
-| IterableIterator&lt;[string, string]&gt; | ES6 iterator.|
-
-**Example**
-
-```ts
-const paramsObject = new Url.URLSearchParams('fod=bay&edg=bap');
-let iter: Iterable<Object[]> = paramsObject[Symbol.iterator]();
-let pairs = Array.from(iter);
-for (let pair of pairs) {
-  console.log(pair[0] + ', ' + pair[1]);
-}
-```
-
-### tostring<sup>(deprecated)</sup>
-
-toString(): string
-
-Obtains search parameters that are serialized as a string and, if necessary, percent-encodes the characters in the string.
-
-> **NOTE**
->
-> This API is supported since API version 7 and deprecated since API version 9. You are advised to use [URLParams.tostring<sup>9+</sup>](#tostring9) instead.
-
-**System capability**: SystemCapability.Utils.Lang
-
-**Return value**
-
-| Type| Description|
-| -------- | -------- |
-| string | String of serialized search parameters, which is percent-encoded if necessary.|
-
-**Example**
-
-```ts
-let url = new Url.URL('https://developer.exampleUrl/?fod=1&bard=2');
-let params = new Url.URLSearchParams(url.search.slice(1)); 
-params.append('fod', '3');
-console.log(params.toString());
-```
-<!--no_check-->

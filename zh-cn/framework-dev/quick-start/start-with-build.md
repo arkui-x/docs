@@ -5,7 +5,6 @@
   ```shell
   --product-name    # 必须  编译的产品名称，如：arkui-x
   --target-os       # 必须  编译的跨平台目标，如：android或ios
-  --target-cpu      # 可选  指定target侧CPU架构，如：arm或arm64
   --build-target    # 可选  指定编译目标，可以指定多个
   --gn-args         # 可选  gn参数，支持指定多个
   --ninja-args      # 可选  ninja参数，如：--ninja-args=-dkeeprsp
@@ -15,7 +14,7 @@
 
 - 新下载代码或更新代码时，需要下载或更新预编译工具链，命令如下
   ```
-  ./build/prebuilts_download.sh --build-arkuix
+  ./build/prebuilts_download.sh --build-arkuix --skip-ssl
   ```
 - 编译命令示例
   - 查看编译脚本支持的选项

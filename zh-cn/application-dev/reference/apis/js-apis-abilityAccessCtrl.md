@@ -67,17 +67,19 @@ checkAccessToken(tokenID: number, permissionName: Permissions): Promise&lt;Grant
 
 ```js
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import { BusinessError } from '@ohos.base';
 
-let atManager = abilityAccessCtrl.createAtManager();
-let tokenID = 1;
+let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
+let tokenID: number = 1;
+
 try {
-    atManager.checkAccessToken(tokenID, 'ohos.permission.CAMERA').then((data) => {
-        console.log(`checkAccessToken success, data->${JSON.stringify(data)}`);
-    }).catch((err) => {
-        console.log(`checkAccessToken fail, err->${JSON.stringify(err)}`);
-    });
+  atManager.checkAccessToken(tokenID, 'ohos.permission.CAMERA').then((data: abilityAccessCtrl.GrantStatus) => {
+	console.log(`checkAccessToken success, data->${JSON.stringify(data)}`);
+  }).catch((err: BusinessError) => {
+	console.log(`checkAccessToken fail, err->${JSON.stringify(err)}`);
+  });
 } catch(err) {
-    console.log(`catch err->${JSON.stringify(err)}`);
+  console.log(`catch err->${JSON.stringify(err)}`);
 }
 ```
 
@@ -111,9 +113,9 @@ checkAccessTokenSync(tokenID: number, permissionName: Permissions): GrantStatus;
 **示例：**
 
 ```js
-let atManager = abilityAccessCtrl.createAtManager();
-let tokenID = 1;
-let data = atManager.checkAccessTokenSync(tokenID, 'ohos.permission.CAMERA');
+let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
+let tokenID: number = 1;
+let data: abilityAccessCtrl.GrantStatus = atManager.checkAccessTokenSync(tokenID, 'ohos.permission.CAMERA');
 console.log(`data->${JSON.stringify(data)}`);
 ```
 
@@ -154,16 +156,23 @@ requestPermissionsFromUser(context: Context, permissionList: Array&lt;Permission
 **示例：**
 
   ```js
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-let atManager = abilityAccessCtrl.createAtManager();
+import abilityAccessCtrl, { Context, PermissionRequestResult } from '@ohos.abilityAccessCtrl';
+import { BusinessError } from '@ohos.base';
+
+let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
+let context: Context = getContext(this);
 try {
-    atManager.requestPermissionsFromUser(this.context, ['ohos.permission.CAMERA'], (err, data)=>{
-        console.info('data:' + JSON.stringify(data));
-        console.info('data permissions:' + data.permissions);
-        console.info('data authResults:' + data.authResults);
-    });
+  atManager.requestPermissionsFromUser(context, ['ohos.permission.CAMERA'], (err: BusinessError, data: PermissionRequestResult) => {
+	if (err) {
+	  console.log(`requestPermissionsFromUser err->${JSON.stringify(err)}`);
+	} else {
+	  console.info('data:' + JSON.stringify(data));
+	  console.info('data permissions:' + data.permissions);
+	  console.info('data authResults:' + data.authResults);
+	}
+  });
 } catch(err) {
-    console.log(`catch err->${JSON.stringify(err)}`);
+  console.log(`catch err->${JSON.stringify(err)}`);
 }
   ```
 
@@ -197,17 +206,20 @@ requestPermissionsFromUser(context: Context, permissionList: Array&lt;Permission
 **示例：**
 
   ```js
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-let atManager = abilityAccessCtrl.createAtManager();
+import abilityAccessCtrl, { Context, PermissionRequestResult } from '@ohos.abilityAccessCtrl';
+import { BusinessError } from '@ohos.base';
+
+let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
+let context: Context = getContext(this);
 try {
-    atManager.requestPermissionsFromUser(this.context, ['ohos.permission.CAMERA']).then((data) => {
-        console.info('data:' + JSON.stringify(data));
-        console.info('data permissions:' + data.permissions);
-        console.info('data authResults:' + data.authResults);
-    }).catch((err) => {
-        console.info('data:' + JSON.stringify(err));
-    })
+  atManager.requestPermissionsFromUser(context, ['ohos.permission.CAMERA']).then((data: PermissionRequestResult) => {
+	console.info('data:' + JSON.stringify(data));
+	console.info('data permissions:' + data.permissions);
+	console.info('data authResults:' + data.authResults);
+  }).catch((err: BusinessError) => {
+	console.info('data:' + JSON.stringify(err));
+  })
 } catch(err) {
-    console.log(`catch err->${JSON.stringify(err)}`);
+  console.log(`catch err->${JSON.stringify(err)}`);
 }
   ```

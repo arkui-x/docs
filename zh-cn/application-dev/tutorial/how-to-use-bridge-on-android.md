@@ -16,6 +16,8 @@ import bridge from '@arkui-x.bridge';
 
 // 创建平台桥接实例
 const bridgeImpl = bridge.createBridge('Bridge');
+// 创建平台桥接实例(二进制格式)
+const bridgeImpl = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
 ```
 
 2、在Android侧创建BridgePlugin类。指定名称，该名称应与ArkUI侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
@@ -23,7 +25,13 @@ const bridgeImpl = bridge.createBridge('Bridge');
 ```java
 // xxx.java
 
+// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
 Bridge bridge = new Bridge(this, "Bridge", getInstanceId());
+Bridge bridge = new Bridge(this, "Bridge", getInstanceId(),  BridgePlugin.BridgeType.BINARY_TYPE);
+
+// 创建平台桥接实例(新)
+Bridge bridge = new Bridge(this, "Bridge", getBridgeManager());
+Bridge bridge = new Bridge(this, "Bridge", getBridgeManager(), BridgePlugin.BridgeType.BINARY_TYPE);
 ```
 
 ### 场景一：ArkUI侧向Android侧传递数据
@@ -46,8 +54,15 @@ bridgeImpl.sendMessage('text').then((res)=>{
 ```java
 // xxx.java
 
+// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
 public Bridge(Context context, String name, int id) {
     super(context, name, id);
+    setMessageListener(this);
+}
+
+// 创建平台桥接实例(新)
+public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    super(context, name, bridgeManager);
     setMessageListener(this);
 }
 
@@ -87,8 +102,15 @@ bridgeImpl.setMessageListener((message) => {
 ```java
 // xxx.java
 
+// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
 public Bridge(Context context, String name, int id) {
     super(context, name, id);
+    setMessageListener(this);
+}
+
+// 创建平台桥接实例(新)
+public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    super(context, name, bridgeManager);
     setMessageListener(this);
 }
 
@@ -116,7 +138,7 @@ bridgeImpl.callMethod('platformCallMethod').then((res)=>{
 ```java
 // xxx.java
 
-public platformCallMethod() {
+public String platformCallMethod() {
   return "call java platformCallMethod success";
 }
 ```
@@ -169,6 +191,10 @@ bridgeImpl.unRegisterMethod('getString');
 
 public Bridge(Context context, String name, int id) {
     super(context, name, id);
+}
+
+public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    super(context, name, bridgeManager);
     setMethodResultListener(this);
 }
 
@@ -181,6 +207,72 @@ public void onError(String s, int i, String s1) {}
 @Override
 public void onMethodCancel(String s) {}
 ```
+
+### 场景六：ArkUI侧注册callBack且调用Android侧的方法（无参）
+
+1、在ArkUI侧注册callBack且调用Android侧的方法。
+
+```javascript
+// xxx.ets
+function testCallBackOfJs() {
+  console.log("bridge js testCallBackOfJs run")
+}
+
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs).then((res)=>{
+    console.log('result: ' + res);
+}).catch((err) => {
+    console.error('error: ' + JSON.stringify(err));
+});
+```
+
+2、在Android侧实现被调用的方法，调用ArkUI侧的方法。
+
+```java
+// xxx.java
+
+public String testCallBack() {
+  return "call android testCallBack success";
+}
+
+Object[] paramObject = {};
+MethodData methodData = new MethodData("testCallBack", paramObject);
+bridge.callMethod(methodData);
+```
+
+### 场景七：ArkUI侧注册callBack且调用Android侧的方法（有参）
+
+1、在ArkUI侧注册callBack且调用Android侧的方法。
+
+```javascript
+// xxx.ets
+function testCallBackOfJs(stringParam) {
+  console.log("Js received a parameter of " + stringParam)
+  return "js testCallBackReturn call success."
+}
+
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
+    console.log('result: ' + res);
+}).catch((err) => {
+    console.error('error: ' + JSON.stringify(err));
+});
+```
+
+2、在Android侧实现被调用的方法，调用ArkUI侧的方法。
+
+```java
+// xxx.java
+
+public String testCallBack(String sParam) {
+	ALog.i("Android received a parameter of ", sParam);
+    return "call android testCallBack success";
+}
+
+Object[] paramObject = {"android sends parameter"};
+MethodData methodData = new MethodData("testCallBack", paramObject);
+bridge.callMethod(methodData);
+```
+
+### 
 
 ## 场景示例
 
@@ -254,9 +346,15 @@ import ohos.ace.adapter.capability.bridge.BridgePlugin;
 import ohos.ace.adapter.capability.bridge.IMessageListener;
 
 public class Bridge extends BridgePlugin implements IMessageListener {
+	// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
     public Bridge(Context context, String name, int id) {
-        super(context, name, id);
-
+    	super(context, name, id);
+        setMessageListener(this);
+    }
+    
+    // 创建平台桥接实例
+    public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    	super(context, name, bridgeManager);
         setMessageListener(this);
     }
 
