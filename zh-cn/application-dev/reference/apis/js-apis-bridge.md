@@ -38,31 +38,6 @@ createBridge(bridgeName: string): BridgeObject
   const bridgeObj: BridgeObject = bridge.createBridge('Bridge');
   ```
 
- createBridge(bridgeName: string, type: BridgeType): BridgeObject;
-
-定义BridgeObject类(编解码模式)。
-
-**系统能力：**   SystemCapability.ArkUI.ArkUI.Full
-
-**参数：** 
-
-| 参数名     | 类型       | 必填 | 说明                                 |
-| ---------- | ---------- | ---- | ------------------------------------ |
-| bridgeName | string     | 是   | 定义桥接名称。                       |
-| bridgeType | BridgeType | 否   | 编解码类型（可不填，默认为json格式） |
-
-**返回值：** 
-
-| 类型                          | 说明           |
-| ----------------------------- | -------------- |
-| [BridgeObject](#bridgeobject) | 桥接的接口类。 |
-
-**示例：** 
-
-  ```javaScript
-  const bridgeObj: BridgeObject = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
-  ```
-
 ## BridgeObject
 
 桥接的接口类。
@@ -99,6 +74,7 @@ callMethod(methodName: string, ...parameters: Array\<any\>): Promise\<ResultValu
 | 4 | 方法名称错误。 |
 | 5 | 方法正确运行，不能重复运行。 |
 | 6 | 方法未实现。 |
+
 
 **示例：**
 
@@ -232,56 +208,11 @@ bridgeObj.setMessageListener((data) => {
 });
 ```
 
-### callMethodWithCallback
 
-callMethodWithCallback(methodName: string, method: (parameters?: Record<string , Parameter>) => ResultValue, parameters?: Record<string, Parameter>): Promise<ResultValue>；
-
-callMethodWithCallback(methodName: string, method: (parameters?: Record<string , Parameter>) => ResultValue, parameters?: Array<any>): Promise<ResultValue>;
-
-注册callback, 供平台侧调用，调用平台侧函数。
-
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
-
-**参数：** 
-
-| 参数名     | 类型                        | 必填 | 说明           |
-| ---------- | --------------------------- | ---- | -------------- |
-| methodName | string                      | 是   | 方法名称。     |
-| method     | function                    | 是   | JS侧方法       |
-| parameters | Record\<string, Parameter\> | 否   | 方法参数列表。 |
-| parameters | Array\<any\>                | 否   | 方法参数列表。 |
-
-**返回值：** 
-
-| 类型                        | 说明               |
-| --------------------------- | ------------------ |
-| [ResultValue](#resultvalue) | 平台方法执行结果。 |
-
-**示例：**
-
-```javaScript
-function jsMethod() {
-  return 'ts return：jsMethod';
-}
-
-const bridgeObj = bridge.createBridge('Bridge');
-bridgeObj.callMethodWithCallBack('jsMethod', jsMethod, PlatformParams).then((data)=>{
-    console.log('data = ' + data);
-}).catch((err) => {
-    console.error('error = ' + JSON.stringify(err));
-});
-```
-
-## **BridgeType**
-
-| 参数名      | 说明                   |
-| ----------- | ---------------------- |
-| JSON_TYPE   | JSON格式序列化编解码   |
-| BINARY_TYPE | 二进制格式序列化编解码 |
 
 ## S 
 
-type S = number | boolean | string | null | ArrayBuffer;
+type S = number | boolean | string | null
 
 **说明：** 定义桥接使用的基础数据类型。
 

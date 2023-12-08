@@ -11,81 +11,7 @@ import ohos.ace.adapter.capability.bridge.BridgePlugin;
 ```
 ## BridgePlugin
 
-**BridgePlugin(Context context, String bridgeName, int instanceId);** 
-
-@since 10
-
-@deprecated since 11
-
-创建BridgePlugin类。
-
-**参数：** 
-
-| 参数名     | 类型    | 必填 | 说明               |
-| ---------- | ------- | ---- | ------------------ |
-| context    | Context | 是   | 应用程序的上下文。 |
-| bridgeName | String  | 是   | 定义桥接名称。     |
-| instanceId | int     | 是   | 实例ID。           |
-
-**返回值：** 
-
-| 类型         | 说明           |
-| ------------ | -------------- |
-| BridgePlugin | 桥接结果接口。 |
-
-**示例：** 
-
-  ```java
-public class BridgeImpl extends BridgePlugin {
-    ...
-}
-
-BridgeImpl bridgeImpl = new BridgeImpl(this, "Bridge", getInstanceId());
-  ```
-
-**BridgePlugin(Context context, String bridgeName, int instanceId, BridgeType bridgeType);** 
-
-@since 10
-
-@deprecated since 11
-
-创建BridgePlugin类(编解码模式)。
-
-BridgeType:
-
-| 参数名      | 说明                   |
-| ----------- | ---------------------- |
-| JSON_TYPE   | JSON格式序列化编解码   |
-| BINARY_TYPE | 二进制格式序列化编解码 |
-
-**参数：** 
-
-| 参数名     | 类型       | 必填 | 说明                                 |
-| ---------- | ---------- | ---- | ------------------------------------ |
-| context    | Context    | 是   | 应用程序的上下文。                   |
-| bridgeName | string     | 是   | 定义桥接名称。                       |
-| instanceId | int        | 是   | 实例ID。                             |
-| bridgeType | BridgeType | 否   | 编解码类型（可不填，默认为json格式） |
-
-**返回值：** 
-
-| 类型         | 说明           |
-| ------------ | -------------- |
-| BridgePlugin | 桥接结果接口。 |
-
-**示例：** 
-
-  ```java
-public class BridgeImpl extends BridgePlugin {
-    ...
-}
-
-BridgeImpl bridgeImpl = new BridgeImpl(this, "Bridge", getInstanceId(), BridgePlugin.BridgeType.BINARY_TYPE);
-  ```
-
-**BridgePlugin(Context context, String bridgeName, BridgeManager bridgeManager);**
-
-@since 11
+BridgePlugin(Context context, String bridgeName, int instanceId);
 
 创建BridgePlugin类。
 
@@ -95,7 +21,7 @@ BridgeImpl bridgeImpl = new BridgeImpl(this, "Bridge", getInstanceId(), BridgePl
 | ---------- | ------- | ---- | ------------------ |
 | context    | Context | 是   | 应用程序的上下文。 |
 | bridgeName | string  | 是   | 定义桥接名称。     |
-| bridgeManager | BridgeManager | 是   | BridgeManager实例。 |
+| instanceId | int     | 是   | 实例ID。     |
 
 **返回值：** 
 
@@ -110,45 +36,7 @@ public class BridgeImpl extends BridgePlugin {
     ...
 }
 
-BridgeImpl bridgeImpl = new BridgeImpl(this, "Bridge", getBridgeManager());
-  ```
-
-**BridgePlugin(Context context, String bridgeName, BridgeManager bridgeManager, BridgeType bridgeType);**
-
-@since 11
-
-创建BridgePlugin类(编解码模式)。
-
-BridgeType:
-
-| 参数名      | 说明                   |
-| ----------- | ---------------------- |
-| JSON_TYPE   | JSON格式序列化编解码   |
-| BINARY_TYPE | 二进制格式序列化编解码 |
-
-**参数：** 
-
-| 参数名        | 类型          | 必填 | 说明                                 |
-| ------------- | ------------- | ---- | ------------------------------------ |
-| context       | Context       | 是   | 应用程序的上下文。                   |
-| bridgeName    | string        | 是   | 定义桥接名称。                       |
-| bridgeManager | BridgeManager | 是   | BridgeManager实例。                  |
-| bridgeType    | BridgeType    | 否   | 编解码类型（可不填，默认为json格式） |
-
-**返回值：** 
-
-| 类型         | 说明           |
-| ------------ | -------------- |
-| BridgePlugin | 桥接结果接口。 |
-
-**示例：** 
-
-  ```java
-public class BridgeImpl extends BridgePlugin {
-    ...
-}
-
-BridgeImpl bridgeImpl = new BridgeImpl(this, "Bridge", getBridgeManager(), BridgePlugin.BridgeType.BINARY_TYPE);
+BridgeImpl bridgeImpl = new BridgeImpl(this, "Bridge", getInstanceId());
   ```
 
 ## callMethod
@@ -227,11 +115,6 @@ public void setMessageListener(IMessageListener messageListener);
 ```java
 public BridgeImpl(Context context, String name, int id) {
     super(context, name, id);
-    setMessageListener(this);
-}
-
-public BridgeImpl(Context context, String name, BridgeManager bridgeManager) {
-    super(context, name, bridgeManager);
     this.name = name;
     setMessageListener(this);
 }
@@ -271,12 +154,6 @@ public void setMethodResultListener(IMethodResult methodResultListener);
 ```java
 public BridgeImpl(Context context, String name, int id) {
     super(context, name, id);
-    this.name = name;
-    setMethodResultListener(this);
-}
-
-public BridgeImpl(Context context, String name, BridgeManager bridgeManager) {
-    super(context, name, bridgeManager);
     this.name = name;
     setMethodResultListener(this);
 }
