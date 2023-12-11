@@ -633,7 +633,7 @@ constructor(country: string, options?: PhoneNumberFormatOptions)
 | 参数名     | 类型                                       | 必填   | 说明               |
 | ------- | ---------------------------------------- | ---- | ---------------- |
 | country | string                                   | 是    | 表示电话号码所属国家或地区代码。 |
-| options | [PhoneNumberFormatOptions](#phonenumberformatoptions8) | 否    | 电话号码格式化对象的相关选项。默认值：NATIONAL。  |
+| options | [PhoneNumberFormatOptions](#phonenumberformatoptions11) | 否    | 电话号码格式化对象的相关选项。默认值：NATIONAL。  |
 
 **示例：**
   ```ts
@@ -694,6 +694,17 @@ format(number: string): string
   let phonenumberfmt: I18n.PhoneNumberFormat = new I18n.PhoneNumberFormat("CN");
   let formattedPhoneNumber: string = phonenumberfmt.format("158****2312"); // formattedPhoneNumber = "158 **** 2312"
   ```
+
+
+## PhoneNumberFormatOptions<sup>11+</sup>
+
+表示电话号码格式化对象可设置的属性。
+
+**系统能力**：SystemCapability.Global.I18n
+
+| 名称   | 类型     | 可读   | 可写   | 说明                                       |
+| ---- | ------ | ---- | ---- | ---------------------------------------- |
+| type | string | 是    | 是    | 表示对电话号码格式化的类型，取值范围："E164",&nbsp;"INTERNATIONAL",&nbsp;"NATIONAL",&nbsp;"RFC3966"。<br>-在API version 8版本，type为必填项。 <br>-API version 9版本开始，type为选填项。|
 
 
 ## I18n.getTimeZone<sup>7+</sup>
