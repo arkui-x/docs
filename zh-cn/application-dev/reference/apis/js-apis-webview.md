@@ -1547,9 +1547,10 @@ postMessageEvent(message: WebMessage): void
 
 **错误码：**
 
-| 错误码ID | 错误信息                 |
-| -------- | ------------------------ |
-| 401      | Invalid input parameter. |
+| 错误码ID | 错误信息                                               |
+| -------- | ------------------------------------------------------ |
+| 401      | Invalid input parameter.                               |
+| 17100010 | Can not post message using this port.（只支持Android） |
 
 **示例：**
 
@@ -2314,11 +2315,11 @@ struct WebComponent {
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
-| 名称          | 类型   | 可读 | 可写 | 说明                      |      |
-| ------------- | ------ | ---- | ---- | ------------------------- | ---- |
-| historyUrl    | string | 是   | 否   | 历史记录项的url地址。     |      |
-| historyRawUrl | string | 是   | 否   | 历史记录项的原始url地址。 |      |
-| title         | string | 是   | 否   | 历史记录项的标题。        |      |
+| 名称          | 类型   | 可读 | 可写 | 说明                      |
+| ------------- | ------ | ---- | ---- | ------------------------- |
+| historyUrl    | string | 是   | 否   | 历史记录项的url地址。     |
+| historyRawUrl | string | 是   | 否   | 历史记录项的原始url地址。 |
+| title         | string | 是   | 否   | 历史记录项的标题。        |
 
 ## WebHeader
 
