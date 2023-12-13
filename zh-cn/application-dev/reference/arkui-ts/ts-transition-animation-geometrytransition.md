@@ -1,19 +1,69 @@
-# ç»„ä»¶å†…éšå¼å…±äº«å…ƒç´ è½¬åœº
+# ×é¼þÄÚÒþÊ½¹²ÏíÔªËØ×ª³¡
 
-geometryTransitionç”¨äºŽç»„ä»¶å†…éšå¼å…±äº«å…ƒç´ è½¬åœºï¼Œåœ¨ç»„ä»¶æ˜¾ç¤ºåˆ‡æ¢è¿‡ç¨‹ä¸­æä¾›å¹³æ»‘è¿‡æ¸¡æ•ˆæžœã€‚é€šç”¨transitionæœºåˆ¶æä¾›äº†opacityã€scaleç­‰è½¬åœºåŠ¨æ•ˆï¼ŒgeometryTransitioné€šè¿‡idç»‘å®šin/outç»„ä»¶(inæŒ‡å…¥åœºç»„ä»¶ã€outæŒ‡å‡ºåœºç»„ä»¶)ï¼Œä½¿å¾—ç»„ä»¶åŽŸæœ¬ç‹¬ç«‹çš„transitionåŠ¨ç”»åœ¨ç©ºé—´ä½ç½®ä¸Šå‘ç”Ÿè”ç³»ï¼Œä»Žè€Œå°†è§†è§‰ç„¦ç‚¹ç”±å‡ºåœºç»„ä»¶ä½ç½®å¼•å¯¼åˆ°å…¥åœºç»„ä»¶ä½ç½®ã€‚
+geometryTransitionÓÃÓÚ×é¼þÄÚÒþÊ½¹²ÏíÔªËØ×ª³¡£¬ÔÚ×é¼þÏÔÊ¾ÇÐ»»¹ý³ÌÖÐÌá¹©Æ½»¬¹ý¶ÉÐ§¹û¡£Í¨ÓÃtransition»úÖÆÌá¹©ÁËopacity¡¢scaleµÈ×ª³¡¶¯Ð§£¬geometryTransitionÍ¨¹ýid°ó¶¨in/out×é¼þ(inÖ¸Èë³¡×é¼þ¡¢outÖ¸³ö³¡×é¼þ)£¬Ê¹µÃ×é¼þÔ­±¾¶ÀÁ¢µÄtransition¶¯»­ÔÚ¿Õ¼äÎ»ÖÃÉÏ·¢ÉúÁªÏµ£¬´Ó¶ø½«ÊÓ¾õ½¹µãÓÉ³ö³¡×é¼þÎ»ÖÃÒýµ¼µ½Èë³¡×é¼þÎ»ÖÃ¡£
 
-> **è¯´æ˜Žï¼š**
+> **ËµÃ÷£º**
 >
-> ä»ŽAPI Version 10å¼€å§‹æ”¯æŒã€‚åŽç»­ç‰ˆæœ¬å¦‚æœ‰æ–°å¢žå†…å®¹ï¼Œåˆ™é‡‡ç”¨ä¸Šè§’æ ‡å•ç‹¬æ ‡è®°è¯¥å†…å®¹çš„èµ·å§‹ç‰ˆæœ¬ã€‚
+> ´ÓAPI Version 10¿ªÊ¼Ö§³Ö¡£ºóÐø°æ±¾ÈçÓÐÐÂÔöÄÚÈÝ£¬Ôò²ÉÓÃÉÏ½Ç±êµ¥¶À±ê¼Ç¸ÃÄÚÈÝµÄÆðÊ¼°æ±¾¡£
 
-## å±žæ€§
+## ÊôÐÔ
 
-| åç§°               | å‚æ•°ç±»åž‹ | å‚æ•°æè¿°                                                     |
+| Ãû³Æ               | ²ÎÊýÀàÐÍ | ²ÎÊýÃèÊö                                                     |
 | ------------------ | -------- | ------------------------------------------------------------ |
-| geometryTransition | string   | è®¾ç½®geometryTransitionçš„idï¼Œç”¨äºŽè®¾ç½®ç»‘å®šå…³ç³»ï¼Œidç½®ä¸ºç©ºå­—ç¬¦ä¸²""å¯æ¸…é™¤ç»‘å®šå…³ç³»é¿å…å‚ä¸Žå…±äº«è¡Œä¸ºï¼ŒidåŠ¨æ€ä¿®æ”¹å¯é‡æ–°å»ºç«‹ç»‘å®šå…³ç³»ã€‚åŒä¸€ä¸ªidåªèƒ½æœ‰ä¸¤ä¸ªç»„ä»¶ç»‘å®šä¸”åˆ†åˆ«æ˜¯in/outç»„ä»¶ã€‚ |
+| geometryTransition | string   | ÉèÖÃgeometryTransitionµÄid£¬ÓÃÓÚÉèÖÃ°ó¶¨¹ØÏµ£¬idÖÃÎª¿Õ×Ö·û´®""¿ÉÇå³ý°ó¶¨¹ØÏµ±ÜÃâ²ÎÓë¹²ÏíÐÐÎª£¬id¶¯Ì¬ÐÞ¸Ä¿ÉÖØÐÂ½¨Á¢°ó¶¨¹ØÏµ¡£Í¬Ò»¸öidÖ»ÄÜÓÐÁ½¸ö×é¼þ°ó¶¨ÇÒ·Ö±ðÊÇin/out×é¼þ¡£ |
 
-**è¯´æ˜Žï¼š**
+**ËµÃ÷£º**
 
-geometryTransitionå¿…é¡»é…åˆanimateToä½¿ç”¨æ‰æœ‰åŠ¨ç”»æ•ˆæžœï¼ŒåŠ¨æ•ˆæ—¶é•¿ã€æ›²çº¿è·ŸéšanimateToä¸­çš„é…ç½®ï¼Œä¸æ”¯æŒ.animationéšå¼åŠ¨ç”»ã€‚
+geometryTransition±ØÐëÅäºÏanimateToÊ¹ÓÃ²ÅÓÐ¶¯»­Ð§¹û£¬¶¯Ð§Ê±³¤¡¢ÇúÏß¸úËæanimateToÖÐµÄÅäÖÃ£¬²»Ö§³Ö.animationÒþÊ½¶¯»­¡£
+
+## Ê¾Àý
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct Index {
+  @State isShow: boolean = false
+
+  build() {
+    Stack({ alignContent: Alignment.Center }) {
+      if (this.isShow) {
+        Image($r('app.media.pic'))
+          .autoResize(false)
+          .clip(true)
+          .width(300)
+          .height(400)
+          .offset({ y: 100 })
+          .geometryTransition("picture")
+          .transition(TransitionEffect.OPACITY)
+      } else {
+        // geometryTransition´Ë´¦°ó¶¨µÄÊÇÈÝÆ÷£¬ÄÇÃ´ÈÝÆ÷ÄÚµÄ×Ó×é¼þÐèÉèÎªÏà¶Ô²¼¾Ö¸úËæ¸¸ÈÝÆ÷±ä»¯£¬
+        // Ì×¶à²ãÈÝÆ÷ÎªÁËËµÃ÷Ïà¶Ô²¼¾ÖÔ¼Êø´«µÝ
+        Column() {
+          Column() {
+            Image($r('app.media.icon'))
+              .width('100%').height('100%')
+          }.width('100%').height('100%')
+        }
+        .width(80)
+        .height(80)
+        // geometryTransition»áÍ¬²½Ô²½Ç£¬µ«½öÏÞÓÚgeometryTransition°ó¶¨´¦£¬´Ë´¦°ó¶¨µÄÊÇÈÝÆ÷
+        // Ôò¶ÔÈÝÆ÷±¾ÉíÓÐÔ²½ÇÍ¬²½¶ø²»»á²Ù×÷ÈÝÆ÷ÄÚ²¿×Ó×é¼þµÄborderRadius
+        .borderRadius(20)
+        .clip(true)
+        .geometryTransition("picture")
+        // transition±£Ö¤×é¼þÀë³¡²»±»Á¢¼´Îö¹¹£¬¿ÉÉèÖÃÆäËû×ª³¡Ð§¹û
+        .transition(TransitionEffect.OPACITY)
+      }
+    }
+    .onClick(() => {
+      animateTo({ duration: 1000 }, () => {
+        this.isShow = !this.isShow
+      })
+    })
+  }
+}
+```
+![geometrytransition](figures/geometrytransition.gif)
 
 

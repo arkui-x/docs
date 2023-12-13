@@ -51,11 +51,19 @@ createModuleContext(moduleName: string): Context;
 **示例：**
 
 ```ts
-let moduleContext: common.Context;
-try {
-    moduleContext = this.context.createModuleContext('entry');
-} catch (error) {
-    console.error('createModuleContext failed, error.code: ${error.code}, error.message: ${error.message}');
+import UIAbility from '@ohos.app.ability.UIAbility';
+import common from '@ohos.app.ability.common';
+
+export default class EntryAbility extends UIAbility {
+  onCreate() {
+    console.log('MyAbility onCreate');
+    let moduleContext: common.Context;
+    try {
+      moduleContext = this.context.createModuleContext('entry');
+    } catch (error) {
+      console.error('createModuleContext failed, error.code: ${error.code}, error.message: ${error.message}');
+    }
+  }
 }
 ```
 
@@ -76,11 +84,19 @@ getApplicationContext(): ApplicationContext;
 **示例：**
 
 ```ts
-let applicationContext: common.Context;
-try {
-    applicationContext = this.context.getApplicationContext();
-} catch (error) {
-    console.error('getApplicationContext failed, error.code: ${error.code}, error.message: ${error.message}');
+import UIAbility from '@ohos.app.ability.UIAbility';
+import common from '@ohos.app.ability.common';
+
+export default class EntryAbility extends UIAbility {
+  onCreate() {
+    console.log('MyAbility onCreate');
+    let applicationContext: common.Context;
+    try {
+      applicationContext = this.context.getApplicationContext();
+    } catch (error) {
+      console.error('getApplicationContext failed, error.code: ${error.code}, error.message: ${error.message}');
+    }
+  }
 }
 ```
 

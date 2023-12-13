@@ -5,42 +5,64 @@
 
 - 通过Ace create命令[创建](../quick-start/start-with-ace-tools.md#创建应用)跨平台项目，ACE工具具体使用方法请见[ACE工具使用指南](../quick-start/start-with-ace-tools.md#使用说明)。
 
-跨平台工程目录
-
 ```
-ace_project 
-  |-----andrioid
-  |-----ios
-  |-----ohos 
-  |-----source/entry/src
-    |-----main
-    |-----ohosTest
-      |-----ets
-        |-----Application
-        |-----test  
-        |-----testability
-        |-----testRunner
-      |-----resources
+ArkUI-X应用工程目录结构
+  ├── .arkui-x
+  │   ├── android                 // Android平台相关代码
+  │   └── ios                     // iOS平台相关代码
+  ├── AppScope
+  ├── entry
+  ├── hvigor
+  ├── build-profile.json5
+  ├── hvigorfile.ts
+  ├── hvigorw
+  ├── hvigorw.bat
+  ├── local.properties
+  └── oh-package.json5
 ```
-
-
-| 文件目录      | 说明                                                     |
-| ---------- | ------------------------------------------------------------ |
-| android | Android平台测试时进行配置的文件夹   |
-| ios        | ios平台测试时进行配置的文件夹       |
-| ohos       | 编译过程生成文件                   |
-| Application| 系统生成文件，无需修改              |
-| test       | 存放测试代码文件            |
-| testability| 系统生成文件，无需修改             |
-| testRunner | 系统生成文件，无需修改             |
-| resources  | 资源文件夹                        |
 
 ## 编写测试代码
 ### 创建测试代码文件
 
-- 进入ohosTest\ets\test目录，创建demo.test.ets文件。测试代码编写可参考创建工程时自动生成的Ability.test.ets中内容。
+- 进入entry\src\ohosTest\ets\test目录，创建demo.test.ets文件。测试代码编写可参考创建工程时自动生成的Ability.test.ets中内容。
 
-![32342](./pic/语法_说明.png)
+```js
+import hilog from '@ohos.hilog';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+
+export default function abilityTest() {
+  describe('ActsAbilityTest', () => {
+    // Defines a test suite. Two parameters are supported: test suite name and test suite function.
+    beforeAll(() => {
+      // Presets an action, which is performed only once before all test cases of the test suite start.
+      // This API supports only one parameter: preset action function.
+    })
+    beforeEach(() => {
+      // Presets an action, which is performed before each unit test case starts.
+      // The number of execution times is the same as the number of test cases defined by **it**.
+      // This API supports only one parameter: preset action function.
+    })
+    afterEach(() => {
+      // Presets a clear action, which is performed after each unit test case ends.
+      // The number of execution times is the same as the number of test cases defined by **it**.
+      // This API supports only one parameter: clear action function.
+    })
+    afterAll(() => {
+      // Presets a clear action, which is performed after all test cases of the test suite end.
+      // This API supports only one parameter: clear action function.
+    })
+    it('assertContain', 0, () => {
+      // Defines a test case. This API supports three parameters: test case name, filter parameter, and test case function.
+      hilog.info(0x0000, 'testTag', '%{public}s', 'it begin');
+      let a = 'abc';
+      let b = 'b';
+      // Defines a variety of assertion methods, which are used to declare expected boolean conditions.
+      expect(a).assertContain(b);
+      expect(a).assertEqual(a);
+    })
+  })
+}
+```
 
 测试用例采用通用语法，describe定义测试套， it定义测试用例。
 
@@ -76,19 +98,19 @@ import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from
 import util from '@ohos.util';
 export default function UtilFunTest() {
   describe('UtilTest', function () {
-    it('testIsNumberObject001', 0, function () {
+    it('testIsNumberObject001', 0, () => {
       let proc = new util.types();
       let result = proc.isNumberObject(new Number(0));
       expect(result).assertEqual(true);
     });
 
-    it('testIsNumberObject002', 0, function () {
+    it('testIsNumberObject002', 0, () => {
       let proc = new util.types();
       let result = proc.isNumberObject(new Number(10));
       expect(result).assertEqual(true);
     });
 
-    it('testIsNumberObject003', 0, function () {
+    it('testIsNumberObject003', 0, () => {
       let proc = new util.types();
       let result = proc.isNumberObject(15);
       expect(result).assertEqual(false);
@@ -108,8 +130,8 @@ export default function UtilFunTest() {
 ```js
 import { describe, it, expect } from '@ohos/hypium';
 export default function UtilFunTest() {
-  describe('UtilTest', function () {
-    it('testIsNumberObject001', 0, function () {
+  describe('UtilTest', () => {
+    it('testIsNumberObject001', 0, () => {
       let proc = new util.types();
       let result = proc.isNumberObject(new Number(0));
       expect(result).assertEqual(true);
@@ -126,7 +148,7 @@ export default function UtilFunTest() {
 
 ### 修改List.test.ets文件
 
-- 在ohosTest\ets\test\List.test.ets中，导入创建的测试文件。
+- 在entry\src\ohosTest\ets\test\List.test.ets中，导入创建的测试文件。
 
 
 ```js
@@ -144,10 +166,10 @@ export default function testsuite() {
 
 | 平台    | 测试运行指令                                                 |
 | ------- | ------------------------------------------------------------ |
-| Android | ace test **apk** --b `bundle name` --m `entryTest` --unittest OpenHarmonyTestRunner  --timeout 10000 |
-| ios     | ace test **app** --b `bundle name` --m `entryTest` --unittest OpenHarmonyTestRunner  --timeout 10000 |
+| Android | ace test **apk** --b `bundle name` --m `entry_test` --unittest OpenHarmonyTestRunner  --timeout 10000 |
+| ios     | ace test **app** --b `bundle name` --m `entry_test` --unittest OpenHarmonyTestRunner  --timeout 10000 |
 
-- 在所创建工程目录下进入cmd命令行，运行上述测试执行指令，命令会触发测试工程编译、打包、安装并运行测试用例。其中，bundle name为ohos\AppScope\app.json5文件中的"bundleName"值，entryTest为ohosTest\module.json5文件中module下定义的"name"值。
+- 在所创建工程目录下进入cmd命令行，运行上述测试执行指令，命令会触发测试工程编译、打包、安装并运行测试用例。其中，bundle name为ohos\AppScope\app.json5文件中的"bundleName"值，entry_test为ohosTest\module.json5文件中module下定义的"name"值。
 
 ### 查看测试结果
 

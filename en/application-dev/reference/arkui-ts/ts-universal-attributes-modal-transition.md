@@ -5,16 +5,17 @@ You can bind a full-screen modal to a component through the **bindContentCover**
 >  **NOTE**
 >
 >  The APIs of this module are supported since API version 10. Updates will be marked with a superscript to indicate their earliest API version.
+>
 >  Switching between landscape and portrait modes is not supported.
+>
+>  Route hopping is not supported.
 
 ## Attributes
 
 | Name              | Parameter                                      | Description                                    |
 | ---------------- | ---------------------------------------- | ---------------------------------------- |
 | bindContentCover | isShow: boolean,<br>builder: [CustomBuilder](ts-types.md#custombuilder8),<br>options?: [ContentCoverOptions](#contentcoveroptions) | Binds a modal to the component, which can be displayed when the component is touched. The content of the modal is customizable. The transition type can be set to none, slide-up and slide-down animation, and opacity gradient animation.<br> **isShow**: whether to display the modal.<br>Since API version 10, this parameter supports two-way binding through [$$](../../quick-start/arkts-two-way-sync.md).<br>**builder**: content of the modal.<br> **options**: optional attributes of the modal.|
-
 ## ContentCoverOptions
-
 | Name             | Type                                      | Mandatory  | Description           |
 | --------------- | ---------------------------------------- | ---- | ------------- |
 | modalTransition | [ModalTransition](ts-types.md#modaltransition10) | No   | Transition mode of the modal. |
@@ -47,7 +48,6 @@ struct ModalTransitionExample {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(Color.Orange)
   }
 
   @Builder myBuilder() {
@@ -57,7 +57,7 @@ struct ModalTransitionExample {
         .fontSize(20)
         .onClick(()=>{
           this.isShow2 = true;
-        }).bindContentCover($$this.isShow2, this.myBuilder2(), ModalTransition.NONE)
+        }).bindContentCover(this.isShow2, this.myBuilder2(), {modalTransition: ModalTransition.NONE, backgroundColor: Color.Orange, onAppear: () => {console.log("BindContentCover onAppear.")}, onDisappear: () => {console.log("BindContentCover onDisappear.")}})
 
       Button("close modal 1")
         .margin(10)
@@ -68,7 +68,6 @@ struct ModalTransitionExample {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(Color.Pink)
     .justifyContent(FlexAlign.Center)
   }
 
@@ -80,7 +79,7 @@ struct ModalTransitionExample {
         })
         .fontSize(20)
         .margin(10)
-        .bindContentCover($$this.isShow, this.myBuilder(), ModalTransition.NONE)
+        .bindContentCover(this.isShow, this.myBuilder(), {modalTransition: ModalTransition.NONE, backgroundColor: Color.Pink, onAppear: () => {console.log("BindContentCover onAppear.")}, onDisappear: () => {console.log("BindContentCover onDisappear.")}})
     }
     .justifyContent(FlexAlign.Center)
     .backgroundColor("#ff49c8ab")
@@ -126,7 +125,6 @@ struct ModalTransitionExample {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(Color.Orange)
   }
 
 
@@ -137,7 +135,7 @@ struct ModalTransitionExample {
         .fontSize(20)
         .onClick(()=>{
           this.isShow2 = true;
-        }).bindContentCover($$this.isShow2, this.myBuilder2(), ModalTransition.NONE)
+        }).bindContentCover(this.isShow2, this.myBuilder2(), {modalTransition: ModalTransition.NONE, backgroundColor: Color.Orange, onAppear: () => {console.log("BindContentCover onAppear.")}, onDisappear: () => {console.log("BindContentCover onDisappear.")}})
 
       Button("close modal 1")
         .margin(10)
@@ -148,7 +146,6 @@ struct ModalTransitionExample {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(Color.Pink)
     .justifyContent(FlexAlign.Center)
     .scale({x: this.isScale2, y: this.isScale2})
     .animation({curve:curves.springMotion()})
@@ -162,7 +159,7 @@ struct ModalTransitionExample {
         })
         .fontSize(20)
         .margin(10)
-        .bindContentCover($$this.isShow, this.myBuilder(), ModalTransition.NONE)
+        .bindContentCover(this.isShow, this.myBuilder(), {modalTransition: ModalTransition.NONE, backgroundColor: Color.Pink, onAppear: () => {console.log("BindContentCover onAppear.")}, onDisappear: () => {console.log("BindContentCover onDisappear.")}})
     }
     .justifyContent(FlexAlign.Center)
     .backgroundColor("#ff49c8ab")
@@ -199,7 +196,6 @@ struct ModalTransitionExample {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(Color.Gray)
   }
 
   @Builder myBuilder() {
@@ -209,7 +205,7 @@ struct ModalTransitionExample {
         .fontSize(20)
         .onClick(()=>{
           this.isShow2 = true;
-        }).bindContentCover(this.isShow2, this.myBuilder2(), ModalTransition.DEFAULT)
+        }).bindContentCover(this.isShow2, this.myBuilder2(), {modalTransition: ModalTransition.DEFAULT, backgroundColor: Color.Gray, onAppear: () => {console.log("BindContentCover onAppear.")}, onDisappear: () => {console.log("BindContentCover onDisappear.")}})
 
       Button("close modal 1")
         .margin(10)
@@ -220,7 +216,6 @@ struct ModalTransitionExample {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(Color.Pink)
     .justifyContent(FlexAlign.Center)
   }
 
@@ -232,7 +227,7 @@ struct ModalTransitionExample {
         })
         .fontSize(20)
         .margin(10)
-        .bindContentCover($$this.isShow, this.myBuilder(), ModalTransition.DEFAULT)
+        .bindContentCover(this.isShow, this.myBuilder(), {modalTransition: ModalTransition.DEFAULT, backgroundColor: Color.Pink, onAppear: () => {console.log("BindContentCover onAppear.")}, onDisappear: () => {console.log("BindContentCover onDisappear.")}})
     }
     .justifyContent(FlexAlign.Center)
     .backgroundColor(Color.White)
@@ -267,7 +262,6 @@ struct ModalTransitionExample {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(Color.Gray)
     .justifyContent(FlexAlign.Center)
   }
 
@@ -279,7 +273,7 @@ struct ModalTransitionExample {
         .fontSize(20)
         .onClick(()=>{
           this.isShow2 = true;
-        }).bindContentCover(this.isShow2, this.myBuilder2(), ModalTransition.ALPHA)
+        }).bindContentCover(this.isShow2, this.myBuilder2(), {modalTransition: ModalTransition.ALPHA, backgroundColor: Color.Gray, onAppear: () => {console.log("BindContentCover onAppear.")}, onDisappear: () => {console.log("BindContentCover onDisappear.")}})
 
       Button("close modal 1")
         .margin(10)
@@ -290,7 +284,6 @@ struct ModalTransitionExample {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(Color.Pink)
     .justifyContent(FlexAlign.Center)
   }
 
@@ -302,7 +295,7 @@ struct ModalTransitionExample {
         })
         .fontSize(20)
         .margin(10)
-        .bindContentCover($$this.isShow, this.myBuilder(), ModalTransition.ALPHA)
+        .bindContentCover(this.isShow, this.myBuilder(), {modalTransition: ModalTransition.ALPHA, backgroundColor: Color.Pink, onAppear: () => {console.log("BindContentCover onAppear.")}, onDisappear: () => {console.log("BindContentCover onDisappear.")}})
     }
     .justifyContent(FlexAlign.Center)
     .backgroundColor(Color.White)

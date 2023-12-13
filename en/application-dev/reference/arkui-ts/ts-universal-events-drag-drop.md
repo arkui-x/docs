@@ -51,9 +51,6 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | getY() | number | Y-coordinate of the drag position relative to the upper left corner of the screen, in vp.|
 | useCustomDropAnimation<sup>10+</sup> | boolean | Whether to use the default drop animation when the dragging ends.|
 | dragBehavior<sup>10+</sup> | [DragBehavior](#dragbehavior10) | Component tree behavior corresponding to the drga event.|
-| setData(unifiedData: UnifiedData)<sup>10+</sup> | void | Sets drag-related data in the drag event.|
-| getData()<sup>10+</sup> | UnifiedData | Obtains drag-related data from the drag event.|
-| getSummary()<sup>10+</sup> | Summary | Obtains the summary of drag-related data from the drag event.|
 | setResult(dragRect: [DragRet](#dragret10))<sup>10+</sup>| void | Sets the drag and drop result in the drag event.|
 | getResult()<sup>10+</sup> | [DragRet](#dragret10)| Obtains the drag and drop result from the drag event.|
 | getPrviewRect()<sup>10+</sup> | [Rectangle](ts-universal-attributes-touch-target.md#rectangle) | Obtains the rectangle where the preview image is located.|

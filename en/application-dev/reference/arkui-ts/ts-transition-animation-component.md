@@ -12,23 +12,8 @@ You can configure the component transition animations through the **transition**
 
 | Name| Type| Description|
 | -------- | -------- | -------- |
-| transition | TransitionOptions \| TransitionEffect<sup>10+</sup>  | Transition effects when the component is inserted, displayed, deleted, or hidden.<br>Since API version 9, this API is supported in ArkTS widgets.<br>**NOTE**<br>For details, see the description of **TransitionOptions** and **TransitionEffect**.|
+| transition | TransitionEffect<sup>10+</sup>  | Transition effects when the component is inserted, displayed, deleted, or hidden.<br>Since API version 9, this API is supported in ArkTS widgets.<br>**NOTE**<br>For details, see the descriptions of **TransitionEffect**.|
 
-## TransitionOptions
-Defines the transition effect by setting parameters in the struct.
-| Name| Type| Mandatory| Description|
-| -------- | -------- | -------- | -------- |
-| type | [TransitionType](ts-appendix-enums.md#transitiontype)  | No| Transition type.<br>Default value: **TransitionType.All**<br>Since API version 9, this API is supported in ArkTS widgets.<br>**NOTE**<br>If **type** is not specified, the default value **TransitionType.All** is used, which means that the transition effect works for both component addition and deletion.|
-| opacity | number | No| Opacity of the component during transition, which is the value of the start point of insertion and the end point of deletion.<br>Value range: [0, 1]<br>Since API version 9, this API is supported in ArkTS widgets.<br>**NOTE**<br>A value less than 0 or greater than 1 evaluates to the value **1**.|
-| translate | {<br>x? : number \| string,<br>y? : number \| string,<br>z? : number \| string<br>} | No| Translation of the component during transition, which is the value of the start point of insertion and the end point of deletion.<br>-**x**: distance to translate along the x-axis.<br>-**y**: distance to translate along the y-axis.<br>-**z**: distance to translate along the z-axis.<br>Since API version 9, this API is supported in ArkTS widgets.|
-| scale | {<br>x? : number,<br>y? : number,<br>z? : number,<br>centerX? : number \| string,<br>centerY? : number \| string<br>} | No| Scaling of the component during transition, which is the value of the start point of insertion and the end point of deletion.<br>- **x**: scale factor along the x-axis.<br>- **y**: scale factor along the y-axis.<br>- **z**: scale factor along the z-axis.<br>- **centerX** and **centerY**: scale center point. The default values are both **"50%"**, indicating that the center point of the page.<br>- If the center point is (0, 0), it refers to the upper left corner of the component.<br>Since API version 9, this API is supported in ArkTS widgets.|
-| rotate | {<br>x?: number,<br>y?: number,<br>z?: number,<br>angle: number \| string,<br>centerX?: number \| string,<br>centerY?: number \| string<br>} | No| Rotation of the component during transition, which is the value of the start point of insertion and the end point of deletion.<br>- **x**: X-component of the rotation vector.<br>- **y**: Y-component of the rotation vector.<br>- **z**: Z-component of the rotation vector.<br>- **centerX** and **centerY**: rotation center point. The default values are both **"50%"**, indicating that the center point of the page.<br>- If the center point is (0, 0), it refers to the upper left corner of the component.<br>Since API version 9, this API is supported in ArkTS widgets.|
-
->  **NOTE**
->
->  1. When set to a value of the **TransitionOptions** type, the **transition** attribute must work with [animateTo](ts-explicit-animation.md). The animation duration, curve, and delay follow the settings in **animateTo**.
->  2. If the value of the **TransitionOptions** type has only **type** specified, the transition effect will take on the default opacity. For example, **{type: TransitionType.Insert}** produces the same effect as **{type: TransitionType.Insert, opacity: 0}**. If a specific style is specified, the transition effect will not take on the default opacity.
->  3. For details about the scale and rotate effects, see [Transformation](ts-universal-attributes-transformation.md).
 
 ## TransitionEffect<sup>10+</sup>
 Defines the transition effect by using the provided APIs, as listed below.
@@ -37,7 +22,7 @@ Defines the transition effect by using the provided APIs, as listed below.
 | opacity | number | Yes| Opacity of the component during transition, which is the value of the start point of insertion and the end point of deletion.<br>Value range: [0, 1]<br>**NOTE**<br>A value less than 0 or greater than 1 evaluates to the value **1**.|
 | translate | {<br>x? : number \| string,<br>y? : number \| string,<br>z? : number \| string<br>} | Yes| Translation of the component during transition, which is the value of the start point of insertion and the end point of deletion.<br>-**x**: distance to translate along the x-axis.<br>-**y**: distance to translate along the y-axis.<br>-**z**: distance to translate along the z-axis.|
 | scale | {<br>x? : number,<br>y? : number,<br>z? : number,<br>centerX? : number \| string,<br>centerY? : number \| string<br>} | Yes| Scaling of the component during transition, which is the value of the start point of insertion and the end point of deletion.<br>- **x**: scale factor along the x-axis.<br>- **y**: scale factor along the y-axis.<br>- **z**: scale factor along the z-axis.<br>- **centerX** and **centerY**: scale center point. The default values are both **"50%"**, indicating that the center point of the page.<br>- If the center point is (0, 0), it refers to the upper left corner of the component.|
-| rotate | {<br>x?: number,<br>y?: number,<br>z?: number,<br>angle: number \| string,<br>centerX?: number \| string,<br>centerY?: number \| string<br>} | Yes| Rotation of the component during transition, which is the value of the start point of insertion and the end point of deletion.<br>- **x**: rotation vector along the x-axis.<br>- **y**: Y-component of the rotation vector.<br>- **z**: Z-component of the rotation vector.<br>- **centerX** and **centerY**: rotation center point. The default values are both **"50%"**, indicating that the center point of the page.<br>- If the center point is (0, 0), it refers to the upper left corner of the component.|
+| rotate | {<br>x?: number,<br>y?: number,<br>z?: number,<br>angle: number \| string,<br>centerX?: number \| string,<br>centerY?: number \| string,<br>centerZ?: number,<br>perspective?: number<br>} | Yes| Rotation of the component during transition, which is the value of the start point of insertion and the end point of deletion.<br>- **x**: X-component of the rotation vector.<br>- **y**: Y-component of the rotation vector.<br>- **z**: Z-component of the rotation vector.<br>- **centerX** and **centerY**: rotation center point. The default values are both **"50%"**, indicating that the center point of the page.<br>- If the center point is (0, 0), it refers to the upper left corner of the component.<br>- **centerZ**: z-axis anchor point, that is, the z-component of the 3D rotation center point. The default value is **0**.<br>- **perspective**: distance from the user to the z=0 plane. The default value is **0**.|
 | move | [TransitionEdge](ts-appendix-enums.md#transitionedge10) | Yes| Slide-in and slide-out of the component from the screen edge during transition. It is essentially a translation effect, which is the value of the start point of insertion and the end point of deletion.|
 | asymmetric | appear: TransitionEffect,<br>disappear: TransitionEffect<br>| Yes| Asymmetric transition effect.<br>The first parameter indicates the transition effect for appearance, and the second parameter indicates the transition effect for disappearance.<br>If the **asymmetric** function is not used for **TransitionEffect**, the transition effect takes effect for both appearance and disappearance of the component.|
 | combine | TransitionEffect | No| Combination of transition effects.|
@@ -49,7 +34,7 @@ The static functions listed in the preceding table are used to create a **Transi
 | -------- | -------- |
 | IDENTITY | Disables the transition effect.|
 | OPACITY | Applies a transition effect with the opacity of 0. It is equivalent to **TransitionEffect.opacity(0)**.|
-| SLIDE | Applies a transition effect of sliding in from the left when the component appears and sliding out from the right when the component disappears. It is equivalent to **TransitionEffect.asymmetric(TransitionEffect.START, TrasitionEffect.END)**.|
+| SLIDE | Applies a transition effect of sliding in from the left when the component appears and sliding out from the right when the component disappears. It is equivalent to **TransitionEffect.asymmetric(TransitionEffect.move(TransitionEdge.START), TransitionEffect.move(TransitionEdge.END))**.|
 
 >  **NOTE**
 >
@@ -57,47 +42,10 @@ The static functions listed in the preceding table are used to create a **Transi
 >  2. The animation settings take effect in the following sequence: animation settings specified in the current **TransitionEffect** > animation settings specified in the previous **TransitionEffect** > animation settings specified in **animateTo** that triggers the component to appear and disappear.
 >  3. If **animateTo** is not used and **TransitionEffect** does not have the **animation** parameter specified, the component will appear or disappear without any transition animation.
 >  4. If the value of an attribute specified in **TransitionEffect** is the same as the default value, no transition animation is applied for the attribute. For example, with **TransitionEffect.opacity(1).animation({duration:1000})**, because the default value of **opacity** is also **1**, no opacity animation will be applied, and the component appears or disappears without any transition animation.
+>  5. For details about the scale and rotate effects, see [Transformation](ts-universal-attributes-transformation.md).
+
 
 ## Example
-The following is an example of using **TransitionOptions** for appearance and disappearance of the component.
-```ts
-// xxx.ets
-@Entry
-@Component
-struct TransitionExample {
-  @State flag: boolean = true
-  @State show: string = 'show'
-
-  build() {
-    Column() {
-      Button(this.show).width(80).height(30).margin(30)
-        .onClick(() => {
-          // Click the button to show or hide the image.
-          if (this.flag) {
-            this.show = 'hide';
-          } else {
-            this.show = 'show';
-          }
-          // When set to a value of the TransitionOptions type, the transition attribute must work with animateTo.
-          animateTo({ duration: 1000 }, () => {
-            this.flag = !this.flag
-          })
-        })
-      if (this.flag) {
-        // Apply different transition effects to the appearance and disappearance of the image.
-        // When the image appears, it changes from the state where the scale factor is 0 along the x-axis and 1 along the y-axis to the state where the scale factor is both 1 along x-axis and y-axis.
-        // When the image disappears, it rotates from 0° to 180° clockwise around the z-axis.
-        Image($r('app.media.testImg')).width(200).height(200)
-          .transition({ type: TransitionType.Insert, scale: { x: 0, y: 1.0 } })
-          .transition({ type: TransitionType.Delete, rotate: { z: 1, angle: 180 } })
-      }
-    }.width('100%')
-  }
-}
-```
-
-Below you can see the example in action.<br>
-![transitionComponent1](figures/transitionComponent1.gif)
 
 The following is an example of using the same transition effect for the appearance and disappearance (which are inverse processes) of the component.
 ```ts

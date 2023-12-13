@@ -27,10 +27,10 @@ Select(options: Array\<[SelectOption](#selectoption对象说明)\>)
 
 | 名称                    | 参数类型                              | 描述                                          |
 | ----------------------- | ------------------------------------- | --------------------------------------------- |
-| selected                | number                                | 设置下拉菜单初始选项的索引，第一项的索引为0。<br>当不设置selected属性时，默认选择值为-1，菜单项不选中。<br />从API version 10开始，该属性支持[$$](../../quick-start/arkts-two-way-sync.md)双向绑定变量。 |
-| value                   | string                                | 设置下拉按钮本身的文本内容。当菜单选中时默认会替换为菜单项文本内容。<br />从API version 10开始，该参数支持[$$](../../quick-start/arkts-two-way-sync.md)双向绑定变量。 |
+| selected                | number \| [Resource](ts-types.md#resource)<sup>11+</sup>    | 设置下拉菜单初始选项的索引，第一项的索引为0。<br>当不设置selected属性时，默认选择值为-1，菜单项不选中；当设置为undefined、null时，选中第一项。<br />从API version 10开始，该属性支持[$$](../../quick-start/arkts-two-way-sync.md)双向绑定变量。 |
+| value                   | string \| [Resource](ts-types.md#resource)<sup>11+</sup>  | 设置下拉按钮本身的文本内容。当菜单选中时默认会替换为菜单项文本内容。<br />从API version 10开始，该参数支持[$$](../../quick-start/arkts-two-way-sync.md)双向绑定变量。 |
 | font                    | [Font](ts-types.md#font)          | 设置下拉按钮本身的文本样式。<br/>默认值：<br/>{<br/>size:&nbsp;'16fp',<br/>weight:&nbsp;FontWeight.Medium<br/>} |
-| fontColor               | [ResourceColor](ts-types.md#resourcecolor) | 设置下拉按钮本身的文本颜色。<br/>默认值：'\#E6FFFFFF' |
+| fontColor               | [ResourceColor](ts-types.md#resourcecolor) | 设置下拉按钮本身的文本颜色。<br/>默认值：'\#E5182431' |
 | selectedOptionBgColor   | [ResourceColor](ts-types.md#resourcecolor) | 设置下拉菜单选中项的背景色。<br/>默认值：'\#33007DFF' |
 | selectedOptionFont      | [Font](ts-types.md#font)          | 设置下拉菜单选中项的文本样式。<br/>默认值：<br/>{<br/>size:&nbsp;'16fp',<br/>weight:&nbsp;FontWeight.Regular<br/>} |
 | selectedOptionFontColor | [ResourceColor](ts-types.md#resourcecolor) | 设置下拉菜单选中项的文本颜色。<br/>默认值：'\#ff007dff' |
@@ -39,6 +39,7 @@ Select(options: Array\<[SelectOption](#selectoption对象说明)\>)
 | optionFontColor         | [ResourceColor](ts-types.md#resourcecolor) | 设置下拉菜单项的文本颜色。<br/>默认值：'\#ff182431' |
 | space<sup>10+</sup>         | [Length](ts-types.md#length)               | 设置下拉菜单项的文本与箭头之间的间距。<br/>**说明：** <br/>不支持设置百分比。 |
 | arrowPosition<sup>10+</sup> | [ArrowPosition](#arrowposition10枚举说明)                  | 设置下拉菜单项的文本与箭头之间的对齐方式。<br/>默认值：ArrowPosition.END |
+| menuAlign<sup>10+</sup> | alignType: [MenuAlignType](#menualigntype10枚举说明),<br/> offset?: [Offset](ts-types.md#offset)    | 设置下拉按钮与下拉菜单间的对齐方式。<br/> -alignType: 对齐方式类型，必填。<br/>默认值：MenuAlignType.START <br/> -offset: 按照对齐类型对齐后，下拉菜单相对下拉按钮的偏移量。<br/> 默认值：{dx: 0, dy: 0}|
 
 ## ArrowPosition<sup>10+</sup>枚举说明
 
@@ -46,6 +47,15 @@ Select(options: Array\<[SelectOption](#selectoption对象说明)\>)
 | ------------------- | ------------------ |
 | END<sup>10+</sup>   | 文字在前，箭头在后。 |
 | START<sup>10+</sup> | 箭头在前，文字在后。 |
+
+
+## MenuAlignType<sup>10+</sup>枚举说明
+
+| 名称                | 描述               |
+| ------------------- | ------------------ |
+| START               | 按照语言方向起始端对齐。 |
+| CENTER              | 居中对齐。 |
+| END                 | 按照语言方向末端对齐。 |
 
 ## 事件
 
@@ -78,10 +88,13 @@ struct SelectExample {
         .optionFont({ size: 16, weight: 400 })
         .space(this.space)
         .arrowPosition(this.arrowPosition)
-        .onSelect((index:number, text: string)=>{
+        .menuAlign(MenuAlignType.START, {dx:0, dy:0})
+        .onSelect((index:number, text?: string | undefined)=>{
           console.info('Select:' + index)
           this.index = index;
-          this.text = text;
+          if(text){
+            this.text = text;
+          }
         })
     }.width('100%')
   }

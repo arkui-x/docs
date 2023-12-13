@@ -1,20 +1,20 @@
-# Downloading ArkUI-X Project Code
+# Downloading ArkUI-X Code
 
-## ArkUI-X Project
+## ArkUI-X Overview
 
 ArkUI is a UI development framework for building OpenHarmony applications. It provides simple and natural UI syntax and UI development infrastructure including UI components, animation mechanisms, and event interaction, to meet the visualized GUI development requirements of application developers.
 
-The ArkUI-X project extends the ArkUI development framework to multiple OS platforms, enabling developers to develop multi-platform applications based on a set of main code.
+ArkUI-X extends the ArkUI development framework to multiple OS platforms, which allows you develop multi-platform applications based on a set of main code.
 
-[ArkUI-X project master repository](https://gitee.com/arkui-x)
+ArkUI-X master repository: [https://gitee.com/arkui-x](https://gitee.com/arkui-x)
 
 ## Prerequisites
 
-1. Register your account with Gitee.
+1. You have registered an account with Gitee.
 
-2. Register an SSH public key for access to Gitee. For details, see [Gitee Support Center](https://gitee.com/help/articles/4191).
+2. You have registered an SSH public key for access to Gitee.
 
-3. Install the [Git client](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [git-lfs](https://gitee.com/vcs-all-in-one/git-lfs?_from=gitee_search#downloading), and configure basic user information.
+3. You have installed the [Git client](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [git-lfs](https://gitee.com/vcs-all-in-one/git-lfs?_from=gitee_search#downloading), and configured basic user information.
 
    ```shell
    git config --global user.name "yourname"
@@ -22,7 +22,7 @@ The ArkUI-X project extends the ArkUI development framework to multiple OS platf
    git config --global credential.helper store
    ```
 
-4. Run the following commands to install the **repo** tool:
+4. You have installed the **repo** tool.
 
    ```shell
    curl -s https://gitee.com/oschina/repo/raw/fork_flow/repo-py3 > /usr/local/bin/repo  # If you do not have the access permission to this directory, download the tool to any other accessible directory and configure the directory to the environment variable.
@@ -32,7 +32,7 @@ The ArkUI-X project extends the ArkUI development framework to multiple OS platf
 
 ## How to Obtain
 
-- **Obtaining the ArkUI-X Project Master Code**
+- **Obtaining the ArkUI-X Master Code**
 
   Method 1 (recommended): Use the **repo** tool to download the source code over SSH. (You must have registered an SSH public key for access to Gitee.)
 
@@ -53,7 +53,7 @@ The ArkUI-X project extends the ArkUI development framework to multiple OS platf
   repo forall -c 'git lfs pull'
   ```
 
-- **Obtaining the ArkUI-X Project Branch Code**
+- **Obtaining the ArkUI-X Release Code**
 
   Method 1 (recommended): Use the **repo** tool to download the source code over SSH. (You must have registered an SSH public key for access to Gitee.)
 

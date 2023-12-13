@@ -1,6 +1,6 @@
 # Marquee
 
-跑马灯组件，用于滚动展示一段单行文本，仅当文本内容宽度超过跑马灯组件宽度时滚动。
+跑马灯组件，用于滚动展示一段单行文本。仅当文本内容宽度超过跑马灯组件宽度时滚动，不超过时不滚动。
 
 
 >  **说明：**
@@ -23,14 +23,14 @@ Marquee(value: { start: boolean, step?: number, loop?: number, fromStart?: boole
 
 | 参数名 | 参数类型 | 必填 | 参数描述 |
 | -------- | -------- | -------- | -------- |
-| start | boolean | 是 | 控制跑马灯是否进入播放状态。 |
+| start | boolean | 是 | 控制跑马灯是否进入播放状态。<br/>**说明：**<br/>有限的滚动次数播放完毕后，不可以通过改变start重置滚动次数重新开始播放。 |
 | step | number | 否 | 滚动动画文本滚动步长。<br/>默认值：6，单位vp |
 | loop | number | 否 | 设置重复滚动的次数，小于等于零时无限循环。<br/>默认值：-1<br/>**说明：**<br/>ArkTS卡片上该参数设置任意值都仅在可见时滚动一次。 |
 | fromStart | boolean | 否 | 设置文本从头开始滚动或反向滚动。<br/>默认值：true |
 | src | string | 是 | 需要滚动的文本。 |
 
 ## 属性
-
+除支持文本通用属性：fontColor、fontSize、fontWeight、fontFamily外，还支持以下属性：
 | 名称       | 参数类型 | 描述                                                         |
 | ---------- | -------- | ------------------------------------------------------------ |
 | allowScale | boolean  | 是否允许文本缩放。<br/>暂不支持该接口。<br/>默认值：false<br/> |
@@ -55,7 +55,7 @@ struct MarqueeExample {
   @State start: boolean = false
   private fromStart: boolean = true
   private step: number = 50
-  private loop: number = Infinity
+  private loop: number = Number.POSITIVE_INFINITY
   private src: string = "Running Marquee starts rolling"
 
   build() {

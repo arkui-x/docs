@@ -3,8 +3,8 @@
 AbilityConstant提供Ability相关的枚举，包括设置初次启动原因、上次退出原因等。
 
 > **说明：**
-> 
-> 本模块首批接口从API version 9开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  
+>
+> 本模块首批接口从API version 9开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 > 本模块接口仅可在Stage模型下使用。
 
 ## 导入模块
@@ -40,9 +40,10 @@ Ability初次启动原因，该类型为枚举，可配合[Ability](js-apis-app-
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import Want from '@ohos.app.ability.Want';
 
 class MyAbility extends UIAbility {
-    onCreate(want, launchParam) {
+    onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
         if (launchParam.launchReason === AbilityConstant.LaunchReason.UNKNOWN) {
             console.log('The ability has been started.');
         }
@@ -64,9 +65,10 @@ Ability上次退出原因，该类型为枚举，可配合[Ability](js-apis-app-
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import Want from '@ohos.app.ability.Want';
 
 class MyAbility extends UIAbility {
-    onCreate(want, launchParam) {
+    onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
         if (launchParam.lastExitReason === AbilityConstant.LastExitReason.UNKNOWN) {
             console.log('The ability has exit last.');
         }

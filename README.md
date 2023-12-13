@@ -7,21 +7,23 @@
 
 ## 文档目录结构
 
-[中文文档](./zh-cn/README.md) 
+[中文文档](zh-cn/README.md)
+
+[English Documentation](en/README.md)
 
 
 ## ArkUI-X文档版本分支说明
 
 ### 最新版本
 
-master：最新开发版本。
+ - master：最新开发版本。
 
-ArkUI-X 1.0.0 Canary1版本：点击[此处](zh-cn/release-notes/ArkUI-X-v1.0.0-canary1.md)了解版本详情。
+ - ArkUI-X 1.0.0 Release版本：点击[此处](zh-cn/release-notes/ArkUI-X-v1.0.0-release.md)了解版本详情。
 
 
 ## 第三方开源软件及许可说明
 
-3rd-Party-License：[第三方开源软件及许可证说明](zh-cn/contribute/open-source-software-and-license-notice.md)
+3rd-Party-License：[第三方开源软件及许可证说明](zh-cn/contribute/introducing-third-party-open-source-software.md)
 
 ## 贡献
 

@@ -4,6 +4,8 @@
 
 - UI界面
   - [@ohos.animator (动画)](js-apis-animator.md)
+  - [@ohos.arkui.componentSnapshot (组件截图)](js-apis-arkui-componentSnapshot.md)
+  - [@ohos.arkui.inspector (布局回调)](js-apis-arkui-inspector.md)
   - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
   - [@ohos.curves (插值计算)](js-apis-curve.md)
   - [@ohos.matrix4 (矩阵变换)](js-apis-matrix4.md)
@@ -45,6 +47,9 @@
 - 图形图像
   - [@ohos.window (窗口)](js-apis-window.md)
   - [@ohos.display (屏幕属性)](js-apis-display.md)
+
+- 媒体
+  - [@ohos.multimedia.image (图片处理)](js-apis-image.md)
 
 - 资源管理
   - [@ohos.i18n (国际化-I18n)](js-apis-i18n.md)
@@ -97,3 +102,4 @@
 
 - 系统基础能力
   - [@ohos.hilog (HiLog日志打印)](js-apis-hilog.md)
+  - [@ohos.web.webview(Webview)](js-apis-webview.md)

@@ -2,7 +2,7 @@
 
 ## Security Bulletins
 
-You can obtain ArkUI-X security bulletins and disclosure information from [ArkUI-X Security Bulletins](../security-disclosure/readme.md).
+You can obtain ArkUI-X security bulletins and disclosure information from [ArkUI-X Security Bulletins](../security-disclosure/README.md).
 
 ## Reporting Vulnerabilities
 

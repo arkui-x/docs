@@ -35,6 +35,9 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | scrollBarColor | string \| number \| [Color](ts-appendix-enums.md#color)   | Color of the scrollbar.|
 | scrollBarWidth | string \| number         | Width of the scrollbar. This attribute cannot be set in percentage.<br>Default value: **4**<br>Unit: vp<br>**NOTE**<br>If the width of the scrollbar exceeds its height, it will change to the default value.|
 | edgeEffect     | [EdgeEffect](ts-appendix-enums.md#edgeeffect)            | Scroll effect. For details, see **EdgeEffect**.<br>Default value: **EdgeEffect.None**|
+| enableScrollInteraction<sup>10+</sup>  |  boolean  |   Whether to support scroll gestures. When this attribute is set to **false**, scrolling by finger or mouse is not supported, but the scrolling controller API is not affected.<br>Default value: **true**     |
+| nestedScroll<sup>10+</sup>                 | [NestedScrollOptions](#nestedscrolloptions10-)         | Nested scrolling options. You can set the nested scrolling mode in the forward and backward directions to implement scrolling linkage with the parent component.|
+| friction<sup>10+</sup> | number \| [Resource](ts-types.md#resource)    | Friction coefficient. It applies only to gestures in the scrolling area, and it affects only indirectly the scroll chaining during the inertial scrolling process.<br>Default value: **0.9** for wearable devices and **0.6** for non-wearable devices<br>**NOTE**<br>A value less than or equal to 0 evaluates to the default value.|
 
 ## ScrollDirection
 | Name      | Description                    |
@@ -71,7 +74,7 @@ scroller: Scroller = new Scroller()
 
 ### scrollTo
 
-scrollTo(value: { xOffset: number | string, yOffset: number | string, animation?: { duration: number, curve: Curve } }): void
+scrollTo(value: { xOffset: number | string, yOffset: number | string, animation?: { duration?: number, curve?: Curve | ICurve } | boolean }): void
 
 
 Scrolls to the specified position.
@@ -80,9 +83,9 @@ Scrolls to the specified position.
 
 | Name   | Type                                                    | Mandatory| Description                                                    |
 | --------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
-| xOffset   | number \| string                                   | Yes  | Horizontal scrolling offset.<br>**NOTE**<br>This parameter cannot be set in percentage.<br>This parameter is valid only when the scroll axis is the x-axis.|
-| yOffset   | number \| string                                   | Yes  | Vertical scrolling offset.<br>**NOTE**<br>This parameter cannot be set in percentage.<br>This parameter is valid only when the scroll axis is the y-axis.|
-| animation | {<br>duration: number,<br>curve: [Curve](ts-appendix-enums.md#curve)<br>} | No  | Animation configuration, which includes the following:<br>- **duration**: scrolling duration.<br>- **curve**: scrolling curve.<br>Default value:<br>{<br>duration: 0,<br>curve: Curve.Ease<br>}<br>**NOTE**<br>A value less than 0 evaluates to the default value.|
+| xOffset   | number \| string                                   | Yes  | Horizontal scrolling offset.<br>**NOTE**<br>This parameter cannot be set in percentage.<br>If the value is less than 0, no operation is performed. That is, this parameter does not take effect.<br>This parameter is valid only when the scroll axis is the x-axis.|
+| yOffset   | number \| string                                   | Yes  | Vertical scrolling offset.<br>**NOTE**<br>This parameter cannot be set in percentage.<br>If the value is less than 0, no operation is performed. That is, this parameter does not take effect.<br>This parameter is valid only when the scroll axis is the y-axis.|
+| animation | {<br/>duration?: number,<br/>curve?: [Curve](ts-appendix-enums.md#curve) \| [ICurve](../apis/js-apis-curve.md#icurve)<sup>10+ </sup><br/>} \| boolean<sup>10+ </sup> | No  | Animation configuration, which includes the following:<br>- **duration**: scrolling duration.<br>- **curve**: scrolling curve.<br>- **boolean**: whether to enable the default spring animation.<br>Default value:<br>{<br>duration: 1000,<br>curve: Curve.Ease<br>}<br>boolean: false<br>**NOTE**<br>A value less than 0 evaluates to the default value.<br>Currently, the **\<List>**, **\<Scroll>**, **\<Grid>**, and **\<WaterFlow>** support the **Boolean** type and **ICurve**.|
 
 
 ### scrollEdge
@@ -101,7 +104,7 @@ Scrolls to the edge of the container, regardless of the scroll axis direction. *
 
 ### scrollPage
 
-scrollPage(value: { next: boolean, direction?: Axis }): void
+scrollPage(value: { next: boolean }): void
 
 Scrolls to the next or previous page.
 
@@ -110,7 +113,6 @@ Scrolls to the next or previous page.
 | Name      | Type   | Mandatory  | Description                          |
 | --------- | ------- | ---- | ------------------------------ |
 | next      | boolean | Yes   | Whether to turn to the next page. The value **true** means to scroll to the next page, and **false** means to scroll to the previous page.|
-| direction<sup>(deprecated)</sup> | [Axis](ts-appendix-enums.md#axis)    | No   | Scrolling direction: horizontal or vertical.<br>This API is deprecated since API version 9.               |
 
 
 ### currentOffset
@@ -144,9 +146,9 @@ When **smooth** is set to **true**, all passed items are loaded and counted in l
 
 | Name               | Type| Mandatory| Description                                                    |
 | --------------------- | -------- | ---- | ------------------------------------------------------------ |
-| value                 | number   | Yes  | Index of the item to be scrolled to in the list.                          |
+| value                 | number   | Yes  | Index of the item to be scrolled to in the container.<br>**NOTE**<br>If the value set is a negative value or greater than the maximum index of the items in the container, the value is deemed abnormal, and no scrolling will be performed.                    |
 | smooth<sup>10+ </sup> | boolean  | No  | Whether to enable the smooth animation for scrolling to the item with the specified index. The value **true** means to enable that the smooth animation, and **false** means the opposite.<br>Default value: **false**<br>**NOTE**<br>Currently, only the **\<List>** component supports this parameter.|
-| align<sup>10+ </sup> | [ScrollAlign](#scrollalign10)  | No  | How the list item to scroll to is aligned with the list.<br>Default value: **ScrollAlign.START**<br>**NOTE**<br>Currently, only the **\<List>** component supports this parameter.|
+| align<sup>10+ </sup> | [ScrollAlign](#scrollalign10-)  | No  | How the list item to scroll to is aligned with the container.<br>Default value when the container is **\<List>**: **ScrollAlign.START**<br> Default value when the container is **\<Grid>**: **ScrollAlign.AUTO**<br>**NOTE**<br>Currently, only the **\<List>** and **\<Grid>** components support this parameter.|
 
 ### scrollBy<sup>9+</sup>
 
@@ -171,17 +173,17 @@ Scrolls by the specified amount.
 
 isAtEnd(): boolean
 
-Check if the component scrolls to the bottom.
+Checks whether the component has scrolled to the bottom.
 
-> **NOTE**
+>  **NOTE**
 >
-> This API only works for the **\<Scroll>**, **\<List>**, **\<Grid>**, and **\<WaterFlow>** components.
+>  This API is available for the **\<Scroll>**, **\<List>**, **\<Grid>**, and **\<WaterFlow>** components.
 
 **Return value**
 
 | Type    | Description                                                      |
 | ------- | --------------------------------------------------------- |
-| boolean | **true** indicates that the component has scrolled to the bottom, **false** indicates not. |
+| boolean | The value **true** means that the component has scrolled to the bottom, and **false** means the opposite.|
 
 ## ScrollAlign<sup>10+ </sup>
 
@@ -192,11 +194,27 @@ Check if the component scrolls to the bottom.
 | END  | The end edge of the list item is flush with the end edge of the list.|
 | AUTO  | The list item is automatically aligned.<br>If the list item is fully contained within the display area, no adjustment is performed. Otherwise, the list item is aligned so that its start or end edge is flush with the start or end edge of the list, whichever requires a shorter scrolling distance.|
 
+## NestedScrollOptions<sup>10+ </sup>
+| Name  | Type  | Description             |
+| ----- | ------ | ----------------- |
+| scrollForward | NestedScrollMode | Nested scrolling option when the component scrolls forward.|
+| scrollBackward | NestedScrollMode |  Nested scrolling option when the component scrolls backward.|
+
+## NestedScrollMode<sup>10+ </sup>
+| Name    | Description                            |
+| ------ | ------------------------------ |
+| SELF_ONLY   | The scrolling is contained within the component, and no scroll chaining occurs, that is, the parent component does not scroll when the component scrolling reaches the boundary. |
+| SELF_FIRST | The component scrolls first, and when it hits the boundary, the parent component scrolls. When the parent component hits the boundary, its edge effect is displayed. If no edge effect is specified for the parent component, the edge effect of the child component is displayed instead.       |
+| PARENT_FIRST  | The parent component scrolls first, and when it hits the boundary, the component scrolls. When the component hits the boundary, its edge effect is displayed. If no edge effect is specified for the component, the edge effect of the parent component is displayed instead.|
+| PARALLEL  | The component and its parent component scroll at the same time. When both the component and its parent component hit the boundary, the edge effect of the component is displayed. If no edge effect is specified for the component, the edge effect of the parent component is displayed instead.|
+
 ## Example
 ### Example 1
 
 ```ts
 // xxx.ets
+import Curves from '@ohos.curves'
+
 @Entry
 @Component
 struct ScrollExample {
@@ -207,7 +225,7 @@ struct ScrollExample {
     Stack({ alignContent: Alignment.TopStart }) {
       Scroll(this.scroller) {
         Column() {
-          ForEach(this.arr, (item) => {
+          ForEach(this.arr, (item: number) => {
             Text(item.toString())
               .width('90%')
               .height(150)
@@ -216,13 +234,14 @@ struct ScrollExample {
               .fontSize(16)
               .textAlign(TextAlign.Center)
               .margin({ top: 10 })
-          }, item => item)
+          }, (item: string) => item)
         }.width('100%')
       }
-      .scrollable(ScrollDirection.Vertical)  // The scrollbar scrolls in the vertical direction.
-      .scrollBar(BarState.On)  // The scrollbar is always displayed.
-      .scrollBarColor(Color.Gray)  // Color of the scrollbar.
+      .scrollable(ScrollDirection.Vertical) // The scrollbar scrolls in the vertical direction.
+      .scrollBar(BarState.On) // The scrollbar is always displayed.
+      .scrollBarColor(Color.Gray) // The scrollbar color is gray.
       .scrollBarWidth(10) // The scrollbar width is 10.
+      .friction(0.6)
       .edgeEffect(EdgeEffect.None)
       .onScroll((xOffset: number, yOffset: number) => {
         console.info(xOffset + ' ' + yOffset)
@@ -230,40 +249,46 @@ struct ScrollExample {
       .onScrollEdge((side: Edge) => {
         console.info('To the edge')
       })
-      .onScrollEnd(() => {
-        console.info('Scroll Stop')
-      })
 
       Button('scroll 150')
         .height('5%')
         .onClick(() => { // Click to scroll down to 150.0 vp.
-          this.scroller.scrollBy(0,150)
+          this.scroller.scrollBy(0, 150)
         })
         .margin({ top: 10, left: 20 })
       Button('scroll 100')
         .height('5%')
         .onClick(() => { // Click to scroll down by 100.0 vp.
-          this.scroller.scrollTo({ xOffset: 0, yOffset: this.scroller.currentOffset().yOffset + 100 })
+          const yOffset: number = this.scroller.currentOffset().yOffset;
+          this.scroller.scrollTo({ xOffset: 0, yOffset: yOffset + 100 })
         })
         .margin({ top: 60, left: 20 })
+      Button('scroll 100')
+        .height('5%')
+        .onClick(() => {// Click to scroll down by 100.0 vp. An animation is applied to the scrolling.
+          let curve = Curves.interpolatingSpring(100, 1, 228, 30) // Create a step curve.
+          const yOffset: number = this.scroller.currentOffset().yOffset;
+          this.scroller.scrollTo({ xOffset: 0, yOffset: yOffset + 100, animation: { duration: 1000, curve: curve } })
+        })
+        .margin({ top: 110, left: 20 })
       Button('back top')
         .height('5%')
         .onClick(() => { // Click to go back to the top.
           this.scroller.scrollEdge(Edge.Top)
         })
-        .margin({ top: 110, left: 20 })
+        .margin({ top: 160, left: 20 })
       Button('next page')
         .height('5%')
         .onClick(() => { // Click to go to the next page.
           this.scroller.scrollPage({ next: true })
         })
-        .margin({ top: 170, left: 20 })
+        .margin({ top: 210, left: 20 })
     }.width('100%').height('100%').backgroundColor(0xDCDCDC)
   }
 }
 ```
 
-![en-us_image_0000001256978363](figures/en-us_image_0000001256978363.gif)
+![en-us_image_0000001174104386](figures/en-us_image_0000001174104386.gif)
 
 ### Example 2
 ```ts
@@ -280,24 +305,32 @@ struct NestedScroll {
       Scroll(this.scrollerForScroll) {
         Column() {
           Text("Scroll Area")
-            .width("100%").height("40%").backgroundColor(0X330000FF)
-            .fontSize(16).textAlign(TextAlign.Center)
+            .width("100%")
+            .height("40%")
+            .backgroundColor(0X330000FF)
+            .fontSize(16)
+            .textAlign(TextAlign.Center)
             .onClick(() => {
               this.scrollerForList.scrollToIndex(5)
             })
 
           List({ space: 20, scroller: this.scrollerForList }) {
-            ForEach(this.arr, (item) => {
+            ForEach(this.arr, (item: number) => {
               ListItem() {
                 Text("ListItem" + item)
-                  .width("100%").height("100%").borderRadius(15)
-                  .fontSize(16).textAlign(TextAlign.Center).backgroundColor(Color.White)
+                  .width("100%")
+                  .height("100%")
+                  .borderRadius(15)
+                  .fontSize(16)
+                  .textAlign(TextAlign.Center)
+                  .backgroundColor(Color.White)
               }.width("100%").height(100)
-            }, item => item)
+            }, (item: string) => item)
           }
           .width("100%")
           .height("50%")
           .edgeEffect(EdgeEffect.None)
+          .friction(0.6)
           .onReachStart(() => {
             this.listPosition = 0
           })
@@ -314,8 +347,11 @@ struct NestedScroll {
           })
 
           Text("Scroll Area")
-            .width("100%").height("40%").backgroundColor(0X330000FF)
-            .fontSize(16).textAlign(TextAlign.Center)
+            .width("100%")
+            .height("40%")
+            .backgroundColor(0X330000FF)
+            .fontSize(16)
+            .textAlign(TextAlign.Center)
         }
       }
       .width("100%").height("100%")
@@ -325,3 +361,68 @@ struct NestedScroll {
 ```
 
 ![NestedScroll](figures/NestedScroll.gif)
+
+### Example 3
+```ts
+@Entry
+@Component
+struct StickyNestedScroll {
+  @State message: string = 'Hello World'
+  @State arr: number[] = []
+
+  @Styles
+  listCard() {
+    .backgroundColor(Color.White)
+    .height(72)
+    .width("100%")
+    .borderRadius(12)
+  }
+
+  build() {
+    Scroll() {
+      Column() {
+        Text("Scroll Area")
+          .width("100%")
+          .height("40%")
+          .backgroundColor('#0080DC')
+          .textAlign(TextAlign.Center)
+        Tabs({ barPosition: BarPosition.Start }) {
+          TabContent() {
+            List({ space: 10 }) {
+              ForEach(this.arr, (item: number) => {
+                ListItem() {
+                  Text("item" + item)
+                    .fontSize(16)
+                }.listCard()
+              }, (item: string) => item)
+            }.width("100%")
+            .edgeEffect(EdgeEffect.Spring)
+            .nestedScroll({
+              scrollForward: NestedScrollMode.PARENT_FIRST,
+              scrollBackward: NestedScrollMode.SELF_FIRST
+            })
+          }.tabBar("Tab1")
+
+          TabContent() {
+          }.tabBar("Tab2")
+        }
+        .vertical(false)
+        .height("100%")
+      }.width("100%")
+    }
+    .edgeEffect(EdgeEffect.Spring)
+    .friction(0.6)
+    .backgroundColor('#DCDCDC')
+    .scrollBar(BarState.Off)
+    .width('100%')
+    .height('100%')
+  }
+
+  aboutToAppear() {
+    for (let i = 0; i < 30; i++) {
+      this.arr.push(i)
+    }
+  }
+}
+```
+![NestedScroll2](figures/NestedScroll2.gif)

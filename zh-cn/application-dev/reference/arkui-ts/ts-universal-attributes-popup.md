@@ -25,24 +25,25 @@
 | arrowOffset<sup>9+</sup>     | [Length](ts-types.md#length)                                 | 否   | popup箭头在弹窗处的偏移。箭头在气泡上下方时，数值为0表示箭头居最左侧，偏移量为箭头至最左侧的距离，默认居中。箭头在气泡左右侧时，偏移量为箭头至最上侧的距离，默认居中。如果显示在屏幕边缘，气泡会自动左右偏移，数值为0时箭头始终指向绑定组件。 |
 | showInSubWindow<sup>9+</sup> | boolean                                                      | 否   | 是否在子窗口显示气泡，默认值为false。                        |
 | mask<sup>10+</sup>           | boolean&nbsp;\|&nbsp;[ResourceColor](ts-types.md#resourcecolor) | 否   | 设置气泡是否有遮罩层及遮罩颜色。如果设置为false，则没有遮罩层；如果设置为true，则设置有遮罩层并且颜色为透明色；如果设置为Color，则为遮罩层的颜色。 |
-| messageOptions<sup>10+</sup> | [PopupMessageOptions](#popupmessageoptions10)                | 否   | 设置弹窗信息文本参数。                                       |
+| messageOptions<sup>10+</sup> | [PopupMessageOptions](#popupmessageoptions10类型说明)                | 否   | 设置弹窗信息文本参数。                                       |
 | targetSpace<sup>10+</sup>    | [Length](ts-types.md#length)                                 | 否   | 设置popup与目标的间隙。                                      |
-| placement<sup>10+</sup>      | [Placement](ts-appendix-enums.md#placement8)                 | 否   | 设置popup组件相对于目标的显示位置，默认值为Placement.Bottom。<br />如果同时设置了`placementOnTop`和`placement`，则以`placement`的设置生效。 |
+| placement<sup>10+</sup>      | [Placement](ts-appendix-enums.md#placement8)                 | 否   | 设置popup组件相对于目标的显示位置，默认值为Placement.Bottom。 |
 | offset<sup>10+</sup>         | [Position](ts-types.md#position8)                            | 否   | 设置popup组件相对于placement设置的显示位置的偏移。<br />**说明：**<br />不支持设置百分比。 |
+| enableArrow<sup>10+</sup>    | boolean                                                      | 否   | 设置是否显示箭头。<br/>默认值：true                          |
 
 ## PopupMessageOptions<sup>10+</sup>类型说明
 
 | 名称        | 类型                                       | 必填   | 描述          |
 | --------- | ---------------------------------------- | ---- | ----------- |
 | textColor | [ResourceColor](ts-types.md#resourcecolor) | 否    | 设置弹窗信息文本颜色。 |
-| font      | [Font](ts-types.md#Font)                 | 否    | 设置弹窗信息字体属性。 |
+| font      | [Font](ts-types.md#font)                 | 否    | 设置弹窗信息字体属性。 |
 ## CustomPopupOptions<sup>8+</sup>类型说明
 
 | 名称                           | 类型                                       | 必填   | 描述                                       |
 | ---------------------------- | ---------------------------------------- | ---- | ---------------------------------------- |
 | builder                      | [CustomBuilder](ts-types.md#custombuilder8) | 是    | 提示气泡内容的构造器。<br />**说明：**<br />popup为通用属性，自定义popup中不支持再次弹出popup。对builder下的第一层容器组件不支持使用position属性，如果使用将导致气泡不显示。                              |
 | placement                    | [Placement](ts-appendix-enums.md#placement8) | 否    | 气泡组件优先显示的位置，当前位置显示不下时，会自动调整位置。<br/>默认值：Placement.Bottom |
-| popupColor                   | [ResourceColor](ts-types.md#resourcecolor) | 否    | 提示气泡的颜色。                                 |
+| popupColor                   | [ResourceColor](ts-types.md#resourcecolor) | 否    | 提示气泡的颜色。<br/>默认值：'#4d4d4d' |
 | enableArrow                  | boolean                                  | 否    | 是否显示箭头。<br/>从API Version 9开始，如果箭头所在方位侧的气泡长度不足以显示下箭头，则会默认不显示箭头。比如：placement设置为Left，此时如果气泡高度小于箭头的宽度（32vp）与气泡圆角两倍（48vp）之和（80vp），则实际不会显示箭头。<br/>默认值：true |
 | autoCancel                   | boolean                                  | 否    | 页面有操作时，是否自动关闭气泡。<br/>默认值：true            |
 | onStateChange                | (event:&nbsp;{&nbsp;isVisible:&nbsp;boolean&nbsp;})&nbsp;=&gt;&nbsp;void | 否    | 弹窗状态变化事件回调，参数为弹窗当前的显示状态。                 |
@@ -53,6 +54,9 @@
 | offset<sup>10+</sup>         | [Position](ts-types.md#position8)                            | 否   | 设置popup组件相对于placement设置的显示位置的偏移。<br />**说明：**<br />不支持设置百分比。 |
 
 ## 示例
+
+### 示例1
+
 ```ts
 // xxx.ets
 @Entry
@@ -78,7 +82,6 @@ struct PopupExample {
         })
         .bindPopup(this.handlePopup, {
           message: 'This is a popup with PopupOptions',
-          placementOnTop: true,
           showInSubWindow:false,
           primaryButton: {
             value: 'confirm',
@@ -130,3 +133,85 @@ struct PopupExample {
 ```
 
 ![figures/popup.gif](figures/popup.gif)
+
+### 示例2
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct PopupExample {
+  @State handlePopup: boolean = false
+
+  build() {
+    Column() {
+      Button('PopupOptions')
+        .onClick(() => {
+          this.handlePopup = !this.handlePopup
+        })
+        .bindPopup(this.handlePopup, {
+          message: 'This is a popup with PopupOptions',
+          messageOptions: {
+            textColor: Color.Red,
+            font: {
+              size: '14vp',
+              style: FontStyle.Italic,
+              weight: FontWeight.Bolder
+            }
+          },
+          placement: Placement.Bottom,
+          enableArrow: false,
+          targetSpace: '15vp',
+          onStateChange: (e) => {
+            console.info(JSON.stringify(e.isVisible))
+            if (!e.isVisible) {
+              this.handlePopup = false
+            }
+          }
+        })
+    }.margin(20)
+  }
+}
+```
+
+![figures/popup_2.png](figures/popup_2.png)
+
+### 示例3
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct PopupExample {
+  @State customPopup: boolean = false
+
+  // popup构造器定义弹框内容
+  @Builder popupBuilder() {
+    Row() {
+      Text('Custom Popup Message').fontSize(10)
+    }.height(50).padding(5)
+  }
+
+  build() {
+    Column() {
+      // CustomPopupOptions 类型设置弹框内容
+      Button('CustomPopupOptions')
+        .onClick(() => {
+          this.customPopup = !this.customPopup
+        })
+        .bindPopup(this.customPopup, {
+          builder: this.popupBuilder,
+          targetSpace: '15vp',
+          enableArrow: false,
+          onStateChange: (e) => {
+            if (!e.isVisible) {
+              this.customPopup = false
+            }
+          }
+        })
+    }.margin(20)
+  }
+}
+```
+
+![figures/popup_3.png](figures/popup_3.png)

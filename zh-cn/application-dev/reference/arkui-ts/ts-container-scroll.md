@@ -36,6 +36,7 @@ Scroll(scroller?: Scroller)
 | scrollBarWidth | string&nbsp;\|&nbsp;number         | 设置滚动条的宽度，不支持百分比设置。<br/>默认值：4<br/>单位：vp<br/>**说明：** <br/>如果滚动条的宽度超过其高度，则滚动条的宽度会变为默认值。 |
 | edgeEffect     | [EdgeEffect](ts-appendix-enums.md#edgeeffect)            | 设置滑动效果，目前支持的滑动效果参见EdgeEffect的枚举说明。<br/>默认值：EdgeEffect.None |
 | enableScrollInteraction<sup>10+</sup>  |  boolean  |   设置是否支持滚动手势，当设置为false时，无法通过手指或者鼠标滚动，但不影响控制器的滚动接口。<br/>默认值：true      |
+| friction<sup>10+</sup> | number \| [Resource](ts-types.md#resource)    | 设置摩擦系数，手动划动滚动区域时生效，只对惯性滚动过程有影响，对惯性滚动过程中的链式效果有间接影响。<br/>默认值：非可穿戴设备为0.6，可穿戴设备为0.9<br/>**说明：** <br/>设置为小于等于0的值时，按默认值处理 |
 
 ## ScrollDirection枚举说明
 | 名称       | 描述                     |
@@ -52,7 +53,7 @@ Scroll(scroller?: Scroller)
 | onScroll(event: (xOffset: number, yOffset: number) => void)  | 滚动事件回调,&nbsp;返回滚动时水平、竖直方向偏移量。<br/>触发该事件的条件 ：<br/>1、滚动组件触发滚动时触发，支持键鼠操作等其他触发滚动的输入设置。<br/>2、通过滚动控制器API接口调用。<br/>3、越界回弹。 |
 | onScrollEdge(event: (side: Edge) => void)                    | 滚动到边缘事件回调。<br/>触发该事件的条件 ：<br/>1、滚动组件滚动到边缘时触发，支持键鼠操作等其他触发滚动的输入设置。<br/>2、通过滚动控制器API接口调用。<br/>3、越界回弹。 |
 | onScrollStart<sup>9+</sup>(event: () => void)                | 滚动开始时触发。手指拖动Scroll或拖动Scroll的滚动条触发的滚动开始时，会触发该事件。使用[Scroller](#scroller)滚动控制器触发的带动画的滚动，动画开始时会触发该事件。<br/>触发该事件的条件 ：<br/>1、滚动组件开始滚动时触发，支持键鼠操作等其他触发滚动的输入设置。<br/>2、通过滚动控制器API接口调用后开始，带过渡动效。 |
-| onScrollStop<sup>9+</sup>(event: () => void)                 | 滚动停止时触发。手拖动Scroll或拖动Scroll的滚动条触发的滚动，手离开屏幕并且滚动停止时会触发该事件。使用[Scroller](#scroller)滚动控制器触发的带动画的滚动，动画停止时会触发该事件。<br/>触发该事件的条件 ：<br/>1、滚动组件触发滚动后停止，支持键鼠操作等其他触发滚动的输入设置。<br/>2、通过滚动控制器API接口调用后开始，带过渡动效，。 |
+| onScrollStop<sup>9+</sup>(event: () => void)                 | 滚动停止时触发。手拖动Scroll或拖动Scroll的滚动条触发的滚动，手离开屏幕并且滚动停止时会触发该事件。使用[Scroller](#scroller)滚动控制器触发的带动画的滚动，动画停止时会触发该事件。<br/>触发该事件的条件 ：<br/>1、滚动组件触发滚动后停止，支持键鼠操作等其他触发滚动的输入设置。<br/>2、通过滚动控制器API接口调用后开始，带过渡动效。 |
 
 >  **说明：**
 >
@@ -72,7 +73,7 @@ scroller: Scroller = new Scroller()
 
 ### scrollTo
 
-scrollTo(value: { xOffset: number | string, yOffset: number | string, animation?: { duration: number, curve: Curve } }): void
+scrollTo(value: { xOffset: number | string, yOffset: number | string, animation?: { duration?: number, curve?: Curve | ICurve } | boolean }): void
 
 
 滑动到指定位置。
@@ -81,9 +82,9 @@ scrollTo(value: { xOffset: number | string, yOffset: number | string, animation?
 
 | 参数名    | 参数类型                                                     | 必填 | 参数描述                                                     |
 | --------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
-| xOffset   | number&nbsp;\|&nbsp;string                                   | 是   | 水平滑动偏移。<br/>**说明：** <br/>该参数值不支持设置百分比。<br/>仅滚动轴为x轴时生效。 |
-| yOffset   | number&nbsp;\|&nbsp;string                                   | 是   | 垂直滑动偏移。<br/>**说明：** <br/>该参数值不支持设置百分比。<br/>仅滚动轴为y轴时生效。 |
-| animation | {<br/>duration:&nbsp;number,<br/>curve:&nbsp;[Curve](ts-appendix-enums.md#curve)<br/>} | 否   | 动画配置：<br/>-&nbsp;duration:&nbsp;滚动时长设置。<br/>-&nbsp;curve:&nbsp;滚动曲线设置。<br/>默认值： <br/>{<br/>duration:&nbsp;0,<br/>curve:&nbsp;Curve.Ease<br/>}<br/>**说明：** <br/>设置为小于0的值时，按默认值显示。 |
+| xOffset   | number&nbsp;\|&nbsp;string                                   | 是   | 水平滑动偏移。<br/>**说明：** <br/>该参数值不支持设置百分比。<br/>当值小于0时，不做操作，即该参数不生效。<br/>仅滚动轴为x轴时生效。 |
+| yOffset   | number&nbsp;\|&nbsp;string                                   | 是   | 垂直滑动偏移。<br/>**说明：** <br/>该参数值不支持设置百分比。<br/>当值小于0时，不做操作，即该参数不生效。<br/>仅滚动轴为y轴时生效。 |
+| animation | {<br/>duration?:&nbsp;number,<br/>curve?:&nbsp;[Curve](ts-appendix-enums.md#curve)&nbsp;\|&nbsp;[ICurve](../apis/js-apis-curve.md#icurve)<sup>10+ </sup>}&nbsp;\|&nbsp;boolean<sup>10+ </sup> | 否   | 动画配置：<br/>-&nbsp;duration:&nbsp;滚动时长设置。<br/>-&nbsp;curve:&nbsp;滚动曲线设置。<br/>- boolean:&nbsp;使能默认弹簧动效。<br/>默认值： <br/>{<br/>duration:&nbsp;1000,<br/>curve:&nbsp;Curve.Ease<br/>}<br/>boolean:&nbsp;false<br/>**说明：** <br/>设置为小于0的值时，按默认值显示。<br/>当前List、Scroll、Grid、WaterFlow均支持boolean类型和ICurve曲线。 |
 
 
 ### scrollEdge
@@ -102,7 +103,7 @@ scrollEdge(value: Edge): void
 
 ### scrollPage
 
-scrollPage(value: { next: boolean, direction?: Axis }): void
+scrollPage(value: { next: boolean }): void
 
 滚动到下一页或者上一页。
 
@@ -144,9 +145,9 @@ scrollToIndex(value: number, smooth?: boolean, align?: ScrollAlign): void
 
 | 参数名                | 参数类型 | 必填 | 参数描述                                                     |
 | --------------------- | -------- | ---- | ------------------------------------------------------------ |
-| value                 | number   | 是   | 要滑动到的列表项在列表中的索引值。                           |
+| value                 | number   | 是   | 要滑动到的目标元素在当前容器中的索引值。<br/>**说明：** <br/>value值设置成负值或者大于当前容器子组件的最大索引值，视为异常值，本次跳转不生效。 |
 | smooth<sup>10+ </sup> | boolean  | 否   | 设置滑动到列表项在列表中的索引值时是否有动效，true表示有动效，false表示没有动效。<br/>默认值：false。<br/>**说明：** <br/>当前仅List组件支持该参数。 |
-| align<sup>10+ </sup> | [ScrollAlign](#scrollalign枚举说明)  | 否   | 指定滑动到的列表项与List的对齐方式。<br/>默认值：ScrollAlign.START。<br/>**说明：** <br/>当前仅List组件支持该参数。 |
+| align<sup>10+ </sup> | [ScrollAlign](#scrollalign枚举说明10)  | 否   | 指定滑动到的元素与当前容器的对齐方式。<br/>List中的默认值为：ScrollAlign.START。Grid中默认值为：ScrollAlign.AUTO<br/>**说明：** <br/>当前仅List、Grid组件支持该参数。 |
 
 ### scrollBy<sup>9+</sup>
 
@@ -166,6 +167,7 @@ scrollBy(dx: Length, dy: Length): void
 | ----- | ------ | ---- | ----------------- |
 | dx | Length | 是    | 水平方向滚动距离，不支持百分比形式。 |
 | dy | Length | 是    | 竖直方向滚动距离，不支持百分比形式。 |
+
 ### isAtEnd<sup>10+</sup>
 
 isAtEnd(): boolean
@@ -195,6 +197,8 @@ isAtEnd(): boolean
 
 ```ts
 // xxx.ets
+import Curves from '@ohos.curves'
+
 @Entry
 @Component
 struct ScrollExample {
@@ -205,7 +209,7 @@ struct ScrollExample {
     Stack({ alignContent: Alignment.TopStart }) {
       Scroll(this.scroller) {
         Column() {
-          ForEach(this.arr, (item) => {
+          ForEach(this.arr, (item: number) => {
             Text(item.toString())
               .width('90%')
               .height(150)
@@ -214,22 +218,20 @@ struct ScrollExample {
               .fontSize(16)
               .textAlign(TextAlign.Center)
               .margin({ top: 10 })
-          }, item => item)
+          }, (item: string) => item)
         }.width('100%')
       }
       .scrollable(ScrollDirection.Vertical)  // 滚动方向纵向
       .scrollBar(BarState.On)  // 滚动条常驻显示
       .scrollBarColor(Color.Gray)  // 滚动条颜色
       .scrollBarWidth(10) // 滚动条宽度
+      .friction(0.6)
       .edgeEffect(EdgeEffect.None)
       .onScroll((xOffset: number, yOffset: number) => {
         console.info(xOffset + ' ' + yOffset)
       })
       .onScrollEdge((side: Edge) => {
         console.info('To the edge')
-      })
-      .onScrollEnd(() => {
-        console.info('Scroll Stop')
       })
 
       Button('scroll 150')
@@ -241,21 +243,30 @@ struct ScrollExample {
       Button('scroll 100')
         .height('5%')
         .onClick(() => { // 点击后滑动到指定位置，即下滑100.0vp的距离
-          this.scroller.scrollTo({ xOffset: 0, yOffset: this.scroller.currentOffset().yOffset + 100 })
+          const yOffset: number = this.scroller.currentOffset().yOffset;
+          this.scroller.scrollTo({ xOffset: 0, yOffset: yOffset + 100 })
         })
         .margin({ top: 60, left: 20 })
+      Button('scroll 100')
+        .height('5%')
+        .onClick(() => { // 点击后滑动到指定位置，即下滑100.0vp的距离，滑动过程配置有动画
+          let curve = Curves.interpolatingSpring(100, 1, 228, 30) //创建一个阶梯曲线
+          const yOffset: number = this.scroller.currentOffset().yOffset;
+          this.scroller.scrollTo({ xOffset: 0, yOffset: yOffset + 100, animation: { duration: 1000, curve: curve } })
+        })
+        .margin({ top: 110, left: 20 })
       Button('back top')
         .height('5%')
         .onClick(() => { // 点击后回到顶部
           this.scroller.scrollEdge(Edge.Top)
         })
-        .margin({ top: 110, left: 20 })
+        .margin({ top: 160, left: 20 })
       Button('next page')
         .height('5%')
         .onClick(() => { // 点击后滑到下一页
           this.scroller.scrollPage({ next: true })
         })
-        .margin({ top: 170, left: 20 })
+        .margin({ top: 210, left: 20 })
     }.width('100%').height('100%').backgroundColor(0xDCDCDC)
   }
 }
@@ -278,24 +289,32 @@ struct NestedScroll {
       Scroll(this.scrollerForScroll) {
         Column() {
           Text("Scroll Area")
-            .width("100%").height("40%").backgroundColor(0X330000FF)
-            .fontSize(16).textAlign(TextAlign.Center)
+            .width("100%")
+            .height("40%")
+            .backgroundColor(0X330000FF)
+            .fontSize(16)
+            .textAlign(TextAlign.Center)
             .onClick(() => {
               this.scrollerForList.scrollToIndex(5)
             })
 
           List({ space: 20, scroller: this.scrollerForList }) {
-            ForEach(this.arr, (item) => {
+            ForEach(this.arr, (item: number) => {
               ListItem() {
                 Text("ListItem" + item)
-                  .width("100%").height("100%").borderRadius(15)
-                  .fontSize(16).textAlign(TextAlign.Center).backgroundColor(Color.White)
+                  .width("100%")
+                  .height("100%")
+                  .borderRadius(15)
+                  .fontSize(16)
+                  .textAlign(TextAlign.Center)
+                  .backgroundColor(Color.White)
               }.width("100%").height(100)
-            }, item => item)
+            }, (item: string) => item)
           }
           .width("100%")
           .height("50%")
           .edgeEffect(EdgeEffect.None)
+          .friction(0.6)
           .onReachStart(() => {
             this.listPosition = 0
           })
@@ -312,8 +331,11 @@ struct NestedScroll {
           })
 
           Text("Scroll Area")
-            .width("100%").height("40%").backgroundColor(0X330000FF)
-            .fontSize(16).textAlign(TextAlign.Center)
+            .width("100%")
+            .height("40%")
+            .backgroundColor(0X330000FF)
+            .fontSize(16)
+            .textAlign(TextAlign.Center)
         }
       }
       .width("100%").height("100%")

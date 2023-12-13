@@ -5,8 +5,8 @@
 **AbilityStage** notifies you of when you can perform HAP initialization such as resource pre-loading and thread creation during the HAP loading.
 
 > **NOTE**
-> 
-> The initial APIs of this module are supported since API version 9. Newly added APIs will be marked with a superscript to indicate their earliest API version. 
+>
+> The initial APIs of this module are supported since API version 9. Newly added APIs will be marked with a superscript to indicate their earliest API version.
 > The APIs of this module can be used only in the stage model.
 
 ## Modules to Import
@@ -24,7 +24,7 @@ Called when the application is created.
 **System capability**: SystemCapability.Ability.AbilityRuntime.Core
 
 **Example**
-    
+
 ```ts
 import AbilityStage from '@ohos.app.ability.AbilityStage';
 
@@ -46,17 +46,18 @@ Called when the global configuration is updated.
 
 **Parameters**
 
-  | Name| Type| Mandatory| Description| 
+  | Name| Type| Mandatory| Description|
   | -------- | -------- | -------- | -------- |
-  | newConfig | [Configuration](js-apis-app-ability-configuration.md) | Yes| Callback invoked when the global configuration is updated. The global configuration indicates the configuration of the environment where the application is running and includes the language and color mode.| 
+  | newConfig | [Configuration](js-apis-app-ability-configuration.md) | Yes| Callback invoked when the global configuration is updated. The global configuration indicates the configuration of the environment where the application is running and includes the language and color mode.|
 
 **Example**
-    
+
 ```ts
 import AbilityStage from '@ohos.app.ability.AbilityStage';
+import { Configuration } from '@ohos.app.ability.Configuration';
 
 class MyAbilityStage extends AbilityStage {
-    onConfigurationUpdate(config) {
+    onConfigurationUpdate(config: Configuration) {
         console.log('onConfigurationUpdate, language: ${config.language}');
     }
 }

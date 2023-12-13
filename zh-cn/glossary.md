@@ -20,6 +20,12 @@
 
   Node-API是用于封装JavaScript能力为Native插件的API，独立于底层JavaScript，并作为Node.js的一部分。ArkUI-X的N-API组件对Node-API的接口进行了重新实现，当前支持Node-API标准库中的[部分接口](./application-dev/reference/native-lib/third_party_napi/napi.md)。
 
+## O
+
+- ### OHPM
+
+  OHPM CLI（OpenHarmony Package Manager Command-line Interface）作为鸿蒙生态三方库的包管理工具，支持OpenHarmony共享包的发布、安装和依赖管理。
+
 ## P
 
 - ### Platform Bridge

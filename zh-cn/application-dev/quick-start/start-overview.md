@@ -17,18 +17,18 @@ ArkUI跨平台框架(ArkUI-X)进一步将ArkUI开发框架扩展到了多个OS�
 
 ## 开发工具
 
-您可以通过自己偏好的文本编辑器，结合ACE Tools命令行工具来开发ArkUI-X应用。然而，我们推荐您使用DevEco Studio以获取更好的开发体验，除提供代码智能编辑和双向预览功能外，还会对ArkTS接口进行跨平台过滤和使用提示。
+您可以通过自己偏好的文本编辑器和ACE Tools命令行工具进行ArkUI-X应用开发，我们推荐您结合DevEco Studio进行应用开发以获取更好的开发体验，除提供代码智能编辑和双向预览功能外，还会对ArkTS接口进行跨平台过滤和编译提示。
 
 ### IDE工具（DevEco Studio）
 
-1. DevEco Studio为ArkUI-X应用构建提供了简单的集成开发环境，版本要求：V4.0 Beta2。请参考[社区版本软件和工具配套关系](https://gitee.com/openharmony/docs/blob/master/zh-cn/release-notes/OpenHarmony-v4.0-beta2.md#配套关系)完成DevEco Studio下载和安装。
+1. DevEco Studio为ArkUI-X应用构建提供了简单的集成开发环境，版本要求：V4.0 Release。请参考[社区版本软件和工具配套关系](../../release-notes/ArkUI-X-v1.0.0-release.md#配套关系)完成DevEco Studio下载和安装。
 
-2. 请参考[环境配置](./start-with-dev-environment.md)，完成基于**DevEco Studio**的ArkUI-X开发环境配置。
+2. 请参考DevEco Studio[跨平台开发环境配置说明](./start-with-dev-environment.md)，完成基于DevEco Studio的ArkUI-X开发环境配置。
 
 ### 命令行工具（ACE Tools）
 
-1. ACE Tools默认随ArkUI-X SDK发布，获取渠道请参见[SDK介绍](../tools/how-to-use-arkui-x-sdk.md)。
+1. ACE Tools默认随ArkUI-X SDK发布，获取渠道请参见[ArkUI-X SDK介绍](../tools/how-to-use-arkui-x-sdk.md)。推荐使用DevEco Studio进行ArkUI-X SDK下载。
 
-2. 请参考[环境配置](./start-with-ace-tools.md#环境准备)和[命令安装](./start-with-ace-tools.md#命令安装)，完成基于命令行的ArkUI-X开发环境配置。
+2. 请参考命令行[跨平台开发环境配置说明](./start-with-ace-tools.md#环境准备)完成基于命令行的ArkUI-X开发环境配置。
 
-完成上述操作和基本概念的理解后，即可参照[DevEco Studio使用说明](./start-with-deveco-studio.md)或[ACE Tools使用说明](./start-with-ace-tools.md#使用说明)，以及[使用ArkTS语言开发](./start-with-ets-stage.md)中的章节进行下一步ArkUI-X应用开发体验和学习。
+完成上述操作和基本概念的理解后，即可参照[DevEco Studio使用说明](./start-with-deveco-studio.md)或[ACE Tools使用说明](./start-with-ace-tools.md#创建应用)，以及[使用ArkTS语言开发](./start-with-ets-stage.md)中的章节进行下一步ArkUI-X应用开发体验和学习。

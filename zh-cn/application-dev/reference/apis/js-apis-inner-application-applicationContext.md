@@ -3,8 +3,8 @@
 ApplicationContext模块提供开发者应用级别的的上下文的能力，包括提供注册及取消注册应用内组件生命周期的监听接口。
 
 > **说明：**
-> 
-> 本模块首批接口从API version 9开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  
+>
+> 本模块首批接口从API version 9开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 > 本模块接口仅可在Stage模型下使用。
 
 ## 导入模块
@@ -46,39 +46,43 @@ on(type: 'abilityLifecycle', callback: AbilityLifecycleCallback): **number**;
 
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
+import AbilityLifecycleCallback from '@ohos.app.ability.AbilityLifecycleCallback';
 
-let lifecycleId;
+let lifecycleId: number;
 
 export default class EntryAbility extends UIAbility {
     onCreate() {
         console.log('MyAbility onCreate');
-        let AbilityLifecycleCallback = {
+        let AbilityLifecycleCallback: AbilityLifecycleCallback = {
             onAbilityCreate(ability) {
-                console.log('AbilityLifecycleCallback onAbilityCreate ability: ${ability}');
+                console.log(`AbilityLifecycleCallback onAbilityCreate ability: ${ability}`);
             },
             onWindowStageCreate(ability, windowStage) {
-                console.log('AbilityLifecycleCallback onWindowStageCreate ability: ${ability}');
-                console.log('AbilityLifecycleCallback onWindowStageCreate windowStage: ${windowStage}');
+                console.log(`AbilityLifecycleCallback onWindowStageCreate ability: ${ability}`);
+                console.log(`AbilityLifecycleCallback onWindowStageCreate windowStage: ${windowStage}`);
             },
             onWindowStageDestroy(ability, windowStage) {
-                console.log('AbilityLifecycleCallback onWindowStageDestroy ability: ${ability}');
-                console.log('AbilityLifecycleCallback onWindowStageDestroy windowStage: ${windowStage}');
+                console.log(`AbilityLifecycleCallback onWindowStageDestroy ability: ${ability}`);
+                console.log(`AbilityLifecycleCallback onWindowStageDestroy windowStage: ${windowStage}`);
             },
             onAbilityDestroy(ability) {
-                console.log('AbilityLifecycleCallback onAbilityDestroy ability: ${ability}');
+                console.log(`AbilityLifecycleCallback onAbilityDestroy ability: ${ability}`);
             },
             onAbilityForeground(ability) {
-                console.log('AbilityLifecycleCallback onAbilityForeground ability: ${ability}');
+                console.log(`AbilityLifecycleCallback onAbilityForeground ability: ${ability}`);
             },
             onAbilityBackground(ability) {
-                console.log('AbilityLifecycleCallback onAbilityBackground ability: ${ability}');
+                console.log(`AbilityLifecycleCallback onAbilityBackground ability: ${ability}`);
+            },
+            onAbilityContinue(ability) {
+                console.log(`AbilityLifecycleCallback onAbilityContinue ability: ${ability}`);
             }
         }
         // 1.通过context属性获取applicationContext
         let applicationContext = this.context.getApplicationContext();
         // 2.通过applicationContext注册监听应用内生命周期
         lifecycleId = applicationContext.on('abilityLifecycle', AbilityLifecycleCallback);
-        console.log('registerAbilityLifecycleCallback lifecycleId: ${lifecycleId)}');
+        console.log(`registerAbilityLifecycleCallback lifecycleId: ${lifecycleId}`);
     }
 }
 ```
@@ -104,17 +108,17 @@ off(type: 'abilityLifecycle', callbackId: **number**,  callback: AsyncCallback<*
 ```ts
 import UIAbility from '@ohos.app.ability.UIAbility';
 
-let lifecycleId;
+let lifecycleId: number;
 
 export default class EntryAbility extends UIAbility {
     onDestroy() {
         let applicationContext = this.context.getApplicationContext();
-        console.log('stage applicationContext: ${applicationContext}');
+        console.log(`stage applicationContext: ${applicationContext}`);
         applicationContext.off('abilityLifecycle', lifecycleId, (error, data) => {
             if (error) {
-                console.error('unregisterAbilityLifecycleCallback fail, err: ${JSON.stringify(error)}');    
+                console.error(`unregisterAbilityLifecycleCallback fail, err: ${JSON.stringify(error)}`);
             } else {
-                console.log('unregisterAbilityLifecycleCallback success, data: ${JSON.stringify(data)}');
+                console.log(`unregisterAbilityLifecycleCallback success, data: ${JSON.stringify(data)}`);
             }
         });
     }
@@ -151,11 +155,19 @@ getRunningProcessInformation(): Promise\<Array\<ProcessInformation>>;
 **示例：**
 
 ```ts
-applicationContext.getRunningProcessInformation().then((data) => {
-    console.log('The process running information is: ${JSON.stringify(data)}');
-}).catch((error) => {
-    console.error('error: ${JSON.stringify(error)}');
-});
+import UIAbility from '@ohos.app.ability.UIAbility';
+import { BusinessError } from '@ohos.base';
+
+export default class MyAbility extends UIAbility {
+    onForeground() {
+        let applicationContext = this.context.getApplicationContext();
+        applicationContext.getRunningProcessInformation().then((data) => {
+            console.log(`The process running information is: ${JSON.stringify(data)}`);
+        }).catch((error: BusinessError) => {
+            console.error(`error: ${JSON.stringify(error)}`);
+        });
+    }
+}
 ```
 
 ## ApplicationContext.getRunningProcessInformation<sup>9+</sup>
@@ -188,11 +200,18 @@ getRunningProcessInformation(callback: AsyncCallback\<Array\<ProcessInformation>
 **示例：**
 
 ```ts
-applicationContext.getRunningProcessInformation((err, data) => {
-    if (err) {
-        console.error('getRunningProcessInformation faile, err: ${JSON.stringify(err)}');
-    } else {
-        console.log('The process running information is: ${JSON.stringify(data)}');
+import UIAbility from '@ohos.app.ability.UIAbility';
+
+export default class MyAbility extends UIAbility {
+    onForeground() {
+        let applicationContext = this.context.getApplicationContext();
+        applicationContext.getRunningProcessInformation((err, data) => {
+            if (err) {
+                console.error(`getRunningProcessInformation faile, err: ${JSON.stringify(err)}`);
+            } else {
+                console.log(`The process running information is: ${JSON.stringify(data)}`);
+            }
+        })
     }
-})
+}
 ```
