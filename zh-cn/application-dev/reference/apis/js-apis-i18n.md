@@ -1,19 +1,19 @@
 # @ohos.i18n (国际化-I18n)
 
- 本模块提供系统相关的或者增强的国际化能力，包括区域管理、日历等，相关接口为ECMA 402标准中未定义的补充接口。
-[Intl模块](js-apis-intl.md)提供了ECMA 402标准定义的基础国际化接口，与本模块共同使用可提供完整地国际化支持能力。 
+ 本模块提供系统相关的或者增强的国际化能力，包括区域管理、电话号码处理、日历等，相关接口为ECMA 402标准中未定义的补充接口。
+[Intl模块](js-apis-intl.md)提供了ECMA 402标准定义的基础国际化接口，与本模块共同使用可提供完整地国际化支持能力。
 
 >  **说明：**
 >  - 本模块首批接口从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 >
->  - I18N模块包含国际化能力增强接口（未在ECMA 402中定义），包括区域管理、日历等，国际化基础能力请参考[Intl模块](js-apis-intl.md)。
+>  - I18N模块包含国际化能力增强接口（未在ECMA 402中定义），包括区域管理、电话号码处理、日历等，国际化基础能力请参考[Intl模块](js-apis-intl.md)。
 >
 >  - 在本项目SDK中，国际化数据暂时仅支持简体中文、香港繁体、台湾繁体、美式英语、藏语、维吾尔语6种语言，其他语言支持待后续版本根据需要补充；使用非支持的语言，可能会回溯到英文特性或者返回空值。
 
 
 ## 导入模块
 
-```js
+```ts
 import I18n from '@ohos.i18n';
 ```
 
@@ -518,6 +518,193 @@ isWeekend(date?: Date): boolean
   let date: Date = new Date(2011, 11, 6, 9, 0, 0);
   calendar.isWeekend(date); // true
   ```
+
+
+### add<sup>11+</sup>
+
+add(field: string, amount: number): void
+
+在日历的给定字段进行加减操作。
+
+**系统能力**：SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名  | 类型   | 必填   | 说明                                       |
+| ---- | ---- | ---- | ---------------------------------------- |
+| field | string | 是    | 指定进行操作的日历字段，目前支持的field值有&nbsp;year,&nbsp;month,&nbsp;week_of_year,&nbsp;week_of_month,&nbsp;date,&nbsp;day_of_year,&nbsp;day_of_week,&nbsp;day_of_week_in_month,&nbsp;hour,&nbsp;hour_of_day,&nbsp;minute,&nbsp;second,&nbsp;millisecond。 |
+| amount | number | 是    | 进行加减操作的具体数值。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)。
+
+| 错误码ID  | 错误信息                   |
+| ------ | ---------------------- |
+| 890001 | param value not valid |
+
+**示例：**
+  ```ts
+  import { BusinessError } from '@ohos.base';
+
+  try {
+    let calendar: I18n.Calendar = I18n.getCalendar("zh-Hans");
+    calendar.set(2021, 11, 11, 8, 0, 0); // set time to 2021.11.11 08:00:00
+    calendar.add("year", 8); // 2021 + 8
+    let year: number = calendar.get("year"); // year = 2029
+  } catch(error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call Calendar.add failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+
+### getTimeInMillis<sup>11+</sup>
+
+getTimeInMillis(): number
+
+获取当前日历的UTC毫秒数。
+
+**系统能力**：SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型      | 说明                                  |
+| ------- | ----------------------------------- |
+| number | 当前日历的UTC毫秒数。 |
+
+**示例：**
+  ```ts
+  let calendar: I18n.Calendar = I18n.getCalendar("zh-Hans");
+  calendar.setTime(5000);
+  let millisecond: number = calendar.getTimeInMillis(); // millisecond = 5000
+  ```
+
+
+### compareDays<sup>11+</sup>
+
+compareDays(date: Date): number
+
+比较日历和指定日期相差的天数（按毫秒级的精度，不足一天将按一天进行计算）。
+
+**系统能力**：SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名  | 类型   | 必填   | 说明                                       |
+| ---- | ---- | ---- | ---------------------------------------- |
+| date | Date | 是    | 指定的日期。 |
+
+**返回值：**
+
+| 类型      | 说明                                  |
+| ------- | ----------------------------------- |
+| number | 相差的天数，正数代表日历时间更早，负数代表日历时间更晚。 |
+
+**示例：**
+  ```ts
+  import { BusinessError } from '@ohos.base';
+
+  try {
+    let calendar: I18n.Calendar = I18n.getCalendar("zh-Hans");
+    calendar.setTime(5000);
+    let date: Date = new Date(6000);
+    let diff: number = calendar.compareDays(date); // diff = 1
+  } catch(error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call Calendar.compareDays failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+
+## PhoneNumberFormat<sup>11+</sup>
+
+
+### constructor<sup>11+</sup>
+
+constructor(country: string, options?: PhoneNumberFormatOptions)
+
+创建电话号码格式化对象。
+
+**系统能力**：SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名     | 类型                                       | 必填   | 说明               |
+| ------- | ---------------------------------------- | ---- | ---------------- |
+| country | string                                   | 是    | 表示电话号码所属国家或地区代码。 |
+| options | [PhoneNumberFormatOptions](#phonenumberformatoptions11) | 否    | 电话号码格式化对象的相关选项。默认值：NATIONAL。  |
+
+**示例：**
+  ```ts
+  let option: I18n.PhoneNumberFormatOptions = {type: "E164"};
+  let phoneNumberFormat: I18n.PhoneNumberFormat = new I18n.PhoneNumberFormat("CN", option);
+  ```
+
+
+### isValidNumber<sup>11+</sup>
+
+isValidNumber(number: string): boolean
+
+判断传入的电话号码格式是否正确。
+
+**系统能力**：SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名    | 类型     | 必填   | 说明        |
+| ------ | ------ | ---- | --------- |
+| number | string | 是    | 待判断的电话号码。 |
+
+**返回值：**
+
+| 类型      | 说明                                    |
+| ------- | ------------------------------------- |
+| boolean | 返回true表示电话号码的格式正确，返回false表示电话号码的格式错误。 |
+
+**示例：**
+  ```ts
+  let phonenumberfmt: I18n.PhoneNumberFormat = new I18n.PhoneNumberFormat("CN");
+  let isValidNumber: boolean = phonenumberfmt.isValidNumber("158****2312"); // isValidNumber = true
+  ```
+
+
+### format<sup>11+</sup>
+
+format(number: string): string
+
+对电话号码进行格式化。
+
+**系统能力**：SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名    | 类型     | 必填   | 说明         |
+| ------ | ------ | ---- | ---------- |
+| number | string | 是    | 待格式化的电话号码。 |
+
+**返回值：**
+
+| 类型     | 说明         |
+| ------ | ---------- |
+| string | 格式化后的电话号码。 |
+
+**示例：**
+  ```ts
+  let phonenumberfmt: I18n.PhoneNumberFormat = new I18n.PhoneNumberFormat("CN");
+  let formattedPhoneNumber: string = phonenumberfmt.format("158****2312"); // formattedPhoneNumber = "158 **** 2312"
+  ```
+
+
+## PhoneNumberFormatOptions<sup>11+</sup>
+
+表示电话号码格式化对象可设置的属性。
+
+**系统能力**：SystemCapability.Global.I18n
+
+| 名称   | 类型     | 可读   | 可写   | 说明                                       |
+| ---- | ------ | ---- | ---- | ---------------------------------------- |
+| type | string | 是    | 是    | 表示对电话号码格式化的类型，取值范围："E164",&nbsp;"INTERNATIONAL",&nbsp;"NATIONAL",&nbsp;"RFC3966"。<br>-在API version 8版本，type为必填项。 <br>-API version 9版本开始，type为选填项。|
 
 
 ## I18n.getTimeZone<sup>7+</sup>
