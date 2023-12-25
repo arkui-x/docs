@@ -77,6 +77,7 @@
 - 安全
   - [@ohos.abilityAccessCtrl (程序访问控制管理)](js-apis-abilityAccessCtrl.md)
   - [@ohos.security.cryptoFramework (加解密算法库框架)](js-apis-cryptoFramework.md)
+  - [@ohos.security.cert(证书算法库框架)](js-apis-cert.md)
 
 - 语言基础类库
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
