@@ -1187,31 +1187,28 @@ Provides the configuration information of an upload or download task.
 
 **System capability**: SystemCapability.Request.FileTransferAgent
 
-| Name                   | Type                                           | Mandatory | Description                                                  |
-| ---------------------- | ---------------------------------------------- | --------- | ------------------------------------------------------------ |
-| action                 | [Action](#action10)                            | Yes       | Task action.<br>- **UPLOAD**<br>- **DOWNLOAD**               |
-| url                    | string                                         | Yes       | Resource URL. The value contains a maximum of 2048 characters. |
-| title                  | string                                         | No        | Task title. The value contains a maximum of 256 characters. The default value is a null string. |
-| description            | string                                         | No        | Task description. The value contains a maximum of 1024 characters. The default value is a null string. |
-| mode                   | [Mode](#mode10)                                | No        | Task mode. The default mode is background.<br>- For a foreground task, a callback is used for notification.<br>- For a background task, the system notification and network connection features (detection, recovery, and automatic retry) are provided. |
-| overwrite              | boolean                                        | No        | Whether to overwrite an existing file during the download. The default value is **false**.<br>- **true**: Overwrite the existing file.<br>- **false**: Do not overwrite the existing file. In this case, the download fails. |
-| method                 | string                                         | No        | Standard HTTP method for the task. The value can be **GET**, **POST**, or **PUT**, which is case-insensitive.<br>- If the task is an upload, use **PUT** or **POST**. The default value is **PUT**.<br>- If the task is a download, use **GET** or **POST**. The default value is **GET**. |
-| headers                | object                                         | No        | HTTP headers to be included in the task.<br>- If the task is an upload, the default **Content-Type** is **multipart/form-data**.<br>- If the task is a download, the default **Content-Type** is **application/json**. |
-| data                   | string \| Array&lt;[FormItem](#formitem10)&gt; | No        | Task data.<br>- If the task is a download, the value is a string, typically in JSON format (an object will be converted to a JSON string); the default value is null.<br>- If the task is an upload, the value is Array<[FormItem](#formitem10)>; the default value is null. |
-| saveas                 | string                                         | No        | Path for storing downloaded files. The options are as follows:<br>- Relative path in the cache folder of the invoker, for example, **"./xxx/yyy/zzz.html"** and **"xxx/yyy/zzz.html"**.<br>- URI (applicable when the application has the permission to access the URI), for example, **"datashare://bundle/xxx/yyy/zzz.html"**. This option is not supported currently.<br>The default value is a relative path in the cache folder of the application. |
-| network                | [Network](#network10)                          | No        | Network used for the task. The default value is **ANY** (Wi-Fi or cellular). |
-| metered                | boolean                                        | No        | Whether the task is allowed on a metered connection. The default value is **false**.<br>- **true**: The task is allowed on a metered connection.<br>- **false**: The task is not allowed on a metered connection. |
-| roaming                | boolean                                        | No        | Whether the task is allowed on a roaming network. The default value is **true**.<br>- **true**: The task is allowed on a roaming network.<br>- **false**: The task is not allowed on a roaming network. |
-| retry                  | boolean                                        | No        | Whether automatic retry is enabled for the task. This parameter is only applicable to background tasks. The default value is **true**.<br>- **true**: Automatic retry is enabled for the task.<br>- **-false**: Automatic retry is not enabled for the task. |
-| redirect               | boolean                                        | No        | Whether redirection is allowed. The default value is **true**.<br>- **true**: Redirection is allowed.<br>- **false**: Redirection is not allowed. |
-| index                  | number                                         | No        | Path index of the task. It is usually used for resumable downloads. The default value is **0**. |
-| begins                 | number                                         | No        | File start point of the task. It is usually used for resumable downloads. The default value is **0**. The value is a closed interval.<br>- If the task is a download, the value is obtained by sending an HTTP range request to read the start position when the server starts to download files.<br>- If the task is an upload, the value is obtained at the beginning of the upload. |
-| ends                   | number                                         | No        | File end point of the task. It is usually used for resumable downloads. The default value is **-1**. The value is a closed interval.<br>- If the task is a download, the value is obtained by sending an HTTP range request to read the end position when the server starts to download files.<br>- If the task is an upload, the value is obtained at the end of the upload. |
-| gauge                  | boolean                                        | No        | Whether to send progress notifications. This parameter applies only to background tasks. The default value is **false**.<br>- **false**: Progress notifications are not sent. This means that a notification is sent only to indicate the result of the total task.<br>- **true**: Progress notifications are sent to indicate the result of each file. |
-| precise                | boolean                                        | No        | - If this parameter is set to **true**, the task fails when the file size cannot be obtained.<br>- If this parameter is set to **false**, the task continues when the file size is set to **-1**.<br>The default value is **false**. |
-| token                  | string                                         | No        | Token of the task. If the task has a token configured, this token is required for query of the task. The value contains 8 to 2048 bytes. This parameter is left empty by default. |
-| priority<sup>11+</sup> | number                                         | No        | Priority of the task. For tasks in the same mode, a smaller value indicates a higher priority.<br>Default value: **0** |
-| extras                 | object                                         | No        | Additional information of the task. This parameter is left empty by default. |
+| Name        | Type                                           | Mandatory | Description                                                  |
+| ----------- | ---------------------------------------------- | --------- | ------------------------------------------------------------ |
+| action      | [Action](#action10)                            | Yes       | Task action.<br>- **UPLOAD**<br>- **DOWNLOAD**               |
+| url         | string                                         | Yes       | Resource URL. The value contains a maximum of 2048 characters. |
+| title       | string                                         | No        | Task title. The value contains a maximum of 256 characters. The default value is a null string. |
+| description | string                                         | No        | Task description. The value contains a maximum of 1024 characters. The default value is a null string. |
+| mode        | [Mode](#mode10)                                | No        | Task mode. The default mode is foreground .<br>- For a foreground task, a callback is used for notification. |
+| overwrite   | boolean                                        | No        | Whether to overwrite an existing file during the download. The default value is **false**.<br>- **true**: Overwrite the existing file.<br>- **false**: Do not overwrite the existing file. In this case, the download fails. |
+| method      | string                                         | No        | Standard HTTP method for the task. The value can be **GET**, **POST**, or **PUT**, which is case-insensitive.<br>- If the task is an upload, use **PUT** or **POST**. The default value is **PUT**.<br>- If the task is a download, use **GET** or **POST**. The default value is **GET**. |
+| headers     | object                                         | No        | HTTP headers to be included in the task.<br>- If the task is an upload, the default **Content-Type** is **multipart/form-data**.<br>- If the task is a download, the default **Content-Type** is **application/json**. |
+| data        | string \| Array&lt;[FormItem](#formitem10)&gt; | No        | Task data.<br>- If the task is a download, the value is a string, typically in JSON format (an object will be converted to a JSON string); the default value is null.<br>- If the task is an upload, the value is Array<[FormItem](#formitem10)>; the default value is null. |
+| saveas      | string                                         | No        | Path for storing downloaded files. The options are as follows:<br>- Relative path in the cache folder of the invoker, for example, **"./xxx/yyy/zzz.html"** and **"xxx/yyy/zzz.html"**.<br>- URI (applicable when the application has the permission to access the URI), for example, **"datashare://bundle/xxx/yyy/zzz.html"**. This option is not supported currently.<br>The default value is a relative path in the cache folder of the application. |
+| network     | [Network](#network10)                          | No        | Network used for the task. The default value is **ANY** (Wi-Fi or cellular). |
+| metered     | boolean                                        | No        | Whether the task is allowed on a metered connection. The default value is **false**.<br>- **true**: The task is allowed on a metered connection.<br>- **false**: The task is not allowed on a metered connection. |
+| roaming     | boolean                                        | No        | Whether the task is allowed on a roaming network. The default value is **true**.<br>- **true**: The task is allowed on a roaming network.<br>- **false**: The task is not allowed on a roaming network. |
+| redirect    | boolean                                        | No        | Whether redirection is allowed. The default value is **true**.<br>- **true**: Redirection is allowed.<br>- **false**: Redirection is not allowed. |
+| index       | number                                         | No        | Path index of the task. It is usually used for resumable downloads. The default value is **0**. |
+| begins      | number                                         | No        | File start point of the task. It is usually used for resumable downloads. The default value is **0**. The value is a closed interval.<br>- If the task is a download, the value is obtained by sending an HTTP range request to read the start position when the server starts to download files.<br>- If the task is an upload, the value is obtained at the beginning of the upload. |
+| ends        | number                                         | No        | File end point of the task. It is usually used for resumable downloads. The default value is **-1**. The value is a closed interval.<br>- If the task is a download, the value is obtained by sending an HTTP range request to read the end position when the server starts to download files.<br>- If the task is an upload, the value is obtained at the end of the upload. |
+| precise     | boolean                                        | No        | - If this parameter is set to **true**, the task fails when the file size cannot be obtained.<br>- If this parameter is set to **false**, the task continues when the file size is set to **-1**.<br>The default value is **false**. |
+| token       | string                                         | No        | Token of the task. If the task has a token configured, this token is required for query of the task. The value contains 8 to 2048 bytes. This parameter is left empty by default. |
+| extras      | object                                         | No        | Additional information of the task. This parameter is left empty by default. |
 
 ## State<sup>10+</sup>  
 
@@ -1244,7 +1241,7 @@ Describes the data structure of the task progress.
 | index     | number              | Yes       | Index of the file that is being processed in the task.       |
 | processed | number              | Yes       | Size of processed data in the current file in the task, in bytes. |
 | sizes     | Array&lt;number&gt; | Yes       | Size of files in the task, in bytes.                         |
-| extras    | object              | No        | Extra information of the task, for example, the header and body of the response from the server. |
+| extras    | object              | No        | Extra information of the task, for example, the header of the response from the server. |
 
 
 ## Faults<sup>10+</sup>  
@@ -1270,12 +1267,11 @@ Defines the filter criteria.
 
 | Name   | Type                | Mandatory | Description                                                  |
 | ------ | ------------------- | --------- | ------------------------------------------------------------ |
-| bundle | string              | No        | Bundle name of an application.<br>**System API**: This is a system API. |
 | before | number              | No        | Unix timestamp of the end time, in milliseconds. The default value is the invoking time. |
 | after  | number              | No        | Unix timestamp of the start time, in milliseconds. The default value is the invoking time minus 24 hours. |
 | state  | [State](#state10)   | No        | Task state.                                                  |
 | action | [Action](#action10) | No        | Task action.<br>- **UPLOAD**<br>- **DOWNLOAD**               |
-| mode   | [Mode](#mode10)     | No        | Task mode.<br>- **FOREGROUND**<br>- **BACKGROUND**           |
+| mode   | [Mode](#mode10)     | No        | Task mode.<br>- **FOREGROUND**                               |
 
 ## TaskInfo<sup>10+</sup> 
 
@@ -1283,29 +1279,23 @@ Defines the data structure of the task information for query. The fields availab
 
 **System capability**: SystemCapability.Request.FileTransferAgent
 
-| Name                   | Type                                           | Mandatory | Description                                                  |
-| ---------------------- | ---------------------------------------------- | --------- | ------------------------------------------------------------ |
-| uid                    | string                                         | No        | UID of the application. It is only available for query by system applications.<br>**System API**: This is a system API. |
-| bundle                 | string                                         | No        | Bundle name of the application. It is only available for query by system applications.<br>**System API**: This is a system API. |
-| saveas                 | string                                         | No        | Path for storing downloaded files. The options are as follows:<br>- Relative path in the cache folder of the invoker, for example, **"./xxx/yyy/zzz.html"** and **"xxx/yyy/zzz.html"**.<br>- URI (applicable when the application has the permission to access the URI), for example, **"datashare://bundle/xxx/yyy/zzz.html"**. This option is not supported currently.<br>The default value is a relative path in the cache folder of the application. |
-| url                    | string                                         | No        | Task URL.<br>- It can be obtained through [request.agent.show<sup>10+</sup>](#requestagentshow10-1), [request.agent.touch<sup>10+</sup>](#requestagenttouch10-1), or [request.agent.query<sup>10+</sup>](#requestagentquery10-1). When [request.agent.query<sup>10+</sup>](#requestagentquery10-1) is used, an empty string is returned. |
-| data                   | string \| Array&lt;[FormItem](#formitem10)&gt; | No        | Task value.<br>- It can be obtained through [request.agent.show<sup>10+</sup>](#requestagentshow10-1), [request.agent.touch<sup>10+</sup>](#requestagenttouch10-1), or [request.agent.query<sup>10+</sup>](#requestagentquery10-1). When [request.agent.query<sup>10+</sup>](#requestagentquery10-1) is used, an empty string is returned. |
-| tid                    | string                                         | Yes       | Task ID.                                                     |
-| title                  | string                                         | Yes       | Task title.                                                  |
-| description            | string                                         | Yes       | Task description.                                            |
-| action                 | [Action](#action10)                            | Yes       | Task action.<br>- **UPLOAD**<br>- **DOWNLOAD**               |
-| mode                   | [Mode](#mode10)                                | Yes       | Task mode.<br>- **FOREGROUND**<br>- **BACKGROUND**           |
-| priority<sup>11+</sup> | number                                         | No        | Task priority. The priority of a foreground task is higher than that of a background task. For tasks in the same mode, a smaller value indicates a higher priority. |
-| mimeType               | string                                         | Yes       | MIME type in the task configuration.                         |
-| progress               | [Progress](#progress10)                        | Yes       | Task progress.                                               |
-| gauge                  | boolean                                        | Yes       | Whether to send progress notifications. This parameter applies only to background tasks. |
-| ctime                  | number                                         | Yes       | Unix timestamp when the task is created, in milliseconds. The value is generated by the system of the current device.<br>Note: When [request.agent.search<sup>10+</sup>](#requestagentsearch10-1) is used for query, this value must be within the range of [after,before] for the task ID to be obtained. For details about **before** and **after**, see [Filter](#filter10). |
-| mtime                  | number                                         | Yes       | Unix timestamp when the task state changes, in milliseconds. The value is generated by the system of the current device. |
-| retry                  | boolean                                        | Yes       | Whether automatic retry is enabled for the task. This parameter applies only to background tasks. |
-| tries                  | number                                         | Yes       | Number of retries of the task.                               |
-| faults                 | [Faults](#faults10)                            | Yes       | Failure cause of the task.<br>- **OTHERS**: other fault.<br>- **DISCONNECT**: network disconnection.<br>- **TIMEOUT**: timeout.<br>- **PROTOCOL**: protocol error.<br>- **FSIO**: file system I/O error. |
-| reason                 | string                                         | Yes       | Reason why the task is waiting, failed, stopped, or paused.  |
-| extras                 | string                                         | No        | Extra information of the task                                |
+| Name        | Type                                           | Mandatory | Description                                                  |
+| ----------- | ---------------------------------------------- | --------- | ------------------------------------------------------------ |
+| saveas      | string                                         | No        | Path for storing downloaded files. The options are as follows:<br>- Relative path in the cache folder of the invoker, for example, **"./xxx/yyy/zzz.html"** and **"xxx/yyy/zzz.html"**.<br>- URI (applicable when the application has the permission to access the URI), for example, **"datashare://bundle/xxx/yyy/zzz.html"**. This option is not supported currently.<br>The default value is a relative path in the cache folder of the application. |
+| url         | string                                         | No        | Task URL.<br>- It can be obtained through [request.agent.show<sup>10+</sup>](#requestagentshow10-1), [request.agent.touch<sup>10+</sup>](#requestagenttouch10-1), or [request.agent.query<sup>10+</sup>](#requestagentquery10-1). When [request.agent.query<sup>10+</sup>](#requestagentquery10-1) is used, an empty string is returned. |
+| data        | string \| Array&lt;[FormItem](#formitem10)&gt; | No        | Task value.<br>- It can be obtained through [request.agent.show<sup>10+</sup>](#requestagentshow10-1), [request.agent.touch<sup>10+</sup>](#requestagenttouch10-1), or [request.agent.query<sup>10+</sup>](#requestagentquery10-1). When [request.agent.query<sup>10+</sup>](#requestagentquery10-1) is used, an empty string is returned. |
+| tid         | string                                         | Yes       | Task ID.                                                     |
+| title       | string                                         | Yes       | Task title.                                                  |
+| description | string                                         | Yes       | Task description.                                            |
+| action      | [Action](#action10)                            | Yes       | Task action.<br>- **UPLOAD**<br>- **DOWNLOAD**               |
+| mode        | [Mode](#mode10)                                | Yes       | Task mode.<br>- **FOREGROUND**                               |
+| mimeType    | string                                         | Yes       | MIME type in the task configuration.                         |
+| progress    | [Progress](#progress10)                        | Yes       | Task progress.                                               |
+| ctime       | number                                         | Yes       | Unix timestamp when the task is created, in milliseconds. The value is generated by the system of the current device.<br>Note: When [request.agent.search<sup>10+</sup>](#requestagentsearch10-1) is used for query, this value must be within the range of [after,before] for the task ID to be obtained. For details about **before** and **after**, see [Filter](#filter10). |
+| mtime       | number                                         | Yes       | Unix timestamp when the task state changes, in milliseconds. The value is generated by the system of the current device. |
+| faults      | [Faults](#faults10)                            | Yes       | Failure cause of the task.<br>- **OTHERS**: other fault.<br>- **DISCONNECT**: network disconnection.<br>- **TIMEOUT**: timeout.<br>- **PROTOCOL**: protocol error.<br>- **FSIO**: file system I/O error. |
+| reason      | string                                         | Yes       | Reason why the task is waiting, failed, stopped, or paused.  |
+| extras      | string                                         | No        | Extra information of the task                                |
 
 
 ## Task<sup>10+</sup> 
@@ -1807,7 +1797,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'taskStartTest',
   description: 'Sample code for start the download task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "GET",
   data: "",
@@ -1875,7 +1865,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'taskStartTest',
   description: 'Sample code for start the download task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "GET",
   data: "",
@@ -1907,275 +1897,6 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 > **NOTE**
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
-
-### pause<sup>10+</sup>
-
-pause(callback: AsyncCallback&lt;void&gt;): void
-
-Pauses this task. This API can be used to pause a background task that is waiting, running, or retrying. This API uses an asynchronous callback to return the result.
-
-**System capability**: SystemCapability.Request.FileTransferAgent
-
-**Parameters**
-
-| Name     | Type     | Mandatory | Description                                                  |
-| -------- | -------- | --------- | ------------------------------------------------------------ |
-| callback | function | Yes       | Callback used to return the result. If the operation is successful, **err** is **undefined**. Otherwise, **err** is an error object. |
-
-**Error codes**
-
-For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
-
-| ID       | Error Message               |
-| -------- | --------------------------- |
-| 13400003 | task service ability error. |
-| 21900005 | task mode error.            |
-| 21900007 | task state error.           |
-
-**Example**
-
-  ```ts
-let config: request.agent.Config = {
-  action: request.agent.Action.DOWNLOAD,
-  url: 'http://127.0.0.1',
-  title: 'taskPauseTest',
-  description: 'Sample code for pause the download task',
-  mode: request.agent.Mode.BACKGROUND,
-  overwrite: false,
-  method: "GET",
-  data: "",
-  saveas: "./",
-  network: request.agent.Network.CELLULAR,
-  metered: false,
-  roaming: true,
-  retry: true,
-  redirect: true,
-  index: 0,
-  begins: 0,
-  ends: -1,
-  gauge: false,
-  precise: false,
-  token: "it is a secret"
-};
-request.agent.create(getContext(), config).then((task: request.agent.Task) => {
-  task.pause((err: BusinessError) => {
-    if (err) {
-      console.error(`Failed to pause the download task, Code: ${err.code}, message: ${err.message}`);
-      return;
-    }
-    console.info(`Succeeded in pausing a download task. `);
-  });
-  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
-}).catch((err: BusinessError) => {
-  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
-});
-  ```
-
-> **NOTE**
->
-> The error code **21900005 task mode error** is removed from API version 11.
-
-### pause<sup>10+</sup>
-
-pause(): Promise&lt;void&gt;
-
-Pauses this task. This API can be used to pause a background task that is waiting, running, or retrying. This API uses a promise to return the result.
-
-**System capability**: SystemCapability.Request.FileTransferAgent
-
-**Return value**
-
-| Type                | Description                    |
-| ------------------- | ------------------------------ |
-| Promise&lt;void&gt; | Promise that returns no value. |
-
-**Error codes**
-
-For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
-
-| ID       | Error Message               |
-| -------- | --------------------------- |
-| 13400003 | task service ability error. |
-| 21900005 | task mode error.            |
-| 21900007 | task state error.           |
-
-**Example**
-
-  ```ts
-let config: request.agent.Config = {
-  action: request.agent.Action.DOWNLOAD,
-  url: 'http://127.0.0.1',
-  title: 'taskPauseTest',
-  description: 'Sample code for pause the download task',
-  mode: request.agent.Mode.BACKGROUND,
-  overwrite: false,
-  method: "GET",
-  data: "",
-  saveas: "./",
-  network: request.agent.Network.CELLULAR,
-  metered: false,
-  roaming: true,
-  retry: true,
-  redirect: true,
-  index: 0,
-  begins: 0,
-  ends: -1,
-  gauge: false,
-  precise: false,
-  token: "it is a secret"
-};
-request.agent.create(getContext(), config).then((task: request.agent.Task) => {
-  task.pause().then(() => {
-    console.info(`Succeeded in pausing a download task. `);
-  }).catch((err: BusinessError) => {
-    console.error(`Failed to pause the upload task, Code: ${err.code}, message: ${err.message}`);
-  });
-  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
-}).catch((err: BusinessError) => {
-  console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
-});
-  ```
-
-> **NOTE**
->
-> The error code **21900005 task mode error** is removed from API version 11.
-
-### resume<sup>10+</sup>
-
-resume(callback: AsyncCallback&lt;void&gt;): void
-
-Resumes this task. This API can be used to resume a paused background task. This API uses an asynchronous callback to return the result.
-
-**Required permissions**: ohos.permission.INTERNET
-
-**System capability**: SystemCapability.Request.FileTransferAgent
-
-**Parameters**
-
-| Name     | Type     | Mandatory | Description                                                  |
-| -------- | -------- | --------- | ------------------------------------------------------------ |
-| callback | function | Yes       | Callback used to return the result. If the operation is successful, **err** is **undefined**. Otherwise, **err** is an error object. |
-
-**Error codes**
-
-For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
-
-| ID       | Error Message               |
-| -------- | --------------------------- |
-| 13400003 | task service ability error. |
-| 21900005 | task mode error.            |
-| 21900007 | task state error.           |
-
-**Example**
-
-  ```ts
-let config: request.agent.Config = {
-  action: request.agent.Action.DOWNLOAD,
-  url: 'http://127.0.0.1',
-  title: 'taskResumeTest',
-  description: 'Sample code for resume the download task',
-  mode: request.agent.Mode.BACKGROUND,
-  overwrite: false,
-  method: "GET",
-  data: "",
-  saveas: "./",
-  network: request.agent.Network.CELLULAR,
-  metered: false,
-  roaming: true,
-  retry: true,
-  redirect: true,
-  index: 0,
-  begins: 0,
-  ends: -1,
-  gauge: false,
-  precise: false,
-  token: "it is a secret"
-};
-request.agent.create(getContext(), config).then((task: request.agent.Task) => {
-  task.resume((err: BusinessError) => {
-    if (err) {
-      console.error(`Failed to resume the download task, Code: ${err.code}, message: ${err.message}`);
-      return;
-    }
-    console.info(`Succeeded in resuming a download task. `);
-  });
-  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
-}).catch((err: BusinessError) => {
-  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
-});
-  ```
-
-> **NOTE**
->
-> The error code **21900005 task mode error** is removed from API version 11.
-
-
-### resume<sup>10+</sup>
-
-resume(): Promise&lt;void&gt;
-
-Resumes this task. This API can be used to resume a paused background task. This API uses a promise to return the result.
-
-**Required permissions**: ohos.permission.INTERNET
-
-**System capability**: SystemCapability.Request.FileTransferAgent
-
-**Return value**
-
-| Type                | Description                    |
-| ------------------- | ------------------------------ |
-| Promise&lt;void&gt; | Promise that returns no value. |
-
-**Error codes**
-
-For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
-
-| ID       | Error Message               |
-| -------- | --------------------------- |
-| 13400003 | task service ability error. |
-| 21900005 | task mode error.            |
-| 21900007 | task state error.           |
-
-**Example**
-
-  ```ts
-let config: request.agent.Config = {
-  action: request.agent.Action.DOWNLOAD,
-  url: 'http://127.0.0.1',
-  title: 'taskResumeTest',
-  description: 'Sample code for resume the download task',
-  mode: request.agent.Mode.BACKGROUND,
-  overwrite: false,
-  method: "GET",
-  data: "",
-  saveas: "./",
-  network: request.agent.Network.CELLULAR,
-  metered: false,
-  roaming: true,
-  retry: true,
-  redirect: true,
-  index: 0,
-  begins: 0,
-  ends: -1,
-  gauge: false,
-  precise: false,
-  token: "it is a secret"
-};
-request.agent.create(getContext(), config).then((task: request.agent.Task) => {
-  task.resume().then(() => {
-    console.info(`Succeeded in resuming a download task. `);
-  }).catch((err: BusinessError) => {
-    console.error(`Failed to resume the download task, Code: ${err.code}, message: ${err.message}`);
-  });
-  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
-}).catch((err: BusinessError) => {
-  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
-});
-  ```
-
-> **NOTE**
->
-> The error code **21900005 task mode error** is removed from API version 11.
 
 
 ### stop<sup>10+</sup>
@@ -2209,7 +1930,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'taskStopTest',
   description: 'Sample code for stop the download task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "GET",
   data: "",
@@ -2272,7 +1993,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'taskStopTest',
   description: 'Sample code for stop the download task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "GET",
   data: "",
@@ -2347,7 +2068,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'createTest',
   description: 'Sample code for create task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "PUT",
   data: attachments,
@@ -2428,7 +2149,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'createTest',
   description: 'Sample code for create task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "PUT",
   data: attachments,
@@ -2751,7 +2472,7 @@ For details about the error codes, see [Upload and Download Error Codes](../erro
 let filter: request.agent.Filter = {
   bundle: "com.example.myapplication",
   action: request.agent.Action.UPLOAD,
-  mode: request.agent.Mode.BACKGROUND
+  mode: request.agent.Mode.FOREGROUND
 }
 request.agent.search(filter).then((data: Array<string>) => {
   console.info(`Upload task search succeeded. `);

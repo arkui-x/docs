@@ -1221,31 +1221,28 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 
 **系统能力**: SystemCapability.Request.FileTransferAgent
 
-| 名称                   | 类型                                           | 必填 | 说明                                                         |
-| ---------------------- | ---------------------------------------------- | ---- | ------------------------------------------------------------ |
-| action                 | [Action](#action10)                            | 是   | 任务操作选项。<br/>-UPLOAD表示上传任务。<br/>-DOWNLOAD表示下载任务。 |
-| url                    | string                                         | 是   | 资源地址，其最大长度为2048个字符。                           |
-| title                  | string                                         | 否   | 任务标题，其最大长度为256个字符，默认值为小写的 upload 或 download，与上面的 action 保持一致。 |
-| description            | string                                         | 否   | 任务的详细信息，其最大长度为1024个字符，默认值为空字符串。   |
-| mode                   | [Mode](#mode10)                                | 否   | 任务模式,默认为后台任务。<br/>-对于前端任务，有回调通知。<br/>-对于后台任务，有系统通知、检测网络连接、恢复、自动重试功能。 |
-| overwrite              | boolean                                        | 否   | 下载过程中路径已存在时的解决方案选择，默认为false。<br/>- true，覆盖已存在的文件。<br/>- false，下载失败。 |
-| method                 | string                                         | 否   | 上传或下载的HTTP标准方法，包括GET、POST和PUT，不区分大小写。<br/>-上传时，使用PUT或POST，默认值为PUT。<br/>-下载时，使用GET或POST，默认值为GET。 |
-| headers                | object                                         | 否   | 添加要包含在任务中的HTTP协议标志头。<br/>-对于上传请求，默认的Content-Type为"multipart/form-data"。<br/>-对于下载请求，默认的Content-Type为"application/json"。 |
-| data                   | string \| Array&lt;[FormItem](#formitem10)&gt; | 否   | -下载时，data为字符串类型，通常使用json(object将被转换为json文本)，默认为空。<br/>-上传时，data是表单项数组Array&lt;[FormItem](#formitem10)&gt;，默认为空。 |
-| saveas                 | string                                         | 否   | 保存下载文件的路径，包括如下两种：<br/>-相对路径，如"./xxx/yyy/zzz.html"、"xxx/yyy/zzz.html"，位于调用方的缓存路径下。<br/>-uri路径，如"datashare://bundle/xxx/yyy/zzz.html"，仅对具有访问url路径权限的应用开放。该功能暂不支持。<br/>默认为相对路径，即下载至应用当前缓存路径下。 |
-| network                | [Network](#network10)                          | 否   | 网络选项，当前支持无线网络WIFI和蜂窝数据网络CELLULAR，默认为ANY（WIFI或CELLULAR）。 |
-| metered                | boolean                                        | 否   | 是否允许在按流量计费的网络中工作，默认为false。<br/>-true：是 <br/>-false：否 |
-| roaming                | boolean                                        | 否   | 是否允许在漫游网络中工作，默认为true。<br/>-true：是 <br/>-false：否 |
-| retry                  | boolean                                        | 否   | 是否为后台任务启用自动重试，仅应用于后台任务，默认为true。<br/>-true：是 <br/>-false：否 |
-| redirect               | boolean                                        | 否   | 是否允许重定向，默认为true。<br/>-true：是 <br/>-false：否   |
-| index                  | number                                         | 否   | 任务的路径索引，通常用于任务断点续传，默认为0。              |
-| begins                 | number                                         | 否   | 文件起点，通常用于断点续传。默认值为0，取值为闭区间。<br/>-下载时，请求读取服务器开始下载文件时的起点位置（http协议中设置"Range"选项）。<br/>-上传时，在上传开始时读取。 |
-| ends                   | number                                         | 否   | 文件终点，通常用于断点续传。默认值为-1，取值为闭区间。<br/>-下载时，请求读取服务器开始下载文件时的结束位置（http协议中设置"Range"选项）。<br/>-上传时，在上传时结束读取。 |
-| gauge                  | boolean                                        | 否   | 后台任务的过程进度通知策略，仅应用于后台任务，默认值为false。<br/>-false：代表仅完成或失败的通知。<br/>-true，发出每个进度已完成或失败的通知。 |
-| precise                | boolean                                        | 否   | -如果设置为true，在上传/下载无法获取文件大小时任务失败。<br/>-如果设置为false，将文件大小设置为-1时任务继续。<br/>默认值为false。 |
-| token                  | string                                         | 否   | 当创建了一个带有token的任务后，token则为正常查询期间必须提供的，否则将无法通过查询进行检索。其最小为8个字节，最大为2048个字节。默认为空。 |
-| priority<sup>11+</sup> | number                                         | 否   | 任务的优先级。任务模式相同的情况下，该配置项的数字越小优先级越高，默认值为0。 |
-| extras                 | object                                         | 否   | 配置的附加功能，默认为空。                                   |
+| 名称        | 类型                                           | 必填 | 说明                                                         |
+| ----------- | ---------------------------------------------- | ---- | ------------------------------------------------------------ |
+| action      | [Action](#action10)                            | 是   | 任务操作选项。<br/>-UPLOAD表示上传任务。<br/>-DOWNLOAD表示下载任务。 |
+| url         | string                                         | 是   | 资源地址，其最大长度为2048个字符。                           |
+| title       | string                                         | 否   | 任务标题，其最大长度为256个字符，默认值为小写的 upload 或 download，与上面的 action 保持一致。 |
+| description | string                                         | 否   | 任务的详细信息，其最大长度为1024个字符，默认值为空字符串。   |
+| mode        | [Mode](#mode10)                                | 否   | 任务模式,默认为前台任务。<br/>-对于前台任务，有回调通知。    |
+| overwrite   | boolean                                        | 否   | 下载过程中路径已存在时的解决方案选择，默认为false。<br/>- true，覆盖已存在的文件。<br/>- false，下载失败。 |
+| method      | string                                         | 否   | 上传或下载的HTTP标准方法，包括GET、POST和PUT，不区分大小写。<br/>-上传时，使用PUT或POST，默认值为PUT。<br/>-下载时，使用GET或POST，默认值为GET。 |
+| headers     | object                                         | 否   | 添加要包含在任务中的HTTP协议标志头。<br/>-对于上传请求，默认的Content-Type为"multipart/form-data"。<br/>-对于下载请求，默认的Content-Type为"application/json"。 |
+| data        | string \| Array&lt;[FormItem](#formitem10)&gt; | 否   | -下载时，data为字符串类型，通常使用json(object将被转换为json文本)，默认为空。<br/>-上传时，data是表单项数组Array&lt;[FormItem](#formitem10)&gt;，默认为空。 |
+| saveas      | string                                         | 否   | 保存下载文件的路径，包括如下两种：<br/>-相对路径，如"./xxx/yyy/zzz.html"、"xxx/yyy/zzz.html"，位于调用方的缓存路径下。<br/>-uri路径，如"datashare://bundle/xxx/yyy/zzz.html"，仅对具有访问url路径权限的应用开放。该功能暂不支持。<br/>默认为相对路径，即下载至应用当前缓存路径下。 |
+| network     | [Network](#network10)                          | 否   | 网络选项，当前支持无线网络WIFI和蜂窝数据网络CELLULAR，默认为ANY（WIFI或CELLULAR）。 |
+| metered     | boolean                                        | 否   | 是否允许在按流量计费的网络中工作，默认为false。<br/>-true：是 <br/>-false：否 |
+| roaming     | boolean                                        | 否   | 是否允许在漫游网络中工作，默认为true。<br/>-true：是 <br/>-false：否 |
+| redirect    | boolean                                        | 否   | 是否允许重定向，默认为true。<br/>-true：是 <br/>-false：否   |
+| index       | number                                         | 否   | 任务的路径索引，通常用于任务断点续传，默认为0。              |
+| begins      | number                                         | 否   | 文件起点，通常用于断点续传。默认值为0，取值为闭区间。<br/>-下载时，请求读取服务器开始下载文件时的起点位置（http协议中设置"Range"选项）。<br/>-上传时，在上传开始时读取。 |
+| ends        | number                                         | 否   | 文件终点，通常用于断点续传。默认值为-1，取值为闭区间。<br/>-下载时，请求读取服务器开始下载文件时的结束位置（http协议中设置"Range"选项）。<br/>-上传时，在上传时结束读取。 |
+| precise     | boolean                                        | 否   | -如果设置为true，在上传/下载无法获取文件大小时任务失败。<br/>-如果设置为false，将文件大小设置为-1时任务继续。<br/>默认值为false。 |
+| token       | string                                         | 否   | 当创建了一个带有token的任务后，token则为正常查询期间必须提供的，否则将无法通过查询进行检索。其最小为8个字节，最大为2048个字节。默认为空。 |
+| extras      | object                                         | 否   | 配置的附加功能，默认为空。                                   |
 
 ## State<sup>10+</sup>  
 
@@ -1272,13 +1269,13 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 
 **系统能力**: SystemCapability.Request.FileTransferAgent
 
-| 名称      | 类型                | 必填 | 说明                                                 |
-| --------- | ------------------- | ---- | ---------------------------------------------------- |
-| state     | [State](#state10)   | 是   | 任务当前的状态。                                     |
-| index     | number              | 是   | 任务中当前正在处理的文件索引。                       |
-| processed | number              | 是   | 任务中当前文件的已处理数据大小，单位为B。            |
-| sizes     | Array&lt;number&gt; | 是   | 任务中文件的大小，单位为B。                          |
-| extras    | object              | 否   | 交互的额外内容，例如来自服务器的响应的header和body。 |
+| 名称      | 类型                | 必填 | 说明                                           |
+| --------- | ------------------- | ---- | ---------------------------------------------- |
+| state     | [State](#state10)   | 是   | 任务当前的状态。                               |
+| index     | number              | 是   | 任务中当前正在处理的文件索引。                 |
+| processed | number              | 是   | 任务中当前文件的已处理数据大小，单位为B。      |
+| sizes     | Array&lt;number&gt; | 是   | 任务中文件的大小，单位为B。                    |
+| extras    | object              | 否   | 交互的额外内容，例如来自服务器的响应的header。 |
 
 ## Faults<sup>10+</sup>  
 
@@ -1303,12 +1300,11 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 
 | 名称   | 类型                | 必填 | 说明                                                         |
 | ------ | ------------------- | ---- | ------------------------------------------------------------ |
-| bundle | string              | 否   | 指定应用程序的包名，仅对系统应用开放。<br/>**系统接口**：此接口为系统接口。 |
 | before | number              | 否   | 结束的Unix时间戳（毫秒），默认为调用时刻。                   |
 | after  | number              | 否   | 开始的Unix时间戳（毫秒），默认值为调用时刻减24小时。         |
 | state  | [State](#state10)   | 否   | 指定任务的状态。                                             |
 | action | [Action](#action10) | 否   | 任务操作选项。<br/>-UPLOAD表示上传任务。<br/>-DOWNLOAD表示下载任务。 |
-| mode   | [Mode](#mode10)     | 否   | 任务模式。<br/>-FOREGROUND表示前端任务。<br/>-BACKGROUND表示后台任务。<br/>-如果未填写，则查询所有任务。 |
+| mode   | [Mode](#mode10)     | 否   | 任务模式。<br/>-FOREGROUND表示前端任务。                     |
 
 ## TaskInfo<sup>10+</sup> 
 
@@ -1316,29 +1312,23 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 
 **系统能力**: SystemCapability.Request.FileTransferAgent
 
-| 名称                   | 类型                                           | 必填 | 说明                                                         |
-| ---------------------- | ---------------------------------------------- | ---- | ------------------------------------------------------------ |
-| uid                    | string                                         | 否   | 应用程序的UID，仅用于系统查询。<br/>**系统接口**：此接口为系统接口。 |
-| bundle                 | string                                         | 否   | 应用程序的包名，仅用于系统查询。<br/>**系统接口**：此接口为系统接口。 |
-| saveas                 | string                                         | 否   | 保存下载文件的路径，包括如下两种：<br/>-相对路径，如"./xxx/yyy/zzz.html"、"xxx/yyy/zzz.html"，位于调用方的缓存路径下。<br/>-uri路径，如"datashare://bundle/xxx/yyy/zzz.html"，仅对具有访问url路径权限的应用开放。该功能暂不支持。<br/>默认为相对路径，即下载至应用当前缓存路径下。 |
-| url                    | string                                         | 否   | 任务的url。<br/>- 通过[request.agent.show<sup>10+</sup>](#requestagentshow10-1)、[request.agent.touch<sup>10+</sup>](#requestagenttouch10-1)、[request.agent.query<sup>10+</sup>](#requestagentquery10-1)进行查询。其中，使用[request.agent.query<sup>10+</sup>](#requestagentquery10-1)进行查询时会返回空字符串。 |
-| data                   | string \| Array&lt;[FormItem](#formitem10)&gt; | 否   | 任务值。<br/>- 通过[request.agent.show<sup>10+</sup>](#requestagentshow10-1)、[request.agent.touch<sup>10+</sup>](#requestagenttouch10-1)、[request.agent.query<sup>10+</sup>](#requestagentquery10-1)进行查询。其中，使用[request.agent.query<sup>10+</sup>](#requestagentquery10-1)进行查询时会返回空字符串。 |
-| tid                    | string                                         | 是   | 任务id。                                                     |
-| title                  | string                                         | 是   | 任务标题。                                                   |
-| description            | string                                         | 是   | 任务描述。                                                   |
-| action                 | [Action](#action10)                            | 是   | 任务操作选项。<br/>-UPLOAD表示上传任务。<br/>-DOWNLOAD表示下载任务。 |
-| mode                   | [Mode](#mode10)                                | 是   | 指定任务模式。<br/>-FOREGROUND表示前端任务。<br/>-BACKGROUND表示后台任务。 |
-| priority<sup>11+</sup> | number                                         | 否   | 任务配置中的优先级。前端任务的优先级比后台任务高。相同模式的任务，数字越小优先级越高。 |
-| mimeType               | string                                         | 是   | 任务配置中的mimetype。                                       |
-| progress               | [Progress](#progress10)                        | 是   | 任务的过程进度。                                             |
-| gauge                  | boolean                                        | 是   | 后台任务的进度通知策略。                                     |
-| ctime                  | number                                         | 是   | 创建任务的Unix时间戳（毫秒），由当前设备的系统生成。<br/>说明：使用[request.agent.search<sup>10+</sup>](#requestagentsearch10-1)进行查询时，该值需处于[after,before]区间内才可正常查询到任务id，before和after信息详见[Filter](#filter10)。 |
-| mtime                  | number                                         | 是   | 任务状态改变时的Unix时间戳（毫秒），由当前设备的系统生成。   |
-| retry                  | boolean                                        | 是   | 任务的重试开关，仅应用于后台任务。                           |
-| tries                  | number                                         | 是   | 任务的尝试次数。                                             |
-| faults                 | [Faults](#faults10)                            | 是   | 任务的失败原因。<br/>-OTHERS表示其他故障。<br/>-DISCONNECT表示网络断开连接。<br/>-TIMEOUT表示任务超时。<br/>-PROTOCOL表示协议错误。<br/>-FSIO表示文件系统io错误。 |
-| reason                 | string                                         | 是   | 等待/失败/停止/暂停任务的原因。                              |
-| extras                 | string                                         | 否   | 任务的额外部分。                                             |
+| 名称        | 类型                                           | 必填 | 说明                                                         |
+| ----------- | ---------------------------------------------- | ---- | ------------------------------------------------------------ |
+| saveas      | string                                         | 否   | 保存下载文件的路径，包括如下两种：<br/>-相对路径，如"./xxx/yyy/zzz.html"、"xxx/yyy/zzz.html"，位于调用方的缓存路径下。<br/>-uri路径，如"datashare://bundle/xxx/yyy/zzz.html"，仅对具有访问url路径权限的应用开放。该功能暂不支持。<br/>默认为相对路径，即下载至应用当前缓存路径下。 |
+| url         | string                                         | 否   | 任务的url。<br/>- 通过[request.agent.show<sup>10+</sup>](#requestagentshow10-1)、[request.agent.touch<sup>10+</sup>](#requestagenttouch10-1)、[request.agent.query<sup>10+</sup>](#requestagentquery10-1)进行查询。其中，使用[request.agent.query<sup>10+</sup>](#requestagentquery10-1)进行查询时会返回空字符串。 |
+| data        | string \| Array&lt;[FormItem](#formitem10)&gt; | 否   | 任务值。<br/>- 通过[request.agent.show<sup>10+</sup>](#requestagentshow10-1)、[request.agent.touch<sup>10+</sup>](#requestagenttouch10-1)、[request.agent.query<sup>10+</sup>](#requestagentquery10-1)进行查询。其中，使用[request.agent.query<sup>10+</sup>](#requestagentquery10-1)进行查询时会返回空字符串。 |
+| tid         | string                                         | 是   | 任务id。                                                     |
+| title       | string                                         | 是   | 任务标题。                                                   |
+| description | string                                         | 是   | 任务描述。                                                   |
+| action      | [Action](#action10)                            | 是   | 任务操作选项。<br/>-UPLOAD表示上传任务。<br/>-DOWNLOAD表示下载任务。 |
+| mode        | [Mode](#mode10)                                | 是   | 指定任务模式。<br/>-FOREGROUND表示前端任务。                 |
+| mimeType    | string                                         | 是   | 任务配置中的mimetype。                                       |
+| progress    | [Progress](#progress10)                        | 是   | 任务的过程进度。                                             |
+| ctime       | number                                         | 是   | 创建任务的Unix时间戳（毫秒），由当前设备的系统生成。<br/>说明：使用[request.agent.search<sup>10+</sup>](#requestagentsearch10-1)进行查询时，该值需处于[after,before]区间内才可正常查询到任务id，before和after信息详见[Filter](#filter10)。 |
+| mtime       | number                                         | 是   | 任务状态改变时的Unix时间戳（毫秒），由当前设备的系统生成。   |
+| faults      | [Faults](#faults10)                            | 是   | 任务的失败原因。<br/>-OTHERS表示其他故障。<br/>-DISCONNECT表示网络断开连接。<br/>-TIMEOUT表示任务超时。<br/>-PROTOCOL表示协议错误。<br/>-FSIO表示文件系统io错误。 |
+| reason      | string                                         | 是   | 等待/失败/停止/暂停任务的原因。                              |
+| extras      | string                                         | 否   | 任务的额外部分。                                             |
 
 
 ## Task<sup>10+</sup> 
@@ -1840,7 +1830,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'taskStartTest',
   description: 'Sample code for start the download task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "GET",
   data: "",
@@ -1908,7 +1898,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'taskStartTest',
   description: 'Sample code for start the download task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "GET",
   data: "",
@@ -1940,275 +1930,6 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 > **说明：**
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
-
-### pause<sup>10+</sup>
-
-pause(callback: AsyncCallback&lt;void&gt;): void
-
-暂停任务，可以暂停正在等待/正在运行/正在重试的后台任务。使用callback异步回调。
-
-**系统能力**: SystemCapability.Request.FileTransferAgent
-
-**参数：**
-
-| 参数名   | 类型     | 必填 | 说明                                                     |
-| -------- | -------- | ---- | -------------------------------------------------------- |
-| callback | function | 是   | 回调函数，暂停任务成功，err为undefined，否则为错误对象。 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[上传下载错误码](../errorcodes/errorcode-request.md)。
-
-| 错误码ID | 错误信息                    |
-| -------- | --------------------------- |
-| 13400003 | task service ability error. |
-| 21900005 | task mode error.            |
-| 21900007 | task state error.           |
-
-**示例：**
-
-  ```ts
-let config: request.agent.Config = {
-  action: request.agent.Action.DOWNLOAD,
-  url: 'http://127.0.0.1',
-  title: 'taskPauseTest',
-  description: 'Sample code for pause the download task',
-  mode: request.agent.Mode.BACKGROUND,
-  overwrite: false,
-  method: "GET",
-  data: "",
-  saveas: "./",
-  network: request.agent.Network.CELLULAR,
-  metered: false,
-  roaming: true,
-  retry: true,
-  redirect: true,
-  index: 0,
-  begins: 0,
-  ends: -1,
-  gauge: false,
-  precise: false,
-  token: "it is a secret"
-};
-request.agent.create(getContext(), config).then((task: request.agent.Task) => {
-  task.pause((err: BusinessError) => {
-    if (err) {
-      console.error(`Failed to pause the download task, Code: ${err.code}, message: ${err.message}`);
-      return;
-    }
-    console.info(`Succeeded in pausing a download task. `);
-  });
-  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
-}).catch((err: BusinessError) => {
-  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
-});
-  ```
-
-> **说明：**
->
-> 在 api11 中 `21900005 task mode error` 这个错误码被移除。
-
-### pause<sup>10+</sup>
-
-pause(): Promise&lt;void&gt;
-
-暂停任务，可以暂停正在等待/正在运行/正在重试的后台任务。使用Promise异步回调。
-
-**系统能力**: SystemCapability.Request.FileTransferAgent
-
-**返回值：** 
-
-| 类型                | 说明                                   |
-| ------------------- | -------------------------------------- |
-| Promise&lt;void&gt; | Promise对象。无返回结果的Promise对象。 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[上传下载错误码](../errorcodes/errorcode-request.md)。
-
-| 错误码ID | 错误信息                    |
-| -------- | --------------------------- |
-| 13400003 | task service ability error. |
-| 21900005 | task mode error.            |
-| 21900007 | task state error.           |
-
-**示例：**
-
-  ```ts
-let config: request.agent.Config = {
-  action: request.agent.Action.DOWNLOAD,
-  url: 'http://127.0.0.1',
-  title: 'taskPauseTest',
-  description: 'Sample code for pause the download task',
-  mode: request.agent.Mode.BACKGROUND,
-  overwrite: false,
-  method: "GET",
-  data: "",
-  saveas: "./",
-  network: request.agent.Network.CELLULAR,
-  metered: false,
-  roaming: true,
-  retry: true,
-  redirect: true,
-  index: 0,
-  begins: 0,
-  ends: -1,
-  gauge: false,
-  precise: false,
-  token: "it is a secret"
-};
-request.agent.create(getContext(), config).then((task: request.agent.Task) => {
-  task.pause().then(() => {
-    console.info(`Succeeded in pausing a download task. `);
-  }).catch((err: BusinessError) => {
-    console.error(`Failed to pause the upload task, Code: ${err.code}, message: ${err.message}`);
-  });
-  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
-}).catch((err: BusinessError) => {
-  console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
-});
-  ```
-
-> **说明：**
->
-> 在 api11 中 `21900005 task mode error` 这个错误码被移除。
-
-### resume<sup>10+</sup>
-
-resume(callback: AsyncCallback&lt;void&gt;): void
-
-重新启动任务，可以恢复暂停的后台任务。使用callback异步回调。
-
-**需要权限**：ohos.permission.INTERNET
-
-**系统能力**: SystemCapability.Request.FileTransferAgent
-
-**参数：**
-
-| 参数名   | 类型     | 必填 | 说明                                                       |
-| -------- | -------- | ---- | ---------------------------------------------------------- |
-| callback | function | 是   | 回调函数，重新启动任务成功，err为undefined，否则为错误对象 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[上传下载错误码](../errorcodes/errorcode-request.md)。
-
-| 错误码ID | 错误信息                    |
-| -------- | --------------------------- |
-| 13400003 | task service ability error. |
-| 21900005 | task mode error.            |
-| 21900007 | task state error.           |
-
-**示例：**
-
-  ```ts
-let config: request.agent.Config = {
-  action: request.agent.Action.DOWNLOAD,
-  url: 'http://127.0.0.1',
-  title: 'taskResumeTest',
-  description: 'Sample code for resume the download task',
-  mode: request.agent.Mode.BACKGROUND,
-  overwrite: false,
-  method: "GET",
-  data: "",
-  saveas: "./",
-  network: request.agent.Network.CELLULAR,
-  metered: false,
-  roaming: true,
-  retry: true,
-  redirect: true,
-  index: 0,
-  begins: 0,
-  ends: -1,
-  gauge: false,
-  precise: false,
-  token: "it is a secret"
-};
-request.agent.create(getContext(), config).then((task: request.agent.Task) => {
-  task.resume((err: BusinessError) => {
-    if (err) {
-      console.error(`Failed to resume the download task, Code: ${err.code}, message: ${err.message}`);
-      return;
-    }
-    console.info(`Succeeded in resuming a download task. `);
-  });
-  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
-}).catch((err: BusinessError) => {
-  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
-});
-  ```
-
-> **说明：**
->
-> 在 api11 中 `21900005 task mode error` 这个错误码被移除。
-
-
-### resume<sup>10+</sup>
-
-resume(): Promise&lt;void&gt;
-
-重新启动任务，可以恢复暂停的后台任务。使用Promise异步回调。
-
-**需要权限**：ohos.permission.INTERNET
-
-**系统能力**: SystemCapability.Request.FileTransferAgent
-
-**返回值：** 
-
-| 类型                | 说明                                   |
-| ------------------- | -------------------------------------- |
-| Promise&lt;void&gt; | Promise对象。无返回结果的Promise对象。 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[上传下载错误码](../errorcodes/errorcode-request.md)。
-
-| 错误码ID | 错误信息                    |
-| -------- | --------------------------- |
-| 13400003 | task service ability error. |
-| 21900005 | task mode error.            |
-| 21900007 | task state error.           |
-
-**示例：**
-
-  ```ts
-let config: request.agent.Config = {
-  action: request.agent.Action.DOWNLOAD,
-  url: 'http://127.0.0.1',
-  title: 'taskResumeTest',
-  description: 'Sample code for resume the download task',
-  mode: request.agent.Mode.BACKGROUND,
-  overwrite: false,
-  method: "GET",
-  data: "",
-  saveas: "./",
-  network: request.agent.Network.CELLULAR,
-  metered: false,
-  roaming: true,
-  retry: true,
-  redirect: true,
-  index: 0,
-  begins: 0,
-  ends: -1,
-  gauge: false,
-  precise: false,
-  token: "it is a secret"
-};
-request.agent.create(getContext(), config).then((task: request.agent.Task) => {
-  task.resume().then(() => {
-    console.info(`Succeeded in resuming a download task. `);
-  }).catch((err: BusinessError) => {
-    console.error(`Failed to resume the download task, Code: ${err.code}, message: ${err.message}`);
-  });
-  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
-}).catch((err: BusinessError) => {
-  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
-});
-  ```
-
-> **说明：**
->
-> 在 api11 中 `21900005 task mode error` 这个错误码被移除。
 
 
 ### stop<sup>10+</sup>
@@ -2242,7 +1963,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'taskStopTest',
   description: 'Sample code for stop the download task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "GET",
   data: "",
@@ -2305,7 +2026,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'taskStopTest',
   description: 'Sample code for stop the download task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "GET",
   data: "",
@@ -2380,7 +2101,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'createTest',
   description: 'Sample code for create task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "PUT",
   data: attachments,
@@ -2461,7 +2182,7 @@ let config: request.agent.Config = {
   url: 'http://127.0.0.1',
   title: 'createTest',
   description: 'Sample code for create task',
-  mode: request.agent.Mode.BACKGROUND,
+  mode: request.agent.Mode.FOREGROUND,
   overwrite: false,
   method: "PUT",
   data: attachments,
@@ -2784,7 +2505,7 @@ search(filter?: Filter): Promise&lt;Array&lt;string&gt;&gt;
 let filter: request.agent.Filter = {
   bundle: "com.example.myapplication",
   action: request.agent.Action.UPLOAD,
-  mode: request.agent.Mode.BACKGROUND
+  mode: request.agent.Mode.FOREGROUND
 }
 request.agent.search(filter).then((data: Array<string>) => {
   console.info(`Succeeded in searching a upload task. `);
