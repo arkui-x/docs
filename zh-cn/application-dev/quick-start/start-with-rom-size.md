@@ -126,6 +126,6 @@ rom size 的使用是通过给 ace build apk 或者 ace build hap 增加 --analy
 
 ![1702612125137-h9t](figures/1702612125137-h9t.png)
 
-![1702612125137-h9t](figures/1702612125137-h9t.png)
+![1702612177094-rkm](figures/1702612177094-rkm.png)
 
 如需更换另外的需要对比分析的json文件，则可点击右上角的clear，清除当前对比的页面内容。
