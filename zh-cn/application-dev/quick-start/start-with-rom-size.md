@@ -10,7 +10,8 @@ rom size 是一个可以让我们分析应用安装包总体积的应用工具�
 
 ## 3、rom size 的使用
 
-rom size 的使用是通过给 ace build apk 或者 ace build hap 增加 --analyze 参数来解析对应的安装包应用体积。
+rom size 的使用是通过给 ace build apk/hap/ios 增加 --analyze 参数来解析对应的安装包应用体积。
+
 使用示例1： 打开跨平台项目下的命令行窗口，输入 ace build apk --analyze 命令，命令运行成功会出现如下图所示内容，
 
 ![zh-cn_image_1702436822004-c7r](figures/zh-cn_image_1702436822004-c7r.png)
@@ -41,7 +42,7 @@ rom size 的使用是通过给 ace build apk 或者 ace build hap 增加 --analy
 
 ![1702553293199-pkj](figures/1702553293199-pkj.png)
 
-并且会在c盘当前用户文件夹下的 .ace-devtools\ios文件夹中生成ios安装包对应的体积分析json文件；
+并且会在当前用户文根目录下的 .ace-devtools\ios文件夹中生成ios安装包对应的体积分析json文件；
 
 ![1702553389908-qde](figures/1702553389908-qde.png)
 
@@ -57,11 +58,11 @@ rom size 的使用是通过给 ace build apk 或者 ace build hap 增加 --analy
 ![1702613280784-nd8](figures/1702613280784-nd8.png)
 
 以apk的json文件为例，文件中分析的体积模块大致包括：
-     1、应用的lib模块：包含有应用运行时所使用的相关依赖so库；
-     2、assets静态模块：包含应用所使用的图片，视频，音频等资源文件；
-     3、res模块：包含编译后的资源文件；
-     4、META-INT模块：应用存放签名证书的签名文件；
-     5、AndroidManifest.xml文件：配置包名、应用名、权限、安卓四大组件、版本的清单信息文件。
+	1、应用的lib模块：包含有应用运行时所使用的相关依赖so库；
+	2、assets静态模块：包含应用所使用的图片，视频，音频等资源文件；
+	3、res模块：包含编译后的资源文件；
+	4、META-INT模块：应用存放签名证书的签名文件；
+	5、AndroidManifest.xml文件：配置包名、应用名、权限、安卓四大组件、版本的清单信息文件。
 在树状图中，每个文件空间大小被分解成矩形，矩形的位置由体积变量决定，每个小矩形中显示着当前文件\文件夹名字和体积大小。每个矩形的面积与节点在编译后的安装包中所占的大小成比例关系。每个矩形的内部，还有更多的代表子文件\文件夹矩形存在。
 如果要查看某个文件夹下的文件体积详情图，则可以点击文件夹所在的矩形，便以选中的矩形作为树状图中新的根节点，重新展示树状图。
 
@@ -72,7 +73,7 @@ rom size 的使用是通过给 ace build apk 或者 ace build hap 增加 --analy
 
 ![1702449021341-7ga](figures/1702449021341-7ga.png)
 
-，点击目录树中的resources节点。树状图展示resources文件夹下的文件体积图。
+点击目录树中的resources节点。树状图展示resources文件夹下的文件体积图。
 
 
 在解析tab标签页的右上角点击clear，则可以清除当前的文件解析内容。并显示上传文件页面，
