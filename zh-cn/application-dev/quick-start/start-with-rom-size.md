@@ -42,7 +42,7 @@ rom size 的使用是通过给 ace build apk/hap/ios 增加 --analyze 参数来�
 
 ![1702553293199-pkj](figures/1702553293199-pkj.png)
 
-并且会在当前用户文根目录下的 .ace-devtools\ios文件夹中生成ios安装包对应的体积分析json文件；
+并且会在当前用户目录下的 .ace-devtools\ios文件夹中生成ios安装包对应的体积分析json文件；
 
 ![1702553389908-qde](figures/1702553389908-qde.png)
 
