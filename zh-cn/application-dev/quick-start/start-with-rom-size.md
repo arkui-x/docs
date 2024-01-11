@@ -9,14 +9,14 @@
 rom size 是一个可以让我们分析应用安装包总体积的应用工具。可以使用解析tab标签来查看单个体积分析json文件的体积信息，或者可以使用对比tab标签来对比查看不同版本体积分析json文件的体积信息。
 
 ## 2、rom size 环境相关配置
-- rom size 是一个内嵌在 ACE Tools 命令行工具里的应用工具，所以在使用之前，应现在电脑环境中配置ace可运行的环境。
+- rom size 是一个内嵌在 ACE Tools 命令行工具里的应用工具，所以在使用之前，应先在电脑环境中配置ace可运行的环境。
 - 搭建安装ACE Tools的运行环境请参考：[ACE Tools快速指南]https://gitee.com/arkui-x2/docs/blob/master/zh-cn/application-dev/quick-start/start-with-ace-tools.md
 
 ## 3、rom size 的使用
 
 rom size 的使用是通过给 ace build apk/hap/ios 增加 --analyze 参数来解析对应的安装包应用体积。
 
-使用示例1： 打开跨平台项目下的命令行窗口，输入 ace build apk --analyze 命令，命令运行成功会出现如下图所示内容，
+- 使用示例1： 打开跨平台项目下的命令行窗口，输入 ace build apk --analyze 命令，命令运行成功会出现如下图所示内容，
 
 ![zh-cn_image_1702436822004-c7r](figures/zh-cn_image_1702436822004-c7r.png)
 
@@ -29,7 +29,7 @@ rom size 的使用是通过给 ace build apk/hap/ios 增加 --analyze 参数来�
 ![1702437913073-w1a](figures/1702437913073-w1a.png)
 
 
-使用示例2： 打开跨平台项目下的命令行窗口，输入 ace build hap --analyze 命令，命令运行成功会出现如下图所示内容，
+- 使用示例2： 打开跨平台项目下的命令行窗口，输入 ace build hap --analyze 命令，命令运行成功会出现如下图所示内容，
 
 ![1702438744145-5s4](figures/1702438744145-5s4.png)
 
@@ -42,7 +42,7 @@ rom size 的使用是通过给 ace build apk/hap/ios 增加 --analyze 参数来�
 ![1702439139243-hyz](figures/1702439139243-hyz.png)
 
 
-使用示例3： 打开跨平台项目下的命令行窗口，输入 ace build ios --analyze 命令，命令运行成功会出现如下图所示内容，
+- 使用示例3： 打开跨平台项目下的命令行窗口，输入 ace build ios --analyze 命令，命令运行成功会出现如下图所示内容，
 
 ![1702553293199-pkj](figures/1702553293199-pkj.png)
 
@@ -62,11 +62,11 @@ rom size 的使用是通过给 ace build apk/hap/ios 增加 --analyze 参数来�
 ![1702613280784-nd8](figures/1702613280784-nd8.png)
 
 以apk的json文件为例，文件中分析的体积模块大致包括：
-	1、应用的lib模块：包含有应用运行时所使用的相关依赖so库；
-	2、assets静态模块：包含应用所使用的图片，视频，音频等资源文件；
-	3、res模块：包含编译后的资源文件；
-	4、META-INT模块：应用存放签名证书的签名文件；
-	5、AndroidManifest.xml文件：配置包名、应用名、权限、安卓四大组件、版本的清单信息文件。
+   - 1、应用的lib模块：包含有应用运行时所使用的相关依赖so库；
+   - 2、assets静态模块：包含应用所使用的图片，视频，音频等资源文件；
+   - 3、res模块：包含编译后的资源文件；
+   - 4、META-INT模块：应用存放签名证书的签名文件；
+   - 5、AndroidManifest.xml文件：配置包名、应用名、权限、安卓四大组件、版本的清单信息文件。
 在树状图中，每个文件空间大小被分解成矩形，矩形的位置由体积变量决定，每个小矩形中显示着当前文件\文件夹名字和体积大小。每个矩形的面积与节点在编译后的安装包中所占的大小成比例关系。每个矩形的内部，还有更多的代表子文件\文件夹矩形存在。
 如果要查看某个文件夹下的文件体积详情图，则可以点击文件夹所在的矩形，便以选中的矩形作为树状图中新的根节点，重新展示树状图。
 
