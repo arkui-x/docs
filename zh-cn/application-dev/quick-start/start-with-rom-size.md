@@ -1,25 +1,15 @@
 # rom size 使用指导
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 >  **说明：**
 >
 >  请使用**DevEco Studio 4.0 Beta2**及更高版本。如果使用其它版本，可能存在文档与产品功能界面、操作不一致的情况，请以实际功能界面为准。
 
-
-=======
->>>>>>> 0a49209b0c5559514fb81b2c5b1fd85d76f0facd
-=======
->>>>>>> 0a49209b0c5559514fb81b2c5b1fd85d76f0facd
 ## 1、rom size 是什么？
 
 rom size 是一个可以让我们分析应用安装包总体积的应用工具。可以使用解析tab标签来查看单个体积分析json文件的体积信息，或者可以使用对比tab标签来对比查看不同版本体积分析json文件的体积信息。
 
 ## 2、rom size 环境相关配置
 - rom size 是一个内嵌在 ACE Tools 命令行工具里的应用工具，所以在使用之前，应现在电脑环境中配置ace可运行的环境。
-<<<<<<< HEAD
-<<<<<<< HEAD
 - 搭建安装ACE Tools的运行环境请参考：[ACE Tools快速指南]https://gitee.com/arkui-x2/docs/blob/master/zh-cn/application-dev/quick-start/start-with-ace-tools.md
 
 ### 3、rom size 的使用
@@ -123,9 +113,6 @@ rom size 是一个可以让我们分析应用安装包总体积的应用工具�
 	图5.7
 ![1702612125137-h9t](figures/1702612125137-h9t.png)
 	
-=======
-=======
->>>>>>> 0a49209b0c5559514fb81b2c5b1fd85d76f0facd
 - 搭建安装ACE Tools的运行环境请参考：[ACE Tools快速指南](https://gitee.com/arkui-x2/docs/blob/master/zh-cn/application-dev/quick-start/start-with-ace-tools.md)
 
 ## 3、rom size 的使用
@@ -250,7 +237,3 @@ rom size 的使用是通过给 ace build apk/hap/ios 增加 --analyze 参数来�
 ![1702612177094-rkm](figures/1702612177094-rkm.png)
 
 如需更换另外的需要对比分析的json文件，则可点击右上角的clear，清除当前对比的页面内容。
-<<<<<<< HEAD
->>>>>>> 0a49209b0c5559514fb81b2c5b1fd85d76f0facd
-=======
->>>>>>> 0a49209b0c5559514fb81b2c5b1fd85d76f0facd
