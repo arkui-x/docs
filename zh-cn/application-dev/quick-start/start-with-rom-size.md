@@ -10,7 +10,7 @@ rom size 是一个可以让我们分析应用安装包总体积的应用工具�
 
 ## 2、rom size 环境相关配置
 - rom size 是一个内嵌在 ACE Tools 命令行工具里的应用工具，所以在使用之前，应先在电脑环境中配置ace可运行的环境。
-- 搭建安装ACE Tools的运行环境请参考：[ACE Tools快速指南]https://gitee.com/arkui-x2/docs/blob/master/zh-cn/application-dev/quick-start/start-with-ace-tools.md
+- 搭建安装ACE Tools的运行环境请参考：[ACE Tools快速指南]https://gitee.com/arkui-x/docs/blob/master/zh-cn/application-dev/quick-start/start-with-ace-tools.md
 
 ## 3、rom size 的使用
 
@@ -70,15 +70,14 @@ rom size 的使用是通过给 ace build apk/hap/ios 增加 --analyze 参数来�
 在树状图中，每个文件空间大小被分解成矩形，矩形的位置由体积变量决定，每个小矩形中显示着当前文件\文件夹名字和体积大小。每个矩形的面积与节点在编译后的安装包中所占的大小成比例关系。每个矩形的内部，还有更多的代表子文件\文件夹矩形存在。
 如果要查看某个文件夹下的文件体积详情图，则可以点击文件夹所在的矩形，便以选中的矩形作为树状图中新的根节点，重新展示树状图。
 
-![1702441203647-0uh](figures/1702441203647-0uh.png)
-
 点击ets矩形，则以ets为根节点，展示ets文件夹下文件的体积图，同时目录树图也会对应展开ets下的目录结构。
 当点击目录树图的文件夹节点时，也会以当前点击的文件节点作为根节点，在树状图中展示文件夹里的文件体积详情，
 
-![1702449021341-7ga](figures/1702449021341-7ga.png)
+![1702441203647-0uh](figures/1702441203647-0uh.png)
 
 点击目录树中的resources节点。树状图展示resources文件夹下的文件体积图。
 
+![1702449021341-7ga](figures/1702449021341-7ga.png)
 
 在解析tab标签页的右上角点击clear，则可以清除当前的文件解析内容。并显示上传文件页面，
 
