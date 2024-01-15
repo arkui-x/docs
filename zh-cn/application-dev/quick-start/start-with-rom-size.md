@@ -10,7 +10,7 @@ rom size 是一个可以让我们分析应用安装包总体积的应用工具�
 
 ## 2、rom size 环境相关配置
 - rom size 是一个内嵌在 ACE Tools 命令行工具里的应用工具，所以在使用之前，应先在电脑环境中配置ace可运行的环境。
-- 搭建安装ACE Tools的运行环境请参考：[ACE Tools快速指南](/start-with-ace-tools.md)
+- 搭建安装ACE Tools的运行环境请参考：[ACE Tools快速指南](./start-with-ace-tools.md)
 
 ## 3、rom size 的使用
 
