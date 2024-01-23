@@ -12,3 +12,4 @@
 | [StageApplication](StageApplication.md) | Stage模型Application，用于初始化资源路径以及加载配置信息 |
 | [StageApplicationDelegate](StageApplicationDelegate.md) | Stage模型Application代理类，将来自StageApplication的数据经过处理后传递给OpenHarmony框架层 |
 | [StageActivity](StageActivity.md) | Stage模型Activity，将Android中Activity的生命周期与OpenHarmony中Ability的生命周期进行映射 |
+| [IArkUIXPlugin](IArkUIXPlugin.md) | 所有ArkUI-X插件必须实现的接口。 |
