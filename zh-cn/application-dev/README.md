@@ -39,6 +39,7 @@
 - [平台桥接开发指南](./tutorial/how-to-use-bridge-on-android.md)
 - [Library库开发指南](./tutorial/how-to-use-library-on-android.md)
 - [动态化开发指南](./tutorial/how-to-use-dynamic-on-android.md)
+- [Plugin生命周期开发指南](./tutorial/how-to-use-arkui-x-plugin-on-android.md)
 
 #### iOS平台开发
 
@@ -48,6 +49,7 @@
 - [平台桥接开发指南](./tutorial/how-to-use-bridge-on-ios.md)
 - [Library库开发指南](./tutorial/how-to-use-library-on-ios.md)
 - [动态化开发指南](./tutorial/how-to-use-dynamic-on-ios.md)
+- [Plugin生命周期开发指南](./tutorial/how-to-use-arkui-x-plugin-on-ios.md)
 
 ### 开发工具
 
