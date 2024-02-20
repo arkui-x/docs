@@ -36,7 +36,7 @@ API扩展包括两部分内容：一是复用OpenHarmony NAPI机制，在Android
   ```
 
 ### 配置Java环境
-**说明：** 建议下载JDK11.0.2版本，下载请点击[此处](https://repo.huaweicloud.com/openjdk/)。
+**说明：** 建议下载JDK17.0.10版本，下载请点击[此处](https://repo.huaweicloud.com/openjdk/)。
 
   [Linux]
 
