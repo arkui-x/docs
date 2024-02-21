@@ -36,7 +36,7 @@ API extension involves the following: You can use the OpenHarmony NAPI mechanism
   ```
 
 ### Configuring the Java Environment
-**NOTE**:<br>You are advised to [download JDK11.0.2 or later](https://repo.huaweicloud.com/openjdk/).
+**NOTE**:<br>You are advised to [download JDK17.0.10 or later](https://repo.huaweicloud.com/openjdk/).
 
   [Linux]
 
