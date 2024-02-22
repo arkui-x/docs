@@ -22,6 +22,7 @@ import common from '@ohos.app.ability.common';
 | ApplicationContext   | [ApplicationContext](js-apis-inner-application-applicationContext.md)               | ApplicationContext二级模块。 |
 | BaseContext   | [BaseContext](js-apis-inner-application-baseContext.md)               | BaseContext二级模块。 |
 | Context   | [Context](js-apis-inner-application-context.md)               | Context二级模块。 |
+| EventHub<sup>12+</sup>   | [EventHub](js-apis-inner-application-eventHub.md)               | EventHub二级模块。 |
 
 **示例：**
 ```ts
