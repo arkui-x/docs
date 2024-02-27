@@ -28,8 +28,8 @@ createBridge(bridgeName: string): BridgeObject
 
 **返回值：** 
 
-| 类型                              | 说明           |
-| --------------------------------- | -------------- |
+| 类型                          | 说明           |
+| ----------------------------- | -------------- |
 | [BridgeObject](#bridgeobject) | 桥接的接口类。 |
 
 **示例：** 
@@ -69,9 +69,7 @@ createBridge(bridgeName: string): BridgeObject
 
 ### callMethod
 
-callMethod(methodName: string, parameters?: Record\<string, Parameter\>): Promise\<ResultValue\>;
-
-callMethod(methodName: string, ...parameters: Array\<any\>): Promise\<ResultValue\>;
+callMethod(methodName: string, ...parameters: Array\<Parameter\>): Promise\<ResultValue\>;
 
 调用平台方法。
 
@@ -79,11 +77,10 @@ callMethod(methodName: string, ...parameters: Array\<any\>): Promise\<ResultValu
 
 **参数：** 
 
-| 参数名     | 类型                      | 必填 | 说明           |
-| ---------- | ------------------------- | ---- | -------------- |
-| methodName | string                    | 是   | 方法名称。     |
-| parameters | Record\<string, Parameter\> | 否   | 方法参数列表。 |
-| parameters | Array\<any\>                | 否   | 方法参数列表。 |
+| 参数名     | 类型               | 必填 | 说明                 |
+| ---------- | ------------------ | ---- | -------------------- |
+| methodName | string             | 是   | 平台侧方法名称。     |
+| parameters | Array\<Parameter\> | 否   | 平台侧方法参数列表。 |
 
 **返回值：** 
 
@@ -93,12 +90,12 @@ callMethod(methodName: string, ...parameters: Array\<any\>): Promise\<ResultValu
 
 **错误码：**
 
-| 错误码ID   | 错误信息 |
-| --------- | ------- |
-| 1 | 管道不可用。 |
-| 4 | 方法名称错误。 |
-| 5 | 方法正确运行，不能重复运行。 |
-| 6 | 方法未实现。 |
+| 错误码ID | 错误信息                     |
+| -------- | ---------------------------- |
+| 1        | 管道不可用。                 |
+| 4        | 方法名称错误。               |
+| 5        | 方法正确运行，不能重复运行。 |
+| 6        | 方法未实现。                 |
 
 **示例：**
 
@@ -124,15 +121,15 @@ registerMethod(method: MethodData): Promise\<void\>
 
 **参数：** 
 
-| 参数名   | 类型                | 必填 | 说明                       |
-| -------- | ------------------- | ---- | -------------------------- |
-| method   | MethodData          | 是   | 方法数据。                 |
+| 参数名   | 类型                  | 必填 | 说明                     |
+| -------- | --------------------- | ---- | ------------------------ |
+| method   | MethodData            | 是   | JS侧方法数据。           |
 | callback | AsyncCallback\<void\> | 否   | callback方式的回调函数。 |
 
 **错误码：**
 
-| 错误码ID | 错误信息                       |
-| -------- | ------------------------------ |
+| 错误码ID | 错误信息                         |
+| -------- | -------------------------------- |
 | 1        | 管道不可用。                     |
 | 8        | 方法已经被注册，不允许重复注册。 |
 
@@ -157,9 +154,9 @@ unRegisterMethod(methodName: string): Promise\<void\>
 
 **参数：** 
 
-| 参数名   | 类型                | 必填 | 说明                       |
-| -------- | ------------------- | ---- | -------------------------- |
-| method   | string              | 是   | 方法名称。                 |
+| 参数名   | 类型                  | 必填 | 说明                     |
+| -------- | --------------------- | ---- | ------------------------ |
+| method   | string                | 是   | JS侧方法名称。           |
 | callback | AsyncCallback\<void\> | 否   | callback方式的回调函数。 |
 
 **系统能力：**  SystemCapability.ArkUI.ArkUI.Full
@@ -182,9 +179,9 @@ sendMessage(message: Message): Promise\<Response\>
 
 **参数：** 
 
-| 参数名   | 类型                | 必填 | 说明                       |
-| -------- | ------------------- | ---- | -------------------------- |
-| message  | [Message](#message) | 是   | 数据。                     |
+| 参数名   | 类型                  | 必填 | 说明                     |
+| -------- | --------------------- | ---- | ------------------------ |
+| message  | [Message](#message)   | 是   | 数据。                   |
 | callback | AsyncCallback\<void\> | 否   | callback方式的回调函数。 |
 
 **返回值：** 
@@ -234,9 +231,7 @@ bridgeObj.setMessageListener((data) => {
 
 ### callMethodWithCallback
 
-callMethodWithCallback(methodName: string, method: (parameters?: Record<string , Parameter>) => ResultValue, parameters?: Record<string, Parameter>): Promise<ResultValue>；
-
-callMethodWithCallback(methodName: string, method: (parameters?: Record<string , Parameter>) => ResultValue, parameters?: Array<any>): Promise<ResultValue>;
+callMethodWithCallback(methodName: string, method: (...parameters: Array\<Parameter\>) => ResultValue, ...parameters: Array\<Parameter\>): Promise\<ResultValue\>;
 
 注册callback, 供平台侧调用，调用平台侧函数。
 
@@ -244,12 +239,11 @@ callMethodWithCallback(methodName: string, method: (parameters?: Record<string ,
 
 **参数：** 
 
-| 参数名     | 类型                        | 必填 | 说明           |
-| ---------- | --------------------------- | ---- | -------------- |
-| methodName | string                      | 是   | 方法名称。     |
-| method     | function                    | 是   | JS侧方法       |
-| parameters | Record\<string, Parameter\> | 否   | 方法参数列表。 |
-| parameters | Array\<any\>                | 否   | 方法参数列表。 |
+| 参数名     | 类型                              | 必填 | 说明                 |
+| ---------- | --------------------------------- | ---- | -------------------- |
+| methodName | string                            | 是   | 平台侧方法名称。     |
+| method     | ...parameters: Array\<Parameter\> | 是   | JS侧参数列表。       |
+| parameters | Array\<Parameter\>                | 否   | 平台侧方法参数列表。 |
 
 **返回值：** 
 
@@ -260,15 +254,15 @@ callMethodWithCallback(methodName: string, method: (parameters?: Record<string ,
 **示例：**
 
 ```javaScript
-function jsMethod() {
-  return 'ts return：jsMethod';
+function testCallBackOfJs(stringParam) {
+  console.log("Js received a parameter of " + stringParam)
+  return "js testCallBackReturn call success."
 }
 
-const bridgeObj = bridge.createBridge('Bridge');
-bridgeObj.callMethodWithCallBack('jsMethod', jsMethod, PlatformParams).then((data)=>{
-    console.log('data = ' + data);
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
+    console.log('result: ' + res);
 }).catch((err) => {
-    console.error('error = ' + JSON.stringify(err));
+    console.error('error: ' + JSON.stringify(err));
 });
 ```
 
@@ -279,41 +273,86 @@ bridgeObj.callMethodWithCallBack('jsMethod', jsMethod, PlatformParams).then((dat
 | JSON_TYPE   | JSON格式序列化编解码   |
 | BINARY_TYPE | 二进制格式序列化编解码 |
 
-## S 
+## 数据类型
+
+### **MethodData**
+
+**说明：** js侧注册方法的数据类型。
+
+| 参数名 | 类型                              | 必填 | 说明           |
+| ------ | --------------------------------- | ---- | -------------- |
+| name   | string                            | 是   | JS侧方法名。   |
+| method | ...parameters: Array\<Parameter\> | 否   | JS侧参数列表。 |
+
+
+
+### S 
 
 type S = number | boolean | string | null | ArrayBuffer;
 
 **说明：** 定义桥接使用的基础数据类型。
 
-## T
+
+
+### T
 
 type T  = S | Array\<number\> | Array\<boolean\> | Array\<string\>
 
 **说明：** 定义桥接使用的基础数据类型的数组类型。
 
-## Message
+
+
+### Message
 
 type Message = T | Record\<string, T\>
 
 **说明：** 定义桥接使用结构数据类型。
 
-## Parameter
+**示例**：
+
+注：Record为ArkUI侧的自定义类型，Android侧需要用object类型对应。
+
+```javascript
+// ArkUI侧
+
+let params : Record<string, Number> = {"abc" : 123};
+this.bridgeImpl.callMethod("recordFun", params);
+```
+
+```java
+// android侧
+
+public String recordFun(Object params) {
+    Map<String, Integer> map = (Map)params;
+    ALog.i("BridgeTest recordFun params is ", map.toString());
+    return map.toString();
+}
+```
+
+
+
+### Parameter
 
 type Parameter = Message
 
 **说明：** 定义方法参数类型。
 
-## Response
+
+
+### Response
 
 type Response = Message
 
 **说明：** 定义应答的数据类型。
 
-## ResultValue
+
+
+### ResultValue
 
 type ResultValue = T | Map\<string, T\>
 
 **说明：** 定义方法返回值的类型。
+
 
 
 ## 完整示例

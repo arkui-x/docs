@@ -272,6 +272,190 @@ MethodData methodData = new MethodData("testCallBack", paramObject);
 bridge.callMethod(methodData);
 ```
 
+### 场景八：callMethod不同数据类型
+
+```javascript
+import bridge from '@arkui-x.bridge'
+
+@Entry
+@Component
+struct Index {
+  @State bridgeImpl: BridgeObject = bridge.createBridge("BridgeName");
+
+  private funTest(p1: String, p2: Number, p3: Boolean) {
+    console.info('Java->Ts bridge funTest p1 is ' + p1);
+    console.info('Java->Ts bridge funTest p2 is ' + p2);
+    console.info('Java->Ts bridge funTest p3 is ' + p3);
+  }
+
+  private funTestArray(p1: Array<string>, p2: Array<Number>, p3: Array<Boolean>) {
+      console.log('Java->Ts bridge funTestArray p1 is ' + p1.toString());
+      console.log('Java->Ts bridge funTestArray p2 is ' + p2.toString());
+      console.log('Java->Ts bridge funTestArray p3 is ' + p3.toString());
+  }
+
+  private funTestRecord(p1: Record<string, string>, p2: Record<string, Number>, p3: Record<string, Boolean>) {
+      console.log('Java->Ts bridge funTestRecord p1 is ' + p1.toString());
+      console.log('Java->Ts bridge funTestRecord p2 is ' + p2.toString());
+      console.log('Java->Ts bridge funTestRecord p3 is ' + p3.toString());
+  }
+
+  onPageShow() {
+    // Register JavaScript functions
+    this.bridgeImpl.registerMethod({name: "funTest", method: this.funTest});
+    this.bridgeImpl.registerMethod({name: "funTestArray", method: this.funTestArray});
+    this.bridgeImpl.registerMethod({name: "funTestRecord", method: this.funTestRecord});
+  }
+
+  build() {
+    Row() {
+      Column() {
+          
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+```java
+// EntryEntryAbilityActivity.java
+package com.example.androidTestDemo;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import ohos.ace.adapter.capability.bridge.BridgePlugin;
+import ohos.ace.adapter.capability.bridge.MethodData;
+import ohos.stage.ability.adapter.StageActivity;
+
+public class EntryEntryAbilityActivity extends StageActivity {
+    private BridgeImpl bridgeImpl = null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        bridgeImpl = new BridgeImpl(this, "BridgeName", getBridgeManager());
+        setInstanceName("com.example.basebridge:entry:EntryAbility:");
+        super.onCreate(savedInstanceState);
+        // 显示应用程序界面布局(在项目的 res/layout 目录下，添加main_activity.xml文件)
+        setContentView(R.layout.main_activity);
+        // 注册按钮
+        testCallMethod1();
+        testCallMethod2();
+        testCallMethod3();
+    }
+    
+    public void testCallMethod1() {
+        // 使用button按钮点击，发送信息。
+        Button button = (Button) findViewById(R.id.TestCallMethod1);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 定义对象数组，存放JS侧方法形参对应的实参
+                Object[] paramObject = { "param1", 1, true};
+                // 构造JS侧方法描述对象实例
+                MethodData methodData = new MethodData("funTest", paramObject);
+                // 调用Js侧的方法（jsMethodName）
+                bridgeImpl.callMethod(methodData);
+            }
+        });
+    }
+    public void testCallMethod2() {
+        // 使用button按钮点击，发送信息。
+        Button button = (Button) findViewById(R.id.TestCallMethod2);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 定义对象数组，存放JS侧方法形参对应的实参
+                String[] sArray = {"hello", "world"};
+                int[] iArray = {123, 456};
+                boolean[] bArray = {true, false};
+                Object[] paramObject = {sArray, iArray, bArray};
+                // 构造JS侧方法描述对象实例
+                MethodData methodData = new MethodData("funTestArray", paramObject);
+                // 调用Js侧的方法（jsMethodName）
+                bridgeImpl.callMethod(methodData);
+            }
+        });
+    }
+    public void testCallMethod3() {
+        // 使用button按钮点击，发送信息。
+        Button button = (Button) findViewById(R.id.TestCallMethod3);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 定义对象数组，存放JS侧方法形参对应的实参
+                Map<String, String> map1 = new HashMap<>();
+                map1.put("one", "hello");
+                map1.put("two", "world");
+                Map<String, Integer> map2 = new HashMap<>();
+                map2.put("one", 1);
+                map2.put("two", 2);
+                Map<String, Boolean> map3 = new HashMap<>();
+                map3.put("one", true);
+                map3.put("two", false);
+
+                Object[] paramObject = {map1, map2, map3};
+                // 构造JS侧方法描述对象实例
+                MethodData methodData = new MethodData("funTestRecord", paramObject);
+                // 调用Js侧的方法（jsMethodName）
+                bridgeImpl.callMethod(methodData);
+            }
+        });
+    }
+}
+
+```
+
+```xml
+// main_activity.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:rotation="360"
+    android:rotationX="360"
+    android:rotationY="360"
+    android:visibility="visible"
+    tools:context=".EntryEntryAbilityActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="410dp"
+        android:layout_height="650dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+        <Button
+            android:id="@+id/TestCallMethod1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="funTest1" />
+        <Button
+            android:id="@+id/TestCallMethod2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="funTest1" />
+        <Button
+            android:id="@+id/TestCallMethod3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="funTest1" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
 ### 
 
 ## 场景示例
