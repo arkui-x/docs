@@ -5,10 +5,12 @@
 - UI界面
   - [@ohos.animator (动画)](js-apis-animator.md)
   - [@ohos.arkui.componentSnapshot (组件截图)](js-apis-arkui-componentSnapshot.md)
+  - [@ohos.arkui.componentUtils (componentUtils)](js-apis-arkui-componentUtils.md)
   - [@ohos.arkui.inspector (布局回调)](js-apis-arkui-inspector.md)
   - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
   - [@ohos.curves (插值计算)](js-apis-curve.md)
   - [@ohos.matrix4 (矩阵变换)](js-apis-matrix4.md)
+  - [@ohos.measure (文本计算)](js-apis-measure.md)
   - [@ohos.mediaquery (媒体查询)](js-apis-mediaquery.md)
   - [@ohos.promptAction (弹窗)](js-apis-promptAction.md)
   - [@ohos.router (页面路由)](js-apis-router.md)
