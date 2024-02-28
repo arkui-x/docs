@@ -208,6 +208,8 @@ public class EntryEntryAbilityActivity extends StageActivity {
 public BridgePlugin(Context context, String bridgeName, BridgeManager bridgeManager);
 
 public BridgePlugin(Context context, String bridgeName, BridgeManager bridgeManager, BridgeType bridgeType);
+
+public BridgePlugin(Context context, String bridgeName, BridgeManager bridgeManager, BridgeType bridgeType, TaskOption taskOption);
 ```
 
 **描述：**
@@ -222,6 +224,7 @@ public BridgePlugin(Context context, String bridgeName, BridgeManager bridgeMana
 | bridgeName    | String                            | 是   | 平台桥接名称 (必须与ArkUI侧一致)。                           |
 | bridgeManager | [BridgeManager](#bridgemanager类) | 是   | BridgePlugin对象管理器，可通过StageActivity的getBridgeManager() 方法获取。 |
 | bridgeType    | BridgeType                        | 否   | 数据编解码格式，默认为JSON_TYPE。                            |
+| taskOption    | TaskOption                        | 是   | BridgePlugin线程并发模式，默认为连续并发模式。               |
 
 **示例：** 
 
@@ -237,6 +240,11 @@ public class BridgeImpl extends BridgePlugin {
     // 使用BridgeManager对象且指定数据编解码格式构建BridgePlugin对象
     public BridgeImpl(Context context, String name, BridgeManager bridgeManager, BridgeType bridgeType) {
         super(context, name, bridgeManager);
+    }
+    
+    // 使用BridgeManager对象且指定线程并发模式构建BridgePlugin对象
+    public BridgeImpl(Context context, String name, BridgeManager bridgeManager, BridgeType codecType, TaskOption 			taskOption) {
+        super(context, name, bridgeManager, codecType, taskOption);
     }
 }
   ```
@@ -255,6 +263,11 @@ public class EntryEntryAbilityActivity extends StageActivity {
         // 以二进制数据编解码格式, 使用bridgeManager对象实例构建BridgeImpl实例
         bridgeImplByManagerAndType = new BridgeImpl(this, "BridgeImplByManagerAndType", getBridgeManager(), 					BridgePlugin.BridgeType.BINARY_TYPE);
         
+        // 以线程连续并发模式, 使用bridgeManager对象实例构建BridgeImpl实例
+        bridgeImplByManagerAndTask = new BridgeImpl(this, "BridgeImplByManagerAndTask", getBridgeManager(), 					BridgePlugin.BridgeType.BINARY_TYPE, new TaskOption());
+        
+        // bundleName需根据实际情况调整。
+        setInstanceName("bundleName:entry:EntryAbility:");
         super.onCreate(savedInstanceState);
     }
 }
@@ -612,6 +625,30 @@ public MethodData(String methodName, Object[] parameter);
 | ---------- | -------- | ---- | ------------------------- |
 | methodName | String   | 是   | 调用ArkUI侧方法名。       |
 | parameter  | Object[] | 是   | 调用ArkUI侧方法参数列表。 |
+
+
+
+## **TaskOption类<sup>11+</sup>**
+
+指定平台桥接线程并发模式类，供平台侧bridgeplugin构造函数使用
+
+### 构造函数
+
+```java
+public TaskOption();
+
+public TaskOption(boolean isSerial);
+```
+
+**描述：** 
+
+指定平台桥接线程并发模式(默认为线程连续并发模式)，使用true构造指定线程连续并发模式，使用false构造指定线程无序并发模式。
+
+**参数：**
+
+| Name     | 类型    | 必填 | 描述                   |
+| -------- | ------- | ---- | ---------------------- |
+| isSerial | boolean | 否   | 控制线程连续并发模式。 |
 
 
 
