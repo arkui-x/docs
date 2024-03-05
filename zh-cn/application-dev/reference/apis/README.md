@@ -112,3 +112,6 @@
   - [@ohos.commonEventManager (公共事件模块)](js-apis-commonEventManager.md)
   - application
     - [EventHub](js-apis-inner-application-eventHub.md)
+
+- 进程线程通信
+  - [@ohos.events.emitter (Emitter)](js-apis-emitter.md)
