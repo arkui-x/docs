@@ -40,6 +40,7 @@
 - [Library库开发指南](./tutorial/how-to-use-library-on-android.md)
 - [动态化开发指南](./tutorial/how-to-use-dynamic-on-android.md)
 - [Plugin生命周期开发指南](./tutorial/how-to-use-arkui-x-plugin-on-android.md)
+- [联动编译开发指南](./tutorial/how-to-linkage-compilation-on-android.md)
 
 #### iOS平台开发
 
@@ -50,6 +51,7 @@
 - [Library库开发指南](./tutorial/how-to-use-library-on-ios.md)
 - [动态化开发指南](./tutorial/how-to-use-dynamic-on-ios.md)
 - [Plugin生命周期开发指南](./tutorial/how-to-use-arkui-x-plugin-on-ios.md)
+- [联动编译开发指南](./tutorial/how-to-linkage-compilation-on-ios.md)
 
 ### 开发工具
 
