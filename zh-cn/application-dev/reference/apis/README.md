@@ -64,6 +64,9 @@
   - [@ohos.net.http (数据请求)](js-apis-http.md)
   - [@ohos.net.connection (网络连接管理)](js-apis-net-connection.md)
 
+- WiFi管理
+  - [@ohos.wifiManager (WLAN)](js-apis-wlan.md)
+
 - 文件管理
   - [@ohos.file.fs (文件管理)](js-apis-file-fs.md)
 
