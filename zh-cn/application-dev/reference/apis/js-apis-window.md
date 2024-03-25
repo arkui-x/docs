@@ -57,6 +57,20 @@ import window from '@ohos.window';
 | width  | number   | 是   | 是   | 矩形区域的宽度，单位为px，该参数应为整数。 |
 | height | number   | 是   | 是   | 矩形区域的高度，单位为px，该参数应为整数。 |
 
+## AvoidArea<sup>7+</sup>
+
+窗口内容规避区域。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+| 名称       | 类型      | 可读 | 可写 | 说明               |
+| ---------- | ------------- | ---- | ---- | ------------------ |
+| visible<sup>9+</sup>    | boolean       | 是   | 是   | 规避区域是否可见。true表示可见；false表示不可见。 |
+| leftRect   | [Rect](#rect7) | 是   | 是   | 屏幕左侧的矩形区。 |
+| topRect    | [Rect](#rect7) | 是   | 是   | 屏幕顶部的矩形区。 |
+| rightRect  | [Rect](#rect7) | 是   | 是   | 屏幕右侧的矩形区。 |
+| bottomRect | [Rect](#rect7) | 是   | 是   | 屏幕底部的矩形区。 |
+
 ## Size<sup>7+</sup>
 
 窗口大小。
@@ -124,6 +138,20 @@ try {
     console.error('Failed to create the window. Cause: ' + JSON.stringify(exception));
 }
 ```
+
+## AvoidAreaType<sup>7+</sup>
+
+窗口内容需要规避区域的类型枚举。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+| 名称                             | 值   | 说明                                                         |
+| -------------------------------- | ---- | ------------------------------------------------------------ |
+| TYPE_SYSTEM                      | 0    | 表示系统默认区域。一般包括状态栏、导航栏，各设备系统定义可能不同。 |
+| TYPE_CUTOUT                      | 1    | 表示刘海屏区域。                                             |
+| TYPE_SYSTEM_GESTURE<sup>9+</sup> | 2    | 表示手势区域。                                               |
+| TYPE_KEYBOARD<sup>9+</sup>       | 3    | 表示软键盘区域。                                             |
+| TYPE_NAVIGATION_INDICATOR<sup>11+</sup> | 4    | 表示导航条区域。 
 
 ## window.createWindow<sup>9+</sup>
 
@@ -313,6 +341,18 @@ try {
   console.error('Failed to obtain the top window. Cause: ' + JSON.stringify(exception));
 }
 ```
+
+## SpecificSystemBar<sup>11+</sup>
+
+当前支持显示或隐藏的系统栏类型。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称                  | 类型       | 说明     |
+|---------------------|----------|--------|
+| status              | string   | 状态栏。   |
+| navigation          | string   | 导航栏。   |
+| navigationIndicator | string   | 底部导航条。 |
 
 ## Window
 
@@ -715,6 +755,140 @@ try {
 }
 ```
 
+### getWindowAvoidArea<sup>9+</sup>
+
+getWindowAvoidArea(type: AvoidAreaType): AvoidArea
+
+获取窗口内容规避的区域；如系统栏区域、刘海屏区域、手势区域、软键盘区域等与窗口内容重叠时，需要窗口内容避让的区域。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| ---- |----------------------------------| -- | ------------------------------------------------------------ |
+| type | [AvoidAreaType](#avoidareatype7) | 是 | 表示规避区类型。 |
+
+**返回值：**
+
+| 类型 | 说明 |
+|--------------------------| ----------------- |
+| [AvoidArea](#avoidarea7) | 窗口内容规避区域。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | ------------------------------ |
+| 1300002 | This window state is abnormal. |
+
+**示例：**
+
+```ts
+let type = window.AvoidAreaType.TYPE_SYSTEM;
+try {
+  let avoidArea = windowClass.getWindowAvoidArea(type);
+} catch (exception) {
+  console.error('Failed to obtain the area. Cause:' + JSON.stringify(exception));
+}
+```
+
+### setWindowLayoutFullScreen<sup>9+</sup>
+
+setWindowLayoutFullScreen(isLayoutFullScreen: boolean, callback: AsyncCallback&lt;void&gt;): void
+
+设置窗口的布局是否为沉浸式布局，使用callback异步回调。
+沉浸式布局是指布局不避让状态栏与导航栏，组件可能产生与其重叠的情况。
+非沉浸式布局是指布局避让状态栏与导航栏，组件不会与其重叠。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| ------------------ | ------------------------- | -- | --------- |
+| isLayoutFullScreen | boolean                   | 是 | 窗口的布局是否为沉浸式布局（该沉浸式布局状态栏、导航栏仍然显示）。true表示沉浸式布局；false表示非沉浸式布局。 |
+| callback           | AsyncCallback&lt;void&gt; | 是 | 回调函数。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 1300002 | This window state is abnormal.               |
+| 1300003 | This window manager service works abnormally. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@ohos.base';
+
+let isLayoutFullScreen = true;
+try {
+  windowClass.setWindowLayoutFullScreen(isLayoutFullScreen, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
+      return;
+    }
+    console.info('Succeeded in setting the window layout to full-screen mode.');
+  });
+} catch (exception) {
+  console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(exception));
+}
+```
+
+### setWindowLayoutFullScreen<sup>9+</sup>
+
+setWindowLayoutFullScreen(isLayoutFullScreen: boolean): Promise&lt;void&gt;
+
+设置窗口的布局是否为沉浸式布局，使用Promise异步回调。
+沉浸式布局是指布局不避让状态栏与导航栏，组件可能产生与其重叠的情况。
+非沉浸式布局是指布局避让状态栏与导航栏，组件不会与其重叠。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| ------------------ | ------- | -- | ------------------------------------------------------------------------------------------------ |
+| isLayoutFullScreen | boolean | 是 | 窗口的布局是否为沉浸式布局（该沉浸式布局状态栏、导航栏仍然显示）。true表示沉浸式布局；false表示非沉浸式布局。 |
+
+**返回值：**
+
+| 类型 | 说明 |
+| ------------------- | ------------------------ |
+| Promise&lt;void&gt; | 无返回结果的Promise对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 1300002 | This window state is abnormal.               |
+| 1300003 | This window manager service works abnormally. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@ohos.base';
+
+let isLayoutFullScreen = true;
+try {
+  let promise = windowClass.setWindowLayoutFullScreen(isLayoutFullScreen);
+  promise.then(() => {
+    console.info('Succeeded in setting the window layout to full-screen mode.');
+  }).catch((err: BusinessError) => {
+    console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
+  });
+} catch (exception) {
+  console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(exception));
+}
+```
+
 ### setWindowSystemBarEnable<sup>9+</sup>
 
 setWindowSystemBarEnable(names: Array<'status' | 'navigation'>, callback: AsyncCallback&lt;void&gt;): void
@@ -800,6 +974,54 @@ let names: Array<'status' | 'navigation'> = [];
 try {
   let windowClass: window.Window = window.findWindow("test");
   let promise = windowClass.setWindowSystemBarEnable(names);
+  promise.then(() => {
+    console.info('Succeeded in setting the system bar to be invisible.');
+  }).catch((err: BusinessError) => {
+    console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(err));
+  });
+} catch (exception) {
+  console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(exception));
+}
+```
+
+### setSpecificSystemBarEnabled<sup>11+</sup>
+
+setSpecificSystemBarEnabled(name: SpecificSystemBar, enable: boolean): Promise&lt;void&gt;
+
+设置窗口全屏模式时导航栏、状态栏、底部导航条的显示和隐藏，使用Promise异步回调。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**参数：**
+
+| 参数名 | 类型  | 必填 | 说明 |
+| ----- | ---------------------------- | -- | --------------------------------- |
+| name  | [SpecificSystemBar](#specificsystembar11) | 是 | 设置窗口全屏模式时，显示或隐藏的系统栏类型。 |
+| enable  | boolean | 是 | 设置窗口全屏模式时状态栏、导航栏或底部导航条是否显示，true表示显示 false表示隐藏。|
+
+**返回值：**
+
+| 类型 | 说明 |
+| ------------------- | ------------------------ |
+| Promise&lt;void&gt; | 无返回结果的Promise对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 1300002 | This window state is abnormal.               |
+| 1300003 | This window manager service works abnormally. |
+
+**示例：**
+
+```ts
+// 此处以隐藏底部导航条为例
+import { BusinessError } from '@ohos.base';
+
+try {
+  let promise = windowClass.setSpecificSystemBarEnabled('navigationIndicator', false);
   promise.then(() => {
     console.info('Succeeded in setting the system bar to be invisible.');
   }).catch((err: BusinessError) => {
