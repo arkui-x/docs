@@ -75,8 +75,48 @@
     ```
 
 
+### 应用混淆配置说明
+
+在打包混淆的时候需要注意 **Arkui-X跨平台SDK** 相关的内容不应该被混淆，所以我们需要配置混淆文件。
+
+* 打开app目录下的build.gradle文件，在release代码块中添加如下内容（若已经由Android Studio自动生成，则不用手动配置）
+
+```
+proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+```
+
+> 若您的代码包含debug版本并且也需要混淆的话，请在debug代码块中也添加上述代码。
+
+```
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        profile {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+```
+
+* 编写混淆文件，打开app目录下的proguard-rules.pro文件，添加如下代码。
+
+```
+-keep class ohos.stage.ability.adapter.**{*;}
+-keep class ohos.ace.adapter.**{*;}
+-keep class ohos.ace.plugin.**{*;}
+```
 
 完成上述步骤后即可按照Android应用构建流程，构建ArkUI Android应用，并且可以安装至Android手机后运行。
+
 ### 参考
 
 【1】[ArkUI-X Samples仓](https://gitee.com/arkui-x/samples)
