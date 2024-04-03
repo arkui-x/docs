@@ -85,7 +85,7 @@
 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 ```
 
-> 若您的代码包含debug版本并且也需要混淆的话，请在debug代码块中也添加上述代码。
+> 若您的代码包含debug版本并且也需要混淆的话，请在debug代码块中也添加上述代码。（minifyEnabled  默认关闭，若需混淆，需开启）
 
 ```
     buildTypes {
