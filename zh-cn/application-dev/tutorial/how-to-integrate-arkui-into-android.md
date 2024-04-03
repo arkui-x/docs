@@ -11,7 +11,7 @@
 ### Android 工程创建
 通过ACE Tools或DevEco Studio创建一个ArkUI-X应用工程（示例工程名为HelloWorld），其工程目录下的.arkui-x/android文件代表对应的Android工程。Android应用的入口Application和Activity类，这两个类需要继承自ArkUI提供的基类，Activity继承StageActivity类，Application则会继承StageApplication类，Application也可以通过代理类StageApplicationDelegate使用，详情参见[使用说明](https://gitee.com/arkui-x/docs/tree/master/zh-cn/application-dev/reference/arkui-for-android):
 * Activity类
-  该类名通过通过module名和ability名拼接而得，一个ability对应一个Android工程侧的Activity类。详情参见[Ability使用说明](../quick-start/start-with-ability-on-android.md):
+  该类名通过module名和ability名拼接而得，一个ability对应一个Android工程侧的Activity类。详情参见[Ability使用说明](../quick-start/start-with-ability-on-android.md):
   
     ```java
     package com.example.helloworld;
@@ -75,8 +75,41 @@
     ```
 
 
+### 应用混淆配置说明
 
-完成上述步骤后即可按照Android应用构建流程，构建ArkUI Android应用，并且可以安装至Android手机后运行。
+在打包混淆的时候需要注意 **Arkui-X跨平台SDK** 相关的内容不应该被混淆，所以我们需要配置混淆文件。
+
+* 打开app目录下的build.gradle文件，在release代码块中添加如下内容（若已经由Android Studio自动生成，则不用手动配置）
+
+```
+proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+```
+
+> 若您的代码包含debug版本并且也需要混淆的话，请在debug代码块中也添加上述代码。（minifyEnabled  默认关闭，若需混淆，需开启）
+
+```
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+```
+
+* 编写混淆文件，打开app目录下的proguard-rules.pro文件，添加如下代码。
+
+```
+-keep class ohos.stage.ability.adapter.**{*;}
+-keep class ohos.ace.adapter.**{*;}
+-keep class ohos.ace.plugin.**{*;}
+```
+
+完成上述步骤后，即可使用`Android studio`运行程序安装至Android手机上。
+
 ### 参考
 
 【1】[ArkUI-X Samples仓](https://gitee.com/arkui-x/samples)
