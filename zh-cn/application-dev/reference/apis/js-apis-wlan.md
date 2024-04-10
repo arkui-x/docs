@@ -20,6 +20,8 @@ isWifiActive(): boolean
 
 查询WLAN是否已使能。
 
+iOS不支持
+
 **系统能力**：SystemCapability.Communication.WiFi.STA
 
 **返回值：**
@@ -28,10 +30,22 @@ isWifiActive(): boolean
 | :---------- | :----------------------------------------------------------- |
 | boolean | true:已使能， false:未使能。 |
 
+**示例：**
+
+```ts
+    import wifiManager from '@ohos.wifiManager';
+
+	try {
+		let isWifiActive = wifiManager.isWifiActive();
+		console.info("isWifiActive:" + isWifiActive);
+	}catch(error){
+		console.error("failed:" + JSON.stringify(error));
+	}
+```
 
 ## wifiManager.getLinkedInfo<sup>11+</sup>
 
-getLinkedInfo(): Promise<WifiLinkedInfo>
+getLinkedInfo(): Promise\<WifiLinkedInfo\>
 
 获取WLAN连接信息，使用Promise异步回调。
 
@@ -39,7 +53,7 @@ getLinkedInfo(): Promise<WifiLinkedInfo>
 
 **系统能力**：SystemCapability.Communication.WiFi.STA
 
-**参数：**
+**返回值：**
 
 | 类型             | 说明                              |
 | :------------------------------------------ | :--------------------------------- |
@@ -48,7 +62,7 @@ getLinkedInfo(): Promise<WifiLinkedInfo>
 
 ## wifiManager.getLinkedInfo<sup>11+</sup>
 
-getLinkedInfo(callback: AsyncCallback<WifiLinkedInfo>): void
+getLinkedInfo(callback: AsyncCallback\<WifiLinkedInfo\>): void
 
 获取WLAN连接信息，使用callback异步回调。
 
@@ -89,22 +103,22 @@ wifiManager.getLinkedInfo().then(data => {
 
 **系统能力**：SystemCapability.Communication.WiFi.STA
 
-**参数：**
 
-| 名称       | 类型             | 可读        | 可写        | 说明                              |
-| :---------- | :---------------- | :---------- | :---------- | :--------------------------------- |
-| ssid | string|    是    |    否    | 热点的SSID，编码格式为UTF-8。 |
-| bssid | string|    是    |    否    | 热点的BSSID。 |
-| rssi| number|    是    |    否    | 热点的信号强度(dBm)。 |
-| band | number|    是    |    否    | WLAN接入点的频段。 |
-| linkSpeed | number|    是    |    否    | WLAN接入点的速度。 |
-| frequency | number|    是    |    否    | WLAN接入点的频率。 |
-| isHidden | boolean|    是    |    否    | WLAN接入点是否是隐藏网络。 |
-| isRestricted | boolean|    是    |    否    | WLAN接入点是否限制数据量。 |
-| macType | number|    是    |    否    | MAC地址类型。 |
-| macAddress | string|    是    |    否    | 设备的MAC地址。 |
-| ipAddress | number|    是    |    否    | WLAN连接的IP地址。 |
-| connState | `ConnState`|    是    |    否    | WLAN连接状态。 |
+| 名称       | 类型             | 可读        | 可写        | Android       | iOS      | 说明                              |
+| :---------- | :---------------- | :---------- | :---------- | :----------| :----------| :--------------------------------- |
+| ssid | string|    是    |    否    |    是    |    是    | 热点的SSID，编码格式为UTF-8。 |
+| bssid | string|    是    |    否    |    是    |    是    | 热点的BSSID。 |
+| networkId | number|    是    |    否    |    是    |    否    | 网络配置ID。系统接口： 此接口为系统接口。 仅Android支持|
+| rssi| number|    是    |    否    |    是    |    否    | 热点的信号强度(dBm)。 iOS不支持|
+| band | number|    是    |    否    |    否    |    否    | WLAN接入点的频段。 不支持跨平台|
+| linkSpeed | number|    是    |    否    |    是    |    否    | WLAN接入点的速度。 iOS不支持|
+| frequency | number|    是    |    否    |    是    |    否    | WLAN接入点的频率。 iOS不支持|
+| isHidden | boolean|    是    |    否    |    是    |    否    | WLAN接入点是否是隐藏网络。iOS不支持|
+| isRestricted | boolean|    是    |    否    |    否    |    否    | WLAN接入点是否限制数据量。 不支持跨平台|
+| macType | number|    是    |    否    |    否    |    否    | MAC地址类型。 不支持跨平台|
+| macAddress | string|    是    |    否    |    否    |    否    | 设备的MAC地址。 不支持跨平台|
+| ipAddress | number|    是    |    否    |    否    |    否    | WLAN连接的IP地址。 不支持跨平台|
+| connState | `ConnState`|    是    |    否    |    否    |    否    | WLAN连接状态。 不支持跨平台|
 
 
 ## ConnState<sup>11+</sup>
@@ -113,7 +127,6 @@ wifiManager.getLinkedInfo().then(data => {
 
 **系统能力**：SystemCapability.Communication.WiFi.STA
 
-**参数：**
 
 | 名称       | 值             | 说明                              |
 | :---------- | :---------------- | :--------------------------------- |
@@ -143,12 +156,27 @@ isConnected(): boolean
 | :------------------------------------------ | :--------------------------------- |
 | boolean| true:已连接， false:未连接。 | 
 
+**示例：**
+
+```ts
+	import wifiManager from '@ohos.wifiManager';
+
+	try {
+		let ret = wifiManager.isConnected();
+		console.info("isConnected:" + ret);
+	}catch(error){
+		console.error("failed:" + JSON.stringify(error));
+	}
+```
+
 
 ## wifiManager.on('wifiStateChange')<sup>11+</sup>
 
 on(type: "wifiStateChange", callback: Callback<number>): void
 
 注册WLAN状态改变事件。
+
+iOS不支持
 
 **需要权限**：ohos.permission.GET_WIFI_INFO
 
@@ -167,8 +195,8 @@ on(type: "wifiStateChange", callback: Callback<number>): void
 | :---------- | :--------------------------------- |
 | 0 | 未激活。 |
 | 1 | 已激活。 |
-| 2 | 激活中。 |
-| 3 | 去激活中。 |
+| 2 | 激活中。iOS不支持 |
+| 3 | 去激活中。iOS不支持 |
 
 
 ## wifiManager.off('wifiStateChange')<sup>11+</sup>
@@ -176,6 +204,8 @@ on(type: "wifiStateChange", callback: Callback<number>): void
 off(type: "wifiStateChange", callback?: Callback<number>): void
 
 取消注册WLAN状态改变事件。
+
+iOS不支持
 
 **需要权限**：ohos.permission.GET_WIFI_INFO
 
@@ -246,3 +276,19 @@ off(type: "wifiConnectionChange", callback?: Callback<number>): void
 | :---------- | :------------------------------------------ | :---------- | :--------------------------------- |
 | type | string |    是    | 固定填"wifiConnectionChange"字符串。 |
 | callback | Callback<`number`> |    否    | 状态改变回调函数。如果callback不填，将去注册该事件关联的所有回调函数。 |
+
+**示例：**
+
+```ts
+  import wifiManager from '@ohos.wifiManager';
+  
+  let recvWifiConnectionChangeFunc = (result:number) => {
+      console.info("Receive wifi connection change event: " + result);
+  }
+  
+  // Register event
+  wifiManager.on("wifiConnectionChange", recvWifiConnectionChangeFunc);
+  
+  // Unregister event
+  wifiManager.off("wifiConnectionChange", recvWifiConnectionChangeFunc);
+```
