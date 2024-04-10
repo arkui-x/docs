@@ -13,14 +13,13 @@ Directory structure of the ArkUI-X application project
   ├── .arkui-x
   │   ├── android                 // Android-related code
   │   └── ios                     // iOS-related code
-  ├── .hvigor
-  ├── .idea
   ├── AppScope
   ├── entry
   ├── hvigor
-  ├── oh_modules
   ├── build-profile.json5
   ├── hvigorfile.ts
+  ├── hvigorw
+  ├── hvigorw.bat
   ├── local.properties
   └── oh-package.json5
 ```
@@ -31,15 +30,15 @@ As can be seen from the preceding structure, the ArkUI-X application directory h
 
 * ArkTS source code
 
-  Use the OpenHarmony SDK toolchain to generate Ark Byte Code (abc) from the ArkTS source code. Then, copy the code to the Android and iOS application projects and manage it as platform application resources.
+Use the OpenHarmony SDK toolchain to generate Ark Byte Code (abc) from the ArkTS source code. Then, copy the code to the Android and iOS application projects and manage it as platform application resources.
 
 * ArkUI application resources
 
-  Use the OpenHarmony SDK toolchain to compile ArkUI resources. Then, copy the compiled ArkUI resources to the Android and iOS application projects and manage them as platform application resources.
+Use the OpenHarmony SDK toolchain to compile ArkUI resources. Then, copy the compiled ArkUI resources to the Android and iOS application projects and manage them as platform application resources.
 
 * ArkUI Framework Resources
 
-  The ArkUI framework resources are released with the ArkUI-X SDK. During application building, the resources are automatically packaged into the ArkUI-X application, which ensures the UX rendering consistency of the ArkUI-X application across platforms.
+The ArkUI framework resources are released with the ArkUI-X SDK. During application building, the resources are automatically packaged into the ArkUI-X application, which ensures the UX rendering consistency of the ArkUI-X application across platforms.
 
 To sum up, ArkTS compilation products, ArkUI application resources, and ArkUI framework resources are managed in **assets** on the Android platform and in **Bundle Resources** on the iOS platform.
 
@@ -52,6 +51,8 @@ ArkUI-X Android application project
 │   │   ├── arkui_android_adapter.jar                   // ArkUI-X cross-platform adaptation layer, which is released in the SDK
 │   │   └── arm64-v8a
 │   │       └── libarkui_android.so                     // ArkUI-X cross-platform engine library, which is released in the SDK
+│   │       └── libhilog.so                             // ArkUI-X log library, which is released in the SDK
+│   │       └── libresourcemanager.so                   // ArkUI-X resource management library, which is released in the SDK
 │   ├── src
 │   │   ├── androidTest
 │   │   ├── main
@@ -88,12 +89,14 @@ ArkUI-X Android application project
 ArkUI-X iOS application project
 ├── app.xcodeproj
 │   ├── project.xcworkspace
+│   ├── xcuserdata
 │   └── project.pbxproj
 ├── app
 │   ├── Assets.xcassets
 │   ├── Base.Iproj
 │   ├── AppDelegate.h
 │   ├── AppDelegate.m                               // Application entry that drives the lifecycle of the StageApplication
+│   ├── EntryEntryAbilityViewController.h           
 │   ├── EntryEntryAbilityViewController.m           // EntryEntryViewController extended based on the StageViewController
 │   ├── Info.plist
 │   └── main.m
