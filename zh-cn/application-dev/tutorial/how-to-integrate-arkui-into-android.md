@@ -106,6 +106,7 @@ proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pr
 -keep class ohos.stage.ability.adapter.**{*;}
 -keep class ohos.ace.adapter.**{*;}
 -keep class ohos.ace.plugin.**{*;}
+-keep class ohos.ace.adapter.capability.bridge.BridgePlugin {public void* (...) ;}
 ```
 
 完成上述步骤后，即可使用`Android studio`运行程序安装至Android手机上。
