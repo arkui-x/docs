@@ -41,6 +41,7 @@
 - [动态化开发指南](./tutorial/how-to-use-dynamic-on-android.md)
 - [Plugin生命周期开发指南](./tutorial/how-to-use-arkui-x-plugin-on-android.md)
 - [联动编译开发指南](./tutorial/how-to-linkage-compilation-on-android.md)
+- [Fragment跨平台开发指南](./tutorial/how-to-use-fragment-on-android.md)
 
 #### iOS平台开发
 
