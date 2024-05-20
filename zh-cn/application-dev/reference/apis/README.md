@@ -14,6 +14,7 @@
   - [@ohos.mediaquery (媒体查询)](js-apis-mediaquery.md)
   - [@ohos.promptAction (弹窗)](js-apis-promptAction.md)
   - [@ohos.router (页面路由)](js-apis-router.md)
+  - [@ohos.arkui.drawableDescriptor (DrawableDescriptor)](js-apis-arkui-drawableDescriptor.md)
   
 - Ability框架
   - Stage模型能力的接口(推荐)
