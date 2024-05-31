@@ -113,7 +113,7 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
    
 - 从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
    ```shell
-   repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-1.1.6-Release --no-repo-verify
+   repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.1.6-Release --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
