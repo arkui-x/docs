@@ -88,14 +88,14 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
 
 - 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
    ```shell
-   repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-1.1.0-Release --no-repo-verify
+   repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-1.1.6-Release --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
    
 - 从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
    ```shell
-   repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.1.0-Release --no-repo-verify
+   repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.1.6-Release --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
@@ -124,10 +124,10 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
 
 | SDK版本                                  | **版本信息** | **下载站点** | **SHA256校验码** |
 | -----------------------------------------| ------------ | ------------ | ---------------- |
-| ArkUI-X SDK包（macOS）  | 1.1.6 Release | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.0.0.0/darwin/arkui-x-darwin-x64-1.0.0.0-Release.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.0.0.0/darwin/arkui-x-darwin-x64-1.0.0.0-Release.zip.sha256) |
-| ArkUI-X SDK包（macOS-M1）    | 1.1.6 Release | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.0.0.0/darwin/arkui-x-darwin-arm64-1.0.0.0-Release.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.0.0.0/darwin/arkui-x-darwin-arm64-1.0.0.0-Release.zip.sha256) |
-| ArkUI-X SDK包（Windows）    | 1.1.6 Release | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.0.0.0/windows/arkui-x-windows-x64-1.0.0.0-Release.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.0.0.0/windows/arkui-x-windows-x64-1.0.0.0-Release.zip.sha256) |
-| ArkUI-X SDK包（Linux）    | 1.1.6 Release | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.0.0.0/linux/arkui-x-linux-x64-1.0.0.0-Release.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.0.0.0/linux/arkui-x-linux-x64-1.0.0.0-Release.zip.sha256) |
+| ArkUI-X SDK包（macOS）  | 1.1.6 Release | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.1.6.12/darwin/arkui-x-darwin-x64-1.1.6.12-Release.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.1.6.12/darwin/arkui-x-darwin-x64-1.1.6.12-Release.zip.sha256) |
+| ArkUI-X SDK包（macOS-M1）    | 1.1.6 Release | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.1.6.12/darwin/arkui-x-darwin-arm64-1.1.6.12-Release.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.1.6.12/darwin/arkui-x-darwin-arm64-1.1.6.12-Release.zip.sha256) |
+| ArkUI-X SDK包（Windows）    | 1.1.6 Release | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.1.6.12/windows/arkui-x-windows-x64-1.1.6.12-Release.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.1.6.12/windows/arkui-x-windows-x64-1.1.6.12-Release.zip.sha256) |
+| ArkUI-X SDK包（Linux）    | 1.1.6 Release | [站点](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.1.6.12/linux/arkui-x-linux-x64-1.1.6.12-Release.zip)     | [SHA256校验码](https://repo.huaweicloud.com/arkui-crossplatform/sdk/1.1.6.12/linux/arkui-x-linux-x64-1.1.6.12-Release.zip.sha256) |
 
 ## Samples
 
