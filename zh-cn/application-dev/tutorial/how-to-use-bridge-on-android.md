@@ -16,6 +16,8 @@ import bridge from '@arkui-x.bridge';
 
 // 创建平台桥接实例
 const bridgeImpl = bridge.createBridge('Bridge');
+// 创建平台桥接实例(二进制格式)
+const bridgeImpl = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
 ```
 
 2、在Android侧创建BridgePlugin类。指定名称，该名称应与ArkUI侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
@@ -23,7 +25,13 @@ const bridgeImpl = bridge.createBridge('Bridge');
 ```java
 // xxx.java
 
+// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
 Bridge bridge = new Bridge(this, "Bridge", getInstanceId());
+Bridge bridge = new Bridge(this, "Bridge", getInstanceId(),  BridgePlugin.BridgeType.BINARY_TYPE);
+
+// 创建平台桥接实例(新)
+Bridge bridge = new Bridge(this, "Bridge", getBridgeManager());
+Bridge bridge = new Bridge(this, "Bridge", getBridgeManager(), BridgePlugin.BridgeType.BINARY_TYPE);
 ```
 
 ### 场景一：ArkUI侧向Android侧传递数据
@@ -46,8 +54,15 @@ bridgeImpl.sendMessage('text').then((res)=>{
 ```java
 // xxx.java
 
+// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
 public Bridge(Context context, String name, int id) {
     super(context, name, id);
+    setMessageListener(this);
+}
+
+// 创建平台桥接实例(新)
+public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    super(context, name, bridgeManager);
     setMessageListener(this);
 }
 
@@ -87,8 +102,15 @@ bridgeImpl.setMessageListener((message) => {
 ```java
 // xxx.java
 
+// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
 public Bridge(Context context, String name, int id) {
     super(context, name, id);
+    setMessageListener(this);
+}
+
+// 创建平台桥接实例(新)
+public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    super(context, name, bridgeManager);
     setMessageListener(this);
 }
 
@@ -116,7 +138,7 @@ bridgeImpl.callMethod('platformCallMethod').then((res)=>{
 ```java
 // xxx.java
 
-public platformCallMethod() {
+public String platformCallMethod() {
   return "call java platformCallMethod success";
 }
 ```
@@ -169,6 +191,10 @@ bridgeImpl.unRegisterMethod('getString');
 
 public Bridge(Context context, String name, int id) {
     super(context, name, id);
+}
+
+public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    super(context, name, bridgeManager);
     setMethodResultListener(this);
 }
 
@@ -181,6 +207,256 @@ public void onError(String s, int i, String s1) {}
 @Override
 public void onMethodCancel(String s) {}
 ```
+
+### 场景六：ArkUI侧注册callBack且调用Android侧的方法（无参）
+
+1、在ArkUI侧注册callBack且调用Android侧的方法。
+
+```javascript
+// xxx.ets
+function testCallBackOfJs() {
+  console.log("bridge js testCallBackOfJs run")
+}
+
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs).then((res)=>{
+    console.log('result: ' + res);
+}).catch((err) => {
+    console.error('error: ' + JSON.stringify(err));
+});
+```
+
+2、在Android侧实现被调用的方法，调用ArkUI侧的方法。
+
+```java
+// xxx.java
+
+public String testCallBack() {
+  return "call android testCallBack success";
+}
+
+Object[] paramObject = {};
+MethodData methodData = new MethodData("testCallBack", paramObject);
+bridge.callMethod(methodData);
+```
+
+### 场景七：ArkUI侧注册callBack且调用Android侧的方法（有参）
+
+1、在ArkUI侧注册callBack且调用Android侧的方法。
+
+```javascript
+// xxx.ets
+function testCallBackOfJs(stringParam) {
+  console.log("Js received a parameter of " + stringParam)
+  return "js testCallBackReturn call success."
+}
+
+this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
+    console.log('result: ' + res);
+}).catch((err) => {
+    console.error('error: ' + JSON.stringify(err));
+});
+```
+
+2、在Android侧实现被调用的方法，调用ArkUI侧的方法。
+
+```java
+// xxx.java
+
+public String testCallBack(String sParam) {
+	ALog.i("Android received a parameter of ", sParam);
+    return "call android testCallBack success";
+}
+
+Object[] paramObject = {"android sends parameter"};
+MethodData methodData = new MethodData("testCallBack", paramObject);
+bridge.callMethod(methodData);
+```
+
+### 场景八：callMethod不同数据类型
+
+```javascript
+import bridge from '@arkui-x.bridge'
+
+@Entry
+@Component
+struct Index {
+  @State bridgeImpl: BridgeObject = bridge.createBridge("BridgeName");
+
+  private funTest(p1: String, p2: Number, p3: Boolean) {
+    console.info('Java->Ts bridge funTest p1 is ' + p1);
+    console.info('Java->Ts bridge funTest p2 is ' + p2);
+    console.info('Java->Ts bridge funTest p3 is ' + p3);
+  }
+
+  private funTestArray(p1: Array<string>, p2: Array<Number>, p3: Array<Boolean>) {
+      console.log('Java->Ts bridge funTestArray p1 is ' + p1.toString());
+      console.log('Java->Ts bridge funTestArray p2 is ' + p2.toString());
+      console.log('Java->Ts bridge funTestArray p3 is ' + p3.toString());
+  }
+
+  private funTestRecord(p1: Record<string, string>, p2: Record<string, Number>, p3: Record<string, Boolean>) {
+      console.log('Java->Ts bridge funTestRecord p1 is ' + p1.toString());
+      console.log('Java->Ts bridge funTestRecord p2 is ' + p2.toString());
+      console.log('Java->Ts bridge funTestRecord p3 is ' + p3.toString());
+  }
+
+  onPageShow() {
+    // Register JavaScript functions
+    this.bridgeImpl.registerMethod({name: "funTest", method: this.funTest});
+    this.bridgeImpl.registerMethod({name: "funTestArray", method: this.funTestArray});
+    this.bridgeImpl.registerMethod({name: "funTestRecord", method: this.funTestRecord});
+  }
+
+  build() {
+    Row() {
+      Column() {
+          
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+```java
+// EntryEntryAbilityActivity.java
+package com.example.androidTestDemo;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import ohos.ace.adapter.capability.bridge.BridgePlugin;
+import ohos.ace.adapter.capability.bridge.MethodData;
+import ohos.stage.ability.adapter.StageActivity;
+
+public class EntryEntryAbilityActivity extends StageActivity {
+    private BridgeImpl bridgeImpl = null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        bridgeImpl = new BridgeImpl(this, "BridgeName", getBridgeManager());
+        setInstanceName("com.example.basebridge:entry:EntryAbility:");
+        super.onCreate(savedInstanceState);
+        // 显示应用程序界面布局(在项目的 res/layout 目录下，添加main_activity.xml文件)
+        setContentView(R.layout.main_activity);
+        // 注册按钮
+        testCallMethod1();
+        testCallMethod2();
+        testCallMethod3();
+    }
+    
+    public void testCallMethod1() {
+        // 使用button按钮点击，发送信息。
+        Button button = (Button) findViewById(R.id.TestCallMethod1);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 定义对象数组，存放JS侧方法形参对应的实参
+                Object[] paramObject = { "param1", 1, true};
+                // 构造JS侧方法描述对象实例
+                MethodData methodData = new MethodData("funTest", paramObject);
+                // 调用Js侧的方法（jsMethodName）
+                bridgeImpl.callMethod(methodData);
+            }
+        });
+    }
+    public void testCallMethod2() {
+        // 使用button按钮点击，发送信息。
+        Button button = (Button) findViewById(R.id.TestCallMethod2);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 定义对象数组，存放JS侧方法形参对应的实参
+                String[] sArray = {"hello", "world"};
+                int[] iArray = {123, 456};
+                boolean[] bArray = {true, false};
+                Object[] paramObject = {sArray, iArray, bArray};
+                // 构造JS侧方法描述对象实例
+                MethodData methodData = new MethodData("funTestArray", paramObject);
+                // 调用Js侧的方法（jsMethodName）
+                bridgeImpl.callMethod(methodData);
+            }
+        });
+    }
+    public void testCallMethod3() {
+        // 使用button按钮点击，发送信息。
+        Button button = (Button) findViewById(R.id.TestCallMethod3);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 定义对象数组，存放JS侧方法形参对应的实参
+                Map<String, String> map1 = new HashMap<>();
+                map1.put("one", "hello");
+                map1.put("two", "world");
+                Map<String, Integer> map2 = new HashMap<>();
+                map2.put("one", 1);
+                map2.put("two", 2);
+                Map<String, Boolean> map3 = new HashMap<>();
+                map3.put("one", true);
+                map3.put("two", false);
+
+                Object[] paramObject = {map1, map2, map3};
+                // 构造JS侧方法描述对象实例
+                MethodData methodData = new MethodData("funTestRecord", paramObject);
+                // 调用Js侧的方法（jsMethodName）
+                bridgeImpl.callMethod(methodData);
+            }
+        });
+    }
+}
+
+```
+
+```xml
+// main_activity.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:rotation="360"
+    android:rotationX="360"
+    android:rotationY="360"
+    android:visibility="visible"
+    tools:context=".EntryEntryAbilityActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="410dp"
+        android:layout_height="650dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+        <Button
+            android:id="@+id/TestCallMethod1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="funTest1" />
+        <Button
+            android:id="@+id/TestCallMethod2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="funTest1" />
+        <Button
+            android:id="@+id/TestCallMethod3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="funTest1" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+### 
 
 ## 场景示例
 
@@ -254,9 +530,15 @@ import ohos.ace.adapter.capability.bridge.BridgePlugin;
 import ohos.ace.adapter.capability.bridge.IMessageListener;
 
 public class Bridge extends BridgePlugin implements IMessageListener {
+	// 创建平台桥接实例(将在since 13废弃，推荐使用新构造方法)
     public Bridge(Context context, String name, int id) {
-        super(context, name, id);
-
+    	super(context, name, id);
+        setMessageListener(this);
+    }
+    
+    // 创建平台桥接实例
+    public Bridge(Context context, String name, BridgeManager bridgeManager) {
+    	super(context, name, bridgeManager);
         setMessageListener(this);
     }
 

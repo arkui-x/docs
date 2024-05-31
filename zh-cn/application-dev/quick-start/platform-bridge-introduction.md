@@ -28,23 +28,43 @@
 
 ### 数据类型支持
 
-平台桥接通过JSON格式序列化编解码传递数据，支持基础数据类型、数组类型和结构化数据。具体支持类型如下表：
+平台桥接通过JSON格式或二进制格式序列化编解码传递数据，支持基础数据类型、数组类型和结构化数据。具体支持类型如下表
 
-| ArkTS                 | Java                | Objective-C               |
-| --------------------- | ------------------- | ------------------------- |
-| string                | java.lang.String    | NSString                  |
-| number(32bit integer) | java.lang.Integer   | NSNumber numberWithInt    |
-| number(double)        | java.lang.Double    | NSNumber numberWithDouble |
-| boolean               | java.lang.Boolean   | NSNumber numberWithBool   |
-| null                  | null                | NSNull                    |
-| Array\<S\>            | java.util.ArrayList | NSArray                   |
-| Map\<string, T\>      | java.util.HashMap   | NSDictionary              |
+JSON格式数据支持类型表：
+
+| ArkTS                 | Java                    | Objective-C               |
+| --------------------- | ----------------------- | ------------------------- |
+| string                | java.lang.String        | NSString                  |
+| number(32bit integer) | java.lang.Integer       | NSNumber numberWithInt    |
+| number(64bit integer) | java.lang.Long          | NSNumber numberWithLong   |
+| number(double)        | java.lang.Double        | NSNumber numberWithDouble |
+| boolean               | java.lang.Boolean       | NSNumber numberWithBool   |
+| null                  | null                    | NSNull                    |
+| Array\<string\>       | string[]                | NSArray                   |
+| Array\<number\>       | int[], long[], double[] | NSArray                   |
+| Array\<boolean\>      | boolean[]               | NSArray                   |
+| Record\<string, S>    | java.util.HashMap       | NSDictionary              |
+
+二进制格式数据支持类型表：
+
+| ArkTS                 | java类型                | OC类型                    |
+| --------------------- | ----------------------- | ------------------------- |
+| null                  | null                    | NSNull                    |
+| boolean               | java.lang.Boolean       | NSNumber numberWithBool   |
+| number(32bit integer) | java.lang.Integer       | NSNumber numberWithInt    |
+| number(64bit integer) | java.lang.Long          | NSNumber numberWithLong   |
+| number(double)        | java.lang.Double        | NSNumber numberWithDouble |
+| string                | java.lang.String        | NSString                  |
+| ArrayBuffer           | java.nio.ByteBuffer     | NSData                    |
+| Array\<string\>       | string[]                | NSArray                   |
+| Array\<number\>       | int[], long[], double[] | NSArray                   |
+| Array\<boolean\>      | boolean[]               | NSArray                   |
+| Record\<string, S>    | java.util.HashMap       | NSDictionary              |
 
 > **说明**
 >
-> S表示string、number、boolean类型，T表示S及其对应的数组类型；
-> Map类型仅支持string类型的key，且仅用于方法返回。
-
+> S表示string、number、boolean类型；
+> Record表示<key, value>类型，key仅为string类型，value为S类型；
 
 ## 开发指南
 

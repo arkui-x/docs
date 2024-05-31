@@ -1134,4 +1134,1351 @@ Defines the download task information, which is the callback parameter of the [g
 | description | string |Yes| Description of the download task.|
 | downloadedBytes | number |Yes| Size of the files downloaded, in bytes.|
 
+## Action<sup>10+</sup>  
+
+Defines action options.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name     | Value | Description |
+| -------- | ----- | ----------- |
+| DOWNLOAD | 0     | Download.   |
+| UPLOAD   | 1     | Upload.     |
+
+
+## Mode<sup>10+</sup>  
+
+Defines mode options.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name       | Value | Description      |
+| ---------- | ----- | ---------------- |
+| FOREGROUND | 0     | Foreground task. |
+
+## Network<sup>10+</sup>  
+
+Defines network options.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name     | Value | Description            |
+| -------- | ----- | ---------------------- |
+| ANY      | 0     | Network of any type.   |
+| WIFI     | 1     | Wi-Fi network.         |
+| CELLULAR | 2     | Cellular data network. |
+
+
+## FormItem<sup>10+</sup> 
+
+Describes the form item of a task.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name  | Type                                                         | Mandatory | Description           |
+| ----- | ------------------------------------------------------------ | --------- | --------------------- |
+| name  | string                                                       | Yes       | Form parameter name.  |
+| value | string \| [FileSpec](#filespec10) \| Array&lt;[FileSpec](#filespec10)&gt; | Yes       | Form parameter value. |
+
+
+## Config<sup>10+</sup> 
+
+Provides the configuration information of an upload or download task.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name        | Type                                           | Mandatory | Description                                                  |
+| ----------- | ---------------------------------------------- | --------- | ------------------------------------------------------------ |
+| action      | [Action](#action10)                            | Yes       | Task action.<br>- **UPLOAD**<br>- **DOWNLOAD**               |
+| url         | string                                         | Yes       | Resource URL. The value contains a maximum of 2048 characters. |
+| title       | string                                         | No        | Task title. The value contains a maximum of 256 characters. The default value is a null string. |
+| description | string                                         | No        | Task description. The value contains a maximum of 1024 characters. The default value is a null string. |
+| mode        | [Mode](#mode10)                                | No        | Task mode. The default mode is foreground .<br>- For a foreground task, a callback is used for notification. |
+| overwrite   | boolean                                        | No        | Whether to overwrite an existing file during the download. The default value is **false**.<br>- **true**: Overwrite the existing file.<br>- **false**: Do not overwrite the existing file. In this case, the download fails. |
+| method      | string                                         | No        | Standard HTTP method for the task. The value can be **GET**, **POST**, or **PUT**, which is case-insensitive.<br>- If the task is an upload, use **PUT** or **POST**. The default value is **PUT**.<br>- If the task is a download, use **GET** or **POST**. The default value is **GET**. |
+| headers     | object                                         | No        | HTTP headers to be included in the task.<br>- If the task is an upload, the default **Content-Type** is **multipart/form-data**.<br>- If the task is a download, the default **Content-Type** is **application/json**. |
+| data        | string \| Array&lt;[FormItem](#formitem10)&gt; | No        | Task data.<br>- If the task is a download, the value is a string, typically in JSON format (an object will be converted to a JSON string); the default value is null.<br>- If the task is an upload, the value is Array<[FormItem](#formitem10)>; the default value is null. |
+| saveas      | string                                         | No        | Path for storing downloaded files. The options are as follows:<br>- Relative path in the cache folder of the invoker, for example, **"./xxx/yyy/zzz.html"** and **"xxx/yyy/zzz.html"**.<br>- URI (applicable when the application has the permission to access the URI), for example, **"datashare://bundle/xxx/yyy/zzz.html"**. This option is not supported currently.<br>The default value is a relative path in the cache folder of the application. |
+| network     | [Network](#network10)                          | No        | Network used for the task. The default value is **ANY** (Wi-Fi or cellular). |
+| metered     | boolean                                        | No        | Whether the task is allowed on a metered connection. The default value is **false**.<br>- **true**: The task is allowed on a metered connection.<br>- **false**: The task is not allowed on a metered connection. |
+| roaming     | boolean                                        | No        | Whether the task is allowed on a roaming network. The default value is **true**.<br>- **true**: The task is allowed on a roaming network.<br>- **false**: The task is not allowed on a roaming network. |
+| redirect    | boolean                                        | No        | Whether redirection is allowed. The default value is **true**.<br>- **true**: Redirection is allowed.<br>- **false**: Redirection is not allowed. |
+| index       | number                                         | No        | Path index of the task. It is usually used for resumable downloads. The default value is **0**. |
+| begins      | number                                         | No        | File start point of the task. It is usually used for resumable downloads. The default value is **0**. The value is a closed interval.<br>- If the task is a download, the value is obtained by sending an HTTP range request to read the start position when the server starts to download files.<br>- If the task is an upload, the value is obtained at the beginning of the upload. |
+| ends        | number                                         | No        | File end point of the task. It is usually used for resumable downloads. The default value is **-1**. The value is a closed interval.<br>- If the task is a download, the value is obtained by sending an HTTP range request to read the end position when the server starts to download files.<br>- If the task is an upload, the value is obtained at the end of the upload. |
+| precise     | boolean                                        | No        | - If this parameter is set to **true**, the task fails when the file size cannot be obtained.<br>- If this parameter is set to **false**, the task continues when the file size is set to **-1**.<br>The default value is **false**. |
+| token       | string                                         | No        | Token of the task. If the task has a token configured, this token is required for query of the task. The value contains 8 to 2048 bytes. This parameter is left empty by default. |
+| extras      | object                                         | No        | Additional information of the task. This parameter is left empty by default. |
+
+## State<sup>10+</sup>  
+
+Defines the current task status.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name        | Value | Description                                                  |
+| ----------- | ----- | ------------------------------------------------------------ |
+| INITIALIZED | 0x00  | The task is initialized based on the configuration specified in [Config](#config10). |
+| WAITING     | 0x10  | The task lacks resources for running or the resources for retries do not match the network status. |
+| RUNNING     | 0x20  | The task is being executed.                                  |
+| RETRYING    | 0x21  | The task has failed at least once and is being executed again. |
+| PAUSED      | 0x30  | The task is suspended and will be resumed later.             |
+| STOPPED     | 0x31  | The task is stopped.                                         |
+| COMPLETED   | 0x40  | The task is complete.                                        |
+| FAILED      | 0x41  | The task fails.                                              |
+| REMOVED     | 0x50  | The task is removed.                                         |
+
+
+## Progress<sup>10+</sup> 
+
+Describes the data structure of the task progress.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name      | Type                | Mandatory | Description                                                  |
+| --------- | ------------------- | --------- | ------------------------------------------------------------ |
+| state     | [State](#state10)   | Yes       | Current task status.                                         |
+| index     | number              | Yes       | Index of the file that is being processed in the task.       |
+| processed | number              | Yes       | Size of processed data in the current file in the task, in bytes. |
+| sizes     | Array&lt;number&gt; | Yes       | Size of files in the task, in bytes.                         |
+| extras    | object              | No        | Extra information of the task, for example, the header of the response from the server. |
+
+
+## Faults<sup>10+</sup>  
+
+Defines the cause of a task failure.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name         | Value | Description                                                  |
+| ------------ | ----- | ------------------------------------------------------------ |
+| OTHERS       | 0xFF  | Other fault.                                                 |
+| DISCONNECTED | 0x00  | Network disconnection.                                       |
+| TIMEOUT      | 0x10  | Timeout.                                                     |
+| PROTOCOL     | 0x20  | Protocol error, for example, an internal server error (500) or a data range that cannot be processed (416). |
+| FSIO         | 0x40  | File system I/O error, for example, an error that occurs during the open, search, read, write, or close operation. |
+
+
+## Filter<sup>10+</sup>
+
+Defines the filter criteria.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name   | Type                | Mandatory | Description                                                  |
+| ------ | ------------------- | --------- | ------------------------------------------------------------ |
+| before | number              | No        | Unix timestamp of the end time, in milliseconds. The default value is the invoking time. |
+| after  | number              | No        | Unix timestamp of the start time, in milliseconds. The default value is the invoking time minus 24 hours. |
+| state  | [State](#state10)   | No        | Task state.                                                  |
+| action | [Action](#action10) | No        | Task action.<br>- **UPLOAD**<br>- **DOWNLOAD**               |
+| mode   | [Mode](#mode10)     | No        | Task mode.<br>- **FOREGROUND**                               |
+
+## TaskInfo<sup>10+</sup> 
+
+Defines the data structure of the task information for query. The fields available vary depending on the query type.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name        | Type                                           | Mandatory | Description                                                  |
+| ----------- | ---------------------------------------------- | --------- | ------------------------------------------------------------ |
+| saveas      | string                                         | No        | Path for storing downloaded files. The options are as follows:<br>- Relative path in the cache folder of the invoker, for example, **"./xxx/yyy/zzz.html"** and **"xxx/yyy/zzz.html"**.<br>- URI (applicable when the application has the permission to access the URI), for example, **"datashare://bundle/xxx/yyy/zzz.html"**. This option is not supported currently.<br>The default value is a relative path in the cache folder of the application. |
+| url         | string                                         | No        | Task URL.<br>- It can be obtained through [request.agent.show<sup>10+</sup>](#requestagentshow10-1), [request.agent.touch<sup>10+</sup>](#requestagenttouch10-1), or [request.agent.query<sup>10+</sup>](#requestagentquery10-1). When [request.agent.query<sup>10+</sup>](#requestagentquery10-1) is used, an empty string is returned. |
+| data        | string \| Array&lt;[FormItem](#formitem10)&gt; | No        | Task value.<br>- It can be obtained through [request.agent.show<sup>10+</sup>](#requestagentshow10-1), [request.agent.touch<sup>10+</sup>](#requestagenttouch10-1), or [request.agent.query<sup>10+</sup>](#requestagentquery10-1). When [request.agent.query<sup>10+</sup>](#requestagentquery10-1) is used, an empty string is returned. |
+| tid         | string                                         | Yes       | Task ID.                                                     |
+| title       | string                                         | Yes       | Task title.                                                  |
+| description | string                                         | Yes       | Task description.                                            |
+| action      | [Action](#action10)                            | Yes       | Task action.<br>- **UPLOAD**<br>- **DOWNLOAD**               |
+| mode        | [Mode](#mode10)                                | Yes       | Task mode.<br>- **FOREGROUND**                               |
+| mimeType    | string                                         | Yes       | MIME type in the task configuration.                         |
+| progress    | [Progress](#progress10)                        | Yes       | Task progress.                                               |
+| ctime       | number                                         | Yes       | Unix timestamp when the task is created, in milliseconds. The value is generated by the system of the current device.<br>Note: When [request.agent.search<sup>10+</sup>](#requestagentsearch10-1) is used for query, this value must be within the range of [after,before] for the task ID to be obtained. For details about **before** and **after**, see [Filter](#filter10). |
+| mtime       | number                                         | Yes       | Unix timestamp when the task state changes, in milliseconds. The value is generated by the system of the current device. |
+| faults      | [Faults](#faults10)                            | Yes       | Failure cause of the task.<br>- **OTHERS**: other fault.<br>- **DISCONNECT**: network disconnection.<br>- **TIMEOUT**: timeout.<br>- **PROTOCOL**: protocol error.<br>- **FSIO**: file system I/O error. |
+| reason      | string                                         | Yes       | Reason why the task is waiting, failed, stopped, or paused.  |
+| extras      | string                                         | No        | Extra information of the task                                |
+
+
+## Task<sup>10+</sup> 
+
+Implements an upload or download task. Before using this API, you must obtain a **Task** object, from a promise through [request.agent.create<sup>10+</sup>](#requestagentcreate10-1) or from a callback through [request.agent.create<sup>10+</sup>](#requestagentcreate10).
+
+### Attributes
+
+Task attributes include the task ID and task configuration.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name   | Type                | Mandatory | Description                                                  |
+| ------ | ------------------- | --------- | ------------------------------------------------------------ |
+| tid    | string              | Yes       | Task ID, which is unique in the system and is automatically generated by the system. |
+| config | [Config](#config10) | Yes       | Task configuration.                                          |
+
+
+### on('progress')<sup>10+</sup>
+
+on(event: 'progress', callback: (progress: Progress) =&gt; void): void
+
+Subscribes to foreground task progress changes. This API uses a callback to return the result asynchronously.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type     | Mandatory | Description                                                  |
+| -------- | -------- | --------- | ------------------------------------------------------------ |
+| event    | string   | Yes       | Type of the event to subscribe to.<br>The value is **'progress'**, indicating the task progress. |
+| callback | function | Yes       | Callback used to return the data structure of the task progress. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message    |
+| -------- | ---------------- |
+| 21900005 | task mode error. |
+
+**Example**
+
+  ```ts
+let attachments: Array<request.agent.FormItem> = [{
+  name: "taskOnTest",
+  value: {
+    filename: "taskOnTest.avi",
+    mimeType: "application/octet-stream",
+    path: "./taskOnTest.avi",
+  }
+}];
+let config: request.agent.Config = {
+  action: request.agent.Action.UPLOAD,
+  url: 'http://127.0.0.1',
+  title: 'taskOnTest',
+  description: 'Sample code for event listening',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "PUT",
+  data: attachments,
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+let createOnCallback = (progress: request.agent.Progress) => {
+  console.info('upload task progress.');
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  task.on('progress', createOnCallback);
+  console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### on('completed')<sup>10+</sup>
+
+on(event: 'completed', callback: (progress: Progress) =&gt; void): void
+
+Subscribes to the foreground task completion event. This API uses a callback to return the result asynchronously.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type     | Mandatory | Description                                                  |
+| -------- | -------- | --------- | ------------------------------------------------------------ |
+| event    | string   | Yes       | Type of the event to subscribe to.<br>The value is **'completed'**, indicating task completion. |
+| callback | function | Yes       | Callback used to return the data structure of the task progress. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message    |
+| -------- | ---------------- |
+| 21900005 | task mode error. |
+
+**Example**
+
+  ```ts
+let attachments: Array<request.agent.FormItem> = [{
+  name: "taskOnTest",
+  value: {
+    filename: "taskOnTest.avi",
+    mimeType: "application/octet-stream",
+    path: "./taskOnTest.avi",
+  }
+}];
+let config: request.agent.Config = {
+  action: request.agent.Action.UPLOAD,
+  url: 'http://127.0.0.1',
+  title: 'taskOnTest',
+  description: 'Sample code for event listening',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "PUT",
+  data: attachments,
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+let createOnCallback = (progress: request.agent.Progress) => {
+  console.info('upload task completed.');
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  task.on('completed', createOnCallback);
+  console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### on('failed')<sup>10+</sup>
+
+on(event: 'failed', callback: (progress: Progress) =&gt; void): void
+
+Subscribes to the foreground task failure event. This API uses a callback to return the result asynchronously.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type     | Mandatory | Description                                                  |
+| -------- | -------- | --------- | ------------------------------------------------------------ |
+| event    | string   | Yes       | Type of the event to subscribe to.<br>The value is **'failed'**, indicating task failure. |
+| callback | function | Yes       | Callback used to return the data structure of the task progress. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message    |
+| -------- | ---------------- |
+| 21900005 | task mode error. |
+
+**Example**
+
+  ```ts
+let attachments: Array<request.agent.FormItem> = [{
+  name: "taskOnTest",
+  value: {
+    filename: "taskOnTest.avi",
+    mimeType: "application/octet-stream",
+    path: "./taskOnTest.avi",
+  }
+}];
+let config: request.agent.Config = {
+  action: request.agent.Action.UPLOAD,
+  url: 'http://127.0.0.1',
+  title: 'taskOnTest',
+  description: 'Sample code for event listening',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "PUT",
+  data: attachments,
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+let createOnCallback = (progress: request.agent.Progress) => {
+  console.info('upload task failed.');
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  task.on('failed', createOnCallback);
+  console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### off('progress')<sup>10+</sup>
+
+off(event: 'progress', callback?: (progress: Progress) =&gt; void): void
+
+Unsubscribes from foreground task progress changes.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type     | Mandatory | Description                                                  |
+| -------- | -------- | --------- | ------------------------------------------------------------ |
+| event    | string   | Yes       | Type of the event to subscribe to.<br>The value is **'progress'**, indicating the task progress. |
+| callback | function | No        | Callback to unregister. If this parameter is not specified, all callbacks of the current type will be unregistered. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message    |
+| -------- | ---------------- |
+| 21900005 | task mode error. |
+
+**Example**
+
+  ```ts
+let attachments: Array<request.agent.FormItem> = [{
+  name: "taskOffTest",
+  value: {
+    filename: "taskOffTest.avi",
+    mimeType: "application/octet-stream",
+    path: "./taskOffTest.avi",
+  }
+}];
+let config: request.agent.Config = {
+  action: request.agent.Action.UPLOAD,
+  url: 'http://127.0.0.1',
+  title: 'taskOffTest',
+  description: 'Sample code for event listening',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "PUT",
+  data: attachments,
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+let createOffCallback1 = (progress: request.agent.Progress) => {
+  console.info('upload task progress.');
+};
+let createOffCallback2 = (progress: request.agent.Progress) => {
+  console.info('upload task progress.');
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  task.on('progress', createOffCallback1);
+  task.on('progress', createOffCallback2);
+  // Unsubscribe from createOffCallback1.
+  task.off('progress', createOffCallback1);
+  // Unsubscribe from all callbacks of foreground task progress changes.
+  task.off('progress');
+  console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### off('completed')<sup>10+</sup>
+
+off(event: 'completed', callback?: (progress: Progress) =&gt; void): void
+
+Unsubscribes from the foreground task completion event.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type     | Mandatory | Description                                                  |
+| -------- | -------- | --------- | ------------------------------------------------------------ |
+| event    | string   | Yes       | Type of the event to subscribe to.<br>The value is **'completed'**, indicating task completion. |
+| callback | function | No        | Callback to unregister. If this parameter is not specified, all callbacks of the current type will be unregistered. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message    |
+| -------- | ---------------- |
+| 21900005 | task mode error. |
+
+**Example**
+
+  ```ts
+let attachments: Array<request.agent.FormItem> = [{
+  name: "taskOffTest",
+  value: {
+    filename: "taskOffTest.avi",
+    mimeType: "application/octet-stream",
+    path: "./taskOffTest.avi",
+  }
+}];
+let config: request.agent.Config = {
+  action: request.agent.Action.UPLOAD,
+  url: 'http://127.0.0.1',
+  title: 'taskOffTest',
+  description: 'Sample code for event listening',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "PUT",
+  data: attachments,
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+let createOffCallback1 = (progress: request.agent.Progress) => {
+  console.info('upload task completed.');
+};
+let createOffCallback2 = (progress: request.agent.Progress) => {
+  console.info('upload task completed.');
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  task.on('completed', createOffCallback1);
+  task.on('completed', createOffCallback2);
+  // Unsubscribe from createOffCallback1.
+  task.off('completed', createOffCallback1);
+  // Unsubscribe from all callbacks of the foreground task completion event.
+  task.off('completed');
+  console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### off('failed')<sup>10+</sup>
+
+off(event: 'failed', callback?: (progress: Progress) =&gt; void): void
+
+Unsubscribes from the foreground task failure event.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type     | Mandatory | Description                                                  |
+| -------- | -------- | --------- | ------------------------------------------------------------ |
+| event    | string   | Yes       | Type of the event to subscribe to.<br>The value is **'failed'**, indicating task failure. |
+| callback | function | No        | Callback to unregister. If this parameter is not specified, all callbacks of the current type will be unregistered. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message    |
+| -------- | ---------------- |
+| 21900005 | task mode error. |
+
+**Example**
+
+  ```ts
+let attachments: Array<request.agent.FormItem> = [{
+  name: "taskOffTest",
+  value: {
+    filename: "taskOffTest.avi",
+    mimeType: "application/octet-stream",
+    path: "./taskOffTest.avi",
+  }
+}];
+let config: request.agent.Config = {
+  action: request.agent.Action.UPLOAD,
+  url: 'http://127.0.0.1',
+  title: 'taskOffTest',
+  description: 'Sample code for event listening',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "PUT",
+  data: attachments,
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+let createOffCallback1 = (progress: request.agent.Progress) => {
+  console.info('upload task failed.');
+};
+let createOffCallback2 = (progress: request.agent.Progress) => {
+  console.info('upload task failed.');
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  task.on('failed', createOffCallback1);
+  task.on('failed', createOffCallback2);
+  // Unsubscribe from createOffCallback1.
+  task.off('failed', createOffCallback1);
+  // Unsubscribe from all callbacks of the foreground task failure event.
+  task.off('failed');
+  console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### start<sup>10+</sup>
+
+start(callback: AsyncCallback&lt;void&gt;): void
+
+Starts this task. This API cannot be used to start an initialized task. This API uses an asynchronous callback to return the result.
+
+**Required permissions**: ohos.permission.INTERNET
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type     | Mandatory | Description                                                  |
+| -------- | -------- | --------- | ------------------------------------------------------------ |
+| callback | function | Yes       | Callback used to return the result. If the operation is successful, **err** is **undefined**. Otherwise, **err** is an error object. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+| 21900007 | task state error.           |
+
+**Example**
+
+  ```ts
+let config: request.agent.Config = {
+  action: request.agent.Action.DOWNLOAD,
+  url: 'http://127.0.0.1',
+  title: 'taskStartTest',
+  description: 'Sample code for start the download task',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "GET",
+  data: "",
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  task.start((err: BusinessError) => {
+    if (err) {
+      console.error(`Failed to start the download task, Code: ${err.code}, message: ${err.message}`);
+      return;
+    }
+    console.info(`Succeeded in starting a download task.`);
+  });
+  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### start<sup>10+</sup>
+
+start(): Promise&lt;void&gt;
+
+Starts this task. This API cannot be used to start an initialized task. This API uses a promise to return the result.
+
+**Required permissions**: ohos.permission.INTERNET
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Return value**
+
+| Type                | Description                    |
+| ------------------- | ------------------------------ |
+| Promise&lt;void&gt; | Promise that returns no value. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+| 21900007 | task state error.           |
+
+**Example**
+
+  ```ts
+let config: request.agent.Config = {
+  action: request.agent.Action.DOWNLOAD,
+  url: 'http://127.0.0.1',
+  title: 'taskStartTest',
+  description: 'Sample code for start the download task',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "GET",
+  data: "",
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  task.start().then(() => {
+    console.info(`Succeeded in starting a download task.`);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to start the download task, Code: ${err.code}, message: ${err.message}`);
+  });
+  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+
+### stop<sup>10+</sup>
+
+stop(callback: AsyncCallback&lt;void&gt;): void
+
+Stops this task. This API can be used to stop a running, waiting, or retrying task. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type     | Mandatory | Description                                                  |
+| -------- | -------- | --------- | ------------------------------------------------------------ |
+| callback | function | Yes       | Callback used to return the result. If the operation is successful, **err** is **undefined**. Otherwise, **err** is an error object. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+| 21900007 | task state error.           |
+
+**Example**
+
+  ```ts
+let config: request.agent.Config = {
+  action: request.agent.Action.DOWNLOAD,
+  url: 'http://127.0.0.1',
+  title: 'taskStopTest',
+  description: 'Sample code for stop the download task',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "GET",
+  data: "",
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  task.stop((err: BusinessError) => {
+    if (err) {
+      console.error(`Failed to stop the download task, Code: ${err.code}, message: ${err.message}`);
+      return;
+    }
+    console.info(`Succeeded in stopping a download task. `);
+  });
+  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+
+### stop<sup>10+</sup>
+
+stop(): Promise&lt;void&gt;
+
+Stops this task. This API can be used to stop a running, waiting, or retrying task. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Return value**
+
+| Type                | Description                    |
+| ------------------- | ------------------------------ |
+| Promise&lt;void&gt; | Promise that returns no value. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+| 21900007 | task state error.           |
+
+**Example**
+
+  ```ts
+let config: request.agent.Config = {
+  action: request.agent.Action.DOWNLOAD,
+  url: 'http://127.0.0.1',
+  title: 'taskStopTest',
+  description: 'Sample code for stop the download task',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "GET",
+  data: "",
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  task.stop().then(() => {
+    console.info(`Succeeded in stopping a download task. `);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to stop the download task, Code: ${err.code}, message: ${err.message}`);
+  });
+  console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+## request.agent.create<sup>10+</sup>
+
+create(context: BaseContext, config: Config, callback: AsyncCallback&lt;Task&gt;): void
+
+Creates an upload or download task and adds it to the queue. An application can create a maximum of 10 unfinished tasks. This API uses an asynchronous callback to return the result.
+
+
+**Required permissions**: ohos.permission.INTERNET
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type                                                    | Mandatory | Description                                                  |
+| -------- | ------------------------------------------------------- | --------- | ------------------------------------------------------------ |
+| config   | [Config](#config10)                                     | Yes       | Task configuration.                                          |
+| context  | [BaseContext](js-apis-inner-application-baseContext.md) | Yes       | Application-based context.                                   |
+| callback | AsyncCallback&lt;[Task](#task10)&gt;                    | Yes       | Callback used to return the configuration about the created task. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message                      |
+| -------- | ---------------------------------- |
+| 13400001 | file operation error.              |
+| 13400003 | task service ability error.        |
+| 21900004 | application task queue full error. |
+| 21900005 | task mode error.                   |
+
+**Example**
+
+  ```ts
+let attachments: Array<request.agent.FormItem> = [{
+  name: "createTest",
+  value: {
+    filename: "createTest.avi",
+    mimeType: "application/octet-stream",
+    path: "./createTest.avi",
+  }
+}];
+let config: request.agent.Config = {
+  action: request.agent.Action.UPLOAD,
+  url: 'http://127.0.0.1',
+  title: 'createTest',
+  description: 'Sample code for create task',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "PUT",
+  data: attachments,
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+request.agent.create(getContext(), config, (err: BusinessError, task: request.agent.Task) => {
+  if (err) {
+    console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+    return;
+  }
+  console.info(`Succeeded in creating a download task. result: ${task.config}`);
+});
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+## request.agent.create<sup>10+</sup>
+
+create(context: BaseContext, config: Config): Promise&lt;Task&gt;
+
+Creates an upload or download task and adds it to the queue. An application can create a maximum of 10 unfinished tasks. This API uses a promise to return the result.
+
+
+**Required permissions**: ohos.permission.INTERNET
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name    | Type                                                    | Mandatory | Description                |
+| ------- | ------------------------------------------------------- | --------- | -------------------------- |
+| context | [BaseContext](js-apis-inner-application-baseContext.md) | Yes       | Application-based context. |
+| config  | [Config](#config10)                                     | Yes       | Task configuration.        |
+
+**Return value**
+
+| Type                           | Description                                                  |
+| ------------------------------ | ------------------------------------------------------------ |
+| Promise&lt;[Task](#task10)&gt; | Promise used to return the configuration about the created task. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message                      |
+| -------- | ---------------------------------- |
+| 13400001 | file operation error.              |
+| 13400003 | task service ability error.        |
+| 21900004 | application task queue full error. |
+| 21900005 | task mode error.                   |
+
+**Example**
+
+  ```ts
+let attachments: Array<request.agent.FormItem> = [{
+  name: "createTest",
+  value: {
+    filename: "createTest.avi",
+    mimeType: "application/octet-stream",
+    path: "./createTest.avi",
+  }
+}];
+let config: request.agent.Config = {
+  action: request.agent.Action.UPLOAD,
+  url: 'http://127.0.0.1',
+  title: 'createTest',
+  description: 'Sample code for create task',
+  mode: request.agent.Mode.FOREGROUND,
+  overwrite: false,
+  method: "PUT",
+  data: attachments,
+  saveas: "./",
+  network: request.agent.Network.CELLULAR,
+  metered: false,
+  roaming: true,
+  retry: true,
+  redirect: true,
+  index: 0,
+  begins: 0,
+  ends: -1,
+  gauge: false,
+  precise: false,
+  token: "it is a secret"
+};
+request.agent.create(getContext(), config).then((task: request.agent.Task) => {
+  console.info(`Succeeded in creating a download task. result: ${task.config}`);
+}).catch((err) => {
+  console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+## request.agent.remove<sup>10+</sup>
+
+remove(id: string, callback: AsyncCallback&lt;void&gt;): void
+
+Removes a specified task of the invoker. If the task is being executed, the task is forced to stop. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type                      | Mandatory | Description                                                  |
+| -------- | ------------------------- | --------- | ------------------------------------------------------------ |
+| id       | string                    | Yes       | Task ID.                                                     |
+| callback | AsyncCallback&lt;void&gt; | Yes       | Callback used to return the result. If the operation is successful, **err** is **undefined**. Otherwise, **err** is an error object. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+| 21900006 | task not found error.       |
+
+**Example**
+
+  ```ts
+request.agent.remove("123456", (err: BusinessError) => {
+  if (err) {
+    console.error(`Failed to removing a download task, Code: ${err.code}, message: ${err.message}`);
+    return;
+  }
+  console.info(`Succeeded in creating a download task.`);
+});
+  ```
+
+
+## request.agent.remove<sup>10+</sup>
+
+remove(id: string): Promise&lt;void&gt;
+
+Removes a specified task of the invoker. If the task is being executed, the task is forced to stop. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name | Type   | Mandatory | Description |
+| ---- | ------ | --------- | ----------- |
+| id   | string | Yes       | Task ID.    |
+
+**Return value**
+
+| Type                | Description                    |
+| ------------------- | ------------------------------ |
+| Promise&lt;void&gt; | Promise that returns no value. |
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+| 21900006 | task not found error.       |
+
+**Example**
+
+  ```ts
+request.agent.remove("123456").then(() => {
+  console.info(`Succeeded in removing a download task. `);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to remove a download task, Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+
+## request.agent.show<sup>10+</sup>
+
+show(id: string, callback: AsyncCallback&lt;TaskInfo&gt;): void
+
+Shows the task details based on the task ID. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type                                         | Mandatory | Description                           |
+| -------- | -------------------------------------------- | --------- | ------------------------------------- |
+| id       | string                                       | Yes       | Task ID.                              |
+| callback | AsyncCallback&lt;[TaskInfo](#taskinfo10)&gt; | Yes       | Callback used to return task details. |
+
+**Error codes**
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+| 21900006 | task not found error.       |
+
+**Example**
+
+  ```ts
+request.agent.show("123456", (err: BusinessError, taskInfo: request.agent.TaskInfo) => {
+  if (err) {
+    console.error(`Failed to show a upload task, Code: ${err.code}, message: ${err.message}`);
+    return;
+  }
+  console.info(`Succeeded in showing a upload task.`);
+});
+  ```
+
+
+## request.agent.show<sup>10+</sup>
+
+show(id: string): Promise&lt;TaskInfo&gt;
+
+Queries a task details based on the task ID. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name | Type   | Mandatory | Description |
+| ---- | ------ | --------- | ----------- |
+| id   | string | Yes       | Task ID.    |
+
+**Return value**
+
+| Type                                   | Description                                  |
+| -------------------------------------- | -------------------------------------------- |
+| Promise&lt;[TaskInfo](#taskinfo10)&gt; | Promise Promise used to return task details. |
+
+**Error codes**
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+| 21900006 | task not found error.       |
+
+**Example**
+
+  ```ts
+request.agent.show("123456").then((taskInfo: request.agent.TaskInfo) => {
+  console.info(`Succeeded in showing the upload task.`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to show the upload task. Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+
+## request.agent.touch<sup>10+</sup>
+
+touch(id: string, token: string, callback: AsyncCallback&lt;TaskInfo&gt;): void
+
+Queries the task details based on the task ID and token. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type                                         | Mandatory | Description                           |
+| -------- | -------------------------------------------- | --------- | ------------------------------------- |
+| id       | string                                       | Yes       | Task ID.                              |
+| token    | string                                       | Yes       | Token for task query.                 |
+| callback | AsyncCallback&lt;[TaskInfo](#taskinfo10)&gt; | Yes       | Callback used to return task details. |
+
+**Error codes**
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+| 21900006 | task not found error.       |
+
+**Example**
+
+  ```ts
+request.agent.touch("123456", "token", (err: BusinessError, taskInfo: request.agent.TaskInfo) => {
+  if (err) {
+    console.error(`Failed to touch an upload task. Code: ${err.code}, message: ${err.message}`);
+    return;
+  }
+  console.info(`Succeeded in touching an upload task.`);
+});
+  ```
+
+
+## request.agent.touch<sup>10+</sup>
+
+touch(id: string, token: string): Promise&lt;TaskInfo&gt;
+
+Queries the task details based on the task ID and token. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name  | Type   | Mandatory | Description           |
+| ----- | ------ | --------- | --------------------- |
+| id    | string | Yes       | Task ID.              |
+| token | string | Yes       | Token for task query. |
+
+**Return value**
+
+| Type                                   | Description                                  |
+| -------------------------------------- | -------------------------------------------- |
+| Promise&lt;[TaskInfo](#taskinfo10)&gt; | Promise Promise used to return task details. |
+
+**Error codes**
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+| 21900006 | task not found error.       |
+
+**Example**
+
+  ```ts
+request.agent.touch("123456", "token").then((taskInfo: request.agent.TaskInfo) => {
+  console.info(`Succeeded in touching a upload task. `);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to touch an upload task. Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
+## request.agent.search<sup>10+</sup>
+
+search(callback: AsyncCallback&lt;Array&lt;string&gt;&gt;): void
+
+Searches for task IDs based on [Filter](#filter10). This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name     | Type                                     | Mandatory | Description                              |
+| -------- | ---------------------------------------- | --------- | ---------------------------------------- |
+| callback | AsyncCallback&lt;Array&lt;string&gt;&gt; | Yes       | Callback used to return task ID matches. |
+
+**Error codes**
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+
+**Example**
+
+  ```ts
+request.agent.search((err: BusinessError, data: Array<string>) => {
+  if (err) {
+    console.error(`Upload task search failed. Code: ${err.code}, message: ${err.message}`);
+    return;
+  }
+  console.info(`Upload task search succeeded. `);
+});
+  ```
+
+
+## request.agent.search<sup>10+</sup>
+
+search(filter?: Filter): Promise&lt;Array&lt;string&gt;&gt;
+
+Searches for task IDs based on [Filter](#filter10). This API uses a promise to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name   | Type                | Mandatory | Description      |
+| ------ | ------------------- | --------- | ---------------- |
+| filter | [Filter](#filter10) | No        | Filter criteria. |
+
+**Return value**
+
+| Type                               | Description                                     |
+| ---------------------------------- | ----------------------------------------------- |
+| Promise&lt;Array&lt;string&gt;&gt; | Promise Promise used to return task ID matches. |
+
+**Error codes**
+For details about the error codes, see [Upload and Download Error Codes](../errorcodes/errorcode-request.md).
+
+| ID       | Error Message               |
+| -------- | --------------------------- |
+| 13400003 | task service ability error. |
+
+**Example**
+
+  ```ts
+let filter: request.agent.Filter = {
+  bundle: "com.example.myapplication",
+  action: request.agent.Action.UPLOAD,
+  mode: request.agent.Mode.FOREGROUND
+}
+request.agent.search(filter).then((data: Array<string>) => {
+  console.info(`Upload task search succeeded. `);
+}).catch((err: BusinessError) => {
+  console.error(`Upload task search failed. Code: ${err.code}, message: ${err.message}`);
+});
+  ```
+
 <!--no_check-->

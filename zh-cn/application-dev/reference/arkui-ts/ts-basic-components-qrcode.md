@@ -65,7 +65,7 @@ struct QRCodeExample {
 
       // 设置二维码不透明度
       Text('contentOpacity').fontSize(9).width('90%').fontColor(0xCCCCCC).fontSize(30)
-      QRCode(this.value).width(140).height(140).color(Color.Black).contentOpacity(0.1)
+      QRCode(this.value).width(140).height(140).color(Color.Black)
     }.width('100%').margin({ top: 5 })
   }
 }

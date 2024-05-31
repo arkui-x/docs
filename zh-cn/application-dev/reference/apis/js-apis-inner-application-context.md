@@ -27,6 +27,7 @@ import common from '@ohos.app.ability.common';
 | databaseDir | string | 是    | 否    | 数据库目录。 |
 | preferencesDir | string | 是    | 否    | preferences目录。 |
 | bundleCodeDir | string | 是    | 否    | 安装包目录。不能拼接路径访问资源文件，请使用[资源管理接口](js-apis-resource-manager.md)访问资源。 |
+| eventHub<sup>12+</sup> | [EventHub](js-apis-inner-application-eventHub.md) | 是    | 否    | 事件中心，提供订阅、取消订阅、触发事件对象。 |
 
 ## Context.createModuleContext
 
