@@ -110,7 +110,7 @@ let httpRequest = http.createHttp();
 
 ## HttpRequest
 
-HTTP请求任务。在调用HttpRequest的方法前，需要先通过[createHttp()](#httpcreatehttp)创建一个任务。
+HTTP请求任务。在调用HttpRequest的方法前，需要先通过[createHttp()](#httpcreatehttp6)创建一个任务。
 
 ### request<sup>6+</sup>
 
@@ -130,7 +130,7 @@ request(url: string, callback: AsyncCallback\<HttpResponse\>):void
 | 参数名   | 类型                                           | 必填 | 说明                    |
 | -------- | ---------------------------------------------- | ---- | ----------------------- |
 | url      | string                                         | 是   | 发起网络请求的URL地址。 |
-| callback | AsyncCallback\<[HttpResponse](#httpresponse)\> | 是   | 回调函数。              |
+| callback | AsyncCallback\<[HttpResponse](#httpresponse6)\> | 是   | 回调函数。              |
 
 **错误码：**
 
@@ -208,8 +208,8 @@ request(url: string, options: HttpRequestOptions, callback: AsyncCallback\<HttpR
 | 参数名   | 类型                                           | 必填 | 说明                                            |
 | -------- | ---------------------------------------------- | ---- | ----------------------------------------------- |
 | url      | string                                         | 是   | 发起网络请求的URL地址。                         |
-| options  | HttpRequestOptions                             | 是   | 参考[HttpRequestOptions](#httprequestoptions)。 |
-| callback | AsyncCallback\<[HttpResponse](#httpresponse)\> | 是   | 回调函数。                                      |
+| options  | HttpRequestOptions                             | 是   | 参考[HttpRequestOptions](#httprequestoptions6)。 |
+| callback | AsyncCallback\<[HttpResponse](#httpresponse6)\> | 是   | 回调函数。                                      |
 
 **错误码：**
 
@@ -303,13 +303,13 @@ request(url: string, options? : HttpRequestOptions): Promise\<HttpResponse\>
 | 参数名  | 类型               | 必填 | 说明                                            |
 | ------- | ------------------ | ---- | ----------------------------------------------- |
 | url     | string             | 是   | 发起网络请求的URL地址。                         |
-| options | HttpRequestOptions | 否   | 参考[HttpRequestOptions](#httprequestoptions)。 |
+| options | HttpRequestOptions | 否   | 参考[HttpRequestOptions](#httprequestoptions6)。 |
 
 **返回值：**
 
 | 类型                                   | 说明                              |
 | :------------------------------------- | :-------------------------------- |
-| Promise<[HttpResponse](#httpresponse)> | 以Promise形式返回发起请求的结果。 |
+| Promise<[HttpResponse](#httpresponse6)> | 以Promise形式返回发起请求的结果。 |
 
 **错误码：**
 
@@ -720,7 +720,7 @@ httpRequest.off('dataReceiveProgress');
 
 | 名称         | 类型                                          | 必填 | 说明                                                         |
 | -------------- | --------------------------------------------- | ---- | ------------------------------------------------------------ |
-| method         | [RequestMethod](#requestmethod)               | 否   | 请求方式，默认为GET。                                                   |
+| method         | [RequestMethod](#requestmethod6)               | 否   | 请求方式，默认为GET。                                                   |
 | extraData      | string<sup>6+</sup> \| Object<sup>6+</sup> \| ArrayBuffer<sup>8+</sup> | 否   | 发送请求的额外数据，默认无此字段。<br />当HTTP请求为POST、PUT等方法时，此字段为HTTP请求的content，以UTF-8编码形式作为请求体。当'Content-Type'为'application/x-www-form-urlencoded'时，请求提交的信息主体数据应在key和value进行URL转码后按照键值对"key1=value1&key2=value2&key3=value3"的方式进行编码，该字段对应的类型通常为String；当'Content-Type'为'text/xml'时，该字段对应的类型通常为String；当'Content-Type'为'application/json'时，该字段对应的类型通常为Object；当'Content-Type'为'application/octet-stream'时，该字段对应的类型通常为ArrayBuffer；当'Content-Type'为'multipart/form-data'且需上传的字段为文件时，该字段对应的类型通常为ArrayBuffer。以上信息仅供参考，并可能根据具体情况有所不同。<br />- 当HTTP请求为GET、OPTIONS、DELETE、TRACE、CONNECT等方法时，此字段为HTTP请求参数的补充。开发者需传入Encode编码后的string类型参数，Object类型的参数无需预编码，参数内容会拼接到URL中进行发送；ArrayBuffer类型的参数不会做拼接处理。 |
 | <span name="expectDataType">[expectDataType<sup>9+</sup>](#result)</span>  | [HttpDataType](#httpdatatype9)  | 否   | 指定返回数据的类型，默认无此字段。如果设置了此参数，系统将优先返回指定的类型。 |
 | usingCache<sup>9+</sup>      | boolean                         | 否   | 是否使用缓存，默认为true。   |
@@ -803,7 +803,7 @@ request方法回调函数的返回值类型。
 | -------------------- | -------------------------------------------- | ---- | ------------------------------------------------------------ |
 | <span name="result">[result](#expectDataType)</span>              | string<sup>6+</sup> \| Object<sup>deprecated 8+</sup> \| ArrayBuffer<sup>8+</sup> | 是   | HTTP请求根据响应头中Content-type类型返回对应的响应格式内容，若HttpRequestOptions无expectDataType字段，按如下规则返回：<br />- application/json：返回JSON格式的字符串；<br />- application/octet-stream：ArrayBuffer；<br />- image：ArrayBuffer；<br />- 其他：string。<br /> 若HttpRequestOption有expectDataType字段，开发者需传入与服务器返回类型相同的数据类型。 |
 | resultType<sup>9+</sup> | [HttpDataType](#httpdatatype9)             | 是   | 返回值类型。                           |
-| responseCode         | [ResponseCode](#responsecode) \| number      | 是   | 回调函数执行成功时，此字段为[ResponseCode](#responsecode)。若执行失败，错误码将会从AsyncCallback中的err字段返回。 |
+| responseCode         | [ResponseCode](#responsecode6) \| number      | 是   | 回调函数执行成功时，此字段为[ResponseCode](#responsecode6)。若执行失败，错误码将会从AsyncCallback中的err字段返回。 |
 | header               | Object                                       | 是   | 发起HTTP请求返回来的响应头。当前返回的是JSON格式字符串，如需具体字段内容，需开发者自行解析。常见字段及解析方式如下：<br/>- content-type：header['content-type']；<br />- status-line：header['status-line']；<br />- date：header.date/header['date']；<br />- server：header.server/header['server']； |
 | cookies<sup>8+</sup> | string                                       | 是   | 服务器返回的 cookies。                                       |
 
