@@ -103,6 +103,7 @@
   - [TimePicker](ts-basic-components-timepicker.md)
   - [Toggle](ts-basic-components-toggle.md)
   - [Web](ts-basic-components-web.md)
+  - [XComponent](ts-basic-components-xcomponent.md)
 - 容器组件
   - [Badge](ts-container-badge.md)
   - [Column](ts-container-column.md)
