@@ -35,18 +35,12 @@ ArkUI-X 2.0.0 Beta1版配套OpenHarmony API 12 Beta1，新增适配部分API 12�
 ### API适配
 
 主要新增以下接口跨平台适配：
-* ohos.measure；
 * ohos.events.emitter；
-*  EventHub；
+* EventHub；
 * window.setWindowLayoutFullScreen、window.setWindowSystemBarEnable、 window.getWindowAvoidArea；
-* ohos.arkui.UIContext
-* ohos.promptAction
-* ohos.notificationManager
-* ohos.file.picker
-* ohos.security.cryptoFramework
-* ohos.font
-* ohos.arkui.drawableDescriptor
-* ohos.measure
+* ohos.promptAction；
+* ohos.security.cryptoFramework；
+* ohos.measure；
   详情参见：[ArkTS接口跨平台列表](../application-dev/reference/apis/README.md)。
 
 
@@ -54,12 +48,12 @@ ArkUI-X 2.0.0 Beta1版配套OpenHarmony API 12 Beta1，新增适配部分API 12�
 
 **表1** 版本软件和平台配套关系
 
-| 目标平台    | 兼容OS版本                                       | 获取方式                               |
-| ----------- | ------------------------------------------------ | -------------------------------------- |
-| OpenHarmony | 5.0.0 Beta1 (API Version 12)                     | 后续提供                               |
-| HarmonyOS   | 5.0.0 Beta1(API Version 12)                      | 当前仅面向HarmonyOS Next合作企业开发者 |
-| Android     | Android 8<sup>+</sup> (API level 26<sup>+</sup>) | NA                                     |
-| iOS         | iOS 10<sup>+</sup>                               | NA                                     |
+| 目标平台    | 兼容OS版本                                       | 获取方式                                                     |
+| ----------- | ------------------------------------------------ | ------------------------------------------------------------ |
+| OpenHarmony | 5.0.0 Beta1 (API Version 12)                     | 后续提供                                                     |
+| HarmonyOS   | 5.0.0 Beta1(API Version 12)                      | HUAWEI DevEco Studio获取方式：<br />[Windows(64-bit)](https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/7d/v3/IMwqM2WwTCeKxDzJEv7EGQ/devecostudio-windows-5.0.3.403.zip?HW-CC-KV=V1&HW-CC-Date=20240620T071359Z&HW-CC-Expire=315360000&HW-CC-Sign=9663B0DAF6CC0B14AFBB41DBEAEB05BC27E7FD81EAAA600D4244CB2E7A9BBED7)  <br />SHA256校验码：946e369c2d59bf4f4351c5afade429508efef51d5d4c5db4689beaebd36666f7<br />[Mac(X86)](https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/58/v3/eLJwfM_fSQmkq6TR3v89dw/devecostudio-mac-5.0.3.403.zip?HW-CC-KV=V1&HW-CC-Date=20240620T070837Z&HW-CC-Expire=315360000&HW-CC-Sign=61B71F298F5671311CD58F4F296B9BE8F69334DA7896FC6739D3F70F95698E3A)  <br />SHA256校验码：7d88d8fc634aa7ac1dcf7e71f4dcbe8c4dc8e4e9e91d597db668dfdb58ba6932<br />[Mac(ARM)](https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/8e/v3/OgnuovtjSE-bs-e-g9Wrkg/devecostudio-mac-arm-5.0.3.403.zip?HW-CC-KV=V1&HW-CC-Date=20240620T071241Z&HW-CC-Expire=315360000&HW-CC-Sign=65D2F943C49B674F963634930E325DF5B68B563CDC6DFFC4F4B91629054C4A75)  <br />SHA256校验码：9561b21045625242b0ea1d3c88b1ca43d651115a652f6c52481f5c215dfc4d5f |
+| Android     | Android 8<sup>+</sup> (API level 26<sup>+</sup>) | NA                                                           |
+| iOS         | iOS 10<sup>+</sup>                               | NA                                                           |
 
 
 
@@ -159,7 +153,7 @@ ArkUI-X 2.0.0 Beta1版配套OpenHarmony API 12 Beta1，新增适配部分API 12�
 | I9593W | 日期组件iOS端显示不正常 |
 | I9VUS0 | Android应用退到后台bridge通信失败 |
 
-### 遗留缺陷列表
+## 遗留缺陷列表
 
 **表5** 遗留缺陷列表
 
@@ -167,3 +161,5 @@ ArkUI-X 2.0.0 Beta1版配套OpenHarmony API 12 Beta1，新增适配部分API 12�
 | ------- | ------------------------------------------ | ------------------------------------------------------------ | ------------ |
 | IA728D  | 界面中有Web对象bindMenu弹出菜单无法交互    | 使用web组件跨平台弹出菜单不可用。<br />                      | 2024.12.30   |
 | IA728I  | iOS无法通过setPreferredOrientation强制横屏 | 该API无法横屏。<br />规避措施：使用bridge桥接机制调用原生接口横屏。 | 2024.9.30    |
+| IA72BB  | getUIContext无法使用                       | 该接口获取UIContext会异常。<br />                            | 2024.9.30    |
+
