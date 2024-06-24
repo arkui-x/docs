@@ -9,11 +9,13 @@
   - [@ohos.arkui.inspector (布局回调)](js-apis-arkui-inspector.md)
   - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
   - [@ohos.curves (插值计算)](js-apis-curve.md)
+  - [@ohos.font (注册自定义字体)](js-apis-font.md)
   - [@ohos.matrix4 (矩阵变换)](js-apis-matrix4.md)
   - [@ohos.measure (文本计算)](js-apis-measure.md)
   - [@ohos.mediaquery (媒体查询)](js-apis-mediaquery.md)
   - [@ohos.promptAction (弹窗)](js-apis-promptAction.md)
   - [@ohos.router (页面路由)](js-apis-router.md)
+  - [@ohos.arkui.drawableDescriptor (DrawableDescriptor)](js-apis-arkui-drawableDescriptor.md)
   
 - Ability框架
   - Stage模型能力的接口(推荐)
@@ -53,7 +55,9 @@
 
 - 媒体
   - [@ohos.multimedia.image (图片处理)](js-apis-image.md)
-
+  - [@ohos.multimedia.audio (音频管理)](js-apis-audio.md)
+  - [@ohos.multimedia.media (媒体服务)](js-apis-media.md)
+  
 - 资源管理
   - [@ohos.i18n (国际化-I18n)](js-apis-i18n.md)
   - [@ohos.intl (国际化-Intl)](js-apis-intl.md)
@@ -66,16 +70,23 @@
   - [@ohos.net.http (数据请求)](js-apis-http.md)
   - [@ohos.net.connection (网络连接管理)](js-apis-net-connection.md)
 
+- WiFi管理
+  - [@ohos.wifiManager (WLAN)](js-apis-wlan.md)
+
 - 文件管理
   - [@ohos.file.fs (文件管理)](js-apis-file-fs.md)
+  - [@ohos.file.photoAccessHelper (相册管理模块)](js-apis-photoAccessHelper.md)
+  - [@ohos.file.picker(选择器)](js-apis-file-picker.md)
 
 - 设备管理
   - [@ohos.deviceInfo (设备信息)](js-apis-device_Info.md)
 
 - 数据管理
+  - [@ohos.data.dataSharePredicates (数据共享谓词)](js-apis-data-dataSharePredicates.md)
   - [@ohos.data.preferences (用户首选项)](js-apis-data-preferences.md)
   - [@ohos.data.relationalStore (关系型数据库)](js-apis-data-relationalStore.md)
-
+  - [@ohos.data.ValuesBucket (数据集)](js-apis-data-valuesBucket.md)
+  
 - 安全
   - [@ohos.abilityAccessCtrl (程序访问控制管理)](js-apis-abilityAccessCtrl.md)
   - [@ohos.security.cryptoFramework (加解密算法库框架)](js-apis-cryptoFramework.md)
@@ -112,5 +123,9 @@
 - 公共事件与通知
   - [系统公共事件定义](commonEventManager-definitions.md)
   - [@ohos.commonEventManager (公共事件模块)](js-apis-commonEventManager.md)
+  - [@ohos.notificationManager (NotificationManager模块)](js-apis-notificationManager.md)
   - application
     - [EventHub](js-apis-inner-application-eventHub.md)
+
+- 进程线程通信
+  - [@ohos.events.emitter (Emitter)](js-apis-emitter.md)

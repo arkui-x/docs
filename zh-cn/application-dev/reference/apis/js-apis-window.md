@@ -57,6 +57,20 @@ import window from '@ohos.window';
 | width  | number   | 是   | 是   | 矩形区域的宽度，单位为px，该参数应为整数。 |
 | height | number   | 是   | 是   | 矩形区域的高度，单位为px，该参数应为整数。 |
 
+## AvoidArea<sup>7+</sup>
+
+窗口内容规避区域。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+| 名称       | 类型      | 可读 | 可写 | 说明               |
+| ---------- | ------------- | ---- | ---- | ------------------ |
+| visible<sup>9+</sup>    | boolean       | 是   | 是   | 规避区域是否可见。true表示可见；false表示不可见。 |
+| leftRect   | [Rect](#rect7) | 是   | 是   | 屏幕左侧的矩形区。 |
+| topRect    | [Rect](#rect7) | 是   | 是   | 屏幕顶部的矩形区。 |
+| rightRect  | [Rect](#rect7) | 是   | 是   | 屏幕右侧的矩形区。 |
+| bottomRect | [Rect](#rect7) | 是   | 是   | 屏幕底部的矩形区。 |
+
 ## Size<sup>7+</sup>
 
 窗口大小。
@@ -124,6 +138,20 @@ try {
     console.error('Failed to create the window. Cause: ' + JSON.stringify(exception));
 }
 ```
+
+## AvoidAreaType<sup>7+</sup>
+
+窗口内容需要规避区域的类型枚举。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+| 名称                             | 值   | 说明                                                         |
+| -------------------------------- | ---- | ------------------------------------------------------------ |
+| TYPE_SYSTEM                      | 0    | 表示系统默认区域。一般包括状态栏、导航栏，各设备系统定义可能不同。 |
+| TYPE_CUTOUT                      | 1    | 表示刘海屏区域。                                             |
+| TYPE_SYSTEM_GESTURE<sup>9+</sup> | 2    | 表示手势区域。                                               |
+| TYPE_KEYBOARD<sup>9+</sup>       | 3    | 表示软键盘区域。                                             |
+| TYPE_NAVIGATION_INDICATOR<sup>11+</sup> | 4    | 表示导航条区域。 
 
 ## window.createWindow<sup>9+</sup>
 
@@ -313,6 +341,18 @@ try {
   console.error('Failed to obtain the top window. Cause: ' + JSON.stringify(exception));
 }
 ```
+
+## SpecificSystemBar<sup>11+</sup>
+
+当前支持显示或隐藏的系统栏类型。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称                  | 类型       | 说明     |
+|---------------------|----------|--------|
+| status              | string   | 状态栏。   |
+| navigation          | string   | 导航栏。   |
+| navigationIndicator | string   | 底部导航条。 |
 
 ## Window
 
@@ -715,6 +755,140 @@ try {
 }
 ```
 
+### getWindowAvoidArea<sup>9+</sup>
+
+getWindowAvoidArea(type: AvoidAreaType): AvoidArea
+
+获取窗口内容规避的区域；如系统栏区域、刘海屏区域、手势区域、软键盘区域等与窗口内容重叠时，需要窗口内容避让的区域。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| ---- |----------------------------------| -- | ------------------------------------------------------------ |
+| type | [AvoidAreaType](#avoidareatype7) | 是 | 表示规避区类型。 |
+
+**返回值：**
+
+| 类型 | 说明 |
+|--------------------------| ----------------- |
+| [AvoidArea](#avoidarea7) | 窗口内容规避区域。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | ------------------------------ |
+| 1300002 | This window state is abnormal. |
+
+**示例：**
+
+```ts
+let type = window.AvoidAreaType.TYPE_SYSTEM;
+try {
+  let avoidArea = windowClass.getWindowAvoidArea(type);
+} catch (exception) {
+  console.error('Failed to obtain the area. Cause:' + JSON.stringify(exception));
+}
+```
+
+### setWindowLayoutFullScreen<sup>9+</sup>
+
+setWindowLayoutFullScreen(isLayoutFullScreen: boolean, callback: AsyncCallback&lt;void&gt;): void
+
+设置窗口的布局是否为沉浸式布局，使用callback异步回调。
+沉浸式布局是指布局不避让状态栏与导航栏，组件可能产生与其重叠的情况。
+非沉浸式布局是指布局避让状态栏与导航栏，组件不会与其重叠。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| ------------------ | ------------------------- | -- | --------- |
+| isLayoutFullScreen | boolean                   | 是 | 窗口的布局是否为沉浸式布局（该沉浸式布局状态栏、导航栏仍然显示）。true表示沉浸式布局；false表示非沉浸式布局。 |
+| callback           | AsyncCallback&lt;void&gt; | 是 | 回调函数。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 1300002 | This window state is abnormal.               |
+| 1300003 | This window manager service works abnormally. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@ohos.base';
+
+let isLayoutFullScreen = true;
+try {
+  windowClass.setWindowLayoutFullScreen(isLayoutFullScreen, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
+      return;
+    }
+    console.info('Succeeded in setting the window layout to full-screen mode.');
+  });
+} catch (exception) {
+  console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(exception));
+}
+```
+
+### setWindowLayoutFullScreen<sup>9+</sup>
+
+setWindowLayoutFullScreen(isLayoutFullScreen: boolean): Promise&lt;void&gt;
+
+设置窗口的布局是否为沉浸式布局，使用Promise异步回调。
+沉浸式布局是指布局不避让状态栏与导航栏，组件可能产生与其重叠的情况。
+非沉浸式布局是指布局避让状态栏与导航栏，组件不会与其重叠。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| ------------------ | ------- | -- | ------------------------------------------------------------------------------------------------ |
+| isLayoutFullScreen | boolean | 是 | 窗口的布局是否为沉浸式布局（该沉浸式布局状态栏、导航栏仍然显示）。true表示沉浸式布局；false表示非沉浸式布局。 |
+
+**返回值：**
+
+| 类型 | 说明 |
+| ------------------- | ------------------------ |
+| Promise&lt;void&gt; | 无返回结果的Promise对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 1300002 | This window state is abnormal.               |
+| 1300003 | This window manager service works abnormally. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@ohos.base';
+
+let isLayoutFullScreen = true;
+try {
+  let promise = windowClass.setWindowLayoutFullScreen(isLayoutFullScreen);
+  promise.then(() => {
+    console.info('Succeeded in setting the window layout to full-screen mode.');
+  }).catch((err: BusinessError) => {
+    console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
+  });
+} catch (exception) {
+  console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(exception));
+}
+```
+
 ### setWindowSystemBarEnable<sup>9+</sup>
 
 setWindowSystemBarEnable(names: Array<'status' | 'navigation'>, callback: AsyncCallback&lt;void&gt;): void
@@ -800,6 +974,54 @@ let names: Array<'status' | 'navigation'> = [];
 try {
   let windowClass: window.Window = window.findWindow("test");
   let promise = windowClass.setWindowSystemBarEnable(names);
+  promise.then(() => {
+    console.info('Succeeded in setting the system bar to be invisible.');
+  }).catch((err: BusinessError) => {
+    console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(err));
+  });
+} catch (exception) {
+  console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(exception));
+}
+```
+
+### setSpecificSystemBarEnabled<sup>11+</sup>
+
+setSpecificSystemBarEnabled(name: SpecificSystemBar, enable: boolean): Promise&lt;void&gt;
+
+设置窗口全屏模式时导航栏、状态栏、底部导航条的显示和隐藏，使用Promise异步回调。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**参数：**
+
+| 参数名 | 类型  | 必填 | 说明 |
+| ----- | ---------------------------- | -- | --------------------------------- |
+| name  | [SpecificSystemBar](#specificsystembar11) | 是 | 设置窗口全屏模式时，显示或隐藏的系统栏类型。 |
+| enable  | boolean | 是 | 设置窗口全屏模式时状态栏、导航栏或底部导航条是否显示，true表示显示 false表示隐藏。|
+
+**返回值：**
+
+| 类型 | 说明 |
+| ------------------- | ------------------------ |
+| Promise&lt;void&gt; | 无返回结果的Promise对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 1300002 | This window state is abnormal.               |
+| 1300003 | This window manager service works abnormally. |
+
+**示例：**
+
+```ts
+// 此处以隐藏底部导航条为例
+import { BusinessError } from '@ohos.base';
+
+try {
+  let promise = windowClass.setSpecificSystemBarEnabled('navigationIndicator', false);
   promise.then(() => {
     console.info('Succeeded in setting the system bar to be invisible.');
   }).catch((err: BusinessError) => {
@@ -1247,6 +1469,86 @@ try {
   windowClass.setWindowBackgroundColor(color);
 } catch (exception) {
   console.error('Failed to set the background color. Cause: ' + JSON.stringify(exception));
+}
+```
+
+### on('windowSizeChange')<sup>7+</sup>
+
+on(type:  'windowSizeChange', callback: Callback&lt;Size&gt;): void
+
+开启窗口尺寸变化的监听。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                           | 必填 | 说明                                                     |
+| -------- | ------------------------------ | ---- | -------------------------------------------------------- |
+| type     | string                         | 是   | 监听事件，固定为'windowSizeChange'，即窗口尺寸变化事件。 |
+| callback | Callback&lt;[Size](#size7)&gt; | 是   | 回调函数。返回当前的窗口尺寸。                           |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 401     | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+
+**示例：**
+
+```ts
+try {
+  windowClass.on('windowSizeChange', (data) => {
+    console.info('Succeeded in enabling the listener for window size changes. Data: ' + JSON.stringify(data));
+  });
+} catch (exception) {
+  console.error(`Failed to enable the listener for window size changes. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### off('windowSizeChange')<sup>7+</sup>
+
+off(type: 'windowSizeChange', callback?: Callback&lt;Size&gt;): void
+
+关闭窗口尺寸变化的监听。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                          | 必填 | 说明                                                     |
+| -------- | ----------------------------- | ---- | -------------------------------------------------------- |
+| type     | string                        | 是   | 监听事件，固定为'windowSizeChange'，即窗口尺寸变化事件。 |
+| callback | Callback&lt;[Size](#size7)&gt; | 否   | 回调函数。返回当前的窗口尺寸。如果传入参数，则关闭该监听。如果未传入参数，则关闭窗口尺寸变化的监听。                           |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 401     | Parameter error. Possible cause: 1. Incorrect parameter types; 2. Parameter verification failed. |
+
+**示例：**
+
+```ts
+const callback = (size: window.Size) => {
+  // ...
+}
+try {
+  // 通过on接口开启监听
+  windowClass.on('windowSizeChange', callback);
+  // 关闭指定callback的监听
+  windowClass.off('windowSizeChange', callback);
+  // 如果通过on开启多个callback进行监听，同时关闭所有监听：
+  windowClass.off('windowSizeChange');
+} catch (exception) {
+  console.error(`Failed to disable the listener for window size changes. Cause code: ${exception.code}, message: ${exception.message}`);
 }
 ```
 
@@ -1996,6 +2298,497 @@ export default class EntryAbility extends UIAbility {
     }
   }
 };
+```
+
+
+### loadContentByName<sup>11+</sup>
+
+loadContentByName(name: string, storage: LocalStorage, callback: AsyncCallback&lt;void&gt;): void
+
+为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用callback异步回调。
+
+**模型约束：** 此接口仅可在Stage模型下使用。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                                                    | 必填 | 说明                                                         |
+| -------- | ------------------------------------------------------- | ---- | ------------------------------------------------------------ |
+| name     | string                                                  | 是   | 命名路由页面的名称。                                             |
+| storage  | [LocalStorage](../arkui-ts/page-state/arkts-localstorage.md) | 是   | 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。 |
+| callback | AsyncCallback&lt;void&gt;                               | 是   | 回调函数。                                                   |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                      |
+| -------- | --------------------------------------------- |
+| 401      | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 1300002  | This window state is abnormal.                |
+| 1300003  | This window manager service works abnormally. |
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+// EntryAbility.ets
+import { UIAbility } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import * as Index from '../pages/Index'; // 导入命名路由页面
+
+export default class EntryAbility extends UIAbility {
+  // ...
+
+  storage: LocalStorage = new LocalStorage();
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    this.storage.setOrCreate('storageSimpleProp', 121);
+    try {
+      windowStage.loadContentByName(Index.entryName, this.storage, (err: BusinessError) => {
+        const errCode: number = err.code;
+        if (errCode) {
+          console.error(`Failed to load the content. Cause code: ${err.code}, message: ${err.message}`);
+          return;
+        }
+        console.info('Succeeded in loading the content.');
+      });
+    } catch (exception) {
+      console.error(`Failed to load the content. Cause code: ${exception.code}, message: ${exception.message}`);
+    }
+  }
+};
+```
+<!--code_no_check-->
+```ts
+// ets/pages/Index.ets
+export const entryName : string = 'Index';
+@Entry({routeName: entryName, storage : LocalStorage.getShared()})
+@Component
+export struct Index {
+  @State message: string = 'Hello World'
+  build() {
+    Row() {
+      Column() {
+        Text(this.message)
+          .fontSize(50)
+          .fontWeight(FontWeight.Bold)
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+### loadContentByName<sup>11+</sup>
+
+loadContentByName(name: string, callback: AsyncCallback&lt;void&gt;): void
+
+为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，使用callback异步回调。
+
+**模型约束：** 此接口仅可在Stage模型下使用。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                      | 必填 | 说明             |
+| -------- | ------------------------- | ---- | ---------------- |
+| name     | string                    | 是   | 命名路由页面的名称。 |
+| callback | AsyncCallback&lt;void&gt; | 是   | 回调函数。       |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                      |
+| -------- | --------------------------------------------- |
+| 401      | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 1300002  | This window state is abnormal.                |
+| 1300003  | This window manager service works abnormally. |
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+// EntryAbility.ets
+import { UIAbility } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import * as Index from '../pages/Index'; // 导入命名路由页面
+
+export default class EntryAbility extends UIAbility {
+  // ...
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    try {
+      windowStage.loadContentByName(Index.entryName, (err: BusinessError) => {
+        const errCode: number = err.code;
+        if (errCode) {
+          console.error(`Failed to load the content. Cause code: ${err.code}, message: ${err.message}`);
+          return;
+        }
+        console.info('Succeeded in loading the content.');
+      });
+    } catch (exception) {
+      console.error(`Failed to load the content. Cause code: ${exception.code}, message: ${exception.message}`);
+    }
+  }
+};
+```
+<!--code_no_check-->
+```ts
+// ets/pages/Index.ets
+export const entryName : string = 'Index';
+@Entry({routeName: entryName})
+@Component
+export struct Index {
+  @State message: string = 'Hello World'
+  build() {
+    Row() {
+      Column() {
+        Text(this.message)
+          .fontSize(50)
+          .fontWeight(FontWeight.Bold)
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+### loadContentByName<sup>11+</sup>
+
+loadContentByName(name: string, storage?: LocalStorage): Promise&lt;void&gt;;
+
+为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用promise异步回调。
+
+**模型约束：** 此接口仅可在Stage模型下使用。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名  | 类型         | 必填 | 说明                                                         |
+| ------- | ------------ | ---- | ------------------------------------------------------------ |
+| name    | string       | 是   | 命名路由页面的名称。                                             |
+| storage | LocalStorage | 否   | 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                      |
+| -------- | --------------------------------------------- |
+| 401      | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 1300002  | This window state is abnormal.                |
+| 1300003  | This window manager service works abnormally. |
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+// EntryAbility.ets
+import { UIAbility } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import * as Index from '../pages/Index'; // 导入命名路由页面
+
+export default class EntryAbility extends UIAbility {
+  // ...
+
+  storage: LocalStorage = new LocalStorage();
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    this.storage.setOrCreate('storageSimpleProp', 121);
+    try {
+      let promise = windowStage.loadContentByName(Index.entryName, this.storage);
+      promise.then(() => {
+        console.info('Succeeded in loading the content.');
+      }).catch((err: BusinessError) => {
+        console.error(`Failed to load the content. Cause code: ${err.code}, message: ${err.message}`);
+      });
+    } catch (exception) {
+      console.error(`Failed to load the content. Cause code: ${exception.code}, message: ${exception.message}`);
+    }
+  }
+};
+```
+<!--code_no_check-->
+```ts
+// ets/pages/Index.ets
+export const entryName : string = 'Index';
+@Entry({routeName: entryName, storage : LocalStorage.getShared()})
+@Component
+export struct Index {
+  @State message: string = 'Hello World'
+  build() {
+    Row() {
+      Column() {
+        Text(this.message)
+          .fontSize(50)
+          .fontWeight(FontWeight.Bold)
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+### loadContentByName<sup>11+</sup>
+
+loadContentByName(name: string, storage: LocalStorage, callback: AsyncCallback&lt;void&gt;): void
+
+为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用callback异步回调。
+
+**模型约束：** 此接口仅可在Stage模型下使用。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                                                    | 必填 | 说明                                                         |
+| -------- | ------------------------------------------------------- | ---- | ------------------------------------------------------------ |
+| name     | string                                                  | 是   | 命名路由页面的名称。                                             |
+| storage  | [LocalStorage](../arkui-ts/page-state/arkts-localstorage.md) | 是   | 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。 |
+| callback | AsyncCallback&lt;void&gt;                               | 是   | 回调函数。                                                   |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                      |
+| -------- | --------------------------------------------- |
+| 401      | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 1300002  | This window state is abnormal.                |
+| 1300003  | This window manager service works abnormally. |
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+// EntryAbility.ets
+import { UIAbility } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import * as Index from '../pages/Index'; // 导入命名路由页面
+
+export default class EntryAbility extends UIAbility {
+  // ...
+
+  storage: LocalStorage = new LocalStorage();
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    this.storage.setOrCreate('storageSimpleProp', 121);
+    try {
+      windowStage.loadContentByName(Index.entryName, this.storage, (err: BusinessError) => {
+        const errCode: number = err.code;
+        if (errCode) {
+          console.error(`Failed to load the content. Cause code: ${err.code}, message: ${err.message}`);
+          return;
+        }
+        console.info('Succeeded in loading the content.');
+      });
+    } catch (exception) {
+      console.error(`Failed to load the content. Cause code: ${exception.code}, message: ${exception.message}`);
+    }
+  }
+};
+```
+<!--code_no_check-->
+```ts
+// ets/pages/Index.ets
+export const entryName : string = 'Index';
+@Entry({routeName: entryName, storage : LocalStorage.getShared()})
+@Component
+export struct Index {
+  @State message: string = 'Hello World'
+  build() {
+    Row() {
+      Column() {
+        Text(this.message)
+          .fontSize(50)
+          .fontWeight(FontWeight.Bold)
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+### loadContentByName<sup>11+</sup>
+
+loadContentByName(name: string, callback: AsyncCallback&lt;void&gt;): void
+
+为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，使用callback异步回调。
+
+**模型约束：** 此接口仅可在Stage模型下使用。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                      | 必填 | 说明             |
+| -------- | ------------------------- | ---- | ---------------- |
+| name     | string                    | 是   | 命名路由页面的名称。 |
+| callback | AsyncCallback&lt;void&gt; | 是   | 回调函数。       |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                      |
+| -------- | --------------------------------------------- |
+| 401      | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 1300002  | This window state is abnormal.                |
+| 1300003  | This window manager service works abnormally. |
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+// EntryAbility.ets
+import { UIAbility } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import * as Index from '../pages/Index'; // 导入命名路由页面
+
+export default class EntryAbility extends UIAbility {
+  // ...
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    try {
+      windowStage.loadContentByName(Index.entryName, (err: BusinessError) => {
+        const errCode: number = err.code;
+        if (errCode) {
+          console.error(`Failed to load the content. Cause code: ${err.code}, message: ${err.message}`);
+          return;
+        }
+        console.info('Succeeded in loading the content.');
+      });
+    } catch (exception) {
+      console.error(`Failed to load the content. Cause code: ${exception.code}, message: ${exception.message}`);
+    }
+  }
+};
+```
+<!--code_no_check-->
+```ts
+// ets/pages/Index.ets
+export const entryName : string = 'Index';
+@Entry({routeName: entryName})
+@Component
+export struct Index {
+  @State message: string = 'Hello World'
+  build() {
+    Row() {
+      Column() {
+        Text(this.message)
+          .fontSize(50)
+          .fontWeight(FontWeight.Bold)
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+### loadContentByName<sup>11+</sup>
+
+loadContentByName(name: string, storage?: LocalStorage): Promise&lt;void&gt;;
+
+为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用promise异步回调。
+
+**模型约束：** 此接口仅可在Stage模型下使用。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名  | 类型         | 必填 | 说明                                                         |
+| ------- | ------------ | ---- | ------------------------------------------------------------ |
+| name    | string       | 是   | 命名路由页面的名称。                                             |
+| storage | LocalStorage | 否   | 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                      |
+| -------- | --------------------------------------------- |
+| 401      | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 1300002  | This window state is abnormal.                |
+| 1300003  | This window manager service works abnormally. |
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+// EntryAbility.ets
+import { UIAbility } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import * as Index from '../pages/Index'; // 导入命名路由页面
+
+export default class EntryAbility extends UIAbility {
+  // ...
+
+  storage: LocalStorage = new LocalStorage();
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.log('onWindowStageCreate');
+    this.storage.setOrCreate('storageSimpleProp', 121);
+    try {
+      let promise = windowStage.loadContentByName(Index.entryName, this.storage);
+      promise.then(() => {
+        console.info('Succeeded in loading the content.');
+      }).catch((err: BusinessError) => {
+        console.error(`Failed to load the content. Cause code: ${err.code}, message: ${err.message}`);
+      });
+    } catch (exception) {
+      console.error(`Failed to load the content. Cause code: ${exception.code}, message: ${exception.message}`);
+    }
+  }
+};
+```
+<!--code_no_check-->
+```ts
+// ets/pages/Index.ets
+export const entryName : string = 'Index';
+@Entry({routeName: entryName, storage : LocalStorage.getShared()})
+@Component
+export struct Index {
+  @State message: string = 'Hello World'
+  build() {
+    Row() {
+      Column() {
+        Text(this.message)
+          .fontSize(50)
+          .fontWeight(FontWeight.Bold)
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
 ```
 
 ### on('windowStageEvent')<sup>9+</sup>

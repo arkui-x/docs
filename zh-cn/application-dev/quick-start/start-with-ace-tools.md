@@ -10,13 +10,13 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 
 1、建议优先下载DevEco Studio，请参考[社区版本软件和工具配套关系](../../release-notes/ArkUI-X-v1.1.6-release.md#配套关系)完成DevEco Studio的下载和安装，通过DevEco Studio，可以下载到HarmonyOS SDK、OpenHarmony SDK、ArkUI-X SDK、OHPM、Node。
 
-​![image](figures/SDK_setting.png)
+![image](figures/SDK_setting.png)
 
-​![image](figures/node_ohpm_setting.png)
+![image](figures/node_ohpm_setting.png)
 
 2、如果您需要用ACE Tools进行安卓应用的跨平台开发，Android SDK、Java SDK，需要提前下载安装到本地环境，对于iOS应用的跨平台开发，Xcode也需要提前下载安装到本地环境。
 
-Ubuntu环境用户请参考[Ubuntu环境配置说明](assets/how-to-configure-dev-environment-20240416103516-dml5y14.md)。
+Ubuntu环境用户请参考[Ubuntu环境配置说明](../tutorial/how-to-configure-dev-environment.md)。
 
 ### 环境准备
 
@@ -67,10 +67,10 @@ ohos@user Desktop % ace create demo
 ? Enter the project name(demo): # 输入工程名称，不输入默认为文件夹名称
 ? Enter the bundleName (com.example.demo):  # 输入包名，不输入默认为com.example.工程名
 ? Enter the runtimeOS (1: OpenHarmony, 2: HarmonyOS): 1 # 输入RuntimeOS系统
-? Please select the Complie SDk (1: 10, 2: 11): 2 # 输入编译SDK版本
+? Please select the Complie SDk (1: 10, 2: 11, 3: 12): 2 # 输入编译SDK版本
+Signing iOS app for device deployment using developer identity: "Apple Development: xxxxx"
 
 Project created. Target directory:  ${当前目录}/demo.
-
 In order to run your app, type:
 
    $ cd demo
@@ -93,5 +93,3 @@ ace run
 ## 常用命令参考
 
 - [ACE Tools使用说明](https://gitee.com/arkui-x/cli/blob/master/README.md)
-
-‍

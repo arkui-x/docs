@@ -36,7 +36,7 @@ API extension involves the following: You can use the OpenHarmony NAPI mechanism
   ```
 
 ### Configuring the Java Environment
-**NOTE**:<br>You are advised to [download JDK17.0.10 or later](https://repo.huaweicloud.com/openjdk/).
+**NOTE**<br>You are advised to [download JDK17.0.10 or later](https://repo.huaweicloud.com/openjdk/).
 
   [Linux]
 
@@ -58,7 +58,7 @@ API extension involves the following: You can use the OpenHarmony NAPI mechanism
 
   [Linux]
 
-  Use the [command line tools](https://developer.android.google.cn/studio#command-line-tools-only) to download and manage the Android SDK. For details about how to use the command line tools, see [sdkmanager](https://developer.android.com/tools/sdkmanager). The SDK must meet the following version requirements:
+  Use the [command line tools](https://developer.android.google.cn/studio#command-line-tools-only) to download and manage the Android SDK. For details about how to use the command line tools, see [sdkmanager](https://developer.android.google.cn/tools/sdkmanager?hl=en). The SDK must meet the following version requirements:
 
   ```shell
   ./sdkmanager --install "ndk;21.3.6528147" --sdk_root=/home/usrername/path-to-android-sdk

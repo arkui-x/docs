@@ -29,9 +29,9 @@
   - [运行态差异化(@ohos.deviceInfo)](quick-start/platform-different-introduction.md)
 - [动态化介绍](quick-start/dynamic-introduction.md)
 
-### 开发指南
+## 开发指南
 
-#### Android平台开发
+### Android平台开发
 
 - [将ArkUI-X添加到现有Android应用](./tutorial/how-to-integrate-arkui-into-android.md)
 - [Node-API开发指南](./tutorial/how-to-use-napi-on-android.md)
@@ -40,8 +40,10 @@
 - [Library库开发指南](./tutorial/how-to-use-library-on-android.md)
 - [动态化开发指南](./tutorial/how-to-use-dynamic-on-android.md)
 - [Plugin生命周期开发指南](./tutorial/how-to-use-arkui-x-plugin-on-android.md)
+- [联动编译开发指南](./tutorial/how-to-linkage-compilation-on-android.md)
+- [Fragment跨平台开发指南](./tutorial/how-to-use-fragment-on-android.md)
 
-#### iOS平台开发
+### iOS平台开发
 
 - [将ArkUI-X添加到现有iOS应用](./tutorial/how-to-integrate-arkui-into-ios.md)
 - [Node-API开发指南](./tutorial/how-to-use-napi-on-ios.md)
@@ -50,6 +52,7 @@
 - [Library库开发指南](./tutorial/how-to-use-library-on-ios.md)
 - [动态化开发指南](./tutorial/how-to-use-dynamic-on-ios.md)
 - [Plugin生命周期开发指南](./tutorial/how-to-use-arkui-x-plugin-on-ios.md)
+- [联动编译开发指南](./tutorial/how-to-linkage-compilation-on-ios.md)
 
 ### 开发工具
 
@@ -60,6 +63,10 @@
 ### 测试
 
 - [单元/UI测试](./test/arkxtest.md)
+
+### 框架规格
+
+- [跨平台框架规格说明](./tutorial/specification/framework-specification.md)
 
 ## API参考
 
@@ -72,7 +79,10 @@
   - [Android](reference/arkui-for-android/README.md)
   - [iOS](reference/arkui-for-ios/README.md)
 
+## 最佳实践
+
+- [ArkUI-X落地运动健康](./tutorial/how-to-use-arkuix-on-huaweiHealth.md)
+
 ## 示例教程
 
 - [示例代码](https://gitee.com/arkui-x/samples)
-

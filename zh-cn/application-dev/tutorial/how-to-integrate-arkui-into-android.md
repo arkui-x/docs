@@ -8,7 +8,7 @@
 * Android应用工程集成ArkUI-X应用编译产物
 * 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行Android应用开发
 
-### Android 工程创建
+## Android 工程创建
 通过ACE Tools或DevEco Studio创建一个ArkUI-X应用工程（示例工程名为HelloWorld），其工程目录下的.arkui-x/android文件代表对应的Android工程。Android应用的入口Application和Activity类，这两个类需要继承自ArkUI提供的基类，Activity继承StageActivity类，Application则会继承StageApplication类，Application也可以通过代理类StageApplicationDelegate使用，详情参见[使用说明](https://gitee.com/arkui-x/docs/tree/master/zh-cn/application-dev/reference/arkui-for-android):
 * Activity类
   该类名通过module名和ability名拼接而得，一个ability对应一个Android工程侧的Activity类。详情参见[Ability使用说明](../quick-start/start-with-ability-on-android.md):
@@ -54,7 +54,7 @@
     ```
 
 
-### Android 工程编译
+## Android 工程编译
 对Android工程编译时，ACE Tools或DevEco Studio会完成两个步骤：
 
 * 集成ArkUI-X SDK 
@@ -66,15 +66,15 @@
     src/main/assets/arkui-x
         ├── entry
         |   ├── ets
-        |   |   ├── modules.abc
-        |   |   └── sourceMaps.map
+        |   |   └── modules.abc
         |   ├── resouces.index
         |   ├── resouces
         |   └── module.json
         └── systemres
     ```
 
-### 应用混淆配置说明
+
+## 应用混淆配置说明
 
 在打包混淆的时候需要注意 **Arkui-X跨平台SDK** 相关的内容不应该被混淆，所以我们需要配置混淆文件。
 
@@ -110,7 +110,7 @@ proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pr
 
 完成上述步骤后，即可使用`Android studio`运行程序安装至Android手机上。
 
-### 参考
+## 参考
 
 【1】[ArkUI-X Samples仓](https://gitee.com/arkui-x/samples)
 

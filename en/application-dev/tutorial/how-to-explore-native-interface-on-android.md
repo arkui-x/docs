@@ -1,10 +1,10 @@
-# How to Extend Native APIs on Android
+# Extending Native APIs on Android
 
-This tutorial describes how to call Android methods from ArkUI based on the [N-API](../quick-start/ffi-napi-introduction.md) mechanism and plug-in management mechanism on Android.
+This tutorial describes how to use [Node-API](../quick-start/ffi-napi-introduction.md) to call Android APIs using ArkUI.
 
 ## Interface Definition
 
-Implement the **log** method of the **testplugin** module to call the Android log system and print data from ArkUI.
+Implement the **log** method of the **testplugin** module to call the Android log system to print ArkUI data.
 
 | Name| Type| Return Type| Description|
 | --- | --- | --- | --- |
@@ -12,18 +12,26 @@ Implement the **log** method of the **testplugin** module to call the Android lo
 
 ## How to Develop
 
-1. Use [ACE Tools](../quick-start/start-overview.md) or IDE to create a Native project.
+1. Use [ACE Tools](../quick-start/start-overview.md) or IDE to create a native project.
 
 ```
-// Use ACE Tools to create a Native project.
-ace create project
-? Please enter the project name: testplugin
-? Please enter the bundle name (com.example.testplugin):
-? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 1
-? Please enter the template (1: Empty Ability, 2: Native C++): 2
+// Use ACE Tools to create a native project.
+ace create demo -t plugin_napi
+? Please enter the project name(demo)
+? Please enter the bundleName (com.example.demo):
+? Please enter the runtimeOS (1: OpenHarmony, 2: HarmonyOS): 1
+
+Project created successfully! Target directory: ${current_directory}/demo.
+
+In order to run your application, type:
+    
+    $ cd demo
+    $ ace run
+      
+Your application code is in demo/entry.
 ```
 
-2. Import the Native .so file to ArkUI. For example, in the **testplugin\entry\src\main\ets\pages\Index.ets** file, **import testplugin from 'libtestplugin.so'** means to use the **libtestplugin.so** capability in ArkUI. Then, provide the ArkUI object named **testplugin** to the application. You can use this object to develop Java plug-ins based on the plug-in management mechanism and finally call the Java **log** method developed in the **`testplugin\.arkui-x\android\app\src\main\java\com\example\testplugin\TestPlugin.java**.
+2. Import the native .so file to ArkUI. For example, in the **testplugin\entry\src\main\ets\pages\Index.ets** file, **import testplugin from 'libtestplugin.so'** means to use the **libtestplugin.so** capability in ArkUI. Then, provide the ArkUI object named **testplugin** to the application. You can use this object to develop Java plug-ins based on the addon management mechanism and finally call the Java **log** method developed in the **testplugin\android\app\src\main\java\com\example\testplugin\TestPlugin.java**.
 
 ```typescript
 // Index.ets
@@ -37,9 +45,9 @@ testplugin.log("log from ArkUI to Android");
 
 ## Implementing the Module
 
-The essence of calling Android Java APIs is to enable ArkTS to call Java APIs. The recommended path for API calling is ArkTS -> C/C++ -> Java. Specifically, implement the Java method on Android, register the Java module using the Java Native Interface (JNI) mechanism, and then register the C/C++ module using the [N-API](../quick-start/ffi-napi-introduction.md#n-api) mechanism for the ArkTS to call.
+The essence of calling Android Java APIs is to enable ArkTS to call Java APIs. The recommended path for API calling is ArkTS -> C/C++ -> Java. Specifically, implement the Java method on Android, register the Java module using the Java Native Interface (JNI) mechanism, and then register the C/C++ module using the [Node-API](../quick-start/ffi-napi-introduction.md) mechanism for the ArkTS to call.
 
-### 1. Implementing the Java log Method
+### 1. Implementing the Java log method
 
 ```Java
 // android\app\src\main\java\com\example\testplugin\TestPlugin.java
@@ -68,13 +76,13 @@ public class TestPlugin {
 }
 ```
 
-### 2. Invoking the Java log Method Using JNI
+### 2. Calling the Java log method using JNI
 
 1. Register a Java module on C/C++.<br>This operation enables C/C++ to call Java because JNI allows interaction between Java code and C/C++ code.
 
 > **NOTE**
 >
-> In the Native template of ACE Tools or IDE, files in the SDK **arkui-x\engine\lib\include** directory are stored in the **android\app\src\main\cpp\include** directory.
+> In the native template of ACE Tools or IDE, files in the SDK **arkui-x\engine\lib\include** directory are stored in the **android\app\src\main\cpp\include** directory.
 
 ```C++
 // android\app\src\main\cpp\test_plugin_jni.cpp
@@ -218,7 +226,7 @@ public:
 
 ### 3. Registering the Java Method and testplugin
 
-Register the Java method using the plug-in mechanism and register the **testplugin** module using the N-API mechanism to provide the ArkTS log method.
+Register the Java method using the addon mechanism and register the **testplugin** module using Node-API to provide the ArkTS log method.
 
 Implement the C/C++ module corresponding to **testplugin.log**.
 
@@ -370,10 +378,10 @@ project("testplugin")
 // Add the ANDROID_PLATFORM macro.
 add_definitions(-DANDROID_PLATFORM)
 
-// Default configuration of the Native template.
+// Default configuration of the native template.
 set(TESTPLUGIN_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
-// Default configuration of the Native template.
+// Default configuration of the native template.
 include_directories(
         ${TESTPLUGIN_ROOT_PATH}
         ${TESTPLUGIN_ROOT_PATH}/include
