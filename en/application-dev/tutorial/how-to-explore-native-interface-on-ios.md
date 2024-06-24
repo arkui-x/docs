@@ -1,10 +1,10 @@
-# How to Extend Native APIs on iOS
+# Extending Native APIs on iOS
 
-This tutorial describes how to call Android methods from ArkUI based on the [N-API](../quick-start/ffi-napi-introduction.md) mechanism and plug-in management mechanism on iOS.
+This tutorial describes how to use [Node-API](../quick-start/ffi-napi-introduction.md) to call iOS APIs using ArkUI.
 
 ## Interface Definition
 
-Implement the **log** method of the **testplugin** module to call the iOS log system and print data from ArkUI.
+Implement the **log** method of the **testplugin** module to call the iOS log system to print ArkUI data.
 
 | Name| Type| Return Type| Description|
 | --- | --- | --- | --- |
@@ -12,18 +12,26 @@ Implement the **log** method of the **testplugin** module to call the iOS log sy
 
 ## How to Develop
 
-1. Use ACE Tools(../quick-start/start-overview.md) or IDE to create a Native project.
+1. Use [ACE Tools](../quick-start/start-overview.md) or IDE to create a native project.
 
 ```
-// Use ACE Tools to create a Native project.
-ace create project
-? Please enter the project name: testplugin
-? Please enter the bundle name (com.example.testplugin):
-? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 1
-? Please enter the template (1: Empty Ability, 2: Native C++): 2
+// Use ACE Tools to create a native project.
+ace create demo -t plugin_napi
+? Please enter the project name(demo)
+? Please enter the bundleName (com.example.demo):
+? Please enter the runtimeOS (1: OpenHarmony, 2: HarmonyOS): 1
+
+Project created successfully! Target directory: ${current_directory}/demo.
+
+In order to run your application, type:
+    
+    $ cd demo
+    $ ace run
+      
+Your application code is in demo/entry.
 ```
 
-2. Import the Native .so file to ArkUI. For example, in the **testplugin\source\entry\src\main\ets\pages\Index.ets** file, **import testplugin from 'libtestplugin.so'** means to use the **libtestplugin.so** capability in ArkUI. Then, provide the ArkUI object named **testplugin** to the application. You can use this object to develop Objective-C (OC) plug-ins based on the plug-in management mechanism and finally call the OC **log** method developed in the **testplugin\ios\app\ios_test_plugin.m**.
+2. Import the native .so file to ArkUI. For example, in the **testplugin\source\entry\src\main\ets\pages\Index.ets** file, **import testplugin from 'libtestplugin.so'** means to use the **libtestplugin.so** capability in ArkUI. Then, provide the ArkUI object named **testplugin** to the application. You can use this object to develop Objective-C (OC) plug-ins based on the plug-in management mechanism and finally call the OC **log** method developed in the **testplugin\ios\app\ios_test_plugin.m**.
 
 ```typescript
 // Index.ets
@@ -37,7 +45,7 @@ testplugin.log("log from ArkUI to iOS");
 
 ## Implementing the Module
 
-The essence of calling iOS OC APIs is to enable ArkTS to call OC APIs. The recommended path for API calling is ArkTS -> C/C++ -> OC. Specifically, implement the OC API on iOS, encapsulate the OC API in C/C++, and then register the C/C++ module using the [N-API](../quick-start/ffi-napi-introduction.md#n-api) mechanism for the ArkTS to call.
+The essence of calling iOS OC APIs is to enable ArkTS to call OC APIs. The recommended path for API calling is ArkTS -> C/C++ -> OC. Specifically, implement the OC API on iOS, encapsulate the OC API in C/C++, and then register the C/C++ module using the [Node-API](../quick-start/ffi-napi-introduction.md) mechanism for the ArkTS to call.
 
 ### 1. Implementing the OC log Method
 
@@ -82,11 +90,11 @@ NS_ASSUME_NONNULL_BEGIN
 NS_ASSUME_NONNULL_END
 ```
 
-### 2. Implementing the OC log Method Called by C/C++
+### 2. Implementing the OC log Method in C/C++
 
 > **NOTE**
 >
-> In the Native template of ACE Tools or IDE, ensure that the header file in SDK libarkui_ios is referenced.
+> In the native template of ACE Tools or IDE, ensure that the header file in SDK libarkui_ios is included.
 
 ```C++
 // ios\app\test_plugin_impl.mm
@@ -134,9 +142,9 @@ public:
 #endif
 ```
 
-### 3. Registering the testplugin Module
+### 3. Registering the testplugin module 
 
-Register the testplugin module using the N-API mechanism to provide the ArkTS log method.
+Register the **testplugin** module using Node-API to provide the ArkTS log method.
 
 Implement the C/C++ module corresponding to **testplugin.log**.
 
@@ -145,7 +153,7 @@ Implement the C/C++ module corresponding to **testplugin.log**.
 
 #include <cstddef>
 
-// The include in libarkui_ios defines the N-APIs.
+// The include in libarkui_ios defines the Node-API interfaces.
 #include <libarkui_ios/include/napi/native_api.h>
 #include <libarkui_ios/include/node_api.h>
 

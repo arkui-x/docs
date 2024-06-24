@@ -74,7 +74,7 @@ To introduce open-source software, submit a request to the ArkUI-X PMC. Include 
 
 2. **OAT.xml** file
 
-Confirm the issues found by the OAT tool and configure the **OAT.xml** file. For details, see [OAT](https://gitee.com/arkui-x/docs/blob/master/OAT.xml). Attach the file in the request. If no issue needs to be confirmed, you do not have to configure the file.
+Confirm the issues found by the OAT tool and configure the **OAT.xml** file. For details, see [OAT](https://gitee.com/arkui-x/docs/blob/ArkUI-X-2.0.0-Beta1/OAT.xml). Attach the file in the request. If no issue needs to be confirmed, you do not have to configure the file.
 
 3. **README.OpenSource** file of the repository. The format is as follows:
 

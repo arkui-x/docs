@@ -107,57 +107,58 @@ You can use either of the following ways to use [startAbility](../reference/apis
 
 - Use openURL to implement the iOS application page redirection callback to obtain passed parameters.
 
-```objc
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+  ```objc
+  - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+  
+      // Truncate the URL based on rules.
+      NSString *bundleName = url.scheme;
+      NSString *moduleName = url.host;
+      NSString *abilityName, *params;
+  
+      NSURLComponents *urlComponents = [NSURLComponents componentsWithString:url.absoluteString];
+      NSArray <NSURLQueryItem *> *array = urlComponents.queryItems;
+      for (NSURLQueryItem * item in array) {
+          if ([item.name isEqualToString:@"abilityName"]) {
+              abilityName = item.value;
+          } else if ([item.name isEqualToString:@"params"]) {
+              params = item.value;
+          }
+      }
+      // Process a singleton ability.
+      if ([StageApplication handleSingleton:bundleName moduleName:moduleName abilityName:abilityName] == YES) {
+          return YES;
+      }
+      [self handleOpenUrlWithBundleName:bundleName
+                             moduleName:moduleName
+                            abilityName:abilityName
+                                 params:params, nil];
+      return YES;
+  }
+  ```
 
-    // Truncate the URL based on rules.
-    NSString *bundleName = url.scheme;
-    NSString *moduleName = url.host;
-    NSString *abilityName, *params;
-
-    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:url.absoluteString];
-    NSArray <NSURLQueryItem *> *array = urlComponents.queryItems;
-    for (NSURLQueryItem * item in array) {
-        if ([item.name isEqualToString:@"abilityName"]) {
-            abilityName = item.value;
-        } else if ([item.name isEqualToString:@"params"]) {
-            params = item.value;
-        }
-    }
-    // Process a singleton ability.
-    if ([StageApplication handleSingleton:bundleName moduleName:moduleName abilityName:abilityName] == YES) {
-        return YES;
-    }
-    [self handleOpenUrlWithBundleName:bundleName
-                           moduleName:moduleName
-                          abilityName:abilityName
-                               params:params, nil];
-    return YES;
-}
-```
 - Use the parameters parsed from the URL to map the view controller for an ability.
 
-```objc
-- (BOOL)handleOpenUrlWithBundleName:(NSString *)bundleName
-                         moduleName:(NSString *)moduleName
-                        abilityName:(NSString *)abilityName
-                             params:(NSString *)params, ...NS_REQUIRES_NIL_TERMINATION {
-                                               
-    NSString *instanceName = [NSString stringWithFormat:@"%@:%@:%@",bundleName, moduleName, abilityName];
-    
-    // Map the view controller based on moduleName and abilityName.
-    // Note: An incorrect moduleName or abilityName will cause a failure in finding the view controller and opening the page.
-    if ([moduleName isEqualToString:@"entry"] && [abilityName isEqualToString:@"MainAbility"]) {
-        EntryMainAbilityViewController *entryMainVC = [[EntryMainAbilityViewController alloc] initWithInstanceName:instanceName];
-        entryMainVC.params = params;
-    } else if ([moduleName isEqualToString:@"entry"] && [abilityName isEqualToString:@"Other"]) {
-        EntryOtherViewController *entryOtherVC = [[EntryOtherViewController alloc] initWithInstanceName:instanceName];
-        entryOtherVC.params = params;
-    }
-
-    return YES;
-}
-```
+  ```objc
+  - (BOOL)handleOpenUrlWithBundleName:(NSString *)bundleName
+                           moduleName:(NSString *)moduleName
+                          abilityName:(NSString *)abilityName
+                               params:(NSString *)params, ...NS_REQUIRES_NIL_TERMINATION {
+                                                 
+      NSString *instanceName = [NSString stringWithFormat:@"%@:%@:%@",bundleName, moduleName, abilityName];
+      
+      // Map the view controller based on moduleName and abilityName.
+      // Note: An incorrect moduleName or abilityName will cause a failure in finding the view controller and opening the page.
+      if ([moduleName isEqualToString:@"entry"] && [abilityName isEqualToString:@"MainAbility"]) {
+          EntryMainAbilityViewController *entryMainVC = [[EntryMainAbilityViewController alloc] initWithInstanceName:instanceName];
+          entryMainVC.params = params;
+      } else if ([moduleName isEqualToString:@"entry"] && [abilityName isEqualToString:@"Other"]) {
+          EntryOtherViewController *entryOtherVC = [[EntryOtherViewController alloc] initWithInstanceName:instanceName];
+          entryOtherVC.params = params;
+      }
+  
+      return YES;
+  }
+  ```
 
 ### Processing Lifecycle Callbacks for the ArkUI Application
 
@@ -191,6 +192,6 @@ You can use either of the following ways to use [startAbility](../reference/apis
 
 The value of **bundleName** in **info** of the iOS application must be the same as that of **bundleName** in the ability.
 
-The format of **viewControllerName** in the iOS application is as follows: moduleName of the ability + abilityName of the ability + "ViewController". 
+The format of **viewControllerName** in the iOS application is as follows: moduleName of the ability + abilityName of the ability + "ViewController".
 
 ![stage_iOS](figures/StageiOS.png)

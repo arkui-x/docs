@@ -32,43 +32,54 @@ ArkUI-X master repository: [https://gitee.com/arkui-x](https://gitee.com/arkui-x
 
 ## How to Obtain
 
-- **Obtaining the ArkUI-X Master Code**
+- **Obtaining the ArkUI-X master code**
 
   Method 1 (recommended): Use the **repo** tool to download the source code over SSH. (You must have registered an SSH public key for access to Gitee.)
 
   ```shell
-  mkdir arkui
-  cd arkui
   repo init -u git@gitee.com:arkui-x/manifest.git -b master --no-repo-verify
   repo sync -c --no-tags -j12
+  repo forall -c 'git lfs pull'
   ```
 
   Method 2: Use the **repo** tool to download the source code over HTTPS.
 
   ```shell
-  mkdir arkui
-  cd arkui
   repo init -u https://gitee.com/arkui-x/manifest.git -b master --no-repo-verify
   repo sync -c
   repo forall -c 'git lfs pull'
   ```
 
-- **Obtaining the ArkUI-X Release Code**
+- **Obtaining the ArkUI-X 1.0.0 release code**
 
   Method 1 (recommended): Use the **repo** tool to download the source code over SSH. (You must have registered an SSH public key for access to Gitee.)
 
+  Obtain the source code from the version branch. You can obtain the latest source code of the version branch, which includes the code that has been incorporated into the branch up until the time you run the following commands:
   ```shell
-  mkdir arkui
-  cd arkui
-  repo init -u git@gitee.com:arkui-x/manifest.git -b master --no-repo-verify -m arkui-dev.xml
-  repo sync -c --no-tags -j12
+  repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-1.0.0-Release --no-repo-verify
+  repo sync -c
+  repo forall -c 'git lfs pull'
+  ```
+  
+  Obtain the source code from the version tag, which is the same as that released with the version.
+  ```shell
+  repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Release --no-repo-verify
+  repo sync -c
+  repo forall -c 'git lfs pull'
   ```
 
   Method 2: Use the **repo** tool to download the source code over HTTPS.
 
+  Obtain the source code from the version branch. You can obtain the latest source code of the version branch, which includes the code that has been incorporated into the branch up until the time you run the following commands:
   ```shell
-  mkdir arkui
-  cd arkui
-  repo init -u https://gitee.com/arkui-x/manifest.git -b master --no-repo-verify -m arkui-dev.xml
-  repo sync -c --no-tags -j12
+  repo init -u https://gitee.com/arkui-x/manifest.git -b ArkUI-X-1.0.0-Release --no-repo-verify
+  repo sync -c
+  repo forall -c 'git lfs pull'
+  ```
+  
+  Obtain the source code from the version tag, which is the same as that released with the version.
+  ```shell
+  repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Release --no-repo-verify
+  repo sync -c
+  repo forall -c 'git lfs pull'
   ```

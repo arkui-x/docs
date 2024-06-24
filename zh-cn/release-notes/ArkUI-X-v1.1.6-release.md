@@ -35,6 +35,7 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
 ### API适配
 
 主要新增以下接口跨平台适配：
+* ohos.wifiManager；
 * ohos.security.cert；
 * ohos.request；
 * ohos.multimedia.image；

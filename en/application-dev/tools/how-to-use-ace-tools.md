@@ -11,32 +11,42 @@ This tutorial walks you through on how to use ACE Tools to extend the OpenHarmon
 ## Basic Project Development
 * Run the **ace create** command to create a simple project and enter the project name and related information as prompted.
     ```shell
-    ace create project
-   ? Please enter the project name: HelloWorld
-   ? Please enter the bundle name (com.example.helloworld):com.example.helloworld
-   ? Please enter the system (1: OpenHarmony, 2: HarmonyOS): 1
-   ? Please enter the project type (1: Application, 2: Library): 1
-   ? Please enter the template (1: Empty Ability, 2: Native C++): 1 // Create an empty Ability or native C++ project.
+    ohos@user Desktop % ace create demo
+   ? Please enter the project name(demo): # Enter the project name. If no project name is entered, the folder name is used by default.
+   ? Please enter the bundleName (com.example.demo): # Enter the bundle name. If no bundle name is entered, com.example.projectName is used by default.
+   ? Please enter the runtimeOS (1: OpenHarmony, 2: HarmonyOS): 1 # Enter the runtime OS.
+   ? The project already exists. Do you want to delete the directory (y / n): y
+   Delete directory successfully, creating new project.
+   
+   Project created successfully! Target directory: ${current directory}/demo.
+   
+   In order to run your application, type:
+   
+     $ cd demo
+     $ ace run
+   
+   Your application code is in demo/entry.
    ```
 * The structure of the created project is as follows:
     ```
     HelloWorld
     ├── .arkui-x
-    |   ├── android         // Android application project
-    |   └── ios             // iOS application project            
-    ├── AppScope                             
+    |   ├── android                   // Android application project
+    |   └── ios                       // iOS application project
+    ├── AppScope
     ├── build-profile.json5
-    ├── entry               // Module
+    ├── entry                         // Application entry module
     ├── hvigor
+    ├── hvigorfile.ts
     ├── hvigorw
     ├── hvigorw.bat
     └── oh-package.json5
     ```
-* The project structure is the same as the structure of a cross-platform project built using DevEco Studio.
+* The project structure is the same as the structure of a cross-platform sample project imported via DevEco Studio.
 * Run the **ace build** command to build and pack the ArkTS source code. In this way, a cross-platform application is built.
 ## Native C++ Development
 With ACE Tools, you can use native C++ APIs in cross-platform development.
-* When creating a project, select **Native C++** for the template type.
+* When creating a project, select **plugin_napi** for the template type.
 
   **Note**: The iOS project structure remains unchanged. After the iOS project is configured, the **hello.cpp** file in the **source** directory is compiled to the application.
 
@@ -59,6 +69,7 @@ With ACE Tools, you can use native C++ APIs in cross-platform development.
     |       ├── CMakeLists.txt
     |       └── hello.cpp 
     ├── hvigor
+    ├── hvigorfile.ts
     ├── hvigorw
     ├── hvigorw.bat
     └── oh-package.json5
@@ -66,19 +77,20 @@ With ACE Tools, you can use native C++ APIs in cross-platform development.
 * Run the **ace build** command to build the source code. In this way, a cross-platform application is built with native C++ APIs.
 
 ## AAR/Framework Development
-With ACE Tools, you can develop Android Archive (AAR) plug-ins.
-* When creating a project, select **Library** for the project type. The project structure is the same as the structure of a simple project. The only difference is that the project you create is an Android directory project.
+With ACE Tools, you can develop AAR for the Android platform and Framework for the iOS platform.
+* When creating a project, select **Library** for the project type.
 * Run the **ace build** command to build the library product of the target platform.
     ```shell
-    ace build aar        // Build the AAR for the Android platform.
-    ace build framework  // Build the framework of the iOS platform.
+    ace build aar              // Build AAR for the Android platform.
+    ace build ios-framework    // Build Framework for the iOS platform.
+    ace build ios-xcframework  // Build XCFramework for the iOS platform.
     ```
 ## Multi-Ability Development
 With ACE Tools, you can develop a cross-platform application with multiple abilities.
 * Run the following command and enter the ability name as prompted to create an Ability module:
     ```
     cd entry
-    ace create ability
+    ace new ability
     ? Please enter the ability name:Second
     ```
 * The preceding command adds the corresponding ability adaptation code to the **entry**, **android**, and **ios** directories. The following shows only the new code.
@@ -95,16 +107,16 @@ With ACE Tools, you can develop a cross-platform application with multiple abili
         └── SecondAbility           // SecondAbility
             └── SecondAbility.ets             
     ```
-* Run the **ace build app/apk** command to build and pack the ArkTS source code. In this way, an iOS or Android application in the multi-ability scenario is built.
+* Run the **ace build ios/apk** command to build and pack the ArkTS source code. In this way, an iOS or Android application in the multi-ability scenario is built.
 ## Multi-Module Development
 With ACE Tools, you can develop a cross-platform application with multiple modules.
 * Run the following command and enter the module name as prompted:
     ```
-    cd entry
-    ace create ability
+    cd <Root directory of the cross-platform application project>
+    ace new module
     ? Please enter the module name: feature1
     ```
-* Run the **ace create module** command and enter the module name as prompted. In this example, the module name is **feature1**. This command adds the corresponding ability adaptation code to the **entry**, **android**, and **ios** directories.
+* Run the **ace new module** command and enter the module name as prompted. In this example, the module name is **feature1**. This command adds the corresponding ability adaptation code to the **entry**, **android**, and **ios** directories.
     ```
     HelloWorld
     ├── .arkui-x
@@ -117,4 +129,8 @@ With ACE Tools, you can develop a cross-platform application with multiple modul
     └── feature1        // New module: feature1
              
     ```
-* Run the **ace build app/apk** command to build and pack the ArkTS source code. In this way, an iOS or Android application in the multi-module scenario is built.
+* Run the **ace build ios/apk** command to build and pack the ArkTS source code. In this way, an iOS or Android application in the multi-module scenario is built.
+
+##  References
+
+- [ACE Tools](https://gitee.com/arkui-x/cli/blob/master/README-EN.md)

@@ -2,15 +2,15 @@
 
 ## Overview
 
-Node-APIs provide a set of Native interfaces that encapsulate the underlying JavaScript runtime capabilities.
+Node-API provides a set of native interfaces that encapsulate the underlying JavaScript runtime capabilities. It acts as an intermediary between ArkTS/JS and C/C++.
 
 ## Supported Capabilities
 
-Node-APIs shield the differences between different underlying JavaScript engines and provide a set of stable interfaces.
+Node-API shields the differences between different underlying JavaScript engines and provide a set of stable and constent interface for interacting with JS from native code.
 
-The OpenHarmony N-API component re-implements Node-APIs. ArkUI-X extends N-APIs across platforms to enable N-APIs to be used on OpenHarmony, HarmonyOS, Android, and iOS. The following table lists the supported interfaces in the [Node-API standard library](https://nodejs.org/docs/v14.9.0/api/n-api.html).
+The OpenHarmony Node-API component re-implements Node-API. ArkUI-X extends Node-API across platforms to enable Node-API to be used on OpenHarmony, HarmonyOS, Android, and iOS. The following table lists the supported interfaces in the [Node-API standard library](https://nodejs.org/docs/v14.9.0/api/n-api.html).
 
-## Extended Symbols of the N-API Component
+## Extended Node-API Symbols
 
 **Symbols Exported from the Node-API Library**
 
