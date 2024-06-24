@@ -9,11 +9,13 @@
   - [@ohos.arkui.inspector (布局回调)](js-apis-arkui-inspector.md)
   - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
   - [@ohos.curves (插值计算)](js-apis-curve.md)
+  - [@ohos.font (注册自定义字体)](js-apis-font.md)
   - [@ohos.matrix4 (矩阵变换)](js-apis-matrix4.md)
   - [@ohos.measure (文本计算)](js-apis-measure.md)
   - [@ohos.mediaquery (媒体查询)](js-apis-mediaquery.md)
   - [@ohos.promptAction (弹窗)](js-apis-promptAction.md)
   - [@ohos.router (页面路由)](js-apis-router.md)
+  - [@ohos.arkui.drawableDescriptor (DrawableDescriptor)](js-apis-arkui-drawableDescriptor.md)
   
 - Ability框架
   - Stage模型能力的接口(推荐)
@@ -66,6 +68,9 @@
   - [@ohos.net.http (数据请求)](js-apis-http.md)
   - [@ohos.net.connection (网络连接管理)](js-apis-net-connection.md)
 
+- WiFi管理
+  - [@ohos.wifiManager (WLAN)](js-apis-wlan.md)
+
 - 文件管理
   - [@ohos.file.fs (文件管理)](js-apis-file-fs.md)
 
@@ -114,3 +119,6 @@
   - [@ohos.commonEventManager (公共事件模块)](js-apis-commonEventManager.md)
   - application
     - [EventHub](js-apis-inner-application-eventHub.md)
+
+- 进程线程通信
+  - [@ohos.events.emitter (Emitter)](js-apis-emitter.md)

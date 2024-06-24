@@ -2301,6 +2301,200 @@ getMediaBase64ByName(resName: string, density: number): Promise&lt;string&gt;
   }
   ```
 
+### getDrawableDescriptor<sup>10+</sup>
+
+getDrawableDescriptor(resId: number, density?: number, type?: number): DrawableDescriptor
+
+用户获取指定资源ID对应的DrawableDescriptor对象，用于图标的显示，使用同步方式返回。
+
+**元服务API**： 从API version 11开始，该接口支持在元服务中使用。
+
+**系统能力**：SystemCapability.Global.ResourceManager
+
+**参数：**
+
+| 参数名                    | 类型   | 必填 | 说明                                                    |
+| ------------------------- | ------ | ---- | ------------------------------------------------------- |
+| resId                     | number | 是   | 资源ID值。                                              |
+| [density](#screendensity) | number | 否   | 资源获取需要的屏幕密度，0或缺省表示默认屏幕密度。       |
+| type<sup>11+</sup>        | number | 否   | Android和ios平台仅支持0或缺省，表示取应用自身图标资源。 |
+
+**返回值：**
+
+| 类型               | 说明                                   |
+| ------------------ | -------------------------------------- |
+| DrawableDescriptor | 资源ID值对应的DrawableDescriptor对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[资源管理错误码](../errorcodes/errorcode-resource-manager.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | If the input parameter invalid. Possible causes: 1.Incorrect parameter types; 2.Parameter verification failed. |
+| 9001001  | Invalid resource ID.                                         |
+| 9001002  | No matching resource is found based on the resource ID.      |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@ohos.base';
+
+try {
+  this.context.resourceManager.getDrawableDescriptor($r('app.media.icon').id);
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getDrawableDescriptor failed, error code: ${code}, message: ${message}.`);
+}
+try {
+  this.context.resourceManager.getDrawableDescriptor($r('app.media.icon').id, 120);
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getDrawableDescriptor failed, error code: ${code}, message: ${message}.`);
+}
+try {
+  this.context.resourceManager.getDrawableDescriptor($r('app.media.icon').id, 0, 1);
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getDrawableDescriptor failed, error code: ${code}, message: ${message}.`);
+}
+```
+
+### getDrawableDescriptor<sup>10+</sup>
+
+getDrawableDescriptor(resource: Resource, density?: number, type?: number): DrawableDescriptor
+
+用户获取指定resource对应的DrawableDescriptor对象，用于图标的显示，使用同步方式返回。
+
+**元服务API**： 从API version 11开始，该接口支持在元服务中使用。
+
+**系统能力**：SystemCapability.Global.ResourceManager
+
+**模型约束**：此接口仅可在Stage模型下使用。
+
+**参数：**
+
+| 参数名                    | 类型                   | 必填 | 说明                                                    |
+| ------------------------- | ---------------------- | ---- | ------------------------------------------------------- |
+| resource                  | [Resource](#resource9) | 是   | 资源信息。                                              |
+| [density](#screendensity) | number                 | 否   | 资源获取需要的屏幕密度，0或缺省表示默认屏幕密度。       |
+| type<sup>11+</sup>        | number                 | 否   | Android和ios平台仅支持0或缺省，表示取应用自身图标资源。 |
+
+**返回值：**
+
+| 类型               | 说明                                   |
+| ------------------ | -------------------------------------- |
+| DrawableDescriptor | 资源ID值对应的DrawableDescriptor对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[资源管理错误码](../errorcodes/errorcode-resource-manager.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | If the input parameter invalid. Possible causes: 1.Incorrect parameter types; 2.Parameter verification failed. |
+| 9001001  | Invalid resource ID.                                         |
+| 9001002  | No matching resource is found based on the resource ID.      |
+
+**示例：**
+
+```ts
+import resourceManager from '@ohos.resourceManager';
+import { BusinessError } from '@ohos.base';
+
+let resource: resourceManager.Resource = {
+  bundleName: "com.example.myapplication",
+  moduleName: "entry",
+  id: $r('app.media.icon').id
+};
+try {
+  this.context.resourceManager.getDrawableDescriptor(resource);
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getDrawableDescriptor failed, error code: ${code}, message: ${message}.`);
+}
+try {
+  this.context.resourceManager.getDrawableDescriptor(resource, 120);
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getDrawableDescriptor failed, error code: ${code}, message: ${message}.`);
+}
+try {
+  this.context.resourceManager.getDrawableDescriptor(resource, 0, 1);
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getDrawableDescriptor failed, error code: ${code}, message: ${message}.`);
+}
+```
+
+### getDrawableDescriptorByName<sup>10+</sup>
+
+getDrawableDescriptorByName(resName: string, density?: number, type?: number): DrawableDescriptor
+
+用户获取指定资源名称对应的DrawableDescriptor对象，用于图标的显示，使用同步方式返回。
+
+**元服务API**： 从API version 11开始，该接口支持在元服务中使用。
+
+**系统能力**：SystemCapability.Global.ResourceManager
+
+**参数：**
+
+| 参数名                    | 类型   | 必填 | 说明                                                    |
+| ------------------------- | ------ | ---- | ------------------------------------------------------- |
+| resName                   | string | 是   | 资源名称。                                              |
+| [density](#screendensity) | number | 否   | 资源获取需要的屏幕密度，0或缺省表示默认屏幕密度。       |
+| type<sup>11+</sup>        | number | 否   | Android和ios平台仅支持0或缺省，表示取应用自身图标资源。 |
+
+**返回值：**
+
+| 类型               | 说明                                   |
+| ------------------ | -------------------------------------- |
+| DrawableDescriptor | 资源ID值对应的DrawableDescriptor对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[资源管理错误码](../errorcodes/errorcode-resource-manager.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | If the input parameter invalid. Possible causes: 1.Incorrect parameter types; 2.Parameter verification failed. |
+| 9001003  | Invalid resource name.                                       |
+| 9001004  | No matching resource is found based on the resource name.    |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@ohos.base';
+
+try {
+  this.context.resourceManager.getDrawableDescriptorByName('icon');
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getDrawableDescriptorByName failed, error code: ${code}, message: ${message}.`);
+}
+try {
+  this.context.resourceManager.getDrawableDescriptorByName('icon', 120);
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getDrawableDescriptorByName failed, error code: ${code}, message: ${message}.`);
+}
+try {
+  this.context.resourceManager.getDrawableDescriptorByName('icon', 0, 1);
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getDrawableDescriptorByName failed, error code: ${code}, message: ${message}.`);
+}
+```
+
 ### getPluralStringByName<sup>9+</sup>
 
 getPluralStringByName(resName: string, num: number, callback: AsyncCallback&lt;string&gt;): void

@@ -64,6 +64,9 @@
   - [@ohos.net.http (Data Request)](js-apis-http.md)
   - [@ohos.net.connection (Network Connection Management)](js-apis-net-connection.md)
 
+- WiFi Management
+  - [@ohos.wifiManager (WLAN)](js-apis-wlan.md)
+
 - File Management
   - [@ohos.file.fs (File Management)](js-apis-file-fs.md)
 

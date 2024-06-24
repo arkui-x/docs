@@ -75,7 +75,7 @@ ArkUI-X遵从 [Open Source Definition](https://opensource.org/docs/osd) ，满�
 
 2、OAT.xml文件
 
-请[参考](https://gitee.com/arkui-x/docs/blob/master/OAT.xml)，完成OAT.xml文件配置，申请中附上此文件内容（如果无任何需确认问题则无需配置）。
+请[参考](https://gitee.com/arkui-x/docs/blob/ArkUI-X-2.0.0-Beta1/OAT.xml)，完成OAT.xml文件配置，申请中附上此文件内容（如果无任何需确认问题则无需配置）。
 
 3、该仓的README.OpenSource文件内容，格式如下：
 

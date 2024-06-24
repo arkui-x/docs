@@ -1,28 +1,28 @@
-# How to Use N-APIs on Android
+# How to Use Node-API on Android
 
-The N-APIs implement interaction between ArkTS/TS/JS and C/C++ (Native). For details about the N-APIs supported by ArkUI-X and their application scenarios, see [FFI (N-API)](../quick-start/ffi-napi-introduction.md). This tutorial uses the sample Native project in [ArkUI-X/Samples](https://gitee.com/arkui-x/samples) as an example to describe how to use N-APIs to implement cross-language invocation on Android.
+Node-API implements enables seamless interaction between ArkTS/TS/JS and C/C++ (native). For details about the Node-API interfaces supported by ArkUI-X and their application scenarios, see [FFI (Node-API)](../quick-start/ffi-napi-introduction.md). This tutorial uses the sample native project in [ArkUI-X/Samples](https://gitee.com/arkui-x/samples) as an example to describe how to use Node-API to implement cross-language invocation on Android.
 
 ## How to Develop
 
 The development process is as follows:
-1. Set up the environment, that is, obtain the Native project.
-2. Implement Native APIs.<br>Use N-APIs to provide Native capabilities and enable Native APIs to call the methods passed by ArkTS/TS/JS.
-3. Declare API definitions.<br>Add the declaration of the Native APIs exposed to ArkTS.
-4. Call Native APIs.<br>Enable ArkTS/TS/JS to call Native APIs.
+1. Set up the environment, that is, obtain a native project.
+2. Implement native APIs.<br>Use Node-API to provide native capabilities and enable native APIs to call the methods passed by ArkTS/TS/JS.
+3. Declare API definitions.<br>Add the declaration of the native APIs exposed to ArkTS.
+4. Call native APIs.<br>Enable ArkTS/TS/JS to call native APIs.
 5. Build and run the application.<br>Build the application and run it on Android.
 
-The following two examples are provided to describe the typical application scenarios of N-APIs by modifying the sample project:
-1. Define a Native method named **Add**, which is called by ArkTS with two numbers passed in. The **Add** method adds the two numbers and returns the result to ArkTS. This example describes how to enable ArkTS to call Native methods.
-2. Define a Native method named **NativeCallArkTS**, which is called by ArkTS with an ArkTS function passed in. The **NativeCallArkTS** method invokes this ArkTS function and returns the result to ArkTS. This example describes how to enable Native to call ArkTS methods.
+The following two examples are provided to describe the typical application scenarios of Node-API by modifying the sample project:
+1. Define a native method named **Add**, which is called by ArkTS with two numbers passed in. The **Add** method adds the two numbers and returns the result to ArkTS. This example describes how to enable ArkTS to call native methods.
+2. Define a native method named **NativeCallArkTS**, which is called by ArkTS with an ArkTS function passed in. The **NativeCallArkTS** method invokes this ArkTS function and returns the result to ArkTS. This example describes how to enable native to call ArkTS methods.
 
 ### 1. Setting Up the Environment
-Obtain the sample Native project from [ArkUI-X/Samples](https://gitee.com/arkui-x/samples) and use DevEco Studio (V4.0 Beta2 or later) to open the project. The opened project is automatically initialized.
+Obtain the sample native project from [ArkUI-X/Samples](https://gitee.com/arkui-x/samples) and use DevEco Studio (V4.0 Beta2 or later) to open the project. The opened project is automatically initialized.
 
 ### 2. Implementing Native APIs
 
-Develop Native capabilities in N-APIs. In addition, **NativeCallArkTS** in this example demonstrates how Native invokes ArkTS.
+Develop native capabilities in Node-API. In addition, **NativeCallArkTS** in this example demonstrates how native invokes ArkTS.
 ```C++
-// entry\src\main\cpp\hello.cpp contains the Native logic.
+// entry\src\main\cpp\hello.cpp contains the native logic.
 // Include the N-API header file.
 #include "napi/native_api.h"
 
@@ -53,7 +53,7 @@ static napi_value Add(napi_env env, napi_callback_info info)
         return undefined;
     }
 
-    // Convert the obtained ArkTS parameters to the type that can be processed by Native APIs. In this example, the two numbers passed from ArkTS are converted to the double type.
+    // Convert the obtained ArkTS parameters to the type that can be processed by native APIs. In this example, the two numbers passed from ArkTS are converted to the double type.
     double value0;
     napi_get_value_double(env, args[0], &value0);
 
@@ -63,7 +63,7 @@ static napi_value Add(napi_env env, napi_callback_info info)
     // Native API service logic, which is adding two numbers in this example.
     double nativeSum = value0 + value1;
     
-    // Convert the service logic processing result of the Native API to an ArkTS value and return the value to ArkTS.
+    // Convert the service logic processing result of the native API to an ArkTS value and return the value to ArkTS.
     napi_value sum = nullptr;
     napi_create_double(env, nativeSum , &sum);
     return sum;
@@ -71,7 +71,7 @@ static napi_value Add(napi_env env, napi_callback_info info)
 
 static napi_value NativeCallArkTS(napi_env env, napi_callback_info info)
 {
-    // Number of parameters to be obtained from ArkTS. napi_value can be regarded as the representation of the ArkTS value in the Native method.
+    // Number of parameters to be obtained from ArkTS. napi_value can be regarded as the representation of the ArkTS value in the native method.
     size_t argc = 1;
     napi_value args[1] = {nullptr};
     
@@ -95,23 +95,23 @@ static napi_value NativeCallArkTS(napi_env env, napi_callback_info info)
     napi_create_string_utf8(env, "hello", NAPI_AUTO_LENGTH, &argv);
     
     napi_value result = nullptr;
-    // Invoke the ArkTS function in the Native method, save the return value in result, and return result to ArkTS.
+    // Invoke the ArkTS function in the native method, save the return value in result, and return result to ArkTS.
     napi_call_function(env, nullptr, args[0], 1, &argv, &result);
     
     return result;
 }
 
 EXTERN_C_START
-// Init() hooks Native methods, such as Add and NativeCallArkTS, in exports. exports is an ArkTS object obtained after you import the Native APIs.
+// Init() hooks native methods, such as Add and NativeCallArkTS, in exports. exports is an ArkTS object obtained after you import the native APIs.
 static napi_value Init(napi_env env, napi_value exports)
 {
-    // Function description struct. The third parameter "Add" is the Native method.
+    // Function description struct. The third parameter "Add" is the native method.
     // The first parameter "add" is the name of the ArkTS method.
     napi_property_descriptor desc[] = {
         { "add", nullptr, Add, nullptr, nullptr, nullptr, napi_default, nullptr },
         { "nativeCallArkTS", nullptr, NativeCallArkTS, nullptr, nullptr, nullptr, napi_default, nullptr },
     };
-    // Hook the Native method to the ArkTS object exports.
+    // Hook the native method to the ArkTS object exports.
     napi_define_properties(env, exports, sizeof(desc) / sizeof(desc[0]), desc);
     return exports;
 }
@@ -135,21 +135,21 @@ extern "C" __attribute__((constructor)) void RegisterHelloModule(void)
 }
 ```
 ### 3. Declaring API Definitions
-Declare the Native APIs to be exposed to ArkTS in the d.ts file.
+Declare the native APIs to be exposed to ArkTS in the d.ts file.
 ```js
-// entry\src\main\cpp\types\libentry\index.d.ts contains the declaration of the Native APIs exposed to ArkTS.
-// Declare the Native APIs to be exposed to ArkTS.
+// entry\src\main\cpp\types\libentry\index.d.ts contains the declaration of the native APIs exposed to ArkTS.
+// Declare the native APIs to be exposed to ArkTS.
 export const add: (a: number, b: number) => number;
 export const nativeCallArkTS: (a: object) => string;
 ```
 
 ### 4. Calling Native APIs
-Call Native APIs on ArkTS/TS/JS.
-1. The **entry.add** API implements the ArkTS -> Native invocation.
-2. The **entry.nativeCallArkTS** API implements ArkTS -> Native -> ArkTS invocation.
+Call native APIs on ArkTS/TS/JS.
+1. The **entry.add** API implements the ArkTS -> native invocation.
+2. The **entry.nativeCallArkTS** API implements ArkTS -> native -> ArkTS invocation.
 ```js
 // entry\src\main\ets\pages\Index.ets contains the ArkTS logic.
-// Import the Native APIs.
+// Import the native APIs.
 import entry from 'libentry.so'
 
 function TestFunction(str) {
@@ -166,7 +166,7 @@ struct Index {
   build() {
     Row() {
       Column() {
-        // The first button calls the add() method, which uses the Native Add() method to add the two numbers.
+        // The first button calls the add() method, which uses the native Add() method to add the two numbers.
         Text(this.message)
           .fontSize(50)
           .fontWeight(FontWeight.Bold)
@@ -174,7 +174,7 @@ struct Index {
             this.message = "Test native api: 2 + 3 = " + entry.add(2, 3);
             console.log("Test NAPI 2 + 3 = " + entry.add(2, 3));
           })
-        // The second button calls the nativeCallArkTS() method, which uses the Native NativeCallArkTS method to execute the ArkTS function.
+        // The second button calls the nativeCallArkTS() method, which uses the native NativeCallArkTS method to execute the ArkTS function.
         Text(this.message2)
           .fontSize(50)
           .fontWeight(FontWeight.Bold)
@@ -190,7 +190,7 @@ struct Index {
 ```
 
 ### 5. Building and Running the Application
-On DevEco Studio (V4.0 Beta2 or later), choose **Build** > **Build Hap(s)/APP(s)** > **Build APP(s)** to build the application. Use Android Studio to open the **.arkui-x\android** folder of the Native project and click **Run app** to run the application. After the application runs, click the texts on the page.
+On DevEco Studio (V4.0 Beta2 or later), choose **Build** > **Build Hap(s)/APP(s)** > **Build APP(s)** to build the application. Use Android Studio to open the **.arkui-x\android** folder of the native project and click **Run app** to run the application. After the application runs, click the texts on the page.
 ![Running Effect](./figures/napi-android-demo-result.png)
 
 ## Development Guidelines
@@ -211,8 +211,8 @@ The .so file names must comply with the following rules:
 
 The ArkCompiler protects JS object threads. Improper use may cause an application crash. Observe the following rules:
 
-* The N-APIs can be used only by JS threads.
-* The Native API input parameter **env** is bound to the thread and cannot be used across threads. The JS object created by a Native API can be used only in the thread, in which the object is created, that is, the JS object is bound to the **env** of the thread.
+* Node-API can be used only by JS threads.
+* The native API input parameter **env** is bound to the thread and cannot be used across threads. The JS object created by a native API can be used only in the thread, in which the object is created, that is, the JS object is bound to the **env** of the thread.
 
 ### Header File Import
 

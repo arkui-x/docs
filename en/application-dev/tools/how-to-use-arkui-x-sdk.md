@@ -1,16 +1,18 @@
 # ArkUI-X SDK
 
-ArkUI-X extends the OpenHarmony ArkUI development framework to different OS platforms like Android and iOS. This way, you can reuse most of the application code (UI and main application logic) based on ArkUI and deploy the code on your OS.
+The ArkUI-X SDK is a build of the ArkUI-X project. By integrating it into your Android and iOS app projects, you will be able to use a set of ArkTS code to build high-performance applications that can run on different platforms. You can obtain the ArkUI-X SDK as follows:
 
-The ArkUI SDK contains the engine library, plug-in library, and command line tool used to develop ArkUI-X applications. For details about how to obtain the ArkUI-X SDK, see [Acquiring SDK from Mirrors](../../release-notes/ArkUI-X-v1.0.0-canary1.md#acquiring-sdk-from-mirrors).
+* Download the ArkUI-X SDK using DevEco Studio. For Windows, choose **DevEco Studio** > **File** > **Settings** > **ArkUI-X** to download the ArkUI-X SDK. For macOS, choose **DevEco Studio** > **Preferences** > **ArkUI-X** to download the ArkUI-X SDK.
+* Download the ArkUI-X SDK from [ArkUI-X Release Notes](../../release-notes/README.md).
+* Build the ArkUI-X SDK with the ArkUI-X source code. For details, see [ArkUI-X SDK Building](../../framework-dev/tutorial/how-to-package-arkui-x-sdk.md#arkui-x-sdk-building).
 
 ## ArkUI-X SDK Components
 
-The ArkUI-X SDK provides the basic engine library, plug-in library, toolchain, and SDK configuration description files. When DevEco Studio or ACE Tools is used, configure the ArkUI-X SDK based on the following directory structure.
+The ArkUI-X SDK provides the basic engine library, plug-in library, toolchain, and SDK configuration description files. When integrated with DevEco Studio or ACE Tools, the ArkUI-X SDK must be configured in the specific directory structure. The following example shows the default ArkUI-X SDK directory structure in DevEco Studio on macOS.
 
 ```
-Path-to-arkui-x-sdk
-├── versioncode                      // Value of apiVersion in the arkui-x.json file in the ArkUI-X SDK root directory. The value is 10.
+/Users/Username/Library/ArkUI-X/Sdk
+├── {versioncode}                    // Value of the apiVersion field in the arkui-x.json file in the ArkUI-X SDK root directory. It is 10 for the ArkUI-X 1.0.0 Release.
 │   └── arkui-x
 │       ├── engine                   // ArkUI-X SDK engine.
 │       │   ├── lib                  // Dependency of ArkUI-X Android application integration.
@@ -36,4 +38,3 @@ Path-to-arkui-x-sdk
 ## ArkUI-X Command Line Tool
 
 [ACE Tools](../quick-start/start-with-ace-tools.md) is a command line tool provided for ArkUI-X application developers. You can use it to check the development environment check, create a project, build an application, and install, run, and debug your application.
-
