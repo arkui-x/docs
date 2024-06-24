@@ -89,14 +89,14 @@ ArkUI-X 2.0.0 Beta1版配套OpenHarmony API 12 Beta1，新增适配部分API 12�
 
 - 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
    ```shell
-   repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-5.0-Beta1 --no-repo-verify
+   repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-2.0-Beta1 --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
    
 - 从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
    ```shell
-   repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v5.0-Beta1 --no-repo-verify
+   repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v2.0-Beta1 --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
@@ -107,14 +107,14 @@ ArkUI-X 2.0.0 Beta1版配套OpenHarmony API 12 Beta1，新增适配部分API 12�
 
 - 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
    ```shell
-   repo init -u https://gitee.com/arkui-x/manifest.git -b ArkUI-X-5.0-Beta1 --no-repo-verify
+   repo init -u https://gitee.com/arkui-x/manifest.git -b ArkUI-X-2.0-Beta1 --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
    
 - 从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
    ```shell
-   repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v5.0-Beta1 --no-repo-verify
+   repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v2.0-Beta1 --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
@@ -137,7 +137,6 @@ ArkUI-X 2.0.0 Beta1版配套OpenHarmony API 12 Beta1，新增适配部分API 12�
 | 项目名称      | 简介                                                         |
 | ------------- | ------------------------------------------------------------ |
 | PlatformNAPI | C++跨平台应用示例 |
-| XcomponentNative | XComponent组件跨平台示例 |
 
 请访问[Samples](https://gitee.com/arkui-x/samples)仓了解更多消息。
 
