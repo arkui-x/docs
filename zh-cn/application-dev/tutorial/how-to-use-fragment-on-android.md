@@ -1,20 +1,20 @@
 # Fragment跨平台开发指南
 
-## 1、简介
+## 简介
 
 本文介绍将ArkUI框架的UIAbility跨平台部署至Android平台Fragment的使用说明，实现Android原生Fragment和ArkUI跨平台Fragment的混合开发，方便开发者灵活部署跨平台界面。
 
-## 2、Android工程配置
+## Android工程配置
 
-（1）Android工程的PackageName需要与OpenHarmony工程的BundleName一致；
+- Android工程的PackageName需要与OpenHarmony工程的BundleName一致；
 
-（2）请在Android应用的gradle.properties文件，使能AndroidX：
+- 请在Android应用的gradle.properties文件，使能AndroidX：
 
 ```
 android.useAndroidX=true
 ```
 
-（3）请在Android应用的build.gradle文件增加AndroidX Fragment库的依赖项：
+- 请在Android应用的build.gradle文件增加AndroidX Fragment库的依赖项：
 
 ```
 dependencies {
@@ -24,9 +24,9 @@ dependencies {
 }
 ```
 
-## 3、ArkUI-X和Android平台集成所用关键类
+## ArkUI-X和Android平台集成所用关键类
 
-### （1）应用工程Android逻辑部分的StageApplication
+### 应用工程Android逻辑部分的StageApplication
 
 应用需要继承arkui_android_adapter.jar包所提供的StageApplication。StageApplication用于初始化资源路径以及加载配置信息，例如：
 
@@ -39,7 +39,7 @@ public class MyApplication extends StageApplication {
 }
 ```
 
-### （2）应用工程Android逻辑部分Fragment的宿主Activity
+### 应用工程Android逻辑部分Fragment的宿主Activity
 
 原生Activity需要继承androidx.fragment.app.FragmentActivity，绑定StageFragment示例如下：
 
@@ -85,7 +85,7 @@ public class MainActivity extends FragmentActivity {
 </LinearLayout>
 ```
 
-### （3）应用工程Android逻辑部分的StageFragment
+### 应用工程Android逻辑部分的StageFragment
 
 Fragment需要继承arkui_android_adapter.jar包所提供的StageFragment，StageFragment主要功能是将Android中Fragment的生命周期与OpenHarmony中UIAbility的生命周期进行映射，例如：
 
