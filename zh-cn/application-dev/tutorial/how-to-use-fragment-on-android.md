@@ -85,6 +85,15 @@ public class MainActivity extends FragmentActivity {
 </LinearLayout>
 ```
 
+StageFragment支持传递参数，需使用关键字"params"，示例如下：
+
+```java
+StageFragment fragment = new HiFragment();
+Bundle args = new Bundle();
+args.putString("params", "{\"params\":[{\"key\":\"path\",\"type\":10}]}");
+fragment.setArguments(args);
+```
+
 ### 应用工程Android逻辑部分的StageFragment
 
 Fragment需要继承arkui_android_adapter.jar包所提供的StageFragment，StageFragment主要功能是将Android中Fragment的生命周期与OpenHarmony中UIAbility的生命周期进行映射，例如：
