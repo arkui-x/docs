@@ -161,3 +161,39 @@ public class EntryEntryAbilityActivity extends AppCompatActivity {
     }
 }
 ```
+
+## 用启动Ability的方式拉起原生Activity
+
+每一个Ability对应一个StageActivity，启动Ability实际是拉起对应的StageActivity。
+
+所以将原生Activity按照上文中Ability对应StageActivity的规则命名，可以用启动Ability的方式拉起原生Activity。
+
+```javascript
+// xxx.ets
+ let want: Want = {
+    bundleName: 'com.example.helloworld',
+    moduleName: 'entry', //小写
+    abilityName: 'Jump', //首字母大写
+    parameters:{id:1,name:'ArkUI-X'} //可选参数
+    };
+    let context = getContext(this) as common.UIAbilityContext;
+    context.startAbility(want, (err, data) => {
+    }); 
+```
+
+```java
+// xxx.java
+public class EntryJumpActivity extends AppCompatActivity { //命名：moduleName + abilityName + “Activity”
+    private static final String WANT_PARAMS = "params";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_jump);
+        Intent intent = getIntent();
+        String params = "";
+        if (intent != null) {
+            params = intent.getStringExtra(WANT_PARAMS);
+        }
+    }
+}
+```
