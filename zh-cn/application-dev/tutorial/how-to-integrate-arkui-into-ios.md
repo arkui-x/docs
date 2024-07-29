@@ -8,7 +8,7 @@
 * iOS应用工程集成ArkUI-X应用编译产物
 * 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行iOS应用开发
 
-### iOS 工程创建
+## iOS 工程创建
 通过ACE Tools或DevEco Studio创建一个ArkUI-X应用工程（示例工程名为HelloWorld），其工程目录下的.arkui-x/ios目录代表对应的iOS工程。iOS应用的入口AppDelegate和ViewController类，其中ViewController需要继承自ArkUI提供的基类StageViewController，详情参见[使用说明](https://gitee.com/arkui-x/docs/tree/master/zh-cn/application-dev/reference/arkui-for-ios)：
 * ViewController类
   该类名通过通过module名和ability名拼接而得，一个ability对应一个iOS工程侧的ViewController类。详情参见[Ability使用说明](../quick-start/start-with-ability-on-ios.md):
@@ -100,7 +100,7 @@
     ```
     
 
-### iOS 工程编译
+## iOS 工程编译
 
 对iOS工程编译时，ACE Tools或DevEco Studio会完成两个步骤：
 * 集成ArkUI-X SDK
@@ -112,8 +112,7 @@ ArkUI-X编译产物生成后，自动拷贝到iOS应用工程arkui-x目录下。
     arkui-x
         ├── entry
         |   ├── ets
-        |   |   ├── modules.abc
-        |   |   └── sourceMaps.map
+        |   |   └── modules.abc
         |   ├── resouces.index
         |   ├── resouces
         |   └── module.json
@@ -122,7 +121,7 @@ ArkUI-X编译产物生成后，自动拷贝到iOS应用工程arkui-x目录下。
 完成上述步骤后即可按照iOS应用构建流程，构建ArkUI iOS应用，并且可以安装至iOS手机后运行。
 
 
-### 参考
+## 参考
 
 【1】[ArkUI-X Samples仓](https://gitee.com/arkui-x/samples)
 

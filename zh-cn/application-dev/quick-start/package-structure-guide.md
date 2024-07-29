@@ -1,32 +1,58 @@
 # ArkUI-X应用工程结构说明
 
-# 简介
+## 简介
 
 本文档配套ArkUI-X，将OpenHarmony ArkUI开发框架扩展到不同的OS平台，比如Android和iOS平台，让开发者基于ArkUI，可复用大部分的应用代码（UI以及主要应用逻辑）并可以部署到相应的OS平台，降低跨平台应用开发成本。
 
-# 应用工程目录结构介绍
+## 应用工程目录结构介绍
 
-跨平台应用工程目录结构，包含一套为ArkUI开发者提供的应用工程模板，提供构建OpenHarmony应用，HarmonyOS应用，Android应用，iOS应用的能力。
+* 跨平台应用工程目录结构说明
+
+以IDE创建的模板工程【ArkUI-X】Empty Ability举例，包含一套为ArkUI开发者提供的应用工程模板，提供构建OpenHarmony应用，HarmonyOS应用，Android应用，iOS应用的能力。
 
 ```
 ArkUI-X应用工程目录结构
   ├── .arkui-x
   │   ├── android                 // Android平台相关代码
-  │   └── ios                     // iOS平台相关代码
+  │   ├── ios                     // iOS平台相关代码
+  │   └── arkui-x-config.json5    // 标记哪些模块跨平台
   ├── AppScope
   ├── entry
   ├── hvigor
   ├── build-profile.json5
   ├── hvigorfile.ts
-  ├── hvigorw
-  ├── hvigorw.bat
   ├── local.properties
   └── oh-package.json5
 ```
 
 此应用目录结构设计思想是从OpenHarmony应用工程原生支持跨平台角度出发，在OpenHarmony应用工程之上叠加Android和iOS应用工程，ArkTS代码和resources资源在OpenHarmony侧完成编译，Native代码仍在各自平台应用工程中完成编译。
 
-# 编译构建说明
+* 如何配置某些模块支持跨平台
+
+基于上面的工程目录结构，说明下跨平台工程如何实现模块级跨平台，**.arkui-x > arkui-x-config.json5：**
+
+```json
+{
+  "crossplatform": true,
+  "modules": [
+    "entry"
+  ]
+}
+```
+
+其中，"modules"中填入跨平台的应用/服务模块名，正确的模块名可参考**entry > src > main > module.json5：**
+
+```json
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+		...
+  }
+}
+```
+
+## 编译构建说明
 
 * ArkTS源码
 
@@ -42,7 +68,7 @@ ArkUI框架资源随ArkUI-X SDK进行发布，应用构建时会自动打包到A
 
 综上所述，Android平台上通过assets管理ArkTS编译产物、ArkUI应用资源和ArkUI框架资源，iOS平台上通过Bundle Resources管理ArkTS编译产物、ArkUI应用资源和ArkUI框架资源。
 
-## Android应用工程结构
+### Android应用工程结构
 
 ```
 ArkUI-X Android应用工程
@@ -52,22 +78,19 @@ ArkUI-X Android应用工程
 │   │   └── arm64-v8a
 │   │       └── libarkui_android.so                     // ArkUI-X跨平台引擎库，在SDK中发布
 │   │       └── libhilog.so                             // ArkUI-X日志库，在SDK中发布
-│   │       └── libresourcemanager.so                   // ArkUI-X资源管理库，在SDK中发布
 │   ├── src
 │   │   ├── androidTest
 │   │   ├── main
 │   │   │   ├── assets
 │   │   │   │   └── arkui-x                             // ArkUI应用编译后的字节码文件和Resources，作为资源文件存放在assets/arkui-x中
 │   │   │   │       ├── entry                           // ArkUI单个模块的编译结果
-│   │   │   │       │   ├── ets                         // ArkUI单个模块代码的编译结果：包括字节码文件以及sourceMap文件
-│   │   │   │       │   │   ├── sourceMaps.map
+│   │   │   │       │   ├── ets                         // ArkUI单个模块代码的编译结果：包括字节码文件
 │   │   │   │       │   │   └── modules.abc
 │   │   │   │       │   ├── resources.index             // ArkUI单个模块资源的编译结果：resources资源的编译结果
 │   │   │   │       │   ├── resources                   // resources资源中的rawfile资源，不会进行编译。
 │   │   │   │       │   └── module.json
-│   │   │   │       ├── entry_test                      // ohosTest，仅仅Debug模式构建包含。
 │   │   │   │       └── systemres                       // ArkUI框架自带的系统资源
-│   │   │   ├── java/com/example/mayapp
+│   │   │   ├── java/com/example/mayapplication
 │   │   │   │   ├── MyApplication.java                  // 基于StageApplication扩展MyApplication
 │   │   │   │   └── EntryEntryAbilityActivity.java      // 基于StageActivity扩展EntryEntryAbilityActivity
 │   │   │   ├── res
@@ -83,13 +106,12 @@ ArkUI-X Android应用工程
 └── settings.gradle
 ```
 
-## iOS应用工程结构
+### iOS应用工程结构
 
 ```
 ArkUI-X iOS应用工程
 ├── app.xcodeproj
 │   ├── project.xcworkspace
-│   ├── xcuserdata
 │   └── project.pbxproj
 ├── app
 │   ├── Assets.xcassets
@@ -103,12 +125,10 @@ ArkUI-X iOS应用工程
 ├── arkui-x                                         // ArkUI应用编译后的字节码文件和Resources，作为资源文件存放在assets/arkui-x中
 │   ├── entry                                       // ArkUI单个模块的编译结果
 │   │   ├── ets                                     // ArkUI单个模块代码的编译结果：包括字节码文件以及sourceMap文件
-│   │   │   ├── sourceMaps.map
 │   │   │   └── modules.abc
 │   │   ├── resources.index                         // ArkUI单个模块资源的编译结果：resources资源的编译结果
 │   │   ├── resources                               // resources资源中的rawfile资源，不会进行编译。
 │   │   └── module.json
-│   ├── entry_test                                  // ohosTest，仅仅Debug模式构建包含。
 │   └── systemres                                   // ArkUI框架自带的系统资源
 └── frameworks                                      // ArkUI跨平台Framework动态库：包含ArkUI-X的框架以及插件
 ```

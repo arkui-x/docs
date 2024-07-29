@@ -3,15 +3,15 @@
 
 >  **说明：**
 >
->  请使用**DevEco Studio 4.0 Beta2**及更高版本。如果使用其它版本，可能存在文档与产品功能界面、操作不一致的情况，请以实际功能界面为准。
+>  请使用**DevEco Studio 4.1 Release**及更高版本。如果使用其它版本，可能存在文档与产品功能界面、操作不一致的情况，请以实际功能界面为准。
 
 
 ## 应用介绍
 
 通过构建一个简单的ArkUI页面跳转示例，快速了解资源创建引用，路由代码编写和UI布局编写等应用开发流程。
 
-## 导入应用模板
-- 通过**Import Samples**导入helloworld工程。
+## 创建应用工程
+- 参考[创建工程](start-with-deveco-studio.md#创建工程)创建最简单的应用模板工程
 
 ### ArkTS工程目录结构（Stage模型）
 
@@ -136,7 +136,7 @@
         }
     }
    
-      ```
+   ```
 ## 引用资源
 
 1.定义需要被引用的文字资源：在“**Project**”窗口，点击“**entry &gt; src &gt; main &gt; resources &gt; base &gt; element &gt; string.json**”，打开“**string.json**”文件，加入蓝框的文字资源，如下图展示：
@@ -280,7 +280,7 @@
     ```ts
     // second.ets
     import router from '@ohos.router';
-
+   
     @Entry
     @Component
     struct Second {
@@ -314,8 +314,8 @@
     }
    
     ```
-3.无需手动配置新增的第二个页面路由：由于我们选择了用**New &gt;Page**的方式新建页面，路由表里会自动配置新增的页面路由。  
-在“**Project**”窗口，打开“**entry &gt; src &gt; main &gt; resources &gt; base &gt; profile**”，在**main_pages.json**文件中的“src”下自动配置的第二个页面的路由“pages/Second”，示例如下：
+   3.无需手动配置新增的第二个页面路由：由于我们选择了用**New &gt;Page**的方式新建页面，路由表里会自动配置新增的页面路由。  
+   在“**Project**”窗口，打开“**entry &gt; src &gt; main &gt; resources &gt; base &gt; profile**”，在**main_pages.json**文件中的“src”下自动配置的第二个页面的路由“pages/Second”，示例如下：
 
    ```json
       {
