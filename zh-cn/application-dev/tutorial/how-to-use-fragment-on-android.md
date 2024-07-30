@@ -85,12 +85,43 @@ public class MainActivity extends FragmentActivity {
 </LinearLayout>
 ```
 
-StageFragment支持传递参数，需使用关键字"params"，示例如下：
+#### 参数传递
+
+StageFragment支持传递参数，参数的传递需要通过setArguments()进行设置，规则如下：
+
+key值为params  
+value为json格式
+
+```
+{
+    "params":[
+        {
+            "key":键,
+            "type":参数类型值,
+            "value":值
+        },
+        {
+            ...
+        }
+    ]
+}
+```
+
+支持的参数类型列表
+
+| 参数类型 | 参数类型值 |
+| ------- | --------- |
+| boolean |     1     |
+| int     |     5     |
+| double  |     9     |
+| string  |    10     |
+
+示例：
 
 ```java
 StageFragment fragment = new HiFragment();
 Bundle args = new Bundle();
-args.putString("params", "{\"params\":[{\"key\":\"path\",\"type\":10}]}");
+args.putString("params", "{\"params\":[{\"key\":\"path\",\"type\":10,\"value\":\"local\"}]}");
 fragment.setArguments(args);
 ```
 
