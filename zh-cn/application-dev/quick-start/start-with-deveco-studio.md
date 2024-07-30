@@ -5,14 +5,15 @@
 
 ### 创建工程
 
-在DevEco Studio中导入ArkUI-X Sample，快速创建跨平台工程。
+在DevEco Studio中创建跨平台模版工程。
 
-1. 点击File > New > Import > Import Sample。
-   ![import_sample](figures/import_sample.png)
+1. 点击**File > New > Create Project**。
+   ![create_project](figures/create-project.png)
 
-2. 在左上方的下拉框中选择OpenHarmony，选择ArkUI-X/HelloWorld，点击**Next**。
+2. 在打开的模板市场中，选择[ArkUI-X]Empty Ability，点击**Next**。
+   ![ability_template](figures/ability_template.png)
 
-3. 在工程配置页面，填写Project name和Project location，点击**Finish**，等待Sample工程导入完成。
+3. 在工程配置页面，填写Project name和Save location，点击**Finish**，等待模版工程创建完成。
 
 ### 编译构建生成跨平台应用
 
