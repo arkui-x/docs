@@ -56,6 +56,7 @@
 - 媒体
   - [@ohos.multimedia.image (图片处理)](js-apis-image.md)
   - [@ohos.multimedia.audio (音频管理)](js-apis-audio.md)
+  - [@ohos.multimedia.media (媒体服务)](js-apis-media.md)
   
 - 资源管理
   - [@ohos.i18n (国际化-I18n)](js-apis-i18n.md)
