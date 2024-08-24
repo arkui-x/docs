@@ -1,13 +1,13 @@
-# ArkUI-X插件开发指南
+# Plugin生命周期开发指南
 
-ArkUI-X插件用于拓展ArkUI应用的能力，提供管理插件生命周期的能力。本文主要介绍iOS平台的ArkUI-X插件使用。
+ArkUI-X插件用于拓展ArkUI应用的能力，提供管理插件生命周期的能力。本文主要介绍Android平台的ArkUI-X插件生命周期的使用。
 
-### iOS平台创建ArkUI-X插件
+### iOS平台创建ArkUI-X插件生命周期
 
-在iOS平台创建ArkUI-X插件需要实现` IArkUIXPlugin `接口。
+在iOS平台创建ArkUI-X插件生命周期需要实现` IArkUIXPlugin `接口。
 
 ```objective-c
-// pluginTest.h
+// PluginTest.h
 #import <Foundation/Foundation.h>
 #import <libarkui_ios/IArkUIXPlugin.h>
 
@@ -20,7 +20,7 @@ ArkUI-X插件用于拓展ArkUI应用的能力，提供管理插件生命周期�
 ```
 
 ```objective-c
-// pluginTest.m
+// PluginTest.m
 #import "PluginTest.h"
 
 @interface PluginTest () {
