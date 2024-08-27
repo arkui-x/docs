@@ -73,6 +73,13 @@
 - WiFi管理
   - [@ohos.wifiManager (WLAN)](js-apis-wlan.md)
 
+- 基础通信
+  - [@ohos.bluetooth.a2dp ](js-apis-bluetooth-a2dp.md)
+  - [@ohos.bluetooth.access ](js-apis-bluetooth-access.md)
+  - [@ohos.bluetooth.baseProfile ](js-apis-bluetooth-baseProfile.md)
+  - [@ohos.bluetooth.ble ](js-apis-bluetooth-ble.md)
+  - [@ohos.bluetooth.connection ](js-apis-bluetooth-connection.md)
+  - [@ohos.bluetooth.constant ](js-apis-bluetooth-constant.md)
 - 文件管理
   - [@ohos.file.fs (文件管理)](js-apis-file-fs.md)
 
