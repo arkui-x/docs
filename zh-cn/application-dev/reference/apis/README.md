@@ -80,10 +80,12 @@
   - [@ohos.deviceInfo (设备信息)](js-apis-device_Info.md)
 
 - 数据管理
+  - [@ohos.data.dataSharePredicates (数据共享谓词)](js-apis-data-dataSharePredicates.md)
   - [@ohos.data.preferences (用户首选项)](js-apis-data-preferences.md)
   - [@ohos.data.relationalStore (关系型数据库)](js-apis-data-relationalStore.md)
   - [@ohos.data.unifiedDataChannel(标准化数据通路)](js-apis-data-unifiedDataChannel.md)
   - [@ohos.data.uniformTypeDescriptor (标准化数据定义与描述)](js-apis-data-uniformTypeDescriptor.md)
+  - [@ohos.data.ValuesBucket (数据集)](js-apis-data-valuesBucket.md)
   
 - 安全
   - [@ohos.abilityAccessCtrl (程序访问控制管理)](js-apis-abilityAccessCtrl.md)
@@ -121,6 +123,7 @@
 - 公共事件与通知
   - [系统公共事件定义](commonEventManager-definitions.md)
   - [@ohos.commonEventManager (公共事件模块)](js-apis-commonEventManager.md)
+  - [@ohos.notificationManager (NotificationManager模块)](js-apis-notificationManager.md)
   - application
     - [EventHub](js-apis-inner-application-eventHub.md)
 
