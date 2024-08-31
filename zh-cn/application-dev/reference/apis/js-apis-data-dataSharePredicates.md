@@ -21,7 +21,7 @@ import { dataSharePredicates } from '@kit.ArkData';
 ## DataSharePredicates
 提供用于不同实现不同查询方法的数据共享谓词。该类型不是多线程安全的，如果应用中存在多线程同时操作该类派生出的实例，注意加锁保护。
 
-### equalTo<sup>12+</sup>
+### equalTo
 
 equalTo(field: string, value: ValueType): DataSharePredicates
 
@@ -52,7 +52,7 @@ predicates.equalTo("NAME", "Rose")
 ```
 
 
-### and<sup>12+</sup>
+### and
 
 and(): DataSharePredicates
 
@@ -77,7 +77,7 @@ predicates.equalTo("NAME", "lisi")
     .equalTo("SALARY", 200.5)
 ```
 
-### orderByAsc<sup>12+</sup>
+### orderByAsc
 
 orderByAsc(field: string): DataSharePredicates
 
@@ -106,7 +106,7 @@ let predicates = new dataSharePredicates.DataSharePredicates()
 predicates.orderByAsc("AGE")
 ```
 
-### orderByDesc<sup>12+</sup>
+### orderByDesc
 
 orderByDesc(field: string): DataSharePredicates
 
@@ -135,7 +135,7 @@ let predicates = new dataSharePredicates.DataSharePredicates()
 predicates.orderByDesc("AGE")
 ```
 
-### limit<sup>12+</sup>
+### limit
 
 limit(total: number, offset: number): DataSharePredicates
 
@@ -165,7 +165,7 @@ let predicates = new dataSharePredicates.DataSharePredicates()
 predicates.equalTo("NAME", "Rose").limit(10, 3)
 ```
 
-### in<sup>12+</sup>
+### in
 
 in(field: string, value: Array&lt;ValueType&gt;): DataSharePredicates
 
