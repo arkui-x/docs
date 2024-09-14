@@ -15,9 +15,9 @@
 | content                       | [NotificationContent](js-apis-inner-notification-notificationContent.md#notificationcontent)   |   否  | 否  | 通知内容。                                                                 |
 | id                            | number                                                   |   否  | 是  | 通知ID，默认为0。                                                                 |
 | isOngoing                     | boolean                                                  |   否  | 是  | 是否进行时通知，iOS不支持。                                                               |
-| deliveryTime                  | number                                                   |   否  | 是  | 通知发送时间，iOS不支持。                                                               |
+| deliveryTime                  | number                                                   |   否  | 是  | 通知发送时间，iOS不支持。<br>数据格式：时间戳。<br>单位：ms。                                                               |
 | tapDismissed                  | boolean                                                  |   否  | 是  | 通知是否自动清除，iOS不支持。                                                             |
-| autoDeletedTime               | number                                                   |   否  | 是  | 自动清除的时间，iOS不支持。                                                              |
+| autoDeletedTime               | number                                                   |   否  | 是  | 自动清除的时间，iOS不支持。<br>数据格式：时间戳。<br>单位：ms。                                                              |
 | isAlertOnce                   | boolean                                                  |   否  | 是  | 设置是否仅有一次此通知提醒，iOS不支持。                                                        |
 | showDeliveryTime              | boolean                                                  |   否  | 是  | 是否显示分发时间，iOS不支持。                                                             |
 | groupName                     | string                                                   |   否  | 是  | 组通知名称。                                                                |
