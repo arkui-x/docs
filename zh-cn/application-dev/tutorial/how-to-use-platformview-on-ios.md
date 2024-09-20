@@ -16,7 +16,8 @@
 
 3、【Arkui-X ets】使用PlatformView
 
-    结合layout组件中使用widget Xcomponent用来显示PlatformView
+    导入模块
+    import PlatformView, { PlatformViewAttribute } from '@arkui-x.platformview'
     在 iOS 端实现好了之后，就能在Arkui端用ets来显示原生组件的视图了，如显示MapView。
 
 ## iOS平台
@@ -36,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MyPlatformView : NSObject<IPlatformView>
 - (UIView *) view;
 - (void) onDispose;
-- (NSString *) getXComponentID;
+- (NSString *) getPlatformViewID;
 - initWithFrame;
 @end
 
@@ -71,7 +72,7 @@ NS_ASSUME_NONNULL_END
 - (void)onDispose {
     return;
 }
-- (NSString*) getXComponentID {
+- (NSString*) getPlatformViewID {
     return viewTag;
 }
 
@@ -90,7 +91,7 @@ NS_ASSUME_NONNULL_END
 NS_ASSUME_NONNULL_BEGIN
 @interface MyPlatformViewFactory : NSObject<PlatformViewFactory>
 
-- (NSObject<IPlatformView>*) getPlatformView:(NSString*) xComponentId;
+- (NSObject<IPlatformView>*) getPlatformView:(NSString*) platformViewId;
 - initWithFrame;
 @end
 NS_ASSUME_NONNULL_END
@@ -110,9 +111,9 @@ NS_ASSUME_NONNULL_END
     return self;
 }
 
-- (NSObject<IPlatformView>*) getPlatformView:(NSString*) xComponentId {
+- (NSObject<IPlatformView>*) getPlatformView:(NSString*) platformViewId {
     //create PlatfformView
-    if ([xComponentId isEqualToString:@"PlatformViewTest1"]) {
+    if ([platformViewId isEqualToString:@"PlatformViewTest1"]) {
         NSObject<IPlatformView> * view = [[MyPlatformView alloc] initWithFrame];
         return  view;
     }
@@ -199,6 +200,7 @@ NS_ASSUME_NONNULL_END
 
 ```java
 // platformview.ets
+import PlatformView, { PlatformViewAttribute } from '@arkui-x.platformview';
 @Entry
 @Component
 struct PlatformView {
@@ -207,11 +209,7 @@ struct PlatformView {
   controller: SearchController = new SearchController()
   build() {
     Column() {
-      //create XComponent ,init type to PLATFORM_VIEW
-      XComponent({
-        id: 'PlatformViewTest1',
-        type: XComponentType.PLATFORM_VIEW,
-      })
+      PlatformView('PlatformViewTest1')
         .width('100%')
         .height('80%')
         .backgroundColor(Color.Gray)

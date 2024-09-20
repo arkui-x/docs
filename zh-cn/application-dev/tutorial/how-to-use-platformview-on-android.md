@@ -17,7 +17,8 @@
 
 3、【Arkui-X ets】使用PlatformView
 
-    结合layout组件中使用widget Xcomponent用来显示PlatformView
+    导入模块
+    import PlatformView, { PlatformViewAttribute } from '@arkui-x.platformview'
     在 Android 端实现好了之后，就能在ArkUI端用ets来显示原生组件的视图了，如显示MapView。
 
 ## Android平台
@@ -85,7 +86,7 @@ public class MyMapWrapper implements IPlatformView {
         mMapView.onDestroy();
     }
     @Override
-    public String getXComponentID() {
+    public String getPlatformViewID() {
         return id;
     }
 }
@@ -105,9 +106,9 @@ public class MyPlatformViewFactory extends PlatformViewFactory {
     private Bundle savedInstanceState;
 
     @Override
-    public IPlatformView getPlatformView(String xComponentId) {
+    public IPlatformView getPlatformView(String platformViewId) {
         IPlatformView pv = null;
-        switch (xComponentId){
+        switch (platformViewId){
             case "PlatformViewTest1":
                 // create PlatformView
                 pv = new MyMapWrapper(context, savedInstanceState);
@@ -182,6 +183,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
 
 ```java
 // platformview.ets
+import PlatformView, { PlatformViewAttribute } from '@arkui-x.platformview';
 @Entry
 @Component
 struct PlatformView {
@@ -190,11 +192,7 @@ struct PlatformView {
   controller: SearchController = new SearchController()
   build() {
     Column() {
-      //create XComponent ,init type to PLATFORM_VIEW
-      XComponent({
-        id: 'PlatformViewTest1',
-        type: XComponentType.PLATFORM_VIEW,
-      })
+      PlatformView('PlatformViewTest1')
         .width('100%')
         .height('80%')
         .backgroundColor(Color.Gray)
