@@ -82,6 +82,7 @@
   - [@ohos.bluetooth.constant ](js-apis-bluetooth-constant.md)
 - 文件管理
   - [@ohos.file.fs (文件管理)](js-apis-file-fs.md)
+  - [@ohos.file.photoAccessHelper (相册管理模块)](js-apis-photoAccessHelper.md)
 
 - 设备管理
   - [@ohos.deviceInfo (设备信息)](js-apis-device_Info.md)
