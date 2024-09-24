@@ -20,9 +20,6 @@
 1、利用Android的地图原生组件，如显示地图等；<br/>
 2、利用iOS的地图原生组件，如显示地图等；<br/>
 
-> **说明**
->
->  开发者能够在XComponent的PLATFORMVIEW模式下，能够混合显示ArkUI组件与原生view，并支持用户操作的事件处理。
 
 
 ### 接口支持
@@ -35,7 +32,7 @@ IPlatformView接口:
 | ------------------ | -------- | -------------------------------------- |
 | getView() | View | 获得原生组件View           |
 | onDispose()      | void | 资源销毁的处置       |
-| getXComponentID()          | String | 返回原生组件的ID |
+| getPlatformViewID()          | String | 返回原生组件的ID |
 
 PlatformViewFactory接口:
 

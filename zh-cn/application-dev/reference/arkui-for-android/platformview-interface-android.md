@@ -41,11 +41,11 @@ void onDispose();
 
 无
 
-## getXComponentID
+## getPlatformViewID
 
 返回原生组件的ID。
 
-String getXComponentID();
+String getPlatformViewID();
 
 **参数：** 
 
@@ -80,7 +80,7 @@ class SampleMapView implements IPlatformView {
     public void onDispose() {}
 
    @Override
-    public String getXComponentID(){
+    public String getPlatformViewID(){
       return viewtag;
     }
 }
@@ -94,14 +94,14 @@ class SampleMapView implements IPlatformView {
 
 获得IPlatformView接口。
 
-IPlatformView getPlatformView(String xComponentId);
+IPlatformView getPlatformView(String platformViewId);
 
 
 **参数：** 
 
 | 参数名          | 类型             | 必填 | 说明           |
 | --------------- | ---------------- | ---- | -------------- |
-| xComponentId | String | 是   | 原生组件的ID。 |
+| platformViewId | String | 是   | 原生组件的ID。 |
 
 **返回值：** 
 
@@ -119,10 +119,10 @@ class SampleMapFactory implements PlatformViewFactory {
     String NATIVE_VIEW_TAG_ID = "oh.plugin.view.mapview";
 
    @Override
-    public IPlatformView getPlatformView(String xComponentId) {
+    public IPlatformView getPlatformView(String platformViewId) {
         // create MapView
         IPlatformView view = null;
-        if(xComponentId == this.viewtag){
+        if(platformViewId == this.viewtag){
           view = new OH_MapView(vieweid, NATIVE_VIEW_TAG_ID);
         }
         return view;

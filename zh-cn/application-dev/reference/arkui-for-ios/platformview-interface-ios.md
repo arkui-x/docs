@@ -41,11 +41,11 @@ void onDispose();
 
 无
 
-## getXComponentID
+## getPlatformViewID
 
 返回原生组件的ID。
 
-NSString* getXComponentID();
+NSString* getPlatformViewID();
 
 **参数：** 
 
@@ -65,7 +65,7 @@ NSString* getXComponentID();
 @interface OH_MapView : NSObject <IPlatformView>
 - (UIView*)view;
 - (void) onDispose;
-- (NSString*)getXComponentID;
+- (NSString*)getPlatformViewID;
 @end
 
 @implementation OH_MapView {
@@ -91,7 +91,7 @@ NSString* getXComponentID();
   return ;
 }
 
-- (NSString*)getXComponentID {
+- (NSString*)getPlatformViewID {
   return _viewTag;
 }
 
@@ -105,20 +105,20 @@ NSString* getXComponentID();
 
 获得IPlatformView接口。
 
-NSObject<IPlatformView>* getPlatformView:(NSString*) xComponentId;
+NSObject\<IPlatformView>* getPlatformView:(NSString*) platformViewId;
 
 
 **参数：** 
 
 | 参数名          | 类型             | 必填 | 说明           |
 | --------------- | ---------------- | ---- | -------------- |
-| xComponentId | NSString* | 是   | 原生组件的ID。 |
+| platformViewId | NSString* | 是   | 原生组件的ID。 |
 
 **返回值：** 
 
 | 类型                              | 说明           |
 | --------------------------------- | -------------- |
-| NSObject<IPlatformView>* | IPlatformView接口。 |
+| NSObject\<IPlatformView>* | IPlatformView接口。 |
 
 **示例：**
 
@@ -126,8 +126,7 @@ NSObject<IPlatformView>* getPlatformView:(NSString*) xComponentId;
 //实现 PlatformViewFactory 接口，重写 getPlatformView 方法返回 IPlatformView 对象。
 
 @interface OH_ViewFactory : NSObject <PlatformViewFactory>
- - (NSObject<IPlatformView>*) getPlatformView:(NSString*) xComponentId;
-}
+ - (NSObject<IPlatformView>*) getPlatformView:(NSString*) platformViewId;
 @end
 
 @implementation OH_ViewFactory {
@@ -136,15 +135,15 @@ NSObject<IPlatformView>* getPlatformView:(NSString*) xComponentId;
   NSString* _viewTag;
 }
 
-- (void)initWithFrame(viewID: Int64, xComponentId :NSString*)  {
+- (void)initWithFrame(viewID: Int64, platformViewId :NSString*)  {
   _viewID = viewID;
-  _viewTag = xComponentId;
+  _viewTag = platformViewId;
   mapView = nil;
 }
 
-- (NSObject<IPlatformView>*)getPlatformView:(NSString*) xComponentId  {
-  if(xComponentId == _viewTag){
-    mapView = [[OH_MapView alloc] initWithFrame:viewid:_viewID, viewtag:xComponentId];
+- (NSObject<IPlatformView>*)getPlatformView:(NSString*) platformViewId  {
+  if(platformViewId == _viewTag){
+    mapView = [[OH_MapView alloc] initWithFrame:viewid:_viewID, viewtag:platformViewId];
   }
   return mapView;
 }
