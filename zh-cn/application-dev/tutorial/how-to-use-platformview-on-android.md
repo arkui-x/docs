@@ -186,7 +186,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
 import PlatformView, { PlatformViewAttribute } from '@arkui-x.platformview';
 @Entry
 @Component
-struct PlatformView {
+struct PlatformViewSample {
   @State changeValue: string = ''
   @State submitValue: string = ''
   controller: SearchController = new SearchController()
