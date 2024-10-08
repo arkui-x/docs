@@ -6,6 +6,11 @@
 >
 > 本模块首批接口从API version 12开始支持跨平台。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 
+iOS中使用此模块，需要在XCode工程的info.plist配置中增加以下配置项，以说明访问相册的目的和功能
+
+- Privacy - Photo Library Usage Description
+
+
 ## 导入模块
 
 ```ts
