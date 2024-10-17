@@ -4,7 +4,27 @@ baseProfile模块提供了基础的profile方法。
 
 > **说明：**
 >
-> 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+> 本模块首批接口从API version 13开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+
+## 依赖权限
+
+#### iOS平台
+
+**说明：**Xcode项目里存在蓝牙模块任意一个库（libbluetooth_ble、libbluetooth_a2dp、libbluetooth_access、libbluetooth_connection、libbluetooth_common）时，需要配置蓝牙权限。**如果没有配置蓝牙权限会导致运行异常**。
+
+**配置方法：**在Xcode中右击项目中的info.plist，选择Open As > Source Code，在plist标签中加入NSBluetoothAlwaysUsageDescription。
+
+示例如下：
+
+```
+<plist version="1.0">
+<dict>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>获取蓝牙权限描述文案</string>
+</dict>
+</plist>
+
+```
 
 
 
