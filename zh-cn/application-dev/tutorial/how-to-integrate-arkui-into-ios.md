@@ -9,7 +9,7 @@
 * 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行iOS应用开发
 
 ## iOS 工程创建
-通过ACE Tools或DevEco Studio创建一个ArkUI-X应用工程（示例工程名为HelloWorld），其工程目录下的.arkui-x/ios目录代表对应的iOS工程。iOS应用的入口AppDelegate和ViewController类，其中ViewController需要继承自ArkUI提供的基类StageViewController，详情参见[使用说明](https://gitee.com/arkui-x/docs/tree/master/zh-cn/application-dev/reference/arkui-for-ios)：
+通过ACE Tools或DevEco Studio创建一个ArkUI-X应用工程（示例工程名为HelloWorld），其工程目录下的.arkui-x/ios目录代表对应的iOS工程。iOS应用的入口AppDelegate和ViewController类，其中ViewController需要继承自ArkUI提供的基类StageViewController，详情参见[使用说明](../reference/arkui-for-ios)：
 * ViewController类
   该类名通过通过module名和ability名拼接而得，一个ability对应一个iOS工程侧的ViewController类。详情参见[Ability使用说明](../quick-start/start-with-ability-on-ios.md):
   EntryEntryAbilityViewController.h 
