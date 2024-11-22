@@ -65,7 +65,7 @@ ArkUI-X 5.0.1 Release版配套OpenHarmony 5.0.1 Rlease，API 13，新增适配�
 | 目标平台     | 兼容OS版本                                        | 获取方式                                                     |
 | ----------- | ------------------------------------------------ | ------------------------------------------------------------ |
 | OpenHarmony | 5.0.1 Release (API Version 13)                   | 后续提供                                                     |
-| HarmonyOS   | 5.0.1 Release (API Version 13)                   | HUAWEI DevEco Studio获取方式：<br /> <br />[请点击这里获取](https://developer.huawei.com/consumer/cn/download/) |
+| HarmonyOS   | 5.0.1 Release (API Version 13)                   | HUAWEI DevEco Studio获取方式：<br />[请点击这里获取](https://developer.huawei.com/consumer/cn/download/) |
 | Android     | Android 8<sup>+</sup> (API level 26<sup>+</sup>) | NA                                                           |
 | iOS         | iOS 10<sup>+</sup>                               | NA                                                           |
 
