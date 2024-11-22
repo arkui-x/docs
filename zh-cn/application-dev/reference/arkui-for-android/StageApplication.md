@@ -1,0 +1,3 @@
+## StageApplication
+
+StageApplication是Application的子类，是Stage模型Android应用的入口。ArkUI-X Stage模型Android平台应用开发时，需要继承StageApplication。
