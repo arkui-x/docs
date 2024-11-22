@@ -52,6 +52,7 @@
 - 图形图像
   - [@ohos.window (窗口)](js-apis-window.md)
   - [@ohos.display (屏幕属性)](js-apis-display.md)
+  - [@ohos.effectKit (图像效果)](js-apis-effectKit.md)
 
 - 媒体
   - [@ohos.multimedia.image (图片处理)](js-apis-image.md)
