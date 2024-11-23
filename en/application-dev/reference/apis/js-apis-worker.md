@@ -70,8 +70,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200003 | Worker initialization failure. |
-| 10200007 | The worker file patch is invalid path. |
+| 10200003 | Worker initialization failed. |
+| 10200007 | The worker file path is invalid. |
 
 
 
@@ -179,7 +179,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                               |
 | -------- | ----------------------------------------- |
-| 10200004 | Worker instance is not running.           |
+| 10200004 | The worker instance is not running.       |
 | 10200006 | Serializing an uncaught exception failed. |
 
 **Example**
@@ -212,7 +212,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                               |
 | -------- | ----------------------------------------- |
-| 10200004 | Worker instance is not running.           |
+| 10200004 | The worker instance is not running.       |
 | 10200006 | Serializing an uncaught exception failed. |
 
 **Example**
@@ -247,8 +247,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -281,8 +281,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -315,8 +315,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -341,7 +341,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                     |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **Example**
 
@@ -371,8 +371,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -411,8 +411,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -444,8 +444,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -479,8 +479,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -512,8 +512,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -546,7 +546,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                     |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **Example**
 
@@ -585,7 +585,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                     |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **Example**
 
@@ -652,7 +652,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                     |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **Example**
 
@@ -687,8 +687,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -721,7 +721,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                     |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **Example**
 
@@ -760,7 +760,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                     |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **Example**
 
@@ -827,7 +827,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                     |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **Example**
 
@@ -865,7 +865,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                               |
 | -------- | ----------------------------------------- |
-| 10200004 | Worker instance is not running.           |
+| 10200004 | The worker instance is not running.       |
 | 10200006 | Serializing an uncaught exception failed. |
 
 **Example**
@@ -913,7 +913,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                               |
 | -------- | ----------------------------------------- |
-| 10200004 | Worker instance is not running.           |
+| 10200004 | The worker instance is not running.       |
 | 10200006 | Serializing an uncaught exception failed. |
 
 **Example**
@@ -954,7 +954,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                     |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **Example**
 
@@ -995,8 +995,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -1038,8 +1038,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 
@@ -1085,8 +1085,8 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                                  |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **Example**
 

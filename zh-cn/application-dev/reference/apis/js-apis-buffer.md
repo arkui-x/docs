@@ -286,9 +286,9 @@ from(arrayBuffer: ArrayBuffer | SharedArrayBuffer, byteOffset?: number, length?:
 
 以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
 
-| 错误码ID | 错误信息 |
-| -------- | -------- |
-| 10200001 | The value of "[byteOffset/length]" is out of range. |
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 10200001 | The value of "[byteOffset/length]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [byteOffset/length] |
 
 **示例：**
 
@@ -503,9 +503,9 @@ console.log(newBuf.toString('ascii'));
 
 以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
 
-| 错误码ID | 错误信息 |
-| -------- | -------- |
-| 10200013 | Cannot set property ${propertyName} of Buffer which has only a getter. |
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 10200013 | ${propertyName} cannot be set for the buffer that has only a getter. |
 
 **示例：**
 
@@ -860,7 +860,7 @@ readBigInt64BE(offset?: number): bigint
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **示例：**
 
@@ -901,7 +901,7 @@ readBigInt64LE(offset?: number): bigint
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **示例：**
 
@@ -942,7 +942,7 @@ readBigUInt64BE(offset?: number): bigint
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **示例：**
 
@@ -983,7 +983,7 @@ readBigUInt64LE(offset?: number): bigint
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **示例：**
 
@@ -1024,7 +1024,7 @@ readDoubleBE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **示例：**
 
@@ -1064,7 +1064,7 @@ readDoubleLE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **示例：**
 
@@ -1104,7 +1104,7 @@ readFloatBE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **示例：**
 
@@ -1144,7 +1144,7 @@ readFloatLE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **示例：**
 
@@ -1184,7 +1184,7 @@ readInt8(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 1. Received value is: [offset]. |
 
 **示例：**
 
@@ -1225,7 +1225,7 @@ readInt16BE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 2. Received value is: [offset]. |
 
 **示例：**
 
@@ -1265,7 +1265,7 @@ readInt16LE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 2. Received value is: [offset]. |
 
 **示例：**
 
@@ -1305,7 +1305,7 @@ readInt32BE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **示例：**
 
@@ -1345,7 +1345,7 @@ readInt32LE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **示例：**
 
@@ -1472,7 +1472,7 @@ readUInt8(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 1. Received value is: [offset]. |
 
 **示例：**
 
@@ -1514,7 +1514,7 @@ readUInt16BE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 2. Received value is: [offset]. |
 
 **示例：**
 
@@ -1556,7 +1556,7 @@ readUInt16LE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 2. Received value is: [offset]. |
 
 **示例：**
 
@@ -1598,7 +1598,7 @@ readUInt32BE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **示例：**
 
@@ -1639,7 +1639,7 @@ readUInt32LE(offset?: number): number
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **示例：**
 
@@ -1792,9 +1792,9 @@ swap16(): Buffer
 
 以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
 
-| 错误码ID | 错误信息 |
-| -------- | -------- |
-| 10200009 | Buffer size must be a multiple of 16-bits |
+| 错误码ID | 错误信息                                      |
+| -------- | --------------------------------------------- |
+| 10200009 | The buffer size must be a multiple of 16-bits |
 
 **示例：**
 
@@ -1827,9 +1827,9 @@ swap32(): Buffer
 
 以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
 
-| 错误码ID | 错误信息 |
-| -------- | -------- |
-| 10200009 | Buffer size must be a multiple of 32-bits |
+| 错误码ID | 错误信息                                      |
+| -------- | --------------------------------------------- |
+| 10200009 | The buffer size must be a multiple of 32-bits |
 
 **示例：**
 
@@ -1862,9 +1862,9 @@ swap64(): Buffer
 
 以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
 
-| 错误码ID | 错误信息 |
-| -------- | -------- |
-| 10200009 | Buffer size must be a multiple of 64-bits |
+| 错误码ID | 错误信息                                      |
+| -------- | --------------------------------------------- |
+| 10200009 | The buffer size must be a multiple of 64-bits |
 
 **示例：**
 
@@ -1991,9 +1991,9 @@ write(str: string, offset?: number, length?: number, encoding?: string): number
 
 以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
 
-| 错误码ID | 错误信息 |
-| -------- | -------- |
-| 10200001 | The value of "[offset/length]" is out of range. |
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 10200001 | The value of "[offset/length]" is out of range. It must be >= 0 and <= buf.length. Received value is: [offset/length]. |
 
 **示例：**
 

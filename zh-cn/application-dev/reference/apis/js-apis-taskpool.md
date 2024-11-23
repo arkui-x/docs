@@ -90,7 +90,7 @@ Task的构造函数。
 
 | 错误码ID | 错误信息                                 |
 | -------- | --------------------------------------- |
-| 10200014 | The function is not mark as concurrent. |
+| 10200014 | The function is not marked as concurrent. |
 
 **示例：**
 
@@ -260,7 +260,7 @@ addTask(func: Function, ...args: unknown[]): void
 
 | 错误码ID | 错误信息                                 |
 | -------- | --------------------------------------- |
-| 10200014 | The function is not mark as concurrent. |
+| 10200014 | The function is not marked as concurrent. |
 
 **示例：**
 
@@ -295,7 +295,7 @@ addTask(task: Task): void
 
 | 错误码ID | 错误信息                                 |
 | -------- | --------------------------------------- |
-| 10200014 | The function is not mark as concurrent. |
+| 10200014 | The function is not marked as concurrent. |
 
 **示例：**
 
@@ -336,11 +336,11 @@ execute(func: Function, ...args: unknown[]): Promise\<unknown>
 
 以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
 
-| 错误码ID | 错误信息                                      |
-| -------- | -------------------------------------------- |
-| 10200003 | Worker initialization failure.               |
-| 10200006 | An exception occurred during serialization.  |
-| 10200014 | The function is not mark as concurrent.      |
+| 错误码ID | 错误信息                                    |
+| -------- | ------------------------------------------- |
+| 10200003 | Worker initialization failure.              |
+| 10200006 | An exception occurred during serialization. |
+| 10200014 | The function is not marked as concurrent.   |
 
 **示例：**
 
@@ -381,11 +381,11 @@ execute(task: Task, priority?: Priority): Promise\<unknown>
 
 以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
 
-| 错误码ID | 错误信息                                     |
+| 错误码ID | 错误信息                                    |
 | -------- | ------------------------------------------- |
 | 10200003 | Worker initialization failure.              |
 | 10200006 | An exception occurred during serialization. |
-| 10200014 | The function is not mark as concurrent.     |
+| 10200014 | The function is not marked as concurrent.   |
 
 **示例：**
 
@@ -482,10 +482,10 @@ cancel(task: Task): void
 
 以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
 
-| 错误码ID | 错误信息                                      |
-| -------- | -------------------------------------------- |
-| 10200015 | The task does not exist when it is canceled. |
-| 10200016 | The task is executing when it is canceled.   |
+| 错误码ID | 错误信息                                   |
+| -------- | ------------------------------------------ |
+| 10200015 | The task to cancel does not exist.         |
+| 10200016 | The task is executing when it is canceled. |
 
 从API version10开始，此接口调用时不再涉及上报错误码10200016。
 
@@ -551,9 +551,9 @@ cancel(group: TaskGroup): void
 
 以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
 
-| 错误码ID | 错误信息                                                 |
-| -------- | ------------------------------------------------------- |
-| 10200018 | The task group does not exist when it is canceled.      |
+| 错误码ID | 错误信息                                 |
+| -------- | ---------------------------------------- |
+| 10200018 | The task group to cancel does not exist. |
 
 **示例：**
 
