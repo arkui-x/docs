@@ -68,8 +68,8 @@ ThreadWorker构造函数。
 
 | 错误码ID | 错误信息 |
 | -------- | -------- |
-| 10200003 | Worker initialization failure. |
-| 10200007 | The worker file patch is invalid path. |
+| 10200003 | Worker initialization failed. |
+| 10200007 | The worker file path is invalid. |
 
 
 
@@ -177,7 +177,7 @@ postMessage(message: Object, transfer: ArrayBuffer[]): void
 
 | 错误码ID | 错误信息                                |
 | -------- | ----------------------------------------- |
-| 10200004 | Worker instance is not running.           |
+| 10200004 | The worker instance is not running.       |
 | 10200006 | An exception occurred during serialization. |
 
 **示例：**
@@ -210,7 +210,7 @@ postMessage(message: Object, options?: PostMessageOptions): void
 
 | 错误码ID | 错误信息                                |
 | -------- | ----------------------------------------- |
-| 10200004 | Worker instance is not running.           |
+| 10200004 | The worker instance is not running.       |
 | 10200006 | An exception occurred during serialization. |
 
 **示例：**
@@ -369,8 +369,8 @@ Worker对象的onexit属性表示Worker销毁时被调用的事件处理程序�
 
 | 错误码ID | 错误信息                                   |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **示例：**
 
@@ -409,8 +409,8 @@ Worker对象的onerror属性表示Worker在执行过程中发生异常被调用�
 
 | 错误码ID | 错误信息                                   |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **示例：**
 
@@ -442,8 +442,8 @@ Worker对象的onmessage属性表示宿主线程接收到来自其创建的Worke
 
 | 错误码ID | 错误信息                                   |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **示例：**
 
@@ -477,8 +477,8 @@ Worker对象的onmessageerror属性表示当Worker对象接收到一条无法被
 
 | 错误码ID | 错误信息                                   |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **示例：**
 
@@ -510,8 +510,8 @@ addEventListener(type: string, listener: WorkerEventListener): void
 
 | 错误码ID | 错误信息                                   |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **示例：**
 
@@ -544,7 +544,7 @@ removeEventListener(type: string, callback?: WorkerEventListener): void
 
 | 错误码ID | 错误信息                      |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **示例：**
 
@@ -583,7 +583,7 @@ dispatchEvent(event: Event): boolean
 
 | 错误码ID | 错误信息                      |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **示例：**
 
@@ -650,7 +650,7 @@ removeAllListener(): void
 
 | 错误码ID | 错误信息                      |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **示例：**
 
@@ -863,7 +863,7 @@ Worker线程通过转移对象所有权的方式向宿主线程发送消息。
 
 | 错误码ID | 错误信息                                |
 | -------- | ----------------------------------------- |
-| 10200004 | Worker instance is not running.           |
+| 10200004 | The worker instance is not running.       |
 | 10200006 | An exception occurred during serialization. |
 
 **示例：**
@@ -911,7 +911,7 @@ Worker线程通过转移对象所有权或者拷贝数据的方式向宿主线�
 
 | 错误码ID | 错误信息                                |
 | -------- | ----------------------------------------- |
-| 10200004 | Worker instance is not running.           |
+| 10200004 | The worker instance is not running.       |
 | 10200006 | An exception occurred during serialization. |
 
 **示例：**
@@ -952,7 +952,7 @@ close(): void
 
 | 错误码ID | 错误信息                      |
 | -------- | ------------------------------- |
-| 10200004 | Worker instance is not running. |
+| 10200004 | The worker instance is not running. |
 
 **示例：**
 
@@ -993,8 +993,8 @@ ThreadWorkerGlobalScope的onmessage属性表示Worker线程收到来自其宿主
 
 | 错误码ID | 错误信息                                   |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **示例：**
 
@@ -1036,8 +1036,8 @@ ThreadWorkerGlobalScope的onmessageerror属性表示当Worker对象接收到一�
 
 | 错误码ID | 错误信息                                   |
 | -------- | -------------------------------------------- |
-| 10200004 | Worker instance is not running.              |
-| 10200005 | The invoked API is not supported in workers. |
+| 10200004 | The worker instance is not running.          |
+| 10200005 | The called API is not supported in the worker thread. |
 
 **示例：**
 

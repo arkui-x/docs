@@ -236,6 +236,12 @@ parseUUID(uuid: string): Uint8Array
 | -------- | -------- |
 | Uint8Array | 返回表示此UUID的Uint8Array，如果解析失败，则抛出SyntaxError。 |
 
+**错误码：**
+
+| 错误码ID | 错误说明             |
+| -------- | -------------------- |
+| 10200002 | Invalid uuid string. |
+
 **示例：**
 
   ```js
