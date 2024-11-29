@@ -52,6 +52,7 @@
 - 图形图像
   - [@ohos.window (窗口)](js-apis-window.md)
   - [@ohos.display (屏幕属性)](js-apis-display.md)
+  - [@ohos.effectKit (图像效果)](js-apis-effectKit.md)
 
 - 媒体
   - [@ohos.multimedia.image (图片处理)](js-apis-image.md)
@@ -73,6 +74,13 @@
 - WiFi管理
   - [@ohos.wifiManager (WLAN)](js-apis-wlan.md)
 
+- 基础通信
+  - [@ohos.bluetooth.a2dp ](js-apis-bluetooth-a2dp.md)
+  - [@ohos.bluetooth.access ](js-apis-bluetooth-access.md)
+  - [@ohos.bluetooth.baseProfile ](js-apis-bluetooth-baseProfile.md)
+  - [@ohos.bluetooth.ble ](js-apis-bluetooth-ble.md)
+  - [@ohos.bluetooth.connection ](js-apis-bluetooth-connection.md)
+  - [@ohos.bluetooth.constant ](js-apis-bluetooth-constant.md)
 - 文件管理
   - [@ohos.file.fs (文件管理)](js-apis-file-fs.md)
   - [@ohos.file.photoAccessHelper (相册管理模块)](js-apis-photoAccessHelper.md)
@@ -85,6 +93,8 @@
   - [@ohos.data.dataSharePredicates (数据共享谓词)](js-apis-data-dataSharePredicates.md)
   - [@ohos.data.preferences (用户首选项)](js-apis-data-preferences.md)
   - [@ohos.data.relationalStore (关系型数据库)](js-apis-data-relationalStore.md)
+  - [@ohos.data.unifiedDataChannel(标准化数据通路)](js-apis-data-unifiedDataChannel.md)
+  - [@ohos.data.uniformTypeDescriptor (标准化数据定义与描述)](js-apis-data-uniformTypeDescriptor.md)
   - [@ohos.data.ValuesBucket (数据集)](js-apis-data-valuesBucket.md)
   
 - 安全

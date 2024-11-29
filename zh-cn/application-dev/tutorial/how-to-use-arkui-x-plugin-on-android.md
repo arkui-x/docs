@@ -1,18 +1,18 @@
-# ArkUI-X插件开发指南
+# Plugin生命周期开发指南
 
-ArkUI-X插件用于拓展ArkUI应用的能力，提供管理插件生命周期的能力。本文主要介绍Android平台的ArkUI-X插件使用。
+ArkUI-X插件用于拓展ArkUI应用的能力，提供管理插件生命周期的能力。本文主要介绍Android平台的ArkUI-X插件生命周期的使用。
 
-### Android平台创建ArkUI-X插件
+### Android平台创建ArkUI-X插件生命周期
 
-在Android平台创建ArkUI-X插件需要实现` IArkUIXPlugin `接口。
+在Android平台创建ArkUI-X插件生命周期需要实现` IArkUIXPlugin `接口。
 
 ```java
-//plugin.java
+// PluginTest.java
 import ohos.ace.adapter.IArkUIXPlugin;
 import ohos.ace.adapter.PluginContext;
 import ohos.ace.adapter.capability.bridge.BridgePlugin;
 
-public class myPlugin implements IArkUIXPlugin {
+public class PluginTest implements IArkUIXPlugin {
     public Bridge myBridge = null;
     @Override
     public void onRegistry(PluginContext pluginContext) {
@@ -47,7 +47,7 @@ class StageActivity extents Activity implements KeyboardHeightObserver {
  **注意：开发者调用addPlugin()方法，必须位于调用超类的onCreate()方法之前，如下：**
 
 ```java
-//EntryEntryAbilityActivity,java
+// EntryEntryAbilityActivity,java
 import android.os.Bundle;
 import ohos.stage.ability.adapter.StageActivity;
 
@@ -55,7 +55,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // 必须在super.onCreate()之前添加，因为在超类的onCreate()中要调用addPlugin()添加的对象
-        addPlugin("com.example.pluginlifecycle.plugin");
+        addPlugin("com.example.pluginlifecycle.PluginTest");
         setInstanceName("com.example.pluginlifecycle:entry:EntryAbility:");
 
         super.onCreate(savedInstanceState);
@@ -68,13 +68,12 @@ public class EntryEntryAbilityActivity extends StageActivity {
 Bridge相关具体参考 [Bridge](how-to-use-bridge-on-android.md)
 
 ```java
-//plugin.java
-
+// PluginTest.java
 import ohos.ace.adapter.IArkUIXPlugin;
 import ohos.ace.adapter.PluginContext;
 import ohos.ace.adapter.capability.bridge.BridgePlugin;
 
-public class plugin implements IArkUIXPlugin {
+public class PluginTest implements IArkUIXPlugin {
    public Bridge myBridge = null;
     // 在 EntryEntryAbilityActivity 的 onCreate 时被触发
     @Override
@@ -98,14 +97,14 @@ public class plugin implements IArkUIXPlugin {
 注册插件示例如下：
 
 ```java
-//EntryEntryAbilityActivity,java
+// EntryEntryAbilityActivity,java
 import android.os.Bundle;
 import ohos.stage.ability.adapter.StageActivity;
 
 public class EntryEntryAbilityActivity extends StageActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        addPlugin("com.example.pluginlifecycle.plugin");
+        addPlugin("com.example.pluginlifecycle.PluginTest");
         setInstanceName("com.example.pluginlifecycle:entry:EntryAbility:");
         super.onCreate(savedInstanceState);
     }

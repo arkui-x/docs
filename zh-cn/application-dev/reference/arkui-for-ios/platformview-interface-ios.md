@@ -105,7 +105,7 @@ NSString* getPlatformViewID();
 
 获得IPlatformView接口。
 
-NSObject\<IPlatformView>* getPlatformView:(NSString*) platformViewId;
+NSObject<IPlatformView>* getPlatformView:(NSString*) platformViewId;
 
 
 **参数：** 
@@ -118,7 +118,7 @@ NSObject\<IPlatformView>* getPlatformView:(NSString*) platformViewId;
 
 | 类型                              | 说明           |
 | --------------------------------- | -------------- |
-| NSObject\<IPlatformView>* | IPlatformView接口。 |
+| NSObject<IPlatformView>* | IPlatformView接口。 |
 
 **示例：**
 

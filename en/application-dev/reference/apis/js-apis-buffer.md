@@ -288,7 +288,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[byteOffset/length]" is out of range. |
+| 10200001 | The value of "[byteOffset/length]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [byteOffset/length] |
 
 **Example**
 
@@ -505,7 +505,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200013 | Cannot set property ${propertyName} of Buffer which has only a getter. |
+| 10200013 | ${propertyName} cannot be set for the buffer that has only a getter. |
 
 **Example**
 
@@ -860,7 +860,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **Example**
 
@@ -901,7 +901,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **Example**
 
@@ -942,7 +942,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **Example**
 
@@ -983,7 +983,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **Example**
 
@@ -1024,7 +1024,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **Example**
 
@@ -1064,7 +1064,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]. |
 
 **Example**
 
@@ -1104,7 +1104,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **Example**
 
@@ -1144,7 +1144,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **Example**
 
@@ -1184,7 +1184,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 1. Received value is: [offset]. |
 
 **Example**
 
@@ -1225,7 +1225,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 2. Received value is: [offset]. |
 
 **Example**
 
@@ -1265,7 +1265,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 2. Received value is: [offset]. |
 
 **Example**
 
@@ -1305,7 +1305,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **Example**
 
@@ -1345,7 +1345,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **Example**
 
@@ -1387,7 +1387,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[offset/byteLength]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -1431,7 +1431,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[offset/byteLength]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -1472,7 +1472,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 1. Received value is: [offset]. |
 
 **Example**
 
@@ -1514,7 +1514,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 2. Received value is: [offset]. |
 
 **Example**
 
@@ -1556,7 +1556,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 2. Received value is: [offset]. |
 
 **Example**
 
@@ -1598,7 +1598,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **Example**
 
@@ -1639,7 +1639,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "offset" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset]. |
 
 **Example**
 
@@ -1681,7 +1681,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[offset/byteLength]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -1723,7 +1723,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[offset/byteLength]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -1794,7 +1794,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200009 | Buffer size must be a multiple of 16-bits |
+| 10200009 | The buffer size must be a multiple of 16-bits |
 
 **Example**
 
@@ -1829,7 +1829,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200009 | Buffer size must be a multiple of 32-bits |
+| 10200009 | The buffer size must be a multiple of 32-bits |
 
 **Example**
 
@@ -1864,7 +1864,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200009 | Buffer size must be a multiple of 64-bits |
+| 10200009 | The buffer size must be a multiple of 64-bits |
 
 **Example**
 
@@ -1993,7 +1993,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[offset/length]" is out of range. |
+| 10200001 | The value of "[offset/length]" is out of range. It must be >= 0 and <= buf.length. Received value is: [offset/length]. |
 
 **Example**
 
@@ -2037,7 +2037,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2076,7 +2076,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2115,7 +2115,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2154,7 +2154,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2193,7 +2193,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset] |
 
 **Example**
 
@@ -2232,7 +2232,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset] |
 
 **Example**
 
@@ -2271,7 +2271,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset] |
 
 **Example**
 
@@ -2311,7 +2311,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "offset" is out of range. It must be >= 0 and <= buf.length - 4. Received value is: [offset] |
 
 **Example**
 
@@ -2350,7 +2350,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2391,7 +2391,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2431,7 +2431,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2470,7 +2470,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2510,7 +2510,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2550,7 +2550,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset/byteLength]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2591,7 +2591,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset/byteLength]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2630,7 +2630,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2672,7 +2672,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2712,7 +2712,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2752,7 +2752,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2791,7 +2791,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2831,7 +2831,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset/byteLength]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 
@@ -2871,7 +2871,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message|
 | -------- | -------- |
-| 10200001 | The value of "[value/offset/byteLength]" is out of range. |
+| 10200001 | The value of "[param]" is out of range. It must be >= [left range] and <= [right range]. Received value is: [param] |
 
 **Example**
 

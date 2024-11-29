@@ -48,6 +48,7 @@
 - Graphics
   - [@ohos.window (Window)](js-apis-window.md)
   - [@ohos.display (Display)](js-apis-display.md)
+  - [@ohos.effectKit (Image Effects)](js-apis-effectKit.md)
 
 - Media
   - [@ohos.multimedia.image (Image Processing)](js-apis-image.md)

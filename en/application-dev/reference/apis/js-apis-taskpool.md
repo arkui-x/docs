@@ -93,7 +93,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 
 | ID| Error Message                               |
 | -------- | --------------------------------------- |
-| 10200014 | The function is not mark as concurrent. |
+| 10200014 | The function is not marked as concurrent. |
 
 **Example**
 
@@ -145,7 +145,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 | -------- | ----------------------------------------- |
 | 10200003 | Worker initialization failure.            |
 | 10200006 | Serializing an uncaught exception failed. |
-| 10200014 | The function is not mark as concurrent.   |
+| 10200014 | The function is not marked as concurrent. |
 
 **Example**
 
@@ -193,7 +193,7 @@ For details about the error codes, see [Utils Error Codes](../errorcodes/errorco
 | -------- | ----------------------------------------- |
 | 10200003 | Worker initialization failure.            |
 | 10200006 | Serializing an uncaught exception failed. |
-| 10200014 | The function is not mark as concurrent.   |
+| 10200014 | The function is not marked as concurrent. |
 
 **Example**
 
