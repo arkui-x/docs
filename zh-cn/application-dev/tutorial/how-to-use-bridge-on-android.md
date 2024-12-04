@@ -41,10 +41,12 @@ Bridge bridge = new Bridge(this, "Bridge", getBridgeManager(), BridgePlugin.Brid
 ```javascript
 // xxx.ets
 
-bridgeImpl.sendMessage('text').then((res)=>{
+private bridgeImpl = bridge.createBridge('Bridge');
+
+this.bridgeImpl.sendMessage('text').then((res)=>{
     // 监听Android侧的回执
     console.log('response: ' + res);
-}).catch((err) => {
+}).catch((err: Error) => {
     console.log('error: ' + JSON.stringify(err));
 });
 ```
@@ -90,11 +92,13 @@ bridge.sendMessage(data);
 ```javascript
 // xxx.ets
 
-bridgeImpl.setMessageListener((message) => {
+private bridgeImpl = bridge.createBridge('Bridge');
+
+this.bridgeImpl.setMessageListener((message) => {
     console.log('receive message: ' + message);
 
     // 收到消息后，向Android侧发送回执
-    return "ArkUI reveice message success";
+    return "ArkUI receive message success";
 });
 ```
 
@@ -126,9 +130,11 @@ public void onMessageResponse(Object data) {}
 ```javascript
 // xxx.ets
 
-bridgeImpl.callMethod('platformCallMethod').then((res)=>{
+private bridgeImpl = bridge.createBridge('Bridge');
+
+this.bridgeImpl.callMethod('platformCallMethod').then((res)=>{
     console.log('result: ' + res);
-}).catch((err) => {
+}).catch((err: Error) => {
     console.error('error: ' + JSON.stringify(err));
 });
 ```
@@ -151,11 +157,12 @@ public String platformCallMethod() {
 ```javascript
 // xxx.ets
 
-function getString() {
-  return 'call js getString success';
+private bridgeImpl = bridge.createBridge('Bridge');
+private getString() : bridge.ResultValue {
+    return 'call js getString success';
 }
 
-bridgeImpl.registerMethod({ name: 'getString', method: getString });
+this.bridgeImpl.registerMethod({ name: 'getString', method: this.getString });
 ```
 
 2、Android侧调用ArkUI侧的方法。
@@ -173,7 +180,12 @@ bridge.callMethod(methodData);
 ```javascript
 // xxx.ets
 
-bridgeImpl.registerMethod({ name: 'getString', method: getString });
+private bridgeImpl = bridge.createBridge('Bridge');
+private getString() : bridge.ResultValue {
+    return 'call js getString success';
+}
+
+this.bridgeImpl.registerMethod({ name: 'getString', method: this.getString });
 ```
 
 2、移除已注册的ArkUI侧方法。
@@ -467,9 +479,6 @@ public class EntryEntryAbilityActivity extends StageActivity {
 编写ArkUI页面Index.ets。
 
 ```javascript
-// Index.ets
-
-// 导入平台桥接模块
 import bridge from '@arkui-x.bridge';
 
 @Entry
@@ -477,8 +486,8 @@ import bridge from '@arkui-x.bridge';
 struct Index {
   // 创建平台桥接对象
   private bridgeImpl = bridge.createBridge('Bridge');
-  @State helloArkUI: string = '';
-  @State nativeResponse: string = '';
+  @State helloArkUI: bridge.ResultValue = '';
+  @State nativeResponse: bridge.Message = '';
 
   aboutToAppear() {
     this.getHelloArkUI();
@@ -486,7 +495,7 @@ struct Index {
 
   getHelloArkUI() {
     // 调用Android侧方法
-    this.bridgeImpl.callMethod('getHelloArkUI').then((result: string) => {
+    this.bridgeImpl.callMethod('getHelloArkUI').then((result: bridge.ResultValue) => {
       // 通过状态变量，将Android侧方法的返回值显示在页面上
       this.helloArkUI = result;
     });
@@ -495,7 +504,7 @@ struct Index {
   build() {
     Row() {
       Column() {
-        Text(this.helloArkUI)
+        Text(this.helloArkUI?.toString())
           .fontSize(15)
           .margin(10)
         Button('sendMessage')
@@ -526,6 +535,7 @@ package com.example.bridgestage;
 import android.content.Context;
 
 // 引用平台桥接模块
+import ohos.ace.adapter.capability.bridge.BridgeManager;
 import ohos.ace.adapter.capability.bridge.BridgePlugin;
 import ohos.ace.adapter.capability.bridge.IMessageListener;
 
