@@ -2621,7 +2621,7 @@ function doRandBySync() {
 |---|---|---|
 |cryptoFramework|creatKdf(algName : string) : Kdf|根据String设置的参数创建Kdf对象|
 |Kdf|generateSecret(params: KdfSpec, callback: AsyncCallback\<DataBlob>): void |使用callback方式进行密钥派生|
-|Kdf|generateSecret(params: KdfSpec): Promise<DataBlob>;|使用Promise方式进行密钥派生|
+|Kdf|generateSecret(params: KdfSpec): Promise\<DataBlob>;|使用Promise方式进行密钥派生|
 
 ### 开发步骤
 
@@ -2673,10 +2673,10 @@ function kdfCallback() {
 
 针对加解密算法开发，有以下相关实例可供参考：
 
-- [支付（ArkTS）（API9）](https://gitee.com/openharmony/applications_app_samples/tree/master/code/BasicFeature/Security/PaySecurely)
+- [支付（ArkTS）（API9）](https://gitcode.com/openharmony/applications_app_samples/tree/master/code/BasicFeature/Security/PaySecurely)
 
-- [通用密钥库系统（cryptoFramework）（ArkTS）（API9）](https://gitee.com/openharmony/applications_app_samples/tree/master/code/BasicFeature/Security/CryptoFramework)
+- [通用密钥库系统（cryptoFramework）（ArkTS）（API9）](https://gitcode.com/openharmony/applications_app_samples/tree/master/code/BasicFeature/Security/CryptoFramework)
 
-- [加解密（ArkTS）（API9）](https://gitee.com/openharmony/applications_app_samples/tree/master/code/BasicFeature/Security/Cipher)
+- [加解密（ArkTS）（API9）](https://gitcode.com/openharmony/applications_app_samples/tree/master/code/BasicFeature/Security/Cipher)
 
-- [字符串加解密（ArkTS）（API9）](https://gitee.com/openharmony/codelabs/tree/master/Security/StringCipherArkTS)
+- [字符串加解密（ArkTS）（API9）](https://gitcode.com/openharmony/codelabs/tree/master/Security/StringCipherArkTS)

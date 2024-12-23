@@ -31,7 +31,7 @@ createEffect(source: image.PixelMap): Filter
 
 | 参数名    | 类型               | 必填 | 说明     |
 | ------- | ----------------- | ---- | -------- |
-| source  | [image.PixelMap](./js-apis-image.md#pixelmap7) | 是   | image模块创建的PixelMap实例。可通过图片解码或直接创建获得，具体可见[图片开发指导](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/media/image/image-overview.md)。   |
+| source  | [image.PixelMap](./js-apis-image.md#pixelmap7) | 是   | image模块创建的PixelMap实例。可通过图片解码或直接创建获得，具体可见[图片开发指导](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/media/image/image-overview.md)。   |
 
 **返回值：**
 
@@ -73,7 +73,7 @@ createColorPicker(source: image.PixelMap): Promise\<ColorPicker>
 
 | 参数名     | 类型         | 必填 | 说明                       |
 | -------- | ----------- | ---- | -------------------------- |
-| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | 是   |  image模块创建的PixelMap实例。可通过图片解码或直接创建获得，具体可见[图片开发指导](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/media/image/image-overview.md)。 |
+| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | 是   |  image模块创建的PixelMap实例。可通过图片解码或直接创建获得，具体可见[图片开发指导](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/media/image/image-overview.md)。 |
 
 **返回值：**
 
@@ -129,7 +129,7 @@ createColorPicker(source: image.PixelMap, region: Array\<number>): Promise\<Colo
 
 | 参数名     | 类型         | 必填 | 说明                       |
 | -------- | ----------- | ---- | -------------------------- |
-| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | 是   |  image模块创建的PixelMap实例。可通过图片解码或直接创建获得，具体可见[图片开发指导](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/media/image/image-overview.md)。 |
+| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | 是   |  image模块创建的PixelMap实例。可通过图片解码或直接创建获得，具体可见[图片开发指导](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/media/image/image-overview.md)。 |
 | region   | Array\<number> | 是   |  指定图片的取色区域。<br>数组元素个数为4，取值范围为[0, 1]，数组元素分别表示图片区域的左、上、右、下位置，图片最左侧和最上侧对应位置0，最右侧和最下侧对应位置1。数组第三个元素需大于第一个元素，第四个元素需大于第二个元素。|
 
 **返回值：**
@@ -186,7 +186,7 @@ createColorPicker(source: image.PixelMap, callback: AsyncCallback\<ColorPicker>)
 
 | 参数名     | 类型                | 必填 | 说明                       |
 | -------- | ------------------ | ---- | -------------------------- |
-| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | 是  |image模块创建的PixelMap实例。可通过图片解码或直接创建获得，具体可见[图片开发指导](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/media/image/image-overview.md)。  |
+| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | 是  |image模块创建的PixelMap实例。可通过图片解码或直接创建获得，具体可见[图片开发指导](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/media/image/image-overview.md)。  |
 | callback | AsyncCallback\<[ColorPicker](#colorpicker)> | 是  | 回调函数。返回创建的ColorPicker实例。 |
 
 **错误码：**
@@ -237,7 +237,7 @@ createColorPicker(source: image.PixelMap, region:Array\<number>, callback: Async
 
 | 参数名     | 类型                | 必填 | 说明                       |
 | -------- | ------------------ | ---- | -------------------------- |
-| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | 是  |image模块创建的PixelMap实例。可通过图片解码或直接创建获得，具体可见[图片开发指导](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/media/image/image-overview.md)。  |
+| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | 是  |image模块创建的PixelMap实例。可通过图片解码或直接创建获得，具体可见[图片开发指导](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/media/image/image-overview.md)。  |
 | region   | Array\<number> | 是   |  指定图片的取色区域。<br>数组元素个数为4，取值范围为[0, 1]，数组元素分别表示图片区域的左、上、右、下位置，图片最左侧和最上侧对应位置0，最右侧和最下侧对应位置1。数组第三个元素需大于第一个元素，第四个元素需大于第二个元素。|
 | callback | AsyncCallback\<[ColorPicker](#colorpicker)> | 是  | 回调函数。返回创建的ColorPicker实例。 |
 
@@ -636,7 +636,7 @@ blur(radius: number): Filter
 
 >  **说明：**
 >
->  该接口为静态模糊接口，为静态图像提供模糊化效果，如果要对组件进行实时渲染的模糊，可以使用[动态模糊]([../../ui/arkts-blur-effect.md](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkts-blur-effect.md))。
+>  该接口为静态模糊接口，为静态图像提供模糊化效果，如果要对组件进行实时渲染的模糊，可以使用[动态模糊]([../../ui/arkts-blur-effect.md](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkts-blur-effect.md))。
 
 **卡片能力：** 从API version 12开始，该接口支持在ArkTS卡片中使用。
 

@@ -1,4 +1,4 @@
-Developer Certificate of Origin
+# Developer Certificate of Origin
 
 Version 1.1 
 
@@ -35,6 +35,6 @@ Company Name\*:
 
 Date\*:
 
-Information marked with \* is mandatory. Ensure that the email address is bound to your gitee account. If you participant in the project as an individual developer, enter Individual developer as the company name.
+Information marked with \* is mandatory. Ensure that the email address is bound to your gitcode account. If you participant in the project as an individual developer, enter Individual developer as the company name.
 
 Sign the file and send it to [contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn). (The online mode for signing the DCO will be provided later.)

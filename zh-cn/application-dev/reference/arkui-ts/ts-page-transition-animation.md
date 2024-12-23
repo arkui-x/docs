@@ -1,12 +1,12 @@
 # 页面间转场
 
-当路由进行切换时，可以通过在pageTransition函数中自定义页面入场和页面退场的转场动效。详细指导请参考[页面转场动画](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkts-page-transition-animation.md)。
+当路由进行切换时，可以通过在pageTransition函数中自定义页面入场和页面退场的转场动效。详细指导请参考[页面转场动画](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkts-page-transition-animation.md)。
 
 > **说明：**
 >
 > 从API Version 7开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
 >
-> 为了实现更好的转场效果，推荐使用[Navigation组件](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkts-navigation-navigation.md)和[模态转场](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkts-modal-transition.md)。
+> 为了实现更好的转场效果，推荐使用[Navigation组件](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkts-navigation-navigation.md)和[模态转场](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkts-modal-transition.md)。
 
 
 | 名称                | 参数                                                         | 必填 | 参数描述                                                     |

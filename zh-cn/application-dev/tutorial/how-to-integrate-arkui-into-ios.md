@@ -123,5 +123,5 @@ ArkUI-X编译产物生成后，自动拷贝到iOS应用工程arkui-x目录下。
 
 ## 参考
 
-【1】[ArkUI-X Samples仓](https://gitee.com/arkui-x/samples)
+【1】[ArkUI-X Samples仓](https://gitcode.com/arkui-x/samples)
 

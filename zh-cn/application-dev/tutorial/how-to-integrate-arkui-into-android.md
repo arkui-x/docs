@@ -112,5 +112,5 @@ proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pr
 
 ## 参考
 
-【1】[ArkUI-X Samples仓](https://gitee.com/arkui-x/samples)
+【1】[ArkUI-X Samples仓](https://gitcode.com/arkui-x/samples)
 

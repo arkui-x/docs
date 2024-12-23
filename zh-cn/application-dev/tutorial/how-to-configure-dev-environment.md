@@ -79,7 +79,7 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
    ```
    环境配置完成后，即可使用[ACE Tools](../quick-start/start-with-ace-tools.md#创建应用)进行跨平台应用开发调试。
 
-  > **说明**：开发环境检查只识别IDE和SDK默认的安装路径，以及下文提到的环境变量配置。如果提示结果与实际不符，请您通过[ace config命令](https://gitee.com/arkui-x/cli#ace-config)指定实际的IDE安装和SDK下载路径。
+  > **说明**：开发环境检查只识别IDE和SDK默认的安装路径，以及下文提到的环境变量配置。如果提示结果与实际不符，请您通过[ace config命令](https://gitcode.com/arkui-x/cli#ace-config)指定实际的IDE安装和SDK下载路径。
 
 ## 配置目标平台应用开发环境
 

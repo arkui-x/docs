@@ -2627,7 +2627,7 @@ For details about the APIs, see [Crypto Framework](../reference/apis/js-apis-cry
 |---|---|---|
 |cryptoFramework|creatKdf(algName : string) : Kdf|Creates a **Kdf** instance.|
 |Kdf|generateSecret(params: KdfSpec, callback: AsyncCallback\<DataBlob>): void |Generates a derived key. This API uses an asynchronous callback to return the result.|
-|Kdf|generateSecret(params: KdfSpec): Promise<DataBlob>;|Generates a derived key. This API uses a promise to return the result.|
+|Kdf|generateSecret(params: KdfSpec): Promise\<DataBlob>;|Generates a derived key. This API uses a promise to return the result.|
 
 ### How to Develop
 

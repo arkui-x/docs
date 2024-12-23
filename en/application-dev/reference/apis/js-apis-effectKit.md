@@ -31,7 +31,7 @@ Creates a **Filter** instance based on a pixel map.
 
 | Name   | Type              | Mandatory | Description    |
 | ------- | ----------------- | ---- | -------- |
-| source  | [image.PixelMap](./js-apis-image.md#pixelmap7) | Yes  | **PixelMap** instance created by the image module. An instance can be obtained by decoding an image or directly created. For details, see [Image Overview](https://gitee.com/openharmony/docs/blob/master/en/application-dev/media/image/image-overview.md).  |
+| source  | [image.PixelMap](./js-apis-image.md#pixelmap7) | Yes  | **PixelMap** instance created by the image module. An instance can be obtained by decoding an image or directly created. For details, see [Image Overview](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/media/image/image-overview.md).  |
 
 **Return value**
 
@@ -73,7 +73,7 @@ Creates a **ColorPicker** instance based on a pixel map. This API uses a promise
 
 | Name    | Type        | Mandatory | Description                      |
 | -------- | ----------- | ---- | -------------------------- |
-| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | Yes  |  **PixelMap** instance created by the image module. An instance can be obtained by decoding an image or directly created. For details, see [Image Overview](https://gitee.com/openharmony/docs/blob/master/en/application-dev/media/image/image-overview.md). |
+| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | Yes  |  **PixelMap** instance created by the image module. An instance can be obtained by decoding an image or directly created. For details, see [Image Overview](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/media/image/image-overview.md). |
 
 **Return value**
 
@@ -129,7 +129,7 @@ Creates a **ColorPicker** instance for the selected region based on a pixel map.
 
 | Name    | Type        | Mandatory | Description                      |
 | -------- | ----------- | ---- | -------------------------- |
-| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | Yes  |  **PixelMap** instance created by the image module. An instance can be obtained by decoding an image or directly created. For details, see [Image Overview](https://gitee.com/openharmony/docs/blob/master/en/application-dev/media/image/image-overview.md). |
+| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | Yes  |  **PixelMap** instance created by the image module. An instance can be obtained by decoding an image or directly created. For details, see [Image Overview](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/media/image/image-overview.md). |
 | region   | Array\<number> | Yes  |  Region of the image from which the color is picked.<br>The array consists of four elements, representing the left, top, right, and bottom positions of the image, respectively. The value of each element must be in the range [0, 1]. The leftmost and topmost positions of the image correspond to 0, and the rightmost and bottom positions correspond to 1. In the array, the third element must be greater than the first element, and the fourth element must be greater than the second element.|
 
 **Return value**
@@ -186,7 +186,7 @@ Creates a **ColorPicker** instance based on a pixel map. This API uses an asynch
 
 | Name    | Type               | Mandatory | Description                      |
 | -------- | ------------------ | ---- | -------------------------- |
-| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | Yes |**PixelMap** instance created by the image module. An instance can be obtained by decoding an image or directly created. For details, see [Image Overview](https://gitee.com/openharmony/docs/blob/master/en/application-dev/media/image/image-overview.md). |
+| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | Yes |**PixelMap** instance created by the image module. An instance can be obtained by decoding an image or directly created. For details, see [Image Overview](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/media/image/image-overview.md). |
 | callback | AsyncCallback\<[ColorPicker](#colorpicker)> | Yes | Callback used to return the **ColorPicker** instance created. |
 
 **Error codes**
@@ -237,7 +237,7 @@ Creates a **ColorPicker** instance for the selected region based on a pixel map.
 
 | Name    | Type               | Mandatory | Description                      |
 | -------- | ------------------ | ---- | -------------------------- |
-| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | Yes |**PixelMap** instance created by the image module. An instance can be obtained by decoding an image or directly created. For details, see [Image Overview](https://gitee.com/openharmony/docs/blob/master/en/application-dev/media/image/image-overview.md). |
+| source   | [image.PixelMap](./js-apis-image.md#pixelmap7) | Yes |**PixelMap** instance created by the image module. An instance can be obtained by decoding an image or directly created. For details, see [Image Overview](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/media/image/image-overview.md). |
 | region   | Array\<number> | Yes  |  Region of the image from which the color is picked.<br>The array consists of four elements, representing the left, top, right, and bottom positions of the image, respectively. The value of each element must be in the range [0, 1]. The leftmost and topmost positions of the image correspond to 0, and the rightmost and bottom positions correspond to 1. In the array, the third element must be greater than the first element, and the fourth element must be greater than the second element.|
 | callback | AsyncCallback\<[ColorPicker](#colorpicker)> | Yes | Callback used to return the **ColorPicker** instance created. |
 
@@ -636,7 +636,7 @@ Adds the blur effect to the filter linked list, and returns the head node of the
 
 >  **NOTE**
 >
->  This API provides the blur effect for static images. To provide the real-time blur effect for components, use [dynamic blur](https://gitee.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-blur-effect.md).
+>  This API provides the blur effect for static images. To provide the real-time blur effect for components, use [dynamic blur](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-blur-effect.md).
 
 **Widget capability**: This API can be used in ArkTS widgets since API version 12.
 

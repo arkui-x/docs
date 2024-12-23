@@ -1,12 +1,12 @@
 # Page Transition
 
-You can customize the page entrance and exit animations in the **pageTransition** API for transition between pages. For details, see [Page Transition Animation](https://gitee.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-page-transition-animation.md).
+You can customize the page entrance and exit animations in the **pageTransition** API for transition between pages. For details, see [Page Transition Animation](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-page-transition-animation.md).
 
 > **NOTE**
 >
 > This event is supported since API version 7. Updates will be marked with a superscript to indicate their earliest API version.
 >
-> To achieve a better transition effect, you are advised to use the [\<Navigation>](https://gitee.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-navigation-navigation.md) component and [modal transition](https://gitee.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-modal-transition.md).
+> To achieve a better transition effect, you are advised to use the [\<Navigation>](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-navigation-navigation.md) component and [modal transition](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-modal-transition.md).
 
 
 | Name               | Parameter                                                        | Mandatory| Description                                                    |

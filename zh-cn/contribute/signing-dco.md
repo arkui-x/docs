@@ -1,4 +1,4 @@
-Developer Certificate of Origin 
+# Developer Certificate of Origin 
  开发者原创声明 
  Version 1.1 
  第1.1版 
@@ -48,6 +48,6 @@ Developer Certificate of Origin
 
 日期\*:
 
-\* 必填。请确保邮箱与你的gitee账号绑定。如果是个人开发者，公司名称请填写“个人开发者”。
+\* 必填。请确保邮箱与你的gitcode账号绑定。如果是个人开发者，公司名称请填写“个人开发者”。
 
 请将签署后的DCO Markdown文件**通过上述提供的邮箱**发送邮件至ArkUI-X开源项目的邮箱[contact@mail.arkui-x.cn](mailto:contact@mail.arkui-x.cn)。（线上签署待开放）

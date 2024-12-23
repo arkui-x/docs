@@ -15,11 +15,11 @@ Check out the development fundamentals, which comprise descriptions of the packa
 ## Tools
 
 [ACE Tools](quick-start/start-with-ace-tools.md) is the default toolchain for cross-platform application development.
-It can be used to create, build, install, run, debug, and install cross-platform applications. For details, see [ACE Tools](https://gitee.com/arkui-x/cli/blob/master/README-EN.md).
+It can be used to create, build, install, run, debug, and install cross-platform applications. For details, see [ACE Tools](https://gitcode.com/arkui-x/cli/blob/master/README-EN.md).
 
 ## Samples
 
-To make you better understand how functions work together and jumpstart your application development projects, we provide stripped-down, real-world [samples](https://gitee.com/arkui-x/samples). These samples can be directly run through ArkUI-X Command Line Tools.
+To make you better understand how functions work together and jumpstart your application development projects, we provide stripped-down, real-world [samples](https://gitcode.com/arkui-x/samples). These samples can be directly run through ArkUI-X Command Line Tools.
 
 ## API References
 

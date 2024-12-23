@@ -63,14 +63,14 @@ ArkUI-X遵从 [Open Source Definition](https://opensource.org/docs/osd) ，满�
 | 软件官网地址 | 描述该软件官方网站链接地址 | https://softwaresite |
 | 软件版本号 | 描述该软件要引入的版本号，版本号为其社区正式发布的版本号，不要随意修改；未正式发布的版本不建议引入 | 1.0.0 |
 | 软件版本发布日期 | 描述该软件要引入的版本的社区发布日期 | 2021.01.01 |
-| 软件版本地址 | 描述该版本的官方下载链接地址，注意该地址必须为能定位到该具体版本发布包的下载URL | https://gitee.com/softwarecodesite/v1.0.0.zip |
+| 软件版本地址 | 描述该版本的官方下载链接地址，注意该地址必须为能定位到该具体版本发布包的下载URL | https://gitcode.com/softwarecodesite/v1.0.0.zip |
 | 软件许可证 | 描述该版本的官方许可证名称及许可证文件的相对路径，如果是多许可证要完整描述，并说明各许可证的关系，如是And还是Or，或者是不同目录对应不同许可证 | Apache-2.0 |
 | 软件生命周期 | 描述该软件是否有LTS版本，多长时间发布一个版本，最近一年社区代码提交及Issue解决情况，是否有告知停止维护或演进 | 无LTS版本，6个月发布一个版本，近6个月有10次代码提交 |
 | 软件安全漏洞 | 描述该软件存在的业界公开的安全漏洞列表，包括漏洞号、级别、漏洞链接地址、是否已有补丁或解决方案 | 无业界公开漏洞 |
 | 业务场景 | 描述该软件被哪些仓使用,解决什么业务场景的问题 | 被XX仓静态链接使用，提升YYY能力 |
 | 归一化 | 描述社区是否已有此软件或类似软件，业界类似软件有哪些，为什么要新引入该软件或该版本 | 本社区还未引入此软件，业界相似软件有B、C，只有本软件许可证友好，且该软件生态较好，X、Y等公司也在使用 |
 | 许可证兼容性 | 描述使用该软件有哪些进程，各进程的许可证是什么，与要引入软件的许可证是否兼容。 | 此软件在用户态X进程中，静态链接使用，该进程的许可证为Apache-2.0，与该软件许可证一致，无兼容性问题； |
-| 责任人 | 描述该软件引入到本社区后的维护责任人的Gitee用名及邮箱 | Zhangsan，Zhangsan@xyz.com |
+| 责任人 | 描述该软件引入到本社区后的维护责任人的GitCode用名及邮箱 | Zhangsan，Zhangsan@xyz.com |
 
 
 2、OAT.xml文件
@@ -87,7 +87,7 @@ ArkUI-X遵从 [Open Source Definition](https://opensource.org/docs/osd) ，满�
     "License File": "LICENSE",
     "Version Number": "1.0.0",
     "Owner": "Zhangsan@xyz.com",
-    "Upstream URL": "https://gitee.com/softwarecodesite/v1.0.0.zip",
+    "Upstream URL": "https://gitcode.com/softwarecodesite/v1.0.0.zip",
     "Description": "...."
   },
   {

@@ -133,4 +133,4 @@ With ACE Tools, you can develop a cross-platform application with multiple modul
 
 ##  References
 
-- [ACE Tools](https://gitee.com/arkui-x/cli/blob/master/README-EN.md)
+- [ACE Tools](https://gitcode.com/arkui-x/cli/blob/master/README-EN.md)

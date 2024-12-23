@@ -1,6 +1,6 @@
 # How to Use Node-API on Android
 
-Node-API implements enables seamless interaction between ArkTS/TS/JS and C/C++ (native). For details about the Node-API interfaces supported by ArkUI-X and their application scenarios, see [FFI (Node-API)](../quick-start/ffi-napi-introduction.md). This tutorial uses the sample native project in [ArkUI-X/Samples](https://gitee.com/arkui-x/samples) as an example to describe how to use Node-API to implement cross-language invocation on Android.
+Node-API implements enables seamless interaction between ArkTS/TS/JS and C/C++ (native). For details about the Node-API interfaces supported by ArkUI-X and their application scenarios, see [FFI (Node-API)](../quick-start/ffi-napi-introduction.md). This tutorial uses the sample native project in [ArkUI-X/Samples](https://gitcode.com/arkui-x/samples) as an example to describe how to use Node-API to implement cross-language invocation on Android.
 
 ## How to Develop
 
@@ -16,7 +16,7 @@ The following two examples are provided to describe the typical application scen
 2. Define a native method named **NativeCallArkTS**, which is called by ArkTS with an ArkTS function passed in. The **NativeCallArkTS** method invokes this ArkTS function and returns the result to ArkTS. This example describes how to enable native to call ArkTS methods.
 
 ### 1. Setting Up the Environment
-Obtain the sample native project from [ArkUI-X/Samples](https://gitee.com/arkui-x/samples) and use DevEco Studio (V4.0 Beta2 or later) to open the project. The opened project is automatically initialized.
+Obtain the sample native project from [ArkUI-X/Samples](https://gitcode.com/arkui-x/samples) and use DevEco Studio (V4.0 Beta2 or later) to open the project. The opened project is automatically initialized.
 
 ### 2. Implementing Native APIs
 

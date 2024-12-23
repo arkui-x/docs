@@ -1,6 +1,6 @@
-How to Package the ArkUI-X SDK
+# How to Package the ArkUI-X SDK
 
-# Overview
+## Overview
 
 This tutorial describes how to extend the OpenHarmony ArkUI development framework to different OS platforms like Android and iOS. This way, you can reuse most of the app code (UI and main app logic) based on the ArkUI and deploy the code on the corresponding OS platform to facilitate cross-platform app development.
 
@@ -30,19 +30,19 @@ The following describes how to configure the ArkUI-X SDK trustlist, build and ge
 
 ## ArkUI-X SDK Configuration
 
-This section uses the cross-platform implementation of the [@ohos.i18n(Internationalization-I18n)](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-i18n.md) APIs as an example to describe how to configure the ArkUI-X SDK trustlist.
+This section uses the cross-platform implementation of the [@ohos.i18n(Internationalization-I18n)](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-i18n.md) APIs as an example to describe how to configure the ArkUI-X SDK trustlist.
 
 ### Cross-platform Implementation of @ohos.i18n APIs
 
-- ArkUI-X community code repository: **https://gitee.com/arkui-x/plugins**
+- ArkUI-X community code repository: **https://gitcode.com/arkui-x/plugins**
 
-- Code repository for cross-platform implementation of @ohos.i18n APIs: **https://gitee.com/arkui-x/plugins/tree/master/i18n**
+- Code repository for cross-platform implementation of @ohos.i18n APIs: **https://gitcode.com/arkui-x/plugins/tree/master/i18n**
 
 For details about @ohos.i18n API definitions, see [How to Extend @ohos APIs on Android](how-to-achieve-arkts-interface-on-android.md) and [How to Extend @ohos APIs on iOS](how-to-achieve-arkts-interface-on-ios.md).
 
-- After defining the @ohos.i18n APIs for cross-platform implementation, configure the static link targets **i18n_static_android** and **i18n_static_ios** in [BUILD.gn](https://gitee.com/arkui-x/plugins/blob/master/i18n/BUILD.gn). According to the module naming rule, set the name of the @ohos.i18n API module to **i18n**, and configure it in [common_plugin_libs](https://gitee.com/arkui-x/plugins/blob/master/plugin_lib.gni) as the input for the **plugin_lib** template. 
+- After defining the @ohos.i18n APIs for cross-platform implementation, configure the static link targets **i18n_static_android** and **i18n_static_ios** in [BUILD.gn](https://gitcode.com/arkui-x/plugins/blob/master/i18n/BUILD.gn). According to the module naming rule, set the name of the @ohos.i18n API module to **i18n**, and configure it in [common_plugin_libs](https://gitcode.com/arkui-x/plugins/blob/master/plugin_lib.gni) as the input for the **plugin_lib** template. 
 
-- Call the **plugin_lib** template in the [arkui_for_android](https://gitee.com/arkui-x/arkui_for_android/blob/master/build/BUILD.gn) and [arkui_for_ios](https://gitee.com/arkui-x/arkui_for_ios/blob/master/build/BUILD.gn) repositories. Dynamic link targets are generated as follows:
+- Call the **plugin_lib** template in the [arkui_for_android](https://gitcode.com/arkui-x/arkui_for_android/blob/master/build/BUILD.gn) and [arkui_for_ios](https://gitcode.com/arkui-x/arkui_for_ios/blob/master/build/BUILD.gn) repositories. Dynamic link targets are generated as follows:
   - //foundation/arkui/ace_engine/adapter/android/build:i18n
   - //foundation/arkui/ace_engine/adapter/ios/build:libi18n
 
@@ -50,9 +50,9 @@ For details about @ohos.i18n API definitions, see [How to Extend @ohos APIs on A
 
 ### @ohos.i18n SDK Build Trustlist Configuration
 
-After defining the @ohos.i18n APIs for cross-platform implementation, you need to configure the trustlist in the [plug-in repository](https://gitee.com/arkui-x/build_plugins) and package the trustlist into the ArkUI-X SDK during the build process.
+After defining the @ohos.i18n APIs for cross-platform implementation, you need to configure the trustlist in the [plug-in repository](https://gitcode.com/arkui-x/build_plugins) and package the trustlist into the ArkUI-X SDK during the build process.
 
-[Trustlist configuration for Android](https://gitee.com/arkui-x/build_plugins/blob/master/sdk/arkui_cross_sdk_description_std.json)
+[Trustlist configuration for Android](https://gitcode.com/arkui-x/build_plugins/blob/master/sdk/arkui_cross_sdk_description_std.json)
 
 ```json
     {
@@ -75,7 +75,7 @@ After defining the @ohos.i18n APIs for cross-platform implementation, you need t
     },
 ```
 
-[Trustlist configuration for iOS](https://gitee.com/arkui-x/build_plugins/blob/master/sdk/arkui_cross_sdk_description_std.json)
+[Trustlist configuration for iOS](https://gitcode.com/arkui-x/build_plugins/blob/master/sdk/arkui_cross_sdk_description_std.json)
 
 ```json
     {
@@ -89,7 +89,7 @@ After defining the @ohos.i18n APIs for cross-platform implementation, you need t
 
 ### @ohos.i18n API Call Parsing
 
-Both the **engine** and **plugins** directories in the ArkUI-X SDK contain the **apiConfig.json** file, which is used for API call parsing by DevEco Studio and ACE Tools. This way, you can just focus on ArkTS code development, without the need to consider the referenced ArkUI controls and @ohos API plug-ins. This section describes only how to configure the **apiConfig.json** file in the [SDK repository](https://gitee.com/arkui-x/interface_sdk). Introduction to the **apiConfig.json** file is not provided.
+Both the **engine** and **plugins** directories in the ArkUI-X SDK contain the **apiConfig.json** file, which is used for API call parsing by DevEco Studio and ACE Tools. This way, you can just focus on ArkTS code development, without the need to consider the referenced ArkUI controls and @ohos API plug-ins. This section describes only how to configure the **apiConfig.json** file in the [SDK repository](https://gitcode.com/arkui-x/interface_sdk). Introduction to the **apiConfig.json** file is not provided.
 
 ```json
     {
