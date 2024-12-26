@@ -23,7 +23,7 @@ The figure below shows the overall architecture of the ArkUI-X framework. For de
 
 ## Evolution Roadmap
 
-[2023 Roadmap](roadmap/ArkUI-X-roadmap-2023.md)
+[2023 Roadmap](roadmap/ArkUI-X-roadmap.md)
 
 ## Getting Started
 

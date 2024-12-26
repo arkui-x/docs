@@ -34,7 +34,7 @@ The singular focus of the ArkUI-X project in 2022 is on building the core facili
 
   Architecture evolution mainly includes maintainability enhancement (architecture decoupling – on-demand loading of component APIs, hierarchical abstraction – abstraction of the rendering backend for smooth transition, and more), and improvement in performance, memory, and package volume. The evolution is subject to the evolution of ArkUI on OpenHarmony (minimum update, parallel reconstruction, rendering data reconstruction, and 2D-3D fusion) and the cross-platform service requirements.
 
-## Current Progress
+# Current Progress
 
 By November 2022, the ArkUI-X project has released a Beta version, a milestone in its journey. This version mainly packs the following capabilities:
 

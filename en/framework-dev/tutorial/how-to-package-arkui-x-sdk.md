@@ -1,6 +1,6 @@
-# How to Package the ArkUI-X SDK
+How to Package the ArkUI-X SDK
 
-## Overview
+# Overview
 
 This tutorial describes how to extend the OpenHarmony ArkUI development framework to different OS platforms like Android and iOS. This way, you can reuse most of the app code (UI and main app logic) based on the ArkUI and deploy the code on the corresponding OS platform to facilitate cross-platform app development.
 

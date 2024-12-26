@@ -1,4 +1,4 @@
-# Developer Certificate of Origin 
+Developer Certificate of Origin 
  开发者原创声明 
  Version 1.1 
  第1.1版 

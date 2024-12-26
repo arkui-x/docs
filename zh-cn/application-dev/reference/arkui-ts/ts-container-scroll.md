@@ -192,6 +192,13 @@ isAtEnd(): boolean
 | END  | 尾部对齐。指定item尾部与List尾部对齐。 |
 | AUTO  | 自动对齐。<br/>若指定item完全处于显示区，不做调整。否则依照滑动距离最短的原则，将指定item首部对齐或尾部对齐于List,使指定item完全处于显示区。|
 
+## NestedScrollOptions<sup>10+</sup>对象说明
+
+| 名称   | 类型  | 必填 | 描述              |
+| ----- | ------ | ------ | ----------------- |
+| scrollForward | [NestedScrollMode](ts-appendix-enums.md#nestedscrollmode10) | 是 | 滚动组件往末尾端滚动时的嵌套滚动选项。 |
+| scrollBackward | [NestedScrollMode](ts-appendix-enums.md#nestedscrollmode10) | 是 | 滚动组件往起始端滚动时的嵌套滚动选项。 |
+
 ## 示例
 ### 示例1
 

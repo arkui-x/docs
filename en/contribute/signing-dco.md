@@ -1,4 +1,4 @@
-# Developer Certificate of Origin
+Developer Certificate of Origin
 
 Version 1.1 
 
