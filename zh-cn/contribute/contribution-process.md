@@ -2,9 +2,9 @@
 
 ## 环境准备
 
--   针对Git的安装、环境配置及使用方法，请参考码云帮助中心的Git知识大全：[https://gitee.com/help/categories/43](https://gitee.com/help/categories/43)
--   注册SSH公钥，请参考码云帮助中心的公钥管理：[https://gitee.com/help/articles/4191](https://gitee.com/help/articles/4191)
--   在开展Gitee的工作流之前，您需要先在ArkUI-X的代码托管平台上找到您感兴趣的Repository。
+-   针对Git的安装、环境配置及使用方法，请参考GitCode帮助中心的Git知识大全：[https://docs.gitcode.com/docs/learn-git/](https://docs.gitcode.com/docs/learn-git/)
+-   注册SSH公钥，请参考GitCode帮助中心的公钥管理：[https://docs.gitcode.com/docs/users/ssh-key/](https://docs.gitcode.com/docs/users/ssh-key/)
+-   在开展GitCode的工作流之前，您需要先在ArkUI-X的代码托管平台上找到您感兴趣的Repository。
 
 ## 代码下载
 
@@ -51,10 +51,10 @@
 
 ### 使用repo工具批量下载代码仓
 
-1.  下载码云repo工具\(可以参考码云帮助中心：[https://gitee.com/help/articles/4316](https://gitee.com/help/articles/4316)\)：
+1.  下载GitCode repo工具\(可以参考GitCode帮助中心：[https://gitcode.com/gitcode-dev/repo/overview](https://gitcode.com/gitcode-dev/repo/overview)\)：
 
     ```
-    curl https://gitee.com/oschina/repo/raw/fork_flow/repo-py3 > /usr/local/bin/repo
+    curl https://gitcode.com/gitcode-dev/repo/blob/main/repo-py3 > /usr/local/bin/repo
     chmod a+x /usr/local/bin/repo
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple requests
     ```
@@ -62,7 +62,7 @@
 2.  下载\(注意没有repo branch参数\)：
 
     ```
-    repo init -u https://gitee.com/arkui-x/manifest.git -b master --no-repo-verify
+    repo init -u https://gitcode.com/arkui-x/manifest.git -b master --no-repo-verify
     repo sync -c
     ```
 
@@ -117,13 +117,13 @@
 repo config --global repo.token {TOKEN}
 ```
 
-token码在码云[个人设置→安全设置→私人令牌](https://gitee.com/profile/personal_access_tokens)中生成，例如
+token码在GitCode[个人设置→安全设置→访问令牌](https://gitcode.com/setting/token-classic)中生成，例如
 
 ```
 repo config --global repo.token 211XXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
-2. 在码云上任意一个此次要修改的仓下创建issue\(类似于gerrit的changeID功能，用来关联多个耦合仓修改\)，并记录下issue编号\(如下图中的issue编号是\#I1TVV4\)\(如果不涉及多个仓耦合修改，则此步骤不需要\)：
+2. 在GitCode上任意一个此次要修改的仓下创建issue\(类似于gerrit的changeID功能，用来关联多个耦合仓修改\)，并记录下issue编号\(如下图中的issue编号是\#I1TVV4\)\(如果不涉及多个仓耦合修改，则此步骤不需要\)：
 
 ![](figures/repo1.png)
 
@@ -187,19 +187,19 @@ repo push --br="20200903" --d="master" --content="#I1TVV4"
 
 ## 创建Pull Request（如已通过repo工具自动创建PR，则此步忽略）
 
-访问您在码云上的fork仓页面，点击创建Pull Request按钮选择myfeature分支生成PR。
+访问您在GitCode上的fork仓页面，点击创建Pull Request按钮选择myfeature分支生成PR。
 
-详细操作请参考码云帮助中心的开发协作指导：[https://gitee.com/help/articles/4128](https://gitee.com/help/articles/4128)
+详细操作请参考GitCode帮助中心的开发协作指导：[https://docs.gitcode.com/docs/pulls/](https://docs.gitcode.com/docs/pulls/)
 
 >![](public_sys-resources/icon-notice.gif) **须知：** 
 >**多个代码仓存在编译依赖时如何同时发起构建：**
->跨平台项目开发时，经常会遇到多个代码仓的修改具有编译依赖关系，需要同时构建、同时合入。为此码云平台将Issue作为具有编译依赖的多个代码仓提交PR的关联标识。具体操作如下：
+>跨平台项目开发时，经常会遇到多个代码仓的修改具有编译依赖关系，需要同时构建、同时合入。为此GitCode平台将Issue作为具有编译依赖的多个代码仓提交PR的关联标识。具体操作如下：
 >
 >1.  在此次提交的任意一个代码仓上创建Issue。
->2.  将多个需要同时构建、同时合入的PR关联上述Issue，具体操作请参考码云帮助中心：[https://gitee.com/help/articles/4142](https://gitee.com/help/articles/4142)。
+>2.  将多个需要同时构建、同时合入的PR关联上述Issue，具体操作请参考GitCode帮助中心：[https://docs.gitcode.com/docs/repo/issues/manage/](https://docs.gitcode.com/docs/repo/issues/manage/)。
 >3.  触发构建\(详见触发构建的操作帮助\)后，构建中心会识别关联了同一Issue的PR，同时下载构建，并在代码审核通过后，同时进行合并入代码库。
 
 ## 代码审查
 
-请参考码云帮助中心：[https://gitee.com/help/articles/4304](https://gitee.com/help/articles/4304)
+请参考GitCode帮助中心：[https://docs.gitcode.com/docs/pulls/codereview/](https://docs.gitcode.com/docs/pulls/codereview/)
 

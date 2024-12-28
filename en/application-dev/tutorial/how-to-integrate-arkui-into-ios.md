@@ -156,4 +156,4 @@ Now you can build an ArkUI iOS app according to the iOS app building process.
 
 ### References
 
-[1] [ArkUI-X App Samples](https://gitee.com/arkui-x/samples)
+[1] [ArkUI-X App Samples](https://gitcode.com/arkui-x/samples)

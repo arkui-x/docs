@@ -30,4 +30,4 @@
 
 ## Samples
 
-- [ArkUI-X App Samples](https://gitee.com/arkui-x/samples)
+- [ArkUI-X App Samples](https://gitcode.com/arkui-x/samples)

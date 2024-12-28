@@ -37,39 +37,39 @@ The table below lists the code repositories.
 
 | Directory                                   | Description                                                  | Code Repository                                              |
 | ------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| build                                       | Project build and configuration scripts                      | [OpenHarmony/build](https://gitee.com/openharmony/build)     |
-| build_plugins                               | Cross-platform build plug-ins                                | [ArkUI-X/build_plugins](https://gitee.com/arkui-x/build_plugins) |
-| samples                                     | Application samples                                          | [ArkUI-X/samples](https://gitee.com/arkui-x/samples)         |
-| community                                   | Community operations and management                          | [ArkUI-X/community](https://gitee.com/arkui-x/community)     |
-| docs                                        | Reference documents                                          | [ArkUI-X/docs](https://gitee.com/arkui-x/docs)               |
-| interface/sdk                               | ArkUI-X SDK configuration                                    | [ArkUI-X/interface_sdk](https://gitee.com/arkui-x/interface_sdk) |
-| plugins                                     | API plug-in management and OpenHarmony API plug-in implementation | [ArkUI-X/plugins](https://gitee.com/arkui-x/plugins)         |
-| test/xts                                    | ArkUI-X cross-platform application test suites               | [ArkUI-X/xts](https://gitee.com/arkui-x/xts)                 |
-| test/testfwk/arkxtest                       | ArkUI-X test framework                                       | [ArkUI-X/arkxtest](https://gitee.com/arkui-x/arkxtest)       |
-| developtools/ace_tools                      | Cross-platform CLI tool                                      | [ArkUI-X/cli](https://gitee.com/arkui-x/cli)                 |
-| foundation/appframework                     | Application framework compatibility adaptation               | [ArkUI-X/app_framework](https://gitee.com/arkui-x/app_framework) |
-| foundation/arkui/ace_engine/adapter/android | Android platform adaptation code                             | [ArkUI-X/arkui_for_android](https://gitee.com/arkui-x/arkui_for_android) |
-| foundation/arkui/ace_engine/adapter/ios     | iOS platform adaptation code                                 | [ArkUI-X/arkui_for_ios](https://gitee.com/arkui-x/arkui_for_ios) |
-| foundation/arkui/ace_engine                 | Core code of the ArkUI engine                                | [OpenHarmony/arkui_ace_engine](https://gitee.com/openharmony/arkui_ace_engine) |
-| foundation/arkui/napi                       | Native API extension mechanism                               | [OpenHarmony/arkui_napi](https://gitee.com/openharmony/arkui_napi) |
-| foundation/communication/netmanager_base    | Network management module                                    | [OpenHarmony/communication_netmanager_base](https://gitee.com/openharmony/communication_netmanager_base) |
-| foundation/communication/netstack           | Network protocol stack                                       | [OpenHarmony/communication_netstack](https://gitee.com/openharmony/communication_netstack) |
-| foundation/graphic/graphic_2d               | Basic 2D graphics library                                    | [OpenHarmony/graphic_graphic_2d](https://gitee.com/openharmony/graphic_graphic_2d) |
-| foundation/filemanagement/file_api          | APIs for accessing folders and files                         | [OpenHarmony/filemanagement_file_api](https://gitee.com/openharmony/filemanagement_file_api) |
-| foundation/multimedia/image_framework       | Code for implementing image encoding and decoding            | [OpenHarmony/multimedia_image_framework](https://gitee.com/openharmony/multimedia_image_framework) |
-| developtools/ace_ets2bundle                 | Compilation tool and cross-platform application build tool using the ArkTS-based declarative development paradigm | [OpenHarmony/ace_ets2bundle](https://gitee.com/openharmony/developtools_ace_ets2bundle) |
-| developtools/ace_js2bundle                  | Compilation tool and cross-platform application building tool using the JS-compatible web-like development paradigm | [OpenHarmony/ace_js2bundle](https://gitee.com/openharmony/developtools_ace_js2bundle) |
-| arkcompiler/ets_frontend                    | Ark frontend tool                                            | [OpenHarmony/arkcompiler_ets_frontend](https://gitee.com/openharmony/arkcompiler_ets_frontend) |
-| arkcompiler/ets_runtime                     | Ark ArkTS runtime                                            | [OpenHarmony/arkcompiler_ets_runtime](https://gitee.com/openharmony/arkcompiler_ets_runtime) |
-| arkcompiler/runtime_core                    | Ark compiler runtime                                         | [OpenHarmony/arkcompiler_runtime_core](https://gitee.com/openharmony/arkcompiler_runtime_core) |
-| arkcompiler/toolchain                       | Debugging and tuning tool                                    | [OpenHarmony/arkcompiler_toolchain](https://gitee.com/openharmony/arkcompiler_toolchain) |
+| build                                       | Project build and configuration scripts                      | [OpenHarmony/build](https://gitcode.com/openharmony/build)     |
+| build_plugins                               | Cross-platform build plug-ins                                | [ArkUI-X/build_plugins](https://gitcode.com/arkui-x/build_plugins) |
+| samples                                     | Application samples                                          | [ArkUI-X/samples](https://gitcode.com/arkui-x/samples)         |
+| community                                   | Community operations and management                          | [ArkUI-X/community](https://gitcode.com/arkui-x/community)     |
+| docs                                        | Reference documents                                          | [ArkUI-X/docs](https://gitcode.com/arkui-x/docs)               |
+| interface/sdk                               | ArkUI-X SDK configuration                                    | [ArkUI-X/interface_sdk](https://gitcode.com/arkui-x/interface_sdk) |
+| plugins                                     | API plug-in management and OpenHarmony API plug-in implementation | [ArkUI-X/plugins](https://gitcode.com/arkui-x/plugins)         |
+| test/xts                                    | ArkUI-X cross-platform application test suites               | [ArkUI-X/xts](https://gitcode.com/arkui-x/xts)                 |
+| test/testfwk/arkxtest                       | ArkUI-X test framework                                       | [ArkUI-X/arkxtest](https://gitcode.com/arkui-x/arkxtest)       |
+| developtools/ace_tools                      | Cross-platform CLI tool                                      | [ArkUI-X/cli](https://gitcode.com/arkui-x/cli)                 |
+| foundation/appframework                     | Application framework compatibility adaptation               | [ArkUI-X/app_framework](https://gitcode.com/arkui-x/app_framework) |
+| foundation/arkui/ace_engine/adapter/android | Android platform adaptation code                             | [ArkUI-X/arkui_for_android](https://gitcode.com/arkui-x/arkui_for_android) |
+| foundation/arkui/ace_engine/adapter/ios     | iOS platform adaptation code                                 | [ArkUI-X/arkui_for_ios](https://gitcode.com/arkui-x/arkui_for_ios) |
+| foundation/arkui/ace_engine                 | Core code of the ArkUI engine                                | [OpenHarmony/arkui_ace_engine](https://gitcode.com/openharmony/arkui_ace_engine) |
+| foundation/arkui/napi                       | Native API extension mechanism                               | [OpenHarmony/arkui_napi](https://gitcode.com/openharmony/arkui_napi) |
+| foundation/communication/netmanager_base    | Network management module                                    | [OpenHarmony/communication_netmanager_base](https://gitcode.com/openharmony/communication_netmanager_base) |
+| foundation/communication/netstack           | Network protocol stack                                       | [OpenHarmony/communication_netstack](https://gitcode.com/openharmony/communication_netstack) |
+| foundation/graphic/graphic_2d               | Basic 2D graphics library                                    | [OpenHarmony/graphic_graphic_2d](https://gitcode.com/openharmony/graphic_graphic_2d) |
+| foundation/filemanagement/file_api          | APIs for accessing folders and files                         | [OpenHarmony/filemanagement_file_api](https://gitcode.com/openharmony/filemanagement_file_api) |
+| foundation/multimedia/image_framework       | Code for implementing image encoding and decoding            | [OpenHarmony/multimedia_image_framework](https://gitcode.com/openharmony/multimedia_image_framework) |
+| developtools/ace_ets2bundle                 | Compilation tool and cross-platform application build tool using the ArkTS-based declarative development paradigm | [OpenHarmony/ace_ets2bundle](https://gitcode.com/openharmony/developtools_ace_ets2bundle) |
+| developtools/ace_js2bundle                  | Compilation tool and cross-platform application building tool using the JS-compatible web-like development paradigm | [OpenHarmony/ace_js2bundle](https://gitcode.com/openharmony/developtools_ace_js2bundle) |
+| arkcompiler/ets_frontend                    | Ark frontend tool                                            | [OpenHarmony/arkcompiler_ets_frontend](https://gitcode.com/openharmony/arkcompiler_ets_frontend) |
+| arkcompiler/ets_runtime                     | Ark ArkTS runtime                                            | [OpenHarmony/arkcompiler_ets_runtime](https://gitcode.com/openharmony/arkcompiler_ets_runtime) |
+| arkcompiler/runtime_core                    | Ark compiler runtime                                         | [OpenHarmony/arkcompiler_runtime_core](https://gitcode.com/openharmony/arkcompiler_runtime_core) |
+| arkcompiler/toolchain                       | Debugging and tuning tool                                    | [OpenHarmony/arkcompiler_toolchain](https://gitcode.com/openharmony/arkcompiler_toolchain) |
 | prebuilts                                   | Directory for prebuilts (Python, nodejs, clang, and cmake)   | Pre-download the software using a script.                    |
 | third_party                                 | Open-source third-party components (reuse the OpenHarmony code repositories) | Open-source third-party library collection referenced.       |
-| commonlibrary/c_utils                       | Common C++ functions and classes                             | [OpenHarmony/commonlibrary_c_utils](https://gitee.com/openharmony/commonlibrary_c_utils) |
-| commonlibrary/ets_utils                     | Basic JS APIs, such as APIs for managing URLs and URIs       | [OpenHarmony/commonlibrary_ets_utils](https://gitee.com/openharmony/commonlibrary_ets_utils) |
-| base/hiviewdfx/hilog                        | System logging                                               | [OpenHarmony/hiviewdfx_hilog](https://gitee.com/openharmony/hiviewdfx_hilog) |
-| base/web/webview                            | Native engine of the WebView component                       | [OpenHarmony/web_webview](https://gitee.com/openharmony/web_webview) |
-| base/global/resource_management             | Global resource management                                   | [OpenHarmony/global_resource_management](https://gitee.com/openharmony/global_resource_management) |
+| commonlibrary/c_utils                       | Common C++ functions and classes                             | [OpenHarmony/commonlibrary_c_utils](https://gitcode.com/openharmony/commonlibrary_c_utils) |
+| commonlibrary/ets_utils                     | Basic JS APIs, such as APIs for managing URLs and URIs       | [OpenHarmony/commonlibrary_ets_utils](https://gitcode.com/openharmony/commonlibrary_ets_utils) |
+| base/hiviewdfx/hilog                        | System logging                                               | [OpenHarmony/hiviewdfx_hilog](https://gitcode.com/openharmony/hiviewdfx_hilog) |
+| base/web/webview                            | Native engine of the WebView component                       | [OpenHarmony/web_webview](https://gitcode.com/openharmony/web_webview) |
+| base/global/resource_management             | Global resource management                                   | [OpenHarmony/global_resource_management](https://gitcode.com/openharmony/global_resource_management) |
 
 ## Release Synchronization Policy
 

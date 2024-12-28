@@ -1,6 +1,6 @@
 # Using Native APIs in Application Projects
 
-OpenHarmony applications use JavaScript (JS) when calling native APIs. The native APIs (NAPIs) provided by the [ace_napi](https://gitee.com/openharmony/arkui_napi/tree/master) repository are used to implement interaction with JS. Currently, the **ace_napi** repository supports some third-party **Node.js** interfaces. The names of the NAPIs are the same as those in the third-party **Node.js**. For details about the interfaces supported, see libnapi.ndk.json in this repository.
+OpenHarmony applications use JavaScript (JS) when calling native APIs. The native APIs (NAPIs) provided by the [ace_napi](https://gitcode.com/openharmony/arkui_napi/tree/master) repository are used to implement interaction with JS. Currently, the **ace_napi** repository supports some third-party **Node.js** interfaces. The names of the NAPIs are the same as those in the third-party **Node.js**. For details about the interfaces supported, see libnapi.ndk.json in this repository.
 
 ## How to Develop
 
@@ -75,7 +75,7 @@ export default storage;
 
 ### Implementation
 
-You can obtain the complete code from sample/native_module_storage/ in the [OpenHarmony/arkui_napi](https://gitee.com/openharmony/arkui_napi/tree/master) repository.
+You can obtain the complete code from sample/native_module_storage/ in the [OpenHarmony/arkui_napi](https://gitcode.com/openharmony/arkui_napi/tree/master) repository.
 
 #### Registering the Module
 
@@ -308,7 +308,7 @@ export class NetServer {
 
 ### Implementation
 
-You can obtain the complete code from sample/native_module_netserver/ in the [OpenHarmony/arkui_napi](https://gitee.com/openharmony/arkui_napi/tree/master) repository.
+You can obtain the complete code from sample/native_module_netserver/ in the [OpenHarmony/arkui_napi](https://gitcode.com/openharmony/arkui_napi/tree/master) repository.
 
 #### Registering the Module
 
@@ -495,7 +495,7 @@ This example describes how to invoke a JS callback in a non-JS thread. For examp
 
 ### Implementation
 
-You can obtain the complete code from sample/native_module_callback/ in the [OpenHarmony/arkui_napi](https://gitee.com/openharmony/arkui_napi/tree/master) repository.
+You can obtain the complete code from sample/native_module_callback/ in the [OpenHarmony/arkui_napi](https://gitcode.com/openharmony/arkui_napi/tree/master) repository.
 
 #### Registering the Module
 

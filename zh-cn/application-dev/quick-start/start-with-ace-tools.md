@@ -56,7 +56,7 @@ ace check -v
 
 执行 `ace check -v`​ 命令可以检查ArkUI-X应用开发环境是否完备。
 
-> **说明**：开发环境检查只识别IDE和SDK默认的安装路径，如果提示结果与您的预期不符，请您通过[ace config命令](https://gitee.com/arkui-x/cli#ace-config)指定实际的IDE安装和SDK下载路径。
+> **说明**：开发环境检查只识别IDE和SDK默认的安装路径，如果提示结果与您的预期不符，请您通过[ace config命令](https://gitcode.com/arkui-x/cli#ace-config)指定实际的IDE安装和SDK下载路径。
 
 ### 创建应用
 
@@ -92,4 +92,4 @@ ace run
 
 ## 常用命令参考
 
-- [ACE Tools使用说明](https://gitee.com/arkui-x/cli/blob/master/README.md)
+- [ACE Tools使用说明](https://gitcode.com/arkui-x/cli/blob/master/README.md)

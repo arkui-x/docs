@@ -7,7 +7,7 @@ This document is intended for beginners who use the ArkUI-X framework for develo
 
 ### ArkUI Framework
 
-ArkUI is a declarative UI development framework for building distributed applications. It provides simple and natural UI syntax, diverse array of UI components, multi-dimensional status management, and real-time UI preview tools, helping you improve application development efficiency and achieve vivid and smooth user experience across devices. For details, see [ArkUI Overview](https://gitee.com/openharmony/docs/blob/master/en/application-dev/ui/arkui-overview.md).
+ArkUI is a declarative UI development framework for building distributed applications. It provides simple and natural UI syntax, diverse array of UI components, multi-dimensional status management, and real-time UI preview tools, helping you improve application development efficiency and achieve vivid and smooth user experience across devices. For details, see [ArkUI Overview](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/arkui-overview.md).
 
 ### ArkUI-X
 

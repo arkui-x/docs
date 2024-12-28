@@ -144,7 +144,7 @@ export default function UtilFunTest() {
 | ---- | ---------- | ------------------------------------------------------------ |
 |testIsNumberObject001    | isNumberObject   | isNumberObject方法传入Number对象类型的参数' new Number(0) '时，返回值为true，使用expect断言result值为true |
 
-- 更多断言使用方式可参考[单元测试框架断言说明](https://gitee.com/openharmony/testfwk_arkxtest#断言库)。
+- 更多断言使用方式可参考[单元测试框架断言说明](https://gitcode.com/openharmony/testfwk_arkxtest#断言库)。
 
 ### 修改List.test.ets文件
 
