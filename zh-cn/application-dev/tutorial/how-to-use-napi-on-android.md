@@ -1,6 +1,6 @@
 # N-API在Android平台应用的使用指导
 
-N-API接口可以实现ArkTS/TS/JS与C/C++(Native)之间的交互，ArkUI-X中支持的N-API接口情况和使用场景请见[FFI能力(N-API)](../quick-start/ffi-napi-introduction.md)。本文档以[ArkUI-X/Samples](https://gitee.com/arkui-x/samples)中的Native样例工程为例，介绍如何在Android平台上使用N-API能力完成跨语言调用。
+N-API接口可以实现ArkTS/TS/JS与C/C++(Native)之间的交互，ArkUI-X中支持的N-API接口情况和使用场景请见[FFI能力(N-API)](../quick-start/ffi-napi-introduction.md)。本文档以[ArkUI-X/Samples](https://gitcode.com/arkui-x/samples)中的Native样例工程为例，介绍如何在Android平台上使用N-API能力完成跨语言调用。
 
 ## 开发流程
 
@@ -16,7 +16,7 @@ N-API接口可以实现ArkTS/TS/JS与C/C++(Native)之间的交互，ArkUI-X中�
 2. 提供一个名为`NativeCallArkTS`的Native方法，ArkTS侧调用该方法并传入一个ArkTS function，Native方法中调用这个ArkTS function，并将其结果返回ArkTS侧。以此介绍：Native侧如何调用到ArkTS侧方法。
 
 ### 1. 环境准备 
-从[ArkUI-X/Samples](https://gitee.com/arkui-x/samples)中获取Native样例工程，并使用DevEco Studio(V4.0 Beta2及以上版本)打开该工程，打开后将自动进行工程初始化。
+从[ArkUI-X/Samples](https://gitcode.com/arkui-x/samples)中获取Native样例工程，并使用DevEco Studio(V4.0 Beta2及以上版本)打开该工程，打开后将自动进行工程初始化。
 
 ### 2. 提供Native能力
 

@@ -62,6 +62,8 @@
 
  目录，之后再打开对应跨平台界面时初始化框架：
 
+  **注意**：初始化必须在主线程调用。
+
 ```ts
 appDelegate = new StageApplicationDelegate();
 appDelegate.initApplication(this)

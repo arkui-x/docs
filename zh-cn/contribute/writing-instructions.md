@@ -4,7 +4,7 @@
 
 ## 命名规范
 
-如需提交新的文档，在Gitee上工程代码docs目录下创建新的.md文件，命名需遵循xxx-xxx.md格式，根据文档的内容来声明。
+如需提交新的文档，在GitCode上工程代码docs目录下创建新的.md文件，命名需遵循xxx-xxx.md格式，根据文档的内容来声明。
 
 比如介绍写作规范的文档，可以命名为write-standard.md。
 
@@ -103,37 +103,11 @@ Output
 
 **表 1**  参数表
 
-<table><thead align="left"><tr id="row1393134183014"><th class="cellrowborder" valign="top" width="33.33333333333333%" id="mcps1.2.4.1.1"><p id="p1539314418307"><a name="p1539314418307"></a><a name="p1539314418307"></a>Tables</p>
-</th>
-<th class="cellrowborder" valign="top" width="33.33333333333333%" id="mcps1.2.4.1.2"><p id="p1339324120303"><a name="p1339324120303"></a><a name="p1339324120303"></a>Type</p>
-</th>
-<th class="cellrowborder" valign="top" width="33.33333333333333%" id="mcps1.2.4.1.3"><p id="p13932041133012"><a name="p13932041133012"></a><a name="p13932041133012"></a>Note</p>
-</th>
-</tr>
-</thead>
-<tbody><tr id="row1839304110309"><td class="cellrowborder" valign="top" width="33.33333333333333%" headers="mcps1.2.4.1.1 "><p id="p4393174143014"><a name="p4393174143014"></a><a name="p4393174143014"></a>first</p>
-</td>
-<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="mcps1.2.4.1.2 "><p id="p6393141133013"><a name="p6393141133013"></a><a name="p6393141133013"></a>standard</p>
-</td>
-<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="mcps1.2.4.1.3 "><p id="p17393184112307"><a name="p17393184112307"></a><a name="p17393184112307"></a>None</p>
-</td>
-</tr>
-<tr id="row1039318412306"><td class="cellrowborder" valign="top" width="33.33333333333333%" headers="mcps1.2.4.1.1 "><p id="p113941541103012"><a name="p113941541103012"></a><a name="p113941541103012"></a>second</p>
-</td>
-<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="mcps1.2.4.1.2 "><p id="p83941841153016"><a name="p83941841153016"></a><a name="p83941841153016"></a>outstanding</p>
-</td>
-<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="mcps1.2.4.1.3 "><p id="p1539404114305"><a name="p1539404114305"></a><a name="p1539404114305"></a>5</p>
-</td>
-</tr>
-<tr id="row6547101813118"><td class="cellrowborder" valign="top" width="33.33333333333333%" headers="mcps1.2.4.1.1 "><p id="p35483184313"><a name="p35483184313"></a><a name="p35483184313"></a>third</p>
-</td>
-<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="mcps1.2.4.1.2 "><p id="p1554821817318"><a name="p1554821817318"></a><a name="p1554821817318"></a>inside</p>
-</td>
-<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="mcps1.2.4.1.3 "><p id="p15548201819310"><a name="p15548201819310"></a><a name="p15548201819310"></a>with</p>
-</td>
-</tr>
-</tbody>
-</table>
+| Tables |    Type     | Note |
+| ------ | :---------: | ---: |
+| first  |  standard   | None |
+| second | outstanding |    5 |
+| third  |   inside    | with |
 
 **代码**
 

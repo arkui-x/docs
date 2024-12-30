@@ -13,7 +13,10 @@
 
 安全问题响应工作组由ArkUI-X A类捐赠人单位中有相关领域丰富经验并愿意致力于ArkUI-X社区安全响应处理工作的人员组成，当前成员如下：
 
-+ [zhangadong（组长）](https://gitee.com/zhangadong)
++ [zhangadong（组长）](https://gitcode.com/zhangadong)
+
+<!-- 等待OH仓库同步 -->
+
 + [louis.liuxu](https://gitee.com/louis_liuxu)
 
 安全响应工作组设组长一名，组长经组员投票选举产生，每届任期两年，可连选连任。成员任期两年，可连选连任。新加入成员由现有成员采取普通事项决议。现有成员的罢免采取特殊事项决议。
@@ -51,7 +54,7 @@
 
 ## 社区讨论和支持
 
-通过[社区页面](https://gitee.com/arkui-x)可以了解更多ArkUI-X的详细知识以及如何在ArkUI-X社区做安全互动。
+通过[社区页面](https://gitcode.com/arkui-x)可以了解更多ArkUI-X的详细知识以及如何在ArkUI-X社区做安全互动。
 
 ## 致谢
 

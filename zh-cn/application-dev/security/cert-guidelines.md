@@ -829,4 +829,4 @@ async function sample() {
 
 针对证书开发，有以下相关实例可供参考：
 
-- [证书算法库框架（ArkTS）（API9）](https://gitee.com/openharmony/applications_app_samples/tree/master/code/BasicFeature/Security/CertificateFramework)
+- [证书算法库框架（ArkTS）（API9）](https://gitcode.com/openharmony/applications_app_samples/tree/ArkUI-X-5.0.2-Release/code/SystemFeature/Security/CertificateFramework)

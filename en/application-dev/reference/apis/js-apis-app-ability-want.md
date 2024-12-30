@@ -25,7 +25,7 @@ import Want from '@ohos.app.ability.Want';
 
 **Example**
 
-- Basic usage: called in a UIAbility object, as shown in the example below. For details about how to obtain the context, see [Obtaining the Context of UIAbility](https://gitee.com/openharmony/docs/blob/master/en/application-dev/application-models/uiability-usage.md#%E8%8E%B7%E5%8F%96uiability%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF).
+- Basic usage: called in a UIAbility object, as shown in the example below. For details about how to obtain the context, see [Obtaining the Context of UIAbility](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
   ```ts
   import common from '@ohos.app.ability.common';

@@ -48,7 +48,7 @@ In addition to the [universal attributes](ts-universal-attributes-size.md), the 
 | fadingEdge<sup>10+</sup>         | boolean                                  | Whether the tab fades out when it exceeds the container width.<br>Default value: **true**        |
 | barOverlap<sup>10+</sup>         | boolean                                  | Whether the tab bar is superimposed on the **\<TabContent>** component after having its background blurred.<br>Default value: **false**|
 | barBackgroundColor<sup>10+</sup> | [ResourceColor](ts-types.md#resourcecolor) | Background color of the tab bar.<br>Default value: transparent              |
-| barGridAlign<sup>10+</sup> | [BarGridColumnOptions](#bargridcolumnoptions10) | Visible area of the tab bar in grid mode. For details, see **BarGridColumnOptions**. This attribute is effective only in horizontal mode. It is not applicable to [XS, XL, and XXL devices](https://gitee.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-layout-development-grid-layout.md#grid-breakpoints).             |
+| barGridAlign<sup>10+</sup> | [BarGridColumnOptions](#bargridcolumnoptions10) | Visible area of the tab bar in grid mode. For details, see **BarGridColumnOptions**. This attribute is effective only in horizontal mode. It is not applicable to [XS, XL, and XXL devices](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-layout-development-grid-layout.md#grid-breakpoints).             |
 
 ## DividerStyle<sup>10+</sup>
 
@@ -97,7 +97,7 @@ In addition to the [universal events](ts-universal-events-click.md), the followi
 
 | Name                                      | Description                                    |
 | ---------------------------------------- | ---------------------------------------- |
-| onChange(event: (index: number) =&gt; void) | Triggered when a tab is switched.<br>- **index**: index of the active tab. The index starts from 0.<br>This event is triggered when any of the following conditions is met:<br>1. The **\<TabContent>** component supports sliding, and the user slides on the tab bar.<br>2. The [Controller](#tabscontroller) API is called.<br>3. The attribute value is updated using a [state variable](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-state.md).<br>4. A tab is clicked.|
+| onChange(event: (index: number) =&gt; void) | Triggered when a tab is switched.<br>- **index**: index of the active tab. The index starts from 0.<br>This event is triggered when any of the following conditions is met:<br>1. The **\<TabContent>** component supports sliding, and the user slides on the tab bar.<br>2. The [Controller](#tabscontroller) API is called.<br>3. The attribute value is updated using a [state variable](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-state.md).<br>4. A tab is clicked.|
 | onTabBarClick(event: (index: number) =&gt; void)<sup>10+</sup> | Triggered when a tab is clicked.<br>- **index**: index of the clicked tab. The index starts from 0.|
 
 ## TabsController

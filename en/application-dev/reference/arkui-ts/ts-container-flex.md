@@ -18,7 +18,7 @@ Supported
 
 Flex(value?: { direction?: FlexDirection, wrap?: FlexWrap,  justifyContent?: FlexAlign, alignItems?: ItemAlign, alignContent?: FlexAlign })
 
-Creates a standard **\<Flex>** component. For details, see [Flex Layout](https://gitee.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-layout-development-flex-layout.md).
+Creates a standard **\<Flex>** component. For details, see [Flex Layout](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/arkts-layout-development-flex-layout.md).
 
 Since API version 9, this API is supported in ArkTS widgets.
 

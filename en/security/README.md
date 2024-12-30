@@ -22,7 +22,8 @@ The Security Issue Response Team (referred to as "Team" hereinafter) is set up t
 
 The Team consists of people from ArkUI-X A category donors who have extensive experience in related fields and are willing to work on security issues in the ArkUI-X community. Currently, the team members include:
 
-+ [Zhangadong (Leader)](https://gitee.com/zhangadong)
++ [Zhangadong (Leader)](https://gitcode.com/zhangadong)
+<!-- Waiting for OH warehouse synchronization -->
 + [louis.liuxu](https://gitee.com/louis_liuxu)
 
 The Team has a team leader, who is elected by team members for a two-year term and can be re-elected for more terms. The team members serve a two-year term and can be re-elected for more terms. New members are approved by existing members via an ordinary resolution. Dismissal of existing members is approved by a special resolution.
@@ -65,7 +66,7 @@ For details about the disclosed security vulnerabilities in the ArkUI-X communit
 
 ## Community Discussion and Support
 
-Learn more about the ArkUI-X project and how to take part in security activities at [ArkUI-X](https://gitee.com/arkui-x).
+Learn more about the ArkUI-X project and how to take part in security activities at [ArkUI-X](https://gitcode.com/arkui-x).
 
 ## Acknowledgment
 

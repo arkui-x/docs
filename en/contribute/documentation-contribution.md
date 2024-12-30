@@ -23,7 +23,7 @@ ArkUI-X has the right to modify the adopted content according to the community r
 
 Your feedback matters. Submit issues and leave as detailed information as possible, so we can better fix the issues and improve our documents.
 
-1.  On the Gitee page, click the **Issues** tab. On the displayed page, click **New issue**. Then enter the issue title and issue details.
+1.  On the GitCode page, click the **Issues** tab. On the displayed page, click **New issue**. Then enter the issue title and issue details.
 2.  Click **New** to submit the issue. The Docs team will confirm the issue.
 
 >![](public_sys-resources/icon-note.gif) **NOTE**

@@ -278,13 +278,13 @@ System resources include colors, rounded corners, fonts, spacing, character stri
 
 To reference a system resource, use the **"$r('sys.type.resource_id')"** format. Wherein: **sys** indicates a system resource; **type** indicates the resource type, which can be **color**, **float**, **string**, or **media**; **resource_id** indicates the resource ID.
 
-For details about the supported system resource IDs and their values in different configurations, see [Resources](https://gitee.com/openharmony/docs/blob/master/en/design/ux-design/design-resources.md).
+For details about the supported system resource IDs and their values in different configurations, see [Resources](https://gitcode.com/openharmony/docs/blob/master/en/design/ux-design/design-resources.md).
 
 > **NOTE**
 >
 > - The use of system resources is supported in the declarative development paradigm, but not in the web-like development paradigm.
 >
-> - For details about the implementation of preconfigured resources, visit the [OpenHarmony/resources repository](https://gitee.com/openharmony/resources/tree/master/systemres/main/resources). The directory structure there is similar to that of the **resources** directory in the project. Resource qualifiers are used to match resources with different devices and device states.
+> - For details about the implementation of preconfigured resources, visit the [OpenHarmony/resources repository](https://gitcode.com/openharmony/resources/tree/master/systemres/main/resources). The directory structure there is similar to that of the **resources** directory in the project. Resource qualifiers are used to match resources with different devices and device states.
 
 ```ts
 Text('Hello')

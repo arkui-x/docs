@@ -133,6 +133,46 @@ value为json格式
 }
 ```
 
+### 示例代码
+
+* Java
+
+```
+public class EntryEntryAbilityActivity extends AppCompatActivity {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Intent intent = new Intent();
+        intent.setClass(this, EntryEntryAbilityTwoActivity.class);
+        intent.putExtra("params",
+                "{\"params\":[{\"key\":\"keyfirst\",\"type\":1,\"value\":\"keyvalue\"}," +
+                "{\"key\":\"keysecond\",\"type\":9,\"value\":\"2.3\"}," +
+                "{\"key\":\"keythird\",\"type\":5,\"value\":\"2\"}," +
+                "{\"key\":\"keyfourth\",\"type\":10,\"value\":\"test\"}]}");
+        startActivity(intent);
+    }
+}
+```
+
+* ArkTS
+
+```
+# xxx.ets
+export default class EntryAbility extends UIAbility {
+  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    console.log("value = " + want.parameters?.keyfirst)
+    console.log("value = " + want.parameters?.keysecond)
+    console.log("value = " + want.parameters?.keythird)
+    console.log("value = " + want.parameters?.keyfourth)
+  }
+
+  onWindowStageCreate(windowStage: window.WindowStage): void {
+    ...
+  }
+...
+}
+```
 ### 支持的参数类型列表
 
 | 参数类型 | 参数类型值 |
@@ -153,10 +193,10 @@ public class EntryEntryAbilityActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setClass(this, EntryEntryAbilityTwoActivity.class);
         intent.putExtra("params",
-                "{\"params\":[{\"key\":\"bool\",\"type\":1,\"value\":\"true\"}," +
-                "{\"key\":\"double\",\"type\":9,\"value\":\"2.3\"}," +
-                "{\"key\":\"int\",\"type\":5,\"value\":\"2\"}," +
-                "{\"key\":\"string\",\"type\":10,\"value\":\"test\"}]}");
+                "{\"params\":[{\"key\":\"keyfirst",\"type\":1,\"value\":\"valuefirst"}," +
+                "{\"key\":\"keysecond\",\"type\":9,\"value\":\"2.3\"}," +
+                "{\"key\":\"keythird",\"type\":5,\"value\":\"2\"}," +
+                "{\"key\":\"keyfourth",\"type\":10,\"value\":\"test\"}]}");
         startActivity(intent);
     }
 }

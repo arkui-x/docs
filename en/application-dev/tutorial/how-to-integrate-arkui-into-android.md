@@ -117,4 +117,4 @@ After the preceding steps are complete, you can use Android Studio to install th
 
 ### References
 
-[ArkUI-X Samples](https://gitee.com/arkui-x/samples)
+[ArkUI-X Samples](https://gitcode.com/arkui-x/samples)

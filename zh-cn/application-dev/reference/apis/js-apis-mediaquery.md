@@ -30,7 +30,7 @@ matchMediaSync(condition: string): MediaQueryListener
 
 | 参数名    | 类型   | 必填 | 说明                                                         |
 | --------- | ------ | ---- | ------------------------------------------------------------ |
-| condition | string | 是   | 媒体事件的匹配条件，具体可参考[媒体查询语法规则](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkts-layout-development-media-query.md#%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99)。 |
+| condition | string | 是   | 媒体事件的匹配条件，具体可参考[媒体查询语法规则](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/arkts-layout-development-media-query.md#语法规则)。 |
 
 **返回值：** 
 

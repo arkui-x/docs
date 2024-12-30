@@ -451,7 +451,7 @@ backgroundColor(ResourceColor:Color | number | string)
 
 | 类型                                                         | 说明                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [Color](https://gitee.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/ts-appendix-enums.md) | 颜色枚举值。                                                 |
+| [Color](https://gitcode.com/arkui-x/docs/blob/ArkUI-X-5.0.2-Release/zh-cn/application-dev/reference/arkui-ts/ts-appendix-enums.md) | 颜色枚举值。                                                 |
 | number                                                       | HEX格式颜色，支持rgb。示例：0xffffff。                       |
 | string                                                       | rgb或者argb格式颜色。示例：'#ffffff', '#ff000000', 'rgb(255, 100, 255)', 'rgba(255, 100, 255, 0.5)'。 |
 

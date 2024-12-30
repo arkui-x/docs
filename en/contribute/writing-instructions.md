@@ -4,7 +4,7 @@ This document describes the writing specifications for contributing ArkUI-X docu
 
 ## Naming Specifications
 
-To submit a new document, create a new  **.md**  file in the  **doc**  directory of the project code on Gitee. The file name must be in the  _xxx-xxx_**.md**  format.
+To submit a new document, create a new  **.md**  file in the  **doc**  directory of the project code on GitCode. The file name must be in the  _xxx-xxx_**.md**  format.
 
 For example, a document that describes writing specifications can be named  **write-standard.md**.
 

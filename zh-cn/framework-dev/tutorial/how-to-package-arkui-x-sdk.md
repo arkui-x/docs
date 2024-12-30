@@ -24,19 +24,19 @@ ArkUI-X SDK
 
 ## ArkUI-SDK配置说明
 
-这里，ArkUI-SDK白名单内容配置以@ohos接口跨平台实现为例，并通过[@ohos.i18n (国际化-I18n)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-i18n.md)进行讲述。
+这里，ArkUI-SDK白名单内容配置以@ohos接口跨平台实现为例，并通过[@ohos.i18n (国际化-I18n)](https://gitcode.com/arkui-x/docs/blob/ArkUI-X-5.0.2-Release/zh-cn/application-dev/reference/apis/js-apis-i18n.md)进行讲述。
 
 ### @ohos.i18n接口跨平台实现
 
-- ArkUI-X社区代码仓为：https://gitee.com/arkui-x/plugins
+- ArkUI-X社区代码仓为：https://gitcode.com/arkui-x/plugins
 
-- @ohos.i18n接口定义跨平台实现开发仓目录为：https://gitee.com/arkui-x/plugins/tree/master/i18n
+- @ohos.i18n接口定义跨平台实现开发仓目录为：https://gitcode.com/arkui-x/plugins/tree/ArkUI-X-5.0.2-Release/i18n
 
 这里，对于@ohos.i18n接口定义如何具体实现不做详细描述，可请参考：[Android平台扩展@ohos接口](how-to-archieve-arkts-interface-on-android.md)和[iOS平台扩展@ohos接口](how-to-archieve-arkts-interface-on-ios.md)。
 
-- @ohos.i18n接口定义跨平台实现后，提供i18n_static_android和i18n_static_ios两个[静态链接Targets](https://gitee.com/arkui-x/plugins/blob/master/i18n/BUILD.gn)。根据模块名规则，@ohos.i18n的模块名为i18n，需配置在插件列表中[common_plugin_libs](https://gitee.com/arkui-x/plugins/blob/master/plugin_lib.gni)，作为插件模板(plugin_lib)的输入。
+- @ohos.i18n接口定义跨平台实现后，提供i18n_static_android和i18n_static_ios两个[静态链接Targets](https://gitcode.com/arkui-x/plugins/blob/ArkUI-X-5.0.2-Release/i18n/BUILD.gn)。根据模块名规则，@ohos.i18n的模块名为i18n，需配置在插件列表中[common_plugin_libs](https://gitcode.com/arkui-x/plugins/blob/ArkUI-X-5.0.2-Release/plugin_lib.gni)，作为插件模板(plugin_lib)的输入。
 
-- plugin_lib模板会在[arkui_for_android仓](https://gitee.com/arkui-x/arkui_for_android/blob/master/build/BUILD.gn)和[arkui_for_ios仓](https://gitee.com/arkui-x/arkui_for_ios/blob/master/build/BUILD.gn)进行调用。分别生成动态链接Targets：
+- plugin_lib模板会在[arkui_for_android仓](https://gitcode.com/arkui-x/arkui_for_android/blob/ArkUI-X-5.0.2-Release/build/BUILD.gn)和[arkui_for_ios仓](https://gitcode.com/arkui-x/arkui_for_ios/blob/ArkUI-X-5.0.2-Release/build/BUILD.gn)进行调用。分别生成动态链接Targets：
   - //foundation/arkui/ace_engine/adapter/android/build:i18n
   - //foundation/arkui/ace_engine/adapter/ios/build:libi18n
 
@@ -44,9 +44,9 @@ ArkUI-X SDK
 
 ### @ohos.i18n SDK构建白名单配置
 
-@ohos.i18n接口定义跨平台实现后，需在[插件仓](https://gitee.com/arkui-x/build_plugins)完成白名单配置，编译时打包到ArkUI-X SDK中。
+@ohos.i18n接口定义跨平台实现后，需在[插件仓](https://gitcode.com/arkui-x/build_plugins)完成白名单配置，编译时打包到ArkUI-X SDK中。
 
-[Android平台白名单配置](https://gitee.com/arkui-x/build_plugins/blob/master/sdk/arkui_cross_sdk_description_std.json)
+[Android平台白名单配置](https://gitcode.com/arkui-x/build_plugins/blob/ArkUI-X-5.0.2-Release/sdk/arkui_cross_sdk_description_std.json)
 
 ```json
     {
@@ -69,7 +69,7 @@ ArkUI-X SDK
     },
 ```
 
-[iOS平台白名单配置](https://gitee.com/arkui-x/build_plugins/blob/master/sdk/arkui_cross_sdk_description_std.json)
+[iOS平台白名单配置](https://gitcode.com/arkui-x/build_plugins/blob/ArkUI-X-5.0.2-Release/sdk/arkui_cross_sdk_description_std.json)
 
 ```json
     {
@@ -83,7 +83,7 @@ ArkUI-X SDK
 
 ### @ohos.i18n接口调用解析
 
-ArkUI-X SDK中engine和plugins目录都会包含apiConfig.json配置文件，用于DevEco Studio和ACE Tools解析，可使开发者只关注ArkTS代码开发，无需关注引用的ArkUI控件和@ohos接口插件。这里，对于如何解析apiConfig.json不做描述，只讲述如何在[SDK仓](https://gitee.com/arkui-x/interface_sdk)配置apiConfig.json文件。
+ArkUI-X SDK中engine和plugins目录都会包含apiConfig.json配置文件，用于DevEco Studio和ACE Tools解析，可使开发者只关注ArkTS代码开发，无需关注引用的ArkUI控件和@ohos接口插件。这里，对于如何解析apiConfig.json不做描述，只讲述如何在[SDK仓](https://gitcode.com/arkui-x/interface_sdk)配置apiConfig.json文件。
 
 ```json
     {

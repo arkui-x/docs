@@ -21,12 +21,12 @@
 ## AppStorage
 
 
-AppStorage具体UI使用说明，详见[AppStorage(应用全局的UI状态存储)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-appstorage.md)
+AppStorage具体UI使用说明，详见[AppStorage(应用全局的UI状态存储)](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-appstorage.md)
 
 
 ### link<sup>10+</sup>
 
-static link<T>(propName: string): SubscribedAbstractProperty<T>
+static link\<T>(propName: string): SubscribedAbstractProperty\<T>
 
 与AppStorage中对应的propName建立双向数据绑定。如果给定的propName在AppStorage中存在，返回与AppStorage中propName对应属性的双向绑定数据。
 
@@ -294,7 +294,7 @@ static clear(): boolean
 
 清除AppStorage的所有的属性。在AppStorage中清除所有属性的前提是，已经没有任何订阅者。如果有，则什么都不做返回false；删除成功返回true。
 
-订阅者的含义和参考[Delete](#delete)。
+订阅者的含义和参考[Delete](#delete10)。
 
 **返回值：**
 
@@ -332,7 +332,7 @@ let res: number = AppStorage.size(); // 1
 ## LocalStorage<sup>9+</sup>
 
 
-LocalStorage具体UI使用说明，详见[LocalStorage(页面级UI状态存储)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-localstorage.md)
+LocalStorage具体UI使用说明，详见[LocalStorage(页面级UI状态存储)](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-localstorage.md)
 ### constructor<sup>9+</sup>
 
 constructor(initializingProperties?: Object)
@@ -371,7 +371,7 @@ static getShared(): LocalStorage
 | [LocalStorage](#localstorage9) | 返回LocalStorage实例。 |
 
 
-getShared具体使用，见[在UI页面通过getShared接口获取在通过loadContent共享的LocalStorage实例](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-localstorage.md#将localstorage实例从uiability共享到一个或多个视图)
+getShared具体使用，见[在UI页面通过getShared接口获取在通过loadContent共享的LocalStorage实例](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-localstorage.md#将localstorage实例从uiability共享到一个或多个视图)
 
 
 ### has<sup>9+</sup>
@@ -785,7 +785,7 @@ link.set(50); // PropB -> 49, link.get() --> undefined
 ## PersistentStorage
 
 
-PersistentStorage具体UI使用说明，详见[PersistentStorage(持久化存储UI状态)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-persiststorage.md)
+PersistentStorage具体UI使用说明，详见[PersistentStorage(持久化存储UI状态)](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-persiststorage.md)
 
 ### PersistPropsOptions
 
@@ -822,7 +822,7 @@ static persistProp&lt;T&gt;(key: string, defaultValue: T): void
 **示例：**
 
 
-persistProp具体使用，见[从AppStorage中访问PersistentStorage初始化的属性](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-persiststorage.md#从appstorage中访问persistentstorage初始化的属性)
+persistProp具体使用，见[从AppStorage中访问PersistentStorage初始化的属性](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-persiststorage.md#从appstorage中访问persistentstorage初始化的属性)
 
 
 ### deleteProp<sup>10+</sup>
@@ -882,7 +882,7 @@ let keys: Array<string> = PersistentStorage.keys();
 
 ## Environment
 
-Environment具体使用说明，详见[Environment(设备环境查询)](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-environment.md)
+Environment具体使用说明，详见[Environment(设备环境查询)](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-environment.md)
 
 ### EnvPropsOptions
 
@@ -917,7 +917,7 @@ static envProp&lt;S&gt;(key: string, value: S): boolean
 
 **示例：**
 
-EnvProp具体使用，见[从UI中访问Environment参数](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-environment.md#从ui中访问environment参数)
+EnvProp具体使用，见[从UI中访问Environment参数](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/arkts-environment.md#从ui中访问environment参数)
 
 
 

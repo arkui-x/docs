@@ -132,4 +132,4 @@ ACE Tools支持开发者针对跨平台进行多Module范式开发。
 
 ##  参考
 
-- [ACE Tools命令行详情说明](https://gitee.com/arkui-x/cli/blob/master/README.md)
+- [ACE Tools命令行详情说明](https://gitcode.com/arkui-x/cli/blob/ArkUI-X-5.0.2-Release/README.md)

@@ -3,7 +3,7 @@
 应用开发过程中，经常需要用到颜色、字体、间距、图片等资源，在不同的设备或配置中，这些资源的值可能不同。
 
 - 应用资源：借助资源文件能力，开发者在应用中自定义资源，自行管理这些资源在不同的设备或配置中的表现。
-- 系统资源：开发者直接使用系统预置的资源定义（即[分层参数](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/key-features/multi-device-app-dev/visual-basics.md)，同一资源ID在设备横竖屏、颜色模式等不同配置下有不同的取值）。
+- 系统资源：开发者直接使用系统预置的资源定义（即[分层参数](https://gitcode.com/openharmony/docs/blob/master/en/design/ux-design/visual-basis.md)，同一资源ID在设备横竖屏、颜色模式等不同配置下有不同的取值）。
 
 ## 资源分类
 
@@ -278,14 +278,14 @@ Image($rawfile('newDir/newTest.png'))       // rawfile$r引用rawfile目录下�
 
 开发者可以通过```“$r('sys.type.resource_id')”```的形式引用系统资源。sys代表是系统资源；type代表资源类型，可以取“color”、“float”、“string”、“media”；resource_id代表资源id。
 
-可以查看[应用UX设计中关于资源的介绍](https://gitee.com/openharmony/docs/blob/master/zh-cn/design/ux-design/design-resources.md)，获取OpenHarmony支持的系统资源ID及其在不同配置下的取值。
+可以查看[应用UX设计中关于资源的介绍](https://gitcode.com/openharmony/docs/blob/master/zh-cn/design/ux-design/design-resources.md)，获取OpenHarmony支持的系统资源ID及其在不同配置下的取值。
 
 > **说明：**
 >
 > - 仅声明式开发范式支持使用系统资源，类Web开发范式不支持。
 >
-> - 可以查看[OpenHarmony/resources代码仓](https://gitee.com/openharmony/resources/tree/master/systemres/main/resources)了解系统预置资源的实现，这里的目录结构与工程中的resources目录类似，也是通过资源限定词匹配不同的设备或设备状态。
-> - 系统资源的使用场景、id、参数详细对照表详见[OpenHarmony_系统资源分层设计表_V1.0.xlsm](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/key-features/multi-device-app-dev/OpenHarmony_%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1%E8%A1%A8_V1.0.xlsm)
+> - 可以查看[OpenHarmony/resources代码仓](https://gitcode.com/openharmony/resources/tree/master/systemres/main/resources)了解系统预置资源的实现，这里的目录结构与工程中的resources目录类似，也是通过资源限定词匹配不同的设备或设备状态。
+> - 系统资源的使用场景、id、参数详细对照表详见[OpenHarmony_系统资源分层设计表_V1.0.xlsm](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/key-features/multi-device-app-dev/OpenHarmony_%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1%E8%A1%A8_V1.0.xlsm)
 
 ```ts
 Text('Hello')

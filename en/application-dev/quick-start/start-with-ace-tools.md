@@ -125,7 +125,7 @@ After the preceding commands are executed, the application is built, packaged, a
 
 ## Reference
 
-- [ACE Tools](https://gitee.com/arkui-x/cli/blob/master/README-EN.md)
-- [Ubuntu Environment Configuration](https://gitee.com/arkui-x/docs/blob/master/en/application-dev/tutorial/how-to-configure-dev-environment.md)
+- [ACE Tools](https://gitcode.com/arkui-x/cli/blob/ArkUI-X-5.0.2-Release/README-EN.md)
+- [Ubuntu Environment Configuration](https://gitcode.com/arkui-x/docs/blob/ArkUI-X-5.0.2-Release/en/application-dev/tutorial/how-to-configure-dev-environment.md)
 
 <!--no_check-->

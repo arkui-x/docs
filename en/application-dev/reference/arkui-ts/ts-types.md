@@ -158,7 +158,7 @@ The **Font** type is used to set the text style.
 | ------ | ---------------------------------------- | ---- | ---------------------------------------- |
 | size   | [Length](#length)                        | No   | Font size. If the value is of the number type, the unit fp is used. The value cannot be a percentage.<br>Default value: **16.0** |
 | weight | [FontWeight](ts-appendix-enums.md#fontweight) \| number \| string | No   | Font weight. For the number type, the value ranges from 100 to 900, at an interval of 100. A larger value indicates a thicker font.<br>Default value: **400** \| **FontWeight.Normal** |
-| family | string \| [Resource](#resource)          | No   | Font family of the text. Use commas (,) to separate multiple fonts. The priority of the fonts is the sequence in which they are placed. An example value is **'Arial, HarmonyOS Sans'**. The HarmonyOS Sans font and [register custom fonts](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-font.md) are supported.|
+| family | string \| [Resource](#resource)          | No   | Font family of the text. Use commas (,) to separate multiple fonts. The priority of the fonts is the sequence in which they are placed. An example value is **'Arial, HarmonyOS Sans'**. The HarmonyOS Sans font and [register custom fonts](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/js-apis-font.md) are supported.|
 | style  | [FontStyle](ts-appendix-enums.md#fontstyle) | No   | Font style.<br>Default value: **FontStyle.Normal**                              |
 
 ## Area<sup>8+</sup>
@@ -228,7 +228,7 @@ The **CustomBuilder** type is used to define custom UI descriptions in component
 
 | Name           | Type                  | Description                                      |
 | ------------- | ---------------------- | ---------------------------------------- |
-| CustomBuilder | () =&gt; any | Builder for creating a custom component; must be used with @Builder. For details, see [@Builder](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-builder.md).|
+| CustomBuilder | () =&gt; any | Builder for creating a custom component; must be used with @Builder. For details, see [@Builder](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-builder.md).|
 
 ## PixelStretchEffectOptions<sup>10+</sup>
 
