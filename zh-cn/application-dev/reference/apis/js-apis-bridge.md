@@ -82,6 +82,9 @@ callMethod(methodName: string, ...parameters: Array\<Parameter\>): Promise\<Resu
 | methodName | string             | 是   | 平台侧方法名称。     |
 | parameters | Array\<Parameter\> | 否   | 平台侧方法参数列表。 |
 
+注：iOS侧设置Parameter类型为number时，整数取值范围为-2<sup>31</sup>~2<sup>31</sup>-1；
+如果不在该范围的整数值，可以转换为string类型或将bridgeType设置成BINARY_TYPE的方式进行传递。
+
 **返回值：** 
 
 | 类型                        | 说明               |
