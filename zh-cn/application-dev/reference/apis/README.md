@@ -16,6 +16,15 @@
   - [@ohos.promptAction (弹窗)](js-apis-promptAction.md)
   - [@ohos.router (页面路由)](js-apis-router.md)
   - [@ohos.arkui.drawableDescriptor (DrawableDescriptor)](js-apis-arkui-drawableDescriptor.md)
+
+- ArkTS组件
+  - 按钮与选择
+    - [SegmentButton](js-apis-arkui-advanced-segmentButton.md)
+  - 标题栏与工具栏
+    - [ToolBar](js-apis-arkui-advanced-toolBar.md)
+    - [SubHeader](js-apis-arkui-advanced-subHeader.md)
+  - 弹窗
+    - [弹出框 (Diglog)](js-apis-arkui-advanced-dialog.md)
   
 - Ability框架
   - Stage模型能力的接口(推荐)
