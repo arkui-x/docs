@@ -20,7 +20,7 @@ A key event is triggered when a focusable component, such as **\<Button>**, inte
 | Name                                   | Type                                      | Description                        |
 | ------------------------------------- | ---------------------------------------- | -------------------------- |
 | type                                  | [KeyType](ts-appendix-enums.md#keytype)  | Key type.                    |
-| [keyCode](https://gitee.com/openharmony/docs/blob/master/en/application-dev/reference/apis/js-apis-keycode.md) | number                                   | Key code.                    |
+| [keyCode](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-input-kit/js-apis-keycode.md) | number                                   | Key code.                    |
 | keyText                               | string                                   | Key value.                    |
 | keySource                             | [KeySource](ts-appendix-enums.md#keysource) | Type of the input device that triggers the key event.            |
 | deviceId                              | number                                   | ID of the input device that triggers the key event.            |

@@ -21,7 +21,7 @@ The meanings of T and S in this topic are as follows:
 ## AppStorage
 
 
-For details about how to use AppStorage on the UI, see [AppStorage: Application-wide UI State Storage](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-appstorage.md).
+For details about how to use AppStorage on the UI, see [AppStorage: Application-wide UI State Storage](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-appstorage.md).
 
 
 ### link<sup>10+</sup>
@@ -331,7 +331,7 @@ let res: number = AppStorage.size(); // 1
 
 ## LocalStorage<sup>9+</sup>
 
-For details about how to use LocalStorage on the UI, see [LocalStorage: UI State Storage](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-localstorage.md).
+For details about how to use LocalStorage on the UI, see [LocalStorage: UI State Storage](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-localstorage.md).
 ### constructor<sup>9+</sup>
 
 constructor(initializingProperties?: Object)
@@ -370,7 +370,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 | [LocalStorage](#localstorage9) | **LocalStorage** instance.|
 
 
-For details about how to use **getShared**, see [Sharing a LocalStorage Instance from UIAbility to One or More Pages](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-localstorage.md#example-of-sharing-a-localstorage-instance-from-uiability-to-one-or-more-pages).
+For details about how to use **getShared**, see [Sharing a LocalStorage Instance from UIAbility to One or More Pages](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-localstorage.md#example-of-sharing-a-localstorage-instance-from-uiability-to-one-or-more-pages).
 
 
 ### has<sup>9+</sup>
@@ -506,7 +506,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 
 | Type                                 | Description                                      |
 | ----------------------------------- | ---------------------------------------- |
-| SubscribedAbstractProperty&lt;T&gt; | Returns the **SubscribedAbstractProperty<T>** instance if the given attribute exists in AppStorage; returns **undefined** otherwise.|
+| SubscribedAbstractProperty&lt;T&gt; | Returns the **SubscribedAbstractProperty\<T>** instance if the given attribute exists in AppStorage; returns **undefined** otherwise.|
 
 ```ts
 let para:Record<string,number> = { 'PropA': 47 };
@@ -535,7 +535,7 @@ Since API version 9, this API is supported in ArkTS widgets.
 
 | Type                                 | Description                                      |
 | ----------------------------------- | ---------------------------------------- |
-| SubscribedAbstractProperty&lt;T&gt; | Returns the **SubscribedAbstractProperty<T>** instance if the given attribute exists in AppStorage; returns **undefined** otherwise.|
+| SubscribedAbstractProperty&lt;T&gt; | Returns the **SubscribedAbstractProperty\<T>** instance if the given attribute exists in AppStorage; returns **undefined** otherwise.|
 
 ```ts
 let para:Record<string,number> = { 'PropA': 47 };
@@ -761,7 +761,7 @@ link.set(50); // PropB -> 49, link.get() --> undefined
 
 ## PersistentStorage
 
-For details about how to use PersistentStorage on the UI, see [PersistentStorage: Application State Persistence](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-persiststorage.md).
+For details about how to use PersistentStorage on the UI, see [PersistentStorage: Application State Persistence](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-persiststorage.md).
 
 
 ### PersistPropsOptions
@@ -799,7 +799,7 @@ According to the preceding initialization process, if AppStorage contains the ma
 **Example:**
 
 
-For details about how to use persistProp, see [Accessing PersistentStorage Initialized Attribute from AppStorage](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-persiststorage.md#accessing-persistentstorage-initialized-attribute-from-appstorage).
+For details about how to use persistProp, see [Accessing PersistentStorage Initialized Attribute from AppStorage](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-persiststorage.md#accessing-persistentstorage-initialized-attribute-from-appstorage).
 
 
 ### deleteProp<sup>10+</sup>
@@ -861,7 +861,7 @@ let keys: Array<string> = PersistentStorage.keys();
 ## Environment
 
 
-For details about how to use Environment, see [Environment: Device Environment Query](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-environment.md).
+For details about how to use Environment, see [Environment: Device Environment Query](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-environment.md).
 
 
 ### EnvPropsOptions
@@ -898,7 +898,7 @@ It is incorrect to use AppStorage to read environment variables without invoking
 **Example:**
 
 
-For details about how to use **envProp**, see [Accessing Environment Parameters from UI](https://gitee.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-environment.md#accessing-environment-parameters-from-ui).
+For details about how to use **envProp**, see [Accessing Environment Parameters from UI](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/quick-start/arkts-environment.md#accessing-environment-parameters-from-ui).
 
 
 ### envProps<sup>10+</sup>

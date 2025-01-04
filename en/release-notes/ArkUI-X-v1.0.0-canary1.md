@@ -45,7 +45,7 @@ ArkUI cross-platform APIs include OpenHarmony APIs and custom extension APIs. Yo
 
 ### Application Compiler Toolchain
 
-ACE Tools is a command line (CLI) tool that allows ArkUI-X project developers to build applications. Its functions include development environment check, project creation, building and packaging, and installation and debugging. For details, see [ACE Tools](https://gitee.com/arkui-x/cli/blob/master/README-EN.md).
+ACE Tools is a command line (CLI) tool that allows ArkUI-X project developers to build applications. Its functions include development environment check, project creation, building and packaging, and installation and debugging. For details, see [ACE Tools](https://gitcode.com/arkui-x/cli/blob/ArkUI-X-5.0.2-Release/README-EN.md).
 
 
 ## Mapping
@@ -66,11 +66,11 @@ ACE Tools is a command line (CLI) tool that allows ArkUI-X project developers to
 
 ### Prerequisites
 
-1. Register your account with Gitee.
+1. Register your account with GitCode.
 
-2. Register an SSH public key for access to Gitee.
+2. Register an SSH public key for access to GitCode.
 
-3. Install the [git client](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [git-lfs](https://gitee.com/vcs-all-in-one/git-lfs?_from=gitee_search#downloading), and configure user information.
+3. Install the [git client](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [git-lfs](https://gitcode.com/vcs-all-in-one/git-lfs?_from=gitcode_search#downloading), and configure user information.
   
    ```
    git config --global user.name "yourname"
@@ -81,7 +81,7 @@ ACE Tools is a command line (CLI) tool that allows ArkUI-X project developers to
 4. Run the following commands to install the **repo** tool:
   
    ```
-   curl -s https://gitee.com/oschina/repo/raw/fork_flow/repo-py3 > /usr/local/bin/repo  # If you do not have the permission, download the tool to another directory and configure it as an environment variable by running the chmod a+x /usr/local/bin/repo command.
+   curl -s https://gitcode.com/gitcode-dev/repo/blob/main/repo-py3 > /usr/local/bin/repo  # If you do not have the permission, download the tool to another directory and configure it as an environment variable by running the chmod a+x /usr/local/bin/repo command.
    pip3 install -i https://repo.huaweicloud.com/repository/pypi/simple requests
    ```
 
@@ -90,11 +90,11 @@ ACE Tools is a command line (CLI) tool that allows ArkUI-X project developers to
 
 **Method 1 (recommended)**
 
-Use the **repo** tool to download the source code over SSH. (You must have an SSH public key for access to Gitee.)
+Use the **repo** tool to download the source code over SSH. (You must have an SSH public key for access to GitCode.)
 
 
 ```
-repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Canary1 --no-repo-verify
+repo init -u https://gitcode.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Canary1 --no-repo-verify
 repo sync -c
 ```
 
@@ -104,7 +104,7 @@ Use the **repo** tool to download the source code over HTTPS.
 
 
 ```
-repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Canary1 --no-repo-verify
+repo init -u https://gitcode.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.0.0-Canary1 --no-repo-verify
 repo sync -c
 ```
 
@@ -122,7 +122,7 @@ repo sync -c
 
 ### Samples List
 
-**Table 3** [Samples](https://gitee.com/arkui-x/samples) list
+**Table 3** [Samples](https://gitcode.com/arkui-x/samples) list
 
 | Sample     | Description                                                        |
 | ------------- | ------------------------------------------------------------ |

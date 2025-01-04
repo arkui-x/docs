@@ -85,4 +85,4 @@
 
 ## 示例教程
 
-- [示例代码](https://gitee.com/arkui-x/samples)
+- [示例代码](https://gitcode.com/arkui-x/samples)

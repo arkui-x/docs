@@ -3,7 +3,7 @@ The Cryptographic (Crypto for shot) Framework shields the implementation differe
 
 > **NOTE**
 >
-> The Crypto Framework provides cryptographic operations, but not key management. It is used when temporary session keys are used only in the memory or the applications implement secure key storage. If the system is required to provide key management (such as key storage), use the [HUKS](https://gitee.com/openharmony/docs/blob/master/en/application-dev/security/huks-overview.md).
+> The Crypto Framework provides cryptographic operations, but not key management. It is used when temporary session keys are used only in the memory or the applications implement secure key storage. If the system is required to provide key management (such as key storage), use the [HUKS](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/security/UniversalKeystoreKit/huks-overview.md).
 
 ## Working Principles
 

@@ -18,7 +18,7 @@ The ArkUI framework provides a unified API extension mechanism, which reuses the
 
 ## Samples
 
-To make you better understand how functions work together and jumpstart your application development projects, we provide stripped-down, real-world [samples](https://gitee.com/arkui-x/samples). These samples can be directly run through ArkUI-X CLI tools.
+To make you better understand how functions work together and jumpstart your application development projects, we provide stripped-down, real-world [samples](https://gitcode.com/arkui-x/samples). These samples can be directly run through ArkUI-X CLI tools.
 
 With the example tutorial, you can add and invoke your JS APIs to the sample project.
 

@@ -49,7 +49,7 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
 
 | 目标平台    | 兼容OS版本                                       | 获取方式                                                         |
 | ----------- | ------------------------------------------------ | ------------------------------------------------------------ |
-| OpenHarmony | 4.1 Release (API Version 11)                     | HUAWEI DevEco Studio获取方式：<br />[Windows(64-bit)](https://gitee.com/link?target=https%3A%2F%2Fcontentcenter-vali-drcn.dbankcdn.cn%2Fpvt_2%2FDeveloperAlliance_package_901_9%2Fee%2Fv3%2FHqJ-6O2FQny86xtk_dg9HQ%2Fdevecostudio-windows-4.1.0.400.zip%3FHW-CC-KV%3DV1%26HW-CC-Date%3D20240409T033730Z%26HW-CC-Expire%3D315360000%26HW-CC-Sign%3DBFA444BC43A041331E695AE2CFA9035A957AF107E06C97E793FD3D31D7096A0D)  <br />SHA256校验码：c46be4f3cfde27af1806cfc9860d9c366e66a20e31e15180cf3a90ab05464650<br />[Mac(X86)](https://gitee.com/link?target=https%3A%2F%2Fcontentcenter-vali-drcn.dbankcdn.cn%2Fpvt_2%2FDeveloperAlliance_package_901_9%2F3b%2Fv3%2FJgGp8n0bShOkm1MpBFJ73w%2Fdevecostudio-mac-4.1.0.400.zip%3FHW-CC-KV%3DV1%26HW-CC-Date%3D20240409T034037Z%26HW-CC-Expire%3D315360000%26HW-CC-Sign%3D35C1F8B3FC19325EBBC32D8E11106DDB074A8ECC6BB3A77FF2EADBA2A8A223DA)  <br />SHA256校验码：15d6136959b715e4bb2160c41d405b889820ea26ceadbb416509a43e59ed7f09<br />[Mac(ARM)](https://gitee.com/link?target=https%3A%2F%2Fcontentcenter-vali-drcn.dbankcdn.cn%2Fpvt_2%2FDeveloperAlliance_package_901_9%2F21%2Fv3%2FD7Jy1StbTwSLUXaA20VrAw%2Fdevecostudio-mac-arm-4.1.0.400.zip%3FHW-CC-KV%3DV1%26HW-CC-Date%3D20240409T034235Z%26HW-CC-Expire%3D315360000%26HW-CC-Sign%3D19598AAC650D2AB24CAC6DFDF0DBD312188FB0438A8233B7687E6ACDC43A51F8)  <br />SHA256校验码：ac04ca7c2344ec8f27531d5a59261ff037deed2c5a3d42ef88e6f90f4ed45484 |
+| OpenHarmony | 4.1 Release (API Version 11)                     | HUAWEI DevEco Studio获取方式：<br />[Windows(64-bit)](https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/ee/v3/HqJ-6O2FQny86xtk_dg9HQ/devecostudio-windows-4.1.0.400.zip?HW-CC-KV=V1&HW-CC-Date=20240409T033730Z&HW-CC-Expire=315360000&HW-CC-Sign=BFA444BC43A041331E695AE2CFA9035A957AF107E06C97E793FD3D31D7096A0D)  <br />SHA256校验码：c46be4f3cfde27af1806cfc9860d9c366e66a20e31e15180cf3a90ab05464650<br />[Mac(X86)](https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/3b/v3/JgGp8n0bShOkm1MpBFJ73w/devecostudio-mac-4.1.0.400.zip?HW-CC-KV=V1&HW-CC-Date=20240409T034037Z&HW-CC-Expire=315360000&HW-CC-Sign=35C1F8B3FC19325EBBC32D8E11106DDB074A8ECC6BB3A77FF2EADBA2A8A223DA)  <br />SHA256校验码：15d6136959b715e4bb2160c41d405b889820ea26ceadbb416509a43e59ed7f09<br />[Mac(ARM)](https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/21/v3/D7Jy1StbTwSLUXaA20VrAw/devecostudio-mac-arm-4.1.0.400.zip?HW-CC-KV=V1&HW-CC-Date=20240409T034235Z&HW-CC-Expire=315360000&HW-CC-Sign=19598AAC650D2AB24CAC6DFDF0DBD312188FB0438A8233B7687E6ACDC43A51F8)  <br />SHA256校验码：ac04ca7c2344ec8f27531d5a59261ff037deed2c5a3d42ef88e6f90f4ed45484 |
 | HarmonyOS   | 4.1.0 Release (API Version 11)                   | 当前仅面向HarmonyOS Next合作企业开发者                       |
 | Android     | Android 8<sup>+</sup> (API level 26<sup>+</sup>) | NA                                                           |
 | iOS         | iOS 10<sup>+</sup>                               | NA                                                           |
@@ -60,11 +60,11 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
 
 ### 前提条件
 
-1. 注册码云gitee帐号。
+1. 注册GitCode帐号。
 
-2. 注册码云SSH公钥，请参考[码云帮助中心](https://gitee.com/help/articles/4191)。
+2. 注册GitCode SSH公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/users/ssh-key/)。
 
-3. 安装[git客户端](https://gitee.com/link?target=https%3A%2F%2Fgit-scm.com%2Fbook%2Fzh%2Fv2%2F%25E8%25B5%25B7%25E6%25AD%25A5-%25E5%25AE%2589%25E8%25A3%2585-Git)和[git-lfs](https://gitee.com/vcs-all-in-one/git-lfs?_from=gitee_search#downloading)并配置用户信息。
+3. 安装[git客户端](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git)和[git-lfs](https://docs.gitcode.com/docs/repo/code/lfs/)并配置用户信息。
   
    ```
    git config --global user.name "yourname"
@@ -72,10 +72,10 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
    git config --global credential.helper store
    ```
 
-4. 安装码云repo工具，可以执行如下命令。
+4. 安装GitCode repo工具，可以执行如下命令。
   
    ```
-   curl -s https://gitee.com/oschina/repo/raw/fork_flow/repo-py3 > /usr/local/bin/repo  #如果没有权限，可下载至其他目录，并将其配置到环境变量中chmod a+x /usr/local/bin/repo
+   curl -s https://gitcode.com/gitcode-dev/repo/blob/main/repo-py3 > /usr/local/bin/repo  #如果没有权限，可下载至其他目录，并将其配置到环境变量中chmod a+x /usr/local/bin/repo
    pip3 install -i https://repo.huaweicloud.com/repository/pypi/simple requests
    ```
 
@@ -84,18 +84,18 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
 
 **方式一（推荐）**
 
-通过repo + ssh下载（需注册公钥，请参考[码云帮助中心](https://gitee.com/help/articles/4191)）。
+通过repo + ssh下载（需注册公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/users/ssh-key/)）。
 
 - 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
    ```shell
-   repo init -u git@gitee.com:arkui-x/manifest.git -b ArkUI-X-1.1.6-Release --no-repo-verify
+   repo init -u git@gitcode.com:arkui-x/manifest.git -b ArkUI-X-1.1.6-Release --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
    
 - 从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
    ```shell
-   repo init -u git@gitee.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.1.6-Release --no-repo-verify
+   repo init -u git@gitcode.com:arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.1.6-Release --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
@@ -106,14 +106,14 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
 
 - 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
    ```shell
-   repo init -u https://gitee.com/arkui-x/manifest.git -b ArkUI-X-1.1.6-Release --no-repo-verify
+   repo init -u https://gitcode.com/arkui-x/manifest.git -b ArkUI-X-1.1.6-Release --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
    
 - 从版本发布Tag节点获取源码。可获取与版本发布时完全一致的源码。
    ```shell
-   repo init -u https://gitee.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.1.6-Release --no-repo-verify
+   repo init -u https://gitcode.com/arkui-x/manifest.git -b refs/tags/ArkUI-X-v1.1.6-Release --no-repo-verify
    repo sync -c
    repo forall -c 'git lfs pull'
    ```
@@ -146,7 +146,7 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
 | WebExample | Web组件跨平台应用示例|
 | FauxNativeAlbum | 混合开发图库跨平台应用示例|
 
-请访问[Samples](https://gitee.com/arkui-x/samples)仓了解更多消息。
+请访问[Samples](https://gitcode.com/arkui-x/samples)仓了解更多消息。
 
 ## 修复缺陷列表
 

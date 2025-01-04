@@ -452,7 +452,7 @@ Sets the background color for the **\<Web>** component.
 
 | Type                                                        | Description                                                        |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [Color](https://gitee.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/ts-appendix-enums.md) | Color enums.                                                |
+| [Color](./ts-appendix-enums.md) | Color enums.                                                |
 | number                                                       | Color in hexadecimal format. RGB is supported. Example: **0xffffff**                      |
 | string                                                       | Color in RGB or ARGB notation. Example: **'#ffffff', '#ff000000', 'rgb(255, 100, 255)', 'rgba(255, 100, 255, 0.5)'**|
 

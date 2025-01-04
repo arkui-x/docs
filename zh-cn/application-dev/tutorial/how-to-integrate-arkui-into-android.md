@@ -9,7 +9,7 @@
 * 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行Android应用开发
 
 ## Android 工程创建
-通过ACE Tools或DevEco Studio创建一个ArkUI-X应用工程（示例工程名为HelloWorld），其工程目录下的.arkui-x/android文件代表对应的Android工程。Android应用的入口Application和Activity类，这两个类需要继承自ArkUI提供的基类，Activity继承StageActivity类，Application则会继承StageApplication类，Application也可以通过代理类StageApplicationDelegate使用，详情参见[使用说明](https://gitee.com/arkui-x/docs/tree/master/zh-cn/application-dev/reference/arkui-for-android):
+通过ACE Tools或DevEco Studio创建一个ArkUI-X应用工程（示例工程名为HelloWorld），其工程目录下的.arkui-x/android文件代表对应的Android工程。Android应用的入口Application和Activity类，这两个类需要继承自ArkUI提供的基类，Activity继承StageActivity类，Application则会继承StageApplication类，Application也可以通过代理类StageApplicationDelegate使用，详情参见[使用说明](https://gitcode.com/arkui-x/docs/tree/ArkUI-X-5.0.2-Release/zh-cn/application-dev/reference/arkui-for-android):
 * Activity类
   该类名通过module名和ability名拼接而得，一个ability对应一个Android工程侧的Activity类。详情参见[Ability使用说明](../quick-start/start-with-ability-on-android.md):
   
@@ -112,5 +112,5 @@ proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pr
 
 ## 参考
 
-【1】[ArkUI-X Samples仓](https://gitee.com/arkui-x/samples)
+【1】[ArkUI-X Samples仓](https://gitcode.com/arkui-x/samples)
 

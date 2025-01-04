@@ -144,7 +144,7 @@ export default function UtilFunTest() {
 | ---- | ---------- | ------------------------------------------------------------ |
 |testIsNumberObject001    | isNumberObject   | When **new Number(0)** of the Number object type is passed in, **isNumberObject()** returns **true**. Use **expect** to assert that the value of **result** is **true**.|
 
-- For details about how to use assertions, see [Unit Test Framework Assertion Description](https://gitee.com/openharmony/testfwk_arkxtest#assertion-library).
+- For details about how to use assertions, see [Unit Test Framework Assertion Description](https://gitcode.com/openharmony/testfwk_arkxtest#assertion-library).
 
 ### Modifying List.test.ets
 

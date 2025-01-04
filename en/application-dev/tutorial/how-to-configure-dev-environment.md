@@ -83,7 +83,7 @@ Run the **ace check** command to check the dependency configuration of the ArkUI
    ```
 After the environment is configured, you can use [ACE Tools](../quick-start/start-with-ace-tools.md#creating-an-application) to develop and debug an ArkUI-X application.
 
-  > **NOTE**: Only the default installation paths of DevEco Studio and the SDK and the environment variable configurations mentioned below are checked. If the check result is inconsistent with the actual situation, run the [ace config command](https://gitee.com/arkui-x/cli#ace-config) to specify the actual DevEco Studio installation path and SDK download path.
+  > **NOTE**: Only the default installation paths of DevEco Studio and the SDK and the environment variable configurations mentioned below are checked. If the check result is inconsistent with the actual situation, run the [ace config command](https://gitcode.com/arkui-x/cli#ace-config) to specify the actual DevEco Studio installation path and SDK download path.
 
 ## Configuring the Environment for the Target Platform
 

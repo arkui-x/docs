@@ -2305,7 +2305,7 @@ export default class EntryAbility extends UIAbility {
 
 loadContentByName(name: string, storage: LocalStorage, callback: AsyncCallback&lt;void&gt;): void
 
-为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用callback异步回调。
+为当前WindowStage加载[命名路由](https://gitcode.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用callback异步回调。
 
 **模型约束：** 此接口仅可在Stage模型下使用。
 
@@ -2389,7 +2389,7 @@ export struct Index {
 
 loadContentByName(name: string, callback: AsyncCallback&lt;void&gt;): void
 
-为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，使用callback异步回调。
+为当前WindowStage加载[命名路由](https://gitcode.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，使用callback异步回调。
 
 **模型约束：** 此接口仅可在Stage模型下使用。
 
@@ -2469,7 +2469,7 @@ export struct Index {
 
 loadContentByName(name: string, storage?: LocalStorage): Promise&lt;void&gt;;
 
-为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用promise异步回调。
+为当前WindowStage加载[命名路由](https://gitcode.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用promise异步回调。
 
 **模型约束：** 此接口仅可在Stage模型下使用。
 
@@ -2550,7 +2550,7 @@ export struct Index {
 
 loadContentByName(name: string, storage: LocalStorage, callback: AsyncCallback&lt;void&gt;): void
 
-为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用callback异步回调。
+为当前WindowStage加载[命名路由](https://gitcode.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用callback异步回调。
 
 **模型约束：** 此接口仅可在Stage模型下使用。
 
@@ -2634,7 +2634,7 @@ export struct Index {
 
 loadContentByName(name: string, callback: AsyncCallback&lt;void&gt;): void
 
-为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，使用callback异步回调。
+为当前WindowStage加载[命名路由](https://gitcode.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，使用callback异步回调。
 
 **模型约束：** 此接口仅可在Stage模型下使用。
 
@@ -2714,7 +2714,7 @@ export struct Index {
 
 loadContentByName(name: string, storage?: LocalStorage): Promise&lt;void&gt;;
 
-为当前WindowStage加载[命名路由](https://gitee.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用promise异步回调。
+为当前WindowStage加载[命名路由](https://gitcode.com/openharmony/docs/blob/02d475cb7a543b158d2b09099214ea1dee9e8c94/zh-cn/application-dev/ui/arkts-routing.md#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)页面，通过LocalStorage传递状态属性给加载的页面，使用promise异步回调。
 
 **模型约束：** 此接口仅可在Stage模型下使用。
 

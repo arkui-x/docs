@@ -531,6 +531,15 @@ This API is supported in ArkTS widgets.
 | MIN_FONT_SIZE_FIRST     | Prioritize the **minFontSize** settings.    |
 | LAYOUT_CONSTRAINT_FIRST | Prioritize the layout constraint settings in terms of height.|
 
+## NestedScrollMode<sup>10+</sup>
+
+| Name    | Description                            |
+| ------ | ------------------------------ |
+| SELF_ONLY   | The scrolling is contained within the component, and no scroll chaining occurs, that is, the parent component does not scroll when the component scrolling reaches the boundary. |
+| SELF_FIRST | The component scrolls first, and when it hits the boundary, the parent component scrolls. When the parent component hits the boundary, its edge effect is displayed. If no edge effect is specified for the parent component, the edge effect of the child component is displayed instead.       |
+| PARENT_FIRST  | The parent component scrolls first, and when it hits the boundary, the component scrolls. When the component hits the boundary, its edge effect is displayed. If no edge effect is specified for the component, the edge effect of the parent component is displayed instead.|
+| PARALLEL  | The component and its parent component scroll at the same time. When both the component and its parent component hit the boundary, the edge effect of the component is displayed. If no edge effect is specified for the component, the edge effect of the parent component is displayed instead.|
+
 ## ObscuredReasons<sup>10+</sup>
 
 This API is supported in ArkTS widgets.

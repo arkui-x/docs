@@ -63,18 +63,18 @@ To introduce open-source software, submit a request to the ArkUI-X PMC. Include 
 | Official website| Provide the official website link of the software.| https://softwaresite |
 | Software version| Provide the version number of the software to be introduced. The version number must be an official version number released by the community. Do not modify the version number or introduce a version that is not officially released.| 1.0.0 |
 | Software version release date| Provide the official release date of the software version.| 2021.01.01 |
-| Software version address| Provide the official download URL of the version. Note that the URL must be able to locate the release package of the specific version.| https://gitee.com/softwarecodesite/v1.0.0.zip |
+| Software version address| Provide the official download URL of the version. Note that the URL must be able to locate the release package of the specific version.| https://gitcode.com/softwarecodesite/v1.0.0.zip |
 | Software license| Provide the official license name of the version and the relative path of the license file. If there are multiple licenses, list them all and describe their relationship, for example, And, Or, or different licenses for different directories.| Apache-2.0 |
 | Software lifecycle| Describe whether the software has an LTS version, how frequent a version is released, code submitted to the community in the last year, issue resolution status, and whether end of maintenance or evolution is notified.| No LTS version; one version released every six months; 10 code submissions in the last six months|
 | Security vulnerabilities| List disclosed security vulnerabilities in the software, including the vulnerability number, severity, link, and whether patches or solutions are available.| No disclosed vulnerabilities.|
 | Service scenario| Describe the repositories where the software is used and the service scenarios where the software is used.| Used by the static link of the *XX* repository to improve the *YYY* capability.|
 | Normalization| Describe whether the likes of the software exist in the ArkUI-X community, what similar software is in the industry, and why the software or version is introduced. | This software has not been introduced to the ArkUI-X community. Similar software in the industry includes B and C. Only this software is license-friendly and has a good ecosystem. Companies such as *X* and *Y* are also using this software. |
 | License compatibility| Describe the processes that use the software, the license of each process, and whether these licenses are compatible with the license of the software to be introduced. | This software is used in the user-mode *X* process in static link mode. The process is licensed under Apache-2.0, which is consistent with the software license. There is no compatibility issue. |
-| Owner| Provide the Gitee username and email address of the maintenance owner. | James, James@example.com |
+| Owner| Provide the GitCode username and email address of the maintenance owner. | James, James@example.com |
 
 2. **OAT.xml** file
 
-Confirm the issues found by the OAT tool and configure the **OAT.xml** file. For details, see [OAT](https://gitee.com/arkui-x/docs/blob/master/OAT.xml). Attach the file in the request. If no issue needs to be confirmed, you do not have to configure the file.
+Confirm the issues found by the OAT tool and configure the **OAT.xml** file. For details, see [OAT](https:/gitcode.com/arkui-x/docs/blob/ArkUI-X-5.0.2-Release/OAT.xml). Attach the file in the request. If no issue needs to be confirmed, you do not have to configure the file.
 
 3. **README.OpenSource** file of the repository. The format is as follows:
 
@@ -86,7 +86,7 @@ Confirm the issues found by the OAT tool and configure the **OAT.xml** file. For
     "License File": "LICENSE",
     "Version Number": "1.0.0",
     "Owner": "James@example.com",
-    "Upstream URL": "https://gitee.com/softwarecodesite/v1.0.0.zip",
+    "Upstream URL": "https://gitcode.com/softwarecodesite/v1.0.0.zip",
     "Description": "...."
   },
   {
