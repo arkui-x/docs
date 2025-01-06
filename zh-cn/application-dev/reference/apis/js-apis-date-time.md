@@ -12,7 +12,7 @@
 import { systemDateTime } from '@kit.BasicServicesKit';
 ```
 
-## TimeType<sup>10+</sup>
+## TimeType
 
 定义获取时间的枚举类型。
 
@@ -20,10 +20,10 @@ import { systemDateTime } from '@kit.BasicServicesKit';
 
 | 名称    | 值   | 说明                                             | Android平台 | iOS平台 |
 | ------- | ---- | ------------------------------------------------ | ----------- | ------- |
-| STARTUP | 0    | 自系统启动以来经过的毫秒数，包括深度睡眠时间。   | 支持        | 支持    |
-| ACTIVE  | 1    | 自系统启动以来经过的毫秒数，不包括深度睡眠时间。 | 支持        | 支持    |
+| STARTUP | 0    | 自系统启动以来经过的时间，包括深度睡眠时间。   | 支持        | 支持    |
+| ACTIVE  | 1    | 自系统启动以来经过的时间，不包括深度睡眠时间。 | 支持        | 支持    |
 
-## systemDateTime.getTime<sup>10+</sup>
+## systemDateTime.getTime
 
 getTime(isNanoseconds?: boolean): number
 
@@ -58,7 +58,7 @@ try {
 }
 ```
 
-## systemDateTime.getUptime<sup>10+</sup>
+## systemDateTime.getUptime
 
 getUptime(timeType: TimeType, isNanoseconds?: boolean): number
 
@@ -72,7 +72,7 @@ getUptime(timeType: TimeType, isNanoseconds?: boolean): number
 
 | 参数名        | 类型                    | 必填 | 说明                                                                                |
 | ------------- | ----------------------- | ---- |-----------------------------------------------------------------------------------|
-| timeType      | [TimeType](#timetype10) | 是   | 获取时间的类型，仅能为`STARTUP`或者`ACTIVE`。                                                  |
+| timeType      | [TimeType](#timetype) | 是   | 获取时间的类型，仅能为`STARTUP`或者`ACTIVE`。                                                  |
 | isNanoseconds | boolean                 | 否   | 返回结果是否为纳秒数。<br/>- true：表示返回结果为纳秒数（ns）。 <br/>- false：表示返回结果为毫秒数（ms）。<br>默认值为false。 |
 
 **返回值：**
@@ -168,7 +168,7 @@ try {
 }
 ```
 
-## systemDateTime.getTimezoneSync<sup>10+</sup>
+## systemDateTime.getTimezoneSync
 
 getTimezoneSync(): string
 
