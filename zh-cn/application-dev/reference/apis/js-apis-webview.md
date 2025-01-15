@@ -1,5 +1,3 @@
-
-
 # @ohos.web.webview (Webview)
 
 @ohos.web.webview提供web控制能力，[web](../arkui-ts/ts-basic-components-web.md)组件提供具有网页显示能力。
@@ -13,7 +11,7 @@
 ## 导入模块
 
 ```ts
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 ```
 
 
@@ -48,13 +46,13 @@ loadUrl(url: string | Resource, headers?: Array\<WebHeader>): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -76,13 +74,13 @@ struct WebComponent {
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -107,13 +105,13 @@ struct WebComponent {
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -164,13 +162,13 @@ loadData(data: string, mimeType: string, encoding: string, baseUrl?: string, his
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -218,13 +216,13 @@ Android和iOS的返回值与OpenHarmony不完全相同，以各平台行为为�
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -272,13 +270,13 @@ Android4.4以上版本支持，iOS8.0以上版本支持。
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State webResult: string = ''
 
   build() {
@@ -363,13 +361,13 @@ Android4.4以上版本支持，iOS8.0以上版本支持。
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State webResult: string = ''
 
   build() {
@@ -441,13 +439,13 @@ accessBackward(): boolean
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -491,13 +489,13 @@ accessForward(): boolean
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -535,13 +533,13 @@ backward(): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -578,13 +576,13 @@ forward(): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -621,13 +619,13 @@ refresh(): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -677,13 +675,13 @@ accessStep(step: number): boolean
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State steps: number = 2;
 
   build() {
@@ -724,13 +722,13 @@ iOS不支持。
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -775,13 +773,13 @@ scrollTo(x:number, y:number): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -826,13 +824,13 @@ scrollBy(deltaX:number, deltaY:number): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -869,13 +867,13 @@ stop(): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -921,13 +919,13 @@ android平台的参数范围是(0.01,100]，iOS平台的参数范围是(0,100]�
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State factor: number = 1.2;
 
   build() {
@@ -942,6 +940,143 @@ struct WebComponent {
           }
         })
       Web({ src: 'https://www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### zoomIn<sup>16+</sup>
+
+zoomIn(): void
+
+调用此接口将当前网页进行放大，比例为20%。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**错误码：**
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 17100004 | Function not enabled.                                    |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('zoomIn')
+        .onClick(() => {
+          try {
+            this.controller.zoomIn();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### zoomOut<sup>16+</sup>
+
+zoomOut(): void
+
+调用此接口将当前网页进行缩小，比例为20%。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**错误码：**
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 17100004 | Function not enabled.                                    |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('zoomOut')
+        .onClick(() => {
+          try {
+            this.controller.zoomOut();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+###  getOriginalUrl<sup>16+</sup>
+
+getOriginalUrl(): string
+
+获取当前页面的原始url地址。
+
+风险提示：如果想获取url来做JavascriptProxy通信接口认证，请使用getLastJavascriptProxyCallingFrameUrl<sup>12+</sup>
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型   | 说明                 |
+| ------ | -------------------- |
+| string | 当前页面的原始url地址。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('getOrgUrl')
+        .onClick(() => {
+          try {
+            let url = this.controller.getOriginalUrl();
+            console.log("original url: " + url);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
     }
   }
 }
@@ -973,13 +1108,13 @@ getCustomUserAgent(): string
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State userAgent: string = ''
 
   build() {
@@ -1025,13 +1160,13 @@ setCustomUserAgent(userAgent: string): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State userAgent: string = 'test'
 
   build() {
@@ -1075,13 +1210,13 @@ removeCache(clearRom: boolean): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -1127,13 +1262,13 @@ backOrForward(step: number): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State step: number = -2;
 
   build() {
@@ -1179,13 +1314,13 @@ getTitle(): string
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -1231,13 +1366,13 @@ PixelMap不支持跨平台。
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State log: string = "";
 
   build() {
@@ -1294,13 +1429,13 @@ getPageHeight(): number
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -1315,6 +1450,276 @@ struct WebComponent {
           }
         })
       Web({ src: 'https://www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+###  getWebId<sup>16+</sup>
+
+getWebId(): number
+
+获取当前Web组件的索引值，用于多个Web组件的管理。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型   | 说明                  |
+| ------ | --------------------- |
+| number | 当前Web组件的索引值。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('getWebId')
+        .onClick(() => {
+          try {
+            let id = this.controller.getWebId();
+            console.log("id: " + id);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### pageDown<sup>16+</sup>
+
+pageDown(bottom: boolean): void
+
+将Webview的内容向下滚动半个视框大小或者跳转到页面最底部，通过bottom入参控制。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名 | 类型    | 必填 | 说明                                                         |
+| ------ | ------- | ---- | ------------------------------------------------------------ |
+| bottom | boolean | 是   | 是否跳转到页面最底部，设置为false时将页面内容向下滚动半个视框大小，设置为true时跳转到页面最底部。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types.                                     |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('pageDown')
+        .onClick(() => {
+          try {
+            this.controller.pageDown(false);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### pageUp<sup>16+</sup>
+
+pageUp(top: boolean): void
+
+将Webview的内容向上滚动半个视框大小或者跳转到页面最顶部，通过top入参控制。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名 | 类型    | 必填 | 说明                                                        |
+|-----| ------- | ---- | ----------------------------------------------------------- |
+| top | boolean | 是   | 是否跳转到页面最顶部，设置为false时将页面内容向上滚动半个视框大小，设置为true时跳转到页面最顶部。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types.  |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('pageUp')
+        .onClick(() => {
+          try {
+            this.controller.pageUp(false);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+###  postUrl<sup>16+</sup>
+
+postUrl(url: string, postData: ArrayBuffer): void
+
+使用"POST"方法加载带有postData的url。如果url不是网络url，则会使用[loadUrl](#loadurl)方法加载url，忽略postData参数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名   | 类型        | 必填 | 说明                                                         |
+| -------- | ----------- | ---- | ------------------------------------------------------------ |
+| url      | string      | 是   | 需要加载的 URL。                                             |
+| postData | ArrayBuffer | 是   | 使用"POST"方法传递数据。 该请求必须采用"application/x-www-form-urlencoded"编码。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 17100002 | Invalid url.                                                 |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types.                                   |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+class TestObj {
+  constructor() {
+  }
+
+  test(str: string): ArrayBuffer {
+    let buf = new ArrayBuffer(str.length);
+    let buff = new Uint8Array(buf);
+
+    for (let i = 0; i < str.length; i++) {
+      buff[i] = str.charCodeAt(i);
+    }
+    return buf;
+  }
+}
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State testObjtest: TestObj = new TestObj();
+
+  build() {
+    Column() {
+      Button('postUrl')
+        .onClick(() => {
+          try {
+            // 数据转化为ArrayBuffer类型。
+            let postData = this.testObjtest.test("Name=test&Password=test");
+            this.controller.postUrl('www.example.com', postData);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: '', controller: this.controller })
+    }
+  }
+}
+```
+
+###  setWebDebuggingAccess<sup>16+</sup>
+
+static setWebDebuggingAccess(webDebuggingAccess: boolean): void
+
+设置是否启用网页调试功能，默认不开启。详情请参考:
+
+Android：[DevTools工具](./web-debugging-with-devtools-android.md);iOS：[DevTools工具](./web-debugging-with-devtools-ios.md)。
+
+安全提示：启用网页调试功能可以让用户检查修改Web页面内部状态，存在安全隐患，不建议在应用正式发布版本中启用。
+
+iOS16.4及以上版本支持
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名             | 类型    | 必填 | 说明                       |
+| ------------------ | ------- | ---- | -------------------------- |
+| webDebuggingAccess | boolean | 是   | 设置是否启用网页调试功能。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                 |
+| -------- | ------------------------ |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  aboutToAppear(): void {
+    try {
+      webview.WebviewController.setWebDebuggingAccess(true);
+    } catch (error) {
+      console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+    }
+  }
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
     }
   }
 }
@@ -1355,14 +1760,14 @@ createWebMessagePorts(isExtentionType?: boolean): Array\<WebMessagePort>
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
-  ports: web_webview.WebMessagePort[] = [];
+  controller: webview.WebviewController = new webview.WebviewController();
+  ports: webview.WebMessagePort[] = [];
 
   build() {
     Column() {
@@ -1409,14 +1814,14 @@ postMessage(name: string, ports: Array\<WebMessagePort>, uri: string): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
-  ports: web_webview.WebMessagePort[] = [];
+  controller: webview.WebviewController = new webview.WebviewController();
+  ports: webview.WebMessagePort[] = [];
   @State sendFromEts: string = 'Send this message from ets to HTML';
   @State receivedFromHtml: string = 'Display received message send from HTML';
 
@@ -1436,7 +1841,7 @@ struct WebComponent {
             // 1、创建两个消息端口。
             this.ports = this.controller.createWebMessagePorts();
             // 2、在应用侧的消息端口(如端口1)上注册回调事件。
-            this.ports[1].onMessageEvent((result: web_webview.WebMessage) => {
+            this.ports[1].onMessageEvent((result: webview.WebMessage) => {
               let msg = 'Got msg from HTML:';
               if (typeof(result) == "string") {
                 console.log("received string message from html5, string is:" + result);
@@ -1556,14 +1961,14 @@ postMessageEvent(message: WebMessage): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
-  ports: web_webview.WebMessagePort[] = [];
+  controller: webview.WebviewController = new webview.WebviewController();
+  ports: webview.WebMessagePort[] = [];
 
   build() {
     Column() {
@@ -1608,14 +2013,14 @@ onMessageEvent(callback: (result: WebMessage) => void): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
-  ports: web_webview.WebMessagePort[] = [];
+  controller: webview.WebviewController = new webview.WebviewController();
+  ports: webview.WebMessagePort[] = [];
 
   build() {
     Column() {
@@ -1653,14 +2058,14 @@ close(): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
-  msgPort: web_webview.WebMessagePort[] = [];
+  controller: webview.WebviewController = new webview.WebviewController();
+  msgPort: webview.WebMessagePort[] = [];
 
   build() {
     Column() {
@@ -1721,20 +2126,20 @@ static existHttpAuthCredentials(): boolean
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('existHttpAuthCredentials')
         .onClick(() => {
           try {
-            let result = web_webview.WebDataBase.existHttpAuthCredentials();
+            let result = webview.WebDataBase.existHttpAuthCredentials();
           } catch (error) {
             let e: business_error.BusinessError = error as business_error.BusinessError;
             console.error(`ErrorCode: ${e.code},  Message: ${e.message}`);
@@ -1758,20 +2163,20 @@ static deleteHttpAuthCredentials(): void
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('deleteHttpAuthCredentials')
         .onClick(() => {
           try {
-            web_webview.WebDataBase.deleteHttpAuthCredentials();
+            webview.WebDataBase.deleteHttpAuthCredentials();
           } catch (error) {
             let e: business_error.BusinessError = error as business_error.BusinessError;
             console.error(`ErrorCode: ${e.code},  Message: ${e.message}`);
@@ -1814,13 +2219,13 @@ static getHttpAuthCredentials(host: string, realm: string): Array\<string>
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   host: string = "www.spincast.org";
   realm: string = "protected example";
   username_password: string[] = [];
@@ -1830,7 +2235,7 @@ struct WebComponent {
       Button('getHttpAuthCredentials')
         .onClick(() => {
           try {
-            this.username_password = web_webview.WebDataBase.getHttpAuthCredentials(this.host, this.realm);
+            this.username_password = webview.WebDataBase.getHttpAuthCredentials(this.host, this.realm);
             console.log('num: ' + this.username_password.length);
           } catch (error) {
             let e: business_error.BusinessError = error as business_error.BusinessError;
@@ -1870,13 +2275,13 @@ static saveHttpAuthCredentials(host: string, realm: string, username: string, pa
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   host: string = "www.spincast.org";
   realm: string = "protected example";
 
@@ -1885,7 +2290,7 @@ struct WebComponent {
       Button('saveHttpAuthCredentials')
         .onClick(() => {
           try {
-            web_webview.WebDataBase.saveHttpAuthCredentials(this.host, this.realm, "Stromgol", "Laroche");
+            webview.WebDataBase.saveHttpAuthCredentials(this.host, this.realm, "Stromgol", "Laroche");
           } catch (error) {
             let e: business_error.BusinessError = error as business_error.BusinessError;
             console.error(`ErrorCode: ${e.code},  Message: ${e.message}`);
@@ -1907,7 +2312,7 @@ struct WebComponent {
 
 ###  configCookie11+
 
-static configCookie(url: string, value: string, callback: AsyncCallback<void>): void
+static configCookie(url: string, value: string, callback: AsyncCallback\<void>): void
 
 异步callback方式为指定url设置单个cookie的值。
 
@@ -1919,7 +2324,7 @@ static configCookie(url: string, value: string, callback: AsyncCallback<void>): 
 | -------- | ------------------- | ---- | -------------------------------------------- |
 | url      | string              | 是   | 要获取的cookie所属的url，建议使用完整的url。 |
 | value    | string              | 是   | 要设置的cookie的值。                         |
-| callback | AsyncCallback<void> | 是   | callback回调，用于获取设置cookie的结果。     |
+| callback | AsyncCallback\<void> | 是   | callback回调，用于获取设置cookie的结果。     |
 
 **错误码：**
 
@@ -1932,20 +2337,20 @@ static configCookie(url: string, value: string, callback: AsyncCallback<void>): 
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('configCookie')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.configCookie('https://www.example.com', "a=b", (error) => {
+            webview.WebCookieManager.configCookie('https://www.example.com', "a=b", (error) => {
               if (error) {
                 console.log("error: " + JSON.stringify(error));
               }
@@ -1963,7 +2368,7 @@ struct WebComponent {
 
 ###  configCookie11+
 
-static configCookie(url: string, value: string): Promise<void>
+static configCookie(url: string, value: string): Promise\<void>
 
 以异步Promise方式为指定url设置单个cookie的值。
 
@@ -1987,20 +2392,20 @@ static configCookie(url: string, value: string): Promise<void>
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('configCookie')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.configCookie('https://www.example.com', 'a=b')
+            webview.WebCookieManager.configCookie('https://www.example.com', 'a=b')
               .then(() => {
                 console.log('configCookie success!');
               })
@@ -2020,7 +2425,7 @@ struct WebComponent {
 
 ###  fetchCookie11+
 
-static fetchCookie(url: string, callback: AsyncCallback<string>): void
+static fetchCookie(url: string, callback: AsyncCallback\<string>): void
 
 异步callback方式获取指定url对应cookie的值。
 
@@ -2031,7 +2436,7 @@ static fetchCookie(url: string, callback: AsyncCallback<string>): void
 | 参数名   | 类型                  | 必填 | 说明                                         |
 | -------- | --------------------- | ---- | -------------------------------------------- |
 | url      | string                | 是   | 要获取的cookie所属的url，建议使用完整的url。 |
-| callback | AsyncCallback<string> | 是   | callback回调，用于获取cookie。               |
+| callback | AsyncCallback\<string> | 是   | callback回调，用于获取cookie。               |
 
 **错误码：**
 
@@ -2044,20 +2449,20 @@ static fetchCookie(url: string, callback: AsyncCallback<string>): void
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('fetchCookie')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.fetchCookie('https://www.example.com', (error, cookie) => {
+            webview.WebCookieManager.fetchCookie('https://www.example.com', (error, cookie) => {
               if (error) {
                 console.log('error: ' + JSON.stringify(error));
                 return;
@@ -2079,7 +2484,7 @@ struct WebComponent {
 
 ###  fetchCookie11+
 
-static fetchCookie(url: string): Promise<string>
+static fetchCookie(url: string): Promise\<string>
 
 以Promise方式异步获取指定url对应cookie的值。
 
@@ -2095,7 +2500,7 @@ static fetchCookie(url: string): Promise<string>
 
 | 类型            | 说明                                         |
 | --------------- | -------------------------------------------- |
-| Promise<string> | Promise实例，用于获取指定url对应的cookie值。 |
+| Promise\<string> | Promise实例，用于获取指定url对应的cookie值。 |
 
 **错误码：**
 
@@ -2108,20 +2513,20 @@ static fetchCookie(url: string): Promise<string>
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('fetchCookie')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.fetchCookie('https://www.example.com')
+            webview.WebCookieManager.fetchCookie('https://www.example.com')
               .then(cookie => {
                 console.log("fetchCookie cookie = " + cookie);
               })
@@ -2141,7 +2546,7 @@ struct WebComponent {
 
 ###  clearAllCookies11+
 
-static clearAllCookies(callback: AsyncCallback<void>): void
+static clearAllCookies(callback: AsyncCallback\<void>): void
 
 异步callback方式清除所有cookie。
 
@@ -2151,26 +2556,26 @@ static clearAllCookies(callback: AsyncCallback<void>): void
 
 | 参数名   | 类型                | 必填 | 说明                                           |
 | -------- | ------------------- | ---- | ---------------------------------------------- |
-| callback | AsyncCallback<void> | 是   | callback回调，用于获取清除所有cookie是否成功。 |
+| callback | AsyncCallback\<void> | 是   | callback回调，用于获取清除所有cookie是否成功。 |
 
 **示例：**
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('clearAllCookies')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.clearAllCookies((error) => {
+            webview.WebCookieManager.clearAllCookies((error) => {
               if (error) {
                 console.log("error: " + error);
               }
@@ -2188,7 +2593,7 @@ struct WebComponent {
 
 ### clearAllCookies11+
 
-static clearAllCookies(): Promise<void>
+static clearAllCookies(): Promise\<void>
 
 异步promise方式清除所有cookie。
 
@@ -2198,26 +2603,26 @@ static clearAllCookies(): Promise<void>
 
 | 类型          | 说明                                          |
 | ------------- | --------------------------------------------- |
-| Promise<void> | Promise实例，用于获取清除所有cookie是否成功。 |
+| Promise\<void> | Promise实例，用于获取清除所有cookie是否成功。 |
 
 **示例：**
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('clearAllCookies')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.clearAllCookies()
+            webview.WebCookieManager.clearAllCookies()
               .then(() => {
                 console.log("clearAllCookies success!");
               })
@@ -2280,14 +2685,14 @@ getItemAtIndex(index: number): HistoryItem
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import image from "@ohos.multimedia.image";
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State icon: image.PixelMap | undefined = undefined;
 
   build() {
@@ -2331,5 +2736,4 @@ Web组件返回的请求/响应头对象。
 | ----------- | ------ | -----|------|------------------- |
 | headerKey   | string | 是 | 是 | 请求/响应头的key。   |
 | headerValue | string | 是 | 是 | 请求/响应头的value。 |
-
 

@@ -1,5 +1,3 @@
-
-
 # @ohos.web.webview (Webview)
 
 The **@ohos.web.webview** module provides APIs for web control. It can be used with the [<Web\>](../arkui-ts/ts-basic-components-web.md) component, which can be used to display web pages.
@@ -13,7 +11,7 @@ The **@ohos.web.webview** module provides APIs for web control. It can be used w
 ## Modules to Import
 
 ```ts
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 ```
 
 
@@ -48,13 +46,13 @@ Loads a specified URL.
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -76,13 +74,13 @@ struct WebComponent {
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -107,13 +105,13 @@ This example loads local resource files using $rawfile.
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -165,13 +163,13 @@ When loading a local image, you need to obtain the Android or iOS sandbox path a
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -220,13 +218,13 @@ The return value varies by platform.
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -276,13 +274,13 @@ If the script does not return a value, **'(null)'** is returned from iOS.
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State webResult: string = ''
 
   build() {
@@ -367,13 +365,13 @@ If the script does not return a value, **'(null)'** is returned from iOS.
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   @State webResult: string = ''
 
   build() {
@@ -445,13 +443,13 @@ Checks whether going to the previous page can be performed on the current page.
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -495,13 +493,13 @@ Checks whether going to the next page can be performed on the current page.
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -539,13 +537,13 @@ Moves to the previous page based on the history stack. This API is generally use
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -582,13 +580,13 @@ Moves to the next page based on the history stack. This API is generally used to
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -625,13 +623,13 @@ Invoked to instruct the **\<Web>** component to refresh the web page.
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
@@ -649,6 +647,414 @@ struct WebComponent {
   }
 }
 ```
+
+### getWebId<sup>16+</sup>
+
+getWebId(): number
+
+Obtains the index value of this **Web** component, which can be used for **Web** component management.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Return value**
+
+| Type   | Description                                   |
+| ------ | --------------------------------------------- |
+| number | Index value of the current **Web** component. |
+
+**Error codes**
+
+| ID       | Error Message                                                |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('getWebId')
+        .onClick(() => {
+          try {
+            let id = this.controller.getWebId();
+            console.log("id: " + id);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### pageDown<sup>16+</sup>
+
+pageDown(bottom: boolean): void
+
+Scrolls the page down by half the viewport or jumps to the bottom of the page.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name   | Type    | Mandatory | Description                                                  |
+| ------ | ------- | --------- | ------------------------------------------------------------ |
+| bottom | boolean | Yes       | Whether to jump to the bottom of the page. The value **true** means to jump to the bottom of the page; and **false** means to scroll the page down by half the viewport. |
+
+**Error codes**
+
+| ID       | Error Message                                                |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types.                                     |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('pageDown')
+        .onClick(() => {
+          try {
+            this.controller.pageDown(false);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### pageUp<sup>16+</sup>
+
+pageUp(top: boolean): void
+
+Scrolls the page up by half the viewport or jumps to the top of the page.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name | Type    | Mandatory | Description                                                  |
+|------| ------- | --------- | ------------------------------------------------------------ |
+| top  | boolean | Yes       | Whether to jump to the bottom of the page. The value **true** means to jump to the bottom of the page; and **false** means to scroll the page down by half the viewport. |
+
+**Error codes**
+
+| ID       | Error Message                                                |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types.                                     |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('pageUp')
+        .onClick(() => {
+          try {
+            this.controller.pageUp(false);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+###  postUrl<sup>16+</sup>
+
+postUrl(url: string, postData: ArrayBuffer): void
+
+Loads the specified URL with **postData** using the POST method. If **url** is not a network URL, it will be loaded with [loadUrl](#loadurl) instead, and the **postData** parameter will be ignored.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name     | Type        | Mandatory | Description                                                  |
+| -------- | ----------- | --------- | ------------------------------------------------------------ |
+| url      | string      | Yes       | URL to load.                                                 |
+| postData | ArrayBuffer | Yes       | Data to transfer using the POST method. The request must be encoded in "application/x-www-form-urlencoded" format. |
+
+**Error codes**
+
+| ID       | Error Message                                                |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 17100002 | Invalid url.                                                 |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types.                                     |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+class TestObj {
+  constructor() {
+  }
+
+  test(str: string): ArrayBuffer {
+    let buf = new ArrayBuffer(str.length);
+    let buff = new Uint8Array(buf);
+
+    for (let i = 0; i < str.length; i++) {
+      buff[i] = str.charCodeAt(i);
+    }
+    return buf;
+  }
+}
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State testObjtest: TestObj = new TestObj();
+
+  build() {
+    Column() {
+      Button('postUrl')
+        .onClick(() => {
+          try {
+            // Convert data to the ArrayBuffer type.
+            let postData = this.testObjtest.test("Name=test&Password=test");
+            this.controller.postUrl('www.example.com', postData);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: '', controller: this.controller })
+    }
+  }
+}
+```
+
+### setWebDebuggingAccess<sup>16+</sup>
+
+static setWebDebuggingAccess(webDebuggingAccess: boolean): void
+
+Sets whether to enable web debugging. By default, web debugging is disabled. For details, see
+
+Android： [Debugging Frontend Pages by Using DevTools](./web-debugging-with-devtools-android.md);iOS：[Debugging Frontend Pages by Using DevTools](./web-debugging-with-devtools-ios.md).
+
+NOTE: Enabling web debugging allows users to check and modify the internal status of the web page, which poses security risks. Therefore, you are advised not to enable this function in the officially released version of the app.
+
+iOS 16.4 and above versions are supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name               | Type    | Mandatory | Description                           |
+| ------------------ | ------- | --------- | ------------------------------------- |
+| webDebuggingAccess | boolean | Yes       | Sets whether to enable web debugging. |
+
+**Error codes**
+
+| ID   | Error Message            |
+| ---- | ------------------------ |
+| 401  | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  aboutToAppear(): void {
+    try {
+      webview.WebviewController.setWebDebuggingAccess(true);
+    } catch (error) {
+      console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+    }
+  }
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### zoomIn<sup>16+</sup>
+
+zoomIn(): void
+
+Zooms in on this web page by 20%.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Error codes**
+
+| ID       | Error Message                                                |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 17100004 | Function not enabled.                                     |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('zoomIn')
+        .onClick(() => {
+          try {
+            this.controller.zoomIn();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### zoomOut<sup>16+</sup>
+
+zoomOut(): void
+
+Zooms out of this web page by 20%.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Error codes**
+
+| ID       | Error Message                                                |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 17100004 | Function not enabled.                                     |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('zoomOut')
+        .onClick(() => {
+          try {
+            this.controller.zoomOut();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### getOriginalUrl<sup>16+</sup>
+
+getOriginalUrl(): string
+
+Obtains the original URL of this page.
+
+Risk warning: If you want to obtain the URL for JavaScriptProxy communication API authentication, use getLastJavascriptProxyCallingFrameUrl<sup>12+</sup>.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Return value**
+
+| Type   | Description                                   |
+| ------ | --------------------------------------------- |
+| string | Original URL of the current page. |
+
+**Error codes**
+
+| ID       | Error Message                                                |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('getOrgUrl')
+        .onClick(() => {
+          try {
+            let url = this.controller.getOriginalUrl();
+            console.log("original url: " + url);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
 
 ## webDatabase
 
@@ -677,20 +1083,20 @@ Checks whether any saved HTTP authentication credentials exist. This API returns
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('existHttpAuthCredentials')
         .onClick(() => {
           try {
-            let result = web_webview.WebDataBase.existHttpAuthCredentials();
+            let result = webview.WebDataBase.existHttpAuthCredentials();
           } catch (error) {
             let e: business_error.BusinessError = error as business_error.BusinessError;
             console.error(`ErrorCode: ${e.code},  Message: ${e.message}`);
@@ -714,20 +1120,20 @@ Deletes all HTTP authentication credentials saved in the cache. This API returns
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('deleteHttpAuthCredentials')
         .onClick(() => {
           try {
-            web_webview.WebDataBase.deleteHttpAuthCredentials();
+            webview.WebDataBase.deleteHttpAuthCredentials();
           } catch (error) {
             let e: business_error.BusinessError = error as business_error.BusinessError;
             console.error(`ErrorCode: ${e.code},  Message: ${e.message}`);
@@ -770,13 +1176,13 @@ Retrieves HTTP authentication credentials for a given host and realm. This API r
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   host: string = "www.spincast.org";
   realm: string = "protected example";
   username_password: string[] = [];
@@ -786,7 +1192,7 @@ struct WebComponent {
       Button('getHttpAuthCredentials')
         .onClick(() => {
           try {
-            this.username_password = web_webview.WebDataBase.getHttpAuthCredentials(this.host, this.realm);
+            this.username_password = webview.WebDataBase.getHttpAuthCredentials(this.host, this.realm);
             console.log('num: ' + this.username_password.length);
           } catch (error) {
             let e: business_error.BusinessError = error as business_error.BusinessError;
@@ -826,13 +1232,13 @@ Saves HTTP authentication credentials for a given host and realm. This API retur
 
   ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview';
+import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
   host: string = "www.spincast.org";
   realm: string = "protected example";
 
@@ -841,7 +1247,7 @@ struct WebComponent {
       Button('saveHttpAuthCredentials')
         .onClick(() => {
           try {
-            web_webview.WebDataBase.saveHttpAuthCredentials(this.host, this.realm, "Stromgol", "Laroche");
+            webview.WebDataBase.saveHttpAuthCredentials(this.host, this.realm, "Stromgol", "Laroche");
           } catch (error) {
             let e: business_error.BusinessError = error as business_error.BusinessError;
             console.error(`ErrorCode: ${e.code},  Message: ${e.message}`);
@@ -888,20 +1294,20 @@ Sets the value of a single cookie for a specified URL. This API uses an asynchro
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('configCookie')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.configCookie('https://www.example.com', "a=b", (error) => {
+            webview.WebCookieManager.configCookie('https://www.example.com', "a=b", (error) => {
               if (error) {
                 console.log("error: " + JSON.stringify(error));
               }
@@ -949,20 +1355,20 @@ Sets the value of a single cookie for a specified URL. This API uses a promise t
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('configCookie')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.configCookie('https://www.example.com', 'a=b')
+            webview.WebCookieManager.configCookie('https://www.example.com', 'a=b')
               .then(() => {
                 console.log('configCookie success!');
               })
@@ -982,7 +1388,7 @@ struct WebComponent {
 
 ###  fetchCookie11+
 
-static fetchCookie(url: string, callback: AsyncCallback<string>): void
+static fetchCookie(url: string, callback: AsyncCallback\<string>): void
 
 Obtains the cookie value of a specified URL. This API uses an asynchronous callback to return the result.
 
@@ -993,7 +1399,7 @@ Obtains the cookie value of a specified URL. This API uses an asynchronous callb
 | Name  | Type                 | Mandatory| Description                                        |
 | -------- | --------------------- | ---- | -------------------------------------------- |
 | url      | string                | Yes  | URL of the cookie to obtain. A complete URL is recommended.|
-| callback | AsyncCallback<string> | Yes  | Callback used to obtain the result.              |
+| callback | AsyncCallback\<string> | Yes  | Callback used to obtain the result.              |
 
 **Error codes**
 
@@ -1006,20 +1412,20 @@ Obtains the cookie value of a specified URL. This API uses an asynchronous callb
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('fetchCookie')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.fetchCookie('https://www.example.com', (error, cookie) => {
+            webview.WebCookieManager.fetchCookie('https://www.example.com', (error, cookie) => {
               if (error) {
                 console.log('error: ' + JSON.stringify(error));
                 return;
@@ -1070,20 +1476,20 @@ Obtains the cookie value of a specified URL. This API uses a promise to return t
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('fetchCookie')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.fetchCookie('https://www.example.com')
+            webview.WebCookieManager.fetchCookie('https://www.example.com')
               .then(cookie => {
                 console.log("fetchCookie cookie = " + cookie);
               })
@@ -1119,20 +1525,20 @@ Clears all cookies. This API uses an asynchronous callback to return the result.
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('clearAllCookies')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.clearAllCookies((error) => {
+            webview.WebCookieManager.clearAllCookies((error) => {
               if (error) {
                 console.log("error: " + error);
               }
@@ -1166,20 +1572,20 @@ Clears all cookies. This API uses a promise to return the result.
 
 ```ts
 // xxx.ets
-import web_webview from '@ohos.web.webview'
+import webview from '@ohos.web.webview'
 import business_error from '@ohos.base'
 
 @Entry
 @Component
 struct WebComponent {
-  controller: web_webview.WebviewController = new web_webview.WebviewController();
+  controller: webview.WebviewController = new webview.WebviewController();
 
   build() {
     Column() {
       Button('clearAllCookies')
         .onClick(() => {
           try {
-            web_webview.WebCookieManager.clearAllCookies()
+            webview.WebCookieManager.clearAllCookies()
               .then(() => {
                 console.log("clearAllCookies success!");
               })
