@@ -980,3 +980,311 @@ Obtains the level of this console message.
 | Info  | Information level.|
 | Log   | Log level.|
 | Warn  | Warning level. |
+
+## Events
+
+###  onBeforeUnload
+
+onBeforeUnload(callback: Callback<OnBeforeUnloadEvent, boolean>)
+
+Called when this page is about to exit after the user refreshes or closes the page. This API takes effect only when the page has obtained focus.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name     | Type                                                         | Mandatory | Description                                                  |
+| -------- | ------------------------------------------------------------ | --------- | ------------------------------------------------------------ |
+| callback | Callback<[OnBeforeUnloadEvent](#onbeforeunloadevent), boolean> | Yes       | Callback used when this page is about to exit after the user refreshes or closes the page. Return value: boolean If the callback returns **true**, the application can use the custom dialog box (allows the confirm and cancel operations) and invoke the **JsResult** API to instruct the **Web** component to exit the current page based on the user operation. The value **false** means that the custom dialog box drawn in the function is ineffective. |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: $rawfile("index.html"), controller: this.controller })
+        .onBeforeUnload((event) => {
+          if (event) {
+            console.log("event.url:" + event.url);
+            console.log("event.message:" + event.message);
+            AlertDialog.show({
+              title: 'onBeforeUnload',
+              message: 'text',
+              primaryButton: {
+                value: 'cancel',
+                action: () => {
+                  event.result.handleCancel();
+                }
+              },
+              secondaryButton: {
+                value: 'ok',
+                action: () => {
+                  event.result.handleConfirm();
+                }
+              },
+              cancel: () => {
+                event.result.handleCancel();
+              }
+            })
+          }
+          return true;
+        })
+    }
+  }
+}
+```
+
+HTML file to be loaded:
+
+```
+<!--index.html-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+</head>
+<body onbeforeunload="return myFunction()">
+  <h1>WebView onBeforeUnload Demo</h1>
+  <a href="https://www.example.com">Click here</a>
+  <script>
+    function myFunction() {
+      return "onBeforeUnload Event";
+    }
+  </script>
+</body>
+</html>
+```
+
+####  OnBeforeUnloadEvent
+
+Represents the callback invoked when this page is about to exit after the user refreshes or closes the page.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+| Name    | Type                 | Mandatory | Description                                            |
+| ------- | -------------------- | --------- | ------------------------------------------------------ |
+| url     | string               | Yes       | URL of the web page where the dialog box is displayed. |
+| message | string               | Yes       | Message displayed in the dialog box.                   |
+| result  | [JsResult](jsresult) | Yes       | User operation.                                        |
+
+###  onRefreshAccessedHistory
+
+onRefreshAccessedHistory(callback: Callback\<OnRefreshAccessedHistoryEvent>)
+
+Called when loading of the web page is complete and the access history of a web page is refreshed.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name     | Type                                                         | Mandatory | Description                                                  |
+| -------- | ------------------------------------------------------------ | --------- | ------------------------------------------------------------ |
+| callback | Callback<[OnRefreshAccessedHistoryEvent](#onrefreshaccessedhistoryevent)> | Yes       | Called when the access history of the web page is refreshed. |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onRefreshAccessedHistory((event) => {
+          if (event) {
+            console.log('url:' + event.url + ' isReload:' + event.isRefreshed);
+          }
+        })
+    }
+  }
+}
+```
+
+####  OnRefreshAccessedHistoryEvent
+
+Represents the callback invoked when the access history of the web page is refreshed.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+| Name        | Type    | Mandatory | Description                                                  |
+| ----------- | ------- | --------- | ------------------------------------------------------------ |
+| url         | string  | Yes       | URL to be accessed.                                          |
+| isRefreshed | boolean | Yes       | Whether the page is reloaded. The value **true** means that the page is reloaded by invoking the [refresh](#refresh) API, and **false** means the opposite. |
+
+#### refresh
+refresh(): void
+
+Called when the Web component refreshes the web page.
+
+System capability: SystemCapability.Web.Webview.Core
+
+Error codes
+
+For details about the error codes, see Webview Error Codes.
+
+ID	Error Message
+17100001	Init error. The WebviewController must be associated with a Web component.
+Example
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('refresh')
+        .onClick(() => {
+          try {
+            this.controller.refresh();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+###  onFullScreenExit
+
+onFullScreenExit(callback: () => void)
+
+Called when the **Web** component exits full screen mode.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name     | Type       | Mandatory | Description                                                 |
+| -------- | ---------- | --------- | ----------------------------------------------------------- |
+| callback | () => void | Yes       | Callback invoked when the component exits full screen mode. |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  handler: FullScreenExitHandler | null = null;
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onFullScreenExit(() => {
+          console.log("onFullScreenExit...")
+          if (this.handler) {
+            this.handler.exitFullScreen();
+          }
+        })
+        .onFullScreenEnter((event) => {
+          this.handler = event.handler;
+        })
+    }
+  }
+}
+```
+
+###  onFullScreenEnter
+
+onFullScreenEnter(callback: OnFullScreenEnterCallback)
+
+Called when the **Web** component enters full screen mode.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name     | Type                                                    | Mandatory | Description                                                  |
+| -------- | ------------------------------------------------------- | --------- | ------------------------------------------------------------ |
+| callback | [OnFullScreenEnterCallback](#onfullscreenentercallback) | Yes       | Callback invoked when the **Web** component enters full screen mode. |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  handler: FullScreenExitHandler | null = null;
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onFullScreenEnter((event) => {
+          console.log("onFullScreenEnter videoWidth: " + event.videoWidth +
+            ", videoHeight: " + event.videoHeight);
+          // The application can proactively exit fullscreen mode by calling this.handler.exitFullScreen().
+          this.handler = event.handler;
+        })
+    }
+  }
+}
+```
+
+####  OnFullScreenEnterCallback
+
+type OnFullScreenEnterCallback = (event: FullScreenEnterEvent) => void
+
+Called when the **Web** component enters full screen mode.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name  | Type                                          | Mandatory | Description                                                  |
+| ----- | --------------------------------------------- | --------- | ------------------------------------------------------------ |
+| event | [FullScreenEnterEvent](#fullscreenenterevent) | Yes       | Callback event for the **Web** component to enter full screen mode. |
+
+####  FullScreenEnterEvent
+
+Provides details about the callback event for the **Web** component to enter the full-screen mode.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+| Name        | Type                                            | Mandatory | Description                                                                                                                                                                                                                                                                                                     |
+| ----------- | ----------------------------------------------- | --------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| handler     | [FullScreenExitHandler](#fullscreenexithandler) | Yes       | Function handle for exiting full screen mode.                                                                                                                                                                                                                                                                   |
+| videoWidth  | number                                          | No        | Video width, in px. If the element that enters fulls screen mode is a **\<video>** element, the value represents its width; if the element that enters fulls screen mode contains a **\<video>** element, the value represents the width of the first sub-video element; in other cases, the value is **0**.    |
+| videoHeight | number                                          | No        | Video height, in px. If the element that enters fulls screen mode is a **\<video>** element, the value represents its height; if the element that enters fulls screen mode contains a **\<video>** element, the value represents the height of the first sub-video element; in other cases, the value is **0**. |
+
+####  FullScreenExitHandler
+
+Implements a **FullScreenExitHandler** object for listening for exiting full screen mode. For the sample code, see [onFullScreenEnter](#onfullscreenenter).
+##### constructor
+constructor()
+
+System capability: SystemCapability.Web.Webview.Core
+
+##### exitFullScreen
+exitFullScreen(): void
+
+Called when the Web component exits full screen mode.
+
+System capability: SystemCapability.Web.Webview.Core

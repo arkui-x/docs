@@ -1715,3 +1715,319 @@ isCapture(): boolean
 | FileOpenMultipleMode | 打开上传多个文件。   |
 | FileOpenFolderMode   | 打开上传文件夹模式。 |
 | FileSaveMode         | 文件保存模式。       |
+
+
+
+## 事件
+
+###  onBeforeUnload<sup>16+</sup>
+
+
+
+onBeforeUnload(callback: Callback<OnBeforeUnloadEvent, boolean>)
+
+刷新或关闭场景下，在即将离开当前页面时触发此回调。刷新或关闭当前页面应先通过点击等方式获取焦点，才会触发此回调。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名   | 类型                                                         | 必填 | 说明                                                         |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| callback | Callback<[OnBeforeUnloadEvent](#onbeforeunloadevent16), boolean> | 是   | 刷新或关闭场景下，在即将离开当前页面时触发。 返回值boolean。当回调返回true时，应用可以调用自定义弹窗能力（包括确认和取消），并且需要根据用户的确认或取消操作调用JsResult通知Web组件最终是否离开当前页面。当回调返回false时，函数中绘制的自定义弹窗无效。 |
+
+**示例：**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: $rawfile("index.html"), controller: this.controller })
+        .onBeforeUnload((event) => {
+          if (event) {
+            console.log("event.url:" + event.url);
+            console.log("event.message:" + event.message);
+            AlertDialog.show({
+              title: 'onBeforeUnload',
+              message: 'text',
+              primaryButton: {
+                value: 'cancel',
+                action: () => {
+                  event.result.handleCancel();
+                }
+              },
+              secondaryButton: {
+                value: 'ok',
+                action: () => {
+                  event.result.handleConfirm();
+                }
+              },
+              cancel: () => {
+                event.result.handleCancel();
+              }
+            })
+          }
+          return true;
+        })
+    }
+  }
+}
+```
+
+加载的html文件。
+
+```
+<!--index.html-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+</head>
+<body onbeforeunload="return myFunction()">
+  <h1>WebView onBeforeUnload Demo</h1>
+  <a href="https://www.example.com">Click here</a>
+  <script>
+    function myFunction() {
+      return "onBeforeUnload Event";
+    }
+  </script>
+</body>
+</html>
+```
+
+#### OnBeforeUnloadEvent<sup>16+</sup>
+
+
+
+定义刷新或关闭场景下，在即将离开当前页面时触发此回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称    | 类型                  | 必填 | 说明                        |
+| ------- | --------------------- | ---- | --------------------------- |
+| url     | string                | 是   | 当前显示弹窗所在网页的URL。 |
+| message | string                | 是   | 弹窗中显示的信息。          |
+| result  | [JsResult](#jsresult) | 是   | 通知Web组件用户操作行为。   |
+
+###  onRefreshAccessedHistory<sup>16+</sup>
+
+onRefreshAccessedHistory(callback: Callback\<OnRefreshAccessedHistoryEvent>)
+
+加载网页页面完成时触发该回调，用于应用更新其访问的历史链接。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名   | 类型                                                         | 必填 | 说明                           |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------ |
+| callback | Callback<[OnRefreshAccessedHistoryEvent](#onrefreshaccessedhistoryevent16)> | 是   | 在网页刷新访问历史记录时触发。 |
+
+**示例：**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onRefreshAccessedHistory((event) => {
+          if (event) {
+            console.log('url:' + event.url + ' isReload:' + event.isRefreshed);
+          }
+        })
+    }
+  }
+}
+
+```
+#### OnRefreshAccessedHistoryEvent<sup>16+</sup>
+定义网页刷新访问历史记录时触发。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称        | 类型    | 必填 | 说明                                                         |
+| ----------- | ------- | ---- | ------------------------------------------------------------ |
+| url         | string  | 是   | 访问的url。                                                  |
+| isRefreshed | boolean | 是   | true表示该页面是被重新加载的（调用[refresh16+](#refresh16)接口），false表示该页面是新加载的。 |
+
+####  refresh<sup>16+</sup>
+
+refresh(): void
+
+调用此接口通知Web组件刷新网页。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**错误码：**
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+
+**示例：**
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('refresh')
+        .onClick(() => {
+          try {
+            this.controller.refresh();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+
+```
+###  onFullScreenExit<sup>16+</sup>
+
+onFullScreenExit(callback: () => void)
+
+通知开发者Web组件退出全屏模式。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名   | 类型       | 必填 | 说明                       |
+| -------- | ---------- | ---- | -------------------------- |
+| callback | () => void | 是   | 退出全屏模式时的回调函数。 |
+
+**示例：**
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  handler: FullScreenExitHandler | null = null;
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onFullScreenExit(() => {
+          console.log("onFullScreenExit...")
+          if (this.handler) {
+            this.handler.exitFullScreen();
+          }
+        })
+        .onFullScreenEnter((event) => {
+          this.handler = event.handler;
+        })
+    }
+  }
+}
+```
+###  onFullScreenEnter<sup>16+</sup>
+
+onFullScreenEnter(callback: OnFullScreenEnterCallback)
+
+通知开发者Web组件进入全屏模式。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名   | 类型                                                      | 必填 | 说明                          |
+| -------- | --------------------------------------------------------- | ---- | ----------------------------- |
+| callback | [OnFullScreenEnterCallback](#onfullscreenentercallback16) | 是   | Web组件进入全屏时的回调信息。 |
+
+**示例：**
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  handler: FullScreenExitHandler | null = null;
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onFullScreenEnter((event) => {
+          console.log("onFullScreenEnter videoWidth: " + event.videoWidth +
+            ", videoHeight: " + event.videoHeight);
+          // 应用可以通过 this.handler.exitFullScreen() 主动退出全屏。
+          this.handler = event.handler;
+        })
+    }
+  }
+}
+```
+####  OnFullScreenEnterCallback<sup>16+</sup>
+
+type OnFullScreenEnterCallback = (event: FullScreenEnterEvent) => void
+
+Web组件进入全屏时触发的回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+
+| 参数名 | 类型                                            | 必填 | 说明                            |
+| ------ | ----------------------------------------------- | ---- | ------------------------------- |
+| event  | [FullScreenEnterEvent](#fullscreenenterevent16) | 是   | Web组件进入全屏的回调事件详情。 |
+
+
+####  FullScreenEnterEvent<sup>16+</sup>
+
+Web组件进入全屏回调事件的详情。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称        | 类型                                              | 必填 | 说明                                                         |
+| ----------- | ------------------------------------------------- | ---- | ------------------------------------------------------------ |
+| handler     | [FullScreenExitHandler](#fullscreenexithandler16) | 是   | 用于退出全屏模式的函数句柄。                                 |
+| videoWidth  | number                                            | 否   | 视频的宽度，单位：px。如果进入全屏的是 `<video>` 元素，表示其宽度；如果进入全屏的子元素中包含 `<video>` 元素，表示第一个子视频元素的宽度；其他情况下，为0。 |
+| videoHeight | number                                            | 否   | 视频的高度，单位：px。如果进入全屏的是 `<video>` 元素，表示其高度；如果进入全屏的子元素中包含 `<video>` 元素，表示第一个子视频元素的高度；其他情况下，为0。 |
+
+#### FullScreenExitHandler<sup>16+</sup>
+
+通知开发者Web组件退出全屏。示例代码参考[onFullScreenEnter事件](#onfullscreenenter16)。
+
+##### constructor<sup>16+</sup>
+
+constructor()
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+##### exitFullScreen<sup>16+</sup>
+
+exitFullScreen(): void
+
+通知开发者Web组件退出全屏。
+
+**系统能力：** SystemCapability.Web.Webview.Core
