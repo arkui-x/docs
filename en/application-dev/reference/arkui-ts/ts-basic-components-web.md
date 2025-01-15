@@ -1079,7 +1079,7 @@ Represents the callback invoked when this page is about to exit after the user r
 
 ###  onRefreshAccessedHistory
 
-onRefreshAccessedHistory(callback: Callback<OnRefreshAccessedHistoryEvent>)
+onRefreshAccessedHistory(callback: Callback\<OnRefreshAccessedHistoryEvent>)
 
 Called when loading of the web page is complete and the access history of a web page is refreshed.
 
@@ -1268,11 +1268,11 @@ Provides details about the callback event for the **Web** component to enter the
 
 **System capability**: SystemCapability.Web.Webview.Core
 
-| Name        | Type                                            | Mandatory | Description                                                  |
-| ----------- | ----------------------------------------------- | --------- | ------------------------------------------------------------ |
-| handler     | [FullScreenExitHandler](#fullscreenexithandler) | Yes       | Function handle for exiting full screen mode.                |
-| videoWidth  | number                                          | No        | Video width, in px. If the element that enters fulls screen mode is a **<video>** element, the value represents its width; if the element that enters fulls screen mode contains a **<video>** element, the value represents the width of the first sub-video element; in other cases, the value is **0**. |
-| videoHeight | number                                          | No        | Video height, in px. If the element that enters fulls screen mode is a **<video>** element, the value represents its height; if the element that enters fulls screen mode contains a **<video>** element, the value represents the height of the first sub-video element; in other cases, the value is **0**. |
+| Name        | Type                                            | Mandatory | Description                                                                                                                                                                                                                                                                                                     |
+| ----------- | ----------------------------------------------- | --------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| handler     | [FullScreenExitHandler](#fullscreenexithandler) | Yes       | Function handle for exiting full screen mode.                                                                                                                                                                                                                                                                   |
+| videoWidth  | number                                          | No        | Video width, in px. If the element that enters fulls screen mode is a **\<video>** element, the value represents its width; if the element that enters fulls screen mode contains a **\<video>** element, the value represents the width of the first sub-video element; in other cases, the value is **0**.    |
+| videoHeight | number                                          | No        | Video height, in px. If the element that enters fulls screen mode is a **\<video>** element, the value represents its height; if the element that enters fulls screen mode contains a **\<video>** element, the value represents the height of the first sub-video element; in other cases, the value is **0**. |
 
 ####  FullScreenExitHandler
 

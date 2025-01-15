@@ -1820,7 +1820,7 @@ struct WebComponent {
 
 ###  onRefreshAccessedHistory<sup>16+</sup>
 
-onRefreshAccessedHistory(callback: Callback<OnRefreshAccessedHistoryEvent>)
+onRefreshAccessedHistory(callback: Callback\<OnRefreshAccessedHistoryEvent>)
 
 加载网页页面完成时触发该回调，用于应用更新其访问的历史链接。
 
