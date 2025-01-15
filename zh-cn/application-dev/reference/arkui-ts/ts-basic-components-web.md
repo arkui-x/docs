@@ -1378,6 +1378,269 @@ onShowFileSelector(callback: (event?: { result: FileSelectorResult, fileSelector
   }
 ```
 
+###  onlineImageAccess<sup>16+</sup>
+
+onlineImageAccess(onlineImageAccess: boolean)
+
+设置是否允许从网络加载图片资源（通过HTTP和HTTPS访问的资源），默认允许访问。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名            | 类型    | 必填 | 说明                                           |
+| ----------------- | ------- | ---- | ---------------------------------------------- |
+| onlineImageAccess | boolean | 是   | 设置是否允许从网络加载图片资源。默认值：true。 |
+
+**示例：**
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onlineImageAccess(true)
+    }
+  }
+}
+```
+###  domStorageAccess<sup>16+</sup>
+
+domStorageAccess(domStorageAccess: boolean)
+
+设置是否开启文档对象模型存储接口（DOM Storage API）权限，默认未开启。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名           | 类型    | 必填 | 说明                                                         |
+| ---------------- | ------- | ---- | ------------------------------------------------------------ |
+| domStorageAccess | boolean | 是   | 设置是否开启文档对象模型存储接口（DOM Storage API）权限。默认值：false。 |
+
+**示例：**
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .domStorageAccess(true)
+    }
+  }
+}
+```
+### imageAccess<sup>16+</sup>
+
+imageAccess(imageAccess: boolean)
+
+设置是否允许自动加载图片资源，默认允许。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名      | 类型    | 必填 | 说明                                         |
+| ----------- | ------- | ---- | -------------------------------------------- |
+| imageAccess | boolean | 是   | 设置是否允许自动加载图片资源。默认值：true。 |
+
+**示例：**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .imageAccess(true)
+    }
+  }
+}
+```
+
+###  mixedMode<sup>16+</sup>
+
+mixedMode(mixedMode: MixedMode)
+
+设置是否允许加载超文本传输协议（HTTP）和超文本传输安全协议（HTTPS）混合内容，默认不允许加载HTTP和HTTPS混合内容。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名    | 类型                              | 必填 | 说明                                       |
+| --------- | --------------------------------- | ---- | ------------------------------------------ |
+| mixedMode | [MixedMode](#mixedmode枚举说明16) | 是   | 要设置的混合内容。默认值：MixedMode.None。 |
+
+**示例：**
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State mode: MixedMode = MixedMode.All;
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .mixedMode(this.mode)
+    }
+  }
+}
+```
+####  MixedMode枚举说明<sup>16+</sup>
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称       | 值   | 说明                                                        |
+| ---------- | ---- | ----------------------------------------------------------- |
+| All        | 0    | 允许加载HTTP和HTTPS混合内容。所有不安全的内容都可以被加载。 |
+| Compatible | 1    | 混合内容兼容性模式，部分不安全的内容可能被加载。            |
+| None       | 2    | 不允许加载HTTP和HTTPS混合内容。                             |
+
+###  geolocationAccess<sup>16+</sup>
+
+geolocationAccess(geolocationAccess: boolean)
+
+设置是否开启获取地理位置权限，默认开启。具体使用方式参考[管理位置权限](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/web/web-geolocation-permission.md)。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名            | 类型    | 必填 | 说明                                         |
+| ----------------- | ------- | ---- | -------------------------------------------- |
+| geolocationAccess | boolean | 是   | 设置是否开启获取地理位置权限。默认值：true。 |
+
+**示例：**
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .geolocationAccess(true)
+    }
+  }
+}
+```
+### cacheMode<sup>16+</sup>
+
+cacheMode(cacheMode: CacheMode)
+
+设置缓存模式。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名    | 类型                           | 必填 | 说明                                          |
+| --------- |------------------------------| ---- | --------------------------------------------- |
+| cacheMode | [CacheMode](#cachemode枚举说明16) | 是   | 要设置的缓存模式。默认值：CacheMode.Default。 |
+```
+**示例：**// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State mode: CacheMode = CacheMode.None;
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .cacheMode(this.mode)
+    }
+  }
+}
+
+```
+####  CacheMode枚举说明<sup>16+</sup>
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称      | 值   | 说明                                                         |
+| --------- | ---- | ------------------------------------------------------------ |
+| Default9+ | 0    | 使用未过期的cache加载资源，如果cache中无该资源则从网络中获取。 |
+| None      | 1    | 加载资源使用cache，如果cache中无该资源则从网络中获取。       |
+| Online    | 2    | 加载资源不使用cache，全部从网络中获取。                      |
+| Only      | 3    | 只从cache中加载资源。                                        |
+
+###  blockNetwork<sup>16+</sup>
+
+blockNetwork(block: boolean)
+
+设置Web组件是否阻止从网络加载资源。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名 | 类型    | 必填 | 说明                                               |
+| ------ | ------- | ---- | -------------------------------------------------- |
+| block  | boolean | 是   | 设置Web组件是否阻止从网络加载资源。默认值：false。 |
+
+**示例：**
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State block: boolean = true;
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .blockNetwork(this.block)
+    }
+  }
+}
+```
+
 ## WebResourceError
 
 web组件资源管理错误信息对象。示例代码参考[onErrorReceive事件](#onerrorreceive)。

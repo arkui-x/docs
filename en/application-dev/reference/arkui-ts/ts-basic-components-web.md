@@ -852,6 +852,281 @@ The following example uses **loadUrl** in the callback to load the web page.
   </html>
 ```
 
+###  onlineImageAccess
+
+onlineImageAccess(onlineImageAccess: boolean)
+
+Sets whether to enable access to online images through HTTP and HTTPS. By default, this feature is enabled.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name              | Type    | Mandatory | Description                                                  |
+| ----------------- | ------- | --------- | ------------------------------------------------------------ |
+| onlineImageAccess | boolean | Yes       | Whether to enable access to online images through HTTP and HTTPS. Default value: **true** |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onlineImageAccess(true)
+    }
+  }
+}
+```
+
+###  domStorageAccess
+
+domStorageAccess(domStorageAccess: boolean)
+
+Sets whether to enable the DOM Storage API. By default, this feature is disabled.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name             | Type    | Mandatory | Description                                                  |
+| ---------------- | ------- | --------- | ------------------------------------------------------------ |
+| domStorageAccess | boolean | Yes       | Whether to enable the DOM Storage API. The default value is **false**. |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .domStorageAccess(true)
+    }
+  }
+}
+```
+
+###  imageAccess
+
+imageAccess(imageAccess: boolean)
+
+Sets whether to enable automatic image loading. By default, this feature is enabled.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name        | Type    | Mandatory | Description                                                  |
+| ----------- | ------- | --------- | ------------------------------------------------------------ |
+| imageAccess | boolean | Yes       | Whether to enable automatic image loading. Default value: **true** |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .imageAccess(true)
+    }
+  }
+}
+```
+
+###  mixedMode
+
+mixedMode(mixedMode: MixedMode)
+
+Sets whether to enable loading of HTTP and HTTPS hybrid content can be loaded. By default, this feature is disabled.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name      | Type                                            | Mandatory | Description                                              |
+| --------- | ----------------------------------------------- | --------- | -------------------------------------------------------- |
+| mixedMode | [MixedMode](#mixedmode-enumeration-description) | Yes       | Mixed content to load. Default value: **MixedMode.None** |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State mode: MixedMode = MixedMode.All;
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .mixedMode(this.mode)
+    }
+  }
+}
+```
+#### MixedMode Enumeration Description
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+| Name       | Value| Description                                |
+| ---------- | -- | ---------------------------------- |
+| All        | 0 | HTTP and HTTPS hybrid content can be loaded. This means that all insecure content can be loaded.|
+| Compatible | 1 | HTTP and HTTPS hybrid content can be loaded in compatibility mode. This means that some insecure content may be loaded.          |
+| None       | 2 | HTTP and HTTPS hybrid content cannot be loaded.              |
+
+
+###  geolocationAccess
+
+geolocationAccess(geolocationAccess: boolean)
+
+Sets whether to enable geolocation access. By default, this feature is enabled. For details, see [Managing Location Permissions](https://gitee.com/openharmony/docs/blob/master/en/application-dev/web/web-geolocation-permission.md).
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name              | Type    | Mandatory | Description                                                  |
+| ----------------- | ------- | --------- | ------------------------------------------------------------ |
+| geolocationAccess | boolean | Yes       | Whether to enable geolocation access. Default value: **true** |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .geolocationAccess(true)
+    }
+  }
+}
+```
+
+###  cacheMode
+
+cacheMode(cacheMode: CacheMode)
+
+Sets the cache mode.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name      | Type          | Mandatory | Description                                             |
+| --------- | ------------- | --------- | ------------------------------------------------------- |
+| cacheMode | [CacheMode](#cachemode-enumeration-description) | Yes       | Cache mode to set. Default value: **CacheMode.Default** |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State mode: CacheMode = CacheMode.None;
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .cacheMode(this.mode)
+    }
+  }
+}
+```
+
+####  CacheMode Enumeration Description
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+| Name      | Value | Description                                                  |
+| --------- | ----- | ------------------------------------------------------------ |
+| Default9+ | 0     | The cache that has not expired is used to load the resources. If the resources do not exist in the cache, they will be obtained from the Internet. |
+| None      | 1     | The cache is used to load the resources. If the resources do not exist in the cache, they will be obtained from the Internet. |
+| Online    | 2     | The cache is not used to load the resources. All resources are obtained from the Internet. |
+| Only      | 3     | The cache alone is used to load the resources.               |
+
+### blockNetwork
+
+blockNetwork(block: boolean)
+
+Sets whether to block online downloads.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name  | Type    | Mandatory | Description                                                  |
+| ----- | ------- | --------- | ------------------------------------------------------------ |
+| block | boolean | Yes       | Sets whether to block online downloads. The default value is **false**. |
+
+**Example**
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State block: boolean = true;
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .blockNetwork(this.block)
+    }
+  }
+}
+```
+
 ## WebResourceError
 
 Implements the **WebResourceError** object. For the sample code, see [onErrorReceive](#onerrorreceive).
