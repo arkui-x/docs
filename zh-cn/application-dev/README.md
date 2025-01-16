@@ -54,6 +54,10 @@
 - [Plugin生命周期开发指南](./tutorial/how-to-use-arkui-x-plugin-on-ios.md)
 - [联动编译开发指南](./tutorial/how-to-linkage-compilation-on-ios.md)
 
+### 应用改造
+
+- [应用改造指南](./tutorial/how-to-use-arkuix-on-applicationRetrofit.md)
+
 ### 开发工具
 
 - [ArkUI-X SDK](tools/how-to-use-arkui-x-sdk.md)
