@@ -1268,11 +1268,21 @@ Implements a GeolocationPermissions object.
 > You must load the Web component before calling the APIs in GeolocationPermissions.
 
 
+### Required Permissions
+
+#### ArkUI:
+ohos.permission.LOCATION, ohos.permission.APPROXIMATELY_LOCATION, and ohos.permission.LOCATION_IN_BACKGROUND, which are required for accessing the location information.
+
+#### Android:
+android.permission.ACCESS_FINE_LOCATION, android.permission.ACCESS_COARSE_LOCATION, which are required for accessing the location information.
+
 ### allowGeolocation
 
 static allowGeolocation(origin: string, incognito?: boolean): void
 
 Allows the specified origin to use the geolocation information.
+
+iOS: This API is not supported.
 
 **System capability**: SystemCapability.Web.Webview.Core
 
@@ -1325,6 +1335,8 @@ static deleteGeolocation(origin: string, incognito?: boolean): void
 
 Clears the geolocation permission status of a specified origin.
 
+iOS: This API is not supported.
+
 **System capability**: SystemCapability.Web.Webview.Core
 
 **Parameters**
@@ -1372,19 +1384,21 @@ struct WebComponent {
 
 ### getAccessibleGeolocation
 
-static getAccessibleGeolocation(origin: string, callback: AsyncCallback<boolean>, incognito?: boolean): void
+static getAccessibleGeolocation(origin: string, callback: AsyncCallback\<boolean>, incognito?: boolean): void
 
 Obtains the geolocation permission status of the specified origin. This API uses an asynchronous callback to return the result.
+
+iOS: This API is not supported.
 
 **System capability**: SystemCapability.Web.Webview.Core
 
 **Parameters**
 
-| Name                    | Type  | Mandatory | Description                                                                                                                                                                                                                                                                                                       |
-|-------------------------| ------ |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| origin                  | string | Yes       | Index of the origin.                                                                                                                                                                                                                                                                                              |
-| callback                | AsyncCallback<boolean>        | Yes       | Callback used to return the geolocation permission status of the specified origin. If the operation is successful, the value true means that the geolocation permission is granted, and false means the opposite. If the operation fails, the geolocation permission status of the specified origin is not found. |
-| incognito<sup>11+</sup> | boolean | No        | Whether to obtain the geolocation permission status of the specified origin in incognito mode. The value true means to obtain the geolocation permission status of the specified origin in incognito mode, and false means the opposite.                                                                          |
+| Name                    | Type                    | Mandatory | Description                                                                                                                                                                                                                                                                                                       |
+|-------------------------|-------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| origin                  | string                  | Yes       | Index of the origin.                                                                                                                                                                                                                                                                                              |
+| callback                | AsyncCallback\<boolean> | Yes       | Callback used to return the geolocation permission status of the specified origin. If the operation is successful, the value true means that the geolocation permission is granted, and false means the opposite. If the operation fails, the geolocation permission status of the specified origin is not found. |
+| incognito<sup>11+</sup> | boolean                 | No        | Whether to obtain the geolocation permission status of the specified origin in incognito mode. The value true means to obtain the geolocation permission status of the specified origin in incognito mode, and false means the opposite.                                                                          |
 
 **Error codes**
 
@@ -1430,9 +1444,11 @@ struct WebComponent {
 
 ### getAccessibleGeolocation
 
-static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise<boolean>
+static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise\<boolean>
 
 Obtains the geolocation permission status of the specified origin. This API uses a promise to return the result.
+
+iOS: This API is not supported.
 
 **System capability**: SystemCapability.Web.Webview.Core
 
@@ -1445,9 +1461,9 @@ Obtains the geolocation permission status of the specified origin. This API uses
 
 **Return value**
 
-| Type          | Description                                        |
-| -------------- | -------------------------------------------- |
-| Promise<boolean> | Promise used to return the geolocation permission status of the specified origin. If the operation is successful, the value true means that the geolocation permission is granted, and false means the opposite. If the operation fails, the geolocation permission status of the specified origin is not found.|
+| Type              | Description                                        |
+|-------------------| -------------------------------------------- |
+| Promise\<boolean> | Promise used to return the geolocation permission status of the specified origin. If the operation is successful, the value true means that the geolocation permission is granted, and false means the opposite. If the operation fails, the geolocation permission status of the specified origin is not found.|
 
 **Error codes**
 
@@ -1492,18 +1508,20 @@ struct WebComponent {
 
 ### getStoredGeolocation
 
-static getStoredGeolocation(callback: AsyncCallback<Array<string>>, incognito?: boolean): void
+static getStoredGeolocation(callback: AsyncCallback<Array\<string>>, incognito?: boolean): void
 
 Obtains the geolocation permission status of all origins. This API uses an asynchronous callback to return the result.
+
+iOS: This API is not supported.
 
 **System capability**: SystemCapability.Web.Webview.Core
 
 **Parameters**
 
-| Name                    | Type  | Mandatory | Description                                                                                                                                                                                                                                                                                                       |
-|-------------------------| ------ |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| callback                | AsyncCallback<Array<string>>       | Yes       | Callback used to return the geolocation permission status of all origins. |
-| incognito<sup>11+</sup> | boolean | No        | Whether to obtain the geolocation permission status of all origins in incognito mode. The value true means to obtain the geolocation permission status of all origins in incognito mode, and false means the opposite.                                                                         |
+| Name                    | Type                          | Mandatory | Description                                                                                                                                                                                                                                                                                                       |
+|-------------------------|-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| callback                | AsyncCallback<Array\<string>> | Yes       | Callback used to return the geolocation permission status of all origins. |
+| incognito<sup>11+</sup> | boolean                       | No        | Whether to obtain the geolocation permission status of all origins in incognito mode. The value true means to obtain the geolocation permission status of all origins in incognito mode, and false means the opposite.                                                                         |
 
 **Error codes**
 
@@ -1548,9 +1566,11 @@ struct WebComponent {
 
 ### getStoredGeolocation
 
-static getStoredGeolocation(incognito?: boolean): Promise<Array<string>>
+static getStoredGeolocation(incognito?: boolean): Promise<Array\<string>>
 
 Obtains the geolocation permission status of all origins. This API uses a promise to return the result.
+
+iOS: This API is not supported.
 
 **System capability**: SystemCapability.Web.Webview.Core
 
@@ -1562,9 +1582,9 @@ Obtains the geolocation permission status of all origins. This API uses a promis
 
 **Return value**
 
-| Type          | Description                                        |
-| -------------- | -------------------------------------------- |
-| Promise<Array<string>> | Promise used to return the geolocation permission status of all origins.|
+| Type                    | Description                                        |
+|-------------------------| -------------------------------------------- |
+| Promise<Array\<string>> | Promise used to return the geolocation permission status of all origins.|
 
 **Error codes**
 
@@ -1612,6 +1632,8 @@ static deleteAllGeolocation(incognito?: boolean): void
 
 Clears the geolocation permission status of all sources.
 
+iOS: This API is not supported.
+
 **System capability**: SystemCapability.Web.Webview.Core
 
 **Parameters**
@@ -1620,7 +1642,7 @@ Clears the geolocation permission status of all sources.
 | ------ | ------ | ---- | --------------------------- |
 | incognito<sup>11+</sup>  | boolean | No  | 	Whether to clear the geolocation permission status of all sources in incognito mode. The value true means to clear the geolocation permission status of all sources in incognito mode, and false means the opposite. |
 
-**示例：**
+**Example：**
 
   ```ts
 // xxx.ets

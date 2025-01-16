@@ -2311,11 +2311,21 @@ Web组件地理位置权限管理对象。
 > 目前调用GeolocationPermissions下的方法，都需要先加载Web组件。
 
 
+### 需要权限
+
+#### ArkUI:
+访问地理位置时需添加权限：ohos.permission.LOCATION、ohos.permission.APPROXIMATELY_LOCATION、ohos.permission.LOCATION_IN_BACKGROUND
+
+#### Android:
+访问地理位置时需添加权限：android.permission.ACCESS_FINE_LOCATION、android.permission.ACCESS_COARSE_LOCATION
+
 ### allowGeolocation
 
 static allowGeolocation(origin: string, incognito?: boolean): void
 
 允许指定来源使用地理位置接口。
+
+目前iOS不支持。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -2368,6 +2378,8 @@ static deleteGeolocation(origin: string, incognito?: boolean): void
 
 清除指定来源的地理位置权限状态。
 
+目前iOS不支持。
+
 **系统能力：** SystemCapability.Web.Webview.Core
 
 **参数：**
@@ -2415,19 +2427,21 @@ struct WebComponent {
 
 ### getAccessibleGeolocation
 
-static getAccessibleGeolocation(origin: string, callback: AsyncCallback<boolean>, incognito?: boolean): void
+static getAccessibleGeolocation(origin: string, callback: AsyncCallback\<boolean>, incognito?: boolean): void
 
 以回调方式异步获取指定源的地理位置权限状态。
+
+目前iOS不支持。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
 **参数：**
 
-| 参数名                      | 类型                     | 必填 | 说明                         |
-|--------------------------|------------------------|----| ---------------------------- |
-| origin                   | string                 | 是  | 指定源的字符串索引。 |
-| callback                 | AsyncCallback<boolean> | 是  | 返回指定源的地理位置权限状态。获取成功，true表示已授权，false表示拒绝访问。获取失败，表示不存在指定源的权限状态。   |
-| incognito<sup>11+</sup>  | boolean                | 否  | true表示获取隐私模式下以回调方式异步获取指定源的地理位置权限状态，false表示正常非隐私模式下以回调方式异步获取指定源的地理位置权限状态。                                                             |
+| 参数名                      | 类型                      | 必填 | 说明                         |
+|--------------------------|-------------------------|----| ---------------------------- |
+| origin                   | string                  | 是  | 指定源的字符串索引。 |
+| callback                 | AsyncCallback\<boolean> | 是  | 返回指定源的地理位置权限状态。获取成功，true表示已授权，false表示拒绝访问。获取失败，表示不存在指定源的权限状态。   |
+| incognito<sup>11+</sup>  | boolean                 | 否  | true表示获取隐私模式下以回调方式异步获取指定源的地理位置权限状态，false表示正常非隐私模式下以回调方式异步获取指定源的地理位置权限状态。                                                             |
 
 **错误码：**
 
@@ -2473,9 +2487,11 @@ struct WebComponent {
 
 ### getAccessibleGeolocation
 
-static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise<boolean>
+static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise\<boolean>
 
 以Promise方式异步获取指定源的地理位置权限状态。
+
+目前iOS不支持。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -2488,9 +2504,9 @@ static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise<bo
 
 **返回值：**
 
-| 类型           | 说明                                         |
-| -------------- | -------------------------------------------- |
-| Promise<boolean> | Promise实例，用于获取指定源的权限状态，获取成功，true表示已授权，false表示拒绝访问。获取失败，表示不存在指定源的权限状态。 |
+| 类型                | 说明                                         |
+|-------------------| -------------------------------------------- |
+| Promise\<boolean> | Promise实例，用于获取指定源的权限状态，获取成功，true表示已授权，false表示拒绝访问。获取失败，表示不存在指定源的权限状态。 |
 
 **错误码：**
 
@@ -2535,18 +2551,20 @@ struct WebComponent {
 
 ### getStoredGeolocation
 
-static getStoredGeolocation(callback: AsyncCallback<Array<string>>, incognito?: boolean): void
+static getStoredGeolocation(callback: AsyncCallback<Array\<string>>, incognito?: boolean): void
 
 以回调方式异步获取已存储地理位置权限状态的所有源信息。
+
+目前iOS不支持。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
 **参数：**
 
-| 参数名                      | 类型                     | 必填 | 说明                         |
-|--------------------------|------------------------|----| ---------------------------- |
-| callback                 | AsyncCallback<Array<string>> | 是  | 返回已存储地理位置权限状态的所有源信息。   |
-| incognito<sup>11+</sup>  | boolean                | 否  | true表示获取隐私模式下以回调方式异步获取已存储地理位置权限状态的所有源信息，false表示正常非隐私模式下以回调方式异步获取已存储地理位置权限状态的所有源信息。                                                             |
+| 参数名                      | 类型                            | 必填 | 说明                         |
+|--------------------------|-------------------------------|----| ---------------------------- |
+| callback                 | AsyncCallback<Array\<string>> | 是  | 返回已存储地理位置权限状态的所有源信息。   |
+| incognito<sup>11+</sup>  | boolean                       | 否  | true表示获取隐私模式下以回调方式异步获取已存储地理位置权限状态的所有源信息，false表示正常非隐私模式下以回调方式异步获取已存储地理位置权限状态的所有源信息。                                                             |
 
 **错误码：**
 
@@ -2591,9 +2609,11 @@ struct WebComponent {
 
 ### getStoredGeolocation
 
-static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise<boolean>
+static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise\<boolean>
 
 以Promise方式异步获取指定源的地理位置权限状态。
+
+目前iOS不支持。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -2605,9 +2625,9 @@ static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise<bo
 
 **返回值：**
 
-| 类型           | 说明                                         |
-| -------------- | -------------------------------------------- |
-| Promise<Array<string>> | Promise实例，用于获取已存储地理位置权限状态的所有源信息。 |
+| 类型                      | 说明                                         |
+|-------------------------| -------------------------------------------- |
+| Promise<Array\<string>> | Promise实例，用于获取已存储地理位置权限状态的所有源信息。 |
 
 **错误码：**
 
@@ -2654,6 +2674,8 @@ struct WebComponent {
 static deleteAllGeolocation(incognito?: boolean): void
 
 清除所有来源的地理位置权限状态。
+
+目前iOS不支持。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
