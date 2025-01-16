@@ -2640,6 +2640,540 @@ struct WebComponent {
 }
 ```
 
+## WebStorage
+
+通过WebStorage可管理Web SQL数据库接口和HTML5 Web存储接口，每个应用中的所有Web组件共享一个WebStorage。
+
+> **说明：**
+>
+> 目前调用WebStorage下的方法，都需要先加载Web组件。
+
+### deleteOrigin
+
+static deleteOrigin(origin: string): void
+
+清除指定源所使用的存储。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                     |
+| ------ | ------ | ---- | ------------------------ |
+| origin | string | 是   | 指定源的字符串索引，来自于[getOrigins](#getorigins)。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                               |
+| -------- | ------------------------------------------------------ |
+| 17100011 | Invalid origin.                             |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  origin: string = "resource://rawfile/";
+
+  build() {
+    Column() {
+      Button('deleteOrigin')
+        .onClick(() => {
+          try {
+            webview.WebStorage.deleteOrigin(this.origin);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+        .databaseAccess(true)
+    }
+  }
+}
+```
+
+加载的html文件。
+ ```html
+  <!-- index.html -->
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+      <title>test</title>
+      <script type="text/javascript">
+          var request = window.indexedDB.open("MyDatabase", 1);
+          request.onsuccess = function(event) {
+            var db = event.target.result;
+            var transaction = db.transaction(["MyObjectStore"], "readwrite");
+            var objectStore = transaction.objectStore("MyObjectStore");
+
+            var data = { key: "myKey", value: "myValue" };
+            var requestAdd = objectStore.add(data);
+          
+            requestAdd.onsuccess = function(event) {
+                document.querySelector('#status').innerHTML = '<p>数据表已创建,且插入了一条数据。</p>';
+            };
+            
+            requestAdd.onerror = function(event) {
+                console.log("Error adding data:", event.target.errorCode);
+            };
+          };
+
+          request.onerror = function(event) {
+            console.log("Database error:", event.target.errorCode);
+          };
+
+          request.onupgradeneeded = function(event) {
+            var db = event.target.result;
+            if (!db.objectStoreNames.contains("MyObjectStore")) {
+              var objectStore = db.createObjectStore("MyObjectStore", { keyPath: "key" });
+            }
+          };
+      </script>
+  </head>
+  <body>
+  <div id="status" name="status">状态信息</div>
+  </body>
+  </html>
+ ```
+
+### getOrigins
+
+static getOrigins(callback: AsyncCallback\<Array\<WebStorageOrigin>>): void
+
+以回调方式异步获取当前使用Web SQL数据库的所有源的信息。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名   | 类型                                   | 必填 | 说明                                                   |
+| -------- | -------------------------------------- | ---- | ------------------------------------------------------ |
+| callback | AsyncCallback\<Array\<[WebStorageOrigin](#webstorageorigin)>> | 是   | 以数组方式返回源的信息，信息内容参考[WebStorageOrigin](#webstorageorigin)。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                               |
+| -------- | ------------------------------------------------------ |
+| 17100012 | Invalid web storage origin.                             |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('getOrigins')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOrigins((error, origins) => {
+              if (error) {
+                console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+                return;
+              }
+              for (let i = 0; i < origins.length; i++) {
+                console.log('origin: ' + origins[i].origin);
+                console.log('usage: ' + origins[i].usage);
+                console.log('quota: ' + origins[i].quota);
+              }
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+        .databaseAccess(true)
+    }
+  }
+}
+```
+
+加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
+
+### getOrigins
+
+static getOrigins(): Promise\<Array\<WebStorageOrigin>>
+
+以Promise方式异步获取当前使用Web SQL数据库的所有源的信息。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型                             | 说明                                                         |
+| -------------------------------- | ------------------------------------------------------------ |
+| Promise\<Array\<[WebStorageOrigin](#webstorageorigin)>> | Promise实例，用于获取当前所有源的信息，信息内容参考[WebStorageOrigin](#webstorageorigin)。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                               |
+| -------- | ------------------------------------------------------ |
+| 17100012 | Invalid web storage origin.                             |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('getOrigins')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOrigins()
+              .then(origins => {
+                for (let i = 0; i < origins.length; i++) {
+                  console.log('origin: ' + origins[i].origin);
+                  console.log('usage: ' + origins[i].usage);
+                  console.log('quota: ' + origins[i].quota);
+                }
+              })
+              .catch((e: BusinessError) => {
+                console.log('error: ' + JSON.stringify(e));
+              })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+        .databaseAccess(true)
+    }
+  }
+}
+```
+
+加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
+
+### getOriginQuota
+
+static getOriginQuota(origin: string, callback: AsyncCallback\<number>): void
+
+使用callback回调异步获取指定源的Web SQL数据库的存储配额，配额以字节为单位。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名   | 类型                  | 必填 | 说明               |
+| -------- | --------------------- | ---- | ------------------ |
+| origin   | string                | 是   | 指定源的字符串索引 |
+| callback | AsyncCallback\<number> | 是   | 指定源的存储配额   |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                               |
+| -------- | ------------------------------------------------------ |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  origin: string = "resource://rawfile/";
+
+  build() {
+    Column() {
+      Button('getOriginQuota')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOriginQuota(this.origin, (error, quota) => {
+              if (error) {
+                console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+                return;
+              }
+              console.log('quota: ' + quota);
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+        .databaseAccess(true)
+    }
+  }
+}
+```
+
+加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
+
+### getOriginQuota
+
+static getOriginQuota(origin: string): Promise\<number>
+
+以Promise方式异步获取指定源的Web SQL数据库的存储配额，配额以字节为单位。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明               |
+| ------ | ------ | ---- | ------------------ |
+| origin | string | 是   | 指定源的字符串索引 |
+
+**返回值：**
+
+| 类型            | 说明                                    |
+| --------------- | --------------------------------------- |
+| Promise\<number> | Promise实例，用于获取指定源的存储配额。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                               |
+| -------- | ------------------------------------------------------ |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  origin: string = "resource://rawfile/";
+
+  build() {
+    Column() {
+      Button('getOriginQuota')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOriginQuota(this.origin)
+              .then(quota => {
+                console.log('quota: ' + quota);
+              })
+              .catch((e: BusinessError) => {
+                console.log('error: ' + JSON.stringify(e));
+              })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+        .databaseAccess(true)
+    }
+  }
+}
+```
+
+加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
+
+### getOriginUsage
+
+static getOriginUsage(origin: string, callback: AsyncCallback\<number>): void
+
+以回调方式异步获取指定源的Web SQL数据库的存储量，存储量以字节为单位。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名   | 类型                  | 必填 | 说明               |
+| -------- | --------------------- | ---- | ------------------ |
+| origin   | string                | 是   | 指定源的字符串索引 |
+| callback | AsyncCallback\<number> | 是   | 指定源的存储量。   |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                               |
+| -------- | ------------------------------------------------------ |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  origin: string = "resource://rawfile/";
+
+  build() {
+    Column() {
+      Button('getOriginUsage')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOriginUsage(this.origin, (error, usage) => {
+              if (error) {
+                console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+                return;
+              }
+              console.log('usage: ' + usage);
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+        .databaseAccess(true)
+    }
+  }
+}
+```
+
+加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
+
+### getOriginUsage
+
+static getOriginUsage(origin: string): Promise\<number>
+
+以Promise方式异步获取指定源的Web SQL数据库的存储量，存储量以字节为单位。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明               |
+| ------ | ------ | ---- | ------------------ |
+| origin | string | 是   | 指定源的字符串索引 |
+
+**返回值：**
+
+| 类型            | 说明                                  |
+| --------------- | ------------------------------------- |
+| Promise\<number> | Promise实例，用于获取指定源的存储量。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                              |
+| -------- | ----------------------------------------------------- |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  origin: string = "resource://rawfile/";
+
+  build() {
+    Column() {
+      Button('getOriginUsage')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOriginUsage(this.origin)
+              .then(usage => {
+                console.log('usage: ' + usage);
+              }).catch((e: BusinessError) => {
+              console.error('error: ' + JSON.stringify(e));
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+        .databaseAccess(true)
+    }
+  }
+}
+```
+
+加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
+
+### deleteAllData
+
+static deleteAllData(incognito?: boolean): void
+
+清除Web SQL数据库当前使用的所有存储。
+
+iOS不支持。
+参数incognito不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('deleteAllData')
+        .onClick(() => {
+          try {
+            webview.WebStorage.deleteAllData();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+        .databaseAccess(true)
+    }
+  }
+}
+```
+
+加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下加载的html文件。
+
 ## WebMessage
 
 用于描述[WebMessagePort](#webmessageport)所支持的数据类型。
@@ -2649,6 +3183,18 @@ struct WebComponent {
 | 类型   | 说明             |
 | ------ | ---------------- |
 | string | 字符串类型数据。 |
+
+## WebStorageOrigin
+
+提供Web SQL数据库的使用信息。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称   | 类型   | 可读 | 可写 | 说明 |
+| ------ | ------ | ---- | ---- | ---- |
+| origin | string | 是  | 是 | 指定源的字符串索引。 |
+| usage  | number | 是  | 是 | 指定源的存储量。     |
+| quota  | number | 是  | 是 | 指定源的存储配额。   |
 
 ## BackForwardList
 
