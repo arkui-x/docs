@@ -103,6 +103,10 @@
   - [@ohos.security.cert(证书算法库框架)](js-apis-cert.md)
 
 - 语言基础类库
+  - [@arkts.collections (ArkTS容器集)](js-apis-arkts-collections.md)
+  - [@arkts.lang (ArkTS语言基础能力)](js-apis-arkts-lang.md)
+  - [@arkts.math.Decimal (高精度数学库Decimal)](js-apis-arkts-decimal.md)
+  - [@arkts.utils (ArkTS工具库)](js-apis-arkts-utils.md)
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
   - [@ohos.convertxml (xml转换JavaScript)](js-apis-convertxml.md)
   - [@ohos.process (获取进程相关的信息)](js-apis-process.md)

@@ -194,3 +194,12 @@
 - [像素单位](ts-pixel-units.md)
 - [枚举说明](ts-appendix-enums.md)
 - [类型定义](ts-types.md)
+- Sendable对象
+  - [Sendable对象简介](arkts-sendable.md)
+  - [Sendable使用规则与约束](sendable-constraints.md)
+  - [异步锁](arkts-async-lock-introduction.md)
+  - [ASON解析与生成](ason-parsing-generation.md)
+  - [共享容器](arkts-collections-introduction.md)
+  - [共享模块](arkts-sendable-module.md)
+  - [Sendable对象冻结](sendable-freeze.md)
+  - [Sendable使用场景](sendable-guide.md)

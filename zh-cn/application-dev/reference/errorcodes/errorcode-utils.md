@@ -313,3 +313,97 @@ The task group does not exist when it is canceled.
 **处理步骤**
 
 取消任务组前，确保任务组已被taskpool.execute调用进入任务池且任务组内存在任务未执行完成。无法保证时，需要捕获异常。
+
+## 10200030 锁不存在
+
+**错误信息**
+
+The lock does not exist.
+
+**描述**
+
+请求的锁不存在。
+
+**可能的原因**
+
+某个异步锁函数使用了一个不正确的锁名称作为参数。
+
+**处理步骤**
+
+确保在调用接口时，使用正确的锁名称。
+
+## 10200031 lockAsync超时
+
+**错误信息**
+
+Timeout exceeded.
+
+**描述**
+
+[lockAsync](../apis/js-apis-arkts-utils.md#lockasync)函数在指定时间内无法获取锁。
+
+**可能的原因**
+
+某处存在死锁。
+
+**处理步骤**
+
+检查锁之间是否存在循环依赖。尝试在[lockAsync](../apis/js-apis-arkts-utils.md#lockasync)调用中添加catch语句，并查看错误信息。错误信息将包含有关现有异步锁实例和可能的死锁警告的信息。
+
+## 10200201 Concurrent修改错误
+
+**错误信息**
+
+Concurrent modification error.
+
+**错误描述**
+
+并发修改错误。
+
+**可能原因**
+
+使用collections提供的非并发安全的容器时，多个并发实例同时修改容器产生的结果是未定义的。
+
+**处理步骤**
+
+使用collections提供的非并发安全的容器时，使用异步锁进行保护。
+
+## 10200060 超出精度限制
+
+**错误信息**
+
+Precision limit exceeded.
+
+**错误描述**
+
+Decimal函数使用错误。
+
+**可能原因**
+
+使用Decimal提供的函数超出精度限制。有以下函数会抛出这个错误码：[pow](../apis/js-apis-arkts-decimal.md#pow)、[exp](../apis/js-apis-arkts-decimal.md#exp)、[log](../apis/js-apis-arkts-decimal.md#log)、[ln](../apis/js-apis-arkts-decimal.md#ln)、[acos](../apis/js-apis-arkts-decimal.md#acos)、[asin](../apis/js-apis-arkts-decimal.md#asin)、[atan](../apis/js-apis-arkts-decimal.md#atan)、[acosh](../apis/js-apis-arkts-decimal.md#acosh)、[asinh](../apis/js-apis-arkts-decimal.md#asinh)、[atanh](../apis/js-apis-arkts-decimal.md#atanh)、[log2](../apis/js-apis-arkts-decimal.md#log2)、[log10](../apis/js-apis-arkts-decimal.md#log10)、[atan2](../apis/js-apis-arkts-decimal.md#atan2)。
+
+**处理步骤**
+
+使用[Decimal.set](../apis/js-apis-arkts-decimal.md#set)函数来设置有效精度。
+
+如：Decimal.set({ precision: 10 }), 设置有效精度。
+
+## 10200061 加密方法不可用
+
+**错误信息**
+
+crypto unavailable.
+
+**错误描述**
+
+Decimal函数使用错误。
+
+**可能原因**
+
+在Decimal中设置[crypto](../apis/js-apis-arkts-decimal.md#decimalconfig)或使用[Decimal.random](../apis/js-apis-arkts-decimal.md#random)函数时，使用加密方法失败。
+
+**处理步骤**
+
+使用[Decimal.set](../apis/js-apis-arkts-decimal.md#set)函数来取消加密算法。
+
+如：Decimal.set({ crypto: false }), 取消加密算法。
