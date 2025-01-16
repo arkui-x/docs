@@ -4,9 +4,9 @@
 
 ## 一、现状与诉求
 
-​		随着 HarmonyOS Next 5.0 版本正式发布，众多开发者基于 ArkTS 语言为 HarmonyOS Next 系统开发了大量应用，这极大地丰富了 HarmonyOS 的生态。越来越多的应用上线，也给开发者带来了挑战，开发者需要同时开发和维护适用于 HarmonyOS Next、Android、iOS 三个平台的应用程序。这不仅意味着开发工作量大幅增加，开发成本也随之上升，而且很难保持一致的交互体验。<br>
-​		ArkUI-X 跨平台框架是基于 HarmonyOS 打造的跨端跨平台框架，能实现 “一次开发、三平台部署”。 基于ArkTS开发的HarmonyOS Next应用，配套ArkUI-X跨平台框架，可以快速改造为跨平台应用，缩短开发周期，同时还能确保应用在 HarmonyOS Next、Android、iOS 多个平台上，为用户提供一致的交互体验。
-<br>本文重点介绍如何将HarmonyNext应用工程转换为跨平台工程，实现一码多平台。<br>
+&emsp;&emsp;随着 HarmonyOS Next 5.0 版本正式发布，众多开发者基于 ArkTS 语言为 HarmonyOS Next 系统开发了大量应用，这极大地丰富了 HarmonyOS 的生态。越来越多的应用上线，也给开发者带来了挑战，开发者需要同时开发和维护适用于 HarmonyOS Next、Android、iOS 三个平台的应用程序。这不仅意味着开发工作量大幅增加，开发成本也随之上升，而且很难保持一致的交互体验。<br>
+&emsp;&emsp;ArkUI-X 跨平台框架是基于 HarmonyOS 打造的跨端跨平台框架，能实现 “一次开发、三平台部署”。 基于ArkTS开发的HarmonyOS Next应用，配套ArkUI-X跨平台框架，可以快速改造为跨平台应用，缩短开发周期，同时还能确保应用在 HarmonyOS Next、Android、iOS 多个平台上，为用户提供一致的交互体验。
+<br>&emsp;&emsp;本文重点介绍如何将HarmonyNext应用工程转换为跨平台工程，实现一码多平台。<br>
 
 
 
@@ -27,9 +27,9 @@
 
 ### 第一部分：**产品定制层**（products）
 
-​		由于不同操作系统之间的**数据平台差异**等客观原因，部分功能基于各平台的独特能力来实现不可避免。基于此，在products层，建议开发者建立两个module，分别命名为harmonyos和arkuix。在不同的hap包中集成对应的独特功能模块，最终编译成独立的hap包，以此实现功能隔离的效果。<br>
+&emsp;&emsp;由于不同操作系统之间的**数据平台差异**等客观原因，部分功能基于各平台的独特能力来实现不可避免。基于此，在products层，建议开发者建立两个module，分别命名为harmonyos和arkuix。在不同的hap包中集成对应的独特功能模块，最终编译成独立的hap包，以此实现功能隔离的效果。<br>
 
-​		当然，倘若在app的实际开发进程中确定所有功能在三端应用时均可实现，也就是不需要考虑平台差异性问题，可以直接采用单hap设计。开发者需要根据实际开发状况进行全面综合的考量。<br>
+&emsp;&emsp;当然，倘若在app的实际开发进程中确定所有功能在三端应用时均可实现，也就是不需要考虑平台差异性问题，可以直接采用单hap设计。开发者需要根据实际开发状况进行全面综合的考量。<br>
 
 | module    | **编译产物：hap包** | **运行设备平台/系统能力支持** |
 | --------- | ------------------- | ----------------------------- |
@@ -37,7 +37,7 @@
 | arkuix    | arkuix.hap          | Android                       |
 | arkuix    | arkuix.hap          | iOS                           |
 
-​		products层为App主module，其编译产物为[HAP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/hap-package-V5)。作为应用的入口。一般保留有应用启动页和应用首页。由于采用了分包编译，需要开发者于harmonyos.hap（下面简称A包）和 arkuix.hap （下面简称B包）中各自独立开发应用启动页和应用首页（下面简称Pages），带来额外的开发量。基于此，建议开发者进行 products层 设计时考虑以下几点：<br>
+&emsp;&emsp;products层为App主module，其编译产物为[HAP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/hap-package-V5)。作为应用的入口。一般保留有应用启动页和应用首页。由于采用了分包编译，需要开发者于harmonyos.hap（下面简称A包）和 arkuix.hap （下面简称B包）中各自独立开发应用启动页和应用首页（下面简称Pages），带来额外的开发量。基于此，建议开发者进行 products层 设计时考虑以下几点：<br>
 
 - 共性考虑：对于App来说，A包和B包都存在”设置页面、我的页面、登录页面“（见上图），这些共性的代码和文件如果分别存放于A包和B包会导致大量的冗余代码，也不利于后期维护，因此建议对其进行抽象，形成一个独立的模块存放（features层模块main），通过module依赖的方式使用。可参考案例：[案例解析](#四、案例解析)。<br>
 - 差异性考虑：对于App来说，仅A包存在”发现页面“（见上图），如果B包运行至”发现页面“时会产生不可预知的后果。可参考案例：[案例解析](#四、案例解析)。<br>
@@ -48,7 +48,7 @@
 
 ### 第二部分：**基础特性层**（features）
 
-​		Features层属于App的特性界面层，其编译产物为[HAR](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/har-package-V5)/[HSP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/in-app-hsp-V5)包。在该层级中，包含了应用的所有UI界面、弹窗、媒体图片等元素，这些都是能够被用户直接感知并进行操作的。此层是借助HarmonyOS的ArkUI组件以及相关能力来进行设计与开发的，并且ArkUI-X框架确保了在Android/iOS与HarmonyOS Next上能够拥有相同的展示效果和交互体验。<br>
+&emsp;&emsp;Features层属于App的特性界面层，其编译产物为[HAR](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/har-package-V5)/[HSP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/in-app-hsp-V5)包。在该层级中，包含了应用的所有UI界面、弹窗、媒体图片等元素，这些都是能够被用户直接感知并进行操作的。此层是借助HarmonyOS的ArkUI组件以及相关能力来进行设计与开发的，并且ArkUI-X框架确保了在Android/iOS与HarmonyOS Next上能够拥有相同的展示效果和交互体验。<br>
 
 ​		（1） 开发者进行设计时需首先考虑ArkUI-X框架的实际适配状况，使用支持跨平台的UI控件、属性、方法进行跨平台开发，因为在UI组件方面存在的差异，是无法借助Bridge能力来弥补的。 关于ArkUI-X框架组件适配情况可参考：[ArkTS声明式开发范式跨平台支持列表](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/README.md)。可参考案例：[案例解析](#四、案例解析)。<br>
 
@@ -60,17 +60,17 @@
 
 #### 模块main		
 
-​		Products层harmonyos.hap（下面简称A包）和 arkuix.hap （下面简称B包）这样的双hap设计解决了因设备平台差异导致的应用功能差异的问题。但是由此引入了新问题：如果对Products层代码进行量化，那么**共性代码**（A包和B包可复用的一套代码）是要远远多于**差异性代码**（A包和B包需各自进行设计，无法复用）的。开发者在后续的开发和维护过程中，每次都需要同时修改分别部署于A包和B包的共性代码。由此产生大量冗余代码和不必要的工作量。<br>
+&emsp;&emsp;Products层harmonyos.hap（下面简称A包）和 arkuix.hap （下面简称B包）这样的双hap设计解决了因设备平台差异导致的应用功能差异的问题。但是由此引入了新问题：如果对Products层代码进行量化，那么**共性代码**（A包和B包可复用的一套代码）是要远远多于**差异性代码**（A包和B包需各自进行设计，无法复用）的。开发者在后续的开发和维护过程中，每次都需要同时修改分别部署于A包和B包的共性代码。由此产生大量冗余代码和不必要的工作量。<br>
 
-​		为解决该问题，我们设计了模块main。模块main使用[HAR](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/har-package-V5)。通过将共性的部分抽取、实现。后续的开发和维护过程中，仅修改main模块即可，从而提升开发效率，减少冗余代码，优化代码结构。<br>
+&emsp;&emsp;为解决该问题，我们设计了模块main。模块main使用[HAR](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/har-package-V5)。通过将共性的部分抽取、实现。后续的开发和维护过程中，仅修改main模块即可，从而提升开发效率，减少冗余代码，优化代码结构。<br>
 
-​		然而，需要特别注意的是，当products层采用单hap设计时，由于所有功能都集成在一个hap包中，因此无需额外创建模块main，以避免不必要的复杂性。
+&emsp;&emsp;然而，需要特别注意的是，当products层采用单hap设计时，由于所有功能都集成在一个hap包中，因此无需额外创建模块main，以避免不必要的复杂性。
 
 <img src=".\figures\ApplicationRetrofit_image_013.png" />
 
 图片左侧为单hap设计，因为不存在差异性代码，所有代码集成于Products层phone.hap中，向下依赖features层。<br>
 
-​		图示说明：
+&emsp;&emsp;图示说明：
 
 ​			（1）phone.hap 同时依赖features1、features2、features3。
 
@@ -78,7 +78,7 @@
 
 图片右侧为双hap设计，其中差异性代码各自在harmonyos.hap和arkuix.hap中分别实现，实现功能隔离。共性代码抽象集成于features层模块main中，A包和B包共同依赖模块main，实现代码复用。<br>
 
-​		图示说明：
+&emsp;&emsp;图示说明：
 
 ​			（1）harmonyos.hap 依赖features1、features3。
 
@@ -94,15 +94,15 @@
 
 ### 第三部分：公共能力层（commons）
 
-​		commons层是App的能力集合体，其编译产物为[HAR](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/har-package-V5)/[HSP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/in-app-hsp-V5)包，主要用于阐述App的核心功能与附加服务。它向上能够为features层和products层直接给予能力方面的支持，向下则依靠运行设备平台的系统能力。ArkUI - X框架的Bridge能力，为功能模块直接调用Android/iOS平台的能力提供了有力的支撑。<br>
+&emsp;&emsp;commons层是App的能力集合体，其编译产物为[HAR](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/har-package-V5)/[HSP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/in-app-hsp-V5)包，主要用于阐述App的核心功能与附加服务。它向上能够为features层和products层直接给予能力方面的支持，向下则依靠运行设备平台的系统能力。ArkUI - X框架的Bridge能力，为功能模块直接调用Android/iOS平台的能力提供了有力的支撑。<br>
 
-​		需要注意的是，commons层应当合理规划模块设置，谨慎对待模块间的依赖关系，避免出现循环依赖等问题。<br>
+&emsp;&emsp;需要注意的是，commons层应当合理规划模块设置，谨慎对待模块间的依赖关系，避免出现循环依赖等问题。<br>
 
-​		建议开发者首先考虑使用ArkUI-X框架已有进行开发，可参考：[ArkUI-X框架 API参考](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/README.md#api参考)。<br>
+&emsp;&emsp;建议开发者首先考虑使用ArkUI-X框架已有进行开发，可参考：[ArkUI-X框架 API参考](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/README.md#api参考)。<br>
 
-​		根据当前ArkUI-X框架的适配现状，可分为三种改造方式，结合[架构图commons层 NetWork](#三、方案说明)进行说明。至于工程中具体的文件部署细节详见：[工程目录结构设计](#第四部分工程目录结构设计)。<br>
+&emsp;&emsp;根据当前ArkUI-X框架的适配现状，可分为三种改造方式，结合[架构图commons层 NetWork](#三、方案说明)进行说明。至于工程中具体的文件部署细节详见：[工程目录结构设计](#第四部分工程目录结构设计)。<br>
 
-​		**说明:** 示例代码主要展示整体流程、架构。相关代码细节如接口定义、函数功能实现等需开发者根据实际进行开发填充。<br>
+&emsp;&emsp;**说明:** 示例代码主要展示整体流程、架构。相关代码细节如接口定义、函数功能实现等需开发者根据实际进行开发填充。<br>
 
 #### 场景1：
 
@@ -468,7 +468,7 @@ struct Index {
 
 **ArkUI-X框架当前不支持跨平台，且无法通过Bridge平台桥接实现的**
 
-​		整体代码结构与设计流程与上述第二点一致，区别在于NetWorkArkUIX中的实现逻辑：为保证App正常运行，使用空实现，同时使用如输出错误日志信息、返回错误码、警告弹窗等方式提示调用者或使用者。
+&emsp;&emsp;整体代码结构与设计流程与上述第二点一致，区别在于NetWorkArkUIX中的实现逻辑：为保证App正常运行，使用空实现，同时使用如输出错误日志信息、返回错误码、警告弹窗等方式提示调用者或使用者。
 
 ```tsx
 //NetWorkArkUIX.ets
@@ -500,7 +500,7 @@ export class NetWorkArkUIX implements NetWorkInterface {
 
 ### 第四部分工程目录结构设计
 
-​		阐述说明相关文件的目录结构设计。跨平台整体工程目录详细资料请参考[ArkUI-X应用工程结构说明](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/quick-start/package-structure-guide.md)。
+&emsp;&emsp;阐述说明相关文件的目录结构设计。跨平台整体工程目录详细资料请参考[ArkUI-X应用工程结构说明](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/quick-start/package-structure-guide.md)。
 
 ```tsx
 工程
@@ -602,7 +602,7 @@ export class NetWorkArkUIX implements NetWorkInterface {
 
 ## 四、案例解析
 
-​		目前，已经有按照方案完成整体改造的4个Sample作为完整案例。
+&emsp;&emsp;目前，已经有按照方案完成整体改造的4个Sample作为完整案例。
 
 | **应用描述** | **链接**                                                     |
 | ------------ | ------------------------------------------------------------ |
@@ -611,13 +611,13 @@ export class NetWorkArkUIX implements NetWorkInterface {
 | 音乐专辑     | [MusicHome](https://gitcode.com/arkui-x/samples/tree/master/CodeLab/MusicHome) |
 | 购物应用     | [MultiShopping](https://gitcode.com/arkui-x/samples/tree/master/CodeLab/MultiShopping) |
 
-​		下面以实际改造过程中遇到的经典问题进行案例详解。完整代码可通过上述表格链接查找。
+&emsp;&emsp;下面以实际改造过程中遇到的经典问题进行案例详解。完整代码可通过上述表格链接查找。
 
 ### Products共性拆分
 
-​			在拆分原工程products模块为两个hap时，将共通代码进行抽象，存于features层main；被hap依赖使用
+&emsp;&emsp;在拆分原工程products模块为两个hap时，将可以复用的代码进行抽象，存于features层main，被hap依赖使用。
 
-​			首先识别共通部分，以[溪村小镇](https://gitcode.com/arkui-x/samples/tree/master/CodeLab/OxHornCampus)为例，应用启动页会轮播三张图片，而图片源可封装为共通数据，将其存放于features层main中。
+&emsp;&emsp;首先识别可以复用的代码逻辑部分，以[溪村小镇](https://gitcode.com/arkui-x/samples/tree/master/CodeLab/OxHornCampus)为例，应用启动页会轮播三张图片，而图片源的数据结构作为可复用部分，将其存放于features层main中。
 
 <img src=".\figures\ApplicationRetrofit_image_002.png" />
 
@@ -662,9 +662,9 @@ arkuix和harmonyos使用时添加对模块main的依赖，即可访问数据。
 
 ###  Products差异性性拆分
 
-​			以[鸿蒙世界](https://gitcode.com/arkui-x/samples/tree/master/CodeLab/HMOSWorld)为例，HarmonyOS Next设备上应用持有5个tab页，其中 tabs“溪村挑战赛” 使用了harmonyos的独有能力进行UI设计。由于无法通过Bridge实现跨平台改造，因此需要在Android/iOS平台部署时删除该tab页相关元素，同时相关数据结构等根据平台独立设计，分别存放于harmonyos.hap 和 arkuix.hap。
+&emsp;&emsp;以[鸿蒙世界](https://gitcode.com/arkui-x/samples/tree/master/CodeLab/HMOSWorld)为例，HarmonyOS Next设备上应用持有5个tab页，其中 tabs“溪村挑战赛” 使用了harmonyos的独有能力进行UI设计。由于无法通过Bridge实现跨平台改造，因此需要在Android/iOS平台部署时删除该tab页相关元素，同时相关数据结构等根据平台独立设计，分别存放于harmonyos.hap 和 arkuix.hap。
 
-​			arkuix侧不存在“CHALLENGE”数据项。harmonyos侧存在“CHALLENGE”数据项。
+&emsp;&emsp;arkuix侧不存在“CHALLENGE”数据项。harmonyos侧存在“CHALLENGE”数据项。
 
 <img src=".\figures\ApplicationRetrofit_image_003.png" />
 
@@ -677,7 +677,7 @@ arkuix和harmonyos使用时添加对模块main的依赖，即可访问数据。
 
 ### 使用支持跨平台的UI控件、属性、方法进行跨平台开发
 
-​		在[音乐专辑](https://gitcode.com/arkui-x/samples/tree/master/CodeLab/MusicHome)中，当音乐播放时，播放控制栏的音乐图标会执行旋转动画，实际上HarmonyOS Next与Android/iOS使用了两套逻辑实现。
+&emsp;&emsp;在[音乐专辑](https://gitcode.com/arkui-x/samples/tree/master/CodeLab/MusicHome)中，当音乐播放时，播放控制栏的音乐图标会执行旋转动画，实际上HarmonyOS Next与Android/iOS使用了两套逻辑实现。
 
 在HarmonyOS Next上。使用[@ohos.graphics.displaySync (可变帧率)](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-graphics-displaysync-V5)实现动画效果。
 
@@ -786,17 +786,17 @@ export class DisplaySyncArkUIX implements DisplaySyncInterface {
 
 ## 五、关于DevEco Studio编译时报错问题解决
 
-​		问题现象：DevEco Studio编译hap时报错：“ xxx can't support crossplatform application. ”
+&emsp;&emsp;问题现象：DevEco Studio编译hap时报错：“ xxx can't support crossplatform application. ”
 
 <img src=".\figures\ApplicationRetrofit_image_008.png" />
 
-​		问题解析：由于使用了跨平台工程模版，DevEco Studio在进行静态编译检查时会检查跨平台标签“@crossplatform”。而在工程中会使用一些当前不支持跨平台的HarmonyOS 接口导致静态编译检查失败。
+&emsp;&emsp;问题解析：由于使用了跨平台工程模版，DevEco Studio在进行静态编译检查时会检查跨平台标签“@crossplatform”。而在工程中会使用一些当前不支持跨平台的HarmonyOS 接口导致静态编译检查失败。
 
 ​		解决方法：
 
 ​		1、找到 IDE 里配套 OH-SDK；如果是HarmonyOS Next开发，则是HarmonyOS 里带的oh-sdk。
 
-​		简便方法：前提需保证工程使用SDK为正确的。使用DevEco Studio打卡任一工程，在工程中打开并查看任一d.ts文件，于文件名右键点击-->选择 打开范围-->选择 Explorer 点击，打开的文件窗口即为当前工程所使用的SDK路径，于文件窗口回到SDK根目录执行第2步。
+&emsp;&emsp;简便方法：前提需保证工程使用SDK为正确的。使用DevEco Studio打卡任一工程，在工程中打开并查看任一d.ts文件，于文件名右键点击-->选择 打开范围-->选择 Explorer 点击，打开的文件窗口即为当前工程所使用的SDK路径，于文件窗口回到SDK根目录执行第2步。
 
 <img src=".\figures\ApplicationRetrofit_image_009.png" />
 
