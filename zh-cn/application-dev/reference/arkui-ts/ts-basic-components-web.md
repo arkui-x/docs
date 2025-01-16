@@ -66,6 +66,7 @@ Web(options: { src: ResourceStr, controller: WebviewController})
 | ---------- | ---------------------------------------- | ---- | ------- |
 | src        | [ResourceStr](ts-types.md)               | 是    | 网页资源地址。如果访问本地资源文件，请使用$rawfile。 |
 | controller | [WebviewController<sup>9+</sup>](../apis/js-apis-webview.md#webviewcontroller)| 是    | 控制器。 |
+| incognitoMode<sup>16+</sup> | boolean                                                      | 否   | 表示当前创建的webview是否是隐私模式。true表示创建隐私模式的webview, false表示创建正常模式的webview。 默认值：false |
 
 **示例：**
 
@@ -117,6 +118,25 @@ Web(options: { src: ResourceStr, controller: WebviewController})
       </body>
   </html>
   ```
+  
+  隐私模式Webview加载在线网页。
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller, incognitoMode: true })
+    }
+  }
+}
+```
 
 ## 属性
 

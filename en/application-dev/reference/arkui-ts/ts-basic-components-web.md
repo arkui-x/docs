@@ -66,6 +66,7 @@ Web(options: { src: ResourceStr, controller: WebviewController})
 | ---------- | ---------------------------------------- | ---- | ------- |
 | src        | [ResourceStr](ts-types.md)               | Yes   | Address of a web page resource. To access local resource files, use $rawfile.|
 | controller | [WebviewController<sup>9+</sup>](../apis/js-apis-webview.md#webviewcontroller)| Yes   | Controller.|
+| incognitoMode<sup>16+</sup> | boolean                                                      | No        | Whether to enable incognito mode. The value **true** means to enable incognito mode, and **false** means the opposite. Default value: **false** |
 
 **Example**
 
@@ -117,6 +118,25 @@ Web(options: { src: ResourceStr, controller: WebviewController})
       </body>
   </html>
   ```
+
+  Example of loading online web pages in incognito mode:
+
+```
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller, incognitoMode: true })
+    }
+  }
+}
+```
 
 ## Attributes
 
