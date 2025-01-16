@@ -10,10 +10,20 @@ The **<Web\>** component can be used to display web pages. It can be used with t
 ## Required Permissions
 #### ArkUI:
 ohos.permission.INTERNET, required only for accessing online web pages
+
+ohos.permission.LOCATION, ohos.permission.APPROXIMATELY_LOCATION, and ohos.permission.LOCATION_IN_BACKGROUND, which are required for accessing the location information.
+
 #### Android:
 android.permission.INTERNET, required only for accessing online web pages.
 
 ` <uses-permission android:name="android.permission.INTERNET" />`
+
+android.permission.ACCESS_FINE_LOCATION, android.permission.ACCESS_COARSE_LOCATION, which are required for accessing the location information.
+
+```
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+```
 
 #### iOS:
 No setting is required. The application needs to prompt the user to obtain the Internet access permission.

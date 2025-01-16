@@ -10,10 +10,20 @@
 ## 需要权限
 #### ArkUI:
 访问在线网页时需添加网络权限：ohos.permission.INTERNET。
+
+访问地理位置时需添加权限：ohos.permission.LOCATION、ohos.permission.APPROXIMATELY_LOCATION、ohos.permission.LOCATION_IN_BACKGROUND。
+
 #### Android:
 访问在线网页时需添加网络权限：android.permission.INTERNET
 
 ``` <uses-permission android:name="android.permission.INTERNET" />```
+
+访问地理位置时需添加权限：android.permission.ACCESS_FINE_LOCATION、android.permission.ACCESS_COARSE_LOCATION
+
+``` 
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+```
 
 #### iOS:
 无需设置，应用通过询问用户获取网络权限。
