@@ -181,6 +181,8 @@ export default class EntryAbility extends UIAbility {
 | int     |     5     |
 | double  |     9     |
 | string  |    10     |
+| object  |    101    |
+| array   |    102    |
 
 ### 示例代码
 
@@ -201,6 +203,72 @@ public class EntryEntryAbilityActivity extends AppCompatActivity {
     }
 }
 ```
+
+同时提供了WantParams工具类供开发者进行使用,推荐使用WantParams；WantParams提供的接口如下：
+| 接口 | 返回值 | 参数 | 功能 |
+| ------- | --------- | --------- | --------- |
+| addValue | WantParams | String key, boolean value | 为WantParams添加键值为”key”，类型为boolean的值”value”。 |
+| addValue | WantParams | String key, int  value | 为WantParams添加键值为”key”，类型为int的值”value”。 |
+| addValue | WantParams | String key, double value | 为WantParams添加键值为”key”，类型为double的值”value”。 |
+| addValue | WantParams | String key, String value | 为WantParams添加键值为”key”，类型为String的值”value”。 |
+| addValue | WantParams | String key, boolean[] value | 为WantParams添加键值为”key”，类型为boolean[] 的值“value”。 |
+| addValue | WantParams | String key, int[] value | 为WantParams添加键值为”key”，类型为int[] 的值“value”。 |
+| addValue | WantParams | String key, double[] value | 为WantParams添加键值为”key”，类型为double[]的值”value”。 |
+| addValue | WantParams | String key, String[] value | 为WantParams添加键值为”key”，类型为String[]的值”value”。 |
+| addValue | WantParams | String key, WantParams value | 为WantParams添加键值为”key”，类型为WantParams的值”value”。 |
+| getValue | Object | String key | 获取键值为key的属性值，如果键值不存在则返回null。 |
+| addValue | String | - | 将WantParams对象转换为Json字符串。 |
+
+WantParams支持的类型有：
+    boolean、int、float、double、String、WantParams、boolean[]、int[]、float[]、double[]、String[]。
+### 示例代码
+
+```
+public class EntryEntryAbilityActivity extends StageActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        // 设置自定义数据
+        WantParams wantParams = new WantParams();
+        wantParams.addValue("stringKey", "normal")
+                .addValue("intKey", -2147483648)
+                .addValue("doubleKey", -6.9)
+                .addValue("boolKey", true)
+                .addValue("arrayKey", new boolean[] { false, true })
+                .addValue("wantParamsKey",
+                        new WantParams()
+                                .addValue("stringKey2", "It's me."));
+
+        // 获取指定的键对应的值
+        StringBuilder stringBuilder = new StringBuilder();
+        Object obj = wantParams.getValue("stringKey");
+        if (obj instanceof String) {
+            stringBuilder.append("String: ").append((String) obj).append(",\n");
+        }
+        obj = wantParams.getValue("intKey");
+        if (obj instanceof Integer) {
+            stringBuilder.append("Int: ").append((Integer) obj).append(",\n");
+        }
+        obj = wantParams.getValue("arrayKey");
+        if (obj instanceof boolean[]) {
+            stringBuilder.append("Array: ").append(Arrays.toString((boolean[]) obj)).append(",\n");
+        }
+        obj = wantParams.getValue("wantParamsKey");
+        if (obj instanceof WantParams) {
+            stringBuilder.append("WantParams: ").append(((WantParams) obj).toWantParamsString());
+        }
+        String wantParamsStr = wantParams.toWantParamsString();
+        intent.putExtra("params", wantParamsStr);
+        setInstanceName("com.example.webcrossplatform:entry:EntryAbility:");
+        super.onCreate(savedInstanceState);
+    }
+}
+```
+
+### 注意事项
+  * addValue和getValue中的key不能包含特殊字符；如\t、\r、\n等。
+  * 在使用手动方式(非WantParams)自定义字符串时，key和value均不能包含特殊字符。
+  * array和object不支持使用手动方式进行使用。
 
 ## 用启动Ability的方式拉起原生Activity
 
