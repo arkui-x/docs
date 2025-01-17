@@ -1643,7 +1643,15 @@ struct WebComponent {
 
 ## WebResourceError
 
-web组件资源管理错误信息对象。示例代码参考[onErrorReceive事件](#onerrorreceive)。
+Web组件资源管理错误信息对象。示例代码参考[onErrorReceive事件](#onerrorreceive)。
+
+### constructor
+
+constructor()
+
+WebResourceError的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 ### getErrorCode
 
@@ -1654,6 +1662,8 @@ getErrorCode(): number
 **错误码：**
 
 Android和iOS的错误码与OpenHarmony不完全相同，以各平台错误码为准。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **返回值：**
 
@@ -1668,6 +1678,8 @@ getErrorInfo(): string
 获取加载资源的错误信息。  
 Android和iOS的错误信息与OpenHarmony不完全相同，以各平台错误信息为准。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **返回值：**
 
 | 类型     | 说明           |
@@ -1676,8 +1688,29 @@ Android和iOS的错误信息与OpenHarmony不完全相同，以各平台错误�
 
 ## WebResourceRequest
 
-web组件获取资源请求对象。示例代码参考[onErrorReceive事件](#onerrorreceive)。
+Web组件获取资源请求对象。示例代码参考[onErrorReceive事件](#onerrorreceive)。
 
+### constructor
+
+constructor()
+
+WebResourceRequest的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+### getRequestHeader
+
+getRequestHeader(): Array\<Header\>
+
+获取资源请求头信息。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型                         | 说明         |
+| -------------------------- | ---------- |
+| Array\<[Header](#header)\> | 返回资源请求头信息。 |
 
 ### getRequestUrl
 
@@ -1685,33 +1718,142 @@ getRequestUrl(): string
 
 获取资源请求的URL信息。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **返回值：**
 
 | 类型     | 说明            |
 | ------ | ------------- |
 | string | 返回资源请求的URL信息。 |
 
-## WebResourceResponse
+### isMainFrame
 
-web组件资源响应对象。示例代码参考[onHttpErrorReceive事件](#onhttperrorreceive)。
+isMainFrame(): boolean
 
-###  getResponseMimeType
+判断资源请求是否为主frame。
 
-getResponseMimeType(): string
-
-获取资源响应的媒体（MIME）类型。
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **返回值：**
 
-| 类型   | 说明                             |
-| ------ | -------------------------------- |
-| string | 返回资源响应的媒体（MIME）类型。 |
+| 类型      | 说明               |
+| ------- | ---------------- |
+| boolean | 返回资源请求是否为主frame。 |
 
-###  getResponseEncoding
+### isRedirect
+
+isRedirect(): boolean
+
+判断资源请求是否被服务端重定向。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型      | 说明               |
+| ------- | ---------------- |
+| boolean | 返回资源请求是否被服务端重定向。 |
+
+### isRequestGesture
+
+isRequestGesture(): boolean
+
+获取资源请求是否与手势（如点击）相关联。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型      | 说明                   |
+| ------- | -------------------- |
+| boolean | 返回资源请求是否与手势（如点击）相关联。 |
+
+### getRequestMethod<sup>16+</sup>
+
+getRequestMethod(): string
+
+获取请求方法。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型     | 说明      |
+| ------ | ------- |
+| string | 返回请求方法。 |
+
+## Header
+
+Web组件返回的请求/响应头对象。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称          | 类型     | 必填   | 说明            |
+| ----------- | ------ | ---- | ------------- |
+| headerKey   | string | 是    | 请求/响应头的key。   |
+| headerValue | string | 是    | 请求/响应头的value。 |
+
+## WebResourceResponse
+
+Web组件资源响应对象。示例代码参考[onHttpErrorReceive事件](#onhttperrorreceive)。
+
+### constructor
+
+constructor()
+
+WebResourceResponse的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+### getReasonMessage
+
+getReasonMessage(): string
+
+获取资源响应的状态码描述。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型     | 说明            |
+| ------ | ------------- |
+| string | 返回资源响应的状态码描述。 |
+
+### getResponseCode
+
+getResponseCode(): number
+
+获取资源响应的状态码。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型     | 说明          |
+| ------ | ----------- |
+| number | 返回资源响应的状态码。 |
+
+### getResponseData
+
+getResponseData(): string
+
+获取资源响应数据。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型     | 说明        |
+| ------ | --------- |
+| string | 返回资源响应数据。 |
+
+### getResponseEncoding
 
 getResponseEncoding(): string
 
 获取资源响应的编码。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **返回值：**
 
@@ -1719,27 +1861,99 @@ getResponseEncoding(): string
 | ------ | -------------------- |
 | string | 返回资源响应的编码。 |
 
-###  getResponseCode
+### getResponseHeader
 
-getResponseCode(): number
+getResponseHeader() : Array\<Header\>
 
-获取资源响应的状态码。
+获取资源响应头。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **返回值：**
 
-| 类型   | 说明                   |
-| ------ | ---------------------- |
-| number | 返回资源响应的状态码。 |
+| 类型                         | 说明       |
+| -------------------------- | -------- |
+| Array\<[Header](#header)\> | 返回资源响应头。 |
+
+### getResponseMimeType
+
+getResponseMimeType(): string
+
+获取资源响应的媒体（MIME）类型。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型     | 说明                 |
+| ------ | ------------------ |
+| string | 返回资源响应的媒体（MIME）类型。 |
+
+### getResponseDataEx<sup>16+</sup>
+
+getResponseDataEx(): string | number | ArrayBuffer | Resource | undefined
+
+获取资源响应数据，支持多种数据类型。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+|类型|说明|
+|---|---|
+|string|返回HTML格式的字符串。|
+|number|返回文件句柄。|
+|ArrayBuffer|返回二进制数据。|
+|[Resource](../arkui-ts/ts-types.md)|返回`$rawfile`资源。|
+|undefined|如果没有可用数据，返回`undefined`。|
+
+### getResponseIsReady<sup>16+</sup>
+
+getResponseIsReady(): boolean
+
+获取响应数据是否已准备就绪。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+|类型|说明|
+|---|---|
+|boolean|`true`表示响应数据已准备好，`false`表示未准备好。|
 
 ## ConsoleMessage
 
 Web组件获取控制台信息对象。示例代码参考[onConsole事件](#onconsole)。
+
+### constructor
+
+constructor()
+
+ConsoleMessage的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+### getLineNumber
+
+getLineNumber(): number
+
+获取ConsoleMessage的行数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型     | 说明                   |
+| ------ | -------------------- |
+| number | 返回ConsoleMessage的行数。 |
 
 ### getMessage
 
 getMessage(): string
 
 获取ConsoleMessage的日志信息。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **返回值：**
 
@@ -1753,25 +1967,51 @@ getMessageLevel(): MessageLevel
 
 获取ConsoleMessage的信息级别。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **返回值：**
 
 | 类型                                  | 说明                           |
 | ------------------------------------- | ------------------------------ |
 | [MessageLevel](#messagelevel枚举说明) | 返回ConsoleMessage的信息级别。 |
 
-##  MessageLevel枚举说明
+### getSourceId
 
-| 名称  | 描述       |
-| ----- | ---------- |
-| Debug | 调试级别。 |
-| Error | 错误级别。 |
-| Info  | 消息级别。 |
-| Log   | 日志级别。 |
-| Warn  | 警告级别。 |
+getSourceId(): string
+
+获取网页源文件路径和名字。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**返回值：**
+
+| 类型     | 说明            |
+| ------ | ------------- |
+| string | 返回网页源文件路径和名字。 |
+
+## MessageLevel枚举说明
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称    | 值 | 说明    |
+| ----- | -- | ---- |
+| Debug | 1 | 调试级别。 |
+| Error | 4 | 错误级别。 |
+| Info  | 2 | 消息级别。 |
+| Log   | 5 | 日志级别。 |
+| Warn  | 3 | 警告级别。 |
 
 ## JsResult
 
 Web组件返回的弹窗确认或弹窗取消功能对象。示例代码参考[onAlert事件](#onalert)。
+
+### constructor
+
+constructor()
+
+JsResult的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 ### handleCancel
 
@@ -1779,27 +2019,42 @@ handleCancel(): void
 
 通知Web组件用户取消弹窗操作。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 ### handleConfirm
 
 handleConfirm(): void
 
 通知Web组件用户确认弹窗操作。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 ### handlePromptConfirm<sup>9+</sup>
 
 handlePromptConfirm(result: string): void
 
 通知Web组件用户确认弹窗操作及对话框内容。
+Android平台在OnAlertEvent和OnConfirmEvent事件下不支持此接口。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **参数：**
 
-| 参数名 | 参数类型 | 必填 | 默认值 | 参数描述               |
-| ------ | -------- | ---- | ------ | ---------------------- |
-| result | string   | 是   | -      | 用户输入的对话框内容。 |
+| 参数名    | 类型   | 必填   | 说明        |
+| ------ | ------ | ---- | ----------- |
+| result | string | 是    | 用户输入的对话框内容。 |
 
 ## HttpAuthHandler<sup>9+</sup>
 
 Web组件返回的http auth认证请求确认或取消和使用缓存密码认证功能对象。示例代码参考[onHttpAuthRequest事件](#onhttpauthrequest9)。
+
+### constructor
+
+constructor()
+
+HttpAuthHandler的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 ### cancel<sup>9+</sup>
 
@@ -1807,18 +2062,22 @@ cancel(): void
 
 通知Web组件用户取消HTTP认证操作。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 ### confirm<sup>9+</sup>
 
-confirm(userName: string, pwd: string): boolean
+confirm(userName: string, password: string): boolean
 
 使用用户名和密码进行HTTP认证操作。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **参数：**
 
-| 参数名   | 参数类型 | 必填 | 默认值 | 参数描述         |
-| -------- | -------- | ---- | ------ | ---------------- |
-| userName | string   | 是   | -      | HTTP认证用户名。 |
-| pwd      | string   | 是   | -      | HTTP认证密码。   |
+| 参数名      | 类型   | 必填  | 说明       |
+| -------- | ------ | ---- | ---------- |
+| userName | string | 是   | HTTP认证用户名。 |
+| password      | string | 是   | HTTP认证密码。  |
 
 **返回值：**
 
@@ -1830,7 +2089,9 @@ confirm(userName: string, pwd: string): boolean
 
 isHttpAuthInfoSaved(): boolean
 
-通知Web组件用户使用服务器缓存的帐号密码认证。
+通知Web组件用户使用服务器缓存的账号密码认证。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **返回值：**
 
@@ -1842,23 +2103,41 @@ isHttpAuthInfoSaved(): boolean
 
 Web组件返回授权或拒绝权限功能的对象。示例代码参考[onGeolocationShow事件](#ongeolocationshow)。
 
+### constructor
+
+constructor()
+
+JsGeolocation的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
 ### invoke
 
 invoke(origin: string, allow: boolean, retain: boolean): void
 
 设置网页地理位置权限状态。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **参数：**
 
-| 参数名 | 参数类型 | 必填 | 默认值 | 参数描述                                 |
-| ------ | -------- | ---- | ------ | ---------------------------------------- |
-| origin | string   | 是   | -      | 指定源的字符串索引。                     |
-| allow  | boolean  | 是   | -      | 设置的地理位置权限状态。                 |
-| retain | boolean  | 是   | -      | 是否允许将地理位置权限状态保存到系统中。 |
+| 参数名    | 类型    | 必填  | 说明                                     |
+| ------ | ------- | ---- | ---------------------------------------- |
+| origin | string  | 是   | 指定源的字符串索引。                               |
+| allow  | boolean | 是   | 设置的地理位置权限状态。                             |
+| retain | boolean | 是   | 是否允许将地理位置权限状态保存到系统中。 |
 
 ## PermissionRequest<sup>9+</sup>
 
 Web组件返回授权或拒绝权限功能的对象。示例代码参考[onPermissionRequest事件](#onpermissionrequest9)。
+
+### constructor
+
+constructor()
+
+PermissionRequest的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 ### deny<sup>9+</sup>
 
@@ -1866,16 +2145,20 @@ deny(): void
 
 拒绝网页所请求的权限。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 ### getOrigin<sup>9+</sup>
 
 getOrigin(): string
 
 获取网页来源。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **返回值：**
 
-| 类型   | 说明                     |
-| ------ | ------------------------ |
+| 类型     | 说明           |
+| ------ | ------------ |
 | string | 当前请求权限网页的来源。 |
 
 ### getAccessibleResource<sup>9+</sup>
@@ -1884,10 +2167,12 @@ getAccessibleResource(): Array\<string\>
 
 获取网页所请求的权限资源列表，跨平台资源列表支持的类型有RESOURCE_VIDEO_CAPTURE和RESOURCE_AUDIO_CAPTURE。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **返回值：**
 
-| 类型            | 说明                       |
-| --------------- | -------------------------- |
+| 类型              | 说明            |
+| --------------- | ------------- |
 | Array\<string\> | 网页所请求的权限资源列表。 |
 
 ### grant<sup>9+</sup>
@@ -1895,6 +2180,8 @@ getAccessibleResource(): Array\<string\>
 grant(resources: Array\<string\>): void
 
 对网页访问的给定权限进行授权，跨平台iOS不支持授予某一种类型的权限，只支持授予当前申请的权限，或拒绝当前申请的权限。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **参数：**
 
@@ -1906,21 +2193,39 @@ grant(resources: Array\<string\>): void
 
 通知Web组件的文件选择结果。示例代码参考[onShowFileSelector事件](#onshowfileselector9)。
 
+### constructor
+
+constructor()
+
+FileSelectorResult的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
 ### handleFileList<sup>9+</sup>
 
 handleFileList(fileList: Array\<string\>): void
 
 通知Web组件进行文件选择操作。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **参数：**
 
-| 参数名   | 参数类型        | 必填 | 默认值 | 参数描述                 |
-| -------- | --------------- | ---- | ------ | ------------------------ |
-| fileList | Array\<string\> | 是   | -      | 需要进行操作的文件列表。 |
+| 参数名      | 类型            | 必填  | 说明         |
+| -------- | --------------- | ---- | ------------ |
+| fileList | Array\<string\> | 是   | 需要进行操作的文件列表。 |
 
 ## FileSelectorParam<sup>9+</sup>
 
-web组件获取文件对象。示例代码参考[onShowFileSelector事件](#onshowfileselector9)。
+Web组件获取文件对象。示例代码参考[onShowFileSelector事件](#onshowfileselector9)。
+
+### constructor
+
+constructor()
+
+FileSelectorParam的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
 
 ### getTitle<sup>9+</sup>
 
@@ -1928,10 +2233,12 @@ getTitle(): string
 
 获取文件选择器标题。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **返回值：**
 
-| 类型   | 说明                 |
-| ------ | -------------------- |
+| 类型     | 说明         |
+| ------ | ---------- |
 | string | 返回文件选择器标题。 |
 
 ### getMode<sup>9+</sup>
@@ -1940,10 +2247,12 @@ getMode(): FileSelectorMode
 
 获取文件选择器的模式。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **返回值：**
 
-| 类型                                          | 说明                   |
-| --------------------------------------------- | ---------------------- |
+| 类型                                       | 说明          |
+| ---------------------------------------- | ----------- |
 | [FileSelectorMode](#fileselectormode枚举说明) | 返回文件选择器的模式。 |
 
 ### getAcceptType<sup>9+</sup>
@@ -1952,10 +2261,12 @@ getAcceptType(): Array\<string\>
 
 获取文件过滤类型。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **返回值：**
 
-| 类型            | 说明               |
-| --------------- | ------------------ |
+| 类型              | 说明        |
+| --------------- | --------- |
 | Array\<string\> | 返回文件过滤类型。 |
 
 ### isCapture<sup>9+</sup>
@@ -1964,10 +2275,12 @@ isCapture(): boolean
 
 获取是否调用多媒体能力。
 
+**系统能力：** SystemCapability.Web.Webview.Core
+
 **返回值：**
 
-| 类型    | 说明                     |
-| ------- | ------------------------ |
+| 类型      | 说明           |
+| ------- | ------------ |
 | boolean | 返回是否调用多媒体能力。 |
 
 ## FileSelectorMode枚举说明
@@ -2294,3 +2607,212 @@ exitFullScreen(): void
 通知开发者Web组件退出全屏。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+## OnPageEndEvent<sup>16+</sup>
+
+定义网页加载结束时触发的函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| url | string | 是 | 页面的URL地址。                       |
+
+## OnPageBeginEvent<sup>16+</sup>
+
+定义网页加载开始时触发的函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| url | string | 是 | 页面的URL地址。                       |
+
+## OnProgressChangeEvent<sup>16+</sup>
+
+定义网页加载进度变化时触发该回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| newProgress | number | 是 | 新的加载进度，取值范围为0到100的整数。                       |
+
+## OnTitleReceiveEvent<sup>16+</sup>
+
+定义网页document标题更改时触发该回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| title | string | 是 | document标题内容。                       |
+
+## OnGeolocationShowEvent<sup>16+</sup>
+
+定义通知用户收到地理位置信息获取请求。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| origin | string | 是 | 指定源的字符串索引。                       |
+| geolocation | [JsGeolocation](#jsgeolocation) | 是 | 通知Web组件用户操作行为。                       |
+
+## OnAlertEvent<sup>16+</sup>
+
+定义网页触发alert()告警弹窗时触发回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| url | string | 是 | 当前显示弹窗所在网页的URL。                       |
+| message | string | 是 | 弹窗中显示的信息。                       |
+| result | [JsResult](#jsresult) | 是 | 通知Web组件用户操作行为。                       |
+
+## OnConfirmEvent<sup>16+</sup>
+
+定义网页调用confirm()告警时触发此回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| url | string | 是 | 当前显示弹窗所在网页的URL。                       |
+| message | string | 是 | 弹窗中显示的信息。                       |
+| result | [JsResult](#jsresult) | 是 | 通知Web组件用户操作行为。                       |
+
+## OnPromptEvent<sup>16+</sup>
+
+定义网页调用prompt()告警时触发此回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| url | string | 是 | 当前显示弹窗所在网页的URL。                       |
+| message | string | 是 | 弹窗中显示的信息。                       |
+| value | string | 是 | 提示对话框的信息。                       |
+| result | [JsResult](#jsresult) | 是 | 通知Web组件用户操作行为。                       |
+
+## OnConsoleEvent<sup>16+</sup>
+
+定义通知宿主应用JavaScript console消息。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| message | [ConsoleMessage](#consolemessage) | 是 | 触发的控制台信息。                       |
+
+## OnErrorReceiveEvent<sup>16+</sup>
+
+定义网页加载遇到错误时触发该回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| request | [WebResourceRequest](#webresourcerequest) | 是 | 网页请求的封装信息。      |
+| error   | [WebResourceError](#webresourceerror)    | 是 | 网页加载资源错误的封装信息 。 |
+
+## OnHttpErrorReceiveEvent<sup>16+</sup>
+
+定义网页收到加载资源加载HTTP错误时触发。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| request | [WebResourceRequest](#webresourcerequest) | 是 | 网页请求的封装信息。      |
+| response   | [WebResourceResponse](#webresourceresponse)    | 是 | 资源响应的封装信息。 |
+
+## OnDownloadStartEvent<sup>16+</sup>
+
+定义通知主应用开始下载一个文件。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| url                | string | 是 | 文件下载的URL。                           |
+| userAgent          | string | 是 | 用于下载的用户代理。                          |
+| contentDisposition | string | 是 | 服务器返回的 Content-Disposition响应头，可能为空。 |
+| mimetype           | string | 是 | 服务器返回内容媒体类型（MIME）信息。                |
+| contentLength      | number | 是 | 服务器返回文件的长度。                         |
+
+## OnShowFileSelectorEvent<sup>16+</sup>
+
+定义文件选择器结果。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| result       | [FileSelectorResult](#fileselectorresult9) | 是 | 用于通知Web组件文件选择的结果。 |
+| fileSelector | [FileSelectorParam](#fileselectorparam9) | 是 | 文件选择器的相关信息。       |
+
+## OnScaleChangeEvent<sup>16+</sup>
+
+定义当前页面显示比例的变化时触发。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| oldScale | number | 是 | 变化前的显示比例百分比。 |
+| newScale | number | 是 | 变化后的显示比例百分比。 |
+
+## OnHttpAuthRequestEvent<sup>16+</sup>
+
+定义通知收到http auth认证请求。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| handler | [HttpAuthHandler](#httpauthhandler9) | 是 | 通知Web组件用户操作行为。   |
+| host    | string                               | 是 | HTTP身份验证凭据应用的主机。 |
+| realm   | string                               | 是 | HTTP身份验证凭据应用的域。  |
+
+## OnPermissionRequestEvent<sup>16+</sup>
+
+定义通知收到获取权限请求。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| request | [PermissionRequest](#permissionrequest9) | 是 | 通知Web组件用户操作行为。 |
+
+## OnScrollEvent<sup>16+</sup>
+
+定义滚动条滑动到指定位置时触发。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| xOffset | number | 是 | 以网页最左端为基准，水平滚动条滚动所在位置。 |
+| yOffset | number | 是 | 以网页最上端为基准，竖直滚动条滚动所在位置。 |
+
+## OnPageVisibleEvent<sup>16+</sup>
+
+定义旧页面不再呈现，新页面即将可见时触发的回调函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| url  | string | 是 | 旧页面不再呈现，新页面即将可见时新页面的url地址。 |
+
+## OnLoadInterceptEvent<sup>16+</sup>
+
+定义截获资源加载时触发的回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型      | 必填   | 说明                                       |
+| -------------- | ---- | ---- | ---------------------------------------- |
+| data | [WebResourceRequest](#webresourcerequest) | 是 | url请求的相关信息。 |
