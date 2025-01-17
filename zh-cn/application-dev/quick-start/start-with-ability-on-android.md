@@ -204,7 +204,7 @@ public class EntryEntryAbilityActivity extends AppCompatActivity {
 }
 ```
 
-同时提供了WantParams工具类供开发者进行使用,推荐使用WantParams；WantParams提供的接口如下：
+同时提供了WantParams工具类，推荐开发者使用该工具类。WantParams提供的接口如下：
 | 接口 | 返回值 | 参数 | 功能 |
 | ------- | --------- | --------- | --------- |
 | addValue | WantParams | String key, boolean value | 为WantParams添加键值为”key”，类型为boolean的值”value”。 |
@@ -217,7 +217,7 @@ public class EntryEntryAbilityActivity extends AppCompatActivity {
 | addValue | WantParams | String key, String[] value | 为WantParams添加键值为”key”，类型为String[]的值”value”。 |
 | addValue | WantParams | String key, WantParams value | 为WantParams添加键值为”key”，类型为WantParams的值”value”。 |
 | getValue | Object | String key | 获取键值为key的属性值，如果键值不存在则返回null。 |
-| addValue | String | - | 将WantParams对象转换为Json字符串。 |
+| toWantParamsString | String | - | 将WantParams对象转换为Json字符串。 |
 
 WantParams支持的类型有：
     boolean、int、float、double、String、WantParams、boolean[]、int[]、float[]、double[]、String[]。
