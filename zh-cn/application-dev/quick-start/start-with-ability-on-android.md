@@ -269,6 +269,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
   * addValue和getValue中的key不能包含特殊字符；如\t、\r、\n等。
   * 在使用手动方式(非WantParams)自定义字符串时，key和value均不能包含特殊字符。
   * array和object不支持使用手动方式进行使用。
+  * double的小数点后有效小数位为6位。
 
 ## 用启动Ability的方式拉起原生Activity
 
