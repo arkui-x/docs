@@ -61,7 +61,7 @@ Android端应用内的Activity的activityName组成规则：Ability的moduleName
 
 ## StageApplication初始化支持以下三种方式
 
-### 通过继承StageApplication的方式进行初始化
+### 1. 通过继承StageApplication的方式进行初始化
 
 ```
 import ohos.stage.ability.adapter.StageApplication;
@@ -74,7 +74,7 @@ public class HiStageApplication extends StageApplication {
 }
 ```
 
-### 继承Android原生Application方式，在onCreate方法中创建StageApplicationDelegate实例进行初始化
+### 2. 继承Android原生Application方式，在onCreate方法中创建StageApplicationDelegate实例进行初始化
 
 ```
 import android.app.Application;
@@ -92,7 +92,7 @@ public class HiStageApplication extends Application {
 }
 ```
 
-### 在Activity中创建StageApplicationDelegate实例进行初始化
+### 3. 在Activity中创建StageApplicationDelegate实例进行初始化
 
 ```
 import android.app.Activity;
@@ -113,8 +113,10 @@ public class EntryEntryAbilityActivity extends Activity {
 
 ## 通过原生Activity拉起Ability并传递参数
 
-使用原生Activity拉起Ability时，需使用原生应用的startActivity方法，参数的传递需要通过Intent中的putExtra()进行设置，规则如下：
+使用原生Activity拉起Ability时，需使用原生应用的startActivity方法，参数的传递需要通过Intent中的putExtra()进行设置，目前有两种方式进行参数的传递，具体如下：
 
+### 1. 使用手动方式
+#### 参数格式
 key值为params  
 value为json格式
 
@@ -133,7 +135,7 @@ value为json格式
 }
 ```
 
-### 示例代码
+#### 示例代码
 
 * Java
 
@@ -173,7 +175,7 @@ export default class EntryAbility extends UIAbility {
 ...
 }
 ```
-### 支持的参数类型列表
+#### 支持的参数类型列表
 
 | 参数类型 | 参数类型值 |
 | ------- | --------- |
@@ -181,53 +183,29 @@ export default class EntryAbility extends UIAbility {
 | int     |     5     |
 | double  |     9     |
 | string  |    10     |
-| object  |    101    |
-| array   |    102    |
 
-### 示例代码
-
+### 2. WantParams工具类
+推荐使用。
+#### 参数格式
+putExtra中的key值为"params",对应的value为WantParams字符串。
 ```
-public class EntryEntryAbilityActivity extends AppCompatActivity {
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Intent intent = new Intent();
-        intent.setClass(this, EntryEntryAbilityTwoActivity.class);
-        intent.putExtra("params",
-                "{\"params\":[{\"key\":\"keyfirst",\"type\":1,\"value\":\"valuefirst"}," +
-                "{\"key\":\"keysecond\",\"type\":9,\"value\":\"2.3\"}," +
-                "{\"key\":\"keythird",\"type\":5,\"value\":\"2\"}," +
-                "{\"key\":\"keyfourth",\"type\":10,\"value\":\"test\"}]}");
-        startActivity(intent);
-    }
-}
+    WantParams wantParams = new WantParams();
+    wantParams.addValue("key1", "value")
+            .addValue("key2", 123)
+            .addValue("key3", false)
+            ...
 ```
 
-同时提供了WantParams工具类，推荐开发者使用该工具类。WantParams提供的接口如下：
-| 接口 | 返回值 | 参数 | 功能 |
-| ------- | --------- | --------- | --------- |
-| addValue | WantParams | String key, boolean value | 为WantParams添加键值为”key”，类型为boolean的值”value”。 |
-| addValue | WantParams | String key, int  value | 为WantParams添加键值为”key”，类型为int的值”value”。 |
-| addValue | WantParams | String key, double value | 为WantParams添加键值为”key”，类型为double的值”value”。 |
-| addValue | WantParams | String key, String value | 为WantParams添加键值为”key”，类型为String的值”value”。 |
-| addValue | WantParams | String key, boolean[] value | 为WantParams添加键值为”key”，类型为boolean[] 的值“value”。 |
-| addValue | WantParams | String key, int[] value | 为WantParams添加键值为”key”，类型为int[] 的值“value”。 |
-| addValue | WantParams | String key, double[] value | 为WantParams添加键值为”key”，类型为double[]的值”value”。 |
-| addValue | WantParams | String key, String[] value | 为WantParams添加键值为”key”，类型为String[]的值”value”。 |
-| addValue | WantParams | String key, WantParams value | 为WantParams添加键值为”key”，类型为WantParams的值”value”。 |
-| getValue | Object | String key | 获取键值为key的属性值，如果键值不存在则返回null。 |
-| toWantParamsString | String | - | 将WantParams对象转换为Json字符串。 |
-
-WantParams支持的类型有：
-    boolean、int、float、double、String、WantParams、boolean[]、int[]、float[]、double[]、String[]。
-### 示例代码
-
+#### 示例代码
+* Java
+此示例展示了在启动一个新的 Ability 时，如何通过 WantParams 实现参数传递。具体涉及使用 WantParams 中的 addValue、getValue 和 toWantParamsString 接口，完成数据的自定义、获取和修改。
 ```
-public class EntryEntryAbilityActivity extends StageActivity {
+public class MainAbilityActivity extends StageActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Intent intent = getIntent();
+        super.onCreate(savedInstanceState);
+        Intent intent = new Intent();
+        intent.setClass(this, EntryEntryAbilityActivity.class);
         // 设置自定义数据
         WantParams wantParams = new WantParams();
         wantParams.addValue("stringKey", "normal")
@@ -239,31 +217,61 @@ public class EntryEntryAbilityActivity extends StageActivity {
                         new WantParams()
                                 .addValue("stringKey2", "It's me."));
 
-        // 获取指定的键对应的值
-        StringBuilder stringBuilder = new StringBuilder();
+        // 获取指定的键对应的值并修改
         Object obj = wantParams.getValue("stringKey");
         if (obj instanceof String) {
-            stringBuilder.append("String: ").append((String) obj).append(",\n");
+            wantParams.setValue("stringKey", "new string value");
         }
         obj = wantParams.getValue("intKey");
         if (obj instanceof Integer) {
-            stringBuilder.append("Int: ").append((Integer) obj).append(",\n");
+            wantParams.setValue("intKey", 123);
         }
         obj = wantParams.getValue("arrayKey");
         if (obj instanceof boolean[]) {
-            stringBuilder.append("Array: ").append(Arrays.toString((boolean[]) obj)).append(",\n");
+            wantParams.setValue("arrayKey", new boolean[] { false, false });
         }
         obj = wantParams.getValue("wantParamsKey");
         if (obj instanceof WantParams) {
-            stringBuilder.append("WantParams: ").append(((WantParams) obj).toWantParamsString());
+            wantParams.setValue("wantParamsKey", new WantParams().addValue("intKey", 999));
         }
-        String wantParamsStr = wantParams.toWantParamsString();
-        intent.putExtra("params", wantParamsStr);
-        setInstanceName("com.example.webcrossplatform:entry:EntryAbility:");
-        super.onCreate(savedInstanceState);
+        intent.putExtra("params", wantParams.toWantParamsString());
+        startActivity(intent);
     }
 }
 ```
+* ArkTS
+```
+# xxx.ets
+export default class EntryAbility extends UIAbility {
+  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    console.log("value = " + want.parameters?.stringKey)
+    console.log("value = " + want.parameters?.intKey)
+    console.log("value = " + want.parameters?.doubleKey)
+    console.log("value = " + want.parameters?.boolKey)
+    console.log("value = " + JSON.stringify(want.parameters?.arrayKey))
+    console.log("value = " + JSON.stringify(want.parameters?.wantParamsKey))
+  }
+}
+```
+
+#### 支持的参数类型
+WantParams支持的类型有：
+    boolean、int、float、double、String、WantParams、boolean[]、int[]、float[]、double[]、String[]。
+WantParams提供的接口详细如下：
+| 接口 | 返回值 | 参数 | 功能 |
+| ------- | --------- | --------- | --------- |
+| addValue | WantParams | String key, boolean value | 为WantParams添加"String"类型的key，"boolean"类型的值value。 |
+| addValue | WantParams | String key, int  value | 为WantParams添加"String"类型的key，"int"类型的值value。 |
+| addValue | WantParams | String key, double value | 为WantParams添加"String"类型的key，"double"类型的值value。 |
+| addValue | WantParams | String key, String value | 为WantParams添加"String"类型的key，"String"类型的值value。 |
+| addValue | WantParams | String key, boolean[] value | 为WantParams添加"String"类型的key，"boolean[]"类型的值value。 |
+| addValue | WantParams | String key, int[] value | 为WantParams添加"String"类型的key，"int[]"类型的值value。 |
+| addValue | WantParams | String key, double[] value | 为WantParams添加"String"类型的key，"double[]"类型的值value。 |
+| addValue | WantParams | String key, String[] value | 为WantParams添加"String"类型的key，"String[]"类型的值value。 |
+| addValue | WantParams | String key, WantParams value | 为WantParams添加"String"类型的key，"WantParams"类型的值value。 |
+| getValue | Object | String key | 获取键值为key的属性值，如果键值不存在则返回null。 |
+| toWantParamsString | String | - | 将WantParams对象转换为Json字符串。 |
+
 
 ### 注意事项
   * addValue和getValue中的key不能包含特殊字符；如\t、\r、\n等。
