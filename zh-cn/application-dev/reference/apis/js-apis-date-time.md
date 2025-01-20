@@ -16,7 +16,7 @@ import { systemDateTime } from '@kit.BasicServicesKit';
 
 定义获取时间的枚举类型。
 
-**系统能力**: SystemCapability.MiscServices.Time
+**支持平台**： Android 、iOS
 
 | 名称    | 值   | 说明                                             | Android平台 | iOS平台 |
 | ------- | ---- | ------------------------------------------------ | ----------- | ------- |
@@ -29,15 +29,13 @@ getTime(isNanoseconds?: boolean): number
 
  使用同步方式获取自Unix纪元以来经过的时间。
 
-**系统能力：** SystemCapability.MiscServices.Time
-
 **支持平台**： Android 、iOS
 
 **参数：**
 
-| 参数名        | 类型    | 必填 | 说明                                                         |
-| ------------- | ------- | ---- | ------------------------------------------------------------ |
-| isNanoseconds | boolean | 否   | 返回结果是否为纳秒数。<br>- true：表示返回结果为纳秒数（ns）。 <br>- false：表示返回结果为毫秒数（ms）。<br>默认值为false。 |
+| 参数名        | 类型    | 必填 | 说明                                                         | Android平台 | iOS平台 |
+| ------------- | ------- | ---- | ------------------------------------------------------------ | ----------- | ------- |
+| isNanoseconds | boolean | 否   | 返回结果是否为纳秒数。<br>- true：表示返回结果为纳秒数（ns）。 <br>- false：表示返回结果为毫秒数（ms）。<br>默认值为false。 | 支持        | 支持    |
 
 **返回值**：
 
@@ -64,16 +62,14 @@ getUptime(timeType: TimeType, isNanoseconds?: boolean): number
 
 使用同步方式获取自系统启动以来经过的时间。
 
-**系统能力：** SystemCapability.MiscServices.Time
-
 **支持平台**： Android 、iOS
 
 **参数：**
 
-| 参数名        | 类型                    | 必填 | 说明                                                                                |
-| ------------- | ----------------------- | ---- |-----------------------------------------------------------------------------------|
-| timeType      | [TimeType](#timetype) | 是   | 获取时间的类型，仅能为`STARTUP`或者`ACTIVE`。                                                  |
-| isNanoseconds | boolean                 | 否   | 返回结果是否为纳秒数。<br/>- true：表示返回结果为纳秒数（ns）。 <br/>- false：表示返回结果为毫秒数（ms）。<br>默认值为false。 |
+| 参数名        | 类型                  | 必填 | 说明                                                         | Android平台 | iOS平台 |
+| ------------- | --------------------- | ---- | ------------------------------------------------------------ | ----------- | ------- |
+| timeType      | [TimeType](#timetype) | 是   | 获取时间的类型，仅能为`STARTUP`或者`ACTIVE`。                | 支持        | 支持    |
+| isNanoseconds | boolean               | 否   | 返回结果是否为纳秒数。<br/>- true：表示返回结果为纳秒数（ns）。 <br/>- false：表示返回结果为毫秒数（ms）。<br>默认值为false。 | 支持        | 支持    |
 
 **返回值：**
 
@@ -106,15 +102,13 @@ getTimezone(callback: AsyncCallback&lt;string&gt;): void
 
 获取系统时区，使用callback异步回调。
 
-**系统能力：** SystemCapability.MiscServices.Time
-
 **支持平台**： Android 、iOS
 
 **参数：**
 
-| 参数名   | 类型              | 必填 | 说明                 |
-| -------- | --------- | ---- | ------------------------ |
-| callback | AsyncCallback&lt;string&gt; | 是   | 回调函数，返回系统时区。 |
+| 参数名   | 类型              | 必填 | 说明                 | Android平台        | iOS平台            |
+| -------- | --------- | ---- | ------------------------ | ------------------------ | ------------------------ |
+| callback | AsyncCallback&lt;string&gt; | 是   | 回调函数，返回系统时区。 | 支持 | 支持 |
 
 **示例：**
 
@@ -140,8 +134,6 @@ try {
 getTimezone(): Promise&lt;string&gt;
 
 获取系统时区，使用Promise异步回调。
-
-**系统能力：** SystemCapability.MiscServices.Time
 
 **支持平台**： Android 、iOS
 
@@ -173,8 +165,6 @@ try {
 getTimezoneSync(): string
 
 获取系统时区，使用同步方式。
-
-**系统能力：** SystemCapability.MiscServices.Time
 
 **支持平台**： Android 、iOS
 
