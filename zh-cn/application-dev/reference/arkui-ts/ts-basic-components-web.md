@@ -870,7 +870,7 @@ onAlert(callback: (event?: { url: string; message: string; result: JsResult }) =
 | ------- | --------------------- | ------------------------------------------------------------ |
 | url     | string                | 当前显示弹窗所在网页的URL。                                  |
 | message | string                | 弹窗中显示的信息。                                           |
-| result  | [JsResult](#jsresult) | 通知Web组件用户操作行为，iOS端时result.handleCancel行为和result.handleConfirm一致。 |
+| result  | [JsResult](#jsresult) | 通知Web组件用户操作行为。Android和iOS端都不支持result.handlePromptConfirm方法；iOS端时result.handleCancel行为和result.handleConfirm一致。 |
 
 **返回值：**
 
@@ -936,7 +936,7 @@ onConfirm(callback: (event?: { url: string; message: string; result: JsResult })
 | ------- | --------------------- | --------------------------- |
 | url     | string                | 当前显示弹窗所在网页的URL。 |
 | message | string                | 弹窗中显示的信息。          |
-| result  | [JsResult](#jsresult) | 通知Web组件用户操作行为。   |
+| result  | [JsResult](#jsresult) | 通知Web组件用户操作行为。Android和iOS端都不支持result.handlePromptConfirm方法。   |
 
 **返回值：**
 
@@ -1692,6 +1692,8 @@ Android和iOS的错误码与OpenHarmony不完全相同，以各平台错误码�
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android、iOS
+
 **返回值：**
 
 | 类型     | 说明          |
@@ -1706,6 +1708,8 @@ getErrorInfo(): string
 Android和iOS的错误信息与OpenHarmony不完全相同，以各平台错误信息为准。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
 
 **返回值：**
 
@@ -1732,6 +1736,8 @@ getRequestHeader(): Array\<Header\>
 获取资源请求头信息。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
 
 **返回值：**
 
@@ -1761,6 +1767,8 @@ isMainFrame(): boolean
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android
+
 **返回值：**
 
 | 类型      | 说明               |
@@ -1774,6 +1782,8 @@ isRedirect(): boolean
 判断资源请求是否被服务端重定向。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
 
 **返回值：**
 
@@ -1789,6 +1799,8 @@ isRequestGesture(): boolean
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android
+
 **返回值：**
 
 | 类型      | 说明                   |
@@ -1802,6 +1814,8 @@ getRequestMethod(): string
 获取请求方法。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
 
 **返回值：**
 
@@ -1840,6 +1854,8 @@ getReasonMessage(): string
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android
+
 **返回值：**
 
 | 类型     | 说明            |
@@ -1853,6 +1869,8 @@ getResponseCode(): number
 获取资源响应的状态码。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
 
 **返回值：**
 
@@ -1868,6 +1886,8 @@ getResponseData(): string
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android
+
 **返回值：**
 
 | 类型     | 说明        |
@@ -1881,6 +1901,8 @@ getResponseEncoding(): string
 获取资源响应的编码。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
 
 **返回值：**
 
@@ -1896,6 +1918,8 @@ getResponseHeader() : Array\<Header\>
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android
+
 **返回值：**
 
 | 类型                         | 说明       |
@@ -1910,6 +1934,8 @@ getResponseMimeType(): string
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android、iOS
+
 **返回值：**
 
 | 类型     | 说明                 |
@@ -1923,6 +1949,8 @@ getResponseDataEx(): string | number | ArrayBuffer | Resource | undefined
 获取资源响应数据，支持多种数据类型。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
 
 **返回值：**
 
@@ -1941,6 +1969,8 @@ getResponseIsReady(): boolean
 获取响应数据是否已准备就绪。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
 
 **返回值：**
 
@@ -1968,6 +1998,8 @@ getLineNumber(): number
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android
+
 **返回值：**
 
 | 类型     | 说明                   |
@@ -1981,6 +2013,8 @@ getMessage(): string
 获取ConsoleMessage的日志信息。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
 
 **返回值：**
 
@@ -1996,6 +2030,8 @@ getMessageLevel(): MessageLevel
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android、iOS
+
 **返回值：**
 
 | 类型                                  | 说明                           |
@@ -2009,6 +2045,8 @@ getSourceId(): string
 获取网页源文件路径和名字。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
 
 **返回值：**
 
@@ -2048,6 +2086,8 @@ handleCancel(): void
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android、iOS
+
 ### handleConfirm
 
 handleConfirm(): void
@@ -2055,6 +2095,8 @@ handleConfirm(): void
 通知Web组件用户确认弹窗操作。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
 
 ### handlePromptConfirm<sup>9+</sup>
 
@@ -2064,6 +2106,8 @@ handlePromptConfirm(result: string): void
 Android和iOS平台在OnAlertEvent和OnConfirmEvent事件下不支持此接口。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -2091,6 +2135,8 @@ cancel(): void
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android、iOS
+
 ### confirm<sup>9+</sup>
 
 confirm(userName: string, password: string): boolean
@@ -2098,6 +2144,8 @@ confirm(userName: string, password: string): boolean
 使用用户名和密码进行HTTP认证操作。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -2119,6 +2167,8 @@ isHttpAuthInfoSaved(): boolean
 通知Web组件用户使用服务器缓存的账号密码认证。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
 
 **返回值：**
 
@@ -2145,6 +2195,8 @@ invoke(origin: string, allow: boolean, retain: boolean): void
 设置网页地理位置权限状态。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
 
 **参数：**
 
@@ -2174,6 +2226,8 @@ deny(): void
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android、iOS
+
 ### getOrigin<sup>9+</sup>
 
 getOrigin(): string
@@ -2181,6 +2235,8 @@ getOrigin(): string
 获取网页来源。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
 
 **返回值：**
 
@@ -2196,6 +2252,8 @@ getAccessibleResource(): Array\<string\>
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android、iOS
+
 **返回值：**
 
 | 类型              | 说明            |
@@ -2209,6 +2267,8 @@ grant(resources: Array\<string\>): void
 对网页访问的给定权限进行授权，跨平台iOS不支持授予某一种类型的权限，只支持授予当前申请的权限，或拒绝当前申请的权限。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -2236,6 +2296,8 @@ handleFileList(fileList: Array\<string\>): void
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android
+
 **参数：**
 
 | 参数名      | 类型            | 必填  | 说明         |
@@ -2262,6 +2324,8 @@ getTitle(): string
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android
+
 **返回值：**
 
 | 类型     | 说明         |
@@ -2275,6 +2339,8 @@ getMode(): FileSelectorMode
 获取文件选择器的模式。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
 
 **返回值：**
 
@@ -2290,6 +2356,8 @@ getAcceptType(): Array\<string\>
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
+**支持平台：** Android
+
 **返回值：**
 
 | 类型              | 说明        |
@@ -2303,6 +2371,8 @@ isCapture(): boolean
 获取是否调用多媒体能力。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
 
 **返回值：**
 
@@ -2783,13 +2853,15 @@ exitFullScreen(): void
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
-| 名称               | 类型   | 必填 | 说明                                               | Android平台 | iOS平台 |
-| ------------------ | ------ | ---- | -------------------------------------------------- | ----------- | ------- |
-| url                | string | 是   | 文件下载的URL。                                    | 支持        | 支持    |
-| userAgent          | string | 是   | 用于下载的用户代理。                               | 支持        | 支持    |
-| contentDisposition | string | 是   | 服务器返回的 Content-Disposition响应头，可能为空。 | 支持        | 不支持  |
-| mimetype           | string | 是   | 服务器返回内容媒体类型（MIME）信息。               | 支持        | 支持    |
-| contentLength      | number | 是   | 服务器返回文件的长度。                             | 支持        | 支持    |
+**支持平台：** Android、iOS
+
+| 名称               | 类型   | 必填 | 说明                                                         |
+| ------------------ | ------ | ---- | ------------------------------------------------------------ |
+| url                | string | 是   | 文件下载的URL。                                              |
+| userAgent          | string | 是   | 用于下载的用户代理。                                         |
+| contentDisposition | string | 是   | 服务器返回的 Content-Disposition响应头，可能为空，iOS不支持。 |
+| mimetype           | string | 是   | 服务器返回内容媒体类型（MIME）信息。                         |
+| contentLength      | number | 是   | 服务器返回文件的长度。                                       |
 
 ## OnShowFileSelectorEvent<sup>16+</sup>
 
