@@ -1993,6 +1993,13 @@ startDownload(url: string): void
 
 使用Web组件的下载能力来下载指定的url, 比如下载网页中指定的图片。
 
+**Android平台AndroidManifest.xml文件中需要添加权限：**
+
+```
+android.permission.WRITE_EXTERNAL_STORAGE
+android.permission.READ_EXTERNAL_STORAGE
+```
+
 **系统能力：** SystemCapability.Web.Webview.Core
 
 **支持平台：** Android、iOS
@@ -5093,6 +5100,13 @@ start(downloadPath: string): void
 > **说明：**
 >
 > 该接口应在WebDownloadDelegate的onBeforeDownload回调中使用。若在WebDownloadDelegate的onBeforeDownload中未调用start('xxx')，则下载任务将保持在PENDING状态。处于PENDING状态的下载会将文件下载到临时目录，临时文件会在WebDownloadItem.start指定目标路径后被重命名为目标路径，未下载完成的部分会在WebDownloadItem.start指定目标路径后直接下载到目标路径。
+
+**Android平台AndroidManifest.xml文件中需要添加权限：**
+
+```
+android.permission.WRITE_EXTERNAL_STORAGE
+android.permission.READ_EXTERNAL_STORAGE
+```
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
