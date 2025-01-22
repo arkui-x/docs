@@ -1727,7 +1727,7 @@ struct WebComponent {
 
 ### runJavaScriptExt<sup>16+</sup>
 
-runJavaScriptExt(script: string | ArrayBuffer, callback : AsyncCallback<JsMessageExt>): void
+runJavaScriptExt(script: string | ArrayBuffer, callback : AsyncCallback\<JsMessageExt\>): void
 
 异步执行JavaScript脚本，并通过回调方式返回脚本执行的结果。runJavaScriptExt需要在loadUrl完成后，比如onPageEnd中调用。
 
@@ -2432,7 +2432,7 @@ struct WebComponent {
 
 postMessageEventExt(message: WebMessageExt): void
 
-发送[WebMessageType](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkweb/js-apis-webview.md#webmessagetype10)类型消息给HTML5侧，必须先调用[onMessageEventExt](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkweb/js-apis-webview.md#onmessageeventext10)，否则会发送失败。完整示例代码参考[onMessageEventExt](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkweb/js-apis-webview.md#onmessageeventext10)。
+发送[WebMessageType](#WebMessageType<sup>16+</sup>)类型消息给HTML5侧，必须先调用[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)，否则会发送失败。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -2442,7 +2442,7 @@ postMessageEventExt(message: WebMessageExt): void
 
 | 参数名  | 类型                                          | 必填 | 说明           |
 | ------- | --------------------------------------------- | ---- | -------------- |
-| message | [WebMessageExt](#WebMessageExt<sup>10+</sup>) | 是   | 要发送的消息。 |
+| message | [WebMessageExt](#WebMessageExt<sup>16+</sup>) | 是   | 要发送的消息。 |
 
 **错误码：**
 
@@ -2455,7 +2455,7 @@ postMessageEventExt(message: WebMessageExt): void
 
 onMessageEventExt(callback: (result: WebMessageExt) => void): void
 
-在应用侧的消息端口上注册回调函数，接收HTML5侧发送过来的[WebMessageType](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkweb/js-apis-webview.md#webmessagetype10)类型消息。
+在应用侧的消息端口上注册回调函数，接收HTML5侧发送过来的[WebMessageType](#WebMessageType<sup>16+</sup>)类型消息。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -2465,7 +2465,7 @@ onMessageEventExt(callback: (result: WebMessageExt) => void): void
 
 | 参数名   | 类型                                                         | 必填 | 说明           |
 | -------- | ------------------------------------------------------------ | ---- | -------------- |
-| callback | (result: [WebMessageExt](#WebMessageExt<sup>10+</sup>)) => void | 是   | 接收到的消息。 |
+| callback | (result: [WebMessageExt](#WebMessageExt<sup>16+</sup>)) => void | 是   | 接收到的消息。 |
 
 **错误码：**
 
@@ -3407,7 +3407,7 @@ Web组件返回的请求/响应头对象。
 
 ### onBeforeDownload<sup>16+</sup>
 
-onBeforeDownload(callback: Callback<WebDownloadItem>): void
+onBeforeDownload(callback: Callback\<WebDownloadItem\>): void
 
 下载开始前通知给用户，用户需要在此接口中调用WebDownloadItem.start("xxx")并提供下载路径，否则下载会一直处于PENDING状态。
 
@@ -3484,7 +3484,7 @@ struct WebComponent {
 
 ### onDownloadUpdated<sup>16+</sup>
 
-onDownloadUpdated(callback: Callback<WebDownloadItem>): void
+onDownloadUpdated(callback: Callback\<WebDownloadItem\>): void
 
 下载过程中的回调，通过该回调的参数可以了解下载进度等信息。
 
@@ -3561,7 +3561,7 @@ struct WebComponent {
 
 ### onDownloadFinish<sup>16+</sup>
 
-onDownloadFinish(callback: Callback<WebDownloadItem>): void
+onDownloadFinish(callback: Callback\<WebDownloadItem\>): void
 
 下载完成的通知。
 
@@ -3638,7 +3638,7 @@ struct WebComponent {
 
 ### onDownloadFailed<sup>16+</sup>
 
-onDownloadFailed(callback: Callback<WebDownloadItem>): void
+onDownloadFailed(callback: Callback\<WebDownloadItem\>): void
 
 下载失败的通知。
 
@@ -4123,9 +4123,9 @@ setType(type: WebMessageType): void
 
 **参数：**
 
-| 参数名 | 类型                                            | 必填 | 说明                                                         |
-| ------ | ----------------------------------------------- | ---- | ------------------------------------------------------------ |
-| type   | [WebMessageType](#WebMessageType<sup>16+</sup>) | 是   | [webMessagePort](#webMessagePort<sup>16+</sup>)接口所支持的数据类型。 |
+| 参数名 | 类型                                            | 必填 | 说明                                                    |
+| ------ | ----------------------------------------------- | ---- | ------------------------------------------------------- |
+| type   | [WebMessageType](#WebMessageType<sup>16+</sup>) | 是   | [webMessagePort](#webMessagePort)接口所支持的数据类型。 |
 
 **错误码：**
 
@@ -4264,7 +4264,7 @@ setError(message: Error): void
 
 ## WebMessageType<sup>16+</sup>
 
-[webMessagePort](#webMessagePort<sup>16+</sup>)接口所支持的数据类型。
+[webMessagePort](#webMessagePort)接口所支持的数据类型。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
