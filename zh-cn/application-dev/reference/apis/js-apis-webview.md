@@ -1740,7 +1740,7 @@ runJavaScriptExt(script: string | ArrayBuffer, callback : AsyncCallback\<JsMessa
 | 参数名   | 类型                                                       | 必填 | 说明                         | Android平台                      | iOS平台                          |
 | -------- | ---------------------------------------------------------- | ---- | ---------------------------- | -------------------------------- | -------------------------------- |
 | script   | string \| ArrayBuffer                                      | 是   | JavaScript脚本。             | 支持string,**不支持ArrayBuffer** | 支持string,**不支持ArrayBuffer** |
-| callback | AsyncCallback<[JsMessageExt](#JsMessageExt<sup>16+</sup>)> | 是   | 回调执行JavaScript脚本结果。 | 支持                             | 支持                             |
+| callback | AsyncCallback\<[JsMessageExt](#jsmessageext16)> | 是   | 回调执行JavaScript脚本结果。 | 支持                             | 支持                             |
 
 **错误码：**
 
@@ -1826,7 +1826,7 @@ struct WebComponent {
 
 ### runJavaScriptExt<sup>16+</sup>
 
-runJavaScriptExt(script: string | ArrayBuffer): Promise<[JsMessageExt](# JsMessageExt<sup>16+</sup>)>
+runJavaScriptExt(script: string | ArrayBuffer): Promise<[JsMessageExt](#JsMessageExt16)>
 
 异步执行JavaScript脚本，并通过Promise方式返回脚本执行的结果。runJavaScriptExt需要在loadUrl完成后，比如onPageEnd中调用。
 
@@ -1842,9 +1842,9 @@ runJavaScriptExt(script: string | ArrayBuffer): Promise<[JsMessageExt](# JsMessa
 
 **返回值：**
 
-| 类型                                                 | 说明                              |
-| ---------------------------------------------------- | --------------------------------- |
-| Promise<[JsMessageExt](#JsMessageExt<sup>16+</sup>)> | Promise实例，返回脚本执行的结果。 |
+| 类型                                     | 说明                              |
+| ---------------------------------------- | --------------------------------- |
+| Promise<[JsMessageExt](#JsMessageExt16)> | Promise实例，返回脚本执行的结果。 |
 
 **错误码：**
 
@@ -1948,9 +1948,9 @@ setDownloadDelegate(delegate: WebDownloadDelegate): void
 
 **参数：**
 
-| 参数名   | 类型                                                      | 必填 | 说明                       |
-| -------- | --------------------------------------------------------- | ---- | -------------------------- |
-| delegate | [WebDownloadDelegate](#WebDownloadDelegate<sup>16+</sup>) | 是   | 用来接收下载进回调的委托。 |
+| 参数名   | 类型                                          | 必填 | 说明                       |
+| -------- | --------------------------------------------- | ---- | -------------------------- |
+| delegate | [WebDownloadDelegate](#WebDownloadDelegate16) | 是   | 用来接收下载进回调的委托。 |
 
 **错误码：**
 
@@ -2432,7 +2432,7 @@ struct WebComponent {
 
 postMessageEventExt(message: WebMessageExt): void
 
-发送[WebMessageType](#WebMessageType<sup>16+</sup>)类型消息给HTML5侧，必须先调用[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)，否则会发送失败。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+发送[WebMessageType](#WebMessageType16)类型消息给HTML5侧，必须先调用[onMessageEventExt](#onMessageEventExt16)，否则会发送失败。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -2440,9 +2440,9 @@ postMessageEventExt(message: WebMessageExt): void
 
 **参数：**
 
-| 参数名  | 类型                                          | 必填 | 说明           |
-| ------- | --------------------------------------------- | ---- | -------------- |
-| message | [WebMessageExt](#WebMessageExt<sup>16+</sup>) | 是   | 要发送的消息。 |
+| 参数名  | 类型                              | 必填 | 说明           |
+| ------- | --------------------------------- | ---- | -------------- |
+| message | [WebMessageExt](#WebMessageExt16) | 是   | 要发送的消息。 |
 
 **错误码：**
 
@@ -2455,7 +2455,7 @@ postMessageEventExt(message: WebMessageExt): void
 
 onMessageEventExt(callback: (result: WebMessageExt) => void): void
 
-在应用侧的消息端口上注册回调函数，接收HTML5侧发送过来的[WebMessageType](#WebMessageType<sup>16+</sup>)类型消息。
+在应用侧的消息端口上注册回调函数，接收HTML5侧发送过来的[WebMessageType](#WebMessageType16)类型消息。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -2463,9 +2463,9 @@ onMessageEventExt(callback: (result: WebMessageExt) => void): void
 
 **参数：**
 
-| 参数名   | 类型                                                         | 必填 | 说明           |
-| -------- | ------------------------------------------------------------ | ---- | -------------- |
-| callback | (result: [WebMessageExt](#WebMessageExt<sup>16+</sup>)) => void | 是   | 接收到的消息。 |
+| 参数名   | 类型                                                | 必填 | 说明           |
+| -------- | --------------------------------------------------- | ---- | -------------- |
+| callback | (result: [WebMessageExt](#WebMessageExt16)) => void | 是   | 接收到的消息。 |
 
 **错误码：**
 
@@ -3417,9 +3417,9 @@ onBeforeDownload(callback: Callback\<WebDownloadItem\>): void
 
 **参数：**
 
-| 参数名   | 类型                                                        | 必填 | 说明             |
-| -------- | ----------------------------------------------------------- | ---- | ---------------- |
-| callback | Callback<[WebDownloadItem](#WebDownloadItem<sup>16+</sup>)> | 是   | 触发下载的回调。 |
+| 参数名   | 类型                                            | 必填 | 说明             |
+| -------- | ----------------------------------------------- | ---- | ---------------- |
+| callback | Callback<[WebDownloadItem](#WebDownloadItem16)> | 是   | 触发下载的回调。 |
 
 **示例：**
 
@@ -3494,9 +3494,9 @@ onDownloadUpdated(callback: Callback\<WebDownloadItem\>): void
 
 **参数：**
 
-| 参数名   | 类型                                                        | 必填 | 说明               |
-| -------- | ----------------------------------------------------------- | ---- | ------------------ |
-| callback | Callback<[WebDownloadItem](#WebDownloadItem<sup>16+</sup>)> | 是   | 下载的回调已更新。 |
+| 参数名   | 类型                                            | 必填 | 说明               |
+| -------- | ----------------------------------------------- | ---- | ------------------ |
+| callback | Callback<[WebDownloadItem](#WebDownloadItem16)> | 是   | 下载的回调已更新。 |
 
 **示例：**
 
@@ -3571,9 +3571,9 @@ onDownloadFinish(callback: Callback\<WebDownloadItem\>): void
 
 **参数：**
 
-| 参数名   | 类型                                                        | 必填 | 说明               |
-| -------- | ----------------------------------------------------------- | ---- | ------------------ |
-| callback | Callback<[WebDownloadItem](#WebDownloadItem<sup>16+</sup>)> | 是   | 下载的回调已完成。 |
+| 参数名   | 类型                                            | 必填 | 说明               |
+| -------- | ----------------------------------------------- | ---- | ------------------ |
+| callback | Callback<[WebDownloadItem](#WebDownloadItem16)> | 是   | 下载的回调已完成。 |
 
 **示例：**
 
@@ -3648,9 +3648,9 @@ onDownloadFailed(callback: Callback\<WebDownloadItem\>): void
 
 **参数：**
 
-| 参数名   | 类型                                                        | 必填 | 说明           |
-| -------- | ----------------------------------------------------------- | ---- | -------------- |
-| callback | Callback<[WebDownloadItem](#WebDownloadItem<sup>16+</sup>)> | 是   | 下载回调失败。 |
+| 参数名   | 类型                                            | 必填 | 说明           |
+| -------- | ----------------------------------------------- | ---- | -------------- |
+| callback | Callback<[WebDownloadItem](#WebDownloadItem16)> | 是   | 下载回调失败。 |
 
 **示例：**
 
@@ -3707,7 +3707,7 @@ struct WebComponent {
             console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
           }
         })
-      Web({ src: 'www.example.com', controller: this.controller })
+      Web({ src: 'www.example.com', controller: this.controller })runJavaScriptExt
     }
   }
 }
@@ -3715,13 +3715,13 @@ struct WebComponent {
 
 ## WebMessageExt<sup>16+</sup>
 
-[webMessagePort](#WebMessagePort)接口接收、发送的数据对象。
+[webMessagePort](#webmessageport)接口接收、发送的数据对象。
 
 ### getType<sup>16+</sup>
 
 getType(): WebMessageType
 
-获取数据对象的类型。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+获取数据对象的类型。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3729,15 +3729,15 @@ getType(): WebMessageType
 
 **返回值：**
 
-| 类型                                            | 说明                                                    |
-| ----------------------------------------------- | ------------------------------------------------------- |
-| [WebMessageType](#WebMessageType<sup>16+</sup>) | [webMessagePort](#WebMessagePort)接口所支持的数据类型。 |
+| 类型                                | 说明                                                    |
+| ----------------------------------- | ------------------------------------------------------- |
+| [WebMessageType](#WebMessageType16) | [webMessagePort](#webmessageport)接口所支持的数据类型。 |
 
 ### getString<sup>16+</sup>
 
 getString(): string
 
-获取数据对象的字符串类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+获取数据对象的字符串类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3759,7 +3759,7 @@ getString(): string
 
 getNumber(): number
 
-获取数据对象的数值类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+获取数据对象的数值类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3781,7 +3781,7 @@ getNumber(): number
 
 getBoolean(): boolean
 
-获取数据对象的布尔类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+获取数据对象的布尔类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3803,7 +3803,7 @@ getBoolean(): boolean
 
 getArray(): Array<string | number | boolean>
 
-获取数据对象的数组类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+获取数据对象的数组类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3825,7 +3825,7 @@ getArray(): Array<string | number | boolean>
 
 getError(): Error
 
-获取数据对象的错误类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+获取数据对象的错误类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3847,7 +3847,7 @@ getError(): Error
 
 setType(type: WebMessageType): void
 
-设置数据对象的类型。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+设置数据对象的类型。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3855,9 +3855,9 @@ setType(type: WebMessageType): void
 
 **参数：**
 
-| 参数名 | 类型                                            | 必填 | 说明                                                    |
-| ------ | ----------------------------------------------- | ---- | ------------------------------------------------------- |
-| type   | [WebMessageType](#WebMessageType<sup>16+</sup>) | 是   | [webMessagePort](#WebMessagePort)接口所支持的数据类型。 |
+| 参数名 | 类型                                | 必填 | 说明                                                    |
+| ------ | ----------------------------------- | ---- | ------------------------------------------------------- |
+| type   | [WebMessageType](#WebMessageType16) | 是   | [webMessagePort](#webmessageport)接口所支持的数据类型。 |
 
 **错误码：**
 
@@ -3870,7 +3870,7 @@ setType(type: WebMessageType): void
 
 setString(message: string): void
 
-设置数据对象的字符串类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+设置数据对象的字符串类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3893,7 +3893,7 @@ setString(message: string): void
 
 setNumber(message: number): void
 
-设置数据对象的数值类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+设置数据对象的数值类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3916,7 +3916,7 @@ setNumber(message: number): void
 
 setBoolean(message: boolean): void
 
-设置数据对象的布尔类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+设置数据对象的布尔类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3939,7 +3939,7 @@ setBoolean(message: boolean): void
 
 setArray(message: Array<string | number | boolean>): void
 
-设置数据对象的数组类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+设置数据对象的数组类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3962,7 +3962,7 @@ setArray(message: Array<string | number | boolean>): void
 
 setError(message: Error): void
 
-设置数据对象的错误对象类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+设置数据对象的错误对象类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3983,13 +3983,13 @@ setError(message: Error): void
 
 ## JsMessageExt<sup>16+</sup>
 
-[runJavaScriptExt](#runJavaScriptExt<sup>16+</sup>)接口执行脚本返回的数据对象。
+[runJavaScriptExt](#runJavaScriptExt16)接口执行脚本返回的数据对象。
 
 ### getType<sup>16+</sup>
 
 getType(): JsMessageType
 
-获取数据对象的类型。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt<sup>16+</sup>)。
+获取数据对象的类型。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3997,15 +3997,15 @@ getType(): JsMessageType
 
 **返回值：**
 
-| 类型                                          | 说明                                                         |
-| --------------------------------------------- | ------------------------------------------------------------ |
-| [JsMessageType](#JsMessageType<sup>16+</sup>) | [runJavaScriptExt](#runJavaScriptExt<sup>16+</sup>)接口脚本执行后返回的结果的类型。 |
+| 类型                              | 说明                                                         |
+| --------------------------------- | ------------------------------------------------------------ |
+| [JsMessageType](#JsMessageType16) | [runJavaScriptExt](#runJavaScriptExt16)接口脚本执行后返回的结果的类型。 |
 
 ###  getString<sup>16+</sup>
 
 getString(): string
 
-获取数据对象的字符串类型数据。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt<sup>16+</sup>)。
+获取数据对象的字符串类型数据。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -4027,7 +4027,7 @@ getString(): string
 
 getNumber(): number
 
-获取数据对象的数值类型数据。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt<sup>16+</sup>)。
+获取数据对象的数值类型数据。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -4049,7 +4049,7 @@ getNumber(): number
 
 getBoolean(): boolean
 
-获取数据对象的布尔类型数据。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt<sup>16+</sup>)。
+获取数据对象的布尔类型数据。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -4071,7 +4071,7 @@ getBoolean(): boolean
 
 getArray(): Array<string | number | boolean>
 
-获取数据对象的数组类型数据。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt<sup>16+</sup>)。
+获取数据对象的数组类型数据。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -4093,7 +4093,7 @@ getArray(): Array<string | number | boolean>
 
 getError(): Error
 
-获取数据对象的错误类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
+获取数据对象的错误类型数据。完整示例代码参考[runJavaScriptExt](#runJavaScriptExt16)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -4111,147 +4111,9 @@ getError(): Error
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-### setType<sup>16+</sup>
-
-setType(type: WebMessageType): void
-
-设置数据对象的类型。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
-
-**系统能力：** SystemCapability.Web.Webview.Core
-
-**支持平台：** Android、iOS
-
-**参数：**
-
-| 参数名 | 类型                                            | 必填 | 说明                                                    |
-| ------ | ----------------------------------------------- | ---- | ------------------------------------------------------- |
-| type   | [WebMessageType](#WebMessageType<sup>16+</sup>) | 是   | [webMessagePort](#webMessagePort)接口所支持的数据类型。 |
-
-**错误码：**
-
-| 错误码ID | 错误信息                                                     |
-| -------- | ------------------------------------------------------------ |
-| 17100014 | The type and value of the message do not match.              |
-| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
-
-### setString<sup>16+</sup>
-
-setString(message: string): void
-
-设置数据对象的字符串类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
-
-**系统能力：** SystemCapability.Web.Webview.Core
-
-**支持平台：** Android、iOS
-
-**参数：**
-
-| 参数名  | 类型   | 必填 | 说明             |
-| ------- | ------ | ---- | ---------------- |
-| message | string | 是   | 字符串类型数据。 |
-
-**错误码：**
-
-| 错误码ID | 错误信息                                                     |
-| -------- | ------------------------------------------------------------ |
-| 17100014 | The type and value of the message do not match.              |
-| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
-
-### setNumber<sup>16+</sup>
-
-setNumber(message: number): void
-
-设置数据对象的数值类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
-
-**系统能力：** SystemCapability.Web.Webview.Core
-
-**支持平台：** iOS
-
-**参数：**
-
-| 参数名  | 类型   | 必填 | 说明           |
-| ------- | ------ | ---- | -------------- |
-| message | number | 是   | 数值类型数据。 |
-
-**错误码：**
-
-| 错误码ID | 错误信息                                                     |
-| -------- | ------------------------------------------------------------ |
-| 17100014 | The type and value of the message do not match.              |
-| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
-
-### setBoolean<sup>16+</sup>
-
-setBoolean(message: boolean): void
-
-设置数据对象的布尔类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
-
-**系统能力：** SystemCapability.Web.Webview.Core
-
-**支持平台：** iOS
-
-**参数：**
-
-| 参数名  | 类型    | 必填 | 说明           |
-| ------- | ------- | ---- | -------------- |
-| message | boolean | 是   | 布尔类型数据。 |
-
-**错误码：**
-
-| 错误码ID | 错误信息                                                     |
-| -------- | ------------------------------------------------------------ |
-| 17100014 | The type and value of the message do not match.              |
-| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
-
-### setArray<sup>16+</sup>
-
-setArray(message: Array<string | number | boolean>): void
-
-设置数据对象的数组类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
-
-**系统能力：** SystemCapability.Web.Webview.Core
-
-**支持平台：** iOS
-
-**参数：**
-
-| 参数名  | 类型                               | 必填 | 说明           |
-| ------- | ---------------------------------- | ---- | -------------- |
-| message | Array<string \| number \| boolean> | 是   | 数组类型数据。 |
-
-**错误码：**
-
-| 错误码ID | 错误信息                                                     |
-| -------- | ------------------------------------------------------------ |
-| 17100014 | The type and value of the message do not match.              |
-| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
-
-### setError<sup>16+</sup>
-
-setError(message: Error): void
-
-设置数据对象的错误对象类型数据。完整示例代码参考[onMessageEventExt](#onMessageEventExt<sup>16+</sup>)。
-
-**系统能力：** SystemCapability.Web.Webview.Core
-
-**支持平台：** iOS
-
-**参数：**
-
-| 参数名  | 类型  | 必填 | 说明               |
-| ------- | ----- | ---- | ------------------ |
-| message | Error | 是   | 错误对象类型数据。 |
-
-**错误码：**
-
-| 错误码ID | 错误信息                                                     |
-| -------- | ------------------------------------------------------------ |
-| 17100014 | The type and value of the message do not match.              |
-| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
-
 ## JsMessageType<sup>16+</sup>
 
-[runJavaScriptExt](#runJavaScriptExt<sup>16+</sup>)接口脚本执行后返回的结果的类型。
+[runJavaScriptExt](#runJavaScriptExt16)接口脚本执行后返回的结果的类型。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -4264,7 +4126,7 @@ setError(message: Error): void
 
 ## WebMessageType<sup>16+</sup>
 
-[webMessagePort](#webMessagePort)接口所支持的数据类型。
+[webMessagePort](#webmessageport)接口所支持的数据类型。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -4564,9 +4426,9 @@ getState(): WebDownloadState
 
 **返回值：**
 
-| 类型                                                | 说明         |
-| --------------------------------------------------- | ------------ |
-| [WebDownloadState](#WebDownloadState<sup>16+</sup>) | 下载的状态。 |
+| 类型                                    | 说明         |
+| --------------------------------------- | ------------ |
+| [WebDownloadState](#WebDownloadState16) | 下载的状态。 |
 
 **示例：**
 
@@ -4631,9 +4493,9 @@ getLastErrorCode(): WebDownloadErrorCode
 
 **返回值：**
 
-| 类型                                                        | 说明                         |
-| ----------------------------------------------------------- | ---------------------------- |
-| [WebDownloadErrorCode](#WebDownloadErrorCode<sup>16+</sup>) | 下载发生错误的时候的错误码。 |
+| 类型                                            | 说明                         |
+| ----------------------------------------------- | ---------------------------- |
+| [WebDownloadErrorCode](#WebDownloadErrorCode16) | 下载发生错误的时候的错误码。 |
 
 **示例：**
 
@@ -5466,9 +5328,9 @@ static setDownloadDelegate(delegate: WebDownloadDelegate): void
 
 **参数：**
 
-| 参数名   | 类型                                                      | 必填 | 说明                       |
-| -------- | --------------------------------------------------------- | ---- | -------------------------- |
-| delegate | [WebDownloadDelegate](#WebDownloadDelegate<sup>16+</sup>) | 是   | 用来接收下载进回调的委托。 |
+| 参数名   | 类型                                          | 必填 | 说明                       |
+| -------- | --------------------------------------------- | ---- | -------------------------- |
+| delegate | [WebDownloadDelegate](#WebDownloadDelegate16) | 是   | 用来接收下载进回调的委托。 |
 
 **示例：**
 
