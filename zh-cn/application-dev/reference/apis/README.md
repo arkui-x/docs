@@ -20,6 +20,7 @@
 - Ability框架
   - Stage模型能力的接口(推荐)
     - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](js-apis-app-ability-abilityLifecycleCallback.md)
+    - [@ohos.app.ability.ApplicationStateChangeCallback (ApplicationStateChangeCallback)](js-apis-app-ability-applicationStateChangeCallback.md)
     - [@ohos.app.ability.AbilityConstant (AbilityConstant)](js-apis-app-ability-abilityConstant.md)
     - [@ohos.app.ability.AbilityStage (AbilityStage)](js-apis-app-ability-abilityStage.md)
     - [@ohos.app.ability.UIAbility (UIAbility)](js-apis-app-ability-uiAbility.md)
