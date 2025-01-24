@@ -16,12 +16,6 @@ import Want from '@ohos.app.ability.Want';
 
 **参数：**
 
-| 名称        | 类型                 | 必填 | 说明                                               |
-| ----------- | -------------------- | ---- | -------------------------------------------------- |
-| bundleName  | string               | 是   | 表示待启动Ability所在的应用Bundle名称。            |
-| moduleName  | string               | 是   | 表示待启动的Ability所属的模块名称。                |
-| abilityName | string               | 是   | 表示待启动Ability名称。                            |
-| parameters  | {[key: string]: any} | 否   | 表示WantParams描述，由开发者自行决定传入的键值对。 |
 **支持平台：** Android、iOS
 
 | 名称        | 类型                 | 必填 | 说明                                               | Android平台 | iOS平台 |
