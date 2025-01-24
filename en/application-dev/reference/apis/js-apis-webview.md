@@ -1699,6 +1699,532 @@ struct WebComponent {
 }
 ```
 
+## WebStorage
+
+Implements a **WebStorage** object to manage the Web SQL database and HTML5 Web Storage APIs. All **Web** components in an application share a **WebStorage** object.
+
+> **NOTE**
+>
+> You must load the **Web** component before calling the APIs in **WebStorage**.
+
+### deleteOrigin
+
+static deleteOrigin(origin: string): void
+
+Deletes all data in the specified origin.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description                    |
+| ------ | ------ | ---- | ------------------------ |
+| origin | string | Yes  | Index of the origin, which is obtained through [getOrigins](#getorigins).|
+
+**Error codes**
+
+| ID| Error Message                                              |
+| -------- | ------------------------------------------------------ |
+| 17100011 | Invalid origin.                             |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  origin: string = "resource://rawfile/";
+
+  build() {
+    Column() {
+      Button('deleteOrigin')
+        .onClick(() => {
+          try {
+            webview.WebStorage.deleteOrigin(this.origin);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+    }
+  }
+}
+```
+
+HTML file to be loaded:
+ ```html
+  <!-- index.html -->
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+      <title>test</title>
+      <script type="text/javascript">
+          var request = window.indexedDB.open("MyDatabase", 1);
+          request.onsuccess = function(event) {
+            var db = event.target.result;
+            var transaction = db.transaction(["MyObjectStore"], "readwrite");
+            var objectStore = transaction.objectStore("MyObjectStore");
+
+            var data = { key: "myKey", value: "myValue" };
+            var requestAdd = objectStore.add(data);
+          
+            requestAdd.onsuccess = function(event) {
+                document.querySelector('#status').innerHTML = '<p>Data table created, with one data records inserted.</p>';
+            };
+            
+            requestAdd.onerror = function(event) {
+                console.log("Error adding data:", event.target.errorCode);
+            };
+          };
+
+          request.onerror = function(event) {
+              console.log("Database error:", event.target.errorCode);
+          };
+
+          request.onupgradeneeded = function(event) {
+            var db = event.target.result;
+            if (!db.objectStoreNames.contains("MyObjectStore")) {
+                var objectStore = db.createObjectStore("MyObjectStore", { keyPath: "key" });
+            }
+          };
+      </script>
+  </head>
+  <body>
+  <div id="status" name="status">status information </div>
+  </body>
+  </html>
+ ```
+
+### getOrigins
+
+static getOrigins(callback: AsyncCallback\<Array\<WebStorageOrigin>>): void
+
+Obtains information about all origins that are currently using the Web SQL Database. This API uses an asynchronous callback to return the result.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name  | Type                                  | Mandatory| Description                                                  |
+| -------- | -------------------------------------- | ---- | ------------------------------------------------------ |
+| callback | AsyncCallback\<Array\<[WebStorageOrigin](#webstorageorigin)>> | Yes  | Callback used to return the information about the origins. For details, see [WebStorageOrigin](#webstorageorigin).|
+
+**Error codes**
+
+| ID| Error Message                                              |
+| -------- | ------------------------------------------------------ |
+| 17100012 | Invalid web storage origin.                             |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('getOrigins')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOrigins((error, origins) => {
+              if (error) {
+                console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+                return;
+              }
+              for (let i = 0; i < origins.length; i++) {
+                console.log('origin: ' + origins[i].origin);
+                console.log('usage: ' + origins[i].usage);
+                console.log('quota: ' + origins[i].quota);
+              }
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+    }
+  }
+}
+```
+
+For details about the HTML file loaded, see the HTML file loaded using the [deleteOrigin](#deleteorigin) API.
+
+### getOrigins
+
+static getOrigins(): Promise\<Array\<WebStorageOrigin>>
+
+Obtains information about all origins that are currently using the Web SQL Database. This API uses a promise to return the result.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Return value**
+
+| Type                            | Description                                                        |
+| -------------------------------- | ------------------------------------------------------------ |
+| Promise\<Array\<[WebStorageOrigin](#webstorageorigin)>> | Promise used to return the information about the origins. For details, see [WebStorageOrigin](#webstorageorigin).|
+
+**Error codes**
+
+| ID| Error Message                                              |
+| -------- | ------------------------------------------------------ |
+| 17100012 | Invalid web storage origin.                             |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('getOrigins')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOrigins()
+              .then(origins => {
+                for (let i = 0; i < origins.length; i++) {
+                  console.log('origin: ' + origins[i].origin);
+                  console.log('usage: ' + origins[i].usage);
+                  console.log('quota: ' + origins[i].quota);
+                }
+              })
+              .catch((e: BusinessError) => {
+                console.log('error: ' + JSON.stringify(e));
+              })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+    }
+  }
+}
+```
+
+For details about the HTML file loaded, see the HTML file loaded using the [deleteOrigin](#deleteorigin) API.
+
+### getOriginQuota
+
+static getOriginQuota(origin: string, callback: AsyncCallback\<number>): void
+
+Obtains the storage quota of an origin in the Web SQL Database, in bytes. This API uses an asynchronous callback to return the result.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name  | Type                 | Mandatory| Description              |
+| -------- | --------------------- | ---- | ------------------ |
+| origin   | string                | Yes  | Index of the origin.|
+| callback | AsyncCallback\<number> | Yes  | Storage quota of the origin.  |
+
+**Error codes**
+
+| ID| Error Message                                              |
+| -------- | ------------------------------------------------------ |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  origin: string = "resource://rawfile/";
+
+  build() {
+    Column() {
+      Button('getOriginQuota')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOriginQuota(this.origin, (error, quota) => {
+              if (error) {
+                console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+                return;
+              }
+              console.log('quota: ' + quota);
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+    }
+  }
+}
+```
+
+For details about the HTML file loaded, see the HTML file loaded using the [deleteOrigin](#deleteorigin) API.
+
+### getOriginQuota
+
+static getOriginQuota(origin: string): Promise\<number>
+
+Obtains the storage quota of an origin in the Web SQL Database, in bytes. This API uses a promise to return the result.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description              |
+| ------ | ------ | ---- | ------------------ |
+| origin | string | Yes  | Index of the origin.|
+
+**Return value**
+
+| Type           | Description                                   |
+| --------------- | --------------------------------------- |
+| Promise\<number> | Promise used to return the storage quota of the origin.|
+
+**Error codes**
+
+| ID| Error Message                                              |
+| -------- | ------------------------------------------------------ |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  origin: string = "resource://rawfile/";
+
+  build() {
+    Column() {
+      Button('getOriginQuota')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOriginQuota(this.origin)
+              .then(quota => {
+                console.log('quota: ' + quota);
+              })
+              .catch((e: BusinessError) => {
+                console.log('error: ' + JSON.stringify(e));
+              })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+    }
+  }
+}
+```
+
+For details about the HTML file loaded, see the HTML file loaded using the [deleteOrigin](#deleteorigin) API.
+
+### getOriginUsage
+
+static getOriginUsage(origin: string, callback: AsyncCallback\<number>): void
+
+Obtains the storage usage of an origin in the Web SQL Database, in bytes. This API uses an asynchronous callback to return the result.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name  | Type                 | Mandatory| Description              |
+| -------- | --------------------- | ---- | ------------------ |
+| origin   | string                | Yes  | Index of the origin.|
+| callback | AsyncCallback\<number> | Yes  | Storage usage of the origin.  |
+
+**Error codes**
+
+| ID| Error Message                                              |
+| -------- | ------------------------------------------------------ |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  origin: string = "resource://rawfile/";
+
+  build() {
+    Column() {
+      Button('getOriginUsage')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOriginUsage(this.origin, (error, usage) => {
+              if (error) {
+                console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+                return;
+              }
+              console.log('usage: ' + usage);
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+    }
+  }
+}
+```
+
+For details about the HTML file loaded, see the HTML file loaded using the [deleteOrigin](#deleteorigin) API.
+
+### getOriginUsage
+
+static getOriginUsage(origin: string): Promise\<number>
+
+Obtains the storage usage of an origin in the Web SQL Database, in bytes. This API uses a promise to return the result.
+
+iOS: This API is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description              |
+| ------ | ------ | ---- | ------------------ |
+| origin | string | Yes  | Index of the origin.|
+
+**Return value**
+
+| Type           | Description                                 |
+| --------------- | ------------------------------------- |
+| Promise\<number> | Promise used to return the storage usage of the origin.|
+
+**Error codes**
+
+| ID| Error Message                                             |
+| -------- | ----------------------------------------------------- |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  origin: string = "resource://rawfile/";
+
+  build() {
+    Column() {
+      Button('getOriginUsage')
+        .onClick(() => {
+          try {
+            webview.WebStorage.getOriginUsage(this.origin)
+              .then(usage => {
+                console.log('usage: ' + usage);
+              }).catch((e: BusinessError) => {
+              console.error('error: ' + JSON.stringify(e));
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+    }
+  }
+}
+```
+
+For details about the HTML file loaded, see the HTML file loaded using the [deleteOrigin](#deleteorigin) API.
+
+### deleteAllData
+
+static deleteAllData(incognito?: boolean): void
+
+Deletes all data in the Web SQL Database.
+
+iOS: This API is not supported.
+incognito: This Parameter is not supported.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('deleteAllData')
+        .onClick(() => {
+          try {
+            webview.WebStorage.deleteAllData();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+    }
+  }
+}
+```
+
+For details about the HTML file loaded, see the HTML file loaded using the [deleteOrigin](#deleteorigin) API.
+
 ## WebHeader
 
 Describes the request/response header returned by the **\<Web>** component.
@@ -1709,3 +2235,15 @@ Describes the request/response header returned by the **\<Web>** component.
 | ----------- | ------ | -----|------|------------------- |
 | headerKey   | string | Yes| Yes| Key of the request/response header.  |
 | headerValue | string | Yes| Yes| Value of the request/response header.|
+
+## WebStorageOrigin
+
+Provides usage information of the Web SQL Database.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+| Name  | Type  | Readable| Writable| Description|
+| ------ | ------ | ---- | ---- | ---- |
+| origin | string | Yes | Yes| Index of the origin.|
+| usage  | number | Yes | Yes| Storage usage of the origin.    |
+| quota  | number | Yes | Yes| Storage quota of the origin.  |

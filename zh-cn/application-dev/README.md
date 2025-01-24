@@ -42,6 +42,7 @@
 - [Plugin生命周期开发指南](./tutorial/how-to-use-arkui-x-plugin-on-android.md)
 - [联动编译开发指南](./tutorial/how-to-linkage-compilation-on-android.md)
 - [Fragment跨平台开发指南](./tutorial/how-to-use-fragment-on-android.md)
+- [ArkUI-X框架LogInterface使用指南](./tutorial/how-to-use-arkui-x-loginterface-on-android.md)
 
 ### iOS平台开发
 
@@ -53,6 +54,11 @@
 - [动态化开发指南](./tutorial/how-to-use-dynamic-on-ios.md)
 - [Plugin生命周期开发指南](./tutorial/how-to-use-arkui-x-plugin-on-ios.md)
 - [联动编译开发指南](./tutorial/how-to-linkage-compilation-on-ios.md)
+- [ArkUI-X框架LogInterface使用指南](./tutorial/how-to-use-arkui-x-loginterface-on-ios.md)
+
+### 应用改造
+
+- [应用改造指南](./tutorial/how-to-use-arkuix-on-applicationRetrofit.md)
 
 ### 开发工具
 

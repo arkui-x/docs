@@ -16,10 +16,20 @@
   - [@ohos.promptAction (弹窗)](js-apis-promptAction.md)
   - [@ohos.router (页面路由)](js-apis-router.md)
   - [@ohos.arkui.drawableDescriptor (DrawableDescriptor)](js-apis-arkui-drawableDescriptor.md)
+
+- ArkTS组件
+  - 按钮与选择
+    - [SegmentButton](js-apis-arkui-advanced-segmentButton.md)
+  - 标题栏与工具栏
+    - [ToolBar](js-apis-arkui-advanced-toolBar.md)
+    - [SubHeader](js-apis-arkui-advanced-subHeader.md)
+  - 弹窗
+    - [弹出框 (Diglog)](js-apis-arkui-advanced-dialog.md)
   
 - Ability框架
   - Stage模型能力的接口(推荐)
     - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](js-apis-app-ability-abilityLifecycleCallback.md)
+    - [@ohos.app.ability.ApplicationStateChangeCallback (ApplicationStateChangeCallback)](js-apis-app-ability-applicationStateChangeCallback.md)
     - [@ohos.app.ability.AbilityConstant (AbilityConstant)](js-apis-app-ability-abilityConstant.md)
     - [@ohos.app.ability.AbilityStage (AbilityStage)](js-apis-app-ability-abilityStage.md)
     - [@ohos.app.ability.UIAbility (UIAbility)](js-apis-app-ability-uiAbility.md)
@@ -103,6 +113,10 @@
   - [@ohos.security.cert(证书算法库框架)](js-apis-cert.md)
 
 - 语言基础类库
+  - [@arkts.collections (ArkTS容器集)](js-apis-arkts-collections.md)
+  - [@arkts.lang (ArkTS语言基础能力)](js-apis-arkts-lang.md)
+  - [@arkts.math.Decimal (高精度数学库Decimal)](js-apis-arkts-decimal.md)
+  - [@arkts.utils (ArkTS工具库)](js-apis-arkts-utils.md)
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
   - [@ohos.convertxml (xml转换JavaScript)](js-apis-convertxml.md)
   - [@ohos.process (获取进程相关的信息)](js-apis-process.md)
@@ -139,3 +153,6 @@
 
 - 进程线程通信
   - [@ohos.events.emitter (Emitter)](js-apis-emitter.md)
+
+- 其他
+  - [@ohos.systemDateTime (系统时间、时区)](js-apis-date-time.md)

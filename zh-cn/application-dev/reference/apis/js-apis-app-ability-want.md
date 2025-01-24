@@ -16,12 +16,12 @@ import Want from '@ohos.app.ability.Want';
 
 **系统能力**：以下各项对应的系统能力均为SystemCapability.Ability.AbilityBase
 
-| 名称        | 类型                 | 必填 | 说明                                                         |
-| ----------- | -------------------- | ---- | ------------------------------------------------------------ |
-| bundleName   | string               | 是   | 表示待启动Ability所在的应用Bundle名称。 |
-| moduleName | string | 是 | 表示待启动的Ability所属的模块名称。 |
-| abilityName  | string               | 是   | 表示待启动Ability名称。 |
-| parameters   | {[key: string]: any} | 否   | 表示WantParams描述，由开发者自行决定传入的键值对。|
+| 名称        | 类型                 | 必填 | 说明                                               |
+| ----------- | -------------------- | ---- | -------------------------------------------------- |
+| bundleName  | string               | 是   | 表示待启动Ability所在的应用Bundle名称。            |
+| moduleName  | string               | 是   | 表示待启动的Ability所属的模块名称。                |
+| abilityName | string               | 是   | 表示待启动Ability名称。                            |
+| parameters  | {[key: string]: any} | 否   | 表示WantParams描述，由开发者自行决定传入的键值对。 |
 
 **示例：**
 
@@ -43,56 +43,108 @@ import Want from '@ohos.app.ability.Want';
     console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
   });
   ```
+- 目前parameters支持的数据类型有：字符串、数字、布尔、数组、对象。
 
-- 目前parameters支持的数据类型有：字符串、数字、布尔等。
+  * 字符串（String）
 
-    * 字符串（String）
-        ```ts
-        import common from '@ohos.app.ability.common';
-        import Want from '@ohos.app.ability.Want';
+    ```ts
+    import common from '@ohos.app.ability.common';
+    import Want from '@ohos.app.ability.Want';
 
-        let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
-        let want: Want = {
-          bundleName: 'com.example.myapplication',
-          abilityName: 'FuncAbility',
-          parameters: {
-            keyForString: 'str',
-          },
-        };
+    let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
+    let want: Want = {
+      bundleName: 'com.example.myapplication',
+      abilityName: 'FuncAbility',
+      parameters: {
+        keyForString: 'str',
+      },
+    };
 
-        context.startAbility(want, (err) => {
-          console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
-        });
-        ```
-    * 数字（Number）
-        ```ts
-        import common from '@ohos.app.ability.common';
-        import Want from '@ohos.app.ability.Want';
+    context.startAbility(want, (err) => {
+      console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
+    });
+    ```
+  * 数字（Number）
 
-        let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
-        let want: Want = {
-          bundleName: 'com.example.myapplication',
-          abilityName: 'FuncAbility',
-          parameters: {
-            keyForInt: 100,
-            keyForDouble: 99.99,
-          },
-        };
-        ```
-    * 布尔（Boolean）
-        ```ts
-        import Want from '@ohos.app.ability.Want';
+    ```ts
+    import common from '@ohos.app.ability.common';
+    import Want from '@ohos.app.ability.Want';
 
-        let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
-        let want: Want = {
-          bundleName: 'com.example.myapplication',
-          abilityName: 'FuncAbility',
-          parameters: {
-            keyForBool: true,
-          },
-        };
+    let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
+    let want: Want = {
+      bundleName: 'com.example.myapplication',
+      abilityName: 'FuncAbility',
+      parameters: {
+        keyForInt: 100,
+        keyForDouble: 99.99,
+      },
+    };
+    ```
+  * 布尔（Boolean）
 
-        context.startAbility(want, (err) => {
-          console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
-        });
-        ```
+    ```ts
+    import Want from '@ohos.app.ability.Want';
+
+    let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
+    let want: Want = {
+      bundleName: 'com.example.myapplication',
+      abilityName: 'FuncAbility',
+      parameters: {
+        keyForBool: true,
+      },
+    };
+
+    context.startAbility(want, (err) => {
+      console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
+    });
+    ```
+  * 对象（Object）
+
+    ```ts
+    import { common, Want } from '@kit.AbilityKit';
+    import { BusinessError } from '@kit.BasicServicesKit';
+
+    let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
+    let want: Want = {
+      bundleName: 'com.example.myapplication',
+      abilityName: 'FuncAbility',
+      parameters: {
+        keyForObject: {
+          keyForObjectString: 'str',
+          keyForObjectInt: -200,
+          keyForObjectDouble: 35.5,
+          keyForObjectBool: false,
+        },
+      },
+    };
+
+    context.startAbility(want, (err: BusinessError) => {
+      if (err.code) {
+        console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
+      }
+    });
+    ```
+  * 数组（Array）
+
+    ```ts
+    import { common, Want } from '@kit.AbilityKit';
+    import { BusinessError } from '@kit.BasicServicesKit';
+
+    let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
+    let want: Want = {
+      bundleName: 'com.example.myapplication',
+      abilityName: 'FuncAbility',
+      parameters: {
+        keyForArrayString: ['str1', 'str2', 'str3'],
+        keyForArrayInt: [100, 200, 300, 400],
+        keyForArrayDouble: [0.1, 0.2],
+      },
+    };
+
+    context.startAbility(want, (err: BusinessError) => {
+      if (err.code) {
+        console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
+      }
+    });
+    ```
+    不支持数组中嵌套数组以及Object对象。

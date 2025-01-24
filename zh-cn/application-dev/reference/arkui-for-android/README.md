@@ -13,3 +13,4 @@
 | [StageApplicationDelegate](StageApplicationDelegate.md) | Stage模型Application代理类，将来自StageApplication的数据经过处理后传递给OpenHarmony框架层 |
 | [StageActivity](StageActivity.md) | Stage模型Activity，将Android中Activity的生命周期与OpenHarmony中Ability的生命周期进行映射 |
 | [IArkUIXPlugin](IArkUIXPlugin.md) | 所有ArkUI-X插件必须实现的接口。 |
+| [ILogger](ILogger.md) | 日志记录的通用接口 |

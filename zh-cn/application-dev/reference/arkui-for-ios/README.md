@@ -12,3 +12,4 @@
 | [StageViewController](StageViewController.md) | Stage模型UIViewController，将iOS中UIViewController的生命周期与OpenHarmony中Ability的生命周期进行映射 |
 | [StageApplication](StageApplication.md) | 负责iOS应用初始化流程 |
 | [IArkUIXPlugin](IArkUIXPlugin.md) | 所有ArkUI-X插件必须实现的接口。 |
+| [ILogger](ILogger.md) | 日志记录的通用接口 |

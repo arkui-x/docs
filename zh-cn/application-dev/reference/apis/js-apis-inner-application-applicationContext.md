@@ -125,6 +125,105 @@ export default class EntryAbility extends UIAbility {
 }
 ```
 
+## ApplicationContext.on('applicationStateChange')<sup>16+</sup>
+
+on(type: 'applicationStateChange', callback: ApplicationStateChangeCallback): void
+
+注册对当前应用前后台变化的监听。使用callback异步回调。仅支持主线程调用。
+
+**系统能力**：SystemCapability.Ability.AbilityRuntime.Core
+
+**支持平台**：Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                                                         | 必填 | 说明                                                         | Android平台 | iOS平台 |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ | ----------- | ------- |
+| type     | 'applicationStateChange'                                     | 是   | 监听事件类型。                                               | 支持        | 支持    |
+| callback | [ApplicationStateChangeCallback](js-apis-app-ability-applicationStateChangeCallback.md) | 是   | 回调函数。可以对应用从后台切换到前台，以及前台切换到后台分别定义回调。 | 支持        | 支持    |
+
+**错误码**：
+
+以下错误码详细介绍请参考[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified. 2.Incorrect parameter types. |
+
+**示例：**
+
+```
+import { UIAbility, ApplicationStateChangeCallback } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+export default class MyAbility extends UIAbility {
+  onCreate() {
+    console.log('MyAbility onCreate');
+    let applicationStateChangeCallback: ApplicationStateChangeCallback = {
+      onApplicationForeground() {
+        console.info('applicationStateChangeCallback onApplicationForeground');
+      },
+      onApplicationBackground() {
+        console.info('applicationStateChangeCallback onApplicationBackground');
+      }
+    }
+
+    // 1.获取applicationContext
+    let applicationContext = this.context.getApplicationContext();
+    try {
+      // 2.通过applicationContext注册应用前后台状态监听
+      applicationContext.on('applicationStateChange', applicationStateChangeCallback);
+    } catch (paramError) {
+      console.error(`error: ${(paramError as BusinessError).code}, ${(paramError as BusinessError).message}`);
+    }
+    console.log('Resgiter applicationStateChangeCallback');
+  }
+}
+```
+
+## ApplicationContext.off('applicationStateChange')<sup>16+</sup>
+
+off(type: 'applicationStateChange', callback?: ApplicationStateChangeCallback): void
+
+取消当前应用注册的前后台变化的全部监听。使用callback异步回调。仅支持主线程调用。
+
+**系统能力**：SystemCapability.Ability.AbilityRuntime.Core
+
+**支持平台**：Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                                                         | 必填 | 说明                                                         | Android平台 | iOS平台 |
+| -------- | :----------------------------------------------------------- | ---- | ------------------------------------------------------------ | ----------- | ------- |
+| type     | 'applicationStateChange'                                     | 是   | 取消监听事件的类型。                                         | 支持        | 支持    |
+| callback | [ApplicationStateChangeCallback](js-apis-app-ability-applicationStateChangeCallback.md) | 否   | 回调函数。可以对应用从后台切换到前台，以及前台切换到后台分别定义回调。 | 支持        | 支持    |
+
+**错误码**：
+
+以下错误码详细介绍请参考[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified. 2.Incorrect parameter types. |
+
+**示例：**
+
+```
+import { UIAbility } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+export default class MyAbility extends UIAbility {
+  onDestroy() {
+    let applicationContext = this.context.getApplicationContext();
+    try {
+      applicationContext.off('applicationStateChange');
+    } catch (paramError) {
+      console.error(`error: ${(paramError as BusinessError).code}, ${(paramError as BusinessError).message}`);
+    }
+  }
+}
+```
+
 ## ApplicationContext.getRunningProcessInformation<sup>9+</sup>
 
 getRunningProcessInformation(): Promise\<Array\<ProcessInformation>>;
@@ -213,5 +312,43 @@ export default class MyAbility extends UIAbility {
             }
         })
     }
+}
+```
+
+## ApplicationContext.setColorMode<sup>16+</sup>
+
+setColorMode(colorMode: ConfigurationConstant.ColorMode): void
+
+设置应用的颜色模式。仅支持主线程调用。
+
+**系统能力**：SystemCapability.Ability.AbilityRuntime.Core
+
+**支持平台**：Android、iOS
+
+**参数：**
+
+| 参数名    | 类型                                                         | 必填 | 说明                                                         | Android平台 | iOS平台 |
+| --------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ | ----------- | ------- |
+| colorMode | [ColorMode](js-apis-app-ability-configurationConstant.md#colormode) | 是   | 设置颜色模式，包括：深色模式、浅色模式、不设置（跟随系统）。 | 支持        | 支持    |
+
+**错误码**：
+
+以下错误码详细介绍请参考[通用错误码](../errorcodes/errorcode-universal.md)和[元能力子系统错误码](../errorcodes/errorcode-ability.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified. 2.Incorrect parameter types. |
+| 16000011 | The context does not exist.                                  |
+
+**示例：**
+
+```
+import { UIAbility, ConfigurationConstant } from '@kit.AbilityKit';
+
+export default class MyAbility extends UIAbility {
+  onForeground() {
+    let applicationContext = this.context.getApplicationContext();
+    applicationContext.setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_DARK);
+  }
 }
 ```
