@@ -3715,6 +3715,102 @@ struct WebComponent {
 }
 ```
 
+###  existCookie<sup>16+</sup>
+
+static existCookie(incognito?: boolean): boolean
+
+获取是否存在cookie。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名                  | 类型    | 必填 | 说明                                                         |
+| ----------------------- | ------- | ---- | ------------------------------------------------------------ |
+| incognito<sup>11+</sup> | boolean | 否   | true表示隐私模式下查询是否存在cookies，false表示正常非隐私模式下查询是否存在cookies。(Android、iOS不支持incognito) |
+
+**返回值：**
+
+| 类型    | 说明                                        |
+| ------- | ------------------------------------------- |
+| boolean | true表示存在cookie，false表示不存在cookie。 |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('existCookie')
+        .onClick(() => {
+          let result = webview.WebCookieManager.existCookie();
+          console.log("result: " + result);
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### clearSessionCookie<sup>16+</sup>
+
+static clearSessionCookie(callback: AsyncCallback\<void>): void
+
+异步callback方式清除所有会话cookie。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名   | 类型                   | 必填 | 说明                                               |
+| -------- |----------------------| ---- | -------------------------------------------------- |
+| callback | AsyncCallback\<void> | 是   | callback回调，用于获取清除所有会话cookie是否成功。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                 |
+| -------- | ------------------------ |
+| 401      | Invalid input parameter. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('clearSessionCookie')
+        .onClick(() => {
+          try {
+            webview.WebCookieManager.clearSessionCookie((error) => {
+              if (error) {
+                console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+              }
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
 ## WebStorage
 
 通过WebStorage可管理Web SQL数据库接口和HTML5 Web存储接口，每个应用中的所有Web组件共享一个WebStorage。
@@ -3771,7 +3867,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -3879,7 +3974,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -3943,7 +4037,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -4005,7 +4098,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -4072,7 +4164,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -4134,7 +4225,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -4199,7 +4289,6 @@ struct WebComponent {
           }
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -4241,7 +4330,6 @@ struct WebComponent {
           }
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }

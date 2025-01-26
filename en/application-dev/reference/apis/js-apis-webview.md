@@ -2014,6 +2014,102 @@ struct WebComponent {
 }
 ```
 
+###  existCookie<sup>16+</sup>
+
+static existCookie(incognito?: boolean): boolean
+
+Checks whether cookies exist.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name                    | Type    | Mandatory | Description                                                  |
+| ----------------------- | ------- | --------- | ------------------------------------------------------------ |
+| incognito<sup>11+</sup> | boolean | No        | Whether to check for cookies in incognito mode. The value **true** means to check for cookies in incognito mode, and **false** means the opposite.(Android、iOS do not support incognito.) |
+
+**Return value**
+
+| Type    | Description                                                  |
+| ------- | ------------------------------------------------------------ |
+| boolean | Whether cookies exist. The value **true** means that cookies exist, and **false** means the opposite. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('existCookie')
+        .onClick(() => {
+          let result = webview.WebCookieManager.existCookie();
+          console.log("result: " + result);
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+###  clearSessionCookie<sup>16+</sup>
+
+static clearSessionCookie(callback: AsyncCallback\<void>): void
+
+Clears all session cookies. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.Web.Webview.Core
+
+**Parameters**
+
+| Name     | Type                 | Mandatory | Description                         |
+| -------- |----------------------| --------- | ----------------------------------- |
+| callback | AsyncCallback\<void> | Yes       | Callback used to return the result. |
+
+**Error codes**
+
+| ID   | Error Message            |
+| ---- | ------------------------ |
+| 401  | Invalid input parameter. |
+
+**Example**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('clearSessionCookie')
+        .onClick(() => {
+          try {
+            webview.WebCookieManager.clearSessionCookie((error) => {
+              if (error) {
+                console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+              }
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
 ## WebStorage
 
 Implements a **WebStorage** object to manage the Web SQL database and HTML5 Web Storage APIs. All **Web** components in an application share a **WebStorage** object.
@@ -2070,7 +2166,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -2178,7 +2273,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -2242,7 +2336,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -2304,7 +2397,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -2371,7 +2463,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -2433,7 +2524,6 @@ struct WebComponent {
 
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -2498,7 +2588,6 @@ struct WebComponent {
           }
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
@@ -2540,7 +2629,6 @@ struct WebComponent {
           }
         })
       Web({ src: $rawfile('index.html'), controller: this.controller })
-        .databaseAccess(true)
     }
   }
 }
