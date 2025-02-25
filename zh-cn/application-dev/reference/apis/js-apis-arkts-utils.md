@@ -499,7 +499,8 @@ type Transformer = (this: ISendable, key: string, value: ISendable | undefined |
 
 | 名称 | 值| 说明            | Android平台   | iOS平台 |
 | ------ | ------ | --------------- | --------------- | --------------- |
-| OBJECT   | 0 |返回 SendableObject 对象。<br>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。|支持|支持|
+| OBJECT   | 0 |返回 SendableObject 对象。|支持|支持|
+| MAP | 1 |返回 SendableMap 对象。|支持|支持|
 
 ### ParseOptions
 
