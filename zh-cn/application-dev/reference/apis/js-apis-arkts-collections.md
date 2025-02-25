@@ -45,6 +45,40 @@ ISendable是所有Sendable类型（除`null`和`undefined`）的父类型。自�
 | ------ | ------ | ---- | ---- | ----------------- | ----------------- | ----------------- |
 | length | number | 是   | 否   | ConcatArray的元素个数。 | 支持 | 支持 |
 
+### [index: number]
+
+readonly &#91;index: number&#93;: T
+
+返回ConcatArray指定索引位置的元素。
+
+**支持平台：** Android、iOS
+
+| 参数名 | 类型   | 必填 | 说明                                                         | Android平台 | iOS平台 |
+| ------ | ------ | ---- | ------------------------------------------------------------ | ----------- | ------- |
+| index  | number | 是   | 所需代码单元的从零开始的索引。当index<0 或者index>=length，则会抛出错误。 | 支持        | 支持    |
+
+**返回值：**
+
+| 类型 | 说明                            |
+| ---- | ------------------------------- |
+| T    | ConcatArray给定的元素数据类型。 |
+
+**错误码**：
+
+以下错误码详细介绍请参考[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
+
+| 错误码ID | 错误信息                            |
+| -------- | ----------------------------------- |
+| 401      | Parameter error. Illegal index.     |
+| 10200001 | The value of index is out of range. |
+
+**示例：**
+
+```ts
+let concatArray : collections.ConcatArray<number> = new collections.Array<number>(1, 2, 4);
+console.info("Element at index 1: ", concatArray[1]);
+```
+
 ### join
 
 join(separator?: string): string
@@ -289,6 +323,48 @@ let sendableArray = collections.Array.from<string>(array); // 返回Sendable Arr
 // 反例
 let array : Array<Array<string>> = [['str1', 'str2', 'str3'], ['str4', 'str5', 'str6'], ['str7', 'str8', 'str9']]; // 原生Array<T>，T是非Sendable数据类型。
 let sendableArray = collections.Array.from<Array<string>>(array); // 打印异常信息：Parameter error.Only accept sendable value
+```
+
+### from
+
+static from\<T>(iterable: Iterable\<T>): Array\<T>
+
+从一个实现了Iterable接口的对象创建一个新的ArkTS Array。
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型         | 必填 | 说明                        | Android平台 | iOS平台 |
+| -------- | ------------ | ---- | --------------------------- | ----------- | ------- |
+| iterable | Iterable\<T> | 是   | 用于构造ArkTS Array的对象。 | 支持        | 支持    |
+
+**返回值：**
+
+| 类型      | 说明                      |
+| --------- | ------------------------- |
+| Array\<T> | 新创建的ArkTS Array实例。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error: Possible causes: 1. Mandatory parameters are left unspecified;2. Incorrect parameter types; 3. Parameter verification failed. |
+| 10200011 | The from method cannot be bound.                             |
+
+**示例：**
+
+```ts
+// 正例
+const mapper = new Map([
+  ['1', 'a'],
+  ['2', 'b'],
+]);
+let newArray: collections.Array<string> = collections.Array.from(mapper.values());
+console.info(newArray.toString());
+// 预期输出： a,b
 ```
 
 ### pop
@@ -1366,6 +1442,39 @@ let obj = new Object();
 const myMap2: collections.Map<number, Object> = new collections.Map<number, Object>([[1, obj]]);
 ```
 
+### constructor
+constructor(iterable: Iterable<readonly [K, V]>)
+
+构造函数，用于创建ArkTS Map对象。
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                      | 必填 | 说明                      | Android平台 | iOS平台 |
+| -------- | ------------------------- | ---- | ------------------------- | ----------- | ------- |
+| iterable | Iterable<readonly [K, V]> | 是   | 用于构造ArkTS Map的对象。 | 支持        | 支持    |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
+
+| 错误码ID | 错误信息                                                |
+| -------- | ------------------------------------------------------- |
+| 10200012 | The ArkTS Map's constructor cannot be directly invoked. |
+
+**示例：**
+
+```ts
+let mapper = new collections.Map<number, string>([
+  [1, "one"],
+  [2, "two"],
+  [3, "three"],
+]);
+let iter: Iterable<[number, string]> = mapper.entries();
+const myMap = new collections.Map<number, string>(iter);
+```
+
 ### entries
 entries(): IterableIterator<[K, V]>
 
@@ -1853,6 +1962,38 @@ const mySet1: collections.Set<number|SharedClass> = new collections.Set<number|S
 // Type arguments of generic "Sendable" type must be a "Sendable" data type (arkts-sendable-generic-types)
 let obj = new Object();
 const mySet2: collections.Set<number|SharedClass> = new collections.Set<number|Object>([1, obj]);
+```
+
+### constructor
+constructor(iterable: Iterable\<T\>)
+
+构造函数，用于创建ArkTS Set对象。
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型          | 必填 | 说明                      | Android平台 | iOS平台 |
+| -------- | ------------- | ---- | ------------------------- | ----------- | ------- |
+| iterable | Iterable\<T\> | 是   | 用于构造ArkTS Set的对象。 | 支持        | 支持    |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
+
+| 错误码ID | 错误信息                                                |
+| -------- | ------------------------------------------------------- |
+| 10200012 | The ArkTS Set's constructor cannot be directly invoked. |
+
+**示例：**
+
+```ts
+let mapper = new collections.Map<string, string>([
+  ['1', 'a'],
+  ['2', 'b'],
+]);
+let iter: Iterable<string> = mapper.values();
+const mySet = new collections.Set<string>(iter);
 ```
 
 ### entries
@@ -2481,6 +2622,46 @@ let int32Array: collections.Int32Array = new collections.Int32Array(12);
 let uint32Array: collections.Uint32Array = new collections.Uint32Array(12);
 let uint8ClampedArray: collections.Uint8ClampedArray = new collections.Uint8ClampedArray(12);
 let float32Array: collections.Float32Array = new collections.Float32Array(12);
+```
+
+### constructor
+constructor(elements: Iterable\<number\>)
+
+构造函数，以Iterable创建一个ArkTS TypedArray对象。
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型     | 必填 | 说明                             | Android平台 | iOS平台 |
+| -------- | -------- | ---- | -------------------------------- | ----------- | ------- |
+| elements | Iterable | 是   | 用于构造ArkTS TypedArray的对象。 | 支持        | 支持    |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
+
+| 错误码ID | 错误信息                                                 |
+| -------- | -------------------------------------------------------- |
+| 10200012 | The TypedArray's constructor cannot be directly invoked. |
+
+
+**示例：**
+
+```ts
+// 以Iterable构造对象
+const mapper = new Map<number, number>([
+  [1, 11],
+  [2, 22],
+]);
+let int8Array: collections.Int8Array = new collections.Int8Array(mapper.values());
+let uint8Array: collections.Uint8Array = new collections.Uint8Array(mapper.values());
+let int16Array: collections.Int16Array = new collections.Int16Array(mapper.values());
+let uint16Array: collections.Uint16Array = new collections.Uint16Array(mapper.values());
+let int32Array: collections.Int32Array = new collections.Int32Array(mapper.values());
+let uint32Array: collections.Uint32Array = new collections.Uint32Array(mapper.values());
+let uint8ClampedArray: collections.Uint8ClampedArray = new collections.Uint8ClampedArray(mapper.values());
+let float32Array: collections.Float32Array = new collections.Float32Array(mapper.values());
 ```
 
 ### constructor
