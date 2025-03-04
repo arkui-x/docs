@@ -22,6 +22,10 @@ This topic describes how to check the validity of a path configured in **config*
 | --harmonyos-sdk   | 1. Check whether the configured path exists.<br>2. Check whether the configured path is available. (In Windows, the path cannot be a drive letter. In macOS and Linux, the path cannot be the system root directory.)<br>New version:<br>1. Check whether the name of any folder in the configured path contains **HarmonyOS** or **default**.<br>2. Check whether the **sdk-pkg.json** file exists in a folder of the configured path. If the file exists and the data.platformVersion version number in the file is greater than or equal to 5.0.0, the path is considered valid. Otherwise, go to step 3<br>3. Check whether the **licenses** folder exists in the configured path.<br>If a folder whose name contains **HarmonyOS** or **default** does not exist in the path or the **sdk-pkg.json** file does not exist in the folder, follow the method used in the old version.<br>Old version:<br>1. Check whether the **hmscore** and **openharmony** folders exist in the configured path.<br>2. Check whether the **openharmony** folder contains the **versioncode** folder.<br>3. Check whether the **versioncode** folder contains the **toolchains** folder.<br>4. Check whether the **licenses** folder exists in the configured path.|
 | --openharmony-sdk | 1. Check whether the configured path exists.<br>2. Check whether the configured path is available. (In Windows, the path cannot be a drive letter. In macOS and Linux, the path cannot be the system root directory.)<br>3. Check whether the **versioncode** folder exists in the configured path.<br>4. Check whether the **versioncode** folder contains the **toolchains** folder.<br>5. Check whether the **licenses** folder exists in the configured path.|
 
+
+####  Special Note
+
+
 - openharmony-sdk: The openharmony-sdk configuration must be the same as the address configured in the OpenHarmony SDK in the DevEco settings, as shown in the following figure.
 Note: The value cannot be set to the openharmony path in the sdk directory contained in the DevEco.
 ![openharmony-sdk-setting](figures/openharmony-sdk-setting.png)
