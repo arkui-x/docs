@@ -18,9 +18,9 @@
 | 配置选项          | 判断方法                                                     |
 | ----------------- | ------------------------------------------------------------ |
 | --android-sdk     | 1.判断路径是否存在 <br>2.路径是否可用（windows不能为磁盘符；mac和linux不能为系统根目录） <br/>3.判断路径下是否存在’build-tools‘及’platform-tools‘文件夹 |
-| --arkui-x-sdk     | 1.判断路径是否存在<br/>2.路径是否可用（windows不能为磁盘符；mac和linux不能为系统根目录）<br/>3.路径下是否有api VersionCode（如12、13、14）文件夹 <br/>4.api VersionCode（如12、13、14）文件夹下是否有'arkui-x'文件夹 <br/>5.路径下是否有‘licenses’文件夹 |
-| --harmonyos-sdk   | 1.判断路径是否存在 <br/>2.路径是否可用（windows不能为磁盘符；mac和linux不能为系统根目录）<br/>新版本：<br/>1.路径下是否有文件夹名称包含'HarmonyOS'或’default’<br/>2.文件夹下是否有'sdk-pkg.json'文件，如有此文件且文件中的data.platformVersion版本号大于等于5.0.0则直接判定为有效路径，否则继续判断第3步<br/>3.路径下是否有‘licenses’文件夹<br/>若路径下无文件夹名称包含'HarmonyOS'或‘default’，或是文件夹下无'sdk-pkg.json'文件，转为判断旧版本是否合法<br/>旧版本： <br/>1.路径下是否有'hmscore'和'openharmony'文件夹<br/>2.'openharmony'文件夹下是否有vapi VersionCode（如12、13、14）文件夹<br/>3.api VersionCode（如12、13、14）文件夹下是否有'toolchains'文件夹<br/>4.路径下是否有‘licenses’文件夹 |
-| --openharmony-sdk | 1.判断路径是否存在<br/>2.路径是否可用（windows不能为磁盘符；mac和linux不能为系统根目录）<br/>3.路径下是否有api VersionCode（如12、13、14）文件夹<br/>4.api VersionCode（如12、13、14）文件夹下是否有'toolchains'文件夹<br/>5.路径下是否有‘licenses’文件夹 |
+| --arkui-x-sdk     | 1.判断路径是否存在<br/>2.路径是否可用（windows不能为磁盘符；mac和linux不能为系统根目录）<br/>3.路径下是否有api versionCode（如12、13、14）文件夹 <br/>4.api versionCode（如12、13、14）文件夹下是否有'arkui-x'文件夹 <br/>5.路径下是否有‘licenses’文件夹 |
+| --harmonyos-sdk   | 1.判断路径是否存在 <br/>2.路径是否可用（windows不能为磁盘符；mac和linux不能为系统根目录）<br/>新版本：<br/>1.路径下是否有文件夹名称包含'HarmonyOS'或’default’<br/>2.文件夹下是否有'sdk-pkg.json'文件，如有此文件且文件中的data.platformVersion版本号大于等于5.0.0则直接判定为有效路径，否则继续判断第3步<br/>3.路径下是否有‘licenses’文件夹<br/>若路径下无文件夹名称包含'HarmonyOS'或‘default’，或是文件夹下无'sdk-pkg.json'文件，转为判断旧版本是否合法<br/>旧版本： <br/>1.路径下是否有'hmscore'和'openharmony'文件夹<br/>2.'openharmony'文件夹下是否有api versionCode（如12、13、14）文件夹<br/>3.api versionCode（如12、13、14）文件夹下是否有'toolchains'文件夹<br/>4.路径下是否有‘licenses’文件夹 |
+| --openharmony-sdk | 1.判断路径是否存在<br/>2.路径是否可用（windows不能为磁盘符；mac和linux不能为系统根目录）<br/>3.路径下是否有api versionCode（如12、13、14）文件夹<br/>4.api versionCode（如12、13、14）文件夹下是否有'toolchains'文件夹<br/>5.路径下是否有‘licenses’文件夹 |
 
 - ####  特别说明
 
