@@ -122,10 +122,10 @@ pushUrl(options: RouterOptions, mode: RouterMode): Promise&lt;void&gt;
 
 **参数：**
 
-| 参数名     | 类型                              | 必填   | 说明         |
-| ------- | ------------------------------- | ---- | ---------- |
-| options | [RouterOptions](#routeroptions) | 是    | 跳转页面描述信息。  |
-| mode    | [RouterMode](#routermode9)      | 是    | 跳转页面使用的模式。 |
+| 参数名  | 类型                            | 必填 | 说明                 |
+| ------- | ------------------------------- | ---- | -------------------- |
+| options | [RouterOptions](#routeroptions) | 是   | 跳转页面描述信息。   |
+| mode    | [RouterMode](#routermode9+)     | 是   | 跳转页面使用的模式。 |
 
 **返回值：**
 
@@ -176,7 +176,7 @@ pushUrl(options: RouterOptions, mode: RouterMode, callback: AsyncCallback&lt;voi
 | 参数名     | 类型                              | 必填   | 说明         |
 | ------- | ------------------------------- | ---- | ---------- |
 | options | [RouterOptions](#routeroptions) | 是    | 跳转页面描述信息。  |
-| mode    | [RouterMode](#routermode9)      | 是    | 跳转页面使用的模式。 |
+| mode    | [RouterMode](#routermode9+)     | 是    | 跳转页面使用的模式。 |
 | callback | AsyncCallback&lt;void&gt;      | 是   | 异常响应回调。   |
 
 **错误码：**
@@ -209,6 +209,226 @@ router.pushUrl({
 })
 ```
 
+## router.replaceUrl<sup>9+</sup>
+
+replaceUrl(options: RouterOptions): Promise&lt;void&gt;
+
+用应用内的某个页面替换当前页面，并销毁被替换的页面。不支持设置页面转场动效。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Lite
+
+**参数：**
+
+| 参数名  | 类型                            | 必填 | 说明               |
+| ------- | ------------------------------- | ---- | ------------------ |
+| options | [RouterOptions](#routeroptions) | 是   | 替换页面描述信息。 |
+
+**返回值：**
+
+| 类型                | 说明           |
+| ------------------- | -------------- |
+| Promise&lt;void&gt; | 异常返回结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
+
+> **说明**：
+>
+> 该接口返回的以下错误码均为string类型。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 100001   | The UI execution context is not found. This error code is thrown only in the standard system. |
+| 200002   | Uri error. The URI of the page to be used for replacement is incorrect or does not exist. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+class routerParams {
+  data1: string
+
+  constructor(str: string) {
+    this.data1 = str
+  }
+}
+
+router.replaceUrl({
+  url: 'pages/detail',
+  params: new routerParams('message')
+})
+  .then(() => {
+    console.error(`replaceUrl finish`);
+  })
+  .catch((err: ESObject) => {
+    console.error(`replaceUrl failed, code is ${(err as BusinessError).code}, message is ${(err as BusinessError).message}`);
+  })
+```
+
+## router.replaceUrl<sup>9+</sup>
+
+replaceUrl(options: RouterOptions, callback: AsyncCallback&lt;void&gt;): void
+
+用应用内的某个页面替换当前页面，并销毁被替换的页面。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Lite
+
+**参数：**
+
+| 参数名   | 类型                            | 必填 | 说明               |
+| -------- | ------------------------------- | ---- | ------------------ |
+| options  | [RouterOptions](#routeroptions) | 是   | 替换页面描述信息。 |
+| callback | AsyncCallback&lt;void&gt;       | 是   | 异常响应回调。     |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
+
+> **说明**：
+>
+> 该接口返回的以下错误码均为string类型。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 100001   | The UI execution context is not found. This error code is thrown only in the standard system. |
+| 200002   | Uri error. The URI of the page to be used for replacement is incorrect or does not exist. |
+
+**示例：**
+
+```ts
+class routerParams {
+  data1: string
+
+  constructor(str: string) {
+    this.data1 = str
+  }
+}
+
+router.replaceUrl({
+  url: 'pages/detail',
+  params: new routerParams('message')
+}, (err) => {
+  if (err) {
+    console.error(`replaceUrl failed, code is ${err.code}, message is ${err.message}`);
+    return;
+  }
+  console.info('replaceUrl success');
+})
+```
+
+## router.replaceUrl<sup>9+</sup>
+
+replaceUrl(options: RouterOptions, mode: RouterMode): Promise&lt;void&gt;
+
+用应用内的某个页面替换当前页面，并销毁被替换的页面。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Lite
+
+**参数：**
+
+| 参数名  | 类型                            | 必填 | 说明                 |
+| ------- | ------------------------------- | ---- | -------------------- |
+| options | [RouterOptions](#routeroptions) | 是   | 替换页面描述信息。   |
+| mode    | [RouterMode](#routermode9+)     | 是   | 跳转页面使用的模式。 |
+
+**返回值：**
+
+| 类型                | 说明           |
+| ------------------- | -------------- |
+| Promise&lt;void&gt; | 异常返回结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
+
+> **说明**：
+>
+> 该接口返回的以下错误码均为string类型。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 100001   | Failed to get the delegate. This error code is thrown only in the standard system. |
+| 200002   | Uri error. The URI of the page to be used for replacement is incorrect or does not exist. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+class routerParams {
+  data1:string
+
+  constructor(str:string) {
+    this.data1 = str
+  }
+}
+
+router.replaceUrl({
+  url: 'pages/detail',
+  params: new routerParams('message')
+}, router.RouterMode.Standard)
+  .then(() => {
+    console.error(`replaceUrl finish`);
+  })
+  .catch((err: ESObject) => {
+    console.error(`replaceUrl failed, code is ${(err as BusinessError).code}, message is ${(err as BusinessError).message}`);
+  })
+```
+
+## router.replaceUrl<sup>9+</sup>
+
+replaceUrl(options: RouterOptions, mode: RouterMode, callback: AsyncCallback&lt;void&gt;): void
+
+用应用内的某个页面替换当前页面，并销毁被替换的页面。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Lite
+
+**参数：**
+
+| 参数名   | 类型                            | 必填 | 说明                 |
+| -------- | ------------------------------- | ---- | -------------------- |
+| options  | [RouterOptions](#routeroptions) | 是   | 替换页面描述信息。   |
+| mode     | [RouterMode](#routermode9+)     | 是   | 跳转页面使用的模式。 |
+| callback | AsyncCallback&lt;void&gt;       | 是   | 异常响应回调。       |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
+
+> **说明**：
+>
+> 该接口返回的以下错误码均为string类型。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 100001   | The UI execution context is not found. This error code is thrown only in the standard system. |
+| 200002   | Uri error. The URI of the page to be used for replacement is incorrect or does not exist. |
+
+**示例：**
+
+```ts
+class routerParams {
+  data1: string
+
+  constructor(str: string) {
+    this.data1 = str
+  }
+}
+
+router.replaceUrl({
+  url: 'pages/detail',
+  params: new routerParams('message')
+}, router.RouterMode.Standard, (err) => {
+  if (err) {
+    console.error(`replaceUrl failed, code is ${err.code}, message is ${err.message}`);
+    return;
+  }
+  console.info('replaceUrl success');
+});
+```
+
 ## router.pushNamedRoute<sup>10+</sup>
 
 pushNamedRoute(options: NamedRouterOptions): Promise&lt;void&gt;
@@ -219,9 +439,9 @@ pushNamedRoute(options: NamedRouterOptions): Promise&lt;void&gt;
 
 **参数：**
 
-| 参数名  | 类型                                        | 必填 | 说明               |
-| ------- | ------------------------------------------- | ---- | ------------------ |
-| options | [NamedRouterOptions](#namedrouteroptions10) | 是   | 跳转页面描述信息。 |
+| 参数名  | 类型                                         | 必填 | 说明               |
+| ------- | -------------------------------------------- | ---- | ------------------ |
+| options | [NamedRouterOptions](#namedrouteroptions10+) | 是   | 跳转页面描述信息。 |
 
 **返回值：**
 
@@ -282,10 +502,10 @@ pushNamedRoute(options: NamedRouterOptions, callback: AsyncCallback&lt;void&gt;)
 
 **参数：**
 
-| 参数名   | 类型                                        | 必填 | 说明               |
-| -------- | ------------------------------------------- | ---- | ------------------ |
-| options  | [NamedRouterOptions](#namedrouteroptions10) | 是   | 跳转页面描述信息。 |
-| callback | AsyncCallback&lt;void&gt;                   | 是   | 异常响应回调。     |
+| 参数名   | 类型                                         | 必填 | 说明               |
+| -------- | -------------------------------------------- | ---- | ------------------ |
+| options  | [NamedRouterOptions](#namedrouteroptions10+) | 是   | 跳转页面描述信息。 |
+| callback | AsyncCallback&lt;void&gt;                    | 是   | 异常响应回调。     |
 
 **错误码：**
 
@@ -340,10 +560,10 @@ pushNamedRoute(options: NamedRouterOptions, mode: RouterMode): Promise&lt;void&g
 
 **参数：**
 
-| 参数名  | 类型                                        | 必填 | 说明                 |
-| ------- | ------------------------------------------- | ---- | -------------------- |
-| options | [NamedRouterOptions](#namedrouteroptions10) | 是   | 跳转页面描述信息。   |
-| mode    | [RouterMode](#routermode9)                  | 是   | 跳转页面使用的模式。 |
+| 参数名  | 类型                                         | 必填 | 说明                 |
+| ------- | -------------------------------------------- | ---- | -------------------- |
+| options | [NamedRouterOptions](#namedrouteroptions10+) | 是   | 跳转页面描述信息。   |
+| mode    | [RouterMode](#routermode9+)                  | 是   | 跳转页面使用的模式。 |
 
 **返回值：**
 
@@ -404,11 +624,11 @@ pushNamedRoute(options: NamedRouterOptions, mode: RouterMode, callback: AsyncCal
 
 **参数：**
 
-| 参数名   | 类型                                        | 必填 | 说明                 |
-| -------- | ------------------------------------------- | ---- | -------------------- |
-| options  | [NamedRouterOptions](#namedrouteroptions10) | 是   | 跳转页面描述信息。   |
-| mode     | [RouterMode](#routermode9)                  | 是   | 跳转页面使用的模式。 |
-| callback | AsyncCallback&lt;void&gt;                   | 是   | 异常响应回调。       |
+| 参数名   | 类型                                         | 必填 | 说明                 |
+| -------- | -------------------------------------------- | ---- | -------------------- |
+| options  | [NamedRouterOptions](#namedrouteroptions10+) | 是   | 跳转页面描述信息。   |
+| mode     | [RouterMode](#routermode9+)                  | 是   | 跳转页面使用的模式。 |
+| callback | AsyncCallback&lt;void&gt;                    | 是   | 异常响应回调。       |
 
 **错误码：**
 
@@ -463,9 +683,9 @@ replaceNamedRoute(options: NamedRouterOptions): Promise&lt;void&gt;
 
 **参数：**
 
-| 参数名  | 类型                                        | 必填 | 说明               |
-| ------- | ------------------------------------------- | ---- | ------------------ |
-| options | [NamedRouterOptions](#namedrouteroptions10) | 是   | 替换页面描述信息。 |
+| 参数名  | 类型                                         | 必填 | 说明               |
+| ------- | -------------------------------------------- | ---- | ------------------ |
+| options | [NamedRouterOptions](#namedrouteroptions10+) | 是   | 替换页面描述信息。 |
 
 **返回值：**
 
@@ -515,10 +735,10 @@ replaceNamedRoute(options: NamedRouterOptions, callback: AsyncCallback&lt;void&g
 
 **参数：**
 
-| 参数名   | 类型                                        | 必填 | 说明               |
-| -------- | ------------------------------------------- | ---- | ------------------ |
-| options  | [NamedRouterOptions](#namedrouteroptions10) | 是   | 替换页面描述信息。 |
-| callback | AsyncCallback&lt;void&gt;                   | 是   | 异常响应回调。     |
+| 参数名   | 类型                                         | 必填 | 说明               |
+| -------- | -------------------------------------------- | ---- | ------------------ |
+| options  | [NamedRouterOptions](#namedrouteroptions10+) | 是   | 替换页面描述信息。 |
+| callback | AsyncCallback&lt;void&gt;                    | 是   | 异常响应回调。     |
 
 **错误码：**
 
@@ -562,10 +782,10 @@ replaceNamedRoute(options: NamedRouterOptions, mode: RouterMode): Promise&lt;voi
 
 **参数：**
 
-| 参数名  | 类型                                        | 必填 | 说明                 |
-| ------- | ------------------------------------------- | ---- | -------------------- |
-| options | [NamedRouterOptions](#namedrouteroptions10) | 是   | 替换页面描述信息。   |
-| mode    | [RouterMode](#routermode9)                  | 是   | 跳转页面使用的模式。 |
+| 参数名  | 类型                                         | 必填 | 说明                 |
+| ------- | -------------------------------------------- | ---- | -------------------- |
+| options | [NamedRouterOptions](#namedrouteroptions10+) | 是   | 替换页面描述信息。   |
+| mode    | [RouterMode](#routermode9+)                  | 是   | 跳转页面使用的模式。 |
 
 
 **返回值：**
@@ -616,11 +836,11 @@ replaceNamedRoute(options: NamedRouterOptions, mode: RouterMode, callback: Async
 
 **参数：**
 
-| 参数名   | 类型                                        | 必填 | 说明                 |
-| -------- | ------------------------------------------- | ---- | -------------------- |
-| options  | [NamedRouterOptions](#namedrouteroptions10) | 是   | 替换页面描述信息。   |
-| mode     | [RouterMode](#routermode9)                  | 是   | 跳转页面使用的模式。 |
-| callback | AsyncCallback&lt;void&gt;                   | 是   | 异常响应回调。       |
+| 参数名   | 类型                                         | 必填 | 说明                 |
+| -------- | -------------------------------------------- | ---- | -------------------- |
+| options  | [NamedRouterOptions](#namedrouteroptions10+) | 是   | 替换页面描述信息。   |
+| mode     | [RouterMode](#routermode9+)                  | 是   | 跳转页面使用的模式。 |
+| callback | AsyncCallback&lt;void&gt;                    | 是   | 异常响应回调。       |
 
 **错误码：**
 
@@ -673,6 +893,31 @@ back(options?: RouterOptions ): void
 
 ```ts
 router.back({url:'pages/detail'});    
+```
+
+## router.back<sup>12+</sup>
+
+back(index: number, params?: Object): void;
+
+返回指定的页面，会删除当前页面与指定页面之间的所有页面。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                    |
+| ------ | ------ | ---- | ------------------------------------------------------- |
+| index  | number | 是   | 跳转目标页面的索引值。 从栈底到栈顶，index从1开始递增。 |
+| params | Object | 否   | 页面返回时携带的参数。                                  |
+
+**示例：**
+
+```ts
+router.back(1);
+```
+
+```ts
+router.back(1, { info: '来自Home页' }); //携带参数返回
 ```
 
 ## router.clear
