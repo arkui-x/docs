@@ -731,13 +731,13 @@ replaceUrl(options: router.RouterOptions): Promise&lt;void&gt;
 
 用应用内的某个页面替换当前页面，并销毁被替换的页面，通过Promise获取跳转异常的返回的结果。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**支持平台**： Android 、iOS
 
 **参数：**
 
-| 参数名  | 类型                                                    | 必填 | 说明               |
-| ------- | ------------------------------------------------------- | ---- | ------------------ |
-| options | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。 |
+| 参数名  | 类型                                                    | 必填 | 说明               | Android平台 | iOS平台 |
+| ------- | ------------------------------------------------------- | ---- | ------------------ | ----------- | ------- |
+| options | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。 | 支持        | 支持    |
 
 **返回值：**
 
@@ -802,14 +802,14 @@ replaceUrl(options: router.RouterOptions, callback: AsyncCallback&lt;void&gt;): 
 
 用应用内的某个页面替换当前页面，并销毁被替换的页面。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**支持平台**： Android 、iOS
 
 **参数：**
 
-| 参数名   | 类型                                                    | 必填 | 说明               |
-| -------- | ------------------------------------------------------- | ---- | ------------------ |
-| options  | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。 |
-| callback | AsyncCallback&lt;void&gt;                               | 是   | 异常响应回调。     |
+| 参数名   | 类型                                                    | 必填 | 说明               | Android平台 | iOS平台 |
+| -------- | ------------------------------------------------------- | ---- | ------------------ | ----------- | ------- |
+| options  | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。 | 支持        | 支持    |
+| callback | AsyncCallback&lt;void&gt;                               | 是   | 异常响应回调。     | 支持        | 支持    |
 
 **错误码：**
 
@@ -870,14 +870,14 @@ replaceUrl(options: router.RouterOptions, mode: router.RouterMode): Promise&lt;v
 
 用应用内的某个页面替换当前页面，并销毁被替换的页面，通过Promise获取跳转异常的返回结果。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**支持平台**： Android 、iOS
 
 **参数：**
 
-| 参数名  | 类型                                                    | 必填 | 说明                 |
-| ------- | ------------------------------------------------------- | ---- | -------------------- |
-| options | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。   |
-| mode    | [router.RouterMode](js-apis-router.md#routermode9+)     | 是   | 跳转页面使用的模式。 |
+| 参数名  | 类型                                                    | 必填 | 说明                 | Android平台 | iOS平台 |
+| ------- | ------------------------------------------------------- | ---- | -------------------- | ----------- | ------- |
+| options | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。   | 支持        | 支持    |
+| mode    | [router.RouterMode](js-apis-router.md#routermode9+)     | 是   | 跳转页面使用的模式。 | 支持        | 支持    |
 
 **返回值：**
 
@@ -949,15 +949,15 @@ replaceUrl(options: router.RouterOptions, mode: router.RouterMode, callback: Asy
 
 用应用内的某个页面替换当前页面，并销毁被替换的页面。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**支持平台**： Android 、iOS
 
 **参数：**
 
-| 参数名   | 类型                                                    | 必填 | 说明                 |
-| -------- | ------------------------------------------------------- | ---- | -------------------- |
-| options  | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。   |
-| mode     | [router.RouterMode](js-apis-router.md#routermode9+)     | 是   | 跳转页面使用的模式。 |
-| callback | AsyncCallback&lt;void&gt;                               | 是   | 异常响应回调。       |
+| 参数名   | 类型                                                    | 必填 | 说明                 | Android平台 | iOS平台 |
+| -------- | ------------------------------------------------------- | ---- | -------------------- | ----------- | ------- |
+| options  | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。   | 支持        | 支持    |
+| mode     | [router.RouterMode](js-apis-router.md#routermode9+)     | 是   | 跳转页面使用的模式。 | 支持        | 支持    |
+| callback | AsyncCallback&lt;void&gt;                               | 是   | 异常响应回调。       | 支持        | 支持    |
 
 **错误码：**
 
@@ -1046,14 +1046,14 @@ back(index: number, params?: Object): void;
 
 返回指定的页面。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**支持平台**： Android 、iOS
 
 **参数：**
 
-| 参数名 | 类型   | 必填 | 说明                   |
-| ------ | ------ | ---- | ---------------------- |
-| index  | number | 是   | 跳转目标页面的索引值。 |
-| params | Object | 否   | 页面返回时携带的参数。 |
+| 参数名 | 类型   | 必填 | 说明                   | Android平台 | iOS平台 |
+| ------ | ------ | ---- | ---------------------- | ----------- | ------- |
+| index  | number | 是   | 跳转目标页面的索引值。 | 支持        | 支持    |
+| params | Object | 否   | 页面返回时携带的参数。 | 支持        | 支持    |
 
 **示例：**
 
