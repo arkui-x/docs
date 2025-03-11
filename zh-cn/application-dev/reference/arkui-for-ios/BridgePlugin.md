@@ -67,7 +67,7 @@
 IMessageListener代理实现。
 
 ```objective-c
-@interface EntryEntryAbilityViewController ()<imessagelistener, IMethodResult>
+@interface EntryEntryAbilityViewController ()<IMessageListener, IMethodResult>
 @end
 ```
 
@@ -295,7 +295,7 @@ IMethodResult代理实现。
 
 | 类型                                          | 访问权限 |
 | --------------------------------------------- | -------- |
-| id<IMessageListener> | 读写     |
+| id\<IMessageListener> | 读写     |
 
 
 
@@ -313,7 +313,7 @@ IMethodResult代理实现。
 
 | 类型                                    | 访问权限 |
 | --------------------------------------- | -------- |
-| id<IMethodResult> | 读写     |
+| id\<IMethodResult> | 读写     |
 
 
 
@@ -502,6 +502,10 @@ IMethodResult代理实现。
 | Name | 类型 | 必填 | 描述     |
 | ---- | ---- | ---- | -------- |
 | data | id   | 是   | 消息内容 |
+
+> **说明**
+>
+> [数据类型支持](../../quick-start/platform-bridge-introduction.md#数据类型支持)
 
 **返回值：** 
 

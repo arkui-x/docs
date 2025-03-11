@@ -149,6 +149,7 @@ public String platformCallMethod() {
 }
 ```
 
+复杂多参数方法调用参考[场景八](#场景八callmethod不同数据类型)
 
 ### 场景四：Android侧调用ArkUI侧的方法
 
@@ -168,10 +169,15 @@ this.bridgeImpl.registerMethod({ name: 'getString', method: this.getString });
 2、Android侧调用ArkUI侧的方法。
 
 ```java
+// 方式一: 构造ArkUI侧方法描述对象实例调用
 Object[] paramObject = {};
 MethodData methodData = new MethodData("getString", paramObject);
 bridge.callMethod(methodData);
+// 方式二: ArkUI侧函数名加ArkUI侧方法形参对应的实参调用
+bridge.callMethod("getString");
 ```
+
+复杂多参数方法调用参考[场景八](#场景八callmethod不同数据类型)
 
 ### 场景五：ArkUI侧监听Android侧的方法
 
@@ -292,28 +298,31 @@ import bridge from '@arkui-x.bridge'
 @Entry
 @Component
 struct Index {
-  @State bridgeImpl: BridgeObject = bridge.createBridge("BridgeName");
+  @State bridgeImpl: bridge.BridgeObject = bridge.createBridge("BridgeName");
 
-  private funTest(p1: String, p2: Number, p3: Boolean) {
+  private funTest(p1: string, p2: number, p3: boolean) : bridge.ResultValue {
     console.info('Java->Ts bridge funTest p1 is ' + p1);
     console.info('Java->Ts bridge funTest p2 is ' + p2);
     console.info('Java->Ts bridge funTest p3 is ' + p3);
+    return "call success"
   }
 
-  private funTestArray(p1: Array<string>, p2: Array<Number>, p3: Array<Boolean>) {
-      console.log('Java->Ts bridge funTestArray p1 is ' + p1.toString());
-      console.log('Java->Ts bridge funTestArray p2 is ' + p2.toString());
-      console.log('Java->Ts bridge funTestArray p3 is ' + p3.toString());
+  private funTestArray(p1: Array<string>, p2: Array<number>, p3: Array<boolean>) : bridge.ResultValue {
+    console.log('Java->Ts bridge funTestArray p1 is ' + p1.toString());
+    console.log('Java->Ts bridge funTestArray p2 is ' + p2.toString());
+    console.log('Java->Ts bridge funTestArray p3 is ' + p3.toString());
+    return "call success"
   }
 
-  private funTestRecord(p1: Record<string, string>, p2: Record<string, Number>, p3: Record<string, Boolean>) {
-      console.log('Java->Ts bridge funTestRecord p1 is ' + p1.toString());
-      console.log('Java->Ts bridge funTestRecord p2 is ' + p2.toString());
-      console.log('Java->Ts bridge funTestRecord p3 is ' + p3.toString());
+  private funTestRecord(p1: Record<string, string>, p2: Record<string, number>, p3: Record<string, boolean>) : bridge.ResultValue {
+    console.log('Java->Ts bridge funTestRecord p1 is ' + p1.toString());
+    console.log('Java->Ts bridge funTestRecord p2 is ' + p2.toString());
+    console.log('Java->Ts bridge funTestRecord p3 is ' + p3.toString());
+    return "call success"
   }
 
   onPageShow() {
-    // Register JavaScript functions
+    // Register ArkUI侧 functions
     this.bridgeImpl.registerMethod({name: "funTest", method: this.funTest});
     this.bridgeImpl.registerMethod({name: "funTestArray", method: this.funTestArray});
     this.bridgeImpl.registerMethod({name: "funTestRecord", method: this.funTestRecord});
@@ -368,12 +377,13 @@ public class EntryEntryAbilityActivity extends StageActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 定义对象数组，存放JS侧方法形参对应的实参
+                // 定义对象数组，存放ArkUI侧方法形参对应的实参
                 Object[] paramObject = { "param1", 1, true};
-                // 构造JS侧方法描述对象实例
+                // 方式一: 构造ArkUI侧方法描述对象实例调用
                 MethodData methodData = new MethodData("funTest", paramObject);
-                // 调用Js侧的方法（jsMethodName）
                 bridgeImpl.callMethod(methodData);
+                // 方式二: ArkUI侧函数名加ArkUI侧方法形参对应的实参调用
+                bridgeImpl.callMethod("funTest", "param1", 1, true);
             }
         });
     }
@@ -383,15 +393,16 @@ public class EntryEntryAbilityActivity extends StageActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 定义对象数组，存放JS侧方法形参对应的实参
+                // 定义对象数组，存放ArkUI侧方法形参对应的实参
                 String[] sArray = {"hello", "world"};
                 int[] iArray = {123, 456};
                 boolean[] bArray = {true, false};
                 Object[] paramObject = {sArray, iArray, bArray};
-                // 构造JS侧方法描述对象实例
+                // 方式一: 构造ArkUI侧方法描述对象实例调用
                 MethodData methodData = new MethodData("funTestArray", paramObject);
-                // 调用Js侧的方法（jsMethodName）
                 bridgeImpl.callMethod(methodData);
+                // 方式二: ArkUI侧函数名加ArkUI侧方法形参对应的实参调用
+                bridgeImpl.callMethod("funTestArray", sArray, iArray, bArray);
             }
         });
     }
@@ -401,7 +412,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 定义对象数组，存放JS侧方法形参对应的实参
+                // 定义对象数组，存放ArkUI侧方法形参对应的实参
                 Map<String, String> map1 = new HashMap<>();
                 map1.put("one", "hello");
                 map1.put("two", "world");
@@ -413,10 +424,11 @@ public class EntryEntryAbilityActivity extends StageActivity {
                 map3.put("two", false);
 
                 Object[] paramObject = {map1, map2, map3};
-                // 构造JS侧方法描述对象实例
+                // 方式一: 构造ArkUI侧方法描述对象实例调用
                 MethodData methodData = new MethodData("funTestRecord", paramObject);
-                // 调用Js侧的方法（jsMethodName）
                 bridgeImpl.callMethod(methodData);
+                // 方式二: ArkUI侧函数名加ArkUI侧方法形参对应的实参调用
+                bridgeImpl.callMethod("funTestRecord", map1, map2, map3);
             }
         });
     }

@@ -63,10 +63,11 @@ JSON格式数据支持类型表：
 
 > **说明**
 >
-> S表示string、number、boolean类型；
-> Record表示<key, value>类型，key仅为string类型，value为S类型；
+> 1、S表示string、number、boolean类型；<br/>
+> 2、Record表示<key, value>类型，key仅为string类型，value为S类型；<br/>
+> 3、string类型数据最大传输大小限制为2MB;<br/>
 
 ## 开发指南
 
-[平台桥接开发指南（Android）](../tutorial/how-to-use-bridge-on-android.md)<br />
+[平台桥接开发指南（Android）](../tutorial/how-to-use-bridge-on-android.md)<br/>
 [平台桥接开发指南（iOS）](../tutorial/how-to-use-bridge-on-ios.md)
