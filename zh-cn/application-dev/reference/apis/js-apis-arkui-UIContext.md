@@ -877,7 +877,7 @@ replaceUrl(options: router.RouterOptions, mode: router.RouterMode): Promise&lt;v
 | 参数名  | 类型                                                    | 必填 | 说明                 | Android平台 | iOS平台 |
 | ------- | ------------------------------------------------------- | ---- | -------------------- | ----------- | ------- |
 | options | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。   | 支持        | 支持    |
-| mode    | [router.RouterMode](js-apis-router.md#routermode9+)     | 是   | 跳转页面使用的模式。 | 支持        | 支持    |
+| mode    | [router.RouterMode](js-apis-router.md#routermode9)     | 是   | 跳转页面使用的模式。 | 支持        | 支持    |
 
 **返回值：**
 
@@ -956,7 +956,7 @@ replaceUrl(options: router.RouterOptions, mode: router.RouterMode, callback: Asy
 | 参数名   | 类型                                                    | 必填 | 说明                 | Android平台 | iOS平台 |
 | -------- | ------------------------------------------------------- | ---- | -------------------- | ----------- | ------- |
 | options  | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。   | 支持        | 支持    |
-| mode     | [router.RouterMode](js-apis-router.md#routermode9+)     | 是   | 跳转页面使用的模式。 | 支持        | 支持    |
+| mode     | [router.RouterMode](js-apis-router.md#routermode9)     | 是   | 跳转页面使用的模式。 | 支持        | 支持    |
 | callback | AsyncCallback&lt;void&gt;                               | 是   | 异常响应回调。       | 支持        | 支持    |
 
 **错误码：**
