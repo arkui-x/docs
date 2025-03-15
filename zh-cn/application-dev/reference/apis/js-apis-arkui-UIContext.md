@@ -725,6 +725,300 @@ router.pushUrl({
 })
 ```
 
+### replaceUrl
+
+replaceUrl(options: router.RouterOptions): Promise&lt;void&gt;
+
+用应用内的某个页面替换当前页面，并销毁被替换的页面，通过Promise获取跳转异常的返回的结果。
+
+**支持平台**： Android 、iOS
+
+**参数：**
+
+| 参数名  | 类型                                                    | 必填 | 说明               | Android平台 | iOS平台 |
+| ------- | ------------------------------------------------------- | ---- | ------------------ | ----------- | ------- |
+| options | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。 | 支持        | 支持    |
+
+**返回值：**
+
+| 类型                | 说明           |
+| ------------------- | -------------- |
+| Promise&lt;void&gt; | 异常返回结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 100001   | The UI execution context is not found. This error code is thrown only in the standard system. |
+| 200002   | Uri error. The URI of the page to be used for replacement is incorrect or does not exist. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit'
+
+@Entry
+@Component
+struct Index {
+  async routePage() {
+    this.getUIContext().getRouter().replaceUrl({
+        url: 'pages/detail',
+        params: {
+          data1: 'message'
+        }
+      })
+      .then(() => {
+        console.info('succeeded')
+      })
+      .catch((error: BusinessError) => {
+        console.error(`pushUrl failed, code is ${error.code}, message is ${error.message}`);
+      })
+  }
+
+  build() {
+    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
+      Button() {
+        Text('next page')
+          .fontSize(25)
+          .fontWeight(FontWeight.Bold)
+      }.type(ButtonType.Capsule)
+      .margin({ top: 20 })
+      .backgroundColor('#ccc')
+      .onClick(() => {
+        this.routePage()
+      })
+    }
+    .width('100%')
+    .height('100%')
+  }
+}
+```
+
+### replaceUrl
+
+replaceUrl(options: router.RouterOptions, callback: AsyncCallback&lt;void&gt;): void
+
+用应用内的某个页面替换当前页面，并销毁被替换的页面。
+
+**支持平台**： Android 、iOS
+
+**参数：**
+
+| 参数名   | 类型                                                    | 必填 | 说明               | Android平台 | iOS平台 |
+| -------- | ------------------------------------------------------- | ---- | ------------------ | ----------- | ------- |
+| options  | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。 | 支持        | 支持    |
+| callback | AsyncCallback&lt;void&gt;                               | 是   | 异常响应回调。     | 支持        | 支持    |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 100001   | The UI execution context is not found. This error code is thrown only in the standard system. |
+| 200002   | Uri error. The URI of the page to be used for replacement is incorrect or does not exist. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit'
+
+@Entry
+@Component
+struct Index {
+  async routePage() {
+    this.getUIContext().getRouter().replaceUrl({
+      url: 'pages/detail',
+      params: {
+        data1: 'message'
+      }
+    }, (err: Error) => {
+      if (err) {
+        let message = (err as BusinessError).message;
+        let code = (err as BusinessError).code;
+        console.error(`replaceUrl failed, code is ${code}, message is ${message}`);
+        return;
+      }
+      console.info('replaceUrl success');
+    })
+  }
+
+  build() {
+    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
+      Button() {
+        Text('next page')
+          .fontSize(25)
+          .fontWeight(FontWeight.Bold)
+      }.type(ButtonType.Capsule)
+      .margin({ top: 20 })
+      .backgroundColor('#ccc')
+      .onClick(() => {
+        this.routePage()
+      })
+    }
+    .width('100%')
+    .height('100%')
+  }
+}
+```
+
+### replaceUrl
+
+replaceUrl(options: router.RouterOptions, mode: router.RouterMode): Promise&lt;void&gt;
+
+用应用内的某个页面替换当前页面，并销毁被替换的页面，通过Promise获取跳转异常的返回结果。
+
+**支持平台**： Android 、iOS
+
+**参数：**
+
+| 参数名  | 类型                                                    | 必填 | 说明                 | Android平台 | iOS平台 |
+| ------- | ------------------------------------------------------- | ---- | -------------------- | ----------- | ------- |
+| options | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。   | 支持        | 支持    |
+| mode    | [router.RouterMode](js-apis-router.md#routermode9)     | 是   | 跳转页面使用的模式。 | 支持        | 支持    |
+
+**返回值：**
+
+| 类型                | 说明           |
+| ------------------- | -------------- |
+| Promise&lt;void&gt; | 异常返回结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 100001   | Failed to get the delegate. This error code is thrown only in the standard system. |
+| 200002   | Uri error. The URI of the page to be used for replacement is incorrect or does not exist. |
+
+**示例：**
+
+```ts
+import { router } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit'
+
+class RouterTmp {
+  Standard: router.RouterMode = router.RouterMode.Standard
+}
+
+let rtm: RouterTmp = new RouterTmp()
+
+@Entry
+@Component
+struct Index {
+  async routePage() {
+    this.getUIContext().getRouter().replaceUrl({
+        url: 'pages/detail',
+        params: {
+          data1: 'message'
+        }
+      }, rtm.Standard)
+      .then(() => {
+        console.info('succeeded')
+      })
+      .catch((error: BusinessError) => {
+        console.error(`pushUrl failed, code is ${error.code}, message is ${error.message}`);
+      })
+  }
+
+  build() {
+    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
+      Button() {
+        Text('next page')
+          .fontSize(25)
+          .fontWeight(FontWeight.Bold)
+      }.type(ButtonType.Capsule)
+      .margin({ top: 20 })
+      .backgroundColor('#ccc')
+      .onClick(() => {
+        this.routePage()
+      })
+    }
+    .width('100%')
+    .height('100%')
+  }
+}
+```
+
+### replaceUrl
+
+replaceUrl(options: router.RouterOptions, mode: router.RouterMode, callback: AsyncCallback&lt;void&gt;): void
+
+用应用内的某个页面替换当前页面，并销毁被替换的页面。
+
+**支持平台**： Android 、iOS
+
+**参数：**
+
+| 参数名   | 类型                                                    | 必填 | 说明                 | Android平台 | iOS平台 |
+| -------- | ------------------------------------------------------- | ---- | -------------------- | ----------- | ------- |
+| options  | [router.RouterOptions](js-apis-router.md#routeroptions) | 是   | 替换页面描述信息。   | 支持        | 支持    |
+| mode     | [router.RouterMode](js-apis-router.md#routermode9)     | 是   | 跳转页面使用的模式。 | 支持        | 支持    |
+| callback | AsyncCallback&lt;void&gt;                               | 是   | 异常响应回调。       | 支持        | 支持    |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.router(页面路由)](../errorcodes/errorcode-router.md)错误码。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 100001   | The UI execution context is not found. This error code is thrown only in the standard system. |
+| 200002   | Uri error. The URI of the page to be used for replacement is incorrect or does not exist. |
+
+**示例：**
+
+```ts
+import { router } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+class RouterTmp {
+  Standard: router.RouterMode = router.RouterMode.Standard
+}
+
+let rtm: RouterTmp = new RouterTmp()
+
+@Entry
+@Component
+struct Index {
+  async routePage() {
+    this.getUIContext().getRouter().replaceUrl({
+      url: 'pages/detail',
+      params: {
+        data1: 'message'
+      }
+    }, rtm.Standard, (err: Error) => {
+      if (err) {
+        let message = (err as BusinessError).message;
+        let code = (err as BusinessError).code;
+        console.error(`replaceUrl failed, code is ${code}, message is ${message}`);
+        return;
+      }
+      console.info('replaceUrl success');
+    });
+  }
+
+  build() {
+    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
+      Button() {
+        Text('next page')
+          .fontSize(25)
+          .fontWeight(FontWeight.Bold)
+      }.type(ButtonType.Capsule)
+      .margin({ top: 20 })
+      .backgroundColor('#ccc')
+      .onClick(() => {
+        this.routePage()
+      })
+    }
+    .width('100%')
+    .height('100%')
+  }
+}
+```
+
 ### back
 
 back(options?: RouterOptions ): void
@@ -744,6 +1038,37 @@ back(options?: RouterOptions ): void
 ```ts
 let router = uiContext.getRouter();
 router.back({url:'pages/detail'});    
+```
+
+### back
+
+back(index: number, params?: Object): void;
+
+返回指定的页面。
+
+**支持平台**： Android 、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                   | Android平台 | iOS平台 |
+| ------ | ------ | ---- | ---------------------- | ----------- | ------- |
+| index  | number | 是   | 跳转目标页面的索引值。 | 支持        | 支持    |
+| params | Object | 否   | 页面返回时携带的参数。 | 支持        | 支持    |
+
+**示例：**
+
+```ts
+import { Router } from '@kit.ArkUI';
+
+let router: Router = uiContext.getRouter();
+router.back(1);
+```
+
+```ts
+import { Router } from '@kit.ArkUI';
+
+let router: Router = uiContext.getRouter();
+router.back(1, {info:'来自Home页'}); //携带参数返回
 ```
 
 ### clear
