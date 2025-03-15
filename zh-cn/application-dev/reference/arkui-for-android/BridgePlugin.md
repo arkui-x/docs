@@ -293,6 +293,10 @@ public void sendMessage(Object data);
 | ---- | ------ | ---- | ------ |
 | data | Object | 是   | 数据。 |
 
+> **说明**
+>
+> [数据类型支持](../../quick-start/platform-bridge-introduction.md#数据类型支持)
+
 **返回值：** 
 
 无
@@ -398,11 +402,11 @@ public class EntryEntryAbilityActivity extends StageActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 定义对象数组，存放JS侧方法形参对应的实参
+                // 定义对象数组，存放ArkUI侧方法形参对应的实参
                 Object[] paramObject = { "param1", "param2" };
-                // 构造JS侧方法描述对象实例, jsMethodName需根据实际情况调整。
+                // 构造ArkUI侧方法描述对象实例, jsMethodName需根据实际情况调整。
                 MethodData methodData = new MethodData("jsMethodName", paramObject);
-                // 调用Js侧的方法（jsMethodName）
+                // 调用ArkUI侧的方法（jsMethodName）
                 bridgeImpl.callMethod(methodData);
             }
         });
@@ -411,6 +415,70 @@ public class EntryEntryAbilityActivity extends StageActivity {
 ```
 
 
+
+#### callMethod
+
+```java
+public void callMethod(String methodName, Object... parameters);
+```
+
+**描述：**
+
+ 调用ArkUI侧定义的方法，ArkUI侧方法的返回结果通过 IMethodResult.onSucessess 接口获取。
+
+**参数：** 
+
+| Name       | 类型      | 必填 | 描述                  |
+| ---------- | --------- | ---- | --------------------- |
+| methodName | String    | 是   | ArkUI侧方法名称。     |
+| parameters | Object... | 否   | ArkUI侧方法参数列表。 |
+
+**返回值：** 
+
+无
+
+**示例：**
+
+```java
+// BridgeImpl.java
+
+public class BridgeImpl extends BridgePlugin {
+    // 使用BridgeManager对象构造BridgePlugin对象，数据编解码格式为JSON_TYPE(默认)
+    public BridgeImpl(Context context, String name, BridgeManager bridgeManager) {
+        super(context, name, bridgeManager);
+    }
+}
+```
+
+```java
+// EntryEntryAbilityActivity.java
+
+public class EntryEntryAbilityActivity extends StageActivity {
+    public BridgeImpl bridgeImpl = null;
+    
+    protected void onCreate(Bundle savedInstanceState) {
+        // 创建平台桥接对象实例
+        bridgeImpl = new BridgeImpl(this, "BridgeName", getBridgeManager());
+        // bundleName需根据实际情况调整。
+        setInstanceName("bundleName:entry:EntryAbility:");
+        super.onCreate(savedInstanceState);
+        // 注册TestCallMethod按钮
+        testCallMethod();
+    }
+
+	public void testCallMethod() {
+        // 使用button按钮点击，发送信息。
+        Button button = (Button) findViewById(R.id.TestCallMethod);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ArkUI侧函数名加ArkUI侧方法形参对应的实参调用
+                bridgeImpl.callMethod("jsMethodName", "param1", "param2");
+            }
+        });
+    }
+}
+```
 
 #### setMessageListener
 
