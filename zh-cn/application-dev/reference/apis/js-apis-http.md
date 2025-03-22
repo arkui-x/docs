@@ -456,6 +456,9 @@ requestInStream(url: string, callback: AsyncCallback\<number\>): void
 | 2300998 | It is not allowed to access this domain.                       |
 | 2300999 | Unknown error.                                                 |
 
+> **部分场景跨平台错误码不一致说明：**
+>  使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Andriod平台会返回错误码2300007，IOS平台会返回错误码2300008。
+
 > **错误码说明：**
 > 以上错误码的详细介绍参见[HTTP错误码](../errorcodes/errorcode-net-http.md)。
 > HTTP 错误码映射关系：2300000 + curl错误码。更多常用错误码，可参考[curl错误码](https://curl.se/libcurl/c/libcurl-errors.html)
@@ -531,6 +534,11 @@ requestInStream(url: string, options: HttpRequestOptions, callback: AsyncCallbac
 | 2300997 | Cleartext traffic not permitted.                               |
 | 2300998 | It is not allowed to access this domain.                       |
 | 2300999 | Unknown error.                                                 |
+
+> **部分场景跨平台错误码不一致说明：**
+> （1）使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Andriod平台会返回错误码2300007，IOS平台会返回错误码2300008。
+> （2）使用错误的代理协议发起http流式请求时，OH和Andriod平台会返回错误码2300005，IOS平台会返回错误码2300999。
+> （3）使用DELETE方法和HTTP2协议或HTTP3协议发起流式请求时，请求成功后，OH和IOS会返回405，Android会返回400。
 
 > **错误码说明：**
 > 以上错误码的详细介绍参见[HTTP错误码](../errorcodes/errorcode-net-http.md)。
@@ -634,6 +642,10 @@ requestInStream(url: string, options? : HttpRequestOptions): Promise\<number\>
 | 2300997 | Cleartext traffic not permitted.                               |
 | 2300998 | It is not allowed to access this domain.                       |
 | 2300999 | Unknown error.                                                 |
+
+> **部分场景跨平台错误码不一致说明：**
+> （1）使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Andriod平台会返回错误码2300007，IOS平台会返回错误码2300008。
+> （2）使用错误的代理协议发起http流式请求时，OH和Andriod平台会返回错误码2300005，IOS平台会返回错误码2300999。
 
 > **错误码说明：**
 > 以上错误码的详细介绍参见[HTTP错误码](../errorcodes/errorcode-net-http.md)。
