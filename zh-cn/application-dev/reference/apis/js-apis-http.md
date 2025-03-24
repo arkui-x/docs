@@ -494,8 +494,8 @@ requestInStream(url: string, options: HttpRequestOptions, callback: AsyncCallbac
 | 参数名   | 类型                                           | 必填 | 说明                                            |
 | -------- | ---------------------------------------------- | ---- | ----------------------------------------------- |
 | url      | string                                         | 是   | 发起网络请求的URL地址。                         |
-| options  | HttpRequestOptions                             | 是   | 参考[HttpRequestOptions](#httprequestoptions)。 |
-| callback | AsyncCallback\<[number](#responsecode)\>       | 是   | 回调函数。                                      |
+| options  | HttpRequestOptions                             | 是   | 参考[HttpRequestOptions](#httprequestoptions6)。 |
+| callback | AsyncCallback\<[number](#responsecode6)\>       | 是   | 回调函数。                                      |
 
 **错误码：**
 
@@ -597,13 +597,13 @@ requestInStream(url: string, options? : HttpRequestOptions): Promise\<number\>
 | 参数名  | 类型               | 必填 | 说明                                            |
 | ------- | ------------------ | ---- | ----------------------------------------------- |
 | url     | string             | 是   | 发起网络请求的URL地址。                         |
-| options | HttpRequestOptions | 否   | 参考[HttpRequestOptions](#httprequestoptions)。 |
+| options | HttpRequestOptions | 否   | 参考[HttpRequestOptions](#httprequestoptions6)。 |
 
 **返回值：**
 
 | 类型                                   | 说明                              |
 | :------------------------------------- | :-------------------------------- |
-| Promise\<[number](#responsecode)\> | 以Promise形式返回发起请求的结果。 |
+| Promise\<[number](#responsecode6)\> | 以Promise形式返回发起请求的结果。 |
 
 **错误码：**
 
