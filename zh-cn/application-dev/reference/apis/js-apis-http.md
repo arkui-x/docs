@@ -400,6 +400,284 @@ let httpRequest = http.createHttp();
 httpRequest.destroy();
 ```
 
+
+### requestInStream<sup>18+</sup>
+
+requestInStream(url: string, callback: AsyncCallback\<number\>): void
+
+根据URL地址，发起HTTP网络请求并返回流式响应，使用callback方式作为异步方法。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**参数：**
+
+| 参数名   | 类型                                           | 必填 | 说明                                            |
+| -------- | ---------------------------------------------- | ---- | ----------------------------------------------- |
+| url      | string                                         | 是   | 发起网络请求的URL地址。                         |
+| callback | AsyncCallback\<number\>       | 是   | 回调函数。                                      |
+
+**错误码：**
+
+| 错误码ID   | 错误信息                                                         |
+|---------|----------------------------------------------------------------|
+| 401     | Parameter error.                                               |
+| 201     | Permission denied.                                             |
+| 2300001 | Unsupported protocol.                                          |
+| 2300003 | Invalid URL format or missing URL.                             |
+| 2300005 | Failed to resolve the proxy name.                              |
+| 2300006 | Failed to resolve the host name.                               |
+| 2300007 | Failed to connect to the server.                               |
+| 2300008 | Invalid server response.                                       |
+| 2300009 | Access to the remote resource denied.                          |
+| 2300016 | Error in the HTTP2 framing layer.                              |
+| 2300018 | Transferred a partial file.                                    |
+| 2300023 | Failed to write the received data to the disk or application.  |
+| 2300025 | Upload failed.                                                 |
+| 2300026 | Failed to open or read local data from the file or application.|
+| 2300027 | Out of memory.                                                 |
+| 2300028 | Operation timeout.                                             |
+| 2300047 | The number of redirections reaches the maximum allowed.        |
+| 2300052 | The server returned nothing (no header or data).               |
+| 2300055 | Failed to send data to the peer.                               |
+| 2300056 | Failed to receive data from the peer.                          |
+| 2300058 | Local SSL certificate error.                                   |
+| 2300059 | The specified SSL cipher cannot be used.                       |
+| 2300060 | Invalid SSL peer certificate or SSH remote key.                |
+| 2300061 | Invalid HTTP encoding format.                                  |
+| 2300063 | Maximum file size exceeded.                                    |
+| 2300070 | Remote disk full.                                              |
+| 2300073 | Remote file already exists.                                    |
+| 2300077 | The SSL CA certificate does not exist or is inaccessible.      |
+| 2300078 | Remote file not found.                                         |
+| 2300094 | Authentication error.                                          |
+| 2300997 | Cleartext traffic not permitted.                               |
+| 2300998 | It is not allowed to access this domain.                       |
+| 2300999 | Unknown error.                                                 |
+
+> **部分场景跨平台错误码不一致说明：**
+>  使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Andriod平台会返回错误码2300007，IOS平台会返回错误码2300008。
+
+> **错误码说明：**
+> 以上错误码的详细介绍参见[HTTP错误码](../errorcodes/errorcode-net-http.md)。
+> HTTP 错误码映射关系：2300000 + curl错误码。更多常用错误码，可参考[curl错误码](https://curl.se/libcurl/c/libcurl-errors.html)
+
+**示例：**
+
+```ts
+import { http } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let httpRequest = http.createHttp();
+httpRequest.requestInStream("EXAMPLE_URL", (err: BusinessError, data: number) => {
+  if (!err) {
+    console.info("requestInStream OK! ResponseCode is " + JSON.stringify(data));
+  } else {
+    console.info("requestInStream ERROR : err = " + JSON.stringify(err));
+  }
+})
+```
+
+### requestInStream<sup>18+</sup>
+
+requestInStream(url: string, options: HttpRequestOptions, callback: AsyncCallback\<number\>): void
+
+根据URL地址和相关配置项，发起HTTP网络请求并返回流式响应，使用callback方式作为异步方法。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**参数：**
+
+| 参数名   | 类型                                           | 必填 | 说明                                            |
+| -------- | ---------------------------------------------- | ---- | ----------------------------------------------- |
+| url      | string                                         | 是   | 发起网络请求的URL地址。                         |
+| options  | HttpRequestOptions                             | 是   | 参考[HttpRequestOptions](#httprequestoptions6)。 |
+| callback | AsyncCallback\<[number](#responsecode6)\>       | 是   | 回调函数。                                      |
+
+**错误码：**
+
+| 错误码ID   | 错误信息                                                         |
+|---------|----------------------------------------------------------------|
+| 401     | Parameter error.                                               |
+| 201     | Permission denied.                                             |
+| 2300001 | Unsupported protocol.                                          |
+| 2300003 | Invalid URL format or missing URL.                             |
+| 2300005 | Failed to resolve the proxy name.                              |
+| 2300006 | Failed to resolve the host name.                               |
+| 2300007 | Failed to connect to the server.                               |
+| 2300008 | Invalid server response.                                       |
+| 2300009 | Access to the remote resource denied.                          |
+| 2300016 | Error in the HTTP2 framing layer.                              |
+| 2300018 | Transferred a partial file.                                    |
+| 2300023 | Failed to write the received data to the disk or application.  |
+| 2300025 | Upload failed.                                                 |
+| 2300026 | Failed to open or read local data from the file or application.|
+| 2300027 | Out of memory.                                                 |
+| 2300028 | Operation timeout.                                             |
+| 2300047 | The number of redirections reaches the maximum allowed.        |
+| 2300052 | The server returned nothing (no header or data).               |
+| 2300055 | Failed to send data to the peer.                               |
+| 2300056 | Failed to receive data from the peer.                          |
+| 2300058 | Local SSL certificate error.                                   |
+| 2300059 | The specified SSL cipher cannot be used.                       |
+| 2300060 | Invalid SSL peer certificate or SSH remote key.                |
+| 2300061 | Invalid HTTP encoding format.                                  |
+| 2300063 | Maximum file size exceeded.                                    |
+| 2300070 | Remote disk full.                                              |
+| 2300073 | Remote file already exists.                                    |
+| 2300077 | The SSL CA certificate does not exist or is inaccessible.      |
+| 2300078 | Remote file not found.                                         |
+| 2300094 | Authentication error.                                          |
+| 2300997 | Cleartext traffic not permitted.                               |
+| 2300998 | It is not allowed to access this domain.                       |
+| 2300999 | Unknown error.                                                 |
+
+> **部分场景跨平台错误码不一致说明：**
+> （1）使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Andriod平台会返回错误码2300007，IOS平台会返回错误码2300008。
+> （2）使用错误的代理协议发起http流式请求时，OH和Andriod平台会返回错误码2300005，IOS平台会返回错误码2300999。
+> （3）使用DELETE方法和HTTP2协议或HTTP3协议发起流式请求时，请求成功后，OH和IOS平台会返回405，Android平台会返回400。
+
+> **错误码说明：**
+> 以上错误码的详细介绍参见[HTTP错误码](../errorcodes/errorcode-net-http.md)。
+> HTTP 错误码映射关系：2300000 + curl错误码。更多常用错误码，可参考[curl错误码](https://curl.se/libcurl/c/libcurl-errors.html)
+
+**示例：**
+
+```ts
+import { http } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+class Header {
+  public contentType: string;
+
+  constructor(contentType: string) {
+    this.contentType = contentType;
+  }
+}
+
+let httpRequest = http.createHttp();
+let options: http.HttpRequestOptions = {
+    method: http.RequestMethod.POST, // 可选，默认为http.RequestMethod.GET。
+    // 当使用POST请求时此字段用于传递请求体内容，具体格式与服务端协商确定。
+    extraData: 'data to send',
+    expectDataType: http.HttpDataType.STRING, // 可选，指定返回数据的类型。
+    usingCache: true, // 可选，默认为true。
+    priority: 1, // 可选，默认为1。
+    // 开发者根据自身业务需要添加header字段。
+    header: new Header('application/json'),
+    readTimeout: 60000, // 可选，默认为60000ms。
+    connectTimeout: 60000, // 可选，默认为60000ms。
+    usingProtocol: http.HttpProtocol.HTTP1_1, // 可选，协议类型默认值由系统自动指定。
+    usingProxy: false, //可选，默认不使用网络代理，自API 10开始支持该属性。
+};
+httpRequest.requestInStream("EXAMPLE_URL", options, (err: BusinessError<void> , data: number) => {
+  if (!err) {
+    console.info("requestInStream OK! ResponseCode is " + JSON.stringify(data));
+  } else {
+    console.info("requestInStream ERROR : err = " + JSON.stringify(err));
+  }
+})
+```
+
+### requestInStream<sup>18+</sup>
+
+requestInStream(url: string, options? : HttpRequestOptions): Promise\<number\>
+
+根据URL地址，发起HTTP网络请求并返回流式响应，使用Promise方式作为异步方法。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**参数：**
+
+| 参数名  | 类型               | 必填 | 说明                                            |
+| ------- | ------------------ | ---- | ----------------------------------------------- |
+| url     | string             | 是   | 发起网络请求的URL地址。                         |
+| options | HttpRequestOptions | 否   | 参考[HttpRequestOptions](#httprequestoptions6)。 |
+
+**返回值：**
+
+| 类型                                   | 说明                              |
+| :------------------------------------- | :-------------------------------- |
+| Promise\<[number](#responsecode6)\> | 以Promise形式返回发起请求的结果。 |
+
+**错误码：**
+
+| 错误码ID   | 错误信息                                                         |
+|---------|----------------------------------------------------------------|
+| 401     | Parameter error.                                               |
+| 201     | Permission denied.                                             |
+| 2300001 | Unsupported protocol.                                          |
+| 2300003 | Invalid URL format or missing URL.                             |
+| 2300005 | Failed to resolve the proxy name.                              |
+| 2300006 | Failed to resolve the host name.                               |
+| 2300007 | Failed to connect to the server.                               |
+| 2300008 | Invalid server response.                                       |
+| 2300009 | Access to the remote resource denied.                          |
+| 2300016 | Error in the HTTP2 framing layer.                              |
+| 2300018 | Transferred a partial file.                                    |
+| 2300023 | Failed to write the received data to the disk or application.  |
+| 2300025 | Upload failed.                                                 |
+| 2300026 | Failed to open or read local data from the file or application.|
+| 2300027 | Out of memory.                                                 |
+| 2300028 | Operation timeout.                                             |
+| 2300047 | The number of redirections reaches the maximum allowed.        |
+| 2300052 | The server returned nothing (no header or data).               |
+| 2300055 | Failed to send data to the peer.                               |
+| 2300056 | Failed to receive data from the peer.                          |
+| 2300058 | Local SSL certificate error.                                   |
+| 2300059 | The specified SSL cipher cannot be used.                       |
+| 2300060 | Invalid SSL peer certificate or SSH remote key.                |
+| 2300061 | Invalid HTTP encoding format.                                  |
+| 2300063 | Maximum file size exceeded.                                    |
+| 2300070 | Remote disk full.                                              |
+| 2300073 | Remote file already exists.                                    |
+| 2300077 | The SSL CA certificate does not exist or is inaccessible.      |
+| 2300078 | Remote file not found.                                         |
+| 2300094 | Authentication error.                                          |
+| 2300997 | Cleartext traffic not permitted.                               |
+| 2300998 | It is not allowed to access this domain.                       |
+| 2300999 | Unknown error.                                                 |
+
+> **部分场景跨平台错误码不一致说明：**
+> （1）使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Andriod平台会返回错误码2300007，IOS平台会返回错误码2300008。
+> （2）使用错误的代理协议发起http流式请求时，OH和Andriod平台会返回错误码2300005，IOS平台会返回错误码2300999。
+
+> **错误码说明：**
+> 以上错误码的详细介绍参见[HTTP错误码](../errorcodes/errorcode-net-http.md)。
+> HTTP 错误码映射关系：2300000 + curl错误码。更多常用错误码，可参考[curl错误码](https://curl.se/libcurl/c/libcurl-errors.html)
+
+**示例：**
+
+```ts
+import { http } from '@kit.NetworkKit';
+
+class Header {
+  public contentType: string;
+
+  constructor(contentType: string) {
+    this.contentType = contentType;
+  }
+}
+
+let httpRequest = http.createHttp();
+let promise = httpRequest.requestInStream("EXAMPLE_URL", {
+  method: http.RequestMethod.GET,
+  connectTimeout: 60000,
+  readTimeout: 60000,
+  header: new Header('application/json')
+});
+promise.then((data: number) => {
+  console.info("requestInStream OK!" + data);
+}).catch((err: Error) => {
+  console.info("requestInStream ERROR : err = " + JSON.stringify(err));
+});
+```
+
 ### on('headerReceive')<sup>(deprecated)</sup>
 
 on(type: 'headerReceive', callback: AsyncCallback\<Object\>): void
