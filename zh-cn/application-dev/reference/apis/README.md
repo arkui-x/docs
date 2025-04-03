@@ -25,7 +25,7 @@
     - [ToolBar](js-apis-arkui-advanced-toolBar.md)
     - [SubHeader](js-apis-arkui-advanced-subHeader.md)
   - 弹窗
-    - [弹出框 (Diglog)](js-apis-arkui-advanced-dialog.md)
+    - [弹出框 (Dialog)](js-apis-arkui-advanced-dialog.md)
   
 - Ability框架
   - Stage模型能力的接口(推荐)
