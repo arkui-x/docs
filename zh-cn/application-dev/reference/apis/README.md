@@ -39,6 +39,8 @@
     - [@ohos.app.ability.Configuration (Configuration)](js-apis-app-ability-configuration.md)
     - [@ohos.app.ability.ConfigurationConstant (ConfigurationConstant)](js-apis-app-ability-configurationConstant.md)
     - [@ohos.app.ability.Want (Want)](js-apis-app-ability-want.md)
+    - [@ohos.app.ability.errorManager (ErrorManager)](js-apis-app-ability-errorManager.md)
+
   - 接口依赖的元素及定义
     - application
       - [abilityDelegator](js-apis-inner-application-abilityDelegator.md)
@@ -151,6 +153,8 @@
   - [@ohos.notificationManager (NotificationManager模块)](js-apis-notificationManager.md)
   - application
     - [EventHub](js-apis-inner-application-eventHub.md)
+- 性能分析服务
+  - [@ohos.hiviewdfx.hiAppEvent (应用事件打点)](js-apis-hiviewdfx-hiappevent.md)
 
 - 进程线程通信
   - [@ohos.events.emitter (Emitter)](js-apis-emitter.md)
