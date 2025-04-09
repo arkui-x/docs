@@ -4,7 +4,7 @@
 
 > **说明：**
 >
-> - 本模块接口从API Version 9开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+> - 本模块接口从API Version 10开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
 >
 > - 示例效果请以真机运行为准，当前IDE预览器不支持。
 
@@ -945,7 +945,7 @@ struct WebComponent {
 }
 ```
 
-### zoomIn<sup>16+</sup>
+### zoomIn<sup>18+</sup>
 
 zoomIn(): void
 
@@ -988,7 +988,7 @@ struct WebComponent {
 }
 ```
 
-### zoomOut<sup>16+</sup>
+### zoomOut<sup>18+</sup>
 
 zoomOut(): void
 
@@ -1031,7 +1031,7 @@ struct WebComponent {
 }
 ```
 
-###  getOriginalUrl<sup>16+</sup>
+###  getOriginalUrl<sup>18+</sup>
 
 getOriginalUrl(): string
 
@@ -1455,7 +1455,7 @@ struct WebComponent {
 }
 ```
 
-###  getWebId<sup>16+</sup>
+###  getWebId<sup>18+</sup>
 
 getWebId(): number
 
@@ -1504,7 +1504,7 @@ struct WebComponent {
 }
 ```
 
-### pageDown<sup>16+</sup>
+### pageDown<sup>18+</sup>
 
 pageDown(bottom: boolean): void
 
@@ -1553,7 +1553,7 @@ struct WebComponent {
 }
 ```
 
-### pageUp<sup>16+</sup>
+### pageUp<sup>18+</sup>
 
 pageUp(top: boolean): void
 
@@ -1602,7 +1602,7 @@ struct WebComponent {
 }
 ```
 
-###  postUrl<sup>16+</sup>
+###  postUrl<sup>18+</sup>
 
 postUrl(url: string, postData: ArrayBuffer): void
 
@@ -1671,7 +1671,7 @@ struct WebComponent {
 }
 ```
 
-###  setWebDebuggingAccess<sup>16+</sup>
+###  setWebDebuggingAccess<sup>18+</sup>
 
 static setWebDebuggingAccess(webDebuggingAccess: boolean): void
 
@@ -1725,7 +1725,7 @@ struct WebComponent {
 }
 ```
 
-### runJavaScriptExt<sup>16+</sup>
+### runJavaScriptExt<sup>18+</sup>
 
 runJavaScriptExt(script: string | ArrayBuffer, callback : AsyncCallback\<JsMessageExt\>): void
 
@@ -1824,7 +1824,7 @@ struct WebComponent {
 }
 ```
 
-### runJavaScriptExt<sup>16+</sup>
+### runJavaScriptExt<sup>18+</sup>
 
 runJavaScriptExt(script: string | ArrayBuffer): Promise<[JsMessageExt](#jsmessageext16)>
 
@@ -1936,7 +1936,7 @@ function test() {
 </html>
 ```
 
-### setDownloadDelegate<sup>16+</sup>
+### setDownloadDelegate<sup>18+</sup>
 
 setDownloadDelegate(delegate: WebDownloadDelegate): void
 
@@ -1987,7 +1987,7 @@ struct WebComponent {
 }
 ```
 
-### startDownload<sup>16+</sup>
+### startDownload<sup>18+</sup>
 
 startDownload(url: string): void
 
@@ -2428,7 +2428,7 @@ struct WebComponent {
 }
 ```
 
-### postMessageEventExt<sup>16+</sup>
+### postMessageEventExt<sup>18+</sup>
 
 postMessageEventExt(message: WebMessageExt): void
 
@@ -2451,7 +2451,7 @@ postMessageEventExt(message: WebMessageExt): void
 | 17100010 | Failed to post messages through the port.                    |
 | 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
 
-### onMessageEventExt<sup>16+</sup>
+### onMessageEventExt<sup>18+</sup>
 
 onMessageEventExt(callback: (result: WebMessageExt) => void): void
 
@@ -3715,7 +3715,7 @@ struct WebComponent {
 }
 ```
 
-###  existCookie<sup>16+</sup>
+###  existCookie<sup>18+</sup>
 
 static existCookie(incognito?: boolean): boolean
 
@@ -3759,7 +3759,7 @@ struct WebComponent {
 }
 ```
 
-### clearSessionCookie<sup>16+</sup>
+### clearSessionCookie<sup>18+</sup>
 
 static clearSessionCookie(callback: AsyncCallback\<void>): void
 
@@ -4446,11 +4446,11 @@ Web组件返回的请求/响应头对象。
 | headerKey   | string | 是 | 是 | 请求/响应头的key。   |
 | headerValue | string | 是 | 是 | 请求/响应头的value。 |
 
-## WebDownloadDelegate<sup>16+</sup>
+## WebDownloadDelegate<sup>18+</sup>
 
 下载任务的状态会通过该类的回调接口通知给用户。
 
-### onBeforeDownload<sup>16+</sup>
+### onBeforeDownload<sup>18+</sup>
 
 onBeforeDownload(callback: Callback\<WebDownloadItem\>): void
 
@@ -4527,7 +4527,7 @@ struct WebComponent {
 }
 ```
 
-### onDownloadUpdated<sup>16+</sup>
+### onDownloadUpdated<sup>18+</sup>
 
 onDownloadUpdated(callback: Callback\<WebDownloadItem\>): void
 
@@ -4604,7 +4604,7 @@ struct WebComponent {
 }
 ```
 
-### onDownloadFinish<sup>16+</sup>
+### onDownloadFinish<sup>18+</sup>
 
 onDownloadFinish(callback: Callback\<WebDownloadItem\>): void
 
@@ -4681,7 +4681,7 @@ struct WebComponent {
 }
 ```
 
-### onDownloadFailed<sup>16+</sup>
+### onDownloadFailed<sup>18+</sup>
 
 onDownloadFailed(callback: Callback\<WebDownloadItem\>): void
 
@@ -4758,11 +4758,11 @@ struct WebComponent {
 }
 ```
 
-## WebMessageExt<sup>16+</sup>
+## WebMessageExt<sup>18+</sup>
 
 [webMessagePort](#webmessageport)接口接收、发送的数据对象。
 
-### getType<sup>16+</sup>
+### getType<sup>18+</sup>
 
 getType(): WebMessageType
 
@@ -4778,7 +4778,7 @@ getType(): WebMessageType
 | ----------------------------------- | ------------------------------------------------------- |
 | [WebMessageType](#webmessagetype16) | [webMessagePort](#webmessageport)接口所支持的数据类型。 |
 
-### getString<sup>16+</sup>
+### getString<sup>18+</sup>
 
 getString(): string
 
@@ -4800,7 +4800,7 @@ getString(): string
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-### getNumber<sup>16+</sup>
+### getNumber<sup>18+</sup>
 
 getNumber(): number
 
@@ -4822,7 +4822,7 @@ getNumber(): number
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-### getBoolean<sup>16+</sup>
+### getBoolean<sup>18+</sup>
 
 getBoolean(): boolean
 
@@ -4844,7 +4844,7 @@ getBoolean(): boolean
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-### getArray<sup>16+</sup>
+### getArray<sup>18+</sup>
 
 getArray(): Array<string | number | boolean>
 
@@ -4866,7 +4866,7 @@ getArray(): Array<string | number | boolean>
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-### getError<sup>16+</sup>
+### getError<sup>18+</sup>
 
 getError(): Error
 
@@ -4888,7 +4888,7 @@ getError(): Error
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-### setType<sup>16+</sup>
+### setType<sup>18+</sup>
 
 setType(type: WebMessageType): void
 
@@ -4911,7 +4911,7 @@ setType(type: WebMessageType): void
 | 17100014 | The type and value of the message do not match.              |
 | 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
 
-### setString<sup>16+</sup>
+### setString<sup>18+</sup>
 
 setString(message: string): void
 
@@ -4934,7 +4934,7 @@ setString(message: string): void
 | 17100014 | The type and value of the message do not match.              |
 | 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
 
-### setNumber<sup>16+</sup>
+### setNumber<sup>18+</sup>
 
 setNumber(message: number): void
 
@@ -4957,7 +4957,7 @@ setNumber(message: number): void
 | 17100014 | The type and value of the message do not match.              |
 | 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
 
-### setBoolean<sup>16+</sup>
+### setBoolean<sup>18+</sup>
 
 setBoolean(message: boolean): void
 
@@ -4980,7 +4980,7 @@ setBoolean(message: boolean): void
 | 17100014 | The type and value of the message do not match.              |
 | 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
 
-### setArray<sup>16+</sup>
+### setArray<sup>18+</sup>
 
 setArray(message: Array<string | number | boolean>): void
 
@@ -5003,7 +5003,7 @@ setArray(message: Array<string | number | boolean>): void
 | 17100014 | The type and value of the message do not match.              |
 | 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
 
-### setError<sup>16+</sup>
+### setError<sup>18+</sup>
 
 setError(message: Error): void
 
@@ -5026,11 +5026,11 @@ setError(message: Error): void
 | 17100014 | The type and value of the message do not match.              |
 | 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
 
-## JsMessageExt<sup>16+</sup>
+## JsMessageExt<sup>18+</sup>
 
 [runJavaScriptExt](#runjavascriptext16)接口执行脚本返回的数据对象。
 
-### getType<sup>16+</sup>
+### getType<sup>18+</sup>
 
 getType(): JsMessageType
 
@@ -5046,7 +5046,7 @@ getType(): JsMessageType
 | --------------------------------- | ------------------------------------------------------------ |
 | [JsMessageType](#jsmessagetype16) | [runJavaScriptExt](#runjavascriptext16)接口脚本执行后返回的结果的类型。 |
 
-###  getString<sup>16+</sup>
+###  getString<sup>18+</sup>
 
 getString(): string
 
@@ -5068,7 +5068,7 @@ getString(): string
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-### getNumber<sup>16+</sup>
+### getNumber<sup>18+</sup>
 
 getNumber(): number
 
@@ -5090,7 +5090,7 @@ getNumber(): number
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-### getBoolean<sup>16+</sup>
+### getBoolean<sup>18+</sup>
 
 getBoolean(): boolean
 
@@ -5112,7 +5112,7 @@ getBoolean(): boolean
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-### getArray<sup>16+</sup>
+### getArray<sup>18+</sup>
 
 getArray(): Array<string | number | boolean>
 
@@ -5134,7 +5134,7 @@ getArray(): Array<string | number | boolean>
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-### getError<sup>16+</sup>
+### getError<sup>18+</sup>
 
 getError(): Error
 
@@ -5156,7 +5156,7 @@ getError(): Error
 | -------- | ----------------------------------------------- |
 | 17100014 | The type and value of the message do not match. |
 
-## JsMessageType<sup>16+</sup>
+## JsMessageType<sup>18+</sup>
 
 [runJavaScriptExt](#runjavascriptext16)接口脚本执行后返回的结果的类型。
 
@@ -5169,7 +5169,7 @@ getError(): Error
 | BOOLEAN | 3    | 布尔类型。   | 不支持      | 支持    |
 | ARRAY   | 5    | 数组类型。   | 不支持      | 支持    |
 
-## WebMessageType<sup>16+</sup>
+## WebMessageType<sup>18+</sup>
 
 [webMessagePort](#webmessageport)接口所支持的数据类型。
 
@@ -5183,7 +5183,7 @@ getError(): Error
 | ARRAY   | 5    | 数组类型。   | 不支持      | 支持    |
 | ERROR   | 6    | 错误类型。   | 不支持      | 支持    |
 
-## WebDownloadItem<sup>16+</sup>
+## WebDownloadItem<sup>18+</sup>
 
 表示下载任务，您可以使用此对象来操作相应的下载任务。
 
@@ -5191,7 +5191,7 @@ getError(): Error
 >
 > 在下载过程中，下载的进程会通过WebDownloadDelegate通知给使用者，使用者可以通过参数WebDownloadItem来操作下载任务。
 
-### getGuid<sup>16+</sup>
+### getGuid<sup>18+</sup>
 
 getGuid(): string
 
@@ -5258,7 +5258,7 @@ struct WebComponent {
 }
 ```
 
-### getCurrentSpeed<sup>16+</sup>
+### getCurrentSpeed<sup>18+</sup>
 
 getCurrentSpeed(): number
 
@@ -5325,7 +5325,7 @@ struct WebComponent {
 }
 ```
 
-### getPercentComplete<sup>16+</sup>
+### getPercentComplete<sup>18+</sup>
 
 getPercentComplete(): number
 
@@ -5392,7 +5392,7 @@ struct WebComponent {
 }
 ```
 
-### getTotalBytes<sup>16+</sup>
+### getTotalBytes<sup>18+</sup>
 
 getTotalBytes(): number
 
@@ -5459,7 +5459,7 @@ struct WebComponent {
 }
 ```
 
-### getState<sup>16+</sup>
+### getState<sup>18+</sup>
 
 getState(): WebDownloadState
 
@@ -5526,7 +5526,7 @@ struct WebComponent {
 }
 ```
 
-### getLastErrorCode<sup>16+</sup>
+### getLastErrorCode<sup>18+</sup>
 
 getLastErrorCode(): WebDownloadErrorCode
 
@@ -5594,7 +5594,7 @@ struct WebComponent {
 }
 ```
 
-### getMethod<sup>16+</sup>
+### getMethod<sup>18+</sup>
 
 getMethod(): string
 
@@ -5661,7 +5661,7 @@ struct WebComponent {
 }
 ```
 
-### getMimeType<sup>16+</sup>
+### getMimeType<sup>18+</sup>
 
 getMimeType(): string
 
@@ -5728,7 +5728,7 @@ struct WebComponent {
 }
 ```
 
-### getUrl<sup>16+</sup>
+### getUrl<sup>18+</sup>
 
 getUrl(): string
 
@@ -5795,7 +5795,7 @@ struct WebComponent {
 }
 ```
 
-### getSuggestedFileName<sup>16+</sup>
+### getSuggestedFileName<sup>18+</sup>
 
 getSuggestedFileName(): string
 
@@ -5862,7 +5862,7 @@ struct WebComponent {
 }
 ```
 
-### getReceivedBytes<sup>16+</sup>
+### getReceivedBytes<sup>18+</sup>
 
 getReceivedBytes(): number
 
@@ -5930,7 +5930,7 @@ struct WebComponent {
 }
 ```
 
-### getFullPath<sup>16+</sup>
+### getFullPath<sup>18+</sup>
 
 getFullPath(): string
 
@@ -5998,7 +5998,7 @@ struct WebComponent {
 }
 ```
 
-### start<sup>16+</sup>
+### start<sup>18+</sup>
 
 start(downloadPath: string): void
 
@@ -6082,7 +6082,7 @@ struct WebComponent {
 }
 ```
 
-### cancel<sup>16+</sup>
+### cancel<sup>18+</sup>
 
 cancel(): void
 
@@ -6153,7 +6153,7 @@ struct WebComponent {
 }
 ```
 
-### pause<sup>16+</sup>
+### pause<sup>18+</sup>
 
 pause(): void
 
@@ -6238,7 +6238,7 @@ struct WebComponent {
 }
 ```
 
-### resume<sup>16+</sup>
+### resume<sup>18+</sup>
 
 resume(): void
 
@@ -6331,7 +6331,7 @@ struct WebComponent {
 }
 ```
 
-## WebDownloadState<sup>16+</sup>
+## WebDownloadState<sup>18+</sup>
 
 下载任务的状态。
 
@@ -6347,7 +6347,7 @@ struct WebComponent {
 | PAUSED      | 5    | 下载任务已经被暂停。 | 支持        | 支持    |
 | UNKNOWN     | 6    | 下载任务未知状态。   | 支持        | 支持    |
 
-## WebDownloadErrorCode<sup>16+</sup>
+## WebDownloadErrorCode<sup>18+</sup>
 
 下载任务的错误码。
 
@@ -6357,11 +6357,11 @@ struct WebComponent {
 | ------------- | ---- | ---------------- | ----------- | ------- |
 | USER_CANCELED | 40   | 用户取消了下载。 | 支持        | 支持    |
 
-## WebDownloadManager<sup>16+</sup>
+## WebDownloadManager<sup>18+</sup>
 
 可以通过该类提供的接口来恢复失败的下载任务。
 
-### setDownloadDelegate<sup>16+</sup>
+### setDownloadDelegate<sup>18+</sup>
 
 static setDownloadDelegate(delegate: WebDownloadDelegate): void
 
