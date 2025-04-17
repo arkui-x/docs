@@ -18,7 +18,7 @@
   - [@ohos.promptAction (弹窗)](js-apis-promptAction.md)
   - [@ohos.router (页面路由)](js-apis-router.md)
   - [@ohos.arkui.drawableDescriptor (DrawableDescriptor)](js-apis-arkui-drawableDescriptor.md)
-
+  - [@ohos.arkui.Prefetcher (Prefetching)](js-apis-arkui-Prefetcher.md)
 - ArkTS组件
   - 按钮与选择
     - [SegmentButton](js-apis-arkui-advanced-segmentButton.md)
@@ -27,7 +27,8 @@
     - [SubHeader](js-apis-arkui-advanced-subHeader.md)
   - 弹窗
     - [弹出框 (Dialog)](js-apis-arkui-advanced-dialog.md)
-  
+  - 系统预置UI组件库
+    - [SwipeRefresher](js-api-arkui-advanced-SwipeRefresher.md)
 - Ability框架
   - Stage模型能力的接口(推荐)
     - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](js-apis-app-ability-abilityLifecycleCallback.md)
