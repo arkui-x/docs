@@ -4,7 +4,7 @@ Want是对象间信息传递的载体，可以用于应用组件间的信息传�
 
 > **说明：**
 >
-> 本模块首批接口从API version 16 开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+> 本模块首批接口从API version 10 开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 
 ## 导入模块
 
@@ -23,7 +23,7 @@ import Want from '@ohos.app.ability.Want';
 | bundleName  | string               | 是   | 表示待启动Ability所在的应用Bundle名称。            | 支持        | 支持    |
 | moduleName  | string               | 是   | 表示待启动的Ability所属的模块名称。                | 支持        | 支持    |
 | abilityName | string               | 是   | 表示待启动Ability名称。                            | 支持        | 支持    |
-| type        | string               | 否   | 表示MIME type类型描述，打开文件的类型。            | 支持        | 支持    |
+| type<sup>18+</sup>        | string               | 否   | 表示MIME type类型描述，打开文件的类型。            | 支持        | 支持    |
 | parameters  | {[key: string]: any} | 否   | 表示WantParams描述，由开发者自行决定传入的键值对。 | 支持        | 支持    |
 
 > **说明：**
@@ -55,9 +55,9 @@ context.startAbility(want, (err) => {
 });
 ```
 
-目前parameters支持的数据类型有：字符串、数字、布尔等。
+- 目前parameters支持的数据类型有：字符串、数字、布尔等。
 
-字符串（String）
+  * 字符串（String）
 
 ```ts
 import common from '@ohos.app.ability.common';
@@ -86,13 +86,13 @@ import Want from '@ohos.app.ability.Want';
 
 let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
 let want: Want = {
-	bundleName: 'com.example.myapplication',
-	abilityName: 'FuncAbility',
-  moduleName: 'entry',
-	parameters: {
-		keyForInt: 100,
-		keyForDouble: 99.99,
-	},
+    bundleName: 'com.example.myapplication',
+    abilityName: 'FuncAbility',
+    moduleName: 'entry',
+    parameters: {
+        keyForInt: 100,
+        keyForDouble: 99.99,
+    },
 };
 ```
 
@@ -103,16 +103,16 @@ import Want from '@ohos.app.ability.Want';
 
 let context = getContext(this) as common.UIAbilityContext; // UIAbilityContext
 let want: Want = {
-	bundleName: 'com.example.myapplication',
-	abilityName: 'FuncAbility',
-  moduleName: 'entry',
-	parameters: {
-		keyForBool: true,
-	},
+    bundleName: 'com.example.myapplication',
+    abilityName: 'FuncAbility',
+    moduleName: 'entry',
+    parameters: {
+        keyForBool: true,
+    },
 };
 
 context.startAbility(want, (err) => {
-	console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
+    console.error(`Failed to startAbility. Code: ${err.code}, message: ${err.message}`);
 });
 ```
 
