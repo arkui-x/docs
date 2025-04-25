@@ -53,4 +53,4 @@
 
 ## 约束
 
-> 该接口最早使用时机在 [StageApplication launchApplication]; 调用之后；<br/>
+> 该接口最早使用时机在 [StageApplication launchApplication], 调用之后；<br/>
