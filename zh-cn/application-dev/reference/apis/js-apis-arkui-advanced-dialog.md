@@ -4,7 +4,7 @@
 
 > **说明：**
 >
-> 该组件从API Version 16开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+> 该组件从API Version 12开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
 
 ## 导入模块
 
@@ -20,7 +20,7 @@ import { TipsDialog, SelectDialog, ConfirmDialog, AlertDialog, LoadingDialog, Cu
 
 不支持[通用属性](../../../application-dev/reference/arkui-ts/ts-universal-attributes-size.md)
 
-## TipsDialog
+## TipsDialog<sup>18+</sup>
 
 TipsDialog({controller: CustomDialogController, imageRes: Resource, imageSize?: SizeOptions, title?: ResourceStr, content?: ResourceStr, checkTips?: ResourceStr, ischecked?: boolean, checkAction?: (isChecked: boolean) => void, primaryButton?: ButtonOptions, secondaryButton?: ButtonOptions})
 
@@ -32,21 +32,21 @@ TipsDialog({controller: CustomDialogController, imageRes: Resource, imageSize?: 
 
 | 名称            | 类型                                                                                                                                                           | 必填 | 装饰器类型 | 说明                                                                                   | Android平台 | iOS平台 |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ---------- | -------------------------------------------------------------------------------------- | ----------- | ------- |
-| controller      | [CustomDialogController](../../../application-dev/reference/arkui-ts/ts-methods-custom-dialog-box.md#customdialogcontroller)                                      | 是   | -          | 提示弹出框控制器。<br/>**说明：** 未使用@Require装饰，构造时不强制校验参数。 | 支持        | 支持    |
+| controller<sup>18+</sup>      | [CustomDialogController](../../../application-dev/reference/arkui-ts/ts-methods-custom-dialog-box.md#customdialogcontroller)                                      | 是   | -          | 提示弹出框控制器。<br/>**说明：** 未使用@Require装饰，构造时不强制校验参数。 | 支持        | 支持    |
 | imageRes        | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr) \| [PixelMap](../../../application-dev/reference/apis/js-apis-image.md#pixelmap7) | 是   | -          | 展示的图片。                                                                           | 支持        | 支持    |
-| imageSize       | [SizeOptions](../../../application-dev/reference/arkui-ts/ts-types.md#sizeoptions)                                                                                | 否   | -          | 自定义图片尺寸。<br/>默认值：64*64vp                                               | 支持        | 支持    |
-| title           | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                                                                | 否   | -          | 提示弹出框标题。                                                                       | 支持        | 支持    |
-| content         | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                                                                | 否   | -          | 提示弹出框内容。                                                                       | 支持        | 支持    |
-| checkTips       | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                                                                | 否   | -          | checkbox的提示内容。                                                                   | 支持        | 支持    |
-| isChecked       | boolean                                                                                                                                                        | 否   | \@Prop     | value为true时，表示checkbox已选中，value为false时，表示未选中。<br/>默认值：false  | 支持        | 支持    |
-| checkAction     | (isChecked: boolean) => void                                                                                                                                   | 否   | -          | 现推荐使用 onCheckedChange。                                                           | 支持        | 支持    |
-| onCheckedChange | Callback\<boolean>                                                                                                                                             | 否   | -          | checkbox的选中状态改变事件。                                                           | 支持        | 支持    |
-| primaryButton   | [ButtonOptions](#buttonoptions)                                                                                                                                   | 否   | -          | 提示框左侧按钮。                                                                       | 支持        | 支持    |
-| secondaryButton | [ButtonOptions](#buttonoptions)                                                                                                                                   | 否   | -          | 提示框右侧按钮。                                                                       | 支持        | 支持    |
+| imageSize<sup>18+</sup>       | [SizeOptions](../../../application-dev/reference/arkui-ts/ts-types.md#sizeoptions)                                                                                | 否   | -          | 自定义图片尺寸。<br/>默认值：64*64vp                                               | 支持        | 支持    |
+| title<sup>18+</sup>           | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                                                                | 否   | -          | 提示弹出框标题。                                                                       | 支持        | 支持    |
+| content<sup>18+</sup>         | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                                                                | 否   | -          | 提示弹出框内容。                                                                       | 支持        | 支持    |
+| checkTips<sup>18+</sup>       | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                                                                | 否   | -          | checkbox的提示内容。                                                                   | 支持        | 支持    |
+| isChecked<sup>18+</sup>       | boolean                                                                                                                                                        | 否   | \@Prop     | value为true时，表示checkbox已选中，value为false时，表示未选中。<br/>默认值：false  | 支持        | 支持    |
+| checkAction<sup>18+</sup>     | (isChecked: boolean) => void                                                                                                                                   | 否   | -          | 现推荐使用 onCheckedChange。                                                           | 支持        | 支持    |
+| onCheckedChange<sup>18+</sup> | Callback\<boolean>                                                                                                                                             | 否   | -          | checkbox的选中状态改变事件。                                                           | 支持        | 支持    |
+| primaryButton<sup>18+</sup>   | [ButtonOptions](#buttonoptions)                                                                                                                                   | 否   | -          | 提示框左侧按钮。                                                                       | 支持        | 支持    |
+| secondaryButton<sup>18+</sup> | [ButtonOptions](#buttonoptions)                                                                                                                                   | 否   | -          | 提示框右侧按钮。                                                                       | 支持        | 支持    |
 | theme           | Theme \| CustomTheme                                                                                                                                            | 否   | -          | 主题信息，可以是CustomTheme或从onWillApplyTheme中获取的Theme实例。                     | 支持        | 支持    |
-| themeColorMode  | [ThemeColorMode](../../../application-dev/reference/arkui-ts/ts-appendix-enums.md#themecolormode10)                                                               | 否   | -          | 自定义弹窗深浅色模式。                                                                 | 支持        | 支持    |
+| themeColorMode<sup>18+</sup>  | [ThemeColorMode](../../../application-dev/reference/arkui-ts/ts-appendix-enums.md#themecolormode10)                                                               | 否   | -          | 自定义弹窗深浅色模式。                                                                 | 支持        | 支持    |
 
-## SelectDialog
+## SelectDialog<sup>18+</sup>
 
 SelectDialog({controller: CustomDialogController, title: ResourceStr, content?: ResourceStr, selectedIndex?: number, confirm?: ButtonOptions, radioContent: Array&lt;SheetInfo&gt;})
 
@@ -58,16 +58,16 @@ SelectDialog({controller: CustomDialogController, title: ResourceStr, content?: 
 
 | 名称           | 类型                                                                                                                      | 必填 | 说明                                                                                   | Android平台 | iOS平台 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------- | ---- | -------------------------------------------------------------------------------------- | ----------- | ------- |
-| controller     | [CustomDialogController](../../../application-dev/reference/arkui-ts/ts-methods-custom-dialog-box.md#customdialogcontroller) | 是   | 选择弹出框控制器。<br/>**说明：** 未使用@Require装饰，构造时不强制校验参数。 | 支持        | 支持    |
-| title          | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 是   | 选择弹出框标题。                                                                       | 支持        | 支持    |
-| content        | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | 选择弹出框内容。                                                                       | 支持        | 支持    |
-| selectedIndex  | number                                                                                                                    | 否   | 选择弹出框的选中项。<br/>默认值：-1                                                | 支持        | 支持    |
-| confirm        | [ButtonOptions](#buttonoptions)                                                                                              | 否   | 选择弹出框底部按钮。                                                                   | 支持        | 支持    |
-| radioContent   | Array&lt;[SheetInfo](../../../application-dev/reference/arkui-ts/ts-methods-action-sheet.md#sheetinfo接口说明)&gt;           | 是   | 选择弹出框的子项内容列表，每个选择项支持设置文本和选中的回调事件。                     | 支持        | 支持    |
+| controller<sup>18+</sup>     | [CustomDialogController](../../../application-dev/reference/arkui-ts/ts-methods-custom-dialog-box.md#customdialogcontroller) | 是   | 选择弹出框控制器。<br/>**说明：** 未使用@Require装饰，构造时不强制校验参数。 | 支持        | 支持    |
+| title<sup>18+</sup>          | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 是   | 选择弹出框标题。                                                                       | 支持        | 支持    |
+| content<sup>18+</sup>        | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | 选择弹出框内容。                                                                       | 支持        | 支持    |
+| selectedIndex<sup>18+</sup>  | number                                                                                                                    | 否   | 选择弹出框的选中项。<br/>默认值：-1                                                | 支持        | 支持    |
+| confirm<sup>18+</sup>        | [ButtonOptions](#buttonoptions)                                                                                              | 否   | 选择弹出框底部按钮。                                                                   | 支持        | 支持    |
+| radioContent<sup>18+</sup>   | Array&lt;[SheetInfo](../../../application-dev/reference/arkui-ts/ts-methods-action-sheet.md#sheetinfo接口说明)&gt;           | 是   | 选择弹出框的子项内容列表，每个选择项支持设置文本和选中的回调事件。                     | 支持        | 支持    |
 | theme          | Theme \| CustomTheme                                                                                                       | 否   | 主题信息，可以是CustomTheme或从onWillApplyTheme中获取的Theme实例。                     | 支持        | 支持    |
 | themeColorMode | [ThemeColorMode](../../../application-dev/reference/arkui-ts/ts-appendix-enums.md#themecolormode10)                          | 否   | 自定义弹窗深浅色模式。                                                                 | 支持        | 支持    |
 
-## ConfirmDialog
+## ConfirmDialog<sup>18+</sup>
 
 ConfirmDialog({controller: CustomDialogController, title: ResourceStr, content?: ResourceStr, checkTips?: ResourceStr, ischecked?: boolean, primaryButton?: ButtonOptions, secondaryButton?: ButtonOptions})
 
@@ -79,18 +79,18 @@ ConfirmDialog({controller: CustomDialogController, title: ResourceStr, content?:
 
 | 名称            | 类型                                                                                                                      | 必填 | 装饰器类型 | 说明                                                                                   | Android平台 | iOS平台 |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------- | ---- | ---------- | -------------------------------------------------------------------------------------- | ----------- | ------- |
-| controller      | [CustomDialogController](../../../application-dev/reference/arkui-ts/ts-methods-custom-dialog-box.md#customdialogcontroller) | 是   | -          | 确认弹出框控制器。<br/>**说明：** 未使用@Require装饰，构造时不强制校验参数。 | 支持        | 支持    |
-| title           | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 是   | -          | 确认弹出框标题。                                                                       | 支持        | 支持    |
-| content         | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | -          | 确认弹出框内容。                                                                       | 支持        | 支持    |
-| checkTips       | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | -          | checkbox的提示内容。                                                                   | 支持        | 支持    |
-| isChecked       | boolean                                                                                                                   | 否   | \@Prop     | value为true时，表示checkbox已选中，value为false时，表示未选中。<br/>默认值：false  | 支持        | 支持    |
+| controller<sup>18+</sup>      | [CustomDialogController](../../../application-dev/reference/arkui-ts/ts-methods-custom-dialog-box.md#customdialogcontroller) | 是   | -          | 确认弹出框控制器。<br/>**说明：** 未使用@Require装饰，构造时不强制校验参数。 | 支持        | 支持    |
+| title<sup>18+</sup>           | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 是   | -          | 确认弹出框标题。                                                                       | 支持        | 支持    |
+| content<sup>18+</sup>         | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | -          | 确认弹出框内容。                                                                       | 支持        | 支持    |
+| checkTips<sup>18+</sup>       | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | -          | checkbox的提示内容。                                                                   | 支持        | 支持    |
+| isChecked<sup>18+</sup>       | boolean                                                                                                                   | 否   | \@Prop     | value为true时，表示checkbox已选中，value为false时，表示未选中。<br/>默认值：false  | 支持        | 支持    |
 | onCheckedChange | Callback\<boolean>                                                                                                        | 否   | -          | checkbox的选中状态改变事件。                                                           | 支持        | 支持    |
-| primaryButton   | [ButtonOptions](#buttonoptions)                                                                                              | 否   | -          | 确认框左侧按钮。                                                                       | 支持        | 支持    |
-| secondaryButton | [ButtonOptions](#buttonoptions)                                                                                              | 否   | -          | 确认框右侧按钮。                                                                       | 支持        | 支持    |
+| primaryButton<sup>18+</sup>   | [ButtonOptions](#buttonoptions)                                                                                              | 否   | -          | 确认框左侧按钮。                                                                       | 支持        | 支持    |
+| secondaryButton<sup>18+</sup> | [ButtonOptions](#buttonoptions)                                                                                              | 否   | -          | 确认框右侧按钮。                                                                       | 支持        | 支持    |
 | theme           | Theme \| CustomTheme                                                                                                       | 否   | -          | 主题信息，可以是CustomTheme或从onWillApplyTheme中获取的Theme实例。                     | 支持        | 支持    |
 | themeColorMode  | [ThemeColorMode](../../../application-dev/reference/arkui-ts/ts-appendix-enums.md#themecolormode10)                          | 否   | -          | 自定义弹窗深浅色模式。                                                                 | 支持        | 支持    |
 
-## AlertDialog
+## AlertDialog<sup>18+</sup>
 
 AlertDialog({controller: CustomDialogController, primaryTitle?: ResourceStr, secondaryTitle?: ResourceStr, content: ResourceStr, primaryButton?: ButtonOptions, secondaryButton?: ButtonOptions})
 
@@ -102,16 +102,16 @@ AlertDialog({controller: CustomDialogController, primaryTitle?: ResourceStr, sec
 
 | 名称            | 类型                                                                                                                      | 必填 | 说明                                                                                   | Android平台 | iOS平台 |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------- | ---- | -------------------------------------------------------------------------------------- | ----------- | ------- |
-| controller      | [CustomDialogController](../../../application-dev/reference/arkui-ts/ts-methods-custom-dialog-box.md#customdialogcontroller) | 是   | 确认弹出框控制器。<br/>**说明：** 未使用@Require装饰，构造时不强制校验参数。 | 支持        | 支持    |
-| primaryTitle    | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | 确认框一级标题。                                                                       | 支持        | 支持    |
-| secondaryTitle  | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | 确认框二级标题。                                                                       | 支持        | 支持    |
-| content         | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 是   | 确认弹出框内容。                                                                       | 支持        | 支持    |
-| primaryButton   | [ButtonOptions](#buttonoptions)                                                                                              | 否   | 确认框左侧按钮。                                                                       | 支持        | 支持    |
-| secondaryButton | [ButtonOptions](#buttonoptions)                                                                                              | 否   | 确认框右侧按钮。                                                                       | 支持        | 支持    |
+| controller<sup>18+</sup>      | [CustomDialogController](../../../application-dev/reference/arkui-ts/ts-methods-custom-dialog-box.md#customdialogcontroller) | 是   | 确认弹出框控制器。<br/>**说明：** 未使用@Require装饰，构造时不强制校验参数。 | 支持        | 支持    |
+| primaryTitle<sup>18+</sup>    | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | 确认框一级标题。                                                                       | 支持        | 支持    |
+| secondaryTitle<sup>18+</sup>  | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | 确认框二级标题。                                                                       | 支持        | 支持    |
+| content<sup>18+</sup>         | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 是   | 确认弹出框内容。                                                                       | 支持        | 支持    |
+| primaryButton<sup>18+</sup>   | [ButtonOptions](#buttonoptions)                                                                                              | 否   | 确认框左侧按钮。                                                                       | 支持        | 支持    |
+| secondaryButton<sup>18+</sup> | [ButtonOptions](#buttonoptions)                                                                                              | 否   | 确认框右侧按钮。                                                                       | 支持        | 支持    |
 | theme           | Theme \| CustomTheme                                                                                                       | 否   | 主题信息，可以是CustomTheme或从onWillApplyTheme中获取的Theme实例。                     | 支持        | 支持    |
 | themeColorMode  | [ThemeColorMode](../../../application-dev/reference/arkui-ts/ts-appendix-enums.md#themecolormode10)                          | 否   | 自定义弹窗深浅色模式。                                                                 | 支持        | 支持    |
 
-## LoadingDialog
+## LoadingDialog<sup>18+</sup>
 
 LoadingDialog({controller: CustomDialogController, content?: ResourceStr})
 
@@ -123,10 +123,10 @@ LoadingDialog({controller: CustomDialogController, content?: ResourceStr})
 
 | 名称           | 类型                                                                                                                      | 必填 | 说明                                                                                   | Android平台 | iOS平台 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------- | ---- | -------------------------------------------------------------------------------------- | ----------- | ------- |
-| Controller     | [CustomDialogController](../../../application-dev/reference/arkui-ts/ts-methods-custom-dialog-box.md#customdialogcontroller) | 是   | 加载弹出框控制器。<br/>**说明：** 未使用@Require装饰，构造时不强制校验参数。 | 支持        | 支持    |
-| content        | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | 加载弹出框内容。                                                                       | 支持        | 支持    |
+| Controller<sup>18+</sup>     | [CustomDialogController](../../../application-dev/reference/arkui-ts/ts-methods-custom-dialog-box.md#customdialogcontroller) | 是   | 加载弹出框控制器。<br/>**说明：** 未使用@Require装饰，构造时不强制校验参数。 | 支持        | 支持    |
+| content<sup>18+</sup>        | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)                                           | 否   | 加载弹出框内容。                                                                       | 支持        | 支持    |
 | theme          | Theme\| CustomTheme                                                                                                       | 否   | 主题信息，可以是CustomTheme或从onWillApplyTheme中获取的Theme实例。                     | 支持        | 支持    |
-| themeColorMode | [ThemeColorMode](../../../application-dev/reference/arkui-ts/ts-appendix-enums.md#themecolormode10)                          | 否   | 自定义弹窗深浅色模式。                                                                 | 支持        | 支持    |
+| themeColorMode<sup>18+</sup> | [ThemeColorMode](../../../application-dev/reference/arkui-ts/ts-appendix-enums.md#themecolormode10)                          | 否   | 自定义弹窗深浅色模式。                                                                 | 支持        | 支持    |
 
 ## CustomContentDialog
 
@@ -150,7 +150,7 @@ CustomContentDialog({controller: CustomDialogController, contentBuilder: () => v
 | theme                       | Theme \| CustomTheme                                                                                                       | 否   | -             | 主题信息，可以是CustomTheme或从onWillApplyTheme中获取的Theme实例。                 | 支持        | 支持    |
 | themeColorMode              | [ThemeColorMode](../../../application-dev/reference/arkui-ts/ts-appendix-enums.md#themecolormode10)                          | 否   | -             | 自定义弹窗深浅色模式。                                                             | 支持        | 支持    |
 
-## PopoverDialog
+## PopoverDialog<sup>14+</sup>
 
 PopoverDialog({visible: boolean, popover: PopoverOptions, targetBuilder: Callback\<void>})
 
@@ -158,20 +158,20 @@ PopoverDialog({visible: boolean, popover: PopoverOptions, targetBuilder: Callbac
 
 | 名称          | 类型                           | 必填 | 装饰器类型 | 说明                                                   | Android平台 | iOS平台 |
 | ------------- | ------------------------------ | ---- | ---------- | ------------------------------------------------------ | ----------- | ------- |
-| visible       | boolean                        | 是   | \@Link     | 跟手弹出框显示状态。<br/>默认值为false，隐藏弹窗。 | 支持        | 支持    |
-| popover       | [PopoverOptions](#popoveroptions) | 是   | \@Prop     | 配置跟手弹窗的参数。                                   | 支持        | 支持    |
-| targetBuilder | Callback\<void>                | 是   | -          | 跟手弹出框基于的目标组件。                             | 支持        | 支持    |
+| visible<sup>14+</sup>       | boolean                        | 是   | \@Link     | 跟手弹出框显示状态。<br/>默认值为false，隐藏弹窗。 | 支持        | 支持    |
+| popover<sup>14+</sup>      | [PopoverOptions](#popoveroptions) | 是   | \@Prop     | 配置跟手弹窗的参数。                                   | 支持        | 支持    |
+| targetBuilder<sup>14+</sup> | Callback\<void>                | 是   | -          | 跟手弹出框基于的目标组件。                             | 支持        | 支持    |
 
-## ButtonOptions
+## ButtonOptions<sup>18+</sup>
 
 **支持平台：** Android 、iOS
 
 | 名称        | 类型                                                                                | 必填 | 说明                                                                                               | Android平台 | iOS平台 |
 | ----------- | ----------------------------------------------------------------------------------- | ---- | -------------------------------------------------------------------------------------------------- | ----------- | ------- |
-| value       | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)     | 是   | 按钮的内容。                                                                                       | 支持        | 支持    |
-| action      | ()&nbsp;=&gt;&nbsp;void                                                             | 否   | 按钮的点击事件。                                                                                   | 支持        | 支持    |
-| background  | [ResourceColor](../../../application-dev/reference/arkui-ts/ts-types.md#resourcecolor) | 否   | 按钮的背景。                                                                                       | 支持        | 支持    |
-| fontColor   | [ResourceColor](../../../application-dev/reference/arkui-ts/ts-types.md#resourcecolor) | 否   | 按钮的字体颜色。                                                                                   | 支持        | 支持    |
+| value<sup>18+</sup>       | [ResourceStr](../../../application-dev/reference/arkui-ts/ts-types.md#resourcestr)     | 是   | 按钮的内容。                                                                                       | 支持        | 支持    |
+| action<sup>18+</sup>      | ()&nbsp;=&gt;&nbsp;void                                                             | 否   | 按钮的点击事件。                                                                                   | 支持        | 支持    |
+| background<sup>18+</sup>  | [ResourceColor](../../../application-dev/reference/arkui-ts/ts-types.md#resourcecolor) | 否   | 按钮的背景。                                                                                       | 支持        | 支持    |
+| fontColor<sup>18+</sup>   | [ResourceColor](../../../application-dev/reference/arkui-ts/ts-types.md#resourcecolor) | 否   | 按钮的字体颜色。                                                                                   | 支持        | 支持    |
 | buttonStyle | ButtonStyleMode                                                                     | 否   | 按钮的样式。<br/>默认值：2in1设备为ButtonStyleMode.NORMAL，其他设备为ButtonStyleMode.TEXTUAL。 | 支持        | 支持    |
 | role        | ButtonRole                                                                          | 否   | 按钮的角色。<br/>默认值：ButtonRole.NORMAL。                                                   | 支持        | 支持    |
 
@@ -179,7 +179,7 @@ PopoverDialog({visible: boolean, popover: PopoverOptions, targetBuilder: Callbac
 >
 > buttonStyle和role优先级高于fontColor和background。如果buttonStyle和role设置的是默认值，那么fontColor和background可生效。
 
-## PopoverOptions
+## PopoverOptions<sup>14+</sup>
 
 跟手弹窗参数，用于设置弹窗内容、位置属性等。
 

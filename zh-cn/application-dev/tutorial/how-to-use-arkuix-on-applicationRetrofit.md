@@ -98,7 +98,7 @@
 
 &emsp;&emsp;需要注意的是，commons层应当合理规划模块设置，谨慎对待模块间的依赖关系，避免出现循环依赖等问题。<br>
 
-&emsp;&emsp;建议开发者首先考虑使用ArkUI-X框架已有进行开发，可参考：[ArkUI-X框架 API参考](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/README.md#api参考)。<br>
+&emsp;&emsp;建议开发者首先考虑使用ArkUI-X框架已有API进行开发，可参考：[ArkUI-X框架 API参考](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/README.md#api参考)。<br>
 
 &emsp;&emsp;根据当前ArkUI-X框架的适配现状，可分为三种改造方式，结合[架构图commons层 NetWork](#三、方案说明)进行说明。至于工程中具体的文件部署细节详见：[工程目录结构设计](#第四部分工程目录结构设计)。<br>
 
