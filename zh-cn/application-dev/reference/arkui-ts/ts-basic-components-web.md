@@ -1776,6 +1776,97 @@ struct WebComponent {
 }
 ```
 
+### javaScriptProxy<sup>20+</sup>
+
+javaScriptProxy(javaScriptProxy: JavaScriptProxy)
+
+注入JavaScript对象到window对象中，并在window对象中调用该对象的方法。
+
+> **说明：**
+>
+> javaScriptProxy接口需要和deleteJavaScriptRegister接口配合使用，防止内存泄漏。 javaScriptProxy对象的所有参数不支持更新。 注册对象时，同步与异步方法列表请至少选择一项不为空，可同时注册两类方法。 此接口只支持注册一个对象，若需要注册多个对象请使用[registerJavaScriptProxy20+](../apis/js-apis-webview.md#registerjavascriptproxy20)。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名          | 类型            | 必填 | 说明                                         |
+| --------------- | --------------- | ---- | -------------------------------------------- |
+| javaScriptProxy | JavaScriptProxy | 是   | 参与注册的对象。只能声明方法，不能声明属性。 |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+class TestObj {
+  constructor() {
+  }
+
+  test(data1: string, data2: string, data3: string): string {
+    console.log("data1:" + data1);
+    console.log("data2:" + data2);
+    console.log("data3:" + data3);
+    return "AceString";
+  }
+
+  asyncTest(data: string): void {
+    console.log("async data:" + data);
+  }
+
+  toString(): void {
+    console.log('toString' + "interface instead.");
+  }
+}
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  testObj = new TestObj();
+  build() {
+    Column() {
+      Button('deleteJavaScriptRegister')
+        .onClick(() => {
+          try {
+            this.controller.deleteJavaScriptRegister("objName");
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+        .javaScriptAccess(true)
+        .javaScriptProxy({
+          object: this.testObj,
+          name: "objName",
+          methodList: ["test", "toString"],
+          asyncMethodList: ["asyncTest"],
+          controller: this.controller,
+      })
+    }
+  }
+}
+```
+
+## JavaScriptProxy<sup>20+</sup>
+
+定义要注入的JavaScript对象。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+| 名称                          | 类型                                                         | 必填 | 说明                                                         | Android平台 | iOS平台 |
+| ----------------------------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ | ----------- | ------- |
+| object<sup>20+</sup>          | object                                                       | 是   | 参与注册的对象。只能声明方法，不能声明属性。                 | 支持        | 支持    |
+| name<sup>20+</sup>            | string                                                       | 是   | 注册对象的名称，与window中调用的对象名一致。                 | 支持        | 支持    |
+| methodList<sup>20+</sup>      | Array\<string>                                               | 是   | 参与注册的应用侧JavaScript对象的同步方法。                   | 支持        | 支持    |
+| controller<sup>20+</sup>      | [WebviewController](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-webview.md?init=initTree#webviewcontroller) | 是   | 控制器                                                            | 支持        | 支持    |
+| asyncMethodList<sup>20+</sup> | Array\<string>                                               | 否   | 参与注册的应用侧JavaScript对象的异步方法。异步方法无法获取返回值。 | 支持        | 支持    |
+
 ## WebResourceError
 
 Web组件资源管理错误信息对象。示例代码参考[onErrorReceive事件](#onerrorreceive)。
