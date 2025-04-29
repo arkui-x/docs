@@ -85,6 +85,16 @@ public class MainActivity extends FragmentActivity {
 </LinearLayout>
 ```
 
+如果当前StageFragment对应的UIAbility涉及页面跳转，Activity需要重写onBackPressed方法，以便在手机back键点击或手势侧滑时逐级返回页面，否则会退出跨平台承载的Activity页面。
+
+```java
+    @Override
+    public void onBackPressed() {
+        if(fragment.onBackPressed()) {
+            super.onBackPressed();
+        }
+    }
+```
 #### 参数传递
 
 StageFragment支持传递参数，参数的传递需要通过setArguments()进行设置，规则如下：
