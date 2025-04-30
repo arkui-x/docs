@@ -63,6 +63,7 @@
   - bundleManager
     - [abilityInfo](js-apis-bundleManager-abilityInfo.md)
     - [applicationInfo](js-apis-bundleManager-applicationInfo.md)
+    - [bundleInfo](js-apis-bundleManager-bundleInfo.md)
     - [hapModuleInfo](js-apis-bundleManager-hapModuleInfo.md)
     - [metadata](js-apis-bundleManager-metadata.md)
 
