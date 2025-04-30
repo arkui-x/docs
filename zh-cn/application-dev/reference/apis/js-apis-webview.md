@@ -2054,6 +2054,284 @@ struct WebComponent {
 }
 ```
 
+### registerJavaScriptProxy<sup>20+</sup>
+
+registerJavaScriptProxy(object: object, name: string, methodList: Array\<string>, asyncMethodList?: Array\<string>, permission?: string): void
+
+registerJavaScriptProxy提供了应用与Web组件加载的网页之间强大的交互能力。
+注入JavaScript对象到window对象中，并在window对象中调用该对象的方法。
+
+> **说明：**
+>
+> - registerJavaScriptProxy需要和deleteJavaScriptRegister接口配合使用，防止内存泄漏。
+> - 请尽可能只在可信的URL及安全通信HTTPS场景下进行registerJavaScriptProxy注册。在非可信的Web组件中注入JavaScript对象，可能会导致应用被恶意攻击。
+> - 在注册registerJavaScriptProxy后，应用会将JavaScript对象暴露给所有的页面frames。
+> - 同一方法在同步与异步列表中重复注册，将默认异步调用。
+> - 同步函数列表和异步函数列表不可同时为空，否则此次调用接口注册失败。
+> - 异步的作用在于：H5线程将异步JavaScript任务提交给ETS主线程后，无需等待任务执行完成并返回结果，H5线程即可继续执行后续任务。这在执行耗时较长的JavaScript任务或ETS线程较为拥堵的情况下，可以有效减少H5线程因JavaScript任务而被阻塞的情况。然而，异步JavaScript任务无法返回值，且任务执行的顺序无法保证，因此需要根据具体情境判断是否使用同步或异步方式。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+| 参数名          | 类型           | 必填 | 说明                                                         | Android平台 | iOS   平     台 |
+| --------------- | -------------- | ---- | ------------------------------------------------------------ | ----------- | --------------- |
+| object          | object         | 是   | 参与注册的应用侧JavaScript对象。可以单独声明方法和属性，但无法同时进行注册与使用。对象只包含属性时，H5可以访问对象中的属性。对象只包含方法时，H5可以访问对象中的方法。<br>方法的参数和返回类型可以为string，number，boolean。<br>方法的参数和返回类型支持Dictionary，Array，最多嵌套10层，每层1w个数据。<br>方法的参数和返回类型支持Object，需要在Object里添加属性methodNameListForJsProxy:[fun1, fun2]，fun1和fun2为可被调用的方法。<br>方法的参数支持Function，Promise，它们的Callback不能有返回值。<br>方法的返回类型支持Promise，Promise的Callback不能有返回值。 | 支持        | 支持            |
+| name            | string         | 是   | 注册对象的名称，与window中调用的对象名一致。注册后window对象可以通过此名字访问应用侧JavaScript对象。 | 支持        | 支持            |
+| methodList      | Array\<string> | 是   | 参与注册的应用侧JavaScript对象的同步方法。                   | 支持        | 支持            |
+| asyncMethodList | Array\<string> | 否   | 参与注册的应用侧JavaScript对象的异步方法，默认为空。异步方法无法获取返回值。 | 支持        | 支持            |
+| permission      | string         | 否   | json字符串，默认为空，通过该字符串配置JSBridge的权限管控，可以定义object、method一级的url白名单。 | 不支持      | 不支持          |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+class TestObj {
+  constructor() {
+  }
+
+  test(testStr: string): string {
+    console.log('Web Component str' + testStr);
+    return testStr;
+  }
+
+  toString(): void {
+    console.log('Web Component toString');
+  }
+
+  testNumber(testNum: number): number {
+    console.log('Web Component number' + testNum);
+    return testNum;
+  }
+
+  asyncTestBool(testBol: boolean): void {
+    console.log('Web Component boolean' + testBol);
+  }
+}
+
+class WebObj {
+  constructor() {
+  }
+
+  webTest(): string {
+    console.log('Web test');
+    return "Web test";
+  }
+
+  webString(): void {
+    console.log('Web test toString');
+  }
+}
+
+class AsyncObj {
+  constructor() {
+  }
+
+  asyncTest(): void {
+    console.log('Async test');
+  }
+
+  asyncString(testStr: string): void {
+    console.log('Web async string' + testStr);
+  }
+}
+
+@Entry
+@Component
+struct Index {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State testObjtest: TestObj = new TestObj();
+  @State webTestObj: WebObj = new WebObj();
+  @State asyncTestObj: AsyncObj = new AsyncObj();
+
+  build() {
+    Column() {
+      Button('refresh')
+        .onClick(() => {
+          try {
+            this.controller.refresh();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Button('Register JavaScript To Window')
+        .onClick(() => {
+          try {
+            // 同时注册同步和异步函数
+            this.controller.registerJavaScriptProxy(this.testObjtest, "objName", ["test", "toString", "testNumber"], ["asyncTestBool"]);
+            // 仅注册同步函数
+            this.controller.registerJavaScriptProxy(this.webTestObj, "objTestName", ["webTest", "webString"]);
+            // 仅注册异步函数
+            this.controller.registerJavaScriptProxy(this.asyncTestObj, "objAsyncName", [], ["asyncTest", "asyncString"]);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Button('deleteJavaScriptRegister')
+        .onClick(() => {
+          try {
+            this.controller.deleteJavaScriptRegister("objName");
+            this.controller.deleteJavaScriptRegister("objTestName");
+            this.controller.deleteJavaScriptRegister("objAsyncName");
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+        .javaScriptAccess(true)
+    }
+  }
+}
+```
+
+加载的html文件。
+
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <body>
+      <button type="button" onclick="htmlTest()">Click Me!</button>
+      <p id="demo"></p>
+      <p id="webDemo"></p>
+      <p id="asyncDemo"></p>
+    </body>
+    <script type="text/javascript">
+    function htmlTest() {
+      // This function call expects to return "ArkUI Web Component"
+      let str=objName.test("webtest data");
+      objName.testNumber(1);
+      objName.asyncTestBool(true);
+      document.getElementById("demo").innerHTML=str;
+      console.log('objName.test result:'+ str)
+
+      // This function call expects to return "Web test"
+      let webStr = objTestName.webTest();
+      document.getElementById("webDemo").innerHTML=webStr;
+      console.log('objTestName.webTest result:'+ webStr)
+
+      objAsyncName.asyncTest();
+      objAsyncName.asyncString("async test data");
+    }
+</script>
+</html>
+```
+
+### deleteJavaScriptRegister<sup>20+</sup>
+
+deleteJavaScriptRegister(name: string): void
+
+删除通过registerJavaScriptProxy注册到window上的指定name的应用侧JavaScript对象。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| name   | string | 是   | 注册对象的名称，可在网页侧JavaScript中通过此名称调用应用侧JavaScript对象。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 17100008 | Failed to delete JavaScriptProxy because it does not exist.  |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+class TestObj {
+  constructor() {
+  }
+
+  test(): string {
+    return "ArkUI Web Component";
+  }
+
+  toString(): void {
+    console.log('Web Component toString');
+  }
+}
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State testObjtest: TestObj = new TestObj();
+  @State name: string = 'objName';
+  build() {
+    Column() {
+      Button('refresh')
+        .onClick(() => {
+          try {
+            this.controller.refresh();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Button('Register JavaScript To Window')
+        .onClick(() => {
+          try {
+            this.controller.registerJavaScriptProxy(this.testObjtest, this.name, ["test", "toString"]);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Button('deleteJavaScriptRegister')
+        .onClick(() => {
+          try {
+            this.controller.deleteJavaScriptRegister(this.name);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+        .javaScriptAccess(true)
+    }
+  }
+}
+```
+
+加载的html文件。
+
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <body>
+      <button type="button" onclick="htmlTest()">Click Me!</button>
+      <p id="demo"></p>
+    </body>
+    <script type="text/javascript">
+    function htmlTest() {
+      let str=objName.test();
+      document.getElementById("demo").innerHTML=str;
+      console.log('objName.test result:'+ str)
+    }
+</script>
+</html>
+```
+
 ## WebMessagePort
 
 通过WebMessagePort可以进行消息的发送以及接收。
