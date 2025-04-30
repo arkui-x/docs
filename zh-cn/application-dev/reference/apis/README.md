@@ -7,6 +7,7 @@
   - [@ohos.arkui.componentSnapshot (组件截图)](js-apis-arkui-componentSnapshot.md)
   - [@ohos.arkui.componentUtils (componentUtils)](js-apis-arkui-componentUtils.md)
   - [@ohos.arkui.dragController (DragController)](js-apis-arkui-dragController.md)
+  - [@ohos.arkui.observer (无感监听)](js-apis-arkui-observer.md)
   - [@ohos.arkui.inspector (布局回调)](js-apis-arkui-inspector.md)
   - [@ohos.arkui.theme (主题换肤)](js-apis-arkui-theme.md)
   - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
