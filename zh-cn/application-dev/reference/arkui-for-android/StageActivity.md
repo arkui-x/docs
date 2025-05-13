@@ -21,6 +21,7 @@ StageActivity是Activity的子类，是Android Activity组件生命周期入口�
 | 类型 | 方法                         | 描述                     |
 | ---- | ---------------------------- | ------------------------ |
 | void | setInstanceName(String name) | 设置ArkUI JSBundle实例名 |
+| boolean | isUseSurfaceView() | 视图底层实现使用表层视图（SurfaceView）或 纹理视图（TextureView），默认为表层试图（SurfaceView），返回为True |
 
 ### 方法说明
 
@@ -33,6 +34,16 @@ StageActivity是Activity的子类，是Android Activity组件生命周期入口�
 * @param name the instance name to set
 */
 public void setInstanceName(String name);
+```
+- isUseSurfaceView
+
+```
+/**
+* Set use SurfaceView or TextureView.
+*
+* @return If true create SurfaceView else create TextureView, default is true.
+*/
+public boolean isUseSurfaceView();
 ```
 
 ### StageActivity跟Ability映射命名规则
