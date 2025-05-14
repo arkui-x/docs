@@ -61,6 +61,7 @@
 ### 应用改造
 
 - [应用改造指南](./tutorial/how-to-use-arkuix-on-applicationRetrofit.md)
+- [跨平台Bridge最佳实践](./tutorial/how-to-use-bridge-on-applicationRetrofit.md)
 
 ### 开发工具
 
