@@ -128,9 +128,9 @@ Obtains detailed file information synchronously.
 
 ## fs.access
 
-access(path: string): Promise&lt;boolean&gt;
+access(path: string, mode?: AccessModeType): Promise&lt;boolean&gt;
 
-Checks whether a file exists. This API uses a promise to return the result.
+Checks whether the file or directory exists or has the operation permission. This API uses a promise to return the result.<br>If the read, write, or read and write permission verification fails, the error code 13900012 (Permission denied) will be thrown.
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -138,28 +138,37 @@ Checks whether a file exists. This API uses a promise to return the result.
 
 | Name| Type  | Mandatory| Description                                                        |
 | ------ | ------ | ---- | ------------------------------------------------------------ |
-| path   | string | Yes  | Application sandbox path of the file.                                  |
+| path   | string | Yes  | Application sandbox path of the file or directory.                                  |
+| mode<sup>20+</sup>   | [AccessModeType](#accessmodetype20) | No  | Permission on the file or directory to check. If this parameter is left blank, the system checks whether the file exists.|
 
 **Return value**
 
   | Type                 | Description                          |
   | ------------------- | ---------------------------- |
-  | Promise&lt;boolean&gt; | Promise used to return the result. The value **true** means the file exists; the value **false** means the opposite.|
+  | Promise&lt;boolean&gt; | Promise used to return a Boolean value. The value **true** means the file exists; the value **false** means the opposite.|
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+| ID                    | Error Message       |
+| ---------------------------- | ---------- |
+| 401 | 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types.|
+| 13900020 | Invalid parameter value.|
 
 **Example**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
-  fs.access(filePath).then((res) => {
+  fs.access(filePath).then((res: boolean) => {
     if (res) {
       console.info("file exists");
+    } else {
+      console.info("file not exists");
     }
-  }).catch((err) => {
-    console.info("access failed with error message: " + err.message + ", error code: " + err.code);
+  }).catch((err: BusinessError) => {
+    console.error("access failed with error message: " + err.message + ", error code: " + err.code);
   });
   ```
 
@@ -167,7 +176,7 @@ Checks whether a file exists. This API uses a promise to return the result.
 
 access(path: string, callback: AsyncCallback&lt;boolean&gt;): void
 
-Checks whether a file exists. This API uses an asynchronous callback to return the result.
+Checks whether a file or directory exists. This API uses an asynchronous callback to return the result.
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -175,23 +184,31 @@ Checks whether a file exists. This API uses an asynchronous callback to return t
 
 | Name  | Type                     | Mandatory| Description                                                        |
 | -------- | ------------------------- | ---- | ------------------------------------------------------------ |
-| path     | string                    | Yes  | Application sandbox path of the file.                                  |
-| callback | AsyncCallback&lt;boolean&gt; | Yes  | Callback invoked to return the result. The value **true** means the file exists; the value **false** means the opposite.|
+| path     | string                    | Yes  | Application sandbox path of the file or directory.                                  |
+| callback | AsyncCallback&lt;boolean&gt; | Yes  | Callback used to return the result. The value **true** means the file exists; the value **false** means the opposite.|
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+| ID                    | Error Message       |
+| ---------------------------- | ---------- |
+| 401 | 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types.|
+| 13900020 | Invalid parameter value.|
 
 **Example**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
-  fs.access(filePath, (err, res) => {
+  fs.access(filePath, (err: BusinessError, res: boolean) => {
     if (err) {
-      console.info("access failed with error message: " + err.message + ", error code: " + err.code);
+      console.error("access failed with error message: " + err.message + ", error code: " + err.code);
     } else {
       if (res) {
         console.info("file exists");
+      } else {
+        console.info("file not exists");
       }
     }
   });
@@ -199,9 +216,9 @@ Checks whether a file exists. This API uses an asynchronous callback to return t
 
 ## fs.accessSync
 
-accessSync(path: string): boolean
+accessSync(path: string, mode?: AccessModeType): boolean
 
-Synchronously checks whether a file exists.
+Checks whether a file or directory exists or has the operation permission. This API returns the result synchronously.<br>If the read, write, or read and write permission verification fails, the error code 13900012 (Permission denied) will be thrown.
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -209,32 +226,41 @@ Synchronously checks whether a file exists.
 
 | Name| Type  | Mandatory| Description                                                        |
 | ------ | ------ | ---- | ------------------------------------------------------------ |
-| path   | string | Yes  | Application sandbox path of the file.                                  |
+| path   | string | Yes  | Application sandbox path of the file or directory.                                  |
+| mode<sup>20+</sup>   | [AccessModeType](#accessmodetype20) | No  | Permission on the file or directory to check. If this parameter is left blank, the system checks whether the file or directory exists.|
 
 **Return value**
 
   | Type                 | Description                          |
   | ------------------- | ---------------------------- |
-  | boolean | Returns **true** if the file exists; returns **false** otherwise.|
+  | boolean | The value **true** means the file exists; the value **false** means the opposite.|
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+| ID                    | Error Message       |
+| ---------------------------- | ---------- |
+| 401 | 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types.|
+| 13900020 | Invalid parameter value.|
 
 **Example**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
   try {
-      let res = fs.accessSync(filePath);
-      if (res) {
-        console.info("file exists");
-      }
-  } catch(err) {
-      console.info("accessSync failed with error message: " + err.message + ", error code: " + err.code);
+    let res = fs.accessSync(filePath);
+    if (res) {
+      console.info("file exists");
+    } else {
+      console.info("file not exists");
+    }
+  } catch(error) {
+    let err: BusinessError = error as BusinessError;
+    console.error("accessSync failed with error message: " + err.message + ", error code: " + err.code);
   }
   ```
-
 
 ## fs.close
 
@@ -405,7 +431,6 @@ Copies a file. This API uses an asynchronous callback to return the result.
   });
   ```
 
-
 ## fs.copyFileSync
 
 copyFileSync(src: string|number, dest: string|number, mode?: number): void
@@ -432,6 +457,331 @@ Synchronously copies a file.
   let srcPath = pathDir + "/srcDir/test.txt";
   let dstPath = pathDir + "/dstDir/test.txt";
   fs.copyFileSync(srcPath, dstPath);
+  ```
+
+## fs.copyDir<sup>20+</sup>
+
+copyDir(src: string, dest: string, mode?: number): Promise\<void>
+
+Copies the source directory to the destination path. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | Yes   | Application sandbox path of the source directory.|
+  | dest | string | Yes   | Application sandbox path of the destination directory.|
+  | mode | number | No   | Copy mode. The default value is **0**.<br>- **0**: Throw an exception if a file conflict occurs.<br> An exception will be thrown if the destination directory contains a directory with the same name as the source directory, and a file with the same name exists in the conflict directory. All the non-conflicting files in the source directory will be moved to the destination directory, and the non-conflicting files in the destination directory will be retained. The data attribute in the error returned provides information about the conflicting files in the Array\<[ConflictFiles](#conflictfiles20)> format.<br>- **1**: Forcibly overwrite the files with the same name in the destination directory.<br> When the destination directory contains a directory with the same name as the source directory, the files with the same names in the destination directory are overwritten forcibly; the files without conflicts in the destination directory are retained.|
+
+**Return value**
+
+  | Type                 | Description                          |
+  | ------------------- | ---------------------------- |
+  | Promise&lt;void&gt; | Promise that returns no value.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  // Copy srcPath to destPath.
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.copyDir(srcPath, destPath, 0).then(() => {
+    console.info("copy directory succeed");
+  }).catch((err: BusinessError) => {
+    console.error("copy directory failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## fs.copyDir<sup>20+</sup>
+
+copyDir(src: string, dest: string, mode: number, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
+
+Copies the source directory to the destination path. You can set the copy mode. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | Yes   | Application sandbox path of the source directory.|
+  | dest | string | Yes   | Application sandbox path of the destination directory.|
+  | mode | number | Yes   | Copy mode. The default value is **0**.<br>- **0**: Throw an exception if a file conflict occurs.<br> An exception will be thrown if the destination directory contains a directory with the same name as the source directory, and a file with the same name exists in the conflict directory. All the non-conflicting files in the source directory will be moved to the destination directory, and the non-conflicting files in the destination directory will be retained. The data attribute in the error returned provides information about the conflicting files in the Array\<[ConflictFiles](#conflictfiles20)> format.<br>- **1**: Forcibly overwrite the files with the same name in the destination directory.<br> When the destination directory contains a directory with the same name as the source directory, the files with the same names in the destination directory are overwritten forcibly; the files without conflicts in the destination directory are retained.|
+  | callback | AsyncCallback&lt;void, Array&lt;[ConflictFiles](#conflictfiles20)&gt;&gt; | Yes   | Callback used to return the result.             |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ConflictFiles } from '@kit.CoreFileKit';
+  // Copy srcPath to destPath.
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.copyDir(srcPath, destPath, 0, (err: BusinessError<Array<ConflictFiles>>) => {
+    if (err && err.code == 13900015 && err.data?.length !== undefined) {
+      for (let i = 0; i < err.data.length; i++) {
+        console.error("copy directory failed with conflicting files: " + err.data[i].srcFile + " " + err.data[i].destFile);
+      }
+    } else if (err) {
+      console.error("copy directory failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("copy directory succeed");
+    }
+  });
+  ```
+
+## fs.copyDir<sup>20+</sup>
+
+copyDir(src: string, dest: string, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
+
+Copies the source directory to the destination path. This API uses an asynchronous callback to return the result.
+
+An exception will be thrown if the destination directory contains a directory with the same name as the source directory and there are files with the same name in the conflicting directory. All the non-conflicting files in the source directory will be moved to the destination directory, and the non-conflicting files in the destination directory will be retained. The data attribute in the error returned provides information about the conflicting files in the Array\<[ConflictFiles](#conflictfiles20)> format.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | Yes   | Application sandbox path of the source directory.|
+  | dest | string | Yes   | Application sandbox path of the destination directory.|
+  | callback | AsyncCallback&lt;void, Array&lt;[ConflictFiles](#conflictfiles20)&gt;&gt; | Yes   | Callback used to return the result.             |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ConflictFiles } from '@kit.CoreFileKit';
+  // Copy srcPath to destPath.
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.copyDir(srcPath, destPath, (err: BusinessError<Array<ConflictFiles>>) => {
+    if (err && err.code == 13900015 && err.data?.length !== undefined) {
+      for (let i = 0; i < err.data.length; i++) {
+        console.error("copy directory failed with conflicting files: " + err.data[i].srcFile + " " + err.data[i].destFile);
+      }
+    } else if (err) {
+      console.error("copy directory failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("copy directory succeed");
+    }
+  });
+  ```
+
+## fs.copyDirSync<sup>20+</sup>
+
+copyDirSync(src: string, dest: string, mode?: number): void
+
+Copies the source directory to the destination path. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | Yes   | Application sandbox path of the source directory.|
+  | dest | string | Yes   | Application sandbox path of the destination directory.|
+  | mode | number | No   | Copy mode. The default value is **0**.<br>- **0**: Throw an exception if a file conflict occurs.<br> An exception will be thrown if the destination directory contains a directory with the same name as the source directory, and a file with the same name exists in the conflict directory. All the non-conflicting files in the source directory will be moved to the destination directory, and the non-conflicting files in the destination directory will be retained. The data attribute in the error returned provides information about the conflicting files in the Array\<[ConflictFiles](#conflictfiles20)> format.<br>- **1**: Forcibly overwrite the files with the same name in the destination directory.<br> When the destination directory contains a directory with the same name as the source directory, the files with the same names in the destination directory are overwritten forcibly; the files without conflicts in the destination directory are retained.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  // Copy srcPath to destPath.
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  try {
+    fs.copyDirSync(srcPath, destPath, 0);
+    console.info("copy directory succeed");
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error("copy directory failed with error message: " + err.message + ", error code: " + err.code);
+  }
+  ```
+
+## fs.setxattr<sup>20+</sup>
+
+setxattr(path: string, key: string, value: string): Promise&lt;void&gt;
+
+Sets an extended attribute of a file or directory.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description                                                        |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | Yes  | Application sandbox path of the file or directory.                                  |
+| key   | string | Yes  | Key of the extended attribute to obtain. The value is a string of less than 256 bytes and can contain only the **user.** prefix. |
+| value   | string | Yes  | Value of the extended attribute to set.                                  |
+
+**Return value**
+
+  | Type    | Description                                      |
+  | ------ | ---------------------------------------- |
+  | Promise&lt;void&gt;| Promise that returns no value.                            |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+
+  let filePath = pathDir + "/test.txt";
+  let attrKey = "user.comment";
+  let attrValue = "Test file.";
+
+  fs.setxattr(filePath, attrKey, attrValue).then(() => {
+    console.info("Set extended attribute successfully.");
+  }).catch((err: BusinessError) => {
+    console.error("Failed to set extended attribute with error message: " + err.message + ", error code: " + err.code);
+  });
+
+  ```
+
+## fs.setxattrSync<sup>20+</sup>
+
+setxattrSync(path: string, key: string, value: string): void
+
+Sets an extended attribute of a file or directory.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description                                                        |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | Yes  | Application sandbox path of the file or directory.                                  |
+| key   | string | Yes  | Key of the extended attribute to obtain. The value is a string of less than 256 bytes and can contain only the **user.** prefix.  |
+| value   | string | Yes  | Value of the extended attribute to set.                                  |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](errorcode-filemanagement.md#basic-file-io-error-codes).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+
+  let filePath = pathDir + "/test.txt";
+  let attrKey = "user.comment";
+  let attrValue = "Test file.";
+
+  try {
+    fs.setxattrSync(filePath, attrKey, attrValue);
+    console.info("Set extended attribute successfully.");
+  } catch (err) {
+    console.error("Failed to set extended attribute with error message: " + err.message + ", error code: " + err.code);
+  }
+
+  ```
+
+## fs.getxattr<sup>20+</sup>
+
+getxattr(path: string, key: string): Promise&lt;string&gt;
+
+Obtains an extended attribute of a file or directory.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description                                                        |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | Yes  | Application sandbox path of the file or directory.                                  |
+| key   | string | Yes  | Key of the extended attribute to obtain.                                  |
+
+**Return value**
+
+  | Type    | Description                                      |
+  | ------ | ---------------------------------------- |
+  | Promise&lt;string&gt;| Promise used to return the value of the extended attribute obtained.   |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](errorcode-filemanagement.md#basic-file-io-error-codes).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+
+  let filePath = pathDir + "/test.txt";
+  let attrKey = "user.comment";
+
+  fs.getxattr(filePath, attrKey).then((attrValue: string) => {
+    console.info("Get extended attribute succeed, the value is: " + attrValue);
+  }).catch((err: BusinessError) => {
+    console.error("Failed to get extended attribute with error message: " + err.message + ", error code: " + err.code);
+  });
+
+  ```
+
+## fs.getxattrSync<sup>20+</sup>
+
+getxattrSync(path: string, key: string): string
+
+Obtains an extended attribute of a file. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description                                                        |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | Yes  | Application sandbox path of the file or directory.                                  |
+| key   | string | Yes  | Key of the extended attribute to obtain.                                  |
+
+**Return value**
+
+  | Type    | Description                                      |
+  | ------ | ---------------------------------------- |
+  | key| Value of the extended attribute obtained.     |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+
+  let filePath = pathDir + "/test.txt";
+  let attrKey = "user.comment";
+
+  try {
+    let attrValue = fs.getxattrSync(filePath, attrKey);
+    console.info("Get extended attribute succeed, the value is: " + attrValue);
+  } catch (err) {
+    console.error("Failed to get extended attribute with error message: " + err.message + ", error code: " + err.code);
+    }
+
   ```
 
 ## fs.mkdir
@@ -469,6 +819,43 @@ Creates a directory. This API uses a promise to return the result.
   });
   ```
 
+## fs.mkdir<sup>20+</sup>
+
+mkdir(path: string, recursion: boolean): Promise\<void>
+
+Creates a directory. This API uses a promise to return the result. The value **true** means to create a directory recursively.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description                                                        |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | Yes  | Application sandbox path of the directory.                                  |
+| recursion   | boolean | Yes  | Whether to create a directory recursively.<br>The value **true** means to create a directory recursively. The value **false** means to create a single-level directory.  |
+
+**Return value**
+
+  | Type                 | Description                          |
+  | ------------------- | ---------------------------- |
+  | Promise&lt;void&gt; | Promise that returns no value.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let dirPath = pathDir + "/testDir1/testDir2/testDir3";
+  fs.mkdir(dirPath, true).then(() => {
+    console.info("Directory created");
+  }).catch((err: BusinessError) => {
+    console.error("mkdir failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
 ## fs.mkdir
 
 mkdir(path: string, callback: AsyncCallback&lt;void&gt;): void
@@ -501,6 +888,40 @@ Creates a directory. This API uses an asynchronous callback to return the result
   });
   ```
 
+## fs.mkdir<sup>20+</sup>
+
+mkdir(path: string, recursion: boolean, callback: AsyncCallback&lt;void&gt;): void
+
+Creates a directory. This API uses an asynchronous callback to return the result. The value **true** means to create a directory recursively.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name  | Type                     | Mandatory| Description                                                        |
+| -------- | ------------------------- | ---- | ------------------------------------------------------------ |
+| path     | string                    | Yes  | Application sandbox path of the directory.                                  |
+| recursion   | boolean | Yes  | Whether to create a directory recursively.<br>The value **true** means to create a directory recursively. The value **false** means to create a single-level directory.  |
+| callback | AsyncCallback&lt;void&gt; | Yes  | Callback used to return the result.                            |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let dirPath = pathDir + "/testDir1/testDir2/testDir3";
+  fs.mkdir(dirPath, true, (err: BusinessError) => {
+    if (err) {
+      console.error("mkdir failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("Directory created");
+    }
+  });
+  ```
+
 ## fs.mkdirSync
 
 mkdirSync(path: string): void
@@ -524,6 +945,32 @@ Synchronously creates a directory.
   ```js
   let dirPath = pathDir + "/testDir";
   fs.mkdirSync(dirPath);
+  ```
+
+## fs.mkdirSync<sup>20+</sup>
+
+mkdirSync(path: string, recursion: boolean): void
+
+Creates a directory. This API returns the result synchronously. The value **true** means to create a directory recursively.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description                                                        |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | Yes  | Application sandbox path of the directory.                                  |
+| recursion   | boolean | Yes  | Whether to create a directory recursively.<br>The value **true** means to create a directory recursively. The value **false** means to create a single-level directory.  |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](errorcode-filemanagement.md#basic-file-io-error-codes).
+
+**Example**
+
+  ```ts
+  let dirPath = pathDir + "/testDir1/testDir2/testDir3";
+  fs.mkdirSync(dirPath, true);
   ```
 
 ## fs.open
@@ -561,7 +1008,6 @@ Opens a file. This API uses a promise to return the result. File uniform resourc
       console.info("open file failed with error message: " + err.message + ", error code: " + err.code);
   });
   ```
-
 
 ## fs.open
 
@@ -631,9 +1077,9 @@ Synchronously opens a file. File URIs are supported.
 
 ## fs.read
 
-read(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: number; }): Promise&lt;number&gt;
+read(fd: number, buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
 
-Reads data from a file. This API uses a promise to return the result.
+Reads file data. This API uses a promise to return the result.
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -643,36 +1089,40 @@ Reads data from a file. This API uses a promise to return the result.
 | ------- | ----------- | ---- | ------------------------------------------------------------ |
 | fd      | number      | Yes  | FD of the file.                                    |
 | buffer  | ArrayBuffer | Yes  | Buffer used to store the file data read.                          |
-| options | Object      | No  | The options are as follows:<br>- **offset** (number): position of the data to read in the file. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.|
+| options | [ReadOptions](#readoptions20)      | No  | The options are as follows:<br>- **offset** (number): start position to read the data. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.|
 
 **Return value**
 
   | Type                                | Description    |
   | ---------------------------------- | ------ |
-  | Promise&lt;number&gt; | Promise used to return the data read.|
+  | Promise&lt;number&gt; | Promise used to return the length of the data read, in bytes.|
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { buffer } from '@kit.ArkTS';
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE);
-  let buf = new ArrayBuffer(4096);
-  fs.read(file.fd, buf).then((readLen) => {
-      console.info("Read file data successfully");
-      console.info(String.fromCharCode.apply(null, new Uint8Array(buf.slice(0, readLen))));
-      fs.closeSync(file);
-  }).catch((err) => {
-      console.info("read file data failed with error message: " + err.message + ", error code: " + err.code);
+  let arrayBuffer = new ArrayBuffer(4096);
+  fs.read(file.fd, arrayBuffer).then((readLen: number) => {
+    console.info("Read file data successfully");
+    let buf = buffer.from(arrayBuffer, 0, readLen);
+    console.info(`The content of file: ${buf.toString()}`);
+  }).catch((err: BusinessError) => {
+    console.error("read file data failed with error message: " + err.message + ", error code: " + err.code);
+  }).finally(() => {
+    fs.closeSync(file);
   });
   ```
 
 ## fs.read
 
-read(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: number; }, callback: AsyncCallback&lt;number&gt;): void
+read(fd: number, buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCallback&lt;number&gt;): void
 
 Reads data from a file. This API uses an asynchronous callback to return the result.
 
@@ -684,35 +1134,38 @@ Reads data from a file. This API uses an asynchronous callback to return the res
   | -------- | ---------------------------------------- | ---- | ---------------------------------------- |
   | fd       | number                                   | Yes   | FD of the file.                            |
   | buffer   | ArrayBuffer                              | Yes   | Buffer used to store the file data read.                       |
-  | options | Object      | No  | The options are as follows:<br>- **offset** (number): position of the data to read in the file. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.|
-  | callback | AsyncCallback&lt;number&gt; | Yes   | Callback invoked when the data is read asynchronously.                            |
+  | options | [ReadOptions](#readoptions11)      | No  | The options are as follows:<br>- **offset** (number): start position to read the data. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.|
+  | callback | AsyncCallback&lt;number&gt; | Yes   | Callback used to return the length of the data read, in bytes.                            |
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { buffer } from '@kit.ArkTS';
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE);
-  let buf = new ArrayBuffer(4096);
-  fs.read(file.fd, buf, (err, readLen) => {
+  let arrayBuffer = new ArrayBuffer(4096);
+  fs.read(file.fd, arrayBuffer, (err: BusinessError, readLen: number) => {
     if (err) {
-      console.info("mkdir failed with error message: " + err.message + ", error code: " + err.code);
+      console.error("read failed with error message: " + err.message + ", error code: " + err.code);
     } else {
       console.info("Read file data successfully");
-      console.info(String.fromCharCode.apply(null, new Uint8Array(buf.slice(0, readLen))));
-      fs.closeSync(file);
+      let buf = buffer.from(arrayBuffer, 0, readLen);
+      console.info(`The content of file: ${buf.toString()}`);
     }
+    fs.closeSync(file);
   });
   ```
 
 ## fs.readSync
 
-readSync(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: number; }): number
+readSync(fd: number, buffer: ArrayBuffer, options?: ReadOptions): number
 
-Synchronously reads data from a file.
+Reads data from a file. This API returns the result synchronously.
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -722,25 +1175,25 @@ Synchronously reads data from a file.
   | ------- | ----------- | ---- | ---------------------------------------- |
   | fd      | number      | Yes   | FD of the file.                            |
   | buffer  | ArrayBuffer | Yes   | Buffer used to store the file data read.                       |
-  | options | Object      | No  | The options are as follows:<br>- **offset** (number): position of the data to read in the file. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.|
+  | options | [ReadOptions](#readoptions20)      | No  | The options are as follows:<br>- **offset** (number): start position to read the data. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.|
 
 **Return value**
 
   | Type    | Description      |
   | ------ | -------- |
-  | number | Length of the data read.|
+  | number | Length of the data read, in bytes.|
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
-  ```js
+  ```ts
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE);
   let buf = new ArrayBuffer(4096);
-  let num = fs.readSync(file.fd, buf);
+  fs.readSync(file.fd, buf);
   fs.closeSync(file);
   ```
 
@@ -928,12 +1381,11 @@ Synchronously deletes a file.
   fs.unlinkSync(filePath);
   ```
 
-
 ## fs.write
 
-write(fd: number, buffer: ArrayBuffer|string, options?: { offset?: number; length?: number; encoding?: string; }): Promise&lt;number&gt;
+write(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
 
-Writes data into a file. This API uses a promise to return the result.
+Writes data to a file. This API uses a promise to return the result.
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -942,37 +1394,40 @@ Writes data into a file. This API uses a promise to return the result.
   | Name    | Type                             | Mandatory  | Description                                      |
   | ------- | ------------------------------- | ---- | ---------------------------------------- |
   | fd      | number                          | Yes   | FD of the file.                            |
-  | buffer  | ArrayBuffer\|string | Yes   | Data to write. It can be a string or data from a buffer.                    |
-  | options | Object                          | No   | The options are as follows:<br>- **offset** (number): start position to write the data in the file. This parameter is optional. By default, data is written from the current position.<br>- **length** (number): length of the data to write. This parameter is optional. The default value is the buffer length.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported.|
+  | buffer  | ArrayBuffer \| string | Yes   | Data to write. It can be a string or data from a buffer.                    |
+  | options | [WriteOptions](#writeoptions20)                          | No   | The options are as follows:<br>- **offset** (number): start position to write the data in the file. This parameter is optional. By default, data is written from the current position.<br>- **length** (number): length of the data to write. This parameter is optional. The default value is the buffer length.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported currently.|
 
 **Return value**
 
   | Type                   | Description      |
   | --------------------- | -------- |
-  | Promise&lt;number&gt; | Promise used to return the length of the data written.|
+  | Promise&lt;number&gt; | Promise used to return the length of the data written, in bytes.|
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
-  fs.write(file.fd, "hello, world").then((writeLen) => {
+  let str: string = "hello, world";
+  fs.write(file.fd, str).then((writeLen: number) => {
     console.info("write data to file succeed and size is:" + writeLen);
+  }).catch((err: BusinessError) => {
+    console.error("write data to file failed with error message: " + err.message + ", error code: " + err.code);
+  }).finally(() => {
     fs.closeSync(file);
-  }).catch((err) => {
-    console.info("write data to file failed with error message: " + err.message + ", error code: " + err.code);
   });
   ```
 
 ## fs.write
 
-write(fd: number, buffer: ArrayBuffer|string, options?: { offset?: number; length?: number; encoding?: string; }, callback: AsyncCallback&lt;number&gt;): void
+write(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions, callback: AsyncCallback&lt;number&gt;): void
 
-Writes data into a file. This API uses an asynchronous callback to return the result.
+Writes data to a file. This API uses an asynchronous callback to return the result.
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -981,34 +1436,36 @@ Writes data into a file. This API uses an asynchronous callback to return the re
   | Name     | Type                             | Mandatory  | Description                                      |
   | -------- | ------------------------------- | ---- | ---------------------------------------- |
   | fd       | number                          | Yes   | FD of the file.                            |
-  | buffer   | ArrayBuffer\|string | Yes   | Data to write. It can be a string or data from a buffer.                    |
-  | options | Object                          | No   | The options are as follows:<br>- **offset** (number): start position to write the data in the file. This parameter is optional. By default, data is written from the current position.<br>- **length** (number): length of the data to write. This parameter is optional. The default value is the buffer length.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported.|
-  | callback | AsyncCallback&lt;number&gt;     | Yes   | Callback invoked when the data is written asynchronously.                      |
+  | buffer   | ArrayBuffer \| string | Yes   | Data to write. It can be a string or data from a buffer.                    |
+  | options | [WriteOptions](#writeoptions20)                          | No   | The options are as follows:<br>- **offset** (number): start position to write the data in the file. This parameter is optional. By default, data is written from the current position.<br>- **length** (number): length of the data to write. This parameter is optional. The default value is the buffer length.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported currently.|
+  | callback | AsyncCallback&lt;number&gt;     | Yes   | Callback used to return the result.                      |
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
-  fs.write(file.fd, "hello, world", (err, writeLen) => {
+  let str: string = "hello, world";
+  fs.write(file.fd, str, (err: BusinessError, writeLen: number) => {
     if (err) {
-      console.info("write failed with error message: " + err.message + ", error code: " + err.code);
+      console.error("write data to file failed with error message:" + err.message + ", error code: " + err.code);
     } else {
       console.info("write data to file succeed and size is:" + writeLen);
-      fs.closeSync(file);
     }
+    fs.closeSync(file);
   });
   ```
 
 ## fs.writeSync
 
-writeSync(fd: number, buffer: ArrayBuffer|string, options?: { offset?: number; length?: number; encoding?: string; }): number
+writeSync(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions): number
 
-Synchronously writes data into a file.
+Writes data to a file. This API returns the result synchronously.
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1017,25 +1474,26 @@ Synchronously writes data into a file.
   | Name    | Type                             | Mandatory  | Description                                      |
   | ------- | ------------------------------- | ---- | ---------------------------------------- |
   | fd      | number                          | Yes   | FD of the file.                            |
-  | buffer  | ArrayBuffer\|string | Yes   | Data to write. It can be a string or data from a buffer.                    |
-  | options | Object                          | No   | The options are as follows:<br>- **offset** (number): start position to write the data in the file. This parameter is optional. By default, data is written from the current position.<br>- **length** (number): length of the data to write. This parameter is optional. The default value is the buffer length.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported.|
+  | buffer  | ArrayBuffer \| string | Yes   | Data to write. It can be a string or data from a buffer.                    |
+  | options | [WriteOptions](#writeoptions20)                          | No   | The options are as follows:<br>- **offset** (number): start position to write the data in the file. This parameter is optional. By default, data is written from the current position.<br>- **length** (number): length of the data to write. This parameter is optional. The default value is the buffer length.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported currently.|
 
 **Return value**
 
   | Type    | Description      |
   | ------ | -------- |
-  | number | Length of the data written in the file.|
+  | number | Length of the data written, in bytes.|
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
-  ```js
+  ```ts
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
-  let writeLen = fs.writeSync(file.fd, "hello, world");
+  let str: string = "hello, world";
+  let writeLen = fs.writeSync(file.fd, str);
   console.info("write data to file succeed and size is:" + writeLen);
   fs.closeSync(file);
   ```
@@ -1140,7 +1598,7 @@ Synchronously truncates a file.
 
 ## fs.readText
 
-readText(filePath: string, options?: { offset?: number; length?: number; encoding?: string; }): Promise&lt;string&gt;
+readText(filePath: string, options?: ReadTextOptions): Promise&lt;string&gt;
 
 Reads the text content of a file. This API uses a promise to return the result.
 
@@ -1151,32 +1609,33 @@ Reads the text content of a file. This API uses a promise to return the result.
 | Name  | Type  | Mandatory| Description                                                        |
 | -------- | ------ | ---- | ------------------------------------------------------------ |
 | filePath | string | Yes  | Application sandbox path of the file.                                  |
-| options  | Object | No  | The options are as follows:<br>- **offset** (number): position of the data to read in the file. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the file length.<br>- **encoding** (string): format of the string to be encoded. The default value is **'utf-8'**, which is the only value supported.|
+| options  | [ReadTextOptions](#readtextoptions20) | No  | The options are as follows:<br>- **offset** (number): start position to read the data. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the file length.<br>- **encoding** (string): format of the data to be encoded.<br>It is valid only when the data is of the string type. The default value is **'utf-8'**, which is the only value supported.|
 
 **Return value**
 
   | Type                   | Description        |
   | --------------------- | ---------- |
-  | Promise&lt;string&gt; | Promise used to return the content read.|
+  | Promise&lt;string&gt; | Promise used to return the file content read.|
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
-  fs.readText(filePath).then((str) => {
-      console.info("readText succeed:" + str);
-  }).catch((err) => {
-      console.info("readText failed with error message: " + err.message + ", error code: " + err.code);
+  fs.readText(filePath).then((str: string) => {
+    console.info("readText succeed:" + str);
+  }).catch((err: BusinessError) => {
+    console.error("readText failed with error message: " + err.message + ", error code: " + err.code);
   });
   ```
 
 ## fs.readText
 
-readText(filePath: string, options?: { offset?: number; length?: number; encoding?: string; }, callback: AsyncCallback&lt;string&gt;): void
+readText(filePath: string, options?: ReadTextOptions, callback: AsyncCallback&lt;string&gt;): void
 
 Reads the text content of a file. This API uses an asynchronous callback to return the result.
 
@@ -1187,20 +1646,29 @@ Reads the text content of a file. This API uses an asynchronous callback to retu
 | Name  | Type                       | Mandatory| Description                                                        |
 | -------- | --------------------------- | ---- | ------------------------------------------------------------ |
 | filePath | string                      | Yes  | Application sandbox path of the file.                                  |
-| options  | Object                      | No  | The options are as follows:<br>- **offset** (number): position of the data to read in the file. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the file length.<br>- **encoding** (string): format of the string to be encoded. The default value is **'utf-8'**, which is the only value supported.|
-| callback | AsyncCallback&lt;string&gt; | Yes  | Callback invoked to return the content read.                        |
+| options  | [ReadTextOptions](#readtextoptions20)                      | No  | The options are as follows:<br>- **offset** (number): start position to read the data. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the file length.<br>- **encoding** (string): format of the data to be encoded. The default value is **'utf-8'**, which is the only value supported.|
+| callback | AsyncCallback&lt;string&gt; | Yes  | Callback used to return the content read.                        |
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ReadTextOptions } from '@kit.CoreFileKit';
   let filePath = pathDir + "/test.txt";
-  fs.readText(filePath, { offset: 1, encoding: 'UTF-8' }, (err, str) => {
+  let readTextOption: ReadTextOptions = {
+      offset: 1,
+      length: 0,
+      encoding: 'utf-8'
+  };
+  let stat = fs.statSync(filePath);
+  readTextOption.length = stat.size;
+  fs.readText(filePath, readTextOption, (err: BusinessError, str: string) => {
     if (err) {
-      console.info("read text failed with error message: " + err.message + ", error code: " + err.code);
+      console.error("readText failed with error message: " + err.message + ", error code: " + err.code);
     } else {
       console.info("readText succeed:" + str);
     }
@@ -1209,9 +1677,9 @@ Reads the text content of a file. This API uses an asynchronous callback to retu
 
 ## fs.readTextSync
 
-readTextSync(filePath: string, options?: { offset?: number; length?: number; encoding?: string; }): string
+readTextSync(filePath: string, options?: ReadTextOptions): string
 
-Synchronously reads the text of a file. 
+Reads the text content of a file. This API returns the result synchronously.
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1220,23 +1688,31 @@ Synchronously reads the text of a file.
 | Name  | Type  | Mandatory| Description                                                        |
 | -------- | ------ | ---- | ------------------------------------------------------------ |
 | filePath | string | Yes  | Application sandbox path of the file.                                  |
-| options  | Object | No  | The options are as follows:<br>- **offset** (number): position of the data to read in the file. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the file length.<br>- **encoding** (string): format of the string to be encoded. The default value is **'utf-8'**, which is the only value supported.|
+| options  | [ReadTextOptions](#readtextoptions20) | No  | The options are as follows:<br>- **offset** (number): start position to read the data. This parameter is optional. By default, data is read from the current position.<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the file length.<br>- **encoding** (string): format of the data to be encoded.<br>It is valid only when the data is of the string type. The default value is **'utf-8'**, which is the only value supported.|
 
 **Return value**
 
   | Type  | Description                |
   | ------ | -------------------- |
-  | string | Promise used to return the content of the file read.|
+  | string | Content of the file read.|
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
-  ```js
+  ```ts
+  import { fileIo as fs, ReadTextOptions } from '@kit.CoreFileKit';
   let filePath = pathDir + "/test.txt";
-  let str = fs.readTextSync(filePath, {offset: 1, length: 3});
+  let readTextOptions: ReadTextOptions = {
+    offset: 1,
+    length: 0,
+    encoding: 'utf-8'
+  };
+  let stat = fs.statSync(filePath);
+  readTextOptions.length = stat.size;
+  let str = fs.readTextSync(filePath, readTextOptions);
   console.info("readText succeed:" + str);
   ```
 
@@ -1800,6 +2276,190 @@ Lists all files in a folder synchronously. This API supports recursive listing o
   }
   ```
 
+## fs.moveDir<sup>20+</sup>
+
+moveDir(src: string, dest: string, mode?: number): Promise\<void>
+
+Moves the source directory to the destination directory. This API uses a promise to return the result.
+
+> **NOTE**
+>
+> This API is not supported in a distributed directory.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | Yes   | Application sandbox path of the source directory.|
+  | dest | string | Yes   | Application sandbox path of the destination directory.|
+  | mode | number | No   | Move mode. The default value is **0**.<br>- **0**: Throw an exception if a directory conflict occurs.<br> An exception will be thrown if the destination directory contains a non-empty directory with the same name as the source directory.<br>- **1**: Throw an exception if a file conflict occurs.<br> An exception will be thrown if the destination directory contains a directory with the same name as the source directory, and a file with the same name exists in the conflict directory. All the non-conflicting files in the source directory will be moved to the destination directory, and the non-conflicting files in the destination directory will be retained. The data attribute in the error returned provides information about the conflicting files in the Array\<[ConflictFiles](#conflictfiles20)> format.<br>- **2**: Forcibly overwrite the conflicting files in the destination directory.<br> When the destination directory contains a directory with the same name as the source directory, the files with the same names in the destination directory are overwritten forcibly; the files without conflicts in the destination directory are retained.<br>- **3**: Forcibly overwrite the conflicting directory.<br> The source directory is moved to the destination directory, and the content of the moved directory is the same as that of the source directory. If the destination directory contains a directory with the same name as the source directory, all original files in the directory will be deleted.|
+
+**Return value**
+
+  | Type                 | Description                          |
+  | ------------------- | ---------------------------- |
+  | Promise&lt;void&gt; | Promise that returns no value.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  // move directory from srcPath to destPath
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.moveDir(srcPath, destPath, 1).then(() => {
+    console.info("move directory succeed");
+  }).catch((err: BusinessError) => {
+    console.error("move directory failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## fs.moveDir<sup>20+</sup>
+
+moveDir(src: string, dest: string, mode: number, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
+
+Moves the source directory to the destination directory. You can set the move mode. This API uses an asynchronous callback to return the result.
+
+> **NOTE**
+>
+> This API is not supported in a distributed directory.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | Yes   | Application sandbox path of the source directory.|
+  | dest | string | Yes   | Application sandbox path of the destination directory.|
+  | mode | number | Yes   | Move mode. The default value is **0**.<br>- **0**: Throw an exception if a directory conflict occurs.<br> An exception will be thrown if the destination directory contains a directory with the same name as the source directory.<br>- **1**: Throw an exception if a file conflict occurs.<br> An exception will be thrown if the destination directory contains a directory with the same name as the source directory, and a file with the same name exists in the conflict directory. All the non-conflicting files in the source directory will be moved to the destination directory, and the non-conflicting files in the destination directory will be retained. The data attribute in the error returned provides information about the conflicting files in the Array\<[ConflictFiles](#conflictfiles20)> format.<br>- **2**: Forcibly overwrite the conflicting files in the destination directory.<br> When the destination directory contains a directory with the same name as the source directory, the files with the same names in the destination directory are overwritten forcibly; the files without conflicts in the destination directory are retained.<br>- **3**: Forcibly overwrite the conflicting directory.<br> The source directory is moved to the destination directory, and the content of the moved directory is the same as that of the source directory. If the destination directory contains a directory with the same name as the source directory, all original files in the directory will be deleted.|
+  | callback | AsyncCallback&lt;void, Array&lt;[ConflictFiles](#conflictfiles20)&gt;&gt; | Yes   | Callback used to return the result.             |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ConflictFiles } from '@kit.CoreFileKit';
+  // move directory from srcPath to destPath
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.moveDir(srcPath, destPath, 1, (err: BusinessError<Array<ConflictFiles>>) => {
+    if (err && err.code == 13900015 && err.data?.length !== undefined) {
+      for (let i = 0; i < err.data.length; i++) {
+        console.error("move directory failed with conflicting files: " + err.data[i].srcFile + " " + err.data[i].destFile);
+      }
+    } else if (err) {
+      console.error("move directory failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("move directory succeed");
+    }
+  });
+  ```
+
+## fs.moveDir<sup>20+</sup>
+
+moveDir(src: string, dest: string, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
+
+Moves the source directory to the destination directory. This API uses an asynchronous callback to return the result.
+
+An exception will be thrown if a directory conflict occurs, that is, the destination directory contains a directory with the same name as the source directory.
+
+> **NOTE**
+>
+> This API is not supported in a distributed directory.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | Yes   | Application sandbox path of the source directory.|
+  | dest | string | Yes   | Application sandbox path of the destination directory.|
+  | callback | AsyncCallback&lt;void, Array&lt;[ConflictFiles](#conflictfiles20)&gt;&gt; | Yes   | Callback used to return the result.             |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ConflictFiles } from '@kit.CoreFileKit';
+  // move directory from srcPath to destPath
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.moveDir(srcPath, destPath, (err: BusinessError<Array<ConflictFiles>>) => {
+    if (err && err.code == 13900015 && err.data?.length !== undefined) {
+      for (let i = 0; i < err.data.length; i++) {
+        console.error("move directory failed with conflicting files: " + err.data[i].srcFile + " " + err.data[i].destFile);
+      }
+    } else if (err) {
+      console.error("move directory failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("move directory succeed");
+    }
+  });
+  ```
+
+## fs.moveDirSync<sup>20+</sup>
+
+moveDirSync(src: string, dest: string, mode?: number): void
+
+Moves the source directory to the destination directory. This API returns the result synchronously.
+
+> **NOTE**
+>
+> This API is not supported in a distributed directory.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | Yes   | Application sandbox path of the source directory.|
+  | dest | string | Yes   | Application sandbox path of the destination directory.|
+  | mode | number | No   | Move mode. The default value is **0**.<br>- **0**: Throw an exception if a directory conflict occurs.<br> An exception will be thrown if the destination directory contains a directory with the same name as the source directory.<br>- **1**: Throw an exception if a file conflict occurs.<br> An exception will be thrown if the destination directory contains a directory with the same name as the source directory, and a file with the same name exists in the conflict directory. All the non-conflicting files in the source directory will be moved to the destination directory, and the non-conflicting files in the destination directory will be retained. The data attribute in the error returned provides information about the conflicting files in the Array\<[ConflictFiles](#conflictfiles20)> format.<br>- **2**: Forcibly overwrite the conflicting files in the destination directory.<br> When the destination directory contains a directory with the same name as the source directory, the files with the same names in the destination directory are overwritten forcibly; the files without conflicts in the destination directory are retained.<br>- **3**: Forcibly overwrite the conflicting directory.<br> The source directory is moved to the destination directory, and the content of the moved directory is the same as that of the source directory. If the destination directory contains a directory with the same name as the source directory, all original files in the directory will be deleted.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+import { fileIo as fs, ConflictFiles } from '@kit.CoreFileKit';
+// move directory from srcPath to destPath
+let srcPath = pathDir + "/srcDir/";
+let destPath = pathDir + "/destDir/";
+try {
+  fs.moveDirSync(srcPath, destPath, 1);
+  console.info("move directory succeed");
+} catch (error) {
+  let err: BusinessError<Array<ConflictFiles>> = error as BusinessError<Array<ConflictFiles>>;
+  if (err.code == 13900015 && err.data?.length !== undefined) {
+    for (let i = 0; i < err.data.length; i++) {
+      console.error("move directory failed with conflicting files: " + err.data[i].srcFile + " " + err.data[i].destFile);
+    }
+  } else {
+    console.error("move directory failed with error message: " + err.message + ", error code: " + err.code);
+  }
+}
+  ```
+
 ## fs.moveFile
 
 moveFile(src: string, dest: string, mode?: number): Promise\<void>
@@ -2157,7 +2817,7 @@ Checks whether this file is a socket.
 
 **Error codes**
 
- For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+ For details about the error codes, see [Basic File IO Error Codes](c).
 
 **Example**
 
@@ -2236,3 +2896,72 @@ Defines the file filtering configuration, which can be used by **listFile()**.
 | fileSizeOver    | number | Locate files that are greater than or equal to the specified size.      |
 | lastModifiedAfter    | number | Locate files whose last modification time is the same or later than the specified time.      |
 | excludeMedia    | boolean | Whether to exclude the files already in **Media**.      |
+
+## ConflictFiles<sup>20+</sup>
+
+Defines conflicting file information used in **copyDir()** or **moveDir()**.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Type      | Description               |
+| ----------- | --------------- | ------------------ |
+| srcFile | string     | Path of the source file.          |
+| destFile    | string     | Path of the destination file.|
+
+## Options<sup>20+</sup>
+
+Defines the options used in **readLines()**.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Type      | Description               |
+| ----------- | --------------- | ------------------ |
+| encoding | string     | File encoding format. It is optional.          |
+
+## AccessModeType<sup>20+</sup>
+
+Enumerates the access modes to verify. If this parameter is left blank, the system checks whether the file exists.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Value      | Description               |
+| ----------- | --------------- | ------------------ |
+| EXIST | 0     | Whether the file exists.          |
+| WRITE    | 2     | Verify the write permission on the file.|
+| READ    | 4     | Verify the read permission on the file.|
+| READ_WRITE    | 6     | Verify the read/write permission on the file.|
+
+## ReadOptions<sup>20+</sup>
+
+Defines the options used in **read()**.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Type      | Mandatory      | Description               |
+| ----------- | --------------- | ------------------ |------------------ |
+| length | number     | No| Length of the data to read, in bytes. This parameter is optional. The default value is the buffer length.          |
+|  offset    | number     | No| Start position of the file to read (current **filePointer** plus **offset**), in bytes. This parameter is optional. By default, data is read from the **filePointer**.|
+
+## ReadTextOptions<sup>20+</sup>
+
+Defines the options used in **readText()**. It inherits from [ReadOptions](#readoptions20).
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Type      | Mandatory      | Description               |
+| ----------- | --------------- | ------------------ | ------------------ |
+| length | number     | No| Length of the data to read, in bytes. This parameter is optional. The default value is the file length.          |
+|  offset    | number     | No| Start position of the file to read, in bytes. This parameter is optional. By default, data is read from the current position.|
+| encoding    | string | No| Format of the data to be encoded. This parameter is valid only when the data type is string. The default value is **'utf-8'**, which is the only value supported.<br> |
+
+## WriteOptions<sup>20+</sup>
+
+Defines the options used in **write()**. It inherits from [Options](#options20).
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Type      | Mandatory      | Description               |
+| ----------- | --------------- | ------------------ | ------------------ |
+| length | number     | No| Length of the data to write, in bytes. This parameter is optional. The default value is the buffer length. |
+|  offset    | number     | No| Start position of the file to write (current **filePointer** plus **offset**), in bytes. This parameter is optional. By default, data is written from the **filePointer**.|
+| encoding    | string | No| Format of the data to be encoded. This parameter is valid only when the data type is string. The default value is **'utf-8'**, which is the only value supported.      |
