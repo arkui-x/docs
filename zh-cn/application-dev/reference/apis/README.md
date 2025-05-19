@@ -150,6 +150,7 @@
 
 - 系统基础能力
   - [@ohos.hilog (HiLog日志打印)](js-apis-hilog.md)
+  - [@ohos.hiTraceMeter (性能打点)](js-apis-hitracemeter.md)
   - [@ohos.web.webview(Webview)](js-apis-webview.md)
 
 - 公共事件与通知
