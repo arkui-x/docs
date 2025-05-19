@@ -104,7 +104,7 @@ traceByValue(name: string, count: number): void
 
 用来标记一个跟踪的整数变量，该变量的数值会不断变化。
 
-从API version 20开始，建议使用[traceByValue](#hitracemetertracebyvalue-2)接口。
+从API version 20开始，建议使用[traceByValue](#hitracemetertracebyvalue-1)接口。
 
 **系统能力**：SystemCapability.HiviewDFX.HiTrace
 
@@ -163,10 +163,10 @@ startAsyncTrace(level: HiTraceOutputLevel, name: string, taskId: number, customC
 
 | 参数名         | 类型                                      | 必填 | 说明                                                         | Android平台 | iOS平台 |
 | -------------- | ----------------------------------------- | ---- | ------------------------------------------------------------ | ----------- | ------- |
-| level          | [HiTraceOutputLevel](#hitraceoutputlevel) | 是   | 跟踪输出级别。（尽管该属性在 Android 和 iOS 平台不支持，但由于该属性为必填项，您仍需传入） | 不支持      | 不支持  |
+| level          | [HiTraceOutputLevel](#hitraceoutputlevel) | 是   | 跟踪输出级别。（尽管该参数在 Android 和 iOS 平台不支持，但由于该参数为必填项，您仍需传入） | 不支持      | 不支持  |
 | name           | string                                    | 是   | 要跟踪的任务名称。                                           | 支持        | 不支持  |
 | taskId         | number                                    | 是   | 任务id。                                                     | 支持        | 不支持  |
-| customCategory | string                                    | 是   | 自定义聚类名称，用于聚合同一类异步跟踪打点。（尽管该属性在 Android 和 iOS 平台不支持，但由于该属性为必填项，您仍需传入） | 不支持      | 不支持  |
+| customCategory | string                                    | 是   | 自定义聚类名称，用于聚合同一类异步跟踪打点。（尽管该参数在 Android 和 iOS 平台不支持，但由于该参数为必填项，您仍需传入） | 不支持      | 不支持  |
 | customArgs     | string                                    | 否   | 自定义键值对，格式key=value，多个键值对用逗号分隔。<br>不传入该参数等同于传入空字符串。 | 不支持      | 不支持  |
 
 **示例：**
@@ -198,7 +198,7 @@ finishAsyncTrace的level、name和taskId必须与流程开始的[startAsyncTrace
 
 | 参数名 | 类型                                      | 必填 | 说明                                                         | Android平台 | iOS平台 |
 | ------ | ----------------------------------------- | ---- | ------------------------------------------------------------ | ----------- | ------- |
-| level  | [HiTraceOutputLevel](#hitraceoutputlevel) | 是   | 跟踪输出级别。（尽管该属性在 Android 和 iOS 平台不支持，但由于该属性为必填项，您仍需传入） | 不支持      | 不支持  |
+| level  | [HiTraceOutputLevel](#hitraceoutputlevel) | 是   | 跟踪输出级别。（尽管该参数在 Android 和 iOS 平台不支持，但由于该参数为必填项，您仍需传入） | 不支持      | 不支持  |
 | name   | string                                    | 是   | 要跟踪的任务名称。                                           | 支持        | 不支持  |
 | taskId | number                                    | 是   | 任务id。                                                     | 支持        | 不支持  |
 
@@ -255,7 +255,7 @@ startSyncTrace(level: HiTraceOutputLevel, name: string, customArgs?: string): vo
 
 | 参数名     | 类型                                      | 必填 | 说明                                                         | Android平台 | iOS平台 |
 | ---------- | ----------------------------------------- | ---- | ------------------------------------------------------------ | ----------- | ------- |
-| level      | [HiTraceOutputLevel](#hitraceoutputlevel) | 是   | 跟踪输出级别。（尽管该属性在 Android 和 iOS 平台不支持，但由于该属性为必填项，您仍需传入） | 不支持      | 不支持  |
+| level      | [HiTraceOutputLevel](#hitraceoutputlevel) | 是   | 跟踪输出级别。（尽管该参数在 Android 和 iOS 平台不支持，但由于该参数为必填项，您仍需传入） | 不支持      | 不支持  |
 | name       | string                                    | 是   | 要跟踪的任务名称。                                           | 支持        | 不支持  |
 | customArgs | string                                    | 否   | 键值对，格式key=value，多个键值对用逗号分隔。<br>不传入该参数等同于传入空字符串。 | 不支持      | 不支持  |
 
@@ -287,7 +287,7 @@ finishSyncTrace的level必须与流程开始的[startSyncTrace](#hitracemetersta
 
 | 参数名 | 类型                                      | 必填 | 说明                                                         | Android平台 | iOS平台 |
 | ------ | ----------------------------------------- | ---- | ------------------------------------------------------------ | ----------- | ------- |
-| level  | [HiTraceOutputLevel](#hitraceoutputlevel) | 是   | 跟踪输出级别。（尽管该属性在 Android 和 iOS 平台不支持，但由于该属性为必填项，您仍需传入） | 不支持      | 不支持  |
+| level  | [HiTraceOutputLevel](#hitraceoutputlevel) | 是   | 跟踪输出级别。（尽管该参数在 Android 和 iOS 平台不支持，但由于该参数为必填项，您仍需传入） | 不支持      | 不支持  |
 
 **示例：**
 
@@ -326,7 +326,7 @@ traceByValue(level: HiTraceOutputLevel, name: string, count: number): void
 
 | 参数名 | 类型                                      | 必填 | 说明                                                         | Android平台 | iOS平台 |
 | ------ | ----------------------------------------- | ---- | ------------------------------------------------------------ | ----------- | ------- |
-| level  | [HiTraceOutputLevel](#hitraceoutputlevel) | 是   | 跟踪输出级别。（尽管该属性在 Android 和 iOS 平台不支持，但由于该属性为必填项，您仍需传入） | 不支持      | 不支持  |
+| level  | [HiTraceOutputLevel](#hitraceoutputlevel) | 是   | 跟踪输出级别。（尽管该参数在 Android 和 iOS 平台不支持，但由于该参数为必填项，您仍需传入） | 不支持      | 不支持  |
 | name   | string                                    | 是   | 要跟踪的整数变量名称。                                       | 支持        | 不支持  |
 | count  | number                                    | 是   | 整数变量的值。                                               | 支持        | 不支持  |
 
