@@ -1656,6 +1656,183 @@ truncateSync(file: string | number, len?: number): void
   fs.truncateSync(filePath, len);
   ```
 
+## fs.readLines<sup>20+</sup>
+
+readLines(filePath: string, options?: Options): Promise&lt;ReaderIterator&gt;
+
+逐行读取文件文本内容，使用promise异步回调。只支持读取utf-8格式文件。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                                                         |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| filePath | string | 是   | 文件的应用沙箱路径。                                   |
+| options | [Options](#options20) | 否   | 可选项。支持以下选项：<br/>-&nbsp;encoding，string类型，当数据是&nbsp;string&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'，仅支持&nbsp;'utf-8'。|
+
+**返回值：**
+
+  | 类型                    | 说明         |
+  | --------------------- | ---------- |
+  | Promise&lt;[ReaderIterator](#readeriterator20)&gt; | Promise对象。返回文件读取迭代器。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, Options } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let options: Options = {
+    encoding: 'utf-8'
+  };
+  fs.readLines(filePath, options).then((readerIterator: fs.ReaderIterator) => {
+    for (let it = readerIterator.next(); !it.done; it = readerIterator.next()) {
+      console.info("content: " + it.value);
+    }
+  }).catch((err: BusinessError) => {
+    console.error("readLines failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## fs.readLines<sup>20+</sup>
+
+readLines(filePath: string, options?: Options, callback: AsyncCallback&lt;ReaderIterator&gt;): void
+
+逐行读取文件文本内容，使用callback异步回调，只支持读取utf-8格式文件。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                                                         |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| filePath | string | 是   | 文件的应用沙箱路径。                                   |
+| options | [Options](#options20) | 否   | 可选项。支持以下选项：<br/>-&nbsp;encoding，string类型，当数据是&nbsp;string&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'，仅支持&nbsp;'utf-8'。|
+| callback | AsyncCallback&lt;[ReaderIterator](#readeriterator20)&gt; | 是   | 逐行读取文件文本内容回调。                                   |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, Options } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let options: Options = {
+    encoding: 'utf-8'
+  };
+  fs.readLines(filePath, options, (err: BusinessError, readerIterator: fs.ReaderIterator) => {
+    if (err) {
+      console.error("readLines failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      for (let it = readerIterator.next(); !it.done; it = readerIterator.next()) {
+        console.info("content: " + it.value);
+      }
+    }
+  });
+  ```
+
+## fs.readLinesSync<sup>20+</sup>
+
+readLinesSync(filePath: string, options?: Options): ReaderIterator
+
+以同步方式逐行读取文件的文本内容。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                                                         |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| filePath | string | 是   | 文件的应用沙箱路径。                                   |
+| options | [Options](#options20) | 否   | 可选项。支持以下选项：<br/>-&nbsp;encoding，string类型，当数据是&nbsp;string&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'，仅支持&nbsp;'utf-8'。|
+
+**返回值：**
+
+  | 类型                    | 说明         |
+  | --------------------- | ---------- |
+  | [ReaderIterator](#readeriterator20) | 返回文件读取迭代器。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { fileIo as fs, Options } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let options: Options = {
+    encoding: 'utf-8'
+  };
+  let readerIterator = fs.readLinesSync(filePath, options);
+  for (let it = readerIterator.next(); !it.done; it = readerIterator.next()) {
+    console.info("content: " + it.value);
+  }
+  ```
+
+## ReaderIterator<sup>20+</sup>
+
+文件读取迭代器。在调用ReaderIterator的方法前，需要先通过readLines方法（同步或异步）来构建一个ReaderIterator实例。
+
+### next
+
+next(): ReaderIteratorResult
+
+获取迭代器下一项内容。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**返回值：**
+
+  | 类型                    | 说明         |
+  | --------------------- | ---------- |
+  | [ReaderIteratorResult](#readeriteratorresult20) | 文件读取迭代器返回结果。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+> **说明**：
+>
+> 如果ReaderIterator读取的当前行的编码方式不是'utf-8'，接口返回错误码13900037。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, Options } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let options: Options = {
+    encoding: 'utf-8'
+  };
+  fs.readLines(filePath, options).then((readerIterator: fs.ReaderIterator) => {
+    for (let it = readerIterator.next(); !it.done; it = readerIterator.next()) {
+      console.info("content: " + it.value);
+    }
+  }).catch((err: BusinessError) => {
+    console.error("readLines failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## ReaderIteratorResult<sup>20+</sup>
+
+文件读取迭代器返回结果，支持ReaderIterator接口使用。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 类型       | 说明                |
+| ----------- | --------------- | ------------------ |
+| done | boolean     |  迭代器是否已完成迭代。true：已完成迭代；false：未完成迭代。          |
+| value    | string     | 逐行读取的文件文本内容。 |
+
 ## fs.readText
 
 readText(filePath: string, options?: ReadTextOptions): Promise&lt;string&gt;
@@ -2343,6 +2520,41 @@ listFileSync(path: string, options?: {
   }
   ```
 
+## fs.lseek<sup>20+</sup>
+
+lseek(fd: number, offset: number, whence?: WhenceType): number
+
+调整文件偏移指针位置。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | fd | number | 是    | 文件描述符。 |
+  | offset | number | 是    | 相对偏移位置，单位为字节。 |
+  | whence | [WhenceType](#whencetype20) | 否    | 偏移指针相对位置类型。不指定则默认为文件起始位置处。|
+
+**返回值：**
+
+  | 类型                   | 说明         |
+  | --------------------- | ---------- |
+  | number | 当前文件偏移指针位置（相对于文件头的偏移量，单位为字节）。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  console.info('The current offset is at ' + fs.lseek(file.fd, 5, fs.WhenceType.SEEK_SET));
+  fs.closeSync(file);
+  ```
+
 ## fs.moveDir<sup>20+</sup>
 
 moveDir(src: string, dest: string, mode?: number): Promise\<void>
@@ -2729,6 +2941,981 @@ mkdtempSync(prefix: string): string
   let res = fs.mkdtempSync(pathDir + "/XXXXXX");
   ```  
 
+## fs.utimes<sup>20+</sup>
+
+utimes(path: string, mtime: number): void
+
+修改文件最近访问时间属性。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+|    参数名    | 类型     | 必填   | 说明                          |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+| path  | string  |  是    | 文件的应用沙箱路径。 |
+| mtime  | number  |  是   | 待更新的时间戳。自1970年1月1日起至目标时间的毫秒数。仅支持修改文件最近访问时间属性。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  fs.writeSync(file.fd, 'test data');
+  fs.closeSync(file);
+  fs.utimes(filePath, new Date().getTime());
+  ```
+
+## fs.createRandomAccessFile<sup>20+</sup>
+
+createRandomAccessFile(file: string | File, mode?: number): Promise&lt;RandomAccessFile&gt;
+
+基于文件路径或文件对象创建RandomAccessFile对象，使用promise异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+|    参数名    | 类型     | 必填   | 说明                          |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | 是    | 文件的应用沙箱路径或已打开的File对象。 |
+|     mode     | number | 否   | 创建文件RandomAccessFile对象的[选项](#openmode)，仅当传入文件沙箱路径时生效，必须指定如下选项中的一个，默认以只读方式创建：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读创建。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写创建。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写创建。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果RandomAccessFile对象存在且对应文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到RandomAccessFile对象末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path未指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式创建RandomAccessFile对象。 |
+
+**返回值：**
+
+  | 类型                                | 说明        |
+  | --------------------------------- | --------- |
+  | Promise&lt;[RandomAccessFile](#randomaccessfile)&gt; | Promise对象。返回RandomAccessFile对象的结果。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  fs.createRandomAccessFile(file).then((randomAccessFile: fs.RandomAccessFile) => {
+    console.info("randomAccessFile fd: " + randomAccessFile.fd);
+    randomAccessFile.close();
+  }).catch((err: BusinessError) => {
+    console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+  }).finally(() => {
+    fs.closeSync(file);
+  });
+  ```
+
+## fs.createRandomAccessFile<sup>20+</sup>
+
+createRandomAccessFile(file: string | File, callback: AsyncCallback&lt;RandomAccessFile&gt;): void
+
+基于文件路径或文件对象，以只读方式创建RandomAccessFile对象，使用callback异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+|  参数名    | 类型     | 必填   | 说明                          |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | 是    | 文件的应用沙箱路径或已打开的File对象。 |
+| callback | AsyncCallback&lt;[RandomAccessFile](#randomaccessfile)&gt; | 是   | 异步创建RandomAccessFile对象之后的回调。                                   |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  fs.createRandomAccessFile(file, (err: BusinessError, randomAccessFile: fs.RandomAccessFile) => {
+    if (err) {
+      console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("randomAccessFile fd: " + randomAccessFile.fd);
+      randomAccessFile.close();
+    }
+    fs.closeSync(file);
+  });
+  ```
+
+## fs.createRandomAccessFile<sup>20+</sup>
+
+createRandomAccessFile(file: string | File, mode: number, callback: AsyncCallback&lt;RandomAccessFile&gt;): void
+
+基于文件路径或文件对象创建RandomAccessFile对象，使用callback异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+|  参数名    | 类型     | 必填   | 说明                          |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | 是    | 文件的应用沙箱路径或已打开的File对象。 |
+|     mode     | number | 是   | 创建文件RandomAccessFile对象的[选项](#openmode)，仅当传入文件沙箱路径时生效，必须指定如下选项中的一个，默认以只读方式创建：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读创建。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写创建。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写创建。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果RandomAccessFile对象存在且对应文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到RandomAccessFile对象末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式创建RandomAccessFile对象。 |
+| callback | AsyncCallback&lt;[RandomAccessFile](#randomaccessfile)&gt; | 是   | 异步创建RandomAccessFile对象之后的回调。                                   |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  fs.createRandomAccessFile(file, fs.OpenMode.READ_ONLY, (err: BusinessError, randomAccessFile: fs.RandomAccessFile) => {
+    if (err) {
+      console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("randomAccessFile fd: " + randomAccessFile.fd);
+      randomAccessFile.close();
+    }
+    fs.closeSync(file);
+  });
+  ```
+
+## fs.createRandomAccessFile<sup>20+</sup>
+
+createRandomAccessFile(file: string | File, mode?: number, options?: RandomAccessFileOptions): Promise&lt;RandomAccessFile&gt;
+
+基于文件路径或文件对象创建RandomAccessFile对象，使用promise异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+|  参数名    | 类型     | 必填   | 说明                          |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | 是    | 文件的应用沙箱路径或已打开的File对象。 |
+|     mode     | number | 否   | 创建文件RandomAccessFile对象的[选项](#openmode)，仅当传入文件沙箱路径时生效，必须指定如下选项中的一个，默认以只读方式创建：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读创建。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写创建。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写创建。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果RandomAccessFile对象存在且对应文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到RandomAccessFile对象末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式创建RandomAccessFile对象。 |
+|options|[RandomAccessFileOptions](#randomaccessfileoptions12)|否|支持如下选项：<br/>- start，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>- end，number类型，表示期望读取结束的位置。可选，默认文件末尾。|
+
+**返回值：**
+
+  | 类型                                | 说明        |
+  | --------------------------------- | --------- |
+  | Promise&lt;[RandomAccessFile](#randomaccessfile)&gt; | Promise对象。返回RandomAccessFile对象的结果。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+let filePath = pathDir + "/test.txt";
+fs.createRandomAccessFile(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE, { start: 10, end: 100 })
+  .then((randomAccessFile: fs.RandomAccessFile) => {
+    console.info("randomAccessFile fd: " + randomAccessFile.fd);
+    randomAccessFile.close();
+  })
+  .catch((err: BusinessError) => {
+    console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+  });
+```
+
+## fs.createRandomAccessFileSync<sup>20+</sup>
+
+createRandomAccessFileSync(file: string | File, mode?: number): RandomAccessFile
+
+基于文件路径或文件对象创建RandomAccessFile对象。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+|  参数名    | 类型     | 必填   | 说明                          |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | 是    | 文件的应用沙箱路径或已打开的File对象。 |
+|     mode     | number | 否   | 创建文件RandomAccessFile对象的[选项](#openmode)，仅当传入文件沙箱路径时生效，必须指定如下选项中的一个，默认以只读方式创建：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读创建。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写创建。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写创建。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果RandomAccessFile对象存在且对应文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到RandomAccessFile对象末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式创建RandomAccessFile对象。 |
+
+**返回值：**
+
+  | 类型                | 说明        |
+  | ------------------ | --------- |
+  | [RandomAccessFile](#randomaccessfile) | 返回RandomAccessFile对象。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  randomAccessFile.close();
+  ```
+
+## fs.createRandomAccessFileSync<sup>20+</sup>
+
+createRandomAccessFileSync(file: string | File, mode?: number,
+  options?: RandomAccessFileOptions): RandomAccessFile
+
+基于文件路径或文件对象创建RandomAccessFile对象。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+|  参数名    | 类型     | 必填   | 说明                          |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | 是    | 文件的应用沙箱路径或已打开的File对象。 |
+|     mode     | number | 否   | 创建文件RandomAccessFile对象的[选项](#openmode)，仅当传入文件沙箱路径时生效，必须指定如下选项中的一个，默认以只读方式创建：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读创建。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写创建。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写创建。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果RandomAccessFile对象存在且对应文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到RandomAccessFile对象末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式创建RandomAccessFile对象。 |
+|options|[RandomAccessFileOptions](#randomaccessfileoptions12)|否|支持如下选项：<br/>- start，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>- end，number类型，表示期望读取结束的位置。可选，默认文件末尾。|
+
+**返回值：**
+
+  | 类型                | 说明        |
+  | ------------------ | --------- |
+  | [RandomAccessFile](#randomaccessfile) | 返回RandomAccessFile对象。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let randomAccessFile = fs.createRandomAccessFileSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE,
+    { start: 10, end: 100 });
+  randomAccessFile.close();
+  ```
+
+## fs.createStream<sup>20+</sup>
+
+createStream(path: string, mode: string): Promise&lt;Stream&gt;
+
+基于文件路径创建文件流，使用promise异步回调。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | 是   | 文件的应用沙箱路径。                                   |
+| mode   | string | 是   | -&nbsp;r：打开只读文件，该文件必须存在。<br/>-&nbsp;r+：打开可读写的文件，该文件必须存在。<br/>-&nbsp;w：打开只写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;w+：打开可读写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;a：以附加的方式打开只写文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾，即文件原先的内容会被保留。<br/>-&nbsp;a+：以附加方式打开可读写的文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾后，即文件原先的内容会被保留。 |
+
+**返回值：**
+
+  | 类型                                | 说明        |
+  | --------------------------------- | --------- |
+  | Promise&lt;[Stream]((#stream20))&gt; | Promise对象。返回文件流的结果。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  fs.createStream(filePath, "a+").then((stream: fs.Stream) => {
+    stream.closeSync();
+    console.info("createStream succeed");
+  }).catch((err: BusinessError) => {
+    console.error("createStream failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## fs.createStream<sup>20+</sup>
+
+createStream(path: string, mode: string, callback: AsyncCallback&lt;Stream&gt;): void
+
+基于文件路径创建文件流，使用callback异步回调。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名   | 类型                                    | 必填 | 说明                                                         |
+| -------- | --------------------------------------- | ---- | ------------------------------------------------------------ |
+| path     | string                                  | 是   | 文件的应用沙箱路径。                                   |
+| mode     | string                                  | 是   | -&nbsp;r：打开只读文件，该文件必须存在。<br/>-&nbsp;r+：打开可读写的文件，该文件必须存在。<br/>-&nbsp;w：打开只写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;w+：打开可读写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;a：以附加的方式打开只写文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾，即文件原先的内容会被保留。<br/>-&nbsp;a+：以附加方式打开可读写的文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾后，即文件原先的内容会被保留。 |
+| callback | AsyncCallback&lt;[Stream]((#stream20))&gt; | 是   | 异步打开文件流之后的回调。                                   |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  fs.createStream(filePath, "r+", (err: BusinessError, stream: fs.Stream) => {
+    if (err) {
+      console.error("create stream failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("createStream succeed");
+    }
+    stream.closeSync();
+  })
+  ```
+
+## fs.createStreamSync<sup>20+</sup>
+
+createStreamSync(path: string, mode: string): Stream
+
+以同步方法基于文件路径创建文件流。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | 是   | 文件的应用沙箱路径。                                   |
+| mode   | string | 是   | -&nbsp;r：打开只读文件，该文件必须存在。<br/>-&nbsp;r+：打开可读写的文件，该文件必须存在。<br/>-&nbsp;w：打开只写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;w+：打开可读写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;a：以附加的方式打开只写文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾，即文件原先的内容会被保留。<br/>-&nbsp;a+：以附加方式打开可读写的文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾后，即文件原先的内容会被保留。 |
+
+**返回值：**
+
+  | 类型                | 说明        |
+  | ------------------ | --------- |
+  | [Stream]((#stream20)) | 返回文件流的结果。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  console.info("createStream succeed");
+  stream.closeSync();
+  ```
+
+## fs.fdopenStream<sup>20+</sup>
+
+fdopenStream(fd: number, mode: string): Promise&lt;Stream&gt;
+
+基于文件描述符打开文件流，使用promise异步回调。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名  | 类型     | 必填   | 说明                                       |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | fd   | number | 是    | 已打开的文件描述符。                             |
+  | mode | string | 是    | -&nbsp;r：打开只读文件，该文件必须存在。<br/>-&nbsp;r+：打开可读写的文件，该文件必须存在。<br/>-&nbsp;w：打开只写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;w+：打开可读写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;a：以附加的方式打开只写文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾，即文件原先的内容会被保留。<br/>-&nbsp;a+：以附加方式打开可读写的文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾后，即文件原先的内容会被保留。 |
+
+**返回值：**
+
+  | 类型                               | 说明        |
+  | --------------------------------- | --------- |
+  | Promise&lt;[Stream]((#stream20))&gt; | Promise对象。返回文件流的结果。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath);
+  fs.fdopenStream(file.fd, "r+").then((stream: fs.Stream) => {
+    console.info("openStream succeed");
+    stream.closeSync();
+  }).catch((err: BusinessError) => {
+    console.error("openStream failed with error message: " + err.message + ", error code: " + err.code);
+    // 文件流打开失败后，文件描述符需要手动关闭
+    fs.closeSync(file);
+  });
+  ```
+
+> **注意：**
+>
+> 使用文件描述符创建的文件流时，文件描述符的生命周期将由文件流对象管理。调用文件流的close()函数后，初始的文件描述符也会被关闭。
+
+## fs.fdopenStream<sup>20+</sup>
+
+fdopenStream(fd: number, mode: string, callback: AsyncCallback&lt;Stream&gt;): void
+
+基于文件描述符打开文件流，使用callback异步回调。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名      | 类型                                       | 必填   | 说明                                       |
+  | -------- | ---------------------------------------- | ---- | ---------------------------------------- |
+  | fd       | number                                   | 是    | 已打开的文件描述符。                             |
+  | mode     | string                                   | 是    | -&nbsp;r：打开只读文件，该文件必须存在。<br/>-&nbsp;r+：打开可读写的文件，该文件必须存在。<br/>-&nbsp;w：打开只写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;w+：打开可读写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;a：以附加的方式打开只写文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾，即文件原先的内容会被保留。<br/>-&nbsp;a+：以附加方式打开可读写的文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾后，即文件原先的内容会被保留。 |
+  | callback | AsyncCallback&lt;[Stream]((#stream20))&gt; | 是    | 异步打开文件流之后的回调。                            |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.READ_ONLY);
+  fs.fdopenStream(file.fd, "r+", (err: BusinessError, stream: fs.Stream) => {
+    if (err) {
+      console.error("fdopen stream failed with error message: " + err.message + ", error code: " + err.code);
+      stream.closeSync();
+    } else {
+      console.info("fdopen stream succeed");
+      // 文件流打开失败后，文件描述符需要手动关闭
+      fs.closeSync(file);
+    }
+  });
+  ```
+
+> **注意：**
+>
+> 使用文件描述符创建的文件流，文件描述符的生命周期也交由文件流对象，在调用文件流的close()函数后，初始的文件描述符也会被关闭。
+
+## fs.fdopenStreamSync<sup>20+</sup>
+
+fdopenStreamSync(fd: number, mode: string): Stream
+
+以同步方法基于文件描述符打开文件流。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名  | 类型     | 必填   | 说明                                       |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | fd   | number | 是    | 已打开的文件描述符。                             |
+  | mode | string | 是    | -&nbsp;r：打开只读文件，该文件必须存在。<br/>-&nbsp;r+：打开可读写的文件，该文件必须存在。<br/>-&nbsp;w：打开只写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;w+：打开可读写文件，若文件存在则文件长度清0，即该文件内容会消失。若文件不存在则建立该文件。<br/>-&nbsp;a：以附加的方式打开只写文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾，即文件原先的内容会被保留。<br/>-&nbsp;a+：以附加方式打开可读写的文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾后，即文件原先的内容会被保留。 |
+
+**返回值：**
+
+  | 类型                | 说明        |
+  | ------------------ | --------- |
+  | [Stream]((#stream20)) | 返回文件流的结果。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.READ_ONLY | fs.OpenMode.CREATE);
+  let stream = fs.fdopenStreamSync(file.fd, "r+");
+  stream.closeSync();
+  ```
+
+> **注意：**
+>
+> 使用文件描述符创建的文件流，文件描述符的生命周期也交由文件流对象，在调用文件流的close()函数后，初始的文件描述符也会被关闭。
+
+## fs.createReadStream<sup>20+</sup>
+
+createReadStream(path: string, options?: ReadStreamOptions ): ReadStream
+
+以同步方法打开文件可读流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名  | 类型     | 必填   | 说明                                       |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | path   | string | 是    | 文件路径。                             |
+  | options | [ReadStreamOptions](#readstreamoptions12) | 否    | 支持如下选项：<br/>- start，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>- end，number类型，表示期望读取结束的位置。可选，默认文件末尾。 |
+
+**返回值：**
+
+  | 类型                | 说明        |
+  | ------------------ | --------- |
+  | [ReadStream](#readstream12) | 文件可读流。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+ // 创建文件可读流
+  const rs = fs.createReadStream(`${pathDir}/read.txt`);
+  // 创建文件可写流
+  const ws = fs.createWriteStream(`${pathDir}/write.txt`);
+  // 暂停模式拷贝文件
+  rs.on('readable', () => {
+    const data = rs.read();
+    if (!data) {
+      return;
+    }
+    ws.write(data);
+  });
+  ```
+
+## fs.createWriteStream<sup>20+</sup>
+
+createWriteStream(path: string, options?: WriteStreamOptions): WriteStream
+
+以同步方法打开文件可写流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名  | 类型     | 必填   | 说明                                       |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | path   | string | 是    | 文件路径。                             |
+  | options | [WriteStreamOptions](#writestreamoptions12) | 否    | 支持如下选项：<br/>- start，number类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>- mode，number 类型，创建文件可写流的[选项](#openmode)，可选，默认以只写方式创建。 |
+
+**返回值：**
+
+  | 类型                | 说明        |
+  | ------------------ | --------- |
+  | [WriteStream](#writestream12) | 文件可写流。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+ // 创建文件可读流
+  const rs = fs.createReadStream(`${pathDir}/read.txt`);
+  // 创建文件可写流
+  const ws = fs.createWriteStream(`${pathDir}/write.txt`);
+  // 暂停模式拷贝文件
+  rs.on('readable', () => {
+    const data = rs.read();
+    if (!data) {
+      return;
+    }
+    ws.write(data);
+  });
+  ```
+
+## AtomicFile<sup>20+</sup>
+AtomicFile是一个用于对文件进行原子读写操作的类。
+
+在写操作时，通过写入临时文件，并在写入成功后将其重命名到原始文件位置来确保写入文件的完整性；而在写入失败时删除临时文件，不修改原始文件内容。
+
+使用者可以自行调用finishWrite或failWrite来完成文件内容的写入或回滚。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+### constructor<sup>20+</sup>
+
+constructor(path: string)
+
+对于给定路径的文件创建一个AtomicFile类。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名  | 类型     | 必填   | 说明                               |
+  | ------ | ------ | ---- | -------------------------------------- |
+  | path   | string | 是    | 文件的沙箱路径。                       |
+
+### getBaseFile<sup>20+</sup>
+
+getBaseFile(): File
+
+通过AtomicFile对象获取文件对象。
+
+文件描述符fd需要由用户调用close方法关闭。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**返回值：**
+
+  | 类型          | 说明            |
+  | ------------- | -------------- |
+  | [File](#file) | 打开的File对象。|
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)和[通用错误码](../errorcodes/errorcode-universal.md#通用错误码)。
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+
+// 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let atomicFile = new fs.AtomicFile(`${pathDir}/write.txt`);
+  let writeSream = atomicFile.startWrite();
+  writeSream.write("xxxxx","utf-8",()=> {
+    atomicFile.finishWrite();
+    let File = atomicFile.getBaseFile();
+    hilog.info(0x0000, 'AtomicFile', 'getBaseFile File.fd is:%{public}d, path:%{public}s, name:%{public}s', File.fd, File.path, File.path);
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed! err :%{public}s', err.message);
+}
+```
+
+### openRead<sup>20+</sup>
+
+openRead(): ReadStream
+
+创建一个读文件流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**返回值：**
+
+  | 类型                | 说明        |
+  | ------------------ | --------- |
+  | [ReadStream](#readstream20) | 文件可读流。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)和[通用错误码](../errorcodes/errorcode-universal.md#通用错误码)。
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+// 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let file = new fs.AtomicFile(`${pathDir}/read.txt`);
+  let writeSream = file.startWrite();
+  writeSream.write("xxxxxx","utf-8",()=> {
+    file.finishWrite();
+    setTimeout(()=>{
+      let readStream = file.openRead();
+      readStream.on('readable', () => {
+        const data = readStream.read();
+        if (!data) {
+          hilog.error(0x0000, 'AtomicFile', 'Read data is null');
+          return;
+        }
+        hilog.info(0x0000, 'AtomicFile', 'Read data is:%{public}s!', data);
+      });
+    },1000);
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed!, err : %{public}s', err.message);
+}
+```
+
+### readFully<sup>20+</sup>
+
+readFully(): ArrayBuffer
+
+读取文件全部内容。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**返回值：**
+
+  | 类型                | 说明        |
+  | ------------------ | --------- |
+  | ArrayBuffer | 文件的全部内容。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)和[通用错误码](../errorcodes/errorcode-universal.md#通用错误码)。
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+import { util, buffer } from '@kit.ArkTS';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+// 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let file = new fs.AtomicFile(`${pathDir}/read.txt`);
+  let writeSream = file.startWrite();
+  writeSream.write("xxxxxxxxxxx","utf-8",()=> {
+    file.finishWrite();
+    setTimeout(()=>{
+      let data = file.readFully();
+      let decoder = util.TextDecoder.create('utf-8');
+      let str = decoder.decodeToString(new Uint8Array(data));
+      hilog.info(0x0000, 'AtomicFile', 'readFully str is :%{public}s!', str);
+    },1000);
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed!, err : %{public}s', err.message);
+}
+```
+
+### startWrite<sup>20+</sup>
+
+startWrite(): WriteStream
+
+对文件开始新的写入操作。将返回一个WriteStream，用于在其中写入新的文件数据。
+
+当文件不存在时新建文件。
+
+在写入文件完成后，写入成功需要调用finishWrite()，写入失败需要调用failWrite()。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**返回值：**
+
+  | 类型                | 说明        |
+  | ------------------ | --------- |
+  | [WriteStream](#writestream20) | 文件可写流。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)和[通用错误码](../errorcodes/errorcode-universal.md#通用错误码)。
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+
+// 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let file = new fs.AtomicFile(`${pathDir}/write.txt`);
+  let writeSream = file.startWrite();
+  hilog.info(0x0000, 'AtomicFile', 'startWrite end');
+  writeSream.write("xxxxxxxx","utf-8",()=> {
+    hilog.info(0x0000, 'AtomicFile', 'write end');
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed! err :%{public}s', err.message);
+}
+```
+
+### finishWrite<sup>20+</sup>
+
+finishWrite(): void
+
+在完成对startWrite返回流的写入操作时调用，表示文件写入成功。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)和[通用错误码](../errorcodes/errorcode-universal.md#通用错误码)。
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+
+// 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let file = new fs.AtomicFile(`${pathDir}/write.txt`);
+  let writeSream = file.startWrite();
+  writeSream.write("xxxxxxxxxxx","utf-8",()=> {
+    file.finishWrite();
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed!, err : %{public}s', err.message);
+}
+```
+
+### failWrite<sup>20+</sup>
+
+failWrite(): void
+
+文件写入失败后调用，将执行文件回滚操作。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)和[通用错误码](../errorcodes/errorcode-universal.md#通用错误码)。
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+import { util, buffer } from '@kit.ArkTS';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+// 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+let file = new fs.AtomicFile(`${pathDir}/write.txt`);
+try {
+  let writeSream = file.startWrite();
+  writeSream.write("xxxxxxxxxxx","utf-8",()=> {
+    hilog.info(0x0000, 'AtomicFile', 'write succeed!');
+  })
+} catch (err) {
+  file.failWrite();
+  hilog.error(0x0000, 'AtomicFile', 'failed!, err : %{public}s', err.message);
+}
+```
+
+### delete<sup>20+</sup>
+
+delete(): void
+
+删除AtomicFile类，会删除原始文件和临时文件。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)和[通用错误码](../errorcodes/errorcode-universal.md#通用错误码)。
+
+**示例：**
+
+<!--code_no_check-->
+```ts
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { util } from '@kit.ArkTS';
+
+// 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let file = new fs.AtomicFile(`${pathDir}/read.txt`);
+  let writeSream = file.startWrite();
+  writeSream.write("xxxxxxxxxxx","utf-8",()=> {
+    file.finishWrite();
+    setTimeout(()=>{
+      let data = file.readFully();
+      let decoder = util.TextDecoder.create('utf-8');
+      let str = decoder.decodeToString(new Uint8Array(data));
+      hilog.info(0x0000, 'AtomicFile', 'readFully str is :%{public}s!', str);
+      file.delete();
+    },1000);
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed!, err : %{public}s', err.message);
+}
+```
+
+## fs.createWatcher<sup>20+</sup>
+
+createWatcher(path: string, events: number, listener: WatchEventListener): Watcher
+
+创建Watcher对象，监听文件或目录变动, ios暂不支持。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名  | 类型     | 必填   | 说明                                       |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | path   | string | 是    | 监听文件或目录的沙箱路径。                             |
+  | events | number | 是    | 监听变动的事件集，多个事件通过或(\|)的方式进行集合。<br/>-&nbsp;0x1: IN_ACCESS， 文件被访问。<br/>-&nbsp;0x2: IN_MODIFY，文件内容被修改。<br/>-&nbsp;0x4: IN_ATTRIB，文件元数据被修改。<br/>-&nbsp;0x8: IN_CLOSE_WRITE，文件在打开时进行了写操作，然后被关闭。<br/>-&nbsp;0x10: IN_CLOSE_NOWRITE，文件或目录在打开时未进行写操作，然后被关闭。<br/>-&nbsp;0x20: IN_OPEN，文件或目录被打开。 <br/>-&nbsp;0x40: IN_MOVED_FROM，监听目录中文件被移动走。<br/>-&nbsp;0x80: IN_MOVED_TO，监听目录中文件被移动过来。<br/>-&nbsp;0x100: IN_CREATE，监听目录中文件或子目录被创建。<br/>-&nbsp;0x200: IN_DELETE，监听目录中文件或子目录被删除。<br/>-&nbsp;0x400: IN_DELETE_SELF，监听的目录被删除，删除后监听停止。<br/>-&nbsp;0x800: IN_MOVE_SELF，监听的文件或目录被移动，移动后监听继续。<br/>-&nbsp;0xfff: IN_ALL_EVENTS，监听以上所有事件。|
+  | listener   | [WatchEventListener](#watcheventlistener20) | 是    | 监听事件发生后的回调。监听事件每发生一次，回调一次。                             |
+
+**返回值：**
+
+  | 类型                | 说明        |
+  | ------------------ | --------- |
+  | [Watcher](#watcher20) | 返回Watcher对象。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+<!--code_no_check-->
+  ```ts
+  import { common } from '@kit.AbilityKit';
+  import { fileIo as fs, WatchEvent } from '@kit.CoreFileKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let pathDir = context.filesDir;
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+  let watcher = fs.createWatcher(filePath, 0x2 | 0x10, (watchEvent: WatchEvent) => {
+    if (watchEvent.event == 0x2) {
+      console.info(watchEvent.fileName + 'was modified');
+    } else if (watchEvent.event == 0x10) {
+      console.info(watchEvent.fileName + 'was closed');
+    }
+  });
+  watcher.start();
+  fs.writeSync(file.fd, 'test');
+  fs.closeSync(file);
+  watcher.stop();
+  ```
+
+## WatchEventListener<sup>20+</sup>
+
+(event: WatchEvent): void
+
+事件监听类，ios暂不支持。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名  | 类型     | 必填   | 说明                                       |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | event   | [WatchEvent](#watchevent10) | 是    | 回调的事件类。                             |
+
+## WatchEvent<sup>20+</sup>
+
+事件类, ios暂不支持。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+### 属性
+
+| 名称   | 类型   | 只读   | 可选   | 说明      |
+| ---- | ------ | ---- | ---- | ------- |
+| fileName | string | 是    | 否    | 发生监听事件对应文件的沙箱路径，该沙箱路径包含文件名称。 |
+| event | number | 是    | 否    | 监听变动的事件集，多个事件通过或(\|)的方式进行集合。<br/>-&nbsp;0x1: IN_ACCESS， 文件被访问。<br/>-&nbsp;0x2: IN_MODIFY，文件内容被修改。<br/>-&nbsp;0x4: IN_ATTRIB，文件元数据被修改。<br/>-&nbsp;0x8: IN_CLOSE_WRITE，文件在打开时进行了写操作，然后被关闭。<br/>-&nbsp;0x10: IN_CLOSE_NOWRITE，文件或目录在打开时未进行写操作，然后被关闭。<br/>-&nbsp;0x20: IN_OPEN，文件或目录被打开。 <br/>-&nbsp;0x40: IN_MOVED_FROM，监听目录中文件被移动走。<br/>-&nbsp;0x80: IN_MOVED_TO，监听目录中文件被移动过来。<br/>-&nbsp;0x100: IN_CREATE，监听目录中文件或子目录被创建。<br/>-&nbsp;0x200: IN_DELETE，监听目录中文件或子目录被删除。<br/>-&nbsp;0x400: IN_DELETE_SELF，监听的目录被删除，删除后监听停止。<br/>-&nbsp;0x800: IN_MOVE_SELF，监听的文件或目录被移动，移动后监听继续。<br/>-&nbsp;0xfff: IN_ALL_EVENTS，监听以上所有事件。 |
+| cookie | number | 是    | 否    | 绑定相关事件的cookie。当前仅支持事件IN_MOVED_FROM与IN_MOVED_TO，同一个文件的移动事件IN_MOVED_FROM和IN_MOVED_TO具有相同的cookie值。 |
+
 ## Stat
 
 文件具体信息，在调用Stat的方法前，需要先通过[stat()](#fsstat)方法（同步或异步）来构建一个Stat实例。
@@ -2923,6 +4110,443 @@ isSymbolicLink(): boolean
   let isSymbolicLink = fs.statSync(filePath).isSymbolicLink(); 
   ```
 
+## Stream<sup>20+</sup>
+
+文件流，在调用Stream的方法前，需要先通过[fs.createStream](#fscreatestream20)方法或者[fs.fdopenStream](#fsfdopenstream20)（同步或异步）来构建一个Stream实例。
+
+### close
+
+close(): Promise&lt;void&gt;
+
+关闭文件流，使用promise异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**返回值：**
+
+  | 类型                  | 说明            |
+  | ------------------- | ------------- |
+  | Promise&lt;void&gt; | Promise对象。无返回值。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.close().then(() => {
+    console.info("close fileStream succeed");
+  }).catch((err: BusinessError) => {
+    console.error("close fileStream  failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+### close
+
+close(callback: AsyncCallback&lt;void&gt;): void
+
+异步关闭文件流，使用callback异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名      | 类型                        | 必填   | 说明            |
+  | -------- | ------------------------- | ---- | ------------- |
+  | callback | AsyncCallback&lt;void&gt; | 是    | 异步关闭文件流之后的回调。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.close((err: BusinessError) => {
+    if (err) {
+      console.error("close stream failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("close stream succeed");
+    }
+  });
+  ```
+
+### closeSync
+
+closeSync(): void
+
+同步关闭文件流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.closeSync();
+  ```
+
+### flush
+
+flush(): Promise&lt;void&gt;
+
+刷新文件流，使用promise异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**返回值：**
+
+  | 类型                  | 说明            |
+  | ------------------- | ------------- |
+  | Promise&lt;void&gt; | Promise对象。返回表示异步刷新文件流的结果。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.flush().then(() => {
+    console.info("flush succeed");
+    stream.close();
+  }).catch((err: BusinessError) => {
+    console.error("flush failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+### flush
+
+flush(callback: AsyncCallback&lt;void&gt;): void
+
+异步刷新文件流，使用callback异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名      | 类型                        | 必填   | 说明             |
+  | -------- | ------------------------- | ---- | -------------- |
+  | callback | AsyncCallback&lt;void&gt; | 是    | 异步刷新文件流后的回调函数。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.flush((err: BusinessError) => {
+    if (err) {
+      console.error("flush stream failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("flush succeed");
+      stream.close();
+    }
+  });
+  ```
+
+### flushSync
+
+flushSync(): void
+
+同步刷新文件流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.flushSync();
+  stream.close();
+  ```
+
+### write
+
+write(buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
+
+将数据写入流文件，使用promise异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名     | 类型                              | 必填   | 说明                                       |
+  | ------- | ------------------------------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer \| string | 是    | 待写入文件的数据，可来自缓冲区或字符串。                     |
+  | options | [WriteOptions](#writeoptions20)                          | 否    | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望写入数据的长度。默认缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。仅支持&nbsp;'utf-8'。|
+
+**返回值：**
+
+  | 类型                    | 说明       |
+  | --------------------- | -------- |
+  | Promise&lt;number&gt; | Promise对象。返回实际写入的长度。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  let writeOption: WriteOptions = {
+    offset: 5,
+    length: 5,
+    encoding: 'utf-8'
+  };
+  stream.write("hello, world", writeOption).then((number: number) => {
+    console.info("write succeed and size is:" + number);
+    stream.close();
+  }).catch((err: BusinessError) => {
+    console.error("write failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+### write
+
+write(buffer: ArrayBuffer | string, options?: WriteOptions, callback: AsyncCallback&lt;number&gt;): void
+
+将数据写入流文件，使用callback异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名   | 类型                            | 必填 | 说明                                                         |
+  | -------- | ------------------------------- | ---- | ------------------------------------------------------------ |
+  | buffer   | ArrayBuffer \| string | 是   | 待写入文件的数据，可来自缓冲区或字符串。                     |
+  | options  | [WriteOptions](#writeoptions20)                          | 否   | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。仅支持&nbsp;'utf-8'。|
+  | callback | AsyncCallback&lt;number&gt;     | 是   | 异步写入完成后执行的回调函数。                               |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  let writeOption: WriteOptions = {
+    offset: 5,
+    length: 5,
+    encoding: 'utf-8'
+  };
+  stream.write("hello, world", writeOption, (err: BusinessError, bytesWritten: number) => {
+    if (err) {
+      console.error("write stream failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      if (bytesWritten) {
+        console.info("write succeed and size is:" + bytesWritten);
+        stream.close();
+      }
+    }
+  });
+  ```
+
+### writeSync
+
+writeSync(buffer: ArrayBuffer | string, options?: WriteOptions): number
+
+以同步方法将数据写入流文件。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名     | 类型                              | 必填   | 说明                                       |
+  | ------- | ------------------------------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer \| string | 是    | 待写入文件的数据，可来自缓冲区或字符串。                     |
+  | options | [WriteOptions](#writeoptions20)                          | 否    | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。仅支持&nbsp;'utf-8'。|
+
+**返回值：**
+
+  | 类型     | 说明       |
+  | ------ | -------- |
+  | number | 实际写入的长度。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath,"r+");
+  let writeOption: WriteOptions = {
+    offset: 5,
+    length: 5,
+    encoding: 'utf-8'
+  };
+  let num = stream.writeSync("hello, world", writeOption);
+  stream.close();
+  ```
+
+### read
+
+read(buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
+
+从流文件读取数据，使用promise异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名     | 类型          | 必填   | 说明                                       |
+  | ------- | ----------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer | 是    | 用于读取文件的缓冲区。                              |
+  | options | [ReadOptions](#readoptions20)      | 否    | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。 |
+
+**返回值：**
+
+  | 类型                                 | 说明     |
+  | ---------------------------------- | ------ |
+  | Promise&lt;number&gt; | Promise对象。返回读取的结果。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { buffer } from '@kit.ArkTS';
+  import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  let arrayBuffer = new ArrayBuffer(4096);
+  let readOption: ReadOptions = {
+    offset: 5,
+    length: 5
+  };
+  stream.read(arrayBuffer, readOption).then((readLen: number) => {
+    console.info("read data succeed");
+    let buf = buffer.from(arrayBuffer, 0, readLen);
+    console.log(`The content of file: ${buf.toString()}`);
+    stream.close();
+  }).catch((err: BusinessError) => {
+    console.error("read data failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+### read
+
+read(buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCallback&lt;number&gt;): void
+
+从流文件读取数据，使用callback异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名      | 类型                                       | 必填   | 说明                                       |
+  | -------- | ---------------------------------------- | ---- | ---------------------------------------- |
+  | buffer   | ArrayBuffer                              | 是    | 用于读取文件的缓冲区。                              |
+  | options  | [ReadOptions](#readoptions20)                                   | 否    | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读取。|
+  | callback | AsyncCallback&lt;number&gt; | 是    | 异步读取完成后的回调。                         |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { buffer } from '@kit.ArkTS';
+  import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  let arrayBuffer = new ArrayBuffer(4096);
+  let readOption: ReadOptions = {
+    offset: 5,
+    length: 5
+  };
+  stream.read(arrayBuffer, readOption, (err: BusinessError, readLen: number) => {
+    if (err) {
+      console.error("read stream failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("read data succeed");
+      let buf = buffer.from(arrayBuffer, 0, readLen);
+      console.log(`The content of file: ${buf.toString()}`);
+      stream.close();
+    }
+  });
+  ```
+
+### readSync
+
+readSync(buffer: ArrayBuffer, options?: ReadOptions): number
+
+以同步方法从流文件读取数据。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名     | 类型          | 必填   | 说明                                       |
+  | ------- | ----------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer | 是    | 用于读取文件的缓冲区。                              |
+  | options | [ReadOptions](#readoptions20)      | 否    | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>  |
+
+**返回值：**
+
+  | 类型     | 说明       |
+  | ------ | -------- |
+  | number | 实际读取的长度。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  let readOption: ReadOptions = {
+    offset: 5,
+    length: 5
+  };
+  let buf = new ArrayBuffer(4096);
+  let num = stream.readSync(buf, readOption);
+  stream.close();
+  ```
+
 ## File
 
 由open接口打开的File对象。
@@ -2934,6 +4558,413 @@ isSymbolicLink(): boolean
 | 名称   | 类型   | 可读   | 可写   | 说明      |
 | ---- | ------ | ---- | ---- | ------- |
 | fd | number | 是    | 否    | 打开的文件描述符。 |
+
+### getParent<sup>20+</sup>
+
+getParent(): string
+
+获取File对象对应文件父目录。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**返回值：**
+
+  | 类型                                 | 说明     |
+  | ---------------------------------- | ------ |
+  | string | 返回父目录路径。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+  console.info('The parent path is: ' + file.getParent());
+  fs.closeSync(file);
+  ```
+
+## RandomAccessFile<sup>20+</sup>
+
+随机读写文件流。在调用RandomAccessFile的方法前，需要先通过createRandomAccessFile()方法（同步或异步）来构建一个RandomAccessFile实例。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+### 属性
+
+| 名称         | 类型   | 只读  | 可选  | 说明              |
+| ----------- | ------ | ----  | ----- | ---------------- |
+| fd          | number | 是    | 否    | 打开的文件描述符。 |
+| filePointer | number | 是    | 否    | RandomAccessFile对象的偏移指针。 |
+
+### setFilePointer<sup>20+</sup>
+
+setFilePointer(filePointer:number): void
+
+设置文件偏移指针。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名     | 类型      | 必填   | 说明         |
+  | ------- | ----------- | ---- | ----------------------------- |
+  | filePointer  | number | 是   | RandomAccessFile对象的偏移指针。  |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let randomAccessFile = fs.createRandomAccessFileSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+  randomAccessFile.setFilePointer(1);
+  randomAccessFile.close();
+  ```
+
+### close<sup>20+</sup>
+
+close(): void
+
+以同步方式关闭RandomAccessFile对象。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let randomAccessFile = fs.createRandomAccessFileSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+  randomAccessFile.close();
+  ```
+
+### write<sup>20+</sup>
+
+write(buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
+
+将数据写入文件，使用promise异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名     | 类型                              | 必填   | 说明                                       |
+  | ------- | ------------------------------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer \| string | 是    | 待写入文件的数据，可来自缓冲区或字符串。                     |
+  | options | [WriteOptions](#writeoptions20)                          | 否    | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望写入数据的长度。默认缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望写入文件位置（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始写。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。仅支持&nbsp;'utf-8'。|
+
+**返回值：**
+
+  | 类型                    | 说明       |
+  | --------------------- | -------- |
+  | Promise&lt;number&gt; | Promise对象。返回实际写入的长度。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  let bufferLength: number = 4096;
+  let writeOption: WriteOptions = {
+    offset: 1,
+    length: 5,
+    encoding: 'utf-8'
+  };
+  let arrayBuffer = new ArrayBuffer(bufferLength);
+  randomAccessFile.write(arrayBuffer, writeOption).then((bytesWritten: number) => {
+    console.info("randomAccessFile bytesWritten: " + bytesWritten);
+  }).catch((err: BusinessError) => {
+    console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+  }).finally(() => {
+    randomAccessFile.close();
+    fs.closeSync(file);
+  });
+
+  ```
+
+### write<sup>20+</sup>
+
+write(buffer: ArrayBuffer | string, options?: WriteOptions, callback: AsyncCallback&lt;number&gt;): void
+
+将数据写入文件，使用callback异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名   | 类型                            | 必填 | 说明                                                         |
+  | -------- | ------------------------------- | ---- | ------------------------------------------------------------ |
+  | buffer   | ArrayBuffer \| string | 是   | 待写入文件的数据，可来自缓冲区或字符串。                     |
+  | options  | [WriteOptions](#writeoptions20)                          | 否   | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望写入数据的长度。可选，默认为缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望写入文件位置（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始写。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。仅支持&nbsp;'utf-8'。|
+  | callback | AsyncCallback&lt;number&gt;     | 是   | 异步写入完成后执行的回调函数。                               |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  let bufferLength: number = 4096;
+  let writeOption: WriteOptions = {
+    offset: 1,
+    length: bufferLength,
+    encoding: 'utf-8'
+  };
+  let arrayBuffer = new ArrayBuffer(bufferLength);
+  randomAccessFile.write(arrayBuffer, writeOption, (err: BusinessError, bytesWritten: number) => {
+    if (err) {
+      console.error("write failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      if (bytesWritten) {
+        console.info("write succeed and size is:" + bytesWritten);
+      }
+    }
+    randomAccessFile.close();
+    fs.closeSync(file);
+  });
+  ```
+
+### writeSync<sup>20+</sup>
+
+writeSync(buffer: ArrayBuffer | string, options?: WriteOptions): number
+
+以同步方法将数据写入文件。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名     | 类型                              | 必填   | 说明                                       |
+  | ------- | ------------------------------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer \| string | 是    | 待写入文件的数据，可来自缓冲区或字符串。                     |
+  | options | [WriteOptions](#writeoptions20)                          | 否    | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望写入文件位置（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始写。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。仅支持&nbsp;'utf-8'。|
+
+**返回值：**
+
+  | 类型     | 说明       |
+  | ------ | -------- |
+  | number | 实际写入的长度。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let randomAccessFile = fs.createRandomAccessFileSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let writeOption: WriteOptions = {
+    offset: 5,
+    length: 5,
+    encoding: 'utf-8'
+  };
+  let bytesWritten = randomAccessFile.writeSync("hello, world", writeOption);
+  randomAccessFile.close();
+  ```
+
+### read<sup>20+</sup>
+
+read(buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
+
+从文件读取数据，使用promise异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名     | 类型          | 必填   | 说明                                       |
+  | ------- | ----------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer | 是    | 用于读取文件的缓冲区。                              |
+  | options | [ReadOptions](#readoptions20)      | 否    | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认为缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望读取文件位置（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始读。 |
+
+**返回值：**
+
+  | 类型                                 | 说明     |
+  | ---------------------------------- | ------ |
+  | Promise&lt;number&gt; | Promise对象。返回读取的结果。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  let bufferLength: number = 4096;
+  let readOption: ReadOptions = {
+    offset: 1,
+    length: 5
+  };
+  let arrayBuffer = new ArrayBuffer(bufferLength);
+  randomAccessFile.read(arrayBuffer, readOption).then((readLength: number) => {
+    console.info("randomAccessFile readLength: " + readLength);
+  }).catch((err: BusinessError) => {
+    console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+  }).finally(() => {
+    randomAccessFile.close();
+    fs.closeSync(file);
+  });
+  ```
+
+### read<sup>20+</sup>
+
+read(buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCallback&lt;number&gt;): void
+
+从文件读取数据，使用callback异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名      | 类型                                       | 必填   | 说明                                       |
+  | -------- | ---------------------------------------- | ---- | ---------------------------------------- |
+  | buffer   | ArrayBuffer                              | 是    | 用于读取文件的缓冲区。                              |
+  | options  | [ReadOptions](#readoptions20)                                   | 否    | 支持如下选项：<br/>-&nbsp;length，number类型，表示读取数据的长度。可选，默认为缓冲区长度。<br/>-&nbsp;offset，number类型，表示读取文件位置（基于当前filePointer加上offset的位置）。可选，默认从filePointer开始读。 |
+  | callback | AsyncCallback&lt;number&gt; | 是    | 异步读取完成后的回调。                         |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  let length: number = 20;
+  let readOption: ReadOptions = {
+    offset: 1,
+    length: 5
+  };
+  let arrayBuffer = new ArrayBuffer(length);
+  randomAccessFile.read(arrayBuffer, readOption, (err: BusinessError, readLength: number) => {
+    if (err) {
+      console.error("read failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      if (readLength) {
+        console.info("read succeed and size is:" + readLength);
+      }
+    }
+    randomAccessFile.close();
+    fs.closeSync(file);
+  });
+  ```
+
+### readSync<sup>20+</sup>
+
+readSync(buffer: ArrayBuffer, options?: ReadOptions): number
+
+以同步方法从文件读取数据。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名     | 类型          | 必填   | 说明                                       |
+  | ------- | ----------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer | 是    | 用于读取文件的缓冲区。                              |
+  | options | [ReadOptions](#readoptions20)      | 否    | 支持如下选项：<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;offset，number类型，表示期望读取文件位置（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始读。<br/>  |
+
+**返回值：**
+
+  | 类型     | 说明       |
+  | ------ | -------- |
+  | number | 实际读取的长度。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  let length: number = 4096;
+  let arrayBuffer = new ArrayBuffer(length);
+  let readLength = randomAccessFile.readSync(arrayBuffer);
+  randomAccessFile.close();
+  fs.closeSync(file);
+  ```
+
+## Watcher<sup>20+</sup>
+
+文件目录变化监听对象。由createWatcher接口获得,ios暂不支持。
+
+### start<sup>20+</sup>
+
+start(): void
+
+开启监听。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let watcher = fs.createWatcher(filePath, 0xfff, () => {});
+  watcher.start();
+  watcher.stop();
+  ```
+
+### stop<sup>20+</sup>
+
+stop(): void
+
+停止监听并移除Watcher对象。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let watcher = fs.createWatcher(filePath, 0xfff, () => {});
+  watcher.start();
+  watcher.stop();
+  ```
 
 ## OpenMode
 
@@ -2990,6 +5021,18 @@ open接口flags参数常量。文件打开标签。
 | ----------- | --------------- | ------------------ |
 | encoding | string     | 文件编码方式。可选项。           |
 
+## WhenceType<sup>20+</sup>
+
+枚举，文件偏移指针相对偏移位置类型，支持lseek接口使用。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 值       | 说明                |
+| ----------- | --------------- | ------------------ |
+| SEEK_SET | 0     | 文件起始位置处。           |
+| SEEK_CUR    | 1     | 当前文件偏移指针位置处。 |
+| SEEK_END    | 2     | 文件末尾位置处。 |
+
 ## AccessModeType<sup>20+</sup>
 
 枚举，表示需要校验的具体权限。若不填，默认校验文件是否存在。
@@ -3037,3 +5080,171 @@ open接口flags参数常量。文件打开标签。
 | length | number     | 否 | 期望写入数据的长度，单位为字节。可选，默认缓冲区长度。 |
 |  offset    | number     | 否 | 期望写入文件位置，单位为字节（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始写。 |
 | encoding    | string | 否 | 当数据是string类型时有效，表示数据的编码方式。默认 'utf-8'。仅支持 'utf-8'。       |
+
+## ReadStream<sup>20+</sup>
+
+文件可读流，需要先通过[fs.createReadStream](#fscreatereadstream20)方法来构建一个ReadStream实例。ReadStream继承自数据流基类[stream](../apis-arkts/js-apis-stream.md#readable)。
+
+**规格**：ReadStream读到的数据为解码后的字符串，其编码格式当前仅支持'utf-8'。
+
+### 属性
+
+| 名称     | 类型   | 只读   | 可选   | 说明                                       |
+| ------ | ------ | ---- | ---- | ---------------------------------------- |
+| bytesRead    | number | 是    | 否    | 可读流已经读取的字节数。 |
+| path    | string | 是    | 否    | 当前可读流对应的文件路径。 |
+
+### Seek
+
+seek(offset: number, whence?: WhenceType): number
+
+
+调整可读流偏移指针位置。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | offset | number | 是    | 相对偏移位置，单位为字节。 |
+  | whence | [WhenceType](#whencetype20) | 否    | 偏移指针相对位置类型。默认值：SEEK_SET，文件起始位置处。 |
+
+**返回值：**
+
+  | 类型                   | 说明         |
+  | --------------------- | ---------- |
+  | number | 当前可读流偏移指针位置（相对于文件头的偏移量，单位为字节）。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  const filePath = pathDir + "/test.txt";
+  const rs = fs.createReadStream(filePath);
+  const curOff = rs.seek(5, fs.WhenceType.SEEK_SET);
+  console.info(`current offset is ${curOff}`);
+  rs.close();
+  ```
+
+### close
+
+close(): void
+
+关闭可读流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  const filePath = pathDir + "/test.txt";
+  const rs = fs.createReadStream(filePath);
+  rs.close();
+  ```
+
+## WriteStream<sup>20+</sup>
+
+文件可写流，需要先通过[fs.createWriteStream](#fscreatewritestream20)方法来构建一个WriteStream实例。WriteStream继承自数据流基类[stream](../apis-arkts/js-apis-stream.md#writable)。
+
+### 属性
+
+| 名称     | 类型   | 只读   | 可选   | 说明                                       |
+| ------ | ------ | ---- | ---- | ---------------------------------------- |
+| bytesWritten    | number | 是    | 否    | 可写流已经写入的字节数。 |
+| path    | string | 是    | 否    | 当前可写流对应的文件路径。 |
+
+### Seek
+
+seek(offset: number, whence?: WhenceType): number;
+
+调整可写流的偏移指针位置。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | offset | number | 是    | 相对偏移位置，单位为字节。 |
+  | whence | [WhenceType](#whencetype20) | 否    | 偏移指针相对位置类型。默认值：SEEK_SET，文件起始位置处。 |
+
+**返回值：**
+
+  | 类型                   | 说明         |
+  | --------------------- | ---------- |
+  | number | 当前可写流偏移指针位置（相对于文件头的偏移量，单位为字节）。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  const filePath = pathDir + "/test.txt";
+  const ws = fs.createWriteStream(filePath);
+  const curOff = ws.seek(5, fs.WhenceType.SEEK_SET);
+  console.info(`current offset is ${curOff}`);
+  ws.close();
+  ```
+
+### close
+
+close(): void
+
+关闭可写流。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  const filePath = pathDir + "/test.txt";
+  const ws = fs.createWriteStream(filePath);
+  ws.close();
+  ```
+
+## RandomAccessFileOptions<sup>20+</sup>
+
+可选项类型，支持 createRandomAccessFile 接口使用。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 类型       | 必选       |  说明                |
+| ----------- | --------------- | ------------------ | ------------------ |
+| start   | number     | 否 | 表示期望读取文件的位置，单位为字节。可选，默认从当前位置开始读。           |
+| end     | number     | 否 |  表示期望读取结束的位置，单位为字节。可选，默认文件末尾。 |
+
+## ReadStreamOptions<sup>20+</sup>
+
+可选项类型，支持 createReadStream 接口使用。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 类型       | 必选       |  说明                |
+| ----------- | --------------- | ------------------ | ------------------ |
+| start   | number     | 否 | 表示期望读取文件的位置，单位为字节。可选，默认从当前位置开始读。           |
+| end     | number     | 否 |  表示期望读取结束的位置，单位为字节。可选，默认文件末尾。 |
+
+## WriteStreamOptions<sup>20+</sup>
+
+可选项类型，支持 createWriteStream 接口使用。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 类型       | 必选       |  说明                |
+| ----------- | --------------- | ------------------ | ------------------ |
+| start   | number     | 否 | 表示期望写入文件的位置，单位为字节。可选，默认文件起始位置。           |
+| mode     | number     | 否 | 创建文件可写流的[选项](#openmode)，必须指定如下选项中的一个，默认只写方式创建：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果文件存在且文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到文件末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式打开文件。 |

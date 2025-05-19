@@ -681,7 +681,7 @@ Sets an extended attribute of a file or directory.
 
 **Error codes**
 
-For details about the error codes, see [Basic File IO Error Codes](errorcode-filemanagement.md#basic-file-io-error-codes).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
@@ -724,7 +724,7 @@ Obtains an extended attribute of a file or directory.
 
 **Error codes**
 
-For details about the error codes, see [Basic File IO Error Codes](errorcode-filemanagement.md#basic-file-io-error-codes).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
@@ -964,7 +964,7 @@ Creates a directory. This API returns the result synchronously. The value **true
 
 **Error codes**
 
-For details about the error codes, see [Basic File IO Error Codes](errorcode-filemanagement.md#basic-file-io-error-codes).
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
 
 **Example**
 
@@ -1596,6 +1596,183 @@ Synchronously truncates a file.
   fs.truncateSync(filePath, len);
   ```
 
+## fs.readLines<sup>20+</sup>
+
+readLines(filePath: string, options?: Options): Promise&lt;ReaderIterator&gt;
+
+Reads the text content of a file line by line. This API uses a promise to return the result. Only the files in UTF-8 format are supported.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name  | Type  | Mandatory| Description                                                        |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| filePath | string | Yes  | Application sandbox path of the file.                                  |
+| options | [Options](#options20) | No  | Options for reading the text. The options are as follows:<br>- **encoding** (string): format of the data to be encoded.<br>It is valid only when the data is of the string type.<br>The default value is **'utf-8'**, which is the only value supported.|
+
+**Return value**
+
+  | Type                   | Description        |
+  | --------------------- | ---------- |
+  | Promise&lt;[ReaderIterator](#readeriterator20)&gt; | Promise used to return a **ReaderIterator** object.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, Options } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let options: Options = {
+    encoding: 'utf-8'
+  };
+  fs.readLines(filePath, options).then((readerIterator: fs.ReaderIterator) => {
+    for (let it = readerIterator.next(); !it.done; it = readerIterator.next()) {
+      console.info("content: " + it.value);
+    }
+  }).catch((err: BusinessError) => {
+    console.error("readLines failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## fs.readLines<sup>20+</sup>
+
+readLines(filePath: string, options?: Options, callback: AsyncCallback&lt;ReaderIterator&gt;): void
+
+Reads a file text line by line. This API uses an asynchronous callback to return the result. Only the files in UTF-8 format are supported.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name  | Type  | Mandatory| Description                                                        |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| filePath | string | Yes  | Application sandbox path of the file.                                  |
+| options | [Options](#options20) | No  | Options for reading the text. The options are as follows:<br>- **encoding** (string): format of the data to be encoded.<br>It is valid only when the data is of the string type.<br>The default value is **'utf-8'**, which is the only value supported.|
+| callback | AsyncCallback&lt;[ReaderIterator](#readeriterator20)&gt; | Yes  | Callback used to return a **ReaderIterator** object.                                  |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, Options } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let options: Options = {
+    encoding: 'utf-8'
+  };
+  fs.readLines(filePath, options, (err: BusinessError, readerIterator: fs.ReaderIterator) => {
+    if (err) {
+      console.error("readLines failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      for (let it = readerIterator.next(); !it.done; it = readerIterator.next()) {
+        console.info("content: " + it.value);
+      }
+    }
+  });
+  ```
+
+## fs.readLinesSync<sup>20+</sup>
+
+readLinesSync(filePath: string, options?: Options): ReaderIterator
+
+Reads the text content of a file line by line. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name  | Type  | Mandatory| Description                                                        |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| filePath | string | Yes  | Application sandbox path of the file.                                  |
+| options | [Options](#options20) | No  | Options for reading the text. The options are as follows:<br>- **encoding** (string): format of the data to be encoded.<br>It is valid only when the data is of the string type.<br>The default value is **'utf-8'**, which is the only value supported.|
+
+**Return value**
+
+  | Type                   | Description        |
+  | --------------------- | ---------- |
+  | [ReaderIterator](#readeriterator20) | **ReaderIterator** object.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { fileIo as fs, Options } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let options: Options = {
+    encoding: 'utf-8'
+  };
+  let readerIterator = fs.readLinesSync(filePath, options);
+  for (let it = readerIterator.next(); !it.done; it = readerIterator.next()) {
+    console.info("content: " + it.value);
+  }
+  ```
+
+## ReaderIterator<sup>20+</sup>
+
+Provides a **ReaderIterator** object. Before calling APIs of **ReaderIterator**, you need to use **readLines()** to create a **ReaderIterator** instance.
+
+### next<sup>20+</sup>
+
+next(): ReaderIteratorResult
+
+Obtains the **ReaderIterator** result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Return value**
+
+  | Type                   | Description        |
+  | --------------------- | ---------- |
+  | [ReaderIteratorResult](#readeriteratorresult20) | **ReaderIteratorResult** object obtained.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+> **NOTE**
+>
+> If the line read by ReaderIterator is not in UTF-8 format, error code 13900037 will be returned.
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, Options } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let options: Options = {
+    encoding: 'utf-8'
+  };
+  fs.readLines(filePath, options).then((readerIterator: fs.ReaderIterator) => {
+    for (let it = readerIterator.next(); !it.done; it = readerIterator.next()) {
+      console.info("content: " + it.value);
+    }
+  }).catch((err: BusinessError) => {
+    console.error("readLines failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## ReaderIteratorResult<sup>20+</sup>
+
+Represents the information obtained by the **ReaderIterator** object.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Type      | Description               |
+| ----------- | --------------- | ------------------ |
+| done | boolean     |  Whether the iteration is complete. The value **true** means the iteration is complete; the value **false** means the opposite.         |
+| value    | string     | File text content read line by line.|
+
 ## fs.readText
 
 readText(filePath: string, options?: ReadTextOptions): Promise&lt;string&gt;
@@ -1982,7 +2159,6 @@ Flushes data of a file to disk. This API uses an asynchronous callback to return
   });
   ```
 
-
 ## fs.fsyncSync
 
 fsyncSync(fd: number): void
@@ -2274,6 +2450,41 @@ Lists all files in a folder synchronously. This API supports recursive listing o
   for (let i = 0; i < filenames.length; i++) {
     console.info("filename: %s", filenames[i]);
   }
+  ```
+
+## fs.lseek<sup>20+</sup>
+
+lseek(fd: number, offset: number, whence?: WhenceType): number
+
+Adjusts the position of the file offset pointer.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | fd | number | Yes   | FD of the file.|
+  | offset | number | Yes   | Relative offset, in bytes.|
+  | whence | [WhenceType](#whencetype20) | No   | Where to start the offset. If this parameter is not specified, the file start position is used by default.|
+
+**Return value**
+
+  | Type                  | Description        |
+  | --------------------- | ---------- |
+  | number | Position of the current offset as measured from the beginning of the file, in bytes.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  console.info('The current offset is at ' + fs.lseek(file.fd, 5, fs.WhenceType.SEEK_SET));
+  fs.closeSync(file);
   ```
 
 ## fs.moveDir<sup>20+</sup>
@@ -2657,6 +2868,981 @@ Synchronously creates a temporary directory.
   let res = fs.mkdtempSync(pathDir + "/XXXXXX");
   ```  
 
+## fs.utimes<sup>20+</sup>
+
+utimes(path: string, mtime: number): void
+
+Updates the latest access timestamp of a file.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+|    Name   | Type    | Mandatory  | Description                         |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+| path  | string  |  Yes   | Application sandbox path of the file.|
+| mtime  | number  |  Yes  | New timestamp. The value is the number of milliseconds elapsed since the Epoch time (00:00:00 UTC on January 1, 1970). Only the last access time of a file can be modified.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  fs.writeSync(file.fd, 'test data');
+  fs.closeSync(file);
+  fs.utimes(filePath, new Date().getTime());
+  ```
+
+## fs.createRandomAccessFile<sup>20+</sup>
+
+createRandomAccessFile(file: string | File, mode?: number): Promise&lt;RandomAccessFile&gt;
+
+Creates a **RandomAccessFile** instance based on the specified file path or file object. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+|    Name   | Type    | Mandatory  | Description                         |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | Yes   | Application sandbox path of the file or an opened file object.|
+|     mode     | number | No  | [Mode](#openmode) for creating the **RandomAccessFile** instance. This parameter is valid only when the application sandbox path of the file is passed in. One of the following options must be specified:<br>- **OpenMode.READ_ONLY(0o0)**: Create the file in read-only mode. This is the default value.<br>- **OpenMode.WRITE_ONLY(0o1)**: Create the file in write-only mode.<br>- **OpenMode.READ_WRITE(0o2)**: Create the file in read/write mode.<br>You can also specify the following options, separated by a bitwise OR operator (&#124;). By default, no additional options are given.<br>- **OpenMode.CREATE(0o100)**: If the file does not exist, create it.<br>- **OpenMode.TRUNC(0o1000)**: If the **RandomAccessFile** object already exists and is created in write mode, truncate the file length to 0.<br>- **OpenMode.APPEND(0o2000)**: Create the file in append mode. New data will be added to the end of the **RandomAccessFile** object. <br>- **OpenMode.NONBLOCK(0o4000)**: If **path** points to a named pipe (also known as a FIFO), block special file, or character special file, perform non-blocking operations on the created file and in subsequent I/Os.<br>- **OpenMode.DIR(0o200000)**: If **path** does not point to a directory, throw an exception. The write permission is not allowed.<br>- **OpenMode.NOFOLLOW(0o400000)**: If **path** points to a symbolic link, throw an exception.<br>- **OpenMode.SYNC(0o4010000)**: Create a **RandomAccessFile** instance in synchronous I/O mode.|
+
+**Return value**
+
+  | Type                               | Description       |
+  | --------------------------------- | --------- |
+  | Promise&lt;[RandomAccessFile](#randomaccessfile20)&gt; | Promise used to return the **RandomAccessFile** instance created.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  fs.createRandomAccessFile(file).then((randomAccessFile: fs.RandomAccessFile) => {
+    console.info("randomAccessFile fd: " + randomAccessFile.fd);
+    randomAccessFile.close();
+  }).catch((err: BusinessError) => {
+    console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+  }).finally(() => {
+    fs.closeSync(file);
+  });
+  ```
+
+## fs.createRandomAccessFile<sup>20+</sup>
+
+createRandomAccessFile(file: string | File, callback: AsyncCallback&lt;RandomAccessFile&gt;): void
+
+Creates a **RandomAccessFile** object in read-only mode based on a file path or file object. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+|  Name   | Type    | Mandatory  | Description                         |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | Yes   | Application sandbox path of the file or an opened file object.|
+| callback | AsyncCallback&lt;[RandomAccessFile](#randomaccessfile20)&gt; | Yes  | Callback used to return the **RandomAccessFile** instance created.                                  |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  fs.createRandomAccessFile(file, (err: BusinessError, randomAccessFile: fs.RandomAccessFile) => {
+    if (err) {
+      console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("randomAccessFile fd: " + randomAccessFile.fd);
+      randomAccessFile.close();
+    }
+    fs.closeSync(file);
+  });
+  ```
+
+## fs.createRandomAccessFile<sup>20+</sup>
+
+createRandomAccessFile(file: string | File, mode: number, callback: AsyncCallback&lt;RandomAccessFile&gt;): void
+
+Creates a **RandomAccessFile** instance based on a file path or file object. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+|  Name   | Type    | Mandatory  | Description                         |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | Yes   | Application sandbox path of the file or an opened file object.|
+|     mode     | number | Yes  | [Mode](#openmode) for creating the **RandomAccessFile** instance. This parameter is valid only when the application sandbox path of the file is passed in. One of the following options must be specified:<br>- **OpenMode.READ_ONLY(0o0)**: Create the file in read-only mode. This is the default value.<br>- **OpenMode.WRITE_ONLY(0o1)**: Create the file in write-only mode.<br>- **OpenMode.READ_WRITE(0o2)**: Create the file in read/write mode.<br>You can also specify the following options, separated by a bitwise OR operator (&#124;). By default, no additional options are given.<br>- **OpenMode.CREATE(0o100)**: If the file does not exist, create it.<br>- **OpenMode.TRUNC(0o1000)**: If the **RandomAccessFile** object already exists and is created in write mode, truncate the file length to 0.<br>- **OpenMode.APPEND(0o2000)**: Create the file in append mode. New data will be added to the end of the **RandomAccessFile** object. <br>- **OpenMode.NONBLOCK(0o4000)**: If **path** points to a named pipe (also known as a FIFO), block special file, or character special file, perform non-blocking operations on the created file and in subsequent I/Os.<br>- **OpenMode.DIR(0o200000)**: If **path** does not point to a directory, throw an exception. The write permission is not allowed.<br>- **OpenMode.NOFOLLOW(0o400000)**: If **path** points to a symbolic link, throw an exception.<br>- **OpenMode.SYNC(0o4010000)**: Create a **RandomAccessFile** instance in synchronous I/O mode.|
+| callback | AsyncCallback&lt;[RandomAccessFile](#randomaccessfile20)&gt; | Yes  | Callback used to return the **RandomAccessFile** instance created.                                  |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  fs.createRandomAccessFile(file, fs.OpenMode.READ_ONLY, (err: BusinessError, randomAccessFile: fs.RandomAccessFile) => {
+    if (err) {
+      console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("randomAccessFile fd: " + randomAccessFile.fd);
+      randomAccessFile.close();
+    }
+    fs.closeSync(file);
+  });
+  ```
+
+## fs.createRandomAccessFile<sup>20+</sup>
+
+createRandomAccessFile(file: string | File, mode?: number, options?: RandomAccessFileOptions): Promise&lt;RandomAccessFile&gt;
+
+Creates a **RandomAccessFile** instance based on the specified file path or file object. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+|  Name   | Type    | Mandatory  | Description                         |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | Yes   | Application sandbox path of the file or an opened file object.|
+|     mode     | number | No  | [Mode](#openmode) for creating the **RandomAccessFile** instance. This parameter is valid only when the application sandbox path of the file is passed in. One of the following options must be specified:<br>- **OpenMode.READ_ONLY(0o0)**: Create the file in read-only mode. This is the default value.<br>- **OpenMode.WRITE_ONLY(0o1)**: Create the file in write-only mode.<br>- **OpenMode.READ_WRITE(0o2)**: Create the file in read/write mode.<br>You can also specify the following options, separated by a bitwise OR operator (&#124;). By default, no additional options are given.<br>- **OpenMode.CREATE(0o100)**: If the file does not exist, create it.<br>- **OpenMode.TRUNC(0o1000)**: If the **RandomAccessFile** object already exists and is created in write mode, truncate the file length to 0.<br>- **OpenMode.APPEND(0o2000)**: Create the file in append mode. New data will be added to the end of the **RandomAccessFile** object. <br>- **OpenMode.NONBLOCK(0o4000)**: If **path** points to a named pipe (also known as a FIFO), block special file, or character special file, perform non-blocking operations on the created file and in subsequent I/Os.<br>- **OpenMode.DIR(0o200000)**: If **path** does not point to a directory, throw an exception. The write permission is not allowed.<br>- **OpenMode.NOFOLLOW(0o400000)**: If **path** points to a symbolic link, throw an exception.<br>- **OpenMode.SYNC(0o4010000)**: Create a **RandomAccessFile** instance in synchronous I/O mode.|
+|options|[RandomAccessFileOptions](#randomaccessfileoptions20)|No|The options are as follows:<br>- **start** (number): start position of the data to read in the file. This parameter is optional. By default, data is read from the current position.<br>- **end** (number): end position of the data to read in the file. This parameter is optional. The default value is the end of the file.|
+
+**Return value**
+
+  | Type                               | Description       |
+  | --------------------------------- | --------- |
+  | Promise&lt;[RandomAccessFile](#randomaccessfile20)&gt; | Promise used to return the **RandomAccessFile** instance created.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+let filePath = pathDir + "/test.txt";
+fs.createRandomAccessFile(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE, { start: 10, end: 100 })
+  .then((randomAccessFile: fs.RandomAccessFile) => {
+    console.info("randomAccessFile fd: " + randomAccessFile.fd);
+    randomAccessFile.close();
+  })
+  .catch((err: BusinessError) => {
+    console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+  });
+```
+
+## fs.createRandomAccessFileSync<sup>20+</sup>
+
+createRandomAccessFileSync(file: string | File, mode?: number): RandomAccessFile
+
+Creates a **RandomAccessFile** instance based on a file path or file object.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+|  Name   | Type    | Mandatory  | Description                         |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | Yes   | Application sandbox path of the file or an opened file object.|
+|     mode     | number | No  | [Mode](#openmode) for creating the **RandomAccessFile** instance. This parameter is valid only when the application sandbox path of the file is passed in. One of the following options must be specified:<br>- **OpenMode.READ_ONLY(0o0)**: Create the file in read-only mode. This is the default value.<br>- **OpenMode.WRITE_ONLY(0o1)**: Create the file in write-only mode.<br>- **OpenMode.READ_WRITE(0o2)**: Create the file in read/write mode.<br>You can also specify the following options, separated by a bitwise OR operator (&#124;). By default, no additional options are given.<br>- **OpenMode.CREATE(0o100)**: If the file does not exist, create it.<br>- **OpenMode.TRUNC(0o1000)**: If the **RandomAccessFile** object already exists and is created in write mode, truncate the file length to 0.<br>- **OpenMode.APPEND(0o2000)**: Create the file in append mode. New data will be added to the end of the **RandomAccessFile** object. <br>- **OpenMode.NONBLOCK(0o4000)**: If **path** points to a named pipe (also known as a FIFO), block special file, or character special file, perform non-blocking operations on the created file and in subsequent I/Os.<br>- **OpenMode.DIR(0o200000)**: If **path** does not point to a directory, throw an exception. The write permission is not allowed.<br>- **OpenMode.NOFOLLOW(0o400000)**: If **path** points to a symbolic link, throw an exception.<br>- **OpenMode.SYNC(0o4010000)**: Create a **RandomAccessFile** instance in synchronous I/O mode.|
+
+**Return value**
+
+  | Type               | Description       |
+  | ------------------ | --------- |
+  | [RandomAccessFile](#randomaccessfile20) | **RandomAccessFile** instance created.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  randomAccessFile.close();
+  ```
+
+## fs.createRandomAccessFileSync<sup>20+</sup>
+
+createRandomAccessFileSync(file: string | File, mode?: number,
+  options?: RandomAccessFileOptions): RandomAccessFile
+
+Creates a **RandomAccessFile** instance based on a file path or file object.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+|  Name   | Type    | Mandatory  | Description                         |
+| ------------ | ------ | ------ | ------------------------------------------------------------ |
+|     file     | string \| [File](#file) | Yes   | Application sandbox path of the file or an opened file object.|
+|     mode     | number | No  | [Mode](#openmode) for creating the **RandomAccessFile** instance. This parameter is valid only when the application sandbox path of the file is passed in. One of the following options must be specified:<br>- **OpenMode.READ_ONLY(0o0)**: Create the file in read-only mode. This is the default value.<br>- **OpenMode.WRITE_ONLY(0o1)**: Create the file in write-only mode.<br>- **OpenMode.READ_WRITE(0o2)**: Create the file in read/write mode.<br>You can also specify the following options, separated by a bitwise OR operator (&#124;). By default, no additional options are given.<br>- **OpenMode.CREATE(0o100)**: If the file does not exist, create it.<br>- **OpenMode.TRUNC(0o1000)**: If the **RandomAccessFile** object already exists and is created in write mode, truncate the file length to 0.<br>- **OpenMode.APPEND(0o2000)**: Create the file in append mode. New data will be added to the end of the **RandomAccessFile** object. <br>- **OpenMode.NONBLOCK(0o4000)**: If **path** points to a named pipe (also known as a FIFO), block special file, or character special file, perform non-blocking operations on the created file and in subsequent I/Os.<br>- **OpenMode.DIR(0o200000)**: If **path** does not point to a directory, throw an exception. The write permission is not allowed.<br>- **OpenMode.NOFOLLOW(0o400000)**: If **path** points to a symbolic link, throw an exception.<br>- **OpenMode.SYNC(0o4010000)**: Create a **RandomAccessFile** instance in synchronous I/O mode.|
+|options|[RandomAccessFileOptions](#randomaccessfileoptions20)|No|The options are as follows:<br>- **start** (number): start position of the data to read in the file. This parameter is optional. By default, data is read from the current position.<br>- **end** (number): end position of the data to read in the file. This parameter is optional. The default value is the end of the file.|
+
+**Return value**
+
+  | Type               | Description       |
+  | ------------------ | --------- |
+  | [RandomAccessFile](#randomaccessfile20) | **RandomAccessFile** instance created.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let randomAccessFile = fs.createRandomAccessFileSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE,
+    { start: 10, end: 100 });
+  randomAccessFile.close();
+  ```
+
+## fs.createStream<sup>20+</sup>
+
+createStream(path: string, mode: string): Promise&lt;Stream&gt;
+
+Creates a stream based on a file path. This API uses a promise to return the result. To close the stream, use **close()** of [Stream20](#stream).
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description                                                        |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | Yes  | Application sandbox path of the file.                                  |
+| mode   | string | Yes  | - **r**: Open a file for reading. The file must exist.<br>- **r+**: Open a file for both reading and writing. The file must exist.<br>- **w**: Open a file for writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **w+**: Open a file for both reading and writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **a**: Open a file in append mode for writing at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).<br>- **a+**: Open a file in append mode for reading or updating at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).|
+
+**Return value**
+
+  | Type                               | Description       |
+  | --------------------------------- | --------- |
+  | Promise&lt;[Stream](#stream20)&gt; | Promise used to return the stream opened.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  fs.createStream(filePath, "a+").then((stream: fs.Stream) => {
+    stream.closeSync();
+    console.info("Stream created");
+  }).catch((err: BusinessError) => {
+    console.error("createStream failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## fs.createStream<sup>20+</sup>
+
+createStream(path: string, mode: string, callback: AsyncCallback&lt;Stream&gt;): void
+
+Creates a stream based on a file path. This API uses an asynchronous callback to return the result. To close the stream, use **close()** of [Stream](#stream20).
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name  | Type                                   | Mandatory| Description                                                        |
+| -------- | --------------------------------------- | ---- | ------------------------------------------------------------ |
+| path     | string                                  | Yes  | Application sandbox path of the file.                                  |
+| mode     | string                                  | Yes  | - **r**: Open a file for reading. The file must exist.<br>- **r+**: Open a file for both reading and writing. The file must exist.<br>- **w**: Open a file for writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **w+**: Open a file for both reading and writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **a**: Open a file in append mode for writing at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).<br>- **a+**: Open a file in append mode for reading or updating at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).|
+| callback | AsyncCallback&lt;[Stream](#stream20)&gt; | Yes  | Callback used to return the result.                                  |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  fs.createStream(filePath, "r+", (err: BusinessError, stream: fs.Stream) => {
+    if (err) {
+      console.error("create stream failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("Stream created");
+    }
+    stream.closeSync();
+  })
+  ```
+
+## fs.createStreamSync<sup>20+</sup>
+
+createStreamSync(path: string, mode: string): Stream
+
+Creates a stream based on a file path. This API returns the result synchronously. To close the stream, use **close()** of [Stream20](#stream).
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+| Name| Type  | Mandatory| Description                                                        |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | Yes  | Application sandbox path of the file.                                  |
+| mode   | string | Yes  | - **r**: Open a file for reading. The file must exist.<br>- **r+**: Open a file for both reading and writing. The file must exist.<br>- **w**: Open a file for writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **w+**: Open a file for both reading and writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **a**: Open a file in append mode for writing at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).<br>- **a+**: Open a file in append mode for reading or updating at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).|
+
+**Return value**
+
+  | Type               | Description       |
+  | ------------------ | --------- |
+  | [Stream](#stream20) | Stream opened.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  console.info("Stream created");
+  stream.closeSync();
+  ```
+
+## fs.fdopenStream<sup>20+</sup>
+
+fdopenStream(fd: number, mode: string): Promise&lt;Stream&gt;
+
+Opens a stream based on an FD. This API uses a promise to return the result. To close the stream, use **close()** of [Stream20](#stream).
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name | Type    | Mandatory  | Description                                      |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | fd   | number | Yes   | FD of the file.                            |
+  | mode | string | Yes   | - **r**: Open a file for reading. The file must exist.<br>- **r+**: Open a file for both reading and writing. The file must exist.<br>- **w**: Open a file for writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **w+**: Open a file for both reading and writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **a**: Open a file in append mode for writing at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).<br>- **a+**: Open a file in append mode for reading or updating at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).|
+
+**Return value**
+
+  | Type                              | Description       |
+  | --------------------------------- | --------- |
+  | Promise&lt;[Stream](#stream20)&gt; | Promise used to return the stream opened.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath);
+  fs.fdopenStream(file.fd, "r+").then((stream: fs.Stream) => {
+    console.info("Stream opened");
+    stream.closeSync();
+  }).catch((err: BusinessError) => {
+    console.error("openStream failed with error message: " + err.message + ", error code: " + err.code);
+    // If the file stream fails to be opened, the FD must be manually closed.
+    fs.closeSync(file);
+  });
+  ```
+
+> **NOTE**
+>
+> When a file stream created with an FD is used, the lifecycle of the FD will be managed by the file stream object. When **close()** is called to close the file stream, the FD is also closed.
+
+## fs.fdopenStream<sup>20+</sup>
+
+fdopenStream(fd: number, mode: string, callback: AsyncCallback&lt;Stream&gt;): void
+
+Opens a stream based on an FD. This API uses an asynchronous callback to return the result. To close the stream, use **close()** of [Stream](#stream20).
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name     | Type                                      | Mandatory  | Description                                      |
+  | -------- | ---------------------------------------- | ---- | ---------------------------------------- |
+  | fd       | number                                   | Yes   | FD of the file.                            |
+  | mode     | string                                   | Yes   | - **r**: Open a file for reading. The file must exist.<br>- **r+**: Open a file for both reading and writing. The file must exist.<br>- **w**: Open a file for writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **w+**: Open a file for both reading and writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **a**: Open a file in append mode for writing at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).<br>- **a+**: Open a file in append mode for reading or updating at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).|
+  | callback | AsyncCallback&lt;[Stream](#stream20)&gt; | Yes   | Callback used to return the result.                           |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.READ_ONLY);
+  fs.fdopenStream(file.fd, "r+", (err: BusinessError, stream: fs.Stream) => {
+    if (err) {
+      console.error("fdopen stream failed with error message: " + err.message + ", error code: " + err.code);
+      stream.closeSync();
+    } else {
+      console.info("fdopen stream succeed");
+      // If the file stream fails to be opened, the FD must be manually closed.
+      fs.closeSync(file);
+    }
+  });
+  ```
+
+> **NOTE**
+>
+> If a file stream is created with an FD, the lifecycle of the FD is also transferred to the file stream object. When **close()** is called to close the file stream, the FD is also closed.
+
+## fs.fdopenStreamSync<sup>20+</sup>
+
+fdopenStreamSync(fd: number, mode: string): Stream
+
+Opens a stream based on an FD. This API returns the result synchronously. To close the stream, use **close()** of [Stream](#stream20).
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name | Type    | Mandatory  | Description                                      |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | fd   | number | Yes   | FD of the file.                            |
+  | mode | string | Yes   | - **r**: Open a file for reading. The file must exist.<br>- **r+**: Open a file for both reading and writing. The file must exist.<br>- **w**: Open a file for writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **w+**: Open a file for both reading and writing. If the file exists, clear its content. If the file does not exist, create a file.<br>- **a**: Open a file in append mode for writing at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).<br>- **a+**: Open a file in append mode for reading or updating at the end of the file. If the file does not exist, create a file. If the file exists, write data to the end of the file (the original content of the file is reserved).|
+
+**Return value**
+
+  | Type               | Description       |
+  | ------------------ | --------- |
+  | [Stream](#stream20) | Stream opened.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.READ_ONLY | fs.OpenMode.CREATE);
+  let stream = fs.fdopenStreamSync(file.fd, "r+");
+  stream.closeSync();
+  ```
+
+> **NOTE**
+>
+> If a file stream is created with an FD, the lifecycle of the FD is also transferred to the file stream object. When **close()** is called to close the file stream, the FD is also closed.
+
+## fs.createReadStream<sup>20+</sup>
+
+createReadStream(path: string, options?: ReadStreamOptions ): ReadStream
+
+Creates a readable stream. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name | Type    | Mandatory  | Description                                      |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | path   | string | Yes   | Path of the file.                            |
+  | options | [ReadStreamOptions](#readstreamoptions20) | No   | The options are as follows:<br>- **start** (number): start position of the data to read in the file. This parameter is optional. By default, data is read from the current position.<br>- **end** (number): end position of the data to read in the file. This parameter is optional. The default value is the end of the file.|
+
+**Return value**
+
+  | Type               | Description       |
+  | ------------------ | --------- |
+  | [ReadStream](#readstream20) | **ReadStream** instance obtained.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+ // Create a readable stream.
+  const rs = fs.createReadStream(`${pathDir}/read.txt`);
+  // Create a writeable stream.
+  const ws = fs.createWriteStream(`${pathDir}/write.txt`);
+  // Copy files in paused mode.
+  rs.on('readable', () => {
+    const data = rs.read();
+    if (!data) {
+      return;
+    }
+    ws.write(data);
+  });
+  ```
+
+## fs.createWriteStream<sup>20+</sup>
+
+createWriteStream(path: string, options?: WriteStreamOptions): WriteStream
+
+Creates a writeable stream. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name | Type    | Mandatory  | Description                                      |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | path   | string | Yes   | Path of the file.                            |
+  | options | [WriteStreamOptions](#writestreamoptions20) | No   | The options are as follows:<br>- **start** (number): start position to write the data in the file. This parameter is optional. By default, data is written from the current position.<br>- **mode** (number): [mode](#openmode) for creating the writeable stream. This parameter is optional. The default value is the write-only mode.|
+
+**Return value**
+
+  | Type               | Description       |
+  | ------------------ | --------- |
+  | [WriteStream](#writestream20) | **WriteStream** instance obtained.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+ // Create a readable stream.
+  const rs = fs.createReadStream(`${pathDir}/read.txt`);
+  // Create a writeable stream.
+  const ws = fs.createWriteStream(`${pathDir}/write.txt`);
+  // Copy files in paused mode.
+  rs.on('readable', () => {
+    const data = rs.read();
+    if (!data) {
+      return;
+    }
+    ws.write(data);
+  });
+  ```
+
+## AtomicFile<sup>20+</sup>
+AtomicFile is a class used to perform atomic read and write operations on files.
+
+A temporary file is written and renamed to the original file location, which ensures file integrity. If the write operation fails, the temporary file is deleted without modifying the original file content.
+
+You can call **finishWrite()** or **failWrite()** to write or roll back file content.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+### constructor<sup>20+</sup>
+
+constructor(path: string)
+
+Creates an **AtomicFile** class for a file in a specified path.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name | Type    | Mandatory  | Description                              |
+  | ------ | ------ | ---- | -------------------------------------- |
+  | path   | string | Yes   | Application sandbox path of the file.                      |
+
+### getBaseFile<sup>20+</sup>
+
+getBaseFile(): File
+
+Obtains the file object through the **AtomicFile** object.
+
+The FD needs to be closed by calling **close()**.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Return value**
+
+| Type               | Description       |
+| ------------------ | --------- |
+|  [File](#file) | open file object.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md) and [Universal Error Codes](../errorcodes/errorcode-universal.md).
+
+**Example**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+
+// Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let atomicFile = new fs.AtomicFile(`${pathDir}/write.txt`);
+  let writeSream = atomicFile.startWrite();
+  writeSream.write("xxxxx","utf-8",()=> {
+    atomicFile.finishWrite();
+    let File = atomicFile.getBaseFile();
+    hilog.info(0x0000, 'AtomicFile', 'getBaseFile File.fd is:%{public}d, path:%{public}s, name:%{public}s', File.fd, File.path, File.path);
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed! err :%{public}s', err.message);
+}
+```
+
+### openRead<sup>20+</sup>
+
+openRead(): ReadStream
+
+Creates a **ReadStream** instance.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Return value**
+
+  | Type               | Description       |
+  | ------------------ | --------- |
+  | [ReadStream](#readstream20) | **ReadStream** instance obtained.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md) and [Universal Error Codes](../errorcodes/errorcode-universal.md).
+
+**Example**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+// Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let file = new fs.AtomicFile(`${pathDir}/read.txt`);
+  let writeSream = file.startWrite();
+  writeSream.write("xxxxxx","utf-8",()=> {
+    file.finishWrite();
+    setTimeout(()=>{
+      let readStream = file.openRead();
+      readStream.on('readable', () => {
+        const data = readStream.read();
+        if (!data) {
+          hilog.error(0x0000, 'AtomicFile', 'Read data is null');
+          return;
+        }
+        hilog.info(0x0000, 'AtomicFile', 'Read data is:%{public}s!', data);
+      });
+    },1000);
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed!, err : %{public}s', err.message);
+}
+```
+
+### readFully<sup>20+</sup>
+
+readFully(): ArrayBuffer
+
+Reads all content of a file.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Return value**
+
+  | Type               | Description       |
+  | ------------------ | --------- |
+  | ArrayBuffer | Full content of a file.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md) and [Universal Error Codes](../errorcodes/errorcode-universal.md).
+
+**Example**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+import { util, buffer } from '@kit.ArkTS';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+// Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let file = new fs.AtomicFile(`${pathDir}/read.txt`);
+  let writeSream = file.startWrite();
+  writeSream.write("xxxxxxxxxxx","utf-8",()=> {
+    file.finishWrite();
+    setTimeout(()=>{
+      let data = file.readFully();
+      let decoder = util.TextDecoder.create('utf-8');
+      let str = decoder.decodeToString(new Uint8Array(data));
+      hilog.info(0x0000, 'AtomicFile', 'readFully str is :%{public}s!', str);
+    },1000);
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed!, err : %{public}s', err.message);
+}
+```
+
+### startWrite<sup>20+</sup>
+
+startWrite(): WriteStream
+
+Starts to write new file data in the **WriteStream** object returned.
+
+If the file does not exist, create a file.
+
+Call **finishWrite()** if the write operation is successful; call **failWrite()** if the write operation fails.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Return value**
+
+  | Type               | Description       |
+  | ------------------ | --------- |
+  | [WriteStream](#writestream20) | **WriteStream** instance obtained.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md) and [Universal Error Codes](../errorcodes/errorcode-universal.md).
+
+**Example**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+
+// Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let file = new fs.AtomicFile(`${pathDir}/write.txt`);
+  let writeSream = file.startWrite();
+  hilog.info(0x0000, 'AtomicFile', 'startWrite end');
+  writeSream.write("xxxxxxxx","utf-8",()=> {
+    hilog.info(0x0000, 'AtomicFile', 'write end');
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed! err :%{public}s', err.message);
+}
+```
+
+### finishWrite<sup>20+</sup>
+
+finishWrite(): void
+
+Finishes writing file data when the write operation is complete.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md) and [Universal Error Codes](../errorcodes/errorcode-universal.md).
+
+**Example**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+
+// Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let file = new fs.AtomicFile(`${pathDir}/write.txt`);
+  let writeSream = file.startWrite();
+  writeSream.write("xxxxxxxxxxx","utf-8",()=> {
+    file.finishWrite();
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed!, err : %{public}s', err.message);
+}
+```
+
+### failWrite<sup>20+</sup>
+
+failWrite(): void
+
+Rolls back the file after the file fails to be written.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md) and [Universal Error Codes](../errorcodes/errorcode-universal.md).
+
+**Example**
+
+<!--code_no_check-->
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+import { util, buffer } from '@kit.ArkTS';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+// Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+let file = new fs.AtomicFile(`${pathDir}/write.txt`);
+try {
+  let writeSream = file.startWrite();
+  writeSream.write("xxxxxxxxxxx","utf-8",()=> {
+    hilog.info(0x0000, 'AtomicFile', 'write succeed!');
+  })
+} catch (err) {
+  file.failWrite();
+  hilog.error(0x0000, 'AtomicFile', 'failed!, err : %{public}s', err.message);
+}
+```
+
+### delete<sup>20+</sup>
+
+delete(): void
+
+Deletes the **AtomicFile** class, including the original files and temporary files.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md) and [Universal Error Codes](../errorcodes/errorcode-universal.md).
+
+**Example**
+
+<!--code_no_check-->
+```ts
+import { common } from '@kit.AbilityKit';
+import { fileIo as fs} from '@kit.CoreFileKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { util } from '@kit.ArkTS';
+
+// Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let pathDir = context.filesDir;
+
+try {
+  let file = new fs.AtomicFile(`${pathDir}/read.txt`);
+  let writeSream = file.startWrite();
+  writeSream.write("xxxxxxxxxxx","utf-8",()=> {
+    file.finishWrite();
+    setTimeout(()=>{
+      let data = file.readFully();
+      let decoder = util.TextDecoder.create('utf-8');
+      let str = decoder.decodeToString(new Uint8Array(data));
+      hilog.info(0x0000, 'AtomicFile', 'readFully str is :%{public}s!', str);
+      file.delete();
+    },1000);
+  })
+} catch (err) {
+  hilog.error(0x0000, 'AtomicFile', 'failed!, err : %{public}s', err.message);
+}
+```
+
+## fs.createWatcher<sup>20+</sup>
+
+createWatcher(path: string, events: number, listener: WatchEventListener): Watcher
+
+Creates a **Watcher** object to listen for file or directory changes.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name | Type    | Mandatory  | Description                                      |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | path   | string | Yes   | Application sandbox path of the file or directory to observe.                            |
+  | events | number | Yes   | Events to observe. Multiple events can be separated by a bitwise OR operator (\|).<br>- **0x1: IN_ACCESS**: A file is accessed.<br>- **0x2: IN_MODIFY**: The file content is modified.<br>- **0x4: IN_ATTRIB**: The file metadata is modified.<br>- **0x8: IN_CLOSE_WRITE**: A file is opened, written with data, and then closed.<br>- **0x10: IN_CLOSE_NOWRITE**: A file or directory is opened and then closed without data written.<br>- **0x20: IN_OPEN**: A file or directory is opened.<br>- **0x40: IN_MOVED_FROM**: A file in the observed directory is moved.<br>- **0x80: IN_MOVED_TO**: A file is moved to the observed directory.<br>- **0x100: IN_CREATE**: A file or directory is created in the observed directory.<br>- **0x200: IN_DELETE**: A file or directory is deleted from the observed directory.<br>- **0x400: IN_DELETE_SELF**: The observed directory is deleted. After the directory is deleted, the listening stops.<br>- **0x800: IN_MOVE_SELF**: The observed file or directory is moved. After the file or directory is moved, the listening continues.<br>- **0xfff: IN_ALL_EVENTS**: All events.|
+  | listener   | [WatchEventListener](#watcheventlistener20) | Yes   | Callback invoked when an observed event occurs. The callback will be invoked each time an observed event occurs.                            |
+
+**Return value**
+
+  | Type               | Description       |
+  | ------------------ | --------- |
+  | [Watcher](#watcher20) | **Watcher** object created.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+<!--code_no_check-->
+  ```ts
+  import { common } from '@kit.AbilityKit';
+  import { fileIo as fs, WatchEvent } from '@kit.CoreFileKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let pathDir = context.filesDir;
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+  let watcher = fs.createWatcher(filePath, 0x2 | 0x10, (watchEvent: WatchEvent) => {
+    if (watchEvent.event == 0x2) {
+      console.info(watchEvent.fileName + 'was modified');
+    } else if (watchEvent.event == 0x10) {
+      console.info(watchEvent.fileName + 'was closed');
+    }
+  });
+  watcher.start();
+  fs.writeSync(file.fd, 'test');
+  fs.closeSync(file);
+  watcher.stop();
+  ```
+
+## WatchEventListener<sup>20+</sup>
+
+(event: WatchEvent): void
+
+Provides APIs for observing events.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name | Type    | Mandatory  | Description                                      |
+  | ---- | ------ | ---- | ---------------------------------------- |
+  | event   | [WatchEvent](#watchevent20) | Yes   | Event for the callback to invoke.                            |
+
+## WatchEvent<sup>20+</sup>
+
+Defines the event to observe.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+### Properties
+
+| Name  | Type  | Read-Only  | Optional  | Description     |
+| ---- | ------ | ---- | ---- | ------- |
+| fileName | string | Yes   | No   | Sandbox path of the file to observe. The sandbox path contains the file name.|
+| event | number | Yes   | No   | Events to observe. Multiple events can be separated by a bitwise OR operator (\|).<br>- **0x1: IN_ACCESS**: A file is accessed.<br>- **0x2: IN_MODIFY**: The file content is modified.<br>- **0x4: IN_ATTRIB**: The file metadata is modified.<br>- **0x8: IN_CLOSE_WRITE**: A file is opened, written with data, and then closed.<br>- **0x10: IN_CLOSE_NOWRITE**: A file or directory is opened and then closed without data written.<br>- **0x20: IN_OPEN**: A file or directory is opened.<br>- **0x40: IN_MOVED_FROM**: A file in the observed directory is moved.<br>- **0x80: IN_MOVED_TO**: A file is moved to the observed directory.<br>- **0x100: IN_CREATE**: A file or directory is created in the observed directory.<br>- **0x200: IN_DELETE**: A file or directory is deleted from the observed directory.<br>- **0x400: IN_DELETE_SELF**: The observed directory is deleted. After the directory is deleted, the listening stops.<br>- **0x800: IN_MOVE_SELF**: The observed file or directory is moved. After the file or directory is moved, the listening continues.<br>- **0xfff: IN_ALL_EVENTS**: All events.|
+| cookie | number | Yes   | No   | Cookie bound with the event.<br>Currently, only the **IN_MOVED_FROM** and **IN_MOVED_TO** events are supported. The **IN_MOVED_FROM** and **IN_MOVED_TO** events of the same file have the same **cookie** value.|
+
 ## Stat
 
 Represents detailed file information. Before calling any API of the **Stat()** class, use [stat()](#fsstat) to create a **Stat** instance synchronously or asynchronously.
@@ -2851,6 +4037,443 @@ Checks whether this file is a symbolic link.
   let isSymbolicLink = fs.statSync(filePath).isSymbolicLink(); 
   ```
 
+## Stream<sup>20+</sup>
+
+Provides API for stream operations. Before calling any API of **Stream**, you need to create a **Stream** instance by using [fs.createStream](#fscreatestream20) or [fs.fdopenStream](#fsfdopenstream20).
+
+### close
+
+close(): Promise&lt;void&gt;
+
+Closes the file stream. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Return value**
+
+  | Type                 | Description           |
+  | ------------------- | ------------- |
+  | Promise&lt;void&gt; | Promise that returns no value.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.close().then(() => {
+    console.info("File stream closed");
+  }).catch((err: BusinessError) => {
+    console.error("close fileStream  failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+### close
+
+close(callback: AsyncCallback&lt;void&gt;): void
+
+Closes the file stream. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name     | Type                       | Mandatory  | Description           |
+  | -------- | ------------------------- | ---- | ------------- |
+  | callback | AsyncCallback&lt;void&gt; | Yes   | Callback invoked immediately after the stream is closed.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.close((err: BusinessError) => {
+    if (err) {
+      console.error("close stream failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("close stream succeed");
+    }
+  });
+  ```
+
+### closeSync
+
+closeSync(): void
+
+Closes the file stream. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.closeSync();
+  ```
+
+### flush
+
+flush(): Promise&lt;void&gt;
+
+Flushes the file stream. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Return value**
+
+  | Type                 | Description           |
+  | ------------------- | ------------- |
+  | Promise&lt;void&gt; | Promise used to return the result.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.flush().then(() => {
+    console.info("Stream flushed");
+    stream.close();
+  }).catch((err: BusinessError) => {
+    console.error("flush failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+### flush
+
+flush(callback: AsyncCallback&lt;void&gt;): void
+
+Flushes the file stream. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name     | Type                       | Mandatory  | Description            |
+  | -------- | ------------------------- | ---- | -------------- |
+  | callback | AsyncCallback&lt;void&gt; | Yes   | Callback used to return the result.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.flush((err: BusinessError) => {
+    if (err) {
+      console.error("flush stream failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("Stream flushed");
+      stream.close();
+    }
+  });
+  ```
+
+### flushSync
+
+flushSync(): void
+
+Flushes the file stream. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  stream.flushSync();
+  stream.close();
+  ```
+
+### write
+
+write(buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
+
+Writes data to a stream file. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name    | Type                             | Mandatory  | Description                                      |
+  | ------- | ------------------------------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer \| string | Yes   | Data to write. It can be a string or data from a buffer.                    |
+  | options | [WriteOptions](#writeoptions20)                          | No   | The options are as follows:<br>- **length** (number): length of the data to write. The default value is the buffer length.<br>- **offset** (number): start position to write the data in the file. This parameter is optional. By default, data is written from the current position.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported.|
+
+**Return value**
+
+  | Type                   | Description      |
+  | --------------------- | -------- |
+  | Promise&lt;number&gt; | Promise used to return the length of the data written.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  let writeOption: WriteOptions = {
+    offset: 5,
+    length: 5,
+    encoding: 'utf-8'
+  };
+  stream.write("hello, world", writeOption).then((number: number) => {
+    console.info("write succeed and size is:" + number);
+    stream.close();
+  }).catch((err: BusinessError) => {
+    console.error("write failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+### write
+
+write(buffer: ArrayBuffer | string, options?: WriteOptions, callback: AsyncCallback&lt;number&gt;): void
+
+Writes data to a stream file. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name  | Type                           | Mandatory| Description                                                        |
+  | -------- | ------------------------------- | ---- | ------------------------------------------------------------ |
+  | buffer   | ArrayBuffer \| string | Yes  | Data to write. It can be a string or data from a buffer.                    |
+  | options  | [WriteOptions](#writeoptions20)                          | No  | The options are as follows:<br>- **length** (number): length of the data to write. This parameter is optional. The default value is the buffer length.<br>- **offset** (number): start position to write the data in the file. This parameter is optional. By default, data is written from the current position.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported.|
+  | callback | AsyncCallback&lt;number&gt;     | Yes  | Callback used to return the result.                              |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  let writeOption: WriteOptions = {
+    offset: 5,
+    length: 5,
+    encoding: 'utf-8'
+  };
+  stream.write("hello, world", writeOption, (err: BusinessError, bytesWritten: number) => {
+    if (err) {
+      console.error("write stream failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      if (bytesWritten) {
+        console.info("write succeed and size is:" + bytesWritten);
+        stream.close();
+      }
+    }
+  });
+  ```
+
+### writeSync
+
+writeSync(buffer: ArrayBuffer | string, options?: WriteOptions): number
+
+Writes data to a stream file. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name    | Type                             | Mandatory  | Description                                      |
+  | ------- | ------------------------------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer \| string | Yes   | Data to write. It can be a string or data from a buffer.                    |
+  | options | [WriteOptions](#writeoptions20)                          | No   | The options are as follows:<br>- **length** (number): length of the data to write. This parameter is optional. The default value is the buffer length.<br>- **offset** (number): start position to write the data in the file. This parameter is optional. By default, data is written from the current position.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported.|
+
+**Return value**
+
+  | Type    | Description      |
+  | ------ | -------- |
+  | number | Length of the data written in the file.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath,"r+");
+  let writeOption: WriteOptions = {
+    offset: 5,
+    length: 5,
+    encoding: 'utf-8'
+  };
+  let num = stream.writeSync("hello, world", writeOption);
+  stream.close();
+  ```
+
+### read
+
+read(buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
+
+Reads data from a stream file. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name    | Type         | Mandatory  | Description                                      |
+  | ------- | ----------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer | Yes   | Buffer used to store the file read.                             |
+  | options | [ReadOptions](#readoptions20)      | No   | The options are as follows:<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.<br>- **offset** (number): start position to read the data. This parameter is optional. By default, data is read from the current position.|
+
+**Return value**
+
+  | Type                                | Description    |
+  | ---------------------------------- | ------ |
+  | Promise&lt;number&gt; | Promise used to return the data read.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { buffer } from '@kit.ArkTS';
+  import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  let arrayBuffer = new ArrayBuffer(4096);
+  let readOption: ReadOptions = {
+    offset: 5,
+    length: 5
+  };
+  stream.read(arrayBuffer, readOption).then((readLen: number) => {
+    console.info("Read data successfully");
+    let buf = buffer.from(arrayBuffer, 0, readLen);
+    console.log(`The content of file: ${buf.toString()}`);
+    stream.close();
+  }).catch((err: BusinessError) => {
+    console.error("read data failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+### read
+
+read(buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCallback&lt;number&gt;): void
+
+Reads data from a stream file. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name     | Type                                      | Mandatory  | Description                                      |
+  | -------- | ---------------------------------------- | ---- | ---------------------------------------- |
+  | buffer   | ArrayBuffer                              | Yes   | Buffer used to store the file read.                             |
+  | options  | [ReadOptions](#readoptions20)                                   | No   | The options are as follows:<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.<br>- **offset** (number): start position to read the data. This parameter is optional. By default, data is read from the current position.|
+  | callback | AsyncCallback&lt;number&gt; | Yes   | Callback used to return the result.                        |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { buffer } from '@kit.ArkTS';
+  import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  let arrayBuffer = new ArrayBuffer(4096);
+  let readOption: ReadOptions = {
+    offset: 5,
+    length: 5
+  };
+  stream.read(arrayBuffer, readOption, (err: BusinessError, readLen: number) => {
+    if (err) {
+      console.error("read stream failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("Read data successfully");
+      let buf = buffer.from(arrayBuffer, 0, readLen);
+      console.log(`The content of file: ${buf.toString()}`);
+      stream.close();
+    }
+  });
+  ```
+
+### readSync
+
+readSync(buffer: ArrayBuffer, options?: ReadOptions): number
+
+Reads data from a stream file. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name    | Type         | Mandatory  | Description                                      |
+  | ------- | ----------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer | Yes   | Buffer used to store the file read.                             |
+  | options | [ReadOptions](#readoptions20)      | No   | The options are as follows:<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.<br>- **offset** (number): start position to read the data. This parameter is optional. By default, data is read from the current position.<br> |
+
+**Return value**
+
+  | Type    | Description      |
+  | ------ | -------- |
+  | number | Length of the data read.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let stream = fs.createStreamSync(filePath, "r+");
+  let readOption: ReadOptions = {
+    offset: 5,
+    length: 5
+  };
+  let buf = new ArrayBuffer(4096);
+  let num = stream.readSync(buf, readOption);
+  stream.close();
+  ```
+
 ## File
 
 Represents a **File** object opened by **open()**.
@@ -2862,6 +4485,413 @@ Represents a **File** object opened by **open()**.
 | Name  | Type  | Readable  | Writable  | Description     |
 | ---- | ------ | ---- | ---- | ------- |
 | fd | number | Yes   | No   | FD of the file.|
+
+### getParent<sup>20+</sup>
+
+getParent(): string
+
+Obtains the parent directory of this file object.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Return value**
+
+  | Type                                | Description    |
+  | ---------------------------------- | ------ |
+  | string | Parent directory obtained.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+  console.info('The parent path is: ' + file.getParent());
+  fs.closeSync(file);
+  ```
+
+## RandomAccessFile<sup>20+</sup>
+
+Provides APIs for randomly reading and writing a stream. Before invoking any API of **RandomAccessFile**, you need to use **createRandomAccessFile()** to create a **RandomAccessFile** instance synchronously or asynchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+### Properties
+
+| Name        | Type  | Read-Only | Optional | Description             |
+| ----------- | ------ | ----  | ----- | ---------------- |
+| fd          | number | Yes   | No   | FD of the file.|
+| filePointer | number | Yes   | No   | Offset pointer to the **RandomAccessFile** instance.|
+
+### setFilePointer
+
+setFilePointer(filePointer:number): void
+
+Sets the file offset pointer.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name    | Type     | Mandatory  | Description        |
+  | ------- | ----------- | ---- | ----------------------------- |
+  | filePointer  | number | Yes  | Offset pointer to the **RandomAccessFile** instance. |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let randomAccessFile = fs.createRandomAccessFileSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+  randomAccessFile.setFilePointer(1);
+  randomAccessFile.close();
+  ```
+
+### close<
+
+close(): void
+
+Closes the **RandomAccessFile** instance. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let randomAccessFile = fs.createRandomAccessFileSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+  randomAccessFile.close();
+  ```
+
+### write
+
+write(buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
+
+Writes data into a file. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name    | Type                             | Mandatory  | Description                                      |
+  | ------- | ------------------------------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer \| string | Yes   | Data to write. It can be a string or data from a buffer.                    |
+  | options | [WriteOptions](#writeoptions20)                          | No   | The options are as follows:<br>- **length** (number): length of the data to write. The default value is the buffer length.<br>- **offset** (number): start position to write the data (it is determined by **filePointer** plus **offset**). This parameter is optional. By default, data is written from the **filePointer**.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported.|
+
+**Return value**
+
+  | Type                   | Description      |
+  | --------------------- | -------- |
+  | Promise&lt;number&gt; | Promise used to return the length of the data written.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  let bufferLength: number = 4096;
+  let writeOption: WriteOptions = {
+    offset: 1,
+    length: 5,
+    encoding: 'utf-8'
+  };
+  let arrayBuffer = new ArrayBuffer(bufferLength);
+  randomAccessFile.write(arrayBuffer, writeOption).then((bytesWritten: number) => {
+    console.info("randomAccessFile bytesWritten: " + bytesWritten);
+  }).catch((err: BusinessError) => {
+    console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+  }).finally(() => {
+    randomAccessFile.close();
+    fs.closeSync(file);
+  });
+
+  ```
+
+### write
+
+write(buffer: ArrayBuffer | string, options?: WriteOptions, callback: AsyncCallback&lt;number&gt;): void
+
+Writes data to a file. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name  | Type                           | Mandatory| Description                                                        |
+  | -------- | ------------------------------- | ---- | ------------------------------------------------------------ |
+  | buffer   | ArrayBuffer \| string | Yes  | Data to write. It can be a string or data from a buffer.                    |
+  | options  | [WriteOptions](#writeoptions20)                          | No  | The options are as follows:<br>- **length** (number): length of the data to write. This parameter is optional. The default value is the buffer length.<br>- **offset** (number): start position to write the data (it is determined by **filePointer** plus **offset**). This parameter is optional. By default, data is written from the **filePointer**.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported.|
+  | callback | AsyncCallback&lt;number&gt;     | Yes  | Callback used to return the result.                              |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  let bufferLength: number = 4096;
+  let writeOption: WriteOptions = {
+    offset: 1,
+    length: bufferLength,
+    encoding: 'utf-8'
+  };
+  let arrayBuffer = new ArrayBuffer(bufferLength);
+  randomAccessFile.write(arrayBuffer, writeOption, (err: BusinessError, bytesWritten: number) => {
+    if (err) {
+      console.error("write failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      if (bytesWritten) {
+        console.info("write succeed and size is:" + bytesWritten);
+      }
+    }
+    randomAccessFile.close();
+    fs.closeSync(file);
+  });
+  ```
+
+### writeSync
+
+writeSync(buffer: ArrayBuffer | string, options?: WriteOptions): number
+
+Writes data to a file. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name    | Type                             | Mandatory  | Description                                      |
+  | ------- | ------------------------------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer \| string | Yes   | Data to write. It can be a string or data from a buffer.                    |
+  | options | [WriteOptions](#writeoptions20)                          | No   | The options are as follows:<br>- **length** (number): length of the data to write. This parameter is optional. The default value is the buffer length.<br>- **offset** (number): start position to write the data (it is determined by **filePointer** plus **offset**). This parameter is optional. By default, data is written from the **filePointer**.<br>- **encoding** (string): format of the data to be encoded when the data is a string. The default value is **'utf-8'**, which is the only value supported.|
+
+**Return value**
+
+  | Type    | Description      |
+  | ------ | -------- |
+  | number | Length of the data written in the file.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { fileIo as fs, WriteOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let randomAccessFile = fs.createRandomAccessFileSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let writeOption: WriteOptions = {
+    offset: 5,
+    length: 5,
+    encoding: 'utf-8'
+  };
+  let bytesWritten = randomAccessFile.writeSync("hello, world", writeOption);
+  randomAccessFile.close();
+  ```
+
+### read
+
+read(buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
+
+Reads data from a file. This API uses a promise to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name    | Type         | Mandatory  | Description                                      |
+  | ------- | ----------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer | Yes   | Buffer used to store the file read.                             |
+  | options | [ReadOptions](#readoptions20)      | No   | The options are as follows:<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.<br>- **offset** (number): start position to read the data (it is determined by **filePointer** plus **offset**). This parameter is optional. By default, data is read from the **filePointer**.|
+
+**Return value**
+
+  | Type                                | Description    |
+  | ---------------------------------- | ------ |
+  | Promise&lt;number&gt; | Promise used to return the data read.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  let bufferLength: number = 4096;
+  let readOption: ReadOptions = {
+    offset: 1,
+    length: 5
+  };
+  let arrayBuffer = new ArrayBuffer(bufferLength);
+  randomAccessFile.read(arrayBuffer, readOption).then((readLength: number) => {
+    console.info("randomAccessFile readLength: " + readLength);
+  }).catch((err: BusinessError) => {
+    console.error("create randomAccessFile failed with error message: " + err.message + ", error code: " + err.code);
+  }).finally(() => {
+    randomAccessFile.close();
+    fs.closeSync(file);
+  });
+  ```
+
+### read
+
+read(buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCallback&lt;number&gt;): void
+
+Reads data from a file. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name     | Type                                      | Mandatory  | Description                                      |
+  | -------- | ---------------------------------------- | ---- | ---------------------------------------- |
+  | buffer   | ArrayBuffer                              | Yes   | Buffer used to store the file read.                             |
+  | options  | [ReadOptions](#readoptions20)                                   | No   | The options are as follows:<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.<br>- **offset** (number): start position to read the data (it is determined by **filePointer** plus **offset**). This parameter is optional. By default, data is read from the **filePointer**.|
+  | callback | AsyncCallback&lt;number&gt; | Yes   | Callback used to return the result.                        |
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ReadOptions } from '@kit.CoreFileKit';
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  let length: number = 20;
+  let readOption: ReadOptions = {
+    offset: 1,
+    length: 5
+  };
+  let arrayBuffer = new ArrayBuffer(length);
+  randomAccessFile.read(arrayBuffer, readOption, (err: BusinessError, readLength: number) => {
+    if (err) {
+      console.error("read failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      if (readLength) {
+        console.info("read succeed and size is:" + readLength);
+      }
+    }
+    randomAccessFile.close();
+    fs.closeSync(file);
+  });
+  ```
+
+### readSync
+
+readSync(buffer: ArrayBuffer, options?: ReadOptions): number
+
+Reads data from a file. This API returns the result synchronously.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name    | Type         | Mandatory  | Description                                      |
+  | ------- | ----------- | ---- | ---------------------------------------- |
+  | buffer  | ArrayBuffer | Yes   | Buffer used to store the file read.                             |
+  | options | [ReadOptions](#readoptions20)      | No   | The options are as follows:<br>- **length** (number): length of the data to read. This parameter is optional. The default value is the buffer length.<br>- **offset** (number): start position to read the data (it is determined by **filePointer** plus **offset**). This parameter is optional. By default, data is read from the **filePointer**.<br> |
+
+**Return value**
+
+  | Type    | Description      |
+  | ------ | -------- |
+  | number | Length of the data read.|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+  let randomAccessFile = fs.createRandomAccessFileSync(file);
+  let length: number = 4096;
+  let arrayBuffer = new ArrayBuffer(length);
+  let readLength = randomAccessFile.readSync(arrayBuffer);
+  randomAccessFile.close();
+  fs.closeSync(file);
+  ```
+
+## Watcher<sup>20+</sup>
+
+Provides APIs for observing the changes of files or directories. Before using the APIs of **Watcher**, call **createWatcher()** to create a **Watcher** object.
+
+### start<sup>20+</sup>
+
+start(): void
+
+Starts listening.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let watcher = fs.createWatcher(filePath, 0xfff, () => {});
+  watcher.start();
+  watcher.stop();
+  ```
+
+### stop<sup>20+</sup>
+
+stop(): void
+
+Stops listening and removes the **Watcher** object.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  let filePath = pathDir + "/test.txt";
+  let watcher = fs.createWatcher(filePath, 0xfff, () => {});
+  watcher.start();
+  watcher.stop();
+  ```
 
 ## OpenMode
 
@@ -2918,6 +4948,18 @@ Defines the options used in **readLines()**.
 | ----------- | --------------- | ------------------ |
 | encoding | string     | File encoding format. It is optional.          |
 
+## WhenceType<sup>20+</sup>
+
+Enumerates the types of the relative offset position used in **lseek()**.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Value      | Description               |
+| ----------- | --------------- | ------------------ |
+| SEEK_SET | 0     | Beginning of the file.          |
+| SEEK_CUR    | 1     | Current offset position.|
+| SEEK_END    | 2     | End of the file.|
+
 ## AccessModeType<sup>20+</sup>
 
 Enumerates the access modes to verify. If this parameter is left blank, the system checks whether the file exists.
@@ -2965,3 +5007,171 @@ Defines the options used in **write()**. It inherits from [Options](#options20).
 | length | number     | No| Length of the data to write, in bytes. This parameter is optional. The default value is the buffer length. |
 |  offset    | number     | No| Start position of the file to write (current **filePointer** plus **offset**), in bytes. This parameter is optional. By default, data is written from the **filePointer**.|
 | encoding    | string | No| Format of the data to be encoded. This parameter is valid only when the data type is string. The default value is **'utf-8'**, which is the only value supported.      |
+
+## ReadStream<sup>20+</sup>
+
+Defines a readable stream. You need to use [fs.createReadStream](#fscreatereadstream20) to create a **ReadStream** instance, which is inherited from the [stream base class](../apis-arkts/js-apis-stream.md#readable).
+
+The data obtained by **ReadStream** is a decoded string. Currently, only the UTF-8 format is supported.
+
+### Properties
+
+| Name    | Type  | Read-Only  | Optional  | Description                                      |
+| ------ | ------ | ---- | ---- | ---------------------------------------- |
+| bytesRead    | number | Yes   | No   | Number of bytes read by the readable stream.|
+| path    | string | Yes   | No   | Path of the file corresponding to the readable stream.|
+
+### Seek
+
+seek(offset: number, whence?: WhenceType): number
+
+
+Adjusts the position of the readable stream offset pointer.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | offset | number | Yes   | Relative offset, in bytes.|
+  | whence | [WhenceType](#whencetype20) | No   | Where to start the offset. The default value is **SEEK_SET**, which indicates the beginning of the file.|
+
+**Return value**
+
+  | Type                  | Description        |
+  | --------------------- | ---------- |
+  | number | Position of the current offset pointer (offset relative to the file header, in bytes).|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  const filePath = pathDir + "/test.txt";
+  const rs = fs.createReadStream(filePath);
+  const curOff = rs.seek(5, fs.WhenceType.SEEK_SET);
+  console.info(`current offset is ${curOff}`);
+  rs.close();
+  ```
+
+### close
+
+close(): void
+
+Closes this readable stream.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  const filePath = pathDir + "/test.txt";
+  const rs = fs.createReadStream(filePath);
+  rs.close();
+  ```
+
+## WriteStream<sup>20+</sup>
+
+Defines a writeable stream. You need to use [fs.createWriteStream](#fscreatewritestream20) to create a **WriteStream** instance, which is inherited from the [stream base class](../apis-arkts/js-apis-stream.md#writable).
+
+### Properties
+
+| Name    | Type  | Read-Only  | Optional  | Description                                      |
+| ------ | ------ | ---- | ---- | ---------------------------------------- |
+| bytesWritten    | number | Yes   | No   | Number of bytes written to the writable stream.|
+| path    | string | Yes   | No   | Path of the file corresponding to the writeable stream.|
+
+### Seek
+
+seek(offset: number, whence?: WhenceType): number;
+
+Adjusts the position of the writeable stream offset pointer.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Parameters**
+
+  | Name   | Type    | Mandatory  | Description                         |
+  | ------ | ------ | ---- | --------------------------- |
+  | offset | number | Yes   | Relative offset, in bytes.|
+  | whence | [WhenceType](#whencetype20) | No   | Where to start the offset. The default value is **SEEK_SET**, which indicates the beginning of the file.|
+
+**Return value**
+
+  | Type                  | Description        |
+  | --------------------- | ---------- |
+  | number | Position of the current offset pointer (offset relative to the file header, in bytes).|
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  const filePath = pathDir + "/test.txt";
+  const ws = fs.createWriteStream(filePath);
+  const curOff = ws.seek(5, fs.WhenceType.SEEK_SET);
+  console.info(`current offset is ${curOff}`);
+  ws.close();
+  ```
+
+### close
+
+close(): void
+
+Closes this writeable stream.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+**Error codes**
+
+For details about the error codes, see [Basic File IO Error Codes](../errorcodes/errorcode-filemanagement.md).
+
+**Example**
+
+  ```ts
+  const filePath = pathDir + "/test.txt";
+  const ws = fs.createWriteStream(filePath);
+  ws.close();
+  ```
+
+## RandomAccessFileOptions<sup>20+</sup>
+
+Defines the options used in **createRandomAccessFile()**.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Type      | Mandatory      |  Description               |
+| ----------- | --------------- | ------------------ | ------------------ |
+| start   | number     | No| Start position to read the data, in bytes. This parameter is optional. By default, data is read from the current position.          |
+| end     | number     | No|  End position to read the data, in bytes. This parameter is optional. The default value is the end of the file.|
+
+## ReadStreamOptions<sup>20+</sup>
+
+Defines the options used in **createReadStream()**.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Type      | Mandatory      |  Description               |
+| ----------- | --------------- | ------------------ | ------------------ |
+| start   | number     | No| Start position to read the data, in bytes. This parameter is optional. By default, data is read from the current position.          |
+| end     | number     | No|  End position to read the data, in bytes. This parameter is optional. The default value is the end of the file.|
+
+## WriteStreamOptions<sup>20+</sup>
+
+Defines the options used in **createWriteStream()**.
+
+**System capability**: SystemCapability.FileManagement.File.FileIO
+
+| Name       | Type      | Mandatory      |  Description               |
+| ----------- | --------------- | ------------------ | ------------------ |
+| start   | number     | No| Start position to write the data, in bytes. This parameter is optional. By default, data is written from the beginning of the file.          |
+| mode     | number     | No| [Option](#openmode) for creating the writeable stream. You must specify one of the following options.<br>- **OpenMode.READ_ONLY(0o0)**: read-only, which is the default value.<br>- **OpenMode.WRITE_ONLY(0o1)**: write-only.<br>- **OpenMode.READ_WRITE(0o2)**: read/write.<br>You can also specify the following options, separated by a bitwise OR operator (&#124;). By default, no additional options are given.<br>- **OpenMode.CREATE(0o100)**: If the file does not exist, create it.<br>- **OpenMode.TRUNC(0o1000)**: If the file exists and is opened in write mode, truncate the file length to 0.<br>- **OpenMode.APPEND(0o2000)**: Open the file in append mode. New data will be added to the end of the file.<br>- **OpenMode.NONBLOCK(0o4000)**: If **path** points to a named pipe (also known as a FIFO), block special file, or character special file, perform non-blocking operations on the opened file and in subsequent I/Os.<br>- **OpenMode.DIR(0o200000)**: If **path** does not point to a directory, throw an exception. The write permission is not allowed.<br>- **OpenMode.NOFOLLOW(0o400000)**: If **path** points to a symbolic link, throw an exception.<br>- **OpenMode.SYNC(0o4010000)**: Open the file in synchronous I/O mode.|
