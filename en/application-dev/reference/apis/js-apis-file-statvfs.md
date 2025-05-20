@@ -87,7 +87,7 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
   });
   ```
 
-## statfs.getFreeSizeSync<sup>20+</sup>
+## statfs.getFreeSizeSync
 
 getFreeSizeSync(path:string): number
 
@@ -197,7 +197,7 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
   });
   ```
 
-## statfs.getTotalSizeSync<sup>20+</sup>
+## statfs.getTotalSizeSync
 
 getTotalSizeSync(path: string): number
 

@@ -108,7 +108,7 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
     }
   });
   ```
-## hash.createHash<sup>20+</sup>
+## hash.createHash
 
 createHash(algorithm: string): HashStream;
 
@@ -126,7 +126,7 @@ Creates a **HashStream** instance, which can be used to generate a message diges
 
   | Type           | Description        |
   | ------------- | ---------- |
-  | [HashStream](#HashStream20) | **HashStream** instance created.|
+  | [HashStream](#HashStream) | **HashStream** instance created.|
 
 **Error codes**
 
@@ -157,11 +157,11 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
   ```
 
 
-## HashStream<sup>20+</sup>
+## HashStream
 
-The **HashStream** class is a utility for creating a message digest of data. You can use [createHash](#hash.createHash20) to create a **HashStream** instance.
+The **HashStream** class is a utility for creating a message digest of data. You can use [createHash](#hash.createHash) to create a **HashStream** instance.
 
-### update<sup>20+</sup>
+### update
 
 update(data: ArrayBuffer): void
 
@@ -185,7 +185,7 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
   console.info(`hashResult: ${hashResult}`);
   ```
 
-### digest<sup>20+</sup>
+### digest
 
 digest(): string
 
