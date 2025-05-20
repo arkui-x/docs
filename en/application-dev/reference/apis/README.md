@@ -70,6 +70,8 @@
 
 - File Management
   - [@ohos.file.fs (File Management)](js-apis-file-fs.md)
+  - [@ohos.file.hash (File Hash Processing)](js-apis-file-hash.md)
+  - [@ohos.file.statvfs (File System Space Statistics)](js-apis-file-statvfs.md)
 
 - Device Management
   - [@ohos.deviceInfo (Device Information)](js-apis-device_Info.md)
