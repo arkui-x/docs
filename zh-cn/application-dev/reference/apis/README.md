@@ -101,6 +101,8 @@
   - [@ohos.bluetooth.constant ](js-apis-bluetooth-constant.md)
 - 文件管理
   - [@ohos.file.fs (文件管理)](js-apis-file-fs.md)
+  - [@ohos.file.hash (文件哈希处理)](js-apis-file-hash.md)
+  - [@ohos.file.statvfs (文件系统空间统计)](js-apis-file-statvfs.md)
   - [@ohos.file.photoAccessHelper (相册管理模块)](js-apis-photoAccessHelper.md)
   - [@ohos.file.picker(选择器)](js-apis-file-picker.md)
 
