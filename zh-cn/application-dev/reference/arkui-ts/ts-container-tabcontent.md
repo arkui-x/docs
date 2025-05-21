@@ -159,6 +159,16 @@ BottomTabBarStyle的静态构造函数。
 | VERTICAL    | 页签内容上下排布。 |
 | HORIZONAL   | 页签内容左右排布。 |
 
+### TabBarSymbol<sup>20+</sup>
+
+页签内symbol图标样式对象。
+
+**支持平台：** Android、iOS
+
+| 名称   | 类型            | 必填 | 说明                                                                                                                                                                  |
+| -------- | ------------------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| normal   | SymbolGlyphModifier | 是   | 页签内symbol图标普通态样式。<br/>默认值：<br/>fontColor：#66182431 <br/>renderingStrategy：SymbolRenderingStrategy.MULTIPLE_OPACITY<br/>fontSize：24vp |
+| selected | SymbolGlyphModifier | 是   | 页签内symbol图标选中态样式。<br/>默认值：<br/>fontColor：#ff007dff<br/>renderingStrategy：SymbolRenderingStrategy.MULTIPLE_OPACITY<br/>fontSize：24vp |
 
 ## 示例
 
@@ -867,3 +877,79 @@ struct TabContentExample6 {
 ```
 
 ![tabContent4](figures/tabContent5.gif)
+
+### 示例7
+
+```ts
+// xxx.ets
+import { SymbolGlyphModifier } from '@kit.ArkUI';
+
+@Entry
+@Component
+struct Index {
+  @State symbolModifier1: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.ohos_wifi'));
+  @State symbolModifier2: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.ellipsis_bubble'));
+  @State symbolModifier3: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.dot_video'));
+  @State symbolModifier4: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.exposure')); 
+  build() {
+    Row() {
+      Scroll() {
+        Column() {
+          Tabs({ barPosition: BarPosition.End }) {
+            TabContent() {
+              Column().width('100%').height('100%').backgroundColor(Color.Pink)
+            }.tabBar(new BottomTabBarStyle({
+              normal: this.symbolModifier1,
+            }, 'Pink'))
+            .onWillShow(() => {
+            })
+            .onWillHide(() => {
+            })
+
+            TabContent() {
+              Column().width('100%').height('100%').backgroundColor(Color.Orange)
+            }.tabBar(new BottomTabBarStyle({
+              normal: this.symbolModifier2,
+            }, 'Orange'))
+            .onWillShow(() => {
+            })
+            .onWillHide(() => {
+            })
+
+            TabContent() {
+              Column().width('100%').height('100%').backgroundColor(Color.Blue)
+            }.tabBar(new BottomTabBarStyle({
+              normal: this.symbolModifier3,
+            }, 'Blue'))
+            .onWillShow(() => {
+            })
+            .onWillHide(() => {
+            })
+
+            TabContent() {
+              Column().width('100%').height('100%').backgroundColor(Color.Green)
+            }.tabBar(new BottomTabBarStyle({
+              normal: this.symbolModifier4,
+            }, 'Green'))
+            .onWillShow(() => {
+            })
+            .onWillHide(() => {
+            })
+          }
+          .vertical(false)
+          .scrollable(true)
+          .barMode(BarMode.Fixed)
+          .onChange((index: number) => {
+          })
+          .width('90%')
+          .height('30%')
+          .backgroundColor(0xF1F3F5)
+          }
+        .width('100%')
+      }
+    }
+    .height('100%')
+  }
+}
+  ```
+![tabContent4](figures/tabbarsymbol.png)

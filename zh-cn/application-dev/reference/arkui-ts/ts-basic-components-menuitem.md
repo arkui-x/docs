@@ -22,6 +22,8 @@ MenuItem(value?: MenuItemOptions| CustomBuilder)
 
 ## MenuItemOptions类型说明
 
+**支持平台：** Android、iOS
+
 | 名称      | 类型                                        | 必填 | 描述                                   |
 | --------- | ------------------------------------------- | ---- | -------------------------------------- |
 | startIcon | [ResourceStr](ts-types.md#resourcestr)      | 否   | item中显示在左侧的图标信息路径。       |
@@ -29,7 +31,8 @@ MenuItem(value?: MenuItemOptions| CustomBuilder)
 | endIcon   | [ResourceStr](ts-types.md#resourcestr)      | 否   | item中显示在右侧的图标信息路径。       |
 | labelInfo | [ResourceStr](ts-types.md#resourcestr)      | 否   | 定义结束标签信息，如快捷方式Ctrl+C等。 |
 | builder   | [CustomBuilder](ts-types.md#custombuilder8) | 否   | 用于构建二级菜单。                     |
-
+| symbolStartIcon<sup>20+</sup>   | SymbolGlyphModifier | 否   | item中显示在左侧的HMSymbol图标信息路径。配置该项时，原先startIcon图标不显示。                     |
+| symbolEndIcon<sup>20+</sup>  | SymbolGlyphModifier | 否   | item中显示在右侧的HMSymbol图标信息路径。配置该项时，原先endIcon图标不显示。                     |
 ## 属性
 
 除支持[通用属性](ts-universal-attributes-size.md)外，还支持以下属性:
@@ -52,3 +55,68 @@ MenuItem(value?: MenuItemOptions| CustomBuilder)
 ## 示例
 
 详见[Menu组件示例](ts-basic-components-menu.md#示例)。
+
+### 示例1
+
+```ts
+import { SymbolGlyphModifier } from '@kit.ArkUI';
+
+@Entry
+@Component
+struct Index {
+
+    @State startIconModifier: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.ohos_mic')).fontSize('24vp');
+    @State endIconModifier: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.ohos_trash')).fontSize('24vp');
+
+    @Builder
+    SubMenu() {
+        Menu() {
+        MenuItem({ content: "复制", labelInfo: "Ctrl+C" })
+        MenuItem({ content: "粘贴", labelInfo: "Ctrl+V" })
+        }
+    }
+
+    @Builder
+    MyMenu() {
+        Menu() {
+        MenuItem({ symbolStartIcon: this.startIconModifier, content: "菜单选项" })
+        MenuItem({ symbolStartIcon: this.startIconModifier, content: "菜单选项" })
+            .enabled(false)
+        MenuItem({
+            symbolStartIcon: this.startIconModifier,
+            content: "菜单选项",
+            symbolEndIcon: this.endIconModifier,
+            builder: (): void => this.SubMenu()
+        })
+        MenuItemGroup({ header: '小标题' }) {
+            MenuItem({
+            symbolStartIcon: this.startIconModifier,
+            content: "菜单选项",
+            symbolEndIcon: this.endIconModifier,
+            builder: (): void => this.SubMenu()
+            })
+            MenuItem({
+            symbolStartIcon: this.startIconModifier,
+            content: "菜单选项",
+            symbolEndIcon: this.endIconModifier,
+            builder: (): void => this.SubMenu()
+            })
+        }
+        }
+    }
+
+    build() {
+        Column() {
+            Column() {
+                Button('click to show menu')
+                .fontWeight(FontWeight.Bold)
+            }
+            .bindMenu(this.MyMenu)
+            .width('100%')
+        }
+        .width('100%')
+        .height('100%')
+    }
+}
+```
+![customKeyboard](figures/menuitem.png)

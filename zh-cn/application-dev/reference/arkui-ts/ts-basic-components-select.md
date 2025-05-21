@@ -16,10 +16,13 @@ Select(options: Array\<[SelectOption](#selectoption对象说明)\>)
 
 ## SelectOption对象说明
 
+**支持平台：** Android、iOS
+
 | 参数名 | 参数类型                            | 必填 | 参数描述       |
 | ------ | ----------------------------------- | ---- | -------------- |
 | value  | [ResourceStr](ts-types.md#resourcestr) | 是   | 下拉选项内容。 |
 | icon   | [ResourceStr](ts-types.md#resourcestr) | 否   | 下拉选项图片。 |
+| symbolIcon<sup>20+</sup>   | SymbolGlyphModifier | 否   | 下拉选项图片。<br/>symbolIcon优先级高于icon。 |
 
 ## 属性
 
@@ -63,8 +66,14 @@ Select(options: Array\<[SelectOption](#selectoption对象说明)\>)
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | onSelect(callback: (index: number, value?:&nbsp;string) => void) | 下拉菜单选中某一项的回调。<br/>index：选中项的索引。<br/>value：选中项的值。 |
 
+### MenuItemConfiguration<sup>12+</sup>对象说明
+
+| 名称     | 类型                                        | 必填 | 说明                                                         |  支持Android  |支持iOS  |
+| ---------- | ----------------------------------------------- | ---- | ------------------------------------------------------------ | ---- | ---- |
+| symbolIcon<sup>20+</sup> | SymbolGlyphModifier | 否   | 下拉选项Symbol图片内容。      |是 | 是|
 ##  示例
 
+###  示例1
 ```ts
 // xxx.ets
 @Entry
@@ -102,3 +111,53 @@ struct SelectExample {
 ```
 
 ![](figures/select.png)
+
+###  示例2
+
+```ts
+// xxx.ets
+import { SymbolGlyphModifier } from '@kit.ArkUI';
+@Entry
+@Component
+struct SelectExample {
+  @State text1: string = "Click Select"
+  @State index: number = 2
+  @State space: number = 8
+  @State arrowPosition: ArrowPosition = ArrowPosition.END
+  @State symbolModifier5: SymbolGlyphModifier =
+    new SymbolGlyphModifier($r('sys.symbol.ohos_wifi')).fontColor([Color.Green]);
+  @State symbolModifier6: SymbolGlyphModifier =
+    new SymbolGlyphModifier($r('sys.symbol.ohos_star')).fontColor([Color.Red]);
+  @State symbolModifier7: SymbolGlyphModifier =
+    new SymbolGlyphModifier($r('sys.symbol.ohos_trash')).fontColor([Color.Gray]);
+  @State symbolModifier8: SymbolGlyphModifier =
+    new SymbolGlyphModifier($r('sys.symbol.exposure')).fontColor([Color.Gray]);
+  build() {
+    Column() {
+       Select([{ value: 'aaa', symbolIcon: this.symbolModifier5 },
+            { value: 'bbb', symbolIcon: this.symbolModifier6 },
+            { value: 'ccc', symbolIcon: this.symbolModifier7 },
+            { value: 'ddd', symbolIcon: this.symbolModifier8 }])
+            .selected(this.index)
+            .value(this.text1)
+            .font({ size: 16, weight: 500 })
+            .fontColor('#182431')
+            .selectedOptionFont({ size: 16, weight: 400 })
+            .optionFont({ size: 16, weight: 400 })
+            .space(this.space)
+            .arrowPosition(this.arrowPosition)
+            .menuAlign(MenuAlignType.START, { dx: 0, dy: 0 })
+            .onSelect((index: number, text1?: string | undefined) => {
+              console.info('Select:' + index)
+              this.index = index;
+              if (text1) {
+                this.text1 = text1;
+              }
+            })
+    }.width('100%')
+  }
+}
+```
+
+
+![](figures/select_symbol.png)
