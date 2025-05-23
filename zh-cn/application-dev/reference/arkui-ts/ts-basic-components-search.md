@@ -155,6 +155,13 @@ getTextContentLineCount(): number
 | ----- | -------- |
 | number| 已编辑文本内容行数。 |
 
+### CancelButtonSymbolOptions<sup>20+</sup>
+
+**支持平台：** Android、iOS
+
+| 名称     | 类型                                        | 必填 | 说明                                                         |
+| ---------- | ----------------------------------------------- | ---- | ------------------------------------------------------------ |
+| icon | SymbolGlyphModifier	| 否   | 右侧清除按钮Symbol图标。      |
 ##  示例
 
 ### 示例1
@@ -278,6 +285,44 @@ struct SearchExample {
     }
   }
 }
-````
+```
 
 ![customKeyboard](figures/searchCustomKeyboard.png)
+
+
+##  示例4
+
+```ts
+
+// xxx.ets
+import { SymbolGlyphModifier } from '@kit.ArkUI';
+
+@Entry
+@Component
+struct SelectExample {
+  @State modifier: SymbolGlyphModifier =
+    new SymbolGlyphModifier($r("sys.symbol.ohos_wifi")).fontColor([Color.Blue]).fontSize(100);
+  @State changeValue: string = ''
+  controller: SearchController = new SearchController()
+  build() {
+    Column() {
+       Search({ value: this.changeValue, placeholder: 'Type to search...', controller: this.controller })
+            .searchIcon(new SymbolGlyphModifier($r('sys.symbol.magnifyingglass')).fontColor([Color.Red]))
+            .cancelButton({
+              style: CancelButtonStyle.CONSTANT,
+              icon: new SymbolGlyphModifier($r('sys.symbol.xmark')).fontColor([Color.Green])
+            })
+            .searchButton('SEARCH')
+            .width('95%')
+            .height(40)
+            .backgroundColor('#F5F5F5')
+            .placeholderColor(Color.Grey)
+            .placeholderFont({ size: 14, weight: 400 })
+            .textFont({ size: 14, weight: 400 })
+            .margin(10)
+    }.width('100%')
+  }
+}
+```
+
+![](figures/search_symbol.png)
