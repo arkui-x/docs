@@ -725,7 +725,7 @@ router.pushUrl({
 })
 ```
 
-### replaceUrl
+### replaceUrl<sup>19+</sup>
 
 replaceUrl(options: router.RouterOptions): Promise&lt;void&gt;
 
@@ -796,7 +796,7 @@ struct Index {
 }
 ```
 
-### replaceUrl
+### replaceUrl<sup>19+<sup>
 
 replaceUrl(options: router.RouterOptions, callback: AsyncCallback&lt;void&gt;): void
 
@@ -864,7 +864,7 @@ struct Index {
 }
 ```
 
-### replaceUrl
+### replaceUrl<sup>19+<sup>
 
 replaceUrl(options: router.RouterOptions, mode: router.RouterMode): Promise&lt;void&gt;
 
@@ -943,7 +943,7 @@ struct Index {
 }
 ```
 
-### replaceUrl
+### replaceUrl<sup>19+<sup>
 
 replaceUrl(options: router.RouterOptions, mode: router.RouterMode, callback: AsyncCallback&lt;void&gt;): void
 
@@ -1040,7 +1040,7 @@ let router = uiContext.getRouter();
 router.back({url:'pages/detail'});    
 ```
 
-### back
+### back<sup>19+<sup>
 
 back(index: number, params?: Object): void;
 
