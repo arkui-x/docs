@@ -208,6 +208,60 @@ static is24HourClock(): boolean
   }
   ```
 
+
+### setAppPreferredLanguage<sup>20+</sup>
+
+static setAppPreferredLanguage(language: string): void
+
+设置应用偏好语言。设置后，应用将优先加载应用偏好语言对应的资源。设置偏好语言为'default'后，应用语言将跟随系统语言，应用冷启动生效。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名      | 类型     | 必填   | 说明    |
+| -------- | ------ | ---- | ----- |
+| language | string | 是    | 合法的语言ID或'default'。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)。
+
+| 错误码ID  | 错误信息                   |
+| ------ | ---------------------- |
+| 890001 | param value not valid. |
+
+**示例：**
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+
+  try {
+    i18n.System.setAppPreferredLanguage('zh');
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call System.setAppPreferredLanguage failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+### getAppPreferredLanguage<sup>9+</sup>
+
+static getAppPreferredLanguage(): string
+
+获取应用偏好语言。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型     | 说明       |
+| ------ | -------- |
+| string | 应用偏好语言。 |
+
+**示例：**
+  ```ts
+  let appPreferredLanguage: string = i18n.System.getAppPreferredLanguage();
+  ```
+
 ## I18n.isRTL<sup>7+</sup>
 
 isRTL(locale: string): boolean
@@ -242,20 +296,20 @@ getCalendar(locale: string, type? : string): Calendar
 
 **系统能力**：SystemCapability.Global.I18n
 
-**参数：** 
+**参数：**
 
 | 参数名    | 类型     | 必填   | 说明                                       |
 | ------ | ------ | ---- | ---------------------------------------- |
 | locale | string | 是    | 合法的locale值，例如zh-Hans-CN。                 |
 | type   | string | 否    | 合法的日历类型，目前合法的类型有buddhist,&nbsp;chinese,&nbsp;coptic,&nbsp;ethiopic,&nbsp;hebrew,&nbsp;gregory,&nbsp;indian,&nbsp;islamic_civil,&nbsp;islamic_tbla,&nbsp;islamic_umalqura,&nbsp;japanese,&nbsp;persian。当type没有给出时，采用区域默认的日历类型。 |
 
-**返回值：** 
+**返回值：**
 
 | 类型                     | 说明    |
 | ---------------------- | ----- |
 | [Calendar](#calendar8) | 日历对象。 |
 
-**示例：** 
+**示例：**
   ```js
   I18n.getCalendar("zh-Hans", "chinese"); // 获取中国农历日历对象
   ```
