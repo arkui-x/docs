@@ -44,6 +44,8 @@ ArkUI-X框架支持日志拦截能力，iOS侧提供原生接口，用于注入L
 
 ​		设置日志拦截等级需使用[StageApplication](../reference/arkui-for-ios/StageApplication.md)类中[setLogLevel](../reference/arkui-for-ios/StageApplication.md)方法，设置日志拦截等级成功，日志等级优先级低于该日志拦截等级时，日志不被输出。
 
+​		通过[setLogInterface](../reference/arkui-for-android/StageApplicationDelegate.md)注入LogInterface时， **默认仅拦截并处理ERROR和FATAL等级日志**；通过[setLogLevel](../reference/arkui-for-android/StageApplicationDelegate.md)可降低日志拦截等级以输出更详细日志。
+
 设置ArkUI-X框架LogInterface以及日志拦截等级，完整示例如下：
 
 ```objective-c
@@ -65,10 +67,3 @@ ArkUI-X框架支持日志拦截能力，iOS侧提供原生接口，用于注入L
    	return YES;
 }
 ```
-
-
-
-
-
-
-
