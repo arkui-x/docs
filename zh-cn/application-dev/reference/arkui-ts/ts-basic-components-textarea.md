@@ -46,6 +46,8 @@ TextArea(value?:{placeholder?: ResourceStr, text?: ResourceStr, controller?: Tex
 | selectionMenuHidden<sup>10+</sup> | boolean | 设置长按输入框或者右键输入框时，是否弹出文本选择菜单。<br />默认值：false |
 | maxLines<sup>10+</sup> | number | 设置内联输入风格编辑态时文本可显示的最大行数。<br/>默认值：3 <br/>**说明：**<br/>取值范围：(0, +∞)。|
 | customKeyboard<sup>10+</sup> | [CustomBuilder](ts-types.md#custombuilder8) | 设置自定义键盘。<br/>**说明：**<br/>当设置自定义键盘时，输入框激活后不会打开系统输入法，而是加载指定的自定义组件。<br/>自定义键盘的高度可以通过自定义组件根节点的height属性设置，宽度不可设置，使用系统默认值。<br/>自定义键盘采用覆盖原始界面的方式呈现，不会对应用原始界面产生压缩或者上提。<br/>自定义键盘无法获取焦点，但是会拦截手势事件。<br/>默认在输入控件失去焦点时，关闭自定义键盘，开发者也可以通过[TextAreaController](#textareacontroller8).[stopEditing](#stopediting10)方法控制键盘关闭。 | 
+| minFontScale<sup>20+</sup> | number \| [Resource](ts-types.md#resource) | 文本最小的字体缩放倍数，支持undefined类型。<br/>取值范围：[0, 1]<br/>**说明：** <br/>设置的值小于0时，按值为0处理。设置的值大于1，按值为1处理。异常值默认不生效。<br/>使用前需在工程中配置configuration.json文件和app.json5文件，具体详见[示例4设置最小字体范围与最大字体范围](#示例4)。 |
+| maxFontScale<sup>20+</sup> | number \| [Resource](ts-types.md#resource) | 文本最大的字体缩放倍数，支持undefined类型。<br/>取值范围：[1, +∞)<br/>**说明：** <br/>设置的值小于1时，按值为1处理。异常值默认不生效。<br/>使用前需在工程中配置configuration.json文件和app.json5文件，具体详见[示例4设置最小字体范围与最大字体范围](#示例4)。 |
 
 >  **说明：**
 >
@@ -273,3 +275,58 @@ struct TextAreaExample {
 ```
 
 ![customKeyboard](figures/textAreaCustomKeyboard.png)
+
+### 示例4
+
+该示例通过minFontScale、maxFontScale设置字体显示最小与最大范围。
+
+```json
+// 开启应用缩放跟随系统
+// AppScope/resources/base，新建文件夹profile。
+// AppScope/resources/base/profile，新建文件configuration.json。
+// AppScope/resources/base/profile/configuration.json，增加如下代码。
+{
+  "configuration": {
+    "fontSizeScale": "followSystem",
+    "fontSizeMaxScale": "3.2"
+  }
+}
+```
+
+```json
+// AppScope/app.json5，修改如下代码。
+{
+  "app": {
+    "bundleName": "com.example.myapplication",
+    "vendor": "example",
+    "versionCode": 1000000,
+    "versionName": "1.0.0",
+    "icon": "$media:app_icon",
+    "label": "$string:app_name",
+    "configuration": "$profile:configuration"
+  }
+}
+```
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct TextAreaExample {
+  @State minFontScale: number = 0.85;
+  @State maxFontScale: number = 2;
+
+  build() {
+    Column() {
+      Column({ space: 30 }) {
+        Text("系统字体变大变小，变大变小aaaaaaaAAAAAA")
+        TextArea({
+          placeholder: 'The text area can hold an unlimited amount of text. input your word...',
+        })
+          .minFontScale(this.minFontScale) // 设置最小字体缩放倍数，参数为undefined则跟随系统默认倍数缩放
+          .maxFontScale(this.maxFontScale) // 设置最大字体缩放倍数，参数为undefined则跟随系统默认倍数缩放
+      }.width('100%')
+    }
+  }
+}
+```
