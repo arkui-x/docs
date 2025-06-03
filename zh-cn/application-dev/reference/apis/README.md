@@ -31,6 +31,10 @@
     - [弹出框 (Dialog)](js-apis-arkui-advanced-dialog.md)
   - 系统预置UI组件库
     - [SwipeRefresher](js-api-arkui-advanced-SwipeRefresher.md)
+    - [ComposeListItem](js-apis-arkui-advanced-composeListItem.md)
+    - [ComposeTitleBar](js-apis-arkui-advanced-composeTitleBar.md)
+    - [SelectTitleBar](js-apis-arkui-advanced-selectTitleBar.md)
+    - [SelectionMenu](js-apis-arkui-advanced-selectionMenu.md)
 - Ability框架
   - Stage模型能力的接口(推荐)
     - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](js-apis-app-ability-abilityLifecycleCallback.md)
