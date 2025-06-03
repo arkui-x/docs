@@ -4,7 +4,7 @@
 
 > **说明**
 >
-> - 本模块首批接口从API version 8开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+> - 本模块首批接口从API version 10开始支持跨平台。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 >
 > - 页面路由需要在页面渲染完成之后才能调用，在onInit和onReady生命周期中页面还处于渲染阶段，禁止调用页面路由方法。
 >
@@ -18,7 +18,7 @@
 import router from '@ohos.router'
 ```
 
-## router.pushUrl<sup>9+</sup>
+## router.pushUrl
 
 pushUrl(options: RouterOptions): Promise&lt;void&gt;
 
@@ -68,7 +68,7 @@ router.pushUrl({
   })
 ```
 
-## router.pushUrl<sup>9+</sup>
+## router.pushUrl
 
 pushUrl(options: RouterOptions, callback: AsyncCallback&lt;void&gt;): void
 
@@ -112,7 +112,7 @@ router.pushUrl({
   console.info('pushUrl success');
 })
 ```
-## router.pushUrl<sup>9+</sup>
+## router.pushUrl
 
 pushUrl(options: RouterOptions, mode: RouterMode): Promise&lt;void&gt;
 
@@ -163,7 +163,7 @@ router.pushUrl({
   })
 ```
 
-## router.pushUrl<sup>9+</sup>
+## router.pushUrl
 
 pushUrl(options: RouterOptions, mode: RouterMode, callback: AsyncCallback&lt;void&gt;): void
 
@@ -209,7 +209,7 @@ router.pushUrl({
 })
 ```
 
-## router.pushNamedRoute<sup>10+</sup>
+## router.pushNamedRoute
 
 pushNamedRoute(options: NamedRouterOptions): Promise&lt;void&gt;
 
@@ -272,7 +272,7 @@ try {
 }
 ```
 
-## router.pushNamedRoute<sup>10+</sup>
+## router.pushNamedRoute
 
 pushNamedRoute(options: NamedRouterOptions, callback: AsyncCallback&lt;void&gt;): void
 
@@ -330,7 +330,7 @@ router.pushNamedRoute({
 })
 ```
 
-## router.pushNamedRoute<sup>10+</sup>
+## router.pushNamedRoute
 
 pushNamedRoute(options: NamedRouterOptions, mode: RouterMode): Promise&lt;void&gt;
 
@@ -394,7 +394,7 @@ try {
 }
 ```
 
-## router.pushNamedRoute<sup>10+</sup>
+## router.pushNamedRoute
 
 pushNamedRoute(options: NamedRouterOptions, mode: RouterMode, callback: AsyncCallback&lt;void&gt;): void
 
@@ -453,7 +453,7 @@ router.pushNamedRoute({
 })
 ```
 
-## router.replaceNamedRoute<sup>10+</sup>
+## router.replaceNamedRoute
 
 replaceNamedRoute(options: NamedRouterOptions): Promise&lt;void&gt;
 
@@ -505,7 +505,7 @@ try {
 }
 ```
 
-## router.replaceNamedRoute<sup>10+</sup>
+## router.replaceNamedRoute
 
 replaceNamedRoute(options: NamedRouterOptions, callback: AsyncCallback&lt;void&gt;): void
 
@@ -552,7 +552,7 @@ router.replaceNamedRoute({
 })
 ```
 
-## router.replaceNamedRoute<sup>10+</sup>
+## router.replaceNamedRoute
 
 replaceNamedRoute(options: NamedRouterOptions, mode: RouterMode): Promise&lt;void&gt;
 
@@ -606,7 +606,7 @@ try {
 }
 ```
 
-## router.replaceNamedRoute<sup>10+</sup>
+## router.replaceNamedRoute
 
 replaceNamedRoute(options: NamedRouterOptions, mode: RouterMode, callback: AsyncCallback&lt;void&gt;): void
 
@@ -745,7 +745,7 @@ console.log('current path = ' + page.path);
 | name  | string | 否   | 表示当前页面的名称，即对应文件名。                           |
 | path  | string | 是   | 表示当前页面的路径。                                         |
 
-## router.showAlertBeforeBackPage<sup>9+</sup>
+## router.showAlertBeforeBackPage
 
 showAlertBeforeBackPage(options: EnableAlertOptions): void
 
@@ -788,7 +788,7 @@ try {
 | ------- | ------ | ---- | ---------------- |
 | message | string | 是   | 询问对话框内容。 |
 
-## router.hideAlertBeforeBackPage<sup>9+</sup>
+## router.hideAlertBeforeBackPage
 
 hideAlertBeforeBackPage(): void
 
@@ -822,7 +822,7 @@ getParams(): Object
 router.getParams();
 ```
 
-## RouterOptions
+## RouterOptions<sup>19+<sup>
 
 路由跳转选项。
 
@@ -837,7 +837,7 @@ router.getParams();
   > **说明：**
   > 页面路由栈支持的最大Page数量为32。
 
-## RouterMode<sup>9+</sup>
+## RouterMode
 
 路由跳转模式。
 
@@ -848,7 +848,7 @@ router.getParams();
 | Standard | 多实例模式，也是默认情况下的跳转模式。 <br/>目标页面会被添加到页面栈顶，无论栈中是否存在相同url的页面。<br/>**说明：** 不使用路由跳转模式时，则按照默认的多实例模式进行跳转。 | 支持        | 支持    |
 | Single   | 单实例模式。<br/>如果目标页面的url已经存在于页面栈中，则会将离栈顶最近的同url页面移动到栈顶，该页面成为新建页。<br />如果目标页面的url在页面栈中不存在同url页面，则按照默认的多实例模式进行跳转。 | 支持        | 支持    |
 
-## NamedRouterOptions<sup>10+</sup>
+## NamedRouterOptions
 
 命名路由跳转选项。
 
