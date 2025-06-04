@@ -30,6 +30,23 @@ import window from '@ohos.window';
 | displayId  | number                     | 否 | 当前物理屏幕id。不设置，则默认为-1，该参数应为整数。                                             |
 | parentId   | number                     | 否 | 父窗口id。不设置，则默认为-1，该参数应为整数。                                                           |
 
+## SystemBarProperties<sup>20+</sup>
+
+状态栏、三键导航栏的属性。在设置窗口级状态栏、三键导航栏属性时使用。
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+| 名称                                   | 类型 |  必填 | 说明                                                         |
+| -------------------------------------- | -------- | ---- | ------------------------------------------------------------ |
+| statusBarColor                        | string   |  否   | 状态栏背景颜色(iOS中不支持)，为十六进制RGB或ARGB颜色，不区分大小写，例如`'#00FF00'`或`'#FF00FF00'`。默认值：`'#66000000'`。 <br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core|
+| isStatusBarLightIcon      | boolean  |  否   | 状态栏图标是否为高亮状态。true表示高亮；false表示不高亮。默认值：false。 <br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core|
+| statusBarContentColor     | string   |  否   | 状态栏文字颜色(跨平台中暂不支持)。当设置此属性后， `isStatusBarLightIcon`属性设置无效。默认值：`'#E5FFFFFF'`。 <br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core|
+| navigationBarColor                     | string   |  否   | 三键导航栏背景颜色(iOS中不支持)，为十六进制RGB或ARGB颜色，不区分大小写，例如`'#00FF00'`或`'#FF00FF00'`。默认值：`'#66000000'`。 <br><!--RP12--><!--RP12End--><br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core|
+| isNavigationBarLightIcon  | boolean  |  否   | 三键导航栏图标是否为高亮状态(iOS中不支持)。true表示高亮；false表示不高亮。默认值：false。 <br><!--RP12--><!--RP12End--><br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core|
+| navigationBarContentColor | string   |  否   | 三键导航栏文字颜色(跨平台中暂不支持)。当设置此属性后， `isNavigationBarLightIcon`属性设置无效。默认值：`'#E5FFFFFF'`。 <br><!--RP12--><!--RP12End--><br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core|
+| enableStatusBarAnimation | boolean   |  否   | 是否使能状态栏属性变化时动画效果(Android暂不支持)。true表示变化时使能动画效果；false表示没有使能动画效果。默认值：false。 <br> **系统能力：** SystemCapability.Window.SessionManager|
+| enableNavigationBarAnimation | boolean   |  否   | 是否使能三键导航栏属性变化时动画效果(跨平台中暂不支持)。true表示变化时使能动画效果；false表示没有使能动画效果。默认值：false。 <br><!--RP12--><!--RP12End--><br> **系统能力：** SystemCapability.Window.SessionManager|
+
 ## Orientation<sup>9+</sup>
 
 窗口显示方向类型枚举。
@@ -82,6 +99,18 @@ import window from '@ohos.window';
 | width  | number   | 是   | 是   | 窗口宽度，单位为px，该参数应为整数。 |
 | height | number   | 是   | 是   | 窗口高度，单位为px，该参数应为整数。 |
 
+## AvoidAreaOptions<sup>20+</sup>
+
+系统规避区变化后返回当前规避区域以及规避区域类型。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+| 名称       | 类型      | 可读 | 可写 | 说明               |
+| ---------- | ------------- | ---- | ---- | ------------------ |
+| type   | [AvoidAreaType](#avoidareatype7) | 是   | 是   | 系统规避区变化后返回的规避区域类型。 |
+| area   | [AvoidArea](#avoidarea7)         | 是   | 是   | 系统规避区变化后返回的规避区域。 |
 ## WindowProperties
 
 窗口属性。
@@ -93,6 +122,22 @@ import window from '@ohos.window';
 | windowRect<sup>7+</sup>               | [Rect](#rect7)             | 是   | 是   | 窗口尺寸。                                                                                                  |
 | brightness                            | number                    | 是   | 是   | 屏幕亮度。该参数为浮点数，可设置的亮度范围为[0.0, 1.0]，其取1.0时表示最大亮度值。如果窗口没有设置亮度值，表示亮度跟随系统，此时获取到的亮度值为-1。                      |
 | isKeepScreenOn                        | boolean                   | 是   | 是   | 屏幕是否常亮，默认为false。true表示常亮；false表示不常亮。                                                                   |
+## WindowStatusType<sup>20+</sup>
+
+窗口模式枚举。
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称       | 值   | 说明                          |
+| ---------- | ---- | ----------------------------- |
+| UNDEFINED  | 0    | 表示APP未定义窗口模式。       |
+| FULL_SCREEN | 1    | 表示APP全屏模式。             |
+| MAXIMIZE    | 2    | 表示APP窗口最大化模式（跨平台暂不支持）。   |
+| MINIMIZE    | 3    | 表示APP窗口最小化模式。   |
+| FLOATING    | 4    | 表示APP自由悬浮形式窗口模式（跨平台暂不支持）。   |
+| SPLIT_SCREEN  | 5    | 表示APP分屏模式。   |
 ## window.createWindow<sup>9+</sup>
 
 createWindow(config: Configuration, callback: AsyncCallback&lt;Window&gt;): void
@@ -1031,6 +1076,81 @@ try {
   console.error('Failed to set the system bar to be invisible. Cause:' + JSON.stringify(exception));
 }
 ```
+### setWindowSystemBarProperties<sup>20+</sup>
+
+setWindowSystemBarProperties(systemBarProperties: SystemBarProperties): Promise&lt;void&gt;
+
+设置主窗口三键导航栏、状态栏的属性，使用Promise异步回调，<!--RP5-->该接口在2in1设备上调用不生效。<!--RP5End-->
+
+子窗口调用后不生效。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名              | 类型                                        | 必填 | 说明                   |
+| ------------------- | ------------------------------------------- | ---- | ---------------------- |
+| systemBarProperties | [SystemBarProperties](#systembarproperties20) | 是   | 三键导航栏、状态栏的属性。 |
+
+**返回值：**
+
+| 类型                | 说明                      |
+| ------------------- | ------------------------- |
+| Promise&lt;void&gt; | 无返回结果的Promise对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 401     | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 801     | Capability not supported. Failed to call the API due to limited device capabilities. |
+| 1300002 | This window state is abnormal.               |
+| 1300003 | This window manager service works abnormally. |
+
+**示例：**
+
+```ts
+// EntryAbility.ets
+import { UIAbility } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+export default class EntryAbility extends UIAbility {
+  // ...
+  onWindowStageCreate(windowStage: window.WindowStage): void {
+    console.info('onWindowStageCreate');
+    let windowClass: window.Window | undefined = undefined;
+    windowStage.getMainWindow((err: BusinessError, data) => {
+      const errCode: number = err.code;
+      if (errCode) {
+        console.error(`Failed to obtain the main window. Cause code: ${err.code}, message: ${err.message}`);
+        return;
+      }
+      windowClass = data;
+      let SystemBarProperties: window.SystemBarProperties = {
+        statusBarColor: '#ff00ff',
+        navigationBarColor: '#00ff00',
+        isStatusBarLightIcon: false,
+        isNavigationBarLightIcon: false,
+        enableStatusBarAnimation:false,
+      };
+      try {
+        let promise = windowClass.setWindowSystemBarProperties(SystemBarProperties);
+        promise.then(() => {
+          console.info('Succeeded in setting the system bar properties.');
+        }).catch((err: BusinessError) => {
+          console.error(`Failed to set the system bar properties. Cause code: ${err.code}, message: ${err.message}`);
+        });
+      } catch (exception) {
+        console.error(`Failed to set the system bar properties. Cause code: ${exception.code}, message: ${exception.message}`);
+      }
+    });
+  }
+}
+```
 
 ### setPreferredOrientation<sup>9+</sup>
 
@@ -1438,6 +1558,86 @@ try {
 }
 ```
 
+### on('windowStatusChange')<sup>20+</sup>
+
+on(type:  'windowStatusChange', callback: Callback&lt;WindowStatusType&gt;): void
+
+开启窗口模式变化的监听，当窗口windowStatus发生变化时进行通知（此时窗口属性可能还没有更新，当前仅支持iOS，Android 暂不支持）。
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**参数：**
+
+| 参数名   | 类型                           | 必填 | 说明                                                     |
+| -------- | ------------------------------ | ---- | -------------------------------------------------------- |
+| type     | string                         | 是   | 监听事件，固定为'windowStatusChange'，即窗口模式变化事件。 |
+| callback | Callback&lt;[WindowStatusType](#windowstatustype20)&gt; | 是   | 回调函数。返回当前的窗口模式。                           |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | ------------------------------ |
+| 401     | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+| 801     | Capability not supported. Failed to call the API due to limited device capabilities. |
+
+**示例：**
+
+```ts
+try {
+    windowClass.on('windowStatusChange', (WindowStatusType) => {
+        console.info('Succeeded in enabling the listener for window status changes. Data: ' + JSON.stringify(WindowStatusType));
+    });
+} catch (exception) {
+    console.error(`Failed to unregister callback. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### off('windowStatusChange')<sup>20+</sup>
+
+off(type: 'windowStatusChange', callback?: Callback&lt;WindowStatusType&gt;): void
+
+关闭窗口模式变化的监听(当前仅支持iOS，Android 暂不支持)。
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**参数：**
+
+| 参数名   | 类型                          | 必填 | 说明                                                     |
+| -------- | ----------------------------- | ---- | -------------------------------------------------------- |
+| type     | string                        | 是   | 监听事件，固定为'windowStatusChange'，即窗口模式变化事件。 |
+| callback | Callback&lt;[WindowStatusType](#windowstatustype20)&gt; | 否   | 回调函数。返回当前的窗口模式。如果传入参数，则关闭该监听。如果未传入参数，则关闭所有窗口模式变化的监听。                           |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | ------------------------------ |
+| 401     | Parameter error. Possible cause: 1. Incorrect parameter types; 2. Parameter verification failed. |
+| 801     | Capability not supported. Failed to call the API due to limited device capabilities. |
+
+**示例：**
+
+```ts
+const callback = (windowStatusType: window.WindowStatusType) => {
+    // ...
+}
+try {
+    windowClass.on('windowStatusChange', callback);
+    windowClass.off('windowStatusChange', callback);
+    // 如果通过on开启多个callback进行监听，同时关闭所有监听：
+    windowClass.off('windowStatusChange');
+} catch (exception) {
+    console.error(`Failed to unregister callback. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
 ### setWindowBackgroundColor<sup>9+</sup>
 
 setWindowBackgroundColor(color: string): void
@@ -1551,7 +1751,92 @@ try {
   console.error(`Failed to disable the listener for window size changes. Cause code: ${exception.code}, message: ${exception.message}`);
 }
 ```
+### on('avoidAreaChange')<sup>20+</sup>
 
+on(type: 'avoidAreaChange', callback: Callback&lt;AvoidAreaOptions&gt;): void
+
+开启当前应用窗口系统规避区变化的监听。
+在Android中，子窗口会自动避让，不会返回避让区域。
+暂不支持全屏子窗。
+<!--RP7-->常见的触发避让区回调的场景如下：应用窗口在全屏模式、悬浮模式、分屏模式之间的切换；应用窗口旋转；多折叠设备在屏幕折叠态和展开态之间的切换。<!--RP7End-->
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                              | 必填 | 说明                                  |
+| -------- |----------------------------------| ---- |--------------------------------------|
+| type     | string                           | 是   | 监听事件，固定为'avoidAreaChange'，即系统规避区变化事件。 |
+| callback | Callback&lt;[AvoidAreaOptions](#avoidareaoptions20)&gt; | 是   | 回调函数。返回当前规避区以及规避区类型。|
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 401     | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+
+**示例：**
+
+```ts
+try {
+  windowClass.on('avoidAreaChange', (data) => {
+    console.info('Succeeded in enabling the listener for system avoid area changes. type:' +
+    JSON.stringify(data.type) + ', area: ' + JSON.stringify(data.area));
+  });
+} catch (exception) {
+  console.error(`Failed to enable the listener for system avoid area changes. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### off('avoidAreaChange')<sup>20+</sup>
+
+off(type: 'avoidAreaChange', callback?: Callback&lt;AvoidAreaOptions&gt;): void
+
+关闭当前窗口系统规避区变化的监听。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                              | 必填 | 说明                                |
+| -------- |----------------------------------|------|------------------------------------|
+| type     | string                           | 是   | 监听事件，固定为'avoidAreaChange'，即系统规避区变化事件。 |
+| callback | Callback&lt;[AvoidAreaOptions](#avoidareaoptions20)&gt; | 否   | 回调函数。返回当前规避区以及规避区类型。如果传入参数，则关闭该监听。如果未传入参数，则关闭所有系统规避区变化的监听。|
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 401     | Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter verification failed. |
+
+**示例：**
+
+```ts
+interface Param {
+  type: window.AvoidAreaType,
+  area: window.AvoidArea
+}
+const callback = (data: Param) => {
+  // ...
+}
+try {
+  windowClass.on('avoidAreaChange', callback);
+
+  windowClass.off('avoidAreaChange', callback);
+  // 如果通过on开启多个callback进行监听，同时关闭所有监听：
+  windowClass.off('avoidAreaChange');
+} catch (exception) {
+  console.error(`Failed to enable or disable the listener for system avoid area changes. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
 ### setWindowBrightness<sup>9+</sup>
 
 setWindowBrightness(brightness: number, callback: AsyncCallback&lt;void&gt;): void
@@ -1741,7 +2026,108 @@ try {
   console.error('Failed to set the screen to be always on. Cause: ' + JSON.stringify(exception));
 }
 ```
+### setWindowPrivacyMode<sup>20+</sup>
 
+setWindowPrivacyMode(isPrivacyMode: boolean, callback: AsyncCallback&lt;void&gt;): void
+
+设置窗口是否为隐私模式，使用callback异步回调。设置为隐私模式的窗口，窗口内容将无法被截屏或录屏。此接口可用于禁止截屏/录屏的场景。
+子窗口暂不支持单独设置隐私模式，子窗口设置无效果。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+**需要权限：** ohos.permission.PRIVACY_WINDOW
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| ------------- | ------------------------- | -- | ------------------------------------------------------ |
+| isPrivacyMode | boolean                   | 是 | 窗口是否为隐私模式。true表示模式开启；false表示模式关闭。  |
+| callback      | AsyncCallback&lt;void&gt; | 是 | 回调函数。                                              |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | ------------------------------ |
+| 201     | Permission verification failed. The application does not have the permission required to call the API. |
+| 401     | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 1300002 | This window state is abnormal. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let isPrivacyMode: boolean = true;
+try {
+  windowClass.setWindowPrivacyMode(isPrivacyMode, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error(`Failed to set the window to privacy mode. Cause code: ${err.code}, message: ${err.message}`);
+      return;
+    }
+    console.info('Succeeded in setting the window to privacy mode.');
+  });
+} catch (exception) {
+  console.error(`Failed to set the window to privacy mode. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### setWindowPrivacyMode<sup>20+</sup>
+
+setWindowPrivacyMode(isPrivacyMode: boolean): Promise&lt;void&gt;
+
+设置窗口是否为隐私模式，使用Promise异步回调。设置为隐私模式的窗口，窗口内容将无法被截屏或录屏。此接口可用于禁止截屏/录屏的场景。
+子窗口暂不支持单独设置隐私模式，子窗口设置无效果。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+**需要权限：** ohos.permission.PRIVACY_WINDOW
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| ------------- | ------- | -- | ----------------------------------------------------- |
+| isPrivacyMode | boolean | 是 | 窗口是否为隐私模式。true表示模式开启；false表示模式关闭。 |
+
+**返回值：**
+
+| 类型 | 说明 |
+| ------------------- | ------------------------ |
+| Promise&lt;void&gt; | 无返回结果的Promise对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[窗口错误码](errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | ------------------------------ |
+| 201     | Permission verification failed. The application does not have the permission required to call the API. |
+| 401     | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 1300002 | This window state is abnormal. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let isPrivacyMode: boolean = true;
+try {
+  let promise = windowClass.setWindowPrivacyMode(isPrivacyMode);
+  promise.then(() => {
+    console.info('Succeeded in setting the window to privacy mode.');
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to set the window to privacy mode. Cause code: ${err.code}, message: ${err.message}`);
+  });
+} catch (exception) {
+  console.error(`Failed to set the window to privacy mode. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
 ## WindowStageEventType<sup>9+</sup>
 
 WindowStage生命周期。
