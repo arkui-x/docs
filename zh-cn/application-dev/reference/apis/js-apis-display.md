@@ -183,7 +183,7 @@ display.off('remove', callback);
 ## display.isFoldable<sup>20+</sup>
 isFoldable(): boolean
 
-检查设备是否可折叠。
+检查设备是否可折叠。支持在展开或半折叠状态下获取判断值，完全折叠场景下无法获取判断值。
 
 **系统能力：** SystemCapability.Window.SessionManager
 
@@ -221,7 +221,7 @@ ret = display.isFoldable();
 ## display.getFoldStatus<sup>20+</sup>
 getFoldStatus(): FoldStatus
 
-获取可折叠设备的当前折叠状态。
+获取可折叠设备的当前折叠状态。支持在展开或半折叠状态下获取状态值，完全折叠场景下无法获取状态值。
 
 **系统能力：** SystemCapability.Window.SessionManager
 
@@ -260,7 +260,7 @@ console.info('Succeeded in obtaining fold status. Data: ' + JSON.stringify(data)
 
 on(type: 'foldStatusChange', callback: Callback&lt;FoldStatus&gt;): void
 
-开启折叠设备折叠状态变化的监听。
+开启折叠设备折叠状态变化的监听。能够获取展开或半折叠的状态值，无法获取完全折叠的状态值。
 
 **系统能力：** SystemCapability.Window.SessionManager
 
