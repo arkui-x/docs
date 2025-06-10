@@ -128,9 +128,9 @@ statSync(file: string | number): Stat
 
 ## fs.access
 
-access(path: string): Promise&lt;boolean&gt;
+access(path: string, mode?: AccessModeType): Promise&lt;boolean&gt;
 
-检查文件是否存在，使用Promise异步返回。
+检查文件或目录是否存在，或校验操作权限，使用promise异步回调。<br>校验读、写或读写权限不通过会抛出13900012（Permission denied）错误码。
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -139,29 +139,36 @@ access(path: string): Promise&lt;boolean&gt;
 | 参数名 | 类型   | 必填 | 说明                                                         |
 | ------ | ------ | ---- | ------------------------------------------------------------ |
 | path   | string | 是   | 文件应用沙箱路径。                                   |
+| mode<sup>20+</sup>   | [AccessModeType](#accessmodetype20) | 否   | 文件校验的权限。不填该参数则默认校验文件是否存在。|
 
 **返回值：**
 
   | 类型                  | 说明                           |
   | ------------------- | ---------------------------- |
-  | Promise&lt;boolean&gt; | Promise对象。返回boolean，表示文件是否存在。 |
+  | Promise&lt;boolean&gt; | Promise对象。返回布尔值。返回true，表示文件存在；返回false，表示文件不存在。 |
 
 **错误码：**
 
 接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
 
+| 错误码ID                     | 错误信息        |
+| ---------------------------- | ---------- |
+| 401 | 1. 未指定必须的参数；2. 参数类型与接口定义不匹配。 |
+| 13900020 | 非法参数值。 |
+
 **示例：**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
-  fs.access(filePath).then((res) => {
+  fs.access(filePath).then((res: boolean) => {
     if (res) {
       console.info("file exists");
     } else {
       console.info("file not exists");
     }
-  }).catch((err) => {
-    console.info("access failed with error message: " + err.message + ", error code: " + err.code);
+  }).catch((err: BusinessError) => {
+    console.error("access failed with error message: " + err.message + ", error code: " + err.code);
   });
   ```
 
@@ -203,9 +210,9 @@ access(path: string, callback: AsyncCallback&lt;boolean&gt;): void
 
 ## fs.accessSync
 
-accessSync(path: string): boolean
+accessSync(path: string, mode?: AccessModeType): boolean
 
-以同步方法检查文件是否存在。
+以同步方法检查文件或目录是否存在，或校验操作权限。<br>校验读、写或读写权限不通过会抛出13900012（Permission denied）错误码。
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -214,6 +221,7 @@ accessSync(path: string): boolean
 | 参数名 | 类型   | 必填 | 说明                                                         |
 | ------ | ------ | ---- | ------------------------------------------------------------ |
 | path   | string | 是   | 文件应用沙箱路径。                                   |
+| mode<sup>20+</sup>   | [AccessModeType](#accessmodetype20) | 否   | 文件校验的权限。不填该参数则默认校验文件是否存在。 |
 
 **返回值：**
 
@@ -225,20 +233,28 @@ accessSync(path: string): boolean
 
 接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
 
+| 错误码ID                     | 错误信息        |
+| ---------------------------- | ---------- |
+| 401 | 1. 未指定必须的参数；2. 参数类型与接口定义不匹配。 |
+| 13900020 | 非法参数值。 |
+
 **示例：**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
   try {
-      let res = fs.accessSync(filePath);
-      if (res) {
-        console.info("file exists");
-      }
-  } catch(err) {
-      console.info("accessSync failed with error message: " + err.message + ", error code: " + err.code);
+    let res = fs.accessSync(filePath);
+    if (res) {
+      console.info("file exists");
+    } else {
+      console.info("file not exists");
+    }
+  } catch(error) {
+    let err: BusinessError = error as BusinessError;
+    console.error("accessSync failed with error message: " + err.message + ", error code: " + err.code);
   }
   ```
-
 
 ## fs.close
 
@@ -442,7 +458,6 @@ copyFile(src: string | number, dest: string | number, callback: AsyncCallback&lt
   });
   ```
 
-
 ## fs.copyFileSync
 
 copyFileSync(src: string | number, dest: string | number, mode?: number): void
@@ -469,6 +484,330 @@ copyFileSync(src: string | number, dest: string | number, mode?: number): void
   let srcPath = pathDir + "/srcDir/test.txt";
   let dstPath = pathDir + "/dstDir/test.txt";
   fs.copyFileSync(srcPath, dstPath);
+  ```
+
+## fs.copyDir<sup>20+</sup>
+
+copyDir(src: string, dest: string, mode?: number): Promise\<void>
+
+复制源目录至目标路径下，使用promise异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | 是    | 源目录的应用沙箱路径。 |
+  | dest | string | 是    | 目标目录的应用沙箱路径。 |
+  | mode | number | 否    | 复制模式，默认值为0。<br/>-&nbsp; mode为0，文件级别抛异常。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则抛出异常。源目录下未冲突的文件全部移动至目标目录下，目标目录下未冲突文件将继续保留，且冲突文件信息将在抛出异常的data属性中以Array\<[ConflictFiles](#conflictfiles20)>形式提供。<br/>-&nbsp; mode为1，文件级别强制覆盖。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则强制覆盖冲突目录下所有同名文件，未冲突文件将继续保留。|
+
+**返回值：**
+
+  | 类型                  | 说明                           |
+  | ------------------- | ---------------------------- |
+  | Promise&lt;void&gt; | Promise对象。无返回值。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  // copy directory from srcPath to destPath
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.copyDir(srcPath, destPath, 0).then(() => {
+    console.info("copy directory succeed");
+  }).catch((err: BusinessError) => {
+    console.error("copy directory failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## fs.copyDir<sup>20+</sup>
+
+copyDir(src: string, dest: string, mode: number, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
+
+复制源目录至目标路径下，可设置复制模式。使用callback异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | 是    | 源目录的应用沙箱路径。 |
+  | dest | string | 是    | 目标目录的应用沙箱路径。 |
+  | mode | number | 是    | 复制模式，默认值为0。<br/>-&nbsp; mode为0，文件级别抛异常。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则抛出异常。源目录下未冲突的文件全部移动至目标目录下，目标目录下未冲突文件将继续保留，且冲突文件信息将在抛出异常的data属性中以Array\<[ConflictFiles](#conflictfiles20)>形式提供。<br/>-&nbsp; mode为1，文件级别强制覆盖。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则强制覆盖冲突目录下所有同名文件，未冲突文件将继续保留。|
+  | callback | AsyncCallback&lt;void, Array&lt;[ConflictFiles](#conflictfiles20)&gt;&gt; | 是    | 异步复制目录之后的回调。              |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ConflictFiles } from '@kit.CoreFileKit';
+  // copy directory from srcPath to destPath
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.copyDir(srcPath, destPath, 0, (err: BusinessError<Array<ConflictFiles>>) => {
+    if (err && err.code == 13900015 && err.data?.length !== undefined) {
+      for (let i = 0; i < err.data.length; i++) {
+        console.error("copy directory failed with conflicting files: " + err.data[i].srcFile + " " + err.data[i].destFile);
+      }
+    } else if (err) {
+      console.error("copy directory failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("copy directory succeed");
+    }
+  });
+  ```
+
+## fs.copyDir<sup>20+</sup>
+
+copyDir(src: string, dest: string, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
+
+复制源目录至目标路径下，使用callback异步回调。
+
+如果目标目录下有与源目录名冲突的目录，且冲突目录下有同名文件，则抛出异常。源目录下未冲突的文件全部移动至目标目录下，目标目录下未冲突文件将继续保留，且冲突文件信息将在抛出异常的data属性中以Array\<[ConflictFiles](#conflictfiles20)>形式提供。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | 是    | 源目录的应用沙箱路径。 |
+  | dest | string | 是    | 目标目录的应用沙箱路径。 |
+  | callback | AsyncCallback&lt;void, Array&lt;[ConflictFiles](#conflictfiles20)&gt;&gt; | 是    | 异步复制目录之后的回调。              |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ConflictFiles } from '@kit.CoreFileKit';
+  // copy directory from srcPath to destPath
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.copyDir(srcPath, destPath, (err: BusinessError<Array<ConflictFiles>>) => {
+    if (err && err.code == 13900015 && err.data?.length !== undefined) {
+      for (let i = 0; i < err.data.length; i++) {
+        console.error("copy directory failed with conflicting files: " + err.data[i].srcFile + " " + err.data[i].destFile);
+      }
+    } else if (err) {
+      console.error("copy directory failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("copy directory succeed");
+    }
+  });
+  ```
+
+## fs.copyDirSync<sup>20+</sup>
+
+copyDirSync(src: string, dest: string, mode?: number): void
+
+以同步方法复制源目录至目标路径下。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | 是    | 源目录的应用沙箱路径。 |
+  | dest | string | 是    | 目标目录的应用沙箱路径。 |
+  | mode | number | 否    | 复制模式，默认值为0。<br/>-&nbsp; mode为0，文件级别抛异常。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则抛出异常。源目录下未冲突的文件全部移动至目标目录下，目标目录下未冲突文件将继续保留，且冲突文件信息将在抛出异常的data属性中以Array\<[ConflictFiles](#conflictfiles20)>形式提供。<br/>-&nbsp; mode为1，文件级别强制覆盖。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则强制覆盖冲突目录下所有同名文件，未冲突文件将继续保留。|
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  // copy directory from srcPath to destPath
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  try {
+    fs.copyDirSync(srcPath, destPath, 0);
+    console.info("copy directory succeed");
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error("copy directory failed with error message: " + err.message + ", error code: " + err.code);
+  }
+  ```
+
+## fs.setxattr<sup>20+</sup>
+
+setxattr(path: string, key: string, value: string): Promise&lt;void&gt;
+
+设置文件或目录的扩展属性。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | 是   | 目录的应用沙箱路径。                                   |
+| key   | string | 是   | 扩展属性的key。仅支持前缀为“user.”的字符串，且长度需小于256字节。  |
+| value   | string | 是   | 扩展属性的value。                                   |
+
+**返回值：**
+
+  | 类型     | 说明                                       |
+  | ------ | ---------------------------------------- |
+  | Promise&lt;void&gt;| Promise对象。无返回值。                             |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+
+  let filePath = pathDir + "/test.txt";
+  let attrKey = "user.comment";
+  let attrValue = "Test file.";
+
+  fs.setxattr(filePath, attrKey, attrValue).then(() => {
+    console.info("Set extended attribute successfully.");
+  }).catch((err: BusinessError) => {
+    console.error("Failed to set extended attribute with error message: " + err.message + ", error code: " + err.code);
+  });
+
+  ```
+## fs.setxattrSync<sup>20+</sup>
+
+setxattrSync(path: string, key: string, value: string): void
+
+设置文件或目录的扩展属性。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | 是   | 目录的应用沙箱路径。                                   |
+| key   | string | 是   | 扩展属性的key。仅支持前缀为“user.”的字符串，且长度需小于256字节。   |
+| value   | string | 是   | 扩展属性的value。                                   |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+
+  let filePath = pathDir + "/test.txt";
+  let attrKey = "user.comment";
+  let attrValue = "Test file.";
+
+  try {
+    fs.setxattrSync(filePath, attrKey, attrValue);
+    console.info("Set extended attribute successfully.");
+  } catch (err) {
+    console.error("Failed to set extended attribute with error message: " + err.message + ", error code: " + err.code);
+  }
+
+  ```
+
+## fs.getxattr<sup>20+</sup>
+
+getxattr(path: string, key: string): Promise&lt;string&gt;
+
+获取文件或目录的扩展属性。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | 是   | 目录的应用沙箱路径。                                   |
+| key   | string | 是   | 扩展属性的key。                                   |
+
+**返回值：**
+
+  | 类型     | 说明                                       |
+  | ------ | ---------------------------------------- |
+  | Promise&lt;string&gt;| Promise对象。返回扩展属性的value。    |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+
+  let filePath = pathDir + "/test.txt";
+  let attrKey = "user.comment";
+
+  fs.getxattr(filePath, attrKey).then((attrValue: string) => {
+    console.info("Get extended attribute succeed, the value is: " + attrValue);
+  }).catch((err: BusinessError) => {
+    console.error("Failed to get extended attribute with error message: " + err.message + ", error code: " + err.code);
+  });
+
+  ```
+
+## fs.getxattrSync<sup>20+</sup>
+
+getxattrSync(path: string, key: string): string
+
+使用同步接口获取文件或目录的扩展属性。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | 是   | 目录的应用沙箱路径。                                   |
+| key   | string | 是   | 扩展属性的key。                                   |
+
+**返回值：**
+
+  | 类型     | 说明                                       |
+  | ------ | ---------------------------------------- |
+  | key| string对象。返回扩展属性的value。      |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+
+  let filePath = pathDir + "/test.txt";
+  let attrKey = "user.comment";
+
+  try {
+    let attrValue = fs.getxattrSync(filePath, attrKey);
+    console.info("Get extended attribute succeed, the value is: " + attrValue);
+  } catch (err) {
+    console.error("Failed to get extended attribute with error message: " + err.message + ", error code: " + err.code);
+    }
+
   ```
 
 ## fs.mkdir
@@ -506,6 +845,43 @@ mkdir(path: string): Promise&lt;void&gt;
   });
   ```
 
+## fs.mkdir<sup>20+</sup>
+
+mkdir(path: string, recursion: boolean): Promise\<void>
+
+创建目录，使用promise异步回调。当recursion指定为true时，可递归创建目录。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | 是   | 目录的应用沙箱路径。                                   |
+| recursion   | boolean | 是   | 是否递归创建目录。recursion指定为true时，可递归创建目录。recursion指定为false时，仅可创建单层目录。   |
+
+**返回值：**
+
+  | 类型                  | 说明                           |
+  | ------------------- | ---------------------------- |
+  | Promise&lt;void&gt; | Promise对象。无返回值。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let dirPath = pathDir + "/testDir1/testDir2/testDir3";
+  fs.mkdir(dirPath, true).then(() => {
+    console.info("mkdir succeed");
+  }).catch((err: BusinessError) => {
+    console.error("mkdir failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
 ## fs.mkdir
 
 mkdir(path: string, callback: AsyncCallback&lt;void&gt;): void
@@ -538,6 +914,40 @@ mkdir(path: string, callback: AsyncCallback&lt;void&gt;): void
   });
   ```
 
+## fs.mkdir<sup>20+</sup>
+
+mkdir(path: string, recursion: boolean, callback: AsyncCallback&lt;void&gt;): void
+
+创建目录，使用callback异步回调。当recursion指定为true，可递归创建目录。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名   | 类型                      | 必填 | 说明                                                         |
+| -------- | ------------------------- | ---- | ------------------------------------------------------------ |
+| path     | string                    | 是   | 目录的应用沙箱路径。                                   |
+| recursion   | boolean | 是   | 是否递归创建目录。recursion指定为true时，可递归创建目录。recursion指定为false时，仅可创建单层目录。   |
+| callback | AsyncCallback&lt;void&gt; | 是   | 异步创建目录操作完成之后的回调。                             |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let dirPath = pathDir + "/testDir1/testDir2/testDir3";
+  fs.mkdir(dirPath, true, (err: BusinessError) => {
+    if (err) {
+      console.error("mkdir failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("mkdir succeed");
+    }
+  });
+  ```
+
 ## fs.mkdirSync
 
 mkdirSync(path: string): void
@@ -561,6 +971,32 @@ mkdirSync(path: string): void
   ```js
   let dirPath = pathDir + "/testDir";
   fs.mkdirSync(dirPath);
+  ```
+
+## fs.mkdirSync<sup>20+</sup>
+
+mkdirSync(path: string, recursion: boolean): void
+
+以同步方法创建目录。当recursion指定为true，可递归创建目录。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| path   | string | 是   | 目录的应用沙箱路径。                                   |
+| recursion   | boolean | 是   | 是否递归创建目录。recursion指定为true时，可递归创建目录。recursion指定为false时，仅可创建单层目录。   |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let dirPath = pathDir + "/testDir1/testDir2/testDir3";
+  fs.mkdirSync(dirPath, true);
   ```
 
 ## fs.open
@@ -701,9 +1137,9 @@ openSync(path: string, mode?: number): File
 
 ## fs.read
 
-read(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: number; }): Promise&lt;number&gt;
+read(fd: number, buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
 
-从文件读取数据，使用Promise异步返回。
+读取文件数据，使用promise异步回调。
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -713,13 +1149,13 @@ read(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: numb
 | ------- | ----------- | ---- | ------------------------------------------------------------ |
 | fd      | number      | 是   | 已打开的文件描述符。                                     |
 | buffer  | ArrayBuffer | 是   | 用于保存读取到的文件数据的缓冲区。                           |
-| options | Object      | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认缓冲区长度。|
+| options | [ReadOptions](#readoptions20)      | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认缓冲区长度。|
 
 **返回值：**
 
   | 类型                                 | 说明     |
   | ---------------------------------- | ------ |
-  | Promise&lt;number&gt; | Promise对象。返回读取的实际数据长度。 |
+  | Promise&lt;number&gt; | Promise对象。返回实际读取的数据长度（单位：字节）。|
 
 **错误码：**
 
@@ -727,22 +1163,26 @@ read(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: numb
 
 **示例：**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { buffer } from '@kit.ArkTS';
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE);
-  let buf = new ArrayBuffer(4096);
-  fs.read(file.fd, buf).then((readLen) => {
-      console.info("read file data succeed");
-      console.info(String.fromCharCode.apply(null, new Uint8Array(buf.slice(0, readLen))));
-      fs.closeSync(file);
-  }).catch((err) => {
-      console.info("read file data failed with error message: " + err.message + ", error code: " + err.code);
+  let arrayBuffer = new ArrayBuffer(4096);
+  fs.read(file.fd, arrayBuffer).then((readLen: number) => {
+    console.info("read file data succeed");
+    let buf = buffer.from(arrayBuffer, 0, readLen);
+    console.info(`The content of file: ${buf.toString()}`);
+  }).catch((err: BusinessError) => {
+    console.error("read file data failed with error message: " + err.message + ", error code: " + err.code);
+  }).finally(() => {
+    fs.closeSync(file);
   });
   ```
 
 ## fs.read
 
-read(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: number; }, callback: AsyncCallback&lt;number&gt;): void
+read(fd: number, buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCallback&lt;number&gt;): void
 
 从文件读取数据，使用callback异步回调。
 
@@ -754,8 +1194,8 @@ read(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: numb
   | -------- | ---------------------------------------- | ---- | ---------------------------------------- |
   | fd       | number                                   | 是    | 已打开的文件描述符。                             |
   | buffer   | ArrayBuffer                              | 是    | 用于保存读取到的文件数据的缓冲区。                        |
-  | options | Object      | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认缓冲区长度。|
-  | callback | AsyncCallback&lt;number&gt; | 是    | 异步读取数据之后的回调。                             |
+  | options | [ReadOptions](#readoptions20)      | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认缓冲区长度。|
+  | callback | AsyncCallback&lt;number&gt; | 是    | 异步读取数据之后的回调。返回实际读取的数据长度，单位字节。                             |
 
 **错误码：**
 
@@ -763,24 +1203,27 @@ read(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: numb
 
 **示例：**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { buffer } from '@kit.ArkTS';
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE);
-  let buf = new ArrayBuffer(4096);
-  fs.read(file.fd, buf, (err, readLen) => {
+  let arrayBuffer = new ArrayBuffer(4096);
+  fs.read(file.fd, arrayBuffer, (err: BusinessError, readLen: number) => {
     if (err) {
-      console.info("mkdir failed with error message: " + err.message + ", error code: " + err.code);
+      console.error("read failed with error message: " + err.message + ", error code: " + err.code);
     } else {
       console.info("read file data succeed");
-      console.info(String.fromCharCode.apply(null, new Uint8Array(buf.slice(0, readLen))));
-      fs.closeSync(file);
+      let buf = buffer.from(arrayBuffer, 0, readLen);
+      console.info(`The content of file: ${buf.toString()}`);
     }
+    fs.closeSync(file);
   });
   ```
 
 ## fs.readSync
 
-readSync(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: number; }): number
+readSync(fd: number, buffer: ArrayBuffer, options?: ReadOptions): number
 
 以同步方法从文件读取数据。
 
@@ -792,13 +1235,13 @@ readSync(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: 
   | ------- | ----------- | ---- | ---------------------------------------- |
   | fd      | number      | 是    | 已打开的文件描述符。                             |
   | buffer  | ArrayBuffer | 是    | 用于保存读取到的文件数据的缓冲区。                        |
-  | options | Object      | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认缓冲区长度。|
+  | options | [ReadOptions](#readoptions20)      | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认缓冲区长度。|
 
 **返回值：**
 
   | 类型     | 说明       |
   | ------ | -------- |
-  | number | 实际读取的长度。 |
+  | number | 返回实际读取的数据长度（单位：字节）。 |
 
 **错误码：**
 
@@ -806,11 +1249,11 @@ readSync(fd: number, buffer: ArrayBuffer, options?: { offset?: number; length?: 
 
 **示例：**
 
-  ```js
+  ```ts
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE);
   let buf = new ArrayBuffer(4096);
-  let num = fs.readSync(file.fd, buf);
+  fs.readSync(file.fd, buf);
   fs.closeSync(file);
   ```
 
@@ -998,12 +1441,11 @@ unlinkSync(path: string): void
   fs.unlinkSync(filePath);
   ```
 
-
 ## fs.write
 
-write(fd: number, buffer: ArrayBuffer | string, options?: { offset?: number; length?: number; encoding?: string; }): Promise&lt;number&gt;
+write(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
 
-将数据写入文件，使用Promise异步返回。
+将数据写入文件，使用promise异步回调。
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1012,14 +1454,14 @@ write(fd: number, buffer: ArrayBuffer | string, options?: { offset?: number; len
   | 参数名     | 类型                              | 必填   | 说明                                       |
   | ------- | ------------------------------- | ---- | ---------------------------------------- |
   | fd      | number                          | 是    | 已打开的文件描述符。                             |
-  | buffer  | ArrayBuffer\|string | 是    | 待写入文件的数据，可来自缓冲区或字符串。                     |
-  | options | Object                          | 否    | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;length，number类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。当前仅支持&nbsp;'utf-8'。|
+  | buffer  | ArrayBuffer \| string | 是    | 待写入文件的数据，可来自缓冲区或字符串。                     |
+  | options | [WriteOptions](#writeoptions20)                          | 否    | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望写入文件的位置。可选，默认从当前位置开始写入。<br/>-&nbsp;length，number类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。当前仅支持&nbsp;'utf-8'。|
 
 **返回值：**
 
   | 类型                    | 说明       |
   | --------------------- | -------- |
-  | Promise&lt;number&gt; | Promise对象。返回实际写入的长度。 |
+  | Promise&lt;number&gt; | Promise对象。返回实际写入的数据长度（单位：字节）。 |
 
 **错误码：**
 
@@ -1027,20 +1469,23 @@ write(fd: number, buffer: ArrayBuffer | string, options?: { offset?: number; len
 
 **示例：**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
-  fs.write(file.fd, "hello, world").then((writeLen) => {
+  let str: string = "hello, world";
+  fs.write(file.fd, str).then((writeLen: number) => {
     console.info("write data to file succeed and size is:" + writeLen);
+  }).catch((err: BusinessError) => {
+    console.error("write data to file failed with error message: " + err.message + ", error code: " + err.code);
+  }).finally(() => {
     fs.closeSync(file);
-  }).catch((err) => {
-    console.info("write data to file failed with error message: " + err.message + ", error code: " + err.code);
   });
   ```
 
 ## fs.write
 
-write(fd: number, buffer: ArrayBuffer | string, options?: { offset?: number; length?: number; encoding?: string; }, callback: AsyncCallback&lt;number&gt;): void
+write(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions, callback: AsyncCallback&lt;number&gt;): void
 
 将数据写入文件，使用callback异步回调。
 
@@ -1051,8 +1496,8 @@ write(fd: number, buffer: ArrayBuffer | string, options?: { offset?: number; len
   | 参数名      | 类型                              | 必填   | 说明                                       |
   | -------- | ------------------------------- | ---- | ---------------------------------------- |
   | fd       | number                          | 是    | 已打开的文件描述符。                             |
-  | buffer   | ArrayBuffer\|string | 是    | 待写入文件的数据，可来自缓冲区或字符串。                     |
-  | options | Object                          | 否    | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;length，number类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。当前仅支持&nbsp;'utf-8'。|
+  | buffer   | ArrayBuffer \| string | 是    | 待写入文件的数据，可来自缓冲区或字符串。                     |
+  | options | [WriteOptions](#writeoptions20)                          | 否    | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;length，number类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。当前仅支持&nbsp;'utf-8'。|
   | callback | AsyncCallback&lt;number&gt;     | 是    | 异步将数据写入完成后执行的回调函数。                       |
 
 **错误码：**
@@ -1061,22 +1506,24 @@ write(fd: number, buffer: ArrayBuffer | string, options?: { offset?: number; len
 
 **示例：**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
-  fs.write(file.fd, "hello, world", (err, writeLen) => {
+  let str: string = "hello, world";
+  fs.write(file.fd, str, (err: BusinessError, writeLen: number) => {
     if (err) {
-      console.info("write data to file failed with error message: " + err.message + ", error code: " + err.code);
+      console.error("write data to file failed with error message:" + err.message + ", error code: " + err.code);
     } else {
       console.info("write data to file succeed and size is:" + writeLen);
-      fs.closeSync(file);
     }
+    fs.closeSync(file);
   });
   ```
 
 ## fs.writeSync
 
-writeSync(fd: number, buffer: ArrayBuffer | string, options?: { offset?: number; length?: number; encoding?: string; }): number
+writeSync(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions): number
 
 以同步方法将数据写入文件。
 
@@ -1087,14 +1534,14 @@ writeSync(fd: number, buffer: ArrayBuffer | string, options?: { offset?: number;
   | 参数名     | 类型                              | 必填   | 说明                                       |
   | ------- | ------------------------------- | ---- | ---------------------------------------- |
   | fd      | number                          | 是    | 已打开的文件描述符。                             |
-  | buffer  | ArrayBuffer\|string | 是    | 待写入文件的数据，可来自缓冲区或字符串。                     |
-  | options | Object                          | 否    | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;length，number类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。当前仅支持&nbsp;'utf-8'。|
+  | buffer  | ArrayBuffer \| string | 是    | 待写入文件的数据，可来自缓冲区或字符串。                     |
+  | options | [WriteOptions](#writeoptions20)                          | 否    | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;length，number类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;encoding，string类型，当数据是string类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'。当前仅支持&nbsp;'utf-8'。|
 
 **返回值：**
 
   | 类型     | 说明       |
   | ------ | -------- |
-  | number | 实际写入的长度。 |
+  | number | 返回实际写入的数据长度（单位：字节）。 |
 
 **错误码：**
 
@@ -1102,10 +1549,11 @@ writeSync(fd: number, buffer: ArrayBuffer | string, options?: { offset?: number;
 
 **示例：**
 
-  ```js
+  ```ts
   let filePath = pathDir + "/test.txt";
   let file = fs.openSync(filePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
-  let writeLen = fs.writeSync(file.fd, "hello, world");
+  let str: string = "hello, world";
+  let writeLen = fs.writeSync(file.fd, str);
   console.info("write data to file succeed and size is:" + writeLen);
   fs.closeSync(file);
   ```
@@ -1210,9 +1658,9 @@ truncateSync(file: string | number, len?: number): void
 
 ## fs.readText
 
-readText(filePath: string, options?: { offset?: number; length?: number; encoding?: string; }): Promise&lt;string&gt;
+readText(filePath: string, options?: ReadTextOptions): Promise&lt;string&gt;
 
-基于文本方式读取文件（即直接读取文件的文本内容），使用Promise异步返回。
+基于文本方式读取文件（即直接读取文件的文本内容），使用promise异步回调。
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1221,7 +1669,7 @@ readText(filePath: string, options?: { offset?: number; length?: number; encodin
 | 参数名   | 类型   | 必填 | 说明                                                         |
 | -------- | ------ | ---- | ------------------------------------------------------------ |
 | filePath | string | 是   | 文件的应用沙箱路径。                                   |
-| options  | Object | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读取。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认文件长度。<br/>-&nbsp;encoding，string类型，当数据是&nbsp;string&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'，仅支持&nbsp;'utf-8'。 |
+| options  | [ReadTextOptions](#readtextoptions20) | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读取。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认文件长度。<br/>-&nbsp;encoding，string类型，当数据是&nbsp;string&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'，仅支持&nbsp;'utf-8'。 |
 
 **返回值：**
 
@@ -1235,20 +1683,21 @@ readText(filePath: string, options?: { offset?: number; length?: number; encodin
 
 **示例：**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
   let filePath = pathDir + "/test.txt";
-  fs.readText(filePath).then((str) => {
-      console.info("readText succeed:" + str);
-  }).catch((err) => {
-      console.info("readText failed with error message: " + err.message + ", error code: " + err.code);
+  fs.readText(filePath).then((str: string) => {
+    console.info("readText succeed:" + str);
+  }).catch((err: BusinessError) => {
+    console.error("readText failed with error message: " + err.message + ", error code: " + err.code);
   });
   ```
 
 ## fs.readText
 
-readText(filePath: string, options?: { offset?: number; length?: number; encoding?: string; }, callback: AsyncCallback&lt;string&gt;): void
+readText(filePath: string, options?: ReadTextOptions, callback: AsyncCallback&lt;string&gt;): void
 
-基于文本方式读取文件（即直接读取文件的文本内容），使用callback异步回调。
+基于文本方式读取文件内容，使用callback异步回调。
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1257,7 +1706,7 @@ readText(filePath: string, options?: { offset?: number; length?: number; encodin
 | 参数名   | 类型                        | 必填 | 说明                                                         |
 | -------- | --------------------------- | ---- | ------------------------------------------------------------ |
 | filePath | string                      | 是   | 文件的应用沙箱路径。                                   |
-| options  | Object                      | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读取。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认文件长度。<br/>-&nbsp;encoding，string类型，表示数据的编码方式，默认&nbsp;'utf-8'，仅支持&nbsp;'utf-8'。 |
+| options  | [ReadTextOptions](#readtextoptions20)                      | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读取。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认文件长度。<br/>-&nbsp;encoding，string类型，表示数据的编码方式，默认&nbsp;'utf-8'，仅支持&nbsp;'utf-8'。 |
 | callback | AsyncCallback&lt;string&gt; | 是   | 回调函数，返回读取文件的内容。                         |
 
 **错误码：**
@@ -1266,11 +1715,20 @@ readText(filePath: string, options?: { offset?: number; length?: number; encodin
 
 **示例：**
 
-  ```js
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ReadTextOptions } from '@kit.CoreFileKit';
   let filePath = pathDir + "/test.txt";
-  fs.readText(filePath, { offset: 1, encoding: 'UTF-8' }, (err, str) => {
+  let readTextOption: ReadTextOptions = {
+      offset: 1,
+      length: 0,
+      encoding: 'utf-8'
+  };
+  let stat = fs.statSync(filePath);
+  readTextOption.length = stat.size;
+  fs.readText(filePath, readTextOption, (err: BusinessError, str: string) => {
     if (err) {
-      console.info("readText failed with error message: " + err.message + ", error code: " + err.code);
+      console.error("readText failed with error message: " + err.message + ", error code: " + err.code);
     } else {
       console.info("readText succeed:" + str);
     }
@@ -1279,7 +1737,7 @@ readText(filePath: string, options?: { offset?: number; length?: number; encodin
 
 ## fs.readTextSync
 
-readTextSync(filePath: string, options?: { offset?: number; length?: number; encoding?: string; }): string
+readTextSync(filePath: string, options?: ReadTextOptions): string
 
 以同步方法基于文本方式读取文件（即直接读取文件的文本内容）。
 
@@ -1290,7 +1748,7 @@ readTextSync(filePath: string, options?: { offset?: number; length?: number; enc
 | 参数名   | 类型   | 必填 | 说明                                                         |
 | -------- | ------ | ---- | ------------------------------------------------------------ |
 | filePath | string | 是   | 文件的应用沙箱路径。                                   |
-| options  | Object | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读取。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认文件长度。<br/>-&nbsp;encoding，string类型，当数据是&nbsp;string&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'，仅支持&nbsp;'utf-8'。 |
+| options  | [ReadTextOptions](#readtextoptions20) | 否   | 支持如下选项：<br/>-&nbsp;offset，number类型，表示期望读取文件的位置。可选，默认从当前位置开始读取。<br/>-&nbsp;length，number类型，表示期望读取数据的长度。可选，默认文件长度。<br/>-&nbsp;encoding，string类型，当数据是&nbsp;string&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;'utf-8'，仅支持&nbsp;'utf-8'。 |
 
 **返回值：**
 
@@ -1304,10 +1762,119 @@ readTextSync(filePath: string, options?: { offset?: number; length?: number; enc
 
 **示例：**
 
-  ```js
+  ```ts
+  import { fileIo as fs, ReadTextOptions } from '@kit.CoreFileKit';
   let filePath = pathDir + "/test.txt";
-  let str = fs.readTextSync(filePath, {offset: 1, length: 3});
+  let readTextOptions: ReadTextOptions = {
+    offset: 1,
+    length: 0,
+    encoding: 'utf-8'
+  };
+  let stat = fs.statSync(filePath);
+  readTextOptions.length = stat.size;
+  let str = fs.readTextSync(filePath, readTextOptions);
   console.info("readText succeed:" + str);
+  ```
+
+## fs.lstat<sup>20+</sup>
+
+lstat(path: string): Promise&lt;Stat&gt;
+
+获取链接文件信息，使用promise异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                   |
+| ------ | ------ | ---- | -------------------------------------- |
+| path   | string | 是   | 文件的应用沙箱路径。 |
+
+**返回值：**
+
+  | 类型                           | 说明         |
+  | ---------------------------- | ---------- |
+  | Promise&lt;[Stat](#stat)&gt; | Promise对象。返回Stat对象，表示文件的具体信息，详情见Stat。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/linkToFile";
+  fs.lstat(filePath).then((stat: fs.Stat) => {
+    console.info("lstat succeed, the size of file is " + stat.size);
+  }).catch((err: BusinessError) => {
+    console.error("lstat failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## fs.lstat<sup>20+</sup>
+
+lstat(path: string, callback: AsyncCallback&lt;Stat&gt;): void
+
+获取链接文件信息，使用callback异步回调。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名   | 类型                               | 必填 | 说明                                   |
+| -------- | ---------------------------------- | ---- | -------------------------------------- |
+| path     | string                             | 是   | 文件的应用沙箱路径。 |
+| callback | AsyncCallback&lt;[Stat](#stat)&gt; | 是   | 异步获取文件具体信息之后的回调。       |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let filePath = pathDir + "/linkToFile";
+  fs.lstat(filePath, (err: BusinessError, stat: fs.Stat) => {
+    if (err) {
+      console.error("lstat failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("lstat succeed, the size of file is" + stat.size);
+    }
+  });
+  ```
+
+## fs.lstatSync<sup>20+</sup>
+
+lstatSync(path: string): Stat
+
+以同步方法获取链接文件信息。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                   |
+| ------ | ------ | ---- | -------------------------------------- |
+| path   | string | 是   | 文件的应用沙箱路径。 |
+
+**返回值：**
+
+  | 类型            | 说明         |
+  | ------------- | ---------- |
+  | [Stat](#stat) | 表示文件的具体信息。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  let filePath = pathDir + "/linkToFile";
+  let fileStat = fs.lstatSync(filePath);
+  console.info("lstat succeed, the size of file is" + fileStat.size);
   ```
 
 ## fs.rename
@@ -1776,6 +2343,233 @@ listFileSync(path: string, options?: {
   }
   ```
 
+## fs.moveDir<sup>20+</sup>
+
+moveDir(src: string, dest: string, mode?: number): Promise\<void>
+
+移动源目录至目标路径下，使用promise异步回调。
+
+> **说明：**
+>
+> 该接口不支持在分布式文件路径下操作。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | 是    | 源目录的应用沙箱路径。 |
+  | dest | string | 是    | 目标目录的应用沙箱路径。 |
+  | mode | number | 否    | 移动模式，默认值为0。<br/>-&nbsp;mode为0，目录级别抛异常。若目标目录下存在与源目录名冲突的非空目录，则抛出异常。<br/>-&nbsp;mode为1，文件级别抛异常。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则抛出异常。源目录下未冲突的文件全部移动至目标目录下，目标目录下未冲突文件将继续保留，且冲突文件信息将在抛出异常的data属性中以Array\<[ConflictFiles](#conflictfiles20)>形式提供。<br/>-&nbsp; mode为2，文件级别强制覆盖。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则强制覆盖冲突目录下所有同名文件，未冲突文件将继续保留。<br/>-&nbsp; mode为3，目录级别强制覆盖。移动源目录至目标目录下，目标目录下移动的目录内容与源目录完全一致。若目标目录下存在与源目录名冲突的目录，该目录下的所有原始文件将被删除。|
+
+**返回值：**
+
+  | 类型                  | 说明                           |
+  | ------------------- | ---------------------------- |
+  | Promise&lt;void&gt; | Promise对象。无返回值。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  // move directory from srcPath to destPath
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.moveDir(srcPath, destPath, 1).then(() => {
+    console.info("move directory succeed");
+  }).catch((err: BusinessError) => {
+    console.error("move directory failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
+## fs.moveDir<sup>20+</sup>
+
+moveDir(src: string, dest: string, mode: number, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
+
+移动源目录至目标路径下，支持设置移动模式。使用callback异步回调。
+
+> **说明：**
+>
+> 该接口不支持在分布式文件路径下操作。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | 是    | 源目录的应用沙箱路径。 |
+  | dest | string | 是    | 目标目录的应用沙箱路径。 |
+  | mode | number | 是    | 移动模式，默认值为0。<br/>-&nbsp;mode为0，目录级别抛异常。若目标目录下存在与源目录名冲突的目录，则抛出异常。<br/>-&nbsp;mode为1，文件级别抛异常。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则抛出异常。源目录下未冲突的文件全部移动至目标目录下，目标目录下未冲突文件将继续保留，且冲突文件信息将在抛出异常的data属性中以Array\<[ConflictFiles](#conflictfiles20)>形式提供。<br/>-&nbsp; mode为2，文件级别强制覆盖。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则强制覆盖冲突目录下所有同名文件，未冲突文件将继续保留。<br/>-&nbsp; mode为3，目录级别强制覆盖。移动源目录至目标目录下，目标目录下移动的目录内容与源目录完全一致。若目标目录下存在与源目录名冲突的目录，该目录下所有原始文件将被删除。|
+  | callback | AsyncCallback&lt;void, Array&lt;[ConflictFiles](#conflictfiles20)&gt;&gt; | 是    | 异步移动目录之后的回调。              |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ConflictFiles } from '@kit.CoreFileKit';
+  // move directory from srcPath to destPath
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.moveDir(srcPath, destPath, 1, (err: BusinessError<Array<ConflictFiles>>) => {
+    if (err && err.code == 13900015 && err.data?.length !== undefined) {
+      for (let i = 0; i < err.data.length; i++) {
+        console.error("move directory failed with conflicting files: " + err.data[i].srcFile + " " + err.data[i].destFile);
+      }
+    } else if (err) {
+      console.error("move directory failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("move directory succeed");
+    }
+  });
+  ```
+
+  ## fs.moveDir<sup>20+</sup>
+
+moveDir(src: string, dest: string, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
+
+移动源目录至目标路径下。使用callback异步回调。
+
+移动模式为目录级别抛异常。当目标目录下存在与源目录名冲突的目录，则抛出异常。
+
+> **说明：**
+>
+> 该接口不支持在分布式文件路径下操作。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | 是    | 源目录的应用沙箱路径。 |
+  | dest | string | 是    | 目标目录的应用沙箱路径。 |
+  | callback | AsyncCallback&lt;void, Array&lt;[ConflictFiles](#conflictfiles20)&gt;&gt; | 是    | 异步移动目录之后的回调。              |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { fileIo as fs, ConflictFiles } from '@kit.CoreFileKit';
+  // move directory from srcPath to destPath
+  let srcPath = pathDir + "/srcDir/";
+  let destPath = pathDir + "/destDir/";
+  fs.moveDir(srcPath, destPath, (err: BusinessError<Array<ConflictFiles>>) => {
+    if (err && err.code == 13900015 && err.data?.length !== undefined) {
+      for (let i = 0; i < err.data.length; i++) {
+        console.error("move directory failed with conflicting files: " + err.data[i].srcFile + " " + err.data[i].destFile);
+      }
+    } else if (err) {
+      console.error("move directory failed with error message: " + err.message + ", error code: " + err.code);
+    } else {
+      console.info("move directory succeed");
+    }
+  });
+  ```
+
+## fs.moveDirSync<sup>20+</sup>
+
+moveDirSync(src: string, dest: string, mode?: number): void
+
+以同步方法移动源目录至目标路径下。
+
+> **说明：**
+>
+> 该接口不支持在分布式文件路径下操作。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | 是    | 源目录的应用沙箱路径。 |
+  | dest | string | 是    | 目标目录的应用沙箱路径。 |
+  | mode | number | 否    | 移动模式，默认值为0。<br/>-&nbsp;mode为0，目录级别抛异常。若目标目录下存在与源目录名冲突的目录，则抛出异常。<br/>-&nbsp;mode为1，文件级别抛异常。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则抛出异常。源目录下未冲突的文件全部移动至目标目录下，目标目录下未冲突文件将继续保留，且冲突文件信息将在抛出异常的data属性中以Array\<[ConflictFiles](#conflictfiles20)>形式提供。<br/>-&nbsp; mode为2，文件级别强制覆盖。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则强制覆盖冲突目录下所有同名文件，未冲突文件将继续保留。<br/>-&nbsp; mode为3，目录级别强制覆盖。移动源目录至目标目录下，目标目录下移动的目录内容与源目录完全一致。若目标目录下存在与源目录名冲突的目录，该目录下所有原始文件将被删除。|
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+import { fileIo as fs, ConflictFiles } from '@kit.CoreFileKit';
+// move directory from srcPath to destPath
+let srcPath = pathDir + "/srcDir/";
+let destPath = pathDir + "/destDir/";
+try {
+  fs.moveDirSync(srcPath, destPath, 1);
+  console.info("move directory succeed");
+} catch (error) {
+  let err: BusinessError<Array<ConflictFiles>> = error as BusinessError<Array<ConflictFiles>>;
+  if (err.code == 13900015 && err.data?.length !== undefined) {
+    for (let i = 0; i < err.data.length; i++) {
+      console.error("move directory failed with conflicting files: " + err.data[i].srcFile + " " + err.data[i].destFile);
+    }
+  } else {
+    console.error("move directory failed with error message: " + err.message + ", error code: " + err.code);
+  }
+}
+  ```
+
+## fs.moveFile<sup>20+</sup>
+
+moveFile(src: string, dest: string, mode?: number): Promise\<void>
+
+移动文件，使用promise异步回调。
+
+> **说明：**
+>
+> 该接口不支持在分布式文件路径下操作。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+**参数：**
+
+  | 参数名    | 类型     | 必填   | 说明                          |
+  | ------ | ------ | ---- | --------------------------- |
+  | src | string | 是    | 源文件的应用沙箱路径。 |
+  | dest | string | 是    | 目标文件的应用沙箱路径。 |
+  | mode | number | 否    | 移动模式。若mode为0，移动位置存在同名文件时，强制移动覆盖。若mode为1，移动位置存在同名文件时，抛出异常。默认为0。 |
+
+**返回值：**
+
+  | 类型                  | 说明                           |
+  | ------------------- | ---------------------------- |
+  | Promise&lt;void&gt; | Promise对象。无返回值。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[基础文件IO错误码](../errorcodes/errorcode-filemanagement.md#文件管理错误码)。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  let srcPath = pathDir + "/source.txt";
+  let destPath = pathDir + "/dest.txt";
+  fs.moveFile(srcPath, destPath, 0).then(() => {
+    console.info("move file succeed");
+  }).catch((err: BusinessError) => {
+    console.error("move file failed with error message: " + err.message + ", error code: " + err.code);
+  });
+  ```
+
 ## fs.moveFile
 
 moveFile(src: string, dest: string, mode?: number, callback: AsyncCallback\<void>): void
@@ -2174,3 +2968,72 @@ open接口flags参数常量。文件打开标签。
 | fileSizeOver    | number | 文件大小匹配，大于等于指定大小的文件。       |
 | lastModifiedAfter    | number | 文件最近修改时间匹配，在指定时间点及之后的文件。       |
 | excludeMedia    | boolean | 是否排除Media中已有的文件。       |
+
+## ConflictFiles<sup>20+</sup>
+
+冲突文件信息，支持copyDir及moveDir接口使用。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 类型       | 说明                |
+| ----------- | --------------- | ------------------ |
+| srcFile | string     | 源冲突文件路径。           |
+| destFile    | string     | 目标冲突文件路径。 |
+
+## Options<sup>20+</sup>
+
+可选项类型，支持readLines接口使用。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 类型       | 说明                |
+| ----------- | --------------- | ------------------ |
+| encoding | string     | 文件编码方式。可选项。           |
+
+## AccessModeType<sup>20+</sup>
+
+枚举，表示需要校验的具体权限。若不填，默认校验文件是否存在。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 值       | 说明                |
+| ----------- | --------------- | ------------------ |
+| EXIST | 0     | 文件是否存在。           |
+| WRITE    | 2     | 文件是否具有写入权限。 |
+| READ    | 4     | 文件是否具有读取权限。 |
+| READ_WRITE    | 6     | 文件是否具有读写权限。 |
+
+## ReadOptions<sup>20+</sup>
+
+可选项类型，支持read接口使用。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 类型       | 必选       | 说明                |
+| ----------- | --------------- | ------------------ |------------------ |
+| length | number     | 否 | 期望读取数据的长度，单位为字节。可选，默认缓冲区长度。           |
+|  offset    | number     | 否 | 期望读取文件位置，单位为字节（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始读。 |
+
+## ReadTextOptions<sup>20+</sup>
+
+可选项类型，支持readText接口使用，ReadTextOptions继承至[ReadOptions](#readoptions20)。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 类型       | 必选       | 说明                |
+| ----------- | --------------- | ------------------ | ------------------ |
+| length | number     | 否 | 期望读取数据的长度，单位为字节。可选，默认文件长度。           |
+|  offset    | number     | 否 | 期望读取文件的位置，单位为字节。可选，默认从当前位置开始读取。 |
+| encoding    | string | 否 | 当数据是 string 类型时有效，表示数据的编码方式，默认 'utf-8'，仅支持 'utf-8'。 |
+
+## WriteOptions<sup>20+</sup>
+
+可选项类型，支持write接口使用，WriteOptions继承至[Options](#options20)。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称        | 类型       | 必选       | 说明                |
+| ----------- | --------------- | ------------------ | ------------------ |
+| length | number     | 否 | 期望写入数据的长度，单位为字节。可选，默认缓冲区长度。 |
+|  offset    | number     | 否 | 期望写入文件位置，单位为字节（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始写。 |
+| encoding    | string | 否 | 当数据是string类型时有效，表示数据的编码方式。默认 'utf-8'。仅支持 'utf-8'。       |
