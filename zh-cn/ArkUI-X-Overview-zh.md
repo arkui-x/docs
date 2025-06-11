@@ -24,7 +24,7 @@ ArkUI跨平台框架整体架构如下图所示，详细设计请参考[ArkUI跨
 
 ## 演进路线
 
-[2023 Roadmap](roadmap/ArkUI-X-roadmap-2023.md)
+[2025 Roadmap](roadmap/ArkUI-X-roadmap-2025.md)
 
 ## 快速入门
 
