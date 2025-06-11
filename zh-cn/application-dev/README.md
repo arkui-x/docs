@@ -75,9 +75,10 @@
 
 - [单元/UI测试](./test/arkxtest.md)
 
-### 框架规格
+### 常见问题
 
 - [跨平台框架规格说明](./tutorial/specification/framework-specification.md)
+- [FAQ](./tutorial/faq/README.md)
 
 ## API参考
 
