@@ -12,7 +12,7 @@
 import { statfs } from '@kit.CoreFileKit';
 ```
 
-## statfs.getFreeSize<sup>20+</sup>
+## statfs.getFreeSize
 
 getFreeSize(path:string):Promise&lt;number&gt;
 
@@ -52,7 +52,7 @@ getFreeSize(path:string):Promise&lt;number&gt;
   });
   ```
 
-## statfs.getFreeSize<sup>20+</sup>
+## statfs.getFreeSize
 
 getFreeSize(path:string, callback:AsyncCallback&lt;number&gt;): void
 
@@ -89,7 +89,7 @@ getFreeSize(path:string, callback:AsyncCallback&lt;number&gt;): void
   });
   ```
 
-## statfs.getFreeSizeSync<sup>20+</sup>
+## statfs.getFreeSizeSync
 
 getFreeSizeSync(path:string): number
 
@@ -125,7 +125,7 @@ getFreeSizeSync(path:string): number
   console.info("getFreeSizeSync succeed, Size: " + number);
   ```
 
-## statfs.getTotalSize<sup>20+</sup>
+## statfs.getTotalSize
 
 getTotalSize(path: string): Promise&lt;number&gt;
 
@@ -165,7 +165,7 @@ getTotalSize(path: string): Promise&lt;number&gt;
   });
   ```
 
-## statfs.getTotalSize<sup>20+</sup>
+## statfs.getTotalSize
 
 getTotalSize(path: string, callback: AsyncCallback&lt;number&gt;): void
 
@@ -202,7 +202,7 @@ getTotalSize(path: string, callback: AsyncCallback&lt;number&gt;): void
   });
   ```
 
-## statfs.getTotalSizeSync<sup>20+</sup>
+## statfs.getTotalSizeSync
 
 getTotalSizeSync(path: string): number
 

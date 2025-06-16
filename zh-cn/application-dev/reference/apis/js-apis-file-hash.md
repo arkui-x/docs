@@ -28,7 +28,7 @@ import { hash } from '@kit.CoreFileKit';
   }
   ```
 
-## hash.hash<sup>20+</sup>
+## hash.hash
 
 hash(path: string, algorithm: string): Promise&lt;string&gt;
 
@@ -70,7 +70,7 @@ hash(path: string, algorithm: string): Promise&lt;string&gt;
   });
   ```
 
-## hash.hash<sup>20+</sup>
+## hash.hash
 
 hash(path: string, algorithm: string, callback: AsyncCallback&lt;string&gt;): void
 
@@ -109,7 +109,7 @@ hash(path: string, algorithm: string, callback: AsyncCallback&lt;string&gt;): vo
     }
   });
   ```
-## hash.createHash<sup>20+</sup>
+## hash.createHash
 
 createHash(algorithm: string): HashStream;
 
@@ -127,7 +127,7 @@ createHash(algorithm: string): HashStream;
 
   | 类型            | 说明         |
   | ------------- | ---------- |
-  | [HashStream](#HashStream20) | HashStream 类的实例。 |
+  | [HashStream](#HashStream) | HashStream 类的实例。 |
 
 **错误码：**
 
@@ -157,11 +157,11 @@ createHash(algorithm: string): HashStream;
   }
   ```
 
-## HashStream<sup>20+</sup>
+## HashStream
 
-HashStream 类是用于创建数据的哈希摘要的实用工具。由 [createHash](#hash.createHash20) 接口获得。
+HashStream 类是用于创建数据的哈希摘要的实用工具。由 [createHash](#hash.createHash) 接口获得。
 
-### update<sup>20+</sup>
+### update
 
 update(data: ArrayBuffer): void
 
@@ -185,7 +185,7 @@ update(data: ArrayBuffer): void
   console.info(`hashResult: ${hashResult}`);
   ```
 
-### digest<sup>20+</sup>
+### digest
 
 digest(): string
 
