@@ -24,8 +24,6 @@ import { AppStorageV2,UIUtils} from '@kit.ArkUI';
 
 ## AppStorageV2
 
-AppStorageV2具体UI使用说明，详见[AppStorageV2(应用全局的UI状态存储)](../../quick-start/arkts-new-appstoragev2.md)。
-
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **支持平台：** Android、iOS
@@ -38,7 +36,7 @@ static&nbsp;connect\<T extends object\>( </br >
   &nbsp;&nbsp;&nbsp;&nbsp;defaultCreator?:&nbsp;StorageDefaultCreator\<T\> </br >
 ):&nbsp;T&nbsp;|&nbsp;undefined
 
-将键值对数据储存在应用内存中。如果给定的key已经存在于[AppStorageV2](../../quick-start/arkts-new-appstoragev2.md)中，返回对应的值；否则，通过获取默认值的构造器构造默认值，并返回。
+将键值对数据储存在应用内存中。如果给定的key已经存在于AppStorageV2中，返回对应的值；否则，通过获取默认值的构造器构造默认值，并返回。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -48,8 +46,8 @@ static&nbsp;connect\<T extends object\>( </br >
 
 | 参数名   | 类型   | 必填 | 说明               |
 | -------- | ------ | ---- | ---------------------- |
-| type | [TypeConstructorWithArgs\<T\>](#typeconstructorwithargst) | 是   | 指定的类型，若未指定key，则使用type的name作为key。 |
-| keyOrDefaultCreator | string&nbsp;\|&nbsp;[StorageDefaultCreator\<T\>](#storagedefaultcreatort) | 否   | 指定的key，或者是获取默认值的构造器。 |
+| type | [TypeConstructorWithArgs\<T\>](#typeconstructorwithargs) | 是   | 指定的类型，若未指定key，则使用type的name作为key。 |
+| keyOrDefaultCreator | string&nbsp;\|&nbsp;[StorageDefaultCreator\<T\>](#storagedefaultcreator) | 否   | 指定的key，或者是获取默认值的构造器。 |
 | defaultCreator | StorageDefaultCreator\<T\> | 否   | 获取默认值的构造器。 |
 
 >**说明：**
@@ -92,7 +90,7 @@ const as3: SampleClass = AppStorageV2.connect(SampleClass) as SampleClass;
 
 static&nbsp;remove\<T\>(keyOrType:&nbsp;string&nbsp;|&nbsp;TypeConstructorWithArgs\<T\>):&nbsp;void
 
-将指定的键值对数据从[AppStorageV2](../../quick-start/arkts-new-appstoragev2.md)里面删除。如果指定的键值不存在于AppStorageV2中，将删除失败。
+将指定的键值对数据从AppStorageV2里面删除。如果指定的键值不存在于AppStorageV2中，将删除失败。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -127,7 +125,7 @@ AppStorageV2.remove('key_as1');
 
 static&nbsp;keys():&nbsp;Array\<string\>
 
-获取[AppStorageV2](../../quick-start/arkts-new-appstoragev2.md)中的所有key。
+获取AppStorageV2中的所有key。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -162,7 +160,7 @@ UIUtils提供一些方法，用于处理状态管理相关的数据转换。
 
 static getTarget\<T extends object\>(source: T): T
 
-从状态管理框架包裹的代理对象中获取原始对象。详见[getTarget接口：获取状态管理框架代理前的原始对象](../../quick-start/arkts-new-getTarget.md)。
+从状态管理框架包裹的代理对象中获取原始对象。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -205,7 +203,7 @@ struct Index {
 
 static makeObserved\<T extends object\>(source: T): T
 
-将普通不可观察数据变为可观察数据。详见[makeObserved接口：将非观察数据变为可观察数据](../../quick-start/arkts-new-makeObserved.md)。
+将普通不可观察数据变为可观察数据。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -215,7 +213,7 @@ static makeObserved\<T extends object\>(source: T): T
 
 | 参数名 | 类型 | 必填 | 说明     |
 | ------ | ---- | ---- | ------------ |
-| source | T    | 是   | 数据源对象。支持非@Observed和@ObserveV2修饰的class，JSON.parse返回的Object和@Sendable修饰的class。</br>支持Array、Map、Set和Date。</br>支持collection.Array, collection.Set和collection.Map。</br>具体使用规则，详见[makeObserved接口：将非观察数据变为可观察数据](../../quick-start/arkts-new-makeObserved.md)。 |
+| source | T    | 是   | 数据源对象。支持非@Observed和@ObserveV2修饰的class，JSON.parse返回的Object和@Sendable修饰的class。</br>支持Array、Map、Set和Date。</br>支持collection.Array, collection.Set和collection.Map。|
 
 **返回值：**
 
@@ -255,7 +253,7 @@ struct Index {
 
 static enableV2Compatibility\<T extends object\>(source: T): T
 
-使V1的状态变量能够在\@ComponentV2中观察，主要应用于状态管理V1、V2混用场景。详见[状态管理V1V2混用文档](../../quick-start/arkts-v1-v2-mixusage.md)。
+使V1的状态变量能够在\@ComponentV2中观察，主要应用于状态管理V1、V2混用场景。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -320,7 +318,7 @@ static makeV1Observed\<T extends object\>(source: T): T
 
 将不可观察的对象包装成状态管理V1可观察的对象，其能力等同于@Observed，可初始化@ObjectLink。
 
-该接口可搭配[enableV2Compatibility](#enablev2compatibility18)应用于状态管理V1和V2混用场景，详见[状态管理V1V2混用文档](../../quick-start/arkts-v1-v2-mixusage.md)。
+该接口可搭配[enableV2Compatibility](#enablev2compatibility18)应用于状态管理V1和V2混用场景。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -464,7 +462,7 @@ type TypeDecorator = \<T\>(type: TypeConstructor\<T\>) => PropertyDecorator
 
 | 参数名 | 类型 | 必填 | 说明     |
 | ------ | ---- | ---- | ------------ |
-| type | [TypeConstructor\<T\>](#typeconstructort)    | 是   | 标记类属性的类型。   |
+| type | [TypeConstructor\<T\>](#typeconstructor)    | 是   | 标记类属性的类型。   |
 
 **返回值：**
 
