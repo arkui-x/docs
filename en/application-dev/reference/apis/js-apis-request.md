@@ -454,6 +454,9 @@ Describes the configuration for an upload task.
 | method | string | Yes| Request method, which can be **'POST'** or **'PUT'**. The default value is **'POST'**.|
 | files | Array&lt;[File](#file)&gt; | Yes| List of files to upload, which is submitted through **multipart/form-data**.|
 | data | Array&lt;[RequestData](#requestdata)&gt; | Yes| Form data in the request body.|
+| index<sup>11+</sup> | number | No| Path index of the task. The default value is **0**.|
+| begins<sup>11+</sup> | number | No| Start point of the file read when the upload task begins. The default value is **0**. The value is a closed interval, indicating that the file is read from the beginning.|
+| ends<sup>11+</sup> | number | No| End point of the file read when the upload task is complete. The default value is **-1**. The value is a closed interval, indicating that the file is read till the end.|
 
 ## TaskState<sup>9+</sup>
 Implements a **TaskState** object, which is the callback parameter of the [on('complete' | 'fail')<sup>9+</sup>](#oncomplete--fail9) and [off('complete' | 'fail')<sup>9+</sup>](#offcomplete--fail9) APIs.
@@ -1209,6 +1212,7 @@ Provides the configuration information of an upload or download task.
 | precise     | boolean                                        | No        | - If this parameter is set to **true**, the task fails when the file size cannot be obtained.<br>- If this parameter is set to **false**, the task continues when the file size is set to **-1**.<br>The default value is **false**. |
 | token       | string                                         | No        | Token of the task. If the task has a token configured, this token is required for query of the task. The value contains 8 to 2048 bytes. This parameter is left empty by default. |
 | extras      | object                                         | No        | Additional information of the task. This parameter is left empty by default. |
+| proxy<sup>12+</sup> | string | No| Proxy address. The value contains a maximum of 512 characters.<br>It is in the format of http://\<domain or address\>:\<port\>. By default, this parameter is left blank.|
 
 ## State<sup>10+</sup>  
 
@@ -1296,6 +1300,37 @@ Defines the data structure of the task information for query. The fields availab
 | faults      | [Faults](#faults10)                            | Yes       | Failure cause of the task.<br>- **OTHERS**: other fault.<br>- **DISCONNECT**: network disconnection.<br>- **TIMEOUT**: timeout.<br>- **PROTOCOL**: protocol error.<br>- **FSIO**: file system I/O error. |
 | reason      | string                                         | Yes       | Reason why the task is waiting, failed, stopped, or paused.  |
 | extras      | string                                         | No        | Extra information of the task                                |
+| priority<sup>11+</sup> | number | Yes| Task priority. The priority of a foreground task is higher than that of a background task. For tasks in the same mode, a smaller value indicates a higher priority.|
+
+## HttpResponse<sup>12+</sup> 
+Describes the data structure of the task response header.
+
+**Atomic service API**: This API can be used in atomic services since API version 12.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| version | string | Yes| HTTP version.|
+| statusCode | number | Yes| HTTP response status code.|
+| reason | string | Yes| HTTP response cause.|
+| headers | Map&lt;string, Array&lt;string&gt;&gt; | Yes| HTTP response header.|
+
+## BroadcastEvent<sup>11+</sup>
+
+Defines a custom system event. You can use a common event API to obtain the event.
+The upload and download SA has the ohos.permission.SEND_TASK_COMPLETE_EVENT permission. You can configure the level-2 configuration file to which the metadata of an event points to intercept other event senders.
+
+Use the **CommonEventData** type to transmit data related to common events. The members in **CommonEventData** are different from those described in [CommonEventData](js-apis-inner-commonEvent-commonEventData.md). Specifically, **CommonEventData.code** indicates the task status, which is **0x40 COMPLETE** or **0x41 FAILED**, and **CommonEventData.data** indicates the task ID.
+
+<!--Del-->
+For details about how to obtain the event configuration and configure the level-2 configuration file, see [Subscribing to Common Events in Static Mode (for System Applications Only)](../../basic-services/common-event/common-event-static-subscription.md).<!--DelEnd-->
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+| Name| Value| Description       |
+| -------- | ------- |-----------|
+| COMPLETE | 'ohos.request.event.COMPLETE' | Task completion event. The returned event code can be **0x40** or **0x41**, depending on whether the task is successful or fails.|
 
 
 ## Task<sup>10+</sup> 
@@ -1526,6 +1561,340 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 > **NOTE**
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### on('response')<sup>12+</sup>
+
+on(event: 'response', callback: Callback&lt;HttpResponse&gt;): void
+
+Subscribes to task response headers. This API uses an asynchronous callback to return the result.
+
+**Atomic service API**: This API can be used in atomic services since API version 12.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to subscribe to.<br>- **'response'**: task response.|
+| callback | Callback&lt;[HttpResponse](#httpresponse12)&gt; | Yes| Callback used to return the data structure of the task response header.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOnTest",
+    value: {
+      filename: "taskOnTest.avi",
+      path: "./taskOnTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOnTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOnCallback = (response: request.agent.HttpResponse) => {
+    console.info('upload task response.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('response', createOnCallback);
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### on('pause')<sup>11+</sup>
+
+on(event: 'pause', callback: (progress: [Progress](#progress10)) =&gt; void): void
+
+Subscribes to task pause events. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to subscribe to.<br>- **'pause'**: task pause.|
+| callback | function | Yes| Callback used to return the data structure of the task progress.|
+
+Parameters of the callback function
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| progress | [Progress](#progress10) | Yes| Task progress.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOnTest",
+    value: {
+      filename: "taskOnTest.avi",
+      path: "./taskOnTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOnTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOnCallback = (progress: request.agent.Progress) => {
+    console.info('upload task pause.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('pause', createOnCallback);
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // To prevent asynchronous out-of-order, wait for 1 second before performing the next operation.
+    task.pause();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### on('resume')<sup>11+</sup>
+
+on(event: 'resume', callback: (progress: [Progress](#progress10)) =&gt; void): void
+
+Subscribes to task resume events. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to subscribe to.<br>- **'resume'**: task resume.|
+| callback | function | Yes| Callback used to return the data structure of the task progress.|
+
+Parameters of the callback function
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| progress | [Progress](#progress10) | Yes| Task progress.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOnTest",
+    value: {
+      filename: "taskOnTest.avi",
+      path: "./taskOnTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOnTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOnCallback = (progress: request.agent.Progress) => {
+    console.info('upload task resume.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('resume', createOnCallback);
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // To prevent asynchronous out-of-order, wait for 1 second before performing the next operation.
+    task.pause();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // To prevent asynchronous out-of-order, wait for 1 second before performing the next operation.
+    task.resume();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### on('remove')<sup>11+</sup>
+
+on(event: 'remove', callback: (progress: [Progress](#progress10)) =&gt; void): void
+
+Subscribes to task removal events. This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to subscribe to.<br>- **'remove'**: task removal.|
+| callback | function | Yes| Callback used to return the data structure of the task progress.|
+
+Parameters of the callback function
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| progress | [Progress](#progress10) | Yes| Task progress.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOnTest",
+    value: {
+      filename: "taskOnTest.avi",
+      path: "./taskOnTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOnTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOnCallback = (progress: request.agent.Progress) => {
+    console.info('upload task remove.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('remove', createOnCallback);
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // To prevent asynchronous out-of-order, wait for 1 second before performing the next operation.
+    request.agent.remove(task.tid);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+
 
 ### off('progress')<sup>10+</sup>
 
@@ -1764,6 +2133,718 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
+### off('response')<sup>12+</sup>
+
+off(event: 'response', callback?: Callback&lt;HttpResponse&gt;): void
+
+Unsubscribes from task response headers.
+
+**Atomic service API**: This API can be used in atomic services since API version 12.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to unsubscribe from.<br>- **response**: task response.|
+| callback | Callback&lt;[HttpResponse](#httpresponse12)&gt; | No| Callback to unregister. If this parameter is not specified, all callbacks of the current type will be unregistered.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.HttpResponse) => {
+    console.info('upload task response.');
+  };
+  let createOffCallback2 = (progress: request.agent.HttpResponse) => {
+    console.info('upload task response.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('response', createOffCallback1);
+    task.on('response', createOffCallback2);
+    // Unsubscribe from createOffCallback1.
+    task.off('response', createOffCallback1);
+    // Unsubscribe from all callbacks of the task removal event.
+    task.off('response');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### off('pause')<sup>11+</sup>
+
+off(event: 'pause', callback?: (progress: [Progress](#progress10)) =&gt; void): void
+
+Unsubscribes from the foreground task pause event.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to unsubscribe from.<br>- **'pause'**: task pause.|
+| callback | function | No| Callback used to return the data structure of the task progress.|
+
+Parameters of the callback function
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| progress | [Progress](#progress10) | Yes| Task progress.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.Progress) => {
+    console.info('upload task pause.');
+  };
+  let createOffCallback2 = (progress: request.agent.Progress) => {
+    console.info('upload task pause.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('pause', createOffCallback1);
+    task.on('pause', createOffCallback2);
+    // Unsubscribe from createOffCallback1.
+    task.off('pause', createOffCallback1);
+    // Unsubscribe from all callbacks of the foreground task pause event.
+    task.off('pause');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### off('resume')<sup>11+</sup>
+
+off(event: 'resume', callback?: (progress: [Progress](#progress10)) =&gt; void): void
+
+Unsubscribes from the foreground task resume event.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to unsubscribe from.<br>- **'resume'**: task resume.|
+| callback | function | No| Callback used to return the data structure of the task progress.|
+
+Parameters of the callback function
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| progress | [Progress](#progress10) | Yes| Task progress.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.Progress) => {
+    console.info('upload task resume.');
+  };
+  let createOffCallback2 = (progress: request.agent.Progress) => {
+    console.info('upload task resume.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('resume', createOffCallback1);
+    task.on('resume', createOffCallback2);
+    // Unsubscribe from createOffCallback1.
+    task.off('resume', createOffCallback1);
+    // Unsubscribe from all callbacks of the foreground task resume event.
+    task.off('resume');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### off('remove')<sup>11+</sup>
+
+off(event: 'remove', callback?: (progress: [Progress](#progress10)) =&gt; void): void
+
+Unsubscribes from the task removal event.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to unsubscribe from.<br>- **'remove'**: task removal.|
+| callback | function | No| Callback used to return the data structure of the task progress.|
+
+Parameters of the callback function
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| progress | [Progress](#progress10) | Yes| Task progress.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.Progress) => {
+    console.info('upload task remove.');
+  };
+  let createOffCallback2 = (progress: request.agent.Progress) => {
+    console.info('upload task remove.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('remove', createOffCallback1);
+    task.on('remove', createOffCallback2);
+    // Unsubscribe from createOffCallback1.
+    task.off('remove', createOffCallback1);
+    // Unsubscribe from all callbacks of the task removal event.
+    task.off('remove');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### off('response')<sup>12+</sup>
+
+off(event: 'response', callback?: Callback&lt;HttpResponse&gt;): void
+
+Unsubscribes from task response headers.
+
+**Atomic service API**: This API can be used in atomic services since API version 12.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to unsubscribe from.<br>- **response**: task response.|
+| callback | Callback&lt;[HttpResponse](#httpresponse12)&gt; | No| Callback to unregister. If this parameter is not specified, all callbacks of the current type will be unregistered.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.HttpResponse) => {
+    console.info('upload task response.');
+  };
+  let createOffCallback2 = (progress: request.agent.HttpResponse) => {
+    console.info('upload task response.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('response', createOffCallback1);
+    task.on('response', createOffCallback2);
+    // Unsubscribe from createOffCallback1.
+    task.off('response', createOffCallback1);
+    // Unsubscribe from all callbacks of the task removal event.
+    task.off('response');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### off('pause')<sup>11+</sup>
+
+off(event: 'pause', callback?: (progress: [Progress](#progress10)) =&gt; void): void
+
+Unsubscribes from the foreground task pause event.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to unsubscribe from.<br>- **'pause'**: task pause.|
+| callback | function | No| Callback used to return the data structure of the task progress.|
+
+Parameters of the callback function
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| progress | [Progress](#progress10) | Yes| Task progress.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.Progress) => {
+    console.info('upload task pause.');
+  };
+  let createOffCallback2 = (progress: request.agent.Progress) => {
+    console.info('upload task pause.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('pause', createOffCallback1);
+    task.on('pause', createOffCallback2);
+    // Unsubscribe from createOffCallback1.
+    task.off('pause', createOffCallback1);
+    // Unsubscribe from all callbacks of the foreground task pause event.
+    task.off('pause');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### off('resume')<sup>11+</sup>
+
+off(event: 'resume', callback?: (progress: [Progress](#progress10)) =&gt; void): void
+
+Unsubscribes from the foreground task resume event.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to unsubscribe from.<br>- **'resume'**: task resume.|
+| callback | function | No| Callback used to return the data structure of the task progress.|
+
+Parameters of the callback function
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| progress | [Progress](#progress10) | Yes| Task progress.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.Progress) => {
+    console.info('upload task resume.');
+  };
+  let createOffCallback2 = (progress: request.agent.Progress) => {
+    console.info('upload task resume.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('resume', createOffCallback1);
+    task.on('resume', createOffCallback2);
+    // Unsubscribe from createOffCallback1.
+    task.off('resume', createOffCallback1);
+    // Unsubscribe from all callbacks of the foreground task resume event.
+    task.off('resume');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
+### off('remove')<sup>11+</sup>
+
+off(event: 'remove', callback?: (progress: [Progress](#progress10)) =&gt; void): void
+
+Unsubscribes from the task removal event.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| event | string | Yes| Type of the event to unsubscribe from.<br>- **'remove'**: task removal.|
+| callback | function | No| Callback used to return the data structure of the task progress.|
+
+Parameters of the callback function
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| progress | [Progress](#progress10) | Yes| Task progress.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.Progress) => {
+    console.info('upload task remove.');
+  };
+  let createOffCallback2 = (progress: request.agent.Progress) => {
+    console.info('upload task remove.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('remove', createOffCallback1);
+    task.on('remove', createOffCallback2);
+    // Unsubscribe from createOffCallback1.
+    task.off('remove', createOffCallback1);
+    // Unsubscribe from all callbacks of the task removal event.
+    task.off('remove');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **NOTE**
+>
+> For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
 ### start<sup>10+</sup>
 
 start(callback: AsyncCallback&lt;void&gt;): void
@@ -1898,6 +2979,286 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
+### pause<sup>10+</sup>
+
+pause(callback: AsyncCallback&lt;void&gt;): void
+
+Pauses a task that is waiting, running, or retrying. A paused task can be resumed by [resume](#resume10). This API uses an asynchronous callback to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| callback | AsyncCallback&lt;void&gt; | Yes| Callback used to return the result. If the operation is successful, **err** is **undefined**. Otherwise, **err** is an error object.|
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](errorcode-request.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 13400003 | Task service ability error. |
+| 21900007 | Operation with wrong task state. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let config: request.agent.Config = {
+    action: request.agent.Action.DOWNLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskPauseTest',
+    description: 'Sample code for pause the download task',
+    mode: request.agent.Mode.BACKGROUND,
+    overwrite: false,
+    method: "GET",
+    data: "",
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // To prevent asynchronous out-of-order, wait for 1 second before performing the next operation.
+    task.pause((err: BusinessError) => {
+      if (err) {
+        console.error(`Failed to pause the download task, Code: ${err.code}, message: ${err.message}`);
+        return;
+      }
+      console.info(`Succeeded in pausing a download task. `);
+    });
+    console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+### pause<sup>10+</sup>
+
+pause(): Promise&lt;void&gt;
+
+Pauses a task that is waiting, running, or retrying. A paused task can be resumed by [resume](#resume10). This API uses a promise to return the result.
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Return value**
+
+| Type               | Description                     |
+| ------------------- | ------------------------- |
+| Promise&lt;void&gt; | Promise that returns no value.|
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](errorcode-request.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 13400003 | Task service ability error. |
+| 21900007 | Operation with wrong task state. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let config: request.agent.Config = {
+    action: request.agent.Action.DOWNLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskPauseTest',
+    description: 'Sample code for pause the download task',
+    mode: request.agent.Mode.BACKGROUND,
+    overwrite: false,
+    method: "GET",
+    data: "",
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // To prevent asynchronous out-of-order, wait for 1 second before performing the next operation.
+    task.pause().then(() => {
+      console.info(`Succeeded in pausing a download task. `);
+    }).catch((err: BusinessError) => {
+      console.error(`Failed to pause the download task, Code: ${err.code}, message: ${err.message}`);
+    });
+    console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+### resume<sup>10+</sup>
+
+resume(callback: AsyncCallback&lt;void&gt;): void
+
+Resumes a paused task. This API uses an asynchronous callback to return the result.
+
+**Required permissions**: ohos.permission.INTERNET
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Parameters**
+
+| Name| Type| Mandatory| Description|
+| -------- | -------- | -------- | -------- |
+| callback | AsyncCallback&lt;void&gt; | Yes| Callback used to return the result. If the operation is successful, **err** is **undefined**. Otherwise, **err** is an error object.|
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](errorcode-request.md) and [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 201 | Permission denied. |
+| 13400003 | Task service ability error. |
+| 21900007 | Operation with wrong task state. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let config: request.agent.Config = {
+    action: request.agent.Action.DOWNLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskResumeTest',
+    description: 'Sample code for resume the download task',
+    mode: request.agent.Mode.BACKGROUND,
+    overwrite: false,
+    method: "GET",
+    data: "",
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // To prevent asynchronous out-of-order, wait for 1 second before performing the next operation.
+    task.pause();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // To prevent asynchronous out-of-order, wait for 1 second before performing the next operation.
+    task.resume((err: BusinessError) => {
+      if (err) {
+        console.error(`Failed to resume the download task, Code: ${err.code}, message: ${err.message}`);
+        return;
+      }
+      console.info(`Succeeded in resuming a download task. `);
+    });
+    console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+### resume<sup>10+</sup>
+
+resume(): Promise&lt;void&gt;
+
+Resumes a paused task. This API uses a promise to return the result.
+
+**Required permissions**: ohos.permission.INTERNET
+
+**System capability**: SystemCapability.Request.FileTransferAgent
+
+**Return value**
+
+| Type               | Description                     |
+| ------------------- | ------------------------- |
+| Promise&lt;void&gt; | Promise that returns no value.|
+
+**Error codes**
+
+For details about the error codes, see [Upload and Download Error Codes](errorcode-request.md) and [Universal Error Codes](../errorcode-universal.md).
+
+| ID| Error Message|
+| -------- | -------- |
+| 201 | Permission denied. |
+| 13400003 | Task service ability error. |
+| 21900007 | Operation with wrong task state. |
+
+**Example**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // Obtain the context from the component and ensure that the return value of this.getUIContext().getHostContext() is UIAbilityContext.
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let config: request.agent.Config = {
+    action: request.agent.Action.DOWNLOAD,
+    url: 'http://127.0.0.1', // Replace the URL with the HTTP address of the real server.
+    title: 'taskResumeTest',
+    description: 'Sample code for resume the download task',
+    mode: request.agent.Mode.BACKGROUND,
+    overwrite: false,
+    method: "GET",
+    data: "",
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // To prevent asynchronous out-of-order, wait for 1 second before performing the next operation.
+    task.pause();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // To prevent asynchronous out-of-order, wait for 1 second before performing the next operation.
+    task.resume().then(() => {
+      console.info(`Succeeded in resuming a download task. `);
+    }).catch((err: BusinessError) => {
+      console.error(`Failed to resume the download task, Code: ${err.code}, message: ${err.message}`);
+    });
+    console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
 
 ### stop<sup>10+</sup>
 
@@ -2176,6 +3537,7 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 > **NOTE**
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
+
 
 ## request.agent.remove<sup>10+</sup>
 
