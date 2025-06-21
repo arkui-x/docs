@@ -484,6 +484,42 @@ Defines the types of the key and value in a KV pair. This type is not multi-thre
 | ------ | ----------------------- |
 | string | [ValueType](#valuetype) |
 
+## SqlExecutionInfo<sup>12+</sup>
+
+Represents statistics about SQL statements executed by the database.
+
+**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
+
+| Name    | Type                                              | Read-Only| Optional |Description                                                        |
+| -------- | ------------------------------------------------- | ---- | ---- | -------------------------------------------------------- |
+| sql<sup>12+</sup>           | Array&lt;string&gt;            | Yes  |   No  | SQL statements executed. If the value of [batchInsert](#batchinsert) is too large, there may be multiple SQL statements.     |
+| totalTime<sup>12+</sup>      | number                        | Yes  |   No  | Total time used to execute the SQL statements, in μs.                                   |
+| waitTime<sup>12+</sup>       | number                        | Yes  |   No  | Time used to obtain the handle, in μs.                                        |
+| prepareTime<sup>12+</sup>    | number                        | Yes  |   No  | Time used to get the SQL statements ready and bind parameters, in μs.                                |
+| executeTime<sup>12+</sup>    | number                        | Yes  |   No  | Total time used to execute the SQL statements, in μs.|
+
+## TransactionType<sup>14+</sup>
+
+Enumerates the types of transaction objects that can be created. Use the enum name rather than the enum value.
+
+**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
+
+| Name            | Value  | Description                    |
+| ---------------- | ---- | ------------------------ |
+| DEFERRED       | 0    | Deferred transaction object. When a deferred transaction object is created, automatic commit is disabled and no transaction will start. A read or write transaction starts only when the first read or write operation is performed.  |
+| IMMEDIATE | 1    | Immediate transaction object. When an immediate transaction object is created, a write transaction starts. If there is any uncommitted write transaction, the transaction object cannot be created and error 14800024 is returned.|
+| EXCLUSIVE      | 2    | Exclusive transaction object. In WAL mode, the exclusive transaction object is the same as the immediate transaction object. In other log modes, this type of transaction can prevent the database from being read by other connections during the transaction.|
+
+## TransactionOptions<sup>14+</sup>
+
+Represents the configuration of a transaction object.
+
+**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
+
+| Name       | Type         | Mandatory| Description                                                     |
+| ------------- | ------------- | ---- | --------------------------------------------------------- |
+| transactionType          | [TransactionType](#transactiontype14)        | No  | Transaction object type. <br>Default value: **DEFERRED**. |
+
 ## ConflictResolution<sup>10+</sup>
 
 Defines the resolution to use when **insert()** and **update()** conflict.
