@@ -348,7 +348,7 @@ class EntryAbility extends UIAbility {
 | ------------- | ------------- | ---- | ---------------------------------------------------- |
 | name          | string        | 是   | 数据库文件名。                                          |
 | securityLevel | [SecurityLevel](#securitylevel) | 是   | 设置数据库安全级别                     |
-| encrypt       | boolean       | 否   | 指定数据库是否加密，默认不加密。<br/> true:加密。<br/> false:非加密。 |
+| encrypt       | boolean       | 否   | 指定数据库是否加密，默认不加密。<br/> true:加密。<br/> false:非加密。<br/>如该参数指定为true，需同时配置cryptoParam参数，配置加密数据库密钥。 |
 | dataGroupId<sup>10+</sup> | string | 否 | 应用组ID，需要向应用市场获取。<br/>**模型约束：** 此属性仅在Stage模型下可用。<br/>从API version 10开始，支持此可选参数。指定在此dataGroupId对应的沙箱路径下创建RdbStore实例，当此参数不填时，默认在本应用沙箱目录下创建RdbStore实例。 |
 | customDir<sup>11+</sup> | string | 否 | 数据库自定义路径。<br/>**使用约束：** 数据库路径大小限制为128字节，如果超过该大小会开库失败，返回错误。<br/>从API version 11开始，支持此可选参数。数据库将在如下的目录结构中被创建：context.databaseDir + "/rdb/" + customDir，其中context.databaseDir是应用沙箱对应的路径，"/rdb/"表示创建的是关系型数据库，customDir表示自定义的路径。当此参数不填时，默认在本应用沙箱目录下创建RdbStore实例。 |
 | isReadOnly<sup>12+</sup> | boolean | 否 | 指定数据库是否只读，默认为数据库可读写。<br/>true：只允许从数据库读取数据，不允许对数据库进行写操作，否则会返回错误码801。<br/>false：允许对数据库进行读写操作。<br/>从API version 12开始，支持此可选参数。<br/>**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core |
@@ -377,7 +377,7 @@ class EntryAbility extends UIAbility {
 
 | 名称          | 类型   | 必填 | 说明                                                         |
 | ------------- | ------ | ---- | ------------------------------------------------------------ |
-| encryptionKey | Uint8Array | 是   | 指定数据库加/解密使用的密钥。<br/>如传入密钥为空，则由数据库负责生成并保存密钥，并使用生成的密钥打开数据库文件。<br/>使用完后用户需要将密钥内容全部置为零。 |
+| encryptionKey | Uint8Array | 是   | 指定数据库加/解密使用的密钥。<br/>使用完后用户需要将密钥内容全部置为零。 |
 | iterationCount | number | 否 | 整数类型，指定数据库PBKDF2算法的迭代次数，默认值为10000。<br/>迭代次数应当为大于零的整数，若非整数则向下取整。<br/>不指定此参数或指定为零时，使用默认值10000，并使用默认加密算法AES_256_GCM。 |
 | encryptionAlgo | [EncryptionAlgo](#encryptionalgo14) | 否 | 指定数据库加解密使用的加密算法。如不指定，默认值为 AES_256_GCM。 |
 | hmacAlgo | [HmacAlgo](#hmacalgo14) | 否 | 指定数据库加解密使用的HMAC算法。如不指定，默认值为SHA256。 |
