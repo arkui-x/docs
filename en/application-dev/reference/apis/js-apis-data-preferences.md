@@ -1632,8 +1632,6 @@ Subscribes to changes of specific data. The registered callback will be invoked 
   >
   > After [removePreferencesFromCache](#preferencesremovepreferencesfromcache) or [deletePreferences](#preferencesdeletepreferences) is called, the data change subscription will be automatically canceled. After [getPreferences](#preferencesgetpreferences) is called again, you need to subscribe to data changes again.
 
-**Atomic service API**: This API can be used in atomic services since API version 12.
-
 **System capability**: SystemCapability.DistributedDataManager.Preferences.Core
 
 **Parameters**
@@ -1682,8 +1680,6 @@ dataPreferences.flush((err: BusinessError) => {
 off(type: 'dataChange', keys: Array&lt;string&gt;,  callback?: Callback&lt;Record&lt;string, ValueType&gt;&gt;): void
 
 Unsubscribes from changes of specific data.
-
-**Atomic service API**: This API can be used in atomic services since API version 12.
 
 **System capability**: SystemCapability.DistributedDataManager.Preferences.Core
 
