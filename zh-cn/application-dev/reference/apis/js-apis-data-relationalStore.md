@@ -351,10 +351,10 @@ class EntryAbility extends UIAbility {
 | encrypt       | boolean       | 否   | 指定数据库是否加密，默认不加密。<br/> true:加密。<br/> false:非加密。<br/>如该参数指定为true，需同时配置cryptoParam参数，配置加密数据库密钥。 |
 | dataGroupId<sup>10+</sup> | string | 否 | 应用组ID，需要向应用市场获取。<br/>**模型约束：** 此属性仅在Stage模型下可用。<br/>从API version 10开始，支持此可选参数。指定在此dataGroupId对应的沙箱路径下创建RdbStore实例，当此参数不填时，默认在本应用沙箱目录下创建RdbStore实例。 |
 | customDir<sup>11+</sup> | string | 否 | 数据库自定义路径。<br/>**使用约束：** 数据库路径大小限制为128字节，如果超过该大小会开库失败，返回错误。<br/>从API version 11开始，支持此可选参数。数据库将在如下的目录结构中被创建：context.databaseDir + "/rdb/" + customDir，其中context.databaseDir是应用沙箱对应的路径，"/rdb/"表示创建的是关系型数据库，customDir表示自定义的路径。当此参数不填时，默认在本应用沙箱目录下创建RdbStore实例。 |
-| isReadOnly<sup>12+</sup> | boolean | 否 | 指定数据库是否只读，默认为数据库可读写。<br/>true：只允许从数据库读取数据，不允许对数据库进行写操作，否则会返回错误码801。<br/>false：允许对数据库进行读写操作。<br/>从API version 12开始，支持此可选参数。<br/>**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core |
-| rootDir<sup>18+</sup> | string | 否 | 指定数据库根路径。<br/>从API version 18开始，支持此可选参数。将从如下目录打开或删除数据库：rootDir + "/" + customDir。通过设置此参数打开的数据库为只读模式，不允许对数据库进行写操作，否则返回错误码801。配置此参数打开或删除数据库时，应确保对应路径下数据库文件存在，并且有读取权限，否则返回错误码14800010。<br/>**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core |
-| cryptoParam<sup>14+</sup> | [CryptoParam](#cryptoparam14) | 否 | 指定用户自定义的加密参数。<br/>当此参数不填时，使用默认的加密参数，见[CryptoParam](#cryptoparam14)各参数默认值。<br/>此配置只有在encrypt选项设置为真时才有效。<br/>从API version 14开始，支持此可选参数。<br/>**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core 
-| persist<sup>18+</sup> | boolean | 否 | 指定数据库是否需要持久化。true表示持久化，false表示不持久化，即内存数据库。默认为true。<br/>内存数据库不支持加密、backup、restore、跨进程访问及分布式能力，securityLevel属性会被忽略。<br/>**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
+| isReadOnly<sup>20+</sup> | boolean | 否 | 指定数据库是否只读，默认为数据库可读写。<br/>true：只允许从数据库读取数据，不允许对数据库进行写操作，否则会返回错误码801。<br/>false：允许对数据库进行读写操作。<br/>从API version 12开始，支持此可选参数。<br/>**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core |
+| rootDir<sup>20+</sup> | string | 否 | 指定数据库根路径。<br/>从API version 18开始，支持此可选参数。将从如下目录打开或删除数据库：rootDir + "/" + customDir。通过设置此参数打开的数据库为只读模式，不允许对数据库进行写操作，否则返回错误码801。配置此参数打开或删除数据库时，应确保对应路径下数据库文件存在，并且有读取权限，否则返回错误码14800010。<br/>**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core |
+| cryptoParam<sup>20+</sup> | [CryptoParam](#cryptoparam14) | 否 | 指定用户自定义的加密参数。<br/>当此参数不填时，使用默认的加密参数，见[CryptoParam](#cryptoparam14)各参数默认值。<br/>此配置只有在encrypt选项设置为真时才有效。<br/>从API version 14开始，支持此可选参数。<br/>**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core 
+| persist<sup>20+</sup> | boolean | 否 | 指定数据库是否需要持久化。true表示持久化，false表示不持久化，即内存数据库。默认为true。<br/>内存数据库不支持加密、backup、restore、跨进程访问及分布式能力，securityLevel属性会被忽略。<br/>**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 
 ## SecurityLevel
 
@@ -369,7 +369,7 @@ class EntryAbility extends UIAbility {
 | S3   | 3    | 表示数据库的安全级别为高级别，当数据泄露时会产生重大影响。例如，包含用户运动、健康、位置等信息的数据库。 |
 | S4   | 4    | 表示数据库的安全级别为关键级别，当数据泄露时会产生严重影响。例如，包含认证凭据、财务数据等信息的数据库。 |
 
-## CryptoParam<sup>14+</sup>
+## CryptoParam<sup>20+</sup>
 
 数据库加密参数配置。此配置只有在StoreConfig的encrypt选项设置为true时有效。
 
@@ -384,7 +384,7 @@ class EntryAbility extends UIAbility {
 | kdfAlgo | [KdfAlgo](#kdfalgo14) | 否 | 指定数据库加解密使用的PBKDF2算法。如不指定，默认使用和HMAC算法相等的算法。 |
 | cryptoPageSize | number | 否 | 整数类型，指定数据库加解密使用的页大小。如不指定，默认值为1024字节。<br/>用户指定的页大小应为1024到65536范围内的整数，并且为2<sup>n</sup>。若指定值非整数，则向下取整。 |
 
-## HmacAlgo<sup>14+</sup>
+## HmacAlgo<sup>20+</sup>
 
 数据库的HMAC算法枚举。请使用枚举名称而非枚举值。
 
@@ -396,7 +396,7 @@ class EntryAbility extends UIAbility {
 | SHA256 |  1    | HMAC_SHA256算法。     |
 | SHA512 |  2    | HMAC_SHA512算法。    |
 
-## KdfAlgo<sup>14+</sup>
+## KdfAlgo<sup>20+</sup>
 
 数据库的PBKDF2算法枚举。请使用枚举名称而非枚举值。
 
@@ -408,7 +408,7 @@ class EntryAbility extends UIAbility {
 | KDF_SHA256 |  1    | PBKDF2_HMAC_SHA256算法。     |
 | KDF_SHA512 |  2    | PBKDF2_HMAC_SHA512算法。     |
 
-## Field<sup>11+</sup>
+## Field<sup>20+</sup>
 
 用于谓词查询条件的特殊字段。请使用枚举名称而非枚举值。
 
@@ -489,7 +489,7 @@ class EntryAbility extends UIAbility {
 | ------ | ----------------------- |
 | string | [ValueType](#valuetype) |
 
-## SqlExecutionInfo<sup>12+</sup>
+## SqlExecutionInfo<sup>20+</sup>
 
 描述数据库执行的SQL语句的统计信息。
 
@@ -503,7 +503,7 @@ class EntryAbility extends UIAbility {
 | prepareTime<sup>12+</sup>    | number                        | 是   |   否   | 表示准备SQL和绑定参数的时间，单位为μs。                                 |
 | executeTime<sup>12+</sup>    | number                        | 是   |   否   | 表示执行SQL语句的时间，单位为μs。 |
 
-## TransactionType<sup>14+</sup>
+## TransactionType<sup>20+</sup>
 
 描述创建事务对象的枚举。请使用枚举名称而非枚举值。
 
@@ -515,7 +515,7 @@ class EntryAbility extends UIAbility {
 | IMMEDIATE | 1    | 表示创建一个IMMEDIATE类型的事务对象，该类型的事务对象在创建时会真正开始一个写事务；如果有别的写事务未提交，则会创建失败，返回错误码14800024。 |
 | EXCLUSIVE      | 2    | 表示创建一个EXCLUSIVE类型的事务对象，该类型的事务在WAL模式下和IMMEDIATE相同，但在其他日志模式下能够防止事务期间有其他连接读取数据库。 |
 
-## TransactionOptions<sup>14+</sup>
+## TransactionOptions<sup>20+</sup>
 
 事务对象的配置信息。
 
@@ -1325,7 +1325,7 @@ let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.notIn("NAME", ["Lisa", "Rose"]);
 ```
 
-### notContains<sup>12+</sup>
+### notContains<sup>20+</sup>
 
 notContains(field: string, value: string): RdbPredicates
 
@@ -1362,7 +1362,7 @@ let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.notContains("NAME", "os");
 ```
 
-### notLike<sup>12+</sup>
+### notLike<sup>20+</sup>
 
 notLike(field: string, value: string): RdbPredicates
 
@@ -1655,79 +1655,7 @@ if(store != undefined) {
 }
 ```
 
-### insertSync<sup>12+</sup>
-
-insertSync(table: string, values: sendableRelationalStore.ValuesBucket, conflict?: ConflictResolution):number
-
-传入Sendable数据，向目标表中插入一行数据。由于共享内存大小限制为2Mb，因此单条数据的大小需小于2Mb，否则会查询失败。
-
-**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**参数：**
-
-| 参数名   | 类型                                                                                           | 必填 | 说明                                                                            |
-| -------- | ---------------------------------------------------------------------------------------------- | ---- | ------------------------------------------------------------------------------- |
-| table    | string                                                                                         | 是   | 指定的目标表名。                                                                |
-| values   | [sendableRelationalStore.ValuesBucket](./js-apis-data-sendableRelationalStore.md#valuesbucket) | 是   | 表示要插入到表中的可跨线程传递数据。                                            |
-| conflict | [ConflictResolution](#conflictresolution10)                                                    | 否   | 指定冲突解决模式。默认值是relationalStore.ConflictResolution.ON_CONFLICT_NONE。 |
-
-**返回值**：
-
-| 类型   | 说明                                 |
-| ------ | ------------------------------------ |
-| number | 如果操作成功，返回行ID；否则返回-1。 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[关系型数据库错误码](errorcode-data-rdb.md)。其中，14800011错误码处理可参考[数据库备份与恢复](../../database/data-backup-and-restore.md)。
-
-| **错误码ID** | **错误信息**                                                 |
-| ------------ | ------------------------------------------------------------ |
-| 401          | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
-| 14800000     | Inner error.                                                 |
-| 14800011     | Failed to open the database because it is corrupted.                                          |
-| 14800014     | The RdbStore or ResultSet is already closed.                                              |
-| 14800015     | The database does not respond.                                        |
-| 14800021     | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist.                                       |
-| 14800022     | SQLite: Callback routine requested an abort.                 |
-| 14800023     | SQLite: Access permission denied.                            |
-| 14800024     | SQLite: The database file is locked.                         |
-| 14800025     | SQLite: A table in the database is locked.                   |
-| 14800026     | SQLite: The database is out of memory.                       |
-| 14800027     | SQLite: Attempt to write a readonly database.                |
-| 14800028     | SQLite: Some kind of disk I/O error occurred.                |
-| 14800029     | SQLite: The database is full.                                |
-| 14800030     | SQLite: Unable to open the database file.                    |
-| 14800031     | SQLite: TEXT or BLOB exceeds size limit.                     |
-| 14800032     | SQLite: Abort due to constraint violation.                   |
-| 14800033     | SQLite: Data type mismatch.                                  |
-| 14800034     | SQLite: Library used incorrectly.                            |
-| 14800047     | The WAL file size exceeds the default limit.                 |
-
-**示例：**
-
-```ts
-import { sendableRelationalStore } from '@kit.ArkData';
-
-const valuesBucket: relationalStore.ValuesBucket = {
-  "NAME": 'hangman',
-  "AGE": 18,
-  "SALARY": 100.5,
-  "CODES": new Uint8Array([1, 2, 3])
-};
-const sendableValuesBucket = sendableRelationalStore.toSendableValuesBucket(valuesBucket);
-
-if (store != undefined) {
-  try {
-    let rowId: number = (store as relationalStore.RdbStore).insertSync("EMPLOYEE", sendableValuesBucket, relationalStore.ConflictResolution.ON_CONFLICT_REPLACE);
-    console.info(`Insert is successful, rowId = ${rowId}`);
-  } catch (error) {
-    console.error(`Insert is failed, code is ${error.code},message is ${error.message}`);
-  }
-}
-```
-
-### insertSync<sup>12+</sup>
+### insertSync<sup>20+</sup>
 
 insertSync(table: string, values: sendableRelationalStore.ValuesBucket, conflict?: ConflictResolution):number
 
@@ -1957,69 +1885,7 @@ if(store != undefined) {
 }
 ```
 
-### createTransaction<sup>14+</sup>
-
-createTransaction(options?: TransactionOptions): Promise&lt;Transaction&gt;
-
-创建一个事务对象并开始事务，使用Promise异步回调。
-
-与[beginTransaction](#begintransaction)的区别在于：createTransaction接口会返回一个事务对象，不同事务对象之间是隔离的。使用事务对象进行插入、删除或更新数据等操作，无法被注册数据变更通知[on('dataChange')](#ondatachange)监听到。
-
-一个store最多支持同时存在四个事务对象，超过后会返回14800015错误码，此时需要检查是否持有事务对象时间过长或并发事务过多，若确认无法通过上述优化解决问题，建议等待现有事务释放后，再尝试新建事务对象。
-
-优先使用createTransaction，不再推荐使用beginTransaction。
-
-**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**参数：**
-
-| 参数名      | 类型                          | 必填 | 说明                                                         |
-| ----------- | ----------------------------- | ---- | ------------------------------------------------------------ |
-| options       | [TransactionOptions](#transactionoptions14)           | 否   | 表示事务对象的配置信息。                                 |
-
-**返回值**：
-
-| 类型                | 说明                      |
-| ------------------- | ------------------------- |
-| Promise&lt;[Transaction](#transaction14)&gt; | Promise对象，返回事务对象。 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[关系型数据库错误码](errorcode-data-rdb.md)。其中，14800011错误码处理可参考[数据库备份与恢复](../../database/data-backup-and-restore.md)。
-
-| **错误码ID** | **错误信息**                                                 |
-|-----------| ------------------------------------------------------------ |
-| 14800000  | Inner error. |
-| 14800011  | Failed to open the database because it is corrupted. |
-| 14800014  | The RdbStore or ResultSet is already closed. |
-| 14800015  | The database is busy.              |
-| 14800023  | SQLite: Access permission denied. |
-| 14800024  | SQLite: The database file is locked. |
-| 14800026  | SQLite: The database is out of memory. |
-| 14800028  | SQLite: Some kind of disk I/O error occurred. |
-| 14800029  | SQLite: The database is full. |
-| 14800030  | SQLite: Unable to open the database file. |
-
-**示例：**
-
-```ts
-import { BusinessError } from '@kit.BasicServicesKit';
-
-if (store != undefined) {
-  (store as relationalStore.RdbStore).createTransaction().then((transaction: relationalStore.Transaction) => {
-    transaction.execute("DELETE FROM test WHERE age = ? OR age = ?", [21, 20]).then(() => {
-      transaction.commit();
-    }).catch((e: BusinessError) => {
-      transaction.rollback();
-      console.error(`execute sql failed, code is ${e.code},message is ${e.message}`);
-    });
-  }).catch((err: BusinessError) => {
-    console.error(`createTransaction faided, code is ${err.code},message is ${err.message}`);
-  });
-}
-```
-
-### createTransaction<sup>14+</sup>
+### createTransaction<sup>20+</sup>
 
 createTransaction(options?: TransactionOptions): Promise&lt;Transaction&gt;
 
@@ -3139,7 +3005,7 @@ if(store != undefined) {
 }
 ```
 
-### on('statistics')<sup>12+</sup>
+### on('statistics')<sup>20+</sup>
 
 on(event: 'statistics', observer: Callback&lt;SqlExecutionInfo&gt;): void
 
@@ -3208,113 +3074,7 @@ try {
 }
 ```
 
-### close<sup>12+</sup>
-
-close(): Promise&lt;void&gt;
-
-关闭数据库，使用Promise异步回调。
-
-**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**返回值：**
-
-| 类型                | 说明          |
-| ------------------- | ------------- |
-| Promise&lt;void&gt; | Promise对象。 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[关系型数据库错误码](errorcode-data-rdb.md)。
-
-| **错误码ID** | **错误信息**                                    |
-| ------------ | ----------------------------------------------- |
-| 401          | Parameter error. The store must not be nullptr. |
-| 14800000     | Inner error.                                    |
-
-**示例：**
-
-```ts
-import { BusinessError } from '@kit.BasicServicesKit';
-
-if (store != undefined) {
-  (store as relationalStore.RdbStore).close().then(() => {
-    console.info(`close succeeded`);
-  }).catch((err: BusinessError) => {
-    console.error(`close failed, code is ${err.code},message is ${err.message}`);
-  });
-}
-```
-
-### on('statistics')<sup>12+</sup>
-
-on(event: 'statistics', observer: Callback&lt;SqlExecutionInfo&gt;): void
-
-订阅SQL统计信息。
-
-**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**参数：**
-
-| 参数名       | 类型                              | 必填 | 说明                                |
-| ------------ |---------------------------------| ---- |-----------------------------------|
-| event        | string                          | 是   | 订阅事件名称，取值为'statistics'，表示sql执行时间的统计。 |
-| observer     | Callback&lt;[SqlExecutionInfo](#sqlexecutioninfo12)&gt; | 是   | 回调函数。用于返回数据库中SQL执行时间的统计信息。  |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[关系型数据库错误码](errorcode-data-rdb.md)。
-
-| **错误码ID** | **错误信息**    |
-|-----------|--------|
-| 401       | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
-| 801       | Capability not supported.  |
-| 14800000  | Inner error.  |
-| 14800014  | The RdbStore or ResultSet is already closed.     |
-
-**示例：**
-
-```ts
-import { BusinessError } from '@kit.BasicServicesKit';
-
-let sqlExecutionInfo = (sqlExecutionInfo: relationalStore.SqlExecutionInfo) => {
-  console.info(`sql: ${sqlExecutionInfo.sql[0]}`);
-  console.info(`totalTime: ${sqlExecutionInfo.totalTime}`);
-  console.info(`waitTime: ${sqlExecutionInfo.waitTime}`);
-  console.info(`prepareTime: ${sqlExecutionInfo.prepareTime}`);
-  console.info(`executeTime: ${sqlExecutionInfo.executeTime}`);
-};
-
-try {
-  if (store != undefined) {
-    (store as relationalStore.RdbStore).on('statistics', sqlExecutionInfo);
-  }
-} catch (err) {
-  let code = (err as BusinessError).code;
-  let message = (err as BusinessError).message;
-  console.error(`Register observer failed, code is ${code},message is ${message}`);
-}
-
-try {
-  let value1 = "Lisa";
-  let value2 = 18;
-  let value3 = 100.5;
-  let value4 = new Uint8Array([1, 2, 3, 4, 5]);
-
-  const valueBucket: relationalStore.ValuesBucket = {
-    'NAME': value1,
-    'AGE': value2,
-    'SALARY': value3,
-    'CODES': value4
-  };
-  if (store != undefined) {
-    (store as relationalStore.RdbStore).insert('test', valueBucket);
-  }
-} catch (err) {
-  console.error(`insert fail, code:${err.code}, message: ${err.message}`);
-}
-```
-
-### close<sup>12+</sup>
+### close<sup>20+</sup>
 
 close(): Promise&lt;void&gt;
 
@@ -3694,62 +3454,7 @@ const codes = (resultSet as relationalStore.ResultSet).getBlob((resultSet as rel
 }
 ```
 
-### getValue<sup>12+</sup>
-
-getValue(columnIndex: number): ValueType
-
-获取当前行中指定列的值，如果值类型是ValueType中指定的任意类型，返回指定类型的值，否则返回14800000。
-
-**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**参数：**
-
-| 参数名      | 类型   | 必填 | 说明                    |
-| ----------- | ------ | ---- | ----------------------- |
-| columnIndex | number | 是   | 指定的列索引，从0开始。 |
-
-**返回值：**
-
-| 类型       | 说明                             |
-| ---------- | -------------------------------- |
-| [ValueType](#valuetype) | 表示允许的数据字段类型。 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[关系型数据库错误码](errorcode-data-rdb.md)。其中，14800011错误码处理可参考[数据库备份与恢复](../../database/data-backup-and-restore.md)。
-
-| **错误码ID** | **错误信息**     |
-|-----------|---------|
-| 401       | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
-| 14800000  | Inner error.      |
-| 14800011  | Failed to open the database because it is corrupted.        |
-| 14800012  | ResultSet is empty or pointer index is out of bounds.       |
-| 14800013  | Resultset is empty or column index is out of bounds.   |
-| 14800014  | The RdbStore or ResultSet is already closed.       |
-| 14800021  | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist.    |
-| 14800022  | SQLite: Callback routine requested an abort.     |
-| 14800023  | SQLite: Access permission denied.    |
-| 14800024  | SQLite: The database file is locked.    |
-| 14800025  | SQLite: A table in the database is locked.  |
-| 14800026  | SQLite: The database is out of memory.    |
-| 14800027  | SQLite: Attempt to write a readonly database.    |
-| 14800028  | SQLite: Some kind of disk I/O error occurred.    |
-| 14800029  | SQLite: The database is full.   |
-| 14800030  | SQLite: Unable to open the database file.    |
-| 14800031  | SQLite: TEXT or BLOB exceeds size limit.    |
-| 14800032  | SQLite: Abort due to constraint violation.   |
-| 14800033  | SQLite: Data type mismatch.      |
-| 14800034  | SQLite: Library used incorrectly.    |
-
-**示例：**
-
-```ts
-if (resultSet != undefined) {
-  const codes = (resultSet as relationalStore.ResultSet).getValue((resultSet as relationalStore.ResultSet).getColumnIndex("BIGINT_COLUMN"));
-}
-```
-
-### getValue<sup>12+</sup>
+### getValue<sup>20+</sup>
 
 getValue(columnIndex: number): ValueType
 
@@ -3984,55 +3689,7 @@ const docs = (resultSet as relationalStore.ResultSet).getAssets((resultSet as re
 }
 ```
 
-### getRow<sup>11+</sup>
-
-getRow(): ValuesBucket
-
-获取当前行。
-
-**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**返回值：**
-
-| 类型              | 说明                           |
-| ---------------- | ---------------------------- |
-| [ValuesBucket](#valuesbucket) | 返回指定行的值。 |
-
-**错误码：**
-
-以下错误码的详细介绍请参见[关系型数据库错误码](errorcode-data-rdb.md)。其中，14800011错误码处理可参考[数据库备份与恢复](../../database/data-backup-and-restore.md)。
-
-| **错误码ID** | **错误信息**                                                 |
-|-----------| ------------------------------------------------------------ |
-| 14800000  | Inner error. |
-| 14800011  | Failed to open the database because it is corrupted. |
-| 14800012  | ResultSet is empty or pointer index is out of bounds. |
-| 14800013  | Resultset is empty or column index is out of bounds. |
-| 14800014  | The RdbStore or ResultSet is already closed. |
-| 14800021  | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
-| 14800022  | SQLite: Callback routine requested an abort. |
-| 14800023  | SQLite: Access permission denied. |
-| 14800024  | SQLite: The database file is locked. |
-| 14800025  | SQLite: A table in the database is locked. |
-| 14800026  | SQLite: The database is out of memory. |
-| 14800027  | SQLite: Attempt to write a readonly database. |
-| 14800028  | SQLite: Some kind of disk I/O error occurred. |
-| 14800029  | SQLite: The database is full. |
-| 14800030  | SQLite: Unable to open the database file. |
-| 14800031  | SQLite: TEXT or BLOB exceeds size limit. |
-| 14800032  | SQLite: Abort due to constraint violation. |
-| 14800033  | SQLite: Data type mismatch. |
-| 14800034  | SQLite: Library used incorrectly. |
-
-**示例：**
-
-```ts
-if (resultSet != undefined) {
-  const row = (resultSet as relationalStore.ResultSet).getRow();
-}
-```
-
-### getRow<sup>11+</sup>
+### getRow<sup>20+</sup>
 
 getRow(): ValuesBucket
 
@@ -4140,7 +3797,7 @@ if(resultSet != undefined) {
 | ------------ | ------------------------------------------------------------ |
 | 14800012     | The result set is empty or the specified location is invalid. |
 
-## Transaction<sup>14+</sup>
+## Transaction<sup>20+</sup>
 
 提供以事务方式管理数据库的方法。事务对象是通过[createTransaction](#createtransaction14)接口创建的，不同事务对象之间的操作是隔离的，不同类型事务的区别见[TransactionType](#transactiontype14) 。
 
@@ -4185,7 +3842,7 @@ class EntryAbility extends UIAbility {
 }
 ```
 
-### commit<sup>14+</sup>
+### commit<sup>20+</sup>
 
 commit(): Promise&lt;void&gt;
 
@@ -4243,7 +3900,7 @@ if (store != undefined) {
 }
 ```
 
-### rollback<sup>14+</sup>
+### rollback<sup>20+</sup>
 
 rollback(): Promise&lt;void&gt;
 
@@ -4290,7 +3947,7 @@ if (store != undefined) {
 }
 ```
 
-### insert<sup>14+</sup>
+### insert<sup>20+</sup>
 
 insert(table: string, values: ValuesBucket, conflict?: ConflictResolution): Promise&lt;number&gt;
 
@@ -4377,7 +4034,7 @@ if (store != undefined) {
 }
 ```
 
-### insertSync<sup>14+</sup>
+### insertSync<sup>20+</sup>
 
 insertSync(table: string, values: ValuesBucket | sendableRelationalStore.ValuesBucket, conflict?: ConflictResolution): number
 
@@ -4465,7 +4122,7 @@ if (store != undefined) {
 }
 ```
 
-### batchInsert<sup>14+</sup>
+### batchInsert<sup>20+</sup>
 
 batchInsert(table: string, values: Array&lt;ValuesBucket&gt;): Promise&lt;number&gt;
 
@@ -4559,7 +4216,7 @@ if (store != undefined) {
 }
 ```
 
-### batchInsertSync<sup>14+</sup>
+### batchInsertSync<sup>20+</sup>
 
 batchInsertSync(table: string, values: Array&lt;ValuesBucket&gt;): number
 
@@ -4654,7 +4311,7 @@ if (store != undefined) {
 }
 ```
 
-### batchInsertWithConflictResolution<sup>18+</sup>
+### batchInsertWithConflictResolution<sup>20+</sup>
 
 batchInsertWithConflictResolution(table: string, values: Array&lt;ValuesBucket&gt;, conflict: ConflictResolution): Promise&lt;number&gt;
 
@@ -4752,7 +4409,7 @@ if (store != undefined) {
 }
 ```
 
-### batchInsertWithConflictResolutionSync<sup>18+</sup>
+### batchInsertWithConflictResolutionSync<sup>20+</sup>
 
 batchInsertWithConflictResolutionSync(table: string, values: Array&lt;ValuesBucket&gt;, conflict: ConflictResolution): number
 
@@ -4851,7 +4508,7 @@ if (store != undefined) {
 }
 ```
 
-### update<sup>14+</sup>
+### update<sup>20+</sup>
 
 update(values: ValuesBucket, predicates: RdbPredicates, conflict?: ConflictResolution): Promise&lt;number&gt;
 
@@ -4941,7 +4598,7 @@ if (store != undefined) {
 }
 ```
 
-### updateSync<sup>14+</sup>
+### updateSync<sup>20+</sup>
 
 updateSync(values: ValuesBucket, predicates: RdbPredicates, conflict?: ConflictResolution): number
 
@@ -5032,7 +4689,7 @@ if (store != undefined) {
 }
 ```
 
-### delete<sup>14+</sup>
+### delete<sup>20+</sup>
 
 delete(predicates: RdbPredicates):Promise&lt;number&gt;
 
@@ -5095,7 +4752,7 @@ if (store != undefined) {
 }
 ```
 
-### deleteSync<sup>14+</sup>
+### deleteSync<sup>20+</sup>
 
 deleteSync(predicates: RdbPredicates): number
 
@@ -5159,7 +4816,7 @@ if (store != undefined) {
 }
 ```
 
-### query<sup>14+</sup>
+### query<sup>20+</sup>
 
 query(predicates: RdbPredicates, columns?: Array&lt;string&gt;): Promise&lt;ResultSet&gt;
 
@@ -5228,7 +4885,7 @@ if (store != undefined) {
 }
 ```
 
-### querySync<sup>14+</sup>
+### querySync<sup>20+</sup>
 
 querySync(predicates: RdbPredicates, columns?: Array&lt;string&gt;): ResultSet
 
@@ -5299,7 +4956,7 @@ if (store != undefined) {
 }
 ```
 
-### querySql<sup>14+</sup>
+### querySql<sup>20+</sup>
 
 querySql(sql: string, args?: Array&lt;ValueType&gt;): Promise&lt;ResultSet&gt;
 
@@ -5366,7 +5023,7 @@ if (store != undefined) {
 }
 ```
 
-### querySqlSync<sup>14+</sup>
+### querySqlSync<sup>20+</sup>
 
 querySqlSync(sql: string, args?: Array&lt;ValueType&gt;): ResultSet
 
@@ -5434,7 +5091,7 @@ if (store != undefined) {
 }
 ```
 
-### execute<sup>14+</sup>
+### execute<sup>20+</sup>
 
 execute(sql: string, args?: Array&lt;ValueType&gt;): Promise&lt;ValueType&gt;
 
@@ -5504,7 +5161,7 @@ if (store != undefined) {
 }
 ```
 
-### executeSync<sup>14+</sup>
+### executeSync<sup>20+</sup>
 
 executeSync(sql: string, args?: Array&lt;ValueType&gt;): ValueType
 

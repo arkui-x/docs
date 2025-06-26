@@ -348,10 +348,10 @@ Defines the RDB store configuration.
 | securityLevel | [SecurityLevel](#securitylevel) | Yes  | Security level of the RDB store.                                       |
 | encrypt       | boolean       | No  | Whether to encrypt the RDB store.<br>The value **true** means to encrypt the RDB store; the value **false** (default) means the opposite.<br/>If this parameter is set to true, the cryptoParam parameter must also be configured to set the encrypted database key.|
 | dataGroupId<sup>10+</sup> | string | No| Application group ID, which needs to be obtained from the AppGallery.<br>**Model restriction**: This attribute can be used only in the stage model.<br>This parameter is supported since API version 10. It specifies the **relationalStore** instance created in the sandbox directory corresponding to the **dataGroupId**. If this parameter is not specified, the **relationalStore** instance is created in the sandbox directory of the application.|
-| isReadOnly<sup>12+</sup> | boolean | No| Whether the RDB store is read-only.<br>**true**: The RDB store is read-only. Writing data to the RDB store will result in error code 801.<br>**false** (default): The RDB store is readable and writeable.<br>This parameter is supported since API version 12.<br>**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core|
-| rootDir<sup>18+</sup> | string | No| Root path of the database.<br>This parameter is supported since API version 18. The database in the **rootDir** + "/" + **customDir** directory will be opened or deleted. The database opened is read-only. Writing data to a read-only database will trigger error 801. If this parameter is set when you want to open or delete an RDB store, ensure that the database file exists in the corresponding path and the caller has the read permission. Otherwise, error 14800010 will be returned.<br>**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core|
-| cryptoParam<sup>14+</sup> | [CryptoParam](#cryptoparam14) | No| Custom encryption parameters.<br>If this parameter is left empty, the default encryption parameters are used. For details, see default values of [CryptoParam](#cryptoparam14).<br>This parameter is valid only when **encrypt** is **true**.<br>This parameter is supported since API version 14.<br>**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core|
-| persist<sup>18+</sup> | boolean | No| Whether to persist the RDB store. The value **true** means to persist the RDB store; the value **false** means the opposite (using an in-memory database). <br>Default value: **true**.<br>An in-memory database does not support encryption, backup, restore, cross-process access, and distributed capabilities, with the **securityLevel** property ignored.<br>**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core|
+| isReadOnly<sup>20+</sup> | boolean | No| Whether the RDB store is read-only.<br>**true**: The RDB store is read-only. Writing data to the RDB store will result in error code 801.<br>**false** (default): The RDB store is readable and writeable.<br>This parameter is supported since API version 12.<br>**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core|
+| rootDir<sup>20+</sup> | string | No| Root path of the database.<br>This parameter is supported since API version 18. The database in the **rootDir** + "/" + **customDir** directory will be opened or deleted. The database opened is read-only. Writing data to a read-only database will trigger error 801. If this parameter is set when you want to open or delete an RDB store, ensure that the database file exists in the corresponding path and the caller has the read permission. Otherwise, error 14800010 will be returned.<br>**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core|
+| cryptoParam<sup>20+</sup> | [CryptoParam](#cryptoparam14) | No| Custom encryption parameters.<br>If this parameter is left empty, the default encryption parameters are used. For details, see default values of [CryptoParam](#cryptoparam14).<br>This parameter is valid only when **encrypt** is **true**.<br>This parameter is supported since API version 14.<br>**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core|
+| persist<sup>20+</sup> | boolean | No| Whether to persist the RDB store. The value **true** means to persist the RDB store; the value **false** means the opposite (using an in-memory database). <br>Default value: **true**.<br>An in-memory database does not support encryption, backup, restore, cross-process access, and distributed capabilities, with the **securityLevel** property ignored.<br>**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core|
 
 ## SecurityLevel
 
@@ -366,7 +366,7 @@ Enumerates the RDB store security levels.
 | S3   | 3    | The RDB store security level is high. If data leakage occurs, major impact will be caused on the database. For example, an RDB store that contains information such as user fitness, health, and location data.|
 | S4   | 4    | The RDB store security level is critical. If data leakage occurs, severe impact will be caused on the database. For example, an RDB store that contains information such as authentication credentials and financial data.|
 
-## CryptoParam<sup>14+</sup>
+## CryptoParam<sup>20+</sup>
 
 Represents the configuration of database encryption parameters. This parameter is valid only when **encrypt** in **StoreConfig** is **true**.
 
@@ -381,7 +381,7 @@ Represents the configuration of database encryption parameters. This parameter i
 | kdfAlgo | [KdfAlgo](#kdfalgo14) | No| PBKDF2 algorithm used for database encryption and decryption. <br>Default value: the same as the HMAC algorithm used.|
 | cryptoPageSize | number | No| Page size used for database encryption and decryption. <br>Default value: **1024** bytes.<br>The value must be an integer within the range of 1024 to 65536 and must be 2<sup>n</sup>. If the specified value is not an integer, the value is rounded down.|
 
-## HmacAlgo<sup>14+</sup>
+## HmacAlgo<sup>20+</sup>
 
 Enumerates the HMAC algorithms for the database. Use the enum name rather than the enum value.
 
@@ -393,7 +393,7 @@ Enumerates the HMAC algorithms for the database. Use the enum name rather than t
 | SHA256 |  1    | HMAC_SHA256.    |
 | SHA512 |  2    | HMAC_SHA512.   |
 
-## KdfAlgo<sup>14+</sup>
+## KdfAlgo<sup>20+</sup>
 
 Enumerates the PBKDF2 algorithms for the database. Use the enum name rather than the enum value.
 
@@ -405,7 +405,7 @@ Enumerates the PBKDF2 algorithms for the database. Use the enum name rather than
 | KDF_SHA256 |  1    | PBKDF2_HMAC_SHA256.    |
 | KDF_SHA512 |  2    | PBKDF2_HMAC_SHA512.    |
 
-## Field<sup>11+</sup>
+## Field<sup>20+</sup>
 
 Enumerates the special fields used in predicates. Use the enum name rather than the enum value.
 
@@ -486,7 +486,7 @@ Defines the types of the key and value in a KV pair. This type is not multi-thre
 | ------ | ----------------------- |
 | string | [ValueType](#valuetype) |
 
-## SqlExecutionInfo<sup>12+</sup>
+## SqlExecutionInfo<sup>20+</sup>
 
 Represents statistics about SQL statements executed by the database.
 
@@ -500,7 +500,7 @@ Represents statistics about SQL statements executed by the database.
 | prepareTime<sup>12+</sup>    | number                        | Yes  |   No  | Time used to get the SQL statements ready and bind parameters, in μs.                                |
 | executeTime<sup>12+</sup>    | number                        | Yes  |   No  | Total time used to execute the SQL statements, in μs.|
 
-## TransactionType<sup>14+</sup>
+## TransactionType<sup>20+</sup>
 
 Enumerates the types of transaction objects that can be created. Use the enum name rather than the enum value.
 
@@ -512,7 +512,7 @@ Enumerates the types of transaction objects that can be created. Use the enum na
 | IMMEDIATE | 1    | Immediate transaction object. When an immediate transaction object is created, a write transaction starts. If there is any uncommitted write transaction, the transaction object cannot be created and error 14800024 is returned.|
 | EXCLUSIVE      | 2    | Exclusive transaction object. In WAL mode, the exclusive transaction object is the same as the immediate transaction object. In other log modes, this type of transaction can prevent the database from being read by other connections during the transaction.|
 
-## TransactionOptions<sup>14+</sup>
+## TransactionOptions<sup>20+</sup>
 
 Represents the configuration of a transaction object.
 
@@ -1324,7 +1324,7 @@ let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.notIn("NAME", ["Lisa", "Rose"]);
 ```
 
-### notContains<sup>12+</sup>
+### notContains<sup>20+</sup>
 
 notContains(field: string, value: string): RdbPredicates
 
@@ -1361,7 +1361,7 @@ let predicates = new relationalStore.RdbPredicates("EMPLOYEE");
 predicates.notContains("NAME", "os");
 ```
 
-### notLike<sup>12+</sup>
+### notLike<sup>20+</sup>
 
 notLike(field: string, value: string): RdbPredicates
 
@@ -1654,79 +1654,7 @@ if(store != undefined) {
 }
 ```
 
-### insertSync<sup>12+</sup>
-
-insertSync(table: string, values: sendableRelationalStore.ValuesBucket, conflict?: ConflictResolution):number
-
-Inserts a row of Sendable data into a table. This API returns the result synchronously. Due to the limit of the shared memory (max. 2 MB), a single data record cannot exceed 2 MB. Otherwise, the query operation will fail.
-
-**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**Parameters**
-
-| Name  | Type                                                                                          | Mandatory| Description                                                                           |
-| -------- | ---------------------------------------------------------------------------------------------- | ---- | ------------------------------------------------------------------------------- |
-| table    | string                                                                                         | Yes  | Name of the target table.                                                               |
-| values   | [sendableRelationalStore.ValuesBucket](./js-apis-data-sendableRelationalStore.md#valuesbucket) | Yes  | Sendable data to insert.                                           |
-| conflict | [ConflictResolution](#conflictresolution10)                                                    | No  | Resolution used to resolve the conflict. <br>Default value: **relationalStore.ConflictResolution.ON_CONFLICT_NONE**.|
-
-**Return value**
-
-| Type  | Description                                |
-| ------ | ------------------------------------ |
-| number | If the operation is successful, the row ID will be returned. Otherwise, **-1** will be returned.|
-
-**Error codes**
-
-For details about the error codes, see [Universal Error Codes](../errorcode-universal.md) and [RDB Store Error Codes](errorcode-data-rdb.md). For details about how to handle error 14800011, see [Database Backup and Restore](../../database/data-backup-and-restore.md).
-
-| **ID**| **Error Message**                                                |
-| ------------ | ------------------------------------------------------------ |
-| 401          | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
-| 14800000     | Inner error.                                                 |
-| 14800011     | Failed to open the database because it is corrupted.                                          |
-| 14800014     | The RdbStore or ResultSet is already closed.                                              |
-| 14800015     | The database does not respond.                                        |
-| 14800021     | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist.                                       |
-| 14800022     | SQLite: Callback routine requested an abort.                 |
-| 14800023     | SQLite: Access permission denied.                            |
-| 14800024     | SQLite: The database file is locked.                         |
-| 14800025     | SQLite: A table in the database is locked.                   |
-| 14800026     | SQLite: The database is out of memory.                       |
-| 14800027     | SQLite: Attempt to write a readonly database.                |
-| 14800028     | SQLite: Some kind of disk I/O error occurred.                |
-| 14800029     | SQLite: The database is full.                                |
-| 14800030     | SQLite: Unable to open the database file.                    |
-| 14800031     | SQLite: TEXT or BLOB exceeds size limit.                     |
-| 14800032     | SQLite: Abort due to constraint violation.                   |
-| 14800033     | SQLite: Data type mismatch.                                  |
-| 14800034     | SQLite: Library used incorrectly.                            |
-| 14800047     | The WAL file size exceeds the default limit.                 |
-
-**Example**
-
-```ts
-import { sendableRelationalStore } from '@kit.ArkData';
-
-const valuesBucket: relationalStore.ValuesBucket = {
-  "NAME": 'hangman',
-  "AGE": 18,
-  "SALARY": 100.5,
-  "CODES": new Uint8Array([1, 2, 3])
-};
-const sendableValuesBucket = sendableRelationalStore.toSendableValuesBucket(valuesBucket);
-
-if (store != undefined) {
-  try {
-    let rowId: number = (store as relationalStore.RdbStore).insertSync("EMPLOYEE", sendableValuesBucket, relationalStore.ConflictResolution.ON_CONFLICT_REPLACE);
-    console.info(`Insert is successful, rowId = ${rowId}`);
-  } catch (error) {
-    console.error(`Insert is failed, code is ${error.code},message is ${error.message}`);
-  }
-}
-```
-
-### insertSync<sup>12+</sup>
+### insertSync<sup>20+</sup>
 
 insertSync(table: string, values: sendableRelationalStore.ValuesBucket, conflict?: ConflictResolution):number
 
@@ -1956,69 +1884,7 @@ if(store != undefined) {
 }
 ```
 
-### createTransaction<sup>14+</sup>
-
-createTransaction(options?: TransactionOptions): Promise&lt;Transaction&gt;
-
-Creates a transaction object and starts a transaction. This API uses a promise to return the result.
-
-Different from [beginTransaction](#begintransaction), **createTransaction()** returns a transaction object, which is isolated from other transaction objects. When a transaction object is used to insert, delete, or update data, these changes cannot be detected by [on ('dataChange')](#ondatachange).
-
-A store supports a maximum of four transaction objects at a time. If the number of transaction objects exceeds the upper limit, error 14800015 is returned. In this case, check whether transaction objects are being held too long or whether there are too many concurrent transactions. If the problem cannot be solved through these optimizations, you are advised to create transaction objects after existing transactions are released.
-
-You are advised to use **createTransaction** instead of **beginTransaction**.
-
-**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**Parameters**
-
-| Name     | Type                         | Mandatory| Description                                                        |
-| ----------- | ----------------------------- | ---- | ------------------------------------------------------------ |
-| options       | [TransactionOptions](#transactionoptions14)           | No  | Configuration of the transaction object to create.                                |
-
-**Return value**
-
-| Type               | Description                     |
-| ------------------- | ------------------------- |
-| Promise&lt;[Transaction](#transaction14)&gt; | Promise used to return the transaction object created.|
-
-**Error codes**
-
-For details about the error codes, see [Universal Error Codes](../errorcode-universal.md) and [RDB Store Error Codes](errorcode-data-rdb.md). For details about how to handle error 14800011, see [Database Backup and Restore](../../database/data-backup-and-restore.md).
-
-| **ID**| **Error Message**                                                |
-|-----------| ------------------------------------------------------------ |
-| 14800000  | Inner error. |
-| 14800011  | Failed to open the database because it is corrupted. |
-| 14800014  | The RdbStore or ResultSet is already closed. |
-| 14800015  | The database is busy.              |
-| 14800023  | SQLite: Access permission denied. |
-| 14800024  | SQLite: The database file is locked. |
-| 14800026  | SQLite: The database is out of memory. |
-| 14800028  | SQLite: Some kind of disk I/O error occurred. |
-| 14800029  | SQLite: The database is full. |
-| 14800030  | SQLite: Unable to open the database file. |
-
-**Example**
-
-```ts
-import { BusinessError } from '@kit.BasicServicesKit';
-
-if (store != undefined) {
-  (store as relationalStore.RdbStore).createTransaction().then((transaction: relationalStore.Transaction) => {
-    transaction.execute("DELETE FROM test WHERE age = ? OR age = ?", [21, 20]).then(() => {
-      transaction.commit();
-    }).catch((e: BusinessError) => {
-      transaction.rollback();
-      console.error(`execute sql failed, code is ${e.code},message is ${e.message}`);
-    });
-  }).catch((err: BusinessError) => {
-    console.error(`createTransaction faided, code is ${err.code},message is ${err.message}`);
-  });
-}
-```
-
-### createTransaction<sup>14+</sup>
+### createTransaction<sup>20+</sup>
 
 createTransaction(options?: TransactionOptions): Promise&lt;Transaction&gt;
 
@@ -3138,7 +3004,7 @@ if(store != undefined) {
 }
 ```
 
-### on('statistics')<sup>12+</sup>
+### on('statistics')<sup>20+</sup>
 
 on(event: 'statistics', observer: Callback&lt;SqlExecutionInfo&gt;): void
 
@@ -3207,113 +3073,7 @@ try {
 }
 ```
 
-### close<sup>12+</sup>
-
-close(): Promise&lt;void&gt;
-
-Closes this RDB store. This API uses a promise to return the result.
-
-**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**Return value**
-
-| Type               | Description         |
-| ------------------- | ------------- |
-| Promise&lt;void&gt; | Promise that returns no value.|
-
-**Error codes**
-
-For details about the error codes, see [Universal Error Codes](../errorcode-universal.md) and [RDB Store Error Codes](errorcode-data-rdb.md).
-
-| **ID**| **Error Message**                                   |
-| ------------ | ----------------------------------------------- |
-| 401          | Parameter error. The store must not be nullptr. |
-| 14800000     | Inner error.                                    |
-
-**Example**
-
-```ts
-import { BusinessError } from '@kit.BasicServicesKit';
-
-if (store != undefined) {
-  (store as relationalStore.RdbStore).close().then(() => {
-    console.info(`close succeeded`);
-  }).catch((err: BusinessError) => {
-    console.error(`close failed, code is ${err.code},message is ${err.message}`);
-  });
-}
-```
-
-### on('statistics')<sup>12+</sup>
-
-on(event: 'statistics', observer: Callback&lt;SqlExecutionInfo&gt;): void
-
-Subscribes to SQL statistics.
-
-**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**Parameters**
-
-| Name      | Type                             | Mandatory| Description                               |
-| ------------ |---------------------------------| ---- |-----------------------------------|
-| event        | string                          | Yes  | Event type. The value is **'statistics'**, which indicates the statistics of the SQL execution time.|
-| observer     | Callback&lt;[SqlExecutionInfo](#sqlexecutioninfo12)&gt; | Yes  | Callback used to return the statistics about the SQL execution time in the database. |
-
-**Error codes**
-
-For details about the error codes, see [Universal Error Codes](../errorcode-universal.md) and [RDB Store Error Codes](errorcode-data-rdb.md).
-
-| **ID**| **Error Message**   |
-|-----------|--------|
-| 401       | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
-| 801       | Capability not supported.  |
-| 14800000  | Inner error.  |
-| 14800014  | The RdbStore or ResultSet is already closed.     |
-
-**Example**
-
-```ts
-import { BusinessError } from '@kit.BasicServicesKit';
-
-let sqlExecutionInfo = (sqlExecutionInfo: relationalStore.SqlExecutionInfo) => {
-  console.info(`sql: ${sqlExecutionInfo.sql[0]}`);
-  console.info(`totalTime: ${sqlExecutionInfo.totalTime}`);
-  console.info(`waitTime: ${sqlExecutionInfo.waitTime}`);
-  console.info(`prepareTime: ${sqlExecutionInfo.prepareTime}`);
-  console.info(`executeTime: ${sqlExecutionInfo.executeTime}`);
-};
-
-try {
-  if (store != undefined) {
-    (store as relationalStore.RdbStore).on('statistics', sqlExecutionInfo);
-  }
-} catch (err) {
-  let code = (err as BusinessError).code;
-  let message = (err as BusinessError).message;
-  console.error(`Register observer failed, code is ${code},message is ${message}`);
-}
-
-try {
-  let value1 = "Lisa";
-  let value2 = 18;
-  let value3 = 100.5;
-  let value4 = new Uint8Array([1, 2, 3, 4, 5]);
-
-  const valueBucket: relationalStore.ValuesBucket = {
-    'NAME': value1,
-    'AGE': value2,
-    'SALARY': value3,
-    'CODES': value4
-  };
-  if (store != undefined) {
-    (store as relationalStore.RdbStore).insert('test', valueBucket);
-  }
-} catch (err) {
-  console.error(`insert fail, code:${err.code}, message: ${err.message}`);
-}
-```
-
-### close<sup>12+</sup>
+### close<sup>20+</sup>
 
 close(): Promise&lt;void&gt;
 
@@ -3693,62 +3453,7 @@ const codes = (resultSet as relationalStore.ResultSet).getBlob((resultSet as rel
 }
 ```
 
-### getValue<sup>12+</sup>
-
-getValue(columnIndex: number): ValueType
-
-Obtains the value from the specified column and current row. If the value type is any of **ValueType**, the value of the corresponding type will be returned. Otherwise, **14800000** will be returned.
-
-**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**Parameters**
-
-| Name     | Type  | Mandatory| Description                   |
-| ----------- | ------ | ---- | ----------------------- |
-| columnIndex | number | Yes  | Index of the target column, starting from 0.|
-
-**Return value**
-
-| Type      | Description                            |
-| ---------- | -------------------------------- |
-| [ValueType](#valuetype) | Values of the specified type.|
-
-**Error codes**
-
-For details about the error codes, see [Universal Error Codes](../errorcode-universal.md) and [RDB Store Error Codes](errorcode-data-rdb.md). For details about how to handle error 14800011, see [Database Backup and Restore](../../database/data-backup-and-restore.md).
-
-| **ID**| **Error Message**    |
-|-----------|---------|
-| 401       | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
-| 14800000  | Inner error.      |
-| 14800011  | Failed to open the database because it is corrupted.        |
-| 14800012  | ResultSet is empty or pointer index is out of bounds.       |
-| 14800013  | Resultset is empty or column index is out of bounds.   |
-| 14800014  | The RdbStore or ResultSet is already closed.       |
-| 14800021  | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist.    |
-| 14800022  | SQLite: Callback routine requested an abort.     |
-| 14800023  | SQLite: Access permission denied.    |
-| 14800024  | SQLite: The database file is locked.    |
-| 14800025  | SQLite: A table in the database is locked.  |
-| 14800026  | SQLite: The database is out of memory.    |
-| 14800027  | SQLite: Attempt to write a readonly database.    |
-| 14800028  | SQLite: Some kind of disk I/O error occurred.    |
-| 14800029  | SQLite: The database is full.   |
-| 14800030  | SQLite: Unable to open the database file.    |
-| 14800031  | SQLite: TEXT or BLOB exceeds size limit.    |
-| 14800032  | SQLite: Abort due to constraint violation.   |
-| 14800033  | SQLite: Data type mismatch.      |
-| 14800034  | SQLite: Library used incorrectly.    |
-
-**Example**
-
-```ts
-if (resultSet != undefined) {
-  const codes = (resultSet as relationalStore.ResultSet).getValue((resultSet as relationalStore.ResultSet).getColumnIndex("BIGINT_COLUMN"));
-}
-```
-
-### getValue<sup>12+</sup>
+### getValue<sup>20+</sup>
 
 getValue(columnIndex: number): ValueType
 
@@ -3983,7 +3688,7 @@ const docs = (resultSet as relationalStore.ResultSet).getAssets((resultSet as re
 }
 ```
 
-### getRow<sup>11+</sup>
+### getRow<sup>20+</sup>
 
 getRow(): ValuesBucket
 
@@ -4030,55 +3735,6 @@ if (resultSet != undefined) {
   const row = (resultSet as relationalStore.ResultSet).getRow();
 }
 ```
-
-### getRow<sup>11+</sup>
-
-getRow(): ValuesBucket
-
-Obtains the data in the current row.
-
-**System capability**: SystemCapability.DistributedDataManager.RelationalStore.Core
-
-**Return value**
-
-| Type             | Description                          |
-| ---------------- | ---------------------------- |
-| [ValuesBucket](#valuesbucket) | Data obtained.|
-
-**Error codes**
-
-For details about the error codes, see [RDB Error Codes](errorcode-data-rdb.md). For details about how to handle error 14800011, see [Database Backup and Restore](../../database/data-backup-and-restore.md).
-
-| **ID**| **Error Message**                                                |
-|-----------| ------------------------------------------------------------ |
-| 14800000  | Inner error. |
-| 14800011  | Failed to open the database because it is corrupted. |
-| 14800012  | ResultSet is empty or pointer index is out of bounds. |
-| 14800013  | Resultset is empty or column index is out of bounds. |
-| 14800014  | The RdbStore or ResultSet is already closed. |
-| 14800021  | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
-| 14800022  | SQLite: Callback routine requested an abort. |
-| 14800023  | SQLite: Access permission denied. |
-| 14800024  | SQLite: The database file is locked. |
-| 14800025  | SQLite: A table in the database is locked. |
-| 14800026  | SQLite: The database is out of memory. |
-| 14800027  | SQLite: Attempt to write a readonly database. |
-| 14800028  | SQLite: Some kind of disk I/O error occurred. |
-| 14800029  | SQLite: The database is full. |
-| 14800030  | SQLite: Unable to open the database file. |
-| 14800031  | SQLite: TEXT or BLOB exceeds size limit. |
-| 14800032  | SQLite: Abort due to constraint violation. |
-| 14800033  | SQLite: Data type mismatch. |
-| 14800034  | SQLite: Library used incorrectly. |
-
-**Example**
-
-```ts
-if (resultSet != undefined) {
-  const row = (resultSet as relationalStore.ResultSet).getRow();
-}
-```
-
 
 ### isColumnNull
 
@@ -4140,7 +3796,7 @@ For details about the error codes, see [RDB Error Codes](../errorcodes/errorcode
 | ------------ | ------------------------------------------------------------ |
 | 14800012     | The result set is empty or the specified location is invalid. |
 
-## Transaction<sup>14+</sup>
+## Transaction<sup>20+</sup>
 
 Provides API for managing databases in transaction mode. A transaction object is created by using [createTransaction](#createtransaction14). Operations on different transaction objects are isolated. For details about the transaction types, see [TransactionType](#transactiontype14).
 
@@ -4185,7 +3841,7 @@ class EntryAbility extends UIAbility {
 }
 ```
 
-### commit<sup>14+</sup>
+### commit<sup>20+</sup>
 
 commit(): Promise&lt;void&gt;
 
@@ -4243,7 +3899,7 @@ if (store != undefined) {
 }
 ```
 
-### rollback<sup>14+</sup>
+### rollback<sup>20+</sup>
 
 rollback(): Promise&lt;void&gt;
 
@@ -4290,7 +3946,7 @@ if (store != undefined) {
 }
 ```
 
-### insert<sup>14+</sup>
+### insert<sup>20+</sup>
 
 insert(table: string, values: ValuesBucket, conflict?: ConflictResolution): Promise&lt;number&gt;
 
@@ -4377,7 +4033,7 @@ if (store != undefined) {
 }
 ```
 
-### insertSync<sup>14+</sup>
+### insertSync<sup>20+</sup>
 
 insertSync(table: string, values: ValuesBucket | sendableRelationalStore.ValuesBucket, conflict?: ConflictResolution): number
 
@@ -4465,7 +4121,7 @@ if (store != undefined) {
 }
 ```
 
-### batchInsert<sup>14+</sup>
+### batchInsert<sup>20+</sup>
 
 batchInsert(table: string, values: Array&lt;ValuesBucket&gt;): Promise&lt;number&gt;
 
@@ -4559,7 +4215,7 @@ if (store != undefined) {
 }
 ```
 
-### batchInsertSync<sup>14+</sup>
+### batchInsertSync<sup>20+</sup>
 
 batchInsertSync(table: string, values: Array&lt;ValuesBucket&gt;): number
 
@@ -4654,7 +4310,7 @@ if (store != undefined) {
 }
 ```
 
-### batchInsertWithConflictResolution<sup>18+</sup>
+### batchInsertWithConflictResolution<sup>20+</sup>
 
 batchInsertWithConflictResolution(table: string, values: Array&lt;ValuesBucket&gt;, conflict: ConflictResolution): Promise&lt;number&gt;
 
@@ -4752,7 +4408,7 @@ if (store != undefined) {
 }
 ```
 
-### batchInsertWithConflictResolutionSync<sup>18+</sup>
+### batchInsertWithConflictResolutionSync<sup>20+</sup>
 
 batchInsertWithConflictResolutionSync(table: string, values: Array&lt;ValuesBucket&gt;, conflict: ConflictResolution): number
 
@@ -4851,7 +4507,7 @@ if (store != undefined) {
 }
 ```
 
-### update<sup>14+</sup>
+### update<sup>20+</sup>
 
 update(values: ValuesBucket, predicates: RdbPredicates, conflict?: ConflictResolution): Promise&lt;number&gt;
 
@@ -4941,7 +4597,7 @@ if (store != undefined) {
 }
 ```
 
-### updateSync<sup>14+</sup>
+### updateSync<sup>20+</sup>
 
 updateSync(values: ValuesBucket, predicates: RdbPredicates, conflict?: ConflictResolution): number
 
@@ -5032,7 +4688,7 @@ if (store != undefined) {
 }
 ```
 
-### delete<sup>14+</sup>
+### delete<sup>20+</sup>
 
 delete(predicates: RdbPredicates):Promise&lt;number&gt;
 
@@ -5095,7 +4751,7 @@ if (store != undefined) {
 }
 ```
 
-### deleteSync<sup>14+</sup>
+### deleteSync<sup>20+</sup>
 
 deleteSync(predicates: RdbPredicates): number
 
@@ -5159,7 +4815,7 @@ if (store != undefined) {
 }
 ```
 
-### query<sup>14+</sup>
+### query<sup>20+</sup>
 
 query(predicates: RdbPredicates, columns?: Array&lt;string&gt;): Promise&lt;ResultSet&gt;
 
@@ -5228,7 +4884,7 @@ if (store != undefined) {
 }
 ```
 
-### querySync<sup>14+</sup>
+### querySync<sup>20+</sup>
 
 querySync(predicates: RdbPredicates, columns?: Array&lt;string&gt;): ResultSet
 
@@ -5299,7 +4955,7 @@ if (store != undefined) {
 }
 ```
 
-### querySql<sup>14+</sup>
+### querySql<sup>20+</sup>
 
 querySql(sql: string, args?: Array&lt;ValueType&gt;): Promise&lt;ResultSet&gt;
 
@@ -5366,7 +5022,7 @@ if (store != undefined) {
 }
 ```
 
-### querySqlSync<sup>14+</sup>
+### querySqlSync<sup>20+</sup>
 
 querySqlSync(sql: string, args?: Array&lt;ValueType&gt;): ResultSet
 
@@ -5434,7 +5090,7 @@ if (store != undefined) {
 }
 ```
 
-### execute<sup>14+</sup>
+### execute<sup>20+</sup>
 
 execute(sql: string, args?: Array&lt;ValueType&gt;): Promise&lt;ValueType&gt;
 
@@ -5504,7 +5160,7 @@ if (store != undefined) {
 }
 ```
 
-### executeSync<sup>14+</sup>
+### executeSync<sup>20+</sup>
 
 executeSync(sql: string, args?: Array&lt;ValueType&gt;): ValueType
 
