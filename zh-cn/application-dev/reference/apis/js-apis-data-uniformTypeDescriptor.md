@@ -31,7 +31,7 @@ import uniformTypeDescriptor from '@ohos.data.uniformTypeDescriptor';
 | FOLDER        | 'general.folder'           | 所有文件夹的基类型，归属类型为DIRECTORY。                         | 支持                       | 支持                       |
 | OPENHARMONY_PIXEL_MAP                        | 'openharmony.pixel-map'                  | 系统定义的像素图类型，归属类型为IMAGE。             | 支持           | 支持           |
 
-## TypeDescriptor<sup>11+</sup> 
+## TypeDescriptor<sup>20+</sup> 
 
 标准化数据类型的描述类，它包含了一些属性和方法用于描述标准化数据类型自身以及和其他标准化数据类型之间的归属与层级关系。
 
@@ -95,7 +95,7 @@ try{
 }
 ```
 
-### isLowerLevelType<sup>11+</sup> 
+### isLowerLevelType<sup>20+</sup> 
 
 isLowerLevelType(type: string): boolean
 
@@ -141,7 +141,7 @@ try{
 }
 ```
 
-### isHigherLevelType<sup>11+</sup> 
+### isHigherLevelType<sup>20+</sup> 
 
 isHigherLevelType(type: string): boolean
 
@@ -187,7 +187,7 @@ try{
 }
 ```
 
-### equals<sup>11+</sup> 
+### equals<sup>20+</sup> 
 
 equals(typeDescriptor: TypeDescriptor): boolean
 
@@ -233,7 +233,7 @@ try{
 }
 ```
 
-## uniformTypeDescriptor.getTypeDescriptor<sup>11+</sup>
+## uniformTypeDescriptor.getTypeDescriptor<sup>20+</sup>
 
 getTypeDescriptor(typeId: string): TypeDescriptor
 
@@ -287,7 +287,7 @@ try {
 }
 ```
 
-## uniformTypeDescriptor.getUniformDataTypeByFilenameExtension<sup>11+</sup>
+## uniformTypeDescriptor.getUniformDataTypeByFilenameExtension<sup>20+</sup>
 
 getUniformDataTypeByFilenameExtension(filenameExtension: string, belongsTo?: string): string
 
@@ -344,7 +344,7 @@ try {
 }
 ```
 
-## uniformTypeDescriptor.getUniformDataTypeByMIMEType<sup>11+</sup>
+## uniformTypeDescriptor.getUniformDataTypeByMIMEType<sup>20+</sup>
 
 getUniformDataTypeByMIMEType(mimeType: string, belongsTo?: string): string
 
@@ -401,7 +401,7 @@ try {
 }
 ```
 
-## uniformTypeDescriptor.getUniformDataTypesByFilenameExtension<sup>13+</sup>
+## uniformTypeDescriptor.getUniformDataTypesByFilenameExtension<sup>20+</sup>
 
 getUniformDataTypesByFilenameExtension(filenameExtension: string, belongsTo?: string): Array\<string>
 
@@ -458,7 +458,7 @@ try {
 }
 ```
 
-## uniformTypeDescriptor.getUniformDataTypesByMIMEType<sup>13+</sup>
+## uniformTypeDescriptor.getUniformDataTypesByMIMEType<sup>20+</sup>
 
 getUniformDataTypesByMIMEType(mimeType: string, belongsTo?: string): Array\<string>
 
