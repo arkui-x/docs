@@ -1624,7 +1624,7 @@ try {
 }
 ```
 
-### on('dataChange')<sup>12+</sup>
+### on('dataChange')<sup>20+</sup>
 
 on(type: 'dataChange', keys: Array&lt;string&gt;,  callback: Callback&lt;Record&lt;string, ValueType&gt;&gt;): void
 
@@ -1677,7 +1677,7 @@ dataPreferences.flush((err: BusinessError) => {
 })
 ```
 
-### off('dataChange')<sup>12+</sup>
+### off('dataChange')<sup>20+</sup>
 
 off(type: 'dataChange', keys: Array&lt;string&gt;,  callback?: Callback&lt;Record&lt;string, ValueType&gt;&gt;): void
 
