@@ -454,9 +454,9 @@ Describes the configuration for an upload task.
 | method | string | Yes| Request method, which can be **'POST'** or **'PUT'**. The default value is **'POST'**.|
 | files | Array&lt;[File](#file)&gt; | Yes| List of files to upload, which is submitted through **multipart/form-data**.|
 | data | Array&lt;[RequestData](#requestdata)&gt; | Yes| Form data in the request body.|
-| index<sup>11+</sup> | number | No| Path index of the task. The default value is **0**.|
-| begins<sup>11+</sup> | number | No| Start point of the file read when the upload task begins. The default value is **0**. The value is a closed interval, indicating that the file is read from the beginning.|
-| ends<sup>11+</sup> | number | No| End point of the file read when the upload task is complete. The default value is **-1**. The value is a closed interval, indicating that the file is read till the end.|
+| index<sup>20+</sup> | number | No| Path index of the task. The default value is **0**.|
+| begins<sup>20+</sup> | number | No| Start point of the file read when the upload task begins. The default value is **0**. The value is a closed interval, indicating that the file is read from the beginning.|
+| ends<sup>20+</sup> | number | No| End point of the file read when the upload task is complete. The default value is **-1**. The value is a closed interval, indicating that the file is read till the end.|
 
 ## TaskState<sup>9+</sup>
 Implements a **TaskState** object, which is the callback parameter of the [on('complete' | 'fail')<sup>9+</sup>](#oncomplete--fail9) and [off('complete' | 'fail')<sup>9+</sup>](#offcomplete--fail9) APIs.
@@ -1212,7 +1212,7 @@ Provides the configuration information of an upload or download task.
 | precise     | boolean                                        | No        | - If this parameter is set to **true**, the task fails when the file size cannot be obtained.<br>- If this parameter is set to **false**, the task continues when the file size is set to **-1**.<br>The default value is **false**. |
 | token       | string                                         | No        | Token of the task. If the task has a token configured, this token is required for query of the task. The value contains 8 to 2048 bytes. This parameter is left empty by default. |
 | extras      | object                                         | No        | Additional information of the task. This parameter is left empty by default. |
-| proxy<sup>12+</sup> | string | No| Proxy address. The value contains a maximum of 512 characters.<br>It is in the format of http://\<domain or address\>:\<port\>. By default, this parameter is left blank.|
+| proxy<sup>20+</sup> | string | No| Proxy address. The value contains a maximum of 512 characters.<br>It is in the format of http://\<domain or address\>:\<port\>. By default, this parameter is left blank.|
 
 ## State<sup>10+</sup>  
 
@@ -1300,9 +1300,9 @@ Defines the data structure of the task information for query. The fields availab
 | faults      | [Faults](#faults10)                            | Yes       | Failure cause of the task.<br>- **OTHERS**: other fault.<br>- **DISCONNECT**: network disconnection.<br>- **TIMEOUT**: timeout.<br>- **PROTOCOL**: protocol error.<br>- **FSIO**: file system I/O error. |
 | reason      | string                                         | Yes       | Reason why the task is waiting, failed, stopped, or paused.  |
 | extras      | string                                         | No        | Extra information of the task                                |
-| priority<sup>11+</sup> | number | Yes| Task priority. The priority of a foreground task is higher than that of a background task. For tasks in the same mode, a smaller value indicates a higher priority.|
+| priority<sup>20+</sup> | number | Yes| Task priority. The priority of a foreground task is higher than that of a background task. For tasks in the same mode, a smaller value indicates a higher priority.|
 
-## HttpResponse<sup>12+</sup> 
+## HttpResponse<sup>20+</sup> 
 Describes the data structure of the task response header.
 
 **System capability**: SystemCapability.Request.FileTransferAgent
@@ -1314,7 +1314,7 @@ Describes the data structure of the task response header.
 | reason | string | Yes| HTTP response cause.|
 | headers | Map&lt;string, Array&lt;string&gt;&gt; | Yes| HTTP response header.|
 
-## BroadcastEvent<sup>11+</sup>
+## BroadcastEvent<sup>20+</sup>
 
 Defines a custom system event. You can use a common event API to obtain the event.
 The upload and download SA has the ohos.permission.SEND_TASK_COMPLETE_EVENT permission. You can configure the level-2 configuration file to which the metadata of an event points to intercept other event senders.
@@ -1560,7 +1560,7 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
-### on('response')<sup>12+</sup>
+### on('response')<sup>20+</sup>
 
 on(event: 'response', callback: Callback&lt;HttpResponse&gt;): void
 
@@ -1636,7 +1636,7 @@ For details about the error codes, see [Universal Error Codes](../errorcode-univ
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
-### on('pause')<sup>11+</sup>
+### on('pause')<sup>20+</sup>
 
 on(event: 'pause', callback: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -1720,7 +1720,7 @@ For details about the error codes, see [Universal Error Codes](../errorcode-univ
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
-### on('resume')<sup>11+</sup>
+### on('resume')<sup>20+</sup>
 
 on(event: 'resume', callback: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -1806,7 +1806,7 @@ For details about the error codes, see [Universal Error Codes](../errorcode-univ
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
-### on('remove')<sup>11+</sup>
+### on('remove')<sup>20+</sup>
 
 on(event: 'remove', callback: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -2129,7 +2129,7 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
-### off('response')<sup>12+</sup>
+### off('response')<sup>20+</sup>
 
 off(event: 'response', callback?: Callback&lt;HttpResponse&gt;): void
 
@@ -2213,7 +2213,7 @@ For details about the error codes, see [Universal Error Codes](../errorcode-univ
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
-### off('pause')<sup>11+</sup>
+### off('pause')<sup>20+</sup>
 
 off(event: 'pause', callback?: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -2303,7 +2303,7 @@ For details about the error codes, see [Universal Error Codes](../errorcode-univ
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
-### off('resume')<sup>11+</sup>
+### off('resume')<sup>20+</sup>
 
 off(event: 'resume', callback?: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -2393,7 +2393,7 @@ For details about the error codes, see [Universal Error Codes](../errorcode-univ
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
-### off('remove')<sup>11+</sup>
+### off('remove')<sup>20+</sup>
 
 off(event: 'remove', callback?: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -2617,7 +2617,7 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
 
-### pause<sup>10+</sup>
+### pause<sup>20+</sup>
 
 pause(callback: AsyncCallback&lt;void&gt;): void
 
@@ -2686,7 +2686,7 @@ For details about the error codes, see [Upload and Download Error Codes](errorco
   });
   ```
 
-### pause<sup>10+</sup>
+### pause<sup>20+</sup>
 
 pause(): Promise&lt;void&gt;
 
@@ -2752,7 +2752,7 @@ For details about the error codes, see [Upload and Download Error Codes](errorco
     console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
   });
   ```
-### resume<sup>10+</sup>
+### resume<sup>20+</sup>
 
 resume(callback: AsyncCallback&lt;void&gt;): void
 
@@ -2826,7 +2826,7 @@ For details about the error codes, see [Upload and Download Error Codes](errorco
   });
   ```
 
-### resume<sup>10+</sup>
+### resume<sup>20+</sup>
 
 resume(): Promise&lt;void&gt;
 
@@ -3175,7 +3175,6 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 > **NOTE**
 >
 > For details about how to obtain the context in the example, see [Obtaining the Context of UIAbility](../../application-models/uiability-usage.md#obtaining-the-context-of-uiability).
-
 
 ## request.agent.remove<sup>10+</sup>
 

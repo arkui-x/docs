@@ -465,9 +465,9 @@ delete(callback: AsyncCallback&lt;boolean&gt;): void
 | method | string | 是 | 请求方法：POST、PUT。缺省为POST。 |
 | files | Array&lt;[File](#file)&gt; | 是 | 要上传的文件列表。请使用&nbsp;multipart/form-data提交。 |
 | data | Array&lt;[RequestData](#requestdata)&gt; | 是 | 请求的表单数据。 |
-| index<sup>11+</sup> | number | 否 | 任务的路径索引，默认值为0。 |
-| begins<sup>11+</sup> | number | 否 | 上传任务开始时读取的文件起点。默认值为0，取值范围为闭区间，表示从头开始传输。|
-| ends<sup>11+</sup> | number | 否 | 上传任务结束时读取的文件终点。默认值为-1，取值范围为闭区间，表示传输到整个文件末尾结束。 |
+| index<sup>20+</sup> | number | 否 | 任务的路径索引，默认值为0。 |
+| begins<sup>20+</sup> | number | 否 | 上传任务开始时读取的文件起点。默认值为0，取值范围为闭区间，表示从头开始传输。|
+| ends<sup>20+</sup> | number | 否 | 上传任务结束时读取的文件终点。默认值为-1，取值范围为闭区间，表示传输到整个文件末尾结束。 |
 
 ## TaskState<sup>9+</sup>
 上传任务信息，[on('complete' | 'fail')<sup>9+</sup>](#oncomplete--fail9)和[off('complete' | 'fail')<sup>9+</sup>](#offcomplete--fail9)接口的回调参数。
@@ -1246,7 +1246,7 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 | precise     | boolean                                        | 否   | -如果设置为true，在上传/下载无法获取文件大小时任务失败。<br/>-如果设置为false，将文件大小设置为-1时任务继续。<br/>默认值为false。 |
 | token       | string                                         | 否   | 当创建了一个带有token的任务后，token则为正常查询期间必须提供的，否则将无法通过查询进行检索。其最小为8个字节，最大为2048个字节。默认为空。 |
 | extras      | object                                         | 否   | 配置的附加功能，默认为空。                                   |
-| proxy<sup>12+</sup> | string | 否 | 设置代理地址，其最大长度为512个字符，默认为空。<br/>代理地址格式:"http://\<domain or address\>:\<port\>" |
+| proxy<sup>20+</sup> | string | 否 | 设置代理地址，其最大长度为512个字符，默认为空。<br/>代理地址格式:"http://\<domain or address\>:\<port\>" |
 
 ## State<sup>10+</sup>  
 
@@ -1333,9 +1333,9 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 | faults      | [Faults](#faults10)                            | 是   | 任务的失败原因。<br/>-OTHERS表示其他故障。<br/>-DISCONNECT表示网络断开连接。<br/>-TIMEOUT表示任务超时。<br/>-PROTOCOL表示协议错误。<br/>-FSIO表示文件系统io错误。 |
 | reason      | string                                         | 是   | 等待/失败/停止/暂停任务的原因。                              |
 | extras      | string                                         | 否   | 任务的额外部分。                                             |
-| priority<sup>11+</sup> | number | 是 | 任务配置中的优先级。前台任务的优先级比后台任务高。相同模式的任务，数字越小优先级越高。 |
+| priority<sup>20+</sup> | number | 是 | 任务配置中的优先级。前台任务的优先级比后台任务高。相同模式的任务，数字越小优先级越高。 |
 
-## HttpResponse<sup>12+</sup> 
+## HttpResponse<sup>20+</sup> 
 任务响应头的数据结构。
 
 **系统能力**：SystemCapability.Request.FileTransferAgent
@@ -1347,7 +1347,7 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 | reason | string | 是 | Http响应原因。|
 | headers | Map&lt;string, Array&lt;string&gt;&gt; | 是 | Http响应头部。 |
 
-## BroadcastEvent<sup>11+</sup>
+## BroadcastEvent<sup>20+</sup>
 
 定义自定义系统事件。用户可以使用公共事件接口获取该事件。
 上传下载 SA 具有 'ohos.permission.SEND_TASK_COMPLETE_EVENT' 该权限，用户可以配置事件的metadata指向的二级配置文件来拦截其他事件发送者。
@@ -1592,7 +1592,7 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
-### on('response')<sup>12+</sup>
+### on('response')<sup>20+</sup>
 
 on(event: 'response', callback: Callback&lt;HttpResponse&gt;): void
 
@@ -1668,7 +1668,7 @@ on(event: 'response', callback: Callback&lt;HttpResponse&gt;): void
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
-### on('pause')<sup>11+</sup>
+### on('pause')<sup>20+</sup>
 
 on(event: 'pause', callback: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -1752,7 +1752,7 @@ on(event: 'pause', callback: (progress: [Progress](#progress10)) =&gt; void): vo
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
-### on('resume')<sup>11+</sup>
+### on('resume')<sup>20+</sup>
 
 on(event: 'resume', callback: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -1838,7 +1838,7 @@ on(event: 'resume', callback: (progress: [Progress](#progress10)) =&gt; void): v
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
-### on('remove')<sup>11+</sup>
+### on('remove')<sup>20+</sup>
 
 on(event: 'remove', callback: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -2159,7 +2159,7 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
-### off('response')<sup>12+</sup>
+### off('response')<sup>20+</sup>
 
 off(event: 'response', callback?: Callback&lt;HttpResponse&gt;): void
 
@@ -2243,7 +2243,7 @@ off(event: 'response', callback?: Callback&lt;HttpResponse&gt;): void
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
-### off('pause')<sup>11+</sup>
+### off('pause')<sup>20+</sup>
 
 off(event: 'pause', callback?: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -2333,7 +2333,7 @@ off(event: 'pause', callback?: (progress: [Progress](#progress10)) =&gt; void): 
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
-### off('resume')<sup>11+</sup>
+### off('resume')<sup>20+</sup>
 
 off(event: 'resume', callback?: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -2423,7 +2423,7 @@ off(event: 'resume', callback?: (progress: [Progress](#progress10)) =&gt; void):
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
-### off('remove')<sup>11+</sup>
+### off('remove')<sup>20+</sup>
 
 off(event: 'remove', callback?: (progress: [Progress](#progress10)) =&gt; void): void
 
@@ -2647,7 +2647,7 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
-### pause<sup>10+</sup>
+### pause<sup>20+</sup>
 
 pause(callback: AsyncCallback&lt;void&gt;): void
 
@@ -2716,7 +2716,7 @@ pause(callback: AsyncCallback&lt;void&gt;): void
   });
   ```
 
-  ### pause<sup>10+</sup>
+### pause<sup>20+</sup>
 
 pause(): Promise&lt;void&gt;
 
@@ -2783,7 +2783,7 @@ pause(): Promise&lt;void&gt;
   });
   ```
 
-### resume<sup>10+</sup>
+### resume<sup>20+</sup>
 
 resume(callback: AsyncCallback&lt;void&gt;): void
 
@@ -2857,7 +2857,7 @@ resume(callback: AsyncCallback&lt;void&gt;): void
   });
   ```
 
-### resume<sup>10+</sup>
+### resume<sup>20+</sup>
 
 resume(): Promise&lt;void&gt;
 
@@ -3206,7 +3206,6 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 > **说明：**
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
-
 
 ## request.agent.remove<sup>10+</sup>
 
