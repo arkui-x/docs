@@ -1624,6 +1624,109 @@ try {
 }
 ```
 
+### on('dataChange')<sup>20+</sup>
+
+on(type: 'dataChange', keys: Array&lt;string&gt;,  callback: Callback&lt;Record&lt;string, ValueType&gt;&gt;): void
+
+精确订阅数据变更，只有被订阅的key值发生变更后，在执行[flush](#flush)方法后，触发callback回调。
+
+  > **说明：**
+  >
+  > 当调用[removePreferencesFromCache](#preferencesremovepreferencesfromcache)或[deletePreferences](#preferencesdeletepreferences)后，订阅的数据变更会主动取消订阅，在重新[getPreferences](#preferencesgetpreferences)后需要重新订阅数据变更。
+
+**系统能力：** SystemCapability.DistributedDataManager.Preferences.Core
+
+**参数：**
+
+| 参数名   | 类型                                                         | 必填 | 说明                                                         |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| type     | string                                                       | 是   | 事件类型，固定值'dataChange'，表示精确的数据变更。           |
+| keys     | Array&lt;string&gt;                                          | 是   | 需要订阅的key集合。                                          |
+| callback | Callback&lt;Record&lt;string, [ValueType](#valuetype)&gt;&gt; | 是   | 回调函数。回调支持返回多个键值对，其中键为发生变更的订阅key，值为变更后的数据：支持number、string、boolean、Array\<number>、Array\<string>、Array\<boolean>、Uint8Array、object类型。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[用户首选项错误码](errorcode-preferences.md)。
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------ |
+| 401      | Parameter error. Possible causes:1. Mandatory parameters are left unspecified;2. Incorrect parameter types;3. Parameter verification failed.                       |
+| 15500000 | Inner error.                   |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let observer = (data: Record<string, preferences.ValueType>) => {
+  for (const keyValue of Object.entries(data)) {
+    console.info(`observer : ${keyValue}`);
+  }
+  console.info("The observer called.");
+}
+let keys = ['name', 'age'];
+dataPreferences.on('dataChange', keys, observer);
+dataPreferences.putSync('name', 'xiaohong');
+dataPreferences.putSync('weight', 125);
+dataPreferences.flush((err: BusinessError) => {
+  if (err) {
+    console.error("Failed to flush. Cause: " + err);
+    return;
+  }
+  console.info("Succeeded in flushing.");
+})
+```
+
+### off('dataChange')<sup>20+</sup>
+
+off(type: 'dataChange', keys: Array&lt;string&gt;,  callback?: Callback&lt;Record&lt;string, ValueType&gt;&gt;): void
+
+取消精确订阅数据变更。
+
+**系统能力：** SystemCapability.DistributedDataManager.Preferences.Core
+
+**参数：**
+
+| 参数名   | 类型                                                         | 必填 | 说明                                                         |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| type     | string                                                       | 是   | 事件类型，固定值'dataChange'，表示精确的数据变更。           |
+| keys     | Array&lt;string&gt;                                          | 是   | 需要取消订阅的key集合，当keys为空数组时，表示取消订阅全部key；当keys为非空数组时，表示只取消订阅key集合中的key。 |
+| callback | Callback&lt;Record&lt;string, [ValueType](#valuetype)&gt;&gt; | 否   | 需要取消的回调函数，若callback不填写，表示所有的callback都需要处理；若callback填写，表示只处理该callback。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcode-universal.md)和[用户首选项错误码](errorcode-preferences.md)。
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------ |
+| 401      | Parameter error. Possible causes:1. Mandatory parameters are left unspecified;2. Incorrect parameter types;3. Parameter verification failed.                       |
+| 15500000 | Inner error.                   |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let observer = (data: Record<string, preferences.ValueType>) => {
+  for (const keyValue of Object.entries(data)) {
+    console.info(`observer : ${keyValue}`);
+  }
+  console.info("The observer called.");
+}
+let keys = ['name', 'age'];
+dataPreferences.on('dataChange', keys, observer);
+dataPreferences.putSync('name', 'xiaohong');
+dataPreferences.putSync('weight', 125);
+dataPreferences.flush((err: BusinessError) => {
+  if (err) {
+    console.error("Failed to flush. Cause: " + err);
+    return;
+  }
+  console.info("Succeeded in flushing.");
+})
+dataPreferences.off('dataChange', keys, observer);
+```
+
 ## ValueType
 
 用于表示允许的数据字段类型。

@@ -1622,6 +1622,109 @@ try {
 }
 ```
 
+### on('dataChange')<sup>20+</sup>
+
+on(type: 'dataChange', keys: Array&lt;string&gt;,  callback: Callback&lt;Record&lt;string, ValueType&gt;&gt;): void
+
+Subscribes to changes of specific data. The registered callback will be invoked only after the values of the specified keys are changed and [flushed](#flush).
+
+  > **NOTE**
+  >
+  > After [removePreferencesFromCache](#preferencesremovepreferencesfromcache) or [deletePreferences](#preferencesdeletepreferences) is called, the data change subscription will be automatically canceled. After [getPreferences](#preferencesgetpreferences) is called again, you need to subscribe to data changes again.
+
+**System capability**: SystemCapability.DistributedDataManager.Preferences.Core
+
+**Parameters**
+
+| Name  | Type                                                        | Mandatory| Description                                                        |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| type     | string                                                       | Yes  | Event type. The value is **'dataChange'**, which indicates data changes.          |
+| keys     | Array&lt;string&gt;                                          | Yes  | Array of the keys to be observed.                                         |
+| callback | Callback&lt;Record&lt;string, [ValueType](#valuetype)&gt;&gt; | Yes  | Callback used to return the changed data, in an array of KV pairs. The keys identify the data changed, and the values are the new values. The values support the following data types: number, string, boolean, Array\<number>, Array\<string>, Array\< boolean>, Uint8Array, and object.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md) and [User Preference Error Codes](errorcode-preferences.md).
+
+| ID| Error Message                       |
+| -------- | ------------------------------ |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.                       |
+| 15500000 | Inner error.                   |
+
+**Example**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let observer = (data: Record<string, preferences.ValueType>) => {
+  for (const keyValue of Object.entries(data)) {
+    console.info(`observer : ${keyValue}`);
+  }
+  console.info("The observer called.");
+}
+let keys = ['name', 'age'];
+dataPreferences.on('dataChange', keys, observer);
+dataPreferences.putSync('name', 'xiaohong');
+dataPreferences.putSync('weight', 125);
+dataPreferences.flush((err: BusinessError) => {
+  if (err) {
+    console.error("Failed to flush. Cause: " + err);
+    return;
+  }
+  console.info("Successfully flushed data.");
+})
+```
+
+### off('dataChange')<sup>20+</sup>
+
+off(type: 'dataChange', keys: Array&lt;string&gt;,  callback?: Callback&lt;Record&lt;string, ValueType&gt;&gt;): void
+
+Unsubscribes from changes of specific data.
+
+**System capability**: SystemCapability.DistributedDataManager.Preferences.Core
+
+**Parameters**
+
+| Name  | Type                                                        | Mandatory| Description                                                        |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| type     | string                                                       | Yes  | Event type. The value is **'dataChange'**, which indicates data changes.          |
+| keys     | Array&lt;string&gt;                                          | Yes  | Array of keys to be unsubscribed from. If this parameter is left empty, all keys are unsubscribed from.|
+| callback | Callback&lt;Record&lt;string, [ValueType](#valuetype)&gt;&gt; | No  | Callback to unregister. If this parameter is not specified, this API unregisters all callbacks for the changes of the specified data.|
+
+**Error codes**
+
+For details about the error codes, see [Universal Error Codes](../errorcode-universal.md) and [User Preference Error Codes](errorcode-preferences.md).
+
+| ID| Error Message                       |
+| -------- | ------------------------------ |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.                       |
+| 15500000 | Inner error.                   |
+
+**Example**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let observer = (data: Record<string, preferences.ValueType>) => {
+  for (const keyValue of Object.entries(data)) {
+    console.info(`observer : ${keyValue}`);
+  }
+  console.info("The observer called.");
+}
+let keys = ['name', 'age'];
+dataPreferences.on('dataChange', keys, observer);
+dataPreferences.putSync('name', 'xiaohong');
+dataPreferences.putSync('weight', 125);
+dataPreferences.flush((err: BusinessError) => {
+  if (err) {
+    console.error("Failed to flush. Cause: " + err);
+    return;
+  }
+  console.info("Successfully flushed data.");
+})
+dataPreferences.off('dataChange', keys, observer);
+```
+
 ## ValueType
 
 Enumerates the value types.
