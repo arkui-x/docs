@@ -43,9 +43,8 @@
 - [如何解决部分API不支持跨平台的问题](Development-Stage/Dev-faq-10.md)
 - [ArkUI-X for Android如何设置窗口内导航栏、状态栏属性](Development-Stage/Dev-faq-5.md)
 - [ArkUI-X 如何实现结束输入会话的能力](Development-Stage/Dev-faq-13.md)
-
+- [ArkUI-X 使用PlatformView报"Only UI component syntax can be written here"错误](Development-Stage/Dev-faq-14.md)
 
 ### 问题自排查
 
 - [稳定性问题自排查](Development-Stage/Dev-faq-11.md)
-
