@@ -465,6 +465,9 @@ delete(callback: AsyncCallback&lt;boolean&gt;): void
 | method | string | 是 | 请求方法：POST、PUT。缺省为POST。 |
 | files | Array&lt;[File](#file)&gt; | 是 | 要上传的文件列表。请使用&nbsp;multipart/form-data提交。 |
 | data | Array&lt;[RequestData](#requestdata)&gt; | 是 | 请求的表单数据。 |
+| index<sup>20+</sup> | number | 否 | 任务的路径索引，默认值为0。 |
+| begins<sup>20+</sup> | number | 否 | 上传任务开始时读取的文件起点。默认值为0，取值范围为闭区间，表示从头开始传输。|
+| ends<sup>20+</sup> | number | 否 | 上传任务结束时读取的文件终点。默认值为-1，取值范围为闭区间，表示传输到整个文件末尾结束。 |
 
 ## TaskState<sup>9+</sup>
 上传任务信息，[on('complete' | 'fail')<sup>9+</sup>](#oncomplete--fail9)和[off('complete' | 'fail')<sup>9+</sup>](#offcomplete--fail9)接口的回调参数。
@@ -1243,6 +1246,7 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 | precise     | boolean                                        | 否   | -如果设置为true，在上传/下载无法获取文件大小时任务失败。<br/>-如果设置为false，将文件大小设置为-1时任务继续。<br/>默认值为false。 |
 | token       | string                                         | 否   | 当创建了一个带有token的任务后，token则为正常查询期间必须提供的，否则将无法通过查询进行检索。其最小为8个字节，最大为2048个字节。默认为空。 |
 | extras      | object                                         | 否   | 配置的附加功能，默认为空。                                   |
+| proxy<sup>20+</sup> | string | 否 | 设置代理地址，其最大长度为512个字符，默认为空。<br/>代理地址格式:"http://\<domain or address\>:\<port\>" |
 
 ## State<sup>10+</sup>  
 
@@ -1329,7 +1333,35 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 | faults      | [Faults](#faults10)                            | 是   | 任务的失败原因。<br/>-OTHERS表示其他故障。<br/>-DISCONNECT表示网络断开连接。<br/>-TIMEOUT表示任务超时。<br/>-PROTOCOL表示协议错误。<br/>-FSIO表示文件系统io错误。 |
 | reason      | string                                         | 是   | 等待/失败/停止/暂停任务的原因。                              |
 | extras      | string                                         | 否   | 任务的额外部分。                                             |
+| priority<sup>20+</sup> | number | 是 | 任务配置中的优先级。前台任务的优先级比后台任务高。相同模式的任务，数字越小优先级越高。 |
 
+## HttpResponse<sup>20+</sup> 
+任务响应头的数据结构。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称 | 类型 | 必填 | 说明 |
+| -------- | -------- | -------- | -------- |
+| version | string | 是 | Http版本。 |
+| statusCode | number | 是 | Http响应状态码。 |
+| reason | string | 是 | Http响应原因。|
+| headers | Map&lt;string, Array&lt;string&gt;&gt; | 是 | Http响应头部。 |
+
+## BroadcastEvent<sup>20+</sup>
+
+定义自定义系统事件。用户可以使用公共事件接口获取该事件。
+上传下载 SA 具有 'ohos.permission.SEND_TASK_COMPLETE_EVENT' 该权限，用户可以配置事件的metadata指向的二级配置文件来拦截其他事件发送者。
+
+调用CommonEventData类型传输公共事件相关数据，成员的内容填写和 [CommonEventData](js-apis-inner-commonEvent-commonEventData.md) 介绍的有所区别，其中CommonEventData.code表示任务的状态，目前为0x40 COMPLETE或0x41 FAILED；CommonEventData.data表示任务的taskId。
+
+<!--Del-->
+请参考[静态订阅公共事件](../../basic-services/common-event/common-event-static-subscription.md)以获取事件配置信息和二级配置文件的配置方式。<!--DelEnd-->
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称 | 值 | 说明        |
+| -------- | ------- |-----------|
+| COMPLETE | 'ohos.request.event.COMPLETE' | 表示自定义系统事件完成。在任务结束后会触发该事件，根据任务的成功或失败，事件的code返回0x40或者0x41。 |
 
 ## Task<sup>10+</sup> 
 
@@ -1554,6 +1586,336 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 }).catch((err: BusinessError) => {
   console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
 });
+  ```
+
+> **说明：**
+>
+> 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
+
+### on('response')<sup>20+</sup>
+
+on(event: 'response', callback: Callback&lt;HttpResponse&gt;): void
+
+订阅任务响应头，使用callback异步回调。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | event | string | 是 | 订阅的事件类型。<br>- 取值为'response'，表示任务响应，请求接收到响应时触发该事件。 |
+  | callback | Callback&lt;[HttpResponse](#httpresponse12)&gt; | 是 | 回调函数，发生相关的事件时触发该回调方法，返回任务响应头的数据结构。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcode-universal.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOnTest",
+    value: {
+      filename: "taskOnTest.avi",
+      path: "./taskOnTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskOnTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOnCallback = (response: request.agent.HttpResponse) => {
+    console.info('upload task response.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('response', createOnCallback);
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **说明：**
+>
+> 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
+
+### on('pause')<sup>20+</sup>
+
+on(event: 'pause', callback: (progress: [Progress](#progress10)) =&gt; void): void
+
+订阅任务暂停事件，使用callback异步回调。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | event | string | 是 | 订阅的事件类型。<br>- 取值为'pause'，表示任务已暂停，任务暂停时触发该事件。 |
+  | callback | function | 是 | 回调函数，发生相关的事件时触发该回调方法。 |
+
+回调函数的参数：
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | progress | [Progress](#progress10) | 是 | 表示任务的进度信息。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcode-universal.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOnTest",
+    value: {
+      filename: "taskOnTest.avi",
+      path: "./taskOnTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskOnTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOnCallback = (progress: request.agent.Progress) => {
+    console.info('upload task pause.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('pause', createOnCallback);
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // 等待1秒再执行下一步操作，以防异步乱序
+    task.pause();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **说明：**
+>
+> 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
+
+### on('resume')<sup>20+</sup>
+
+on(event: 'resume', callback: (progress: [Progress](#progress10)) =&gt; void): void
+
+订阅任务恢复事件，使用callback异步回调。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | event | string | 是 | 订阅的事件类型。<br>- 取值为'resume'，表示任务恢复，任务恢复时触发该事件。 |
+  | callback | function | 是 | 回调函数，发生相关的事件时触发该回调方法。 |
+
+回调函数的参数：
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | progress | [Progress](#progress10) | 是 | 表示任务的进度信息。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcode-universal.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOnTest",
+    value: {
+      filename: "taskOnTest.avi",
+      path: "./taskOnTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskOnTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOnCallback = (progress: request.agent.Progress) => {
+    console.info('upload task resume.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('resume', createOnCallback);
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // 等待1秒再执行下一步操作，以防异步乱序
+    task.pause();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // 等待1秒再执行下一步操作，以防异步乱序
+    task.resume();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **说明：**
+>
+> 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
+
+### on('remove')<sup>20+</sup>
+
+on(event: 'remove', callback: (progress: [Progress](#progress10)) =&gt; void): void
+
+订阅任务移除事件，使用callback异步回调。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | event | string | 是 | 订阅的事件类型。<br>- 取值为'remove'，表示任务被移除，任务移除时触发该事件。 |
+  | callback | function | 是 | 回调函数，发生相关的事件时触发该回调方法。 |
+
+回调函数的参数：
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | progress | [Progress](#progress10) | 是 | 表示任务的进度信息。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcode-universal.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOnTest",
+    value: {
+      filename: "taskOnTest.avi",
+      path: "./taskOnTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskOnTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOnCallback = (progress: request.agent.Progress) => {
+    console.info('upload task remove.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('remove', createOnCallback);
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // 等待1秒再执行下一步操作，以防异步乱序
+    request.agent.remove(task.tid);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
   ```
 
 > **说明：**
@@ -1797,6 +2159,360 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
+### off('response')<sup>20+</sup>
+
+off(event: 'response', callback?: Callback&lt;HttpResponse&gt;): void
+
+取消订阅任务响应事件。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | event | string | 是 | 取消订阅的事件类型。<br>- 取值为'response'，表示任务响应。 |
+  | callback | Callback&lt;[HttpResponse](#httpresponse12)&gt; | 否 | 需要取消订阅的回调函数。若无此参数，则取消订阅当前类型的所有回调函数。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcode-universal.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.HttpResponse) => {
+    console.info('upload task response.');
+  };
+  let createOffCallback2 = (progress: request.agent.HttpResponse) => {
+    console.info('upload task response.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('response', createOffCallback1);
+    task.on('response', createOffCallback2);
+    //表示取消createOffCallback1的订阅
+    task.off('response', createOffCallback1);
+    //表示取消订阅任务移除的所有回调
+    task.off('response');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **说明：**
+>
+> 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
+
+### off('pause')<sup>20+</sup>
+
+off(event: 'pause', callback?: (progress: [Progress](#progress10)) =&gt; void): void
+
+取消订阅任务暂停事件。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | event | string | 是 | 取消订阅的事件类型。<br>- 取值为'pause'，表示任务暂停。 |
+  | callback | function | 否 | 回调函数，发生相关的事件时触发该回调方法。 |
+
+回调函数的参数：
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | progress | [Progress](#progress10) | 是 | 表示任务的进度信息。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcode-universal.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.Progress) => {
+    console.info('upload task pause.');
+  };
+  let createOffCallback2 = (progress: request.agent.Progress) => {
+    console.info('upload task pause.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('pause', createOffCallback1);
+    task.on('pause', createOffCallback2);
+    //表示取消createOffCallback1的订阅
+    task.off('pause', createOffCallback1);
+    //表示取消订阅任务暂停的所有回调
+    task.off('pause');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **说明：**
+>
+> 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
+
+### off('resume')<sup>20+</sup>
+
+off(event: 'resume', callback?: (progress: [Progress](#progress10)) =&gt; void): void
+
+取消订阅任务恢复事件。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | event | string | 是 | 取消订阅的事件类型。<br>- 取值为'resume'，表示任务恢复。 |
+  | callback | function | 否 | 回调函数，发生相关的事件时触发该回调方法。 |
+
+回调函数的参数：
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | progress | [Progress](#progress10) | 是 | 表示任务的进度信息。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcode-universal.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.Progress) => {
+    console.info('upload task resume.');
+  };
+  let createOffCallback2 = (progress: request.agent.Progress) => {
+    console.info('upload task resume.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('resume', createOffCallback1);
+    task.on('resume', createOffCallback2);
+    //表示取消createOffCallback1的订阅
+    task.off('resume', createOffCallback1);
+    //表示取消订阅任务恢复的所有回调
+    task.off('resume');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **说明：**
+>
+> 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
+
+### off('remove')<sup>20+</sup>
+
+off(event: 'remove', callback?: (progress: [Progress](#progress10)) =&gt; void): void
+
+取消订阅任务移除事件。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | event | string | 是 | 取消订阅的事件类型。<br>- 取值为'remove'，表示任务被移除。 |
+  | callback | function | 否 | 回调函数，发生相关的事件时触发该回调方法。 |
+
+回调函数的参数：
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | progress | [Progress](#progress10) | 是 | 表示任务的进度信息。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcode-universal.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 401 | Parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let attachments: Array<request.agent.FormItem> = [{
+    name: "taskOffTest",
+    value: {
+      filename: "taskOffTest.avi",
+      path: "./taskOffTest.avi",
+    }
+  }];
+  let config: request.agent.Config = {
+    action: request.agent.Action.UPLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskOffTest',
+    description: 'Sample code for event listening',
+    mode: request.agent.Mode.FOREGROUND,
+    overwrite: false,
+    method: "PUT",
+    data: attachments,
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  let createOffCallback1 = (progress: request.agent.Progress) => {
+    console.info('upload task remove.');
+  };
+  let createOffCallback2 = (progress: request.agent.Progress) => {
+    console.info('upload task remove.');
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.on('remove', createOffCallback1);
+    task.on('remove', createOffCallback2);
+    //表示取消createOffCallback1的订阅
+    task.off('remove', createOffCallback1);
+    //表示取消订阅任务移除的所有回调
+    task.off('remove');
+    console.info(`Succeeded in creating a upload task. result: ${task.tid}`);
+    task.start();
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a upload task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+> **说明：**
+>
+> 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
+
 ### start<sup>10+</sup>
 
 start(callback: AsyncCallback&lt;void&gt;): void
@@ -1931,6 +2647,287 @@ request.agent.create(getContext(), config).then((task: request.agent.Task) => {
 >
 > 示例中context的获取方式请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
 
+### pause<sup>20+</sup>
+
+pause(callback: AsyncCallback&lt;void&gt;): void
+
+暂停任务，可以暂停正在等待/正在运行/正在重试的任务，已暂停的任务可被[resume](#resume10)恢复。使用callback异步回调。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | callback | AsyncCallback&lt;void&gt; | 是 | 回调函数。当暂停任务成功，err为undefined，否则为错误对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[上传下载错误码](errorcode-request.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 13400003 | Task service ability error. |
+  | 21900007 | Operation with wrong task state. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let config: request.agent.Config = {
+    action: request.agent.Action.DOWNLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskPauseTest',
+    description: 'Sample code for pause the download task',
+    mode: request.agent.Mode.BACKGROUND,
+    overwrite: false,
+    method: "GET",
+    data: "",
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // 等待1秒再执行下一步操作，以防异步乱序
+    task.pause((err: BusinessError) => {
+      if (err) {
+        console.error(`Failed to pause the download task, Code: ${err.code}, message: ${err.message}`);
+        return;
+      }
+      console.info(`Succeeded in pausing a download task. `);
+    });
+    console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+### pause<sup>20+</sup>
+
+pause(): Promise&lt;void&gt;
+
+暂停任务，可以暂停正在等待/正在运行/正在重试的任务，已暂停的任务可被[resume](#resume10)恢复。使用Promise异步回调。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**返回值：** 
+
+| 类型                | 说明                      |
+| ------------------- | ------------------------- |
+| Promise&lt;void&gt; | Promise对象。无返回结果的Promise对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[上传下载错误码](errorcode-request.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 13400003 | Task service ability error. |
+  | 21900007 | Operation with wrong task state. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let config: request.agent.Config = {
+    action: request.agent.Action.DOWNLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskPauseTest',
+    description: 'Sample code for pause the download task',
+    mode: request.agent.Mode.BACKGROUND,
+    overwrite: false,
+    method: "GET",
+    data: "",
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // 等待1秒再执行下一步操作，以防异步乱序
+    task.pause().then(() => {
+      console.info(`Succeeded in pausing a download task. `);
+    }).catch((err: BusinessError) => {
+      console.error(`Failed to pause the download task, Code: ${err.code}, message: ${err.message}`);
+    });
+    console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+### resume<sup>20+</sup>
+
+resume(callback: AsyncCallback&lt;void&gt;): void
+
+重新启动任务，可以恢复被暂停的任务。使用callback异步回调。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+  | 参数名 | 类型 | 必填 | 说明 |
+  | -------- | -------- | -------- | -------- |
+  | callback | AsyncCallback&lt;void&gt; | 是 | 回调函数。当重新启动任务成功，err为undefined，否则为错误对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[上传下载错误码](errorcode-request.md)与[通用错误码说明文档](../errorcode-universal.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 201 | Permission denied. |
+  | 13400003 | Task service ability error. |
+  | 21900007 | Operation with wrong task state. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let config: request.agent.Config = {
+    action: request.agent.Action.DOWNLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskResumeTest',
+    description: 'Sample code for resume the download task',
+    mode: request.agent.Mode.BACKGROUND,
+    overwrite: false,
+    method: "GET",
+    data: "",
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // 等待1秒再执行下一步操作，以防异步乱序
+    task.pause();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // 等待1秒再执行下一步操作，以防异步乱序
+    task.resume((err: BusinessError) => {
+      if (err) {
+        console.error(`Failed to resume the download task, Code: ${err.code}, message: ${err.message}`);
+        return;
+      }
+      console.info(`Succeeded in resuming a download task. `);
+    });
+    console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
+
+### resume<sup>20+</sup>
+
+resume(): Promise&lt;void&gt;
+
+重新启动任务，可以恢复被暂停的任务。使用Promise异步回调。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**返回值：** 
+
+| 类型                | 说明                      |
+| ------------------- | ------------------------- |
+| Promise&lt;void&gt; | Promise对象。无返回结果的Promise对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[上传下载错误码](errorcode-request.md)与[通用错误码说明文档](../errorcode-universal.md)。
+
+  | 错误码ID | 错误信息 |
+  | -------- | -------- |
+  | 201 | Permission denied. |
+  | 13400003 | Task service ability error. |
+  | 21900007 | Operation with wrong task state. |
+
+**示例：**
+  <!--code_no_check-->
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { common } from '@kit.AbilityKit';
+
+  // 请在组件内获取context，确保this.getUIContext().getHostContext()返回结果为UIAbilityContext
+  let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  let config: request.agent.Config = {
+    action: request.agent.Action.DOWNLOAD,
+    url: 'http://127.0.0.1', // 需要手动将url替换为真实服务器的HTTP协议地址
+    title: 'taskResumeTest',
+    description: 'Sample code for resume the download task',
+    mode: request.agent.Mode.BACKGROUND,
+    overwrite: false,
+    method: "GET",
+    data: "",
+    saveas: "./",
+    network: request.agent.Network.CELLULAR,
+    metered: false,
+    roaming: true,
+    retry: true,
+    redirect: true,
+    index: 0,
+    begins: 0,
+    ends: -1,
+    gauge: false,
+    precise: false,
+    token: "it is a secret"
+  };
+  request.agent.create(context, config).then((task: request.agent.Task) => {
+    task.start();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // 等待1秒再执行下一步操作，以防异步乱序
+    task.pause();
+    for(let t = Date.now(); Date.now() - t <= 1000;); // 等待1秒再执行下一步操作，以防异步乱序
+    task.resume().then(() => {
+      console.info(`Succeeded in resuming a download task. `);
+    }).catch((err: BusinessError) => {
+      console.error(`Failed to resume the download task, Code: ${err.code}, message: ${err.message}`);
+    });
+    console.info(`Succeeded in creating a download task. result: ${task.tid}`);
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to create a download task, Code: ${err.code}, message: ${err.message}`);
+  });
+  ```
 
 ### stop<sup>10+</sup>
 
