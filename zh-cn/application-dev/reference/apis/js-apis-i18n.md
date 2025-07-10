@@ -215,9 +215,9 @@ static setAppPreferredLanguage(language: string): void
 
 设置应用偏好语言。
 设置后，应用将优先加载应用偏好语言对应的资源。
-安卓的原生页面需要应用重启才能生效，ios的原生页面需要开发者实现资源映射逻辑。
-ArkTs实现的页面需要退回原生页面后重新进入即可生效。
-设置偏好语言为'default'后，应用语言将跟随系统语言，需要应用重启生效。
+安卓的原生页面的资源加载需要应用重启才能生效，ios的原生页面的资源加载需要开发者实现资源映射逻辑。
+ArkTS实现的页面的资源加载可热生效。
+设置偏好语言为'default'后，应用语言将跟随系统语言，注意这种情况下需要应用重启生效。
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -247,42 +247,37 @@ ArkTs实现的页面需要退回原生页面后重新进入即可生效。
   }
   ```
 
-**说明：**
+> **说明：**
 
-在安卓中可以通过在Activity中实现I18NSetAppPreferredLanguage并调用I18NPlugin.setRestartFunc，这样在调用i18n.System.setAppPreferredLanguage接口时可以重启应用：
+> 在安卓应用中，ArkTS层资源可热生效，但原生层页面资源需重启应用才能更新。为此提供以下方法，实现调用i18n.System.setAppPreferredLanguage时自动重启应用：
+> 1. 实现接口：在Activity中实现I18NSetAppPreferredLanguage接口，并重写restartApp方法；
+> 2. 注册重启函数：调用I18NPlugin.setRestartFunc传入接口实例。
+> 示例代码如下：
 ```java
 import ohos.ace.plugin.i18nplugin.I18NPlugin;
 import ohos.ace.plugin.i18nplugin.I18NSetAppPreferredLanguage;
 
-public class EntryEntryAbilityActivity extends StageActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-      I18NPlugin.setRestartFunc(new I18NSetAppPreferredLanguage() {
-        @Override
-        public void restartApp() {
-          // 获取应用的启动Intent
-          Context context = getApplicationContext();
-          PackageManager packageManager = context.getPackageManager();
-          Intent launchIntent = packageManager.getLaunchIntentForPackage(context.getPackageName());
-          if (launchIntent != null) {
-            // 添加标志以清除任务栈并创建新任务
-            launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            // 启动主Activity
-            startActivity(launchIntent);
-            // 结束当前Activity
-            finish();
-            // 确保进程完全重启（可选，根据需求）
-            System.exit(0);
-          }
-        }
-      });
-    }
+public class EntryEntryAbilityActivity extends StageActivity implements I18NSetAppPreferredLanguage {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    Log.e("HiHelloWorld", "EntryEntryAbilityActivity");
+    setInstanceName("com.example.changeapplanguage:entry:EntryAbility:");
+    super.onCreate(savedInstanceState);
+    I18NPlugin.setRestartFunc(this);
+  }
+
+  @Override
+  public void restartApp() {
+    Intent intent = new Intent(this, EntryEntryAbilityActivity.class);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(intent);
+    finish();
+    System.exit(0);
+  }
 }
 ```
 
-### getAppPreferredLanguage<sup>9+</sup>
+### getAppPreferredLanguage<sup>20+</sup>
 
 static getAppPreferredLanguage(): string
 
