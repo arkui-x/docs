@@ -213,7 +213,11 @@ static is24HourClock(): boolean
 
 static setAppPreferredLanguage(language: string): void
 
-设置应用偏好语言。设置后，应用将优先加载应用偏好语言对应的资源。设置偏好语言为'default'后，应用语言将跟随系统语言，应用冷启动生效。
+设置应用偏好语言。
+设置后，应用将优先加载应用偏好语言对应的资源。
+安卓的原生页面需要应用重启才能生效，ios的原生页面需要开发者实现资源映射逻辑。
+ArkTs实现的页面需要退回原生页面后重新进入即可生效。
+设置偏好语言为'default'后，应用语言将跟随系统语言，需要应用重启生效。
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -242,6 +246,41 @@ static setAppPreferredLanguage(language: string): void
     console.error(`call System.setAppPreferredLanguage failed, error code: ${err.code}, message: ${err.message}.`);
   }
   ```
+
+**说明：**
+
+在安卓中可以通过在Activity中实现I18NSetAppPreferredLanguage并调用I18NPlugin.setRestartFunc，这样在调用i18n.System.setAppPreferredLanguage接口时可以重启应用：
+```java
+import ohos.ace.plugin.i18nplugin.I18NPlugin;
+import ohos.ace.plugin.i18nplugin.I18NSetAppPreferredLanguage;
+
+public class EntryEntryAbilityActivity extends StageActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+      I18NPlugin.setRestartFunc(new I18NSetAppPreferredLanguage() {
+        @Override
+        public void restartApp() {
+          // 获取应用的启动Intent
+          Context context = getApplicationContext();
+          PackageManager packageManager = context.getPackageManager();
+          Intent launchIntent = packageManager.getLaunchIntentForPackage(context.getPackageName());
+          if (launchIntent != null) {
+            // 添加标志以清除任务栈并创建新任务
+            launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            // 启动主Activity
+            startActivity(launchIntent);
+            // 结束当前Activity
+            finish();
+            // 确保进程完全重启（可选，根据需求）
+            System.exit(0);
+          }
+        }
+      });
+    }
+}
+```
 
 ### getAppPreferredLanguage<sup>9+</sup>
 
