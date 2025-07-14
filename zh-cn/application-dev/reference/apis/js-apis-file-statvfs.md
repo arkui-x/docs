@@ -18,6 +18,8 @@ getFreeSize(path:string):Promise&lt;number&gt;
 
 异步方法获取指定文件系统空闲字节数，以Promise形式返回结果。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -58,6 +60,8 @@ getFreeSize(path:string, callback:AsyncCallback&lt;number&gt;): void
 
 异步方法获取指定文件系统空闲字节数，使用callback形式返回结果。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -95,6 +99,8 @@ getFreeSizeSync(path:string): number
 
 以同步方法获取指定文件系统空闲字节数。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -130,6 +136,8 @@ getFreeSizeSync(path:string): number
 getTotalSize(path: string): Promise&lt;number&gt;
 
 异步方法获取指定文件系统总字节数，以Promise形式返回结果。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -171,6 +179,8 @@ getTotalSize(path: string, callback: AsyncCallback&lt;number&gt;): void
 
 异步方法获取指定文件系统总字节数，使用callback形式返回结果。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -207,6 +217,8 @@ getTotalSize(path: string, callback: AsyncCallback&lt;number&gt;): void
 getTotalSizeSync(path: string): number
 
 以同步方法获取指定文件系统总字节数。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 

@@ -34,6 +34,8 @@ hash(path: string, algorithm: string): Promise&lt;string&gt;
 
 Calculates a hash value for a file. This API uses a promise to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -76,6 +78,8 @@ hash(path: string, algorithm: string, callback: AsyncCallback&lt;string&gt;): vo
 
 Calculates a hash value for a file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -113,6 +117,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 createHash(algorithm: string): HashStream;
 
 Creates a **HashStream** instance, which can be used to generate a message digest (a hash value) using the given algorithm.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -161,11 +167,15 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 The **HashStream** class is a utility for creating a message digest of data. You can use [createHash](#hash.createHash) to create a **HashStream** instance.
 
+**Support platform**: Android, iOS
+
 ### update
 
 update(data: ArrayBuffer): void
 
 Updates the data for generating a message digest. This API can be called multiple times.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -190,6 +200,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 digest(): string
 
 Generates a message digest.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
