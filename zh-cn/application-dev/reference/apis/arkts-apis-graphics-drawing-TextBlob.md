@@ -55,6 +55,7 @@ static makeFromPosText(text: string, len: number, points: common2D.Point[], font
 ```ts
 import { RenderNode } from '@kit.ArkUI';
 import { drawing,common2D} from '@kit.ArkGraphics2D';
+import { PlatformInfo } from "../../pages/platformInfo";
 
 class DrawingRenderNode extends RenderNode {
   draw(context : DrawContext) {
@@ -62,6 +63,12 @@ class DrawingRenderNode extends RenderNode {
     let text : string = 'makeFromPosText';
     let font : drawing.Font = new drawing.Font();
     font.setSize(100);
+    if (PlatformInfo.isAndroid()) {
+      myTypeFace = drawing.Typeface.makeFromFile("/system/fonts/Roboto-Regular.ttf");
+    } else if (PlatformInfo.isIOS()) {
+      myTypeFace = drawing.Typeface.makeFromFile("/System/Library/Fonts/LanguageSupport/PingFang.ttc");
+    }
+    font.setTypeface(myTypeFace);
     let length = font.countText(text);
     let points : common2D.Point[] = [];
     for (let i = 0; i !== length; ++i) {
@@ -135,6 +142,7 @@ static makeFromString(text: string, font: Font, encoding?: TextEncoding): TextBl
 ```ts
 import { RenderNode } from '@kit.ArkUI';
 import { drawing } from '@kit.ArkGraphics2D';
+import { PlatformInfo } from "../../pages/platformInfo";
 
 class DrawingRenderNode extends RenderNode {
   draw(context : DrawContext) {
@@ -143,6 +151,12 @@ class DrawingRenderNode extends RenderNode {
     brush.setColor({alpha: 255, red: 255, green: 0, blue: 0});
     const font = new drawing.Font();
     font.setSize(20);
+    if (PlatformInfo.isAndroid()) {
+      myTypeFace = drawing.Typeface.makeFromFile("/system/fonts/Roboto-Regular.ttf");
+    } else if (PlatformInfo.isIOS()) {
+      myTypeFace = drawing.Typeface.makeFromFile("/System/Library/Fonts/LanguageSupport/PingFang.ttc");
+    }
+    font.setTypeface(myTypeFace);
     const textBlob = drawing.TextBlob.makeFromString("drawing", font, drawing.TextEncoding.TEXT_ENCODING_UTF8);
     canvas.attachBrush(brush);
     canvas.drawTextBlob(textBlob, 20, 20);
@@ -186,6 +200,7 @@ static makeFromRunBuffer(pos: Array\<TextBlobRunBuffer>, font: Font, bounds?: co
 ```ts
 import { RenderNode } from '@kit.ArkUI';
 import { common2D, drawing } from '@kit.ArkGraphics2D';
+import { PlatformInfo } from "../../pages/platformInfo";
 
 class DrawingRenderNode extends RenderNode {
   draw(context : DrawContext) {
@@ -199,6 +214,12 @@ class DrawingRenderNode extends RenderNode {
       { glyph: 283, positionX: 30.62, positionY: 0 },
       { glyph: 299, positionX: 35.4, positionY: 0}
     ];
+    if (PlatformInfo.isAndroid()) {
+      myTypeFace = drawing.Typeface.makeFromFile("/system/fonts/Roboto-Regular.ttf");
+    } else if (PlatformInfo.isIOS()) {
+      myTypeFace = drawing.Typeface.makeFromFile("/System/Library/Fonts/LanguageSupport/PingFang.ttc");
+    }
+    font.setTypeface(myTypeFace);
     const textBlob = drawing.TextBlob.makeFromRunBuffer(runBuffer, font, null);
     const brush = new drawing.Brush();
     brush.setColor({alpha: 255, red: 255, green: 0, blue: 0});
