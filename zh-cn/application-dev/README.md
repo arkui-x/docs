@@ -44,6 +44,7 @@
 - [Fragment跨平台开发指南](./tutorial/how-to-use-fragment-on-android.md)
 - [ArkUI-X框架LogInterface使用指南](./tutorial/how-to-use-arkui-x-loginterface-on-android.md)
 - [预加载应用特性abc开发指南](./tutorial/how-to-use-preloadEtsModule-on-android.md)
+- [平台视图开发指南](./tutorial/how-to-use-platformview-on-android.md)
 
 ### iOS平台开发
 
@@ -57,6 +58,7 @@
 - [联动编译开发指南](./tutorial/how-to-linkage-compilation-on-ios.md)
 - [ArkUI-X框架LogInterface使用指南](./tutorial/how-to-use-arkui-x-loginterface-on-ios.md)
 - [预加载应用特性abc开发指南](./tutorial/how-to-use-preloadEtsModule-on-ios.md)
+- [平台视图开发指南](./tutorial/how-to-use-platformview-on-ios.md)
 
 ### 应用改造
 
