@@ -429,3 +429,40 @@ WantParams提供的接口详细如下：
   * 在使用手动方式(非WantParams)自定义字符串时，key和value均不能包含特殊字符。
   * array和object不支持使用手动方式进行使用。
   * double的小数点后有效小数位为6位。
+
+## 用启动Ability的方式拉起原生ViewController
+
+通过 `openURL` 方法访问自定义的 **URL Scheme**，会触发 AppDelegate 的 `-application:openURL:options:` 方法。在该方法内，可根据传入的 URL 和配置信息，执行跳转到相应原生页面的逻辑。
+
+  * 在 `Info.plist` 中添加 **URL Scheme** 声明：
+
+    ```xml
+    <key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+    			<string>com.example.helloworld</string>
+    		</array>
+    	</dict>
+    </array>
+    ```
+
+  * 在ets页面中添加 **`startAbility`** 方法：
+
+    ```javascript
+    // xxx.ets
+     let want: Want = {
+        bundleName: 'com.example.helloworld', //与iOS工程配置的URL Scheme相同
+        moduleName: 'entry', //小写
+        abilityName: 'CustomAbility', //首字母大写
+        parameters:{id:1,name:'ArkUI-X'} //可选参数
+        };
+        let context = getContext(this) as common.UIAbilityContext;
+        context.startAbility(want, (err, data) => {
+        }); 
+    ```
+
+  * 通过解析url得到参数，在AppDelegate.m的`-handleOpenUrlWithBundleName:moduleName:abilityName:params:`方法中添加逻辑，跳转到原生viewController：
+
+    ![start-with-ability-on-ios-handle-open-url](figures/start-with-ability-on-ios-handle-open-url.jpeg)
