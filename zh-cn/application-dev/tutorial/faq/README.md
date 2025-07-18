@@ -32,7 +32,7 @@
 
 - [如何手动替换ArkUI-X SDK](Development-Stage/Dev-faq-1.md)
 - [ArkUI-X SDK Version与API Version映射表](Development-Stage/Dev-faq-12.md)
-- [问题反馈的常用信息获取方式](Development-Stage/Dev-faq-3.md)
+- [问题反馈模板](Development-Stage/Dev-faq-3.md)
 
 ### 功能开发
 
