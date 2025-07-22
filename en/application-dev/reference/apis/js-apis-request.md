@@ -1314,23 +1314,6 @@ Describes the data structure of the task response header.
 | reason | string | Yes| HTTP response cause.|
 | headers | Map&lt;string, Array&lt;string&gt;&gt; | Yes| HTTP response header.|
 
-## BroadcastEvent<sup>20+</sup>
-
-Defines a custom system event. You can use a common event API to obtain the event.
-The upload and download SA has the ohos.permission.SEND_TASK_COMPLETE_EVENT permission. You can configure the level-2 configuration file to which the metadata of an event points to intercept other event senders.
-
-Use the **CommonEventData** type to transmit data related to common events. The members in **CommonEventData** are different from those described in [CommonEventData](js-apis-inner-commonEvent-commonEventData.md). Specifically, **CommonEventData.code** indicates the task status, which is **0x40 COMPLETE** or **0x41 FAILED**, and **CommonEventData.data** indicates the task ID.
-
-<!--Del-->
-For details about how to obtain the event configuration and configure the level-2 configuration file, see [Subscribing to Common Events in Static Mode (for System Applications Only)](../../basic-services/common-event/common-event-static-subscription.md).<!--DelEnd-->
-
-**System capability**: SystemCapability.Request.FileTransferAgent
-
-| Name| Value| Description       |
-| -------- | ------- |-----------|
-| COMPLETE | 'ohos.request.event.COMPLETE' | Task completion event. The returned event code can be **0x40** or **0x41**, depending on whether the task is successful or fails.|
-
-
 ## Task<sup>10+</sup> 
 
 Implements an upload or download task. Before using this API, you must obtain a **Task** object, from a promise through [request.agent.create<sup>10+</sup>](#requestagentcreate10-1) or from a callback through [request.agent.create<sup>10+</sup>](#requestagentcreate10).

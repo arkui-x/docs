@@ -1347,22 +1347,6 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 | reason | string | 是 | Http响应原因。|
 | headers | Map&lt;string, Array&lt;string&gt;&gt; | 是 | Http响应头部。 |
 
-## BroadcastEvent<sup>20+</sup>
-
-定义自定义系统事件。用户可以使用公共事件接口获取该事件。
-上传下载 SA 具有 'ohos.permission.SEND_TASK_COMPLETE_EVENT' 该权限，用户可以配置事件的metadata指向的二级配置文件来拦截其他事件发送者。
-
-调用CommonEventData类型传输公共事件相关数据，成员的内容填写和 [CommonEventData](js-apis-inner-commonEvent-commonEventData.md) 介绍的有所区别，其中CommonEventData.code表示任务的状态，目前为0x40 COMPLETE或0x41 FAILED；CommonEventData.data表示任务的taskId。
-
-<!--Del-->
-请参考[静态订阅公共事件](../../basic-services/common-event/common-event-static-subscription.md)以获取事件配置信息和二级配置文件的配置方式。<!--DelEnd-->
-
-**系统能力**：SystemCapability.Request.FileTransferAgent
-
-| 名称 | 值 | 说明        |
-| -------- | ------- |-----------|
-| COMPLETE | 'ohos.request.event.COMPLETE' | 表示自定义系统事件完成。在任务结束后会触发该事件，根据任务的成功或失败，事件的code返回0x40或者0x41。 |
-
 ## Task<sup>10+</sup> 
 
 上传或下载任务。使用该方法前需要先获取Task对象，promise形式通过[request.agent.create<sup>10+</sup>](#requestagentcreate10-1)获取，callback形式通过[request.agent.create<sup>10+</sup>](#requestagentcreate10)获取。
