@@ -1246,7 +1246,7 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 | precise     | boolean                                        | 否   | -如果设置为true，在上传/下载无法获取文件大小时任务失败。<br/>-如果设置为false，将文件大小设置为-1时任务继续。<br/>默认值为false。 |
 | token       | string                                         | 否   | 当创建了一个带有token的任务后，token则为正常查询期间必须提供的，否则将无法通过查询进行检索。其最小为8个字节，最大为2048个字节。默认为空。 |
 | extras      | object                                         | 否   | 配置的附加功能，默认为空。                                   |
-| proxy<sup>20+</sup> | string | 否 | 设置代理地址，其最大长度为512个字符，默认为空。<br/>代理地址格式:"http://\<domain or address\>:\<port\>" |
+| proxy<sup>20+</sup> | string | 否 | 设置代理地址，其最大长度为512个字符，默认为空。<br/>代理地址格式:"http://\<domain or address\>:\<port\>" <br>Android DownloadManager不支持proxy。|
 
 ## State<sup>10+</sup>  
 

@@ -1212,7 +1212,7 @@ Provides the configuration information of an upload or download task.
 | precise     | boolean                                        | No        | - If this parameter is set to **true**, the task fails when the file size cannot be obtained.<br>- If this parameter is set to **false**, the task continues when the file size is set to **-1**.<br>The default value is **false**. |
 | token       | string                                         | No        | Token of the task. If the task has a token configured, this token is required for query of the task. The value contains 8 to 2048 bytes. This parameter is left empty by default. |
 | extras      | object                                         | No        | Additional information of the task. This parameter is left empty by default. |
-| proxy<sup>20+</sup> | string | No| Proxy address. The value contains a maximum of 512 characters.<br>It is in the format of http://\<domain or address\>:\<port\>. By default, this parameter is left blank.|
+| proxy<sup>20+</sup> | string | No| Proxy address. The value contains a maximum of 512 characters.<br>It is in the format of http://\<domain or address\>:\<port\>. By default, this parameter is left blank. <br>Android DownloadManager does not support proxy.|
 
 ## State<sup>10+</sup>  
 
