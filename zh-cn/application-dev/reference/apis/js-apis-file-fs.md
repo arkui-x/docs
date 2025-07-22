@@ -35,6 +35,8 @@ stat(file: string | number): Promise&lt;Stat&gt;
 
 获取文件详细属性信息，使用Promise异步返回。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -70,6 +72,8 @@ stat(file: string | number, callback: AsyncCallback&lt;Stat&gt;): void
 
 获取文件详细属性信息，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -101,6 +105,8 @@ statSync(file: string | number): Stat
 
 以同步方法获取文件详细属性信息。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -131,6 +137,8 @@ statSync(file: string | number): Stat
 access(path: string, mode?: AccessModeType): Promise&lt;boolean&gt;
 
 检查文件或目录是否存在，或校验操作权限，使用promise异步回调。<br>校验读、写或读写权限不通过会抛出13900012（Permission denied）错误码。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -178,6 +186,8 @@ access(path: string, callback: AsyncCallback&lt;boolean&gt;): void
 
 检查文件是否存在，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -213,6 +223,8 @@ access(path: string, callback: AsyncCallback&lt;boolean&gt;): void
 accessSync(path: string, mode?: AccessModeType): boolean
 
 以同步方法检查文件或目录是否存在，或校验操作权限。<br>校验读、写或读写权限不通过会抛出13900012（Permission denied）错误码。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -262,6 +274,8 @@ close(file: number | File): Promise&lt;void&gt;
 
 关闭文件，使用Promise异步返回。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -298,6 +312,8 @@ close(file: number | File, callback: AsyncCallback&lt;void&gt;): void
 
 关闭文件，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -331,6 +347,8 @@ closeSync(file: number | File): void
 
 以同步方法关闭文件。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -356,6 +374,8 @@ closeSync(file: number | File): void
 copyFile(src: string | number, dest: string | number, mode?: number): Promise&lt;void&gt;
 
 复制文件，使用Promise异步返回。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -395,6 +415,8 @@ copyFile(src: string | number, dest: string | number, mode: number, callback: As
 
 复制文件，可设置覆盖文件的方式，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -430,6 +452,8 @@ copyFile(src: string | number, dest: string | number, callback: AsyncCallback&lt
 
 复制文件，覆盖方式为完全覆盖目标文件，未覆盖部分将被裁切。使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -464,6 +488,8 @@ copyFileSync(src: string | number, dest: string | number, mode?: number): void
 
 以同步方法复制文件。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -491,6 +517,8 @@ copyFileSync(src: string | number, dest: string | number, mode?: number): void
 copyDir(src: string, dest: string, mode?: number): Promise\<void>
 
 复制源目录至目标路径下，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -531,6 +559,8 @@ copyDir(src: string, dest: string, mode?: number): Promise\<void>
 copyDir(src: string, dest: string, mode: number, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
 
 复制源目录至目标路径下，可设置复制模式。使用callback异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -576,6 +606,8 @@ copyDir(src: string, dest: string, callback: AsyncCallback\<void, Array\<Conflic
 
 如果目标目录下有与源目录名冲突的目录，且冲突目录下有同名文件，则抛出异常。源目录下未冲突的文件全部移动至目标目录下，目标目录下未冲突文件将继续保留，且冲突文件信息将在抛出异常的data属性中以Array\<[ConflictFiles](#conflictfiles20)>形式提供。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -617,6 +649,8 @@ copyDirSync(src: string, dest: string, mode?: number): void
 
 以同步方法复制源目录至目标路径下。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -652,6 +686,8 @@ copyDirSync(src: string, dest: string, mode?: number): void
 setxattr(path: string, key: string, value: string): Promise&lt;void&gt;
 
 设置文件或目录的扩展属性。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -695,6 +731,8 @@ setxattrSync(path: string, key: string, value: string): void
 
 设置文件或目录的扩展属性。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -732,6 +770,8 @@ setxattrSync(path: string, key: string, value: string): void
 getxattr(path: string, key: string): Promise&lt;string&gt;
 
 获取文件或目录的扩展属性。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -773,6 +813,8 @@ getxattr(path: string, key: string): Promise&lt;string&gt;
 getxattrSync(path: string, key: string): string
 
 使用同步接口获取文件或目录的扩展属性。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -816,6 +858,8 @@ mkdir(path: string): Promise&lt;void&gt;
 
 创建目录，使用Promise异步返回。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -850,6 +894,8 @@ mkdir(path: string): Promise&lt;void&gt;
 mkdir(path: string, recursion: boolean): Promise\<void>
 
 创建目录，使用promise异步回调。当recursion指定为true时，可递归创建目录。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -888,6 +934,8 @@ mkdir(path: string, callback: AsyncCallback&lt;void&gt;): void
 
 创建目录，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -919,6 +967,8 @@ mkdir(path: string, callback: AsyncCallback&lt;void&gt;): void
 mkdir(path: string, recursion: boolean, callback: AsyncCallback&lt;void&gt;): void
 
 创建目录，使用callback异步回调。当recursion指定为true，可递归创建目录。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -954,6 +1004,8 @@ mkdirSync(path: string): void
 
 以同步方法创建目录。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -979,6 +1031,8 @@ mkdirSync(path: string, recursion: boolean): void
 
 以同步方法创建目录。当recursion指定为true，可递归创建目录。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1003,7 +1057,9 @@ mkdirSync(path: string, recursion: boolean): void
 
 open(path: string, mode?: number): Promise&lt;File&gt;
 
-打开文件，使用Promise异步返回。支持使用URI打开文件。
+打开文件，使用Promise异步返回。目前仅支持打开文件的应用沙箱路径。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1011,7 +1067,7 @@ open(path: string, mode?: number): Promise&lt;File&gt;
 
 | 参数名 | 类型   | 必填 | 说明                                                         |
 | ------ | ------ | ---- | ------------------------------------------------------------ |
-| path   | string | 是   | 文件的应用沙箱路径或文件URI。                                   |
+| path   | string | 是   | 文件的应用沙箱路径。                                   |
 | mode  | number | 否   | 打开文件的[选项](#openmode)，必须指定如下选项中的一个，默认以只读方式打开：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读打开。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写打开。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写打开。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果文件存在且以只写或读写的方式打开文件，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到文件末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式打开文件。 |
 
 **返回值：**
@@ -1035,14 +1091,15 @@ open(path: string, mode?: number): Promise&lt;File&gt;
   });
   ```
 
-
 ## fs.open
 
 open(path: string, mode: number, callback: AsyncCallback&lt;File&gt;): void
 
 打开文件，可设置打开文件的选项。使用callback异步回调。
 
-支持使用URI打开文件。
+目前仅支持打开文件的应用沙箱路径。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1050,7 +1107,7 @@ open(path: string, mode: number, callback: AsyncCallback&lt;File&gt;): void
 
 | 参数名   | 类型                            | 必填 | 说明                                                         |
 | -------- | ------------------------------- | ---- | ------------------------------------------------------------ |
-| path     | string                          | 是   | 文件的应用沙箱路径或URI。                                   |
+| path     | string                          | 是   | 文件的应用沙箱路径。                                   |
 | mode  | number | 否   | 打开文件的[选项](#openmode)，必须指定如下选项中的一个，默认以只读方式打开：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读打开。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写打开。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写打开。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果文件存在且以只写或读写的方式打开文件，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到文件末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式打开文件。 |
 
 **错误码：**
@@ -1074,7 +1131,9 @@ open(path: string, mode: number, callback: AsyncCallback&lt;File&gt;): void
 
 open(path: string, callback: AsyncCallback&lt;File&gt;): void
 
-打开文件，使用callback异步回调。支持使用URI打开文件。
+打开文件，使用callback异步回调。目前仅支持打开文件的应用沙箱路径。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1082,7 +1141,7 @@ open(path: string, callback: AsyncCallback&lt;File&gt;): void
 
 | 参数名   | 类型                            | 必填 | 说明                                                         |
 | -------- | ------------------------------- | ---- | ------------------------------------------------------------ |
-| path     | string                          | 是   | 文件的应用沙箱路径或URI。                                   |
+| path     | string                          | 是   | 文件的应用沙箱路径。                                   |
 
 **错误码：**
 
@@ -1105,7 +1164,9 @@ open(path: string, callback: AsyncCallback&lt;File&gt;): void
 
 openSync(path: string, mode?: number): File
 
-以同步方法打开文件。支持使用URI打开文件。
+以同步方法打开文件。目前仅支持打开文件的应用沙箱路径。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1113,7 +1174,7 @@ openSync(path: string, mode?: number): File
 
 | 参数名 | 类型   | 必填 | 说明                                                         |
 | ------ | ------ | ---- | ------------------------------------------------------------ |
-| path   | string | 是   | 打开文件的应用沙箱路径或URI。                                   |
+| path   | string | 是   | 打开文件的应用沙箱路径。                                   |
 | mode  | number | 否   | 打开文件的[选项](#openmode)，必须指定如下选项中的一个，默认以只读方式打开：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读打开。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写打开。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写打开。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果文件存在且以只写或读写的方式打开文件，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到文件末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式打开文件。 |
 
 **返回值：**
@@ -1140,6 +1201,8 @@ openSync(path: string, mode?: number): File
 read(fd: number, buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
 
 读取文件数据，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1186,6 +1249,8 @@ read(fd: number, buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCall
 
 从文件读取数据，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1227,6 +1292,8 @@ readSync(fd: number, buffer: ArrayBuffer, options?: ReadOptions): number
 
 以同步方法从文件读取数据。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1263,6 +1330,8 @@ rmdir(path: string): Promise&lt;void&gt;
 
 删除整个目录，使用Promise异步返回。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1298,6 +1367,8 @@ rmdir(path: string, callback: AsyncCallback&lt;void&gt;): void
 
 删除整个目录，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1330,6 +1401,8 @@ rmdirSync(path: string): void
 
 以同步方法删除目录。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1354,6 +1427,8 @@ rmdirSync(path: string): void
 unlink(path: string): Promise&lt;void&gt;
 
 删除单个文件，使用Promise异步返回。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1390,6 +1465,8 @@ unlink(path: string, callback: AsyncCallback&lt;void&gt;): void
 
 删除文件，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1422,6 +1499,8 @@ unlinkSync(path: string): void
 
 以同步方法删除文件。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1446,6 +1525,8 @@ unlinkSync(path: string): void
 write(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
 
 将数据写入文件，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1489,6 +1570,8 @@ write(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions, callback
 
 将数据写入文件，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1527,6 +1610,8 @@ writeSync(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions): num
 
 以同步方法将数据写入文件。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1563,6 +1648,8 @@ writeSync(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions): num
 truncate(file: string | number, len?: number): Promise&lt;void&gt;
 
 截断文件，使用Promise异步返回。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1601,6 +1688,8 @@ truncate(file: string | number, len?: number, callback: AsyncCallback&lt;void&gt
 
 截断文件，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1635,6 +1724,8 @@ truncateSync(file: string | number, len?: number): void
 
 以同步方法截断文件。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1661,6 +1752,8 @@ truncateSync(file: string | number, len?: number): void
 readLines(filePath: string, options?: Options): Promise&lt;ReaderIterator&gt;
 
 逐行读取文件文本内容，使用promise异步回调。只支持读取utf-8格式文件。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1705,6 +1798,8 @@ readLines(filePath: string, options?: Options, callback: AsyncCallback&lt;Reader
 
 逐行读取文件文本内容，使用callback异步回调，只支持读取utf-8格式文件。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1744,6 +1839,8 @@ readLines(filePath: string, options?: Options, callback: AsyncCallback&lt;Reader
 readLinesSync(filePath: string, options?: Options): ReaderIterator
 
 以同步方式逐行读取文件的文本内容。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1788,6 +1885,8 @@ next(): ReaderIteratorResult
 
 获取迭代器下一项内容。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **返回值：**
@@ -1826,6 +1925,8 @@ next(): ReaderIteratorResult
 
 文件读取迭代器返回结果，支持ReaderIterator接口使用。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 | 名称        | 类型       | 说明                |
@@ -1838,6 +1939,8 @@ next(): ReaderIteratorResult
 readText(filePath: string, options?: ReadTextOptions): Promise&lt;string&gt;
 
 基于文本方式读取文件（即直接读取文件的文本内容），使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1875,6 +1978,8 @@ readText(filePath: string, options?: ReadTextOptions): Promise&lt;string&gt;
 readText(filePath: string, options?: ReadTextOptions, callback: AsyncCallback&lt;string&gt;): void
 
 基于文本方式读取文件内容，使用callback异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -1918,6 +2023,8 @@ readTextSync(filePath: string, options?: ReadTextOptions): string
 
 以同步方法基于文本方式读取文件（即直接读取文件的文本内容）。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1959,6 +2066,8 @@ lstat(path: string): Promise&lt;Stat&gt;
 
 获取链接文件信息，使用promise异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -1995,6 +2104,8 @@ lstat(path: string, callback: AsyncCallback&lt;Stat&gt;): void
 
 获取链接文件信息，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2028,6 +2139,8 @@ lstatSync(path: string): Stat
 
 以同步方法获取链接文件信息。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2059,6 +2172,8 @@ lstatSync(path: string): Stat
 rename(oldPath: string, newPath: string): Promise&lt;void&gt;
 
 重命名文件或文件夹，使用Promise异步返回。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -2097,6 +2212,8 @@ rename(oldPath: string, newPath: string, callback: AsyncCallback&lt;void&gt;): v
 
 重命名文件或文件夹，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2131,6 +2248,8 @@ renameSync(oldPath: string, newPath: string): void
 
 以同步方法重命名文件或文件夹。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2157,6 +2276,8 @@ renameSync(oldPath: string, newPath: string): void
 fsync(fd: number): Promise&lt;void&gt;
 
 同步文件数据，使用Promise异步返回。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -2194,6 +2315,8 @@ fsync(fd: number, callback: AsyncCallback&lt;void&gt;): void
 
 同步文件数据，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2222,12 +2345,13 @@ fsync(fd: number, callback: AsyncCallback&lt;void&gt;): void
   });
   ```
 
-
 ## fs.fsyncSync
 
 fsyncSync(fd: number): void
 
 以同步方法同步文件数据。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -2255,6 +2379,8 @@ fsyncSync(fd: number): void
 fdatasync(fd: number): Promise&lt;void&gt;
 
 实现文件内容数据同步，使用Promise异步返回。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -2293,6 +2419,8 @@ fdatasync(fd: number, callback: AsyncCallback&lt;void&gt;): void
 
 实现文件内容数据同步，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2327,6 +2455,8 @@ fdatasyncSync(fd: number): void
 
 以同步方法实现文件内容数据同步。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2349,6 +2479,7 @@ fdatasyncSync(fd: number): void
   ```
 
 ## fs.listFile
+
 listFile(path: string, options?: {
     recursion?: boolean;
     listNum?: number;
@@ -2356,6 +2487,8 @@ listFile(path: string, options?: {
 }): Promise<string[]>
 
 列出文件夹下所有文件名，支持递归列出所有文件名（包含子目录下），支持文件过滤，使用Promise异步返回。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -2408,6 +2541,7 @@ listFile(path: string, options?: {
   ```
 
 ## fs.listFile
+
 listFile(path: string, options?: {
     recursion?: boolean;
     listNum?: number;
@@ -2415,6 +2549,8 @@ listFile(path: string, options?: {
 }, callback: AsyncCallback<string[]>): void
 
 列出文件夹下所有文件名，支持递归列出所有文件名（包含子目录下），支持文件过滤，使用Callback异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -2473,6 +2609,8 @@ listFileSync(path: string, options?: {
 
 以同步方式列出文件夹下所有文件名，支持递归列出所有文件名（包含子目录下），支持文件过滤。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2526,6 +2664,8 @@ lseek(fd: number, offset: number, whence?: WhenceType): number
 
 调整文件偏移指针位置。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2560,6 +2700,8 @@ lseek(fd: number, offset: number, whence?: WhenceType): number
 moveDir(src: string, dest: string, mode?: number): Promise\<void>
 
 移动源目录至目标路径下，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 > **说明：**
 >
@@ -2605,6 +2747,8 @@ moveDir(src: string, dest: string, mode: number, callback: AsyncCallback\<void, 
 
 移动源目录至目标路径下，支持设置移动模式。使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 > **说明：**
 >
 > 该接口不支持在分布式文件路径下操作。
@@ -2645,13 +2789,15 @@ moveDir(src: string, dest: string, mode: number, callback: AsyncCallback\<void, 
   });
   ```
 
-  ## fs.moveDir<sup>20+</sup>
+## fs.moveDir<sup>20+</sup>
 
 moveDir(src: string, dest: string, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
 
 移动源目录至目标路径下。使用callback异步回调。
 
 移动模式为目录级别抛异常。当目标目录下存在与源目录名冲突的目录，则抛出异常。
+
+**支持平台**：Android、iOS
 
 > **说明：**
 >
@@ -2697,6 +2843,8 @@ moveDir(src: string, dest: string, callback: AsyncCallback\<void, Array\<Conflic
 moveDirSync(src: string, dest: string, mode?: number): void
 
 以同步方法移动源目录至目标路径下。
+
+**支持平台**：Android、iOS
 
 > **说明：**
 >
@@ -2745,6 +2893,8 @@ moveFile(src: string, dest: string, mode?: number): Promise\<void>
 
 移动文件，使用promise异步回调。
 
+**支持平台**：Android、iOS
+
 > **说明：**
 >
 > 该接口不支持在分布式文件路径下操作。
@@ -2788,6 +2938,8 @@ moveFile(src: string, dest: string, mode?: number, callback: AsyncCallback\<void
 
 移动文件，使用Callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2823,6 +2975,8 @@ moveFileSync(src: string, dest: string, mode?: number): void
 
 以同步方式移动文件。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2851,6 +3005,8 @@ moveFileSync(src: string, dest: string, mode?: number): void
 mkdtemp(prefix: string): Promise&lt;string&gt;
 
 创建临时目录，使用Promise异步返回。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -2886,6 +3042,8 @@ mkdtemp(prefix: string, callback: AsyncCallback&lt;string&gt;): void
 
 创建临时目录，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2917,6 +3075,8 @@ mkdtempSync(prefix: string): string
 
 以同步的方法创建临时目录。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2947,6 +3107,8 @@ utimes(path: string, mtime: number): void
 
 修改文件最近访问时间属性。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -2974,6 +3136,8 @@ utimes(path: string, mtime: number): void
 createRandomAccessFile(file: string | File, mode?: number): Promise&lt;RandomAccessFile&gt;
 
 基于文件路径或文件对象创建RandomAccessFile对象，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3015,6 +3179,8 @@ createRandomAccessFile(file: string | File, callback: AsyncCallback&lt;RandomAcc
 
 基于文件路径或文件对象，以只读方式创建RandomAccessFile对象，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -3049,6 +3215,8 @@ createRandomAccessFile(file: string | File, callback: AsyncCallback&lt;RandomAcc
 createRandomAccessFile(file: string | File, mode: number, callback: AsyncCallback&lt;RandomAccessFile&gt;): void
 
 基于文件路径或文件对象创建RandomAccessFile对象，使用callback异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3085,6 +3253,8 @@ createRandomAccessFile(file: string | File, mode: number, callback: AsyncCallbac
 createRandomAccessFile(file: string | File, mode?: number, options?: RandomAccessFileOptions): Promise&lt;RandomAccessFile&gt;
 
 基于文件路径或文件对象创建RandomAccessFile对象，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3125,6 +3295,8 @@ createRandomAccessFileSync(file: string | File, mode?: number): RandomAccessFile
 
 基于文件路径或文件对象创建RandomAccessFile对象。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -3160,6 +3332,8 @@ createRandomAccessFileSync(file: string | File, mode?: number,
 
 基于文件路径或文件对象创建RandomAccessFile对象。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -3194,6 +3368,8 @@ createRandomAccessFileSync(file: string | File, mode?: number,
 createStream(path: string, mode: string): Promise&lt;Stream&gt;
 
 基于文件路径创建文件流，使用promise异步回调。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3233,6 +3409,8 @@ createStream(path: string, mode: string, callback: AsyncCallback&lt;Stream&gt;):
 
 基于文件路径创建文件流，使用callback异步回调。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -3268,6 +3446,8 @@ createStreamSync(path: string, mode: string): Stream
 
 以同步方法基于文件路径创建文件流。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -3301,6 +3481,8 @@ createStreamSync(path: string, mode: string): Stream
 fdopenStream(fd: number, mode: string): Promise&lt;Stream&gt;
 
 基于文件描述符打开文件流，使用promise异步回调。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3347,6 +3529,8 @@ fdopenStream(fd: number, mode: string, callback: AsyncCallback&lt;Stream&gt;): v
 
 基于文件描述符打开文件流，使用callback异步回调。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -3389,6 +3573,8 @@ fdopenStreamSync(fd: number, mode: string): Stream
 
 以同步方法基于文件描述符打开文件流。需要配合[Stream]((#stream20))中的close()函数关闭文件流。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -3426,6 +3612,8 @@ fdopenStreamSync(fd: number, mode: string): Stream
 createReadStream(path: string, options?: ReadStreamOptions ): ReadStream
 
 以同步方法打开文件可读流。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3469,6 +3657,8 @@ createWriteStream(path: string, options?: WriteStreamOptions): WriteStream
 
 以同步方法打开文件可写流。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -3506,11 +3696,14 @@ createWriteStream(path: string, options?: WriteStreamOptions): WriteStream
   ```
 
 ## AtomicFile<sup>20+</sup>
+
 AtomicFile是一个用于对文件进行原子读写操作的类。
 
 在写操作时，通过写入临时文件，并在写入成功后将其重命名到原始文件位置来确保写入文件的完整性；而在写入失败时删除临时文件，不修改原始文件内容。
 
 使用者可以自行调用finishWrite或failWrite来完成文件内容的写入或回滚。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3519,6 +3712,8 @@ AtomicFile是一个用于对文件进行原子读写操作的类。
 constructor(path: string)
 
 对于给定路径的文件创建一个AtomicFile类。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3535,6 +3730,8 @@ getBaseFile(): File
 通过AtomicFile对象获取文件对象。
 
 文件描述符fd需要由用户调用close方法关闭。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3578,6 +3775,8 @@ try {
 openRead(): ReadStream
 
 创建一个读文件流。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3632,6 +3831,8 @@ readFully(): ArrayBuffer
 
 读取文件全部内容。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **返回值：**
@@ -3685,6 +3886,8 @@ startWrite(): WriteStream
 
 在写入文件完成后，写入成功需要调用finishWrite()，写入失败需要调用failWrite()。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **返回值：**
@@ -3727,6 +3930,8 @@ finishWrite(): void
 
 在完成对startWrite返回流的写入操作时调用，表示文件写入成功。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **错误码：**
@@ -3761,6 +3966,8 @@ try {
 failWrite(): void
 
 文件写入失败后调用，将执行文件回滚操作。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3799,6 +4006,8 @@ try {
 delete(): void
 
 删除AtomicFile类，会删除原始文件和临时文件。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3841,7 +4050,9 @@ try {
 
 createWatcher(path: string, events: number, listener: WatchEventListener): Watcher
 
-创建Watcher对象，监听文件或目录变动, ios暂不支持。
+创建Watcher对象，监听文件或目录变动。
+
+**支持平台**：Android
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3892,7 +4103,9 @@ createWatcher(path: string, events: number, listener: WatchEventListener): Watch
 
 (event: WatchEvent): void
 
-事件监听类，ios暂不支持。
+事件监听类。
+
+**支持平台**：Android
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3904,7 +4117,9 @@ createWatcher(path: string, events: number, listener: WatchEventListener): Watch
 
 ## WatchEvent<sup>20+</sup>
 
-事件类, ios暂不支持。
+事件类。
+
+**支持平台**：Android
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3919,6 +4134,8 @@ createWatcher(path: string, events: number, listener: WatchEventListener): Watch
 ## Stat
 
 文件具体信息，在调用Stat的方法前，需要先通过[stat()](#fsstat)方法（同步或异步）来构建一个Stat实例。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3940,6 +4157,8 @@ createWatcher(path: string, events: number, listener: WatchEventListener): Watch
 isBlockDevice(): boolean
 
 用于判断文件是否是块特殊文件。一个块特殊文件只能以块为粒度进行访问，且访问的时候带缓存。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -3966,6 +4185,8 @@ isCharacterDevice(): boolean
 
 用于判断文件是否是字符特殊文件。一个字符特殊设备可进行随机访问，且访问的时候不带缓存。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **返回值：**
@@ -3990,6 +4211,8 @@ isCharacterDevice(): boolean
 isDirectory(): boolean
 
 用于判断文件是否是目录。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4016,6 +4239,8 @@ isFIFO(): boolean
 
 用于判断文件是否是命名管道（有时也称为FIFO）。命名管道通常用于进程间通信。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **返回值：**
@@ -4040,6 +4265,8 @@ isFIFO(): boolean
 isFile(): boolean
 
 用于判断文件是否是普通文件。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4066,6 +4293,8 @@ isSocket(): boolean
 
 用于判断文件是否是套接字。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **返回值：**
@@ -4091,6 +4320,8 @@ isSymbolicLink(): boolean
 
 用于判断文件是否是符号链接。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **返回值：**
@@ -4114,11 +4345,15 @@ isSymbolicLink(): boolean
 
 文件流，在调用Stream的方法前，需要先通过[fs.createStream](#fscreatestream20)方法或者[fs.fdopenStream](#fsfdopenstream20)（同步或异步）来构建一个Stream实例。
 
+**支持平台**：Android、iOS
+
 ### close
 
 close(): Promise&lt;void&gt;
 
 关闭文件流，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4150,6 +4385,8 @@ close(): Promise&lt;void&gt;
 close(callback: AsyncCallback&lt;void&gt;): void
 
 异步关闭文件流，使用callback异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4184,6 +4421,8 @@ closeSync(): void
 
 同步关闭文件流。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **错误码：**
@@ -4203,6 +4442,8 @@ closeSync(): void
 flush(): Promise&lt;void&gt;
 
 刷新文件流，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4235,6 +4476,8 @@ flush(): Promise&lt;void&gt;
 flush(callback: AsyncCallback&lt;void&gt;): void
 
 异步刷新文件流，使用callback异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4270,6 +4513,8 @@ flushSync(): void
 
 同步刷新文件流。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **错误码：**
@@ -4290,6 +4535,8 @@ flushSync(): void
 write(buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
 
 将数据写入流文件，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4336,6 +4583,8 @@ write(buffer: ArrayBuffer | string, options?: WriteOptions, callback: AsyncCallb
 
 将数据写入流文件，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -4380,6 +4629,8 @@ writeSync(buffer: ArrayBuffer | string, options?: WriteOptions): number
 
 以同步方法将数据写入流文件。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -4419,6 +4670,8 @@ writeSync(buffer: ArrayBuffer | string, options?: WriteOptions): number
 read(buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
 
 从流文件读取数据，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4468,6 +4721,8 @@ read(buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCallback&lt;numb
 
 从流文件读取数据，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -4513,6 +4768,8 @@ readSync(buffer: ArrayBuffer, options?: ReadOptions): number
 
 以同步方法从流文件读取数据。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -4551,6 +4808,8 @@ readSync(buffer: ArrayBuffer, options?: ReadOptions): number
 
 由open接口打开的File对象。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 ### 属性
@@ -4564,6 +4823,8 @@ readSync(buffer: ArrayBuffer, options?: ReadOptions): number
 getParent(): string
 
 获取File对象对应文件父目录。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4591,6 +4852,8 @@ getParent(): string
 
 随机读写文件流。在调用RandomAccessFile的方法前，需要先通过createRandomAccessFile()方法（同步或异步）来构建一个RandomAccessFile实例。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 ### 属性
@@ -4605,6 +4868,8 @@ getParent(): string
 setFilePointer(filePointer:number): void
 
 设置文件偏移指针。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4633,6 +4898,8 @@ close(): void
 
 以同步方式关闭RandomAccessFile对象。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **错误码：**
@@ -4652,6 +4919,8 @@ close(): void
 write(buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
 
 将数据写入文件，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4704,6 +4973,8 @@ write(buffer: ArrayBuffer | string, options?: WriteOptions, callback: AsyncCallb
 
 将数据写入文件，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -4752,6 +5023,8 @@ writeSync(buffer: ArrayBuffer | string, options?: WriteOptions): number
 
 以同步方法将数据写入文件。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -4791,6 +5064,8 @@ writeSync(buffer: ArrayBuffer | string, options?: WriteOptions): number
 read(buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
 
 从文件读取数据，使用promise异步回调。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4841,6 +5116,8 @@ read(buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCallback&lt;numb
 
 从文件读取数据，使用callback异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -4888,6 +5165,8 @@ readSync(buffer: ArrayBuffer, options?: ReadOptions): number
 
 以同步方法从文件读取数据。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -4922,13 +5201,17 @@ readSync(buffer: ArrayBuffer, options?: ReadOptions): number
 
 ## Watcher<sup>20+</sup>
 
-文件目录变化监听对象。由createWatcher接口获得,ios暂不支持。
+文件目录变化监听对象。由createWatcher接口获得,iOS暂不支持。
+
+**支持平台**：Android
 
 ### start<sup>20+</sup>
 
 start(): void
 
 开启监听。
+
+**支持平台**：Android
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -4951,6 +5234,8 @@ stop(): void
 
 停止监听并移除Watcher对象。
 
+**支持平台**：Android
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **错误码：**
@@ -4970,6 +5255,8 @@ stop(): void
 
 open接口flags参数常量。文件打开标签。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 | 名称   | 类型   | 值  | 说明      |
@@ -4986,6 +5273,8 @@ open接口flags参数常量。文件打开标签。
 | SYNC | number | 0o4010000    | 以同步IO的方式打开文件。 |
 
 ## Filter
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -5004,6 +5293,8 @@ open接口flags参数常量。文件打开标签。
 
 冲突文件信息，支持copyDir及moveDir接口使用。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 | 名称        | 类型       | 说明                |
@@ -5015,6 +5306,8 @@ open接口flags参数常量。文件打开标签。
 
 可选项类型，支持readLines接口使用。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 | 名称        | 类型       | 说明                |
@@ -5024,6 +5317,8 @@ open接口flags参数常量。文件打开标签。
 ## WhenceType<sup>20+</sup>
 
 枚举，文件偏移指针相对偏移位置类型，支持lseek接口使用。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -5036,6 +5331,8 @@ open接口flags参数常量。文件打开标签。
 ## AccessModeType<sup>20+</sup>
 
 枚举，表示需要校验的具体权限。若不填，默认校验文件是否存在。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -5050,6 +5347,8 @@ open接口flags参数常量。文件打开标签。
 
 可选项类型，支持read接口使用。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 | 名称        | 类型       | 必选       | 说明                |
@@ -5060,6 +5359,8 @@ open接口flags参数常量。文件打开标签。
 ## ReadTextOptions<sup>20+</sup>
 
 可选项类型，支持readText接口使用，ReadTextOptions继承至[ReadOptions](#readoptions20)。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -5073,6 +5374,8 @@ open接口flags参数常量。文件打开标签。
 
 可选项类型，支持write接口使用，WriteOptions继承至[Options](#options20)。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 | 名称        | 类型       | 必选       | 说明                |
@@ -5084,6 +5387,8 @@ open接口flags参数常量。文件打开标签。
 ## ReadStream<sup>20+</sup>
 
 文件可读流，需要先通过[fs.createReadStream](#fscreatereadstream20)方法来构建一个ReadStream实例。ReadStream继承自数据流基类[stream](../apis-arkts/js-apis-stream.md#readable)。
+
+**支持平台**：Android、iOS
 
 **规格**：ReadStream读到的数据为解码后的字符串，其编码格式当前仅支持'utf-8'。
 
@@ -5100,6 +5405,8 @@ seek(offset: number, whence?: WhenceType): number
 
 
 调整可读流偏移指针位置。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -5136,6 +5443,8 @@ close(): void
 
 关闭可读流。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **错误码：**
@@ -5154,6 +5463,8 @@ close(): void
 
 文件可写流，需要先通过[fs.createWriteStream](#fscreatewritestream20)方法来构建一个WriteStream实例。WriteStream继承自数据流基类[stream](../apis-arkts/js-apis-stream.md#writable)。
 
+**支持平台**：Android、iOS
+
 ### 属性
 
 | 名称     | 类型   | 只读   | 可选   | 说明                                       |
@@ -5166,6 +5477,8 @@ close(): void
 seek(offset: number, whence?: WhenceType): number;
 
 调整可写流的偏移指针位置。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -5202,6 +5515,8 @@ close(): void
 
 关闭可写流。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **错误码：**
@@ -5220,6 +5535,8 @@ close(): void
 
 可选项类型，支持 createRandomAccessFile 接口使用。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 | 名称        | 类型       | 必选       |  说明                |
@@ -5231,6 +5548,8 @@ close(): void
 
 可选项类型，支持 createReadStream 接口使用。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 | 名称        | 类型       | 必选       |  说明                |
@@ -5241,6 +5560,8 @@ close(): void
 ## WriteStreamOptions<sup>20+</sup>
 
 可选项类型，支持 createWriteStream 接口使用。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 

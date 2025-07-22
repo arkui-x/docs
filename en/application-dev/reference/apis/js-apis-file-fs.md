@@ -35,6 +35,8 @@ stat(file: string|number): Promise&lt;Stat&gt;
 
 Obtains detailed file information. This API uses a promise to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -70,6 +72,8 @@ stat(file: string|number, callback: AsyncCallback&lt;Stat&gt;): void
 
 Obtains detailed file information. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -101,6 +105,8 @@ statSync(file: string|number): Stat
 
 Obtains detailed file information synchronously. 
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -131,6 +137,8 @@ Obtains detailed file information synchronously.
 access(path: string, mode?: AccessModeType): Promise&lt;boolean&gt;
 
 Checks whether the file or directory exists or has the operation permission. This API uses a promise to return the result.<br>If the read, write, or read and write permission verification fails, the error code 13900012 (Permission denied) will be thrown.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -178,6 +186,8 @@ access(path: string, callback: AsyncCallback&lt;boolean&gt;): void
 
 Checks whether a file or directory exists. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -219,6 +229,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 accessSync(path: string, mode?: AccessModeType): boolean
 
 Checks whether a file or directory exists or has the operation permission. This API returns the result synchronously.<br>If the read, write, or read and write permission verification fails, the error code 13900012 (Permission denied) will be thrown.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -268,6 +280,8 @@ close(file: File|number): Promise&lt;void&gt;
 
 Closes a file. This API uses a promise to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -305,6 +319,8 @@ close(file: File|number, callback: AsyncCallback&lt;void&gt;): void
 
 Closes a file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -338,6 +354,8 @@ closeSync(file: File|number): void
 
 Synchronously closes a file.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -363,6 +381,8 @@ Synchronously closes a file.
 copyFile(src: string|number, dest: string|number, mode?: number): Promise&lt;void&gt;
 
 Copies a file. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -402,6 +422,8 @@ copyFile(src: string|number, dest: string|number, mode?: number, callback: Async
 
 Copies a file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -437,6 +459,8 @@ copyFileSync(src: string|number, dest: string|number, mode?: number): void
 
 Synchronously copies a file.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -464,6 +488,8 @@ Synchronously copies a file.
 copyDir(src: string, dest: string, mode?: number): Promise\<void>
 
 Copies the source directory to the destination path. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -504,6 +530,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 copyDir(src: string, dest: string, mode: number, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
 
 Copies the source directory to the destination path. You can set the copy mode. This API uses an asynchronous callback to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -549,6 +577,8 @@ Copies the source directory to the destination path. This API uses an asynchrono
 
 An exception will be thrown if the destination directory contains a directory with the same name as the source directory and there are files with the same name in the conflicting directory. All the non-conflicting files in the source directory will be moved to the destination directory, and the non-conflicting files in the destination directory will be retained. The data attribute in the error returned provides information about the conflicting files in the Array\<[ConflictFiles](#conflictfiles20)> format.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -590,6 +620,8 @@ copyDirSync(src: string, dest: string, mode?: number): void
 
 Copies the source directory to the destination path. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -625,6 +657,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 setxattr(path: string, key: string, value: string): Promise&lt;void&gt;
 
 Sets an extended attribute of a file or directory.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -669,6 +703,8 @@ setxattrSync(path: string, key: string, value: string): void
 
 Sets an extended attribute of a file or directory.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -706,6 +742,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 getxattr(path: string, key: string): Promise&lt;string&gt;
 
 Obtains an extended attribute of a file or directory.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -747,6 +785,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 getxattrSync(path: string, key: string): string
 
 Obtains an extended attribute of a file. This API returns the result synchronously.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -790,6 +830,8 @@ mkdir(path: string): Promise&lt;void&gt;
 
 Creates a directory. This API uses a promise to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -824,6 +866,8 @@ Creates a directory. This API uses a promise to return the result.
 mkdir(path: string, recursion: boolean): Promise\<void>
 
 Creates a directory. This API uses a promise to return the result. The value **true** means to create a directory recursively.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -862,6 +906,8 @@ mkdir(path: string, callback: AsyncCallback&lt;void&gt;): void
 
 Creates a directory. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -893,6 +939,8 @@ Creates a directory. This API uses an asynchronous callback to return the result
 mkdir(path: string, recursion: boolean, callback: AsyncCallback&lt;void&gt;): void
 
 Creates a directory. This API uses an asynchronous callback to return the result. The value **true** means to create a directory recursively.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -928,6 +976,8 @@ mkdirSync(path: string): void
 
 Synchronously creates a directory.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -953,6 +1003,8 @@ mkdirSync(path: string, recursion: boolean): void
 
 Creates a directory. This API returns the result synchronously. The value **true** means to create a directory recursively.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -977,7 +1029,9 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 open(path: string, mode?: number): Promise&lt;File&gt;
 
-Opens a file. This API uses a promise to return the result. File uniform resource identifiers (URIs) are supported. 
+Opens a file. This API uses a promise to return the result. Currently, only the application sandbox path for opening files is supported. 
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -985,7 +1039,7 @@ Opens a file. This API uses a promise to return the result. File uniform resourc
 
 | Name| Type  | Mandatory| Description                                                        |
 | ------ | ------ | ---- | ------------------------------------------------------------ |
-| path   | string | Yes  | Application sandbox path or URI of the file.                                  |
+| path   | string | Yes  | Application sandbox path.                                  |
 | mode  | number | No  | [Mode](#openmode) for opening the file. You must specify one of the following options. By default, the file is open in read-only mode.<br>- **OpenMode.READ_ONLY(0o0)**: Open the file in read-only mode.<br>- **OpenMode.WRITE_ONLY(0o1)**: Open the file in write-only mode.<br>- **OpenMode.READ_WRITE(0o2)**: Open the file in read/write mode.<br>You can also specify the following options, separated by a bitwise OR operator (&#124;). By default, no additional options are given.<br>- **OpenMode.CREATE(0o100)**: If the file does not exist, create it.<br>- **OpenMode.TRUNC(0o1000)**: If the file exists and is open in write-only or read/write mode, truncate the file length to 0.<br>- **OpenMode.APPEND(0o2000)**: Open the file in append mode. New data will be added to the end of the file.<br>- **OpenMode.NONBLOCK(0o4000)**: If **path** points to a named pipe (also known as a FIFO), block special file, or character special file, perform non-blocking operations on the open file and in subsequent I/Os.<br>- **OpenMode.DIR(0o200000)**: If **path** does not point to a directory, throw an exception.<br>- **OpenMode.NOFOLLOW(0o400000)**: If **path** points to a symbolic link, throw an exception.<br>- **OpenMode.SYNC(0o4010000)**: Open the file in synchronous I/O mode.|
 
 **Return value**
@@ -1013,7 +1067,9 @@ Opens a file. This API uses a promise to return the result. File uniform resourc
 
 open(path: string, mode?: number, callback: AsyncCallback&lt;File&gt;): void
 
-Opens a file. This API uses an asynchronous callback to return the result. File URIs are supported. 
+Opens a file. This API uses an asynchronous callback to return the result. Currently, only the application sandbox path for opening files is supported.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1021,7 +1077,7 @@ Opens a file. This API uses an asynchronous callback to return the result. File 
 
 | Name  | Type                           | Mandatory| Description                                                        |
 | -------- | ------------------------------- | ---- | ------------------------------------------------------------ |
-| path     | string                          | Yes  | Application sandbox path or URI of the file.                                  |
+| path     | string                          | Yes  | Application sandbox path.                                  |
 | mode  | number | No  | [Mode](#openmode) for opening the file. You must specify one of the following options. By default, the file is open in read-only mode.<br>- **OpenMode.READ_ONLY(0o0)**: Open the file in read-only mode.<br>- **OpenMode.WRITE_ONLY(0o1)**: Open the file in write-only mode.<br>- **OpenMode.READ_WRITE(0o2)**: Open the file in read/write mode.<br>You can also specify the following options, separated by a bitwise OR operator (&#124;). By default, no additional options are given.<br>- **OpenMode.CREATE(0o100)**: If the file does not exist, create it.<br>- **OpenMode.TRUNC(0o1000)**: If the file exists and is open in write-only or read/write mode, truncate the file length to 0.<br>- **OpenMode.APPEND(0o2000)**: Open the file in append mode. New data will be added to the end of the file.<br>- **OpenMode.NONBLOCK(0o4000)**: If **path** points to a named pipe (also known as a FIFO), block special file, or character special file, perform non-blocking operations on the open file and in subsequent I/Os.<br>- **OpenMode.DIR(0o200000)**: If **path** does not point to a directory, throw an exception.<br>- **OpenMode.NOFOLLOW(0o400000)**: If **path** points to a symbolic link, throw an exception.<br>- **OpenMode.SYNC(0o4010000)**: Open the file in synchronous I/O mode.|
 
 **Error codes**
@@ -1045,7 +1101,9 @@ Opens a file. This API uses an asynchronous callback to return the result. File 
 
 openSync(path: string, mode?: number): File
 
-Synchronously opens a file. File URIs are supported. 
+Synchronously opens a file. Currently, only the application sandbox path for opening files is supported.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1053,7 +1111,7 @@ Synchronously opens a file. File URIs are supported.
 
 | Name| Type  | Mandatory| Description                                                        |
 | ------ | ------ | ---- | ------------------------------------------------------------ |
-| path   | string | Yes  | Application sandbox path or URI of the file.                                  |
+| path   | string | Yes  | Application sandbox path.                                  |
 | mode  | number | No  | [Mode](#openmode) for opening the file. You must specify one of the following options. By default, the file is open in read-only mode.<br>- **OpenMode.READ_ONLY(0o0)**: Open the file in read-only mode.<br>- **OpenMode.WRITE_ONLY(0o1)**: Open the file in write-only mode.<br>- **OpenMode.READ_WRITE(0o2)**: Open the file in read/write mode.<br>You can also specify the following options, separated by a bitwise OR operator (&#124;). By default, no additional options are given.<br>- **OpenMode.CREATE(0o100)**: If the file does not exist, create it.<br>- **OpenMode.TRUNC(0o1000)**: If the file exists and is open in write-only or read/write mode, truncate the file length to 0.<br>- **OpenMode.APPEND(0o2000)**: Open the file in append mode. New data will be added to the end of the file.<br>- **OpenMode.NONBLOCK(0o4000)**: If **path** points to a named pipe (also known as a FIFO), block special file, or character special file, perform non-blocking operations on the open file and in subsequent I/Os.<br>- **OpenMode.DIR(0o200000)**: If **path** does not point to a directory, throw an exception.<br>- **OpenMode.NOFOLLOW(0o400000)**: If **path** points to a symbolic link, throw an exception.<br>- **OpenMode.SYNC(0o4010000)**: Open the file in synchronous I/O mode.|
 
 **Return value**
@@ -1080,6 +1138,8 @@ Synchronously opens a file. File URIs are supported.
 read(fd: number, buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
 
 Reads file data. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1126,6 +1186,8 @@ read(fd: number, buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCall
 
 Reads data from a file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1167,6 +1229,8 @@ readSync(fd: number, buffer: ArrayBuffer, options?: ReadOptions): number
 
 Reads data from a file. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1203,6 +1267,8 @@ rmdir(path: string): Promise&lt;void&gt;
 
 Deletes a directory. This API uses a promise to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1238,6 +1304,8 @@ rmdir(path: string, callback: AsyncCallback&lt;void&gt;): void
 
 Deletes a directory. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1270,6 +1338,8 @@ rmdirSync(path: string): void
 
 Synchronously deletes a directory.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1294,6 +1364,8 @@ Synchronously deletes a directory.
 unlink(path: string): Promise&lt;void&gt;
 
 Deletes a file. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1330,6 +1402,8 @@ unlink(path: string, callback: AsyncCallback&lt;void&gt;): void
 
 Deletes a file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1362,6 +1436,8 @@ unlinkSync(path: string): void
 
 Synchronously deletes a file.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1386,6 +1462,8 @@ Synchronously deletes a file.
 write(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
 
 Writes data to a file. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1429,6 +1507,8 @@ write(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions, callback
 
 Writes data to a file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1467,6 +1547,8 @@ writeSync(fd: number, buffer: ArrayBuffer | string, options?: WriteOptions): num
 
 Writes data to a file. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1503,6 +1585,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 truncate(file: string|number, len?: number): Promise&lt;void&gt;
 
 Truncates a file. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1541,6 +1625,8 @@ truncate(file: string|number, len?: number, callback: AsyncCallback&lt;void&gt;)
 
 Truncates a file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1575,6 +1661,8 @@ truncateSync(file: string|number, len?: number): void
 
 Synchronously truncates a file.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1601,6 +1689,8 @@ Synchronously truncates a file.
 readLines(filePath: string, options?: Options): Promise&lt;ReaderIterator&gt;
 
 Reads the text content of a file line by line. This API uses a promise to return the result. Only the files in UTF-8 format are supported.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1645,6 +1735,8 @@ readLines(filePath: string, options?: Options, callback: AsyncCallback&lt;Reader
 
 Reads a file text line by line. This API uses an asynchronous callback to return the result. Only the files in UTF-8 format are supported.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1685,6 +1777,8 @@ readLinesSync(filePath: string, options?: Options): ReaderIterator
 
 Reads the text content of a file line by line. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1722,11 +1816,15 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 Provides a **ReaderIterator** object. Before calling APIs of **ReaderIterator**, you need to use **readLines()** to create a **ReaderIterator** instance.
 
+**Support platform**: Android, iOS
+
 ### next<sup>20+</sup>
 
 next(): ReaderIteratorResult
 
 Obtains the **ReaderIterator** result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1766,6 +1864,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 Represents the information obtained by the **ReaderIterator** object.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 | Name       | Type      | Description               |
@@ -1778,6 +1878,8 @@ Represents the information obtained by the **ReaderIterator** object.
 readText(filePath: string, options?: ReadTextOptions): Promise&lt;string&gt;
 
 Reads the text content of a file. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1815,6 +1917,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 readText(filePath: string, options?: ReadTextOptions, callback: AsyncCallback&lt;string&gt;): void
 
 Reads the text content of a file. This API uses an asynchronous callback to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -1858,6 +1962,8 @@ readTextSync(filePath: string, options?: ReadTextOptions): string
 
 Reads the text content of a file. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1899,6 +2005,8 @@ lstat(path: string): Promise&lt;Stat&gt;
 
 Obtains information about a symbolic link. This API uses a promise to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1934,6 +2042,8 @@ lstat(path: string, callback: AsyncCallback&lt;Stat&gt;): void
 
 Obtains information about a symbolic link. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1966,6 +2076,8 @@ lstatSync(path: string): Stat
 
 Obtains information about a symbolic link synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -1996,6 +2108,8 @@ Obtains information about a symbolic link synchronously.
 rename(oldPath: string, newPath: string): Promise&lt;void&gt;
 
 Renames a file or folder. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -2034,6 +2148,8 @@ rename(oldPath: string, newPath: string, callback: AsyncCallback&lt;void&gt;): v
 
 Renames a file or folder. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2068,6 +2184,8 @@ renameSync(oldPath: string, newPath: string): void
 
 Renames a file or folder synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2094,6 +2212,8 @@ Renames a file or folder synchronously.
 fsync(fd: number): Promise&lt;void&gt;
 
 Flushes data of a file to disk. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -2131,6 +2251,8 @@ fsync(fd: number, callback: AsyncCallback&lt;void&gt;): void
 
 Flushes data of a file to disk. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2165,6 +2287,8 @@ fsyncSync(fd: number): void
 
 Flushes data of a file to disk synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2191,6 +2315,8 @@ Flushes data of a file to disk synchronously.
 fdatasync(fd: number): Promise&lt;void&gt;
 
 Flushes data of a file to disk. This API uses a promise to return the result. **fdatasync()** is similar to **fsync()**, but does not flush modified metadata unless that metadata is needed.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -2229,6 +2355,8 @@ fdatasync(fd: number, callback: AsyncCallback&lt;void&gt;): void
 
 Flushes data of a file to disk. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2263,6 +2391,8 @@ fdatasyncSync(fd: number): void
 
 Synchronizes data in a file synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2285,6 +2415,7 @@ Synchronizes data in a file synchronously.
   ```
 
 ## fs.listFile
+
 listFile(path: string, options?: {
     recursion?: boolean;
     listNum?: number;
@@ -2292,6 +2423,8 @@ listFile(path: string, options?: {
 }): Promise<string[]>
 
 Lists all files in a folder. This API uses a promise to return the result.<br>This API supports recursive listing of all files (including files in subfolders) and file filtering.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -2344,6 +2477,7 @@ Lists all files in a folder. This API uses a promise to return the result.<br>Th
   ```
 
 ## fs.listFile
+
 listFile(path: string, options?: {
     recursion?: boolean;
     listNum?: number;
@@ -2351,6 +2485,8 @@ listFile(path: string, options?: {
 }, callback: AsyncCallback<string[]>): void
 
 Lists all files in a folder. This API uses an asynchronous callback to return the result.<br>This API supports recursive listing of all files (including files in subfolders) and file filtering.
+
+**Support platform**: Android, iOS
 
 **Parameters**
 
@@ -2407,6 +2543,8 @@ listFileSync(path: string, options?: {
 
 Lists all files in a folder synchronously. This API supports recursive listing of all files (including files in subfolders) and file filtering.
 
+**Support platform**: Android, iOS
+
 **Parameters**
 
   | Name   | Type    | Mandatory  | Description                         |
@@ -2458,6 +2596,8 @@ lseek(fd: number, offset: number, whence?: WhenceType): number
 
 Adjusts the position of the file offset pointer.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2492,6 +2632,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 moveDir(src: string, dest: string, mode?: number): Promise\<void>
 
 Moves the source directory to the destination directory. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 > **NOTE**
 >
@@ -2536,6 +2678,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 moveDir(src: string, dest: string, mode: number, callback: AsyncCallback\<void, Array\<ConflictFiles>>): void
 
 Moves the source directory to the destination directory. You can set the move mode. This API uses an asynchronous callback to return the result.
+
+**Support platform**: Android, iOS
 
 > **NOTE**
 >
@@ -2585,6 +2729,8 @@ Moves the source directory to the destination directory. This API uses an asynch
 
 An exception will be thrown if a directory conflict occurs, that is, the destination directory contains a directory with the same name as the source directory.
 
+**Support platform**: Android, iOS
+
 > **NOTE**
 >
 > This API is not supported in a distributed directory.
@@ -2629,6 +2775,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 moveDirSync(src: string, dest: string, mode?: number): void
 
 Moves the source directory to the destination directory. This API returns the result synchronously.
+
+**Support platform**: Android, iOS
 
 > **NOTE**
 >
@@ -2677,6 +2825,8 @@ moveFile(src: string, dest: string, mode?: number): Promise\<void>
 
 Moves a file. This API uses a promise to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2715,6 +2865,8 @@ moveFile(src: string, dest: string, mode?: number, callback: AsyncCallback\<void
 
 Moves a file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2750,6 +2902,8 @@ moveFile(src: string, dest: string, mode?: number): void
 
 Moves a file synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2778,6 +2932,8 @@ Moves a file synchronously.
 mkdtemp(prefix: string): Promise&lt;string&gt;
 
 Creates a temporary directory. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -2813,6 +2969,8 @@ mkdtemp(prefix: string, callback: AsyncCallback&lt;string&gt;): void
 
 Creates a temporary directory. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2844,6 +3002,8 @@ mkdtempSync(prefix: string): string
 
 Synchronously creates a temporary directory.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2874,6 +3034,8 @@ utimes(path: string, mtime: number): void
 
 Updates the latest access timestamp of a file.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2901,6 +3063,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 createRandomAccessFile(file: string | File, mode?: number): Promise&lt;RandomAccessFile&gt;
 
 Creates a **RandomAccessFile** instance based on the specified file path or file object. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -2942,6 +3106,8 @@ createRandomAccessFile(file: string | File, callback: AsyncCallback&lt;RandomAcc
 
 Creates a **RandomAccessFile** object in read-only mode based on a file path or file object. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -2976,6 +3142,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 createRandomAccessFile(file: string | File, mode: number, callback: AsyncCallback&lt;RandomAccessFile&gt;): void
 
 Creates a **RandomAccessFile** instance based on a file path or file object. This API uses an asynchronous callback to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3012,6 +3180,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 createRandomAccessFile(file: string | File, mode?: number, options?: RandomAccessFileOptions): Promise&lt;RandomAccessFile&gt;
 
 Creates a **RandomAccessFile** instance based on the specified file path or file object. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3052,6 +3222,8 @@ createRandomAccessFileSync(file: string | File, mode?: number): RandomAccessFile
 
 Creates a **RandomAccessFile** instance based on a file path or file object.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -3087,6 +3259,8 @@ createRandomAccessFileSync(file: string | File, mode?: number,
 
 Creates a **RandomAccessFile** instance based on a file path or file object.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -3121,6 +3295,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 createStream(path: string, mode: string): Promise&lt;Stream&gt;
 
 Creates a stream based on a file path. This API uses a promise to return the result. To close the stream, use **close()** of [Stream20](#stream).
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3160,6 +3336,8 @@ createStream(path: string, mode: string, callback: AsyncCallback&lt;Stream&gt;):
 
 Creates a stream based on a file path. This API uses an asynchronous callback to return the result. To close the stream, use **close()** of [Stream](#stream20).
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -3195,6 +3373,8 @@ createStreamSync(path: string, mode: string): Stream
 
 Creates a stream based on a file path. This API returns the result synchronously. To close the stream, use **close()** of [Stream20](#stream).
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -3228,6 +3408,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 fdopenStream(fd: number, mode: string): Promise&lt;Stream&gt;
 
 Opens a stream based on an FD. This API uses a promise to return the result. To close the stream, use **close()** of [Stream20](#stream).
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3274,6 +3456,8 @@ fdopenStream(fd: number, mode: string, callback: AsyncCallback&lt;Stream&gt;): v
 
 Opens a stream based on an FD. This API uses an asynchronous callback to return the result. To close the stream, use **close()** of [Stream](#stream20).
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -3316,6 +3500,8 @@ fdopenStreamSync(fd: number, mode: string): Stream
 
 Opens a stream based on an FD. This API returns the result synchronously. To close the stream, use **close()** of [Stream](#stream20).
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -3353,6 +3539,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 createReadStream(path: string, options?: ReadStreamOptions ): ReadStream
 
 Creates a readable stream. This API returns the result synchronously.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3396,6 +3584,8 @@ createWriteStream(path: string, options?: WriteStreamOptions): WriteStream
 
 Creates a writeable stream. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -3433,11 +3623,14 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
   ```
 
 ## AtomicFile<sup>20+</sup>
+
 AtomicFile is a class used to perform atomic read and write operations on files.
 
 A temporary file is written and renamed to the original file location, which ensures file integrity. If the write operation fails, the temporary file is deleted without modifying the original file content.
 
 You can call **finishWrite()** or **failWrite()** to write or roll back file content.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3446,6 +3639,8 @@ You can call **finishWrite()** or **failWrite()** to write or roll back file con
 constructor(path: string)
 
 Creates an **AtomicFile** class for a file in a specified path.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3462,6 +3657,8 @@ getBaseFile(): File
 Obtains the file object through the **AtomicFile** object.
 
 The FD needs to be closed by calling **close()**.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3505,6 +3702,8 @@ try {
 openRead(): ReadStream
 
 Creates a **ReadStream** instance.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3559,6 +3758,8 @@ readFully(): ArrayBuffer
 
 Reads all content of a file.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Return value**
@@ -3612,6 +3813,8 @@ If the file does not exist, create a file.
 
 Call **finishWrite()** if the write operation is successful; call **failWrite()** if the write operation fails.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Return value**
@@ -3654,6 +3857,8 @@ finishWrite(): void
 
 Finishes writing file data when the write operation is complete.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Error codes**
@@ -3688,6 +3893,8 @@ try {
 failWrite(): void
 
 Rolls back the file after the file fails to be written.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3726,6 +3933,8 @@ try {
 delete(): void
 
 Deletes the **AtomicFile** class, including the original files and temporary files.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3769,6 +3978,8 @@ try {
 createWatcher(path: string, events: number, listener: WatchEventListener): Watcher
 
 Creates a **Watcher** object to listen for file or directory changes.
+
+**Support platform**: Android
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3821,6 +4032,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 Provides APIs for observing events.
 
+**Support platform**: Android
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -3832,6 +4045,8 @@ Provides APIs for observing events.
 ## WatchEvent<sup>20+</sup>
 
 Defines the event to observe.
+
+**Support platform**: Android
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3846,6 +4061,8 @@ Defines the event to observe.
 ## Stat
 
 Represents detailed file information. Before calling any API of the **Stat()** class, use [stat()](#fsstat) to create a **Stat** instance synchronously or asynchronously.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3867,6 +4084,8 @@ Represents detailed file information. Before calling any API of the **Stat()** c
 isBlockDevice(): boolean
 
 Checks whether this file is a block special file. A block special file supports access by block only, and it is cached when accessed.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3893,6 +4112,8 @@ isCharacterDevice(): boolean
 
 Checks whether this file is a character special file. A character special file supports random access, and it is not cached when accessed.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Return value**
@@ -3917,6 +4138,8 @@ Checks whether this file is a character special file. A character special file s
 isDirectory(): boolean
 
 Checks whether this file is a directory.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3943,6 +4166,8 @@ isFIFO(): boolean
 
 Checks whether this file is a named pipe (or FIFO). Named pipes are used for inter-process communication.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Return value**
@@ -3967,6 +4192,8 @@ Checks whether this file is a named pipe (or FIFO). Named pipes are used for int
 isFile(): boolean
 
 Checks whether this file is a regular file.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -3993,6 +4220,8 @@ isSocket(): boolean
 
 Checks whether this file is a socket.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Return value**
@@ -4018,6 +4247,8 @@ isSymbolicLink(): boolean
 
 Checks whether this file is a symbolic link.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Return value**
@@ -4041,11 +4272,15 @@ Checks whether this file is a symbolic link.
 
 Provides API for stream operations. Before calling any API of **Stream**, you need to create a **Stream** instance by using [fs.createStream](#fscreatestream20) or [fs.fdopenStream](#fsfdopenstream20).
 
+**Support platform**: Android, iOS
+
 ### close
 
 close(): Promise&lt;void&gt;
 
 Closes the file stream. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4077,6 +4312,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 close(callback: AsyncCallback&lt;void&gt;): void
 
 Closes the file stream. This API uses an asynchronous callback to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4111,6 +4348,8 @@ closeSync(): void
 
 Closes the file stream. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Error codes**
@@ -4130,6 +4369,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 flush(): Promise&lt;void&gt;
 
 Flushes the file stream. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4162,6 +4403,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 flush(callback: AsyncCallback&lt;void&gt;): void
 
 Flushes the file stream. This API uses an asynchronous callback to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4197,6 +4440,8 @@ flushSync(): void
 
 Flushes the file stream. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Error codes**
@@ -4217,6 +4462,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 write(buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
 
 Writes data to a stream file. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4263,6 +4510,8 @@ write(buffer: ArrayBuffer | string, options?: WriteOptions, callback: AsyncCallb
 
 Writes data to a stream file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -4307,6 +4556,8 @@ writeSync(buffer: ArrayBuffer | string, options?: WriteOptions): number
 
 Writes data to a stream file. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -4346,6 +4597,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 read(buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
 
 Reads data from a stream file. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4395,6 +4648,8 @@ read(buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCallback&lt;numb
 
 Reads data from a stream file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -4440,6 +4695,8 @@ readSync(buffer: ArrayBuffer, options?: ReadOptions): number
 
 Reads data from a stream file. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -4478,6 +4735,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 Represents a **File** object opened by **open()**.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 ### Attributes
@@ -4491,6 +4750,8 @@ Represents a **File** object opened by **open()**.
 getParent(): string
 
 Obtains the parent directory of this file object.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4518,6 +4779,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 Provides APIs for randomly reading and writing a stream. Before invoking any API of **RandomAccessFile**, you need to use **createRandomAccessFile()** to create a **RandomAccessFile** instance synchronously or asynchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 ### Properties
@@ -4532,6 +4795,8 @@ Provides APIs for randomly reading and writing a stream. Before invoking any API
 setFilePointer(filePointer:number): void
 
 Sets the file offset pointer.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4560,6 +4825,8 @@ close(): void
 
 Closes the **RandomAccessFile** instance. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Error codes**
@@ -4579,6 +4846,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 write(buffer: ArrayBuffer | string, options?: WriteOptions): Promise&lt;number&gt;
 
 Writes data into a file. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4631,6 +4900,8 @@ write(buffer: ArrayBuffer | string, options?: WriteOptions, callback: AsyncCallb
 
 Writes data to a file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -4679,6 +4950,8 @@ writeSync(buffer: ArrayBuffer | string, options?: WriteOptions): number
 
 Writes data to a file. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -4718,6 +4991,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 read(buffer: ArrayBuffer, options?: ReadOptions): Promise&lt;number&gt;
 
 Reads data from a file. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4768,6 +5043,8 @@ read(buffer: ArrayBuffer, options?: ReadOptions, callback: AsyncCallback&lt;numb
 
 Reads data from a file. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -4815,6 +5092,8 @@ readSync(buffer: ArrayBuffer, options?: ReadOptions): number
 
 Reads data from a file. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -4851,11 +5130,15 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 Provides APIs for observing the changes of files or directories. Before using the APIs of **Watcher**, call **createWatcher()** to create a **Watcher** object.
 
+**Support platform**: Android
+
 ### start<sup>20+</sup>
 
 start(): void
 
 Starts listening.
+
+**Support platform**: Android
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4878,6 +5161,8 @@ stop(): void
 
 Stops listening and removes the **Watcher** object.
 
+**Support platform**: Android
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Error codes**
@@ -4897,6 +5182,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 Defines the constants of the **mode** parameter used in **open()**. It specifies the mode for opening a file.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 | Name  | Type  | Value | Description     |
@@ -4913,6 +5200,8 @@ Defines the constants of the **mode** parameter used in **open()**. It specifies
 | SYNC | number | 0o4010000    | Open the file in synchronous I/O mode.|
 
 ## Filter
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4931,6 +5220,8 @@ Defines the file filtering configuration, which can be used by **listFile()**.
 
 Defines conflicting file information used in **copyDir()** or **moveDir()**.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 | Name       | Type      | Description               |
@@ -4942,6 +5233,8 @@ Defines conflicting file information used in **copyDir()** or **moveDir()**.
 
 Defines the options used in **readLines()**.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 | Name       | Type      | Description               |
@@ -4951,6 +5244,8 @@ Defines the options used in **readLines()**.
 ## WhenceType<sup>20+</sup>
 
 Enumerates the types of the relative offset position used in **lseek()**.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4963,6 +5258,8 @@ Enumerates the types of the relative offset position used in **lseek()**.
 ## AccessModeType<sup>20+</sup>
 
 Enumerates the access modes to verify. If this parameter is left blank, the system checks whether the file exists.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4977,6 +5274,8 @@ Enumerates the access modes to verify. If this parameter is left blank, the syst
 
 Defines the options used in **read()**.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 | Name       | Type      | Mandatory      | Description               |
@@ -4987,6 +5286,8 @@ Defines the options used in **read()**.
 ## ReadTextOptions<sup>20+</sup>
 
 Defines the options used in **readText()**. It inherits from [ReadOptions](#readoptions20).
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -4999,6 +5300,8 @@ Defines the options used in **readText()**. It inherits from [ReadOptions](#read
 ## WriteOptions<sup>20+</sup>
 
 Defines the options used in **write()**. It inherits from [Options](#options20).
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -5014,6 +5317,8 @@ Defines a readable stream. You need to use [fs.createReadStream](#fscreatereadst
 
 The data obtained by **ReadStream** is a decoded string. Currently, only the UTF-8 format is supported.
 
+**Support platform**: Android, iOS
+
 ### Properties
 
 | Name    | Type  | Read-Only  | Optional  | Description                                      |
@@ -5025,8 +5330,9 @@ The data obtained by **ReadStream** is a decoded string. Currently, only the UTF
 
 seek(offset: number, whence?: WhenceType): number
 
-
 Adjusts the position of the readable stream offset pointer.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -5063,6 +5369,8 @@ close(): void
 
 Closes this readable stream.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Error codes**
@@ -5081,6 +5389,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 Defines a writeable stream. You need to use [fs.createWriteStream](#fscreatewritestream20) to create a **WriteStream** instance, which is inherited from the [stream base class](../apis-arkts/js-apis-stream.md#writable).
 
+**Support platform**: Android, iOS
+
 ### Properties
 
 | Name    | Type  | Read-Only  | Optional  | Description                                      |
@@ -5093,6 +5403,8 @@ Defines a writeable stream. You need to use [fs.createWriteStream](#fscreatewrit
 seek(offset: number, whence?: WhenceType): number;
 
 Adjusts the position of the writeable stream offset pointer.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -5129,6 +5441,8 @@ close(): void
 
 Closes this writeable stream.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Error codes**
@@ -5147,6 +5461,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 
 Defines the options used in **createRandomAccessFile()**.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 | Name       | Type      | Mandatory      |  Description               |
@@ -5158,6 +5474,8 @@ Defines the options used in **createRandomAccessFile()**.
 
 Defines the options used in **createReadStream()**.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 | Name       | Type      | Mandatory      |  Description               |
@@ -5168,6 +5486,8 @@ Defines the options used in **createReadStream()**.
 ## WriteStreamOptions<sup>20+</sup>
 
 Defines the options used in **createWriteStream()**.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 

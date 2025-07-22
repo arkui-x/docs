@@ -34,6 +34,8 @@ hash(path: string, algorithm: string): Promise&lt;string&gt;
 
 计算文件的哈希值，使用Promise异步回调。
 
+**支持平台**：Android、iOS
+
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
 **参数：**
@@ -76,6 +78,7 @@ hash(path: string, algorithm: string, callback: AsyncCallback&lt;string&gt;): vo
 
 计算文件的哈希值，使用callback异步回调。
 
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -114,6 +117,8 @@ hash(path: string, algorithm: string, callback: AsyncCallback&lt;string&gt;): vo
 createHash(algorithm: string): HashStream;
 
 创建并返回 HashStream 对象，该对象可用于使用给定的 algorithm 生成哈希摘要。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -161,11 +166,15 @@ createHash(algorithm: string): HashStream;
 
 HashStream 类是用于创建数据的哈希摘要的实用工具。由 [createHash](#hash.createHash) 接口获得。
 
+**支持平台**：Android、iOS
+
 ### update
 
 update(data: ArrayBuffer): void
 
 使用给定的 data 更新哈希内容，可多次调用。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 
@@ -190,6 +199,8 @@ update(data: ArrayBuffer): void
 digest(): string
 
 计算传给被哈希的所有数据的摘要。
+
+**支持平台**：Android、iOS
 
 **系统能力**：SystemCapability.FileManagement.File.FileIO
 

@@ -18,6 +18,8 @@ getFreeSize(path:string):Promise&lt;number&gt;
 
 Obtains the free size of the specified file system in bytes. This API uses a promise to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -57,6 +59,8 @@ getFreeSize(path:string, callback:AsyncCallback&lt;number&gt;): void
 
 Obtains the free size of the specified file system in bytes. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -93,6 +97,8 @@ getFreeSizeSync(path:string): number
 
 Obtains the free size of the specified file system in bytes. This API returns the result synchronously.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -127,6 +133,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 getTotalSize(path: string): Promise&lt;number&gt;
 
 Obtains the total size of the specified file system in bytes. This API uses a promise to return the result.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
@@ -167,6 +175,8 @@ getTotalSize(path: string, callback: AsyncCallback&lt;number&gt;): void
 
 Obtains the total size of the specified file system in bytes. This API uses an asynchronous callback to return the result.
 
+**Support platform**: Android, iOS
+
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
 **Parameters**
@@ -202,6 +212,8 @@ For details about the error codes, see [Basic File IO Error Codes](../errorcodes
 getTotalSizeSync(path: string): number
 
 Obtains the total size of the specified file system in bytes. This API returns the result synchronously.
+
+**Support platform**: Android, iOS
 
 **System capability**: SystemCapability.FileManagement.File.FileIO
 
