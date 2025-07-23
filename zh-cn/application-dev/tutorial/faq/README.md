@@ -19,6 +19,7 @@
 
 - [DevEco Studio环境搭建常见问题](Pre-research-Stage/Pre-faq-6.md)
 - [Ace Tools环境搭建常见问题](Pre-research-Stage/Pre-faq-7.md)
+- [Xcode升级到16以上版本](Development-Stag/Dev-faq-16.md)
 
 ### 跨平台改造
 
