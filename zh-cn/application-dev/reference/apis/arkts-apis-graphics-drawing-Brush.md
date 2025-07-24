@@ -164,6 +164,32 @@ const brush = new drawing.Brush();
 brush.setColor(0xffff0000);
 ```
 
+### setColor4f<sup>20+</sup>
+
+setColor4f(color4f: common2D.Color4f, colorSpace: colorSpaceManager.ColorSpaceManager | null): void
+
+设置画刷的颜色以及标准色域，与[setColor](#setcolor)区别在于可以单独设置色域，适用于需要单独设置色域的场景。
+
+**系统能力：** SystemCapability.Graphics.Drawing
+
+**参数：**
+
+| 参数名 | 类型                                                 | 必填 | 说明             |
+| ------ | ---------------------------------------------------- | ---- | ---------------- |
+| color4f  | [common2D.Color4f](js-apis-graphics-common2D.md#color4f20) | 是   | ARGB格式的颜色，每个颜色通道的值是0.0-1.0之间的浮点数，大于1.0时，取1.0，小于0.0时，取0.0。|
+| colorSpace  | [colorSpaceManager.ColorSpaceManager](js-apis-colorSpaceManager.md#colorspacemanager) \| null | 是   | 标准色域对象，null表示使用SRGB色域。|
+
+**示例：**
+
+```ts
+import { common2D, drawing, colorSpaceManager } from "@kit.ArkGraphics2D";
+
+const brush = new drawing.Brush();
+let colorSpace = colorSpaceManager.create(colorSpaceManager.ColorSpace.BT2020_HLG);
+let color4f:common2D.Color4f = {alpha:1, red:0.5, green:0.4, blue:0.7};
+brush.setColor4f(color4f, colorSpace);
+```
+
 ### getColor<sup>20+</sup>
 
 getColor(): common2D.Color
@@ -209,9 +235,10 @@ getColor4f(): common2D.Color4f
 import { common2D, drawing, colorSpaceManager } from "@kit.ArkGraphics2D";
 
 const brush = new drawing.Brush();
-const color: common2D.Color = { alpha: 255, red: 255, green: 0, blue: 0 };
-brush.setColor(color);
-let color4f = brush.getColor4f();
+let colorSpace = colorSpaceManager.create(colorSpaceManager.ColorSpace.BT2020_HLG);
+let color4f:common2D.Color4f = {alpha:1, red:0.5, green:0.4, blue:0.7};
+brush.setColor4f(color4f, colorSpace);
+let color = brush.getColor4f();
 ```
 
 ### getHexColor<sup>20+</sup>
