@@ -36,7 +36,7 @@
 
 ### 功能开发
 
-- [ArkUI-X for Android如何设置沉浸式效果](Development-Stage/Dev-faq-6.md)
+- [ArkUI-X如何设置沉浸式效果](Development-Stage/Dev-faq-6.md)
 - [ArkTS通过UIContext获取组件能力，运行态功能不可用](Development-Stage/Dev-faq-7.md)
 - [ArkUI-X和原生侧如何实现相互传参和取参](Development-Stage/Dev-faq-8.md)
 - [如何实现平台差异化(编译态、运行态)](Development-Stage/Dev-faq-9.md)
