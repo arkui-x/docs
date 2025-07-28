@@ -2,7 +2,7 @@
 
 1、DevEco Studio为ArkUI-X应用构建提供了简单的集成开发环境，建议版本：V5.0.0 Release及以上。请从[官网](https://developer.huawei.com/consumer/cn/download/)进行DevEco Studio的下载和安装：
 
-<img src="../figures/Pre-faq-5.png" width="600">
+<img src="../figures/pre-faq-5.png" width="600">
 
 2、使用DevEco Studio开发ArkUI-X依赖其他的开发工具和SDK，根据开发的系统，MacOS上开发依赖以下四项，Windows上开发依赖除Xcode以外的另外三项。
 
