@@ -46,7 +46,7 @@
 - [ArkUI-X 使用PlatformView报"Only UI component syntax can be written here"错误](Development-Stage/Dev-faq-14.md)
 - [ArkUI-X Android界面在输入法展开收起时出现界面闪烁](Development-Stage/Dev-faq-15.md)
 - [http请求配置CA证书提示本地SSL证书错误](Development-Stage/Dev-faq-16.md)
-
+- [ArkUI-X 解决平台视图从ArkTS侧向原生侧传值](Development-Stage/Dev-faq-18.md)
 ### 问题自排查
 
 - [稳定性问题自排查](Development-Stage/Dev-faq-11.md)
