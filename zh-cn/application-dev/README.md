@@ -59,6 +59,7 @@
 - [ArkUI-X框架LogInterface使用指南](./tutorial/how-to-use-arkui-x-loginterface-on-ios.md)
 - [预加载应用特性abc开发指南](./tutorial/how-to-use-preloadEtsModule-on-ios.md)
 - [平台视图开发指南](./tutorial/how-to-use-platformview-on-ios.md)
+- [IOS跨平台页面实现左滑返回指南](./quick-start/ios-slip-left-back.md)
 
 ### 应用改造
 
