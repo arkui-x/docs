@@ -1,12 +1,12 @@
-# IOS跨平台页面实现侧滑返回指南
+# IOS跨平台页面实现手势返回指南
 
 ## 简介
 
-本文介绍将介绍如何实现跨平台页面层级之间的侧滑返回，以及当跨平台页面已经是根页面时如何侧滑返回上级原生页面。
+本文介绍将介绍如何实现跨平台页面层级之间的侧滑手势返回，以及当跨平台页面已经是根页面时如何侧滑返回上级原生页面。
 
-## iOS原生页面之间实现侧滑返回
+## iOS原生页面之间实现侧滑手势返回
 
-### UINavigationController实现侧滑返回
+### UINavigationController实现侧滑手势返回
 
 界面UI结构如果是包裹在UINavigationController中，则可以直接使用UINavigationController的侧滑返回实现
 
@@ -68,7 +68,7 @@ ArkUI-X跨平台开发中，框架通过StageViewController提供了一个可以
 ![stage_iOS](figures/pan-gesture-math.png)
 
 
-## 调用processBackPress方法实现跨平台页面的侧滑返回
+## 调用processBackPress方法实现跨平台页面的侧滑手势返回
 
 如果容器类StageViewController在iOS原生中是包含在UINavigationController中，则在StageViewController中增加UINavigationController的侧滑返回实现，并在手势的响应方法中调用processBackPress方法。
 
