@@ -19,6 +19,7 @@
 
 - [DevEco Studio环境搭建常见问题](Pre-research-Stage/Pre-faq-6.md)
 - [Ace Tools环境搭建常见问题](Pre-research-Stage/Pre-faq-7.md)
+- [Xcode升级到16以上版本](Development-Stag/Dev-faq-16.md)
 
 ### 跨平台改造
 
@@ -45,6 +46,10 @@
 - [ArkUI-X 如何实现结束输入会话的能力](Development-Stage/Dev-faq-13.md)
 - [ArkUI-X 使用PlatformView报"Only UI component syntax can be written here"错误](Development-Stage/Dev-faq-14.md)
 - [ArkUI-X Android界面在输入法展开收起时出现界面闪烁](Development-Stage/Dev-faq-15.md)
+- [http请求配置CA证书提示本地SSL证书错误](Development-Stage/Dev-faq-16.md)
+- [ArkUI-X 解决平台视图从ArkTS侧向原生侧传值](Development-Stage/Dev-faq-18.md)
+- [ArkUI-X 如何使用非原生系统字体](Development-Stage/Dev-faq-19.md)
+
 - [关于 registerJavaScriptProxy使用说明](Development-Stage/Dev-faq-21.md)
 
 ### 问题自排查

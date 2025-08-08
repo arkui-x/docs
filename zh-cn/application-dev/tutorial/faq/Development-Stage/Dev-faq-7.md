@@ -60,4 +60,55 @@ try to load abc file from /private/var/containers/Bundle/Application/98628FE0-A1
 
 **解决办法**
 
-当前由开发者手动将"libpromptaction.so、librouter.so、libfont.so"拷贝到".arkui-x\android\app\libs\arm64-v8a"文件夹下。
+***Android平台：***
+
+请手动从对应API的ArkUI-X SDK路径下，将"libpromptaction.so、librouter.so、libfont.so"拷贝到工程目录".arkui-x\android\app\libs\arm64-v8a"文件夹下。
+
+*so具体位置*
+
+以"libpromptaction.so"举例说明：
+
+相对路径：arkui-x\plugins\api\lib\promptaction
+
+![image](../figures/dev-faq-7-1.png)
+
+三个文件夹分别对应三种设备架构，获取设备架构方式如下：
+
+1、连接测试设备
+
+2、打开命令行输入“adb shell getprop ro.product.cpu.abi”
+
+3、根据返回结果，进入对应文件夹（如 arm64-v8a）。
+
+| 设备架构    | 对应文件夹            |
+| ----------- | --------------------- |
+| arm64-v8a   | android-arm64-release |
+| armeabi-v7a | android-arm-release   |
+| x86_64      | android-x86_64        |
+
+4、从目标文件夹中复制“libpromptaction.so”到所需位置即可。
+
+***iOS平台：***
+
+请手动从对应API的ArkUI-X SDK路径下，将"libpromptaction.xcframework、librouter.xcframework、libfont.xcframework"拷贝到工程目录".arkui-x/ios/frameworks"文件夹下。
+
+*xcframework具体位置*
+
+以"libpromptaction.xcframework"举例说明：
+
+相对路径：arkui-x/plugins/api/xcframework/ios-release/libpromptaction.xcframework
+
+以"libpromptaction.xcframework"举例说明：
+
+![image](../figures/dev-faq-7-2.png)
+
+***API、ArkUI-X SDK路径***
+
+> API版本位置如图所示：
+
+![image](../figures/dev-faq-7-3.png)
+
+
+> ArkUI-X SDK位置如图所示：
+
+![image](../figures/dev-faq-7-4.png)

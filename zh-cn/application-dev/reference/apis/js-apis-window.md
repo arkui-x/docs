@@ -2031,7 +2031,7 @@ try {
 setWindowPrivacyMode(isPrivacyMode: boolean, callback: AsyncCallback&lt;void&gt;): void
 
 设置窗口是否为隐私模式，使用callback异步回调。设置为隐私模式的窗口，窗口内容将无法被截屏或录屏。此接口可用于禁止截屏/录屏的场景。
-子窗口暂不支持单独设置隐私模式，子窗口设置无效果。
+子窗口暂不支持单独设置隐私模式，子窗口设置无效果。在iOS中需要在先重写[supportWindowPrivacyMode](../arkui-for-ios/StageViewController.md)，并将返回值改为true。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
@@ -2081,7 +2081,7 @@ try {
 setWindowPrivacyMode(isPrivacyMode: boolean): Promise&lt;void&gt;
 
 设置窗口是否为隐私模式，使用Promise异步回调。设置为隐私模式的窗口，窗口内容将无法被截屏或录屏。此接口可用于禁止截屏/录屏的场景。
-子窗口暂不支持单独设置隐私模式，子窗口设置无效果。
+子窗口暂不支持单独设置隐私模式，子窗口设置无效果。在iOS中需要在先重写[supportWindowPrivacyMode](../arkui-for-ios/StageViewController.md)，并将返回值改为true。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
