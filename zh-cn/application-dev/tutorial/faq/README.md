@@ -45,6 +45,7 @@
 - [ArkUI-X 如何实现结束输入会话的能力](Development-Stage/Dev-faq-13.md)
 - [ArkUI-X 使用PlatformView报"Only UI component syntax can be written here"错误](Development-Stage/Dev-faq-14.md)
 - [ArkUI-X Android界面在输入法展开收起时出现界面闪烁](Development-Stage/Dev-faq-15.md)
+- [关于 registerJavaScriptProxy使用说明](Development-Stage/Dev-faq-21.md)
 
 ### 问题自排查
 
