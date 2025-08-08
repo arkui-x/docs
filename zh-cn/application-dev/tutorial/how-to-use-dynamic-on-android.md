@@ -18,14 +18,15 @@
 动态加载时要求应用沙箱内目录架构如下所示：
 
 ```
-/data/data/应用/files/arkui-x    
+/data/data/应用/files/arkui-x
+├── arkui-x.json                # so库所关联的版本号
 ├── feature1                    # 跨平台特性1
 │   ├── ets                     # ets目录
 │   │   ├──sourceMaps.map
 │   │   └──modules.abc
 │   ├── resources.index         
 │   ├── resources              
-│   ├── module.json
+│   ├── module.json             # modules.abc以及resource相关版本号
 │   └── libs                    # 特性bundle带的so库
 │       ├── arm64-v8a
 │       ├── armeabi-v7a
@@ -46,15 +47,15 @@
 
    ### 加载优先级
 
-+ 引擎so库：优先加载应用lib目录下，如果未找到则去应用沙箱根目录加载；
++ 引擎so库：存在arkui-x.json时，根据其中的version字段选择优先加载的路径，不存在时，优先加载应用lib目录，如果未找到则去应用沙箱目录加载；
 
-+ 插件so库：优先加载应用lib目录下，如果未找到则去应用沙箱根目录尝试加载，最后去插件自身的libs目录加载；
++ 插件so库：存在arkui-x.json时，根据其中的version字段选择优先加载的路径，不存在时，优先加载应用lib目录，如果未找到则去应用沙箱目录加载；
 
-+ module加载：优先从应用assets目录下寻找，如果找不到则去沙箱内尝试加载；
++ module加载：根据module.json中的versionCode字段判断加载的路径；
 
-+ systemres加载：同上，优先加载应用assets目录，找不到则去沙箱内加载；
++ systemres加载：加载沙箱路径；
 
-  **注意**：不建议应用同一个module，即预制到应用assets内又在沙箱同时部署。
+  **注意**：.so以及hsp类型的module只支持冷启动，不支持热重载，module支持冷启动以及热重载。
 
   ### 框架初始化
 
@@ -68,6 +69,15 @@
 appDelegate = new StageApplicationDelegate();
 appDelegate.initApplication(this)
 ```
+
+### 加载流程
+主库与插件库加载流程:
+
+<img src=".\figures\how-to-use-dynamic-on-android_001.png" />
+
+modules.abc以及resource相关
+
+<img src=".\figures\how-to-use-dynamic-on-android_002.png" />
 
 后续再打开应用，建议按照正常流程在Application里初始化框架，提前完全引擎库加载，提高跨平台模块加载速度；
 
