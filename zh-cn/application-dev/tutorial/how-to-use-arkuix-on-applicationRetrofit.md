@@ -796,14 +796,14 @@ export class DisplaySyncArkUIX implements DisplaySyncInterface {
 
 ​		1、找到 IDE 里配套 OH-SDK；如果是HarmonyOS Next开发，则是HarmonyOS 里带的oh-sdk。
 
-&emsp;&emsp;简便方法：前提需保证工程使用SDK为正确的。使用DevEco Studio打卡任一工程，在工程中打开并查看任一d.ts文件，于文件名右键点击-->选择 打开范围-->选择 Explorer 点击，打开的文件窗口即为当前工程所使用的SDK路径，于文件窗口回到SDK根目录执行第2步。
+&emsp;&emsp;简便方法：前提需保证工程使用SDK为正确的。使用DevEco Studio打开任一工程，在工程中打开并查看任一d.ts文件，于文件名右键点击-->选择 打开范围-->选择 Explorer 点击，打开的文件窗口即为当前工程所使用的SDK路径，于文件窗口回到SDK根目录执行第2步。
 
 <img src=".\figures\ApplicationRetrofit_image_009.png" />
 
 ​		2、找到文件：" api_check_util.js "。文件在SDK中的相对路径为：
 
 ```
-sdk\HarmonyOS-NEXT-DB1\openharmony\ets\build-tools\ets-loader\lib\fast_build\system_api\api_check_utils.js
+sdk\default\openharmony\ets\build-tools\ets-loader\lib\fast_build\system_api\api_check_utils.js
 ```
 
 ​		3、在文件" api_check_util.js "中搜索关键字：**CROSSPLATFORM_TAG_CHECK_ERROER**，将其后边的 **DiagnosticCategory.Error** 修改为 **DiagnosticCategory.Warning**。
