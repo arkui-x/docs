@@ -1,0 +1,13 @@
+name: "咨询"
+description: "提出一个您对我们的问题"
+title: "[咨询][应用名称]"
+labels: ["question"]
+
+body:
+  - type: textarea
+    id: consult_question
+    attributes:
+      label: "咨询问题"
+      placeholder: "请在这里描述您对我们的疑问"
+    validations:
+      required: true

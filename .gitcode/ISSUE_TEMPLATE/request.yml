@@ -1,0 +1,19 @@
+name: "需求"
+description: "提出一个您对我们的需求"
+title: "[需求][应用名称]"
+labels: ["request"]
+
+body:
+  - type: textarea
+    id: feature_description
+    attributes:
+      label: "需求描述"
+      placeholder: "请在这里描述您对我们的需求"
+    validations:
+      required: true  
+
+  - type: textarea
+    id: feature_value
+    attributes:
+      label: "需求价值"
+      placeholder: "请在这里描述您的需求的价值和具体的使用场景，例如对您当前应用跨端的帮助或作用"
