@@ -26,7 +26,7 @@ useNormalizedOHMUrl设置为true时，开发者构建app，并在Android和iOS�
 
 DevEco Studio 5.1.1 已默认集成 hvigor-ohos-arkui-x-plugin 4.19.5，其最低兼容版本为 4.19.2。
 
-如果您正在打开或维护旧工程，请先升级至 4.19.2 及以上版本，以确保确保该问题解决。
+如果您正在打开或维护旧工程，请先升级至 4.19.2 及以上版本(4.20.2 为特殊版本未适配该功能)，以确保确保该问题解决。
 
 hvigor-arkui-x-plugin 版本号查看位置如下图所示：
 
