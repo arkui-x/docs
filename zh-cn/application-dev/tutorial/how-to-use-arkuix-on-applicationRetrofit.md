@@ -802,11 +802,9 @@ export class DisplaySyncArkUIX implements DisplaySyncInterface {
 
 ​		2、找到文件：" api_check_util.js "。文件在SDK中的相对路径为：
 
-```
-sdk\default\openharmony\ets\build-tools\ets-loader\lib\fast_build\system_api\api_check_utils.js
-```
+<span style="color: red;">sdk\default\openharmony\ets\build-tools\ets-loader\lib\fast_build\system_api\api_check_utils.js</span>
 
-​		3、在文件" api_check_util.js "中搜索关键字：**CROSSPLATFORM_TAG_CHECK_ERROER**，将其后边的 **DiagnosticCategory.Error** 修改为 **DiagnosticCategory.Warning**。
+​		3、在文件" api_check_util.js "中搜索关键字：**CROSSPLATFORM_TAG_CHECK_ERROER**，将其前一个的 **DiagnosticCategory.Error** 修改为 **DiagnosticCategory.Warning**。
 
 ​		4、回到DevEco Studio 如果当前工程已编译过，先执行clean操作；之后执行操作： 点击文件-->选择 清理缓存 点击--> 勾选选项 -->  点击清除并重新启动。
 
