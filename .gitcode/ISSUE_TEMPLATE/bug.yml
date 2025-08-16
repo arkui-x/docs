@@ -1,0 +1,55 @@
+name: "缺陷"
+description: "报告一个问题帮助我们改进"
+title: "[缺陷][应用名称]"
+labels: ["bug"]
+
+body:
+  - type: input
+    id: version
+    attributes:
+      label: "ArkUI-X SDK版本"
+      placeholder: "例如，5.1.0.100"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: system
+    attributes:
+      label: "问题系统"
+      multiple: false
+      options:
+        - Android
+        - iOS
+        - Android+iOS
+    validations:
+      required: true
+
+  - type: dropdown
+    id: source
+    attributes:
+      label: "问题概率"
+      multiple:  false
+      options:
+        - 必现
+        - 高概率
+        - 低概率
+    validations:
+      required: true
+
+  - type: textarea
+    id: error_description
+    attributes:
+      label: "问题描述"
+      placeholder: "1、请描述您遇到的问题\n2、请提供您遇到的问题现象截图或录屏\n3、请描述您认为无误的效果。"
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: "应用前置分析/排查结论"
+      placeholder: "描述您认为是 SDK 问题的原因，或者描述您前期为了修复该问题做过的尝试"
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "问题复现的代码示例"
+      placeholder: "请在这里输入可复现该问题的代码，或贴上可复现该问题的项目链接，或在附件上传可复现该问题的项目"
