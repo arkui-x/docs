@@ -33,6 +33,14 @@ iOS平台
 import common from '@ohos.app.ability.common';
 ```
 
+## **属性**
+
+**系统能力：** SystemCapability.Ability.AbilityRuntime.Core
+
+| 名称      | 类型                                                                                                                                                                                                | 可读 | 可写 | 说明                                         | Android平台 | IOS平台 |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ---- | -------------------------------------------- | ---- | ---- |
+| windowStage<sup>21+</sup>     | window.WindowStage         | 是   | 否   | 当前WindowStage对象。仅支持在主线程调用。| 支持   | 支持   |
+
 ## **UIAbilityContext.startAbility**
 
 startAbility(want: Want, callback: AsyncCallback&lt;void&gt;): void;
