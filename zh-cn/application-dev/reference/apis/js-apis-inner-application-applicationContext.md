@@ -352,3 +352,152 @@ export default class MyAbility extends UIAbility {
   }
 }
 ```
+
+## ApplicationContext.setFont<sup>21+</sup>
+
+setFont(font: string): void
+
+设置应用的字体类型。仅支持主线程调用。
+
+> **说明：**
+>
+> 调用该接口前，需要确保窗口已完成创建、且UIAbility对应的页面已完成加载，即在[onWindowStageCreate()](js-apis-app-ability-uiAbility.md#onwindowstagecreate)生命周期中通过[loadContent](js-apis-window.md#loadcontent9)方法加载页面之后调用。
+
+**系统能力**：SystemCapability.Ability.AbilityRuntime.Core
+
+**支持平台**：Android、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| font   | string | 是   | 设置字体类型，字体可以通过[UIContext.registerFont](js-apis-font.md#registerfont)方法进行注册使用。 |
+
+**错误码**：
+
+以下错误码详细介绍请参考[通用错误码](../errorcodes/errorcode-universal.md)和[元能力子系统错误码](../errorcodes/errorcode-ability.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 16000011 | The context does not exist.                                  |
+| 16000050 | Internal error.                                              |
+
+**示例：**
+
+```ts
+import { font } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
+
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+  context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+
+  aboutToAppear() {
+    this.getUIContext().getFont().registerFont({
+      familyName: 'fontName',
+      familySrc: $rawfile('font/medium.ttf')
+    })
+
+    this.context.getApplicationContext().setFont("fontName");
+  }
+
+  build() {
+    Row() {
+      Column() {
+        Text(this.message)
+          .fontSize(50)
+          .fontWeight(50)
+      }
+      .width('100%')
+    }
+    .height('100%')
+  }
+}
+```
+
+## ApplicationContext.setFontSizeScale<sup>21+</sup>
+
+setFontSizeScale(fontSizeScale: number): void
+
+设置应用字体大小缩放比例。仅支持主线程调用。
+
+**系统能力**：SystemCapability.Ability.AbilityRuntime.Core
+
+**支持平台**：Android、iOS
+
+**参数：**
+
+| 参数名        | 类型   | 必填 | 说明                                                         |
+| ------------- | ------ | ---- | ------------------------------------------------------------ |
+| fontSizeScale | number | 是   | 表示字体缩放比例，取值为非负数。当应用字体[跟随系统](https://docs.openharmony.cn/pages/v5.0/zh-cn/application-dev/quick-start/app-configuration-file.md#configuration标签)且该字段取值超过[fontSizeMaxScale](https://docs.openharmony.cn/pages/v5.0/zh-cn/application-dev/quick-start/app-configuration-file.md#configuration标签)取值时，实际生效值为[fontSizeMaxScale](https://docs.openharmony.cn/pages/v5.0/zh-cn/application-dev/quick-start/app-configuration-file.md#configuration标签)取值。 |
+
+**示例：**
+
+```ts
+import { UIAbility } from '@kit.AbilityKit';
+import { window } from '@kit.ArkUI';
+
+export default class MyAbility extends UIAbility {
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    windowStage.loadContent('pages/Index', (err, data) => {
+      if (err.code) {
+        return;
+      }
+      let applicationContext = this.context.getApplicationContext();
+      applicationContext.setFontSizeScale(2);
+    });
+  }
+}
+```
+
+## ApplicationContext.setLanguage<sup>21+</sup>
+
+setLanguage(language: string): void
+
+设置应用的语言。仅支持主线程调用。
+
+> **说明：**
+>
+> 调用该接口前，需要确保窗口已完成创建、且UIAbility对应的页面已完成加载，即在[onWindowStageCreate()](js-apis-app-ability-uiAbility.md#onwindowstagecreate)生命周期中通过[loadContent](js-apis-window.md#loadcontent9)方法加载页面之后调用。
+
+**系统能力**：SystemCapability.Ability.AbilityRuntime.Core
+
+**支持平台**：Android、iOS
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                                                         |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| language | string | 是   | 设置语言，当前支持的语言列表可以通过[getSystemLanguages()](js-apis-i18n.md#getsystemlanguages9)获取。 |
+
+**错误码**：
+
+以下错误码详细介绍请参考[通用错误码](../errorcodes/errorcode-universal.md)和[元能力子系统错误码](../errorcodes/errorcode-ability.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 16000011 | The context does not exist.                                  |
+
+**示例：**
+
+```ts
+import { UIAbility } from '@kit.AbilityKit';
+import { window } from '@kit.ArkUI';
+
+export default class MyAbility extends UIAbility {
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.info("Ability onWindowStageCreate");
+    windowStage.loadContent('pages/Index', (err, data) => {
+      if (err.code) {
+        console.error(`Failed to load the content. Code: ${err.code}, message: ${err.message}`);
+        return;
+      }
+      console.info(`Succeeded in loading the content. Data: ${JSON.stringify(data)}`);
+    });
+    let applicationContext = this.context.getApplicationContext();
+    applicationContext.setLanguage('zh-cn');
+  }
+}
+```
