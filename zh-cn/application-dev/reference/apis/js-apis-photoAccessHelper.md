@@ -171,6 +171,167 @@ async function example() {
   }
 }
 ```
+### createAsset<sup>22+</sup>
+
+createAsset(photoType: PhotoType, extension: string, options: CreateOptions, callback: AsyncCallback<string>): void
+
+指定文件类型、后缀和创建选项，创建图片或视频资源。使用callback方式返回结果。
+
+**支持平台**：Android
+
+**系统能力**：SystemCapability.FileManagement.PhotoAccessHelper.Core
+
+**需要权限**：ohos.permission.WRITE_IMAGEVIDEO
+
+**参数：**
+
+| 参数名    | 类型                                                        | 必填 | 说明                                                         | Android平台 | iOS平台 |
+| :-------- | :---------------------------------------------------------- | :--- | :----------------------------------------------------------- | ----------- | ------- |
+| photoType | [PhotoType](#phototype)                                     | 是   | 创建的文件类型，IMAGE或者VIDEO类型。                         | 支持        | 不支持  |
+| extension | string                                                      | 是   | 文件名后缀参数，例如：'jpg'。**注意：**需传入目标操作系统（Android）所支持和识别的标准文件扩展名,若传入"."则只会解析最后一个"."之后的字符，如传入".jpg"则最终会解析为jpg | 支持        | 不支持  |
+| options   | [CreateOptions<sup>22+</sup>](#CreateOptions22+) | 是   | 创建选项，当前仅支持'title'，例如{title: 'testPhoto'}。**注意：**传入'title'之外的选项，配置不生效。文件名中不允许出现非法英文字符，包括： . .. \ / : * ? " ' ` < > \| { } [ ] | 支持        | 不支持  |
+| callback  | AsyncCallback<string>                                       | 是   | callback返回创建的图片和视频的uri。                          | 支持        | 不支持  |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[文件管理错误码](../errorcodes/errorcode-filemanagement.md)。
+
+| 错误码ID | 错误信息                                                     |
+| :------- | :----------------------------------------------------------- |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+| 201      | Permission denied.                                           |
+| 13900020 | Invalid argument.                                            |
+| 14000011 | System inner fail.                                           |
+
+**示例：**
+
+phAccessHelper的创建请参考[photoAccessHelper.getPhotoAccessHelper](#photoaccesshelpergetphotoaccesshelper)的示例使用。
+```ts
+async function example(phAccessHelper: photoAccessHelper.PhotoAccessHelper) {
+    console.info('createAssetDemo');
+    let photoType: photoAccessHelper.PhotoType = photoAccessHelper.PhotoType.IMAGE;
+    let extension:string = 'jpg';
+    let options: photoAccessHelper.CreateOptions = {
+        title: 'testPhoto'
+    }
+    phAccessHelper.createAsset(photoType, extension, options, (err, uri) => {
+        if (uri !== undefined) {
+            console.info('createAsset uri' + uri);
+            console.info('createAsset successfully');
+        } else {
+            console.error(`createAsset failed, error: ${err.code}, ${err.message}`);
+        }
+    });
+}
+```
+
+### createAsset<sup>22+</sup>
+
+createAsset(photoType: PhotoType, extension: string, callback: AsyncCallback<string>): void
+
+指定文件类型和后缀，创建图片或视频资源，使用callback方式返回结果。
+
+**支持平台**：Android
+
+**系统能力**：SystemCapability.FileManagement.PhotoAccessHelper.Core
+
+**需要权限**：ohos.permission.WRITE_IMAGEVIDEO
+
+**参数：**
+
+| 参数名    | 类型                    | 必填 | 说明                                                         | Android平台 | iOS平台 |
+| :-------- | :---------------------- | :--- | :----------------------------------------------------------- | ----------- | ------- |
+| photoType | [PhotoType](#phototype) | 是   | 创建的文件类型，IMAGE或者VIDEO类型。                         | 支持        | 不支持  |
+| extension | string                  | 是   | 文件名后缀参数，例如：'jpg'。**注意：**需传入目标操作系统（Android）所支持和识别的标准文件扩展名,若传入"."则只会解析最后一个"."之后的字符，如传入".jpg"则最终会解析为jpg | 支持        | 不支持  |
+| callback  | AsyncCallback<string>   | 是   | callback返回创建的图片和视频的uri。                          | 支持        | 不支持  |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[文件管理错误码](../errorcodes/errorcode-filemanagement.md)。
+
+| 错误码ID | 错误信息                                                     |
+| :------- | :----------------------------------------------------------- |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+| 201      | Permission denied.                                           |
+| 13900020 | Invalid argument.                                            |
+| 14000011 | System inner fail.                                           |
+
+**示例：**
+
+phAccessHelper的创建请参考[photoAccessHelper.getPhotoAccessHelper](#photoaccesshelpergetphotoaccesshelper)的示例使用。
+```ts
+async function example(phAccessHelper: photoAccessHelper.PhotoAccessHelper) {  
+    console.info('createAssetDemo');
+    let photoType: photoAccessHelper.PhotoType = photoAccessHelper.PhotoType.IMAGE;
+    let extension: string = 'jpg';
+    phAccessHelper.createAsset(photoType, extension, (err, uri) => {
+        if (uri !== undefined) {
+            console.info('createAsset uri' + uri);
+            console.info('createAsset successfully');
+        } else {
+            console.error(`createAsset failed, error: ${err.code}, ${err.message}`);
+        }
+    });
+}
+```
+
+### createAsset<sup>22+</sup>
+
+createAsset(photoType: PhotoType, extension: string, options?: CreateOptions): Promise<string>
+
+指定文件类型、后缀和创建选项，创建图片或视频资源，以Promise方式返回结果。
+
+**支持平台**：Android
+
+**系统能力**：SystemCapability.FileManagement.PhotoAccessHelper.Core
+
+**需要权限**：ohos.permission.WRITE_IMAGEVIDEO
+
+**参数：**
+
+| 参数名    | 类型                                                        | 必填 | 说明                                                         | Android平台 | iOS平台 |
+| :-------- | :---------------------------------------------------------- | :--- | :----------------------------------------------------------- | ----------- | ------- |
+| photoType | [PhotoType](#phototype)                                     | 是   | 创建的文件类型，IMAGE或者VIDEO类型。                         | 支持        | 不支持  |
+| extension | string                                                      | 是   | 文件名后缀参数，例如：'jpg'。**注意：**需传入目标操作系统（Android）所支持和识别的标准文件扩展名,若传入"."则只会解析最后一个"."之后的字符，如传入".jpg"则最终会解析为jpg | 支持        | 不支持  |
+| options   | [CreateOptions<sup>22+</sup>](#CreateOptions22+) | 否   | 创建选项，当前仅支持'title'，例如{title: 'testPhoto'}。**注意：**传入'title'之外的选项，配置不生效。文件名中不允许出现非法英文字符，包括： . .. \ / : * ? " ' ` < > \| { } [ ] | 支持        | 不支持  |
+
+**返回值：**s
+
+| 类型            | 说明                                     |
+| :-------------- | :--------------------------------------- |
+| Promise<string> | Promise对象，返回创建的图片和视频的uri。 |
+
+**错误码：**
+
+接口抛出错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[文件管理错误码](../errorcodes/errorcode-filemanagement.md)。
+
+| 错误码ID | 错误信息                                                     |
+| :------- | :----------------------------------------------------------- |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+| 201      | Permission denied.                                           |
+| 13900020 | Invalid argument.                                            |
+| 14000011 | System inner fail.                                           |
+
+**示例：**
+
+phAccessHelper的创建请参考[photoAccessHelper.getPhotoAccessHelper](#photoaccesshelpergetphotoaccesshelper)的示例使用。
+```ts
+async function example(phAccessHelper: photoAccessHelper.PhotoAccessHelper) {
+    console.info('createAssetDemo');
+    try {
+        let photoType: photoAccessHelper.PhotoType = photoAccessHelper.PhotoType.IMAGE;
+        let extension: string = 'jpg';
+        let options: photoAccessHelper.CreateOptions = {
+            title: 'testPhoto'
+        }
+        let uri: string = await phAccessHelper.createAsset(photoType, extension, options);
+        console.info('createAsset uri' + uri);
+        console.info('createAsset successfully');
+    } catch (err) {
+        console.error(`createAsset failed, error: ${err.code}, ${err.message}`);
+    }
+}
+```
 
 ### getAlbums
 
@@ -1384,6 +1545,23 @@ PhotoAsset的成员类型。
 | ------------- | ------------------- | ---------------------------------------------------------- |
 | URI           | 'uri'                 | 相册uri。                                                   |
 | ALBUM_NAME    | 'album_name'          | 相册名字。                                                   |
+
+## CreateOptions<sup>22+</sup>
+
+图片或视频的创建选项。
+
+title参数的规格如下：
+
+- 不应包含扩展名。
+- 文件名字符串长度为1~255。
+
+**支持平台**：Android
+
+**系统能力**：SystemCapability.FileManagement.PhotoAccessHelper.Core
+
+| 名称  | 类型   | 必填 | 说明                 | Android平台 | iOS平台 |
+| :---- | :----- | :--- | :------------------- | ----------- | ------- |
+| title | string | 否   | 图片或者视频的标题。 | 支持        | 不支持  |
 
 ## FetchOptions
 
