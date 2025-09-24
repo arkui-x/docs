@@ -38,9 +38,8 @@ PlatformViewFactory接口:
 
 | 函数名称           | 类型     | 描述                                   |
 | ------------------ | -------- | -------------------------------------- |
-| getPlatformView(String) | IPlatformView | 获得IPlatformView接口           |
-
-
+| getPlatformView(String id) | IPlatformView | 获得IPlatformView接口           |
+| getPlatformView(String id, String data)<sup>22+</sup> | IPlatformView | 获得IPlatformView及其数据接口           |
 
 > **说明**
 > 
