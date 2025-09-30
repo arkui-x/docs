@@ -74,6 +74,9 @@ bridgeImpl.sendMessage('text').then((res)=>{
 
 bridgeImpl.setMessageListener((message) => {
     console.log('receive message: ' + message);
+
+    // 收到消息后，向iOS侧发送回执
+    return "ArkUI receive message success";
 });
 ```
 
