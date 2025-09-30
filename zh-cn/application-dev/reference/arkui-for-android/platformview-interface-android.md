@@ -14,7 +14,7 @@
 
 获得原生组件View。
 
-View getView();
+View getView()
 
 **参数：** 
 
@@ -31,7 +31,7 @@ View getView();
 
 资源销毁的处置。
 
-void onDispose();
+void onDispose()
 
 **参数：** 
 
@@ -45,7 +45,7 @@ void onDispose();
 
 返回原生组件的ID。
 
-String getPlatformViewID();
+String getPlatformViewID()
 
 **参数：** 
 
@@ -61,27 +61,34 @@ String getPlatformViewID();
 **示例：**
 
 ```java
-//实现 IPlatformView 接口，重写 getView 方法返回 mapView 对象。
+//实现 IPlatformView 接口，重写 getView 方法返回 webView 对象。
 
-class SampleMapView implements IPlatformView {
-    // 原生组件view
-    private MapView mapView;
-    
-    public SampleMapView( int viewid, string viewtag ) {
-        //...
+public class MyWebView implements IPlatformView {
+    private String id = "WebView";
+    private WebView mWebView;
+
+    MyWebView(Context context) {
+        this(context, "https://gitcode.com/arkui-x");
     }
-    //...
-    
-   @Override
+
+    MyWebView(Context context, String url) {
+        mWebView = new WebView(context);
+        ```````
+    }
+
+    @Override
     public View getView() {
-        return mapView;
+        return mWebView;
     }
-   @Override
-    public void onDispose() {}
 
-   @Override
-    public String getPlatformViewID(){
-      return viewtag;
+    @Override
+    public void onDispose() {
+        mWebView.destroy();
+    }
+
+    @Override
+    public String getPlatformViewID() {
+        return id;
     }
 }
 ```
@@ -94,7 +101,7 @@ class SampleMapView implements IPlatformView {
 
 获得IPlatformView接口。
 
-IPlatformView getPlatformView(String platformViewId);
+IPlatformView getPlatformView(String platformViewId)
 
 
 **参数：** 
@@ -109,25 +116,51 @@ IPlatformView getPlatformView(String platformViewId);
 | --------------------------------- | -------------- |
 | IPlatformView | IPlatformView接口。 |
 
+IPlatformView getPlatformView(String platformViewId, String data)<sup>22+</sup>
+> **说明：**
+>
+> 可选重载，用于需要从ArkTs侧传递数据到原生侧的场景。
+
+**参数：** 
+
+| 参数名          | 类型             | 必填 | 说明           |
+| --------------- | ---------------- | ---- | -------------- |
+| platformViewId | String | 是   | 原生组件的ID。 |
+| data | String | 是   | ArkTs侧传递的数据。 |
+
+**返回值：** 
+
+| 类型                              | 说明           |
+| --------------------------------- | -------------- |
+| IPlatformView | IPlatformView接口。 |
+
 **示例：**
 
 ```java
 //实现 PlatformViewFactory 接口，重写 getPlatformView 方法返回 mapView 对象。
 
-class SampleMapFactory implements PlatformViewFactory {
-    
-    String NATIVE_VIEW_TAG_ID = "oh.plugin.view.mapview";
+public class MyPlatformViewFactory extends PlatformViewFactory {
+    private Context context;
 
-   @Override
-    public IPlatformView getPlatformView(String platformViewId) {
-        // create MapView
-        IPlatformView view = null;
-        if(platformViewId == this.viewtag){
-          view = new OH_MapView(vieweid, NATIVE_VIEW_TAG_ID);
+    @Override
+    public IPlatformView getPlatformView(String Id) {
+        if ("WebView".equals(Id)) {
+            return new MyWebView(context);
         }
-        return view;
+        return null;
     }
 
+    @Override
+    public IPlatformView getPlatformView(String Id, String data) {
+         if ("WebView".equals(Id)) {
+            return new MyWebView(context, data);
+        }
+        return null;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 }
 
 ```

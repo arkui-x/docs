@@ -70,6 +70,9 @@ bridgeImpl.sendMessage('text').then((res)=>{
 
 bridgeImpl.setMessageListener((message) => {
     console.log('receive message: ' + message);
+
+    // Send a response to iOS.
+    return "ArkUI receive message success";
 });
 ```
 

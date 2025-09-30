@@ -26,7 +26,7 @@
 
 1、自定义IPlatformView接口的实现类。
 
-```java
+```Objective-C
 // MyPlatformView.h
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_END
 
 ```
 
-```java
+```Objective-C
 // MyPlatformView.m
 @implementation MyPlatformView {
     MKMapView *mapView;
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_END
 
 2、自定义PlatformViewFactory接口的实现类。
 
-```java
+```Objective-C
 // MyPlatformViewFactory.h
 #import <libarkui_ios/PlatformViewFactory.h>
 #import <libarkui_ios/IPlatformView.h>
@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_END
 
 ```
 
-```java
+```Objective-C
 // MyPlatformViewFactory.mm
 #import "MyPlatformViewFactory.h"
 #import "MyPlatformView.h"
@@ -126,7 +126,7 @@ NS_ASSUME_NONNULL_END
 
 3、自定义ViewController，把PlatformViewFactory实现类注册到ViewController中。
 
-```java
+```Objective-C
 // EntryEntryAbilityViewController.h
 #import <UIKit/UIKit.h>
 #import <libarkui_ios/StageViewController.h>
@@ -161,7 +161,7 @@ NS_ASSUME_NONNULL_END
 @end
 ```
 
-```java
+```Objective-C
 // AppDelegate.h
 #import <UIKit/UIKit.h>
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -198,7 +198,7 @@ NS_ASSUME_NONNULL_END
 4、在ArkTS中，使用PlatformView。
    编写ArkUI页面platformview.ets。
 
-```java
+```js
 // platformview.ets
 import PlatformView, { PlatformViewAttribute } from '@arkui-x.platformview';
 @Entry
@@ -233,5 +233,46 @@ struct PlatformViewSample {
     }.height('100%')
   }
 }
+
+```
+
+5、通过平台视图构造参数传递数据（可选）
+构造时传递数据
+```js
+build() {
+    Column() {
+      PlatformView('PlatformViewTest1', 'this is data')
+        .width('100%')
+        .height('80%')
+        .backgroundColor(Color.Gray)
+
+      ...
+
+    }.height('100%')
+}
+```
+重写 getPlatformView:(NSString*) platformViewId data:data
+
+获取传递的数据
+```Objective-C
+// MyPlatformViewFactory.mm
+#import "MyPlatformViewFactory.h"
+#import "MyPlatformView.h"
+
+@implementation MyPlatformViewFactory {
+
+}
+
+...
+
+- (NSObject<IPlatformView>*) getPlatformView:(NSString*) platformViewId data:data {
+    //use data do something
+    if ([platformViewId isEqualToString:@"PlatformViewTest1"]) {
+        NSObject<IPlatformView> * view = [[MyPlatformView alloc] initWithFrame];
+        return view;
+    }
+    return  nil;
+}
+@end
 
 ```
