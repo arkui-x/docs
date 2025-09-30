@@ -229,6 +229,9 @@ const bridgeObj = bridge.createBridge('Bridge');
 
 bridgeObj.setMessageListener((data) => {
     console.log('receive data =' + data);
+
+    // 收到消息后，向原生侧发送回执
+    return "ArkUI receive message success";
 });
 ```
 
