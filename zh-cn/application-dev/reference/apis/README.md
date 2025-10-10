@@ -184,7 +184,12 @@
   - [@ohos.hilog (HiLog日志打印)](js-apis-hilog.md)
   - [@ohos.hiTraceMeter (性能打点)](js-apis-hitracemeter.md)
   - [@ohos.web.webview(Webview)](js-apis-webview.md)
-
+  - [Class (WebResourceHandler)](arkts-apis-webview-WebResourceHandler.md)
+    - [Class (WebSchemeHandler)](arkts-apis-webview-WebSchemeHandler.md)
+    - [Class (WebSchemeHandlerRequest)](arkts-apis-webview-WebSchemeHandlerRequest.md)
+    - [Class (WebSchemeHandlerResponse)](arkts-apis-webview-WebSchemeHandlerResponse.md)
+    - [@ohos.web.netErrorList](arkts-apis-netErrorList.md)
+  
 - 公共事件与通知
   - [系统公共事件定义](commonEventManager-definitions.md)
   - [@ohos.commonEventManager (公共事件模块)](js-apis-commonEventManager.md)

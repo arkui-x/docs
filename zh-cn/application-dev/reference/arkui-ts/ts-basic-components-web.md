@@ -1851,6 +1851,187 @@ struct WebComponent {
 }
 ```
 
+### fileAccess<sup>22+</sup>
+
+fileAccess(fileAccess: boolean)
+
+设置是否开启应用中文件系统的访问。[$rawfile(filepath/filename)](../../quick-start/resource-categories-and-access.md)中的文件不受该属性影响而被限制访问。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
+
+**参数：**
+
+| 参数名     | 类型    | 必填 | 说明                                                         |
+| ---------- | ------- | ---- | ------------------------------------------------------------ |
+| fileAccess | boolean | 是   | 设置是否开启应用中文件系统的访问。<br>true表示开启应用中文件系统的访问。false表示不开启应用中文件系统的访问。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .fileAccess(true)
+      }
+    }
+  }
+  ```
+
+### textZoomRatio<sup>22+</sup>
+
+textZoomRatio(textZoomRatio: number)
+
+设置页面的文本缩放百分比。当属性没有显式调用时，默认缩放百分比为100%。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名        | 类型   | 必填 | 说明                                                         |
+| ------------- | ------ | ---- | ------------------------------------------------------------ |
+| textZoomRatio | number | 是   | 要设置的页面的文本缩放百分比。<br>取值为整数，范围为(0, 2147483647]。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+    @State ratio: number = 150;
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .textZoomRatio(this.ratio)
+      }
+    }
+  }
+  ```
+
+### nestedScroll<sup>22+</sup>
+
+nestedScroll(value: NestedScrollOptions | NestedScrollOptionsExt)
+
+调用以设置嵌套滚动选项。
+
+> **说明：**
+>
+> - 可以设置上下左右四个方向，或者设置向前、向后两个方向的嵌套滚动模式，实现与父组件的滚动联动。
+> - 支持嵌套滚动的容器：Grid、List、Scroll、Swiper、Tabs、WaterFlow、Refresh、bindSheet。
+> - 支持嵌套滚动的输入事件：使用手势。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型                                          | 必填 | 说明                                                         |
+| ------ | --------------------------------------------- | ---- | ------------------------------------------------------------ |
+| value  | NestedScrollOptions \| NestedScrollOptionsExt | 是   | 可滚动组件滚动时的嵌套滚动选项。<br> value为NestedScrollOptions（向前、向后两个方向）类型时，scrollForward、scrollBackward默认滚动选项为NestedScrollMode.SELF_FIRST。 <br> value为NestedScrollOptionsExt（上下左右四个方向）类型时，scrollUp、scrollDown、scrollLeft、scrollRight默认滚动选项为NestedScrollMode.SELF_FIRST。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .nestedScroll({
+            scrollForward: NestedScrollMode.SELF_FIRST,
+            scrollBackward: NestedScrollMode.SELF_FIRST,
+          })
+      }
+    }
+  }
+  ```
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController()
+    build() {
+      Scroll(){
+        Column() {
+          Text("嵌套Web")
+            .height("25%")
+            .width("100%")
+            .fontSize(30)
+            .backgroundColor(Color.Yellow)
+          Web({ src: $rawfile('index.html'),
+                controller: this.controller })
+            .nestedScroll({
+              scrollUp: NestedScrollMode.SELF_FIRST,
+              scrollDown: NestedScrollMode.PARENT_FIRST,
+              scrollLeft: NestedScrollMode.SELF_FIRST,
+              scrollRight: NestedScrollMode.SELF_FIRST,
+            })
+        }
+      }
+    }
+  }
+  ```
+
+  加载的html文件。
+
+  ```html
+  <!-- index.html -->
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+          .blue {
+            background-color: lightblue;
+          }
+          .green {
+            background-color: lightgreen;
+          }
+          .blue, .green {
+          font-size:16px;
+          height:200px;
+          text-align: center;       /* 水平居中 */
+          line-height: 200px;       /* 垂直居中（值等于容器高度） */
+          }
+      </style>
+  </head>
+  <body>
+  <div class="blue" >webArea</div>
+  <div class="green">webArea</div>
+  <div class="blue">webArea</div>
+  <div class="green">webArea</div>
+  <div class="blue">webArea</div>
+  <div class="green">webArea</div>
+  <div class="blue">webArea</div>
+  </body>
+  </html>
+  ```
+
 ## JavaScriptProxy<sup>20+</sup>
 
 定义要注入的JavaScript对象。
@@ -2178,6 +2359,118 @@ getResponseIsReady(): boolean
 |类型|说明|
 |---|---|
 |boolean|`true`表示响应数据已准备好，`false`表示未准备好。|
+
+### setResponseData<sup>22+</sup>
+
+setResponseData(data: string \| number \| Resource \| ArrayBuffer): void
+
+设置资源响应数据。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型                                       | 必填 | 说明                                                         |
+| ------ | ------------------------------------------ | ---- | ------------------------------------------------------------ |
+| data   | string \| number \|Resource \| ArrayBuffer | 是   | 要设置的资源响应数据。string表示HTML格式的字符串。number表示文件句柄，此句柄由系统的Web组件负责关闭。Resource表示应用rawfile目录下文件资源。ArrayBuffer表示资源的原始二进制数据。 |
+
+### setResponseEncoding<sup>22+</sup>
+
+setResponseEncoding(encoding: string): void
+
+设置资源响应的编码。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                     |
+| -------- | ------ | ---- | ------------------------ |
+| encoding | string | 是   | 要设置的资源响应的编码。 |
+
+### setResponseMimeType<sup>22+</sup>
+
+setResponseMimeType(mimeType: string): void
+
+设置资源响应的媒体（MIME）类型。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                                 |
+| -------- | ------ | ---- | ------------------------------------ |
+| mimeType | string | 是   | 要设置的资源响应的媒体（MIME）类型。 |
+
+### setReasonMessage<sup>22+</sup>
+
+setReasonMessage(reason: string): void
+
+设置资源响应的状态码描述。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                           |
+| ------ | ------ | ---- | ------------------------------ |
+| reason | string | 是   | 要设置的资源响应的状态码描述。 |
+
+### setResponseHeader<sup>22+</sup>
+
+setResponseHeader(header: Array\<Header\>): void
+
+设置资源响应头。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型                       | 必填 | 说明                 |
+| ------ | -------------------------- | ---- | -------------------- |
+| header | Array\<[Header](#header)\> | 是   | 要设置的资源响应头。 |
+
+### setResponseCode<sup>22+</sup>
+
+setResponseCode(code: number): void
+
+设置资源响应的状态码。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| code   | number | 是   | 要设置的资源响应的状态码。如果该资源以错误结束，请参考[@ohos.web.netErrorList](../apis/arkts-apis-netErrorList.md)设置相应错误码，避免设置错误码为 ERR_IO_PENDING，设置为该错误码可能会导致XMLHttpRequest同步请求阻塞。 |
+
+### setResponseIsReady<sup>22+</sup>
+
+setResponseIsReady(IsReady: boolean): void
+
+设置资源响应数据是否已经就绪。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名  | 类型    | 必填 | 说明                                                         |
+| ------- | ------- | ---- | ------------------------------------------------------------ |
+| IsReady | boolean | 是   | 资源响应数据是否已经就绪。<br>true表示资源响应数据已经就绪，false表示资源响应数据未就绪。<br>如果数据是异步提供，需要显式设置为false。设置为非法值如null，undefined或者不设置都会被认为数据已经准备好。 |
 
 ## ConsoleMessage
 
@@ -2583,6 +2876,68 @@ isCapture(): boolean
 | 类型      | 说明           |
 | ------- | ------------ |
 | boolean | 返回是否调用多媒体能力。 |
+
+## SslErrorHandler<sup>22+</sup>
+
+Web组件返回的SSL错误通知事件用户处理功能对象。
+
+### constructor<sup>22+</sup>
+
+constructor()
+
+SslErrorHandler的构造函数。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+### handleCancel<sup>22+</sup>
+
+handleCancel(): void
+
+通知Web组件取消此请求。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+### handleConfirm<sup>22+</sup>
+
+handleConfirm(): void
+
+通知Web组件继续使用SSL证书。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+## SslError<sup>22+</sup>
+
+onSslErrorEventReceive接口返回的SSL错误的具体原因。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称         | 值   | 说明                   | Android平台 | iOS平台 |
+| ------------ | ---- | ---------------------- | ----------- | ------- |
+| HostMismatch | 1    | 主机名不匹配。         | 支持        | 支持    |
+| DateInvalid  | 2    | 证书日期无效。         | 支持        | 支持    |
+| Untrusted    | 3    | 证书颁发机构不受信任。 | 支持        | 支持    |
+
+## SslErrorEvent<sup>22+</sup>
+
+用户加载资源时发生SSL错误时触发的回调详情。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称          | 类型                                  | 只读 | 可选 | 说明                                                  | Android平台 | iOS平台 |
+| ------------- | ------------------------------------- | ---- | ---- | ----------------------------------------------------- | ----------- | ------- |
+| handler       | [SslErrorHandler](#sslerrorhandler22) | 否   | 否   | 通知Web组件用户操作行为。                             | 支持        | 支持    |
+| error         | [SslError](#sslerror22)               | 否   | 否   | 错误码。                                              | 支持        | 支持    |
+| url           | string                                | 否   | 否   | url地址。                                             | 支持        | 支持    |
+| originalUrl   | string                                | 否   | 否   | 请求的原始url地址。                                   | 支持        | 支持    |
+| referrer      | string                                | 否   | 否   | referrer url地址。                                    | 支持        | 支持    |
+| isMainFrame   | boolean                               | 否   | 否   | 是否是主资源。<br>true表示主资源，false表示非主资源。 | 支持        | 支持    |
+| certChainData | Array<Uint8Array\>                    | 否   | 是   | 证书链数据。                                          | 支持        | 支持    |
 
 ## FileSelectorMode枚举说明
 
@@ -3115,3 +3470,360 @@ exitFullScreen(): void
 | 名称 | 类型                                      | 必填 | 说明                | Android平台 | iOS平台 |
 | ---- | ----------------------------------------- | ---- | ------------------- | ----------- | ------- |
 | data | [WebResourceRequest](#webresourcerequest) | 是   | url请求的相关信息。 | 支持        | 支持    |
+
+## OnInterceptRequest<sup>22+</sup>
+
+onInterceptRequest(callback: Callback<OnInterceptRequestEvent, WebResourceResponse>)
+
+当Web组件加载URL之前触发该回调，用于拦截URL并返回响应数据。`onInterceptRequest`可拦截所有跳转请求并返回响应数据，但无法访问POST请求体（Body）内容，且不支持分片缓冲（buffer）类型数据获取。此类场景需改用[WebSchemeHandler](../apis/arkts-apis-webview-WebSchemeHandler.md)实现，依据具体业务需求进行判断。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名   | 类型                                                         | 必填 | 说明                                                         |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| callback | Callback\<[OnInterceptRequestEvent](#oninterceptrequestevent22), [WebResourceResponse](#webresourceresponse)\> | 是   | 当Web组件加载url之前触发。<br>返回值[WebResourceResponse](#webresourceresponse)。返回响应数据则按照响应数据加载，无响应数据则返回null表示按照原来的方式加载。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+    responseWeb: WebResourceResponse = new WebResourceResponse();
+    heads: Header[] = new Array();
+    webData: string = "<!DOCTYPE html>\n" +
+      "<html>\n" +
+      "<head>\n" +
+      "<title>intercept test</title>\n" +
+      "</head>\n" +
+      "<body>\n" +
+      "<h1>intercept test</h1>\n" +
+      "</body>\n" +
+      "</html>";
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .onInterceptRequest((event) => {
+            if (event) {
+              console.info('url:' + event.request.getRequestUrl());
+            }
+            let head1: Header = {
+              headerKey: "Connection",
+              headerValue: "keep-alive"
+            }
+            let head2: Header = {
+              headerKey: "Cache-Control",
+              headerValue: "no-cache"
+            }
+            // 将新元素追加到数组的末尾，并返回数组的新长度。
+            let length = this.heads.push(head1);
+            length = this.heads.push(head2);
+            console.info('The response header result length is :' + length);
+            const promise: Promise<String> = new Promise((resolve: Function, reject: Function) => {
+              this.responseWeb.setResponseHeader(this.heads);
+              this.responseWeb.setResponseData(this.webData);
+              this.responseWeb.setResponseEncoding('utf-8');
+              this.responseWeb.setResponseMimeType('text/html');
+              this.responseWeb.setResponseCode(200);
+              this.responseWeb.setReasonMessage('OK');
+              resolve("success");
+            })
+            promise.then(() => {
+              console.info("prepare response ready");
+              this.responseWeb.setResponseIsReady(true);
+            })
+            this.responseWeb.setResponseIsReady(false);
+            return this.responseWeb;
+          })
+      }
+    }
+  }
+  ```
+
+## OnInterceptRequestEvent<sup>22+</sup>
+
+定义当Web组件加载url之前触发。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+| 名称    | 类型                                      | 只读 | 可选 | 说明                |
+| ------- | ----------------------------------------- | ---- | ---- | ------------------- |
+| request | [WebResourceRequest](#WebResourceRequest) | 否   | 否   | url请求的相关信息。 |
+
+## OnSslErrorEventReceiveEvent<sup>22+</sup>
+
+定义网页收到SSL错误时触发。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+| 名称          | 类型                                  | 只读 | 可选 | 说明                      |
+| ------------- | ------------------------------------- | ---- | ---- | ------------------------- |
+| handler       | [SslErrorHandler](#SslErrorHandler22) | 否   | 否   | 通知Web组件用户操作行为。 |
+| error         | [SslError](#sslerror22)               | 否   | 否   | 错误码。                  |
+| certChainData | Array<Uint8Array\>                    | 否   | 是   | 证书链数据。              |
+
+## onSslErrorEventReceive<sup>22+</sup>
+
+onSslErrorEventReceive(callback: Callback\<OnSslErrorEventReceiveEvent\>)
+
+通知用户加载资源时发生SSL错误，只支持主资源。
+如果需要支持子资源，请使用[OnSslErrorEvent](#onsslerrorevent22)接口。
+
+> **说明：**
+>
+> - 主资源：浏览器加载网页的入口文件，通常是HTML文档。  
+> - 子资源：主资源中引用的依赖文件，由主资源解析过程中遇到特定标签时触发加载。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                                                         | 必填 | 说明                      |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------- |
+| callback | Callback\<[OnSslErrorEventReceiveEvent](#onsslerroreventreceiveevent22)\> | 是   | 当网页收到SSL错误时触发。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+  import { cert } from '@kit.DeviceCertificateKit';
+  
+  function LogCertInfo(certChainData : Array<Uint8Array> | undefined) {
+    if (!(certChainData instanceof Array)) {
+      console.error('failed, cert chain data type is not array');
+      return;
+    }
+
+    for (let i = 0; i < certChainData.length; i++) {
+      let encodeBlobData: cert.EncodingBlob = {
+        data: certChainData[i],
+        encodingFormat: cert.EncodingFormat.FORMAT_DER
+      }
+      cert.createX509Cert(encodeBlobData, (error, x509Cert) => {
+        if (error) {
+          console.error('Index : ' + i + ',createX509Cert failed, errCode: ' + error.code + ', errMsg: ' + error.message);
+        } else {
+          console.info('createX509Cert success');
+          console.info(ParseX509CertInfo(x509Cert));
+        }
+      });
+    }
+    return;
+  }
+  
+  function Uint8ArrayToString(dataArray: Uint8Array) {
+    let dataString = '';
+    for (let i = 0; i < dataArray.length; i++) {
+      dataString += String.fromCharCode(dataArray[i]);
+    }
+    return dataString;
+  }
+
+  function ParseX509CertInfo(x509Cert: cert.X509Cert) {
+    let res: string = 'getCertificate success, '
+      + 'issuer name = '
+      + Uint8ArrayToString(x509Cert.getIssuerName().data) + ', subject name = '
+      + Uint8ArrayToString(x509Cert.getSubjectName().data) + ', valid start = '
+      + x509Cert.getNotBeforeTime()
+      + ', valid end = ' + x509Cert.getNotAfterTime();
+    return res;
+  }
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+    uiContext: UIContext = this.getUIContext();
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .onSslErrorEventReceive((event) => {
+            LogCertInfo(event.certChainData);
+            this.uiContext.showAlertDialog({
+              title: 'onSslErrorEventReceive',
+              message: 'text',
+              primaryButton: {
+                value: 'confirm',
+                action: () => {
+                  event.handler.handleConfirm();
+                }
+              },
+              secondaryButton: {
+                value: 'cancel',
+                action: () => {
+                  event.handler.handleCancel();
+                }
+              },
+              cancel: () => {
+                event.handler.handleCancel();
+              }
+            })
+          })
+      }
+    }
+  }
+  ```
+
+## onSslErrorEvent<sup>22+</sup>
+
+onSslErrorEvent(callback: OnSslErrorEventCallback)
+
+通知用户加载资源（主资源+子资源）时发生SSL错误，如果只想处理主资源的SSL错误，请用[isMainFrame](#ismainframe)字段进行区分。
+
+> **说明：**
+>
+> - 主资源：浏览器加载网页的入口文件，通常是HTML文档。  
+> - 子资源：主资源中引用的依赖文件，由主资源解析过程中遇到特定标签时触发加载。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                                                  | 必填 | 说明                            |
+| -------- | ----------------------------------------------------- | ---- | ------------------------------- |
+| callback | [OnSslErrorEventCallback](#onsslerroreventcallback22) | 是   | 通知用户加载资源时发生SSL错误。 |
+
+**示例：**
+
+  ```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { cert } from '@kit.DeviceCertificateKit';
+
+function LogCertInfo(certChainData : Array<Uint8Array> | undefined) {
+  if (!(certChainData instanceof Array)) {
+    console.error('failed, cert chain data type is not array');
+    return;
+  }
+
+  for (let i = 0; i < certChainData.length; i++) {
+    let encodeBlobData: cert.EncodingBlob = {
+      data: certChainData[i],
+      encodingFormat: cert.EncodingFormat.FORMAT_DER
+    }
+    cert.createX509Cert(encodeBlobData, (error, x509Cert) => {
+      if (error) {
+        console.error('Index : ' + i + ',createX509Cert failed, errCode: ' + error.code + ', errMsg: ' + error.message);
+      } else {
+        console.info('createX509Cert success');
+        console.info(ParseX509CertInfo(x509Cert));
+      }
+    });
+  }
+  return;
+}
+
+function Uint8ArrayToString(dataArray: Uint8Array) {
+  let dataString = '';
+  for (let i = 0; i < dataArray.length; i++) {
+    dataString += String.fromCharCode(dataArray[i]);
+  }
+  return dataString;
+}
+
+function ParseX509CertInfo(x509Cert: cert.X509Cert) {
+  let res: string = 'getCertificate success, '
+    + 'issuer name = '
+    + Uint8ArrayToString(x509Cert.getIssuerName().data) + ', subject name = '
+    + Uint8ArrayToString(x509Cert.getSubjectName().data) + ', valid start = '
+    + x509Cert.getNotBeforeTime()
+    + ', valid end = ' + x509Cert.getNotAfterTime();
+  return res;
+}
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  uiContext: UIContext = this.getUIContext();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onSslErrorEvent((event: SslErrorEvent) => {
+          console.info("onSslErrorEvent url: " + event.url);
+          console.info("onSslErrorEvent error: " + event.error);
+          console.info("onSslErrorEvent originalUrl: " + event.originalUrl);
+          console.info("onSslErrorEvent referrer: " + event.referrer);
+          console.info("onSslErrorEvent isMainFrame: " + event.isMainFrame);
+          LogCertInfo(event.certChainData);
+          this.uiContext.showAlertDialog({
+            title: 'onSslErrorEvent',
+            message: 'text',
+            primaryButton: {
+              value: 'confirm',
+              action: () => {
+                event.handler.handleConfirm();
+              }
+            },
+            secondaryButton: {
+              value: 'cancel',
+              action: () => {
+                event.handler.handleCancel();
+              }
+            },
+            cancel: () => {
+              event.handler.handleCancel();
+            }
+          })
+        })
+    }
+  }
+}
+  ```
+
+## OnSslErrorEventCallback<sup>22+</sup>
+
+type OnSslErrorEventCallback = (sslErrorEvent: SslErrorEvent) => void
+
+用户加载资源时发生SSL错误时触发的回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名        | 类型                              | 必填 | 说明                                        |
+| ------------- | --------------------------------- | ---- | ------------------------------------------- |
+| sslErrorEvent | [SslErrorEvent](#sslerrorevent22) | 是   | 用户加载资源时发生SSL错误时触发的回调详情。 |
+
+## OnOverrideUrlLoadingCallback<sup>22+</sup>
+
+type OnOverrideUrlLoadingCallback = (webResourceRequest: WebResourceRequest) => boolean
+
+onOverrideUrlLoading的回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名             | 类型                                      | 必填 | 说明                |
+| ------------------ | ----------------------------------------- | ---- | ------------------- |
+| webResourceRequest | [WebResourceRequest](#WebResourceRequest) | 是   | url请求的相关信息。 |
+
+**返回值：**
+
+| 类型    | 说明                                         |
+| ------- | -------------------------------------------- |
+| boolean | 返回true表示阻止此次加载，否则允许此次加载。 |
+
