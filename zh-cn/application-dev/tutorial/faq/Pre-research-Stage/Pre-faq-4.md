@@ -1,6 +1,6 @@
 # ArkUI-X是否支持应用跨平台和鸿蒙的混合开发
 
-<img src="../figures/Pre-faq-4.png" width="600">
+<img src="../figures/pre-faq-4.png" width="600">
 
 跨平台工程中支持跨平台模块和鸿蒙模块共存，Build Hap(s)情况下，所有的模块都会进行鸿蒙态编译，不会区分是否是跨平台模块；而Build APP(s)情况下，同样会先进行所有模块的鸿蒙态编译，但**只有标记了是跨平台模块的，才会最终打包编译到安卓或者iOS的最终应用形态。**
 
@@ -10,6 +10,6 @@
 
 3）在HarmonyOS Next设备上正常签名、安装、调试
 
-4）使用DevEco Studio->Build APP(s)拷贝跨平台模块产物和SDK中依赖项，参考[**Android应用工程集成ArkUI-X SDK**](./pre-faq-2.md)，[**Android应用工程集成ArkUI-X应用编译产物**](./pre-faq-2.md)
+4）使用DevEco Studio->Build APP(s)拷贝跨平台模块产物和SDK中依赖项，参考[**Android应用工程集成ArkUI-X SDK**](../../how-to-integrate-arkui-into-android.md)，[**Android应用工程集成ArkUI-X应用编译产物**](../../how-to-integrate-arkui-into-android.md)
 
 5）在Android、iOS应用工程整体打包编译，在对应设备上开发联调

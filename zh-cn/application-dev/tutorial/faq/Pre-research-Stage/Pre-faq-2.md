@@ -1,6 +1,6 @@
 # 应用是如何借助ArkUI-X实现跨平台编译运行的
 
-![image](../figures/Pre-faq-2.png)
+![image](../figures/pre-faq-2.png)
 
 让我们以最简单的HelloWorld工程为例，工程创建请参考：[ArkUI-X之初体验-创建工程](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/quick-start/start-with-deveco-studio.md#%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B)
 
