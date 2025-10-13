@@ -181,7 +181,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
 4、在ArkTS中，使用PlatformView。
    编写ArkUI页面platformview.ets。
 
-```java
+```js
 // platformview.ets
 import PlatformView, { PlatformViewAttribute } from '@arkui-x.platformview';
 @Entry
@@ -215,5 +215,45 @@ struct PlatformViewSample {
 
     }.height('100%')
   }
+}
+```
+5、通过平台视图构造参数传递数据（可选）
+构造时传递数据
+```js
+build() {
+    Column() {
+      PlatformView('PlatformViewTest1', 'this is data')
+        .width('100%')
+        .height('80%')
+        .backgroundColor(Color.Gray)
+
+      ...
+
+    }.height('100%')
+}
+```
+重写 getPlatformView(String platformViewId, String data)
+
+获取传递的数据
+```java
+// MyPlatformViewFactory.java
+...
+public class MyPlatformViewFactory extends PlatformViewFactory {
+    ...
+
+    @Override
+    public IPlatformView getPlatformView(String platformViewId, String data) {
+        //use data do something
+        IPlatformView pv = null;
+        switch (platformViewId){
+            case "PlatformViewTest1":
+                // create PlatformView
+                pv = new MyMapWrapper(context, savedInstanceState);
+                break;
+            default:
+                break;
+        }
+        return pv;
+    }
 }
 ```

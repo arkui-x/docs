@@ -35,6 +35,7 @@
     - [ComposeTitleBar](js-apis-arkui-advanced-composeTitleBar.md)
     - [SelectTitleBar](js-apis-arkui-advanced-selectTitleBar.md)
     - [SelectionMenu](js-apis-arkui-advanced-selectionMenu.md)
+    - [SplitLayout](js-apis-arkui-advanced-SplitLayout.md)
 - Ability框架
   - Stage模型能力的接口(推荐)
     - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](js-apis-app-ability-abilityLifecycleCallback.md)
