@@ -1737,10 +1737,10 @@ runJavaScriptExt(script: string | ArrayBuffer, callback : AsyncCallback\<JsMessa
 
 **参数：**
 
-| 参数名   | 类型                                                       | 必填 | 说明                         | Android平台                      | iOS平台                          |
-| -------- | ---------------------------------------------------------- | ---- | ---------------------------- | -------------------------------- | -------------------------------- |
-| script   | string \| ArrayBuffer                                      | 是   | JavaScript脚本。             | 支持string,**不支持ArrayBuffer** | 支持string,**不支持ArrayBuffer** |
-| callback | AsyncCallback\<[JsMessageExt](#jsmessageext16)> | 是   | 回调执行JavaScript脚本结果。 | 支持                             | 支持                             |
+| 参数名   | 类型                                            | 必填 | 说明                         | Android平台                      | iOS平台                          |
+| -------- | ----------------------------------------------- | ---- | ---------------------------- | -------------------------------- | -------------------------------- |
+| script   | string \| ArrayBuffer                           | 是   | JavaScript脚本。             | 支持string,**不支持ArrayBuffer** | 支持string,**不支持ArrayBuffer** |
+| callback | AsyncCallback\<[JsMessageExt](#jsmessageext18)> | 是   | 回调执行JavaScript脚本结果。 | 支持                             | 支持                             |
 
 **错误码：**
 
@@ -1826,7 +1826,7 @@ struct WebComponent {
 
 ### runJavaScriptExt<sup>18+</sup>
 
-runJavaScriptExt(script: string | ArrayBuffer): Promise<[JsMessageExt](#jsmessageext16)>
+runJavaScriptExt(script: string | ArrayBuffer): Promise<[JsMessageExt](#jsmessageext18)>
 
 异步执行JavaScript脚本，并通过Promise方式返回脚本执行的结果。runJavaScriptExt需要在loadUrl完成后，比如onPageEnd中调用。
 
@@ -1844,7 +1844,7 @@ runJavaScriptExt(script: string | ArrayBuffer): Promise<[JsMessageExt](#jsmessag
 
 | 类型                                     | 说明                              |
 | ---------------------------------------- | --------------------------------- |
-| Promise<[JsMessageExt](#jsmessageext16)> | Promise实例，返回脚本执行的结果。 |
+| Promise<[JsMessageExt](#jsmessageext18)> | Promise实例，返回脚本执行的结果。 |
 
 **错误码：**
 
@@ -1950,7 +1950,7 @@ setDownloadDelegate(delegate: WebDownloadDelegate): void
 
 | 参数名   | 类型                                          | 必填 | 说明                       |
 | -------- | --------------------------------------------- | ---- | -------------------------- |
-| delegate | [WebDownloadDelegate](#webdownloaddelegate16) | 是   | 用来接收下载进回调的委托。 |
+| delegate | [WebDownloadDelegate](#webdownloaddelegate18) | 是   | 用来接收下载进回调的委托。 |
 
 **错误码：**
 
@@ -2332,6 +2332,190 @@ struct WebComponent {
 </html>
 ```
 
+### getUserAgent<sup>22+</sup>
+
+getUserAgent(): string
+
+获取当前默认用户代理。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**返回值：**
+
+| 类型   | 说明           |
+| ------ | -------------- |
+| string | 默认用户代理。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Webview错误码](../errorcodes/errorcode-webview.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('getUserAgent')
+        .onClick(() => {
+          try {
+            let userAgent = this.controller.getUserAgent();
+            console.info("userAgent: " + userAgent);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+支持开发者基于默认的User-Agent去定制User-Agent。
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  @State customUserAgent: string = 'test';
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onControllerAttached(() => {
+          console.log("onControllerAttached");
+          try {
+            let userAgent = this.controller.getUserAgent() + this.customUserAgent;
+            this.controller.setCustomUserAgent(userAgent);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+    }
+  }
+}
+```
+
+### setWebSchemeHandler<sup>22+</sup>
+
+setWebSchemeHandler(scheme: string, handler: WebSchemeHandler): void
+
+为当前Web组件设置[WebSchemeHandler](./arkts-apis-webview-WebSchemeHandler.md), [WebSchemeHandler](./arkts-apis-webview-WebSchemeHandler.md)类用于拦截指定scheme的请求。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名  | 类型                                                         | 必填 | 说明                 |
+| ------- | ------------------------------------------------------------ | ---- | :------------------- |
+| scheme  | string                                                       | 是   | 要拦截的协议。       |
+| handler | [WebSchemeHandler](./arkts-apis-webview-WebSchemeHandler.md) | 是   | 拦截此协议的拦截器。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Webview错误码](../errorcodes/errorcode-webview.md)、[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1. Incorrect parameter types. |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  schemeHandler: webview.WebSchemeHandler = new webview.WebSchemeHandler();
+
+  build() {
+    Column() {
+      Button('setWebSchemeHandler')
+        .onClick(() => {
+          try {
+            this.controller.setWebSchemeHandler('http', this.schemeHandler);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### clearWebSchemeHandler<sup>22+</sup>
+
+clearWebSchemeHandler(): void
+
+清除当前Web组件设置的所有WebSchemeHandler。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Webview错误码](../errorcodes/errorcode-webview.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('clearWebSchemeHandler')
+        .onClick(() => {
+          try {
+            this.controller.clearWebSchemeHandler();
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
 ## WebMessagePort
 
 通过WebMessagePort可以进行消息的发送以及接收。
@@ -2710,7 +2894,7 @@ struct WebComponent {
 
 postMessageEventExt(message: WebMessageExt): void
 
-发送[WebMessageType](#webmessagetype16)类型消息给HTML5侧，必须先调用[onMessageEventExt](#onmessageeventext16)，否则会发送失败。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+发送[WebMessageType](#webmessagetype18)类型消息给HTML5侧，必须先调用[onMessageEventExt](#onmessageeventext18)，否则会发送失败。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -2733,7 +2917,7 @@ postMessageEventExt(message: WebMessageExt): void
 
 onMessageEventExt(callback: (result: WebMessageExt) => void): void
 
-在应用侧的消息端口上注册回调函数，接收HTML5侧发送过来的[WebMessageType](#webmessagetype16)类型消息。
+在应用侧的消息端口上注册回调函数，接收HTML5侧发送过来的[WebMessageType](#webmessagetype18)类型消息。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3243,7 +3427,7 @@ struct WebComponent {
   }
 }
   ```
-  
+
 ## GeolocationPermissions
 
 Web组件地理位置权限管理对象。
@@ -3653,7 +3837,7 @@ struct WebComponent {
     }
   }
 }
-```
+  ```
 
 ## WebCookieManager
 
@@ -4742,7 +4926,7 @@ onBeforeDownload(callback: Callback\<WebDownloadItem\>): void
 
 | 参数名   | 类型                                            | 必填 | 说明             |
 | -------- | ----------------------------------------------- | ---- | ---------------- |
-| callback | Callback<[WebDownloadItem](#webdownloaditem16)> | 是   | 触发下载的回调。 |
+| callback | Callback<[WebDownloadItem](#webdownloaditem18)> | 是   | 触发下载的回调。 |
 
 **示例：**
 
@@ -4819,7 +5003,7 @@ onDownloadUpdated(callback: Callback\<WebDownloadItem\>): void
 
 | 参数名   | 类型                                            | 必填 | 说明               |
 | -------- | ----------------------------------------------- | ---- | ------------------ |
-| callback | Callback<[WebDownloadItem](#webdownloaditem16)> | 是   | 下载的回调已更新。 |
+| callback | Callback<[WebDownloadItem](#webdownloaditem18)> | 是   | 下载的回调已更新。 |
 
 **示例：**
 
@@ -5044,7 +5228,7 @@ struct WebComponent {
 
 getType(): WebMessageType
 
-获取数据对象的类型。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+获取数据对象的类型。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5054,13 +5238,13 @@ getType(): WebMessageType
 
 | 类型                                | 说明                                                    |
 | ----------------------------------- | ------------------------------------------------------- |
-| [WebMessageType](#webmessagetype16) | [webMessagePort](#webmessageport)接口所支持的数据类型。 |
+| [WebMessageType](#webmessagetype18) | [webMessagePort](#webmessageport)接口所支持的数据类型。 |
 
 ### getString<sup>18+</sup>
 
 getString(): string
 
-获取数据对象的字符串类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+获取数据对象的字符串类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5082,7 +5266,7 @@ getString(): string
 
 getNumber(): number
 
-获取数据对象的数值类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+获取数据对象的数值类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5104,7 +5288,7 @@ getNumber(): number
 
 getBoolean(): boolean
 
-获取数据对象的布尔类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+获取数据对象的布尔类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5126,7 +5310,7 @@ getBoolean(): boolean
 
 getArray(): Array<string | number | boolean>
 
-获取数据对象的数组类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+获取数据对象的数组类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5148,7 +5332,7 @@ getArray(): Array<string | number | boolean>
 
 getError(): Error
 
-获取数据对象的错误类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+获取数据对象的错误类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5170,7 +5354,7 @@ getError(): Error
 
 setType(type: WebMessageType): void
 
-设置数据对象的类型。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+设置数据对象的类型。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5180,7 +5364,7 @@ setType(type: WebMessageType): void
 
 | 参数名 | 类型                                | 必填 | 说明                                                    |
 | ------ | ----------------------------------- | ---- | ------------------------------------------------------- |
-| type   | [WebMessageType](#webmessagetype16) | 是   | [webMessagePort](#webmessageport)接口所支持的数据类型。 |
+| type   | [WebMessageType](#webmessagetype18) | 是   | [webMessagePort](#webmessageport)接口所支持的数据类型。 |
 
 **错误码：**
 
@@ -5193,7 +5377,7 @@ setType(type: WebMessageType): void
 
 setString(message: string): void
 
-设置数据对象的字符串类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+设置数据对象的字符串类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5216,7 +5400,7 @@ setString(message: string): void
 
 setNumber(message: number): void
 
-设置数据对象的数值类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+设置数据对象的数值类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5239,7 +5423,7 @@ setNumber(message: number): void
 
 setBoolean(message: boolean): void
 
-设置数据对象的布尔类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+设置数据对象的布尔类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5262,7 +5446,7 @@ setBoolean(message: boolean): void
 
 setArray(message: Array<string | number | boolean>): void
 
-设置数据对象的数组类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+设置数据对象的数组类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5285,7 +5469,7 @@ setArray(message: Array<string | number | boolean>): void
 
 setError(message: Error): void
 
-设置数据对象的错误对象类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext16)。
+设置数据对象的错误对象类型数据。完整示例代码参考[onMessageEventExt](#onmessageeventext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5306,13 +5490,13 @@ setError(message: Error): void
 
 ## JsMessageExt<sup>18+</sup>
 
-[runJavaScriptExt](#runjavascriptext16)接口执行脚本返回的数据对象。
+[runJavaScriptExt](#runjavascriptext18)接口执行脚本返回的数据对象。
 
 ### getType<sup>18+</sup>
 
 getType(): JsMessageType
 
-获取数据对象的类型。完整示例代码参考[runJavaScriptExt](#runjavascriptext16)。
+获取数据对象的类型。完整示例代码参考[runJavaScriptExt](#runjavascriptext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5322,13 +5506,13 @@ getType(): JsMessageType
 
 | 类型                              | 说明                                                         |
 | --------------------------------- | ------------------------------------------------------------ |
-| [JsMessageType](#jsmessagetype16) | [runJavaScriptExt](#runjavascriptext16)接口脚本执行后返回的结果的类型。 |
+| [JsMessageType](#jsmessagetype18) | [runJavaScriptExt](#runjavascriptext18)接口脚本执行后返回的结果的类型。 |
 
 ###  getString<sup>18+</sup>
 
 getString(): string
 
-获取数据对象的字符串类型数据。完整示例代码参考[runJavaScriptExt](#runjavascriptext16)。
+获取数据对象的字符串类型数据。完整示例代码参考[runJavaScriptExt](#runjavascriptext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5350,7 +5534,7 @@ getString(): string
 
 getNumber(): number
 
-获取数据对象的数值类型数据。完整示例代码参考[runJavaScriptExt](#runjavascriptext16)。
+获取数据对象的数值类型数据。完整示例代码参考[runJavaScriptExt](#runjavascriptext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5372,7 +5556,7 @@ getNumber(): number
 
 getBoolean(): boolean
 
-获取数据对象的布尔类型数据。完整示例代码参考[runJavaScriptExt](#runjavascriptext16)。
+获取数据对象的布尔类型数据。完整示例代码参考[runJavaScriptExt](#runjavascriptext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5394,7 +5578,7 @@ getBoolean(): boolean
 
 getArray(): Array<string | number | boolean>
 
-获取数据对象的数组类型数据。完整示例代码参考[runJavaScriptExt](#runjavascriptext16)。
+获取数据对象的数组类型数据。完整示例代码参考[runJavaScriptExt](#runjavascriptext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5416,7 +5600,7 @@ getArray(): Array<string | number | boolean>
 
 getError(): Error
 
-获取数据对象的错误类型数据。完整示例代码参考[runJavaScriptExt](#runjavascriptext16)。
+获取数据对象的错误类型数据。完整示例代码参考[runJavaScriptExt](#runjavascriptext18)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5436,7 +5620,7 @@ getError(): Error
 
 ## JsMessageType<sup>18+</sup>
 
-[runJavaScriptExt](#runjavascriptext16)接口脚本执行后返回的结果的类型。
+[runJavaScriptExt](#runjavascriptext18)接口脚本执行后返回的结果的类型。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -5751,7 +5935,7 @@ getState(): WebDownloadState
 
 | 类型                                    | 说明         |
 | --------------------------------------- | ------------ |
-| [WebDownloadState](#webdownloadstate16) | 下载的状态。 |
+| [WebDownloadState](#webdownloadstate18) | 下载的状态。 |
 
 **示例：**
 
@@ -5818,7 +6002,7 @@ getLastErrorCode(): WebDownloadErrorCode
 
 | 类型                                            | 说明                         |
 | ----------------------------------------------- | ---------------------------- |
-| [WebDownloadErrorCode](#webdownloaderrorcode16) | 下载发生错误的时候的错误码。 |
+| [WebDownloadErrorCode](#webdownloaderrorcode18) | 下载发生错误的时候的错误码。 |
 
 **示例：**
 
@@ -6653,7 +6837,7 @@ static setDownloadDelegate(delegate: WebDownloadDelegate): void
 
 | 参数名   | 类型                                          | 必填 | 说明                       |
 | -------- | --------------------------------------------- | ---- | -------------------------- |
-| delegate | [WebDownloadDelegate](#webdownloaddelegate16) | 是   | 用来接收下载进回调的委托。 |
+| delegate | [WebDownloadDelegate](#webdownloaddelegate18) | 是   | 用来接收下载进回调的委托。 |
 
 **示例：**
 
