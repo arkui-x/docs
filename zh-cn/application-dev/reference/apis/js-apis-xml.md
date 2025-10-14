@@ -462,6 +462,27 @@ console.log(str);
 // 0(START_DOCUMENT):0(起始深度为0), 2(START_TAG):1(解析到开始标签node, 对应深度为1), 10(WHITESPACE):1(解析到空白标签空格, 对应深度为1), 2(START_TAG):2(解析到开始标签title, 对应深度为2), ...
 ```
 
+## AttributeWithTagCb<sup>22+</sup>
+
+type AttributeWithTagCb = (tagName: string, key: string, value: string) => boolean
+
+**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+**参数：**
+
+| 参数名   |  类型  | 必填 |  说明   |
+| ------- | -------| ---- | ------ |
+| tagName | string | 是   | 标签名称。|
+| key     | string | 是   | 属性名称。|
+| value   | string | 是   | 属性的值。|
+
+**返回值：**
+
+| 类型    | 说明                                                                       |
+| ------- | ------------------------------------------------------------------------- |
+| boolean | 是否继续解析标签名称、属性名称及属性的值。true表示继续解析，false表示停止解析。 |
 
 ## ParseOptions
 

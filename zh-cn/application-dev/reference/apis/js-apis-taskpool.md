@@ -833,3 +833,316 @@ async function taskpoolGroupCancelTest() {
 
 taskpoolGroupCancelTest()
 ```
+
+## TaskResult<sup>20+</sup>
+
+处于等待或执行过程中的任务进行取消操作后，在catch分支里捕获到BusinessError里的补充信息。其他场景下该信息为undefined。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+### 属性
+
+**系统能力：** SystemCapability.Utils.Lang
+
+**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
+
+| 名称     | 类型                | 只读 | 可选 | 说明                                                           |
+| -------- | ------------------ | ---- | ---- | ------------------------------------------------------------- |
+| result | Object             | 否   | 是   | 任务执行结果。默认为undefined。 不建议修改此值。 |
+| error   | Error \| Object   | 否   | 是   | 错误信息。默认和BusinessError的message字段一致。不建议修改此值。 |
+
+> **说明：**
+>
+> 任务被取消后，有如下两种情况：
+>    - 如果当前任务是处于等待阶段，则result的值为undefined，error的值和BusinessError的message字段一致；
+>    - 如果当前任务正在运行，有异常抛出的情况下result的值为undefined，error的值为抛出的异常信息；没有异常的情况下，result为任务执行完成后的结果，error的值和BusinessError的message字段一致。
+>
+
+**示例**
+
+```ts
+import { taskpool } from '@kit.ArkTS';
+import { BusinessError } from '@kit.BasicServicesKit'
+
+@Concurrent
+function loop(): Error | number {
+  let start: number = Date.now();
+  while (Date.now() - start < 1500) {
+  }
+  if (taskpool.Task.isCanceled()) {
+    return 0;
+  }
+  while (Date.now() - start < 3000) {
+  }
+  if (taskpool.Task.isCanceled()) {
+    throw new Error("this is loop error");
+  }
+  return 1;
+}
+
+// 执行前取消
+function waitingCancel() {
+  let task = new taskpool.Task(loop);
+  taskpool.executeDelayed(2000, task).catch((e:BusinessError<taskpool.TaskResult>) => {
+    console.error(`waitingCancel task catch code: ${e.code}, message: ${e.message}`);
+    // waitingCancel task catch code: 0, message: taskpool:: task has been canceled
+    if (e.data !== undefined) {
+      console.error(`waitingCancel task catch data: result: ${e.data.result}, error: ${e.data.error}`);
+      // waitingCancel task catch data: result: undefined, error: taskpool:: task has been canceled
+    }
+  })
+  setTimeout(() => {
+    taskpool.cancel(task);
+  }, 1000);
+}
+
+// 执行过程中取消
+function runningCancel() {
+  let task = new taskpool.Task(loop);
+  taskpool.execute(task).catch((e:BusinessError<taskpool.TaskResult>) => {
+    console.error(`runningCancel task catch code: ${e.code}, message: ${e.message}`);
+    // runningCancel task catch code: 0, message: taskpool:: task has been canceled
+    if (e.data !== undefined) {
+      console.error(`runningCancel task catch data: result: ${e.data.result}, error: ${e.data.error}`);
+      // runningCancel task catch data: result: 0, error: taskpool:: task has been canceled
+    }
+  })
+  setTimeout(() => {
+    taskpool.cancel(task);
+  }, 1000);
+}
+
+// 执行过程中抛异常
+function runningCancelError() {
+  let task = new taskpool.Task(loop);
+  taskpool.execute(task).catch((e:BusinessError<taskpool.TaskResult>) => {
+    console.error(`runningCancelError task catch code: ${e.code}, message: ${e.message}`);
+    // runningCancelError task catch code: 0, message: taskpool:: task has been canceled
+    if (e.data !== undefined) {
+      console.error(`runningCancelError task catch data: result: ${e.data.result}, error: ${e.data.error}`);
+      // runningCancelError task catch data: result: undefined, error: Error: this is loop error
+    }
+  })
+  setTimeout(() => {
+    taskpool.cancel(task);
+  }, 2000);
+}
+```
+
+## taskpool.cancel<sup>22+</sup>
+
+cancel(taskId: number): void
+
+通过任务ID取消任务池中的任务。如果任务在taskpool等待队列中，取消后任务将不再执行，并返回任务取消的异常。如果任务已在taskpool工作线程中执行，取消不影响任务继续执行，执行结果在catch分支返回。使用isCanceled可以对任务取消行为作出响应。taskpool.cancel对其之前的taskpool.execute或taskpool.executeDelayed生效。在其他线程调用taskpool.cancel时，需注意其行为是异步的，可能影响之后的taskpool.execute或taskpool.executeDelayed。
+
+从API version 22开始，支持在执行cancel操作后，在catch分支里使用BusinessError<[taskpool.TaskResult](#taskresult20)>的泛型标记。这可以用来获取任务中抛出的异常信息或最终的执行结果。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                    | 必填 | 说明                 |
+| ------- | ----------------------- | ---- | -------------------- |
+| taskId   | number | 是   | 需要取消执行的任务的ID。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
+
+| 错误码ID | 错误信息                                      |
+| -------- | -------------------------------------------- |
+| 10200015 | The task to cancel does not exist. |
+| 10200055 | The asyncRunner task has been canceled. |
+
+**示例：**
+
+```ts
+@Concurrent
+function printArgs(args: number): number {
+  let t: number = Date.now();
+  while (Date.now() - t < 2000) {
+    continue;
+  }
+  if (taskpool.Task.isCanceled()) {
+    console.info("task has been canceled after 2s sleep.");
+    return args + 1;
+  }
+  console.info("printArgs: " + args);
+  return args;
+}
+
+@Concurrent
+function cancelFunction(taskId: number) {
+  try {
+    taskpool.cancel(taskId);
+  } catch (e) {
+    console.error(`taskpool: cancel error code: ${e.code}, info: ${e.message}`);
+  }
+}
+
+function concurrentFunc() {
+  let task = new taskpool.Task(printArgs, 100); // 100: test number
+  taskpool.execute(task);
+  setTimeout(() => {
+    let cancelTask = new taskpool.Task(cancelFunction, task.taskId);
+    taskpool.execute(cancelTask);
+  }, 1000);
+}
+
+concurrentFunc();
+```
+
+## AsyncRunner<sup>22+</sup>
+
+表示异步队列。可以指定任务执行的并发度和排队策略。
+
+### constructor<sup>22+</sup>
+
+constructor(runningCapacity: number, waitingCapacity?: number)
+
+AsyncRunner的构造函数。构造一个非全局的异步队列，如果参数相同，返回的是不同的异步队列。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                  | 必填 | 说明                                                       |
+| -------- | --------------------- | ---- | ---------------------------------------------------------- |
+| runningCapacity | number | 是   | 指定任务执行的最大并发度，该参数应为正整数，负数时报错，非整数时会向下取整。 |
+| waitingCapacity | number | 否   | 指定等待任务的列表容量，取值需大于等于0，负数时报错，输入非整数时会向下取整。默认值为0，表示等待任务列表的容量没有限制。如果设置大于0的值，则表示排队策略为丢弃策略，当加入的任务数量超过该值时，等待列表中处于队头的任务会被丢弃。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3. Parameter verification failed. |
+
+**示例：**
+
+```ts
+let runner: taskpool.AsyncRunner = new taskpool.AsyncRunner(5);
+```
+
+### constructor<sup>22+</sup>
+
+constructor(name: string, runningCapacity: number, waitingCapacity?: number)
+
+AsyncRunner的构造函数用于构造一个全局异步队列。如果队列名称相同，将返回同一个异步队列实例。
+
+> **说明：**
+>
+> - 底层通过单例模式确保创建同名的异步队列时，获取同一个实例。
+> - 无法修改并发度和等待任务列表容量。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                  | 必填 | 说明                                                       |
+| -------- | --------------------- | ---- | ---------------------------------------------------------- |
+| name     | string                | 是   | 异步队列的名字。 |
+| runningCapacity | number | 是   | 指定任务执行的最大并发度，该参数应为正整数。负数时报错，非整数会向下取整。 |
+| waitingCapacity | number | 否   |  指定等待任务的列表容量，取值需大于等于0，负数时报错，非整数时会向下取整。默认值为0，表示等待任务列表的容量没有限制。如果设置大于0的值，则表示排队策略为丢弃策略，当加入的任务数量超过该值时，等待列表中处于队头的任务会被丢弃。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3. Parameter verification failed. |
+
+**示例：**
+
+```ts
+let runner:taskpool.AsyncRunner = new taskpool.AsyncRunner("runner1", 5, 5);
+```
+
+### execute<sup>22+</sup>
+
+execute(task: Task, priority?: Priority): Promise\<Object>
+
+执行异步任务。使用该方法前需要先构造AsyncRunner。使用Promise异步回调。
+
+> **说明：**
+>
+> - 不支持执行任务组中的任务。
+> - 不支持执行串行队列中的任务。
+> - 不支持执行其他异步队列任务。
+> - 不支持执行周期性任务。
+> - 不支持执行延迟任务。
+> - 不支持执行存在依赖的任务。
+> - 不支持执行已执行过的任务。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名 | 类型          | 必填 | 说明                             |
+| ------ | ------------- | ---- | -------------------------------- |
+| task   | [Task](#task) | 是   | 需要添加到异步队列中的任务。 |
+| priority | [Priority](#priority) | 否   | 指定任务的优先级，该参数默认值为taskpool.Priority.MEDIUM。 |
+
+**返回值：**
+
+| 类型             | 说明                              |
+| ---------------- | --------------------------------- |
+| Promise\<Object> | Promise对象，返回任务执行的结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[语言基础类库错误码](../errorcodes/errorcode-utils.md)。
+
+| 错误码ID | 错误信息                                    |
+| -------- | ------------------------------------------- |
+| 10200006 | An exception occurred during serialization. |
+| 10200025 | dependent task not allowed.  |
+| 10200051 | The periodic task cannot be executed again.  |
+| 10200054 | The asyncRunner task is discarded.  |
+| 10200057 | The task cannot be executed by two APIs.  |
+
+**示例：**
+
+```ts
+import { taskpool } from '@kit.ArkTS';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Concurrent
+function additionDelay(delay: number): void {
+  let start: number = new Date().getTime();
+  while (new Date().getTime() - start < delay) {
+    continue;
+  }
+}
+async function asyRunner() {
+  let runner:taskpool.AsyncRunner = new taskpool.AsyncRunner("runner1", 5, 5);
+  for (let i = 0; i < 30; i++) {
+    let task:taskpool.Task = new taskpool.Task(additionDelay, 1000);
+    runner.execute(task).then(() => {
+      console.info("asyncRunner: task" + i + " done.");
+    }).catch((e: BusinessError) => {
+      console.error("asyncRunner: task" + i + " error." + e.code + "-" + e.message);
+    });
+  }
+}
+
+async function asyRunner2() {
+  let runner:taskpool.AsyncRunner = new taskpool.AsyncRunner(5);
+  for (let i = 0; i < 20; i++) {
+    let task:taskpool.Task = new taskpool.Task(additionDelay, 1000);
+    runner.execute(task).then(() => {
+      console.info("asyncRunner: task" + i + " done.");
+    });
+  }
+}
+```
