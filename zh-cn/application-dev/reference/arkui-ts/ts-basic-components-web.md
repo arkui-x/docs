@@ -2372,9 +2372,9 @@ setResponseData(data: string \| number \| Resource \| ArrayBuffer): void
 
 **参数：**
 
-| 参数名 | 类型                                       | 必填 | 说明                                                         |
-| ------ | ------------------------------------------ | ---- | ------------------------------------------------------------ |
-| data   | string \| number \|Resource \| ArrayBuffer | 是   | 要设置的资源响应数据。string表示HTML格式的字符串。number表示文件句柄，此句柄由系统的Web组件负责关闭。Resource表示应用rawfile目录下文件资源。ArrayBuffer表示资源的原始二进制数据。 |
+| 参数名 | 类型                                       | 必填 | 说明                                                         | Android平台                | iOS平台                    |
+| ------ | ------------------------------------------ | ---- | ------------------------------------------------------------ | -------------------------- | -------------------------- |
+| data   | string \| number \|Resource \| ArrayBuffer | 是   | 要设置的资源响应数据。string表示HTML格式的字符串。number表示文件句柄，此句柄由系统的Web组件负责关闭。Resource表示应用rawfile目录下文件资源。ArrayBuffer表示资源的原始二进制数据。 | number和Resource类型不支持 | number和Resource类型不支持 |
 
 ### setResponseEncoding<sup>22+</sup>
 
@@ -2454,7 +2454,7 @@ setResponseCode(code: number): void
 
 | 参数名 | 类型   | 必填 | 说明                                                         |
 | ------ | ------ | ---- | ------------------------------------------------------------ |
-| code   | number | 是   | 要设置的资源响应的状态码。如果该资源以错误结束，请参考[@ohos.web.netErrorList](../apis/arkts-apis-netErrorList.md)设置相应错误码，避免设置错误码为 ERR_IO_PENDING，设置为该错误码可能会导致XMLHttpRequest同步请求阻塞。 |
+| code   | number | 是   | 要设置的资源响应的状态码。如果该资源以错误结束，请参考[@ohos.web.netErrorList](../apis/arkts-apis-netErrorList.md)设置相应错误码，避免设置错误码为 ERR_IO_PENDING，设置为该错误码可能会导致XMLHttpRequest同步请求阻塞。Android平台该值的取值范围为[100, 299], [400, 599]。 |
 
 ### setResponseIsReady<sup>22+</sup>
 
