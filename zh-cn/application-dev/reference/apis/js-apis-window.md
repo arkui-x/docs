@@ -1562,7 +1562,7 @@ try {
 
 on(type:  'windowStatusChange', callback: Callback&lt;WindowStatusType&gt;): void
 
-开启窗口模式变化的监听，当窗口windowStatus发生变化时进行通知（此时窗口属性可能还没有更新，当前仅支持iOS，Android 暂不支持）。
+开启窗口模式变化的监听，当窗口windowStatus发生变化时进行通知（此时窗口属性可能还没有更新，当前仅支持iOS，Android 暂不支持（可以正常添加，添加后没有通知返回））。
 
 **原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
 
