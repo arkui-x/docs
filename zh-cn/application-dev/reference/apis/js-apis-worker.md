@@ -37,7 +37,6 @@ Worker构造函数的选项，用于为Worker添加其他信息。
 | shared | boolean | 否   | 是 | 表示Worker共享功能，此接口暂不支持。 <br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。|
 | priority<sup>22+</sup> | [ThreadWorkerPriority](#threadworkerpriority22) | 否   | 是 | 表示Worker线程优先级。默认值为MEDIUM。 <br/>**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。|
 
-
 ## ThreadWorkerPriority<sup>22+</sup>
 
 Worker线程的优先级枚举。
@@ -1285,7 +1284,7 @@ workerPort.onerror = function(e) {
 ```
 
 ### 内存模型
-Worker基于Actor并发模型实现。在Worker的交互流程中，JS主线程可以创建多个Worker子线程，各个Worker线程间相互隔离，并通过序列化传递对象，等到Worker线程完成计算任务，再把结果返回给主线程。
+Worker基于Actor并发模型实现。在Worker的交互流程中，JS主线程可以创建多个Worker子线程，各个Worker线程间相互隔离，并通过序列化传递对象，等到Worker线程完成计算任务，再把结果返回给主线程。 
 
 Actor并发模型的交互原理：各个Actor并发地处理主线程任务，每个Actor内部都有一个消息队列及单线程执行模块，消息队列负责接收主线程及其他Actor的请求，单线程执行模块则负责串行地处理请求、向其他Actor发送请求以及创建新的Actor。由于Actor采用的是异步方式，各个Actor之间相互隔离没有数据竞争，因此Actor可以高并发运行。
 
