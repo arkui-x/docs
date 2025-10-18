@@ -226,7 +226,7 @@ onPageBegin(callback: Callback\<OnPageBeginEvent\>)
 | ---- | ------ | ---- | --------- |
 | callback  | Callback\<[OnPageBeginEvent](#onpagebeginevent)\> | 是    | 网页加载开始时触发。 |
 
-**注意：**Android平台和iOS平台的触发时机与OpenHarmony不完全相同，以各平台行为为准。
+**注意：** Android平台和iOS平台的触发时机与OpenHarmony不完全相同，以各平台行为为准。
 
 **示例：**
 
@@ -699,7 +699,7 @@ onTitleReceive(callback: Callback\<OnTitleReceiveEvent\>)
 | ----- | ------ | ---- | ------------- |
 | callback | Callback\<[OnTitleReceiveEvent](#ontitlereceiveevent)\> | 是    | 定义主应用程序文档标题更改时触发。 |
 
-**注意：**Android平台和iOS平台的返回值与OpenHarmony不完全相同，以各平台行为为准。
+**注意：** Android平台和iOS平台的返回值与OpenHarmony不完全相同，以各平台行为为准。
 
 **示例：**
 
@@ -840,7 +840,7 @@ onLoadIntercept(callback: Callback\<OnLoadInterceptEvent, boolean\>)
 | ------ | ------ | ---- | --------------------- |
 | callback | Callback\<[OnLoadInterceptEvent](#onloadinterceptevent), boolean\> | 是 | 截获资源加载时触发的回调。<br>返回值boolean。返回true表示阻止此次加载，否则允许此次加载。 |
 
-**注意：**在Android平台，此接口在重定向时触发。
+**注意：** 在Android平台，此接口在重定向时触发。
 
 **示例：**
 
@@ -2608,7 +2608,7 @@ handlePromptConfirm(result: string): void
 | ------ | ------ | ---- | ----------- |
 | result | string | 是    | 用户输入的对话框内容。 |
 
-**注意：**Android平台和iOS平台，在OnAlertEvent和OnConfirmEvent事件下不支持此接口。
+**注意：** Android平台和iOS平台，在OnAlertEvent和OnConfirmEvent事件下不支持此接口。
 
 
 
@@ -2938,6 +2938,8 @@ onSslErrorEventReceive接口返回的SSL错误的具体原因。
 | referrer      | string                                | 否   | 否   | referrer url地址。                                    | 支持        | 支持    |
 | isMainFrame   | boolean                               | 否   | 否   | 是否是主资源。<br>true表示主资源，false表示非主资源。 | 支持        | 支持    |
 | certChainData | Array<Uint8Array\>                    | 否   | 是   | 证书链数据。                                          | 支持        | 支持    |
+
+**注意：** iOS平台在子资源中无法获取referrer，iOS 12以上版本可获取error信息。
 
 ## FileSelectorMode枚举说明
 
