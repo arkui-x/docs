@@ -24,21 +24,19 @@ import { collections } from '@kit.ArkTS';
 
 ## 属性
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
-
 **系统能力：** SystemCapability.Utils.Lang
 
 | 名称   | 类型   | 只读 | 可选 | 说明              |
 | ------ | ------ | ---- | ---- | ----------------- |
 | length | number | 是   | 否   | Array的元素个数。 |
 
-## from<sup>22+</sup>
+## from
 
 static from\<T>(arrayLike: ArrayLike\<T> | Iterable\<T>, mapFn: ArrayFromMapFn\<T, T>): Array\<T>
 
 从一个实现了ArrayLike接口的对象创建一个新的ArkTS Array，并且使用自定义函数处理每个数组元素。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -47,7 +45,7 @@ static from\<T>(arrayLike: ArrayLike\<T> | Iterable\<T>, mapFn: ArrayFromMapFn\<
 | 参数名    | 类型          | 必填 | 说明                            |
 | --------- | ------------- | ---- | ------------------------------- |
 | arrayLike | ArrayLike\<T> \| Iterable\<T> | 是   | 用于构造ArkTS Array的对象。 |
-| mapFn | [ArrayFromMapFn](arkts-apis-arkts-collections-Types.md#arrayfrommapfn18)\<T,T> | 是   | 调用数组每个元素的函数。 |
+| mapFn | [ArrayFromMapFn](arkts-apis-arkts-collections-Types.md#arrayfrommapfn)\<T,T> | 是   | 调用数组每个元素的函数。 |
 
 **返回值：**
 
@@ -71,13 +69,13 @@ let newArray = collections.Array.from<number>(array, (value, index) => value + i
 console.info(newArray.toString()); // 预期输出： 1, 3, 5
 ```
 
-## from<sup>22+</sup>
+## from
 
 static from\<U, T>(arrayLike: ArrayLike\<U> | Iterable\<U>, mapFn: ArrayFromMapFn\<U, T>): Array\<T>
 
 从一个实现了ArrayLike接口的对象创建一个新的ArkTS Array，并且使用自定义函数处理每个数组元素，ArrayLike接口对象的元素类型可以和数组元素的类型不一样。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -86,7 +84,7 @@ static from\<U, T>(arrayLike: ArrayLike\<U> | Iterable\<U>, mapFn: ArrayFromMapF
 | 参数名    | 类型          | 必填 | 说明                            |
 | --------- | ------------- | ---- | ------------------------------- |
 | arrayLike | ArrayLike\<U> \| Iterable\<U> | 是   | 用于构造ArkTS Array的对象。 |
-| mapFn | [ArrayFromMapFn](arkts-apis-arkts-collections-Types.md#arrayfrommapfn18)\<U, T> | 是   | 调用数组每个元素的函数。 |
+| mapFn | [ArrayFromMapFn](arkts-apis-arkts-collections-Types.md#arrayfrommapfn)\<U, T> | 是   | 调用数组每个元素的函数。 |
 
 **返回值：**
 
@@ -110,13 +108,13 @@ let newArray = collections.Array.from<number, string>(array, (value, index) => v
 console.info(newArray.toString()); // 预期输出： 1.0, 2.1, 3.2
 ```
 
-## isArray<sup>22+</sup>
+## isArray
 
 static isArray(value: Object | undefined | null): boolean
 
 检查传入的参数是否是一个ArkTS Array。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -148,13 +146,13 @@ let result: boolean = collections.Array.isArray(arr);
 console.info(result + ''); // 预期输出： true
 ```
 
-## of<sup>22+</sup>
+## of
 
 static of\<T>(...items: T\[]): Array\<T>
 
 通过可变数量的参数创建一个新的ArkTS Array。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -185,12 +183,12 @@ let arr: collections.Array<string> = collections.Array.of('a', 'b', 'c', 'd');
 console.info(arr.toString()); // 预期输出： a, b, c, d
 ```
 
-## copyWithin<sup>22+</sup>
+## copyWithin
 copyWithin(target: number, start: number, end?: number): Array\<T>
 
 从ArkTS Array指定范围内的元素依次拷贝到目标位置。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -226,13 +224,13 @@ let copied: collections.Array<number> = array.copyWithin(3, 1, 3);
 console.info(copied.toString()); // 预期输出： 1, 2, 3, 2, 3, 6, 7, 8
 ```
 
-## lastIndexOf<sup>22+</sup>
+## lastIndexOf
 
 lastIndexOf(searchElement: T, fromIndex?: number): number
 
 返回ArkTS Array实例中最后一次出现searchElement的索引，如果对象不包含，则为-1。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -268,12 +266,12 @@ console.info(array.lastIndexOf(9, 2) + ''); // 预期输出： 2
 console.info(array.lastIndexOf(9, -2) + ''); // 预期输出： -1
 ```
 
-## some<sup>22+</sup>
+## some
 some(predicate: ArrayPredicateFn\<T, Array\<T>>): boolean
 
 测试ArkTS Array是否存在满足指定条件的元素。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -281,7 +279,7 @@ some(predicate: ArrayPredicateFn\<T, Array\<T>>): boolean
 
 | 参数名  | 类型   | 必填 | 说明                                                  |
 | ------- | ------ | ---- | ---------------------------------------------------- |
-| predicate | [ArrayPredicateFn](arkts-apis-arkts-collections-Types.md#arraypredicatefn22)\<T, Array\<T>> | 是 | 用于测试的断言函数。|
+| predicate | [ArrayPredicateFn](arkts-apis-arkts-collections-Types.md#arraypredicatefn)\<T, Array\<T>> | 是 | 用于测试的断言函数。|
 
 **返回值：**
 
@@ -305,13 +303,13 @@ let newArray: collections.Array<number> = collections.Array.from([-10, 20, -30, 
 console.info(newArray.some((element: number) => element < 0) + ''); // 预期输出： true
 ```
 
-## reduceRight<sup>22+</sup>
+## reduceRight
 
 reduceRight(callbackFn: ArrayReduceCallback\<T, T, Array\<T>>): T
 
 对Array中的每个元素按照从右到左顺序执行回调函数，将其结果作为累加值，并返回最终的结果。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -319,7 +317,7 @@ reduceRight(callbackFn: ArrayReduceCallback\<T, T, Array\<T>>): T
 
 | 参数名        | 类型                                                                               | 必填  | 说明                                         |
 | ---------- | -------------------------------------------------------------------------------- | --- | ------------------------------------------ |
-| callbackFn | [ArrayReduceCallback](arkts-apis-arkts-collections-Types.md#arrayreducecallback22)\<T, T, Array\<T>> | 是   | 一个接受四个参数的函数，用于对每个元素执行操作，并将结果作为累加值传递给下一个元素。 |
+| callbackFn | [ArrayReduceCallback](arkts-apis-arkts-collections-Types.md#arrayreducecallback)\<T, T, Array\<T>> | 是   | 一个接受四个参数的函数，用于对每个元素执行操作，并将结果作为累加值传递给下一个元素。 |
 
 **返回值：**
 
@@ -345,13 +343,13 @@ let reducedValue = array.reduceRight((accumulator, value) => accumulator + value
 console.info(reducedValue + ''); // 预期输出： 15
 ```
 
-## reduceRight<sup>22+</sup>
+## reduceRight
 
 reduceRight\<U = T>(callbackFn: ArrayReduceCallback\<U, T, Array\<T>>, initialValue: U): U
 
-与 [reduceRight](#reduceright22)方法类似，但它接受一个初始值作为第二个参数，用于在Array从右到左顺序遍历开始前初始化累加器。
+与 [reduceRight](#reduceright)方法类似，但它接受一个初始值作为第二个参数，用于在Array从右到左顺序遍历开始前初始化累加器。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -359,7 +357,7 @@ reduceRight\<U = T>(callbackFn: ArrayReduceCallback\<U, T, Array\<T>>, initialVa
 
 | 参数名          | 类型                                                                                           | 必填  | 说明                                         |
 | ------------ | -------------------------------------------------------------------------------------------- | --- | ------------------------------------------ |
-| callbackFn   | [ArrayReduceCallback](arkts-apis-arkts-collections-Types.md#arrayreducecallback22)\<U, T, Array\<T>> | 是   | 一个接受四个参数的函数，用于对每个元素执行操作，并将结果作为累加值传递给下一个元素。 |
+| callbackFn   | [ArrayReduceCallback](arkts-apis-arkts-collections-Types.md#arrayreducecallback)\<U, T, Array\<T>> | 是   | 一个接受四个参数的函数，用于对每个元素执行操作，并将结果作为累加值传递给下一个元素。 |
 | initialValue | U                                                                                            | 是   | 用于初始化累加器的值。                                |
 
 **返回值：**
@@ -387,13 +385,13 @@ let reducedValue = array.reduceRight<number>((accumulator: number, value: number
 console.info(reducedValue + ''); // 预期输出： 15
 ```
 
-## reverse<sup>22+</sup>
+## reverse
 
 reverse(): Array\<T>
 
 反转ArkTS Array数组中的元素，并返回同一数组的引用。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -420,13 +418,13 @@ let reversed = array.reverse();
 console.info(array.toString()); // 预期输出： 5, 4, 3, 2, 1
 ```
 
-## toString<sup>22+</sup>
+## toString
 
 toString(): string
 
 ArkTS数组转换为字符串。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -453,20 +451,20 @@ let stringArray = array.toString();
 console.info(stringArray); // 预期输出：1,2,3,4,5
 ```
 
-## every<sup>22+</sup>
+## every
 
 every(predicate: ArrayPredicateFn\<T, Array\<T>>): boolean
 
 测试ArkTS Array中的所有元素是否满足指定条件。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
 **参数：**
 | 参数名  | 类型   | 必填 | 说明                                                    |
 | ------- | ------ | ---- | ----------------------------------------------------- |
-| predicate | [ArrayPredicateFn](arkts-apis-arkts-collections-Types.md#arraypredicatefn22)\<T, Array\<T>> | 是 | 用于测试的断言函数。|
+| predicate | [ArrayPredicateFn](arkts-apis-arkts-collections-Types.md#arraypredicatefn)\<T, Array\<T>> | 是 | 用于测试的断言函数。|
 
 **返回值：**
 
@@ -490,13 +488,13 @@ let newArray: collections.Array<number> = collections.Array.from([-10, 20, -30, 
 console.info(newArray.every((element: number) => element > 0) + ''); // 预期输出：false
 ```
 
-## toLocaleString<sup>22+</sup>
+## toLocaleString
 
 toLocaleString(): string
 
 根据当前应用的系统地区获取符合当前文化习惯的字符串表示形式，让每个元素调用自己的toLocaleString方法转换为字符串，然后使用逗号将每个元素的结果字符串按照顺序拼接成字符串。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 

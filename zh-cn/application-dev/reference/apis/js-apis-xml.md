@@ -466,8 +466,6 @@ console.log(str);
 
 type AttributeWithTagCb = (tagName: string, key: string, value: string) => boolean
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
-
 **系统能力：** SystemCapability.Utils.Lang
 
 **参数：**

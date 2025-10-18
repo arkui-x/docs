@@ -19,13 +19,13 @@ FastBuffer通过from构造时，仅支持FastBuffer、Uint8Array、string、Arra
 import { fastbuffer } from '@kit.ArkTS';
 ```
 
-## BufferEncoding<sup>22+</sup>
+## BufferEncoding
 
 type BufferEncoding = 'ascii' | 'utf8' | 'utf-8' | 'utf16le' | 'ucs2' | 'ucs-2' | 'base64' | 'base64url' | 'latin1' | 'binary' | 'hex'
 
 表示支持的编码格式类型。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -43,13 +43,13 @@ type BufferEncoding = 'ascii' | 'utf8' | 'utf-8' | 'utf16le' | 'ucs2' | 'ucs-2' 
 | 'binary' | 表示二进制格式。 |
 | 'hex' | 表示十六进制格式。 |
 
-## fastbuffer.alloc<sup>22+</sup>
+## fastbuffer.alloc
 
 alloc(size: number, fill?: string | FastBuffer | number, encoding?: BufferEncoding): FastBuffer
 
 创建指定字节长度的FastBuffer对象并初始化。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -81,13 +81,13 @@ console.info(buf3.toString());
 // 输出结果：hello world
 ```
 
-## fastbuffer.allocUninitializedFromPool<sup>22+</sup>
+## fastbuffer.allocUninitializedFromPool
 
 allocUninitializedFromPool(size: number): FastBuffer
 
 从缓冲池中创建指定大小未初始化的FastBuffer对象，需要使用[fill](#fill)函数来初始化FastBuffer对象。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -113,13 +113,13 @@ buf.fill(0);
 // "buf":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ```
 
-## fastbuffer.allocUninitialized<sup>22+</sup>
+## fastbuffer.allocUninitialized
 
 allocUninitialized(size: number): FastBuffer
 
 创建指定大小未初始化的FastBuffer对象，需要使用[fill](#fill)函数来初始化FastBuffer对象。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -145,13 +145,13 @@ buf.fill(0);
 // "buf":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ```
 
-## fastbuffer.byteLength<sup>22+</sup>
+## fastbuffer.byteLength
 
 byteLength(value: string | FastBuffer | TypedArray | DataView | ArrayBuffer | SharedArrayBuffer, encoding?: BufferEncoding): number
 
 根据不同的编码格式，返回指定字符串的字节数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -182,13 +182,13 @@ console.info(`${str}: ${str.length} characters, ${fastbuffer.byteLength(str, 'ut
 // 输出结果：½ + ¼ = ¾: 9 characters, 12 bytes
 ```
 
-## fastbuffer.compare<sup>22+</sup>
+## fastbuffer.compare
 
 compare(buf1: FastBuffer | Uint8Array, buf2: FastBuffer | Uint8Array): -1 | 0 | 1
 
 返回两个FastBuffer对象的比较结果，通常用于对FastBuffer对象数组进行排序。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -226,7 +226,7 @@ console.info(Number(res).toString());
 // 输出结果：1
 ```
 
-## fastbuffer.concat<sup>22+</sup>
+## fastbuffer.concat
 
 concat(list: FastBuffer[] | Uint8Array[], totalLength?: number): FastBuffer
 
@@ -238,7 +238,9 @@ concat(list: FastBuffer[] | Uint8Array[], totalLength?: number): FastBuffer
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
+
+**注：**IOS对于Uint8Array数组仅支持单参数
 
 **参数：**
 
@@ -273,7 +275,7 @@ console.info(buf.toString('hex'));
 // 输出结果：3132333461626364
 ```
 
-## fastbuffer.from<sup>22+</sup>
+## fastbuffer.from
 
 from(array: number[]): FastBuffer
 
@@ -281,7 +283,7 @@ from(array: number[]): FastBuffer
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -305,13 +307,13 @@ console.info(buf.toString('hex'));
 // 输出结果：627566666572
 ```
 
-## fastbuffer.from<sup>22+</sup>
+## fastbuffer.from
 
 from(arrayBuffer: ArrayBuffer | SharedArrayBuffer, byteOffset?: number, length?: number): FastBuffer
 
 创建与`arrayBuffer`共享内存的指定长度的FastBuffer对象。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -349,7 +351,7 @@ console.info(buf.length.toString());
 // 输出结果：2
 ```
 
-## fastbuffer.from<sup>22+</sup>
+## fastbuffer.from
 
 from(buffer: FastBuffer | Uint8Array): FastBuffer
 
@@ -357,7 +359,7 @@ from(buffer: FastBuffer | Uint8Array): FastBuffer
 
 当入参为Uint8Array对象时，基于Uint8Array对象的内存创建新的FastBuffer对象并返回，保持数据的内存关联。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -400,13 +402,13 @@ console.info("uint8Array:", uint8Array)
 // 输出结果：1,1,1,1,1,1,1,1,1,1
 ```
 
-## fastbuffer.from<sup>22+</sup>
+## fastbuffer.from
 
 from(value: string, encoding?: BufferEncoding): FastBuffer
 
 根据指定编码格式的字符串，创建新的FastBuffer对象。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -438,13 +440,13 @@ console.info(buf2.toString());
 ```
 
 
-## fastbuffer.isBuffer<sup>22+</sup>
+## fastbuffer.isBuffer
 
 isBuffer(obj: Object): boolean
 
 判断`obj`是否为FastBuffer。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -482,13 +484,13 @@ console.info("result4 = " + result4);
 // 输出结果：result4 = false
 ```
 
-## fastbuffer.isEncoding<sup>22+</sup>
+## fastbuffer.isEncoding
 
 isEncoding(encoding: string): boolean
 
 判断`encoding`是否为支持的编码格式。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -519,7 +521,7 @@ console.info(fastbuffer.isEncoding('').toString());
 // 输出结果：false
 ```
 
-## fastbuffer.transcode<sup>22+</sup>
+## fastbuffer.transcode
 
 transcode(source: FastBuffer | Uint8Array, fromEnc: string, toEnc: string): FastBuffer
 
@@ -529,7 +531,7 @@ fastbuffer.transcode支持的编码：'ascii' | 'utf8' | 'utf16le'| 'ucs2' | 'la
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -555,13 +557,13 @@ console.info("newBuf = " + newBuf.toString('ascii'));
 // 输出结果：newBuf = buffer
 ```
 
-## FastBuffer<sup>22+</sup>
+## FastBuffer
 
 ### 属性
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 | 名称 | 类型 | 只读 | 可选 | 说明 |
 | -------- | -------- | -------- | -------- | -------- |
@@ -584,13 +586,13 @@ console.info(JSON.stringify(buf.byteOffset));
 // 输出结果：0
 ```
 
-### compare<sup>22+</sup>
+### compare
 
 compare(target: FastBuffer | Uint8Array, targetStart?: number, targetEnd?: number, sourceStart?: number, sourceEnd?: number): -1 | 0 | 1
 
 比较当前对象this与目标对象target，并返回比较结果。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -635,13 +637,13 @@ console.info(buf1.compare(buf2, 5, 6, 5).toString());
 // 输出结果：1
 ```
 
-### copy<sup>22+</sup>
+### copy
 
 copy(target: FastBuffer| Uint8Array, targetStart?: number, sourceStart?: number, sourceEnd?: number): number
 
 将`this`实例中指定位置的数据复制到`target`的指定位置上，并返回复制的字节总长度。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -686,13 +688,13 @@ console.info(buf2.toString('ascii', 0, 25));
 // 输出结果：!!!!!!!!qrst!!!!!!!!!!!!!
 ```
 
-### entries<sup>22+</sup>
+### entries
 
 entries(): IterableIterator&lt;[number,&nbsp;number]&gt;
 
 返回一个包含key值和value值的迭代器。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -724,13 +726,13 @@ while (!next.done) {
 }
 ```
 
-### equals<sup>22+</sup>
+### equals
 
 equals(otherBuffer: Uint8Array | FastBuffer): boolean
 
 逐字节比较`this`和otherBuffer是否相等。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -769,13 +771,13 @@ console.info(buf1.equals(buf3).toString());
 // 输出结果：false
 ```
 
-### fill<sup>22+</sup>
+### fill
 
 fill(value: string | FastBuffer | Uint8Array | number, offset?: number, end?: number, encoding?: BufferEncoding): FastBuffer
 
 使用`value`填充当前对象指定位置的数据，默认为循环填充，并返回填充后的FastBuffer对象。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -813,8 +815,7 @@ console.info(b.toString());
 // 输出结果：hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 ```
 
-
-### includes<sup>22+</sup>
+### includes
 
 includes(value: string | number | FastBuffer | Uint8Array, byteOffset?: number, encoding?: BufferEncoding): boolean
 
@@ -824,7 +825,7 @@ includes(value: string | number | FastBuffer | Uint8Array, byteOffset?: number, 
 
 当byteOffset大于等于this.length时，返回false。当byteOffset小于等于-this.length，查找整个FastBuffer中是否存在`value`。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -854,7 +855,7 @@ console.info(buf.includes('be').toString());
 // 输出结果：false
 ```
 
-### indexOf<sup>22+</sup>
+### indexOf
 
 indexOf(value: string | number | FastBuffer | Uint8Array, byteOffset?: number, encoding?: BufferEncoding): number
 
@@ -864,7 +865,7 @@ indexOf(value: string | number | FastBuffer | Uint8Array, byteOffset?: number, e
 
 当byteOffset大于等于this.length时，返回-1。当byteOffset小于等于-this.length，返回整个FastBuffer中首次出现`value`的索引。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -894,13 +895,13 @@ console.info(buf.indexOf('is').toString());
 // 输出结果：2
 ```
 
-### keys<sup>22+</sup>
+### keys
 
 keys(): IterableIterator&lt;number&gt;
 
 返回一个包含key值的迭代器。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -930,13 +931,13 @@ for (const key of keys) {
 */
 ```
 
-### values<sup>22+</sup>
+### values
 
 values(): IterableIterator&lt;number&gt;
 
 返回一个包含value的迭代器。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -968,7 +969,7 @@ while (!next.done) {
 }
 ```
 
-### lastIndexOf<sup>22+</sup>
+### lastIndexOf
 
 lastIndexOf(value: string | number | FastBuffer | Uint8Array, byteOffset?: number, encoding?: BufferEncoding): number
 
@@ -978,7 +979,7 @@ lastIndexOf(value: string | number | FastBuffer | Uint8Array, byteOffset?: numbe
 
 当byteOffset大于等于this.length时，返回整个FastBuffer中最后一次出现`value`的索引。当byteOffset小于等于-this.length时，返回-1。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1008,14 +1009,13 @@ console.info(buf.lastIndexOf('buffer').toString());
 // 输出结果：17
 ```
 
-
-### readBigInt64BE<sup>22+</sup>
+### readBigInt64BE
 
 readBigInt64BE(offset?: number): bigint
 
 从指定的`offset`处读取有符号的大端序64位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1050,13 +1050,13 @@ console.info(buf.readBigInt64BE(0).toString());
 // 输出结果：7161960797921896816
 ```
 
-### readBigInt64LE<sup>22+</sup>
+### readBigInt64LE
 
 readBigInt64LE(offset?: number): bigint
 
 从指定的`offset`处读取有符号的小端序64位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1091,13 +1091,13 @@ console.info(buf.readBigInt64LE(0).toString());
 // 输出结果：8100120198111388771
 ```
 
-### readBigUInt64BE<sup>22+</sup>
+### readBigUInt64BE
 
 readBigUInt64BE(offset?: number): bigint
 
 从指定的`offset`处读取无符号的大端序64位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1132,13 +1132,13 @@ console.info(buf.readBigUInt64BE(0).toString());
 // 输出结果：7161960797921896816
 ```
 
-### readBigUInt64LE<sup>22+</sup>
+### readBigUInt64LE
 
 readBigUInt64LE(offset?: number): bigint
 
 从指定的`offset`处读取无符号的小端序64位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1173,13 +1173,13 @@ console.info(buf.readBigUInt64LE(0).toString());
 // 输出结果：8100120198111388771
 ```
 
-### readDoubleBE<sup>22+</sup>
+### readDoubleBE
 
 readDoubleBE(offset?: number): number
 
 从指定的`offset`处读取64位大端序双精度值。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1213,13 +1213,13 @@ console.info(buf.readDoubleBE(0).toString());
 // 输出结果：8.20788039913184e-304
 ```
 
-### readDoubleLE<sup>22+</sup>
+### readDoubleLE
 
 readDoubleLE(offset?: number): number
 
 从指定的`offset`处读取64位小端序双精度值。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1253,13 +1253,13 @@ console.info(buf.readDoubleLE(0).toString());
 // 输出结果：5.447603722011605e-270
 ```
 
-### readFloatBE<sup>22+</sup>
+### readFloatBE
 
 readFloatBE(offset?: number): number
 
 从指定的`offset`处读取32位大端序浮点数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1293,13 +1293,13 @@ console.info(buf.readFloatBE(0).toString());
 // 输出结果：2.387939260590663e-38
 ```
 
-### readFloatLE<sup>22+</sup>
+### readFloatLE
 
 readFloatLE(offset?: number): number
 
 从指定的`offset`处读取32位小端序浮点数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1333,13 +1333,13 @@ console.info(buf.readFloatLE(0).toString());
 // 输出结果：1.539989614439558e-36
 ```
 
-### readInt8<sup>22+</sup>
+### readInt8
 
 readInt8(offset?: number): number
 
 从指定的`offset`处读取有符号的8位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1375,13 +1375,13 @@ console.info(buf.readInt8(1).toString());
 // 输出结果：5
 ```
 
-### readInt16BE<sup>22+</sup>
+### readInt16BE
 
 readInt16BE(offset?: number): number
 
 从指定的`offset`处读取有符号的大端序16位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1415,13 +1415,13 @@ console.info(buf.readInt16BE(0).toString());
 // 输出结果：5
 ```
 
-### readInt16LE<sup>22+</sup>
+### readInt16LE
 
 readInt16LE(offset?: number): number
 
 从指定的`offset`处读取有符号的小端序16位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1455,13 +1455,13 @@ console.info(buf.readInt16LE(0).toString());
 // 输出结果：1280
 ```
 
-### readInt32BE<sup>22+</sup>
+### readInt32BE
 
 readInt32BE(offset?: number): number
 
 从指定的`offset`处读取有符号的大端序32位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1495,13 +1495,13 @@ console.info(buf.readInt32BE(0).toString());
 // 输出结果：5
 ```
 
-### readInt32LE<sup>22+</sup>
+### readInt32LE
 
 readInt32LE(offset?: number): number
 
 从指定的`offset`处读取有符号的小端序32位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1535,13 +1535,13 @@ console.info(buf.readInt32LE(0).toString());
 // 输出结果：83886080
 ```
 
-### readIntBE<sup>22+</sup>
+### readIntBE
 
 readIntBE(offset: number, byteLength: number): number
 
 从指定的`offset`处读取byteLength个字节，并将结果解释为支持最高48位精度的大端序、二进制补码有符号值。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1578,14 +1578,13 @@ console.info(num.toString());
 // 输出结果：97
 ```
 
-
-### readIntLE<sup>22+</sup>
+### readIntLE
 
 readIntLE(offset: number, byteLength: number): number
 
 从指定的`offset`处读取`byteLength`个字节，并将结果解释为支持最高48位精度的小端序、二进制补码有符号值。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1621,13 +1620,13 @@ console.info(buf.readIntLE(0, 6).toString(16));
 // 输出结果：-546f87a9cbee
 ```
 
-### readUInt8<sup>22+</sup>
+### readUInt8
 
 readUInt8(offset?: number): number
 
 从`offset`处读取8位无符号整型数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1664,7 +1663,7 @@ console.info(buf.readUInt8(1).toString());
 // 输出结果：254
 ```
 
-### readUInt16BE<sup>22+</sup>
+### readUInt16BE
 
 readUInt16BE(offset?: number): number
 
@@ -1672,7 +1671,7 @@ readUInt16BE(offset?: number): number
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -1707,13 +1706,13 @@ console.info(buf.readUInt16BE(1).toString(16));
 // 输出结果：3456
 ```
 
-### readUInt16LE<sup>22+</sup>
+### readUInt16LE
 
 readUInt16LE(offset?: number): number
 
 从指定的`offset`处的buf读取无符号的小端序16位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1750,13 +1749,13 @@ console.info(buf.readUInt16LE(1).toString(16));
 // 输出结果：5634
 ```
 
-### readUInt32BE<sup>22+</sup>
+### readUInt32BE
 
 readUInt32BE(offset?: number): number
 
 从指定的`offset`处的buf读取无符号的大端序32位整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1791,7 +1790,7 @@ console.info(buf.readUInt32BE(0).toString(16));
 // 输出结果：12345678
 ```
 
-### readUInt32LE<sup>22+</sup>
+### readUInt32LE
 
 readUInt32LE(offset?: number): number
 
@@ -1799,7 +1798,7 @@ readUInt32LE(offset?: number): number
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -1832,13 +1831,13 @@ console.info(buf.readUInt32LE(0).toString(16));
 // 输出结果：78563412
 ```
 
-### readUIntBE<sup>22+</sup>
+### readUIntBE
 
 readUIntBE(offset: number, byteLength: number): number
 
 从指定的`offset`处的buf读取`byteLength`个字节，并将结果解释为支持最高48位精度的无符号大端序整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1874,13 +1873,13 @@ console.info(buf.readUIntBE(0, 6).toString(16));
 // 输出结果：1234567890ab
 ```
 
-### readUIntLE<sup>22+</sup>
+### readUIntLE
 
 readUIntLE(offset: number, byteLength: number): number
 
 从指定的`offset`处的buf读取`byteLength`个字节，并将结果解释为支持最高48位精度的无符号小端序整数。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1916,7 +1915,7 @@ console.info(buf.readUIntLE(0, 6).toString(16));
 // 输出结果：ab9078563412
 ```
 
-### subarray<sup>22+</sup>
+### subarray
 
 subarray(start?: number, end?: number): FastBuffer
 
@@ -1924,7 +1923,7 @@ subarray(start?: number, end?: number): FastBuffer
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -1954,13 +1953,13 @@ console.info(buf2.toString('ascii', 0, buf2.length));
 // 输出结果: abc
 ```
 
-### swap16<sup>22+</sup>
+### swap16
 
 swap16(): FastBuffer
 
 将当前对象转换为无符号的16位整数数组，并交换字节顺序。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -1992,13 +1991,13 @@ console.info(buf1.toString('hex'));
 // 输出结果：0201040306050807
 ```
 
-### swap32<sup>22+</sup>
+### swap32
 
 swap32(): FastBuffer
 
 将当前对象转换为无符号的32位整数数组，并交换字节顺序。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2030,13 +2029,13 @@ console.info(buf1.toString('hex'));
 // 输出结果：0403020108070605
 ```
 
-### swap64<sup>22+</sup>
+### swap64
 
 swap64(): FastBuffer
 
 将当前对象转换为无符号的64位整数数组，并交换字节顺序。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2068,13 +2067,13 @@ console.info(buf1.toString('hex'));
 // 输出结果：0807060504030201
 ```
 
-### toJSON<sup>22+</sup>
+### toJSON
 
 toJSON(): Object
 
 将Buffer转为JSON并返回。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2096,13 +2095,13 @@ console.info(JSON.stringify(obj));
 // 输出结果: {"type":"FastBuffer","data":[1,2,3,4,5]}
 ```
 
-### toString<sup>22+</sup>
+### toString
 
 toString(encoding?: string, start?: number, end?: number): string
 
 将当前对象中指定位置的数据转成指定编码格式的字符串并返回。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2141,13 +2140,13 @@ console.info(buf1.toString('utf-8'));
 // 输出结果: abcdefghijklmnopqrstuvwxyz
 ```
 
-### write<sup>22+</sup>
+### write
 
 write(str: string, offset?: number, length?: number, encoding?: string): number
 
 在FastBuffer对象的offset偏移处写入指定编码的字符串，写入的字节长度为length。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2192,13 +2191,13 @@ console.info("length = " + length);
 // 输出结果：length = 2
 ```
 
-### writeBigInt64BE<sup>22+</sup>
+### writeBigInt64BE
 
 writeBigInt64BE(value: bigint, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入有符号的大端序64位BigInt型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2235,13 +2234,13 @@ console.info("result = " + result);
 // 输出结果：result = 8
 ```
 
-### writeBigInt64LE<sup>22+</sup>
+### writeBigInt64LE
 
 writeBigInt64LE(value: bigint, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入有符号的小端序64位BigInt型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2278,11 +2277,11 @@ console.info("result = " + result);
 // 输出结果：result = 8
 ```
 
-### writeBigUInt64BE<sup>22+</sup>
+### writeBigUInt64BE
 
 writeBigUInt64BE(value: bigint, offset?: number): number
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 在FastBuffer对象的offset偏移处写入无符号的大端序64位BigUInt型数据。
 
@@ -2321,13 +2320,13 @@ console.info("result = " + result);
 // 输出结果：result = 8
 ```
 
-### writeBigUInt64LE<sup>22+</sup>
+### writeBigUInt64LE
 
 writeBigUInt64LE(value: bigint, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入无符号的小端序64位BigUInt型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2364,13 +2363,13 @@ console.info("result = " + result);
 // 输出结果：result = 8
 ```
 
-### writeDoubleBE<sup>22+</sup>
+### writeDoubleBE
 
 writeDoubleBE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入大端序的64位双浮点型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2407,13 +2406,13 @@ console.info("result = " + result);
 // 输出结果：result = 8
 ```
 
-### writeDoubleLE<sup>22+</sup>
+### writeDoubleLE
 
 writeDoubleLE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入小端序的64位双浮点型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2450,13 +2449,13 @@ console.info("result = " + result);
 // 输出结果：result = 8
 ```
 
-### writeFloatBE<sup>22+</sup>
+### writeFloatBE
 
 writeFloatBE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入大端序的32位浮点型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2494,13 +2493,13 @@ console.info("result = " + result);
 ```
 
 
-### writeFloatLE<sup>22+</sup>
+### writeFloatLE
 
 writeFloatLE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入小端序的32位浮点型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2537,13 +2536,13 @@ console.info("result = " + result);
 // 输出结果：result = 4
 ```
 
-### writeInt8<sup>22+</sup>
+### writeInt8
 
 writeInt8(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入8位有符号整型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2584,13 +2583,13 @@ console.info("result1 = " + result1);
 ```
 
 
-### writeInt16BE<sup>22+</sup>
+### writeInt16BE
 
 writeInt16BE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入大端序的16位有符号整型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2628,13 +2627,13 @@ console.info("result = " + result);
 ```
 
 
-### writeInt16LE<sup>22+</sup>
+### writeInt16LE
 
 writeInt16LE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入小端序的16位有符号整型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2671,13 +2670,13 @@ console.info("result = " + result);
 // 输出结果：result = 2
 ```
 
-### writeInt32BE<sup>22+</sup>
+### writeInt32BE
 
 writeInt32BE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入大端序的32位有符号整型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2715,13 +2714,13 @@ console.info("result = " + result);
 ```
 
 
-### writeInt32LE<sup>22+</sup>
+### writeInt32LE
 
 writeInt32LE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入小端序的32位有符号整型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2758,13 +2757,13 @@ console.info("result = " + result);
 // 输出结果：result = 4
 ```
 
-### writeIntBE<sup>22+</sup>
+### writeIntBE
 
 writeIntBE(value: number, offset: number, byteLength: number): number
 
 在FastBuffer对象的offset偏移处写入大端序的有符号数据，字节长度为byteLength。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2803,13 +2802,13 @@ console.info("result = " + result);
 ```
 
 
-### writeIntLE<sup>22+</sup>
+### writeIntLE
 
 writeIntLE(value: number, offset: number, byteLength: number): number
 
 在FastBuffer对象的offset偏移处写入小端序的有符号数据，字节长度为byteLength。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2847,13 +2846,13 @@ console.info("result = " + result);
 // 输出结果：result = 6
 ```
 
-### writeUInt8<sup>22+</sup>
+### writeUInt8
 
 writeUInt8(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入8位无符号整型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2899,13 +2898,13 @@ console.info("result3 = " + result3);
 // 输出结果：result3 = 4
 ```
 
-### writeUInt16BE<sup>22+</sup>
+### writeUInt16BE
 
 writeUInt16BE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入大端序的16位无符号整型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2945,13 +2944,13 @@ console.info("result1 = " + result1);
 // 输出结果：result1 = 4
 ```
 
-### writeUInt16LE<sup>22+</sup>
+### writeUInt16LE
 
 writeUInt16LE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入小端序的16位无符号整型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -2991,13 +2990,13 @@ console.info("result1 = " + result1);
 // 输出结果：result1 = 4
 ```
 
-### writeUInt32BE<sup>22+</sup>
+### writeUInt32BE
 
 writeUInt32BE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入大端序的32位无符号整型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -3034,13 +3033,13 @@ console.info("result = " + result);
 // 输出结果：result = 4
 ```
 
-### writeUInt32LE<sup>22+</sup>
+### writeUInt32LE
 
 writeUInt32LE(value: number, offset?: number): number
 
 在FastBuffer对象的offset偏移处写入小端序的32位无符号整型数据。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -3077,13 +3076,13 @@ console.info("result = " + result);
 // 输出结果：result = 4
 ```
 
-### writeUIntBE<sup>22+</sup>
+### writeUIntBE
 
 writeUIntBE(value: number, offset: number, byteLength: number): number
 
 在FastBuffer对象的offset偏移处写入大端序的无符号数据，字节长度为byteLength。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -3121,13 +3120,13 @@ console.info("result = " + result);
 // 输出结果：result = 6
 ```
 
-### writeUIntLE<sup>22+</sup>
+### writeUIntLE
 
 writeUIntLE(value: number, offset: number, byteLength: number): number
 
 在FastBuffer对象的offset偏移处写入小端序的无符号数据，字节长度为byteLength。
 
-**原子化服务API**：从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 

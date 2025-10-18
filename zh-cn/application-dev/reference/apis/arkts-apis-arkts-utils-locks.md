@@ -8,7 +8,7 @@
 
 > **说明：**
 >
-> 本模块首批接口从API version 12开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+> 本模块首批接口从API version 22开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 >
 > 此模块仅支持在ArkTS文件（文件后缀为.ets）中导入使用。
 
@@ -18,21 +18,21 @@
 import { ArkTSUtils } from '@kit.ArkTS'
 ```
 
-## ConditionVariable<sup>22+</sup>
+## ConditionVariable
 
 实现异步等待功能的类，支持异步等待通知操作。该类使用[@Sendable装饰器](../../arkts-utils/arkts-sendable.md)装饰。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
-### constructor<sup>22+</sup>
+### constructor
 
 constructor()
 
 默认构造函数。创建一个异步等待通知操作的对象。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -42,13 +42,13 @@ constructor()
 let conditionVariable = new ArkTSUtils.locks.ConditionVariable();
 ```
 
-### request<sup>22+</sup>
+### request
 
 static request(name: string): ConditionVariable
 
 使用指定的名称查找或创建（如果未找到）异步等待通知操作的对象。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -62,7 +62,7 @@ static request(name: string): ConditionVariable
 
 | 类型                    | 说明                             |
 | ----------------------- | -------------------------------- |
-| [ConditionVariable](#conditionvariable22) | 返回查找到或创建后的异步等待通知操作的实例。 |
+| [ConditionVariable](#conditionvariable) | 返回查找到或创建后的异步等待通知操作的实例。 |
 
 **示例：**
 
@@ -70,13 +70,13 @@ static request(name: string): ConditionVariable
 let conditionVariable = ArkTSUtils.locks.ConditionVariable.request("conditionName");
 ```
 
-### wait<sup>22+</sup>
+### wait
 
 wait(): Promise\<void>
 
 异步调用进入等待中，将在被唤醒后继续执行。使用Promise异步回调。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -95,13 +95,13 @@ conditionVariable.wait().then(() => {
 });
 ```
 
-### waitFor<sup>22+</sup>
+### waitFor
 
 waitFor(timeout : number) : Promise\<void>
 
 异步调用进入等待中, 将在被唤醒或者等待时间结束后继续执行。使用Promise异步回调。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -126,13 +126,13 @@ conditionVariable.waitFor(3000).then(() => {
 });
 ```
 
-### notifyAll<sup>22+</sup>
+### notifyAll
 
 notifyAll() : void
 
 通知所有等待的线程。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -147,13 +147,13 @@ conditionVariable.waitFor(3000).then(() => {
 conditionVariable.notifyAll();
 ```
 
-### notifyOne<sup>22+</sup>
+### notifyOne
 
 notifyOne() : void
 
 通知第一个等待的线程。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 

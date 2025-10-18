@@ -20,8 +20,6 @@ import { collections } from '@kit.ArkTS';
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
-
 | 名称   | 类型   | 只读 | 可选 | 说明              |
 | ------ | ------ | ---- | ---- | ----------------|
 | buffer | ArrayBuffer | 是   | 否  | ArkTS Uint8ClampedArray底层使用的buffer。|
@@ -30,13 +28,13 @@ import { collections } from '@kit.ArkTS';
 | length | number | 是   | 否  | ArkTS Uint8ClampedArray元素个数。|
 | BYTES_PER_ELEMENT | number | 是   | 否   | ArkTS Uint8ClampedArray中每个元素所占用的字节数。|
 
-## of<sup>22+</sup>
+## of
 
 static of(...items: number[]): Uint8ClampedArray
 
 通过可变数量的参数创建一个新的ArkTS Uint8ClampedArray对象，参数个数可以是0个、1个或者多个。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -67,13 +65,13 @@ let arr: collections.Uint8ClampedArray = collections.Uint8ClampedArray.of(1, 2, 
 console.info(arr.toString()); // 预期输出：1,2,3,4
 ```
 
-## toString<sup>22+</sup>
+## toString
 
 toString(): string
 
 ArkTS Uint8ClampedArray转换为字符串。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -100,13 +98,13 @@ let stringArray = array.toString();
 console.info(stringArray); // 预期输出：1,2,3,4,5
 ```
 
-## toLocaleString<sup>22+</sup>
+## toLocaleString
 
 toLocaleString(): string
 
 根据当前应用的系统地区获取符合当前文化习惯的数字表示形式，让每个元素调用自己的toLocaleString方法把数字转换为字符串，然后使用逗号将每个元素的结果字符串按照顺序拼接成字符串。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -134,13 +132,13 @@ let stringArray = array.toLocaleString();
 console.info(stringArray); // 预期输出：100,110,120
 ```
 
-## lastIndexOf<sup>22+</sup>
+## lastIndexOf
 
 lastIndexOf(searchElement: number, fromIndex?: number): number
 
 返回ArkTS Uint8ClampedArray实例中最后一次出现searchElement的索引，如果对象不包含，则为-1。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -176,13 +174,13 @@ console.info(array.lastIndexOf(9, 2) + ''); // 预期输出：2
 console.info(array.lastIndexOf(9, -2) + ''); // 预期输出：-1
 ```
 
-## reduceRight<sup>22+</sup>
+## reduceRight
 
 reduceRight(callbackFn: TypedArrayReduceCallback\<number, number, Uint8ClampedArray>): number
 
 反向遍历ArkTS Uint8ClampedArray，对ArkTS Uint8ClampedArray中的每个元素执行归约函数，并返回最终的归约结果。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -215,13 +213,13 @@ let reducedValue: number = array.reduceRight((accumulator: number, value: number
 console.info(reducedValue + ''); // 预期输出： 15
 ```
 
-## reduceRight<sup>22+</sup>
+## reduceRight
 
 reduceRight\<U = number>(callbackFn: TypedArrayReduceCallback\<U, number, Uint8ClampedArray>, initialValue: U): U
 
 反向遍历ArkTS Uint8ClampedArray，对ArkTS Uint8ClampedArray中的每个元素执行归约函数，且接收一个初始值作为归约函数首次调用的参数，并返回最终的归约结果。
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 

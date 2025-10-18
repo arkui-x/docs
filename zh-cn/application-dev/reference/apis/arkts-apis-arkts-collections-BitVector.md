@@ -18,8 +18,6 @@ import { collections } from '@kit.ArkTS';
 
 ## 属性
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
-
 **系统能力：** SystemCapability.Utils.Lang
 
 | 名称   | 类型   | 只读 | 可选 | 说明                  |
@@ -33,7 +31,7 @@ constructor(length: number)
 
 BitVector的构造函数。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -56,7 +54,7 @@ push(element:number): boolean
 
 在BitVector尾部插入元素。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -99,7 +97,7 @@ pop(): number
 
 弹出BitVector尾部的元素。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -137,7 +135,7 @@ has(element: number, fromIndex: number, toIndex: number): boolean
 
 判断范围内是否包含特定bit值。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -184,7 +182,7 @@ setBitsByRange(element: number, fromIndex: number, toIndex: number): void
 
 将BitVector中指定范围的元素均设为特定bit值。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -225,7 +223,7 @@ setAllBits(element: number): void
 
 将BitVector中所有元素均设为特定bit值。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -263,7 +261,7 @@ getBitsByRange(fromIndex: number, toIndex: number): BitVector
 
 获取指定范围内的bit值。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -314,7 +312,7 @@ resize(size: number): void
 
 若size小于等于原BitVector的长度，则将原BitVector按size长度大小裁剪。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -355,7 +353,7 @@ getBitCountByRange(element: number, fromIndex: number, toIndex: number): number
 
 统计指定范围内获取指定bit值的数量。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -403,7 +401,7 @@ getIndexOf(element: number, fromIndex: number, toIndex: number): number
 
 返回指定bit值首次出现时的索引值，查找失败返回-1。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -451,7 +449,7 @@ getLastIndexOf(element: number, fromIndex: number, toIndex: number): number
 
 返回指定bit值最后一次出现时的下标值，查找失败返回-1。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -499,7 +497,7 @@ flipBitByIndex(index: number): void
 
 翻转BitVector指定索引处的bit值，0翻转为1，1翻转为0。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -538,7 +536,7 @@ flipBitsByRange(fromIndex: number, toIndex: number): void
 
 翻转BitVector指定范围内的bit值，0翻转为1，1翻转为0。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -578,7 +576,7 @@ values(): IterableIterator\<number>
 
 返回一个新的迭代器对象，该对象包含BitVector中每个元素的值。
 
-**原子化服务API**：从API version 22 开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Utils.Lang
 

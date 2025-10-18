@@ -834,7 +834,7 @@ async function taskpoolGroupCancelTest() {
 taskpoolGroupCancelTest()
 ```
 
-## TaskResult<sup>20+</sup>
+## TaskResult<sup>22+</sup>
 
 处于等待或执行过程中的任务进行取消操作后，在catch分支里捕获到BusinessError里的补充信息。其他场景下该信息为undefined。
 
@@ -843,8 +843,6 @@ taskpoolGroupCancelTest()
 ### 属性
 
 **系统能力：** SystemCapability.Utils.Lang
-
-**原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
 
 | 名称     | 类型                | 只读 | 可选 | 说明                                                           |
 | -------- | ------------------ | ---- | ---- | ------------------------------------------------------------- |
@@ -935,11 +933,11 @@ cancel(taskId: number): void
 
 通过任务ID取消任务池中的任务。如果任务在taskpool等待队列中，取消后任务将不再执行，并返回任务取消的异常。如果任务已在taskpool工作线程中执行，取消不影响任务继续执行，执行结果在catch分支返回。使用isCanceled可以对任务取消行为作出响应。taskpool.cancel对其之前的taskpool.execute或taskpool.executeDelayed生效。在其他线程调用taskpool.cancel时，需注意其行为是异步的，可能影响之后的taskpool.execute或taskpool.executeDelayed。
 
-从API version 22开始，支持在执行cancel操作后，在catch分支里使用BusinessError<[taskpool.TaskResult](#taskresult20)>的泛型标记。这可以用来获取任务中抛出的异常信息或最终的执行结果。
+从API version 22开始，支持在执行cancel操作后，在catch分支里使用BusinessError<[taskpool.TaskResult](#taskresult22)>的泛型标记。这可以用来获取任务中抛出的异常信息或最终的执行结果。
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -1006,7 +1004,7 @@ AsyncRunner的构造函数。构造一个非全局的异步队列，如果参数
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -1042,7 +1040,7 @@ AsyncRunner的构造函数用于构造一个全局异步队列。如果队列名
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -1084,7 +1082,7 @@ execute(task: Task, priority?: Priority): Promise\<Object>
 
 **系统能力：** SystemCapability.Utils.Lang
 
-**原子化服务API：** 从API version 22开始，该接口支持在原子化服务中使用。
+**支持平台：** Android、iOS
 
 **参数：**
 
