@@ -9,6 +9,40 @@
 > - 本模块首批接口从 API version 22 开始支持跨平台。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 > 本模块能力仅支持WGS-84坐标系。
 
+## 依赖权限
+
+#### Android平台
+
+**说明：** 在Android平台上使用位置服务接口时，需要配置位置服务权限。**如果没有配置位置服务权限会导致运行异常**。
+
+**配置方法：** 在.arkui-x/android/app/src/main/AndroidManifest.xml的uses-permission字段中加入android.permission.ACCESS_COARSE_LOCATION，android.permission.ACCESS_FINE_LOCATION。
+
+示例如下：
+
+```
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+```
+
+#### iOS平台
+
+**说明：** 在iOS平台上使用位置服务接口时，需要配置位置服务权限。**如果没有配置位置服务权限会导致运行异常**。
+
+**配置方法：** 在Xcode中右击项目中的info.plist，选择Open As > Source Code，在plist标签中加入NSLocationWhenInUseUsageDescription。
+
+示例如下：
+
+```
+<plist version="1.0">
+<dict>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>需要获取您的位置信息，以提供WiFi BSSID获取及定位相关服务</string>
+</dict>
+</plist>
+
+```
+
+
 ## 导入模块
 
 ```ts
@@ -607,6 +641,8 @@ off(type: 'locationChange', callback?: Callback&lt;Location&gt;): void
 on(type: 'locationError', callback: Callback&lt;LocationError&gt;): void
 
 订阅持续定位过程中的错误码。使用callback异步回调。
+
+在Android API Level 29及以上，此回调不会被调用。
 
 **支持平台：** Android 、iOS
 
