@@ -18,7 +18,7 @@ type AbilityState = 'enable' | 'disable' | 'install'
 
 辅助应用状态类型。
 
-**系统能力：**以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** 以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
 
 | 类型      | 说明       | Android 平台 | iOS 平台 |
 | ------- | -------- | ------- | ------- |
@@ -32,7 +32,7 @@ type AbilityType = 'audible' | 'generic' | 'haptic' | 'spoken' | 'visual' | 'all
 
 无障碍辅助应用类型。
 
-**系统能力：**以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** 以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
 
 | 类型      | 说明               | Android 平台 | iOS 平台 |
 | --------- | ------------------ | ------------ | -------- |
@@ -47,7 +47,7 @@ type AbilityType = 'audible' | 'generic' | 'haptic' | 'spoken' | 'visual' | 'all
 
 辅助应用信息。
 
-**系统能力：**以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** 以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
 
 ### 属性
 
@@ -68,7 +68,7 @@ type Capability = 'retrieve' | 'touchGuide' | 'keyEventObserver' | 'zoom' | 'ges
 
 辅助应用能力类型。
 
-**系统能力：**以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** 以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
 
 | 类型               | 说明                                       | Android 平台 | iOS 平台 |
 | ------------------ | ------------------------------------------ | ------------ | -------- |
@@ -82,7 +82,9 @@ type Capability = 'retrieve' | 'touchGuide' | 'keyEventObserver' | 'zoom' | 'ges
 
 界面变更事件。
 
-**系统能力：**以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** 以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
+
+**注：** Action 由于是必填项可以传支持的任何值，在跨平台侧没有使用该值
 
 ### 属性
 
@@ -102,7 +104,9 @@ constructor(jsonObject: Object)
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
+
+**注：** Action 由于是必填项可以传支持的任何值，在跨平台侧没有使用该值
 
 **参数：**
 
@@ -122,6 +126,32 @@ constructor(jsonObject: Object)
   });
   ```
 
+### constructor
+
+constructor(type: EventType, bundleName: string, triggerAction: Action)
+
+构造函数。
+
+**系统能力**：SystemCapability.BarrierFree.Accessibility.Core
+
+**注：** Action 由于是必填项可以传支持的任何值，在跨平台侧没有使用该值
+
+**参数：**
+
+| 参数名  | 类型                | 必填 | 说明            |
+|------|-------------------|---|---------------|
+| type | [EventType](#eventtype)          | 是 | 无障碍事件类型。      |
+| bundleName | string | 是 | 目标应用名。        |
+| triggerAction | Action | 是 | 触发事件的 Action。 |
+
+**示例：**
+
+  ```ts
+  import { accessibility } from '@kit.AccessibilityKit';
+
+  let eventInfo = new accessibility.EventInfo('click', 'com.example.MyApplication', 'click');
+  ```
+
 ## EventType
 
 type EventType = 'accessibilityFocus' | 'accessibilityFocusClear' |
@@ -132,7 +162,7 @@ type EventType = 'accessibilityFocus' | 'accessibilityFocusClear' |
 
 无障碍事件类型。
 
-**系统能力：**以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** 以下各项对应的系统能力均为 SystemCapability.BarrierFree.Accessibility.Core
 
 | 类型                      | 说明                     | Android              | iOS                  |
 | ----------------------- |------------------------|------------------------|------------------------|
@@ -145,9 +175,9 @@ getAccessibilityExtensionList(abilityType: AbilityType, stateType: AbilityState)
 
 查询辅助应用列表，使用Promise异步回调。
 
-**支持平台：**  Android
+**支持平台：** Android
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -216,7 +246,7 @@ getAccessibilityExtensionList(abilityType: AbilityType, stateType: AbilityState,
 
 **支持平台：** Android
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -286,7 +316,7 @@ getAccessibilityExtensionListSync(abilityType: AbilityType, stateType: AbilitySt
 
 **支持平台：** Android
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -358,7 +388,7 @@ on(type: 'accessibilityStateChange', callback: Callback&lt;boolean&gt;): void
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -394,7 +424,7 @@ on(type: 'touchGuideStateChange', callback: Callback&lt;boolean&gt;): void
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Vision
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Vision
 
 **参数：**
 
@@ -430,7 +460,7 @@ on(type: 'screenReaderStateChange', callback: Callback&lt;boolean&gt;): void
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -463,9 +493,9 @@ on(type: 'touchModeChange', callback: Callback&lt;string&gt;): void
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
-**注：**跨平台不支持单击模式
+**注：** 跨平台不支持单击模式
 
 **参数：**
 
@@ -512,7 +542,7 @@ off(type: 'accessibilityStateChange', callback?: Callback&lt;boolean&gt;): void
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -545,7 +575,7 @@ off(type: 'touchGuideStateChange', callback?: Callback&lt;boolean&gt;): void
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -578,7 +608,7 @@ off(type: 'screenReaderStateChange', callback?: Callback&lt;boolean&gt;): void
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -611,7 +641,7 @@ off(type: 'touchModeChange', callback?: Callback&lt;string&gt;): void
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -662,7 +692,7 @@ isOpenAccessibilitySync(): boolean
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **返回值：**
 
@@ -689,7 +719,7 @@ isOpenTouchGuideSync(): boolean
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Vision
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Vision
 
 **返回值：**
 
@@ -713,7 +743,7 @@ isScreenReaderOpenSync(): boolean
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Vision
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Vision
 
 **返回值：**
 
@@ -737,7 +767,7 @@ sendAccessibilityEvent(event: EventInfo): Promise&lt;void&gt;
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -784,7 +814,7 @@ sendAccessibilityEvent(event: EventInfo, callback: AsyncCallback&lt;void&gt;): v
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
 **参数：**
 
@@ -850,9 +880,9 @@ getTouchModeSync(): string
 
 **支持平台：** Android、iOS
 
-**系统能力：**SystemCapability.BarrierFree.Accessibility.Core
+**系统能力：** SystemCapability.BarrierFree.Accessibility.Core
 
-**注：**跨平台不支持单击模式
+**注：** 跨平台不支持单击模式
 
 **返回值：**
 
@@ -877,4 +907,3 @@ struct Index {
   }
 }
 ```
-
