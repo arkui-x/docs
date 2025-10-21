@@ -56,13 +56,13 @@ import { geoLocationManager } from '@kit.LocationKit';
 
 **系统能力：** SystemCapability.Location.Location.Geocoder
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| locale | string | 否 | 是 | 指定位置描述信息的语言，“zh”代表中文，“en”代表英文。默认值从设置中的“语言和地区”获取。 |
-| country<sup>22+</sup> | string | 否 | 是 | 限制查询结果在指定的国家内，采用ISO 3166-1 alpha-2 。“CN”代表中国。默认值从设置中的“语言和地区”获取。 |
-| latitude | number | 否 | 否 | 表示纬度信息，正值表示北纬，负值表示南纬。取值范围为-90到90。仅支持WGS84坐标系。 |
-| longitude | number | 否 | 否 | 表示经度信息，正值表示东经，负值表示西经。取值范围为-180到180。仅支持WGS84坐标系。 |
-| maxItems | number | 否 | 是 | 指定返回位置信息的最大个数。取值范围为大于等于0，推荐该值小于10。默认值是1。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| locale | string | 否 | 是 | 指定位置描述信息的语言，“zh”代表中文，“en”代表英文。默认值从设置中的“语言和地区”获取。 | 支持 | 支持 |
+| country<sup>22+</sup> | string | 否 | 是 | 限制查询结果在指定的国家内，采用ISO 3166-1 alpha-2 。“CN”代表中国。默认值从设置中的“语言和地区”获取。 | 支持 | 支持 |
+| latitude | number | 否 | 否 | 表示纬度信息，正值表示北纬，负值表示南纬。取值范围为-90到90。仅支持WGS84坐标系。 | 支持 | 支持 |
+| longitude | number | 否 | 否 | 表示经度信息，正值表示东经，负值表示西经。取值范围为-180到180。仅支持WGS84坐标系。 | 支持 | 支持 |
+| maxItems | number | 否 | 是 | 指定返回位置信息的最大个数。取值范围为大于等于0，推荐该值小于10。默认值是1。 | 支持 | 支持 |
 
 
 ## GeoCodeRequest
@@ -73,16 +73,16 @@ import { geoLocationManager } from '@kit.LocationKit';
 
 **系统能力：** SystemCapability.Location.Location.Geocoder
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| locale | string | 否 | 是 | 表示位置描述信息的语言，“zh”代表中文，“en”代表英文。默认值从设置中的“语言和地区”获取。 |
-| country<sup>22+</sup> | string | 否 | 是 | 限制查询结果在指定的国家内，采用ISO 3166-1 alpha-2 。“CN”代表中国。默认值从设置中的“语言和地区”获取。 |
-| description | string | 否 | 否 | 表示位置信息描述，如“上海市浦东新区xx路xx号”，字符串长度不超过100。 |
-| maxItems | number | 否 | 是 | 表示返回位置信息的最大个数。取值范围为大于等于0，推荐该值小于10。默认值是1。 |
-| minLatitude | number | 否 | 是 | 表示最小纬度信息，与下面三个参数一起，表示一个经纬度范围。取值范围为-90到90。仅支持WGS84坐标系。如果该参数有值时，下面三个参数必填。 |
-| minLongitude | number | 否 | 是 | 表示最小经度信息。取值范围为-180到180。仅支持WGS84坐标系。 |
-| maxLatitude | number | 否 | 是 | 表示最大纬度信息。取值范围为-90到90。仅支持WGS84坐标系。 |
-| maxLongitude | number | 否 | 是 | 表示最大经度信息。取值范围为-180到180。仅支持WGS84坐标系。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| locale | string | 否 | 是 | 表示位置描述信息的语言，“zh”代表中文，“en”代表英文。默认值从设置中的“语言和地区”获取。 | 支持 | 支持 |
+| country<sup>22+</sup> | string | 否 | 是 | 限制查询结果在指定的国家内，采用ISO 3166-1 alpha-2 。“CN”代表中国。默认值从设置中的“语言和地区”获取。 | 支持 | 支持 |
+| description | string | 否 | 否 | 表示位置信息描述，如“上海市浦东新区xx路xx号”，字符串长度不超过100。 | 支持 | 支持 |
+| maxItems | number | 否 | 是 | 表示返回位置信息的最大个数。取值范围为大于等于0，推荐该值小于10。默认值是1。 | 支持 | 支持 |
+| minLatitude | number | 否 | 是 | 表示最小纬度信息，与下面三个参数一起，表示一个经纬度范围。取值范围为-90到90。仅支持WGS84坐标系。如果该参数有值时，下面三个参数必填。 | 支持 | 支持 |
+| minLongitude | number | 否 | 是 | 表示最小经度信息。取值范围为-180到180。仅支持WGS84坐标系。 | 支持 | 支持 |
+| maxLatitude | number | 否 | 是 | 表示最大纬度信息。取值范围为-90到90。仅支持WGS84坐标系。 | 支持 | 支持 |
+| maxLongitude | number | 否 | 是 | 表示最大经度信息。取值范围为-180到180。仅支持WGS84坐标系。 | 支持 | 支持 |
 
 
 ## LocationRequest
@@ -95,13 +95,13 @@ import { geoLocationManager } from '@kit.LocationKit';
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| priority | [LocationRequestPriority](#locationrequestpriority) | 否 | 是 | 表示优先级信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestPriority](#locationrequestpriority)的定义。默认值为FIRST_FIX。 |
-| scenario | [LocationRequestScenario](#locationrequestscenario) | 否 | 是 | 表示场景信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestScenario](#locationrequestscenario)的定义。默认值为UNSET。 |
-| timeInterval | number | 否 | 是 |  表示上报位置信息的时间间隔，单位为秒。<br/>取值范围为大于等于0的值。<br/>默认值为对应定位模式下允许的最小时间间隔：<br/>默认值在GNSS定位时为1秒，网络定位时为20秒。<br/>当设置值小于最小间隔时，以最小时间间隔生效。<br/>设置为0时不对时间间隔进行校验，直接上报位置信息。 |
-| distanceInterval | number | 否 | 是 | 表示上报位置信息的距离间隔。单位是米，默认值为0，取值范围为大于等于0。等于0时对位置上报距离间隔无限制。 |
-| maxAccuracy | number | 否 | 是 |  应用向系统请求位置信息时要求的精度值，单位为米。该参数仅在精确位置功能场景（即同时授权了ohos.permission.APPROXIMATELY_LOCATION和ohos.permission.LOCATION 权限）下有效，模糊位置功能生效场景（即仅授权了ohos.permission.APPROXIMATELY_LOCATION 权限）下该字段无意义。<br/>该参数生效的情况下，系统会对比GNSS或网络定位服务上报的位置信息与应用的位置信息申请。当位置信息[Location](#location)中的精度值（accuracy）小于等于应用要求的精度值（maxAccuracy）时，位置信息会返回给应用；否则系统将丢弃本次收到的位置信息。<br/>默认值为0，表示不限制位置信息的精度，取值范围为大于等于0。<br/>当scenario为NAVIGATION/TRAJECTORY_TRACKING/CAR_HAILING或者priority为ACCURACY时建议设置maxAccuracy为大于10的值。<br/>当scenario为DAILY_LIFE_SERVICE/NO_POWER或者priority为LOW_POWER/FIRST_FIX时建议设置maxAccuracy为大于100的值。<br/> |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| priority | [LocationRequestPriority](#locationrequestpriority) | 否 | 是 | 表示优先级信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestPriority](#locationrequestpriority)的定义。默认值为FIRST_FIX。 | 支持 | 支持 |
+| scenario | [LocationRequestScenario](#locationrequestscenario) | 否 | 是 | 表示场景信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestScenario](#locationrequestscenario)的定义。默认值为UNSET。 | 支持 | 支持 |
+| timeInterval | number | 否 | 是 |  表示上报位置信息的时间间隔，单位为秒。<br/>取值范围为大于等于0的值。<br/>默认值为对应定位模式下允许的最小时间间隔：<br/>默认值在GNSS定位时为1秒，网络定位时为20秒。<br/>当设置值小于最小间隔时，以最小时间间隔生效。<br/>设置为0时不对时间间隔进行校验，直接上报位置信息。 | 支持 | 支持 |
+| distanceInterval | number | 否 | 是 | 表示上报位置信息的距离间隔。单位是米，默认值为0，取值范围为大于等于0。等于0时对位置上报距离间隔无限制。 | 支持 | 支持 |
+| maxAccuracy | number | 否 | 是 |  应用向系统请求位置信息时要求的精度值，单位为米。该参数仅在精确位置功能场景（即同时授权了ohos.permission.APPROXIMATELY_LOCATION和ohos.permission.LOCATION 权限）下有效，模糊位置功能生效场景（即仅授权了ohos.permission.APPROXIMATELY_LOCATION 权限）下该字段无意义。<br/>该参数生效的情况下，系统会对比GNSS或网络定位服务上报的位置信息与应用的位置信息申请。当位置信息[Location](#location)中的精度值（accuracy）小于等于应用要求的精度值（maxAccuracy）时，位置信息会返回给应用；否则系统将丢弃本次收到的位置信息。<br/>默认值为0，表示不限制位置信息的精度，取值范围为大于等于0。<br/>当scenario为NAVIGATION/TRAJECTORY_TRACKING/CAR_HAILING或者priority为ACCURACY时建议设置maxAccuracy为大于10的值。<br/>当scenario为DAILY_LIFE_SERVICE/NO_POWER或者priority为LOW_POWER/FIRST_FIX时建议设置maxAccuracy为大于100的值。<br/> | 支持 | 支持 |
 
 
 ## CurrentLocationRequest
@@ -114,12 +114,12 @@ import { geoLocationManager } from '@kit.LocationKit';
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| priority | [LocationRequestPriority](#locationrequestpriority) | 否 | 是 | 表示优先级信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestPriority](#locationrequestpriority)的定义。默认值为FIRST_FIX。|
-| scenario | [LocationRequestScenario](#locationrequestscenario) | 否 | 是 | 表示场景信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestScenario](#locationrequestscenario)的定义。默认值为UNSET。 |
-| maxAccuracy | number | 否 | 是|  应用向系统请求位置信息时要求的精度值，单位为米。该参数仅在精确位置功能场景（即同时授权了ohos.permission.APPROXIMATELY_LOCATION和ohos.permission.LOCATION 权限）下有效，模糊位置功能生效场景（即仅授权了ohos.permission.APPROXIMATELY_LOCATION 权限）下该字段无意义。<br/>该参数生效的情况下，系统会对比GNSS或网络定位服务上报的位置信息与应用的位置信息申请。当位置信息[Location](#location)中的精度值（accuracy）小于等于应用要求的精度值（maxAccuracy）时，位置信息会返回给应用；否则系统将丢弃本次收到的位置信息。<br/>默认值为0，表示不限制位置信息的精度，取值范围为大于等于0。<br/>当scenario为NAVIGATION/TRAJECTORY_TRACKING/CAR_HAILING或者priority为ACCURACY时建议设置maxAccuracy为大于10的值。<br/>当scenario为DAILY_LIFE_SERVICE/NO_POWER或者priority为LOW_POWER/FIRST_FIX时建议设置maxAccuracy为大于100的值。 |
-| timeoutMs | number | 否 | 是 | 表示超时时间，单位是毫秒，最小为1000毫秒。取值范围为大于等于1000。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| priority | [LocationRequestPriority](#locationrequestpriority) | 否 | 是 | 表示优先级信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestPriority](#locationrequestpriority)的定义。默认值为FIRST_FIX。| 支持 | 支持 |
+| scenario | [LocationRequestScenario](#locationrequestscenario) | 否 | 是 | 表示场景信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestScenario](#locationrequestscenario)的定义。默认值为UNSET。 | 支持 | 支持 |
+| maxAccuracy | number | 否 | 是|  应用向系统请求位置信息时要求的精度值，单位为米。该参数仅在精确位置功能场景（即同时授权了ohos.permission.APPROXIMATELY_LOCATION和ohos.permission.LOCATION 权限）下有效，模糊位置功能生效场景（即仅授权了ohos.permission.APPROXIMATELY_LOCATION 权限）下该字段无意义。<br/>该参数生效的情况下，系统会对比GNSS或网络定位服务上报的位置信息与应用的位置信息申请。当位置信息[Location](#location)中的精度值（accuracy）小于等于应用要求的精度值（maxAccuracy）时，位置信息会返回给应用；否则系统将丢弃本次收到的位置信息。<br/>默认值为0，表示不限制位置信息的精度，取值范围为大于等于0。<br/>当scenario为NAVIGATION/TRAJECTORY_TRACKING/CAR_HAILING或者priority为ACCURACY时建议设置maxAccuracy为大于10的值。<br/>当scenario为DAILY_LIFE_SERVICE/NO_POWER或者priority为LOW_POWER/FIRST_FIX时建议设置maxAccuracy为大于100的值。 | 支持 | 支持 |
+| timeoutMs | number | 否 | 是 | 表示超时时间，单位是毫秒，最小为1000毫秒。取值范围为大于等于1000。 | 支持 | 支持 |
 
 ## ContinuousLocationRequest<sup>22+</sup>
 
@@ -131,11 +131,11 @@ import { geoLocationManager } from '@kit.LocationKit';
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| interval | number | 否 | 否 | 表示上报位置信息的时间间隔，单位是秒。默认值为1，取值范围为大于等于0。等于0时对位置上报时间间隔无限制。|
-| locationScenario | [UserActivityScenario](#useractivityscenario22) &#124; [PowerConsumptionScenario](#powerconsumptionscenario22) | 否 | 否 | 表示定位的场景信息。取值范围见[UserActivityScenario](#useractivityscenario22)和[PowerConsumptionScenario](#powerconsumptionscenario22)的定义。 |
-| needPoi<sup>22+ | boolean | 否 | 是 | 表示是否需要获取当前位置附近的POI信息。false代表不需要获取当前位置附近的POI信息，true代表需要获取当前位置附近的POI信息。不设置时，默认值为false。<br/>该参数仅在精确位置功能场景（即同时授权了ohos.permission.APPROXIMATELY_LOCATION和ohos.permission.LOCATION 权限）下有效，模糊位置功能生效场景（即仅授权了ohos.permission.APPROXIMATELY_LOCATION 权限）下不返回POI信息。<br/>**原子化服务API：** 从API version 19开始，该接口支持在原子化服务中使用。|
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| interval | number | 否 | 否 | 表示上报位置信息的时间间隔，单位是秒。默认值为1，取值范围为大于等于0。等于0时对位置上报时间间隔无限制。| 支持 | 支持 |
+| locationScenario | [UserActivityScenario](#useractivityscenario22) &#124; [PowerConsumptionScenario](#powerconsumptionscenario22) | 否 | 否 | 表示定位的场景信息。取值范围见[UserActivityScenario](#useractivityscenario22)和[PowerConsumptionScenario](#powerconsumptionscenario22)的定义。 | 支持 | 支持 |
+| needPoi<sup>22+ | boolean | 否 | 是 | 表示是否需要获取当前位置附近的POI信息。false代表不需要获取当前位置附近的POI信息，true代表需要获取当前位置附近的POI信息。不设置时，默认值为false。<br/>该参数仅在精确位置功能场景（即同时授权了ohos.permission.APPROXIMATELY_LOCATION和ohos.permission.LOCATION 权限）下有效，模糊位置功能生效场景（即仅授权了ohos.permission.APPROXIMATELY_LOCATION 权限）下不返回POI信息。<br/>**原子化服务API：** 从API version 19开始，该接口支持在原子化服务中使用。| 支持 | 支持 |
 
 ## SingleLocationRequest<sup>22+</sup>
 
@@ -147,11 +147,11 @@ import { geoLocationManager } from '@kit.LocationKit';
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| locatingPriority | [LocatingPriority](#locatingpriority22) | 否 | 否 | 表示优先级信息。取值范围见[LocatingPriority](#locatingpriority22)的定义。|
-| locatingTimeoutMs | number | 否 | 否 | 表示超时时间，单位是毫秒，最小为1000毫秒。取值范围为大于等于1000。 |
-| needPoi<sup>22+ | boolean | 否 | 是 | 表示是否需要获取当前位置附近的POI信息。false代表不需要获取当前位置附近的POI信息，true代表需要获取当前位置附近的POI信息。不设置时，默认值为false。<br/>该参数仅在精确位置功能场景（即同时授权了ohos.permission.APPROXIMATELY_LOCATION和ohos.permission.LOCATION 权限）下有效，模糊位置功能生效场景（即仅授权了ohos.permission.APPROXIMATELY_LOCATION 权限）下不返回POI信息。<br/>**原子化服务API：** 从API version 19开始，该接口支持在原子化服务中使用。|
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| locatingPriority | [LocatingPriority](#locatingpriority22) | 否 | 否 | 表示优先级信息。取值范围见[LocatingPriority](#locatingpriority22)的定义。| 支持 | 支持 |
+| locatingTimeoutMs | number | 否 | 否 | 表示超时时间，单位是毫秒，最小为1000毫秒。取值范围为大于等于1000。 | 支持 | 支持 |
+| needPoi<sup>22+ | boolean | 否 | 是 | 表示是否需要获取当前位置附近的POI信息。false代表不需要获取当前位置附近的POI信息，true代表需要获取当前位置附近的POI信息。不设置时，默认值为false。<br/>该参数仅在精确位置功能场景（即同时授权了ohos.permission.APPROXIMATELY_LOCATION和ohos.permission.LOCATION 权限）下有效，模糊位置功能生效场景（即仅授权了ohos.permission.APPROXIMATELY_LOCATION 权限）下不返回POI信息。<br/>**原子化服务API：** 从API version 19开始，该接口支持在原子化服务中使用。| 支持 | 支持 |
 
 
 ## SatelliteStatusInfo
@@ -162,16 +162,16 @@ import { geoLocationManager } from '@kit.LocationKit';
 
 **系统能力：** SystemCapability.Location.Location.Gnss
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| satellitesNumber | number | 否 | 否 | 表示卫星个数。取值范围为大于等于0。 |
-| satelliteIds | Array&lt;number&gt; | 否 | 否 | 表示每个卫星的ID，数组类型。取值范围为大于等于0。 |
-| carrierToNoiseDensitys | Array&lt;number&gt; | 否 | 否 | 表示载波噪声功率谱密度比，即cn0。取值范围为大于0。 |
-| altitudes | Array&lt;number&gt; | 否 | 否 | 表示卫星高度角信息。单位是“度”，取值范围为-90到90。 |
-| azimuths | Array&lt;number&gt; | 否 | 否 | 表示方位角。单位是“度”，取值范围为0到360。 |
-| carrierFrequencies | Array&lt;number&gt; | 否 | 否 | 表示载波频率。单位是Hz，取值范围为大于等于0。 |
-| satelliteConstellation<sup>22+</sup> | Array&lt;[SatelliteConstellationCategory](#satelliteconstellationcategory22)&gt; | 否 | 是 | 表示卫星星座类型。 |
-| satelliteAdditionalInfo<sup>22+</sup> | Array&lt;number&gt; | 否 | 是 | 表示卫星的附加信息。<br/>每个比特位代表不同含义，具体定义参见[SatelliteAdditionalInfo](#satelliteadditionalinfo22)。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| satellitesNumber | number | 否 | 否 | 表示卫星个数。取值范围为大于等于0。 | 支持 | 不支持 |
+| satelliteIds | Array&lt;number&gt; | 否 | 否 | 表示每个卫星的ID，数组类型。取值范围为大于等于0。 | 支持 | 不支持 |
+| carrierToNoiseDensitys | Array&lt;number&gt; | 否 | 否 | 表示载波噪声功率谱密度比，即cn0。取值范围为大于0。 | 支持 | 不支持 |
+| altitudes | Array&lt;number&gt; | 否 | 否 | 表示卫星高度角信息。单位是“度”，取值范围为-90到90。 | 支持 | 不支持 |
+| azimuths | Array&lt;number&gt; | 否 | 否 | 表示方位角。单位是“度”，取值范围为0到360。 | 支持 | 不支持 |
+| carrierFrequencies | Array&lt;number&gt; | 否 | 否 | 表示载波频率。单位是Hz，取值范围为大于等于0。 | 支持 | 不支持 |
+| satelliteConstellation<sup>22+</sup> | Array&lt;[SatelliteConstellationCategory](#satelliteconstellationcategory22)&gt; | 否 | 是 | 表示卫星星座类型。 | 支持 | 不支持 |
+| satelliteAdditionalInfo<sup>22+</sup> | Array&lt;number&gt; | 否 | 是 | 表示卫星的附加信息。<br/>每个比特位代表不同含义，具体定义参见[SatelliteAdditionalInfo](#satelliteadditionalinfo22)。 | 支持 | 不支持 |
 
 
 ## CachedGnssLocationsRequest
@@ -182,10 +182,10 @@ import { geoLocationManager } from '@kit.LocationKit';
 
 **系统能力：** SystemCapability.Location.Location.Gnss
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| reportingPeriodSec | number | 否 | 否 | 表示GNSS缓存位置上报的周期，单位是毫秒。取值范围为大于0。 |
-| wakeUpCacheQueueFull | boolean | 否 | 否  | true表示GNSS芯片底层缓存队列满之后会主动唤醒AP芯片，并把缓存位置上报给应用。<br/>false表示GNSS芯片底层缓存队列满之后不会主动唤醒AP芯片，会把缓存位置直接丢弃。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| reportingPeriodSec | number | 否 | 否 | 表示GNSS缓存位置上报的周期，单位是毫秒。取值范围为大于0。 | 支持 | 支持 |
+| wakeUpCacheQueueFull | boolean | 否 | 否  | true表示GNSS芯片底层缓存队列满之后会主动唤醒AP芯片，并把缓存位置上报给应用。<br/>false表示GNSS芯片底层缓存队列满之后不会主动唤醒AP芯片，会把缓存位置直接丢弃。 | 支持 | 支持 |
 
 
 ## Geofence
@@ -196,13 +196,13 @@ GNSS围栏的配置参数。目前只支持圆形围栏。
 
 **系统能力：** SystemCapability.Location.Location.Geofence
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| latitude | number | 否 | 否 |表示纬度。取值范围为-90到90。 |
-| longitude | number | 否 |否 | 表示经度。取值范围为-180到180。 |
-| coordinateSystemType<sup>22+</sup> | [CoordinateSystemType](#coordinatesystemtype22) | 否 |是 | 表示地理围栏圆心坐标的坐标系。<br/>APP应先使用[getGeofenceSupportedCoordTypes](#geolocationmanagergetgeofencesupportedcoordtypes22)查询支持的坐标系，然后传入正确的圆心坐标。 |
-| radius | number | 否 |否 | 表示圆形围栏的半径。单位是米，取值范围为大于0。 |
-| expiration | number | 否 |否 | 围栏存活的时间，单位是毫秒。取值范围为大于0。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| latitude | number | 否 | 否 |表示纬度。取值范围为-90到90。 | 支持 | 支持 |
+| longitude | number | 否 |否 | 表示经度。取值范围为-180到180。 | 支持 | 支持 |
+| coordinateSystemType<sup>22+</sup> | [CoordinateSystemType](#coordinatesystemtype22) | 否 |是 | 表示地理围栏圆心坐标的坐标系。<br/>APP应先使用[getGeofenceSupportedCoordTypes](#geolocationmanagergetgeofencesupportedcoordtypes22)查询支持的坐标系，然后传入正确的圆心坐标。 | 支持 | 支持 |
+| radius | number | 否 |否 | 表示圆形围栏的半径。单位是米，取值范围为大于0。 | 支持 | 支持 |
+| expiration | number | 否 |否 | 围栏存活的时间，单位是毫秒。取值范围为大于0。 | 支持 | 支持 |
 
 
 ## GeofenceRequest
@@ -213,10 +213,10 @@ GNSS围栏的配置参数。目前只支持圆形围栏。
 
 **系统能力：** SystemCapability.Location.Location.Geofence
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| scenario | [LocationRequestScenario](#locationrequestscenario) | 否 | 否  |  表示定位场景。 |
-| geofence |  [Geofence](#geofence)| 否 | 否  |  表示围栏信息。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| scenario | [LocationRequestScenario](#locationrequestscenario) | 否 | 否  |  表示定位场景。 | 支持 | 支持 |
+| geofence |  [Geofence](#geofence)| 否 | 否  |  表示围栏信息。 | 支持 | 支持 |
 
 
 ## LocationSourceType<sup>22+</sup>
@@ -229,12 +229,12 @@ GNSS围栏的配置参数。目前只支持圆形围栏。
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| GNSS   | 1 |  表示定位结果来自于GNSS定位技术。 |
-| NETWORK    | 2 | 表示定位结果来自于网络定位技术。 |
-| INDOOR     | 3 | 表示定位结果来自于室内高精度定位技术。 |
-| RTK     | 4 | 表示定位结果来自于室外高精度定位技术。 |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| GNSS   | 1 |  表示定位结果来自于GNSS定位技术。 | 支持 | 支持 |
+| NETWORK    | 2 | 表示定位结果来自于网络定位技术。 | 支持 | 支持 |
+| INDOOR     | 3 | 表示定位结果来自于室内高精度定位技术。 | 支持 | 支持 |
+| RTK     | 4 | 表示定位结果来自于室外高精度定位技术。 | 支持 | 支持 |
 
 ## Location
 
@@ -244,25 +244,25 @@ GNSS围栏的配置参数。目前只支持圆形围栏。
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| latitude | number| 否 | 否 | 表示纬度信息，正值表示北纬，负值表示南纬。取值范围为-90到90。仅支持WGS84坐标系。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 |
-| longitude | number| 否 | 否 | 表示经度信息，正值表示东经，负值表是西经。取值范围为-180到180。仅支持WGS84坐标系。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 |
-| altitude | number | 否 | 否 | 表示高度信息，单位米。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 |
-| accuracy | number | 否 | 否 | 表示精度信息，单位米。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 |
-| speed | number | 否 | 否 |表示速度信息，单位米每秒。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 |
-| timeStamp | number | 否 | 否 | 表示位置时间戳，UTC格式。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 |
-| direction | number | 否 | 否 | 表示航向信息。单位是“度”，取值范围为0到360。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 |
-| timeSinceBoot | number | 否 | 否 | 表示获取位置成功的时间戳，值表示从本次开机到获取位置成功所经过的时间，单位为纳秒。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 |
-| additions | Array&lt;string&gt;| 否 | 是 | 附加信息。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 |
-| additionSize | number| 否 | 是 | 附加信息数量。取值范围为大于等于0。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 |
-| additionsMap<sup>22+</sup> | Map&lt;string, string&gt;| 否 | 是 | 附加信息。具体内容和顺序与additions一致。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 |
-| altitudeAccuracy<sup>22+</sup> |number | 否 | 是 | 表示高度信息的精度，单位米。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 |
-| speedAccuracy<sup>22+</sup> | number| 否 | 是 | 表示速度信息的精度，单位米每秒。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 |
-| directionAccuracy<sup>22+</sup> | number| 否 | 是 | 表示航向信息的精度。单位是“度”，取值范围为0到360。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 |
-| uncertaintyOfTimeSinceBoot<sup>22+</sup> | number| 否 | 是 | 表示位置时间戳的不确定度。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 |
-| sourceType<sup>22+</sup> | [LocationSourceType](#locationsourcetype22) | 否 | 是 | 表示定位结果的来源。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 |
-| poi<sup>22+</PoiInfo> | [PoiInfo](#poiinfo22) | 否 | 是 | 表示当前位置附近的POI信息。<br/>**原子化服务API：** 从API version 19开始，该接口支持在原子化服务中使用。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| latitude | number| 否 | 否 | 表示纬度信息，正值表示北纬，负值表示南纬。取值范围为-90到90。仅支持WGS84坐标系。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| longitude | number| 否 | 否 | 表示经度信息，正值表示东经，负值表是西经。取值范围为-180到180。仅支持WGS84坐标系。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| altitude | number | 否 | 否 | 表示高度信息，单位米。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| accuracy | number | 否 | 否 | 表示精度信息，单位米。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| speed | number | 否 | 否 |表示速度信息，单位米每秒。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| timeStamp | number | 否 | 否 | 表示位置时间戳，UTC格式。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| direction | number | 否 | 否 | 表示航向信息。单位是“度”，取值范围为0到360。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| timeSinceBoot | number | 否 | 否 | 表示获取位置成功的时间戳，值表示从本次开机到获取位置成功所经过的时间，单位为纳秒。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| additions | Array&lt;string&gt;| 否 | 是 | 附加信息。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| additionSize | number| 否 | 是 | 附加信息数量。取值范围为大于等于0。<br/>**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| additionsMap<sup>22+</sup> | Map&lt;string, string&gt;| 否 | 是 | 附加信息。具体内容和顺序与additions一致。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| altitudeAccuracy<sup>22+</sup> |number | 否 | 是 | 表示高度信息的精度，单位米。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| speedAccuracy<sup>22+</sup> | number| 否 | 是 | 表示速度信息的精度，单位米每秒。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| directionAccuracy<sup>22+</sup> | number| 否 | 是 | 表示航向信息的精度。单位是“度”，取值范围为0到360。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| uncertaintyOfTimeSinceBoot<sup>22+</sup> | number| 否 | 是 | 表示位置时间戳的不确定度。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| sourceType<sup>22+</sup> | [LocationSourceType](#locationsourcetype22) | 否 | 是 | 表示定位结果的来源。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
+| poi<sup>22+</PoiInfo> | [PoiInfo](#poiinfo22) | 否 | 是 | 表示当前位置附近的POI信息。<br/>**原子化服务API：** 从API version 19开始，该接口支持在原子化服务中使用。 | 支持 | 支持 |
 
 
 ## GeofenceTransition<sup>22+</sup>
@@ -273,11 +273,11 @@ GNSS围栏的配置参数。目前只支持圆形围栏。
 
 **系统能力：** SystemCapability.Location.Location.Geofence
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| geofenceId | number| 否 | 否 | 表示地理围栏ID。 |
-| transitionEvent | [GeofenceTransitionEvent](#geofencetransitionevent22) | 否 | 否 | 表示当前发生的地理围栏事件。 |
-| beaconFence<sup>22+</sup> | [BeaconFence](#beaconfence22) | 否 | 是 | beacon围栏的参数配置。仅beacon围栏使用。<br/>从API version 20开始，支持该字段。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| geofenceId | number| 否 | 否 | 表示地理围栏ID。 | 支持 | 支持 |
+| transitionEvent | [GeofenceTransitionEvent](#geofencetransitionevent22) | 否 | 否 | 表示当前发生的地理围栏事件。 | 支持 | 支持 |
+| beaconFence<sup>22+</sup> | [BeaconFence](#beaconfence22) | 否 | 是 | beacon围栏的参数配置。仅beacon围栏使用。<br/>从API version 20开始，支持该字段。 | 支持 | 支持 |
 
 
 ## GnssGeofenceRequest<sup>22+</sup>
@@ -288,12 +288,12 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Geofence
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| geofence | [Geofence](#geofence) | 否 | 否 | 表示地理围栏信息，包含圆形围栏圆心坐标、半径等信息。 |
-| monitorTransitionEvents | Array&lt;[GeofenceTransitionEvent](#geofencetransitionevent22)&gt; | 否 | 否 | 表示APP监听的地理围栏事件列表。数组长度不超过3。 |
-| notifications | Array&lt;[NotificationRequest](../apis/js-apis-inner-notification-notificationRequest.md)&gt; | 否 | 是 | 表示地理围栏事件发生后弹出的通知对象列表。<br/>monitorTransitionEvents与notifications中的顺序要一一对应，例如monitorTransitionEvents[0]为[GeofenceTransitionEvent](#geofencetransitionevent22).GEOFENCE_TRANSITION_EVENT_ENTER，那notifications[0]中就需要填入用户进入围栏时需要弹出的通知对象。默认值为空数组。 |
-| geofenceTransitionCallback | AsyncCallback&lt;[GeofenceTransition](#geofencetransition22)&gt; | 否 | 否 | 表示用于接收地理围栏事件的回调函数。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| geofence | [Geofence](#geofence) | 否 | 否 | 表示地理围栏信息，包含圆形围栏圆心坐标、半径等信息。 | 支持 | 支持 |
+| monitorTransitionEvents | Array&lt;[GeofenceTransitionEvent](#geofencetransitionevent22)&gt; | 否 | 否 | 表示APP监听的地理围栏事件列表。数组长度不超过3。 | 支持 | 支持 |
+| notifications | Array&lt;[NotificationRequest](../apis/js-apis-inner-notification-notificationRequest.md)&gt; | 否 | 是 | 表示地理围栏事件发生后弹出的通知对象列表。<br/>monitorTransitionEvents与notifications中的顺序要一一对应，例如monitorTransitionEvents[0]为[GeofenceTransitionEvent](#geofencetransitionevent22).GEOFENCE_TRANSITION_EVENT_ENTER，那notifications[0]中就需要填入用户进入围栏时需要弹出的通知对象。默认值为空数组。 | 支持 | 支持 |
+| geofenceTransitionCallback | AsyncCallback&lt;[GeofenceTransition](#geofencetransition22)&gt; | 否 | 否 | 表示用于接收地理围栏事件的回调函数。 | 支持 | 支持 |
 
 
 ## CountryCode
@@ -304,10 +304,10 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| country | string | 否 | 否 | 表示国家码字符串。 |
-| type |  [CountryCodeType](#countrycodetype) | 否 | 否 | 表示国家码信息来源。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| country | string | 否 | 否 | 表示国家码字符串。 | 支持 | 支持 |
+| type |  [CountryCodeType](#countrycodetype) | 否 | 否 | 表示国家码信息来源。 | 支持 | 支持 |
 
 
 ## LocationRequestPriority
@@ -320,12 +320,12 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| UNSET | 0x200 | 表示未设置优先级，表示[LocationRequestPriority](#locationrequestpriority)无效。 |
-| ACCURACY | 0x201 | 表示精度优先。<br/>定位精度优先策略主要以GNSS定位技术为主。我们会在GNSS提供稳定位置结果之前使用网络定位技术提供服务。在持续定位过程中，如果超过30秒无法获取GNSS定位结果则使用网络定位技术。对设备的硬件资源消耗较大，功耗较大。 |
-| LOW_POWER | 0x202 | 表示低功耗优先。<br/>低功耗定位优先策略仅使用网络定位技术，在室内和户外场景均可提供定位服务，因为其依赖周边基站、可见WLAN、蓝牙设备的分布情况，定位结果的精度波动范围较大，推荐在对定位结果精度要求不高的场景下使用该策略，可以有效节省设备功耗。 |
-| FIRST_FIX | 0x203 | 表示快速获取位置优先，如果应用希望快速拿到一个位置，可以将优先级设置为该字段。<br/>快速定位优先策略会同时使用GNSS定位和网络定位技术，以便在室内和户外场景下均可以快速获取到位置结果；当各种定位技术都有提供位置结果时，系统会选择其中精度较好的结果返回给应用。因为对各种定位技术同时使用，对设备的硬件资源消耗较大，功耗也较大。 |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| UNSET | 0x200 | 表示未设置优先级，表示[LocationRequestPriority](#locationrequestpriority)无效。 | 支持 | 支持 |
+| ACCURACY | 0x201 | 表示精度优先。<br/>定位精度优先策略主要以GNSS定位技术为主。我们会在GNSS提供稳定位置结果之前使用网络定位技术提供服务。在持续定位过程中，如果超过30秒无法获取GNSS定位结果则使用网络定位技术。对设备的硬件资源消耗较大，功耗较大。 | 支持 | 支持 |
+| LOW_POWER | 0x202 | 表示低功耗优先。<br/>低功耗定位优先策略仅使用网络定位技术，在室内和户外场景均可提供定位服务，因为其依赖周边基站、可见WLAN、蓝牙设备的分布情况，定位结果的精度波动范围较大，推荐在对定位结果精度要求不高的场景下使用该策略，可以有效节省设备功耗。 | 支持 | 支持 |
+| FIRST_FIX | 0x203 | 表示快速获取位置优先，如果应用希望快速拿到一个位置，可以将优先级设置为该字段。<br/>快速定位优先策略会同时使用GNSS定位和网络定位技术，以便在室内和户外场景下均可以快速获取到位置结果；当各种定位技术都有提供位置结果时，系统会选择其中精度较好的结果返回给应用。因为对各种定位技术同时使用，对设备的硬件资源消耗较大，功耗也较大。 | 支持 | 支持 |
 
 
 ## LocationRequestScenario
@@ -342,14 +342,14 @@ GNSS地理围栏请求参数。
 >
 > 当使用NAVIGATION/TRAJECTORY_TRACKING/CAR_HAILING场景进行单次定位或持续定位时，我们会在GNSS提供稳定位置结果之前使用网络定位技术提供服务；在持续定位时，如果超过30秒无法获取GNSS定位结果则会使用网络定位技术获取位置。
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| UNSET | 0x300 | 表示未设置场景信息。<br/>表示[LocationRequestScenario](#locationrequestscenario)字段无效。 |
-| NAVIGATION | 0x301 | 表示导航场景。<br/>适用于在户外获取设备实时位置的场景，如车载、步行导航。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。 |
-| TRAJECTORY_TRACKING | 0x302 | 表示运动轨迹记录场景。<br/>适用于记录用户位置轨迹的场景，如运动类应用记录轨迹功能。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。 |
-| CAR_HAILING | 0x303 | 表示打车场景。<br/>适用于用户出行打车时定位当前位置的场景，如网约车类应用。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。 |
-| DAILY_LIFE_SERVICE | 0x304 | 表示日常服务使用场景。<br/>适用于不需要定位用户精确位置的使用场景，如新闻资讯、网购、点餐类应用。<br/>该场景仅使用网络定位技术提供定位服务，功耗较低。 |
-| NO_POWER | 0x305 | 表示无功耗功场景，这种场景下不会主动触发定位，会在其他应用定位时，才给当前应用返回位置。 |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- |-------- |-------- |
+| UNSET | 0x300 | 表示未设置场景信息。<br/>表示[LocationRequestScenario](#locationrequestscenario)字段无效。 | 支持 | 支持 |
+| NAVIGATION | 0x301 | 表示导航场景。<br/>适用于在户外获取设备实时位置的场景，如车载、步行导航。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。 | 支持 | 支持 |
+| TRAJECTORY_TRACKING | 0x302 | 表示运动轨迹记录场景。<br/>适用于记录用户位置轨迹的场景，如运动类应用记录轨迹功能。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。 | 支持 | 支持 |
+| CAR_HAILING | 0x303 | 表示打车场景。<br/>适用于用户出行打车时定位当前位置的场景，如网约车类应用。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。 | 支持 | 支持 |
+| DAILY_LIFE_SERVICE | 0x304 | 表示日常服务使用场景。<br/>适用于不需要定位用户精确位置的使用场景，如新闻资讯、网购、点餐类应用。<br/>该场景仅使用网络定位技术提供定位服务，功耗较低。 | 支持 | 支持 |
+| NO_POWER | 0x305 | 表示无功耗功场景，这种场景下不会主动触发定位，会在其他应用定位时，才给当前应用返回位置。 | 支持 | 支持 |
 
 
 ## CountryCodeType
@@ -360,12 +360,12 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| COUNTRY_CODE_FROM_LOCALE | 1 | 从全球化模块的语言配置信息中获取到的国家码。 |
-| COUNTRY_CODE_FROM_SIM | 2 | 从SIM卡中获取到的国家码。 |
-| COUNTRY_CODE_FROM_LOCATION | 3 | 基于用户的位置信息，通过逆地理编码查询到的国家码。 |
-| COUNTRY_CODE_FROM_NETWORK | 4 | 从蜂窝网络注册信息中获取到的国家码。 |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| COUNTRY_CODE_FROM_LOCALE | 1 | 从全球化模块的语言配置信息中获取到的国家码。 | 支持 | 支持 |
+| COUNTRY_CODE_FROM_SIM | 2 | 从SIM卡中获取到的国家码。 | 支持 | 支持 |
+| COUNTRY_CODE_FROM_LOCATION | 3 | 基于用户的位置信息，通过逆地理编码查询到的国家码。 | 支持 | 支持 |
+| COUNTRY_CODE_FROM_NETWORK | 4 | 从蜂窝网络注册信息中获取到的国家码。 | 支持 | 支持 |
 
 
 ## CoordinateSystemType<sup>22+</sup>
@@ -376,9 +376,9 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Geofence
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| WGS84 | 1 | World Geodetic System 1984，是为GPS全球定位系统使用而建立的坐标系统。 |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| WGS84 | 1 | World Geodetic System 1984，是为GPS全球定位系统使用而建立的坐标系统。 | 支持 | 支持 |
 
 
 ## GeofenceTransitionEvent<sup>22+</sup>
@@ -389,11 +389,11 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Geofence
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| GEOFENCE_TRANSITION_EVENT_ENTER  | 1 | 该事件表示设备从地理围栏外进入地理围栏内。 |
-| GEOFENCE_TRANSITION_EVENT_EXIT  | 2 | 该事件表示设备从地理围栏内退出到地理围栏外。 |
-| GEOFENCE_TRANSITION_EVENT_DWELL   | 4 | 该事件表示设备在地理围栏范围内，且持续徘徊超过10秒。 |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| GEOFENCE_TRANSITION_EVENT_ENTER  | 1 | 该事件表示设备从地理围栏外进入地理围栏内。 | 支持 | 支持 |
+| GEOFENCE_TRANSITION_EVENT_EXIT  | 2 | 该事件表示设备从地理围栏内退出到地理围栏外。 | 支持 | 支持 |
+| GEOFENCE_TRANSITION_EVENT_DWELL   | 4 | 该事件表示设备在地理围栏范围内，且持续徘徊超过10秒。 | 支持 | 支持 |
 
 
 ## SatelliteConstellationCategory<sup>22+</sup>
@@ -404,16 +404,16 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Gnss
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| CONSTELLATION_CATEGORY_UNKNOWN   | 0 | 默认值。 |
-| CONSTELLATION_CATEGORY_GPS   | 1 | GPS（Global Positioning System），即全球定位系统，是美国研制发射的一种以人造地球卫星为基础的高精度无线电导航的定位系统。 |
-| CONSTELLATION_CATEGORY_SBAS    | 2 | SBAS（Satellite-Based Augmentation System），即星基增强系统，通过地球静止轨道（GEO）卫星搭载卫星导航增强信号转发器，可以向用户播发星历误差、卫星钟差、电离层延迟等多种修正信息，实现对于原有卫星导航系统定位精度的改进。 |
-| CONSTELLATION_CATEGORY_GLONASS    | 3 | GLONASS（GLOBAL NAVIGATION SATELLITE SYSTEM），是苏联/俄罗斯研制卫星导航系统。 |
-| CONSTELLATION_CATEGORY_QZSS    | 4 | QZSS（Quasi-Zenith Satellite System），即准天顶卫星系统，是以三颗人造卫星透过时间转移完成全球定位系统区域性功能的卫星扩增系统，是日本研发的卫星系统。 |
-| CONSTELLATION_CATEGORY_BEIDOU     | 5 | 北斗卫星导航系统（Beidou Navigation Satellite System）是中国自行研制的全球卫星导航系统。 |
-| CONSTELLATION_CATEGORY_GALILEO     | 6 | GALILEO（Galileo satellite navigation system），即伽利略卫星导航系统，是由欧盟研制和建立的全球卫星导航定位系统。 |
-| CONSTELLATION_CATEGORY_IRNSS     | 7 | IRNSS（Indian Regional Navigation Satellite System），即印度区域导航卫星系统，是一个由印度空间研究组织（ISRO）发展的自由区域型卫星导航系统。 |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| CONSTELLATION_CATEGORY_UNKNOWN   | 0 | 默认值。 | 支持 | 不支持 |
+| CONSTELLATION_CATEGORY_GPS   | 1 | GPS（Global Positioning System），即全球定位系统，是美国研制发射的一种以人造地球卫星为基础的高精度无线电导航的定位系统。 | 支持 | 不支持 |
+| CONSTELLATION_CATEGORY_SBAS    | 2 | SBAS（Satellite-Based Augmentation System），即星基增强系统，通过地球静止轨道（GEO）卫星搭载卫星导航增强信号转发器，可以向用户播发星历误差、卫星钟差、电离层延迟等多种修正信息，实现对于原有卫星导航系统定位精度的改进。 | 支持 | 不支持 |
+| CONSTELLATION_CATEGORY_GLONASS    | 3 | GLONASS（GLOBAL NAVIGATION SATELLITE SYSTEM），是苏联/俄罗斯研制卫星导航系统。 | 支持 | 不支持 |
+| CONSTELLATION_CATEGORY_QZSS    | 4 | QZSS（Quasi-Zenith Satellite System），即准天顶卫星系统，是以三颗人造卫星透过时间转移完成全球定位系统区域性功能的卫星扩增系统，是日本研发的卫星系统。 | 支持 | 不支持 |
+| CONSTELLATION_CATEGORY_BEIDOU     | 5 | 北斗卫星导航系统（Beidou Navigation Satellite System）是中国自行研制的全球卫星导航系统。 | 支持 | 不支持 |
+| CONSTELLATION_CATEGORY_GALILEO     | 6 | GALILEO（Galileo satellite navigation system），即伽利略卫星导航系统，是由欧盟研制和建立的全球卫星导航定位系统。 | 支持 | 不支持 |
+| CONSTELLATION_CATEGORY_IRNSS     | 7 | IRNSS（Indian Regional Navigation Satellite System），即印度区域导航卫星系统，是一个由印度空间研究组织（ISRO）发展的自由区域型卫星导航系统。 | 支持 | 不支持 |
 
 
 ## SatelliteAdditionalInfo<sup>22+</sup>
@@ -424,13 +424,13 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Gnss
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
 | SATELLITES_ADDITIONAL_INFO_NULL  | 0 | 默认值。 |
-| SATELLITES_ADDITIONAL_INFO_EPHEMERIS_DATA_EXIST  | 1 | 表示本卫星具有星历数据。 |
-| SATELLITES_ADDITIONAL_INFO_ALMANAC_DATA_EXIST   | 2 | 表示本卫星具有年历数据。 |
-| SATELLITES_ADDITIONAL_INFO_USED_IN_FIX   | 4 | 表示在最新的位置解算中使用了本卫星。 |
-| SATELLITES_ADDITIONAL_INFO_CARRIER_FREQUENCY_EXIST   | 8 | 表示本卫星具有载波频率。 |
+| SATELLITES_ADDITIONAL_INFO_EPHEMERIS_DATA_EXIST  | 1 | 表示本卫星具有星历数据。 | 支持 | 不支持 |
+| SATELLITES_ADDITIONAL_INFO_ALMANAC_DATA_EXIST   | 2 | 表示本卫星具有年历数据。 | 支持 | 不支持 |
+| SATELLITES_ADDITIONAL_INFO_USED_IN_FIX   | 4 | 表示在最新的位置解算中使用了本卫星。 | 支持 | 不支持 |
+| SATELLITES_ADDITIONAL_INFO_CARRIER_FREQUENCY_EXIST   | 8 | 表示本卫星具有载波频率。 | 支持 | 不支持 |
 
 
 ## PowerConsumptionScenario<sup>22+</sup>
@@ -443,11 +443,11 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| HIGH_POWER_CONSUMPTION  | 0x601 | 高功耗。<br/>以GNSS定位技术为主。我们会在GNSS提供稳定位置结果之前使用网络定位技术提供服务；在持续定位时，如果超过30秒无法获取GNSS定位结果则会使用网络定位技术获取位置。对设备的硬件资源消耗较大，功耗较大。 |
-| LOW_POWER_CONSUMPTION  | 0x602 | 低功耗。<br/>适用于对用户位置精度要求不高的使用场景，如新闻资讯、网购、点餐类应用。<br/>该场景仅使用网络定位技术提供定位服务，功耗较低。 |
-| NO_POWER_CONSUMPTION   | 0x603 | 无功耗。<br/>这种场景下不会主动触发定位，会在其他应用定位时，才给当前应用返回位置。  |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| HIGH_POWER_CONSUMPTION  | 0x601 | 高功耗。<br/>以GNSS定位技术为主。我们会在GNSS提供稳定位置结果之前使用网络定位技术提供服务；在持续定位时，如果超过30秒无法获取GNSS定位结果则会使用网络定位技术获取位置。对设备的硬件资源消耗较大，功耗较大。 | 支持 | 支持 |
+| LOW_POWER_CONSUMPTION  | 0x602 | 低功耗。<br/>适用于对用户位置精度要求不高的使用场景，如新闻资讯、网购、点餐类应用。<br/>该场景仅使用网络定位技术提供定位服务，功耗较低。 | 支持 | 支持 |
+| NO_POWER_CONSUMPTION   | 0x603 | 无功耗。<br/>这种场景下不会主动触发定位，会在其他应用定位时，才给当前应用返回位置。  | 支持 | 支持 |
 
 
 ## LocatingPriority<sup>22+</sup>
@@ -460,10 +460,10 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| PRIORITY_ACCURACY  | 0x501 | 表示精度优先。<br/>定位精度优先策略会同时使用GNSS定位和网络定位技术，并把一段时间内精度较好的结果返回给应用；这个时间段长度为[SingleLocationRequest](#singlelocationrequest22).locatingTimeoutMs与“30秒”中的较小者。<br/>对设备的硬件资源消耗较大，功耗较大。  |
-| PRIORITY_LOCATING_SPEED  | 0x502 | 表示快速获取位置优先，如果应用希望快速拿到一个位置，可以将优先级设置为该类型。<br/>快速定位优先策略会同时使用GNSS定位和网络定位技术，以便在室内和户外场景下均可以快速获取到位置结果，我们会把最先拿到的定位结果返回给应用。对设备的硬件资源消耗较大，功耗也较大。 |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| PRIORITY_ACCURACY  | 0x501 | 表示精度优先。<br/>定位精度优先策略会同时使用GNSS定位和网络定位技术，并把一段时间内精度较好的结果返回给应用；这个时间段长度为[SingleLocationRequest](#singlelocationrequest22).locatingTimeoutMs与“30秒”中的较小者。<br/>对设备的硬件资源消耗较大，功耗较大。  | 支持 | 支持 |
+| PRIORITY_LOCATING_SPEED  | 0x502 | 表示快速获取位置优先，如果应用希望快速拿到一个位置，可以将优先级设置为该类型。<br/>快速定位优先策略会同时使用GNSS定位和网络定位技术，以便在室内和户外场景下均可以快速获取到位置结果，我们会把最先拿到的定位结果返回给应用。对设备的硬件资源消耗较大，功耗也较大。 | 支持 | 支持 |
 
 
 ## LocationError<sup>22+</sup>
@@ -476,13 +476,13 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| LOCATING_FAILED_DEFAULT   | -1 |  默认值。 |
-| LOCATING_FAILED_LOCATION_PERMISSION_DENIED   | -2 | 表示ohos.permission.APPROXIMATELY_LOCATION权限或ohos.permission.LOCATION权限校验失败导致持续定位失败。 |
-| LOCATING_FAILED_BACKGROUND_PERMISSION_DENIED    | -3 | 表示应用在后台时位置权限校验失败导致持续定位失败。<!--RP3-->APP在后台定位时的位置权限申请方式参见[申请位置权限开发指导](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/device/location/location-permission-guidelines.md)。<!--RP3End--> |
-| LOCATING_FAILED_LOCATION_SWITCH_OFF    | -4 | 表示位置信息开关关闭导致持续定位失败。 |
-| LOCATING_FAILED_INTERNET_ACCESS_FAILURE    | -5 | 表示无法访问网络，导致网络定位失败。 |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| LOCATING_FAILED_DEFAULT   | -1 |  默认值。 | 支持 | 支持 |
+| LOCATING_FAILED_LOCATION_PERMISSION_DENIED   | -2 | 表示ohos.permission.APPROXIMATELY_LOCATION权限或ohos.permission.LOCATION权限校验失败导致持续定位失败。 | 支持 | 支持 |
+| LOCATING_FAILED_BACKGROUND_PERMISSION_DENIED    | -3 | 表示应用在后台时位置权限校验失败导致持续定位失败。<!--RP3-->APP在后台定位时的位置权限申请方式参见[申请位置权限开发指导](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/device/location/location-permission-guidelines.md)。<!--RP3End--> | 支持 | 支持 |
+| LOCATING_FAILED_LOCATION_SWITCH_OFF    | -4 | 表示位置信息开关关闭导致持续定位失败。 | 支持 | 支持 |
+| LOCATING_FAILED_INTERNET_ACCESS_FAILURE    | -5 | 表示无法访问网络，导致网络定位失败。 | 支持 | 支持 |
 
 
 ## PowerConsumptionScenario<sup>22+</sup>
@@ -495,11 +495,11 @@ GNSS地理围栏请求参数。
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| HIGH_POWER_CONSUMPTION  | 0x601 | 高功耗。<br/>以GNSS定位技术为主。我们会在GNSS提供稳定位置结果之前使用网络定位技术提供服务；在持续定位时，如果超过30秒无法获取GNSS定位结果则会使用网络定位技术获取位置。对设备的硬件资源消耗较大，功耗较大。 |
-| LOW_POWER_CONSUMPTION  | 0x602 | 低功耗。<br/>适用于对用户位置精度要求不高的使用场景，如新闻资讯、网购、点餐类应用。<br/>该场景仅使用网络定位技术提供定位服务，功耗较低。 |
-| NO_POWER_CONSUMPTION   | 0x603 | 无功耗。<br/>这种场景下不会主动触发定位，会在其他应用定位时，才给当前应用返回位置。  |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| HIGH_POWER_CONSUMPTION  | 0x601 | 高功耗。<br/>以GNSS定位技术为主。我们会在GNSS提供稳定位置结果之前使用网络定位技术提供服务；在持续定位时，如果超过30秒无法获取GNSS定位结果则会使用网络定位技术获取位置。对设备的硬件资源消耗较大，功耗较大。 | 支持 | 支持 |
+| LOW_POWER_CONSUMPTION  | 0x602 | 低功耗。<br/>适用于对用户位置精度要求不高的使用场景，如新闻资讯、网购、点餐类应用。<br/>该场景仅使用网络定位技术提供定位服务，功耗较低。 | 支持 | 支持 |
+| NO_POWER_CONSUMPTION   | 0x603 | 无功耗。<br/>这种场景下不会主动触发定位，会在其他应用定位时，才给当前应用返回位置。  | 支持 | 支持 |
 
 
 ## UserActivityScenario<sup>22+</sup>
@@ -516,12 +516,12 @@ GNSS地理围栏请求参数。
 >
 > 当使用NAVIGATION/SPORT/TRANSPORT场景进行单次定位或持续定位时，我们会在GNSS提供稳定位置结果之前使用网络定位技术提供服务；在持续定位时，如果超过30秒无法获取GNSS定位结果则会使用网络定位技术获取位置。
 
-| 名称 | 值 | 说明 |
-| -------- | -------- | -------- |
-| NAVIGATION  | 0x401 | 表示导航场景。<br/>适用于在户外获取设备实时位置的场景，如车载、步行导航。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。 |
-| SPORT  | 0x402 | 表示运动场景。<br/>适用于记录用户位置轨迹的场景，如运动类应用记录轨迹功能。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。 |
-| TRANSPORT   | 0x403 | 表示出行场景。<br/>适用于用户出行场景，如打车、乘坐公共交通等场景。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。  |
-| DAILY_LIFE_SERVICE   | 0x404 | 表示日常服务使用场景。<br/>适用于不需要定位用户精确位置的使用场景，如新闻资讯、网购、点餐类应用。<br/>该场景仅使用网络定位技术提供定位服务，功耗较低。  |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- |
+| NAVIGATION  | 0x401 | 表示导航场景。<br/>适用于在户外获取设备实时位置的场景，如车载、步行导航。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。 | 支持 | 支持 |
+| SPORT  | 0x402 | 表示运动场景。<br/>适用于记录用户位置轨迹的场景，如运动类应用记录轨迹功能。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。 | 支持 | 支持 |
+| TRANSPORT   | 0x403 | 表示出行场景。<br/>适用于用户出行场景，如打车、乘坐公共交通等场景。<br/>主要使用GNSS定位技术提供定位服务，功耗较高。  | 支持 | 支持 |
+| DAILY_LIFE_SERVICE   | 0x404 | 表示日常服务使用场景。<br/>适用于不需要定位用户精确位置的使用场景，如新闻资讯、网购、点餐类应用。<br/>该场景仅使用网络定位技术提供定位服务，功耗较低。  | 支持 | 支持 |
 
 ## geoLocationManager.on('locationChange')
 
@@ -2382,13 +2382,13 @@ getDistanceBetweenLocations(location1: Location, location2: Location): number
 
 **系统能力：** SystemCapability.Location.Location.Core
 
-| 名称 | 类型 | 只读 | 可选 | 说明 |
-| -------- | -------- | -------- | -------- | -------- |
-| deviceId | string | 否 | 否 | 表示扫描到的设备地址。例如："XX:XX:XX:XX:XX:XX"。 |
-| rssi | number | 否 | 否 | 表示扫描到的设备的rssi值。 |
-| data | ArrayBuffer | 否 | 是 | 表示扫描到的设备发送的广播包。 |
-| deviceName | string | 否 | 否 | 表示扫描到的设备名称。 |
-| connectable | boolean | 否 | 否 | 表示扫描到的设备是否可连接。true表示可连接，false表示不可连接。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
+| -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| deviceId | string | 否 | 否 | 表示扫描到的设备地址。例如："XX:XX:XX:XX:XX:XX"。 | 支持 | 支持 |
+| rssi | number | 否 | 否 | 表示扫描到的设备的rssi值。 | 支持 | 支持 |
+| data | ArrayBuffer | 否 | 是 | 表示扫描到的设备发送的广播包。 | 支持 | 支持 |
+| deviceName | string | 否 | 否 | 表示扫描到的设备名称。 | 支持 | 支持 |
+| connectable | boolean | 否 | 否 | 表示扫描到的设备是否可连接。true表示可连接，false表示不可连接。 | 支持 | 支持 |
 
 ## geoLocationManager.on('bluetoothScanResultChange')<sup>22+</sup>
 
