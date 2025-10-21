@@ -20,13 +20,13 @@ import { collections } from '@kit.ArkTS';
 
 **系统能力：** SystemCapability.Utils.Lang
 
-| 名称   | 类型   | 只读 | 可选 | 说明              |
-| ------ | ------ | ---- | ---- | ----------------|
-| buffer | ArrayBuffer | 是   | 否  | ArkTS Float32Array底层使用的buffer。|
-| byteLength | number | 是   | 否   | ArkTS Float32Array的所占的字节数。|
-| byteOffset | number | 是   | 否   | ArkTS Float32Array距离其ArrayBuffer起始位置的偏移。|
-| length | number | 是   | 否  | ArkTS Float32Array元素个数。|
-| BYTES_PER_ELEMENT | number | 是   | 否   | ArkTS Float32Array中每个元素所占用的字节数。|
+| 名称   | 类型   | 只读 | 可选 | 说明              | Android 平台 | iOS 平台 |
+| ------ | ------ | ---- | ---- | ----------------| ------- | ------- |
+| buffer | ArrayBuffer | 是   | 否  | ArkTS Float32Array底层使用的buffer。| 支持 | 支持 |
+| byteLength | number | 是   | 否   | ArkTS Float32Array的所占的字节数。| 支持 | 支持 |
+| byteOffset | number | 是   | 否   | ArkTS Float32Array距离其ArrayBuffer起始位置的偏移。| 支持 | 支持 |
+| length | number | 是   | 否  | ArkTS Float32Array元素个数。| 支持 | 支持 |
+| BYTES_PER_ELEMENT | number | 是   | 否   | ArkTS Float32Array中每个元素所占用的字节数。| 支持 | 支持 |
 
 ## of
 

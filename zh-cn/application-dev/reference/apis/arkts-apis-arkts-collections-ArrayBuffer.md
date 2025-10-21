@@ -20,9 +20,9 @@ import { collections } from '@kit.ArkTS';
 
 **系统能力：** SystemCapability.Utils.Lang
 
-| 名称   | 类型   | 只读 | 可选 | 说明              |
-| ------ | ------ | ---- | ---- | ----------------|
-| byteLength | number | 是   | 否   | buffer所占的字节数。|
+| 名称   | 类型   | 只读 | 可选 | 说明              | Android 平台 | iOS 平台 |
+| ------ | ------ | ---- | ---- | ----------------| ------- | ------- |
+| byteLength | number | 是   | 否   | buffer所占的字节数。| 支持 | 支持 |
 
 ## constructor
 constructor(byteLength: number)
