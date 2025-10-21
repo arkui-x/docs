@@ -1935,6 +1935,7 @@ nestedScroll(value: NestedScrollOptions | NestedScrollOptionsExt)
 > - 可以设置上下左右四个方向，或者设置向前、向后两个方向的嵌套滚动模式，实现与父组件的滚动联动。
 > - 支持嵌套滚动的容器：Grid、List、Scroll、Swiper、Tabs、WaterFlow、Refresh、bindSheet。
 > - 支持嵌套滚动的输入事件：使用手势。
+> - 由于平台差异，为确保iOS端的滑动体验，如果任一方向的滑动处理采用了`PARENT_FIRST`模式，建议将所有方向统一设置为该模式。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -1945,6 +1946,30 @@ nestedScroll(value: NestedScrollOptions | NestedScrollOptionsExt)
 | 参数名 | 类型                                          | 必填 | 说明                                                         |
 | ------ | --------------------------------------------- | ---- | ------------------------------------------------------------ |
 | value  | NestedScrollOptions \| NestedScrollOptionsExt | 是   | 可滚动组件滚动时的嵌套滚动选项。<br> value为NestedScrollOptions（向前、向后两个方向）类型时，scrollForward、scrollBackward默认滚动选项为NestedScrollMode.SELF_FIRST。 <br> value为NestedScrollOptionsExt（上下左右四个方向）类型时，scrollUp、scrollDown、scrollLeft、scrollRight默认滚动选项为NestedScrollMode.SELF_FIRST。 |
+
+
+#### NestedScrollOptions<sup>22+</sup>对象说明
+
+nestedScroll属性参数对象。
+
+| 名称           | 类型                                                         | 只读 | 可选 | 说明                                   |
+| -------------- | ------------------------------------------------------------ | ---- | ---- | -------------------------------------- |
+| scrollForward  | [NestedScrollMode](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/ts-appendix-enums.md#nestedscrollmode10) | 否   | 否   | 滚动组件往末尾端滚动时的嵌套滚动选项。 |
+| scrollBackward | [NestedScrollMode](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/ts-appendix-enums.md#nestedscrollmode10) | 否   | 否   | 滚动组件往起始端滚动时的嵌套滚动选项。 |
+
+
+#### NestedScrollOptionsExt<sup>22+</sup>
+
+通过NestedScrollOptionsExt可以设置上下左右四个方向的嵌套滚动规则。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称        | 类型                                                         | 只读 | 可选 | 说明                                                         |
+| ----------- | ------------------------------------------------------------ | ---- | ---- | ------------------------------------------------------------ |
+| scrollUp    | [NestedScrollMode](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/ts-appendix-enums.md#nestedscrollmode10) | 否   | 是   | 可滚动组件往上滚动时的嵌套滚动选项。<br/>默认值：NestedScrollMode.SELF_FIRST。 |
+| scrollDown  | [NestedScrollMode](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/ts-appendix-enums.md#nestedscrollmode10) | 否   | 是   | 可滚动组件往下滚动时的嵌套滚动选项。<br/>默认值：NestedScrollMode.SELF_FIRST。 |
+| scrollLeft  | [NestedScrollMode](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/ts-appendix-enums.md#nestedscrollmode10) | 否   | 是   | 可滚动组件往左滚动时的嵌套滚动选项。<br/>默认值：NestedScrollMode.SELF_FIRST。 |
+| scrollRight | [NestedScrollMode](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/ts-appendix-enums.md#nestedscrollmode10) | 否   | 是   | 可滚动组件往右滚动时的嵌套滚动选项。<br/>默认值：NestedScrollMode.SELF_FIRST。 |
 
 **示例：**
 
