@@ -17,7 +17,7 @@ import bridge from '@arkui-x.bridge';
 // 创建平台桥接实例
 const bridgeImpl = bridge.createBridge('Bridge');
 // 创建平台桥接实例(二进制格式)
-const bridgeImpl = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
+const bridgeImpl = bridge.createBridge('Bridge', bridge.BridgeType.BINARY_TYPE);
 ```
 
 2、在iOS侧创建BridgePlugin类。指定名称，该名称应与ArkUI侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
@@ -39,7 +39,7 @@ BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanc
 
 bridgeImpl.sendMessage('text').then((res)=>{
     console.log('response: ' + res);
-}).catch((err) => {
+}).catch((err: Error) => {
     console.log('error: ' + JSON.stringify(err));
 });
 ```
@@ -99,7 +99,7 @@ bridgeImpl.setMessageListener((message) => {
 
 bridgeImpl.callMethod('platformCallMethod').then((res)=>{
     console.log('result: ' + res);
-}).catch((err) => {
+}).catch((err: Error) => {
     console.error('error: ' + JSON.stringify(err));
 });
 ```
@@ -184,13 +184,13 @@ bridgeImpl.unRegisterMethod('getString');
 
 ```javascript
 // xxx.ets
-function testCallBackOfJs() {
-  console.log("bridge js testCallBack run")
+function testCallBackOfJs():bridge.ResultValue {
+  return "bridge js testCallBack run";
 }
 
 this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs).then((res)=>{
     console.log('result: ' + res);
-}).catch((err) => {
+}).catch((err:Error) => {
     console.error('error: ' + JSON.stringify(err));
 });
 ```
@@ -219,14 +219,14 @@ MethodData* method = [[MethodData alloc] initMethodWithName:@"testCallBack" para
 
 ```javascript
 // xxx.ets
-function testCallBackOfJs(stringParam) {
+function testCallBackOfJs(stringParam:string) {
   console.log("Js received a parameter of " + stringParam)
   return "js testCallBackReturn call success."
 }
 
 this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
     console.log('result: ' + res);
-}).catch((err) => {
+}).catch((err:Error) => {
     console.error('error: ' + JSON.stringify(err));
 });
 ```
@@ -259,21 +259,23 @@ import bridge from '@arkui-x.bridge'
 @Entry
 @Component
 struct Index {
-  @State bridgeImpl: BridgeObject = bridge.createBridge("BridgeName");
+  @State bridgeImpl: bridge.BridgeObject = bridge.createBridge("BridgeName");
 
-  private funTest(p1: String, p2: Number, p3: Boolean) {
+  private funTest(p1: string, p2: number, p3: boolean) : bridge.ResultValue{
     console.info('IOS->Ts bridge funTest p1 is ' + p1);
     console.info('IOS->Ts bridge funTest p2 is ' + p2);
     console.info('IOS->Ts bridge funTest p3 is ' + p3);
+    return "call success";
   }
 
-  private funTestArray(p1: Array<string>, p2: Array<Number>, p3: Array<Boolean>) {
+  private funTestArray(p1: Array<string>, p2: Array<number>, p3: Array<boolean>): bridge.ResultValue {
       console.log('IOS->Ts bridge funTestArray p1 is ' + p1.toString());
       console.log('IOS->Ts bridge funTestArray p2 is ' + p2.toString());
       console.log('IOS->Ts bridge funTestArray p3 is ' + p3.toString());
+      return "call success";
   }
 
-  private funTestRecord(p1: Record<string, string>, p2: Record<string, Number>, p3: Record<string, Boolean>) {
+  private funTestRecord(p1: Record<string, string>, p2: Record<string, number>, p3: Record<string, boolean>) : bridge.ResultValue {
     Object.keys(p1).forEach(key => {
       console.log(`IOS->Ts bridge funTestRecord p1 is Key: ${key}, Value: ${p1[key]}`);
     });
@@ -283,6 +285,7 @@ struct Index {
     Object.keys(p3).forEach(key => {
       console.log(`IOS->Ts bridge funTestRecord p3 is Key: ${key}, Value: ${p1[key]}`);
     });
+    return "call success";
   }
 
   onPageShow() {
@@ -469,8 +472,8 @@ import bridge from '@arkui-x.bridge';
 struct Index {
   // 创建平台桥接对象
   private bridgeImpl = bridge.createBridge('Bridge');
-  @State helloArkUI: string = '';
-  @State nativeResponse: string = '';
+  @State helloArkUI: bridge.ResultValue = '';
+  @State nativeResponse: bridge.Message = '';
 
   aboutToAppear() {
     this.getHelloArkUI();
@@ -478,7 +481,7 @@ struct Index {
 
   getHelloArkUI() {
     // 调用iOS侧方法
-    this.bridgeImpl.callMethod('getHelloArkUI').then((result: string) => {
+    this.bridgeImpl.callMethod('getHelloArkUI').then((result: bridge.ResultValue) => {
       // 通过状态变量，将iOS侧方法的返回值显示在页面上
       this.helloArkUI = result;
     });
@@ -487,7 +490,7 @@ struct Index {
   build() {
     Row() {
       Column() {
-        Text(this.helloArkUI)
+        Text(this.helloArkUI?.toString())
           .fontSize(15)
           .margin(10)
         Button('sendMessage')
