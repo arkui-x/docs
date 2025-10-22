@@ -26,15 +26,31 @@ import worker from '@ohos.worker';
 
 ## WorkerOptions
 
-Worker构造函数的选项信息，用于为Worker添加其他信息。
+Worker构造函数的选项，用于为Worker添加其他信息。
 
 **系统能力：** SystemCapability.Utils.Lang
 
-| 名称 | 类型 | 可读 | 可写 | 说明 |
-| ---- | -------- | ---- | ---- | -------------- |
-| type | "classic" \| "module" | 是   | 是 | Worker执行脚本的模式类型，暂不支持module类型，默认值为"classic"。 |
-| name | string   | 是   | 是 | Worker的名称，默认值为 undefined 。 |
-| shared | boolean | 是   | 是 | 表示Worker共享功能，此接口暂不支持。 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android 平台 | iOS 平台 |
+| ---- | -------- | ---- | ---- | -------------- | ------- | ------- |
+| type | 'classic' \| 'module' | 否   | 是 | Worker执行脚本的模式类型，暂不支持module类型，默认值为"classic"。| 支持 | 支持 |
+| name | string   | 否   | 是 | Worker的名称，默认值为undefined。| 支持 | 支持 |
+| shared | boolean | 否   | 是 | 表示Worker共享功能，此接口暂不支持。| 支持 | 支持 |
+| priority<sup>22+</sup> | [ThreadWorkerPriority](#threadworkerpriority22) | 否   | 是 | 表示Worker线程优先级。默认值为MEDIUM。| 支持 | 支持 |
+
+## ThreadWorkerPriority<sup>22+</sup>
+
+Worker线程的优先级枚举。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+| 名称 | 值 | 说明 | Android 平台 | iOS 平台 |
+| -------- | -------- | -------- | ------- | ------- |
+| HIGH   | 0    | 适用于打开文档等用户触发并且可以看到进展的任务，任务在几秒钟之内完成。对应QOS_USER_INITIATED。| 支持 | 支持 |
+| MEDIUM | 1 | 任务完成需要几秒钟。是[ThreadWorkerPriority](#threadworkerpriority22)的默认值。对应QOS_DEFAULT。| 支持 | 支持 |
+| LOW | 2 | 适用于下载等不需要立即看到响应效果的任务，任务完成需要几秒到几分钟。对应QOS_UTILITY。| 支持 | 支持 |
+| IDLE | 3 | 适用于数据同步等用户不可见的后台任务，任务完成需要几分钟甚至几小时。对应QOS_BACKGROUND。| 支持 | 支持 |
+| DEADLINE<sup>22+</sup> | 4 | 适用于页面加载等越快越好的关键任务，任务几乎是瞬间完成的。对应QOS_DEADLINE_REQUEST。| 支持 | 支持 |
+| VIP<sup>22+</sup> | 5 | 适用于UI线程、动画渲染等用户交互任务，任务是即时的。对应QOS_USER_INTERACTIVE。| 支持 | 支持 |
 
 
 ## ThreadWorker<sup>9+</sup>
