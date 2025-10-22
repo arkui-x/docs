@@ -17,7 +17,7 @@ import bridge from '@arkui-x.bridge';
 // 创建平台桥接实例
 const bridgeImpl = bridge.createBridge('Bridge');
 // 创建平台桥接实例(二进制格式)
-const bridgeImpl = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
+const bridgeImpl = bridge.createBridge('Bridge', bridge.BridgeType.BINARY_TYPE);
 ```
 
 2、在Android侧创建BridgePlugin类。指定名称，该名称应与ArkUI侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
@@ -232,13 +232,13 @@ public void onMethodCancel(String s) {}
 
 ```javascript
 // xxx.ets
-function testCallBackOfJs() {
-  console.log("bridge js testCallBackOfJs run")
+function testCallBackOfJs():bridge.ResultValue {
+  return "bridge js testCallBackOfJs run";
 }
 
-this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs).then((res)=>{
+this.bridgeCodec.callMethodWithCallback("testCallBack", testCallBackOfJs).then((res)=>{
     console.log('result: ' + res);
-}).catch((err) => {
+}).catch((err:Error) => {
     console.error('error: ' + JSON.stringify(err));
 });
 ```
@@ -263,14 +263,14 @@ bridge.callMethod(methodData);
 
 ```javascript
 // xxx.ets
-function testCallBackOfJs(stringParam) {
+function testCallBackOfJs(stringParam:string) {
   console.log("Js received a parameter of " + stringParam)
   return "js testCallBackReturn call success."
 }
 
-this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
+this.bridgeCodec.callMethodWithCallback("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
     console.log('result: ' + res);
-}).catch((err) => {
+}).catch((err:Error) => {
     console.error('error: ' + JSON.stringify(err));
 });
 ```
@@ -281,7 +281,7 @@ this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs, "js se
 // xxx.java
 
 public String testCallBack(String sParam) {
-	ALog.i("Android received a parameter of ", sParam);
+	Log.i("Android received a parameter of ", sParam);
     return "call android testCallBack success";
 }
 
@@ -304,21 +304,21 @@ struct Index {
     console.info('Java->Ts bridge funTest p1 is ' + p1);
     console.info('Java->Ts bridge funTest p2 is ' + p2);
     console.info('Java->Ts bridge funTest p3 is ' + p3);
-    return "call success"
+    return "call success";
   }
 
   private funTestArray(p1: Array<string>, p2: Array<number>, p3: Array<boolean>) : bridge.ResultValue {
     console.log('Java->Ts bridge funTestArray p1 is ' + p1.toString());
     console.log('Java->Ts bridge funTestArray p2 is ' + p2.toString());
     console.log('Java->Ts bridge funTestArray p3 is ' + p3.toString());
-    return "call success"
+    return "call success";
   }
 
   private funTestRecord(p1: Record<string, string>, p2: Record<string, number>, p3: Record<string, boolean>) : bridge.ResultValue {
     console.log('Java->Ts bridge funTestRecord p1 is ' + p1.toString());
     console.log('Java->Ts bridge funTestRecord p2 is ' + p2.toString());
     console.log('Java->Ts bridge funTestRecord p3 is ' + p3.toString());
-    return "call success"
+    return "call success";
   }
 
   onPageShow() {

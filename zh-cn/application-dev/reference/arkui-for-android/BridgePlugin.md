@@ -275,6 +275,54 @@ public class EntryEntryAbilityActivity extends StageActivity {
 
 
 
+#### BridgePlugin<sup>22+</sup>
+
+```java
+public BridgePlugin(String bridgeName, BridgeType bridgeType);
+```
+
+**描述：**
+
+使用BridgeManager实例构建平台桥接(BridgePlugin)对象实例，可指定数据编解码格式（默认 JSON_TYPE）。
+
+**参数：**
+
+| Name       | 类型       | 必填 | 描述                               |
+| ---------- | ---------- | ---- | ---------------------------------- |
+| bridgeName | String     | 是   | 平台桥接名称 (必须与ArkUI侧一致)。 |
+| bridgeType | BridgeType | 否   | 数据编解码格式，默认为JSON_TYPE。  |
+
+**示例：** 
+
+  ```java
+// BridgeImpl.java
+
+public class BridgeImpl extends BridgePlugin {
+    //指定名称和数据编解码格式构建BridgePlugin对象
+    public BridgeImpl(String name, BridgeType bridgeType) {
+        super(name, bridgeType);
+}
+  ```
+
+```java
+// EntryEntryAbilityActivity.java
+
+public class EntryEntryAbilityActivity extends StageActivity {
+    private BridgeImpl bridgeImpl = null;
+
+    protected void onCreate(Bundle savedInstanceState) {
+        // 以二进制数据编解码格式, 构建名称为"BridgeName"的BridgeImpl实例对象。
+        bridgeImplByManager = new BridgeImpl("BridgeName", BridgePlugin.BridgeType.BINARY_TYPE());
+        
+        // bundleName需根据实际情况调整。
+        setInstanceName("bundleName:entry:EntryAbility:");
+        super.onCreate(savedInstanceState);
+    }
+}
+```
+
+
+
 ### 成员函数
 
 #### sendMessage
@@ -479,6 +527,73 @@ public class EntryEntryAbilityActivity extends StageActivity {
     }
 }
 ```
+
+
+
+#### callMethodSync<sup>22+</sup>
+
+```java
+public Object callMethodSync(String methodName, Object... parameters)
+```
+
+**描述：**
+
+ 调用ArkUI侧定义的方法，ArkUI侧方法的返回结果同步返回。
+
+**参数：** 
+
+| Name       | 类型      | 必填 | 描述                  |
+| ---------- | --------- | ---- | --------------------- |
+| methodName | String    | 是   | ArkUI侧方法名称。     |
+| parameters | Object... | 否   | ArkUI侧方法参数列表。 |
+
+**返回值：** 
+
+ArkUI侧方法的返回结果
+
+**示例：**
+
+```java
+// BridgeImpl.java
+
+public class BridgeImpl extends BridgePlugin {
+    public BridgeImpl(String bridgeName, BridgeType bridgeType) {
+        super(bridgeName, bridgeType);
+    }
+}
+```
+
+```java
+// EntryEntryAbilityActivity.java
+
+public class EntryEntryAbilityActivity extends StageActivity {
+    public BridgeImpl bridgeImpl = null;
+    
+    protected void onCreate(Bundle savedInstanceState) {
+        // 创建平台桥接对象实例
+        bridgeImpl = new BridgeImpl("BridgeName", BridgePlugin.BridgeType.BINARY_TYPE());
+        // bundleName需根据实际情况调整。
+        setInstanceName("bundleName:entry:EntryAbility:");
+        super.onCreate(savedInstanceState);
+        // 注册TestCallMethod按钮
+        testCallMethod();
+    }
+
+	public void testCallMethod() {
+        // 使用button按钮点击，发送信息。
+        Button button = (Button) findViewById(R.id.TestCallMethod);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ArkUI侧函数名加ArkUI侧方法形参对应的实参调用，同步返回结果
+                Object result = bridgeImpl.callMethodSync("jsMethodName", "param1", "param2");
+            }
+        });
+    }
+}
+```
+
+
 
 #### setMessageListener
 

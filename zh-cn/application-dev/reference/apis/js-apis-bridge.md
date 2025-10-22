@@ -35,7 +35,7 @@ createBridge(bridgeName: string): BridgeObject
 **示例：** 
 
   ```javaScript
-  const bridgeObj: BridgeObject = bridge.createBridge('Bridge');
+  const bridgeObj: bridge.BridgeObject = bridge.createBridge('Bridge');
   ```
 
  createBridge(bridgeName: string, type: BridgeType): BridgeObject;
@@ -60,7 +60,7 @@ createBridge(bridgeName: string): BridgeObject
 **示例：** 
 
   ```javaScript
-  const bridgeObj: BridgeObject = bridge.createBridge('Bridge', BridgeType.BINARY_TYPE);
+  const bridgeObj: bridge.BridgeObject = bridge.createBridge('Bridge', bridge.BridgeType.BINARY_TYPE);
   ```
 
 ## BridgeObject
@@ -107,7 +107,7 @@ const bridgeObj = bridge.createBridge('Bridge');
 
 bridgeObj.callMethod('nativeMethod').then((data)=>{
     console.log('data = ' + data);
-}).catch((err) => {
+}).catch((err : Error) => {
     console.error('error = ' + JSON.stringify(err));
 });
 ```
@@ -202,7 +202,7 @@ const bridgeObj = bridge.createBridge('Bridge');
 
 bridgeObj.sendMessage('jsMessage').then((data)=>{
     console.log('data =' + data);
-}).catch((err) => {
+}).catch((err: Error) => {
     console.error('error =' + JSON.stringify(err));
 });
 ```
@@ -260,17 +260,52 @@ callMethodWithCallback(methodName: string, method: (...parameters: Array\<Parame
 **示例：**
 
 ```javaScript
-function testCallBackOfJs(stringParam) {
+function testCallBackOfJs(stringParam : string) {
   console.log("Js received a parameter of " + stringParam)
   return "js testCallBackReturn call success."
 }
 
-this.bridgeCodec.callMethodWithCallBack("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
+this.bridgeCodec.callMethodWithCallback("testCallBack", testCallBackOfJs, "js sends parameter").then((res)=>{
     console.log('result: ' + res);
-}).catch((err) => {
+}).catch((err: Error) => {
     console.error('error: ' + JSON.stringify(err));
 });
 ```
+
+### callMethodSync<sup>22+</sup>
+
+callMethodSync(methodName: string, ...parameters: Array<Parameter>): ResultValue;
+
+调用平台方法，同步返回结果。
+
+**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+
+**参数：** 
+
+| 参数名     | 类型               | 必填 | 说明                 |
+| ---------- | ------------------ | ---- | -------------------- |
+| methodName | string             | 是   | 平台侧方法名称。     |
+| parameters | Array\<Parameter\> | 否   | 平台侧方法参数列表。 |
+
+**返回值：** 
+
+| 类型                        | 说明               |
+| --------------------------- | ------------------ |
+| [ResultValue](#resultvalue) | 平台方法执行结果。 |
+
+**示例：**
+
+```javaScript
+const bridgeObj = bridge.createBridge('Bridge');
+try {
+    let result : bridge.ResultValue = bridgeObj.callMethodSync('nativeMethod')
+    console.log('callMethodSync result is ' + JSON.stringify(result));
+} catch (exception) {
+    console.error(`callMethodSync error, Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+
 
 ## **BridgeType**
 
@@ -321,16 +356,16 @@ type Message = T | Record\<string, T\>
 ```javascript
 // ArkUI侧
 
-let params : Record<string, Number> = {"abc" : 123};
+let params : Record<string, number> = {"abc" : 123};
 this.bridgeImpl.callMethod("recordFun", params);
 ```
 
 ```java
 // android侧
 
-public String recordFun(Object params) {
+public String recordFun(HashMap<String, Integer> params) {
     Map<String, Integer> map = (Map)params;
-    ALog.i("BridgeTest recordFun params is ", map.toString());
+    Log.i("BridgeTest recordFun params is ", map.toString());
     return map.toString();
 }
 ```

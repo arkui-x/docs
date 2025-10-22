@@ -455,6 +455,54 @@ IMethodResult代理实现。
 
 
 
+#### initBridgePlugin<sup>22+</sup>
+
+```objective-c
+(instancetype)initBridgePlugin:(NSString* _Nonnull)bridgeName
+                    bridgeType:(BridgeType)type;
+```
+
+**描述：**
+
+使用BridgePluginManager实例构建平台桥接(BridgePlugin)对象实例，可指定数据编解码格式（默认 JSON_TYPE）和处理数据的方式（默认为异步串行）。
+
+**参数：** 
+
+| 参数名     | 类型       | 必填 | 说明                               |
+| ---------- | ---------- | ---- | ---------------------------------- |
+| bridgeName | NSString*  | 是   | 平台桥接名称 (必须与ArkUI侧一致)。 |
+| bridgeType | BridgeType | 是   | 数据编解码格式，默认为JSON_TYPE。  |
+
+**返回值：** 
+
+| 类型         | 说明               |
+| ------------ | ------------------ |
+| BridgePlugin | 平台桥接对象实例。 |
+
+**示例：** 
+
+  ```objective-c
+- (instancetype)initWithInstanceName:(NSString *)instanceName {
+    self = [super initWithInstanceName:instanceName];
+    if (self) {
+        [self initBridgePlugin];
+    }
+    return self;
+}
+
+//提供了构造构造方法,开发者根据实际情况选择其中一种构造方式
+- (void)InitBridgePlugin {
+    //构造方法
+    self.plugin = [[BridgeClass alloc] initBridgePlugin:@"Bridge" bridgeType:JSON_TYPE];
+
+    //指定代理
+    self.plugin.messageListener = self;
+    self.plugin.methodResult = self;
+}
+  ```
+
+
+
 #### callMethod
 
 ```objective-c
@@ -482,6 +530,39 @@ IMethodResult代理实现。
     //调用Arkui 测注册的方法，调用之前要实现methodResult代理，通过代理回调的到调用结果（注意method name必须与Arkui测方法名保持一致）
     MethodData * method = [[MethodData alloc] initMethodWithName:@"method" parameter:nil];
     [self.plugin callMethod:method];
+}
+```
+
+
+
+#### callMethodSync<sup>22+</sup>
+
+```objective-c
+(id)callMethodSync:(NSString*)methodName parameters:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
+```
+
+**描述：**
+
+ 调用ArkUI侧定义的方法，ArkUI侧方法的返回结果同步返回。
+
+**参数：** 
+
+| Name       | 类型      | 必填 | 描述                  |
+| ---------- | --------- | ---- | --------------------- |
+| methodName | NSString* | 是   | ArkUI侧方法名称。     |
+| parameters | id...     | 否   | ArkUI侧方法参数列表。 |
+
+**返回值：** 
+
+ArkUI侧方法的返回结果
+
+**示例：**
+
+```objective-c
+- (void)bridgeCallMethod {
+    //调用Arkui 测注册的方法，调用同步接口返回调用结果（注意method name必须与Arkui测方法名保持一致,parameters参数必须以nil结尾）
+    BridgeClass *bridge = [[BridgeClass alloc] initBridgePlugin:name bridgeType:bridgeType];
+    id result = [bridge callMethodSync:@"method" parameters:@"firstObject", nil];
 }
 ```
 
