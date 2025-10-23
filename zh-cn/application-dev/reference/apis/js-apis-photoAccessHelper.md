@@ -173,7 +173,7 @@ async function example() {
 ```
 ### createAsset<sup>22+</sup>
 
-createAsset(photoType: PhotoType, extension: string, options: CreateOptions, callback: AsyncCallback<string>): void
+createAsset(photoType: PhotoType, extension: string, options: CreateOptions, callback: AsyncCallback\<string\>): void
 
 指定文件类型、后缀和创建选项，创建图片或视频资源。使用callback方式返回结果。
 
@@ -188,9 +188,9 @@ createAsset(photoType: PhotoType, extension: string, options: CreateOptions, cal
 | 参数名    | 类型                                                        | 必填 | 说明                                                         | Android平台 | iOS平台 |
 | :-------- | :---------------------------------------------------------- | :--- | :----------------------------------------------------------- | ----------- | ------- |
 | photoType | [PhotoType](#phototype)                                     | 是   | 创建的文件类型，IMAGE或者VIDEO类型。                         | 支持        | 不支持  |
-| extension | string                                                      | 是   | 文件名后缀参数，例如：'jpg'。**注意：**需传入目标操作系统（Android）所支持和识别的标准文件扩展名,若传入"."则只会解析最后一个"."之后的字符，如传入".jpg"则最终会解析为jpg | 支持        | 不支持  |
-| options   | [CreateOptions<sup>22+</sup>](#CreateOptions22+) | 是   | 创建选项，当前仅支持'title'，例如{title: 'testPhoto'}。**注意：**传入'title'之外的选项，配置不生效。文件名中不允许出现非法英文字符，包括： . .. \ / : * ? " ' ` < > \| { } [ ] | 支持        | 不支持  |
-| callback  | AsyncCallback<string>                                       | 是   | callback返回创建的图片和视频的uri。                          | 支持        | 不支持  |
+| extension | string                                                      | 是   | 文件名后缀参数，例如：'jpg'。**注意：** 需传入目标操作系统（Android）所支持和识别的标准文件扩展名,若传入"."则只会解析最后一个"."之后的字符，如传入".jpg"则最终会解析为jpg | 支持        | 不支持  |
+| options   | [CreateOptions<sup>22+</sup>](#CreateOptions22+) | 是   | 创建选项，当前仅支持'title'，例如{title: 'testPhoto'}。**注意：** 传入'title'之外的选项，配置不生效。文件名中不允许出现非法英文字符，包括： . .. \ / : * ? " ' ` < > \| { } [ ] | 支持        | 不支持  |
+| callback  | AsyncCallback\<string\>                                       | 是   | callback返回创建的图片和视频的uri。                          | 支持        | 不支持  |
 
 **错误码：**
 
@@ -227,7 +227,7 @@ async function example(phAccessHelper: photoAccessHelper.PhotoAccessHelper) {
 
 ### createAsset<sup>22+</sup>
 
-createAsset(photoType: PhotoType, extension: string, callback: AsyncCallback<string>): void
+createAsset(photoType: PhotoType, extension: string, callback: AsyncCallback\<string\>): void
 
 指定文件类型和后缀，创建图片或视频资源，使用callback方式返回结果。
 
@@ -242,8 +242,8 @@ createAsset(photoType: PhotoType, extension: string, callback: AsyncCallback<str
 | 参数名    | 类型                    | 必填 | 说明                                                         | Android平台 | iOS平台 |
 | :-------- | :---------------------- | :--- | :----------------------------------------------------------- | ----------- | ------- |
 | photoType | [PhotoType](#phototype) | 是   | 创建的文件类型，IMAGE或者VIDEO类型。                         | 支持        | 不支持  |
-| extension | string                  | 是   | 文件名后缀参数，例如：'jpg'。**注意：**需传入目标操作系统（Android）所支持和识别的标准文件扩展名,若传入"."则只会解析最后一个"."之后的字符，如传入".jpg"则最终会解析为jpg | 支持        | 不支持  |
-| callback  | AsyncCallback<string>   | 是   | callback返回创建的图片和视频的uri。                          | 支持        | 不支持  |
+| extension | string                  | 是   | 文件名后缀参数，例如：'jpg'。**注意：** 需传入目标操作系统（Android）所支持和识别的标准文件扩展名,若传入"."则只会解析最后一个"."之后的字符，如传入".jpg"则最终会解析为jpg | 支持        | 不支持  |
+| callback  | AsyncCallback\<string\>  | 是   | callback返回创建的图片和视频的uri。                          | 支持        | 不支持  |
 
 **错误码：**
 
@@ -277,7 +277,7 @@ async function example(phAccessHelper: photoAccessHelper.PhotoAccessHelper) {
 
 ### createAsset<sup>22+</sup>
 
-createAsset(photoType: PhotoType, extension: string, options?: CreateOptions): Promise<string>
+createAsset(photoType: PhotoType, extension: string, options?: CreateOptions): Promise\<string\>
 
 指定文件类型、后缀和创建选项，创建图片或视频资源，以Promise方式返回结果。
 
@@ -292,14 +292,14 @@ createAsset(photoType: PhotoType, extension: string, options?: CreateOptions): P
 | 参数名    | 类型                                                        | 必填 | 说明                                                         | Android平台 | iOS平台 |
 | :-------- | :---------------------------------------------------------- | :--- | :----------------------------------------------------------- | ----------- | ------- |
 | photoType | [PhotoType](#phototype)                                     | 是   | 创建的文件类型，IMAGE或者VIDEO类型。                         | 支持        | 不支持  |
-| extension | string                                                      | 是   | 文件名后缀参数，例如：'jpg'。**注意：**需传入目标操作系统（Android）所支持和识别的标准文件扩展名,若传入"."则只会解析最后一个"."之后的字符，如传入".jpg"则最终会解析为jpg | 支持        | 不支持  |
-| options   | [CreateOptions<sup>22+</sup>](#CreateOptions22+) | 否   | 创建选项，当前仅支持'title'，例如{title: 'testPhoto'}。**注意：**传入'title'之外的选项，配置不生效。文件名中不允许出现非法英文字符，包括： . .. \ / : * ? " ' ` < > \| { } [ ] | 支持        | 不支持  |
+| extension | string                                                      | 是   | 文件名后缀参数，例如：'jpg'。**注意：** 需传入目标操作系统（Android）所支持和识别的标准文件扩展名,若传入"."则只会解析最后一个"."之后的字符，如传入".jpg"则最终会解析为jpg | 支持        | 不支持  |
+| options   | [CreateOptions<sup>22+</sup>](#CreateOptions22+) | 否   | 创建选项，当前仅支持'title'，例如{title: 'testPhoto'}。**注意：** 传入'title'之外的选项，配置不生效。文件名中不允许出现非法英文字符，包括： . .. \ / : * ? " ' ` < > \| { } [ ] | 支持        | 不支持  |
 
-**返回值：**s
+**返回值：**
 
 | 类型            | 说明                                     |
 | :-------------- | :--------------------------------------- |
-| Promise<string> | Promise对象，返回创建的图片和视频的uri。 |
+| Promise\<string\> | Promise对象，返回创建的图片和视频的uri。 |
 
 **错误码：**
 
