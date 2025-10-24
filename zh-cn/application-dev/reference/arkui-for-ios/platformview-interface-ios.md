@@ -106,7 +106,7 @@
 
 获得IPlatformView接口。
 
-(NSObject<IPlatformView>*) getPlatformView:(NSString*) platformViewId
+(NSObject\<IPlatformView\>\*) getPlatformView:(NSString\*) platformViewId
 
 
 **参数：** 
@@ -121,7 +121,7 @@
 | --------------------------------- | -------------- |
 | NSObject<IPlatformView>* | IPlatformView接口。 |
 
-(NSObject<IPlatformView>*) getPlatformView:(NSString*) platformViewId data:(NSString*) data<sup>22+</sup>
+(NSObject\<IPlatformView\>\*) getPlatformView:(NSString\*) platformViewId data:(NSString\*) data<sup>22+</sup>
 > **说明：**
 >
 > 可选重载，用于需要从ArkTs侧传递数据到原生侧的场景。
