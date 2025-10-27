@@ -160,7 +160,7 @@ loadData(data: string, mimeType: string, encoding: string, baseUrl?: string, his
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
@@ -189,7 +189,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### getUrl
 
@@ -214,7 +214,7 @@ Android和iOS的返回值与OpenHarmony不完全相同，以各平台行为为�
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
@@ -240,7 +240,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### runJavaScript
 
@@ -268,7 +268,7 @@ Android4.4以上版本支持，iOS8.0以上版本支持。
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
@@ -307,7 +307,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
  加载的html文件。
 
@@ -359,7 +359,7 @@ Android4.4以上版本支持，iOS8.0以上版本支持。
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
@@ -394,7 +394,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 本地资源文件
 
@@ -2069,6 +2069,7 @@ registerJavaScriptProxy提供了应用与Web组件加载的网页之间强大的
 > - 同一方法在同步与异步列表中重复注册，将默认异步调用。
 > - 同步函数列表和异步函数列表不可同时为空，否则此次调用接口注册失败。
 > - 异步的作用在于：H5线程将异步JavaScript任务提交给ETS主线程后，无需等待任务执行完成并返回结果，H5线程即可继续执行后续任务。这在执行耗时较长的JavaScript任务或ETS线程较为拥堵的情况下，可以有效减少H5线程因JavaScript任务而被阻塞的情况。然而，异步JavaScript任务无法返回值，且任务执行的顺序无法保证，因此需要根据具体情境判断是否使用同步或异步方式。
+> - 由于iOS原生平台只有异步，故要实现同步效果并支持返回值，需要在JS调用注册的方法前加await实现同步效果等待返回值。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -3250,7 +3251,7 @@ static existHttpAuthCredentials(): boolean
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
@@ -3275,7 +3276,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### deleteHttpAuthCredentials
 
@@ -3287,7 +3288,7 @@ static deleteHttpAuthCredentials(): void
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
@@ -3312,7 +3313,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### getHttpAuthCredentials
 
@@ -3343,7 +3344,7 @@ static getHttpAuthCredentials(host: string, realm: string): Array\<string>
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
@@ -3372,7 +3373,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### saveHttpAuthCredentials
 
@@ -3399,7 +3400,7 @@ static saveHttpAuthCredentials(host: string, realm: string, username: string, pa
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import business_error from '@ohos.base';
@@ -3426,7 +3427,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ## GeolocationPermissions
 
@@ -3471,7 +3472,7 @@ static allowGeolocation(origin: string, incognito?: boolean): void
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -3496,7 +3497,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### deleteGeolocation
 
@@ -3524,7 +3525,7 @@ static deleteGeolocation(origin: string, incognito?: boolean): void
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -3549,7 +3550,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### getAccessibleGeolocation
 
@@ -3578,7 +3579,7 @@ static getAccessibleGeolocation(origin: string, callback: AsyncCallback\<boolean
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -3609,7 +3610,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### getAccessibleGeolocation
 
@@ -3643,7 +3644,7 @@ static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise\<b
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -3673,7 +3674,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### getStoredGeolocation
 
@@ -3700,7 +3701,7 @@ static getStoredGeolocation(callback: AsyncCallback<Array\<string>>, incognito?:
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -3731,7 +3732,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### getStoredGeolocation
 
@@ -3763,7 +3764,7 @@ static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise\<b
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -3793,7 +3794,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ### deleteAllGeolocation
 
@@ -3813,7 +3814,7 @@ static deleteAllGeolocation(incognito?: boolean): void
 
 **示例：**
 
-  ```ts
+```ts
 // xxx.ets
 import { webview } from '@kit.ArkWeb';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -3837,7 +3838,7 @@ struct WebComponent {
     }
   }
 }
-  ```
+```
 
 ## WebCookieManager
 
