@@ -12,9 +12,9 @@ ArkUI-X主库地址：[https://gitcode.com/arkui-x](https://gitcode.com/arkui-x)
 
 1. 注册GitCode帐号。
 
-2. 注册GitCode SSH公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/users/ssh-key/)。
+2. 注册GitCode SSH公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/help/home/user_center/security_management/ssh/)。
 
-3. 安装[git客户端](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git)和[git-lfs](https://docs.gitcode.com/docs/repo/code/lfs/)并配置用户信息。
+3. 安装[git客户端](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git)和[git-lfs](https://docs.gitcode.com/docs/help/home/org_project/project_manage/file_operations/lfs/)并配置用户信息。
 
    ```shell
    git config --global user.name "yourname"
@@ -25,7 +25,7 @@ ArkUI-X主库地址：[https://gitcode.com/arkui-x](https://gitcode.com/arkui-x)
 4. 安装GitCode repo工具，可以执行如下命令。
 
    ```shell
-   curl -s https://gitcode.com/gitcode-dev/repo/blob/main/repo-py3 > /usr/local/bin/repo  #如果没有权限，可下载至其他目录，并将其配置到环境变量中
+   curl -s https://raw.gitcode.com/gitcode-dev/repo/raw/main/repo-py3 > /usr/local/bin/repo  #若无权限，可下载至用户目录，并将其配置到环境变量中
    chmod a+x /usr/local/bin/repo
    pip3 install -i https://repo.huaweicloud.com/repository/pypi/simple requests
    ```
@@ -34,7 +34,7 @@ ArkUI-X主库地址：[https://gitcode.com/arkui-x](https://gitcode.com/arkui-x)
 
 - **ArkUI-X主干代码获取**
 
-  方式一（推荐）：通过repo + ssh下载（需注册公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/users/ssh-key/)）。
+  方式一（推荐）：通过repo + ssh下载（需注册公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/help/home/user_center/security_management/ssh/)）。
 
   ```shell
   repo init -u git@gitcode.com:arkui-x/manifest.git -b master --no-repo-verify
@@ -52,7 +52,7 @@ ArkUI-X主库地址：[https://gitcode.com/arkui-x](https://gitcode.com/arkui-x)
 
 - **ArkUI-X 1.0.0 Release分支代码获取**
 
-  方式一（推荐）：通过repo + ssh下载（需注册公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/users/ssh-key/)）。
+  方式一（推荐）：通过repo + ssh下载（需注册公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/help/home/user_center/security_management/ssh/)）。
 
   从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
   ```shell
