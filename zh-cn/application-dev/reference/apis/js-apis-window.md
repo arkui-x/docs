@@ -808,6 +808,11 @@ getWindowAvoidArea(type: AvoidAreaType): AvoidArea
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
+**接口依赖：** 在Android中需修改.arkui-x\android目录相关文件配置:
+<br/>- gradle.properties中android.useAndroidX=true
+<br/>- APP目录下build.gradle中增加androidx库依赖
+<br/>-- implementation "androidx.core:core:1.8.0"
+
 **参数：**
 
 | 参数名 | 类型 | 必填 | 说明 |
@@ -1761,6 +1766,11 @@ on(type: 'avoidAreaChange', callback: Callback&lt;AvoidAreaOptions&gt;): void
 <!--RP7-->常见的触发避让区回调的场景如下：应用窗口在全屏模式、悬浮模式、分屏模式之间的切换；应用窗口旋转；多折叠设备在屏幕折叠态和展开态之间的切换。<!--RP7End-->
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**接口依赖：** 在Android中需修改.arkui-x\android目录相关文件配置:
+<br/>- gradle.properties中android.useAndroidX=true
+<br/>- APP目录下build.gradle中增加androidx库依赖
+<br/>-- implementation "androidx.core:core:1.8.0"
 
 **原子化服务API：** 从API version 20开始，该接口支持在原子化服务中使用。
 
