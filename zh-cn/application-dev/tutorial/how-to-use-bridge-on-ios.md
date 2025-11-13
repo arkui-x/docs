@@ -27,7 +27,9 @@ const bridgeImpl = bridge.createBridge('Bridge', bridge.BridgeType.BINARY_TYPE);
 
 BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId];
 // 创建平台桥接实例(二进制格式)
-BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId bridgeType：BINARY_TYPE];
+BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId bridgeType: BINARY_TYPE];
+// 通过指定name和type创建平台桥接实例（推荐用法）
+BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" bridgeTypeL: JSON_TYPE];
 ```
 
 ### 场景一：ArkUI侧向iOS侧传递数据
@@ -452,8 +454,59 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 ```
 
+### 场景九：ArkUI侧同步调用iOS侧的方法
 
+1、在ArkUI侧调用iOS侧的方法。
 
+```javascript
+// xxx.ets
+
+try {
+  let data: bridge.ResultValue = bridgeImpl.callMethodSync('funcWithString', 'text')
+  console.info(LOG_TAG + 'callMethodSync success; data ：： ' + data)
+} catch (error) {
+  console.error(LOG_TAG + `callMethodSync failed, error: ${error.toString()}`)
+}
+```
+
+2、在iOS侧实现被调用的方法。
+
+```objective-c
+// xxx.mm
+
+@interface Bridge : BridgePlugin
+- (NSString *)funcWithString:(NSString *)param1;
+@end
+
+@implementation Bridge
+- (NSString *)funcWithString:(NSString *)param1 {
+    return @"call objective-c funcWithString success";
+}
+@end
+```
+
+### 场景十：iOS侧同步调用ArkUI侧的方法
+
+1、注册ArkUI侧方法，供iOS侧调用。
+
+```javascript
+// xxx.ets
+
+function getString() {
+  return 'call js getString success';
+}
+
+bridgeImpl.registerMethod({ name: 'getString', method: getString });
+```
+
+2、iOS侧调用ArkUI侧的方法。
+
+```objective-c
+// xxx.mm
+
+id data = nil;
+data = [self.plugin callMethodSync:@"getString" parameters: nil];
+```
 
 ## 场景示例
 
