@@ -52,6 +52,7 @@
 - [ArkUI-X 如何使用非原生系统字体](Development-Stage/Dev-faq-19.md)
 - [ArkUI-X 跨平台本地数据加载示例](Development-Stage/Dev-faq-20.md)
 - [关于 registerJavaScriptProxy使用说明](Development-Stage/Dev-faq-21.md)
+- [ArkUI-X API 20+版本，Android bridge 里使用原生 UI 报错抛异常问题解决](Development-Stage/Dev-faq-22.md)
 
 ### 问题自排查
 
