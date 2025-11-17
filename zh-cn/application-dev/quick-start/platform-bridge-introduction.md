@@ -39,7 +39,6 @@ JSON格式数据支持类型表：
 | number(64bit integer) | java.lang.Long          | NSNumber numberWithLong   |
 | number(double)        | java.lang.Double        | NSNumber numberWithDouble |
 | boolean               | java.lang.Boolean       | NSNumber numberWithBool   |
-| null                  | null                    | NSNull                    |
 | Array\<string\>       | string[]                | NSArray                   |
 | Array\<number\>       | int[], long[], double[] | NSArray                   |
 | Array\<boolean\>      | boolean[]               | NSArray                   |
@@ -49,23 +48,25 @@ JSON格式数据支持类型表：
 
 | ArkTS                 | java类型                | OC类型                    |
 | --------------------- | ----------------------- | ------------------------- |
-| null                  | null                    | NSNull                    |
-| boolean               | java.lang.Boolean       | NSNumber numberWithBool   |
+| string                | java.lang.String        | NSString                  |
 | number(32bit integer) | java.lang.Integer       | NSNumber numberWithInt    |
 | number(64bit integer) | java.lang.Long          | NSNumber numberWithLong   |
 | number(double)        | java.lang.Double        | NSNumber numberWithDouble |
-| string                | java.lang.String        | NSString                  |
-| ArrayBuffer           | java.nio.ByteBuffer     | NSData                    |
+| boolean               | java.lang.Boolean       | NSNumber numberWithBool   |
 | Array\<string\>       | string[]                | NSArray                   |
 | Array\<number\>       | int[], long[], double[] | NSArray                   |
 | Array\<boolean\>      | boolean[]               | NSArray                   |
 | Record\<string, S>    | java.util.HashMap       | NSDictionary              |
+| ArrayBuffer           | java.nio.ByteBuffer     | NSData                    |
 
 > **说明**
 >
-> 1、S表示string、number、boolean类型；<br/>
-> 2、Record表示<key, value>类型，key仅为string类型，value为S类型；<br/>
-> 3、string类型数据最大传输大小限制为2MB;<br/>
+> 1、Record<string, S>表示<key, value>类型，key仅为string类型，value类型仅支持string、number、boolean共3种类型；<br/>
+> 2、string类型数据最大传输大小限制为2MB;<br/>
+> 3、关于**数字**类型数据(具体指上述表格中number(32bit integer)、number(64bit integer)、number(double))，数值范围为（包含边界值）：（ -2^53 + 1） 到（2^53 - 1）;<br/>
+> 4、关于**数字**类型数据(具体指上述表格中number(32bit integer)、number(64bit integer)、number(double))，在原生平台的使用过程中需要考虑数值精度，使用合理的数据类型进行处理;<br/>
+> 5、ArrayBuffer类型数据最大传输大小限制为20MB;<br/>
+> 6、ArrayBuffer类型数据仅支持单独使用，不支持以Array、Record类型包含使用;<br/>
 
 ## 开发指南
 

@@ -1,6 +1,6 @@
 # BridgePlugin (平台桥接)
 
-本模块提供ArkUI侧和Android平台侧消息通信的功能，包括数据传输、方法调用和事件调用。需配套ArkUI侧API使用，ArkUI侧具体用法请参考[Bridge API](../apis/js-apis-bridge.md)。
+本模块将详细阐述平台桥接**Android端**的API方法及相关定义。ArkTS侧具体用法请参考[Bridge API](../apis/js-apis-bridge.md)。
 
 **起始版本：**
 
@@ -11,128 +11,9 @@
 > 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 
 
-
-## **IMessageListener接口**
-
-用于监听ArkUI侧发送的消息。接口类，由开发者实现并通过setMessageListener方法设置到BridgePlugin实例中。
-
-### onMessage
-
-```java
-Object onMessage(Object data);
-```
-
-**描述：**用于监听ArkUI侧发送信息，即接收ArkUI侧通过sendMessage方法发送的消息。
-
-**参数：**
-
-| Name | 类型   | 必填 | 描述                |
-| ---- | ------ | ---- | ------------------- |
-| data | Object | 是   | ArkUI侧发送的消息。 |
-
-**返回值：**
-
-| 类型   | 描述                                                         |
-| ------ | ------------------------------------------------------------ |
-| Object | 应答消息，即平台侧接收到ArkUI侧的消息后，回复ArkUI侧的消息。 |
-
-
-
-### onMessageResponse
-
-```java
-void onMessageResponse(Object data);
-```
-
-**描述：**用于监听平台侧调用sendMessage发送消息后，ArkUI侧应答的消息，即接收ArkUI侧setMessageListener注册的方法的返回值。
-
-**参数：**
-
-| Name | 类型   | 必填 | 描述                                                 |
-| ---- | ------ | ---- | ---------------------------------------------------- |
-| data | Object | 是   | 平台侧调用sendMessage发送消息后，ArkUI侧的应答消息。 |
-
-**返回值：**
-
-无
-
-
-
-## IMethodResult接口
-
-用于监听平台侧调用ArkUI侧方法的执行情况。接口类，由开发者实现并通过setMethodResultListener方法设置到BridgePlugin实例中。
-
-### onSuccess
-
-```java
-void onSuccess(Object resultValue);
-```
-
-**描述：**
-
-平台侧成功调用ArkUI侧定义的方法时触发该接口，并将ArkUI侧方法的返回值传递给平台侧。
-
-**参数：**
-
-| Name        | 类型   | 必填 | 描述                  |
-| ----------- | ------ | ---- | --------------------- |
-| resultValue | Object | 是   | ArkUI侧方法的返回值。 |
-
-**返回值：**
-
-无
-
-
-
-### onError
-
-```java
-void onError(String methodName, int errorCode, String errorMessage);
-```
-
-**描述：**
-
-平台侧调用ArkUI侧定义方法时，如果出错则触发该接口，并将出错信息返回平台侧。
-
-**参数：**
-
-| Name                      | 类型   | 必填 | 描述              |
-| ------------------------- | ------ | ---- | ----------------- |
-| methodName                | String | 是   | ArkUI侧方法名称。 |
-| [errorCode](#errorcode类) | int    | 是   | 错误码。          |
-| errorMessage              | String | 是   | 错误信息描述。    |
-
-**返回值：**
-
-无
-
-
-
-### onMethodCancel
-
-```java
-void onMethodCancel(String methodName);
-```
-
-**描述：**
-
-ArkUI侧调用unRegisterMethod方法时将触发该接口，用于通知平台侧事件被注销了。
-
-**参数：**
-
-| Name       | 类型   | 必填 | 描述                      |
-| ---------- | ------ | ---- | ------------------------- |
-| methodName | String | 是   | ArkUI侧被注销的事件名称。 |
-
-**返回值：**
-
-无
-
-
-
 ## BridgePlugin类
 
-抽象类，提供平台间通信能力，开发者需要扩展此类并创建实例，用于ArkUI与原生平台通信。
+抽象类，开发者需要扩展此类并创建实例，用于Android与ArkTS通信。
 
 ### 类型定义
 
@@ -161,17 +42,18 @@ public BridgePlugin(Context context, String bridgeName, int instanceId);
 
 使用instanceId构建平台桥接(BridgePlugin)对象实例，数据编解码格式为JSON_TYPE（默认）。
 
+**废弃：**
+
+从API version 11开始废弃，建议使用[最新的构造函数](#bridgeplugin22)替代。
+
 **参数：**
 
 | Name       | 类型    | 必填 | 描述                                                    |
 | ---------- | ------- | ---- | ------------------------------------------------------- |
-| context    | Context | 是   | 当前Activity（Android原生）的上下文。                   |
-| bridgeName | String  | 是   | 平台桥接名称 (必须与ArkUI侧一致)。                      |
-| instanceId | int     | 是   | 实例ID，可通过StageActivity的getInstanceId() 方法获取。 |
+| context    | Context | 是   | 当前Activity（Android原生）的上下文                   |
+| bridgeName | String  | 是   | 平台桥接名称 (必须与ArkTS侧一致)                      |
+| instanceId | int     | 是   | 实例ID，可通过StageActivity的getInstanceId() 方法获取 |
 
-**废弃：**
-
-从API version 11开始废弃，建议使用BridgePlugin<sup>11+</sup>替代。
 
 **示例：**
 
@@ -214,17 +96,18 @@ public BridgePlugin(Context context, String bridgeName, BridgeManager bridgeMana
 
 **描述：**
 
-使用BridgeManager实例构建平台桥接(BridgePlugin)对象实例，可指定数据编解码格式（默认 JSON_TYPE）。
+使用BridgeManager实例构建平台桥接(BridgePlugin)对象实例，可指定数据编解码格式（默认为JSON_TYPE）。<br>
+从API version 22开始，建议使用[最新的构造函数](#bridgeplugin22)替代。
 
 **参数：**
 
 | Name          | 类型                              | 必填 | 描述                                                         |
 | ------------- | --------------------------------- | ---- | ------------------------------------------------------------ |
-| context       | Context                           | 是   | 当前Activity（Android原生）的上下文。                        |
-| bridgeName    | String                            | 是   | 平台桥接名称 (必须与ArkUI侧一致)。                           |
-| bridgeManager | [BridgeManager](#bridgemanager类) | 是   | BridgePlugin对象管理器，可通过StageActivity的getBridgeManager() 方法获取。 |
-| bridgeType    | BridgeType                        | 否   | 数据编解码格式，默认为JSON_TYPE。                            |
-| taskOption    | TaskOption                        | 是   | BridgePlugin线程并发模式，默认为连续并发模式。               |
+| context       | Context                           | 是   | 当前Activity（Android原生）的上下文                        |
+| bridgeName    | String                            | 是   | 平台桥接名称 (必须与ArkTS侧一致)                           |
+| bridgeManager | [BridgeManager](#bridgemanager类) | 是   | BridgePlugin对象管理器，可通过StageActivity的getBridgeManager() 方法获取 |
+| bridgeType    | [BridgeType](#bridgetype11)       | 否   | 数据编解码格式，默认为JSON_TYPE                            |
+| taskOption    | [TaskOption](#taskoption类11)     | 是   | BridgePlugin线程并发模式，默认为连续并发模式               |
 
 **示例：** 
 
@@ -243,7 +126,7 @@ public class BridgeImpl extends BridgePlugin {
     }
     
     // 使用BridgeManager对象且指定线程并发模式构建BridgePlugin对象
-    public BridgeImpl(Context context, String name, BridgeManager bridgeManager, BridgeType codecType, TaskOption 			taskOption) {
+    public BridgeImpl(Context context, String name, BridgeManager bridgeManager, BridgeType codecType, TaskOption taskOption) {
         super(context, name, bridgeManager, codecType, taskOption);
     }
 }
@@ -261,10 +144,10 @@ public class EntryEntryAbilityActivity extends StageActivity {
         bridgeImplByManager = new BridgeImpl(this, "BridgeImplByManager", getBridgeManager());
         
         // 以二进制数据编解码格式, 使用bridgeManager对象实例构建BridgeImpl实例
-        bridgeImplByManagerAndType = new BridgeImpl(this, "BridgeImplByManagerAndType", getBridgeManager(), 					BridgePlugin.BridgeType.BINARY_TYPE);
+        bridgeImplByManagerAndType = new BridgeImpl(this, "BridgeImplByManagerAndType", getBridgeManager(), BridgePlugin.BridgeType.BINARY_TYPE);
         
         // 以线程连续并发模式, 使用bridgeManager对象实例构建BridgeImpl实例
-        bridgeImplByManagerAndTask = new BridgeImpl(this, "BridgeImplByManagerAndTask", getBridgeManager(), 					BridgePlugin.BridgeType.BINARY_TYPE, new TaskOption());
+        bridgeImplByManagerAndTask = new BridgeImpl(this, "BridgeImplByManagerAndTask", getBridgeManager(), BridgePlugin.BridgeType.BINARY_TYPE, new TaskOption());
         
         // bundleName需根据实际情况调整。
         setInstanceName("bundleName:entry:EntryAbility:");
@@ -283,14 +166,14 @@ public BridgePlugin(String bridgeName, BridgeType bridgeType);
 
 **描述：**
 
-使用BridgeManager实例构建平台桥接(BridgePlugin)对象实例，可指定数据编解码格式（默认 JSON_TYPE）。
+依据bridgeName和BridgeType构建平台桥接(BridgePlugin)对象实例，可指定数据编解码格式（默认为JSON_TYPE）。
 
 **参数：**
 
 | Name       | 类型       | 必填 | 描述                               |
 | ---------- | ---------- | ---- | ---------------------------------- |
-| bridgeName | String     | 是   | 平台桥接名称 (必须与ArkUI侧一致)。 |
-| bridgeType | BridgeType | 否   | 数据编解码格式，默认为JSON_TYPE。  |
+| bridgeName | String     | 是   | 平台桥接名称 (必须与ArkTS侧一致) |
+| bridgeType | [BridgeType](#bridgetype11) | 是   | 数据编解码格式，默认为JSON_TYPE  |
 
 **示例：** 
 
@@ -298,7 +181,7 @@ public BridgePlugin(String bridgeName, BridgeType bridgeType);
 // BridgeImpl.java
 
 public class BridgeImpl extends BridgePlugin {
-    //指定名称和数据编解码格式构建BridgePlugin对象
+    // 指定名称和数据编解码格式构建BridgePlugin对象
     public BridgeImpl(String name, BridgeType bridgeType) {
         super(name, bridgeType);
 }
@@ -312,7 +195,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         // 以二进制数据编解码格式, 构建名称为"BridgeName"的BridgeImpl实例对象。
-        bridgeImplByManager = new BridgeImpl("BridgeName", BridgePlugin.BridgeType.BINARY_TYPE());
+        bridgeImplByManager = new BridgeImpl("BridgeName", BridgePlugin.BridgeType.BINARY_TYPE);
         
         // bundleName需根据实际情况调整。
         setInstanceName("bundleName:entry:EntryAbility:");
@@ -333,13 +216,13 @@ public void sendMessage(Object data);
 
 **描述：** 
 
-将数据(data)发送到ArkUI侧，ArkUI侧应答信息通过 IMessageListener.onMessageResponse 接口获取。
+将数据(data)发送到ArkTS侧，ArkTS侧应答数据通过 IMessageListener.onMessageResponse 接口接收。
 
 **参数：** 
 
 | Name | 类型   | 必填 | 描述   |
 | ---- | ------ | ---- | ------ |
-| data | Object | 是   | 数据。 |
+| data | Object | 是   | 待发送数据 |
 
 > **说明**
 >
@@ -350,6 +233,8 @@ public void sendMessage(Object data);
 无
 
 **示例：**
+
+接口具体使用方式详见[平台桥接开发指南-Android](../../tutorial/how-to-use-bridge-on-android.md#场景二android侧向arkui侧传递数据)
 
 ```java
 // BridgeImpl.java
@@ -385,7 +270,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
             @Override
             public void onClick(View v) {
                 String androidData = "Android side data";
-        		// 向ArkUI侧发送数据
+        		// 向ArkTS侧发送数据
                 bridgeImpl.sendMessage(androidData);
             }
         });
@@ -403,19 +288,21 @@ public void callMethod(MethodData methodData);
 
 **描述：**
 
- 调用ArkUI侧定义的方法，ArkUI侧方法的返回结果通过 IMethodResult.onSucessess 接口获取。
+ 调用ArkTS侧定义的方法，ArkTS侧方法的函数返回值通过 IMethodResult.onSucessess 接口接收。
 
 **参数：** 
 
 | Name       | 类型                        | 必填 | 描述                                    |
 | ---------- | --------------------------- | ---- | --------------------------------------- |
-| methodData | [MethodData](#methoddata类) | 是   | ArkUI侧方法描述，即方法名称、参数列表。 |
+| methodData | [MethodData](#methoddata类) | 是   | ArkTS侧方法描述，即方法名称、参数列表 |
 
 **返回值：** 
 
 无
 
 **示例：**
+
+接口具体使用方式详见[平台桥接开发指南-Android](../../tutorial/how-to-use-bridge-on-android.md#场景四android侧调用arkui侧的方法)
 
 ```java
 // BridgeImpl.java
@@ -450,11 +337,11 @@ public class EntryEntryAbilityActivity extends StageActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 定义对象数组，存放ArkUI侧方法形参对应的实参
+                // 定义对象数组，存放ArkTS侧方法形参对应的实参
                 Object[] paramObject = { "param1", "param2" };
-                // 构造ArkUI侧方法描述对象实例, jsMethodName需根据实际情况调整。
+                // 构造ArkTS侧方法描述对象实例, jsMethodName需根据实际情况调整。
                 MethodData methodData = new MethodData("jsMethodName", paramObject);
-                // 调用ArkUI侧的方法（jsMethodName）
+                // 调用ArkTS侧的方法（jsMethodName）
                 bridgeImpl.callMethod(methodData);
             }
         });
@@ -472,20 +359,22 @@ public void callMethod(String methodName, Object... parameters);
 
 **描述：**
 
- 调用ArkUI侧定义的方法，ArkUI侧方法的返回结果通过 IMethodResult.onSucessess 接口获取。
+ 调用ArkTS侧定义的方法，ArkTS侧方法的函数返回值通过 IMethodResult.onSucessess 接口接收。
 
 **参数：** 
 
 | Name       | 类型      | 必填 | 描述                  |
 | ---------- | --------- | ---- | --------------------- |
-| methodName | String    | 是   | ArkUI侧方法名称。     |
-| parameters | Object... | 否   | ArkUI侧方法参数列表。 |
+| methodName | String    | 是   | ArkTS侧方法名称     |
+| parameters | Object... | 否   | ArkTS侧方法参数列表 |
 
 **返回值：** 
 
 无
 
 **示例：**
+
+接口具体使用方式详见[平台桥接开发指南-Android](../../tutorial/how-to-use-bridge-on-android.md#场景四android侧调用arkui侧的方法)
 
 ```java
 // BridgeImpl.java
@@ -520,7 +409,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // ArkUI侧函数名加ArkUI侧方法形参对应的实参调用
+                // ArkTS侧函数名加ArkTS侧方法形参对应的实参调用
                 bridgeImpl.callMethod("jsMethodName", "param1", "param2");
             }
         });
@@ -538,18 +427,18 @@ public Object callMethodSync(String methodName, Object... parameters)
 
 **描述：**
 
- 调用ArkUI侧定义的方法，ArkUI侧方法的返回结果同步返回。
+ 以同步方式调用ArkTS侧定义的方法，ArkTS侧方法的函数返回值同步返回，即函数本身的返回值。
 
 **参数：** 
 
 | Name       | 类型      | 必填 | 描述                  |
 | ---------- | --------- | ---- | --------------------- |
-| methodName | String    | 是   | ArkUI侧方法名称。     |
-| parameters | Object... | 否   | ArkUI侧方法参数列表。 |
+| methodName | String    | 是   | ArkTS侧方法名称     |
+| parameters | Object... | 否   | ArkTS侧方法参数列表 |
 
 **返回值：** 
 
-ArkUI侧方法的返回结果
+ArkTS侧方法的函数返回值。
 
 **示例：**
 
@@ -585,7 +474,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // ArkUI侧函数名加ArkUI侧方法形参对应的实参调用，同步返回结果
+                // ArkTS侧函数名加ArkTS侧方法形参对应的实参调用，同步返回结果
                 Object result = bridgeImpl.callMethodSync("jsMethodName", "param1", "param2");
             }
         });
@@ -603,13 +492,13 @@ public void setMessageListener(IMessageListener messageListener);
 
 **描述：** 
 
-设置消息监听，用于捕获ArkUI侧发送的消息。
+设置数据信息监听回调，用于捕获ArkTS侧发送的数据信息。
 
 **参数：** 
 
 | Name            | 类型             | 必填 | 描述               |
 | --------------- | ---------------- | ---- | ------------------ |
-| messageListener | IMessageListener | 是   | 消息监听接口实例。 |
+| messageListener | [IMessageListener](#imessagelistener接口) | 是   | 数据信息监听接口实例 |
 
 **返回值：** 
 
@@ -641,7 +530,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
     protected void onCreate(Bundle savedInstanceState) {
       	// 创建平台桥接对象。
         BridgeImpl bridgeImpl = new BridgeImpl(this, "BridgeName", getBridgeManager());
-      	// 注册消息监听。
+      	// 注册数据信息监听。
         bridgeImpl.setMessageListener(new MessageListener());
         // bundleName需根据实际情况调整。
         setInstanceName("bundleName:entry:EntryAbility:");
@@ -660,13 +549,13 @@ public void setMethodResultListener(IMethodResult methodResultListener);
 
 **描述：**  
 
-设置监听器，用于捕获平台侧调用ArkUI侧方法的执行结果以及ArkUI侧注销的事件。
+设置方法调用相关监听回调，用于接收Android侧调用ArkTS侧方法的执行结果以及ArkTS侧方法移除的事件。
 
 **参数：** 
 
 | Name                 | 类型          | 必填 | 描述                 |
 | -------------------- | ------------- | ---- | -------------------- |
-| methodResultListener | IMethodResult | 是   | 方法返回监听接口类。 |
+| methodResultListener | [IMethodResult](#imethodresult接口) | 是   | 方法返回监听接口类 |
 
 **返回值：** 
 
@@ -730,7 +619,7 @@ public BridgeType getBridgeType();
 
 | **类型**   | 说明                               |
 | ---------- | ---------------------------------- |
-| BridgeType | 返回BridgePlugin的数据编解码格式。 |
+| [BridgeType](#bridgetype11) | 返回平台桥接对象的数据编解码格式。 |
 
 
 
@@ -742,7 +631,7 @@ public boolean isBridgeAvailable();
 
 **描述：** 
 
-检查当前平台桥接对象是否可用。
+检查当前平台桥接通道是否处于可通信状态。
 
 **参数：** 
 
@@ -752,7 +641,7 @@ public boolean isBridgeAvailable();
 
 | **类型** | 说明                                               |
 | -------- | -------------------------------------------------- |
-| boolean  | 返回值为true表示当前平台桥接对象可用，否则不可用。 |
+| boolean  | true表示当前平台桥接通道可以进行通信。<br>false表示不可通信，请检查ArkTS侧bridge对象实例是否创建 |
 
 
 
@@ -770,14 +659,13 @@ public boolean unRegister(String bridgeName);
 
 | Name       | 类型   | 必填 | 描述           |
 | ---------- | ------ | ---- | -------------- |
-| bridgeName | String | 是   | 平台桥接名称。 |
+| bridgeName | String | 是   | 平台桥接实例名称 |
 
 **返回值：** 
 
 | **类型** | 说明                                     |
 | -------- | ---------------------------------------- |
-| boolean  | 返回值为true表示注销成功，否则注销失败。 |
-
+| boolean  | true表示注销成功。false表示注销失败 |
 
 
 ## BridgeManager类
@@ -787,10 +675,131 @@ public boolean unRegister(String bridgeName);
 **开发者不需要关心BridgeManager类中的接口。**
 
 
+## **IMessageListener接口**
+
+用于接收ArkTS侧发送的数据信息。接口类，由开发者自行实现回调并通过setMessageListener方法设置到BridgePlugin实例中。
+
+### onMessage
+
+```java
+Object onMessage(Object data);
+```
+
+**描述：**
+
+接收ArkTS侧通过sendMessage方法发送的数据信息。
+
+**参数：**
+
+| Name | 类型   | 必填 | 描述                |
+| ---- | ------ | ---- | ------------------- |
+| data | Object | 是   | ArkTS侧发送的数据信息 |
+
+**返回值：**
+
+| 类型   | 描述                                                         |
+| ------ | ------------------------------------------------------------ |
+| Object | 应答数据信息，即Android侧接收到ArkTS侧发送的数据信息后，回复ArkTS侧的数据信息 |
+
+
+
+### onMessageResponse
+
+```java
+void onMessageResponse(Object data);
+```
+
+**描述：**
+
+用于接收Android侧调用sendMessage发送数据信息后，ArkTS侧应答的数据信息，即接收ArkTS侧setMessageListener注册的方法的返回值。
+
+
+**参数：**
+
+| Name | 类型   | 必填 | 描述                                                 |
+| ---- | ------ | ---- | ---------------------------------------------------- |
+| data | Object | 是   | Android侧调用sendMessage发送数据信息后，ArkTS侧的应答数据信息 |
+
+**返回值：**
+
+无
+
+
+
+## IMethodResult接口
+
+用于监听Android侧调用ArkTS侧方法的执行情况。接口类，由开发者自行实现回调并通过setMethodResultListener方法设置到BridgePlugin实例中。
+
+### onSuccess
+
+```java
+void onSuccess(Object resultValue);
+```
+
+**描述：**
+
+Android侧成功调用ArkTS侧定义的方法时触发该接口，并将ArkTS侧被调用方法的函数返回值传递给Android侧。
+
+**参数：**
+
+| Name        | 类型   | 必填 | 描述                  |
+| ----------- | ------ | ---- | --------------------- |
+| resultValue | Object | 是   | ArkTS侧被调用方法的函数返回值 |
+
+**返回值：**
+
+无
+
+
+
+### onError
+
+```java
+void onError(String methodName, int errorCode, String errorMessage);
+```
+
+**描述：**
+
+Android侧调用ArkTS侧定义方法时，如果出现异常错误则触发该接口，并将异常错误信息返回给Android侧。
+
+**参数：**
+
+| Name                      | 类型   | 必填 | 描述              |
+| ------------------------- | ------ | ---- | ----------------- |
+| methodName                | String | 是   | ArkTS侧被调用方法的名称，即函数名 |
+| [errorCode](#errorcode类) | int    | 是   | 异常错误码          |
+| errorMessage              | String | 是   | 异常错误信息描述    |
+
+**返回值：**
+
+无
+
+
+
+### onMethodCancel
+
+```java
+void onMethodCancel(String methodName);
+```
+
+**描述：**
+
+ArkTS侧调用unRegisterMethod方法移除已注册方法时将触发该接口，用于通知Android侧相关方法被移除。
+
+**参数：**
+
+| Name       | 类型   | 必填 | 描述                      |
+| ---------- | ------ | ---- | ------------------------- |
+| methodName | String | 是   | ArkTS侧被移除的方法名称，即函数名 |
+
+**返回值：**
+
+无
+
 
 ## MethodData类
 
-存储ArkUI侧的方法名称和参数列表，供平台侧callMethod方法使用。
+存储ArkTS侧的方法名称和参数列表，供Android侧callMethod方法使用。
 
 ### 构造函数
 
@@ -800,20 +809,20 @@ public MethodData(String methodName, Object[] parameter);
 
 **描述：**
 
-使用ArkUI侧的方法名称和参数列表构造MethodData。
+使用ArkTS侧的方法名称和参数列表构造MethodData。
 
 **参数：**
 
 | Name       | 类型     | 必填 | 描述                      |
 | ---------- | -------- | ---- | ------------------------- |
-| methodName | String   | 是   | 调用ArkUI侧方法名。       |
-| parameter  | Object[] | 是   | 调用ArkUI侧方法参数列表。 |
+| methodName | String   | 是   | 调用ArkTS侧方法名       |
+| parameter  | Object[] | 是   | 调用ArkTS侧方法参数列表 |
 
 
 
 ## **TaskOption类<sup>11+</sup>**
 
-指定平台桥接线程并发模式类，供平台侧bridgeplugin构造函数使用
+指定平台桥接线程并发模式类，供bridgeplugin构造函数使用。
 
 ### 构造函数
 
@@ -831,7 +840,7 @@ public TaskOption(boolean isSerial);
 
 | Name     | 类型    | 必填 | 描述                   |
 | -------- | ------- | ---- | ---------------------- |
-| isSerial | boolean | 否   | 控制线程连续并发模式。 |
+| isSerial | boolean | 否   | 控制线程连续并发模式 |
 
 
 
@@ -839,97 +848,21 @@ public TaskOption(boolean isSerial);
 
 平台桥接的状态返回码。
 
-| errorCode | errorMessage               | 描述                               |
-| --------- | -------------------------- | ---------------------------------- |
-| 0         | "Correct!"                 | 成功。                             |
-| 1         | "Bridge name error!"       | Bridge名称错误。                   |
-| 2         | "Bridge creation failure!" | 创建Bridge失败。                   |
-| 3         | "Bridge unavailable!"      | Bridge不可用。                     |
-| 4         | "Method name error!"       | 没有提供方法名称。                 |
-| 5         | "Method is running..."     | 方法正在运行...                    |
-| 6         | "Method not implemented!"  | 方法未实现。                       |
-| 7         | "Method parameter error!"  | 方法参数错误，如实参与形参不对应。 |
-| 8         | "Method already exists!"   | 方法已经被注册了。                 |
-| 9         | "Data error"               | 数据错误。                         |
-
-
-
-## 示例
-
-  ```java
-// BridgeImpl.java
-package com.example.bridgeDemo;
-
-import android.content.Context;
-import ohos.ace.adapter.capability.bridge.BridgeManager;
-import ohos.ace.adapter.capability.bridge.BridgePlugin;
-
-public class BridgeImpl extends BridgePlugin {
-    public BridgeImpl(Context context, String name, BridgeManager bridgeManager) {
-        super(context, name, bridgeManager);
-    }
-}
-  ```
-
-```java
-// MessageListener.java
-package com.example.bridgeDemo;
-
-import android.util.Log;
-
-import ohos.ace.adapter.capability.bridge.IMessageListener;
-
-public class MessageListener implements IMessageListener {
-    @Override
-    public Object onMessage(Object object) {
-        Log.i("MessageListener", "onMessage success");
-        return "android success onMessage";
-    }
-    @Override
-    public void onMessageResponse(Object object) {
-        Log.i("MessageListener", "onMessageResponse success");
-    }
-}
-```
-
-```java
-// EntryEntryAbilityActivity.java
-package com.example.bridgeDemo;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-
-import ohos.ace.adapter.capability.bridge.BridgePlugin;
-import ohos.stage.ability.adapter.StageActivity;
-
-public class EntryEntryAbilityActivity extends StageActivity {
-    private BridgeImpl bridgeImpl = null;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        bridgeImpl = new BridgeImpl(this, "BridgeName", getBridgeManager(), BridgePlugin.BridgeType.BINARY_TYPE);
-        bridgeImpl.setMessageListener(new MessageListener());
-        // bundleName需根据实际情况调整。
-        setInstanceName("bundleName:entry:EntryAbility:");
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
-        testSendMessage();
-    }
-
-    public void testSendMessage() {
-        // 使用button按钮点击，发送信息。
-        Button button = (Button) findViewById(R.id.TestSendMessage);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String androidData = "Android side data";
-                bridgeImpl.sendMessage(androidData);
-            }
-        });
-    }
-}
-```
+| errorCode        | errorMessage                  | 描述                               |
+| ---------------- | ----------------------------- | ---------------------------------- |
+| 0                | "Correct!"                    | 成功                               |
+| 1                | "Bridge name error!"          | Bridge名称错误                     |
+| 2                | "Bridge creation failure!"    | 创建Bridge失败                     |
+| 3                | "Bridge unavailable!"         | Bridge不可用                       |
+| 4                | "Method name error!"          | 没有提供方法名称                    |
+| 5                | "Method is running..."        | 方法正在运行...                    |
+| 6                | "Method not implemented!"     | 方法未实现。                       |
+| 7                | "Method parameter error!"     | 方法参数错误，如实参与形参不对应     |
+| 8                | "Method already exists!"      | 方法已经被注册了                    |
+| 9                | "Data error"                  | 数据错误                           |
+| 10<sup>11+</sup> | "Bottom Communication error!" | 底层通信错误                       |
+| 11<sup>11+</sup> | "Bridge codec type mismatch"  | Bridge编解码器类型不匹配            |
+| 12<sup>11+</sup> | "Bridge codec is invalid"     | Bridge编解码器无效                 |
 
 ####
 
