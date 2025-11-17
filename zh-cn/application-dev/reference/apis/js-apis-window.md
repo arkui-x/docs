@@ -805,10 +805,11 @@ try {
 getWindowAvoidArea(type: AvoidAreaType): AvoidArea
 
 获取窗口内容规避的区域；如系统栏区域、刘海屏区域、手势区域、软键盘区域等与窗口内容重叠时，需要窗口内容避让的区域。
+从API 20开始，在Android中，非沉浸式的情况下，由于内部已经做了避让，除了键盘，其他避让区域返回为空。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
-**接口依赖：** 在Android中需修改.arkui-x\android目录相关文件配置:
+**接口依赖：** 在Android中需修改.arkui-x\android目录相关文件配置，如不设置会导致获取的避让区域为空:
 <br/>- gradle.properties中android.useAndroidX=true
 <br/>- APP目录下build.gradle中增加androidx库依赖
 <br/>-- implementation "androidx.core:core:1.8.0"
@@ -1762,12 +1763,13 @@ on(type: 'avoidAreaChange', callback: Callback&lt;AvoidAreaOptions&gt;): void
 
 开启当前应用窗口系统规避区变化的监听。
 在Android中，子窗口会自动避让，不会返回避让区域。
+从API 20开始，在Android中，非沉浸式的情况下，由于内部已经做了避让，除了键盘，其他避让区域返回为空。
 暂不支持全屏子窗。
 <!--RP7-->常见的触发避让区回调的场景如下：应用窗口在全屏模式、悬浮模式、分屏模式之间的切换；应用窗口旋转；多折叠设备在屏幕折叠态和展开态之间的切换。<!--RP7End-->
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
-**接口依赖：** 在Android中需修改.arkui-x\android目录相关文件配置:
+**接口依赖：** 在Android中需修改.arkui-x\android目录相关文件配置，如不设置会导致获取的避让区域为空:
 <br/>- gradle.properties中android.useAndroidX=true
 <br/>- APP目录下build.gradle中增加androidx库依赖
 <br/>-- implementation "androidx.core:core:1.8.0"
