@@ -4759,7 +4759,7 @@ struct WebComponent {
 
 加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
 
-### deleteAllData
+### deleteAllData<sup>18+</sup>
 
 static deleteAllData(incognito?: boolean): void
 
