@@ -1,5 +1,6 @@
 # ArkUI-X Release Notes
 
+* [ArkUI-X v6.0.0 Release (2025-11-29)](ArkUI-X-v6.0.0-release.md)
 * [ArkUI-X v5.1.0 Release (2025-06-15)](ArkUI-X-v5.1.0-release.md)
 * [ArkUI-X v5.0.1 Release (2024-11-22)](ArkUI-X-v5.0.1-release.md)
 * [ArkUI-X v2.0.0 Beta1 (2024-06-21)](ArkUI-X-v2.0.0-beta1.md)
