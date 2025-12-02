@@ -1765,6 +1765,7 @@ on(type: 'avoidAreaChange', callback: Callback&lt;AvoidAreaOptions&gt;): void
 在Android中，子窗口会自动避让，不会返回避让区域。
 从API 20开始，在Android中，非沉浸式的情况下，由于内部已经做了避让，除了键盘，其他避让区域返回为空。
 暂不支持全屏子窗。
+部分场景可能回调多次，Android 非沉浸式的导航栏隐藏场景会返回两次，以最后一次为准。
 <!--RP7-->常见的触发避让区回调的场景如下：应用窗口在全屏模式、悬浮模式、分屏模式之间的切换；应用窗口旋转；多折叠设备在屏幕折叠态和展开态之间的切换。<!--RP7End-->
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
