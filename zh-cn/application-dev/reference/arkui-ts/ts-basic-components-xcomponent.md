@@ -4,10 +4,11 @@
 
 > **说明：**
 >
-> 该组件从API Version 11 开始支持跨平台。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+> 该组件从API Version 12 开始支持跨平台。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
 
 
 ## 子组件
+
 无
 
 
@@ -23,8 +24,8 @@ XComponent(options: XComponentOptions)
 
 **参数：**
 
-| 参数名  | 类型                                | 必填 | 说明                           |
-| ------- | --------------------------------------- | ---- | ------------------------------ |
+| 参数名  | 类型                                      | 必填 | 说明                           |
+| ------- | ----------------------------------------- | ---- | ------------------------------ |
 | options | [XComponentOptions](#xcomponentoptions20) | 是   | 定义XComponent的具体配置参数。 |
 
 ### XComponent<sup>(deprecated)</sup>
@@ -55,7 +56,7 @@ XComponent(value: {id: string, type: XComponentType, libraryname?: string, contr
 | 参数名      | 参数类型                                      | 必填 | 描述                                                         |
 | ----------- | --------------------------------------------- | ---- | ------------------------------------------------------------ |
 | id          | string                                        | 是   | 组件的唯一标识，支持最大的字符串长度128。                    |
-| type        | [XComponentType](#xcomponenttype)  | 是   | 用于指定XComponent组件类型（跨平台仅支持SURFACE）。 |
+| type        | [XComponentType](#xcomponenttype)             | 是   | 用于指定XComponent组件类型。                                 |
 | libraryname | string                                        | 否   | 用Native层编译输出动态库名称，仅类型为SURFACE或TEXTURE时有效。 |
 | controller  | [XComponentcontroller](#xcomponentcontroller) | 否   | 给组件绑定一个控制器，通过控制器调用组件方法，仅类型为SURFACE或TEXTURE时有效。 |
 
@@ -63,28 +64,35 @@ XComponent(value: {id: string, type: XComponentType, libraryname?: string, contr
 
 定义XComponent的具体配置参数。
 
-| 名称 | 类型 | 必填 | 说明 |
-| -------- | -------- | -------- | -------- |
-| type | [XComponentType](#xcomponenttype)         | 是   | 用于指定XComponent组件类型。 |
-| controller | [XComponentController](#xcomponentcontroller) | 是 | 给组件绑定一个控制器，通过控制器调用组件方法，仅类型为SURFACE或TEXTURE时有效。 |
+| 名称       | 类型                                          | 必填 | 说明                                                         |
+| ---------- | --------------------------------------------- | ---- | ------------------------------------------------------------ |
+| type       | [XComponentType](#xcomponenttype)             | 是   | 用于指定XComponent组件类型。                                 |
+| controller | [XComponentController](#xcomponentcontroller) | 是   | 给组件绑定一个控制器，通过控制器调用组件方法，仅类型为SURFACE或TEXTURE时有效。 |
 
 ## XComponentType
 
-| 名称      | 描述                                                         | Android平台 | iOS平台 |
-| --------- | ------------------------------------------------------------ | --------- | --------- |
-| SURFACE   | 用于EGL/OpenGLES和媒体数据写入，开发者定制的绘制内容单独展示到屏幕上。 | 支持 | 支持 |
-| COMPONENT<sup>(deprecated)</sup> | XComponent将变成一个容器组件，并可在其中执行非UI逻辑以动态加载显示内容。<br/>**说明：**<br/>从API version 12 开始，该接口废弃，建议使用其它容器组件替代。 | 不支持 | 不支持 |
-| TEXTURE   | 用于EGL/OpenGLES和媒体数据写入，开发者定制的绘制内容会和XComponent组件的内容合成后展示到屏幕上（跨平台暂不支持）。 | 不支持 | 不支持 |
+| 名称                             | 描述                                                         | Android平台 | iOS平台 |
+| -------------------------------- | ------------------------------------------------------------ | ----------- | ------- |
+| SURFACE                          | 用于EGL/OpenGLES和媒体数据写入，开发者定制的绘制内容单独展示到屏幕上。 | 支持        | 支持    |
+| COMPONENT<sup>(deprecated)</sup> | XComponent将变成一个容器组件，并可在其中执行非UI逻辑以动态加载显示内容。<br/>**说明：**<br/>从API version 12 开始，该接口废弃，建议使用其它容器组件替代。 | 不支持      | 不支持  |
+| TEXTURE<sup>23+</sup>            | 用于EGL/OpenGLES和媒体数据写入，开发者定制的绘制内容将与XCompponent组件的内容合成后展示到屏幕上。<br/>1、保持帧同步，保持在同一帧将图形处理器(GPU)纹理和ArkUI其他的绘制指令统一发给渲染服务(RenderService)。<br/>2、动效和系统组件统一。<br/>3、走图形处理器(GPU)合成，相比surface可能走显示子系统(DSS)功耗更高。 | 支持        | 支持    |
+
+> **说明**：
+>
+> Android平台使用TEXTURE类型的XComponent组件时，需要在SurfaceChange相关回调中进行EGLSurface的初始化。
+>
+> iOS平台使用TEXTURE类型的XComponent组件时，上下文的创建和设置、纹理、缓冲区、着色器等资源必须在同一线程中执行，所有资源必须在创建它的上下文中释放。
 
 ## 属性
+
 除支持通用属性外，还有限支持以下属性：
-  > 
+
   > **说明：**
   >
   > 不支持foregroundColor、obscured和pixelStretchEffect属性，并且type为SURFACE类型时也不支持动态属性设置、自定义绘制、背景设置(backgroundColor除外)、图像效果(shadow除外)、maskShape和foregroundEffect属性。
   >
   > 对于TEXTURE和SURFACE类型的XComponent组件，当不设置[renderFit](ts-universal-attributes-renderfit.md)属性时，取默认值为RenderFit.RESIZE_FILL。
-  > 
+  >
   > 对于SURFACE类型的XComponent组件，当组件背景色为不透明的纯黑色时，其[renderFit](ts-universal-attributes-renderfit.md)通用属性仅支持设置为RenderFit.RESIZE_FILL，不推荐设置为其它的RenderFit枚举值。
 
 
@@ -108,9 +116,9 @@ onLoad(callback: (event?: object) => void )
 
 **参数:**
 
-| 参数名   | 参数类型   | 必填   | 描述                                       |
-| ----- | ------ | ---- | ---------------------------------------- |
-| event | object | 否    | 获取XComponent实例对象的context，context上挂载的方法由开发者在c++层定义。 |
+| 参数名 | 参数类型 | 必填 | 描述                                                         |
+| ------ | -------- | ---- | ------------------------------------------------------------ |
+| event  | object   | 否   | 获取XComponent实例对象的context，context上挂载的方法由开发者在c++层定义。 |
 
 ### onDestroy
 
@@ -140,8 +148,8 @@ getXComponentSurfaceId(): string
 
 **返回值:**
 
-| 类型     | 描述                      |
-| ------ | ----------------------- |
+| 类型   | 描述                        |
+| ------ | --------------------------- |
 | string | XComponent持有Surface的ID。 |
 
 
@@ -155,10 +163,10 @@ setXComponentSurfaceSize(value: {surfaceWidth: number, surfaceHeight: number}): 
 
 **参数:**
 
-| 参数名           | 参数类型   | 必填   | 描述                      |
-| ------------- | ------ | ---- | ----------------------- |
-| surfaceWidth  | number | 是    | XComponent持有Surface的宽度。 |
-| surfaceHeight | number | 是    | XComponent持有Surface的高度。 |
+| 参数名        | 参数类型 | 必填 | 描述                          |
+| ------------- | -------- | ---- | ----------------------------- |
+| surfaceWidth  | number   | 是   | XComponent持有Surface的宽度。 |
+| surfaceHeight | number   | 是   | XComponent持有Surface的高度。 |
 
 
 ### getXComponentContext
@@ -185,8 +193,8 @@ setXComponentSurfaceRect(rect: SurfaceRect): void
 
 **参数：**
 
-| 参数名 | 类型                             | 必填 | 说明                              |
-| ------ | ------------------------------------ | ---- | --------------------------------- |
+| 参数名 | 类型                                  | 必填 | 说明                              |
+| ------ | ------------------------------------- | ---- | --------------------------------- |
 | rect   | [SurfaceRect](#surfacerect20对象说明) | 是   | XComponent持有Surface的显示区域。 |
 
 > **说明：**
@@ -207,8 +215,8 @@ getXComponentSurfaceRect(): SurfaceRect
 
 **返回值：**
 
-| 类型                                 | 描述                                  |
-| ------------------------------------ | ------------------------------------- |
+| 类型                                  | 描述                                  |
+| ------------------------------------- | ------------------------------------- |
 | [SurfaceRect](#surfacerect20对象说明) | 获取XComponent持有Surface的显示区域。 |
 
 ### onSurfaceCreated<sup>20+</sup>
@@ -221,9 +229,9 @@ onSurfaceCreated(surfaceId: string): void
 
 **参数：**
 
-| 参数名    | 类型 | 必填 | 说明                                              |
-| --------- | -------- | ---- | ------------------------------------------------- |
-| surfaceId | string   | 是   | 回调该方法的时候，绑定XComponent持有Surface的ID。 |
+| 参数名    | 类型   | 必填 | 说明                                              |
+| --------- | ------ | ---- | ------------------------------------------------- |
+| surfaceId | string | 是   | 回调该方法的时候，绑定XComponent持有Surface的ID。 |
 
 > **说明：**
 >
@@ -239,7 +247,7 @@ onSurfaceChanged(surfaceId: string, rect: SurfaceRect): void
 
 **参数：**
 
-| 参数名    | 类型                              | 必填 | 说明                                                    |
+| 参数名    | 类型                                  | 必填 | 说明                                                    |
 | --------- | ------------------------------------- | ---- | ------------------------------------------------------- |
 | surfaceId | string                                | 是   | 回调该方法的时候，绑定XComponent持有Surface的ID。       |
 | rect      | [SurfaceRect](#surfacerect20对象说明) | 是   | 回调该方法的时候，绑定XComponent持有Surface的显示区域。 |
@@ -258,9 +266,9 @@ onSurfaceDestroyed(surfaceId: string): void
 
 **参数：**
 
-| 参数名    | 类型 | 必填 | 说明                                              |
-| --------- | -------- | ---- | ------------------------------------------------- |
-| surfaceId | string   | 是   | 回调该方法的时候，绑定XComponent持有Surface的ID。 |
+| 参数名    | 类型   | 必填 | 说明                                              |
+| --------- | ------ | ---- | ------------------------------------------------- |
+| surfaceId | string | 是   | 回调该方法的时候，绑定XComponent持有Surface的ID。 |
 
 > **说明：**
 >
@@ -276,9 +284,9 @@ setXComponentSurfaceRotation(rotationOptions: SurfaceRotationOptions): void
 
 **参数：**
 
-| 参数名 | 类型                             | 必填 | 说明                              |
-| ------ | ------------------------------------ | ---- | --------------------------------- |
-| rotationOptions   | [SurfaceRotationOptions](#surfacerotationoptions20对象说明) | 是 | 设置XComponent持有Surface在屏幕旋转时是否锁定方向。 |
+| 参数名          | 类型                                                        | 必填 | 说明                                                |
+| --------------- | ----------------------------------------------------------- | ---- | --------------------------------------------------- |
+| rotationOptions | [SurfaceRotationOptions](#surfacerotationoptions20对象说明) | 是   | 设置XComponent持有Surface在屏幕旋转时是否锁定方向。 |
 
 > **说明：**
 >
@@ -298,17 +306,17 @@ getXComponentSurfaceRotation(): Required\<SurfaceRotationOptions>
 
 **返回值：**
 
-| 类型                                 | 描述                                  |
-| ------------------------------------ | ------------------------------------- |
+| 类型                                                        | 描述                                                      |
+| ----------------------------------------------------------- | --------------------------------------------------------- |
 | [SurfaceRotationOptions](#surfacerotationoptions20对象说明) | 获取XComponent持有Surface在屏幕旋转时是否锁定方向的设置。 |
 
 ## SurfaceRotationOptions<sup>20+</sup>对象说明
 
 用于描述XComponent持有Surface在屏幕旋转时是否锁定方向的设置。
 
-| 名称          | 类型   | 必填 | 说明                                                         |
-| ------------- | ------ | ---- | ------------------------------------------------------------ |
-| lock       | boolean | 否   | Surface在屏幕旋转时是否锁定方向，未设置时默认取值为false，即不锁定方向。<br/>true：锁定方向；false：不锁定方向。 |
+| 名称 | 类型    | 必填 | 说明                                                         |
+| ---- | ------- | ---- | ------------------------------------------------------------ |
+| lock | boolean | 否   | Surface在屏幕旋转时是否锁定方向，未设置时默认取值为false，即不锁定方向。<br/>true：锁定方向；false：不锁定方向。 |
 
 ## SurfaceRect<sup>20+</sup>对象说明
 
@@ -324,7 +332,6 @@ getXComponentSurfaceRotation(): Required\<SurfaceRotationOptions>
 > **说明：**
 >
 > surfaceWidth和surfaceHeight属性在未调用[setXComponentSurfaceRect](#setxcomponentsurfacerect20)也未设置[border](ts-universal-attributes-border.md#border)和[padding](ts-universal-attributes-size.md#padding)等属性时，其取值大小为XComponent组件的大小。
->
 
 
 ## 示例
