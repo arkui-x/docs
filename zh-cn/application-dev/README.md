@@ -45,6 +45,7 @@
 - [ArkUI-X框架LogInterface使用指南](./tutorial/how-to-use-arkui-x-loginterface-on-android.md)
 - [预加载应用特性abc开发指南](./tutorial/how-to-use-preloadEtsModule-on-android.md)
 - [平台视图开发指南](./tutorial/how-to-use-platformview-on-android.md)
+- [以Hap为主体的共享逻辑包开发指南](./tutorial/how-to-decoupled-UI-and-Logic-on-android.md)
 
 ### iOS平台开发
 
@@ -60,6 +61,7 @@
 - [预加载应用特性abc开发指南](./tutorial/how-to-use-preloadEtsModule-on-ios.md)
 - [平台视图开发指南](./tutorial/how-to-use-platformview-on-ios.md)
 - [IOS跨平台页面实现手势返回指南](./quick-start/ios-slip-left-back.md)
+- [以Hap为主体的共享逻辑包开发指南](./tutorial/how-to-decoupled-UI-and-Logic-on-ios.md)
 
 ### 应用改造
 
