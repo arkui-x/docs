@@ -54,7 +54,7 @@ checkAccessToken(tokenID: number, permissionName: Permissions): Promise&lt;Grant
 
 | 参数名   | 类型                 | 必填 | 说明                                       | Android平台 | iOS平台 |
 | -------- | -------------------  | ---- | ------------------------------------------ | -------- | -------- |
-| tokenID   |  number   | 是   | 要校验的目标应用的身份标识。当前跨平台上仅支持校验当前应用的自己的授权状态，tokenid可以填任意非0值。         | 支持 | 支持 |
+| tokenID   |  number   | 是   | 要校验的目标应用的身份标识。当前跨平台上仅支持校验当前应用自身的授权状态，tokenID可以填任意非0值。         | 支持 | 支持 |
 | permissionName | Permissions | 是   | 需要校验的权限名称，合法的权限名取值可在[系统权限定义列表](../../security/permission-list.md)中查询。 | 支持 | 支持 |
 
 **返回值：**
@@ -91,11 +91,13 @@ try {
 
 ### checkAccessTokenSync<sup>10+</sup>
 
-checkAccessTokenSync(tokenID: number, permissionName: Permissions): GrantStatus;
+checkAccessTokenSync(tokenID: number, permissionName: Permissions): GrantStatus
 
 校验应用是否被授予权限，同步返回结果。当前跨平台上仅支持校验当前应用的自己的授权状态。
 
 **支持平台：** Android、iOS
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
 
 **系统能力：** SystemCapability.Security.AccessToken
 
@@ -103,7 +105,7 @@ checkAccessTokenSync(tokenID: number, permissionName: Permissions): GrantStatus;
 
 | 参数名   | 类型                 | 必填 | 说明                                       | Android平台 | iOS平台 |
 | -------- | -------------------  | ---- | ------------------------------------------ | -------- | -------- |
-| tokenID   |  number   | 是   | 要校验的目标应用的身份标识。当前跨平台上仅支持校验当前应用的自己的授权状态，tokenid可以填任意非0值。           | 支持 | 支持 |
+| tokenID   |  number   | 是   | 要校验的目标应用的身份标识。当前跨平台上仅支持校验当前应用自身的授权状态，tokenID可以填任意非0值。           | 支持 | 支持 |
 | permissionName | Permissions | 是   | 需要校验的权限名称，合法的权限名取值可在[系统权限定义列表](../../security/permission-list.md)中查询。 | 支持 | 支持 |
 
 **返回值：**
@@ -131,6 +133,8 @@ console.info(`data->${JSON.stringify(data)}`);
 
 表示授权状态的枚举。
 
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
+
 **系统能力：** SystemCapability.Security.AccessToken
 
 | 名称               |    值 | 说明        | Android平台 | iOS平台 |
@@ -141,11 +145,13 @@ console.info(`data->${JSON.stringify(data)}`);
 
 ### requestPermissionsFromUser<sup>9+</sup>
 
-requestPermissionsFromUser(context: Context, permissionList: Array&lt;Permissions&gt;, requestCallback: AsyncCallback&lt;PermissionRequestResult&gt;) : void;
+requestPermissionsFromUser(context: Context, permissionList: Array&lt;Permissions&gt;, requestCallback: AsyncCallback&lt;PermissionRequestResult&gt;) : void
 
 用于拉起弹框请求用户授权。使用callback异步回调。
 
 **支持平台：** Android、iOS
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
 
 **系统能力**: SystemCapability.Security.AccessToken
 
@@ -166,20 +172,20 @@ requestPermissionsFromUser(context: Context, permissionList: Array&lt;Permission
 **示例：**
 
   ```js
-import { abilityAccessCtrl, Context, PermissionRequestResult } from '@kit.AbilityKit';
+import { abilityAccessCtrl, Context, PermissionRequestResult, common } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 
 let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
-let context: Context = getContext(this);
+let context: Context = this.getUIContext().getHostContext() as common.UIAbilityContext;
 try {
   atManager.requestPermissionsFromUser(context, ['ohos.permission.CAMERA'], (err: BusinessError, data: PermissionRequestResult) => {
-  if (err) {
-    console.error(`requestPermissionsFromUser err->${JSON.stringify(err)}`);
-  } else {
-    console.info('data:' + JSON.stringify(data));
-    console.info('data permissions:' + data.permissions);
-    console.info('data authResults:' + data.authResults);
-  }
+    if (err) {
+      console.error(`requestPermissionsFromUser fail, err->${JSON.stringify(err)}`);
+    } else {
+      console.info('data:' + JSON.stringify(data));
+      console.info('data permissions:' + data.permissions);
+      console.info('data authResults:' + data.authResults);
+    }
   });
 } catch(err) {
   console.error(`catch err->${JSON.stringify(err)}`);
@@ -188,11 +194,13 @@ try {
 
 ### requestPermissionsFromUser<sup>9+</sup>
 
-requestPermissionsFromUser(context: Context, permissionList: Array&lt;Permissions&gt;) : Promise&lt;PermissionRequestResult&gt;;
+requestPermissionsFromUser(context: Context, permissionList: Array&lt;Permissions&gt;) : Promise&lt;PermissionRequestResult&gt;
 
 用于拉起弹框请求用户授权。使用promise异步回调。
 
 **支持平台：** Android、iOS
+
+**原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。
 
 **系统能力**: SystemCapability.Security.AccessToken
 
@@ -211,25 +219,25 @@ requestPermissionsFromUser(context: Context, permissionList: Array&lt;Permission
 
 **错误码：**
 
-| 错误码ID | 错误信息 |
+| 错误码ID | 错误信息 | Android平台 | iOS平台 |
 | -------- | -------- | -------- | -------- |
 | 12100001 | The permissionList parameter is invalid. | 支持 | 支持 |
 
 **示例：**
 
   ```js
-import { abilityAccessCtrl, Context, PermissionRequestResult } from '@kit.AbilityKit';
+import { abilityAccessCtrl, Context, PermissionRequestResult, common } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 
-let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
-let context: Context = getContext(this);
+let atManager = abilityAccessCtrl.createAtManager();
 try {
-  atManager.requestPermissionsFromUser(context, ['ohos.permission.CAMERA']).then((data: PermissionRequestResult) => {
-  console.info('data:' + JSON.stringify(data));
-  console.info('data permissions:' + data.permissions);
-  console.info('data authResults:' + data.authResults);
+  let context: Context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  atManager.requestPermissionsFromUser(context, ["ohos.permission.CAMERA"]).then((data) => {
+    console.info('data:' + JSON.stringify(data));
+    console.info('data permissions:' + data.permissions);
+    console.info('data authResults:' + data.authResults);
   }).catch((err: BusinessError) => {
-  console.error('data:' + JSON.stringify(err));
+      console.error("data:" + JSON.stringify(err));
   })
 } catch(err) {
   console.error(`catch err->${JSON.stringify(err)}`);
