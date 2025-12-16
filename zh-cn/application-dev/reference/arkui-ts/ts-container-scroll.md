@@ -37,6 +37,7 @@ Scroll(scroller?: Scroller)
 | edgeEffect     | [EdgeEffect](ts-appendix-enums.md#edgeeffect)            | 设置滑动效果，目前支持的滑动效果参见EdgeEffect的枚举说明。<br/>默认值：EdgeEffect.None |
 | enableScrollInteraction<sup>10+</sup>  |  boolean  |   设置是否支持滚动手势，当设置为false时，无法通过手指或者鼠标滚动，但不影响控制器的滚动接口。<br/>默认值：true      |
 | friction<sup>10+</sup> | number \| [Resource](ts-types.md#resource)    | 设置摩擦系数，手动划动滚动区域时生效，只对惯性滚动过程有影响，对惯性滚动过程中的链式效果有间接影响。<br/>默认值：非可穿戴设备为0.6，可穿戴设备为0.9<br/>**说明：** <br/>设置为小于等于0的值时，按默认值处理 |
+| backToTop<sup>15+</sup> | boolean    | 设置滚动组件是否支持点击状态栏回到顶部。支持当前页面的滚动组件收到点击状态栏事件后，通过动画回到顶部。点击状态栏后，后台应用的滚动组件不受影响，不做回到顶部的动作。<br/>默认值：API version 18之前：false。API version 18及以后：滚动方向是水平方向时为false，是垂直方向时为true。 <br/>**说明：** <br/>在iOS、Android平台上该属性无作用。 |
 
 ## ScrollDirection枚举说明
 | 名称       | 描述                     |
