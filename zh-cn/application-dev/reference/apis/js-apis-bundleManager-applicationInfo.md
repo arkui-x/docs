@@ -24,7 +24,7 @@
 | permissions<sup>20+</sup>         | Array\<string>                              | 是   | 否   | 访问应用程序所需的权限，通过调用[getBundleInfoForSelf](js-apis-bundleManager.md#bundlemanagergetbundleinfoforself)接口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_APPLICATION和GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION获取。 | 支持        | 支持    |
 | metadataArray<sup>20+</sup>       | Array\<[ModuleMetadata](#modulemetadata20)> | 是   | 否   | 应用程序的元信息，通过调用[getBundleInfoForSelf](js-apis-bundleManager.md#bundlemanagergetbundleinfoforself)接口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_APPLICATION和GET_BUNDLE_INFO_WITH_METADATA获取。 | 支持        | 支持    |
 | removable<sup>20+</sup>           | boolean                                     | 是   | 否   | 应用程序是否可以被移除，取值为true表示可以被移除，取值为false表示不可以被移除。 | 支持        | 支持    |
-| accessTokenId<sup>20+</sup>       | number                                      | 是   | 否   | 应用程序的accessTokenId。                                    | 支持        | 支持    |
+| accessTokenId<sup>20+</sup>       | number                                      | 是   | 否   | 应用程序的accessTokenId。                                    | 不支持        | 不支持    |
 | uid<sup>20+</sup>                 | number                                      | 是   | 否   | 应用程序的uid。                                              | 支持        | 支持    |
 | iconResource<sup>20+</sup>        | Resource                                    | 是   | 否   | 应用程序的图标资源信息，通过ApplicationInfo 获取的resource 包含了该资源的信息的bundleName、moduleName 和 id，可以调用全球化的接口getMediaContent来获取详细的资源数据信息。 | 支持        | 支持    |
 | labelResource<sup>20+</sup>       | Resource                                    | 是   | 否   | 应用程序的标签资源信息，通过ApplicationInfo 获取的resource 包含了该资源的信息的bundleName、moduleName 和 id，可以调用全球化的接口getMediaContent来获取详细的资源数据信息。 | 支持        | 支持    |
