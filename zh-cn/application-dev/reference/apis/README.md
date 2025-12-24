@@ -158,10 +158,26 @@
   - [@ohos.security.cryptoFramework (加解密算法库框架)](js-apis-cryptoFramework.md)
   - [@ohos.security.cert(证书算法库框架)](js-apis-cert.md)
 - 语言基础类库
-  - [@arkts.collections (ArkTS容器集)](js-apis-arkts-collections.md)
+  - @arkts.collections (ArkTS容器集)<!--js-apis-arkts-collections-->
+    - [模块描述](js-apis-arkts-collections.md)
+    - [Class (Array)](arkts-apis-arkts-collections-Array.md)
+    - [Class (ArrayBuffer)](arkts-apis-arkts-collections-ArrayBuffer.md)
+    - [Class (BitVector)](arkts-apis-arkts-collections-BitVector.md)
+    - [Class (Float32Array)](arkts-apis-arkts-collections-Float32Array.md)
+    - [Class (Int16Array)](arkts-apis-arkts-collections-Int16Array.md)
+    - [Class (Int32Array)](arkts-apis-arkts-collections-Int32Array.md)
+    - [Class (Int8Array)](arkts-apis-arkts-collections-Int8Array.md)
+    - [Types](arkts-apis-arkts-collections-Types.md)
+    - [Class (Uint16Array)](arkts-apis-arkts-collections-Uint16Array.md)
+    - [Class (Uint32Array)](arkts-apis-arkts-collections-Uint32Array.md)
+    - [Class (Uint8Array)](arkts-apis-arkts-collections-Uint8Array.md)
+    - [Class (Uint8ClampedArray)](arkts-apis-arkts-collections-Uint8ClampedArray.md)
   - [@arkts.lang (ArkTS语言基础能力)](js-apis-arkts-lang.md)
   - [@arkts.math.Decimal (高精度数学库Decimal)](js-apis-arkts-decimal.md)
-  - [@arkts.utils (ArkTS工具库)](js-apis-arkts-utils.md)
+  - @arkts.utils (ArkTS工具库)<!--js-apis-arkts-utils-->
+    - [模块描述](js-apis-arkts-utils.md)
+    - [ArkTSUtils.locks](arkts-apis-arkts-utils-locks.md)
+    - [SendableLruCache<K, V>](arkts-apis-arkts-utils-SendableLruCache.md)
   - [@ohos.buffer (Buffer)](js-apis-buffer.md)
   - [@ohos.convertxml (xml转换JavaScript)](js-apis-convertxml.md)
   - [@ohos.process (获取进程相关的信息)](js-apis-process.md)
@@ -203,5 +219,9 @@
   - [@ohos.hiviewdfx.hiAppEvent (应用事件打点)](js-apis-hiviewdfx-hiappevent.md)
 - 进程线程通信
   - [@ohos.events.emitter (Emitter)](js-apis-emitter.md)
+- 传感器服务
+  - [@ohos.vibrator(振动)](arkts-apis-vibrator.md)
+- 位置服务
+  - [@ohos.geoLocationManager (位置服务)](arkts-apis-geoLocationManager.md)
 - 其他
   - [@ohos.systemDateTime (系统时间、时区)](js-apis-date-time.md)
