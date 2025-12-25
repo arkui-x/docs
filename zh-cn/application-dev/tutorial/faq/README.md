@@ -19,7 +19,7 @@
 
 - [DevEco Studio环境搭建常见问题](Pre-research-Stage/Pre-faq-6.md)
 - [Ace Tools环境搭建常见问题](Pre-research-Stage/Pre-faq-7.md)
-- [Xcode升级到16以上版本](Development-Stag/Dev-faq-16.md)
+- [Xcode升级到16以上版本](Pre-research-Stage/Pre-faq-13.md)
 
 ### 跨平台改造
 
@@ -53,6 +53,7 @@
 - [ArkUI-X 跨平台本地数据加载示例](Development-Stage/Dev-faq-20.md)
 - [关于 registerJavaScriptProxy使用说明](Development-Stage/Dev-faq-21.md)
 - [ArkUI-X API 20+版本，Android bridge 里使用原生 UI 报错抛异常问题解决](Development-Stage/Dev-faq-22.md)
+- [ArkUI-X iOS如何触发应用前后台切换回调](Development-Stage/Dev-faq-23.md)
 
 ### 问题自排查
 

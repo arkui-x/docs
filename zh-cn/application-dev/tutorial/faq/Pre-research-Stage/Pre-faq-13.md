@@ -15,12 +15,12 @@
 
 * plugins/request/core/task/frameworks/ios/dbkit/IosTaskConfig.m
   ```objc
-  124 info.tries = 0; // 原为@“”
+  124 info.tries = 0; // 原为@""
   ```
 
 * foundation/arkui/ace_engine/frameworks/base/log/log_wrapper.h
 
-  ```objc
+  ```c++
   273 const char* p = strrchr_(name, separator); // 自定义，否则会报缺少memrchr方法
   ...
   308 private:
@@ -44,22 +44,21 @@
           }
           return reinterpret_cast<char*>(const_cast<unsigned char*>(last));
       }
-  ```
 
 * build/config/security/BUILD.gn
 
   ```python
   45 # "-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang", # 注释掉这一行，llvm16已废弃
-  ```
 
 * build/misc/mac/find_sdk.py
 
   ```python
-  77 sdks = [re.findall('^MacOSX(1[0,1,2,3,4,5]\.\d+)\.sdk$', s) for s in # 添加MacOSX 15
-  ```
+  77 sdks = [re.findall('^MacOSX([1,2][0,1,2,3,4,5,6]\.\d+)\.sdk$', s) for s in # 添加MacOSX 15
 
 * build_plugins/config/ios/BUILD.gn
 
   ```python
-  118 common_ccflags += [ "-D__IPHONE_OS_VERSION_MIN_REQUIRED=100000" ] # 添加最小支持版本宏
-  ```
+  134 defines += [ "__IPHONE_OS_VERSION_MIN_REQUIRED=100000" ]
+  135 if (defined(Xcode_version) && Xcode_version >= 26) {
+        framework_dirs += [ "$sysroot/System/Library/SubFrameworks" ]
+      }
