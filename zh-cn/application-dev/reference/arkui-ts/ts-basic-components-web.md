@@ -1851,7 +1851,7 @@ struct WebComponent {
 }
 ```
 
-### fileAccess<sup>22+</sup>
+### fileAccess<sup>23+</sup>
 
 fileAccess(fileAccess: boolean)
 
@@ -1887,7 +1887,7 @@ fileAccess(fileAccess: boolean)
   }
   ```
 
-### textZoomRatio<sup>22+</sup>
+### textZoomRatio<sup>23+</sup>
 
 textZoomRatio(textZoomRatio: number)
 
@@ -1924,7 +1924,7 @@ textZoomRatio(textZoomRatio: number)
   }
   ```
 
-### nestedScroll<sup>22+</sup>
+### nestedScroll<sup>23+</sup>
 
 nestedScroll(value: NestedScrollOptions | NestedScrollOptionsExt)
 
@@ -1948,7 +1948,7 @@ nestedScroll(value: NestedScrollOptions | NestedScrollOptionsExt)
 | value  | NestedScrollOptions \| NestedScrollOptionsExt | 是   | 可滚动组件滚动时的嵌套滚动选项。<br> value为NestedScrollOptions（向前、向后两个方向）类型时，scrollForward、scrollBackward默认滚动选项为NestedScrollMode.SELF_FIRST。 <br> value为NestedScrollOptionsExt（上下左右四个方向）类型时，scrollUp、scrollDown、scrollLeft、scrollRight默认滚动选项为NestedScrollMode.SELF_FIRST。 |
 
 
-#### NestedScrollOptions<sup>22+</sup>对象说明
+#### NestedScrollOptions<sup>23+</sup>对象说明
 
 nestedScroll属性参数对象。
 
@@ -1958,7 +1958,7 @@ nestedScroll属性参数对象。
 | scrollBackward | [NestedScrollMode](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/ts-appendix-enums.md#nestedscrollmode10) | 否   | 否   | 滚动组件往起始端滚动时的嵌套滚动选项。 |
 
 
-#### NestedScrollOptionsExt<sup>22+</sup>
+#### NestedScrollOptionsExt<sup>23+</sup>
 
 通过NestedScrollOptionsExt可以设置上下左右四个方向的嵌套滚动规则。
 
@@ -2385,7 +2385,7 @@ getResponseIsReady(): boolean
 |---|---|
 |boolean|`true`表示响应数据已准备好，`false`表示未准备好。|
 
-### setResponseData<sup>22+</sup>
+### setResponseData<sup>23+</sup>
 
 setResponseData(data: string \| number \| Resource \| ArrayBuffer): void
 
@@ -2401,7 +2401,7 @@ setResponseData(data: string \| number \| Resource \| ArrayBuffer): void
 | ------ | ------------------------------------------ | ---- | ------------------------------------------------------------ | -------------------------- | -------------------------- |
 | data   | string \| number \|Resource \| ArrayBuffer | 是   | 要设置的资源响应数据。string表示HTML格式的字符串。number表示文件句柄，此句柄由系统的Web组件负责关闭。Resource表示应用rawfile目录下文件资源。ArrayBuffer表示资源的原始二进制数据。 | number和Resource类型不支持 | number和Resource类型不支持 |
 
-### setResponseEncoding<sup>22+</sup>
+### setResponseEncoding<sup>23+</sup>
 
 setResponseEncoding(encoding: string): void
 
@@ -2417,7 +2417,7 @@ setResponseEncoding(encoding: string): void
 | -------- | ------ | ---- | ------------------------ |
 | encoding | string | 是   | 要设置的资源响应的编码。 |
 
-### setResponseMimeType<sup>22+</sup>
+### setResponseMimeType<sup>23+</sup>
 
 setResponseMimeType(mimeType: string): void
 
@@ -2433,7 +2433,7 @@ setResponseMimeType(mimeType: string): void
 | -------- | ------ | ---- | ------------------------------------ |
 | mimeType | string | 是   | 要设置的资源响应的媒体（MIME）类型。 |
 
-### setReasonMessage<sup>22+</sup>
+### setReasonMessage<sup>23+</sup>
 
 setReasonMessage(reason: string): void
 
@@ -2449,7 +2449,7 @@ setReasonMessage(reason: string): void
 | ------ | ------ | ---- | ------------------------------ |
 | reason | string | 是   | 要设置的资源响应的状态码描述。 |
 
-### setResponseHeader<sup>22+</sup>
+### setResponseHeader<sup>23+</sup>
 
 setResponseHeader(header: Array\<Header\>): void
 
@@ -2465,7 +2465,7 @@ setResponseHeader(header: Array\<Header\>): void
 | ------ | -------------------------- | ---- | -------------------- |
 | header | Array\<[Header](#header)\> | 是   | 要设置的资源响应头。 |
 
-### setResponseCode<sup>22+</sup>
+### setResponseCode<sup>23+</sup>
 
 setResponseCode(code: number): void
 
@@ -2481,7 +2481,7 @@ setResponseCode(code: number): void
 | ------ | ------ | ---- | ------------------------------------------------------------ |
 | code   | number | 是   | 要设置的资源响应的状态码。如果该资源以错误结束，请参考[@ohos.web.netErrorList](../apis/arkts-apis-netErrorList.md)设置相应错误码，避免设置错误码为 ERR_IO_PENDING，设置为该错误码可能会导致XMLHttpRequest同步请求阻塞。Android平台该值的取值范围为[100, 299], [400, 599]。 |
 
-### setResponseIsReady<sup>22+</sup>
+### setResponseIsReady<sup>23+</sup>
 
 setResponseIsReady(IsReady: boolean): void
 
@@ -2902,11 +2902,11 @@ isCapture(): boolean
 | ------- | ------------ |
 | boolean | 返回是否调用多媒体能力。 |
 
-## SslErrorHandler<sup>22+</sup>
+## SslErrorHandler<sup>23+</sup>
 
 Web组件返回的SSL错误通知事件用户处理功能对象。
 
-### constructor<sup>22+</sup>
+### constructor<sup>23+</sup>
 
 constructor()
 
@@ -2916,7 +2916,7 @@ SslErrorHandler的构造函数。
 
 **支持平台：** Android、iOS
 
-### handleCancel<sup>22+</sup>
+### handleCancel<sup>23+</sup>
 
 handleCancel(): void
 
@@ -2926,7 +2926,7 @@ handleCancel(): void
 
 **支持平台：** Android、iOS
 
-### handleConfirm<sup>22+</sup>
+### handleConfirm<sup>23+</sup>
 
 handleConfirm(): void
 
@@ -2936,7 +2936,7 @@ handleConfirm(): void
 
 **支持平台：** Android、iOS
 
-## SslError<sup>22+</sup>
+## SslError<sup>23+</sup>
 
 onSslErrorEventReceive接口返回的SSL错误的具体原因。
 
@@ -2948,7 +2948,7 @@ onSslErrorEventReceive接口返回的SSL错误的具体原因。
 | DateInvalid  | 2    | 证书日期无效。         | 支持        | 支持    |
 | Untrusted    | 3    | 证书颁发机构不受信任。 | 支持        | 支持    |
 
-## SslErrorEvent<sup>22+</sup>
+## SslErrorEvent<sup>23+</sup>
 
 用户加载资源时发生SSL错误时触发的回调详情。
 
@@ -2956,8 +2956,8 @@ onSslErrorEventReceive接口返回的SSL错误的具体原因。
 
 | 名称          | 类型                                  | 只读 | 可选 | 说明                                                  | Android平台 | iOS平台 |
 | ------------- | ------------------------------------- | ---- | ---- | ----------------------------------------------------- | ----------- | ------- |
-| handler       | [SslErrorHandler](#sslerrorhandler22) | 否   | 否   | 通知Web组件用户操作行为。                             | 支持        | 支持    |
-| error         | [SslError](#sslerror22)               | 否   | 否   | 错误码。                                              | 支持        | 支持    |
+| handler       | [SslErrorHandler](#sslerrorhandler23) | 否   | 否   | 通知Web组件用户操作行为。                             | 支持        | 支持    |
+| error         | [SslError](#sslerror23)               | 否   | 否   | 错误码。                                              | 支持        | 支持    |
 | url           | string                                | 否   | 否   | url地址。                                             | 支持        | 支持    |
 | originalUrl   | string                                | 否   | 否   | 请求的原始url地址。                                   | 支持        | 支持    |
 | referrer      | string                                | 否   | 否   | referrer url地址。                                    | 支持        | 支持    |
@@ -3498,7 +3498,7 @@ exitFullScreen(): void
 | ---- | ----------------------------------------- | ---- | ------------------- | ----------- | ------- |
 | data | [WebResourceRequest](#webresourcerequest) | 是   | url请求的相关信息。 | 支持        | 支持    |
 
-## OnInterceptRequest<sup>22+</sup>
+## OnInterceptRequest<sup>23+</sup>
 
 onInterceptRequest(callback: Callback<OnInterceptRequestEvent, WebResourceResponse>)
 
@@ -3510,7 +3510,7 @@ onInterceptRequest(callback: Callback<OnInterceptRequestEvent, WebResourceRespon
 
 | 参数名   | 类型                                                         | 必填 | 说明                                                         |
 | -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
-| callback | Callback\<[OnInterceptRequestEvent](#oninterceptrequestevent22), [WebResourceResponse](#webresourceresponse)\> | 是   | 当Web组件加载url之前触发。<br>返回值[WebResourceResponse](#webresourceresponse)。返回响应数据则按照响应数据加载，无响应数据则返回null表示按照原来的方式加载。 |
+| callback | Callback\<[OnInterceptRequestEvent](#oninterceptrequestevent23), [WebResourceResponse](#webresourceresponse)\> | 是   | 当Web组件加载url之前触发。<br>返回值[WebResourceResponse](#webresourceresponse)。返回响应数据则按照响应数据加载，无响应数据则返回null表示按照原来的方式加载。 |
 
 **示例：**
 
@@ -3574,7 +3574,7 @@ onInterceptRequest(callback: Callback<OnInterceptRequestEvent, WebResourceRespon
   }
   ```
 
-## OnInterceptRequestEvent<sup>22+</sup>
+## OnInterceptRequestEvent<sup>23+</sup>
 
 定义当Web组件加载url之前触发。
 
@@ -3586,7 +3586,7 @@ onInterceptRequest(callback: Callback<OnInterceptRequestEvent, WebResourceRespon
 | ------- | ----------------------------------------- | ---- | ---- | ------------------- |
 | request | [WebResourceRequest](#WebResourceRequest) | 否   | 否   | url请求的相关信息。 |
 
-## OnSslErrorEventReceiveEvent<sup>22+</sup>
+## OnSslErrorEventReceiveEvent<sup>23+</sup>
 
 定义网页收到SSL错误时触发。
 
@@ -3596,16 +3596,16 @@ onInterceptRequest(callback: Callback<OnInterceptRequestEvent, WebResourceRespon
 
 | 名称          | 类型                                  | 只读 | 可选 | 说明                      |
 | ------------- | ------------------------------------- | ---- | ---- | ------------------------- |
-| handler       | [SslErrorHandler](#SslErrorHandler22) | 否   | 否   | 通知Web组件用户操作行为。 |
-| error         | [SslError](#sslerror22)               | 否   | 否   | 错误码。                  |
+| handler       | [SslErrorHandler](#SslErrorHandler23) | 否   | 否   | 通知Web组件用户操作行为。 |
+| error         | [SslError](#sslerror23)               | 否   | 否   | 错误码。                  |
 | certChainData | Array<Uint8Array\>                    | 否   | 是   | 证书链数据。              |
 
-## onSslErrorEventReceive<sup>22+</sup>
+## onSslErrorEventReceive<sup>23+</sup>
 
 onSslErrorEventReceive(callback: Callback\<OnSslErrorEventReceiveEvent\>)
 
 通知用户加载资源时发生SSL错误，只支持主资源。
-如果需要支持子资源，请使用[OnSslErrorEvent](#onsslerrorevent22)接口。
+如果需要支持子资源，请使用[OnSslErrorEvent](#onsslerrorevent23)接口。
 
 > **说明：**
 >
@@ -3620,7 +3620,7 @@ onSslErrorEventReceive(callback: Callback\<OnSslErrorEventReceiveEvent\>)
 
 | 参数名   | 类型                                                         | 必填 | 说明                      |
 | -------- | ------------------------------------------------------------ | ---- | ------------------------- |
-| callback | Callback\<[OnSslErrorEventReceiveEvent](#onsslerroreventreceiveevent22)\> | 是   | 当网页收到SSL错误时触发。 |
+| callback | Callback\<[OnSslErrorEventReceiveEvent](#onsslerroreventreceiveevent23)\> | 是   | 当网页收到SSL错误时触发。 |
 
 **示例：**
 
@@ -3706,7 +3706,7 @@ onSslErrorEventReceive(callback: Callback\<OnSslErrorEventReceiveEvent\>)
   }
   ```
 
-## onSslErrorEvent<sup>22+</sup>
+## onSslErrorEvent<sup>23+</sup>
 
 onSslErrorEvent(callback: OnSslErrorEventCallback)
 
@@ -3725,7 +3725,7 @@ onSslErrorEvent(callback: OnSslErrorEventCallback)
 
 | 参数名   | 类型                                                  | 必填 | 说明                            |
 | -------- | ----------------------------------------------------- | ---- | ------------------------------- |
-| callback | [OnSslErrorEventCallback](#onsslerroreventcallback22) | 是   | 通知用户加载资源时发生SSL错误。 |
+| callback | [OnSslErrorEventCallback](#onsslerroreventcallback23) | 是   | 通知用户加载资源时发生SSL错误。 |
 
 **示例：**
 
@@ -3816,7 +3816,7 @@ struct WebComponent {
 }
   ```
 
-## OnSslErrorEventCallback<sup>22+</sup>
+## OnSslErrorEventCallback<sup>23+</sup>
 
 type OnSslErrorEventCallback = (sslErrorEvent: SslErrorEvent) => void
 
@@ -3830,9 +3830,9 @@ type OnSslErrorEventCallback = (sslErrorEvent: SslErrorEvent) => void
 
 | 参数名        | 类型                              | 必填 | 说明                                        |
 | ------------- | --------------------------------- | ---- | ------------------------------------------- |
-| sslErrorEvent | [SslErrorEvent](#sslerrorevent22) | 是   | 用户加载资源时发生SSL错误时触发的回调详情。 |
+| sslErrorEvent | [SslErrorEvent](#sslerrorevent23) | 是   | 用户加载资源时发生SSL错误时触发的回调详情。 |
 
-## OnOverrideUrlLoadingCallback<sup>22+</sup>
+## OnOverrideUrlLoadingCallback<sup>23+</sup>
 
 type OnOverrideUrlLoadingCallback = (webResourceRequest: WebResourceRequest) => boolean
 

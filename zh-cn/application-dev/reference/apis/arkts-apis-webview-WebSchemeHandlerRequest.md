@@ -3,7 +3,7 @@
 
 > **说明：**
 >
-> - 本Class首批接口从API version 22开始支持。
+> - 本Class首批接口从API version 23开始支持。
 >
 > - 示例效果请以真机运行为准，当前DevEco Studio预览器不支持。
 
