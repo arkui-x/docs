@@ -49,9 +49,10 @@ export default class MyModuleLoader extends ModuleLoader {
 }
 ```
 
-```diff
+```json
 // ${工程}/{Hap}/build-profile.json5
 // 在Hap所属的模块级build-profile.json5中配置" MyModuleLoader.ets "的信息
+
 {
   "apiType": "stageMode",
   "buildOption": {
@@ -60,13 +61,13 @@ export default class MyModuleLoader extends ModuleLoader {
         "enable": false
       }
     },
-+    "arkOptions": {
-+      "runtimeOnly": {
-+        "sources": [
-+          "./src/main/ets/MyModuleLoader.ets"  // 继承ModuleLoader的实例class所在文件的相对路径
-+        ]
-+      }
-+    }
+    "arkOptions": {
+      "runtimeOnly": {
+        "sources": [
+          "./src/main/ets/MyModuleLoader.ets"
+        ]
+      }
+    }
   },
   "buildOptionSet": [
     {
