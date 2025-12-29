@@ -1,6 +1,6 @@
 # @arkui-x.ModuleLoader.d.ts 
 
-ModuleLoader是独立于UIAbility的全新回调，仅在原生侧使用loadModule接口加载ArkTS Hap包的场景下触发。
+ModuleLoader是独立于UIAbility的回调，仅在原生侧使用loadModule接口加载ArkTS Hap包的场景下触发。
 
 > **说明：**
 >
