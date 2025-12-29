@@ -2,8 +2,9 @@
 
 ## 简介
 
-ArkUI-X框架支持加载特殊形式的ArkTS侧Hap包，在该Hap中，开发者可以不实现UI界面，而只关心业务逻辑的开发实现。<br>
+ArkUI-X框架支持UI与逻辑解耦，实现不带UI的业务逻辑跨平台。开发者在Hap的开发过程中可以不实现UI界面，仅关心业务逻辑的实现。<br>
 应用UI使用Android侧能力实现，通过平台桥接能力调用ArkTS侧Hap包的业务逻辑。从而实现应用UI与业务逻辑解耦的目的。<br>
+应注意：本套业务流程仅支持Android、iOS，不支持HarmonyOS。<br>
 
 ## 开发流程
 
@@ -145,7 +146,21 @@ ArkUI-X框架支持加载特殊形式的ArkTS侧Hap包，在该Hap中，开发�
    
 5. **在 hap模块对应`build-profile.json5`中配置模块生命周期实现ets文件（示例为MyModuleLoader.ets）的路径，使文件参与编译。**
 
-   ```diff
+   需要配置的信息如下，其中路径信息需要开发者修改为实际的路径信息。
+
+   ```json
+       "arkOptions": {
+         "runtimeOnly": {
+           "sources": [
+             "./src/main/ets/MyModuleLoader.ets"		// 继承ModuleLoader的实例class所在文件的相对路径
+           ]
+         }
+       }
+   ```
+
+   配置完毕后，整体的build-profile.json5文件范例如下。
+
+   ```json
    // ${工程}/entry/build-profile.json5
    // 配置" MyModuleLoader.ets "的信息
    
@@ -157,13 +172,13 @@ ArkUI-X框架支持加载特殊形式的ArkTS侧Hap包，在该Hap中，开发�
            "enable": false
          }
        },
-   +    "arkOptions": {
-   +      "runtimeOnly": {
-   +        "sources": [
-   +          "./src/main/ets/MyModuleLoader.ets"  // 继承ModuleLoader的实例class所在文件的相对路径
-   +        ]
-   +      }
-   +    }
+       "arkOptions": {
+         "runtimeOnly": {
+           "sources": [
+             "./src/main/ets/MyModuleLoader.ets"
+           ]
+         }
+       }
      },
      "buildOptionSet": [
        {
@@ -383,9 +398,10 @@ StageApplicationDelegate.loadModule("entry", "./ets/MyModuleLoader.ets");
 
 ArkTS侧：配置Hap信息并实现onLoad()回调。
 
-```diff
+```json
 // ${工程}/entry/build-profile.json5
 // 配置" MyModuleLoader.ets "的信息
+
 {
   "apiType": "stageMode",
   "buildOption": {
@@ -394,13 +410,13 @@ ArkTS侧：配置Hap信息并实现onLoad()回调。
         "enable": false
       }
     },
-+    "arkOptions": {
-+      "runtimeOnly": {
-+        "sources": [
-+          "./src/main/ets/MyModuleLoader.ets"  // 继承ModuleLoader的实例class所在文件的相对路径
-+        ]
-+      }
-+    }
+    "arkOptions": {
+      "runtimeOnly": {
+        "sources": [
+          "./src/main/ets/MyModuleLoader.ets"
+        ]
+      }
+    }
   },
   "buildOptionSet": [
     {
