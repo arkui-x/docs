@@ -2333,7 +2333,7 @@ struct WebComponent {
 </html>
 ```
 
-### getUserAgent<sup>22+</sup>
+### getUserAgent<sup>23+</sup>
 
 getUserAgent(): string
 
@@ -2416,7 +2416,7 @@ struct WebComponent {
 }
 ```
 
-### setWebSchemeHandler<sup>22+</sup>
+### setWebSchemeHandler<sup>23+</sup>
 
 setWebSchemeHandler(scheme: string, handler: WebSchemeHandler): void
 
@@ -2471,7 +2471,7 @@ struct WebComponent {
 }
 ```
 
-### clearWebSchemeHandler<sup>22+</sup>
+### clearWebSchemeHandler<sup>23+</sup>
 
 clearWebSchemeHandler(): void
 
