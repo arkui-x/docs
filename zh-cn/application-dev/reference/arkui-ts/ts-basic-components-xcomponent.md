@@ -75,7 +75,7 @@ XComponent(value: {id: string, type: XComponentType, libraryname?: string, contr
 | -------------------------------- | ------------------------------------------------------------ | ----------- | ------- |
 | SURFACE                          | 用于EGL/OpenGLES和媒体数据写入，开发者定制的绘制内容单独展示到屏幕上。 | 支持        | 支持    |
 | COMPONENT<sup>(deprecated)</sup> | XComponent将变成一个容器组件，并可在其中执行非UI逻辑以动态加载显示内容。<br/>**说明：**<br/>从API version 12 开始，该接口废弃，建议使用其它容器组件替代。 | 不支持      | 不支持  |
-| TEXTURE<sup>23+</sup>            | 用于EGL/OpenGLES和媒体数据写入，开发者定制的绘制内容将与XCompponent组件的内容合成后展示到屏幕上。<br/>1、保持帧同步，保持在同一帧将图形处理器(GPU)纹理和ArkUI其他的绘制指令统一发给渲染服务(RenderService)。<br/>2、动效和系统组件统一。<br/>3、走图形处理器(GPU)合成，相比surface可能走显示子系统(DSS)功耗更高。 | 支持        | 支持    |
+| TEXTURE<sup>23+</sup>            | 用于EGL/OpenGLES和媒体数据写入，开发者定制的绘制内容将与XCompponent组件的内容合成后展示到屏幕上。<br/>1、保持帧同步，保持在同一帧将图形处理器(GPU)纹理和ArkUI其它的绘制指令统一发给渲染服务(RenderService)。<br/>2、动效和系统组件统一。<br/>3、走图形处理器(GPU)合成，相比surface可能走显示子系统(DSS)功耗更高。 | 支持        | 支持    |
 
 > **说明**：
 >
