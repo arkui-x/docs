@@ -115,6 +115,7 @@
     - [Class (TypefaceArguments)](arkts-apis-graphics-drawing-TypefaceArguments.md)
     - [Interfaces (其他)](arkts-apis-graphics-drawing-i.md)
     - [Enums](arkts-apis-graphics-drawing-e.md)
+  - [@ohos.graphics.text (文本模块)](js-apis-graphics-text.md)
 - 媒体
   - [@ohos.multimedia.image (图片处理)](js-apis-image.md)
   - [@ohos.multimedia.audio (音频管理)](js-apis-audio.md)
