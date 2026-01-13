@@ -19,7 +19,7 @@ onLoad(): void;
 **描述：**
 
 原生侧调用loadModule接口加载指定Hap，系统会触发该回调，开发者可在该回调中执行初始化逻辑（如初始化Bridge等）。<br>
-Android侧loadModule使用详见[文档](../../tutorial/how-to-decoupled-UI-and-Logic-on-android.md#loadmodule)。iOS侧loadModule使用详见[文档](../../tutorial/how-to-decoupled-UI-and-Logic-on-ios.md#loadmodule)。
+Android侧loadModule使用详见[文档](../arkui-for-android/StageApplicationDelegate.md#loadmodule)。iOS侧loadModule使用详见[文档](../arkui-for-ios/StageApplication.md#loadmodule)。
 
 **限制：**
 
