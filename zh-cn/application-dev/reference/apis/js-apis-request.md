@@ -6,6 +6,21 @@ request部件主要给应用提供上传下载文件、后台传输代理的基�
 >
 > 本模块首批接口从API version 6开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
 
+## 依赖权限
+
+#### Android平台
+
+**说明：** 在Android平台上使用上传下载接口时，需要配置网络、下载隐藏通知权限。**如果没有配置网络、隐藏通知权限会导致运行异常**。
+
+**配置方法：** 在.arkui-x/android/app/src/main/AndroidManifest.xml的uses-permission字段中加入android.permission.INTERNET、android.permission.ACCESS_NETWORK_STATE、android.permission.DOWNLOAD_WITHOUT_NOTIFICATION。
+
+示例如下：
+
+```
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+```
 
 ## 导入模块
 
