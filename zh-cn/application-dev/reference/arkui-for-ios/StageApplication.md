@@ -15,11 +15,12 @@ StageApplication负责iOS应用初始化流程。
 | void | launchApplication | 调度application初始化流程 |
 | void | setLogInterface(ILogger log) | 注册LogInterface来截断日志 |
 | void | setLogLevel(int logLevel) | 设置输出日志的输出等级，低于该等级的日志被拦截，不再输出 |
+| void | launchApplicationWithoutUI | 调度application初始化流程，控制不加载ArkUI，应用启动占用内存较小 |
+| void | loadModule:(NSString *)moduleName entryFile:(NSString *)entryFile | 原生侧加载指定的Hap模块，需要与ArkTS侧[ModuleLoader](../apis/js-apis-ModuleLoader.md)结合使用 |
 
 ## 方法说明
 
-
-+ configModuleWithBundleDirectory:;
+### configModuleWithBundleDirectory:;
 
 ```
 /**
@@ -32,7 +33,7 @@ StageApplication负责iOS应用初始化流程。
  */+ (void)configModuleWithBundleDirectory:(NSString *_Nonnull)bundleDirectory;
 ```
 
-+ launchApplication;
+### launchApplication;
 
 ```
 /**
@@ -44,7 +45,7 @@ StageApplication负责iOS应用初始化流程。
  */+ (void)launchApplication;
 ```
 
-- setLogInterface
+### setLogInterface
 
 ```objective-c
 /**
@@ -76,7 +77,7 @@ StageApplication负责iOS应用初始化流程。
 [StageApplication setLogInterface:self];
 ```
 
-- setLogLevel
+### setLogLevel
 
 ```objective-c
 /**
@@ -105,5 +106,59 @@ StageApplication负责iOS应用初始化流程。
 
 ```objective-c
 [StageApplication setLogLevel:LOG_INFO];
+```
+
+### launchApplicationWithoutUI
+
+```objective-c
++ (void)launchApplicationWithoutUI;
+```
+
+**描述：**
+
+应用初始化ArkUI-X框架，控制不加载ArkUI，应用启动占用内存较小。
+
+**参数：** 
+
+无
+
+**返回值：** 
+
+无
+
+**示例：** 
+
+```objective-c
+[StageApplication launchApplicationWithoutUI];
+```
+
+### loadModule
+
+```objective-c
++ (void)loadModule:(NSString *)moduleName entryFile:(NSString *)entryFile;
+```
+
+**描述：**
+
+原生侧加载指定的Hap模块，需要与ArkTS侧[ModuleLoader](../apis/js-apis-ModuleLoader.md)结合使用。
+
+**参数：** 
+
+| 参数名     | 类型   | 必填 | 说明                                                         |
+| ---------- | ------ | ---- | ------------------------------------------------------------ |
+| moduleName | String | 是   | Hap模块的模块名称。                                          |
+| entryFile  | String | 是   | ArkTS侧Hap模块中自定义的[ModuleLoader](../apis/js-apis-ModuleLoader.md)实现类文件的相对路径（相对于Hap模块中ets目录）。<br>更详细的信息见[以Hap为主体的共享逻辑包开发指南-约束与限制](../../tutorial/how-to-decoupled-UI-and-Logic-on-ios.md#约束与限制)。 |
+
+**返回值：** 
+
+无
+
+**示例：** 
+
+```objective-c
+// 接口使用范例
+// moduleName : "entry"					   : Hap模块的模块名称为entry
+// entryFile  : "./ets/MyModuleLoader.ets" : Hap模块中"MyModuleLoader.ets"的路径
+[StageApplication loadModule:@"entry" entryFile:@"./ets/MyModuleLoader.ets"];
 ```
 

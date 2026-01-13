@@ -19,10 +19,12 @@ StageApplicationDelegate是ArkUI-X跨平台上Stage模型Application的代理类
 | void | onConfigurationChanged(Configuration newCfg) | 系统环境变化通知 |
 | void | setLogInterface(ILogger log)                 | 注册LogInterface截断日志                                 |
 | void | setLogLevel(int logLevel)                    | 设置输出日志的输出等级，低于该等级的日志被拦截，不再输出 |
+| void | initApplication(Application application, boolean shouldLoadUI) | 应用初始化ArkUI-X框架，设置框架是否加载ArkUI |
+| void | loadModule(String moduleName, String entryFile) | 加载指定的Hap模块，需要与ArkTS侧[ModuleLoader](../apis/js-apis-ModuleLoader.md)结合使用。 |
 
 ## 方法说明
 
-- init
+### init
 
 ```
 /**
@@ -33,7 +35,7 @@ StageApplicationDelegate是ArkUI-X跨平台上Stage模型Application的代理类
 public void init(Application application);
 ```
 
-- onConfigurationChanged
+### onConfigurationChanged
 
 ```
 /**
@@ -44,7 +46,7 @@ public void init(Application application);
 public void onConfigurationChanged(Configuration newConfig);
 ```
 
-- setLogInterface
+### setLogInterface
 
 ```java
 /**
@@ -77,7 +79,7 @@ this.appDelegate = new StageApplicationDelegate();
 this.appDelegate.setLogInterface(logInterface);
 ```
 
-- setLogLevel
+### setLogLevel
 
 ```java
 /**
@@ -110,3 +112,72 @@ this.appDelegate = new StageApplicationDelegate();
 this.appDelegate.setLogLevel(ILogger.LOG_DEBUG);
 ```
 
+### initApplication
+
+```java
+/**
+ * Initialize stage application.
+ *
+ * @param application the stage application.
+ * @param shouldLoadUI should load UI.
+ */
+public void initApplication(Application application, boolean shouldLoadUI);
+```
+
+**描述：**
+
+应用初始化ArkUI-X框架，控制是否加载ArkUI，如不加载，应用启动占用内存降低。
+
+**参数：** 
+
+| Name         | 类型        | 必填 | 描述                                              |
+| ------------ | ----------- | ---- | ------------------------------------------------- |
+| application  | Application | 是   | 应用的全局管理者。                                |
+| shouldLoadUI | boolean     | 是   | true表示需要加载ArkUI，false表示不需要加载ArkUI。 |
+
+**返回值：** 
+
+无
+
+**示例：** 
+
+```java
+StageApplicationDelegate stageApplicationDelegate = new StageApplicationDelegate();
+stageApplicationDelegate.initApplication(this, false);
+```
+
+### loadModule
+
+```java
+/**
+ * Load module.
+ *
+ * @param moduleName The module name.
+ * @param entryFile The entry file of the module. Example: "./ets/xxx.ets".
+ */
+public static void loadModule(String moduleName, String entryFile);
+```
+
+**描述：**
+
+加载指定的Hap模块，需要与ArkTS侧[ModuleLoader](../apis/js-apis-ModuleLoader.md)结合使用。
+
+**参数：** 
+
+| Name       | 类型   | 必填 | 描述                                                         |
+| ---------- | ------ | ---- | ------------------------------------------------------------ |
+| moduleName | String | 是   | Hap模块的模块名称。                                          |
+| entryFile  | String | 是   | ArkTS侧Hap模块中自定义的[ModuleLoader](../apis/js-apis-ModuleLoader.md)实现类文件的相对路径（相对于Hap模块中ets目录）。<br>更详细的信息见[以Hap为主体的共享逻辑包开发指南-约束与限制](../../tutorial/how-to-decoupled-UI-and-Logic-on-android.md#约束与限制) |
+
+**返回值：** 
+
+无
+
+**示例：** 
+
+```java
+// 接口使用范例。
+// moduleName : "entry"					   : Hap模块的模块名称为entry
+// entryFile  : "./ets/MyModuleLoader.ets" : Hap模块中"MyModuleLoader.ets"的路径
+StageApplicationDelegate.loadModule("entry", "./ets/MyModuleLoader.ets");
+```
