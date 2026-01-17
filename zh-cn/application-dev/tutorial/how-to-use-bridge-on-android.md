@@ -1,65 +1,163 @@
 # 平台桥接开发指南
 
-平台桥接用于客户端（ArkUI）和平台（Android或iOS）之间传递消息，即用于ArkUI与平台双向数据传递、ArkUI侧调用平台的方法、平台调用ArkUI侧的方法。本文主要介绍Android平台与ArkUI交互，ArkUI侧具体用法请参考[Bridge API](../reference/apis/js-apis-bridge.md)，Android侧参考[BridgePlugin](../reference/arkui-for-android/BridgePlugin.md)。
+平台桥接用于客户端（ArkUI）和平台（Android或iOS）之间传递消息，即用于ArkUI与平台双向数据传递、ArkUI侧调用平台的方法、平台调用ArkUI侧的方法。本文主要介绍Android平台与ArkUI交互，ArkUI侧具体用法请参考[Bridge API](../reference/apis/js-apis-bridge.md)，Android侧参考[BridgePlugin](../reference/arkui-for-android/BridgePlugin.md)。<br>
 
 ## Android平台与ArkUI交互
 
 ### 创建平台桥接
 
-> 平台桥接要求ArkUI端和Android端两端都创建Bridge对象后才可以进行通信流程。任意一端的Bridge对象未创建完成时，平台桥接的功能都是处于不可用的。因此理论上平台桥接功能（消息传递、方法调用等）的最早时机为双端的Bridge都创建完成的那一刻。而从整体的ArkUI-X框架加载流程来看，是先加载Android端环境，后加载ArkUI端环境。因此ArkUI端的Bridge创建时机一般是晚于Android端的，所以保证平台桥接功能好用的最早时间节点是ArkUI端的Bridge的创建完成时间点。在实际开发过程中，开发者只需要保证在两端的Bridge创建完毕后调用平台桥接功能即可。<br>
-> 
-> SDK 版本小于6.0.1.108
->
-> Bridge 最早创建时机可在Activity onCreate里。<br>
-> Bridge 相关接口最早调用时机可在ArkUI侧 UIAbility onWindowStageCreate之后，因为这是保证ArkUI侧Bridge创建准备完成的最早时机。<br>
->
-> SDK 版本大于等于6.0.1.108
->
-> Bridge 最早创建时机可在应用创建后（StageApplication onCreate后或者AppDelegate.initApplication()后）。<br>
-> Bridge 相关接口最早调用时机可在ArkUI侧 UIAbility onCreate里，因为这是保证ArkUI侧Bridge创建准备完成的最早时机。<br>
+平台桥接要求ArkUI端和原生端(Android)两端都创建Bridge对象后才可以进行通信流程。任意一端的Bridge对象未创建完成时，平台桥接的功能无法正常使用。<br>
+在SDK版本6.0.2.118之后，对Bridge的优化主要包括解除Bridge与Activity生命周期的绑定、移除instanceId依赖、优化构造方法、并将Bridge的执行移至子线程。<br>
 
-1、在ArkUI侧创建平台桥接。指定名称，该名称应与Android侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
+#### SDK 版本小于6.0.2.118
 
-```typescript
-// xxx.ets
+##### 创建时机
 
-// 导入平台桥接模块
-import bridge from '@arkui-x.bridge';
+- ArkUI端：Bridge 对象创建时机必须在UIAbility onCreate()函数内部，或在该函数执行完毕后。<br>
 
-// 创建平台桥接实例(默认为JSON模式)
-const bridgeImpl: bridge.BridgeObject = bridge.createBridge('BridgeName');
-// 创建平台桥接实例(二进制模式)
-const bridgeImpl: bridge.BridgeObject = bridge.createBridge('BridgeName', bridge.BridgeType.BINARY_TYPE);
-```
-
-2、在Android侧创建BridgePlugin类。指定名称，该名称应与ArkUI侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
-
-```java
-// xxx.java
-
-// 创建平台桥接实例(JSON模式)
-BridgeImpl bridgeImpl = new BridgeImpl("BridgeName", BridgePlugin.BridgeType.JSON_TYPE);
-// 创建平台桥接实例(二进制模式)
-BridgeImpl bridgeImpl = new BridgeImpl("BridgeName", BridgePlugin.BridgeType.BINARY_TYPE);
-```
-
-```java
-// BridgeImpl.java
-
-package XXX.XXX.XXX;
-
-import ohos.ace.adapter.capability.bridge.BridgePlugin;
-
-public class BridgeImpl extends BridgePlugin {
-
-    public BridgeImpl(String name, BridgeType bridgeType) {
-        super(name, bridgeType);
+  ```tsx
+  // EntryAbility.ets
+  
+  // 导入平台桥接模块
+  import bridge from '@arkui-x.bridge';
+  
+  export default class EntryAbility extends UIAbility {
+    onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+  
+      // 创建平台桥接实例(默认为JSON模式)
+      const bridgeImplForJson: bridge.BridgeObject = bridge.createBridge('BridgeImplForJson');
+      // 创建平台桥接实例(二进制模式)
+      const bridgeImplForBinary: bridge.BridgeObject = bridge.createBridge('BridgeImplForBinary', bridge.BridgeType.BINARY_TYPE);
     }
+  }
+  ```
 
-}
-```
+- 原生端(Android)：Bridge 对象创建时机必须在Activity onCreate()函数内部，或在该函数执行完毕后。<br>
+
+  ```java
+  // EntryEntryAbilityActivity.java
+  
+  public class EntryEntryAbilityActivity extends StageActivity {
+      private BridgeImpl bridgeImplByManager = null;
+      private BridgeImpl bridgeImplByManagerAndType = null;
+  
+      protected void onCreate(Bundle savedInstanceState) {
+          // 使用bridgeManager对象实例构建BridgeImpl实例
+          bridgeImplByManager = new BridgeImpl(this, "BridgeImplForJson", getBridgeManager());
+          
+          // 以二进制数据编解码格式, 使用bridgeManager对象实例构建BridgeImpl实例
+          bridgeImplByManagerAndType = new BridgeImpl(this, "BridgeImplForBinary", getBridgeManager(), BridgePlugin.BridgeType.BINARY_TYPE);
+          
+          // bundleName需根据实际情况调整。
+          setInstanceName("bundleName:entry:EntryAbility:");
+          super.onCreate(savedInstanceState);
+      }
+  }
+  ```
+
+  ```java
+  // BridgeImpl.java
+  
+  package XXX.XXX.XXX;
+  
+  import android.content.Context;
+  import ohos.ace.adapter.capability.bridge.BridgeManager;
+  import ohos.ace.adapter.capability.bridge.BridgePlugin;
+  import ohos.ace.adapter.capability.bridge.TaskOption;
+  
+  public class BridgeImpl extends BridgePlugin {
+      // 使用BridgeManager对象构造BridgePlugin对象，数据编解码格式为JSON_TYPE(默认)
+      public BridgeImpl(Context context, String name, BridgeManager bridgeManager) {
+          super(context, name, bridgeManager);
+      }
+  
+      // 使用BridgeManager对象且指定数据编解码格式构建BridgePlugin对象
+      public BridgeImpl(Context context, String name, BridgeManager bridgeManager, BridgeType bridgeType) {
+          super(context, name, bridgeManager);
+      }
+  
+      // 使用BridgeManager对象且指定线程并发模式构建BridgePlugin对象
+      public BridgeImpl(Context context, String name, BridgeManager bridgeManager, BridgeType codecType, TaskOption taskOption) {
+          super(context, name, bridgeManager, codecType, taskOption);
+      }
+  }
+  ```
+
+##### 接口调用时机
+
+- ArkUI端：Bridge 接口调用时机必须在UIAbility onWindowStageCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
+- 原生端(Android)：Bridge 接口调用时机必须在ArkUI端UIAbility onWindowStageCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
+
+#### SDK 版本大于6.0.2.118
+
+##### 创建时机
+
+- ArkUI端：Bridge 对象创建时机必须在UIAbility onCreate()函数内部，或在该函数执行完毕后。<br>
+
+  ```tsx
+  // EntryAbility.ets
+  
+  import bridge from '@arkui-x.bridge';
+  
+  export default class EntryAbility extends UIAbility {
+    onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+  
+      // 创建平台桥接实例(默认为JSON模式)
+      const bridgeImplForJson: bridge.BridgeObject = bridge.createBridge('BridgeImplForJson');
+      // 创建平台桥接实例(二进制模式)
+      const bridgeImplForBinary: bridge.BridgeObject = bridge.createBridge('BridgeImplForBinary', bridge.BridgeType.BINARY_TYPE);
+    }
+  }
+  ```
+
+- 原生端(Android)：Bridge 对象创建时机必须在StageApplication onCreate()函数执行完毕后或者AppDelegate.initApplication()函数执行完毕后。<br>
+
+  ```java
+  // EntryEntryAbilityActivity.java
+  
+  import android.os.Bundle;
+  import ohos.ace.adapter.capability.bridge.BridgePlugin;
+  import ohos.stage.ability.adapter.StageActivity;
+  
+  public class EntryEntryAbilityActivity extends StageActivity {
+      private BridgeImpl bridgeImplForJson = null;
+      private BridgeImpl bridgeImplForBinary = null;
+  
+      protected void onCreate(Bundle savedInstanceState) {
+          BridgeImpl bridgeImplForJson = new BridgeImpl("BridgeImplForJson", BridgePlugin.BridgeType.JSON_TYPE);
+  
+          BridgeImpl bridgeImplForBinary = new BridgeImpl("BridgeImplForBinary", BridgePlugin.BridgeType.BINARY_TYPE);
+  
+          // bundleName需根据实际情况调整。
+          setInstanceName("bundleName:entry:EntryAbility:");
+          super.onCreate(savedInstanceState);
+      }
+  }
+  ```
+
+  ```java
+  // BridgeImpl.java
+  
+  package XXX.XXX.XXX;
+  
+  import ohos.ace.adapter.capability.bridge.BridgePlugin;
+  
+  public class BridgeImpl extends BridgePlugin {
+  
+      public BridgeImpl(String name, BridgeType bridgeType) {
+          super(name, bridgeType);
+      }
+  
+  }
+  ```
+
+##### 接口调用时机
+
+- ArkUI端：Bridge 接口调用时机必须在UIAbility onCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
+- 原生端(Android)：Bridge 接口调用时机必须在Activity onCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
 
 
+以下示例代码**基于SDK版本大于等于6.0.2.118**编写，原生端(Android)使用该[Bridge构造方法](../reference/arkui-for-android/BridgePlugin.md#bridgeplugin22)。<br>
 
 ### 场景一：ArkUI侧向Android侧传递数据
 

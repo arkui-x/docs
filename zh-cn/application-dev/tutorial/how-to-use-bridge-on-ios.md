@@ -1,48 +1,122 @@
 # 平台桥接开发指南
 
-平台桥接用于客户端（ArkUI）和平台（Android或iOS）之间传递消息，即用于ArkUI与平台双向数据传递、ArkUI侧调用平台的方法、平台调用ArkUI侧的方法。本文主要介绍iOS平台与ArkUI交互，ArkUI侧具体用法请参考[Bridge API](../reference/apis/js-apis-bridge.md)，iOS侧参考[BridgePlugin](../reference/arkui-for-ios/BridgePlugin.md)。
+平台桥接用于客户端（ArkUI）和平台（Android或iOS）之间传递消息，即用于ArkUI与平台双向数据传递、ArkUI侧调用平台的方法、平台调用ArkUI侧的方法。本文主要介绍iOS平台与ArkUI交互，ArkUI侧具体用法请参考[Bridge API](../reference/apis/js-apis-bridge.md)，iOS侧参考[BridgePlugin](../reference/arkui-for-ios/BridgePlugin.md)。<br>
 
 ## iOS平台与ArkUI交互
 
 ### 创建平台桥接
 
-> 平台桥接要求ArkUI端和iOS端两端都创建Bridge对象后才可以进行通信流程。任意一端的Bridge对象未创建完成时，平台桥接的功能都是处于不可用的。因此理论上平台桥接功能（消息传递、方法调用等）的最早时机为双端的Bridge都创建完成的那一刻。而从整体的ArkUI-X框架加载流程来看，是先加载iOS端环境，后加载ArkUI端环境。因此ArkUI端的Bridge创建时机一般是晚于iOS端的，所以保证平台桥接功能好用的最早时间节点是ArkUI端的Bridge的创建完成时间点。在实际开发过程中，开发者只需要保证在两端的Bridge创建完毕后调用平台桥接功能即可。<br>
->
-> SDK 版本小于6.0.1.108
->
-> Bridge 最早创建时机可在ViewController viewDidLoad里。<br>
-> Bridge 相关接口最早调用时机可在ArkUI侧 UIAbility onWindowStageCreate之后，因为这是保证ArkUI侧Bridge创建准备完成的最早时机。<br>
+平台桥接要求ArkUI端和原生端(iOS)两端都创建Bridge对象后才可以进行通信流程。任意一端的Bridge对象未创建完成时，平台桥接的功能无法正常使用。<br>
+在SDK版本6.0.2.118之后，对Bridge的优化主要包括解除Bridge与ViewController生命周期的绑定、移除instanceId依赖、优化构造方法、并将Bridge的执行移至子线程。<br>
 
-> SDK 版本大于等于6.0.1.108
->
-> Bridge 最早创建时机可在应用创建后（application: didFinishLaunchingWithOptions: 后）。<br>
-> Bridge 相关接口最早调用时机可在ArkUI侧 UIAbility onCreate里，因为这是保证ArkUI侧Bridge创建准备完成的最早时机。<br>
+#### SDK 版本小于6.0.2.118
 
-1、在ArkUI侧创建平台桥接。指定名称，该名称应与iOS侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
+##### 创建时机
 
-```javascript
-// xxx.ets
+- ArkUI端：Bridge 对象创建时机必须在UIAbility onCreate()函数内部，或在该函数执行完毕后。<br>
 
-// 导入平台桥接模块
-import bridge from '@arkui-x.bridge';
+  ```tsx
+  // EntryAbility.ets
+  
+  import bridge from '@arkui-x.bridge';
+  
+  export default class EntryAbility extends UIAbility {
+    onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+  
+      // 创建平台桥接实例(默认为JSON模式)
+      const bridgeImplForJson: bridge.BridgeObject = bridge.createBridge('BridgeImplForJson');
+      // 创建平台桥接实例(二进制模式)
+      const bridgeImplForBinary: bridge.BridgeObject = bridge.createBridge('BridgeImplForBinary', bridge.BridgeType.BINARY_TYPE);
+    }
+  }
+  ```
+  
+- 原生端(iOS)：Bridge 对象创建时机必须在ViewController viewDidLoad()函数内部，或在该函数执行完毕后。<br>
 
-// 创建平台桥接实例
-const bridgeImpl = bridge.createBridge('Bridge');
-// 创建平台桥接实例(二进制格式)
-const bridgeImpl = bridge.createBridge('Bridge', bridge.BridgeType.BINARY_TYPE);
-```
+  ```objective-c
+  // xxx.mm
+  
+  - (void)viewDidLoad {
+      [super viewDidLoad];
+  
+      self.edgesForExtendedLayout = UIRectEdgeNone;
+      self.extendedLayoutIncludesOpaqueBars = YES;
+  
+      // 构造方法1. 通过bridgeManager 构造
+      self.pluginForJson = [[BridgeClass alloc] initBridgePlugin:@"BridgeImplForJson" bridgeManager:[self getBridgeManager]];
+  
+      // 构造方法2. 通过bridgeType、bridgeManager构造，bridgeType设置编解码类型
+      self.pluginForBinary = [[BridgeClass alloc] initBridgePlugin:@"BridgeImplForBinary" bridgeManager:[self getBridgeManager] bridgeType:BINARY_TYPE];
+  
+      // 指定代理
+      self.pluginForJson.messageListener = self;
+      self.pluginForJson.methodResult = self;
+      self.pluginForBinary.messageListener = self;
+      self.pluginForBinary.methodResult = self;
+  }
+  ```
 
-2、在iOS侧创建BridgePlugin类。指定名称，该名称应与ArkUI侧平台桥接的名称一致。通过创建的该对象即可调用平台桥接的方法。
+##### 接口调用时机
 
-```objective-c
-// xxx.mm
+- ArkUI端：Bridge 接口调用时机必须在UIAbility onWindowStageCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
+- 原生端(iOS)：Bridge 接口调用时机必须在ArkUI端UIAbility onWindowStageCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
 
-BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId];
-// 创建平台桥接实例(二进制格式)
-BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" instanceId:self.plugin.instanceId bridgeType: BINARY_TYPE];
-// 通过指定name和type创建平台桥接实例（推荐用法）
-BridgePlugin* plugin_ = [[BridgePlugin alloc] initBridgePlugin:@"Bridge" bridgeTypeL: JSON_TYPE];
-```
+#### SDK 版本大于6.0.2.118
+
+##### 创建时机
+
+- ArkUI端：Bridge 对象创建时机必须在UIAbility onCreate()函数内部，或在该函数执行完毕后。<br>
+
+  ```tsx
+  // EntryAbility.ets
+  
+  // 导入平台桥接模块
+  import bridge from '@arkui-x.bridge';
+  
+  export default class EntryAbility extends UIAbility {
+    onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+  
+      // 创建平台桥接实例(默认为JSON模式)
+      const bridgeImplForJson: bridge.BridgeObject = bridge.createBridge('BridgeImplForJson');
+      // 创建平台桥接实例(二进制模式)
+      const bridgeImplForBinary: bridge.BridgeObject = bridge.createBridge('BridgeImplForBinary', bridge.BridgeType.BINARY_TYPE);
+    }
+  }
+  ```
+
+- 原生端(iOS)：Bridge 对象创建时机必须在application: didFinishLaunchingWithOptions()函数内部，或在该函数执行完毕后。<br>
+
+  ```objective-c
+  // xxx.mm
+  
+  - (void)viewDidLoad {
+      [super viewDidLoad];
+  
+      self.edgesForExtendedLayout = UIRectEdgeNone;
+      self.extendedLayoutIncludesOpaqueBars = YES;
+  
+      // 构造方法
+      self.pluginForJson = [[BridgeClass alloc] initBridgePlugin:@"BridgeImplForJson" bridgeType:JSON_TYPE];
+      self.pluginForBinary = [[BridgeClass alloc] initBridgePlugin:@"BridgeImplForBinary" bridgeType:BINARY_TYPE];
+  
+      // 指定代理
+      self.pluginForJson.messageListener = self;
+      self.pluginForJson.methodResult = self;
+      self.pluginForBinary.messageListener = self;
+      self.pluginForBinary.methodResult = self;
+  }
+  ```
+  
+
+##### 接口调用时机
+
+- ArkUI端：Bridge 接口调用时机必须在UIAbility onCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
+- 原生端(iOS)：Bridge 接口调用时机必须在application: didFinishLaunchingWithOptions()函数内部，或在该函数执行完毕后。具体示例代码参考下文场景示例。<br>
+
+
+
+以下示例代码**基于SDK版本大于等于6.0.2.118**编写，原生端(iOS)使用的是使用该[Bridge构造方法](../reference/arkui-for-ios/BridgePlugin.md#initbridgeplugin22)。<br>
+
 
 ### 场景一：ArkUI侧向iOS侧传递数据
 

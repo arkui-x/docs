@@ -14,18 +14,9 @@
 import bridge from '@arkui-x.bridge';
 ```
 ## createBridge
-
-> 平台桥接要求ArkUI端和原生端（Android/iOS）两端都创建Bridge对象后才可以进行通信流程。任意一端的Bridge对象未创建完成时，平台桥接的功能都是处于不可用的。因此理论上平台桥接功能（消息传递、方法调用等）的最早时机为双端的Bridge都创建完成的那一刻。而从整体的ArkUI-X框架加载流程来看，是先加载原生端（Android/iOS）环境，后加载ArkUI端环境。因此ArkUI端的Bridge创建时机一般是晚于原生端（Android/iOS）的，所以保证平台桥接功能好用的最早时间节点是ArkUI端的Bridge的创建完成时间点。在实际开发过程中，开发者只需要保证在两端的Bridge创建完毕后调用平台桥接功能即可。<br>
 >
-> SDK 版本小于6.0.1.108
+> Bridge 对象创建时机必须在UIAbility onCreate()函数内部，或在该函数执行完毕后。<br>
 >
-> Bridge 最早创建时机可在UIAbility onCreate里。<br>
-> Bridge 相关接口最早调用时机可在ArkUI侧 UIAbility onWindowStageCreate之后，因为这是保证ArkUI侧Bridge创建准备完成的最早时机。<br>
->
-> SDK 版本大于等于6.0.1.108
->
-> Bridge 最早创建时机可在UIAbility onCreate里。<br>
-> Bridge 相关接口最早调用时机可在UIAbility onCreate里。<br>
 
 createBridge(bridgeName: string): BridgeObject
 
@@ -79,6 +70,15 @@ createBridge(bridgeName: string, type: BridgeType): BridgeObject;
 ## BridgeObject
 
 平台桥接的接口类。
+
+>
+> 平台桥接要求ArkUI端和原生端(Android/iOS)两端都创建Bridge对象后才可以进行通信流程。任意一端的Bridge对象未创建完成时，平台桥接的功能无法正常使用。<br>
+> 在SDK版本6.0.2.118之后，对Bridge的优化主要包括解除Bridge与Activity/ViewController生命周期的绑定、移除instanceId依赖、优化构造方法、并将Bridge的执行移至子线程。<br>
+>
+>- SDK 版本小于6.0.2.118，Bridge 接口调用时机必须在UIAbility onWindowStageCreate()函数执行完毕后。<br>
+>
+>- SDK 版本大于等于6.0.2.118，Bridge 接口调用时机必须在UIAbility onCreate()函数执行完毕后。<br>
+>
 
 ### callMethod
 
@@ -196,7 +196,7 @@ sendMessage(message: Message): Promise\<Response\>
 | 参数名   | 类型                  | 必填 | 说明                     |
 | -------- | --------------------- | ---- | ------------------------ |
 | message  | [Message](#message)   | 是   | 待发送数据                   |
-| callback | AsyncCallback\<void\> | 否   | callback方式的回调函数 |
+| callback | AsyncCallback\<Response\> | 否   | callback方式的回调函数 |
 
 **返回值：** 
 
