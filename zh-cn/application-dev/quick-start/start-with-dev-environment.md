@@ -74,6 +74,9 @@
   5. 执行以下命令，使配置的环境变量生效。
      
       ```
+      macOS Mojave（10.14）及以前：
       source ~/.bash_profile
+      macOS Catalina（10.15）及以后：
+      source ~/.zshrc
       ```
   6. 环境变量配置完成后，关闭并重启DevEco Studio。
