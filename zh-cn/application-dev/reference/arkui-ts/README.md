@@ -107,6 +107,7 @@
   - [Toggle](ts-basic-components-toggle.md)
   - [Web](ts-basic-components-web.md)
   - [XComponent](ts-basic-components-xcomponent.md)
+  - [Hyperlink](ts-basic-components-hyperlink.md)
 - 容器组件
   - [Badge](ts-container-badge.md)
   - [Column](ts-container-column.md)
