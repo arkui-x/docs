@@ -104,6 +104,127 @@ static getDisplayLanguage(language: string, locale: string, sentenceCase?: boole
   }
   ```
 
+### getSystemLanguages<sup>24+</sup>
+
+static getSystemLanguages(): Array&lt;string&gt;
+
+获取系统支持的语言列表。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型                | 说明                 |
+| ------------------- | -------------------- |
+| Array&lt;string&gt; | 系统支持的语言列表。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  // systemLanguages = [ 'ug', 'bo', 'zh-Hant', 'en-Latn-US', 'zh-Hans' ]
+  let systemLanguages: Array<string> = i18n.System.getSystemLanguages();
+  ```
+
+### getSystemCountries<sup>24+</sup>
+
+static getSystemCountries(language: string): Array&lt;string&gt;
+
+获取输入语言下系统支持的国家地区列表。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                                                         |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| language | string | 是   | 合法的语言ID。 |
+
+**返回值：**
+
+| 类型                | 说明                                   |
+| ------------------- | -------------------------------------- |
+| Array&lt;string&gt; | 某种特定语言下系统支持的国家地区列表。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)和[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+| 890001   | Invalid parameter. Possible causes: Parameter verification failed. |
+
+> **说明**
+>
+> 890001的报错信息请以接口的实际报错为准。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    // systemCountries = [ 'ZW', 'YT', 'YE', ..., 'ER', 'CN', 'DE' ]
+    let systemCountries: Array<string> = i18n.System.getSystemCountries('zh');
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call System.getSystemCountries failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+### isSuggested<sup>24+</sup>
+
+static isSuggested(language: string, region?: string): boolean
+
+判断语言是否是地区的推荐语言。用于根据地区推荐语言或根据语言推荐地区。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                                                         |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| language | string | 是   | 合法的语言ID，例如zh。 |
+| region   | string | 否   | 合法的国家地区码，例如CN。<br>默认值：SIM卡国家地区。 |
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | true表示语言是地区的推荐语言，false表示语言不是地区的推荐语言。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)和[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+| 890001   | Invalid parameter. Possible causes: Parameter verification failed. |
+
+
+> **说明**
+>
+> 890001的报错信息请以接口的实际报错为准。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    let isSuggestedCountry: boolean = i18n.System.isSuggested('zh', 'CN'); // isSuggestedCountry = true
+    isSuggestedCountry = i18n.System.isSuggested('en'); // 结果和系统当前地区相关
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call System.isSuggested failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
 ### getSystemLanguage<sup>9+</sup>
 
 static getSystemLanguage(): string
@@ -208,6 +329,57 @@ static is24HourClock(): boolean
   }
   ```
 
+### getPreferredLanguageList<sup>24+</sup>
+
+static getPreferredLanguageList(): Array&lt;string&gt;
+
+获取系统偏好语言列表。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型                | 说明               |
+| ------------------- | ------------------ |
+| Array&lt;string&gt; | 系统偏好语言列表。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let preferredLanguageList: Array<string> = i18n.System.getPreferredLanguageList();
+  ```
+
+> **说明：**
+
+> 部分系统仅返回当前系统所选语言，不同机型返回语言格式不同。
+
+### getFirstPreferredLanguage<sup>24+</sup>
+
+static getFirstPreferredLanguage(): string
+
+获取系统偏好语言列表中的第一个语言。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型   | 说明                             |
+| ------ | -------------------------------- |
+| string | 系统偏好语言列表中的第一个语言。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let firstPreferredLanguage: string = i18n.System.getFirstPreferredLanguage();
+  ```
+
+> **说明：**
+
+> 不同机型返回语言格式不同。
 
 ### setAppPreferredLanguage<sup>20+</sup>
 
@@ -296,6 +468,194 @@ static getAppPreferredLanguage(): string
   let appPreferredLanguage: string = i18n.System.getAppPreferredLanguage();
   ```
 
+### getUsingLocalDigit<sup>24+</sup>
+
+static getUsingLocalDigit(): boolean
+
+判断系统是否使用本地数字。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | true表示系统当前使用本地数字，false表示系统当前不使用本地数字。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let usingLocalDigit: boolean = i18n.System.getUsingLocalDigit();
+  ```
+
+### getSimplifiedLanguage<sup>24+</sup>
+
+static getSimplifiedLanguage(language?: string): string
+
+获取语言的简化表示。例如：'en-Latn-US'的简化表示为'en'，'en-Latn-GB'的简化表示为'en-GB'。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                                                         |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| language | string | 否   | 合法的语言ID。默认值：系统语言。 |
+
+**返回值：**
+
+| 类型   | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| string | 不传入language时，会根据系统语言和地区判断是否存在系统支持的方言，若存在则返回方言的简化表示；若不存在，则返回系统语言的简化表示。<br>传入language时，返回language的简化表示。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)和[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+| 890001   | Invalid parameter. Possible causes: Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    // simplifiedLanguage = 'zh'
+    let simplifiedLanguage: string = i18n.System.getSimplifiedLanguage('zh-Hans-CN');
+    // 获取当前系统语言的简化表示
+    let simplifiedSystemLanguage: string = i18n.System.getSimplifiedLanguage();
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call System.getSimplifiedLanguage failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+### getTemperatureType<sup>24+</sup>
+
+static getTemperatureType(): TemperatureType
+
+获取系统设置的温度单位。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型                                  | 说明       |
+| ------------------------------------- | ---------- |
+| [TemperatureType](#temperaturetype24) | 温度单位。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let temperatureType: i18n.TemperatureType = i18n.System.getTemperatureType();
+  ```
+
+### getTemperatureName<sup>24+</sup>
+
+static getTemperatureName(type: TemperatureType): string
+
+获取温度单位的名称。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型                                  | 必填 | 说明       |
+| ------ | ------------------------------------- | ---- | ---------- |
+| type   | [TemperatureType](#temperaturetype24) | 是   | 温度单位。 |
+
+**返回值：**
+
+| 类型   | 说明                                                  |
+| ------ | ----------------------------------------------------- |
+| string | 返回温度单位的名称，包括celsius，fahrenheit，kelvin。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 890001   | Invalid parameter. Possible causes: Parameter verification failed. |
+
+
+> **说明**
+>
+> 890001的报错信息请以接口的实际报错为准。
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    // temperatureName = 'celsius'
+    let temperatureName: string = i18n.System.getTemperatureName(i18n.TemperatureType.CELSIUS);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call System.getTemperatureName failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+### getFirstDayOfWeek<sup>24+</sup>
+
+static getFirstDayOfWeek(): WeekDay
+
+获取系统设置的周起始日。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型                  | 说明       |
+| --------------------- | ---------- |
+| [WeekDay](#weekday24) | 周起始日。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let firstDayOfWeek: i18n.WeekDay = i18n.System.getFirstDayOfWeek();
+  ```
+
+## TemperatureType<sup>24+</sup>
+
+温度单位的枚举。
+
+**系统能力：** SystemCapability.Global.I18n
+
+| 名称       | 值   | 说明     |
+| ---------- | ---- | -------- |
+| CELSIUS    | 1    | 摄氏度。 |
+| FAHRENHEIT | 2    | 华氏度。 |
+| KELVIN     | 3    | 开尔文。 |
+
+## WeekDay<sup>24+</sup>
+
+周起始日的枚举，取值范围为周一至周日。
+
+**系统能力：** SystemCapability.Global.I18n
+
+| 名称 | 值   | 说明   |
+| ---- | ---- | ------ |
+| MON  | 1    | 周一。 |
+| TUE  | 2    | 周二。 |
+| WED  | 3    | 周三。 |
+| THU  | 4    | 周四。 |
+| FRI  | 5    | 周五。 |
+| SAT  | 6    | 周六。 |
+| SUN  | 7    | 周日。 |
+
 ## I18n.isRTL<sup>7+</sup>
 
 isRTL(locale: string): boolean
@@ -348,6 +708,108 @@ getCalendar(locale: string, type? : string): Calendar
   I18n.getCalendar("zh-Hans", "chinese"); // 获取中国农历日历对象
   ```
 
+## EntityRecognizer<sup>24+</sup>
+
+提供实体识别相关的能力，可以获取文本中实体的类型和起止位置。当前支持识别的实体包括电话号码和时间日期。
+
+**系统能力：** SystemCapability.Global.I18n
+
+### constructor<sup>24+</sup>
+
+constructor(locale?: string)
+
+创建实体识别对象。该对象根据区域规则识别文本中的实体。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| locale | string | 否   | 表示区域ID的字符串，由语言、脚本、国家地区组成，例如zh-Hans-CN。<br>默认值：系统当前区域ID。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)和[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+| 890001   | Invalid parameter. Possible causes: Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    let entityRecognizer: i18n.EntityRecognizer = new i18n.EntityRecognizer('zh-CN');
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call new i18n.EntityRecognizer failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+### findEntityInfo<sup>24+</sup>
+
+findEntityInfo(text: string): Array&lt;EntityInfoItem&gt;
+
+获取文本中的实体信息。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明       |
+| ------ | ------ | ---- | ---------- |
+| text   | string | 是   | 输入文本。 |
+
+**返回值：**
+
+| 类型                                             | 说明                   |
+| ------------------------------------------------ | ---------------------- |
+| Array&lt;[EntityInfoItem](#entityinfoitem24)&gt; | 文本中的实体信息列表。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    let entityRecognizer: i18n.EntityRecognizer = new i18n.EntityRecognizer('zh-CN');
+    let phoneNumberText: string = '如有疑问，请联系158****2312';
+    // phoneNumberEntity[0].type = 'phone_number', phoneNumberEntity[0].begin = 8, phoneNumberEntity[0].end = 19
+    let phoneNumberEntity: Array<i18n.EntityInfoItem> = entityRecognizer.findEntityInfo(phoneNumberText);
+    let dateText: string = '约定2023年12月1日共进晚餐。';
+    // dateEntity[0].type = 'date', dateEntity[0].begin = 2, dateEntity[0].end = 12
+    let dateEntity: Array<i18n.EntityInfoItem> = entityRecognizer.findEntityInfo(dateText);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call EntityRecognizer.findEntityInfo failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+## EntityInfoItem<sup>24+</sup>
+
+实体信息属性。
+
+**系统能力：** SystemCapability.Global.I18n
+
+| 名称  | 类型   | 只读 | 可选 | 说明                                                         |
+| ----- | ------ | ---- | ---- | ------------------------------------------------------------ |
+| type  | string | 否   | 否   | 实体的类型，当前支持phone_number和date类型。phone_number表示实体类型是电话号码，date表示实体类型是时间日期。 |
+| begin | number | 否   | 否   | 实体在输入字符串中的起始位置。                               |
+| end   | number | 否   | 否   | 实体在输入字符串中的终止位置。                               |
 
 ## Calendar<sup>8+</sup>
 
@@ -577,6 +1039,34 @@ get(field: string): number
   let hourOfDay: number = calendar.get("hour_of_day"); // hourOfDay = 8
   ```
 
+### getDisplayName<sup>24+</sup>
+
+getDisplayName(locale: string): string
+
+获取日历对象名称在指定语言下的翻译。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| locale | string | 是   | 表示区域ID的字符串，由语言、脚本、国家地区组成。 |
+
+**返回值：**
+
+| 类型   | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| string | 日历对象名称在指定语言下的翻译。如buddhist在en-US上显示的名称为“Buddhist&nbsp;Calendar”。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let calendar: i18n.Calendar = i18n.getCalendar('en-US', 'buddhist');
+  let calendarName: string = calendar.getDisplayName('zh'); // calendarName = '佛历'
+  ```
 
 ### isWeekend<sup>8+</sup>
 
@@ -794,6 +1284,412 @@ format(number: string): string
 | ---- | ------ | ---- | ---- | ---------------------------------------- |
 | type | string | 是    | 是    | 表示对电话号码格式化的类型，取值范围："E164",&nbsp;"INTERNATIONAL",&nbsp;"NATIONAL",&nbsp;"RFC3966"。<br>-在API version 8版本，type为必填项。 <br>-API version 9版本开始，type为选填项。|
 
+## UnitInfo<sup>24+</sup>
+
+度量衡单位信息。
+
+**系统能力：** SystemCapability.Global.I18n
+
+| 名称          | 类型   | 只读 | 可选 | 说明                                                   |
+| ------------- | ------ | ---- | ---- | ------------------------------------------------------ |
+| unit          | string | 否   | 否   | 单位的名称，如：'meter',&nbsp;'inch',&nbsp;'cup'等。   |
+| measureSystem | string | 否   | 否   | 单位的度量体系，取值包括：'SI',&nbsp;'US',&nbsp;'UK'。 |
+
+## i18n.getInstance<sup>24+</sup>
+
+getInstance(locale?: string): IndexUtil
+
+创建并返回IndexUtil对象。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| locale | string | 否   | 表示区域ID的字符串，由语言、脚本、国家地区组成。<br>默认值：系统当前区域ID。 |
+
+**返回值：**
+
+| 类型                     | 说明                            |
+| ------------------------ | ------------------------------- |
+| [IndexUtil](#indexutil24) | 根据区域ID创建的IndexUtil对象。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let indexUtil: i18n.IndexUtil = i18n.getInstance('zh-CN');
+  ```
+
+## IndexUtil<sup>24+</sup>
+
+提供索引相关的能力，包括区域索引列表和文本索引值获取。
+
+**系统能力：** SystemCapability.Global.I18n
+
+### getIndexList<sup>24+</sup>
+
+getIndexList(): Array&lt;string&gt;
+
+获取当前区域的索引列表。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型                | 说明                                                  |
+| ------------------- | ----------------------------------------------------- |
+| Array&lt;string&gt; | 当前区域的索引列表。第一个元素和最后一个元素为“...”。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let indexUtil: i18n.IndexUtil = i18n.getInstance('zh-CN');
+  // indexList = [ '...', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+  //              'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '...' ]
+  let indexList: Array<string> = indexUtil.getIndexList();
+  ```
+
+
+### addLocale<sup>24+</sup>
+
+addLocale(locale: string): void
+
+在当前区域的索引列表中，添加新区域的索引列表，形成复合列表。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| locale | string | 是   | 表示区域ID的字符串，由语言、脚本、国家地区组成。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let indexUtil: i18n.IndexUtil = i18n.getInstance('zh-CN');
+  indexUtil.addLocale('en-US');
+  ```
+
+### getIndex<sup>24+</sup>
+
+getIndex(text: string): string
+
+获取输入文本对应的索引值。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明       |
+| ------ | ------ | ---- | ---------- |
+| text   | string | 是   | 输入文本。 |
+
+**返回值：**
+
+| 类型   | 说明                                             |
+| ------ | ------------------------------------------------ |
+| string | 输入文本对应的索引值。无合适索引时返回空字符串。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let indexUtil: i18n.IndexUtil = i18n.getInstance('zh-CN');
+  let index: string = indexUtil.getIndex('hi'); // index = 'H'
+  ```
+
+## i18n.getLineInstance<sup>24+</sup>
+
+getLineInstance(locale: string): BreakIterator
+
+获取用于获取可换行点的BreakIterator对象。BreakIterator对象内部维护一个换行迭代器，可以用于访问各个可换行点。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| locale | string | 是   | 表示区域ID的字符串，由语言、脚本、国家地区组成。<br>生成的[BreakIterator](#breakiterator24)将按照指定区域的规则计算可换行点的位置。 |
+
+**返回值：**
+
+| 类型                             | 说明             |
+| -------------------------------- | ---------------- |
+| [BreakIterator](#breakiterator24) | 可换行点处理器。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let iterator: i18n.BreakIterator = i18n.getLineInstance('en');
+  ```
+
+## BreakIterator<sup>24+</sup>
+
+提供文本换行相关的能力，包括可换行点的获取、移动和识别等。
+
+**系统能力：** SystemCapability.Global.I18n
+
+### setLineBreakText<sup>24+</sup>
+
+setLineBreakText(text: string): void
+
+设置BreakIterator对象要处理的文本。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明       |
+| ------ | ------ | ---- | ---------- |
+| text   | string | 是   | 输入文本。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let iterator: i18n.BreakIterator = i18n.getLineInstance('en');
+  iterator.setLineBreakText('Apple is my favorite fruit.'); // 设置处理文本
+  ```
+
+
+### getLineBreakText<sup>24+</sup>
+
+getLineBreakText(): string
+
+获取BreakIterator对象当前处理的文本。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型   | 说明                              |
+| ------ | --------------------------------- |
+| string | BreakIterator对象正在处理的文本。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let iterator: i18n.BreakIterator = i18n.getLineInstance('en');
+  iterator.setLineBreakText('Apple is my favorite fruit.');
+  let breakText: string = iterator.getLineBreakText(); // breakText = 'Apple is my favorite fruit.'
+  ```
+
+
+### current<sup>24+</sup>
+
+current(): number
+
+获取换行迭代器在当前处理文本中的位置。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型   | 说明                                     |
+| ------ | ---------------------------------------- |
+| number | 获取换行迭代器在当前处理的文本中的位置。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let iterator: i18n.BreakIterator = i18n.getLineInstance('en');
+  iterator.setLineBreakText('Apple is my favorite fruit.');
+  let currentPos: number = iterator.current(); // currentPos = 0
+  ```
+
+
+### first<sup>24+</sup>
+
+first(): number
+
+将换行迭代器移动到第一个可换行点。第一个可换行点总是在被处理文本的起始位置。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型   | 说明                                 |
+| ------ | ------------------------------------ |
+| number | 被处理文本的第一个可换行点的偏移量。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let iterator: i18n.BreakIterator = i18n.getLineInstance('en');
+  iterator.setLineBreakText('Apple is my favorite fruit.');
+  let firstPos: number = iterator.first(); // firstPos = 0
+  ```
+
+
+### last<sup>24+</sup>
+
+last(): number
+
+将换行迭代器移动到最后一个可换行点。最后一个可换行点总是在被处理文本末尾的下一个位置。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型   | 说明                                   |
+| ------ | -------------------------------------- |
+| number | 被处理文本的最后一个可换行点的偏移量。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let iterator: i18n.BreakIterator = i18n.getLineInstance('en');
+  iterator.setLineBreakText('Apple is my favorite fruit.');
+  let lastPos: number = iterator.last(); // lastPos = 27
+  ```
+
+
+### next<sup>24+</sup>
+
+next(index?: number): number
+
+将换行迭代器向后移动index个可换行点。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| index  | number | 否   | 换行迭代器将要移动的可换行点数，取值为整数。<br>正数表示向后移动index个可换行点，负数表示向前移动index个可换行点。<br>默认值：1。 |
+
+**返回值：**
+
+| 类型   | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| number | 移动index个可换行点后，当前换行迭代器在文本中的位置。<br>若移动index个可换行点后超出了所处理的文本的长度范围，返回-1。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let iterator: i18n.BreakIterator = i18n.getLineInstance('en');
+  iterator.setLineBreakText('Apple is my favorite fruit.');
+  let pos: number = iterator.first(); // pos = 0
+  pos = iterator.next(); // pos = 6
+  pos = iterator.next(10); // pos = -1
+  ```
+
+
+### previous<sup>24+</sup>
+
+previous(): number
+
+将换行迭代器向前移动一个可换行点。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型   | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| number | 移动到前一个可换行点后，当前换行迭代器在文本中的位置。<br>若移动后超出了所处理的文本的长度范围，返回-1。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let iterator: i18n.BreakIterator = i18n.getLineInstance('en');
+  iterator.setLineBreakText('Apple is my favorite fruit.');
+  let pos: number = iterator.first(); // pos = 0
+  pos = iterator.next(3); // pos = 12
+  pos = iterator.previous(); // pos = 9
+  ```
+
+
+### following<sup>24+</sup>
+
+following(offset: number): number
+
+将换行迭代器移动到指定位置后面一个可换行点。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                               |
+| ------ | ------ | ---- | -------------------------------------------------- |
+| offset | number | 是   | 将换行迭代器移动到文本指定位置的后面一个可换行点。 |
+
+**返回值：**
+
+| 类型   | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| number | 换行迭代器移动后的位置。若offset所指定位置的下一个可换行点超出了文本的范围，则返回-1。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let iterator: i18n.BreakIterator = i18n.getLineInstance('en');
+  iterator.setLineBreakText('Apple is my favorite fruit.');
+  let pos: number = iterator.following(0); // pos = 6
+  pos = iterator.following(100); // pos = -1
+  pos = iterator.current(); // pos = 27
+  ```
+
+
+### isBoundary<sup>24+</sup>
+
+isBoundary(offset: number): boolean
+
+判断指定位置是否为可换行点。
+
+**系统能力：** SystemCapability.Global.I18n
+
+
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明           |
+| ------ | ------ | ---- | -------------- |
+| offset | number | 是   | 文本指定位置。 |
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | true表示offset指定的文本位置是一个可换行点，false表示offset指定的文本位置不是一个可换行点。<br>返回true时，会将换行迭代器移动到offset指定的位置，否则相当于调用following。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let iterator: i18n.BreakIterator = i18n.getLineInstance('en');
+  iterator.setLineBreakText('Apple is my favorite fruit.');
+  let isBoundary: boolean = iterator.isBoundary(0); // isBoundary = true;
+  isBoundary = iterator.isBoundary(5); // isBoundary = false;
+  ```
 
 ## I18n.getTimeZone<sup>7+</sup>
 
@@ -844,6 +1740,35 @@ getID(): string
   let timezoneID: string = timezone.getID(); // timezoneID = "Asia/Shanghai"
   ```
 
+### getDisplayName<sup>24+</sup>
+
+getDisplayName(locale?: string, isDST?: boolean): string
+
+获取时区对象名称在指定语言下的翻译。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型    | 必填 | 说明                                                         |
+| ------ | ------- | ---- | ------------------------------------------------------------ |
+| locale | string  | 否   | 表示区域ID的字符串，由语言、脚本、国家地区组成。默认值：系统当前区域ID。 |
+| isDST  | boolean | 否   | true表示显示夏令时信息，false表示不显示夏令时信息。默认值：false。 |
+
+**返回值：**
+
+| 类型   | 说明                             |
+| ------ | -------------------------------- |
+| string | 时区对象名称在指定语言下的翻译。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let timezone: i18n.TimeZone = i18n.getTimeZone('Asia/Shanghai');
+  let timezoneName: string = timezone.getDisplayName('zh-CN', false); // timezoneName = '中国标准时间'
+  ```
 
 ### getRawOffset
 
@@ -913,6 +1838,274 @@ static getAvailableIDs(): Array&lt;string&gt;
   let ids: Array<string> = I18n.TimeZone.getAvailableIDs();
   ```
 
+### getZoneRules<sup>24+</sup>
+
+getZoneRules(): ZoneRules
+
+获取时区跳变规则，时区的跳变逻辑参考夏令时跳变。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型                      | 说明                                                   |
+| ------------------------- | ------------------------------------------------------ |
+| [ZoneRules](#zonerules24) | 时区跳变规则，包含跳变的时间点、跳变前后的偏移量信息。 |
+
+**示例：**
+
+```ts
+import { i18n } from '@kit.LocalizationKit';
+
+let tzId: string = 'America/Tijuana';
+let timeZone: i18n.TimeZone = i18n.getTimeZone(tzId);
+let zoneRules: i18n.ZoneRules = timeZone.getZoneRules();
+let date = new Date(2025, 4, 13);
+let zoneOffsetTransition: i18n.ZoneOffsetTransition =
+    zoneRules.nextTransition(date.getTime()); // 获取2025年5月13日以后的下一个时区跳变对象
+zoneOffsetTransition.getMilliseconds(); // 跳变点的时间戳: 1762074000000
+zoneOffsetTransition.getOffsetAfter(); // 跳变后的偏移量: -28800000
+zoneOffsetTransition.getOffsetBefore(); // 跳变前的偏移量: -25200000
+// 将跳变点时间格式化
+let dateTimeFormat: Intl.DateTimeFormat = new Intl.DateTimeFormat('en-US', {
+  timeZone: tzId,
+  dateStyle: 'long',
+  timeStyle: 'long',
+  hour12: false
+});
+let dateFormat: string =
+  dateTimeFormat.format(new Date(zoneOffsetTransition.getMilliseconds())); // November 2, 2025, 1:00:00 PST
+```
+
+## ZoneRules<sup>24+</sup>
+
+提供查询时区跳变规则的能力。
+
+**系统能力：** SystemCapability.Global.I18n
+
+### nextTransition<sup>24+</sup>
+
+nextTransition(date?: number): ZoneOffsetTransition
+
+获取指定时间的下一个时区跳变对象。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| date   | number | 否   | 从1970年1月1日0时0分0秒到指定时间之间的毫秒数，默认到当前系统时间之间的毫秒数，单位：毫秒。 |
+
+**返回值：**
+
+| 类型                                            | 说明           |
+| ----------------------------------------------- | -------------- |
+| [ZoneOffsetTransition](#zoneoffsettransition24) | 时区跳变对象。 |
+
+**示例：**
+
+```ts
+import { i18n } from '@kit.LocalizationKit';
+
+// 获取蒂华纳时区对象
+let timeZone: i18n.TimeZone = i18n.getTimeZone('America/Tijuana');
+// 获取蒂华纳时区跳变规则
+let zoneRules: i18n.ZoneRules = timeZone.getZoneRules();
+let date = new Date(2025, 4, 13);
+// 获取蒂华纳时区2025年5月13日后的下一个跳变对象
+let zoneOffsetTransition: i18n.ZoneOffsetTransition = zoneRules.nextTransition(date.getTime());
+```
+
+## ZoneOffsetTransition<sup>24+</sup>
+
+提供解析时区跳变规则的能力。
+
+**系统能力：** SystemCapability.Global.I18n
+
+### getMilliseconds<sup>24+</sup>
+
+getMilliseconds(): number
+
+获取时区跳变点的时间戳。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型   | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| number | 从1970年1月1日0时0分0秒到时区跳变点之间的毫秒数，例如：1762074000000，单位：毫秒。如果当前时区[原始偏移量](#getrawoffset)保持不变并且不使用夏令时，则返回0。 |
+
+**示例：**
+
+```ts
+import { i18n } from '@kit.LocalizationKit';
+
+let timeZone: i18n.TimeZone = i18n.getTimeZone('America/Tijuana');
+let zoneRules: i18n.ZoneRules = timeZone.getZoneRules();
+let date = new Date(2025, 4, 13);
+let zoneOffsetTransition: i18n.ZoneOffsetTransition =
+    zoneRules.nextTransition(date.getTime()); // 获取2025年5月13日以后的下一个时区跳变对象
+zoneOffsetTransition.getMilliseconds(); // 跳变点的时间戳: 1762074000000
+```
+
+### getOffsetAfter<sup>24+</sup>
+
+getOffsetAfter(): number
+
+获取时区跳变后的偏移量。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型   | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| number | 时区跳变后的偏移量，表示跳变后的时间相对于标准时间（协调世界时UTC）的时间差，单位：毫秒。例如：-28800000表示跳变后的时间比标准时间慢28800000毫秒（8小时）。 |
+
+**示例：**
+
+```ts
+import { i18n } from '@kit.LocalizationKit';
+
+let timeZone: i18n.TimeZone = i18n.getTimeZone('America/Tijuana');
+let zoneRules: i18n.ZoneRules = timeZone.getZoneRules();
+let date = new Date(2025, 4, 13);
+let zoneOffsetTransition: i18n.ZoneOffsetTransition =
+    zoneRules.nextTransition(date.getTime()); // 获取2025年5月13日以后的下一个时区跳变对象
+zoneOffsetTransition.getOffsetAfter(); // 跳变后的偏移量: -28800000
+```
+
+### getOffsetBefore<sup>24+</sup>
+
+getOffsetBefore(): number
+
+获取时区跳变前的偏移量。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型   | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| number | 时区跳变前的偏移量，表示跳变前的时间相对于标准时间（协调世界时UTC）的时间差，单位：毫秒。例如：-25200000表示跳变前的时间比标准时间慢25200000毫秒（7小时）。 |
+
+**示例：**
+
+```ts
+import { i18n } from '@kit.LocalizationKit';
+
+let timeZone: i18n.TimeZone = i18n.getTimeZone('America/Tijuana');
+let zoneRules: i18n.ZoneRules = timeZone.getZoneRules();
+let date = new Date(2025, 4, 13);
+let zoneOffsetTransition: i18n.ZoneOffsetTransition =
+    zoneRules.nextTransition(date.getTime()); // 获取2025年5月13日以后的下一个时区跳变对象
+zoneOffsetTransition.getOffsetBefore(); // 跳变前的偏移量: -25200000
+```
+
+
+## Transliterator<sup>24+</sup>
+
+提供文本音译相关的能力，包括音译支持范围获取和文本音译等。
+
+**系统能力：** SystemCapability.Global.I18n
+
+### getAvailableIDs<sup>24+</sup>
+
+static getAvailableIDs(): string[]
+
+获取音译支持的转换ID列表。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**返回值：**
+
+| 类型     | 说明                   |
+| -------- | ---------------------- |
+| string[] | 音译支持的转换ID列表。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  // 共支持742个ID。每一个ID由使用中划线分割的两部分组成，格式为 source-destination。例如ids = ['Han-Latin','Latin-ASCII', 'Amharic-Latin/BGN','Accents-Any', ...]，Han-Latin表示汉语转为译拉丁文，Amharic-Latin表示阿姆哈拉语转为拉丁文。
+  // 更多使用信息可以参考ISO-15924。
+  let ids: string[] = i18n.Transliterator.getAvailableIDs();
+  ```
+
+
+### getInstance<sup>24+</sup>
+
+static getInstance(id: string): Transliterator
+
+创建指定转换ID的音译对象。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明               |
+| ------ | ------ | ---- | ------------------ |
+| id     | string | 是   | 音译支持的转换ID。 |
+
+**返回值：**
+
+| 类型                               | 说明       |
+| ---------------------------------- | ---------- |
+| [Transliterator](#transliterator24) | 音译对象。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let transliterator: i18n.Transliterator = i18n.Transliterator.getInstance('Any-Latn');
+  ```
+
+
+### transform<sup>24+</sup>
+
+transform(text: string): string
+
+将输入文本从源格式转换为目标格式。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明       |
+| ------ | ------ | ---- | ---------- |
+| text   | string | 是   | 输入文本。 |
+
+**返回值：**
+
+| 类型   | 说明           |
+| ------ | -------------- |
+| string | 转换后的文本。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let transliterator: i18n.Transliterator = i18n.Transliterator.getInstance('Any-Latn');
+  let wordArray: string[] = ['中国', '德国', '美国', '法国']
+  for (let i = 0; i < wordArray.length; i++) {
+    let transliterateLatn: string =
+      transliterator.transform(wordArray[i]); // transliterateLatn依次为：'zhōng guó', 'dé guó', 'měi guó', 'fǎ guó'
+  }
+
+  // 汉语音译去声调
+  transliterator = i18n.Transliterator.getInstance('Any-Latn;Latin-Ascii');
+  let transliterateAscii: string = transliterator.transform('中国'); // transliterateAscii = 'zhong guo'
+
+  // 汉语姓氏读音
+  transliterator = i18n.Transliterator.getInstance('Han-Latin/Names');
+  let transliterateNames: string = transliterator.transform('单老师'); // transliterateNames = 'shàn lǎo shī'
+  transliterateNames = transliterator.transform('长孙无忌'); // transliterateNames = 'zhǎng sūn wú jì'
+  ```
 
 ## Unicode<sup>9+</sup>
 
@@ -1189,6 +2382,39 @@ static getType(char: string): string
 
 ## I18NUtil<sup>9+</sup>
 
+### unitConvert<sup>24+</sup>
+
+static unitConvert(fromUnit: UnitInfo, toUnit: UnitInfo, value: number, locale: string, style?: string): string
+
+将fromUnit的单位转换为toUnit的单位，并根据区域与风格进行格式化。
+
+**参数：**
+
+| 参数名   | 类型                   | 必填 | 说明                                                         |
+| -------- | ---------------------- | ---- | ------------------------------------------------------------ |
+| fromUnit | [UnitInfo](#unitinfo24) | 是   | 需要转换的单位。                                             |
+| toUnit   | [UnitInfo](#unitinfo24) | 是   | 转换成的目标单位。                                           |
+| value    | number                 | 是   | 需要转换的单位的数量值。                                     |
+| locale   | string                 | 是   | 表示区域ID的字符串，由语言、脚本、国家地区组成，如：zh-Hans-CN。 |
+| style    | string                 | 否   | 格式化。 |
+
+**返回值：**
+
+| 类型   | 说明                           |
+| ------ | ------------------------------ |
+| string | 转换单位后的度量衡格式化结果。 |
+
+**示例：**
+
+  ```ts
+  import { i18n } from '@kit.LocalizationKit';
+
+  let fromUnit: i18n.UnitInfo = { unit: 'cup', measureSystem: 'US' };
+  let toUnit: i18n.UnitInfo = { unit: 'liter', measureSystem: 'SI' };
+  let convertResult: string =
+    i18n.I18NUtil.unitConvert(fromUnit, toUnit, 1000, 'en-US', 'long'); // convertResult = '236.588 liters'
+  ```
+
 ### getDateOrder<sup>9+</sup>
 
 static getDateOrder(locale: string): string
@@ -1213,3 +2439,447 @@ static getDateOrder(locale: string): string
   ```ts
   let order: string = I18n.I18NUtil.getDateOrder("zh-CN");  // order = "y-L-d"
   ```
+
+### getTimePeriodName<sup>24+</sup>
+
+static getTimePeriodName(hour:number, locale?: string): string
+
+获取指定时间在某区域的本地化表达。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| hour   | number | 是   | 指定的时间，例如16。                                         |
+| locale | string | 否   | 表示区域ID的字符串，由语言、脚本、国家地区组成。如：zh-Hans-CN。<br>默认值：系统当前区域ID。 |
+
+**返回值：**
+
+| 类型   | 说明                           |
+| ------ | ------------------------------ |
+| string | 指定时间在某区域的本地化表达。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)和[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+| 890001   | Invalid parameter. Possible causes: Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    let name: string = i18n.I18NUtil.getTimePeriodName(2, 'zh-CN'); // name = '凌晨'
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call I18NUtil.getTimePeriodName failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+### getThreeLetterLanguage<sup>24+</sup>
+
+static getThreeLetterLanguage(locale: string): string
+
+将语言代码由二字母转换为三字母。二字母和三字母语言代码的规格参考[ISO 639](https://www.iso.org/iso-639-language-code)。<br>例如，中文的二字母语言代码是zh，对应的三字母语言代码是zho。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                             |
+| ------ | ------ | ---- | -------------------------------- |
+| locale | string | 是   | 待转换的语言二字母代码，如：zh。 |
+
+**返回值：**
+
+| 类型   | 说明                                       |
+| ------ | ------------------------------------------ |
+| string | 返回待转换语言二字母代码对应的三字母代码。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)和[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+| 890001   | Invalid parameter. Possible causes: Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    let language: string = i18n.I18NUtil.getThreeLetterLanguage('zh') // language = 'zho'
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call I18NUtil.getThreeLetterLanguage failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+### getThreeLetterRegion<sup>24+</sup>
+
+static getThreeLetterRegion(locale: string): string
+
+将地区代码由二字母转换为三字母。二字母和三字母地区代码的规格参考[ISO 3166](https://www.iso.org/iso-3166-country-codes.html)<br>例如，中国的二字母地区代码是CN, 三字母是CHN。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                             |
+| ------ | ------ | ---- | -------------------------------- |
+| locale | string | 是   | 待转换的地区二字母代码，如：CN。 |
+
+**返回值：**
+
+| 类型   | 说明                                       |
+| ------ | ------------------------------------------ |
+| string | 返回待转换地区二字母代码对应的三字母代码。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)和[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+| 890001   | Invalid parameter. Possible causes: Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    let region: string = i18n.I18NUtil.getThreeLetterRegion('CN') // region = 'CHN'
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call I18NUtil.getThreeLetterRegion failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+### getUnicodeWrappedFilePath<sup>24+</sup>
+
+static getUnicodeWrappedFilePath(path: string, delimiter?: string, locale?: Intl.Locale): string
+
+对文件路径进行本地化处理。<br>例如，将/data/out/tmp本地化处理后生成tmp/out/data/。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名    | 类型                                                         | 必填 | 说明                              |
+| --------- | ------------------------------------------------------------ | ---- | --------------------------------- |
+| path      | string                                                       | 是   | 待处理的路径，如：/data/out/tmp。 |
+| delimiter | string                                                       | 否   | 路径分隔符，默认值：/。           |
+| locale    | [Intl.Locale](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale) | 否   | 区域对象，默认值：系统区域对象。  |
+
+**返回值：**
+
+| 类型   | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| string | 本地化处理后的文件路径。如果区域对象表示的语言是镜像语言，则处理后的文件路径包含方向控制符，保证文件路径镜像显示。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 890001  | Invalid parameter. Possible causes: Parameter verification failed. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+import { i18n } from '@kit.LocalizationKit';
+
+try {
+  let path: string = '/data/out/tmp';
+  let delimiter: string = '/';
+  let locale: Intl.Locale = new Intl.Locale('ar');
+  let mirrorPath: string =
+    i18n.I18NUtil.getUnicodeWrappedFilePath(path, delimiter, locale); // mirrorPath显示为: 'tmp/out/data/'
+} catch (error) {
+  let err: BusinessError = error as BusinessError;
+  console.error(`call I18NUtil.getUnicodeWrappedFilePath failed, error code: ${err.code}, message: ${err.message}.`);
+}
+```
+
+## Normalizer<sup>24+</sup>
+
+提供文本标准化的能力。
+
+**系统能力：** SystemCapability.Global.I18n
+
+### getInstance<sup>24+</sup>
+
+static getInstance(mode: NormalizerMode): Normalizer
+
+获取文本标准化对象。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型                                | 必填 | 说明             |
+| ------ | ----------------------------------- | ---- | ---------------- |
+| mode   | [NormalizerMode](#normalizermode24) | 是   | 文本标准化范式。 |
+
+**返回值：**
+
+| 类型                        | 说明                           |
+| --------------------------- | ------------------------------ |
+| [Normalizer](#normalizer24) | 返回指定范式的文本标准化对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    let normalizer: i18n.Normalizer = i18n.Normalizer.getInstance(i18n.NormalizerMode.NFC);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call Normalizer.getInstance failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+
+### normalize<sup>24+</sup>
+
+normalize(text: string): string
+
+对字符串进行标准化处理。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明       |
+| ------ | ------ | ---- | ---------- |
+| text   | string | 是   | 输入文本。 |
+
+**返回值：**
+
+| 类型   | 说明                   |
+| ------ | ---------------------- |
+| string | 标准化处理后的字符串。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    let normalizer: i18n.Normalizer = i18n.Normalizer.getInstance(i18n.NormalizerMode.NFC);
+    let normalizedText: string = normalizer.normalize('\u1E9B\u0323'); // normalizedText = 'ẛ̣'
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call Normalizer.getInstance failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+## NormalizerMode<sup>24+</sup>
+
+文本标准化范式的枚举。
+
+**系统能力：** SystemCapability.Global.I18n
+
+| 名称 | 值   | 说明       |
+| ---- | ---- | ---------- |
+| NFC  | 1    | NFC范式。  |
+| NFD  | 2    | NFD范式。  |
+| NFKC | 3    | NFKC范式。 |
+| NFKD | 4    | NFKD范式。 |
+
+
+## HolidayManager<sup>24+</sup>
+
+提供解析节假日数据的能力，包括节假日判断和指定年份节假日列表获取等。
+
+**系统能力：** SystemCapability.Global.I18n
+
+### constructor<sup>24+</sup>
+
+constructor(icsPath: String)
+
+创建HolidayManager对象，用于解析节假日数据。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名  | 类型   | 必填 | 说明                                                         |
+| ------- | ------ | ---- | ------------------------------------------------------------ |
+| icsPath | String | 是   | 在设备上有应用读取权限的iCalendar格式的ics文件路径。iCalendar格式是一种标准的互联网日历格式，用于存储日历数据。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)和[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+| 890001   | Invalid parameter. Possible causes: Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    // 需要将'/system/lib/US.ics'替换为实际ics文件路径
+    let holidayManager = new i18n.HolidayManager('/system/lib/US.ics');
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call i18n.HolidayManager failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+### isHoliday<sup>24+</sup>
+
+isHoliday(date?: Date): boolean
+
+判断指定的日期是否是节假日。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明                                                         |
+| ------ | ---- | ---- | ------------------------------------------------------------ |
+| date   | Date | 否   | 时间、日期。说明：月份从0开始计数，例如0表示一月。<br>默认值：当前日期。 |
+
+**返回值：**
+
+| 类型    | 说明                                                        |
+| ------- | ----------------------------------------------------------- |
+| boolean | true表示指定的日期是节假日，false表示指定的日期不是节假日。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    // 需要将'/system/lib/US.ics'替换为实际ics文件路径
+    let holidayManager: i18n.HolidayManager = new i18n.HolidayManager('/system/lib/US.ics');
+    let isHoliday: boolean = holidayManager.isHoliday();
+    isHoliday = holidayManager.isHoliday(new Date(2023, 5, 25)); // 时间日期为2023.06.25
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call holidayManager.isHoliday failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+
+### getHolidayInfoItemArray<sup>24+</sup>
+
+getHolidayInfoItemArray(year?: number): Array&lt;[HolidayInfoItem](#holidayinfoitem24)&gt;
+
+获取指定年的节假日信息列表。
+
+**系统能力：** SystemCapability.Global.I18n
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                 |
+| ------ | ------ | ---- | ------------------------------------ |
+| year   | number | 否   | 年，例如2023。<br>默认值：当前年份。 |
+
+**返回值：**
+
+| 类型                                               | 说明                 |
+| -------------------------------------------------- | -------------------- |
+| Array&lt;[HolidayInfoItem](#holidayinfoitem24)&gt; | 返回节假日信息列表。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[ohos.i18n错误码](../errorcodes/errorcode-i18n.md)和[通用错误码](../../reference/errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+| 890001   | Invalid parameter. Possible causes: Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { i18n } from '@kit.LocalizationKit';
+
+  try {
+    // 需要将'/system/lib/US.ics'替换为实际ics文件路径
+    let holidayManager: i18n.HolidayManager = new i18n.HolidayManager('/system/lib/US.ics');
+    let holidayInfoItemArray: Array<i18n.HolidayInfoItem> = holidayManager.getHolidayInfoItemArray(2023);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`call holidayManager.getHolidayInfoItemArray failed, error code: ${err.code}, message: ${err.message}.`);
+  }
+  ```
+
+## HolidayInfoItem<sup>24+</sup>
+
+节假日信息。
+
+**系统能力：** SystemCapability.Global.I18n
+
+| 名称       | 类型                                                 | 只读 | 可选 | 说明                   |
+| ---------- | ---------------------------------------------------- | ---- | ---- | ---------------------- |
+| baseName   | string                                               | 否   | 否   | 节假日的英文名称。     |
+| year       | number                                               | 否   | 否   | 节假日所在年。         |
+| month      | number                                               | 否   | 否   | 节假日所在月。         |
+| day        | number                                               | 否   | 否   | 节假日所在日。         |
+| localNames | Array&lt;[HolidayLocalName](#holidaylocalname24)&gt; | 否   | 是   | 节假日的本地名称列表。 |
+
+## HolidayLocalName<sup>24+</sup>
+
+节假日名称在不同语言下的翻译。
+
+**系统能力：** SystemCapability.Global.I18n
+
+| 名称     | 类型   | 只读 | 可选 | 说明                                                         |
+| -------- | ------ | ---- | ---- | ------------------------------------------------------------ |
+| language | string | 否   | 否   | 语言，例如ar，en，tr。                                       |
+| name     | string | 否   | 否   | 节假日的本地名称，例如Sacrifice Feast（宰牲节）的土耳其语名称为Kurban Bayrami。 |
