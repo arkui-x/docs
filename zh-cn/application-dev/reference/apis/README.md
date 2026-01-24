@@ -153,6 +153,9 @@
   - [@ohos.data.unifiedDataChannel(标准化数据通路)](js-apis-data-unifiedDataChannel.md)
   - [@ohos.data.uniformTypeDescriptor (标准化数据定义与描述)](js-apis-data-uniformTypeDescriptor.md)
   - [@ohos.data.ValuesBucket (数据集)](js-apis-data-valuesBucket.md)
+  - [@ohos.data.distributedKVStore(分布式键值数据库)](js-apis-distributedKVStore.md)
+  - [数据库备份与恢复](data-backup-and-restore.md)
+  - [通过键值型数据库实现数据持久化](data-persistence-by-kv-store.md)
 - 安全
   - [@ohos.abilityAccessCtrl (程序访问控制管理)](js-apis-abilityAccessCtrl.md)
   - [@ohos.security.cryptoFramework (加解密算法库框架)](js-apis-cryptoFramework.md)
