@@ -1482,10 +1482,10 @@ getAddressesByName(host: string, callback: AsyncCallback\<Array\<NetAddress>>): 
 
 **参数：**
 
-| 参数名   | 类型                                              | 必填 | 说明                                                         |
-| -------- | ------------------------------------------------- | ---- | ------------------------------------------------------------ |
-| host     | string                                            | 是   | 需要解析的主机名。                                           |
-| callback | AsyncCallback\<Array\<[NetAddress](#netaddress)>> | 是   | 回调函数。当使用默认网络解析主机名成功获取所有IP地址，error为undefined，data为获取到的所有IP地址；否则为错误对象。 |
+| 参数名   | 类型                                                         | 必填 | 说明                                                         |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| host     | string                                                       | 是   | 需要解析的主机名。                                           |
+| callback | AsyncCallback\<Array\<[NetAddress<sup>24+</sup>](#netaddress24)>> | 是   | 回调函数。当使用默认网络解析主机名成功获取所有IP地址，error为undefined，data为获取到的所有IP地址；否则为错误对象。 |
 
 **错误码：**
 
@@ -1526,9 +1526,9 @@ getAddressesByName(host: string): Promise\<Array\<NetAddress>>
 
 **返回值：**
 
-| 类型                                        | 说明                          |
-| ------------------------------------------- | ----------------------------- |
-| Promise\<Array\<[NetAddress](#netaddress)>> | 以Promise形式返回所有IP地址。 |
+| 类型                                                        | 说明                          |
+| ----------------------------------------------------------- | ----------------------------- |
+| Promise\<Array\<[NetAddress<sup>24+</sup>](#netaddress24)>> | 以Promise形式返回所有IP地址。 |
 
 **错误码：**
 
@@ -2087,10 +2087,10 @@ getAddressesByName(host: string, callback: AsyncCallback\<Array\<NetAddress>>): 
 
 **参数：**
 
-| 参数名   | 类型                                              | 必填 | 说明                                                         |
-| -------- | ------------------------------------------------- | ---- | ------------------------------------------------------------ |
-| host     | string                                            | 是   | 需要解析的主机名。                                           |
-| callback | AsyncCallback\<Array\<[NetAddress](#netaddress)>> | 是   | 回调函数。当使用对应网络解析主机名成功获取所有IP地址，error为undefined，data为获取到的所有IP地址；否则为错误对象。 |
+| 参数名   | 类型                                                         | 必填 | 说明                                                         |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| host     | string                                                       | 是   | 需要解析的主机名。                                           |
+| callback | AsyncCallback\<Array\<[NetAddress<sup>24+</sup>](#netaddress24)>> | 是   | 回调函数。当使用对应网络解析主机名成功获取所有IP地址，error为undefined，data为获取到的所有IP地址；否则为错误对象。 |
 
 **错误码：**
 
@@ -2135,9 +2135,9 @@ getAddressesByName(host: string): Promise\<Array\<NetAddress>>
 
 **返回值：**
 
-| 类型                                        | 说明                          |
-| ------------------------------------------- | ----------------------------- |
-| Promise\<Array\<[NetAddress](#netaddress)>> | 以Promise形式返回所有IP地址。 |
+| 类型                                                        | 说明                          |
+| ----------------------------------------------------------- | ----------------------------- |
+| Promise\<Array\<[NetAddress<sup>24+</sup>](#netaddress24)>> | 以Promise形式返回所有IP地址。 |
 
 **错误码：**
 
@@ -2174,10 +2174,10 @@ getAddressByName(host: string, callback: AsyncCallback\<NetAddress>): void
 
 **参数：**
 
-| 参数名   | 类型                                      | 必填 | 说明                                                         |
-| -------- | ----------------------------------------- | ---- | ------------------------------------------------------------ |
-| host     | string                                    | 是   | 需要解析的主机名。                                           |
-| callback | AsyncCallback\<[NetAddress](#netaddress)> | 是   | 回调函数。当使用对应网络解析主机名获取第一个IP地址成功，error为undefined，data为获取的第一个IP地址；否则为错误对象。 |
+| 参数名   | 类型                                                      | 必填 | 说明                                                         |
+| -------- | --------------------------------------------------------- | ---- | ------------------------------------------------------------ |
+| host     | string                                                    | 是   | 需要解析的主机名。                                           |
+| callback | AsyncCallback\<[NetAddress<sup>24+</sup>](#netaddress24)> | 是   | 回调函数。当使用对应网络解析主机名获取第一个IP地址成功，error为undefined，data为获取的第一个IP地址；否则为错误对象。 |
 
 **错误码：**
 
@@ -2222,9 +2222,9 @@ getAddressByName(host: string): Promise\<NetAddress>
 
 **返回值：**
 
-| 类型                                | 说明                            |
-| ----------------------------------- | ------------------------------- |
-| Promise\<[NetAddress](#netaddress)> | 以Promise形式返回第一个IP地址。 |
+| 类型                                                | 说明                            |
+| --------------------------------------------------- | ------------------------------- |
+| Promise\<[NetAddress<sup>24+</sup>](#netaddress24)> | 以Promise形式返回第一个IP地址。 |
 
 **错误码：**
 
@@ -2281,11 +2281,11 @@ connection.getDefaultNet().then((netHandle: connection.NetHandle) => {
 
 **系统能力**：SystemCapability.Communication.NetManager.Core
 
-| 名称    | 类型   | 必填 | 说明                      |
-| ------ | ------ | --- |------------------------- |
-| host  | string | 否  |  代理服务器主机名。 |
-| port  | number | 否  |  主机端口。 |
-| exclusionList  | Array<string> | 否  | 不使用代理的主机名列表，主机名支持域名、IP地址以及通配符形式，详细匹配规则如下：<br/>1、域名匹配规则：<br/>（1）完全匹配：代理服务器主机名只要与列表中的任意一个主机名完全相同，就可以匹配。<br/>（2）包含匹配：代理服务器主机名只要包含列表中的任意一个主机名，就可以匹配。<br/>例如，如果在主机名列表中设置了 “ample.com”，则  “ample.com”、“www.ample.com”、“ample.com:80”都会被匹配，而 “www.example.com”、“ample.com.org”则不会被匹配。<br/>2、IP地址匹配规则：代理服务器主机名只要与列表中的任意一个IP地址完全相同，就可以匹配。<br/>3、域名跟IP地址可以同时添加到列表中进行匹配。<br/>4、单个“*”是唯一有效的通配符，当列表中只有通配符时，将与所有代理服务器主机名匹配，表示禁用代理。通配符只能单独添加，不可以与其他域名、IP地址一起添加到列表中，否则通配符将不生效。<br/>5、匹配规则不区分主机名大小写。<br/>6、匹配主机名时，不考虑http和https等协议前缀。 |
+| 名称          | 类型            | 只读 | 可选 | 说明                                                         |
+| ------------- | --------------- | ---- | ---- | ------------------------------------------------------------ |
+| host          | string          | 否   | 否   | 代理服务器主机名。<br>                                       |
+| port          | number          | 否   | 否   | 主机端口。取值范围[0,65535]。<br>                            |
+| exclusionList | Array\<string\> | 否   | 否   | 不使用代理的主机名列表，主机名支持域名、IP地址以及通配符形式，详细匹配规则如下：<br/>1、域名匹配规则：<br/>（1）完全匹配：代理服务器主机名只要与列表中的任意一个主机名完全相同，就可以匹配。<br/>（2）包含匹配：代理服务器主机名只要包含列表中的任意一个主机名，就可以匹配。<br/>例如，如果在主机名列表中设置了 “ample.com”，则  “ample.com”、“www.ample.com”、“ample.com:80”都会被匹配，而 “www.example.com”、“ample.com.org”则不会被匹配。<br/>2、IP地址匹配规则：代理服务器主机名只要与列表中的任意一个IP地址完全相同，就可以匹配。<br/>3、域名跟IP地址可以同时添加到列表中进行匹配。<br/>4、单个“\*”是唯一有效的通配符，当列表中只有通配符时，将与所有代理服务器主机名匹配，表示禁用代理。通配符只能单独添加，不可以与其他域名、IP地址一起添加到列表中，否则通配符将不生效。<br/>5、匹配规则不区分主机名大小写。<br/>6、匹配主机名时，不考虑http和https等协议前缀。<br> |
 
 ## NetSpecifier<sup>8+</sup>
 
@@ -2334,7 +2334,7 @@ connection.getDefaultNet().then((netHandle: connection.NetHandle) => {
 | domains       | string                             | 是 |所属域，默认""。 |
 | linkAddresses | Array\<[LinkAddress](#linkaddress)> | 是 |链路信息。       |
 | routes        | Array\<[RouteInfo](#routeinfo)>     | 是 |路由信息。       |
-| dnses     | Array\<[NetAddress](#netaddress)> | 是 |网络地址，参考[NetAddress](#netaddress)。 |
+| dnses     | Array\<[NetAddress<sup>24+</sup>](#netaddress24)> | 是 |网络地址，参考[NetAddress<sup>24+</sup>](#netaddress24)。 |
 | mtu           | number                             | 是 |最大传输单元。   |
 
 ## RouteInfo<sup>8+</sup>
@@ -2347,7 +2347,7 @@ connection.getDefaultNet().then((netHandle: connection.NetHandle) => {
 | -------------- | --------------------------- | --- |---------------- |
 | interface      | string                      | 是 |网卡名称。       |
 | destination    | [LinkAddress](#linkaddress) | 是 |目的地址。       |
-| gateway        | [NetAddress](#netaddress)   | 是 |网关地址。       |
+| gateway        | [NetAddress<sup>24+</sup>](#netaddress24) | 是 |网关地址。       |
 | hasGateway     | boolean                     | 是 |是否有网关。     |
 | isDefaultRoute | boolean                     | 是 |是否为默认路由。 |
 
@@ -2359,17 +2359,19 @@ connection.getDefaultNet().then((netHandle: connection.NetHandle) => {
 
 | 名称        | 类型                      | 必填 |说明                 |
 | ------------ | ----------------------- |---- |-------------------- |
-| address      | [NetAddress](#netaddress) | 是 | 链路地址。           |
+| address      | [NetAddress<sup>24+</sup>](#netaddress24) | 是 | 链路地址。           |
 | prefixLength | number                    | 是 |链路地址前缀的长度。 |
 
-## NetAddress<sup>8+</sup>
+## NetAddress<sup>24+</sup>
 
 网络地址。
 
 **系统能力**：SystemCapability.Communication.NetManager.Core
 
+**支持平台**： Android 、iOS
+
 | 名称 | 类型 | 必填 | 说明 |
 | ------- | ------ | -- |------------------------------ |
-| address | string | 是 |地址。 |
-| family  | number | 否 |IPv4 = 1，IPv6 = 2，默认IPv4。 |
-| port    | number | 否 |端口，取值范围\[0, 65535]。 |
+| address<sup>24+</sup> | string | 是 |地址。 |
+| family<sup>24+</sup> | number | 否 |IPv4 = 1，IPv6 = 2，默认IPv4。 |
+| port<sup>24+</sup> | number | 否 |端口，取值范围\[0, 65535]。 |

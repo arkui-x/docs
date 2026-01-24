@@ -20,6 +20,8 @@ constructUDPSocketInstance(): UDPSocket
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
 | 类型                               | 说明                    |
@@ -47,12 +49,14 @@ bind(address: NetAddress, callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                               | 必填 | 说明                                                   |
-| -------- | ---------------------------------- | ---- | ------------------------------------------------------ |
-| address  | [NetAddress](#netaddress) | 是   | 目标地址信息，参考[NetAddress](#netaddress)。 |
-| callback | AsyncCallback\<void\>              | 是   | 回调函数。                                             |
+| 参数名   | 类型                        | 必填 | 说明                                              |
+| -------- | --------------------------- | ---- | ------------------------------------------------- |
+| address  | [NetAddress](#netaddress24) | 是   | 目标地址信息，参考[[NetAddress](#netaddress24)]。 |
+| callback | AsyncCallback\<void\>       | 是   | 回调函数。                                        |
 
 **错误码：**
 
@@ -91,11 +95,13 @@ bind(address: NetAddress): Promise\<void\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名  | 类型                               | 必填 | 说明                                                   |
 | ------- | ---------------------------------- | ---- | ------------------------------------------------------ |
-| address | [NetAddress](#netaddress) | 是   | 目标地址信息，参考[NetAddress](#netaddress)。 |
+| address | [NetAddress](#netaddress24) | 是   | 目标地址信息，参考[[NetAddress](#netaddress24)]。 |
 
 **错误码：**
 
@@ -134,17 +140,19 @@ send(options: UDPSendOptions, callback: AsyncCallback\<void\>): void
 
 通过UDPSocket连接发送数据。使用callback方式作为异步方法。
 
-发送数据前，需要先调用[UDPSocket.bind()](#bind)绑定IP地址和端口。
+发送数据前，需要先调用[UDPSocket.bind()](#bind7)绑定IP地址和端口。
 
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                     | 必填 | 说明                                                         |
 | -------- | ---------------------------------------- | ---- | ------------------------------------------------------------ |
-| options  | [UDPSendOptions](#udpsendoptions) | 是   | UDPSocket发送参数，参考[UDPSendOptions](#udpsendoptions)。 |
+| options  | [UDPSendOptions](#udpsendoptions7) | 是   | UDPSocket发送参数，参考[UDPSendOptions](#udpsendoptions7)。 |
 | callback | AsyncCallback\<void\>                    | 是   | 回调函数。                                                   |
 
 **错误码：**
@@ -184,17 +192,19 @@ send(options: UDPSendOptions): Promise\<void\>
 
 通过UDPSocket连接发送数据。使用Promise方式作为异步方法。
 
-发送数据前，需要先调用[UDPSocket.bind()](#bind)绑定IP地址和端口。
+发送数据前，需要先调用[UDPSocket.bind()](#bind7)绑定IP地址和端口。
 
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名  | 类型                                     | 必填 | 说明                                                         |
 | ------- | ---------------------------------------- | ---- | ------------------------------------------------------------ |
-| options | [UDPSendOptions](#udpsendoptions) | 是   | UDPSocket发送参数，参考[UDPSendOptions](#udpsendoptions)。 |
+| options | [UDPSendOptions](#udpsendoptions7) | 是   | UDPSocket发送参数，参考[UDPSendOptions](#udpsendoptions7)。 |
 
 **错误码：**
 
@@ -241,6 +251,8 @@ close(callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                  | 必填 | 说明       |
@@ -272,6 +284,8 @@ close(): Promise\<void\>
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -306,11 +320,13 @@ getState(callback: AsyncCallback\<SocketStateBase\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                                   | 必填 | 说明       |
-| -------- | ------------------------------------------------------ | ---- | ---------- |
-| callback | AsyncCallback<[SocketStateBase](#socketstatebase)> | 是   | 回调函数。 |
+| 参数名   | 类型                                                | 必填 | 说明       |
+| -------- | --------------------------------------------------- | ---- | ---------- |
+| callback | AsyncCallback<[SocketStateBase](#socketstatebase7)> | 是   | 回调函数。 |
 
 **错误码：**
 
@@ -358,11 +374,13 @@ getState(): Promise\<SocketStateBase\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
-| 类型                                             | 说明                                       |
-| :----------------------------------------------- | :----------------------------------------- |
-| Promise\<[SocketStateBase](#socketstatebase)\> | 以Promise形式返回获取UDPSocket状态的结果。 |
+| 类型                                            | 说明                                       |
+| :---------------------------------------------- | :----------------------------------------- |
+| Promise\<[SocketStateBase](#socketstatebase7)\> | 以Promise形式返回获取UDPSocket状态的结果。 |
 
 **示例：**
 
@@ -389,6 +407,63 @@ udp.bind(bindAddr, (err: BusinessError) => {
 });
 ```
 
+### getSocketFd<sup>24+</sup>
+
+getSocketFd(): Promise\<number\>
+
+获取UDPSocket的文件描述符。使用Promise异步回调。
+
+> **说明：**
+>
+> - [bind](#bind7)方法调用成功后，才可调用此方法。
+> - bind异常、Socket已关闭（如调用close后）等异常情况下调用本接口会返回-1。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close7)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+
+| 错误码ID | 错误信息           |
+| -------- | ------------------ |
+| 201      | Permission denied. |
+
+**返回值：**
+
+| 类型              | 说明                                  |
+| ----------------- | ------------------------------------- |
+| Promise\<number\> | Promise对象，返回Socket的文件描述符。 |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let udp: socket.UDPSocket = socket.constructUDPSocketInstance();
+let bindAddr: socket.NetAddress = {
+    address: '192.168.xx.xxx',
+    port: 8080
+}
+udp.bind(bindAddr)
+  .then(() => {
+    udp.getSocketFd()
+      .then((fd: number) => {
+        console.info(`Socket FD：${fd}`);
+      }).catch((err: BusinessError) => {
+      console.error(`getSocketFd fail: ${err.message}, errorCode: ${err.code}`);
+    });
+  }).catch((err: BusinessError) => {
+  console.error('bind fail');
+});
+```
+
 ### setExtraOptions<sup>7+</sup>
 
 setExtraOptions(options: UDPExtraOptions, callback: AsyncCallback\<void\>): void
@@ -402,11 +477,13 @@ setExtraOptions(options: UDPExtraOptions, callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                     | 必填 | 说明                                                         |
 | -------- | ---------------------------------------- | ---- | ------------------------------------------------------------ |
-| options  | [UDPExtraOptions](#udpextraoptions) | 是   | UDPSocket连接的其他属性，参考[UDPExtraOptions](#udpextraoptions)。 |
+| options  | [UDPExtraOptions](#udpextraoptions7) | 是   | UDPSocket连接的其他属性，参考[UDPExtraOptions](#udpextraoptions7)。 |
 | callback | AsyncCallback\<void\>                    | 是   | 回调函数。                                                   |
 
 **错误码：**
@@ -418,7 +495,7 @@ setExtraOptions(options: UDPExtraOptions, callback: AsyncCallback\<void\>): void
 
 **示例：**
 
-```js
+```ts
 import socket from '@ohos.net.socket';
 import { BusinessError } from '@ohos.base';
 
@@ -464,11 +541,13 @@ setExtraOptions(options: UDPExtraOptions): Promise\<void\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名  | 类型                                     | 必填 | 说明                                                         |
 | ------- | ---------------------------------------- | ---- | ------------------------------------------------------------ |
-| options | [UDPExtraOptions](#udpextraoptions) | 是   | UDPSocket连接的其他属性，参考[UDPExtraOptions](#udpextraoptions)。 |
+| options | [UDPExtraOptions](#udpextraoptions7) | 是   | UDPSocket连接的其他属性，参考[UDPExtraOptions](#udpextraoptions7)。 |
 
 **返回值：**
 
@@ -516,6 +595,59 @@ udp.bind(bindAddr, (err: BusinessError) => {
 })
 ```
 
+### getLocalAddress<sup>24+</sup>
+
+getLocalAddress(): Promise\<NetAddress\>
+
+获取UDP连接的本地Socket地址。使用Promise异步回调。
+
+> **说明：**
+> bind方法调用成功后，才可调用此方法。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型                                   | 说明                                        |
+| -------------------------------------- | ------------------------------------------- |
+| Promise\<[NetAddress](#netaddress24)\> | 以Promise形式返回获取本地socket地址的结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)。
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------- |
+| 2300002  | System internal error.          |
+| 2301009  | Bad file descriptor.            |
+| 2303188  | Socket operation on non-socket. |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let udp: socket.UDPSocket = socket.constructUDPSocketInstance();
+
+let bindAddr: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+udp.bind(bindAddr).then(() => {
+  console.info('bind success');
+  udp.getLocalAddress().then((localAddress: socket.NetAddress) => {
+        console.info("UDP_Socket get SUCCESS! Address：" + JSON.stringify(localAddress));
+      }).catch((err: BusinessError) => {
+        console.error("UDP_Socket get FAILED! Error: " + JSON.stringify(err));
+      })
+}).catch((err: BusinessError) => {
+  console.error('bind fail');
+});
+```
+
 ### on('message')<sup>7+</sup>
 
 on(type: 'message', callback: Callback\<{message: ArrayBuffer, remoteInfo: SocketRemoteInfo}\>): void
@@ -524,12 +656,14 @@ on(type: 'message', callback: Callback\<{message: ArrayBuffer, remoteInfo: Socke
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                                         | 必填 | 说明                                      |
 | -------- | ------------------------------------------------------------ | ---- | ----------------------------------------- |
 | type     | string                                                       | 是   | 订阅的事件类型。'message'：接收消息事件。 |
-| callback | Callback\<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo)}\> | 是   | 回调函数。                                |
+| callback | Callback\<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo7)}\> | 是   | 回调函数。                                |
 
 **示例：**
 
@@ -565,12 +699,14 @@ off(type: 'message', callback?: Callback\<{message: ArrayBuffer, remoteInfo: Soc
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                                         | 必填 | 说明                                      |
 | -------- | ------------------------------------------------------------ | ---- | ----------------------------------------- |
 | type     | string                                                       | 是   | 订阅的事件类型。'message'：接收消息事件。 |
-| callback | Callback<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo)}> | 否   | 回调函数。                                |
+| callback | Callback<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo7)}> | 否   | 回调函数。                                |
 
 **示例：**
 
@@ -606,6 +742,8 @@ on(type: 'listening' | 'close', callback: Callback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型             | 必填 | 说明                                                         |
@@ -637,6 +775,8 @@ off(type: 'listening' | 'close', callback?: Callback\<void\>): void
 > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -675,6 +815,8 @@ on(type: 'error', callback: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -704,6 +846,8 @@ off(type: 'error', callback?: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -726,17 +870,19 @@ udp.off('error', callback);
 udp.off('error');
 ```
 
-## NetAddress<sup>7+</sup>
+## NetAddress<sup>24+</sup>
 
 目标地址信息。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-| 名称  | 类型   | 必填 | 说明                                                         |
-| ------- | ------ | ---- | ------------------------------------------------------------ |
-| address | string | 是   | 本地绑定的ip地址。                                           |
-| port    | number | 否   | 端口号 ，范围0~65535。如果不指定系统随机分配端口。           |
-| family  | number | 否   | 网络协议类型，可选类型：<br />- 1：IPv4<br />- 2：IPv6<br />默认为1。 |
+**支持平台**：Android、iOS
+
+| 名称  | 类型   | 必填 | 说明                                                         | **Android 平台**                                           | **iOS 平台**                                               |
+| ------- | ------ | ---- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| address | string | 是   | 本地绑定的ip地址。                                           | 支持                                         | 支持                                         |
+| port | number | 否   | 端口号 ，范围0~65535。如果不指定系统随机分配端口。           | 支持         | 支持         |
+| family | number | 否   | 网络协议类型，可选类型：<br>- 1：IPv4<br>- 2：IPv6<br>默认为1。 | 支持 | 支持 |
 
 ## UDPSendOptions<sup>7+</sup>
 
@@ -744,16 +890,20 @@ UDPSocket发送参数。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 | 名称  | 类型                               | 必填 | 说明           |
 | ------- | ---------------------------------- | ---- | -------------- |
 | data    | string \| ArrayBuffer<sup>7+</sup>                          | 是   | 发送的数据。   |
-| address | [NetAddress](#netaddress) | 是   | 目标地址信息。 |
+| address | [NetAddress](#netaddress24) | 是   | 目标地址信息。 |
 
 ## UDPExtraOptions<sup>7+</sup>
 
 UDPSocket连接的其他属性。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 | 名称            | 类型    | 必填 | 说明                             |
 | ----------------- | ------- | ---- | -------------------------------- |
@@ -769,6 +919,8 @@ Socket的状态信息。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 | 名称      | 类型    | 必填 | 说明       |
 | ----------- | ------- | ---- | ---------- |
 | isBound     | boolean | 是   | 是否绑定。 |
@@ -780,6 +932,8 @@ Socket的状态信息。
 Socket的连接信息。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 | 名称  | 类型   | 必填 | 说明                                                         |
 | ------- | ------ | ---- | ------------------------------------------------------------ |
@@ -794,6 +948,67 @@ UDP 其余错误码映射形式为：2301000 + Linux内核错误码。
 
 错误码的详细介绍参见[Socket错误码](../errorcodes/errorcode-net-socket.md)
 
+## MulticastSocket11+
+
+MulticastSocket连接。在调用MulticastSocket的方法前，需要先通过socket.constructMulticastSocketInstance创建MulticastSocket对象。
+
+### getSocketFd<sup>24+</sup>
+
+getSocketFd(): Promise\<number\>
+
+MulticastSocket的文件描述符。使用Promise异步回调。
+
+> **说明：**
+>
+> - [bind](#bind7)方法调用成功后，才可调用此方法。
+> - bind异常、Socket已关闭（如调用close后）等异常情况下调用本接口会返回-1。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close7)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+
+| 错误码ID | 错误信息           |
+| -------- | ------------------ |
+| 201      | Permission denied. |
+
+**返回值：**
+
+| 类型              | 说明                                  |
+| ----------------- | ------------------------------------- |
+| Promise\<number\> | Promise对象，返回Socket的文件描述符。 |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let multicast: socket.MulticastSocket = socket.constructMulticastSocketInstance();
+let bindAddr: socket.NetAddress = {
+    address: '192.168.xx.xxx',
+    port: 8080
+}
+multicast.bind(bindAddr)
+  .then(() => {
+    console.info('bind success');
+    multicast.getSocketFd().then((fd: number) => {
+      console.info(`Socket FD：${fd}`);
+    }).catch((err: BusinessError) => {
+      console.error(`getSocketFd fail: ${err.message}, errorCode: ${err.code}`);
+    });
+  }).catch((err: BusinessError) => {
+  console.error('bind fail');
+});
+```
+
 ## socket.constructTCPSocketInstance<sup>7+</sup>
 
 constructTCPSocketInstance(): TCPSocket
@@ -802,22 +1017,24 @@ constructTCPSocketInstance(): TCPSocket
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
 | 类型                               | 说明                    |
-  | :--------------------------------- | :---------------------- |
-| [TCPSocket](#tcpsocket) | 返回一个TCPSocket对象。 |
+| :--------------------------------- | :---------------------- |
+| [TCPSocket](#tcpsocket7) | 返回一个TCPSocket对象。 |
 
 **示例：**
 
-```js
+```ts
 import socket from "@ohos.net.socket";
 let tcp: socket.TCPSocket = socket.constructTCPSocketInstance();
 ```
 
 ## TCPSocket<sup>7+</sup>
 
-TCPSocket连接。在调用TCPSocket的方法前，需要先通过[socket.constructTCPSocketInstance](#socketconstructtcpsocketinstance)创建TCPSocket对象。
+TCPSocket连接。在调用TCPSocket的方法前，需要先通过socket.constructTCPSocketInstance创建TCPSocket对象。
 
 ### bind<sup>7+</sup>
 
@@ -834,12 +1051,14 @@ bind(address: NetAddress, callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                               | 必填 | 说明                                                   |
-| -------- | ---------------------------------- | ---- | ------------------------------------------------------ |
-| address  | [NetAddress](#netaddress) | 是   | 目标地址信息，参考[NetAddress](#netaddress)。 |
-| callback | AsyncCallback\<void\>              | 是   | 回调函数。                                             |
+| 参数名   | 类型                        | 必填 | 说明                                            |
+| -------- | --------------------------- | ---- | ----------------------------------------------- |
+| address  | [NetAddress](#netaddress24) | 是   | 目标地址信息，参考[NetAddress](#netaddress24)。 |
+| callback | AsyncCallback\<void\>       | 是   | 回调函数。                                      |
 
 **错误码：**
 
@@ -882,11 +1101,13 @@ bind(address: NetAddress): Promise\<void\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名  | 类型                               | 必填 | 说明                                                   |
-| ------- | ---------------------------------- | ---- | ------------------------------------------------------ |
-| address | [NetAddress](#netaddress) | 是   | 目标地址信息，参考[NetAddress](#netaddress)。 |
+| 参数名  | 类型                        | 必填 | 说明                                            |
+| ------- | --------------------------- | ---- | ----------------------------------------------- |
+| address | [NetAddress](#netaddress24) | 是   | 目标地址信息，参考[NetAddress](#netaddress24)。 |
 
 **返回值：**
 
@@ -931,11 +1152,13 @@ connect(options: TCPConnectOptions, callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                     | 必填 | 说明                                                         |
 | -------- | ---------------------------------------- | ---- | ------------------------------------------------------------ |
-| options  | [TCPConnectOptions](#tcpconnectoptions) | 是   | TCPSocket连接的参数，参考[TCPConnectOptions](#tcpconnectoptions)。 |
+| options  | [TCPConnectOptions](#tcpconnectoptions7) | 是   | TCPSocket连接的参数，参考[TCPConnectOptions](#tcpconnectoptions7)。 |
 | callback | AsyncCallback\<void\>                    | 是   | 回调函数。                                                   |
 
 **错误码：**
@@ -980,6 +1203,8 @@ connect(options: TCPConnectOptions): Promise\<void\>
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -1033,6 +1258,8 @@ send(options: TCPSendOptions, callback: AsyncCallback\<void\>): void
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -1090,6 +1317,8 @@ send(options: TCPSendOptions): Promise\<void\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名  | 类型                                    | 必填 | 说明                                                         |
@@ -1146,6 +1375,8 @@ close(callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                  | 必填 | 说明       |
@@ -1183,6 +1414,8 @@ close(): Promise\<void\>
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -1222,11 +1455,13 @@ getRemoteAddress(callback: AsyncCallback\<NetAddress\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                              | 必填 | 说明       |
-| -------- | ------------------------------------------------- | ---- | ---------- |
-| callback | AsyncCallback<[NetAddress](#netaddress)> | 是   | 回调函数。 |
+| 参数名   | 类型                                       | 必填 | 说明       |
+| -------- | ------------------------------------------ | ---- | ---------- |
+| callback | AsyncCallback<[NetAddress](#netaddress24)> | 是   | 回调函数。 |
 
 **错误码：**
 
@@ -1273,11 +1508,13 @@ getRemoteAddress(): Promise\<NetAddress\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
-| 类型                                        | 说明                                        |
-| :------------------------------------------ | :------------------------------------------ |
-| Promise<[NetAddress](#netaddress)> | 以Promise形式返回获取对端socket地址的结果。 |
+| 类型                                 | 说明                                        |
+| :----------------------------------- | :------------------------------------------ |
+| Promise<[NetAddress](#netaddress24)> | 以Promise形式返回获取对端socket地址的结果。 |
 
 **错误码：**
 
@@ -1324,11 +1561,13 @@ getState(callback: AsyncCallback\<SocketStateBase\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                                   | 必填 | 说明       |
-| -------- | ------------------------------------------------------ | ---- | ---------- |
-| callback | AsyncCallback<[SocketStateBase](#socketstatebase)> | 是   | 回调函数。 |
+| 参数名   | 类型                                                | 必填 | 说明       |
+| -------- | --------------------------------------------------- | ---- | ---------- |
+| callback | AsyncCallback<[SocketStateBase](#socketstatebase7)> | 是   | 回调函数。 |
 
 **错误码：**
 
@@ -1375,11 +1614,13 @@ getState(): Promise\<SocketStateBase\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
-| 类型                                             | 说明                                       |
-| :----------------------------------------------- | :----------------------------------------- |
-| Promise<[SocketStateBase](#socketstatebase)> | 以Promise形式返回获取TCPSocket状态的结果。 |
+| 类型                                          | 说明                                       |
+| :-------------------------------------------- | :----------------------------------------- |
+| Promise<[SocketStateBase](#socketstatebase7)> | 以Promise形式返回获取TCPSocket状态的结果。 |
 
 **错误码：**
 
@@ -1413,16 +1654,20 @@ tcp.connect(tcpconnectoptions).then(() => {
 });
 ```
 
-### getSocketFd<sup>10+</sup>
+### getSocketFd<sup>24+</sup>
 
 getSocketFd(callback: AsyncCallback\<number\>): void
 
 获取TCPSocket的文件描述符。使用callback方式作为异步方法。
 
 > **说明：**
-> bind或connect方法调用成功后，才可调用此方法。
+>
+> - bind或connect方法调用成功后，才可调用此方法。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close7)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -1432,37 +1677,44 @@ getSocketFd(callback: AsyncCallback\<number\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcp: socket.TCPSocket = socket.constructTCPSocketInstance();
 let bindAddr: socket.NetAddress = {
-  address: '0.0.0.0'
+  address: '192.168.xx.xxx',
+  // 绑定指定网络接口
 }
 tcp.bind(bindAddr)
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
 let tcpconnectoptions: socket.TCPConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
+  address: netAddress,
   timeout: 6000
 }
 tcp.connect(tcpconnectoptions)
 tcp.getSocketFd((err: BusinessError, data: number) => {
-  console.info("getSocketFd failed: " + err);
-  console.info("tunenlfd: " + data);
+  console.error("getSocketFd failed: " + err);
+  console.info("socketFd: " + data);
 })
 ```
-### getSocketFd<sup>10+</sup>
+### getSocketFd<sup>24+</sup>
 
 getSocketFd(): Promise\<number\>
 
 获取TCPSocket的文件描述符。使用Promise方式作为异步方法。
 
 > **说明：**
-> bind或connect方法调用成功后，才可调用此方法。
+>
+> - bind或connect方法调用成功后，才可调用此方法。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close7)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -1472,24 +1724,27 @@ getSocketFd(): Promise\<number\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcp: socket.TCPSocket = socket.constructTCPSocketInstance();
 let bindAddr: socket.NetAddress = {
-  address: '0.0.0.0'
+    address: '192.168.xx.xxx',
+  // 绑定指定网络接口
 }
 tcp.bind(bindAddr)
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
 let tcpconnectoptions: socket.TCPConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
+  address: netAddress,
   timeout: 6000
 }
 tcp.connect(tcpconnectoptions)
 tcp.getSocketFd().then((data: number) => {
-  console.info("tunenlfd: " + data);
+  console.info("socketFd: " + data);
 })
 ```
 
@@ -1506,12 +1761,14 @@ setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                      | 必填 | 说明                                                         |
-| -------- | ----------------------------------------- | ---- | ------------------------------------------------------------ |
-| options  | [TCPExtraOptions](#tcpextraoptions) | 是   | TCPSocket连接的其他属性，参考[TCPExtraOptions](#tcpextraoptions)。 |
-| callback | AsyncCallback\<void\>                     | 是   | 回调函数。                                                   |
+| 参数名   | 类型                                 | 必填 | 说明                                                         |
+| -------- | ------------------------------------ | ---- | ------------------------------------------------------------ |
+| options  | [TCPExtraOptions](#tcpextraoptions7) | 是   | TCPSocket连接的其他属性，参考[TCPExtraOptions](#tcpextraoptions7)。 |
+| callback | AsyncCallback\<void\>                | 是   | 回调函数。                                                   |
 
 **错误码：**
 
@@ -1568,11 +1825,13 @@ setExtraOptions(options: TCPExtraOptions): Promise\<void\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名  | 类型                                      | 必填 | 说明                                                         |
-| ------- | ----------------------------------------- | ---- | ------------------------------------------------------------ |
-| options | [TCPExtraOptions](#tcpextraoptions) | 是   | TCPSocket连接的其他属性，参考[TCPExtraOptions](#tcpextraoptions)。 |
+| 参数名  | 类型                                 | 必填 | 说明                                                         |
+| ------- | ------------------------------------ | ---- | ------------------------------------------------------------ |
+| options | [TCPExtraOptions](#tcpextraoptions7) | 是   | TCPSocket连接的其他属性，参考[TCPExtraOptions](#tcpextraoptions7)。 |
 
 **返回值：**
 
@@ -1620,6 +1879,58 @@ tcp.connect(tcpconnectoptions, () => {
 });
 ```
 
+### getLocalAddress<sup>24+</sup>
+
+getLocalAddress(): Promise\<NetAddress\>
+
+获取TCPSocket的本地Socket地址。使用Promise异步回调。
+
+> **说明：**
+> bind方法调用成功后，才可调用此方法。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型                                   | 说明                                        |
+| -------------------------------------- | ------------------------------------------- |
+| Promise\<[NetAddress](#netaddress24)\> | 以Promise形式返回获取本地socket地址的结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)。
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------- |
+| 2300002  | System internal error.          |
+| 2301009  | Bad file descriptor.            |
+| 2303188  | Socket operation on non-socket. |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tcp: socket.TCPSocket = socket.constructTCPSocketInstance();
+let bindAddr: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  family: 1,
+  port: 8080
+}
+tcp.bind(bindAddr).then(() => {
+  tcp.getLocalAddress().then((localAddress: socket.NetAddress) => {
+    console.info("SUCCESS! Address:" + JSON.stringify(localAddress));
+  }).catch((err: BusinessError) => {
+    console.error("FAILED! Error:" + JSON.stringify(err));
+  })
+}).catch((err: BusinessError) => {
+  console.error('bind fail');
+});
+```
+
 ### on('message')<sup>7+</sup>
 
 on(type: 'message', callback: Callback<{message: ArrayBuffer, remoteInfo: SocketRemoteInfo}\>): void
@@ -1628,12 +1939,14 @@ on(type: 'message', callback: Callback<{message: ArrayBuffer, remoteInfo: Socket
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                                         | 必填 | 说明                                      |
 | -------- | ------------------------------------------------------------ | ---- | ----------------------------------------- |
 | type     | string                                                       | 是   | 订阅的事件类型。'message'：接收消息事件。 |
-| callback | Callback<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo)}> | 是   | 回调函数。                                |
+| callback | Callback<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo7)}> | 是   | 回调函数。                                |
 
 **示例：**
 
@@ -1668,12 +1981,14 @@ off(type: 'message', callback?: Callback<{message: ArrayBuffer, remoteInfo: Sock
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                                         | 必填 | 说明                                      |
 | -------- | ------------------------------------------------------------ | ---- | ----------------------------------------- |
 | type     | string                                                       | 是   | 订阅的事件类型。'message'：接收消息事件。 |
-| callback | Callback<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo)}> | 否   | 回调函数。                                |
+| callback | Callback<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo7)}> | 否   | 回调函数。                                |
 
 **示例：**
 
@@ -1709,6 +2024,8 @@ on(type: 'connect' | 'close', callback: Callback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型             | 必填 | 说明                                                         |
@@ -1740,6 +2057,8 @@ off(type: 'connect' | 'close', callback?: Callback\<void\>): void
 > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -1778,6 +2097,8 @@ on(type: 'error', callback: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -1807,6 +2128,8 @@ off(type: 'error', callback?: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -1835,9 +2158,11 @@ TCPSocket连接的参数。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 | 名称  | 类型                               | 必填 | 说明                       |
 | ------- | ---------------------------------- | ---- | -------------------------- |
-| address | [NetAddress](#netaddress) | 是   | 绑定的地址以及端口。       |
+| address | [NetAddress](#netaddress24) | 是   | 绑定的地址以及端口。       |
 | timeout | number                             | 否   | 超时时间，单位毫秒（ms）。 |
 
 ## TCPSendOptions<sup>7+</sup>
@@ -1845,6 +2170,8 @@ TCPSocket连接的参数。
 TCPSocket发送请求的参数。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 | 名称   | 类型   | 必填 | 说明                                                         |
 | -------- | ------ | ---- | ------------------------------------------------------------ |
@@ -1857,6 +2184,8 @@ TCPSocket连接的其他属性。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 | 名称            | 类型    | 必填 | 说明                                                         |
 | ----------------- | ------- | ---- | ------------------------------------------------------------ |
 | keepAlive         | boolean | 否   | 是否保持连接。默认为false。                                  |
@@ -1868,7 +2197,7 @@ TCPSocket连接的其他属性。
 | reuseAddress      | boolean | 否   | 是否重用地址。默认为false。                                  |
 | socketTimeout     | number  | 否   | 套接字超时时间，单位毫秒（ms），默认为0。                             |
 
-## socket.constructTCPSocketServerInstance<sup>10+</sup>
+## socket.constructTCPSocketServerInstance<sup>24+</sup>
 
 constructTCPSocketServerInstance(): TCPSocketServer
 
@@ -1876,28 +2205,30 @@ constructTCPSocketServerInstance(): TCPSocketServer
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
 | 类型                                | 说明                          |
 | :---------------------------------- | :---------------------------- |
-| [TCPSocketServer](#tcpsocketserver10) | 返回一个TCPSocketServer对象。 |
+| [TCPSocketServer](#tcpsocketserver24) | 返回一个TCPSocketServer对象。 |
 
 **示例：**
 
-```js
+```ts
 import socket from "@ohos.net.socket";
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 ```
 
-## TCPSocketServer<sup>10+</sup>
+## TCPSocketServer<sup>24+</sup>
 
-TCPSocketServer连接。在调用TCPSocketServer的方法前，需要先通过[socket.constructTCPSocketServerInstance](#socketconstructtcpsocketserverinstance10)创建TCPSocketServer对象。
+TCPSocketServer连接。在调用TCPSocketServer的方法前，需要先通过[socket.constructTCPSocketServerInstance](#socketconstructtcpsocketserverinstance24)创建TCPSocketServer对象。
 
-### listen<sup>10+</sup>
+### listen<sup>24+</sup>
 
 listen(address: NetAddress, callback: AsyncCallback\<void\>): void
 
-绑定IP地址和端口，端口可以指定或由系统随机分配。监听并接受与此套接字建立的TCPSocket连接。该接口使用多线程并发处理客户端的数据。使用callback方法作为异步方法。
+绑定IP地址和端口，端口可以指定或由系统随机分配。监听并接受与此套接字建立的TCPSocket连接。该接口使用多线程并发处理客户端的数据。使用callback异步回调。
 
 > **说明：**
 > 服务端使用该方法完成bind，listen，accept操作，bind方法失败会由系统随机分配端口号。
@@ -1906,14 +2237,18 @@ listen(address: NetAddress, callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                      | 必填 | 说明                                          |
-| -------- | ------------------------- | ---- | --------------------------------------------- |
-| address  | [NetAddress](#netaddress7) | 是   | 目标地址信息。 |
-| callback | AsyncCallback\<void\>     | 是   | 回调函数。                                    |
+| 参数名   | 类型                        | 必填 | 说明                                             |
+| -------- | --------------------------- | ---- | ------------------------------------------------ |
+| address  | [NetAddress](#netaddress24) | 是   | 目标地址信息。                                   |
+| callback | AsyncCallback\<void\>       | 是   | 回调函数。回调函数。失败时返回错误码、错误信息。 |
 
 **错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
 
 | 错误码ID | 错误信息                                    |
 | -------- | ------------------------------------------- |
@@ -1927,9 +2262,10 @@ listen(address: NetAddress, callback: AsyncCallback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 let listenAddr: socket.NetAddress = {
   address:  '192.168.xx.xxx',
@@ -1938,18 +2274,18 @@ let listenAddr: socket.NetAddress = {
 }
 tcpServer.listen(listenAddr, (err: BusinessError) => {
   if (err) {
-    console.log("listen fail");
+    console.error("listen fail");
     return;
   }
-  console.log("listen success");
+  console.info("listen success");
 })
 ```
 
-### listen<sup>10+</sup>
+### listen<sup>24+</sup>
 
 listen(address: NetAddress): Promise\<void\>
 
-绑定IP地址和端口，端口可以指定或由系统随机分配。监听并接受与此套接字建立的TCPSocket连接。该接口使用多线程并发处理客户端的数据。使用Promise方法作为异步方法。
+绑定IP地址和端口，端口可以指定或由系统随机分配。监听并接受与此套接字建立的TCPSocket连接。该接口使用多线程并发处理客户端的数据。使用Promise异步回调。
 
 > **说明：**
 > 服务端使用该方法完成bind，listen，accept操作，bind方法失败会由系统随机分配端口号。
@@ -1958,11 +2294,13 @@ listen(address: NetAddress): Promise\<void\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名  | 类型                      | 必填 | 说明                                          |
-| ------- | ------------------------- | ---- | --------------------------------------------- |
-| address | [NetAddress](#netaddress7) | 是   | 目标地址信息。 |
+| 参数名  | 类型                        | 必填 | 说明           |
+| ------- | --------------------------- | ---- | -------------- |
+| address | [NetAddress](#netaddress24) | 是   | 目标地址信息。 |
 
 **返回值：**
 
@@ -1972,6 +2310,8 @@ listen(address: NetAddress): Promise\<void\>
 
 **错误码：**
 
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
 | 错误码ID | 错误信息                                    |
 | -------- | ------------------------------------------- |
 | 401      | Parameter error.                            |
@@ -1984,9 +2324,10 @@ listen(address: NetAddress): Promise\<void\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 let listenAddr: socket.NetAddress = {
   address:  '192.168.xx.xxx',
@@ -1994,17 +2335,17 @@ let listenAddr: socket.NetAddress = {
   family: 1
 }
 tcpServer.listen(listenAddr).then(() => {
-  console.log('listen success');
+  console.info('listen success');
 }).catch((err: BusinessError) => {
-  console.log('listen fail');
+  console.error('listen fail');
 });
 ```
 
-### getState<sup>10+</sup>
+### getState<sup>24+</sup>
 
 getState(callback: AsyncCallback\<SocketStateBase\>): void
 
-获取TCPSocketServer状态。使用callback方式作为异步方法。
+获取TCPSocketServer状态。使用callback异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
@@ -2013,13 +2354,17 @@ getState(callback: AsyncCallback\<SocketStateBase\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                               | 必填 | 说明       |
-| -------- | -------------------------------------------------- | ---- | ---------- |
-| callback | AsyncCallback<[SocketStateBase](#socketstatebase7)> | 是   | 回调函数。 |
+| 参数名   | 类型                                                | 必填 | 说明                                   |
+| -------- | --------------------------------------------------- | ---- | -------------------------------------- |
+| callback | AsyncCallback<[SocketStateBase](#socketstatebase7)> | 是   | 回调函数。失败时返回错误码、错误信息。 |
 
 **错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
 
 | 错误码ID | 错误信息                        |
 | -------- | ------------------------------- |
@@ -2030,9 +2375,10 @@ getState(callback: AsyncCallback\<SocketStateBase\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 let listenAddr: socket.NetAddress = {
   address:  '192.168.xx.xxx',
@@ -2041,25 +2387,25 @@ let listenAddr: socket.NetAddress = {
 }
 tcpServer.listen(listenAddr, (err: BusinessError) => {
   if (err) {
-    console.log("listen fail");
+    console.error("listen fail");
     return;
   }
-  console.log("listen success");
+  console.info("listen success");
 })
 tcpServer.getState((err: BusinessError, data: socket.SocketStateBase) => {
   if (err) {
-    console.log('getState fail');
+    console.error('getState fail');
     return;
   }
-  console.log('getState success:' + JSON.stringify(data));
+  console.info('getState success:' + JSON.stringify(data));
 })
 ```
 
-### getState<sup>10+</sup>
+### getState<sup>24+</sup>
 
 getState(): Promise\<SocketStateBase\>
 
-获取TCPSocketServer状态。使用Promise方式作为异步方法。
+获取TCPSocketServer状态。使用Promise异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
@@ -2067,6 +2413,8 @@ getState(): Promise\<SocketStateBase\>
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -2076,6 +2424,8 @@ getState(): Promise\<SocketStateBase\>
 
 **错误码：**
 
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
 | 错误码ID | 错误信息                        |
 | -------- | ------------------------------- |
 | 201      | Permission denied.              |
@@ -2084,9 +2434,10 @@ getState(): Promise\<SocketStateBase\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 let listenAddr: socket.NetAddress = {
   address:  '192.168.xx.xxx',
@@ -2095,23 +2446,80 @@ let listenAddr: socket.NetAddress = {
 }
 tcpServer.listen(listenAddr, (err: BusinessError) => {
   if (err) {
-    console.log("listen fail");
+    console.error("listen fail");
     return;
   }
-  console.log("listen success");
+  console.info("listen success");
 })
 tcpServer.getState().then((data: socket.SocketStateBase) => {
-  console.log('getState success' + JSON.stringify(data));
+  console.info('getState success' + JSON.stringify(data));
 }).catch((err: BusinessError) => {
-  console.log('getState fail');
+  console.error('getState fail');
 });
 ```
 
-### setExtraOptions<sup>10+</sup>
+### getSocketFd<sup>24+</sup>
+
+getSocketFd(): Promise\<number\>
+
+获取TCPSocketServer监听端口绑定的文件描述符。使用Promise异步回调。
+
+> **说明：**
+>
+> - [listen](#listen10)方法调用成功后，才可调用此方法。多次调用listen时，会获取最新监听端口绑定的文件描述符。
+> - 监听异常、Socket已关闭（如调用close后）等异常情况下调用本接口会返回-1。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close24)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+
+| 错误码ID | 错误信息           |
+| -------- | ------------------ |
+| 201      | Permission denied. |
+
+**返回值：**
+
+| 类型              | 说明                                  |
+| ----------------- | ------------------------------------- |
+| Promise\<number\> | Promise对象，返回Socket的文件描述符。 |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
+let listenAddr: socket.NetAddress = {
+  address:  '192.168.xx.xxx',
+  port: 8080,
+  family: 1
+}
+tcpServer.listen(listenAddr).then(() => {
+  console.info('listen success');
+  tcpServer.getSocketFd().then((fd: number) => {
+    console.info(`Socket FD：${fd}`);
+  }).catch((err: BusinessError) => {
+    console.error(`getSocketFd fail: ${err.message}, errorCode: ${err.code}`);
+  });
+}).catch((err: BusinessError) => {
+  console.error('listen fail');
+});
+```
+
+### setExtraOptions<sup>24+</sup>
 
 setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback\<void\>): void
 
-设置TCPSocketServer连接的其他属性。使用callback方式作为异步方法。
+设置TCPSocketServer连接的其他属性。使用callback异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
@@ -2120,14 +2528,18 @@ setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                | 必填 | 说明                                                         |
 | -------- | ----------------------------------- | ---- | ------------------------------------------------------------ |
 | options  | [TCPExtraOptions](#tcpextraoptions7) | 是   | TCPSocketServer连接的其他属性。 |
-| callback | AsyncCallback\<void\>               | 是   | 回调函数。                                                   |
+| callback | AsyncCallback\<void\>               | 是   | 回调函数。失败时返回错误码、错误信息。                                |
 
 **错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
 
 | 错误码ID | 错误信息                        |
 | -------- | ------------------------------- |
@@ -2138,9 +2550,10 @@ setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 let listenAddr: socket.NetAddress = {
   address:  '192.168.xx.xxx',
@@ -2149,36 +2562,41 @@ let listenAddr: socket.NetAddress = {
 }
 tcpServer.listen(listenAddr, (err: BusinessError) => {
   if (err) {
-    console.log("listen fail");
+    console.error("listen fail");
     return;
   }
-  console.log("listen success");
+  console.info("listen success");
 })
+
+interface SocketLinger {
+  on: boolean;
+  linger: number;
+}
 
 let tcpExtraOptions: socket.TCPExtraOptions = {
   keepAlive: true,
   OOBInline: true,
   TCPNoDelay: true,
-  socketLinger: { on: true, linger: 10 },
-  receiveBufferSize: 1000,
-  sendBufferSize: 1000,
+  socketLinger: { on: true, linger: 10 } as SocketLinger,
+  receiveBufferSize: 8192,
+  sendBufferSize: 8192,
   reuseAddress: true,
   socketTimeout: 3000
 }
 tcpServer.setExtraOptions(tcpExtraOptions, (err: BusinessError) => {
   if (err) {
-    console.log('setExtraOptions fail');
+    console.error('setExtraOptions fail');
     return;
   }
-  console.log('setExtraOptions success');
+  console.info('setExtraOptions success');
 });
 ```
 
-### setExtraOptions<sup>10+</sup>
+### setExtraOptions<sup>24+</sup>
 
 setExtraOptions(options: TCPExtraOptions): Promise\<void\>
 
-设置TCPSocketServer连接的其他属性，使用Promise方式作为异步方法。
+设置TCPSocketServer连接的其他属性。使用Promise异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
@@ -2186,6 +2604,8 @@ setExtraOptions(options: TCPExtraOptions): Promise\<void\>
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -2195,11 +2615,13 @@ setExtraOptions(options: TCPExtraOptions): Promise\<void\>
 
 **返回值：**
 
-| 类型            | 说明                                                       |
-| :-------------- | :--------------------------------------------------------- |
-| Promise\<void\> | 以Promise形式返回，成功返回空，失败返回错误码错误信息。 |
+| 类型            | 说明                                   |
+| :-------------- | :------------------------------------- |
+| Promise\<void\> | Promise对象。无返回结果的Promise对象。 |
 
 **错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
 
 | 错误码ID | 错误信息                        |
 | -------- | ------------------------------- |
@@ -2210,10 +2632,135 @@ setExtraOptions(options: TCPExtraOptions): Promise\<void\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
+let listenAddr: socket.NetAddress = {
+  address:  '192.168.xx.xxx',
+  port: 8080,
+  family: 1
+}
+
+interface SocketLinger {
+  on: boolean;
+  linger: number;
+}
+
+tcpServer.listen(listenAddr, (err: BusinessError) => {
+  if (err) {
+    console.error("listen fail");
+    return;
+  }
+  console.info("listen success");
+})
+
+let tcpExtraOptions: socket.TCPExtraOptions = {
+  keepAlive: true,
+  OOBInline: true,
+  TCPNoDelay: true,
+  socketLinger: { on: true, linger: 10 } as SocketLinger,
+  receiveBufferSize: 8192,
+  sendBufferSize: 8192,
+  reuseAddress: true,
+  socketTimeout: 3000
+}
+tcpServer.setExtraOptions(tcpExtraOptions).then(() => {
+  console.info('setExtraOptions success');
+}).catch((err: BusinessError) => {
+  console.error('setExtraOptions fail');
+});
+```
+
+### getLocalAddress<sup>24+</sup>
+
+getLocalAddress(): Promise\<NetAddress\>
+
+获取TCPSocketServer的本地Socket地址。使用Promise异步回调。
+
+> **说明：**
+> listen方法调用成功后，才可调用此方法。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型                                   | 说明                                        |
+| -------------------------------------- | ------------------------------------------- |
+| Promise\<[NetAddress](#netaddress24)\> | 以Promise形式返回获取本地socket地址的结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)。
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------- |
+| 2300002  | System internal error.          |
+| 2301009  | Bad file descriptor.            |
+| 2303188  | Socket operation on non-socket. |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
+let listenAddr: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080,
+  family: 1
+}
+tcpServer.listen(listenAddr).then(() => {
+  tcpServer.getLocalAddress().then((localAddress: socket.NetAddress) => {
+    console.info("SUCCESS! Address:" + JSON.stringify(localAddress));
+  }).catch((err: BusinessError) => {
+    console.error("FerrorAILED! Error:" + JSON.stringify(err));
+  })
+}).catch((err: BusinessError) => {
+  console.error('listen fail');
+});
+```
+
+### on('connect')<sup>24+</sup>
+
+on(type: 'connect', callback: Callback\<TCPSocketConnection\>): void
+
+订阅TCPSocketServer的连接事件。使用callback异步回调。
+
+> **说明：**
+> listen方法调用成功后，才可调用此方法。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**参数：**
+
+| 参数名   | 类型                                                      | 必填 | 说明                                   |
+| -------- | --------------------------------------------------------- | ---- | -------------------------------------- |
+| type     | string                                                    | 是   | 订阅的事件类型。'connect'：连接事件。  |
+| callback | Callback\<[TCPSocketConnection](#tcpsocketconnection24)\> | 是   | 回调函数。失败时返回错误码、错误信息。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息         |
+| -------- | ---------------- |
+| 401      | Parameter error. |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
+
 let listenAddr: socket.NetAddress = {
   address:  '192.168.xx.xxx',
   port: 8080,
@@ -2221,82 +2768,36 @@ let listenAddr: socket.NetAddress = {
 }
 tcpServer.listen(listenAddr, (err: BusinessError) => {
   if (err) {
-    console.log("listen fail");
+    console.error("listen fail");
     return;
   }
-  console.log("listen success");
+  console.info("listen success");
+  tcpServer.on('connect', (data: socket.TCPSocketConnection) => {
+    console.info(JSON.stringify(data))
+  });
 })
-
-let tcpExtraOptions: socket.TCPExtraOptions = {
-  keepAlive: true,
-  OOBInline: true,
-  TCPNoDelay: true,
-  socketLinger: { on: true, linger: 10 },
-  receiveBufferSize: 1000,
-  sendBufferSize: 1000,
-  reuseAddress: true,
-  socketTimeout: 3000
-}
-tcpServer.setExtraOptions(tcpExtraOptions).then(() => {
-  console.log('setExtraOptions success');
-}).catch((err: BusinessError) => {
-  console.log('setExtraOptions fail');
-});
 ```
 
-### on('connect')<sup>10+</sup>
-
-on(type: 'connect', callback: Callback\<TCPSocketConnection\>): void
-
-订阅TCPSocketServer的连接事件。使用callback方式作为异步方法。
-
-> **说明：**
-> listen方法调用成功后，才可调用此方法。
-
-**系统能力**：SystemCapability.Communication.NetStack
-
-**参数：**
-
-| 参数名   | 类型                            | 必填 | 说明                                  |
-| -------- | ------------------------------- | ---- | ------------------------------------- |
-| type     | string                          | 是   | 订阅的事件类型。'connect'：连接事件。 |
-| callback | Callback<[TCPSocketConnection](#tcpsocketconnection10)> | 是   | 回调函数。                            |
-
-**错误码：**
-
-| 错误码ID | 错误信息         |
-| -------- | ---------------- |
-| 401      | Parameter error. |
-
-**示例：**
-
-```js
-import socket from "@ohos.net.socket";
-let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
-tcpServer.on('connect', (data: socket.TCPSocketConnection) => {
-  console.log(JSON.stringify(data))
-});
-```
-
-### off('connect')<sup>10+</sup>
+### off('connect')<sup>24+</sup>
 
 off(type: 'connect', callback?: Callback\<TCPSocketConnection\>): void
 
-取消订阅TCPSocketServer的连接事件。使用callback方式作为异步方法。
-
-> **说明：**
-> 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
+取消订阅TCPSocketServer的连接事件。使用callback异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                            | 必填 | 说明                                  |
-| -------- | ------------------------------- | ---- | ------------------------------------- |
-| type     | string                          | 是   | 订阅的事件类型。'connect'：连接事件。 |
-| callback | Callback<[TCPSocketConnection](#tcpsocketconnection10)> | 否   | 回调函数。                            |
+| 参数名   | 类型                                                      | 必填 | 说明                                                         |
+| -------- | --------------------------------------------------------- | ---- | ------------------------------------------------------------ |
+| type     | string                                                    | 是   | 订阅的事件类型。'connect'：连接事件。                        |
+| callback | Callback\<[TCPSocketConnection](#tcpsocketconnection24)\> | 否   | 回调函数。可以指定传入on中的callback取消对应的订阅，也可以不指定callback清空所有订阅。 |
 
 **错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
 
 | 错误码ID | 错误信息         |
 | -------- | ---------------- |
@@ -2304,16 +2805,31 @@ off(type: 'connect', callback?: Callback\<TCPSocketConnection\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
-let callback = (data: socket.TCPSocketConnection) => {
-  console.log('on connect message: ' + JSON.stringify(data));
+
+let listenAddr: socket.NetAddress = {
+  address:  '192.168.xx.xxx',
+  port: 8080,
+  family: 1
 }
-tcpServer.on('connect', callback);
-// 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
-tcpServer.off('connect', callback);
-tcpServer.off('connect');
+tcpServer.listen(listenAddr, (err: BusinessError) => {
+  if (err) {
+    console.error("listen fail");
+    return;
+  }
+  console.info("listen success");
+  let callback = (data: socket.TCPSocketConnection) => {
+    console.info('on connect message: ' + JSON.stringify(data));
+  }
+  tcpServer.on('connect', callback);
+  // 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
+  tcpServer.off('connect', callback);
+  tcpServer.off('connect');
+})
 ```
 
 ### on('error')<sup>10+</sup>
@@ -2326,6 +2842,8 @@ on(type: 'error', callback: ErrorCallback): void
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -2342,7 +2860,7 @@ on(type: 'error', callback: ErrorCallback): void
 
 **示例：**
 
-```js
+```ts
 import socket from "@ohos.net.socket";
 import { BusinessError } from '@ohos.base';
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
@@ -2362,6 +2880,8 @@ off(type: 'error', callback?: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -2377,7 +2897,7 @@ off(type: 'error', callback?: ErrorCallback): void
 
 **示例：**
 
-```js
+```ts
 import socket from "@ohos.net.socket";
 import { BusinessError } from '@ohos.base';
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
@@ -2390,7 +2910,62 @@ tcpServer.off('error', callback);
 tcpServer.off('error');
 ```
 
-## TCPSocketConnection<sup>10+</sup>
+### close<sup>24+</sup>
+
+close(): Promise\<void\>
+
+TCPSocketServer停止监听并释放通过[listen](#listen24)方法绑定的端口。若多次调用[listen](#listen24)方法，再调用此方法时会释放TCPSocketServer的所有监听端口。使用Promise异步回调。
+
+> **说明：**
+> 该方法不会关闭已有连接。如需关闭，请调用[TCPSocketConnection](#tcpsocketconnection7)的[close](#close7)方法。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型            | 说明                      |
+| --------------- | ------------------------- |
+| Promise\<void\> | Promise对象，无返回结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息               |
+| -------- | ---------------------- |
+| 201      | Permission denied.     |
+| 2300002  | System internal error. |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
+let listenAddr: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080,
+  family: 1
+}
+tcpServer.on('connect', (connection: socket.TCPSocketConnection) => {
+  console.info("connection clientId: " + connection.clientId);
+  // 逻辑处理
+  tcpServer.close(); // 停止监听
+  connection.close(); // 关闭当前连接
+});
+tcpServer.listen(listenAddr).then(() => {
+  console.info('listen success');
+}).catch((err: BusinessError) => {
+  console.error('listen fail: ' + err.code);
+});
+```
+
+## TCPSocketConnection<sup>24+</sup>
 
 TCPSocketConnection连接，即TCPSocket客户端与服务端的连接。在调用TCPSocketConnection的方法前，需要先获取TCPSocketConnection对象。
 
@@ -2401,11 +2976,11 @@ TCPSocketConnection连接，即TCPSocket客户端与服务端的连接。在调�
 
 ### 属性
 
-| 名称     | 类型   | 必填 | 说明                                      |
-| -------- | ------ | ---- | ----------------------------------------- |
-| clientId | number | 是   | 客户端与TCPSocketServer建立连接的id。 |
+| 名称                   | 类型   | 必填 | 说明                                  | **Android 平台** | **iOS 平台** |
+| ---------------------- | ------ | ---- | ------------------------------------- | ---------------- | ------------ |
+| clientId<sup>24+</sup> | number | 是   | 客户端与TCPSocketServer建立连接的id。 | 支持             | 支持         |
 
-### send<sup>10+</sup>
+### send<sup>24+</sup>
 
 send(options: TCPSendOptions, callback: AsyncCallback\<void\>): void
 
@@ -2418,6 +2993,8 @@ send(options: TCPSendOptions, callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                              | 必填 | 说明                                                         |
@@ -2427,6 +3004,8 @@ send(options: TCPSendOptions, callback: AsyncCallback\<void\>): void
 
 **错误码：**
 
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
 | 错误码ID | 错误信息               |
 | -------- | ---------------------- |
 | 401      | Parameter error.       |
@@ -2435,8 +3014,9 @@ send(options: TCPSendOptions, callback: AsyncCallback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
+```ts
+import { socket } from '@kit.NetworkKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 
 tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
@@ -2444,12 +3024,12 @@ tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
     data: 'Hello, client!'
   }
   client.send(tcpSendOption, () => {
-    console.log('send success');
+    console.info('send success');
   });
 });
 ```
 
-### send<sup>10+</sup>
+### send<sup>24+</sup>
 
 send(options: TCPSendOptions): Promise\<void\>
 
@@ -2461,6 +3041,8 @@ send(options: TCPSendOptions): Promise\<void\>
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -2476,6 +3058,8 @@ send(options: TCPSendOptions): Promise\<void\>
 
 **错误码：**
 
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
 | 错误码ID | 错误信息               |
 | -------- | ---------------------- |
 | 401      | Parameter error.       |
@@ -2484,9 +3068,10 @@ send(options: TCPSendOptions): Promise\<void\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 
 tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
@@ -2494,22 +3079,24 @@ tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
     data: 'Hello, client!'
   }
   client.send(tcpSendOption).then(() => {
-    console.log('send success');
+    console.info('send success');
   }).catch((err: BusinessError) => {
-    console.log('send fail');
+    console.error('send fail');
   });
 });
 ```
 
-### close<sup>10+</sup>
+### close<sup>24+</sup>
 
 close(callback: AsyncCallback\<void\>): void
 
-关闭一个与TCPSocket建立的连接。使用callback方式作为异步方法。
+关闭一个与TCPSocket建立的连接。使用callback异步回调。
 
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -2519,6 +3106,8 @@ close(callback: AsyncCallback\<void\>): void
 
 **错误码：**
 
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
 | 错误码ID | 错误信息               |
 | -------- | ---------------------- |
 | 401      | Parameter error.       |
@@ -2527,31 +3116,34 @@ close(callback: AsyncCallback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 
 tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
   client.close((err: BusinessError) => {
     if (err) {
-      console.log('close fail');
+      console.error('close fail');
       return;
     }
-    console.log('close success');
+    console.info('close success');
   });
 });
 ```
 
-### close<sup>10+</sup>
+### close<sup>24+</sup>
 
 close(): Promise\<void\>
 
-关闭一个与TCPSocket建立的连接。使用Promise方式作为异步方法。
+关闭一个与TCPSocket建立的连接。使用Promise异步回调。
 
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -2561,6 +3153,8 @@ close(): Promise\<void\>
 
 **错误码：**
 
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
 | 错误码ID | 错误信息               |
 | -------- | ---------------------- |
 | 201      | Permission denied.     |
@@ -2568,23 +3162,25 @@ close(): Promise\<void\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
   client.close().then(() => {
-  	console.log('close success');
+    console.info('close success');
   }).catch((err: BusinessError) => {
-  	console.log('close fail');
+    console.error('close fail');
   });
 });
 ```
 
-### getRemoteAddress<sup>10+</sup>
+### getRemoteAddress<sup>24+</sup>
 
 getRemoteAddress(callback: AsyncCallback\<NetAddress\>): void
 
-获取对端Socket地址。使用callback方式作为异步方法。
+获取对端Socket地址。使用callback异步回调。
 
 > **说明：**
 > 与客户端建立连接后，才可调用此方法。
@@ -2593,13 +3189,17 @@ getRemoteAddress(callback: AsyncCallback\<NetAddress\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                     | 必填 | 说明       |
-| -------- | ---------------------------------------- | ---- | ---------- |
-| callback | AsyncCallback<[NetAddress](#netaddress7)> | 是   | 回调函数。 |
+| 参数名   | 类型                                       | 必填 | 说明                                   |
+| -------- | ------------------------------------------ | ---- | -------------------------------------- |
+| callback | AsyncCallback<[NetAddress](#netaddress24)> | 是   | 回调函数。失败时返回错误码、错误信息。 |
 
 **错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
 
 | 错误码ID | 错误信息                        |
 | -------- | ------------------------------- |
@@ -2610,26 +3210,27 @@ getRemoteAddress(callback: AsyncCallback\<NetAddress\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
   client.getRemoteAddress((err: BusinessError, data: socket.NetAddress) => {
     if (err) {
-      console.log('getRemoteAddress fail');
+      console.error('getRemoteAddress fail');
       return;
     }
-    console.log('getRemoteAddress success:' + JSON.stringify(data));
+    console.info('getRemoteAddress success:' + JSON.stringify(data));
   });
 });
 ```
 
-### getRemoteAddress<sup>10+</sup>
+### getRemoteAddress<sup>24+</sup>
 
 getRemoteAddress(): Promise\<NetAddress\>
 
-获取对端Socket地址。使用Promise方式作为异步方法。
+获取对端Socket地址。使用Promise异步回调。
 
 > **说明：**
 > 与客户端建立连接后，才可调用此方法。
@@ -2638,13 +3239,17 @@ getRemoteAddress(): Promise\<NetAddress\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
-| 类型                               | 说明                                        |
-| :--------------------------------- | :------------------------------------------ |
-| Promise<[NetAddress](#netaddress7)> | 以Promise形式返回获取对端socket地址的结果。 |
+| 类型                                   | 说明                                        |
+| :------------------------------------- | :------------------------------------------ |
+| Promise\<[NetAddress](#netaddress24)\> | 以Promise形式返回获取对端socket地址的结果。 |
 
 **错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
 
 | 错误码ID | 错误信息                        |
 | -------- | ------------------------------- |
@@ -2655,15 +3260,137 @@ getRemoteAddress(): Promise\<NetAddress\>
 **示例：**
 
 ```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
   client.getRemoteAddress().then(() => {
-    console.log('getRemoteAddress success');
+    console.info('getRemoteAddress success');
   }).catch((err: BusinessError) => {
-    console.log('getRemoteAddress fail');
+    console.error('getRemoteAddress fail');
   });
+});
+```
+
+### getLocalAddress<sup>24+</sup>
+
+getLocalAddress(): Promise\<NetAddress\>
+
+获取TCPSocketConnection连接的本地Socket地址。使用Promise异步回调。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**返回值：**
+
+| 类型                                   | 说明                                        |
+| -------------------------------------- | ------------------------------------------- |
+| Promise\<[NetAddress](#netaddress24)\> | 以Promise形式返回获取本地socket地址的结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)。
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------- |
+| 2300002  | System internal error.          |
+| 2301009  | Bad file descriptor.            |
+| 2303188  | Socket operation on non-socket. |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
+let listenAddr: socket.NetAddress = {
+  address: "192.168.xx.xx",
+  port: 8080,
+  family: 1
+}
+tcpServer.listen(listenAddr, (err: BusinessError) => {
+  let tcp: socket.TCPSocket = socket.constructTCPSocketInstance();
+  let netAddress: socket.NetAddress = {
+    address: "192.168.xx.xx",
+    port: 8080
+  }
+  let options: socket.TCPConnectOptions = {
+    address: netAddress,
+    timeout: 6000
+  }
+  tcp.connect(options, (err: BusinessError) => {
+    if (err) {
+      console.error('connect fail');
+      return;
+    }
+    console.info('connect success!');
+  })
+  tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
+    client.getLocalAddress().then((localAddress: socket.NetAddress) => {
+      console.info("Family IP Port: " + JSON.stringify(localAddress));
+    }).catch((err: BusinessError) => {
+      console.error('Error:' + JSON.stringify(err));
+    });
+  })
+})
+```
+
+### getSocketFd<sup>24+</sup>
+
+getSocketFd(): Promise\<number\>
+
+获取TCPSocketConnection连接的文件描述符。使用Promise异步回调。
+
+> **说明：**
+>
+> - 与客户端建立连接后，才可调用此方法。
+> - 连接断开、Socket已关闭（如调用close后）等异常情况下调用本接口会返回-1。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close7)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+支持平台： Android 、iOS
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+
+| 错误码ID | 错误信息           |
+| -------- | ------------------ |
+| 201      | Permission denied. |
+
+**返回值：**
+
+| 类型              | 说明                                  |
+| ----------------- | ------------------------------------- |
+| Promise\<number\> | Promise对象，返回Socket的文件描述符。 |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
+let listenAddr: socket.NetAddress = {
+  address: "192.168.xx.xx",
+  port: 8080,
+  family: 1
+}
+tcpServer.listen(listenAddr, (err: BusinessError) => {
+  tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
+    client.getSocketFd().then((fd: number) => {
+      console.info(`Socket FD：${fd}`);
+    }).catch((err: BusinessError) => {
+      console.error(`getSocketFd fail: ${err.message}, errorCode: ${err.code}`);
+    });
+  })
+}).catch((err: BusinessError) => {
+  console.error('listen fail');
 });
 ```
 
@@ -2674,6 +3401,8 @@ on(type: 'message', callback: Callback<{message: ArrayBuffer, remoteInfo: Socket
 订阅TCPSocketConnection连接的接收消息事件。使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -2724,6 +3453,8 @@ off(type: 'message', callback?: Callback<{message: ArrayBuffer, remoteInfo: Sock
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                                         | 必填 | 说明                                      |
@@ -2765,22 +3496,26 @@ tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
 });
 ```
 
-### on('close')<sup>10+</sup>
+### on('close')<sup>24+</sup>
 
 on(type: 'close', callback: Callback\<void\>): void
 
-订阅TCPSocketConnection的关闭事件。使用callback方式作为异步方法。
+订阅TCPSocketConnection的关闭事件。使用callback异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型             | 必填 | 说明                                |
-| -------- | ---------------- | ---- | ----------------------------------- |
-| type     | string           | 是   | 订阅的事件类型。'close'：关闭事件。 |
-| callback | Callback\<void\> | 是   | 回调函数。                          |
+| 参数名   | 类型             | 必填 | 说明                                   |
+| -------- | ---------------- | ---- | -------------------------------------- |
+| type     | string           | 是   | 订阅的事件类型。'close'：关闭事件。    |
+| callback | Callback\<void\> | 是   | 回调函数。失败时返回错误码、错误信息。 |
 
 **错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
 
 | 错误码ID | 错误信息         |
 | -------- | ---------------- |
@@ -2788,36 +3523,38 @@ on(type: 'close', callback: Callback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
   client.on('close', () => {
-    console.log("on close success")
+    console.info("on close success")
   });
 });
 ```
 
-### off('close')<sup>10+</sup>
+### off('close')<sup>24+</sup>
 
 off(type: 'close', callback?: Callback\<void\>): void
 
-取消订阅TCPSocketConnection的关闭事件。使用callback方式作为异步方法。
-
-> **说明：**
-> 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
+取消订阅TCPSocketConnection的关闭事件。使用callback异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型             | 必填 | 说明                                |
-| -------- | ---------------- | ---- | ----------------------------------- |
-| type     | string           | 是   | 订阅的事件类型。'close'：关闭事件。 |
-| callback | Callback\<void\> | 否   | 回调函数。                          |
+| 参数名   | 类型             | 必填 | 说明                                                         |
+| -------- | ---------------- | ---- | ------------------------------------------------------------ |
+| type     | string           | 是   | 订阅的事件类型。'close'：关闭事件。                          |
+| callback | Callback\<void\> | 否   | 回调函数。可以指定传入on中的callback取消对应的订阅，也可以不指定callback清空所有订阅。 |
 
 **错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
 
 | 错误码ID | 错误信息         |
 | -------- | ---------------- |
@@ -2825,11 +3562,12 @@ off(type: 'close', callback?: Callback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
+```ts
+import { socket } from '@kit.NetworkKit';
+
 let tcpServer: socket.TCPSocketServer = socket.constructTCPSocketServerInstance();
 let callback = () => {
-  console.log("on close success");
+  console.info("on close success");
 }
 tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
   client.on('close', callback);
@@ -2846,6 +3584,8 @@ on(type: 'error', callback: ErrorCallback): void
 订阅TCPSocketConnection连接的error事件。使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -2884,6 +3624,8 @@ off(type: 'error', callback?: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -2914,19 +3656,410 @@ tcpServer.on('connect', (client: socket.TCPSocketConnection) => {
 });
 ```
 
+## LocalSocket
+
+LocalSocket连接。在调用LocalSocket的方法前，需要先通过socket.constructLocalSocketInstance创建LocalSocket对象。
+
+### getLocalAddress<sup>24+</sup>
+
+getLocalAddress(): Promise\<string\>
+
+获取LocalSocket的本地Socket地址。使用Promise异步回调。
+
+> **说明：**
+> bind方法调用成功后，才可调用此方法。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型              | 说明                                        |
+| ----------------- | ------------------------------------------- |
+| Promise\<string\> | 以Promise形式返回获取本地socket地址的结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)。
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------- |
+| 2300002  | System internal error.          |
+| 2301009  | Bad file descriptor.            |
+| 2303188  | Socket operation on non-socket. |
+
+**示例：**
+
+>**说明：** 
+>
+>在本文档的示例中，通过this.context来获取UIAbilityContext，其中this代表继承自UIAbility的UIAbility实例。
+
+<!--code_no_check-->
+
+```ts
+import { common } from '@kit.AbilityKit';
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let client: socket.LocalSocket = socket.constructLocalSocketInstance();
+let context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let sandboxPath: string = context.filesDir + '/testSocket';
+let address : socket.LocalAddress = {
+  address: sandboxPath
+}
+client.bind(address).then(() => {
+  console.error('bind success');
+  client.getLocalAddress().then((localPath: string) => {
+    console.info("SUCCESS " + JSON.stringify(localPath));
+  }).catch((err: BusinessError) => {
+    console.error("FAIL " + JSON.stringify(err));
+  })
+}).catch((err: Object) => {
+  console.error('failed to bind: ' + JSON.stringify(err));
+})
+```
+
+## socket.constructLocalSocketServerInstance<sup>11+</sup>
+
+constructLocalSocketServerInstance(): LocalSocketServer
+
+创建一个LocalSocketServer对象。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**返回值：**
+
+| 类型                                      | 说明                            |
+| :---------------------------------------- | :------------------------------ |
+| [LocalSocketServer](#localsocketserver11) | 返回一个LocalSocketServer对象。 |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+let server: socket.LocalSocketServer = socket.constructLocalSocketServerInstance();
+```
+
+## LocalSocketServer<sup>11+</sup>
+
+LocalSocketServer类。在调用LocalSocketServer的方法前，需要先通过[socket.constructLocalSocketServerInstance](#socketconstructlocalsocketserverinstance11)创建LocalSocketServer对象。
+
+### getLocalAddress<sup>24+</sup>
+
+getLocalAddress(): Promise\<string\>
+
+获取LocalSocketServer中本地Socket地址。使用Promise异步回调。
+
+> **说明：**
+> listen方法调用成功后，才可调用此方法。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型              | 说明                                        |
+| ----------------- | ------------------------------------------- |
+| Promise\<string\> | 以Promise形式返回获取本地socket地址的结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)。
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------- |
+| 2300002  | System internal error.          |
+| 2301009  | Bad file descriptor.            |
+| 2303188  | Socket operation on non-socket. |
+
+**示例：**
+
+>**说明：** 
+>
+>在本文档的示例中，通过this.context来获取UIAbilityContext，其中this代表继承自UIAbility的UIAbility实例。
+
+<!--code_no_check-->
+
+```ts
+import { common } from '@kit.AbilityKit';
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let server: socket.LocalSocketServer = socket.constructLocalSocketServerInstance();
+let context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let sandboxPath: string = context.filesDir + '/testSocket';
+let listenAddr: socket.LocalAddress = {
+  address: sandboxPath
+}
+server.listen(listenAddr).then(() => {
+  console.info("listen success");
+  server.getLocalAddress().then((localPath: string) => {
+    console.info("SUCCESS " + JSON.stringify(localPath));
+  }).catch((err: BusinessError) => {
+    console.error("FAIL " + JSON.stringify(err));
+  })
+}).catch((err: Object) => {
+  console.error("listen fail: " + JSON.stringify(err));
+})
+
+```
+
+### getSocketFd<sup>24+</sup>
+
+getSocketFd(): Promise\<number\>
+
+获取LocalSocketServer监听端口绑定的文件描述符。使用Promise异步回调。
+
+> **说明：**
+>
+> - [listen](#listen24)方法调用成功后，才可调用此方法。
+> - 监听异常、Socket已关闭（如调用close后）等异常情况下调用本接口会返回-1。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close24)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型              | 说明                                  |
+| :---------------- | :------------------------------------ |
+| Promise\<number\> | Promise对象，返回Socket的文件描述符。 |
+
+**示例：**
+
+>**说明：** 
+>
+>在本文档的示例中，通过this.context来获取UIAbilityContext，其中this代表继承自UIAbility的UIAbility实例。如需在页面中使用UIAbilityContext提供的能力，请参见[获取UIAbility的上下文信息](../../application-models/uiability-usage.md#获取uiability的上下文信息)。
+
+<!--code_no_check-->
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { common } from '@kit.AbilityKit';
+
+let server: socket.LocalSocketServer = socket.constructLocalSocketServerInstance();
+let context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let sandboxPath: string = context.filesDir + '/testSocket';
+let listenAddr : socket.LocalAddress = {
+  address: sandboxPath
+}
+
+server.listen(listenAddr).then(() => {
+  console.info("listen success");
+  server.getSocketFd().then((fd: number) => {
+    console.info(`Socket FD：${fd}`);
+  }).catch((err: Object) => {
+    console.error(`getSocketFd fail: ${JSON.stringify(err)}`);
+  });
+}).catch((err: Object) => {
+  console.error("listen fail: " + JSON.stringify(err));
+})
+```
+
+### close<sup>24+</sup>
+
+close(): Promise\<void\>
+
+LocalSocketServer停止监听并释放通过[listen](#listen11)方法绑定的监听端口。使用Promise异步回调。
+
+> **说明：**
+> 该方法不会关闭已有连接。如需关闭，请调用[LocalSocketConnection](#localsocketconnection11)的[close](#close11-1)方法。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型            | 说明                      |
+| --------------- | ------------------------- |
+| Promise\<void\> | Promise对象，无返回结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)。
+
+| 错误码ID | 错误信息               |
+| -------- | ---------------------- |
+| 2300002  | System internal error. |
+
+**示例：**
+
+>**说明：** 
+>
+>在本文档的示例中，通过this.context来获取UIAbilityContext，其中this代表继承自UIAbility的UIAbility实例。
+
+<!--code_no_check-->
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { common } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let localserver: socket.LocalSocketServer = socket.constructLocalSocketServerInstance();
+let context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let sandboxPath: string = context.filesDir + '/testSocket';
+let addr: socket.LocalAddress = {
+  address: sandboxPath
+}
+localserver.on('connect', (connection: socket.LocalSocketConnection) => {
+  console.info("connection clientId: " + connection.clientId);
+  // 逻辑处理
+  localserver.close(); // 停止监听
+  connection.close(); // 关闭当前连接
+});
+localserver.listen(addr).then(() => {
+  console.info('listen success');
+}).catch((err: BusinessError) => {
+  console.error('listen fail: ' + err.code);
+});
+```
+
+## LocalSocketConnection<sup>11+</sup>
+
+LocalSocketConnection连接，即LocalSocket客户端与服务端的会话连接。在调用LocalSocketConnection的方法前，需要先获取LocalSocketConnection对象。
+
+> **说明：**
+> 客户端与服务端成功建立连接后，才能通过返回的LocalSocketConnection对象调用相应的接口。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+### getLocalAddress<sup>24+</sup>
+
+getLocalAddress(): Promise\<string\>
+
+获取LocalSocketConnection连接中的本地Socket地址。使用Promise异步回调。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型              | 说明                                        |
+| ----------------- | ------------------------------------------- |
+| Promise\<string\> | 以Promise形式返回获取本地socket地址的结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)。
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------- |
+| 2300002  | System internal error.          |
+| 2301009  | Bad file descriptor.            |
+| 2303188  | Socket operation on non-socket. |
+
+**示例：**
+
+>**说明：** 
+>
+>在本文档的示例中，通过this.context来获取UIAbilityContext，其中this代表继承自UIAbility的UIAbility实例。
+
+<!--code_no_check-->
+
+```ts
+import { common } from '@kit.AbilityKit';
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let server: socket.LocalSocketServer = socket.constructLocalSocketServerInstance();
+let context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let sandboxPath: string = context.filesDir + '/testSocket';
+let localAddr: socket.LocalAddress = {
+  address: sandboxPath
+}
+server.listen(localAddr).then(() => {
+  console.info('listen success');
+  let client: socket.LocalSocket = socket.constructLocalSocketInstance();
+  let connectOpt: socket.LocalConnectOptions = {
+    address: localAddr,
+    timeout: 6000
+  }
+  client.connect(connectOpt).then(() => {
+    server.getLocalAddress().then((localPath: string) => {
+      console.info("success, localPath is" + JSON.stringify(localPath));
+    }).catch((err: BusinessError) => {
+      console.error("FAIL " + JSON.stringify(err));
+    })
+  }).catch((err: Object) => {
+    console.error('connect fail: ' + JSON.stringify(err));
+  });
+});
+```
+
+### getSocketFd<sup>24+</sup>
+
+getSocketFd(): Promise\<number\>
+
+获取LocalSocketConnection连接的文件描述符。使用Promise异步回调。
+
+> **说明：**
+>
+> - 成功建立连接后，才可调用此方法。
+> - 连接断开、Socket已关闭（如调用close后）等异常情况下调用本接口会返回-1。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close24)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型              | 说明                                  |
+| :---------------- | :------------------------------------ |
+| Promise\<number\> | Promise对象，返回Socket的文件描述符。 |
+
+**示例：**
+
+>**说明：** 
+>
+>在本文档的示例中，通过this.context来获取UIAbilityContext，其中this代表继承自UIAbility的UIAbility实例。
+
+<!--code_no_check-->
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { common } from '@kit.AbilityKit';
+
+let server: socket.LocalSocketServer = socket.constructLocalSocketServerInstance();
+let context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
+let sandboxPath: string = context.filesDir + '/testSocket';
+let listenAddr : socket.LocalAddress = {
+  address: sandboxPath
+}
+server.on('connect', (connection: socket.LocalSocketConnection) => {
+  connection.getSocketFd().then((fd: number) => {
+    console.info(`Socket FD：${fd}`);
+  }).catch((err: Object) => {
+    console.error(`getSocketFd fail: ${JSON.stringify(err)}`);
+  });
+});
+server.listen(listenAddr).then(() => {
+  console.info("listen success");
+}).catch((err: Object) => {
+  console.error(`listen fail: ${JSON.stringify(err)}`);
+})
+```
+
 ## TCP 错误码说明
 
 TCP 其余错误码映射形式为：2301000 + Linux内核错误码。
 
 错误码的详细介绍参见[Socket错误码](../errorcodes/errorcode-net-socket.md)
 
-## socket.constructTLSSocketInstance<sup>9+</sup>
+## socket.constructTLSSocketInstance<sup>24+</sup>
 
 constructTLSSocketInstance(): TLSSocket
 
 创建并返回一个TLSSocket对象。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值:**
 
@@ -2936,14 +4069,14 @@ constructTLSSocketInstance(): TLSSocket
 
 **示例：**
 
-```js
+```ts
 import socket from "@ohos.net.socket";
 let tls: socket.TLSSocket = socket.constructTLSSocketInstance();
 ```
 
 ## TLSSocket<sup>9+</sup>
 
-TLSSocket连接。在调用TLSSocket的方法前，需要先通过[socket.constructTLSSocketInstance](#socketconstructtlssocketinstance9)创建TLSSocket对象。
+TLSSocket连接。在调用TLSSocket的方法前，需要先通过[socket.constructTLSSocketInstance](#socketconstructtlssocketinstance24)创建TLSSocket对象。
 
 ### bind<sup>9+</sup>
 
@@ -2955,12 +4088,14 @@ bind(address: NetAddress, callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                               | 必填 | 说明                                                   |
-| -------- | ---------------------------------- | ---- | ------------------------------------------------------ |
-| address  | [NetAddress](#netaddress) | 是   | 目标地址信息，参考[NetAddress](#netaddress)。 |
-| callback | AsyncCallback\<void\>              | 是   | 回调函数。成功返回TLSSocket绑定本机的IP地址和端口的结果。 失败返回错误码，错误信息。|
+| 参数名   | 类型                        | 必填 | 说明                                                         |
+| -------- | --------------------------- | ---- | ------------------------------------------------------------ |
+| address  | [NetAddress](#netaddress24) | 是   | 目标地址信息，参考[NetAddress](#netaddress24)。              |
+| callback | AsyncCallback\<void\>       | 是   | 回调函数。成功返回TLSSocket绑定本机的IP地址和端口的结果。 失败返回错误码，错误信息。 |
 
 **错误码：**
 
@@ -3000,11 +4135,13 @@ bind(address: NetAddress): Promise\<void\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名  | 类型                               | 必填 | 说明                                                   |
-| ------- | ---------------------------------- | ---- | ------------------------------------------------------ |
-| address | [NetAddress](#netaddress)          | 是   | 目标地址信息，参考[NetAddress](#netaddress)。 |
+| 参数名  | 类型                        | 必填 | 说明                                            |
+| ------- | --------------------------- | ---- | ----------------------------------------------- |
+| address | [NetAddress](#netaddress24) | 是   | 目标地址信息，参考[NetAddress](#netaddress24)。 |
 
 **返回值：**
 
@@ -3046,11 +4183,13 @@ getState(callback: AsyncCallback\<SocketStateBase\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                                   | 必填 | 说明       |
 | -------- | ------------------------------------------------------ | ---- | ---------- |
-| callback | AsyncCallback\<[SocketStateBase](#socketstatebase)> | 是   | 回调函数。成功返回TLSSocket状态，失败返回错误码,错误信息。 |
+| callback | AsyncCallback\<[SocketStateBase](#socketstatebase7)> | 是   | 回调函数。成功返回TLSSocket状态，失败返回错误码,错误信息。 |
 
 **错误码：**
 
@@ -3093,11 +4232,13 @@ getState(): Promise\<SocketStateBase\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
-| 类型                                             | 说明                                       |
-| :----------------------------------------------- | :----------------------------------------- |
-| Promise\<[SocketStateBase](#socketstatebase)> | 以Promise形式返回获取TLSSocket状态的结果。失败返回错误码，错误信息。|
+| 类型                                           | 说明                                                         |
+| :--------------------------------------------- | :----------------------------------------------------------- |
+| Promise\<[SocketStateBase](#socketstatebase7)> | 以Promise形式返回获取TLSSocket状态的结果。失败返回错误码，错误信息。 |
 
 **错误码：**
 
@@ -3138,12 +4279,14 @@ setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                      | 必填 | 说明                                                         |
-| -------- | ----------------------------------------- | ---- | ------------------------------------------------------------ |
-| options  | [TCPExtraOptions](#tcpextraoptions) | 是   | TCPSocket连接的其他属性，参考[TCPExtraOptions](#tcpextraoptions)。 |
-| callback | AsyncCallback\<void\>                     | 是   | 回调函数。成功返回设置TCPSocket连接的其他属性的结果，失败返回错误码，错误信息。|
+| 参数名   | 类型                                 | 必填 | 说明                                                         |
+| -------- | ------------------------------------ | ---- | ------------------------------------------------------------ |
+| options  | [TCPExtraOptions](#tcpextraoptions7) | 是   | TCPSocket连接的其他属性，参考[TCPExtraOptions](#tcpextraoptions7)。 |
+| callback | AsyncCallback\<void\>                | 是   | 回调函数。成功返回设置TCPSocket连接的其他属性的结果，失败返回错误码，错误信息。 |
 
 **错误码：**
 
@@ -3198,11 +4341,13 @@ setExtraOptions(options: TCPExtraOptions): Promise\<void\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名  | 类型                                      | 必填 | 说明                                                         |
-| ------- | ----------------------------------------- | ---- | ------------------------------------------------------------ |
-| options | [TCPExtraOptions](#tcpextraoptions) | 是   | TCPSocket连接的其他属性，参考[TCPExtraOptions](#tcpextraoptions)。 |
+| 参数名  | 类型                                 | 必填 | 说明                                                         |
+| ------- | ------------------------------------ | ---- | ------------------------------------------------------------ |
+| options | [TCPExtraOptions](#tcpextraoptions7) | 是   | TCPSocket连接的其他属性，参考[TCPExtraOptions](#tcpextraoptions7)。 |
 
 **返回值：**
 
@@ -3261,12 +4406,14 @@ on(type: 'message', callback: Callback<{message: ArrayBuffer, remoteInfo: Socket
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                                         | 必填 | 说明                                      |
-| -------- | ------------------------------------------------------------ | ---- | ----------------------------------------- |
-| type     | string                                                       | 是   | 订阅的事件类型。'message'：接收消息事件。 |
-| callback | Callback\<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo)}\> | 是   | 回调函数。message：接收到的消息；remoteInfo：socket连接信息。 |
+| 参数名   | 类型                                                         | 必填 | 说明                                                         |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| type     | string                                                       | 是   | 订阅的事件类型。'message'：接收消息事件。                    |
+| callback | Callback\<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo7)}\> | 是   | 回调函数。message：接收到的消息；remoteInfo：socket连接信息。 |
 
 **示例：**
 
@@ -3301,12 +4448,14 @@ off(type: 'message', callback?: Callback\<{message: ArrayBuffer, remoteInfo: Soc
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                                         | 必填 | 说明                                      |
-| -------- | ------------------------------------------------------------ | ---- | ----------------------------------------- |
-| type     | string                                                       | 是   | 订阅的事件类型。'message'：接收消息事件。 |
-| callback | Callback<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo)}> | 否   | 回调函数。message：接收到的消息；remoteInfo：socket连接信息。 |
+| 参数名   | 类型                                                         | 必填 | 说明                                                         |
+| -------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+| type     | string                                                       | 是   | 订阅的事件类型。'message'：接收消息事件。                    |
+| callback | Callback<{message: ArrayBuffer, remoteInfo: [SocketRemoteInfo](#socketremoteinfo7)}> | 否   | 回调函数。message：接收到的消息；remoteInfo：socket连接信息。 |
 
 **示例：**
 
@@ -3340,6 +4489,8 @@ on(type: 'connect' | 'close', callback: Callback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型             | 必填 | 说明                                                         |
@@ -3371,6 +4522,8 @@ off(type: 'connect' | 'close', callback?: Callback\<void\>): void
 > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -3408,6 +4561,8 @@ on(type: 'error', callback: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -3437,6 +4592,8 @@ off(type: 'error', callback?: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -3465,6 +4622,8 @@ connect(options: TLSConnectOptions, callback: AsyncCallback\<void\>): void
 在TLSSocket上bind成功之后，进行通信连接，并创建和初始化TLS会话，实现建立连接过程，启动与服务器的TLS/SSL握手，实现数据传输功能，使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -3519,7 +4678,7 @@ let tlsConnectOptions: socket.TLSConnectOptions = {
     key: "xxxx",
     cert: "xxxx",
     ca: ["xxxx"],
-    password: "xxxx",
+    exclusionListpassword: "xxxx",
     protocols: socket.Protocol.TLSv12,
     useRemoteCipherPrefer: true,
     signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
@@ -3563,6 +4722,8 @@ connect(options: TLSConnectOptions): Promise\<void\>
 在TLSSocket上bind成功之后，进行通信连接，并创建和初始化TLS会话，实现建立连接过程，启动与服务器的TLS/SSL握手，实现数据传输功能，该连接包括两种认证方式，单向认证与双向认证，使用Promise方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -3671,11 +4832,13 @@ getRemoteAddress(callback: AsyncCallback\<NetAddress\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                              | 必填 | 说明       |
 | -------- | ------------------------------------------------- | ---- | ---------- |
-| callback | AsyncCallback\<[NetAddress](#netaddress)\> | 是   | 回调函数。成功返回对端的socket地址，失败返回错误码，错误信息。 |
+| callback | AsyncCallback\<[NetAddress](#netaddress24)\> | 是   | 回调函数。成功返回对端的socket地址，失败返回错误码，错误信息。 |
 
 **错误码：**
 
@@ -3707,11 +4870,13 @@ getRemoteAddress(): Promise\<NetAddress\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
-| 类型                                        | 说明                                        |
-| :------------------------------------------ | :------------------------------------------ |
-| Promise\<[NetAddress](#netaddress)> | 以Promise形式返回获取对端socket地址的结果。失败返回错误码，错误信息。 |
+| 类型                                  | 说明                                                         |
+| :------------------------------------ | :----------------------------------------------------------- |
+| Promise\<[NetAddress](#netaddress24)> | 以Promise形式返回获取对端socket地址的结果。失败返回错误码，错误信息。 |
 
 **错误码：**
 
@@ -3740,6 +4905,8 @@ getCertificate(callback: AsyncCallback\<[X509CertRawData](#x509certrawdata9)\>):
 在TLSSocket通信连接成功之后，获取本地的数字证书，该接口只适用于双向认证时，使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+\**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -3778,6 +4945,8 @@ getCertificate():Promise\<[X509CertRawData](#x509certrawdata9)\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
 | 类型            | 说明                  |
@@ -3812,6 +4981,8 @@ getRemoteCertificate(callback: AsyncCallback\<[X509CertRawData](#x509certrawdata
 在TLSSocket通信连接成功之后，获取服务端的数字证书，使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -3849,6 +5020,8 @@ getRemoteCertificate():Promise\<[X509CertRawData](#x509certrawdata9)\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
 | 类型            | 说明                  |
@@ -3882,6 +5055,8 @@ getProtocol(callback: AsyncCallback\<string\>): void
 在TLSSocket通信连接成功之后，获取通信的协议版本，使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -3920,6 +5095,8 @@ getProtocol():Promise\<string\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
 | 类型            | 说明                  |
@@ -3954,6 +5131,8 @@ getCipherSuite(callback: AsyncCallback\<Array\<string\>\>): void
 在TLSSocket通信连接成功之后，获取通信双方协商后的加密套件，使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -3993,6 +5172,8 @@ getCipherSuite(): Promise\<Array\<string\>\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
 | 类型                    | 说明                  |
@@ -4028,6 +5209,8 @@ getSignatureAlgorithms(callback: AsyncCallback\<Array\<string\>\>): void
 在TLSSocket通信连接成功之后，获取通信双方协商后签名算法，该接口只适配双向认证模式下，使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -4065,6 +5248,8 @@ getSignatureAlgorithms(): Promise\<Array\<string\>\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
 | 类型                    | 说明                  |
@@ -4091,6 +5276,90 @@ tls.getSignatureAlgorithms().then((data: Array<string>) => {
 });
 ```
 
+### getLocalAddress<sup>24+</sup>
+
+getLocalAddress(): Promise\<NetAddress\>
+
+获取TLSSocket的本地Socket地址。使用Promise异步回调。
+
+> **说明：**
+> 在TLSSocketServer通信连接成功之后，才可调用此方法。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型                                   | 说明                                        |
+| -------------------------------------- | ------------------------------------------- |
+| Promise\<[NetAddress](#netaddress24)\> | 以Promise形式返回获取本地socket地址的结果。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------- |
+| 2300002  | System internal error.          |
+| 2301009  | Bad file descriptor.            |
+| 2303188  | Socket operation on non-socket. |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tls: socket.TLSSocket = socket.constructTLSSocketInstance();
+tls.getLocalAddress().then((localAddress: socket.NetAddress) => {
+  console.info("Get success: " + JSON.stringify(localAddress));
+}).catch((err: BusinessError) => {
+  console.error("Get failed, error: " + JSON.stringify(err));
+})
+```
+
+### getSocketFd<sup>24+</sup>
+
+getSocketFd(): Promise\<number\>
+
+获取TLSSocket的文件描述符。使用Promise异步回调。
+
+> **说明：**
+>
+> - bind方法调用成功后，才可调用此方法。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close9)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型              | 说明                                  |
+| ----------------- | ------------------------------------- |
+| Promise\<number\> | 以Promise形式返回socket的文件描述符。 |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+let tls: socket.TLSSocket = socket.constructTLSSocketInstance();
+let bindAddr: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+tls.bind(bindAddr, (err: BusinessError) => {
+  if (err) {
+    console.error('bind fail');
+    return;
+  }
+  console.info('bind success');
+});
+tls.getSocketFd().then((data: number) => {
+  console.info("tls socket fd: " + data);
+})
+```
+
 ### send<sup>9+</sup>
 
 send(data: string, callback: AsyncCallback\<void\>): void
@@ -4098,6 +5367,8 @@ send(data: string, callback: AsyncCallback\<void\>): void
 在TLSSocket通信连接成功之后，向服务端发送消息，使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -4139,6 +5410,8 @@ send(data: string): Promise\<void\>
 在TLSSocket通信连接成功之后，向服务端发送消息，使用Promise方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -4184,6 +5457,8 @@ close(callback: AsyncCallback\<void\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名    | 类型                          | 必填 | 说明            |
@@ -4223,6 +5498,8 @@ close(): Promise\<void\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
 | 类型           | 说明                  |
@@ -4258,34 +5535,44 @@ TLS连接的操作。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-| 名称          | 类型                                     | 必填 | 说明            |
-| -------------- | ------------------------------------- | ---  |-------------- |
-| address        | [NetAddress](#netaddress)             | 是  |  网关地址。       |
-| secureOptions  | [TLSSecureOptions](#tlssecureoptions9) | 是 | TLS安全相关操作。|
-| ALPNProtocols  | Array\<string\>                         | 否 | ALPN协议，支持["spdy/1", "http/1.1"]，默认为[]。      |
+**支持平台**： Android 、iOS
+
+| 名称                               | 类型                                   | 只读 | 可选 | 说明                                                         |
+| ---------------------------------- | -------------------------------------- | ---- | ---- | ------------------------------------------------------------ |
+| address                            | [NetAddress](#netaddress24)            | 否   | 否   | 网关地址。                                                   |
+| secureOptions                      | [TLSSecureOptions](#tlssecureoptions9) | 否   | 否   | TLS安全相关操作。                                            |
+| ALPNProtocols                      | Array\<string\>                        | 否   | 是   | ALPN协议，支持["spdy/1", "http/1.1"]，默认为[]。             |
+| skipRemoteValidation<sup>24+</sup> | boolean                                | 否   | 是   | 是否跳过对服务端进行证书认证，默认为false。true：跳过对服务端进行证书认证；false：不跳过对服务端进行证书认证。 |
+| proxy<sup>18+</sup>                | ProxyOptions                           | 否   | 是   | 使用的代理信息，默认不使用代理。                             |
+| timeout<sup>22+</sup>              | number                                 | 否   | 是   | 连接超时时间，单位：ms，默认为0。传入值需为0-4294967295范围内的整数。TLSSocket连接在超时后会失败。 |
 
 ## TLSSecureOptions<sup>9+</sup>
 
-TLS安全相关操作，其中ca证书为必选参数，其他参数为可选参数。当本地证书cert和私钥key不为空时，开启双向验证模式。cert和key其中一项为空时，开启单向验证模式。
+TLS安全相关操作。当本地证书cert和私钥key不为空时，开启双向验证模式。cert和key其中一项为空时，开启单向验证模式。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-| 名称                 | 类型                                                    | 必填 | 说明                                |
-| --------------------- | ------------------------------------------------------ | --- |----------------------------------- |
-| ca                    | string \| Array\<string\>                               | 是 | 服务端的ca证书，用于认证校验服务端的数字证书。|
-| cert                  | string                                                  | 否 | 本地客户端的数字证书。                 |
-| key                   | string                                                  | 否 | 本地数字证书的私钥。                   |
-| password                | string                                                  | 否 | 读取私钥的密码。                      |
-| protocols             | [Protocol](#protocol9) \|Array\<[Protocol](#protocol9)\> | 否 | TLS的协议版本，默认为"TLSv1.2"。                  |
-| useRemoteCipherPrefer | boolean                                                 | 否 | 优先使用对等方的密码套件。        |
-| signatureAlgorithms   | string                                                 | 否 | 通信过程中的签名算法，默认为"" 。              |
-| cipherSuite           | string                                                 | 否 | 通信过程中的加密套件，默认为"" 。              |
+**支持平台**： Android 、iOS
+
+| 名称                                        | 类型                                                     | 只读 | 可选 | 说明                                                         |
+| ------------------------------------------- | -------------------------------------------------------- | ---- | ---- | ------------------------------------------------------------ |
+| ca                                          | string \| Array\<string\>                                | 否   | 是   | 服务端的ca证书，用于认证校验服务端的数字证书。默认为系统预置CA证书<sup>12+</sup>。最多支持设置1000本证书。 |
+| cert                                        | string \| Array\<string\>                                | 否   | 是   | 本地客户端的数字证书。从API Version 23开始支持传入数组，最多支持设置1000本证书。 |
+| key                                         | string                                                   | 否   | 是   | 本地数字证书的私钥。                                         |
+| password                                    | string                                                   | 否   | 是   | 读取私钥的密码。                                             |
+| protocols                                   | [Protocol](#protocol9) \|Array\<[Protocol](#protocol9)\> | 否   | 是   | TLS的协议版本，默认为"TLSv1.2"。                             |
+| useRemoteCipherPrefer                       | boolean                                                  | 否   | 是   | 优先使用对等方的密码套件。true：优先使用对等方的密码套件；false：不优先使用对等方的密码套件。 |
+| signatureAlgorithms                         | string                                                   | 否   | 是   | 通信过程中的签名算法，默认为"" 。                            |
+| cipherSuite                                 | string                                                   | 否   | 是   | 通信过程中的加密套件，默认为"" 。                            |
+| isBidirectionalAuthentication<sup>24+</sup> | boolean                                                  | 否   | 是   | 用于设置双向认证，默认为false。true：设置双向认证；false：不设置双向认证。 |
 
 ## Protocol<sup>9+</sup>
 
 TLS通信的协议版本。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 | 名称      |    值    | 说明                |
 | --------- | --------- |------------------ |
@@ -4298,7 +5585,9 @@ TLS通信的协议版本。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-## socket.constructTLSSocketServerInstance<sup>10+</sup>
+**支持平台**： Android 、iOS
+
+## socket.constructTLSSocketServerInstance<sup>24+</sup>
 
 constructTLSSocketServerInstance(): TLSSocketServer
 
@@ -4306,33 +5595,47 @@ constructTLSSocketServerInstance(): TLSSocketServer
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值:**
 
 | 类型                                  | 说明                          |
 | :------------------------------------ | :---------------------------- |
-| [TLSSocketServer](#tlssocketserver10) | 返回一个TLSSocketServer对象。 |
+| [TLSSocketServer](#tlssocketserver24) | 返回一个TLSSocketServer对象。 |
 
 **示例：**
 
-```js
+```ts
 import socket from "@ohos.net.socket";
 import { BusinessError } from '@ohos.base';
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
 ```
 
-## TLSSocketServer<sup>10+</sup>
+## TLSSocketServer<sup>24+</sup>
 
-TLSSocketServer连接。在调用TLSSocketServer的方法前，需要先通过[socket.constructTLSSocketServerInstance](#socketconstructtlssocketserverinstance10)创建TLSSocketServer对象。
+TLSSocketServer连接。在调用TLSSocketServer的方法前，需要先通过[socket.constructTLSSocketServerInstance](#socketconstructtlssocketserverinstance24)创建TLSSocketServer对象。
 
-### listen<sup>10+</sup>
+### listen<sup>24+</sup>
 
 listen(options: TLSConnectOptions, callback: AsyncCallback\<void\>): void
 
-绑定IP地址和端口，在TLSSocketServer上bind成功之后，监听客户端的连接，创建和初始化TLS会话，实现建立连接过程，加载证书秘钥并验证，使用callback方式作为异步方法。
+绑定IP地址和端口，在TLSSocketServer上bind成功之后，监听客户端的连接，创建和初始化TLS会话，实现建立连接过程，加载证书秘钥并验证，使用callback异步回调。
+
+>**注意：**
+>
+>IP地址设置为0.0.0.0时，可以监听本机所有地址。
+>
+>address为“”时会被解析成了255.255.255.255（广播地址）, Android监听正常，iOS 不允许绑定广播地址，会监听失败上报地址族不支持的错误。
+>
+>错误码：2303147
+>
+>错误信息：Address family not supported by protocol family
 
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -4360,42 +5663,47 @@ listen(options: TLSConnectOptions, callback: AsyncCallback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
-let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
 
+let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
-  ALPNProtocols: ["spdy/1", "http/1.1"]
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
+  ALPNProtocols: ["spdy/1", "http/1.1"],
+  skipRemoteValidation: false
 }
 tlsServer.listen(tlsConnectOptions, (err: BusinessError) => {
-  console.log("listen callback error" + err);
+  console.error("listen callback error" + err);
 });
 ```
 
-### listen<sup>10+</sup>
+### listen<sup>24+</sup>
 
 listen(options: TLSConnectOptions): Promise\<void\>
 
-绑定IP地址和端口，在TLSSocketServer上bind成功之后，监听客户端的连接，并创建和初始化TLS会话，实现建立连接过程，加载证书秘钥并验证，使用Promise方式作为异步方法。
+绑定IP地址和端口，在TLSSocketServer上bind成功之后，监听客户端的连接，并创建和初始化TLS会话，实现建立连接过程，加载证书秘钥并验证，使用Promise异步回调。
 
 **需要权限**：ohos.permission.INTERNET
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -4428,45 +5736,50 @@ listen(options: TLSConnectOptions): Promise\<void\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
-let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
 
+let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
-  ALPNProtocols: ["spdy/1", "http/1.1"]
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
+  ALPNProtocols: ["spdy/1", "http/1.1"],
+  skipRemoteValidation: false
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
 ```
 
-### getState<sup>10+</sup>
+### getState<sup>24+</sup>
 
 getState(callback: AsyncCallback\<SocketStateBase\>): void
 
-在TLSSocketServer的listen成功之后，获取TLSSocketServer状态。使用callback方式作为异步方法。
+在TLSSocketServer的listen成功之后，获取TLSSocketServer状态。使用callback异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -4484,51 +5797,56 @@ getState(callback: AsyncCallback\<SocketStateBase\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
 tlsServer.getState((err: BusinessError, data: socket.SocketStateBase) => {
   if (err) {
-    console.log('getState fail');
+    console.error('getState fail');
     return;
   }
-  console.log('getState success:' + JSON.stringify(data));
+  console.info('getState success:' + JSON.stringify(data));
 });
 ```
 
-### getState<sup>10+</sup>
+### getState<sup>24+</sup>
 
 getState(): Promise\<SocketStateBase\>
 
-在TLSSocketServer的listen成功之后，获取TLSSocketServer状态。使用Promise方式作为异步方法。
+在TLSSocketServer的listen成功之后，获取TLSSocketServer状态。使用Promise异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -4545,49 +5863,125 @@ getState(): Promise\<SocketStateBase\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
 tlsServer.getState().then(() => {
-  console.log('getState success');
+  console.info('getState success');
 }).catch((err: BusinessError) => {
-  console.log('getState fail');
+  console.error('getState fail');
 });
 ```
 
-### setExtraOptions<sup>10+</sup>
+### getSocketFd<sup>24+</sup>
+
+getSocketFd(): Promise\<number\>
+
+获取TLSSocketServer监听端口绑定的文件描述符。使用Promise异步回调。
+
+> **说明：**
+>
+> - [listen](#listen24)方法调用成功后，才可调用此方法。多次调用listen时，会获取最新监听端口绑定的文件描述符。
+> - 监听异常、Socket已关闭（如调用close后）等异常情况下调用本接口会返回-1。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close24)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+
+| 错误码ID | 错误信息           |
+| -------- | ------------------ |
+| 201      | Permission denied. |
+
+**返回值：**
+
+| 类型              | 说明                                  |
+| ----------------- | ------------------------------------- |
+| Promise\<number\> | Promise对象，返回Socket的文件描述符。 |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: "xxxx",
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
+let tlsConnectOptions: socket.TLSConnectOptions = {
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
+  ALPNProtocols: ["spdy/1", "http/1.1"]
+}
+tlsServer.listen(tlsConnectOptions).then(() => {
+  console.info("listen success");
+  tlsServer.getSocketFd().then((fd: number) => {
+    console.info(`Socket FD：${fd}`);
+  }).catch((err: BusinessError) => {
+    console.error(`getSocketFd fail: ${err.message}, errorCode: ${err.code}`);
+  });
+}).catch((err: BusinessError) => {
+  console.error(`listen failed: ${JSON.stringify(err)}`);
+});
+```
+
+### setExtraOptions<sup>24+</sup>
 
 setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback\<void\>): void
 
-在TLSSocketServer的listen成功之后，设置TLSSocketServer连接的其他属性。使用callback方式作为异步方法。
+在TLSSocketServer的listen成功之后，设置TLSSocketServer连接的其他属性。使用callback异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -4606,62 +6000,72 @@ setExtraOptions(options: TCPExtraOptions, callback: AsyncCallback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
+
+interface SocketLinger {
+  on: boolean;
+  linger: number;
+}
 
 let tcpExtraOptions: socket.TCPExtraOptions = {
   keepAlive: true,
   OOBInline: true,
   TCPNoDelay: true,
-  socketLinger: { on: true, linger: 10 },
-  receiveBufferSize: 1000,
-  sendBufferSize: 1000,
+  socketLinger: { on: true, linger: 10 } as SocketLinger,
+  receiveBufferSize: 8192,
+  sendBufferSize: 8192,
   reuseAddress: true,
   socketTimeout: 3000
 }
 tlsServer.setExtraOptions(tcpExtraOptions, (err: BusinessError) => {
   if (err) {
-    console.log('setExtraOptions fail');
+    console.error('setExtraOptions fail');
     return;
   }
-  console.log('setExtraOptions success');
+  console.info('setExtraOptions success');
 });
 ```
 
-### setExtraOptions<sup>10+</sup>
+### setExtraOptions<sup>24+</sup>
 
 setExtraOptions(options: TCPExtraOptions): Promise\<void\>
 
-在TLSSocketServer的listen成功之后，设置TLSSocketServer连接的其他属性，使用Promise方式作为异步方法。
+在TLSSocketServer的listen成功之后，设置TLSSocketServer连接的其他属性，使用Promise异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -4685,60 +6089,70 @@ setExtraOptions(options: TCPExtraOptions): Promise\<void\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
+
+interface SocketLinger {
+  on: boolean;
+  linger: number;
+}
 
 let tcpExtraOptions: socket.TCPExtraOptions = {
   keepAlive: true,
   OOBInline: true,
   TCPNoDelay: true,
-  socketLinger: { on: true, linger: 10 },
-  receiveBufferSize: 1000,
-  sendBufferSize: 1000,
+  socketLinger: { on: true, linger: 10 } as SocketLinger,
+  receiveBufferSize: 8192,
+  sendBufferSize: 8192,
   reuseAddress: true,
   socketTimeout: 3000
 }
 tlsServer.setExtraOptions(tcpExtraOptions).then(() => {
-  console.log('setExtraOptions success');
+  console.info('setExtraOptions success');
 }).catch((err: BusinessError) => {
-  console.log('setExtraOptions fail');
+  console.error('setExtraOptions fail');
 });
 ```
 
-### getCertificate<sup>10+</sup>
+### getCertificate<sup>24+</sup>
 
 getCertificate(callback: AsyncCallback\<[X509CertRawData](#x509certrawdata9)\>): void
 
-在TLSSocketServer通信连接成功之后，获取本地的数字证书，使用callback方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取本地的数字证书，使用callback异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -4757,51 +6171,59 @@ getCertificate(callback: AsyncCallback\<[X509CertRawData](#x509certrawdata9)\>):
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { util } from '@kit.ArkTS';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
 tlsServer.getCertificate((err: BusinessError, data: socket.X509CertRawData) => {
   if (err) {
-    console.log("getCertificate callback error = " + err);
+    console.error("getCertificate callback error = " + err);
   } else {
-    console.log("getCertificate callback = " + data);
+    const decoder = util.TextDecoder.create();
+    const str = decoder.decodeToString(data.data);
+    console.info("getCertificate callback: " + str);
   }
 });
 ```
 
-### getCertificate<sup>10+</sup>
+### getCertificate<sup>24+</sup>
 
 getCertificate():Promise\<[X509CertRawData](#x509certrawdata9)\>
 
-在TLSSocketServer通信连接之后，获取本地的数字证书，使用Promise方式作为异步方法。
+在TLSSocketServer通信连接之后，获取本地的数字证书，使用Promise异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -4819,49 +6241,57 @@ getCertificate():Promise\<[X509CertRawData](#x509certrawdata9)\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { util } from '@kit.ArkTS';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
-tlsServer.getCertificate().then((data: socket.x509certrawdata9) => {
-  console.log(data);
+tlsServer.getCertificate().then((data: socket.X509CertRawData) => {
+  const decoder = util.TextDecoder.create();
+  const str = decoder.decodeToString(data.data);
+  console.info("getCertificate: " + str);
 }).catch((err: BusinessError) => {
   console.error("failed" + err);
 });
 ```
 
-### getProtocol<sup>10+</sup>
+### getProtocol<sup>24+</sup>
 
 getProtocol(callback: AsyncCallback\<string\>): void
 
-在TLSSocketServer通信连接成功之后，获取通信的协议版本，使用callback方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取通信的协议版本，使用callback异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -4880,51 +6310,56 @@ getProtocol(callback: AsyncCallback\<string\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
 tlsServer.getProtocol((err: BusinessError, data: string) => {
   if (err) {
-    console.log("getProtocol callback error = " + err);
+    console.error("getProtocol callback error = " + err);
   } else {
-    console.log("getProtocol callback = " + data);
+    console.info("getProtocol callback = " + data);
   }
 });
 ```
 
-### getProtocol<sup>10+</sup>
+### getProtocol<sup>24+</sup>
 
 getProtocol():Promise\<string\>
 
-在TLSSocketServer通信连接成功之后，获取通信的协议版本，使用Promise方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取通信的协议版本，使用Promise异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -4942,56 +6377,102 @@ getProtocol():Promise\<string\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
 tlsServer.getProtocol().then((data: string) => {
-  console.log(data);
+  console.info(data);
 }).catch((err: BusinessError) => {
   console.error("failed" + err);
 });
 ```
 
-### on('connect')<sup>10+</sup>
+### getLocalAddress<sup>24+</sup>
+
+getLocalAddress(): Promise\<NetAddress\>
+
+获取TLSSocketServer的本地Socket地址。使用Promise异步回调。
+
+> **说明：**
+> 在TLSSocketServer通信连接成功之后，才可调用此方法。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型                                   | 说明                                        |
+| -------------------------------------- | ------------------------------------------- |
+| Promise\<[NetAddress](#netaddress24)\> | 以Promise形式返回获取本地socket地址的结果。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------- |
+| 2300002  | System internal error.          |
+| 2301009  | Bad file descriptor.            |
+| 2303188  | Socket operation on non-socket. |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+tlsServer.getLocalAddress().then((localAddress: socket.NetAddress) => {
+  console.info("Get success: " + JSON.stringify(localAddress));
+}).catch((err: BusinessError) => {
+  console.error("Get failed, error: " + JSON.stringify(err));
+})
+```
+
+### on('connect')<sup>24+</sup>
 
 on(type: 'connect', callback: Callback\<TLSSocketConnection\>): void
 
-订阅TLSSocketServer的连接事件。使用callback方式作为异步方法。
+订阅TLSSocketServer的连接事件。使用callback异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                                    | 必填 | 说明                                  |
-| -------- | ------------------------------------------------------- | ---- | ------------------------------------- |
-| type     | string                                                  | 是   | 订阅的事件类型。'connect'：连接事件。 |
-| callback | Callback<[TLSSocketConnection](#tlssocketconnection10)> | 是   | 回调函数。                            |
+| 参数名   | 类型                                                      | 必填 | 说明                                   |
+| -------- | --------------------------------------------------------- | ---- | -------------------------------------- |
+| type     | string                                                    | 是   | 订阅的事件类型。'connect'：连接事件。  |
+| callback | Callback\<[TLSSocketConnection](#tlssocketconnection24)\> | 是   | 回调函数。失败时返回错误码、错误信息。 |
 
 **错误码：**
 
@@ -5001,42 +6482,45 @@ on(type: 'connect', callback: Callback\<TLSSocketConnection\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
+  tlsServer.on('connect', (data: socket.TLSSocketConnection) => {
+    console.info(JSON.stringify(data));
+  });
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
-});
-tlsServer.on('connect', (data: socket.TLSSocketConnection) => {
-  console.log(JSON.stringify(data))
+  console.error("failed: " + JSON.stringify(err));
 });
 ```
 
-### off('connect')<sup>10+</sup>
+### off('connect')<sup>24+</sup>
 
 off(type: 'connect', callback?: Callback\<TLSSocketConnection\>): void
 
-取消订阅TLSSocketServer的连接事件。使用callback方式作为异步方法。
+取消订阅TLSSocketServer的连接事件。使用callback异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
@@ -5044,12 +6528,14 @@ off(type: 'connect', callback?: Callback\<TLSSocketConnection\>): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                                    | 必填 | 说明                                  |
-| -------- | ------------------------------------------------------- | ---- | ------------------------------------- |
-| type     | string                                                  | 是   | 订阅的事件类型。'connect'：连接事件。 |
-| callback | Callback<[TLSSocketConnection](#tlssocketconnection10)> | 否   | 回调函数。                            |
+| 参数名   | 类型                                                      | 必填 | 说明                                   |
+| -------- | --------------------------------------------------------- | ---- | -------------------------------------- |
+| type     | string                                                    | 是   | 订阅的事件类型。'connect'：连接事件。  |
+| callback | Callback\<[TLSSocketConnection](#tlssocketconnection24)\> | 否   | 回调函数。失败时返回错误码、错误信息。 |
 
 **错误码：**
 
@@ -5059,35 +6545,38 @@ off(type: 'connect', callback?: Callback\<TLSSocketConnection\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
 
 let callback = (data: socket.TLSSocketConnection) => {
-  console.log('on connect message: ' + JSON.stringify(data));
+  console.info('on connect message: ' + JSON.stringify(data));
 }
 tlsServer.on('connect', callback);
 // 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -5095,23 +6584,25 @@ tlsServer.off('connect', callback);
 tlsServer.off('connect');
 ```
 
-### on('error')<sup>10+</sup>
+### on('error')<sup>24+</sup>
 
 on(type: 'error', callback: ErrorCallback): void
 
-订阅TLSSocketServer连接的error事件。使用callback方式作为异步方法。
+订阅TLSSocketServer连接的error事件。使用callback异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型          | 必填 | 说明                                 |
-| -------- | ------------- | ---- | ------------------------------------ |
-| type     | string        | 是   | 订阅的事件类型。'error'：error事件。 |
-| callback | ErrorCallback | 是   | 回调函数。                           |
+| 参数名   | 类型          | 必填 | 说明                                   |
+| -------- | ------------- | ---- | -------------------------------------- |
+| type     | string        | 是   | 订阅的事件类型。'error'：error事件。   |
+| callback | ErrorCallback | 是   | 回调函数。失败时返回错误码、错误信息。 |
 
 **错误码：**
 
@@ -5121,42 +6612,45 @@ on(type: 'error', callback: ErrorCallback): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
 tlsServer.on('error', (err: BusinessError) => {
-  console.log("on error, err:" + JSON.stringify(err))
+  console.error("on error, err:" + JSON.stringify(err))
 });
 ```
 
-### off('error')<sup>10+</sup>
+### off('error')<sup>24+</sup>
 
 off(type: 'error', callback?: ErrorCallback): void
 
-取消订阅TLSSocketServer连接的error事件。使用callback方式作为异步方法。
+取消订阅TLSSocketServer连接的error事件。使用callback异步回调。。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。
@@ -5164,12 +6658,14 @@ off(type: 'error', callback?: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型          | 必填 | 说明                                 |
-| -------- | ------------- | ---- | ------------------------------------ |
-| type     | string        | 是   | 订阅的事件类型。'error'：error事件。 |
-| callback | ErrorCallback | 否   | 回调函数。                           |
+| 参数名   | 类型          | 必填 | 说明                                   |
+| -------- | ------------- | ---- | -------------------------------------- |
+| type     | string        | 是   | 订阅的事件类型。'error'：error事件。   |
+| callback | ErrorCallback | 否   | 回调函数。失败时返回错误码、错误信息。 |
 
 **错误码：**
 
@@ -5179,35 +6675,38 @@ off(type: 'error', callback?: ErrorCallback): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed: " + JSON.stringify(err));
+  console.error("failed: " + JSON.stringify(err));
 });
 
 let callback = (err: BusinessError) => {
-  console.log("on error, err:" + JSON.stringify(err));
+  console.error("on error, err:" + JSON.stringify(err));
 }
 tlsServer.on('error', callback);
 // 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -5215,7 +6714,76 @@ tlsServer.off('error', callback);
 tlsServer.off('error');
 ```
 
-## TLSSocketConnection<sup>10+</sup>
+### close<sup>24+</sup>
+
+close(): Promise\<void\>
+
+TLSSocketServer停止监听并释放通过[listen](#listen24)方法绑定的端口。使用Promise异步回调。
+
+> **说明：**
+> 该方法不会关闭已有连接。如需关闭，请调用[TLSSocketConnection](#tlssocketconnection24)的[close](#close24)方法。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型            | 说明                      |
+| --------------- | ------------------------- |
+| Promise\<void\> | Promise对象，无返回结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Socket错误码](../errorcodes/errorcode-net-socket.md)和[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息               |
+| -------- | ---------------------- |
+| 201      | Permission denied.     |
+| 2300002  | System internal error. |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
+let tlsConnectOptions: socket.TLSConnectOptions = {
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
+  ALPNProtocols: ["spdy/1", "http/1.1"]
+}
+tlsServer.on('connect', (connection: socket.TLSSocketConnection) => {
+  console.info("connection clientId: " + connection.clientId);
+  // 逻辑处理
+  tlsServer.close(); // 停止监听
+  connection.close(); // 关闭当前连接
+});
+tlsServer.listen(tlsConnectOptions).then(() => {
+  console.info("listen callback success");
+}).catch((err: BusinessError) => {
+  console.error("listen failed: " + err.code);
+});
+```
+
+## TLSSocketConnection<sup>24+</sup>
 
 TLSSocketConnection连接，即TLSSocket客户端与服务端的连接。在调用TLSSocketConnection的方法前，需要先获取TLSSocketConnection对象。
 
@@ -5226,17 +6794,19 @@ TLSSocketConnection连接，即TLSSocket客户端与服务端的连接。在调�
 
 ### 属性
 
-| 名称     | 类型   | 必填 | 说明                                  |
-| -------- | ------ | ---- | ------------------------------------- |
-| clientId | number | 是   | 客户端与TLSSocketServer建立连接的id。 |
+| 名称     | 类型   | 必填 | 说明                                  | Android平台 | iOS平台 |
+| -------- | ------ | ---- | ------------------------------------- | ----------- | ------- |
+| clientId | number | 是   | 客户端与TLSSocketServer建立连接的id。 | 支持        | 支持    |
 
-### send<sup>10+</sup>
+### send<sup>24+</sup>
 
 send(data: string, callback: AsyncCallback\<void\>): void
 
-在TLSSocketServer通信连接成功之后，向客户端发送消息，使用callback方式作为异步方法。
+在TLSSocketServer通信连接成功之后，向客户端发送消息，使用callback异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -5258,51 +6828,56 @@ send(data: string, callback: AsyncCallback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.send('Hello, client!', (err: BusinessError) => {
     if (err) {
-      console.log('send fail');
+      console.error('send fail');
       return;
     }
-    console.log('send success');
+    console.info('send success');
   });
 });
 ```
 
-### send<sup>10+</sup>
+### send<sup>24+</sup>
 
 send(data: string): Promise\<void\>
 
-在TLSSocketServer通信连接成功之后，向服务端发送消息，使用Promise方式作为异步方法。
+在TLSSocketServer通信连接成功之后，向服务端发送消息，使用Promise异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -5329,49 +6904,54 @@ send(data: string): Promise\<void\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.send('Hello, client!').then(() => {
-    console.log('send success');
+    console.info('send success');
   }).catch((err: BusinessError) => {
-    console.log('send fail');
+    console.error('send fail');
   });
 });
 ```
 
-### close<sup>10+</sup>
+### close<sup>24+</sup>
 
 close(callback: AsyncCallback\<void\>): void
 
-在与TLSSocketServer通信连接成功之后，断开连接，使用callback方式作为异步方法。
+在与TLSSocketServer通信连接成功之后，断开连接，使用callback异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -5391,51 +6971,56 @@ close(callback: AsyncCallback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.close((err: BusinessError) => {
     if (err) {
-      console.log('close fail');
+      console.error('close fail');
       return;
     }
-    console.log('close success');
+    console.info('close success');
   });
 });
 ```
 
-### close<sup>10+</sup>
+### close<sup>24+</sup>
 
 close(): Promise\<void\>
 
-在与TLSSocketServer通信连接成功之后，断开连接，使用Promise方式作为异步方法。
+在与TLSSocketServer通信连接成功之后，断开连接，使用Promise异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -5454,54 +7039,59 @@ close(): Promise\<void\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.close().then(() => {
-    console.log('close success');
+    console.info('close success');
   }).catch((err: BusinessError) => {
-    console.log('close fail');
+    console.error('close fail');
   });
 });
 ```
 
-### getRemoteAddress<sup>10+</sup>
+### getRemoteAddress<sup>24+</sup>
 
 getRemoteAddress(callback: AsyncCallback\<NetAddress\>): void
 
-在TLSSocketServer通信连接成功之后，获取对端Socket地址。使用callback方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取对端Socket地址。使用callback异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型                                        | 必填 | 说明                                                         |
-| -------- | ------------------------------------------- | ---- | ------------------------------------------------------------ |
-| callback | AsyncCallback\<[NetAddress](#netaddress7)\> | 是   | 回调函数。成功返回对端的socket地址，失败返回错误码，错误信息。 |
+| 参数名   | 类型                                          | 必填 | 说明                                                         |
+| -------- | --------------------------------------------- | ---- | ------------------------------------------------------------ |
+| callback | AsyncCallback\<[NetAddress](#netaddress24+)\> | 是   | 回调函数。成功返回对端的socket地址，失败返回错误码，错误信息。 |
 
 **错误码：**
 
@@ -5513,56 +7103,61 @@ getRemoteAddress(callback: AsyncCallback\<NetAddress\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.getRemoteAddress((err: BusinessError, data: socket.NetAddress) => {
     if (err) {
-      console.log('getRemoteAddress fail');
+      console.error('getRemoteAddress fail');
       return;
     }
-    console.log('getRemoteAddress success:' + JSON.stringify(data));
+    console.info('getRemoteAddress success:' + JSON.stringify(data));
   });
 });
 ```
 
-### getRemoteAddress<sup>10+</sup>
+### getRemoteAddress<sup>24+</sup>
 
 getRemoteAddress(): Promise\<NetAddress\>
 
-在TLSSocketServer通信连接成功之后，获取对端Socket地址。使用Promise方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取对端Socket地址。使用Promise异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
-| 类型                                 | 说明                                                         |
-| :----------------------------------- | :----------------------------------------------------------- |
-| Promise\<[NetAddress](#netaddress7)> | 以Promise形式返回获取对端socket地址的结果。失败返回错误码，错误信息。 |
+| 类型                                    | 说明                                                         |
+| :-------------------------------------- | :----------------------------------------------------------- |
+| Promise\<[NetAddress](#netaddress24+)\> | 以Promise形式返回获取对端socket地址的结果。失败返回错误码，错误信息。 |
 
 **错误码：**
 
@@ -5573,48 +7168,53 @@ getRemoteAddress(): Promise\<NetAddress\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.getRemoteAddress().then((data: socket.NetAddress) => {
-    console.log('getRemoteAddress success:' + JSON.stringify(data));
+    console.info('getRemoteAddress success:' + JSON.stringify(data));
   }).catch((err: BusinessError) => {
     console.error("failed" + err);
   });
 });
 ```
 
-### getRemoteCertificate<sup>10+</sup>
+### getRemoteCertificate<sup>24+</sup>
 
 getRemoteCertificate(callback: AsyncCallback\<[X509CertRawData](#x509certrawdata9)\>): void
 
-在TLSSocketServer通信连接成功之后，获取对端的数字证书，该接口只适用于客户端向服务端发送证书时，使用callback方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取对端的数字证书，该接口只适用于客户端向服务端发送证书时，使用callback异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -5632,50 +7232,58 @@ getRemoteCertificate(callback: AsyncCallback\<[X509CertRawData](#x509certrawdata
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { util } from '@kit.ArkTS';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.getRemoteCertificate((err: BusinessError, data: socket.X509CertRawData) => {
     if (err) {
-      console.log("getRemoteCertificate callback error = " + err);
+      console.error("getRemoteCertificate callback error: " + err);
     } else {
-      console.log("getRemoteCertificate callback = " + data);
+      const decoder = util.TextDecoder.create();
+      const str = decoder.decodeToString(data.data);
+      console.info("getRemoteCertificate callback: " + str);
     }
   });
 });
 ```
 
-### getRemoteCertificate<sup>10+</sup>
+### getRemoteCertificate<sup>24+</sup>
 
 getRemoteCertificate():Promise\<[X509CertRawData](#x509certrawdata9)\>
 
-在TLSSocketServer通信连接成功之后，获取对端的数字证书，该接口只适用于客户端向服务端发送证书时，使用Promise方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取对端的数字证书，该接口只适用于客户端向服务端发送证书时，使用Promise异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -5692,48 +7300,56 @@ getRemoteCertificate():Promise\<[X509CertRawData](#x509certrawdata9)\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { util } from '@kit.ArkTS';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.getRemoteCertificate().then((data: socket.X509CertRawData) => {
-    console.log('getRemoteCertificate success:' + JSON.stringify(data));
+    const decoder = util.TextDecoder.create();
+    const str = decoder.decodeToString(data.data);
+    console.info("getRemoteCertificate success: " + str);
   }).catch((err: BusinessError) => {
     console.error("failed" + err);
   });
 });
 ```
 
-### getCipherSuite<sup>10+</sup>
+### getCipherSuite<sup>24+</sup>
 
 getCipherSuite(callback: AsyncCallback\<Array\<string\>\>): void
 
-在TLSSocketServer通信连接成功之后，获取通信双方协商后的加密套件，使用callback方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取通信双方协商后的加密套件，使用callback异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -5753,50 +7369,55 @@ getCipherSuite(callback: AsyncCallback\<Array\<string\>\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.getCipherSuite((err: BusinessError, data: Array<string>) => {
     if (err) {
-      console.log("getCipherSuite callback error = " + err);
+      console.error("getCipherSuite callback error = " + err);
     } else {
-      console.log("getCipherSuite callback = " + data);
+      console.info("getCipherSuite callback = " + data);
     }
   });
 });
 ```
 
-### getCipherSuite<sup>10+</sup>
+### getCipherSuite<sup>24+</sup>
 
 getCipherSuite(): Promise\<Array\<string\>\>
 
-在TLSSocketServer通信连接成功之后，获取通信双方协商后的加密套件，使用Promise方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取通信双方协商后的加密套件，使用Promise异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -5815,48 +7436,53 @@ getCipherSuite(): Promise\<Array\<string\>\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.getCipherSuite().then((data: Array<string>) => {
-    console.log('getCipherSuite success:' + JSON.stringify(data));
+    console.info('getCipherSuite success:' + JSON.stringify(data));
   }).catch((err: BusinessError) => {
     console.error("failed" + err);
   });
 });
 ```
 
-### getSignatureAlgorithms<sup>10+</sup>
+### getSignatureAlgorithms<sup>24+</sup>
 
 getSignatureAlgorithms(callback: AsyncCallback\<Array\<string\>\>): void
 
-在TLSSocketServer通信连接成功之后，获取通信双方协商后签名算法，使用callback方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取通信双方协商后签名算法，使用callback异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -5874,50 +7500,55 @@ getSignatureAlgorithms(callback: AsyncCallback\<Array\<string\>\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.getSignatureAlgorithms((err: BusinessError, data: Array<string>) => {
     if (err) {
-      console.log("getSignatureAlgorithms callback error = " + err);
+      console.error("getSignatureAlgorithms callback error = " + err);
     } else {
-      console.log("getSignatureAlgorithms callback = " + data);
+      console.info("getSignatureAlgorithms callback = " + data);
     }
   });
 });
 ```
 
-### getSignatureAlgorithms<sup>10+</sup>
+### getSignatureAlgorithms<sup>24+</sup>
 
 getSignatureAlgorithms(): Promise\<Array\<string\>\>
 
-在TLSSocketServer通信连接成功之后，获取通信双方协商后的签名算法，使用Promise方式作为异步方法。
+在TLSSocketServer通信连接成功之后，获取通信双方协商后的签名算法，使用Promise异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **返回值：**
 
@@ -5934,38 +7565,182 @@ getSignatureAlgorithms(): Promise\<Array\<string\>\>
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.getSignatureAlgorithms().then((data: Array<string>) => {
-    console.log("getSignatureAlgorithms success" + data);
+    console.info("getSignatureAlgorithms success" + data);
   }).catch((err: BusinessError) => {
     console.error("failed" + err);
   });
+});
+```
+
+### getLocalAddress<sup>24+</sup>
+
+getLocalAddress(): Promise\<NetAddress\>
+
+获取TLSSocketConnection连接的本地Socket地址。使用Promise异步回调。
+
+> **说明：**
+> 在TLSSocketServer通信连接成功之后，才可调用此方法。
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**返回值：**
+
+| 类型                                   | 说明                                        |
+| -------------------------------------- | ------------------------------------------- |
+| Promise\<[NetAddress](#netaddress24)\> | 以Promise形式返回获取本地socket地址的结果。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                        |
+| -------- | ------------------------------- |
+| 2300002  | System internal error.          |
+| 2301009  | Bad file descriptor.            |
+| 2303188  | Socket operation on non-socket. |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
+let tlsConnectOptions: socket.TLSConnectOptions = {
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
+  ALPNProtocols: ["spdy/1", "http/1.1"]
+}
+tlsServer.listen(tlsConnectOptions).then(() => {
+  console.info("listen callback success");
+}).catch((err: BusinessError) => {
+  console.error("failed" + err);
+});
+
+tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
+  client.getLocalAddress().then((localAddress: socket.NetAddress) => {
+    console.info("Family IP Port: " + JSON.stringify(localAddress));
+  }).catch((err: BusinessError) => {
+    console.error("TLS Client Get Family IP Port failed, error: " + JSON.stringify(err));
+  })
+});
+```
+
+### getSocketFd<sup>24+</sup>
+
+getSocketFd(): Promise\<number\>
+
+获取TLSSocketConnection连接的文件描述符。使用Promise异步回调。
+
+> **说明：**
+>
+> - 在TLSSocketServer通信连接成功之后，才可调用此方法。
+> - 连接断开、Socket已关闭（如调用close后）等异常情况下调用本接口会返回-1。
+> - 文件描述符的生命周期由系统管理，应用可以通过[close](#close24)方法关闭Socket连接，避免直接操作文件描述符进行关闭。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+
+| 错误码ID | 错误信息           |
+| -------- | ------------------ |
+| 201      | Permission denied. |
+
+**返回值：**
+
+| 类型              | 说明                                  |
+| ----------------- | ------------------------------------- |
+| Promise\<number\> | Promise对象，返回Socket的文件描述符。 |
+
+**示例：**
+
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: "xxxx",
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
+let tlsConnectOptions: socket.TLSConnectOptions = {
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
+  ALPNProtocols: ["spdy/1", "http/1.1"]
+}
+tlsServer.listen(tlsConnectOptions).then(() => {
+  console.info("listen success");
+  tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
+    client.getSocketFd().then((fd: number) => {
+      console.info(`Socket FD：${fd}`);
+    }).catch((err: BusinessError) => {
+      console.error(`getSocketFd fail: ${err.message}, errorCode: ${err.code}`);
+    })
+  });
+}).catch((err: BusinessError) => {
+  console.error(`listen failed: ${JSON.stringify(err)}`);
 });
 ```
 
@@ -5976,6 +7751,8 @@ on(type: 'message', callback: Callback<{message: ArrayBuffer, remoteInfo: Socket
 订阅TLSSocketConnection连接的接收消息事件。使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -6048,6 +7825,8 @@ off(type: 'message', callback?: Callback<{message: ArrayBuffer, remoteInfo: Sock
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
 | 参数名   | 类型                                                         | 必填 | 说明                                      |
@@ -6112,20 +7891,22 @@ tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
 });
 ```
 
-### on('close')<sup>10+</sup>
+### on('close')<sup>24+</sup>
 
 on(type: 'close', callback: Callback\<void\>): void
 
-订阅TLSSocketConnection的关闭事件。使用callback方式作为异步方法。
+订阅TLSSocketConnection的关闭事件。使用callback异步回调。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型             | 必填 | 说明                                |
-| -------- | ---------------- | ---- | ----------------------------------- |
-| type     | string           | 是   | 订阅的事件类型。'close'：关闭事件。 |
-| callback | Callback\<void\> | 是   | 回调函数。                          |
+| 参数名   | 类型             | 必填 | 说明                                                 |
+| -------- | ---------------- | ---- | ---------------------------------------------------- |
+| type     | string           | 是   | 订阅的事件类型。'close'：关闭事件。                  |
+| callback | Callback\<void\> | 是   | 回调函数。成功时返回空，失败时返回错误码、错误信息。 |
 
 **错误码：**
 
@@ -6135,56 +7916,61 @@ on(type: 'close', callback: Callback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.on('close', () => {
-    console.log("on close success")
+    console.info("on close success")
   });
 });
 ```
 
-### off('close')<sup>10+</sup>
+### off('close')<sup>24+</sup>
 
 off(type: 'close', callback?: Callback\<void\>): void
 
-取消订阅TLSSocketConnection的关闭事件。使用callback方式作为异步方法。
+取消订阅TLSSocketConnection的关闭事件。使用callback异步回调。
 
 > **说明：**
 > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型             | 必填 | 说明                                |
-| -------- | ---------------- | ---- | ----------------------------------- |
-| type     | string           | 是   | 订阅的事件类型。'close'：关闭事件。 |
-| callback | Callback\<void\> | 否   | 回调函数。                          |
+| 参数名   | 类型             | 必填 | 说明                                                 |
+| -------- | ---------------- | ---- | ---------------------------------------------------- |
+| type     | string           | 是   | 订阅的事件类型。'close'：关闭事件。                  |
+| callback | Callback\<void\> | 否   | 回调函数。成功时返回空，失败时返回错误码、错误信息。 |
 
 **错误码：**
 
@@ -6194,35 +7980,38 @@ off(type: 'close', callback?: Callback\<void\>): void
 
 **示例：**
 
-```js
-import socket from "@ohos.net.socket";
-import { BusinessError } from '@ohos.base';
+```ts
+import { socket } from '@kit.NetworkKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
 let tlsServer: socket.TLSSocketServer = socket.constructTLSSocketServerInstance();
+let netAddress: socket.NetAddress = {
+  address: '192.168.xx.xxx',
+  port: 8080
+}
+let tlsSecureOptions: socket.TLSSecureOptions = {
+  key: "xxxx",
+  cert: ["xxxx"],
+  ca: ["xxxx"],
+  password: "xxxx",
+  protocols: socket.Protocol.TLSv12,
+  useRemoteCipherPrefer: true,
+  signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
+  cipherSuite: "AES256-SHA256"
+}
 let tlsConnectOptions: socket.TLSConnectOptions = {
-  address: {
-    address: '192.168.xx.xxx',
-    port: 8080
-  },
-  secureOptions: {
-    key: "xxxx",
-    cert: "xxxx",
-    ca: ["xxxx"],
-    password: "xxxx",
-    protocols: socket.Protocol.TLSv12,
-    useRemoteCipherPrefer: true,
-    signatureAlgorithms: "rsa_pss_rsae_sha256:ECDSA+SHA256",
-    cipherSuite: "AES256-SHA256"
-  },
+  address: netAddress,
+  secureOptions: tlsSecureOptions,
   ALPNProtocols: ["spdy/1", "http/1.1"]
 }
 tlsServer.listen(tlsConnectOptions).then(() => {
-  console.log("listen callback success");
+  console.info("listen callback success");
 }).catch((err: BusinessError) => {
-  console.log("failed" + err);
+  console.error("failed" + err);
 });
 
 let callback = () => {
-  console.log("on close success");
+  console.info("on close success");
 }
 tlsServer.on('connect', (client: socket.TLSSocketConnection) => {
   client.on('close', callback);
@@ -6239,6 +8028,8 @@ on(type: 'error', callback: ErrorCallback): void
 订阅TLSSocketConnection连接的error事件。使用callback方式作为异步方法。
 
 **系统能力**：SystemCapability.Communication.NetStack
+
+**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -6300,12 +8091,14 @@ off(type: 'error', callback?: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **参数：**
 
-| 参数名   | 类型          | 必填 | 说明                                 |
-| -------- | ------------- | ---- | ------------------------------------ |
-| type     | string        | 是   | 订阅的事件类型。'error'：error事件。 |
-| callback | ErrorCallback | 否   | 回调函数。                           |
+| 参数名   | 类型          | 必填 | 说明                                 | **Android 平台** | **iOS 平台** |
+| -------- | ------------- | ---- | ------------------------------------ | ---------------- | ------------ |
+| type     | string        | 是   | 订阅的事件类型。'error'：error事件。 | 支持             | 支持         |
+| callback | ErrorCallback | 否   | 回调函数。                           | 支持             | 支持         |
 
 **错误码：**
 
