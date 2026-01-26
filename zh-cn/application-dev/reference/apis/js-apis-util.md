@@ -251,6 +251,36 @@ parseUUID(uuid: string): Uint8Array
   // 132,189,247,150,102,204,70,85,155,137,214,33,141,16,15,156
   ```
 
+## TextDecoderOptions<sup>11+</sup>
+
+解码相关选项参数，包含两个属性fatal和ignoreBOM。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+| 名称      | 类型 | 只读 | 可选 | 说明               |
+| --------- | -------- | ---- | ---- | ------------------ |
+| fatal     | boolean  | 否   | 是 | 是否显示致命错误，true表示显示致命错误，false表示不显示致命错误，默认值是false。 |
+| ignoreBOM | boolean  | 否   | 是 | 是否忽略BOM标记，true表示忽略待解码数据的BOM标记，false表示会对BOM标记解码，默认值是false。  |
+
+## DecodeToStringOptions<sup>12+</sup>
+
+用于配置decodeToString方法在解码字节流时的行为参数。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+| 名称 | 类型 | 只读 | 可选 | 说明 |
+| --------- | -------- | ---- | ---- | ------------------ |
+| stream | boolean | 否 | 是 | 输入末尾出现的不完整字节序列是否需要追加在下次调用decodeToString的参数中处理。设置为true，则不完整的字节序列会存储在内部缓存区直到下次调用该函数，false则会在当前调用时直接解码。默认为false。 |
+
+## DecodeWithStreamOptions<sup>11+</sup>
+
+解码是否跟随附加数据块相关选项参数。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+| 名称 | 类型 | 只读 | 可选 | 说明 |
+| -------- | -------- | ---- | ---- | -------- |
+| stream | boolean | 否 | 是 | 在随后的decodeWithStream()调用中是否跟随附加数据块。如果以块的形式处理数据，则设置为true；如果处理最后的数据未分块，则设置为false。默认为false。 |
 
 ## TextDecoder
 
@@ -274,11 +304,20 @@ TextDecoder的构造函数。
 
 **系统能力：** SystemCapability.Utils.Lang
 
+**示例：**
+
+```ts
+let textDecoder = new util.TextDecoder();
+let retStr = textDecoder.encoding;
+console.info('retStr = ' + retStr);
+// 输出结果：retStr = utf-8
+```
+
 ### create<sup>9+</sup>
 
-create(encoding?: string,options?: { fatal?: boolean; ignoreBOM?: boolean }): TextDecoder;
+static create(encoding?: string, options?: TextDecoderOptions): TextDecoder
 
-替代有参构造功能。
+替代有参构造函数的功能。
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -287,27 +326,82 @@ create(encoding?: string,options?: { fatal?: boolean; ignoreBOM?: boolean }): Te
 | 参数名   | 类型   | 必填 | 说明                                             |
 | -------- | ------ | ---- | ------------------------------------------------ |
 | encoding | string | 否   | 编码格式，默认值是'utf-8'。                      |
-| options  | Object | 否   | 编码相关选项参数，存在两个属性fatal和ignoreBOM。 |
+| options  | [TextDecoderOptions](#textdecoderoptions11) | 否   | 解码相关选项参数，存在两个属性fatal和ignoreBOM。|
 
-**表1.1**options
+**返回值：**
 
-| 名称      | 参数类型 | 必填 | 说明               |
-| --------- | -------- | ---- | ------------------ |
-| fatal     | boolean  | 否   | 是否显示致命错误，默认值是false。 |
-| ignoreBOM | boolean  | 否   | 是否忽略BOM标记，默认值是false。  |
+| 类型       | 说明               |
+| ---------- | ------------------ |
+| [TextDecoder](#textdecoder) | 返回一个TextDecoder对象。 |
 
 **示例：**
 
-```js
-let result = util.TextDecoder.create('utf-8', { ignoreBOM : true })
-let retStr = result.encoding
+```ts
+let textDecoderOptions: util.TextDecoderOptions = {
+  fatal: false,
+  ignoreBOM : true
+}
+let textDecoder = util.TextDecoder.create('utf-8', textDecoderOptions);
+let retStr = textDecoder.encoding;
+console.info('retStr = ' + retStr);
+// 输出结果：retStr = utf-8
 ```
 
-### decodeWithStream<sup>9+</sup>
+### decodeToString<sup>12+</sup>
 
-decodeWithStream(input: Uint8Array, options?: { stream?: boolean }): string
+decodeToString(input: Uint8Array, options?: DecodeToStringOptions): string
 
-通过输入参数解码后输出对应文本。
+将输入参数解码后输出对应文本。
+
+**原子化服务API**：从API version 12开始，该接口支持在原子化服务中使用。
+
+**系统能力：** SystemCapability.Utils.Lang
+
+**参数：**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| -------- | -------- | -------- | -------- |
+| input | Uint8Array | 是 | 需要解码的数组。 |
+| options | [DecodeToStringOptions](#decodetostringoptions12) | 否 | 解码相关选项参数。默认undefined。|
+
+**返回值：**
+
+| 类型 | 说明 |
+| -------- | -------- |
+| string | 解码后的数据。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息 |
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+
+**示例：**
+
+```ts
+let textDecoderOptions: util.TextDecoderOptions = {
+  fatal: false,
+  ignoreBOM : true
+}
+let decodeToStringOptions: util.DecodeToStringOptions = {
+  stream: false
+}
+let textDecoder = util.TextDecoder.create('utf-8', textDecoderOptions);
+let uint8 = new Uint8Array([0xEF, 0xBB, 0xBF, 0x61, 0x62, 0x63]);
+let retStr = textDecoder.decodeToString(uint8, decodeToStringOptions);
+console.info("retStr = " + retStr);
+// 输出结果：retStr = abc
+```
+
+### decodeWithStream<sup>(deprecated)</sup>
+
+decodeWithStream(input: Uint8Array, options?: DecodeWithStreamOptions): string
+
+将输入参数解码后输出对应文本。当input是一个空数组时，返回undefined。
+
+> **说明：**
+>
+> 从API version 9开始支持，从API version 12开始废弃，建议使用[decodeToString<sup>12+</sup>](#decodetostring12)替代。
 
 **系统能力：** SystemCapability.Utils.Lang
 
@@ -316,13 +410,7 @@ decodeWithStream(input: Uint8Array, options?: { stream?: boolean }): string
 | 参数名 | 类型 | 必填 | 说明 |
 | -------- | -------- | -------- | -------- |
 | input | Uint8Array | 是 | 符合格式需要解码的数组。 |
-| options | Object | 否 | 解码相关选项参数。 |
-
-**表2** options
-
-| 名称 | 参数类型 | 必填 | 说明 |
-| -------- | -------- | -------- | -------- |
-| stream | boolean | 否 | 在随后的decodeWithStream()调用中是否跟随附加数据块。如果以块的形式处理数据，则设置为true；如果处理最后的数据块或数据未分块，则设置为false。默认为false。 |
+| options | [DecodeWithStreamOptions](#decodewithstreamoptions11) | 否 | 解码相关选项参数。 |
 
 **返回值：**
 
@@ -330,22 +418,35 @@ decodeWithStream(input: Uint8Array, options?: { stream?: boolean }): string
 | -------- | -------- |
 | string | 解码后的数据。 |
 
+**错误码：**
+
+| 错误码ID | 错误信息 |
+| -------- | -------- |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+
 **示例：**
 
-  ```js
-  let textDecoder = new util.TextDecoder("utf-8",{ignoreBOM: true});
-  let result = new Uint8Array(6);
-  result[0] = 0xEF;
-  result[1] = 0xBB;
-  result[2] = 0xBF;
-  result[3] = 0x61;
-  result[4] = 0x62;
-  result[5] = 0x63;
-  console.log("input num:");
-  let retStr = textDecoder.decodeWithStream( result , {stream: false});
-  console.log("retStr = " + retStr);
-  ```
-
+```ts
+let textDecoderOptions: util.TextDecoderOptions = {
+  fatal: false,
+  ignoreBOM : true
+}
+let decodeWithStreamOptions: util.DecodeWithStreamOptions = {
+  stream: false
+}
+let textDecoder = util.TextDecoder.create('utf-8', textDecoderOptions);
+let uint8 = new Uint8Array(6);
+uint8[0] = 0xEF;
+uint8[1] = 0xBB;
+uint8[2] = 0xBF;
+uint8[3] = 0x61;
+uint8[4] = 0x62;
+uint8[5] = 0x63;
+console.info("input num:");
+let retStr = textDecoder.decodeWithStream(uint8, decodeWithStreamOptions);
+console.info("retStr = " + retStr);
+// 输出结果：retStr = abc
+```
 
 ## TextEncoder
 
