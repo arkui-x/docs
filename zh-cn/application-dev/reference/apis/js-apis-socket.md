@@ -876,8 +876,6 @@ udp.off('error');
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**：Android、iOS
-
 | 名称  | 类型   | 必填 | 说明                                                         | **Android 平台**                                           | **iOS 平台**                                               |
 | ------- | ------ | ---- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | address | string | 是   | 本地绑定的ip地址。                                           | 支持                                         | 支持                                         |
@@ -890,12 +888,10 @@ UDPSocket发送参数。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
-| 名称  | 类型                               | 必填 | 说明           |
-| ------- | ---------------------------------- | ---- | -------------- |
-| data    | string \| ArrayBuffer<sup>7+</sup>                          | 是   | 发送的数据。   |
-| address | [NetAddress](#netaddress24) | 是   | 目标地址信息。 |
+| 名称  | 类型                               | 必填 | 说明           | **Android 平台** | **iOS 平台** |
+| ------- | ---------------------------------- | ---- | -------------- | ------- | ------- |
+| data    | string \| ArrayBuffer<sup>7+</sup>                          | 是   | 发送的数据。   | 支持 | 支持 |
+| address | [NetAddress](#netaddress24) | 是   | 目标地址信息。 | 支持 | 支持 |
 
 ## UDPExtraOptions<sup>7+</sup>
 
@@ -903,15 +899,13 @@ UDPSocket连接的其他属性。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
-| 名称            | 类型    | 必填 | 说明                             |
-| ----------------- | ------- | ---- | -------------------------------- |
-| broadcast         | boolean | 否   | 是否可以发送广播。默认为false。  |
-| receiveBufferSize | number  | 否   | 接收缓冲区大小（单位：Byte），默认为0。   |
-| sendBufferSize    | number  | 否   | 发送缓冲区大小（单位：Byte），默认为0。   |
-| reuseAddress      | boolean | 否   | 是否重用地址。默认为false。      |
-| socketTimeout     | number  | 否   | 套接字超时时间，单位毫秒（ms），默认为0。 |
+| 名称            | 类型    | 必填 | 说明                             | **Android 平台** | **iOS 平台** |
+| ----------------- | ------- | ---- | -------------------------------- | ----------------- | ----------------- |
+| broadcast         | boolean | 否   | 是否可以发送广播。默认为false。  | 支持 | 支持 |
+| receiveBufferSize | number  | 否   | 接收缓冲区大小（单位：Byte），默认为0。   | 支持 | 支持 |
+| sendBufferSize    | number  | 否   | 发送缓冲区大小（单位：Byte），默认为0。   | 支持 | 支持 |
+| reuseAddress      | boolean | 否   | 是否重用地址。默认为false。      | 支持 | 支持 |
+| socketTimeout     | number  | 否   | 套接字超时时间，单位毫秒（ms），默认为0。 | 支持 | 支持 |
 
 ## SocketStateBase<sup>7+</sup>
 
@@ -919,13 +913,11 @@ Socket的状态信息。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
-| 名称      | 类型    | 必填 | 说明       |
-| ----------- | ------- | ---- | ---------- |
-| isBound     | boolean | 是   | 是否绑定。 |
-| isClose     | boolean | 是   | 是否关闭。 |
-| isConnected | boolean | 是   | 是否连接。 |
+| 名称      | 类型    | 必填 | 说明       | **Android 平台** | **iOS 平台** |
+| ----------- | ------- | ---- | ---------- | ----------- | ----------- |
+| isBound     | boolean | 是   | 是否绑定。 | 支持 | 支持 |
+| isClose     | boolean | 是   | 是否关闭。 | 支持 | 支持 |
+| isConnected | boolean | 是   | 是否连接。 | 支持 | 支持 |
 
 ## SocketRemoteInfo<sup>7+</sup>
 
@@ -933,14 +925,12 @@ Socket的连接信息。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
-| 名称  | 类型   | 必填 | 说明                                                         |
-| ------- | ------ | ---- | ------------------------------------------------------------ |
-| address | string | 是   | 本地绑定的ip地址。                                           |
-| family  | string | 是   | 网络协议类型，可选类型：<br />- IPv4<br />- IPv6<br />默认为IPv4。 |
-| port    | number | 是   | 端口号，范围0~65535。                                        |
-| size    | number | 是   | 服务器响应信息的字节长度。                                   |
+| 名称  | 类型   | 必填 | 说明                                                         | **Android 平台** | iOS 平台 |
+| ------- | ------ | ---- | ------------------------------------------------------------ | ------- | ------- |
+| address | string | 是   | 本地绑定的ip地址。                                           | 支持 | 支持 |
+| family  | string | 是   | 网络协议类型，可选类型：<br />- IPv4<br />- IPv6<br />默认为IPv4。 | 支持 | 支持 |
+| port    | number | 是   | 端口号，范围0~65535。                                        | 支持 | 支持 |
+| size    | number | 是   | 服务器响应信息的字节长度。                                   | 支持 | 支持 |
 
 ## UDP 错误码说明
 
@@ -2158,12 +2148,10 @@ TCPSocket连接的参数。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
-| 名称  | 类型                               | 必填 | 说明                       |
-| ------- | ---------------------------------- | ---- | -------------------------- |
-| address | [NetAddress](#netaddress24) | 是   | 绑定的地址以及端口。       |
-| timeout | number                             | 否   | 超时时间，单位毫秒（ms）。 |
+| 名称  | 类型                               | 必填 | 说明                       | Android 平台 | iOS 平台 |
+| ------- | ---------------------------------- | ---- | -------------------------- | ------- | ------- |
+| address | [NetAddress](#netaddress24) | 是   | 绑定的地址以及端口。       | 支持 | 支持 |
+| timeout | number                             | 否   | 超时时间，单位毫秒（ms）。 | 支持 | 支持 |
 
 ## TCPSendOptions<sup>7+</sup>
 
@@ -2171,12 +2159,10 @@ TCPSocket发送请求的参数。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
-| 名称   | 类型   | 必填 | 说明                                                         |
-| -------- | ------ | ---- | ------------------------------------------------------------ |
-| data     | string\| ArrayBuffer<sup>7+</sup>  | 是   | 发送的数据。                                                 |
-| encoding | string | 否   | 字符编码(UTF-8，UTF-16BE，UTF-16LE，UTF-16，US-AECII，ISO-8859-1)，默认为UTF-8。 |
+| 名称   | 类型   | 必填 | 说明                                                         | **Android 平台** | **iOS 平台** |
+| -------- | ------ | ---- | ------------------------------------------------------------ | -------- | -------- |
+| data     | string\| ArrayBuffer<sup>7+</sup>  | 是   | 发送的数据。                                                 | 支持 | 支持 |
+| encoding | string | 否   | 字符编码(UTF-8，UTF-16BE，UTF-16LE，UTF-16，US-AECII，ISO-8859-1)，默认为UTF-8。 | 支持 | 支持 |
 
 ## TCPExtraOptions<sup>7+</sup>
 
@@ -2184,18 +2170,16 @@ TCPSocket连接的其他属性。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
-| 名称            | 类型    | 必填 | 说明                                                         |
-| ----------------- | ------- | ---- | ------------------------------------------------------------ |
-| keepAlive         | boolean | 否   | 是否保持连接。默认为false。                                  |
-| OOBInline         | boolean | 否   | 是否为OOB内联。默认为false。                                 |
-| TCPNoDelay        | boolean | 否   | TCPSocket连接是否无时延。默认为false。                       |
-| socketLinger      | Object  | 是   | socket是否继续逗留。<br />- on：是否逗留（true：逗留；false：不逗留）。<br />- linger：逗留时长，单位毫秒（ms），取值范围为0~65535。<br />当入参on设置为true时，才需要设置。 |
-| receiveBufferSize | number  | 否   | 接收缓冲区大小（单位：Byte），默认为0。                               |
-| sendBufferSize    | number  | 否   | 发送缓冲区大小（单位：Byte），默认为0。                               |
-| reuseAddress      | boolean | 否   | 是否重用地址。默认为false。                                  |
-| socketTimeout     | number  | 否   | 套接字超时时间，单位毫秒（ms），默认为0。                             |
+| 名称            | 类型    | 必填 | 说明                                                         | Android 平台 | iOS 平台 |
+| ----------------- | ------- | ---- | ------------------------------------------------------------ | ----------------- | ----------------- |
+| keepAlive         | boolean | 否   | 是否保持连接。默认为false。                                  | 支持 | 支持 |
+| OOBInline         | boolean | 否   | 是否为OOB内联。默认为false。                                 | 支持 | 支持 |
+| TCPNoDelay        | boolean | 否   | TCPSocket连接是否无时延。默认为false。                       | 支持 | 支持 |
+| socketLinger      | Object  | 是   | socket是否继续逗留。<br />- on：是否逗留（true：逗留；false：不逗留）。<br />- linger：逗留时长，单位毫秒（ms），取值范围为0~65535。<br />当入参on设置为true时，才需要设置。 | 支持 | 支持 |
+| receiveBufferSize | number  | 否   | 接收缓冲区大小（单位：Byte），默认为0。                               | 支持 | 支持 |
+| sendBufferSize    | number  | 否   | 发送缓冲区大小（单位：Byte），默认为0。                               | 支持 | 支持 |
+| reuseAddress      | boolean | 否   | 是否重用地址。默认为false。                                  | 支持 | 支持 |
+| socketTimeout     | number  | 否   | 套接字超时时间，单位毫秒（ms），默认为0。                             | 支持 | 支持 |
 
 ## socket.constructTCPSocketServerInstance<sup>24+</sup>
 
@@ -2843,8 +2827,6 @@ on(type: 'error', callback: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -2879,8 +2861,6 @@ off(type: 'error', callback?: ErrorCallback): void
 > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
 
 **系统能力**：SystemCapability.Communication.NetStack
-
-**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -3281,6 +3261,8 @@ getLocalAddress(): Promise\<NetAddress\>
 
 **系统能力**：SystemCapability.Communication.NetStack
 
+**支持平台**： Android 、iOS
+
 **返回值：**
 
 | 类型                                   | 说明                                        |
@@ -3585,8 +3567,6 @@ on(type: 'error', callback: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -3623,8 +3603,6 @@ off(type: 'error', callback?: ErrorCallback): void
 > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
 
 **系统能力**：SystemCapability.Communication.NetStack
-
-**支持平台**： Android 、iOS
 
 **参数：**
 
@@ -5535,16 +5513,14 @@ TLS连接的操作。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
-| 名称                               | 类型                                   | 只读 | 可选 | 说明                                                         |
-| ---------------------------------- | -------------------------------------- | ---- | ---- | ------------------------------------------------------------ |
-| address                            | [NetAddress](#netaddress24)            | 否   | 否   | 网关地址。                                                   |
-| secureOptions                      | [TLSSecureOptions](#tlssecureoptions9) | 否   | 否   | TLS安全相关操作。                                            |
-| ALPNProtocols                      | Array\<string\>                        | 否   | 是   | ALPN协议，支持["spdy/1", "http/1.1"]，默认为[]。             |
-| skipRemoteValidation<sup>24+</sup> | boolean                                | 否   | 是   | 是否跳过对服务端进行证书认证，默认为false。true：跳过对服务端进行证书认证；false：不跳过对服务端进行证书认证。 |
-| proxy<sup>18+</sup>                | ProxyOptions                           | 否   | 是   | 使用的代理信息，默认不使用代理。                             |
-| timeout<sup>22+</sup>              | number                                 | 否   | 是   | 连接超时时间，单位：ms，默认为0。传入值需为0-4294967295范围内的整数。TLSSocket连接在超时后会失败。 |
+| 名称                               | 类型                                   | 只读 | 可选 | 说明                                                         | Android 平台 | iOS 平台 |
+| ---------------------------------- | -------------------------------------- | ---- | ---- | ------------------------------------------------------------ | ------------ | -------- |
+| address                            | [NetAddress](#netaddress24)            | 否   | 否   | 网关地址。                                                   | 支持         | 支持     |
+| secureOptions                      | [TLSSecureOptions](#tlssecureoptions9) | 否   | 否   | TLS安全相关操作。                                            | 支持         | 支持     |
+| ALPNProtocols                      | Array\<string\>                        | 否   | 是   | ALPN协议，支持["spdy/1", "http/1.1"]，默认为[]。             | 支持         | 支持     |
+| skipRemoteValidation<sup>24+</sup> | boolean                                | 否   | 是   | 是否跳过对服务端进行证书认证，默认为false。true：跳过对服务端进行证书认证；false：不跳过对服务端进行证书认证。 | 支持         | 支持     |
+| proxy<sup>18+</sup>                | ProxyOptions                           | 否   | 是   | 使用的代理信息，默认不使用代理。                             | 支持         | 支持     |
+| timeout<sup>22+</sup>              | number                                 | 否   | 是   | 连接超时时间，单位：ms，默认为0。传入值需为0-4294967295范围内的整数。TLSSocket连接在超时后会失败。 | 支持         | 支持     |
 
 ## TLSSecureOptions<sup>9+</sup>
 
@@ -5552,19 +5528,17 @@ TLS安全相关操作。当本地证书cert和私钥key不为空时，开启双�
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
-| 名称                                        | 类型                                                     | 只读 | 可选 | 说明                                                         |
-| ------------------------------------------- | -------------------------------------------------------- | ---- | ---- | ------------------------------------------------------------ |
-| ca                                          | string \| Array\<string\>                                | 否   | 是   | 服务端的ca证书，用于认证校验服务端的数字证书。默认为系统预置CA证书<sup>12+</sup>。最多支持设置1000本证书。 |
-| cert                                        | string \| Array\<string\>                                | 否   | 是   | 本地客户端的数字证书。从API Version 23开始支持传入数组，最多支持设置1000本证书。 |
-| key                                         | string                                                   | 否   | 是   | 本地数字证书的私钥。                                         |
-| password                                    | string                                                   | 否   | 是   | 读取私钥的密码。                                             |
-| protocols                                   | [Protocol](#protocol9) \|Array\<[Protocol](#protocol9)\> | 否   | 是   | TLS的协议版本，默认为"TLSv1.2"。                             |
-| useRemoteCipherPrefer                       | boolean                                                  | 否   | 是   | 优先使用对等方的密码套件。true：优先使用对等方的密码套件；false：不优先使用对等方的密码套件。 |
-| signatureAlgorithms                         | string                                                   | 否   | 是   | 通信过程中的签名算法，默认为"" 。                            |
-| cipherSuite                                 | string                                                   | 否   | 是   | 通信过程中的加密套件，默认为"" 。                            |
-| isBidirectionalAuthentication<sup>24+</sup> | boolean                                                  | 否   | 是   | 用于设置双向认证，默认为false。true：设置双向认证；false：不设置双向认证。 |
+| 名称                                        | 类型                                                     | 只读 | 可选 | 说明                                                         | Android 平台 | iOS 平台 |
+| ------------------------------------------- | -------------------------------------------------------- | ---- | ---- | ------------------------------------------------------------ | ------------ | -------- |
+| ca                                          | string \| Array\<string\>                                | 否   | 是   | 服务端的ca证书，用于认证校验服务端的数字证书。默认为系统预置CA证书<sup>12+</sup>。最多支持设置1000本证书。 | 支持         | 支持     |
+| cert                                        | string \| Array\<string\>                                | 否   | 是   | 本地客户端的数字证书。从API Version 23开始支持传入数组，最多支持设置1000本证书。 | 支持         | 支持     |
+| key                                         | string                                                   | 否   | 是   | 本地数字证书的私钥。                                         | 支持         | 支持     |
+| password                                    | string                                                   | 否   | 是   | 读取私钥的密码。                                             | 支持         | 支持     |
+| protocols                                   | [Protocol](#protocol9) \|Array\<[Protocol](#protocol9)\> | 否   | 是   | TLS的协议版本，默认为"TLSv1.2"。                             | 支持         | 支持     |
+| useRemoteCipherPrefer                       | boolean                                                  | 否   | 是   | 优先使用对等方的密码套件。true：优先使用对等方的密码套件；false：不优先使用对等方的密码套件。 | 支持         | 支持     |
+| signatureAlgorithms                         | string                                                   | 否   | 是   | 通信过程中的签名算法，默认为"" 。                            | 支持         | 支持     |
+| cipherSuite                                 | string                                                   | 否   | 是   | 通信过程中的加密套件，默认为"" 。                            | 支持         | 支持     |
+| isBidirectionalAuthentication<sup>24+</sup> | boolean                                                  | 否   | 是   | 用于设置双向认证，默认为false。true：设置双向认证；false：不设置双向认证。 | 支持         | 支持     |
 
 ## Protocol<sup>9+</sup>
 
@@ -5572,12 +5546,10 @@ TLS通信的协议版本。
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
-| 名称      |    值    | 说明                |
-| --------- | --------- |------------------ |
-| TLSv12    | "TLSv1.2" | 使用TLSv1.2协议通信。 |
-| TLSv13    | "TLSv1.3" | 使用TLSv1.3协议通信。 |
+| 名称      |    值    | 说明                | Android 平台 | iOS 平台 |
+| --------- | --------- |------------------ | --------- | --------- |
+| TLSv12    | "TLSv1.2" | 使用TLSv1.2协议通信。 | 支持 | 支持 |
+| TLSv13    | "TLSv1.3" | 使用TLSv1.3协议通信。 | 支持 | 支持 |
 
 ## X509CertRawData<sup>9+</sup>
 
@@ -8029,8 +8001,6 @@ on(type: 'error', callback: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
 **参数：**
 
 | 参数名   | 类型          | 必填 | 说明                                 |
@@ -8091,14 +8061,12 @@ off(type: 'error', callback?: ErrorCallback): void
 
 **系统能力**：SystemCapability.Communication.NetStack
 
-**支持平台**： Android 、iOS
-
 **参数：**
 
-| 参数名   | 类型          | 必填 | 说明                                 | **Android 平台** | **iOS 平台** |
-| -------- | ------------- | ---- | ------------------------------------ | ---------------- | ------------ |
-| type     | string        | 是   | 订阅的事件类型。'error'：error事件。 | 支持             | 支持         |
-| callback | ErrorCallback | 否   | 回调函数。                           | 支持             | 支持         |
+| 参数名   | 类型          | 必填 | 说明                                 |
+| -------- | ------------- | ---- | ------------------------------------ |
+| type     | string        | 是   | 订阅的事件类型。'error'：error事件。 |
+| callback | ErrorCallback | 否   | 回调函数。                           |
 
 **错误码：**
 
