@@ -110,6 +110,8 @@ static getSystemLanguages(): Array&lt;string&gt;
 
 获取系统支持的语言列表。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -132,6 +134,8 @@ static getSystemLanguages(): Array&lt;string&gt;
 static getSystemCountries(language: string): Array&lt;string&gt;
 
 获取输入语言下系统支持的国家地区列表。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -180,6 +184,8 @@ static getSystemCountries(language: string): Array&lt;string&gt;
 static isSuggested(language: string, region?: string): boolean
 
 判断语言是否是地区的推荐语言。用于根据地区推荐语言或根据语言推荐地区。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -335,6 +341,8 @@ static getPreferredLanguageList(): Array&lt;string&gt;
 
 获取系统偏好语言列表。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -358,6 +366,8 @@ static getPreferredLanguageList(): Array&lt;string&gt;
 ### getFirstPreferredLanguage<sup>24+</sup>
 
 static getFirstPreferredLanguage(): string
+
+**支持平台：** Android、iOS
 
 获取系统偏好语言列表中的第一个语言。
 
@@ -474,6 +484,8 @@ static getUsingLocalDigit(): boolean
 
 判断系统是否使用本地数字。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -495,6 +507,8 @@ static getUsingLocalDigit(): boolean
 static getSimplifiedLanguage(language?: string): string
 
 获取语言的简化表示。例如：'en-Latn-US'的简化表示为'en'，'en-Latn-GB'的简化表示为'en-GB'。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -542,6 +556,8 @@ static getTemperatureType(): TemperatureType
 
 获取系统设置的温度单位。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -563,6 +579,8 @@ static getTemperatureType(): TemperatureType
 static getTemperatureName(type: TemperatureType): string
 
 获取温度单位的名称。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -612,6 +630,8 @@ static getFirstDayOfWeek(): WeekDay
 
 获取系统设置的周起始日。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -632,6 +652,8 @@ static getFirstDayOfWeek(): WeekDay
 
 温度单位的枚举。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 | 名称       | 值   | 说明     |
@@ -643,6 +665,8 @@ static getFirstDayOfWeek(): WeekDay
 ## WeekDay<sup>24+</sup>
 
 周起始日的枚举，取值范围为周一至周日。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -712,6 +736,8 @@ getCalendar(locale: string, type? : string): Calendar
 
 提供实体识别相关的能力，可以获取文本中实体的类型和起止位置。当前支持识别的实体包括电话号码和时间日期。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 ### constructor<sup>24+</sup>
@@ -719,6 +745,8 @@ getCalendar(locale: string, type? : string): Calendar
 constructor(locale?: string)
 
 创建实体识别对象。该对象根据区域规则识别文本中的实体。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -756,6 +784,8 @@ constructor(locale?: string)
 findEntityInfo(text: string): Array&lt;EntityInfoItem&gt;
 
 获取文本中的实体信息。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -802,6 +832,8 @@ findEntityInfo(text: string): Array&lt;EntityInfoItem&gt;
 ## EntityInfoItem<sup>24+</sup>
 
 实体信息属性。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1044,6 +1076,8 @@ get(field: string): number
 getDisplayName(locale: string): string
 
 获取日历对象名称在指定语言下的翻译。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1288,6 +1322,8 @@ format(number: string): string
 
 度量衡单位信息。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 | 名称          | 类型   | 只读 | 可选 | 说明                                                   |
@@ -1300,6 +1336,8 @@ format(number: string): string
 getInstance(locale?: string): IndexUtil
 
 创建并返回IndexUtil对象。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1327,6 +1365,8 @@ getInstance(locale?: string): IndexUtil
 
 提供索引相关的能力，包括区域索引列表和文本索引值获取。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 ### getIndexList<sup>24+</sup>
@@ -1334,6 +1374,8 @@ getInstance(locale?: string): IndexUtil
 getIndexList(): Array&lt;string&gt;
 
 获取当前区域的索引列表。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1361,6 +1403,8 @@ addLocale(locale: string): void
 
 在当前区域的索引列表中，添加新区域的索引列表，形成复合列表。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **参数：**
@@ -1383,6 +1427,8 @@ addLocale(locale: string): void
 getIndex(text: string): string
 
 获取输入文本对应的索引值。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1413,6 +1459,8 @@ getLineInstance(locale: string): BreakIterator
 
 获取用于获取可换行点的BreakIterator对象。BreakIterator对象内部维护一个换行迭代器，可以用于访问各个可换行点。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **参数：**
@@ -1439,6 +1487,8 @@ getLineInstance(locale: string): BreakIterator
 
 提供文本换行相关的能力，包括可换行点的获取、移动和识别等。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 ### setLineBreakText<sup>24+</sup>
@@ -1446,6 +1496,8 @@ getLineInstance(locale: string): BreakIterator
 setLineBreakText(text: string): void
 
 设置BreakIterator对象要处理的文本。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1470,6 +1522,8 @@ setLineBreakText(text: string): void
 getLineBreakText(): string
 
 获取BreakIterator对象当前处理的文本。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1496,6 +1550,8 @@ current(): number
 
 获取换行迭代器在当前处理文本中的位置。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -1520,6 +1576,8 @@ current(): number
 first(): number
 
 将换行迭代器移动到第一个可换行点。第一个可换行点总是在被处理文本的起始位置。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1546,6 +1604,8 @@ last(): number
 
 将换行迭代器移动到最后一个可换行点。最后一个可换行点总是在被处理文本末尾的下一个位置。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -1570,6 +1630,8 @@ last(): number
 next(index?: number): number
 
 将换行迭代器向后移动index个可换行点。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1604,6 +1666,8 @@ previous(): number
 
 将换行迭代器向前移动一个可换行点。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -1630,6 +1694,8 @@ previous(): number
 following(offset: number): number
 
 将换行迭代器移动到指定位置后面一个可换行点。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1664,9 +1730,9 @@ isBoundary(offset: number): boolean
 
 判断指定位置是否为可换行点。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
-
-
 
 **参数：**
 
@@ -1745,6 +1811,8 @@ getID(): string
 getDisplayName(locale?: string, isDST?: boolean): string
 
 获取时区对象名称在指定语言下的翻译。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1844,6 +1912,8 @@ getZoneRules(): ZoneRules
 
 获取时区跳变规则，时区的跳变逻辑参考夏令时跳变。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -1881,6 +1951,8 @@ let dateFormat: string =
 
 提供查询时区跳变规则的能力。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 ### nextTransition<sup>24+</sup>
@@ -1888,6 +1960,8 @@ let dateFormat: string =
 nextTransition(date?: number): ZoneOffsetTransition
 
 获取指定时间的下一个时区跳变对象。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1921,6 +1995,8 @@ let zoneOffsetTransition: i18n.ZoneOffsetTransition = zoneRules.nextTransition(d
 
 提供解析时区跳变规则的能力。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 ### getMilliseconds<sup>24+</sup>
@@ -1928,6 +2004,8 @@ let zoneOffsetTransition: i18n.ZoneOffsetTransition = zoneRules.nextTransition(d
 getMilliseconds(): number
 
 获取时区跳变点的时间戳。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -1956,6 +2034,8 @@ getOffsetAfter(): number
 
 获取时区跳变后的偏移量。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -1983,6 +2063,8 @@ getOffsetBefore(): number
 
 获取时区跳变前的偏移量。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **返回值：**
@@ -2009,6 +2091,8 @@ zoneOffsetTransition.getOffsetBefore(); // 跳变前的偏移量: -25200000
 
 提供文本音译相关的能力，包括音译支持范围获取和文本音译等。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 ### getAvailableIDs<sup>24+</sup>
@@ -2016,6 +2100,8 @@ zoneOffsetTransition.getOffsetBefore(); // 跳变前的偏移量: -25200000
 static getAvailableIDs(): string[]
 
 获取音译支持的转换ID列表。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -2041,6 +2127,8 @@ static getAvailableIDs(): string[]
 static getInstance(id: string): Transliterator
 
 创建指定转换ID的音译对象。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -2070,6 +2158,8 @@ static getInstance(id: string): Transliterator
 transform(text: string): string
 
 将输入文本从源格式转换为目标格式。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -2388,6 +2478,8 @@ static unitConvert(fromUnit: UnitInfo, toUnit: UnitInfo, value: number, locale: 
 
 将fromUnit的单位转换为toUnit的单位，并根据区域与风格进行格式化。
 
+**支持平台：** Android、iOS
+
 **参数：**
 
 | 参数名   | 类型                   | 必填 | 说明                                                         |
@@ -2446,6 +2538,8 @@ static getTimePeriodName(hour:number, locale?: string): string
 
 获取指定时间在某区域的本地化表达。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **参数：**
@@ -2490,6 +2584,8 @@ static getThreeLetterLanguage(locale: string): string
 
 将语言代码由二字母转换为三字母。二字母和三字母语言代码的规格参考[ISO 639](https://www.iso.org/iso-639-language-code)。<br>例如，中文的二字母语言代码是zh，对应的三字母语言代码是zho。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **参数：**
@@ -2533,6 +2629,8 @@ static getThreeLetterRegion(locale: string): string
 
 将地区代码由二字母转换为三字母。二字母和三字母地区代码的规格参考[ISO 3166](https://www.iso.org/iso-3166-country-codes.html)<br>例如，中国的二字母地区代码是CN, 三字母是CHN。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **参数：**
@@ -2575,6 +2673,8 @@ static getThreeLetterRegion(locale: string): string
 static getUnicodeWrappedFilePath(path: string, delimiter?: string, locale?: Intl.Locale): string
 
 对文件路径进行本地化处理。<br>例如，将/data/out/tmp本地化处理后生成tmp/out/data/。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -2622,6 +2722,8 @@ try {
 
 提供文本标准化的能力。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 ### getInstance<sup>24+</sup>
@@ -2629,6 +2731,8 @@ try {
 static getInstance(mode: NormalizerMode): Normalizer
 
 获取文本标准化对象。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -2673,6 +2777,8 @@ normalize(text: string): string
 
 对字符串进行标准化处理。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **参数：**
@@ -2714,6 +2820,8 @@ normalize(text: string): string
 
 文本标准化范式的枚举。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 | 名称 | 值   | 说明       |
@@ -2728,6 +2836,8 @@ normalize(text: string): string
 
 提供解析节假日数据的能力，包括节假日判断和指定年份节假日列表获取等。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 ### constructor<sup>24+</sup>
@@ -2735,6 +2845,8 @@ normalize(text: string): string
 constructor(icsPath: String)
 
 创建HolidayManager对象，用于解析节假日数据。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -2773,6 +2885,8 @@ constructor(icsPath: String)
 isHoliday(date?: Date): boolean
 
 判断指定的日期是否是节假日。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
@@ -2820,6 +2934,8 @@ getHolidayInfoItemArray(year?: number): Array&lt;[HolidayInfoItem](#holidayinfoi
 
 获取指定年的节假日信息列表。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 **参数：**
@@ -2863,6 +2979,8 @@ getHolidayInfoItemArray(year?: number): Array&lt;[HolidayInfoItem](#holidayinfoi
 
 节假日信息。
 
+**支持平台：** Android、iOS
+
 **系统能力：** SystemCapability.Global.I18n
 
 | 名称       | 类型                                                 | 只读 | 可选 | 说明                   |
@@ -2876,6 +2994,8 @@ getHolidayInfoItemArray(year?: number): Array&lt;[HolidayInfoItem](#holidayinfoi
 ## HolidayLocalName<sup>24+</sup>
 
 节假日名称在不同语言下的翻译。
+
+**支持平台：** Android、iOS
 
 **系统能力：** SystemCapability.Global.I18n
 
