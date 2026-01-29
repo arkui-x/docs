@@ -1247,7 +1247,7 @@ restore(callback: AsyncCallback&lt;boolean&gt;): void
 | description | string                                         | 否   | 任务的详细信息，其最大长度为1024个字符，默认值为空字符串。   |
 | mode        | [Mode](#mode10)                                | 否   | 任务模式,默认为前台任务。<br/>-对于前台任务，有回调通知。    |
 | overwrite   | boolean                                        | 否   | 下载过程中路径已存在时的解决方案选择，默认为false。<br/>- true，覆盖已存在的文件。<br/>- false，下载失败。 |
-| method      | string                                         | 否   | 上传或下载的HTTP标准方法，包括GET、POST和PUT，不区分大小写。<br/>-上传时，使用PUT或POST，默认值为PUT。<br/>-下载时，使用GET或POST，默认值为GET。 |
+| method      | string                                         | 否   | 上传或下载的HTTP标准方法，包括GET、POST和PUT，不区分大小写。<br/>-上传时，使用PUT或POST，默认值为PUT。<br/>-下载时，需使用GET，POST暂不支持，默认值为GET。 |
 | headers     | object                                         | 否   | 添加要包含在任务中的HTTP协议标志头。<br/>-对于上传请求，默认的Content-Type为"multipart/form-data"。<br/>-对于下载请求，默认的Content-Type为"application/json"。 |
 | data        | string \| Array&lt;[FormItem](#formitem10)&gt; | 否   | -下载时，data为字符串类型，通常使用json(object将被转换为json文本)，默认为空。<br/>-上传时，data是表单项数组Array&lt;[FormItem](#formitem10)&gt;，默认为空。 |
 | saveas      | string                                         | 否   | 保存下载文件的路径，包括如下两种：<br/>-相对路径，如"./xxx/yyy/zzz.html"、"xxx/yyy/zzz.html"，位于调用方的缓存路径下。<br/>-uri路径，如"datashare://bundle/xxx/yyy/zzz.html"，仅对具有访问url路径权限的应用开放。该功能暂不支持。<br/>默认为相对路径，即下载至应用当前缓存路径下。 |
