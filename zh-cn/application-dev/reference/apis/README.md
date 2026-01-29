@@ -148,6 +148,7 @@
 - 设备管理
   - [@ohos.deviceInfo (设备信息)](js-apis-device_Info.md)
 - 数据管理
+  - [@ohos.pasteboard (剪贴板)](js-apis-pasteboard.md)
   - [@ohos.data.dataSharePredicates (数据共享谓词)](js-apis-data-dataSharePredicates.md)
   - [@ohos.data.preferences (用户首选项)](js-apis-data-preferences.md)
   - [@ohos.data.relationalStore (关系型数据库)](js-apis-data-relationalStore.md)
