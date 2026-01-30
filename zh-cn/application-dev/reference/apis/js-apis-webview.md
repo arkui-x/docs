@@ -191,7 +191,7 @@ struct WebComponent {
 }
 ```
 
-### getUrl
+### getUrl<sup>11+<sup>
 
 getUrl(): string
 
@@ -601,7 +601,7 @@ struct WebComponent {
 }
 ```
 
-### refresh<sup>24+<sup>
+### refresh<sup>11+<sup>
 
 refresh(): void
 
@@ -2517,7 +2517,7 @@ struct WebComponent {
 }
 ```
 
-## WebMessagePort<sup>11+<sup>
+## WebMessagePort
 
 通过WebMessagePort可以进行消息的发送以及接收。
 
@@ -3429,7 +3429,7 @@ struct WebComponent {
 }
 ```
 
-## GeolocationPermissions<sup>18+<s>
+## GeolocationPermissions
 
 Web组件地理位置权限管理对象。
 
@@ -3840,7 +3840,7 @@ struct WebComponent {
 }
 ```
 
-## WebCookieManager<sup>11+<sup>
+## WebCookieManager
 
 通过WebCookie可以控制Web组件中的cookie的各种行为，其中每个应用中的所有web组件共享一个WebCookieManager实例。
 
@@ -4274,7 +4274,7 @@ struct WebComponent {
 }
 ```
 
-## WebStorage<sup>18+<sup>
+## WebStorage
 
 通过WebStorage可管理Web SQL数据库接口和HTML5 Web存储接口，每个应用中的所有Web组件共享一个WebStorage。
 
@@ -4810,7 +4810,7 @@ struct WebComponent {
 | ------ | ---------------- |
 | string | 字符串类型数据。 |
 
-## WebStorageOrigin<sup>18+<sup>
+## WebStorageOrigin
 
 提供Web SQL数据库的使用信息。
 
@@ -4822,7 +4822,7 @@ struct WebComponent {
 | usage  | number | 是  | 是 | 指定源的存储量。     |
 | quota  | number | 是  | 是 | 指定源的存储配额。   |
 
-## BackForwardList<sup>11+<sup>
+## BackForwardList
 
 当前Webview的历史信息列表。
 
@@ -4886,7 +4886,7 @@ struct WebComponent {
 }
 ```
 
-## HistoryItem<sup>11+<sup>
+## HistoryItem
 
 页面历史记录项。
 
@@ -6191,7 +6191,7 @@ struct WebComponent {
 }
 ```
 
-### getUrl<sup>11+</sup>
+### getUrl<sup>18+</sup>
 
 getUrl(): string
 
