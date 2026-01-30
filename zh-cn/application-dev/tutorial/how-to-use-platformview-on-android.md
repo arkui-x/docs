@@ -1,90 +1,52 @@
-# 平台视图开发指南
+# Android平台视图开发指南
 
-平台视图，提供了ArkUI-X与原生view进行混合显示。本文主要介绍Android平台进行平台视图开发的步骤说明，Android接口参考[PlatformView](../reference/arkui-for-android/platformview-interface-android.md)。
+## 概述
 
-开发者需要做如下3个步骤。
+平台视图（PlatformView）是ArkUI-X框架提供的核心能力之一，允许开发者在ArkUI界面中嵌入原生Android组件。<br>通过此能力，您可以充分利用Android 平台特有的UI组件（如TextureMapView、WebView、MediaPlayer等），实现ArkUI组件与原生视图的无缝混合渲染。<br>ArkUI侧具体API请参考[PlatformView API](../reference/apis/js-apis-PlatformView.md)，Android侧参考[PlatformView](../reference/arkui-for-android/platformview-interface-android.md)。
 
+## 示例
 
-1、【Android】 自定义PlatformView, PlatformViewFactory
-
-    在 Android 端新建一个实现 IPlatformView 接口的类，并实现 getView 、onDispose()接口；
-    在 Android 端新建一个实现 PlatformViewFactory 接口的类，并实现 getPlatformView()接口；
-
-2、【Android】 定义StageActivity，注册上述的 PlatformViewFactory类
-
-    再实现一个继承 StageActivity的类，在其构造函数中创建(1)的 PlatformViewFactory 对象；
-    把 PlatformViewFactory 类注册到 StageActivity中。
-
-3、【Arkui-X ets】使用PlatformView
-
-    导入模块
-    import PlatformView, { PlatformViewAttribute } from '@arkui-x.platformview'
-    在 Android 端实现好了之后，就能在ArkUI端用ets来显示原生组件的视图了，如显示MapView。
-
-## Android平台
-
-### 场景：使用原生地图组件
-
-1、自定义IPlatformView接口的实现类。
+### 自定义IPlatformView接口的实现类, 封装WebView
 
 ```java
-// MyMapWrapper.java
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.TextureMapView;
+//包名
+package com.xxx.xxx;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.view.View;
+import android.webkit.WebView;
+
 import ohos.ace.adapter.capability.platformview.IPlatformView;
 
-public class MyMapWrapper implements IPlatformView {
-    TextureMapView mMapView = null;
-    AMap aMap = null;
-    private String id = "PlatformViewTest1";
-
-    MyMapWrapper(Context context, Bundle savedInstanceState) {
-        // create TextureMapView
-        mMapView = new TextureMapView(context) {
-            @Override
-            public boolean dispatchTouchEvent(MotionEvent event) {
-                return super.dispatchTouchEvent(event);
-            }
-        };
-        mMapView.onCreate(savedInstanceState);
-        // init map
-        aMap = mMapView.getMap();
-        init();
+/**
+ * MyWebView.
+ * 自定义平台视图类
+ * 该类继承 IPlatformView 接口并遵循 IPlatformView 协议，提供网页视图的封装
+ */
+public class MyWebView implements IPlatformView {
+    private String id = "WebView";
+    private WebView mWebView;
+	//构造Android原生WebView组件
+    @SuppressLint("SetJavaScriptEnabled")
+    MyWebView(Context context) {
+        mWebView = new WebView(context);
+        String url = "https://gitcode.com/arkui-x";
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setDomStorageEnabled(true);
+        mWebView.loadUrl(url);
     }
-
-    private void init() {
-        aMap.setOnMapLoadedListener(new AMap.OnMapLoadedListener() {
-            @Override
-            public void onMapLoaded() {
-                setUp(aMap);
-            }
-        });
-    }
-
-    private void setUp(AMap amap) {
-        UiSettings uiSettings = amap.getUiSettings();
-        amap.showIndoorMap(true);
-        uiSettings.setCompassEnabled(true);
-        uiSettings.setScaleControlsEnabled(true);
-        uiSettings.setMyLocationButtonEnabled(true);
-    }
-
-    public void onResume() {
-        mMapView.onResume();
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        mMapView.onSaveInstanceState(outState);
-    }
-
+	// 返回关联的 View 对象（网页视图）
     @Override
     public View getView() {
-        return mMapView;
+        return mWebView;
     }
+	// 清理资源的方法（当前为空实现，可根据需要扩展）
     @Override
-    public  void onDispose() {
-        mMapView.onDestroy();
+    public void onDispose() {
+        mWebView.destroy();
     }
+	// 返回平台视图的唯一标识符
     @Override
     public String getPlatformViewID() {
         return id;
@@ -93,30 +55,179 @@ public class MyMapWrapper implements IPlatformView {
 
 ```
 
-2、自定义PlatformViewFactory接口的实现类。
+自定义IPlatformView接口的实现类, 封装TextureMapView
 
 ```java
-// MyPlatformViewFactory.java
+package com.xxx.xxx;
+
 import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+
+import com.amap.api.maps.TextureMapView;
+
+import ohos.ace.adapter.capability.platformview.IPlatformView;
+
+/**
+ * MyMapView.
+ * 自定义平台视图类
+ * 该类继承 IPlatformView 接口并遵循 IPlatformView 协议，提供地图视图的封装
+ */
+public class MyMapView implements IPlatformView {
+    TextureMapView mMapView;
+    private String id = "MapView";
+	//构造Android原生TextureMapView组件
+    MyMapView(Context context, Bundle savedInstanceState) {
+        mMapView = new TextureMapView(context);
+        mMapView.onCreate(savedInstanceState);
+    }
+	// 返回关联的 View 对象（网页视图）
+    @Override
+    public View getView() {
+        return mMapView;
+    }
+	// 清理资源的方法（当前为空实现，可根据需要扩展）
+    @Override
+    public void onDispose() {
+        mMapView.onDestroy();
+    }
+	// 返回平台视图的唯一标识符
+    @Override
+    public String getPlatformViewID() {
+        return id;
+    }
+}
+
+```
+
+自定义IPlatformView接口的实现类, 封装MediaPlayer
+
+```java
+package com.xxx.xxx;
+
+import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
+import android.graphics.SurfaceTexture;
+import android.media.MediaPlayer;
+import android.view.Surface;
+import android.view.TextureView;
+import android.view.View;
+
+import java.io.IOException;
+
+import ohos.ace.adapter.ALog;
+import ohos.ace.adapter.capability.platformview.IPlatformView;
+
+/**
+ * MyVideoView.
+ * 自定义平台视图类
+ * 该类继承 IPlatformView 接口并遵循 IPlatformView 协议，提供视频组件的封装
+ */
+public class MyVideoView implements IPlatformView, TextureView.SurfaceTextureListener {
+    private String id = "VideoView";
+    private TextureView textureView;
+    private MediaPlayer mediaPlayer;
+    private Context context;
+	//构造Android原生MediaPlayer组件并关联TextureView进行渲染
+    MyVideoView(Context context) {
+        this.context = context;
+        textureView = new TextureView(context);
+        textureView.setSurfaceTextureListener(this);
+        initMediaPlayer();
+    }
+	//视频组件相关初始化
+    private void initMediaPlayer() {
+        mediaPlayer = new MediaPlayer();
+        AssetManager am = context.getAssets();
+        try {
+            AssetFileDescriptor afd = am.openFd("arkui-x/entry/resources/rawfile/video.mp4");
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mediaPlayer.setOnPreparedListener(mp -> {
+            mediaPlayer.start();
+        });
+        mediaPlayer.setLooping(true);
+        mediaPlayer.prepareAsync();
+    }
+	// 返回关联的 View 对象（视频渲染组件）
+    @Override
+    public View getView() {
+        return textureView;
+    }
+	// 清理资源的方法（当前为空实现，可根据需要扩展）
+    @Override
+    public void onDispose() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+	// 返回平台视图的唯一标识符
+    @Override
+    public String getPlatformViewID() {
+        return id;
+    }
+	
+    @Override
+    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+        mediaPlayer.setSurface(new Surface(surface));
+    }
+
+    @Override
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+
+    }
+
+    @Override
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+        return false;
+    }
+
+    @Override
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+
+    }
+}
+```
+
+
+
+### 自定义PlatformViewFactory接口的实现类
+
+```java
+package com.xxx.xxx;
+
+import android.content.Context;
+import android.os.Bundle;
+
 import ohos.ace.adapter.capability.platformview.IPlatformView;
 import ohos.ace.adapter.capability.platformview.PlatformViewFactory;
 
+/**
+ * MyPlatformViewFactory.
+ * 继承 PlatformViewFactory 接口并遵循 PlatformViewFactory 协议，负责创建和管理平台视图实例
+ */
 public class MyPlatformViewFactory extends PlatformViewFactory {
     private Context context;
     private Bundle savedInstanceState;
 
     @Override
-    public IPlatformView getPlatformView(String platformViewId) {
-        IPlatformView pv = null;
-        switch (platformViewId){
-            case "PlatformViewTest1":
-                // create PlatformView
-                pv = new MyMapWrapper(context, savedInstanceState);
-                break;
-            default:
-                break;
+    public IPlatformView getPlatformView(String Id) {
+        //通过ID标识符名称，创建对应组件
+        if ("MapView".equals(Id)) {
+            //地图组件
+            return new MyMapView(context, savedInstanceState);
+        } else if ("WebView".equals(Id)) {
+            //网页组件
+            return new MyWebView(context);
+        } else if ("VideoView".equals(Id)) {
+            //视频组件
+            return new MyVideoView(context);
         }
-        return pv;
+        return null;
     }
 
     public void setContext(Context context) {
@@ -127,133 +238,34 @@ public class MyPlatformViewFactory extends PlatformViewFactory {
         this.savedInstanceState = savedInstanceState;
     }
 }
-
 ```
 
-3、自定义StageActivity，把PlatformViewFactory实现类注册到StageActivity中。
+### 自定义EntryEntryAbilityActivity 继承StageActivity，把PlatformViewFactory实现类注册到StageActivity中
 
 ```java
-// EntryEntryAbilityActivity.java
-import com.amap.api.maps.MapsInitializer;
+package com.xxx.xxx;
 
-import ohos.ace.adapter.capability.platformview.IPlatformView;
-import ohos.ace.adapter.capability.platformview.PlatformViewFactory;
+import android.os.Bundle;
+import android.util.Log;
 import ohos.stage.ability.adapter.StageActivity;
 
 public class EntryEntryAbilityActivity extends StageActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setInstanceName("com.example.mapapp:entry:EntryAbility:");
+        setInstanceName("com.xxx.xxx:entry:EntryAbility:");
         super.onCreate(savedInstanceState);
-        
-        MapsInitializer.updatePrivacyShow(this, true, true);
-        MapsInitializer.updatePrivacyAgree(this, true);
-        // create PlatformViewFactory
-        MyPlatformViewFactory pf = new MyPlatformViewFactory();
-        pf.setContext(this);
-        pf.setSavedInstanceState(savedInstanceState);
-        // register PlatformViewFactory
-        registerPlatformViewFactory(pf);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        ...//其它功能代码
+        //PlatformViewFactory实例对象创建并注册
+        MyPlatformViewFactory platformViewFactory = new MyPlatformViewFactory();
+        platformViewFactory.setContext(this);
+        platformViewFactory.setSavedInstanceState(savedInstanceState);
+        registerPlatformViewFactory(platformViewFactory);
     }
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public void onConfigurationChanged(android.content.res.Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 }
 
 ```
 
-4、在ArkTS中，使用PlatformView。
-   编写ArkUI页面platformview.ets。
-
-```js
-// platformview.ets
-import PlatformView, { PlatformViewAttribute } from '@arkui-x.platformview';
-@Entry
-@Component
-struct PlatformViewSample {
-  @State changeValue: string = ''
-  @State submitValue: string = ''
-  controller: SearchController = new SearchController()
-  build() {
-    Column() {
-      PlatformView('PlatformViewTest1')
-        .width('100%')
-        .height('80%')
-        .backgroundColor(Color.Gray)
-
-      Search({ value: this.changeValue, placeholder: 'Type to search...', controller: this.controller })
-        .searchButton('SEARCH')
-        .width('95%')
-        .height(40)
-        .backgroundColor('#F5F5F5')
-        .placeholderColor(Color.Grey)
-        .placeholderFont({ size: 14, weight: 400 })
-        .textFont({ size: 14, weight: 400 })
-        .onSubmit((value: string) => {
-          this.submitValue = value
-        })
-        .onChange((value: string) => {
-          this.changeValue = value
-        })
-        .margin(20)
-
-    }.height('100%')
-  }
-}
-```
-5、通过平台视图构造参数传递数据（可选）
-构造时传递数据
-```js
-build() {
-    Column() {
-      PlatformView('PlatformViewTest1', 'this is data')
-        .width('100%')
-        .height('80%')
-        .backgroundColor(Color.Gray)
-
-      ...
-
-    }.height('100%')
-}
-```
-重写 getPlatformView(String platformViewId, String data)
-
-获取传递的数据
-```java
-// MyPlatformViewFactory.java
-...
-public class MyPlatformViewFactory extends PlatformViewFactory {
-    ...
-
-    @Override
-    public IPlatformView getPlatformView(String platformViewId, String data) {
-        //use data do something
-        IPlatformView pv = null;
-        switch (platformViewId){
-            case "PlatformViewTest1":
-                // create PlatformView
-                pv = new MyMapWrapper(context, savedInstanceState);
-                break;
-            default:
-                break;
-        }
-        return pv;
-    }
-}
-```
