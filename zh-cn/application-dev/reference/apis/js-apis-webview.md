@@ -2517,7 +2517,7 @@ struct WebComponent {
 }
 ```
 
-## WebMessagePort
+## WebMessagePort<sup>11+</sup>
 
 通过WebMessagePort可以进行消息的发送以及接收。
 
@@ -3429,7 +3429,7 @@ struct WebComponent {
 }
 ```
 
-## GeolocationPermissions
+## GeolocationPermissions<sup>18+<sup>
 
 Web组件地理位置权限管理对象。
 
@@ -3840,7 +3840,7 @@ struct WebComponent {
 }
 ```
 
-## WebCookieManager
+## WebCookieManager<sup>11+<sup>
 
 通过WebCookie可以控制Web组件中的cookie的各种行为，其中每个应用中的所有web组件共享一个WebCookieManager实例。
 
@@ -3848,7 +3848,7 @@ struct WebComponent {
 >
 > 目前调用WebCookieManager下的方法，都需要先加载Web组件。
 
-###  configCookie11+
+###  configCookie<sup>11+<sup>
 
 static configCookie(url: string, value: string, callback: AsyncCallback\<void>): void
 
@@ -3904,7 +3904,7 @@ struct WebComponent {
 }
 ```
 
-###  configCookie11+
+###  configCookie<sup>11+<sup>
 
 static configCookie(url: string, value: string): Promise\<void>
 
@@ -3961,7 +3961,7 @@ struct WebComponent {
 }
 ```
 
-###  fetchCookie11+
+###  fetchCookie<sup>11+<sup>
 
 static fetchCookie(url: string, callback: AsyncCallback\<string>): void
 
@@ -4020,7 +4020,7 @@ struct WebComponent {
 }
 ```
 
-###  fetchCookie11+
+###  fetchCookie<sup>11+<sup>
 
 static fetchCookie(url: string): Promise\<string>
 
@@ -4082,7 +4082,7 @@ struct WebComponent {
 }
 ```
 
-###  clearAllCookies11+
+###  clearAllCookies<sup>11+<sup>
 
 static clearAllCookies(callback: AsyncCallback\<void>): void
 
@@ -4274,7 +4274,7 @@ struct WebComponent {
 }
 ```
 
-## WebStorage
+## WebStorage<sup>18+<sup>
 
 通过WebStorage可管理Web SQL数据库接口和HTML5 Web存储接口，每个应用中的所有Web组件共享一个WebStorage。
 
@@ -4810,7 +4810,7 @@ struct WebComponent {
 | ------ | ---------------- |
 | string | 字符串类型数据。 |
 
-## WebStorageOrigin
+## WebStorageOrigin<sup>18+<sup>
 
 提供Web SQL数据库的使用信息。
 
@@ -4822,7 +4822,7 @@ struct WebComponent {
 | usage  | number | 是  | 是 | 指定源的存储量。     |
 | quota  | number | 是  | 是 | 指定源的存储配额。   |
 
-## BackForwardList
+## BackForwardList<sup>11+<sup>
 
 当前Webview的历史信息列表。
 
@@ -4886,7 +4886,7 @@ struct WebComponent {
 }
 ```
 
-## HistoryItem
+## HistoryItem<sup>11+</sup>
 
 页面历史记录项。
 
