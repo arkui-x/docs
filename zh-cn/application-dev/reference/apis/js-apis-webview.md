@@ -328,7 +328,7 @@ struct WebComponent {
 </html>
 ```
 
-### runJavaScript
+### runJavaScript<sup>11+<sup>
 
 runJavaScript(script: string): Promise\<string>
 
@@ -2521,7 +2521,7 @@ struct WebComponent {
 
 通过WebMessagePort可以进行消息的发送以及接收。
 
-### createWebMessagePorts
+### createWebMessagePorts<sup>11+</sup>
 
 createWebMessagePorts(isExtentionType?: boolean): Array\<WebMessagePort>
 
@@ -2579,7 +2579,7 @@ struct WebComponent {
 }
 ```
 
-### postMessage
+### postMessage<sup>11+</sup>
 
 postMessage(name: string, ports: Array\<WebMessagePort>, uri: string): void
 
@@ -3226,7 +3226,7 @@ function postStringToApp() {
 
 
 
-## webDatabase
+## webDatabase<sup>11+</sup>
 
 web组件数据库管理对象。
 
@@ -3235,7 +3235,7 @@ web组件数据库管理对象。
 > 目前调用WebDataBase下的方法，都需要先加载Web组件。
 
 
-### existHttpAuthCredentials
+### existHttpAuthCredentials<sup>11+</sup>
 
 static existHttpAuthCredentials(): boolean
 
@@ -3278,7 +3278,7 @@ struct WebComponent {
 }
 ```
 
-### deleteHttpAuthCredentials
+### deleteHttpAuthCredentials<sup>11+</sup>
 
 static deleteHttpAuthCredentials(): void
 
@@ -3315,7 +3315,7 @@ struct WebComponent {
 }
 ```
 
-### getHttpAuthCredentials
+### getHttpAuthCredentials<sup>11+</sup>
 
 static getHttpAuthCredentials(host: string, realm: string): Array\<string>
 
@@ -3375,7 +3375,7 @@ struct WebComponent {
 }
 ```
 
-### saveHttpAuthCredentials
+### saveHttpAuthCredentials<sup>11+</sup>
 
 static saveHttpAuthCredentials(host: string, realm: string, username: string, password: string): void
 
@@ -3612,7 +3612,7 @@ struct WebComponent {
 }
 ```
 
-### getAccessibleGeolocation
+### getAccessibleGeolocation<sup>18+<sup>
 
 static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise\<boolean>
 
@@ -3734,7 +3734,7 @@ struct WebComponent {
 }
 ```
 
-### getStoredGeolocation
+### getStoredGeolocation<sup>18+<sup>
 
 static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise\<boolean>
 
@@ -4444,7 +4444,7 @@ struct WebComponent {
 
 加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
 
-### getOrigins
+### getOrigins<sup>18+<sup>
 
 static getOrigins(): Promise\<Array\<WebStorageOrigin>>
 
@@ -4568,7 +4568,7 @@ struct WebComponent {
 
 加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
 
-### getOriginQuota
+### getOriginQuota<sup>18+<sup>
 
 static getOriginQuota(origin: string): Promise\<number>
 
@@ -4695,7 +4695,7 @@ struct WebComponent {
 
 加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
 
-### getOriginUsage
+### getOriginUsage<sup>18+<sup>
 
 static getOriginUsage(origin: string): Promise\<number>
 
