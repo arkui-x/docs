@@ -131,7 +131,7 @@ struct WebComponent {
 }
 ```
 
-### loadData
+### loadData<sup>11+<sup>
 
 loadData(data: string, mimeType: string, encoding: string, baseUrl?: string, historyUrl?: string): void
 
@@ -191,7 +191,7 @@ struct WebComponent {
 }
 ```
 
-### getUrl
+### getUrl<sup>11+<sup>
 
 getUrl(): string
 
@@ -242,7 +242,7 @@ struct WebComponent {
 }
 ```
 
-### runJavaScript
+### runJavaScript<sup>11+<sup>
 
 runJavaScript(script: string, callback : AsyncCallback\<string>): void
 
@@ -328,7 +328,7 @@ struct WebComponent {
 </html>
 ```
 
-### runJavaScript
+### runJavaScript<sup>11+<sup>
 
 runJavaScript(script: string): Promise\<string>
 
@@ -415,7 +415,7 @@ Hello world!
 </html>
 ```
 
-### accessBackward
+### accessBackward<sup>11+<sup>
 
 accessBackward(): boolean
 
@@ -465,7 +465,7 @@ struct WebComponent {
 }
 ```
 
-### accessForward
+### accessForward<sup>11+<sup>
 
 accessForward(): boolean
 
@@ -515,7 +515,7 @@ struct WebComponent {
 }
 ```
 
-### backward
+### backward<sup>11+<sup>
 
 backward(): void
 
@@ -558,7 +558,7 @@ struct WebComponent {
 }
 ```
 
-### forward
+### forward<sup>11+<sup>
 
 forward(): void
 
@@ -601,7 +601,7 @@ struct WebComponent {
 }
 ```
 
-### refresh
+### refresh<sup>11+<sup>
 
 refresh(): void
 
@@ -644,7 +644,7 @@ struct WebComponent {
 }
 ```
 
-### accessStep
+### accessStep<sup>11+<sup>
 
 accessStep(step: number): boolean
 
@@ -702,7 +702,7 @@ struct WebComponent {
 }
 ```
 
-### clearHistory
+### clearHistory<sup>11+<sup>
 
 clearHistory(): void
 
@@ -747,7 +747,7 @@ struct WebComponent {
 }
 ```
 
-### scrollTo
+### scrollTo<sup>11+<sup>
 
 scrollTo(x:number, y:number): void
 
@@ -798,7 +798,7 @@ struct WebComponent {
 }
 ```
 
-### scrollBy
+### scrollBy<sup>11+<sup>
 
 scrollBy(deltaX:number, deltaY:number): void
 
@@ -849,7 +849,7 @@ struct WebComponent {
 }
 ```
 
-### stop
+### stop<sup>11+<sup>
 
 stop(): void
 
@@ -892,7 +892,7 @@ struct WebComponent {
 }
 ```
 
-### zoom
+### zoom<sup>11+<sup>
 
 zoom(factor: number): void
 
@@ -1186,7 +1186,7 @@ struct WebComponent {
 }
 ```
 
-### removeCache
+### removeCache<sup>11+<sup>
 
 removeCache(clearRom: boolean): void
 
@@ -1235,7 +1235,7 @@ struct WebComponent {
 }
 ```
 
-### backOrForward
+### backOrForward<sup>11+<sup>
 
 backOrForward(step: number): void
 
@@ -1288,7 +1288,7 @@ struct WebComponent {
 }
 ```
 
-### getTitle
+### getTitle<sup>11+<sup>
 
 getTitle(): string
 
@@ -1340,7 +1340,7 @@ struct WebComponent {
 }
 ```
 
-### getBackForwardEntries
+### getBackForwardEntries<sup>11+<sup>
 
 getBackForwardEntries(): BackForwardList
 
@@ -1403,7 +1403,7 @@ struct WebComponent {
 }
 ```
 
-### getPageHeight
+### getPageHeight<sup>11+<sup>
 
 getPageHeight(): number
 
@@ -2517,11 +2517,11 @@ struct WebComponent {
 }
 ```
 
-## WebMessagePort
+## WebMessagePort<sup>11+</sup>
 
 通过WebMessagePort可以进行消息的发送以及接收。
 
-### createWebMessagePorts
+### createWebMessagePorts<sup>11+</sup>
 
 createWebMessagePorts(isExtentionType?: boolean): Array\<WebMessagePort>
 
@@ -2579,7 +2579,7 @@ struct WebComponent {
 }
 ```
 
-### postMessage
+### postMessage<sup>11+</sup>
 
 postMessage(name: string, ports: Array\<WebMessagePort>, uri: string): void
 
@@ -2728,7 +2728,7 @@ function PostMsgToEts(data) {
 }
 ```
 
-### postMessageEvent
+### postMessageEvent<sup>11+<sup>
 
 postMessageEvent(message: WebMessage): void
 
@@ -2781,7 +2781,7 @@ struct WebComponent {
 }
 ```
 
-### onMessageEvent
+### onMessageEvent<sup>11+<sup>
 
 onMessageEvent(callback: (result: WebMessage) => void): void
 
@@ -2838,7 +2838,7 @@ struct WebComponent {
 }
 ```
 
-### close
+### close<sup>11+<sup>
 
 close(): void
 
@@ -3226,7 +3226,7 @@ function postStringToApp() {
 
 
 
-## webDatabase
+## webDatabase<sup>11+</sup>
 
 web组件数据库管理对象。
 
@@ -3235,7 +3235,7 @@ web组件数据库管理对象。
 > 目前调用WebDataBase下的方法，都需要先加载Web组件。
 
 
-### existHttpAuthCredentials
+### existHttpAuthCredentials<sup>11+</sup>
 
 static existHttpAuthCredentials(): boolean
 
@@ -3278,7 +3278,7 @@ struct WebComponent {
 }
 ```
 
-### deleteHttpAuthCredentials
+### deleteHttpAuthCredentials<sup>11+</sup>
 
 static deleteHttpAuthCredentials(): void
 
@@ -3315,7 +3315,7 @@ struct WebComponent {
 }
 ```
 
-### getHttpAuthCredentials
+### getHttpAuthCredentials<sup>11+</sup>
 
 static getHttpAuthCredentials(host: string, realm: string): Array\<string>
 
@@ -3375,7 +3375,7 @@ struct WebComponent {
 }
 ```
 
-### saveHttpAuthCredentials
+### saveHttpAuthCredentials<sup>11+</sup>
 
 static saveHttpAuthCredentials(host: string, realm: string, username: string, password: string): void
 
@@ -3429,7 +3429,7 @@ struct WebComponent {
 }
 ```
 
-## GeolocationPermissions
+## GeolocationPermissions<sup>18+<sup>
 
 Web组件地理位置权限管理对象。
 
@@ -3446,7 +3446,7 @@ Web组件地理位置权限管理对象。
 #### Android:
 访问地理位置时需添加权限：android.permission.ACCESS_FINE_LOCATION、android.permission.ACCESS_COARSE_LOCATION
 
-### allowGeolocation
+### allowGeolocation<sup>18+<sup>
 
 static allowGeolocation(origin: string, incognito?: boolean): void
 
@@ -3499,7 +3499,7 @@ struct WebComponent {
 }
 ```
 
-### deleteGeolocation
+### deleteGeolocation<sup>18+<sup>
 
 static deleteGeolocation(origin: string, incognito?: boolean): void
 
@@ -3552,7 +3552,7 @@ struct WebComponent {
 }
 ```
 
-### getAccessibleGeolocation
+### getAccessibleGeolocation<sup>18+<sup>
 
 static getAccessibleGeolocation(origin: string, callback: AsyncCallback\<boolean>, incognito?: boolean): void
 
@@ -3612,7 +3612,7 @@ struct WebComponent {
 }
 ```
 
-### getAccessibleGeolocation
+### getAccessibleGeolocation<sup>18+<sup>
 
 static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise\<boolean>
 
@@ -3676,7 +3676,7 @@ struct WebComponent {
 }
 ```
 
-### getStoredGeolocation
+### getStoredGeolocation<sup>18+<sup>
 
 static getStoredGeolocation(callback: AsyncCallback<Array\<string>>, incognito?: boolean): void
 
@@ -3734,7 +3734,7 @@ struct WebComponent {
 }
 ```
 
-### getStoredGeolocation
+### getStoredGeolocation<sup>18+<sup>
 
 static getAccessibleGeolocation(origin: string, incognito?: boolean): Promise\<boolean>
 
@@ -3796,7 +3796,7 @@ struct WebComponent {
 }
 ```
 
-### deleteAllGeolocation
+### deleteAllGeolocation<sup>18+<sup>
 
 static deleteAllGeolocation(incognito?: boolean): void
 
@@ -3840,7 +3840,7 @@ struct WebComponent {
 }
 ```
 
-## WebCookieManager
+## WebCookieManager<sup>11+<sup>
 
 通过WebCookie可以控制Web组件中的cookie的各种行为，其中每个应用中的所有web组件共享一个WebCookieManager实例。
 
@@ -3848,7 +3848,7 @@ struct WebComponent {
 >
 > 目前调用WebCookieManager下的方法，都需要先加载Web组件。
 
-###  configCookie11+
+###  configCookie<sup>11+<sup>
 
 static configCookie(url: string, value: string, callback: AsyncCallback\<void>): void
 
@@ -3904,7 +3904,7 @@ struct WebComponent {
 }
 ```
 
-###  configCookie11+
+###  configCookie<sup>11+<sup>
 
 static configCookie(url: string, value: string): Promise\<void>
 
@@ -3961,7 +3961,7 @@ struct WebComponent {
 }
 ```
 
-###  fetchCookie11+
+###  fetchCookie<sup>11+<sup>
 
 static fetchCookie(url: string, callback: AsyncCallback\<string>): void
 
@@ -4020,7 +4020,7 @@ struct WebComponent {
 }
 ```
 
-###  fetchCookie11+
+###  fetchCookie<sup>11+<sup>
 
 static fetchCookie(url: string): Promise\<string>
 
@@ -4082,7 +4082,7 @@ struct WebComponent {
 }
 ```
 
-###  clearAllCookies11+
+###  clearAllCookies<sup>11+<sup>
 
 static clearAllCookies(callback: AsyncCallback\<void>): void
 
@@ -4274,7 +4274,7 @@ struct WebComponent {
 }
 ```
 
-## WebStorage
+## WebStorage<sup>18+<sup>
 
 通过WebStorage可管理Web SQL数据库接口和HTML5 Web存储接口，每个应用中的所有Web组件共享一个WebStorage。
 
@@ -4282,7 +4282,7 @@ struct WebComponent {
 >
 > 目前调用WebStorage下的方法，都需要先加载Web组件。
 
-### deleteOrigin
+### deleteOrigin<sup>18+<sup>
 
 static deleteOrigin(origin: string): void
 
@@ -4380,7 +4380,7 @@ struct WebComponent {
   </html>
  ```
 
-### getOrigins
+### getOrigins<sup>18+<sup>
 
 static getOrigins(callback: AsyncCallback\<Array\<WebStorageOrigin>>): void
 
@@ -4444,7 +4444,7 @@ struct WebComponent {
 
 加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
 
-### getOrigins
+### getOrigins<sup>18+<sup>
 
 static getOrigins(): Promise\<Array\<WebStorageOrigin>>
 
@@ -4507,7 +4507,7 @@ struct WebComponent {
 
 加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
 
-### getOriginQuota
+### getOriginQuota<sup>18+<sup>
 
 static getOriginQuota(origin: string, callback: AsyncCallback\<number>): void
 
@@ -4568,7 +4568,7 @@ struct WebComponent {
 
 加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
 
-### getOriginQuota
+### getOriginQuota<sup>18+<sup>
 
 static getOriginQuota(origin: string): Promise\<number>
 
@@ -4634,7 +4634,7 @@ struct WebComponent {
 
 加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
 
-### getOriginUsage
+### getOriginUsage<sup>18+<sup>
 
 static getOriginUsage(origin: string, callback: AsyncCallback\<number>): void
 
@@ -4695,7 +4695,7 @@ struct WebComponent {
 
 加载的html文件，请参考[deleteOrigin](#deleteorigin)接口下的html文件。
 
-### getOriginUsage
+### getOriginUsage<sup>18+<sup>
 
 static getOriginUsage(origin: string): Promise\<number>
 
@@ -4810,7 +4810,7 @@ struct WebComponent {
 | ------ | ---------------- |
 | string | 字符串类型数据。 |
 
-## WebStorageOrigin
+## WebStorageOrigin<sup>18+<sup>
 
 提供Web SQL数据库的使用信息。
 
@@ -4822,7 +4822,7 @@ struct WebComponent {
 | usage  | number | 是  | 是 | 指定源的存储量。     |
 | quota  | number | 是  | 是 | 指定源的存储配额。   |
 
-## BackForwardList
+## BackForwardList<sup>11+<sup>
 
 当前Webview的历史信息列表。
 
@@ -4833,7 +4833,7 @@ struct WebComponent {
 | currentIndex | number | 是   | 否   | 当前在页面历史列表中的索引。                                 |
 | size         | number | 是   | 否   | 历史列表中索引的数量，最多保存50条，超过时起始记录会被覆盖。 |
 
-### getItemAtIndex
+### getItemAtIndex<sup>11+<sup>
 
 getItemAtIndex(index: number): HistoryItem
 
@@ -4886,7 +4886,7 @@ struct WebComponent {
 }
 ```
 
-## HistoryItem
+## HistoryItem<sup>11+</sup>
 
 页面历史记录项。
 
