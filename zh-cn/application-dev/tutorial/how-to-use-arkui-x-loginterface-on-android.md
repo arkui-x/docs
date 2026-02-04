@@ -46,6 +46,34 @@ public class LogInterface implements ILogger {
 }
 ```
 
+## 使用setLogger设置ArkUI-X框架LogInterface以及日志拦截等级
+
+​		在需要控制ArkUI-X框架日志及TypeScript日志的输出时，可以利用[StageApplicationDelegate](../reference/arkui-for-android/StageApplicationDelegate.md)类中[setLogger](../reference/arkui-for-android/StageApplicationDelegate.md)方法来注入LogInterface并设置日志等级，注入成功，框架和TypeScript的日志通过提供的这个实例的方法输出，注入失败，执行日志输出原逻辑。
+
+​		区别于setLogInterface方法，setLogger能拦截到启动时的完整日志，推荐使用setLogger方法。
+
+**注意：setLogger方法调用必须位于MyApplication超类的onCreate()方法之前**
+
+使用setLogger设置ArkUI-X框架LogInterface以及日志拦截等级，完整示例如下：
+
+```java
+// MyApplication.java
+import ohos.ace.adapter.ILogger;
+import ohos.stage.ability.adapter.StageApplication;
+import ohos.stage.ability.adapter.StageApplicationDelegate;
+
+public class MyApplication extends StageApplication {
+    private StageApplicationDelegate appDelegate = null;
+    @Override
+    public void onCreate() {
+        LogInterface logInterface = new LogInterface(this); //创建实例
+        appDelegate = new StageApplicationDelegate(); //创建appDelegate
+        appDelegate.setLogger(logInterface,ILogger.LOG_DEBUG); //设置拦截的实例及日志等级
+        super.onCreate();
+    }
+}
+```
+
 ## 设置ArkUI-X框架LogInterface以及日志拦截等级
 
 ​		在需要控制ArkUI-X框架日志及TypeScript日志的输出时，可以利用[StageApplicationDelegate](../reference/arkui-for-android/StageApplicationDelegate.md)类中[setLogInterface](../reference/arkui-for-android/StageApplicationDelegate.md)方法来注入LogInterface，注入成功，框架和TypeScript的ERROR和FATAL日志通过提供的这个实例的方法输出，注入失败，执行日志输出原逻辑。
