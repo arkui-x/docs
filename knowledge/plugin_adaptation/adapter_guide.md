@@ -5,6 +5,7 @@
 ## 目录
 
 - [概述](#概述)
+- [适配模式对比](#适配模式对比)
 - [插件架构](#插件架构)
 - [核心规则](#核心规则)
 - [实现步骤](#实现步骤)
@@ -42,6 +43,533 @@
 - 输入处理
 - 字体渲染
 - 键盘管理
+
+## 适配模式对比
+
+ArkUI-X 插件适配支持两种架构模式，根据具体场景选择：
+
+### 模式 1: 独立实现模式 (Independent Implementation)
+
+**理念**: 完全独立实现，零 OHOS 依赖
+
+**架构**:
+```
+ArkTS API → NAPI (plugins/ 独立) → 接口 (plugins/) → 平台适配器
+```
+
+**特点**:
+- ✅ **零 OHOS 依赖** - 完全独立
+- ✅ **最小代码体积** - 仅包含必要功能
+- ✅ **平台优化** - 直接调用原生 API
+- ❌ **API 偏差风险** - 可能与 OHOS API 不一致
+- ❌ **重复维护** - 独立 NAPI 层
+- ❌ **需手动同步** - OHOS 更改不会自动传播
+
+**代码量分布**:
+- NAPI 绑定: ~2000 行（自定义）
+- 平台适配器: ~500 行/平台
+- 总计: ~3000 行（100% 自定义）
+
+**适用场景**:
+1. OHOS 模块**重度依赖平台特定功能**（如 `@ohos.telephony`）
+2. 仅需**最小功能集**（降级场景）
+3. 平台 API 与 OHOS **显著不同**
+4. 二进制体积是**关键约束**
+
+**参考**: `plugins/net/http` (独立实现)
+
+### 模式 2: OHOS 代码复用模式 (OHOS Reuse) ⭐ 推荐
+
+**理念**: 最大化复用 OHOS 代码，仅实现最小平台适配器
+
+**架构**:
+```
+ArkTS API → NAPI (OHOS 复用) → 数据结构 (OHOS 复用) → 接口 → 平台适配器
+```
+
+**特点**:
+- ✅ **~95% 代码复用** - 仅适配器是自定义的
+- ✅ **API 兼容性** - 100% 与 OHOS 一致
+- ✅ **自动同步** - OHOS 更改自动传播
+- ✅ **最小维护** - 仅 ~500 行/平台
+- ⚠️ **OHOS 依赖** - 需要 foundation 代码
+- ⚠️ **构建复杂度** - 更多 GN 配置
+
+**代码量分布**:
+- OHOS NAPI 绑定: ~2000 行（复用）
+- OHOS 数据结构: ~1000 行（复用）
+- 平台适配器: ~500 行/平台
+- 总计: ~3000 行（5% 自定义，95% 复用）
+
+**适用场景**:
+1. OHOS 模块**最小平台特定逻辑**
+2. 需要 **API 兼容性**
+3. 需要**自动更新**
+4. 大多数标准数据结构模块
+
+**参考**: `plugins/pasteboard` (OHOS 复用)
+
+### 详细对比表
+
+| 对比项 | 模式 1: 独立实现 | 模式 2: OHOS 复用 |
+|-------|-----------------|-----------------|
+| **代码量** | 100% 自定义 (~3000 行) | 5% 自定义，95% 复用 (~150 行新增) |
+| **二进制大小** | 较大（重复 NAPI） | 较小（共享 NAPI） |
+| **API 兼容性** | ⚠️ 可能偏离 | ✅ 100% 兼容 |
+| **OHOS 更新** | ❌ 手动同步 | ✅ 自动 |
+| **维护成本** | 高（完整 NAPI + 适配器） | 低（仅适配器） |
+| **构建复杂度** | 简单 | 复杂（OHOS 依赖） |
+| **平台优化** | ✅ 完全控制 | ⚠️ 受 OHOS 接口限制 |
+| **学习曲线** | 中等 | 低（遵循 OHOS 模式） |
+| **最适合** | 平台重度模块 | 数据重度模块 |
+
+### 决策流程图
+
+```
+START: 适配新的 @ohos API
+   ↓
+OHOS 实现是否主要是平台无关的业务逻辑？
+   ↓
+   YES → 模块是否重度依赖 OHOS 特定服务？
+           ↓
+           NO → 使用模式 2: OHOS 代码复用 ⭐
+           ↓
+           YES → 能否提取平台无关部分？
+                    ↓
+                    YES → 模式 2 + 服务抽象
+                    NO → 使用模式 1: 独立实现
+   ↓
+   NO → 使用模式 1: 独立实现
+```
+
+### 插件模式 (Plugin Pattern)
+
+**架构**：
+```
+ArkTS API → NAPI (独立) → 业务逻辑 → 平台接口 → 平台实现
+```
+
+**特点**：
+- ✅ 完全独立实现，不依赖 OHOS 代码
+- ✅ 适合新 API，从零开始
+- ✅ 平台隔离清晰（目录分离）
+- ❌ NAPI 代码与 OHOS 重复
+- ❌ 维护成本较高（两套 NAPI）
+
+**适用场景**：
+- 全新 API，OHOS 无对应实现
+- 需要完全不同的实现逻辑
+- 插件式架构，松耦合
+
+### 适配器模式 (Adapter Pattern)
+
+**架构**：
+```
+ArkTS API → NAPI (OHOS 共享) → 纯虚接口 → 平台适配器 (条件编译)
+```
+
+**特点**：
+- ✅ 单一 NAPI 层，无代码重复
+- ✅ OHOS 适配器是薄包装（100% 转发）
+- ✅ 编译时多态，无运行时开销
+- ✅ 最小化 OHOS 代码改动
+- ❌ 依赖 OHOS 仓库代码结构
+- ❌ 需要 OHOS 仓库协作
+
+**适用场景**：
+- 已有 OHOS 模块需要迁移
+- OHOS 和 ArkUI-X 逻辑相似
+- 需要最小化维护成本
+
+### 选择决策树
+
+```
+是否有 OHOS 实现？
+├─ 否 → 使用插件模式（模式 1）
+└─ 是 → OHOS 逻辑是否可复用？
+    ├─ 是 → 使用适配器模式（模式 2）⭐
+    └─ 否 → 使用插件模式（模式 1）
+```
+
+### 模式切换示例
+
+**场景**：适配 `@ohos.pasteboard`
+
+**插件模式** (如果选择)：
+```
+plugins/pasteboard/
+├── napi/pasteboard_module.cpp      # 独立 NAPI
+├── common/pasteboard_core.cpp      # 业务逻辑
+├── android/pasteboard_android.cpp  # Android 实现
+└── ios/pasteboard_ios.mm           # iOS 实现
+```
+
+**适配器模式** (推荐)：
+```
+OHOS 仓库:
+foundation/distributeddatamgr/pasteboard/
+├── interfaces/kits/napi/pasteboard_module.cpp  # NAPI (共享)
+├── interfaces/kits/napi/pasteboard_adapter.h   # 纯虚接口
+└── services/adapter/pasteboard_adapter_ohos.cpp # OHOS 薄包装
+
+Plugin 仓库:
+plugins/pasteboard/
+├── adapter/android/pasteboard_adapter_android.cpp  # JNI 调用
+└── adapter/ios/pasteboard_adapter_ios.mm           # ObjC++ 调用
+```
+
+### 适配器模式详细说明
+
+#### 架构层次
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  第 1 层: ArkTS API 层                                           │
+│  interface/sdk-js/api/@ohos.xxx.d.ts                            │
+└─────────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  第 2 层: NAPI 层 (OHOS 仓库维护，跨平台共享)                     │
+│  foundation/xxx/yyy/interfaces/kits/napi/xxx_module.cpp        │
+│  - 参数解析                                                      │
+│  - 类型转换                                                      │
+│  - 调用适配器接口                                                │
+└─────────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  第 3 层: 平台接口层 (纯虚 C++ 接口)                              │
+│  foundation/xxx/yyy/interfaces/kits/napi/xxx_adapter.h         │
+│  - 纯虚接口定义                                                  │
+│  - 工厂函数声明                                                  │
+└─────────────────────────────────────────────────────────────────┘
+                           ↓
+        ┌─────────────────┴─────────────────┐
+        ↓                                   ↓
+┌─────────────────────┐         ┌─────────────────────┐
+│  第 4 层: OHOS 实现   │         │  第 4 层: Android   │
+│  (薄包装，100%转发)  │         │  - JNI Bridge       │
+│  xxx_adapter_ohos.cpp│         │  - Java/Kotlin Impl │
+└─────────────────────┘         └─────────────────────┘
+                                          ↓
+                              ┌─────────────────────┐
+                              │  第 4 层: iOS 实现   │
+                              │  - ObjC++ Bridge     │
+                              │  - ObjC/Swift Impl   │
+                              └─────────────────────┘
+```
+
+#### 关键原则
+
+1. **单一 NAPI 层**：NAPI 代码只在 OHOS 仓库维护，Android/iOS 共享
+2. **OHOS 薄包装**：OHOS 适配器必须是 100% 转发，零逻辑改动
+3. **编译时多态**：使用条件编译选择平台实现，无虚函数表开销
+4. **Helper 宏**：提供迁移辅助宏，简化代码替换
+
+#### Helper 宏示例
+
+```cpp
+// xxx_adapter_helper.h
+#ifdef OHOS_PLATFORM
+    #define XXX_ADAPTER() (GetPasteboardClient())
+#elif defined(ANDROID_PLATFORM)
+    #define XXX_ADAPTER() (GetPasteboardAdapterAndroid())
+#elif defined(IOS_PLATFORM)
+    #define XXX_ADAPTER() (GetPasteboardAdapterIOS())
+#endif
+```
+
+#### 迁移步骤
+
+1. **定义纯虚接口**：创建 `xxx_adapter.h`
+2. **实现 OHOS 薄包装**：创建 `xxx_adapter_ohos.cpp`
+3. **实现平台适配器**：在 Plugin 仓库创建 Android/iOS 实现
+4. **修改 NAPI 层**：使用 Helper 宏替换直接调用
+5. **配置构建系统**：添加条件编译规则
+
+#### 参考
+
+- **完整示例**：`plugins/pasteboard/ADAPTER_ARCHITECTURE.md`
+- **迁移指南**：`foundation/distributeddatamgr/pasteboard/interfaces/kits/napi/ADAPTER_MIGRATION.md`
+- **Skill 工具**：使用 `/skill-platform-api` 自动生成适配器代码
+
+### GN 构建配置规则
+
+根据选择的架构模式，GN 配置有显著差异。
+
+#### 模式 1: 独立实现 GN 配置
+
+**plugins/{module}/{module}.gni**:
+```gni
+# 无 OHOS 源文件，仅自定义代码
+{module}_sources = [
+  "napi/{module}_napi.cpp",           # 自定义 NAPI 绑定
+  "common/{module}_data.cpp",         # 自定义数据结构
+]
+
+{module}_android_sources = [
+  "android/{module}_adapter_android.cpp",
+]
+
+{module}_ios_sources = [
+  "ios/{module}_adapter_ios.mm",
+]
+
+# 无 OHOS 包含路径
+{module}_include_dirs = [
+  "plugins/{module}",
+  "plugins/{module}/napi",
+  "plugins/interfaces/native",
+]
+
+# 无 OHOS 依赖
+{module}_android_deps = [
+  "//plugins/interfaces/native:ace_plugin_util_android",
+]
+```
+
+**关键规则**:
+- ✅ 零 OHOS 依赖
+- ✅ 自定义 NAPI 源文件
+- ✅ 简单的依赖关系
+
+#### 模式 2: OHOS 复用 GN 配置
+
+**plugins/{module}/{module}.gni**:
+```gni
+# OHOS 模块根目录（用于代码复用）
+{MODULE}_OHOS_ROOT = "//foundation/{ohos_module_path}"
+
+# OHOS NAPI 绑定（100% 复用）
+{module}_sources = [
+  # OHOS NAPI 绑定 - 直接复用
+  "${MODULE}_OHOS_ROOT/interfaces/kits/napi/src/napi_init.cpp",
+  "${MODULE}_OHOS_ROOT/interfaces/kits/napi/src/napi_{module}.cpp",
+  "${MODULE}_OHOS_ROOT/interfaces/kits/napi/src/napi_{module}_common.cpp",
+  # ... 所有 OHOS NAPI 文件（11+ 个文件）
+
+  # OHOS innerkits（数据结构实现）
+  "${MODULE}_OHOS_ROOT/frameworks/innerkits/src/{module}_client.cpp",
+  "${MODULE}_OHOS_ROOT/frameworks/innerkits/src/{module}_data.cpp",
+  # ... 所有 OHOS 数据结构文件（6+ 个文件）
+]
+
+# 平台特定源文件（仅平台适配层）
+{module}_android_sources = [
+  "android/{module}_adapter_android.cpp",  # ~500 行
+]
+
+{module}_ios_sources = [
+  "ios/{module}_adapter_ios.mm",  # ~500 行
+]
+
+# 包含 OHOS 头文件
+{module}_include_dirs = [
+  "plugins/{module}",
+  # OHOS 包含路径（复用的关键）
+  "${MODULE}_OHOS_ROOT/interfaces/kits/napi/include",
+  "${MODULE}_OHOS_ROOT/interfaces/kits/napi/src",
+  "${MODULE}_OHOS_ROOT/frameworks/innerkits/include",
+  # Plugin 接口
+  "plugins/interfaces/native",
+]
+
+# 依赖必须包含 OHOS
+{module}_android_deps = [
+  "plugins/interfaces/native:ace_plugin_util_android",
+  "${MODULE}_OHOS_ROOT/interfaces/kits/napi:{module}_client",  # 关键
+]
+
+{module}_ios_deps = [
+  "plugins/interfaces/native:ace_plugin_util_ios",
+  "${MODULE}_OHOS_ROOT/interfaces/kits/napi:{module}_client",  # 关键
+]
+
+# iOS 框架
+{module}_ios_frameworks = [
+  "Foundation.framework",
+  "UIKit.framework",
+  "MobileCoreServices.framework",
+]
+```
+
+**关键规则**:
+- ✅ OHOS 源文件列在 `{module}_sources`
+- ✅ OHOS 包含路径在 `{module}_include_dirs`
+- ✅ OHOS 依赖在 `{module}_android_deps` 和 `{module}_ios_deps`
+- ✅ 平台适配器仅 ~500 行
+- ✅ 实现 ~95% 代码复用
+
+### GN 构建配置最佳实践
+
+#### 规则 1: 包含路径必须匹配依赖
+
+```gni
+# ✅ 正确：包含路径与依赖匹配
+include_dirs = [
+  "plugins/{module}",
+  "{MODULE}_OHOS_ROOT/interfaces/kits/napi/include",  # 有对应依赖
+]
+deps = [
+  "{MODULE}_OHOS_ROOT/interfaces/kits/napi:{module}_client",  # 匹配包含
+]
+
+# ❌ 错误：包含路径无对应依赖
+include_dirs = [
+  "{MODULE}_OHOS_ROOT/.../include",  # 无对应依赖
+]
+deps = []  # 缺少依赖！
+```
+
+#### 规则 2: 使用 external_deps 引用系统库
+
+```gni
+# ✅ 正确：使用 external_deps 引用系统级库
+external_deps = [
+  "hilog:libhilog",
+  "napi:ace_napi",
+]
+
+# ❌ 错误：不要使用 deps 引用外部库
+deps = [
+  "//foundation/hiviewdfx/hilog:libhilog",  # 错误路径
+]
+```
+
+#### 规则 3: iOS 框架单独配置
+
+```gni
+# ✅ 正确：iOS 框架在独立配置中
+{module}_ios_frameworks = [
+  "Foundation.framework",
+  "UIKit.framework",
+  "MobileCoreServices.framework",
+]
+
+# 在 iOS BUILD.gn 中
+ohos_source_set("{module}_ios") {
+  frameworks = {module}_ios_frameworks
+}
+```
+
+#### 规则 4: 条件编译选择平台适配器
+
+```gni
+# OHOS 仓库 BUILD.gn
+ohos_shared_library("{module}_napi") {
+  sources = [
+    "napi/src/napi_{module}.cpp",
+    # ... 其他 NAPI 源文件
+  ]
+
+  # 条件编译适配器
+  if (!is_arkuix_target) {
+    # OHOS: 使用 OHOS 适配器
+    sources += [ "../../services/adapter/{module}_adapter_ohos.cpp" ]
+  } else {
+    # ArkUI-X: 使用 Plugin 仓库适配器
+    if (is_android) {
+      sources += [ "//plugins/{module}/adapter/android:{module}_adapter_android.cpp" ]
+    } else if (is_ios) {
+      sources += [ "//plugins/{module}/adapter/ios:{module}_adapter_ios.mm" ]
+    }
+  }
+}
+```
+
+### 完整示例：Pasteboard (模式 2)
+
+**plugins/pasteboard/pasteboard.gni**:
+```gni
+import("//build/ohos.gni")
+
+# 模块版本
+pasteboard_version = {
+  major = 2
+  minor = 0
+  patch = 0
+}
+
+# 模块根目录
+PASTEBOARD_ROOT = "//plugins/pasteboard"
+
+# OHOS pasteboard 根目录（用于代码复用）
+PASTEBOARD_OHOS_ROOT = "//foundation/distributeddatamgr/pasteboard"
+
+# 公共包含目录
+pasteboard_include = [
+  "$PASTEBOARD_ROOT",
+  "$PASTEBOARD_ROOT/android",
+  "$PASTEBOARD_ROOT/ios",
+  # OHOS pasteboard 接口（复用）
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/include",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src",
+  "$PASTEBOARD_OHOS_ROOT/frameworks/innerkits/include",
+  # Plugin 接口
+  "//plugins/interfaces",
+  "//plugins/interfaces/native",
+  # Third party
+  "//third_party/bounds_checking_function/include",
+  # Logging
+  "//foundation/hiviewdfx/hilog/interfaces/native/innerkits/include",
+]
+
+# 公共源文件（复用 OHOS NAPI 实现）
+pasteboard_sources = [
+  # OHOS NAPI 绑定（直接复用）
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src/napi_init.cpp",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src/napi_pasteboard.cpp",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src/napi_pasteboard_common.cpp",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src/napi_pastedata.cpp",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src/napi_pastedata_record.cpp",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src/napi_pasteboard_observer.cpp",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src/napi_pasteboard_progress_signal.cpp",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src/napi_systempasteboard.cpp",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src/async_call.cpp",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi/src/napi_data_utils.cpp",
+  # OHOS innerkits（数据结构实现）
+  "$PASTEBOARD_OHOS_ROOT/frameworks/innerkits/src/pasteboard_client.cpp",
+  "$PASTEBOARD_OHOS_ROOT/frameworks/innerkits/src/paste_data.cpp",
+  "$PASTEBOARD_OHOS_ROOT/frameworks/innerkits/src/paste_data_record.cpp",
+  "$PASTEBOARD_OHOS_ROOT/frameworks/innerkits/src/pasteboard_utils.cpp",
+  "$PASTEBOARD_OHOS_ROOT/frameworks/innerkits/src/pasteboard_copy.cpp",
+  "$PASTEBOARD_OHOS_ROOT/frameworks/innerkits/src/convert_utils.cpp",
+]
+
+# 平台特定源文件（仅平台适配层）
+pasteboard_android_sources = [
+  "android/pasteboard_adapter_android.cpp",  # Android 平台适配器
+]
+
+pasteboard_ios_sources = [
+  "ios/pasteboard_adapter_ios.mm",  # iOS 平台适配器
+]
+
+# Android 依赖
+pasteboard_android_deps = [
+  "//plugins/interfaces/native:ace_plugin_util_android",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi:pasteboard_client",  # OHOS 依赖
+]
+
+# iOS 依赖
+pasteboard_ios_deps = [
+  "//plugins/interfaces/native:ace_plugin_util_ios",
+  "$PASTEBOARD_OHOS_ROOT/interfaces/kits/napi:pasteboard_client",  # OHOS 依赖
+]
+
+# iOS 框架
+pasteboard_ios_frameworks = [
+  "Foundation.framework",
+  "UIKit.framework",
+  "MobileCoreServices.framework",
+]
+```
+
+**关键要点**:
+1. ✅ OHOS 源文件列在 `pasteboard_sources`
+2. ✅ OHOS 包含路径在 `pasteboard_include`
+3. ✅ OHOS 依赖在 `pasteboard_android_deps` 和 `pasteboard_ios_deps`
+4. ✅ 平台适配器仅 ~500 行
+5. ✅ 实现 ~95% 代码复用
 
 ## 插件架构
 
@@ -116,7 +644,7 @@ plugins/
 
 ## 核心规则
 
-### 13 条核心实现规则
+### 核心实现规则（16 条）
 
 #### 1. 分层架构
 
@@ -442,6 +970,121 @@ private:
 };
 ```
 
+#### 14. 符号可见性控制
+
+**只导出必要的符号**：
+
+```cpp
+// ✅ 正确：明确导出
+#define PLUGIN_EXPORT __attribute__((visibility("default")))
+
+PLUGIN_EXPORT void* CreateModule() {
+    return new MyModule();
+}
+
+// 内部函数隐藏
+namespace {
+    void InternalHelper() {  // 匿名命名空间，默认隐藏
+        // ...
+    }
+}
+
+// ❌ 错误：所有符号都导出
+__attribute__((visibility("default"))) void EverythingExported();
+```
+
+**BUILD.gn 配置**：
+```gni
+ohos_shared_library("my_plugin") {
+  # 默认隐藏所有符号
+  cflags = [ "-fvisibility=hidden" ]
+
+  # 只明确标记的符号才导出
+  cflags_cc = [ "-fvisibility-inlines-hidden" ]
+}
+```
+
+#### 15. JNI 线程附加
+
+**确保 JNI 调用前线程已附加**：
+
+```cpp
+// ✅ 正确：自动线程附加
+class JniThreadAttacher {
+private:
+    JNIEnv* env_;
+    bool attached_;
+
+public:
+    JniThreadAttacher(JavaVM* vm) : attached_(false) {
+        if (vm->GetEnv(reinterpret_cast<void**>(&env_), JNI_VERSION_1_6) == JNI_EDETACHED) {
+            vm->AttachCurrentThread(&env_, nullptr);
+            attached_ = true;
+        }
+    }
+
+    ~JniThreadAttacher() {
+        if (attached_) {
+            vm_->DetachCurrentThread();
+        }
+    }
+
+    JNIEnv* GetEnv() { return env_; }
+};
+
+void AndroidCallback() {
+    JniThreadAttacher attacher(vm_);
+    JNIEnv* env = attacher.GetEnv();
+    // 安全使用 env
+}
+
+// ❌ 错误：未检查线程附加
+void AndroidCallbackUnsafe() {
+    JNIEnv* env;  // 可能是无效指针
+    vm->GetEnv(reinterpret_cast<void**>(&env_), JNI_VERSION_1_6);
+    // 直接使用可能崩溃
+}
+```
+
+#### 16. 平台特定错误映射
+
+**统一错误码，平台特定映射**：
+
+```cpp
+// common/error_codes.h
+enum class PluginErrorCode {
+    OK = 0,
+    INVALID_PARAM = 401,
+    IO_ERROR = 300,
+    PERMISSION_DENIED = 201,
+};
+
+// Android 错误映射
+PluginErrorCode MapAndroidError(int javaError) {
+    switch (javaError) {
+        case EINVAL: return PluginErrorCode::INVALID_PARAM;
+        case EPERM: return PluginErrorCode::PERMISSION_DENIED;
+        case EIO: return PluginErrorCode::IO_ERROR;
+        default: return PluginErrorCode::IO_ERROR;
+    }
+}
+
+// iOS 错误映射
+PluginErrorCode MapIOSError(NSError* nsError) {
+    if ([nsError.domain isEqualToString:NSURLErrorDomain]) {
+        switch (nsError.code) {
+            case NSURLErrorBadURL:
+                return PluginErrorCode::INVALID_PARAM;
+            case NSURLErrorNoPermissionsToReadFile:
+                return PluginErrorCode::PERMISSION_DENIED;
+            default:
+                return PluginErrorCode::IO_ERROR;
+        }
+    }
+    return PluginErrorCode::IO_ERROR;
+}
+```
+
 ## 实现步骤
 
 ### 步骤 1: 创建插件目录结构
@@ -615,53 +1258,109 @@ NAPI_MODULE(addon, Init)
 
 ## 构建系统配置
 
+### ⚠️ 强制性验证清单
+
+**关键**: 生成适配器代码后，必须完成以下 4 个构建系统配置。没有这些，模块将**无法编译**。
+
 ### 配置文件清单
 
 添加新插件时，必须更新以下 4 个配置文件：
 
-| 配置文件 | 作用 | 优先级 |
-|---------|-----|-------|
-| `plugins/plugin_lib.gni` | 插件注册 | **必须** |
-| `interface/sdk/plugins/api/apiConfig.json` | API 配置 | **必须** |
-| `build_plugins/sdk/arkui_cross_sdk_description_std.json` | SDK 描述 | **必须** |
-| `plugins/new_feature/BUILD.gn` | 构建规则 | **必须** |
+| 配置文件 | 作用 | 状态 | 影响评估 |
+|---------|-----|------|---------|
+| `plugins/plugin_lib.gni` | 插件注册 | ⚠️ **手动** | 不更新则模块被排除编译 |
+| `interface/sdk/plugins/api/apiConfig.json` | API 工具链配置 | ⚠️ **手动** | 不更新则构建系统找不到库 |
+| `build_plugins/sdk/arkui_cross_sdk_description_std.json` | 跨平台 SDK 描述 | ⚠️ **手动** | 不更新则不会包含在 SDK 中 |
+| `plugins/new_feature/BUILD.gn` | 构建规则 | ✅ **自动** | 自动生成 |
 
-### 1. 注册插件 (plugin_lib.gni)
+### ✅ 检查项 1: GN 构建配置
 
-**文件位置**: `plugins/plugin_lib.gni`
+**状态**: Skill 工具**自动生成**
 
-**添加位置**: 在 `common_plugin_libs` 数组中，按字母顺序插入
+**内容**: 在所有必需位置创建 BUILD.gn 文件
 
+**OHOS 仓库文件**:
+- [ ] `foundation/{module}/services/adapter/BUILD.gn`
+- [ ] `foundation/{module}/interfaces/jskits/{module}/BUILD.gn` (已更新)
+
+**Plugin 仓库文件**:
+- [ ] `plugins/{module}/adapter/android/BUILD.gn`
+- [ ] `plugins/{module}/adapter/ios/BUILD.gn`
+- [ ] `plugins/{module}/BUILD.gn`
+- [ ] `plugins/{module}/{module}.gni`
+
+**验证命令**:
+```bash
+# 列出模块的所有 BUILD.gn 文件
+find foundation/{module} -name "BUILD.gn"
+find plugins/{module} -name "BUILD.gn" -o -name "*.gni"
+```
+
+**常见问题**:
+- ❌ 缺少 OHOS 实现的 `deps`（如 `distributeddata_inner`）
+- ❌ 缺少适配器头文件的 `include_dirs`
+- ❌ 忘记 `if (!is_arkuix_target)` 条件编译
+
+---
+
+### ✅ 检查项 2: 插件库注册 (plugin_lib.gni)
+
+**状态**: ⚠️ **手动** - 必须更新此文件
+
+**文件**: `plugins/plugin_lib.gni`
+
+**作用**: 将模块名称添加到 `common_plugin_libs` 数组
+
+**步骤**:
+1. 打开 `plugins/plugin_lib.gni`
+2. 找到 `common_plugin_libs` 数组（约第 120 行）
+3. 按字母顺序添加模块名称
+
+**示例**:
 ```gni
 # plugins/plugin_lib.gni (约第 120 行)
 common_plugin_libs = [
-  # ... 现有插件 ...
+  # ... 现有模块 ...
+  "notification_manager",
   "pasteboard",
-  "new_feature",  # ← 添加这一行，保持字母顺序
+  "{your_module}",  # ← 添加这一行（按字母顺序）
   "vibrator",
 ]
 ```
 
 **验证命令**:
 ```bash
-grep "new_feature" plugins/plugin_lib.gni
+# 检查模块是否已注册
+grep "\"{your_module}\"" plugins/plugin_lib.gni
 ```
 
-### 2. 配置 API (apiConfig.json)
+**影响**: 没有此配置，模块将被排除在编译之外
 
-**文件位置**: `interface/sdk/plugins/api/apiConfig.json`
+---
 
-**添加位置**: 在 JSON 数组末尾、闭合括号前
+### ✅ 检查项 3: API 工具链配置 (apiConfig.json)
 
+**状态**: ⚠️ **手动** - 必须更新此文件
+
+**文件**: `interface/sdk/plugins/api/apiConfig.json`
+
+**作用**: 添加模块工具链配置
+
+**步骤**:
+1. 打开 `interface/sdk/plugins/api/apiConfig.json`
+2. 滚动到 JSON 数组末尾
+3. 在闭合 `]` 前添加模块配置
+
+**模板**:
 ```json
 {
-    "module": "ohos.new_feature",
+    "module": "ohos.{your_module}",
     "library": {
         "android": [
-            "lib/new_feature/ace_new_feature_android.jar",
-            "lib/new_feature/arch_type/libnew_feature.so"
+            "lib/{your_module}/ace_{your_module}_android.jar",
+            "lib/{your_module}/arch_type/lib{your_module}.so"
         ],
-        "ios": [ "xcframework/build_modes/libnew_feature.xcframework" ]
+        "ios": [ "xcframework/build_modes/lib{your_module}.xcframework" ]
     },
     "deps": {
         "android": [],
@@ -670,45 +1369,61 @@ grep "new_feature" plugins/plugin_lib.gni
 }
 ```
 
+**重要**: 保持有效的 JSON 语法（逗号、引号、括号）
+
 **验证命令**:
 ```bash
-# 验证 JSON 格式
-python3 -m json.tool interface/sdk/plugins/api/apiConfig.json > /dev/null && echo "Valid" || echo "Invalid"
+# 检查 JSON 语法是否有效
+python3 -m json.tool interface/sdk/plugins/api/apiConfig.json > /dev/null && echo "✅ Valid JSON" || echo "❌ Invalid JSON"
 
-# 检查模块已配置
-grep "ohos.new_feature" interface/sdk/plugins/api/apiConfig.json
+# 检查模块是否已配置
+grep "ohos.{your_module}" interface/sdk/plugins/api/apiConfig.json
 ```
 
-### 3. 配置 SDK 描述 (arkui_cross_sdk_description_std.json)
+**影响**: 没有此配置，构建系统不知道在哪里找到输出库
 
-**文件位置**: `build_plugins/sdk/arkui_cross_sdk_description_std.json`
+---
 
-**Android SO 配置** (添加到 `"android"` 数组):
+### ✅ 检查项 4: 跨平台 SDK 描述 (MANDATORY)
 
+**状态**: ⚠️ **手动** - 必须更新此文件
+
+**文件**: `build_plugins/sdk/arkui_cross_sdk_description_std.json`
+
+**作用**: 将模块添加到跨平台 SDK 描述（android 和 ios 数组）
+
+**原因**: 这是**跨平台编译入口点** - 没有这个，模块不会包含在跨平台 SDK 中
+
+**步骤**:
+1. 打开 `build_plugins/sdk/arkui_cross_sdk_description_std.json`
+2. 找到 `"android"` 数组（约第 67 行）
+3. 在 vibrator 模块后添加 Android 配置（约第 1650 行）
+4. 找到 `"ios"` 数组（约第 1688 行）
+5. 在 vibrator 模块后添加 iOS 配置（约第 2660 行）
+
+**Android 模板**:
 ```json
 {
-    "install_dir": "arkui-x/plugins/api/lib/new_feature/arch_type",
-    "module_label": "//plugins/new_feature/android:new_feature_adapter_android",
+    "install_dir": "arkui-x/plugins/api/lib/{your_module}/arch_type",
+    "module_label": "//plugins/{your_module}/adapter/android:{your_module}_adapter_android",
     "target_os": ["linux", "windows", "darwin"]
 }
 ```
 
-**Android Java 配置** (如果有 Java 适配):
-
+**Android Java 模板** (如果有 Java 适配器):
 ```json
 {
-    "install_dir": "arkui-x/plugins/api/lib/new_feature",
-    "module_label": "//plugins/new_feature/frameworks/android/java:new_feature_plugin_java",
+    "install_dir": "arkui-x/plugins/api/lib/{your_module}",
+    "module_label": "//plugins/{your_module}/frameworks/android/java:{your_module}_plugin_java",
     "target_os": ["linux", "windows", "darwin"]
 }
 ```
 
-**iOS 配置** (添加到 `"ios"` 数组):
-
+**iOS 模板**:
 ```json
 {
-    "install_dir": "arkui-x/plugins/api/framework/arch_type/libnew_feature.framework",
-    "module_label": "//plugins/new_feature/ios:new_feature_adapter_ios",
+    "install_dir": "arkui-x/plugins/api/framework/arch_type/lib{your_module}.framework",
+    "module_label": "//plugins/{your_module}/ios:{your_module}_adapter_ios",
     "target_os": ["darwin"]
 }
 ```
@@ -716,66 +1431,15 @@ grep "ohos.new_feature" interface/sdk/plugins/api/apiConfig.json
 **验证命令**:
 ```bash
 # 验证 JSON 格式
-python3 -m json.tool build_plugins/sdk/arkui_cross_sdk_description_std.json > /dev/null && echo "Valid" || echo "Invalid"
+python3 -m json.tool build_plugins/sdk/arkui_cross_sdk_description_std.json > /dev/null && echo "✅ Valid" || echo "❌ Invalid"
 
-# 检查模块已配置
-grep "new_feature" build_plugins/sdk/arkui_cross_sdk_description_std.json
+# 检查模块是否已配置
+grep "{your_module}" build_plugins/sdk/arkui_cross_sdk_description_std.json
 ```
 
-### 4. 创建构建规则 (BUILD.gn)
+**影响**: ⚠️ **关键** - 没有这个配置，模块不会包含在跨平台 SDK 中
 
-**文件位置**: `plugins/new_feature/BUILD.gn`
-
-```gni
-import("//build/ohos.gni")
-
-# 平台无关组件
-ohos_source_set("new_feature_common") {
-  sources = [
-    "interface/new_feature_interface.h",
-    "common/new_feature_core.cpp",
-  ]
-
-  include_dirs = [
-    "interface",
-    "//foundation/arkui/napi/native/common",
-  ]
-
-  external_deps = [ "hilog_native:libhilog" ]
-}
-
-# Android 实现
-if (is_android) {
-  ohos_shared_library("new_feature_adapter_android") {
-    sources = [
-      "android/new_feature_android.cpp",
-    ]
-
-    deps = [
-      ":new_feature_common",
-    ]
-
-    include_dirs = [ "interface" ]
-  }
-}
-
-# iOS 实现
-if (is_ios) {
-  ohos_shared_library("new_feature_adapter_ios") {
-    sources = [
-      "ios/new_feature_ios.mm",
-    ]
-
-    deps = [
-      ":new_feature_common",
-    ]
-
-    include_dirs = [ "interface" ]
-
-    frameworks = [ "Foundation" ]
-  }
-}
-```
+---
 
 ## 参考实现
 
@@ -865,7 +1529,7 @@ class IOSHttpExec : public IHttpExec {
 - [ ] 编译通过
 - [ ] 测试通过
 - [ ] 文档完整
-- [ ] 符合 13 条核心规则
+- [ ] 符合 16 条核心规则
 
 ## 常见问题
 
@@ -927,9 +1591,300 @@ class AndroidStrategy : public IStrategy {
 };
 ```
 
+### Q6: 如何处理平台特有功能？
+
+**A**:
+```cpp
+// 在平台实现层处理，不影响业务逻辑
+class AndroidStrategy : public IStrategy {
+    void Execute() override {
+        #ifdef ANDROID_ENABLE_FEATURE_X
+            // Android 特有功能
+        #endif
+    }
+};
+```
+
+## 自动化工具
+
+### Skill 工具：Platform API Adapter
+
+Claude Code 提供了一个 Skill 工具，可以自动生成适配器模式的代码框架。
+
+#### 使用方法
+
+在 Claude Code 中调用：
+
+```
+/skill-platform-api
+```
+
+#### 功能
+
+- 自动生成纯虚接口定义
+- 生成 OHOS 薄包装代码
+- 生成 Android/iOS 存根实现
+- 生成构建配置文件
+- 生成迁移指南文档
+
+#### 示例会话
+
+```
+You: /skill-platform-api
+
+Skill: Platform API Adapter Generator
+=====================================
+
+Module name (e.g., 'pasteboard'): preferences
+OHOS client class name (e.g., 'PasteboardClient'): PreferencesClient
+
+Enter methods to adapt (one per line, empty line to finish):
+Format: return_type method_name param1_type param1_name ...
+Method> void PutString const std::string& key const std::string& value
+Method> std::string GetString const std::string& key const std::string& defValue
+Method> void Clear
+Method>
+
+Generating adapter architecture...
+✓ Adapter interface generated
+✓ OHOS adapter generated
+✓ Android adapter stub generated
+✓ iOS adapter stub generated
+✓ Build configurations generated
+✓ Documentation generated
+
+Next steps:
+1. Implement Android/iOS adapter methods (marked with TODO)
+2. Apply NAPI layer migration (see ADAPTER_MIGRATION.md)
+3. Update plugin_lib.gni
+4. Update apiConfig.json
+5. Compile and test
+```
+
+#### 生成的文件
+
+**OHOS 仓库**：
+- `interfaces/kits/napi/preferences_adapter.h`
+- `interfaces/kits/napi/preferences_adapter_helper.h`
+- `services/adapter/preferences_adapter_ohos.cpp`
+- `ADAPTER_MIGRATION.md`
+
+**Plugin 仓库**：
+- `adapter/android/preferences_adapter_android.cpp`
+- `adapter/ios/preferences_adapter_ios.mm`
+- `BUILD.gn`
+- `ADAPTER_ARCHITECTURE.md`
+
+### 自动化迁移脚本
+
+#### sed 脚本示例
+
+```bash
+#!/bin/bash
+# migration_script.sh - 自动替换 NAPI 层调用
+
+# 1. 替换直接调用为 Helper 宏调用
+find . -name "*.cpp" -exec sed -i 's/PasteboardClient::GetInstance()/PASTEBOARD_ADAPTER()/g' {} \;
+
+# 2. 添加 Helper 宏头文件
+find . -name "*.cpp" -exec sed -i '1i #include "pasteboard_adapter_helper.h"' {} \;
+
+# 3. 验证替换结果
+grep -r "PASTEBOARD_ADAPTER()" . --include="*.cpp"
+```
+
+#### Python 迁移脚本
+
+```python
+#!/usr/bin/env python3
+# migrate.py - 自动化迁移工具
+
+import re
+import sys
+from pathlib import Path
+
+# 映射表：原始调用 → Helper 宏
+REPLACEMENTS = {
+    r'PasteboardClient::GetInstance()': 'PASTEBOARD_ADAPTER()',
+    r'PreferencesClient::GetInstance()': 'PREFERENCES_ADAPTER()',
+    r'KVStoreClient::GetInstance()': 'KVS_ADAPTER()',
+}
+
+def migrate_file(file_path):
+    """迁移单个文件"""
+    content = file_path.read_text()
+    modified = False
+
+    for pattern, replacement in REPLACEMENTS.items():
+        if re.search(pattern, content):
+            content = re.sub(pattern, replacement, content)
+            modified = True
+
+    if modified:
+        file_path.write_text(content)
+        print(f"Migrated: {file_path}")
+
+def main():
+    """主函数"""
+    root = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(".")
+    cpp_files = root.rglob("*.cpp")
+
+    for file_path in cpp_files:
+        migrate_file(file_path)
+
+if __name__ == "__main__":
+    main()
+```
+
+#### 使用方法
+
+```bash
+# 1. 备份代码
+git stash
+
+# 2. 运行迁移脚本
+bash migration_script.sh
+# 或
+python3 migrate.py
+
+# 3. 验证编译
+./build.sh --product-name arkui-x --target-os android --build-target pasteboard_napi
+
+# 4. 运行测试
+# 如果失败，回滚
+git stash pop
+```
+
+## 高级调试技巧
+
+### JNI 调试
+
+```bash
+# 1. 启用 JNI 调试日志
+adb shell setprop debug.checkjni 1
+
+# 2. 查看 JNI 调用
+adb logcat | grep -i "checkjni"
+
+# 3. 检测 JNI 引用泄漏
+adb logcat | grep -i " JNI"
+```
+
+### 符号查看
+
+```bash
+# 1. 查看导出的符号
+nm -D --defined-only libplugin.so | grep PLUGIN_EXPORT
+
+# 2. 查看所有符号（包括隐藏）
+nm -a libplugin.so | grep -i "function_name"
+
+# 3. 检查符号可见性
+readelf -s libplugin.so | grep NOT_GLOBAL
+```
+
+### 内存泄漏检测
+
+```bash
+# Android - 使用 AddressSanitizer
+./build.sh --product-name arkui-x --target-os android \
+    --gn-args="is_asan=true use_clang_coverage=true"
+
+# 运行应用后查看报告
+adb logcat | grep -i "asan"
+
+# iOS - 使用 Instruments
+# 1. Xcode → Product → Profile
+# 2. 选择 "Leaks" 模板
+# 3. 运行应用并分析
+```
+
+### 性能分析
+
+```bash
+# Android - Simpleperf
+# 1. 采集性能数据
+adb shell simpleperf record -p <pid> -f 99 -a sleep 30
+
+# 2. 导出报告
+adb pull /data/local/tmp/perf.data perf.data
+
+# 3. 分析报告
+simpleperf report perf.data
+
+# iOS - Instruments Time Profiler
+# Xcode → Product → Profile → Time Profiler
+```
+
+## 最佳实践总结
+
+### DO (推荐做法)
+
+✅ **架构设计**：
+- 使用明确的分层架构
+- 平台隔离通过目录或条件编译
+- 接口抽象使用纯虚类
+
+✅ **性能优化**：
+- 缓存 JNI 引用和方法 ID
+- 批量传递数据，减少跨语言调用
+- 使用 `std::string_view` 和移动语义
+
+✅ **错误处理**：
+- 定义统一的错误码
+- 平台特定错误映射
+- 详细的错误日志
+
+✅ **线程安全**：
+- 使用互斥锁保护共享数据
+- JNI 调用前确保线程已附加
+- 使用线程安全容器
+
+✅ **构建系统**：
+- 明确声明依赖
+- 配置符号可见性
+- 使用条件编译选择平台
+
+### DON'T (避免做法)
+
+❌ **架构设计**：
+- 不要在 NAPI 层直接调用平台 API
+- 不要过度使用条件编译（优先目录分离）
+- 不要在接口层包含平台特定代码
+
+❌ **性能优化**：
+- 不要频繁 JNI 调用（未缓存）
+- 不要不必要的数据拷贝
+- 不要在热路径中使用虚函数表
+
+❌ **错误处理**：
+- 不要直接返回平台错误码
+- 不要忽略错误检查
+- 不要使用通用错误码掩盖具体问题
+
+❌ **线程安全**：
+- 不要假设线程已附加到 JVM
+- 不要在未加锁的情况下访问共享数据
+- 不要在回调中阻塞主线程
+
+❌ **构建系统**：
+- 不要忘记更新 `plugin_lib.gni`
+- 不要遗漏 `apiConfig.json` 配置
+- 不要忘记 SDK 描述配置
+
 ## 参考文档
 
-- [系统架构](../architecture/system_architecture.md)
-- [开发最佳实践](../best_practices/README.md)
-- [主 CLAUDE.md](../../CLAUDE.md)
+### 架构与设计
+- [系统架构](../architecture/system_architecture.md) - ArkUI-X 系统架构
+- [开发最佳实践](../best_practices/development_guide.md) - 开发指南
+- [主 CLAUDE.md](../../CLAUDE.md) - 项目主文档
+
+### 适配器模式
+- [Platform API Adapter Skill](.claude/skills/platform-api-adapter/README.md) - 自动化工具
+- [Pasteboard Adapter Example](../../plugins/pasteboard/ADAPTER_ARCHITECTURE.md) - 完整示例
+- [Preferences Adapter Guide](../../foundation/distributeddatamgr/preferences/ADAPTER_MIGRATION.md) - 迁移指南
+
+### 外部资源
 - [OpenHarmony API 文档](https://docs.openharmony.cn/)
+- [JNI 规范](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/)
+- [NAPI 指南](https://docs.openharmony.cn/en/v3.2/zh-cn/application-dev/napi/)
