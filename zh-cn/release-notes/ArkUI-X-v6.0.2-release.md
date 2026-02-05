@@ -2,7 +2,7 @@
 
 ## 版本概述
 
-当前版本在ArkUI-X 6.0.0版本基础上，完善平台桥接的能力、新增ohos.accessibility、ohos.vibrator、ohos.gelLocationManager API支持跨平台使用、修复了部分功能和系统稳定性的问题，增强了系统稳定性。欢迎大家更新使用，如有疑问可以通过在社区提交issues交流，期待您的宝贵建议！
+当前版本在ArkUI-X 6.0.0版本基础上，完善平台桥接的能力、新增ohos.accessibility、ohos.vibrator、ohos.geoLocationManager API支持跨平台使用、修复了部分功能和系统稳定性的问题，增强了系统稳定性。欢迎大家更新使用，如有疑问可以通过在社区提交issues交流，期待您的宝贵建议！
 
 ## 特性说明
 
@@ -16,7 +16,7 @@
 
 * ohos.accessibility
 * ohos.vibrator
-* ohos.gelLocationManager
+* ohos.geoLocationManager
 * 详情参见：[ArkTS接口跨平台列表](../application-dev/reference/apis/README.md)。
 
 ## 配套关系
