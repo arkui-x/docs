@@ -17,10 +17,11 @@ StageApplicationDelegate是ArkUI-X跨平台上Stage模型Application的代理类
 | ---- | -------------------------------------------- | ---------------- |
 | void | init(Application application)                | 初始化           |
 | void | onConfigurationChanged(Configuration newCfg) | 系统环境变化通知 |
-| void | setLogInterface(ILogger log)                 | 注册LogInterface截断日志                                 |
-| void | setLogLevel(int logLevel)                    | 设置输出日志的输出等级，低于该等级的日志被拦截，不再输出 |
+| void | setLogInterface(ILogger log)                 | 注册LogInterface截断日志 。该接口将在后续版本废弃，建议使用setLogger代替                                |
+| void | setLogLevel(int logLevel)                    | 设置输出日志的最低打印级别，低于该等级的日志被拦截，不再输出。该接口将在后续版本废弃，建议使用setLogger代替 |
 | void | initApplication(Application application, boolean shouldLoadUI) | 应用初始化ArkUI-X框架，设置框架是否加载ArkUI |
 | void | loadModule(String moduleName, String entryFile) | 加载指定的Hap模块，需要与ArkTS侧[ModuleLoader](../apis/js-apis-ModuleLoader.md)结合使用。 |
+| void | setLogger(ILogger logger, int level)         | 注册截断日志并设置日志的最低打印级别，低于该等级的日志被拦截，不再输出。|
 
 ## 方法说明
 
@@ -180,4 +181,47 @@ public static void loadModule(String moduleName, String entryFile);
 // moduleName : "entry"					   : Hap模块的模块名称为entry
 // entryFile  : "./ets/MyModuleLoader.ets" : Hap模块中"MyModuleLoader.ets"的路径
 StageApplicationDelegate.loadModule("entry", "./ets/MyModuleLoader.ets");
+```
+
+### setLogger
+
+```java
+
+    /**
+     * Set log interface and the min level.
+     * 
+     * @param logger the log interface.
+     * @param level the min level, Logs below this level will not be logged.
+     */
+    public void setLogger(ILogger logger, int level);
+
+```
+
+**描述：**
+
+注册截断日志并设置输出日志的最低打印级别。
+
+**参数：** 
+
+| Name         | 类型        | 必填 | 描述                                              |
+| ------------ | ----------- | ---- | ------------------------------------------------- |
+| logger  | ILogger | 是   | 应用实现的ILogger。                                |
+| level | int     | 是   | 日志的最低打印级别，低于该等级的日志被拦截，不再输出。 |
+
+**返回值：** 
+
+无
+
+**示例：** 
+
+```java
+public class MyApplication extends StageApplication {
+    @Override
+    public void onCreate() {
+        LogInterface logInterface = new LogInterface(this);
+        StageApplicationDelegate appDelegate = new StageApplicationDelegate();
+        appDelegate.setLogger(logInterface,ILogger.LOG_DEBUG);
+        super.onCreate();  
+    }
+}
 ```
