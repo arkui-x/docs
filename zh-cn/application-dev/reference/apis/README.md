@@ -3,6 +3,8 @@
   - [@arkui-x.bridge (平台桥接)](js-apis-bridge.md)
 - 模块加载
   - [@arkui-x.ModuleLoader](js-apis-ModuleLoader.md)
+- 平台视图
+  - [@arkui-x.platformview](js-apis-PlatformView.md)
 - UI界面
   - [@ohos.animator (动画)](js-apis-animator.md)
   - [@ohos.arkui.componentSnapshot (组件截图)](js-apis-arkui-componentSnapshot.md)
