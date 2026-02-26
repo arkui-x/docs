@@ -2,8 +2,8 @@
 
 ## 环境准备
 
--   针对Git的安装、环境配置及使用方法，请参考GitCode帮助中心的Git知识大全：[https://docs.gitcode.com/docs/learn-git/](https://docs.gitcode.com/docs/learn-git/)
--   注册SSH公钥，请参考GitCode帮助中心的公钥管理：[https://docs.gitcode.com/docs/users/ssh-key/](https://docs.gitcode.com/docs/users/ssh-key/)
+-   针对Git的安装、环境配置及使用方法，请参考GitCode帮助中心的Git知识大全：[https://docs.gitcode.com/docs/help/home/general-reference/git](https://docs.gitcode.com/docs/help/home/general-reference/git)
+-   注册SSH公钥，请参考GitCode帮助中心的公钥管理：[https://docs.gitcode.com/docs/help/home/user_center/security_management/ssh](https://docs.gitcode.com/docs/help/home/user_center/security_management/ssh)
 -   在开展GitCode的工作流之前，您需要先在ArkUI-X的代码托管平台上找到您感兴趣的Repository。
 
 ## 代码下载
@@ -189,17 +189,17 @@ repo push --br="20200903" --d="master" --content="#I1TVV4"
 
 访问您在GitCode上的fork仓页面，点击创建Pull Request按钮选择myfeature分支生成PR。
 
-详细操作请参考GitCode帮助中心的开发协作指导：[https://docs.gitcode.com/docs/pulls/](https://docs.gitcode.com/docs/pulls/)
+详细操作请参考GitCode帮助中心的开发协作指导：[https://docs.gitcode.com/docs/help/home/org_project/pullrequests](https://docs.gitcode.com/docs/help/home/org_project/pullrequests)
 
 >![](public_sys-resources/icon-notice.gif) **须知：** 
 >**多个代码仓存在编译依赖时如何同时发起构建：**
 >跨平台项目开发时，经常会遇到多个代码仓的修改具有编译依赖关系，需要同时构建、同时合入。为此GitCode平台将Issue作为具有编译依赖的多个代码仓提交PR的关联标识。具体操作如下：
 >
 >1.  在此次提交的任意一个代码仓上创建Issue。
->2.  将多个需要同时构建、同时合入的PR关联上述Issue，具体操作请参考GitCode帮助中心：[https://docs.gitcode.com/docs/repo/issues/manage/](https://docs.gitcode.com/docs/repo/issues/manage/)。
+>2.  将多个需要同时构建、同时合入的PR关联上述Issue，具体操作请参考GitCode帮助中心：[https://docs.gitcode.com/docs/help/home/org_project/pullrequests/pr-related-issue/](https://docs.gitcode.com/docs/help/home/org_project/pullrequests/pr-related-issue/)。
 >3.  触发构建\(详见触发构建的操作帮助\)后，构建中心会识别关联了同一Issue的PR，同时下载构建，并在代码审核通过后，同时进行合并入代码库。
 
 ## 代码审查
 
-请参考GitCode帮助中心：[https://docs.gitcode.com/docs/pulls/codereview/](https://docs.gitcode.com/docs/pulls/codereview/)
+请参考GitCode帮助中心：[https://docs.gitcode.com/docs/help/home/org_project/pullrequests/pr-code-review](https://docs.gitcode.com/docs/help/home/org_project/pullrequests/pr-code-review)
 

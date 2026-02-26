@@ -62,9 +62,9 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
 
 1. 注册GitCode帐号。
 
-2. 注册GitCode SSH公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/users/ssh-key/)。
+2. 注册GitCode SSH公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/help/home/user_center/security_management/ssh)。
 
-3. 安装[git客户端](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git)和[git-lfs](https://docs.gitcode.com/docs/repo/code/lfs/)并配置用户信息。
+3. 安装[git客户端](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git)和[git-lfs](https://docs.gitcode.com/docs/help/home/org_project/project_manage/file_operations/lfs/)并配置用户信息。
   
    ```
    git config --global user.name "yourname"
@@ -84,7 +84,7 @@ ArkUI-X 1.1.6正式版配套OpenHarmony API 11 Release，新增适配部分API 1
 
 **方式一（推荐）**
 
-通过repo + ssh下载（需注册公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/users/ssh-key/)）。
+通过repo + ssh下载（需注册公钥，请参考[GitCode帮助中心](https://docs.gitcode.com/docs/help/home/user_center/security_management/ssh)）。
 
 - 从版本分支获取源码。可获取该版本分支的最新源码，包括版本发布后在该分支的合入。
    ```shell

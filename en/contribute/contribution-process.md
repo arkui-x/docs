@@ -2,8 +2,8 @@
 
 ## Preparations
 
--   Install, configure, and use Git. For details, visit [https://gitcode.com/help/categories/43](https://gitcode.com/help/categories/43).
--   Register an SSH public key. For details, visit https://gitcode.com/help/articles/4191](https://gitcode.com/help/articles/4191).
+-   Install, configure, and use Git. For details, visit [https://docs.gitcode.com/docs/help/home/general-reference/git](https://docs.gitcode.com/docs/help/home/general-reference/git).
+-   Register an SSH public key. For details, visit [https://docs.gitcode.com/docs/help/home/user_center/security_management/ssh](https://docs.gitcode.com/docs/help/home/user_center/security_management/ssh).
 -   Find the repository that you are interested in on the code hosting platform of ArkUI-X.
 
 ## Downloading Code
@@ -51,7 +51,7 @@ Perform the following steps to download the code in the repository to your compu
 
 ## Using the repo Tool to Download Code Repositories in Batches
 
-1.  Download the repo tool. \(For details, see [https://gitcode.com/help/articles/4316](https://gitcode.com/help/articles/4316).\)
+1.  Download the repo tool. \(For details, see [https://gitcode.com/gitcode-dev/repo/overview](https://gitcode.com/gitcode-dev/repo/overview).\)
 
     ```
     curl https://gitcode.com/gitcode-dev/repo/blob/main/repo-py3 > /usr/local/bin/repo
@@ -187,7 +187,7 @@ The tool automatically associates the PR with the issue.
 ## Creating a Pull Request
 
 Access the fork repository on GitCode, click the button for creating a PR, and select the  **myfeature**  branch to generate a PR. \(Skip this step if a PR has been automatically created using the repo tool.\)
-For details, visit [https://docs.gitcode.com/docs/repo/issues/manage](https://docs.gitcode.com/docs/repo/issues/manage).
+For details, visit [https://docs.gitcode.com/docs/help/home/org_project/pullrequests](https://docs.gitcode.com/docs/help/home/org_project/pullrequests).
 
 >![](public_sys-resources/icon-notice.gif) **NOTICE**
 >
@@ -196,9 +196,9 @@ For details, visit [https://docs.gitcode.com/docs/repo/issues/manage](https://do
 >During the development of a cross-platform project, it is common that multiple code repositories have compilation dependencies. Therefore, the PRs need to be created and merged at the same time. For this reason, GitCode uses issues as the dependency identifiers for code repositories with compilation dependencies to commit the PRs. Follow the operations below:
 >
 >1.  Create an issue in any of the code repositories.
->2.  Associate PRs that need to be built and merged at the same time with the issue. For details, visit  [https://docs.gitcode.com/docs/repo/issues/manage](https://docs.gitcode.com/docs/repo/issues/manage).
+>2.  Associate PRs that need to be built and merged at the same time with the issue. For details, visit  [https://docs.gitcode.com/docs/help/home/org_project/pullrequests/pr-related-issue/](https://docs.gitcode.com/docs/help/home/org_project/pullrequests/pr-related-issue/).
 >3.  After the build is triggered, the build center identifies the PRs associated with the same issue, downloads the build, and merges the PRs into the code library after the code is approved.
 
 ## Reviewing Code
 
-For details, visit [https://gitcode.com/help/articles/4304](https://gitcode.com/help/articles/4304).
+For details, visit [https://docs.gitcode.com/docs/help/home/org_project/pullrequests/pr-code-review](https://docs.gitcode.com/docs/help/home/org_project/pullrequests/pr-code-review).
