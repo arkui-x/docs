@@ -21,6 +21,48 @@ export default class EntryAbility extends UIAbility {
 }
 ```
 
+## resourceManager.getSysResourceManager<sup>20+</sup>
+
+getSysResourceManager(): ResourceManager
+
+获取系统资源管理对象。
+
+**系统能力：** SystemCapability.Global.ResourceManager
+
+**返回值：**
+
+| 类型                                       | 说明                 |
+| ---------------------------------------- | ------------------ |
+| [ResourceManager](#resourcemanager) | 系统资源管理对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[资源管理错误码](errorcode-resource-manager.md)。
+
+| 错误码ID | 错误信息 |
+| -------- | ---------------------------------------- |
+| 9001009  | Failed to access the system resource. which is not mapped to application sandbox, This error code will be thrown. |
+
+**示例：**
+```js
+import { resourceManager } from '@kit.LocalizationKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+try {
+  let systemResourceManager = resourceManager.getSysResourceManager();
+  // 'sys.string.ohos_lab_vibrate'仅作示例，请替换为实际使用的资源
+  systemResourceManager.getStringValue($r('sys.string.ohos_lab_vibrate').id).then((value: string) => {
+    let str = value;
+  }).catch((error: BusinessError) => {
+    console.error(`systemResourceManager getStringValue promise error: ${error}`);
+  });
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getSysResourceManager failed, error code: ${code}, message: ${message}.`);
+}
+```
+
 ## Direction
 
 用于表示设备屏幕方向。
@@ -3085,3 +3127,51 @@ getNumberByName(resName: string): number
     console.error(`getNumberByName failed, error code: ${error.code}, message: ${error.message}.`)
   }
   ```
+
+## resourceManager.getSystemResourceManager<sup>(deprecated)</sup>
+
+getSystemResourceManager(): ResourceManager
+
+获取系统资源管理ResourceManager对象。
+
+> **说明**
+>
+> 当前接口获取到的系统资源管理ResourceManager对象中的Configuration为默认值。默认值如下：
+> {"locale": "", "direction": -1, "deviceType": -1, "screenDensity": 0, "colorMode": 1, "mcc": 0, "mnc": 0}。
+> 
+> 从API version 10开始支持，从API version 20开始废弃，建议使用[resourceManager.getSysResourceManager](#resourcemanagergetsysresourcemanager20)替代。
+
+**系统能力：** SystemCapability.Global.ResourceManager
+
+**返回值：**
+
+| 类型                                       | 说明                 |
+| ---------------------------------------- | ------------------ |
+| [ResourceManager](#resourcemanager) | 系统资源管理对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[资源管理错误码](errorcode-resource-manager.md)。
+
+| 错误码ID | 错误信息 |
+| -------- | ---------------------------------------- |
+| 9001009  | Failed to access the system resource. which is not mapped to application sandbox, This error code will be thrown. |
+
+**示例：**
+```js
+import { resourceManager } from '@kit.LocalizationKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+try {
+  let systemResourceManager = resourceManager.getSystemResourceManager();
+  systemResourceManager.getStringValue($r('sys.string.ohos_lab_vibrate').id).then((value: string) => {
+    let str = value;
+  }).catch((error: BusinessError) => {
+    console.error("systemResourceManager getStringValue promise error is " + error);
+  });
+} catch (error) {
+  let code = (error as BusinessError).code;
+  let message = (error as BusinessError).message;
+  console.error(`getSystemResourceManager failed, error code: ${code}, message: ${message}.`);
+}
+```
