@@ -46,9 +46,13 @@ public class LogInterface implements ILogger {
 }
 ```
 
-## 使用setLogger设置ArkUI-X框架LogInterface以及日志拦截等级
+## 设置ArkUI-X框架LogInterface以及日志拦截等级
+   
+   可以通过以下两种方式注入LogInterface并设置日志等级。注入成功，框架和ArkTS的日志通过提供的这个实例的方法输出，注入失败，执行日志输出原逻辑。注意：**若将日志等级开放至ERROR以下（如 WARN/INFO/DEBUG），存在应用崩溃的风险**。
 
-​		在需要控制ArkUI-X框架日志及TypeScript日志的输出时，可以利用[StageApplicationDelegate](../reference/arkui-for-android/StageApplicationDelegate.md)类中[setLogger](../reference/arkui-for-android/StageApplicationDelegate.md)方法来注入LogInterface并设置日志等级，注入成功，框架和TypeScript的日志通过提供的这个实例的方法输出，注入失败，执行日志输出原逻辑。
+### setLogger
+
+​		[StageApplicationDelegate](../reference/arkui-for-android/StageApplicationDelegate.md)类中[setLogger](../reference/arkui-for-android/StageApplicationDelegate.md)方法用来注入LogInterface并设置日志等级。
 
 ​		区别于setLogInterface方法，setLogger能拦截到启动时的完整日志，推荐使用setLogger方法。
 
@@ -74,13 +78,10 @@ public class MyApplication extends StageApplication {
 }
 ```
 
-## 设置ArkUI-X框架LogInterface以及日志拦截等级
+### setLogInterface
 
-​		在需要控制ArkUI-X框架日志及TypeScript日志的输出时，可以利用[StageApplicationDelegate](../reference/arkui-for-android/StageApplicationDelegate.md)类中[setLogInterface](../reference/arkui-for-android/StageApplicationDelegate.md)方法来注入LogInterface，注入成功，框架和TypeScript的ERROR和FATAL日志通过提供的这个实例的方法输出，注入失败，执行日志输出原逻辑。
-
-​		设置日志拦截等级需使用[StageApplicationDelegate](../reference/arkui-for-android/StageApplicationDelegate.md)类中[setLogLevel](../reference/arkui-for-android/StageApplicationDelegate.md)方法，设置日志拦截等级成功，日志等级优先级低于该日志拦截等级时，日志不被输出。
-
-​		通过[setLogInterface](../reference/arkui-for-android/StageApplicationDelegate.md)注入LogInterface时，**默认仅拦截并处理ERROR和FATAL等级日志**；通过[setLogLevel](../reference/arkui-for-android/StageApplicationDelegate.md)可降低日志拦截等级以输出更详细日志，但需特别注意：**若将日志等级开放至ERROR以下（如 WARN/INFO/DEBUG），存在应用崩溃的风险**。
+​		[StageApplicationDelegate](../reference/arkui-for-android/StageApplicationDelegate.md)类中[setLogInterface](../reference/arkui-for-android/StageApplicationDelegate.md)方法用来注入LogInterface。[setLogLevel](../reference/arkui-for-android/StageApplicationDelegate.md)方法用来设置日志拦截等级，日志等级于该日志拦截等级时，日志不被输出。
+​		通过[setLogInterface](../reference/arkui-for-android/StageApplicationDelegate.md)注入LogInterface时，**默认仅拦截并处理ERROR和FATAL等级日志**。
 
 **注意：开发者使用时注册，必须位于调用MyApplication超类的onCreate()方法之后**
 
