@@ -13,7 +13,7 @@ ArkUI-X 是一个跨平台应用开发框架，支持同时编译生成 HarmonyO
 
 为不同平台创建不同的 product 和 target 配置：
 - **default product**：编译跨平台版本，引用跨平台兼容的业务实现（不包含闭源库调用）
-- **harmonyOSProject product**：编译纯 HarmonyOS 版本，可以引用包含闭源库调用的业务文件
+- **harmonyOS product**：编译纯 HarmonyOS 版本，可以引用包含闭源库调用的业务文件
 
 这样可以确保：
 - 跨平台编译时不会因为引用闭源库而报错
@@ -43,13 +43,13 @@ entry/
     └── main/
         └── ets/
             ├── arkuix_util/
-            │   └── arkuixPage.ets    # default product 跨平台使用的页面  
+            │   └── arkuixPage.ets    # default product Arkui-X跨平台使用的页面  
             └── harmonyOS_util/
-                └── harmonyPage.ets   # harmonyOSProject product harmonyOS使用的页面
+                └── harmonyPage.ets   # harmonyOS product harmonyOS使用的页面
 ```
 
 - 当编译 `default` product 时，打包 `arkuix_util/arkuixPage` 页面，此页面中的逻辑实现符合跨平台开发要求。
-- 当编译 `harmonyOSProject` product 时，打包 `harmonyOS_util/harmonyPage` 页面，此页面中会引用harmonyOS闭源库实现功能。
+- 当编译 `harmonyOS` product 时，打包 `harmonyOS_util/harmonyPage` 页面，此页面中会引用harmonyOS闭源库实现功能。
 
 ### 1.2 工程级 build-profile.json5 配置
 
@@ -76,7 +76,7 @@ entry/
         }
       },
       {
-        "name": "harmonyOSProject",  // 另一个 product
+        "name": "harmonyOS",  // 另一个 product
         "signingConfig": "default",
         "targetSdkVersion": "6.0.2(22)",
         "compatibleSdkVersion": "6.0.2(22)",
@@ -102,9 +102,9 @@ entry/
           ]
         },
         {
-          "name": "harmonyOSProject1",
+          "name": "harmonyOS",
           "applyToProducts": [
-            "harmonyOSProject"
+            "harmonyOS"
           ]
         }
       ]
@@ -141,10 +141,10 @@ entry/
       }
     },
     {
-      "name": "harmonyOSProject1",
+      "name": "harmonyOS",
       "source": {
         "pages": [
-          "harmonyOS_util/harmonyPage"     // harmonyOSProject product为hormonyOS使用的页面
+          "harmonyOS_util/harmonyPage"     // harmonyOS product为hormonyOS使用的页面
         ],
         "sourceRoots": [
           "./src/main"
@@ -177,7 +177,7 @@ entry/
 
 不同 product 可能需要不同的三方依赖库，例如：
 - `default` product：为跨平台product，其中不支持使用三方媒体库进行播放，使用桥接到原生媒体播放库实现播放功能，所以不引用 `@polyvharmony/media-player-sdk` 三方库
-- `harmonyOSProject` product：需要使用 `@polyvharmony/media-player-sdk` 媒体播放库，所以需要引用
+- `harmonyOS` product：需要使用 `@polyvharmony/media-player-sdk` 媒体播放库，所以需要引用
 
 ### 2.2 hvigorfile.ts 动态依赖配置
 
@@ -208,8 +208,8 @@ hvigor.nodesEvaluated(() => {
   console.log(`当前编译 product: ${productName}`);
 
   // 根据 product 动态配置依赖
-  if (productName === 'harmonyOSProject') {
-    // harmonyOSProject product 需要媒体播放库
+  if (productName === 'harmonyOS') {
+    // harmonyOS product 需要媒体播放库
     updateDependencies('./entry/oh-package.json5', {
       "@polyvharmony/media-player-sdk": "2.4.0"
     });

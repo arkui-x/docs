@@ -67,6 +67,7 @@
 
 - [应用改造指南](./tutorial/how-to-use-arkuix-on-applicationRetrofit.md)
 - [跨平台Bridge最佳实践](./tutorial/how-to-use-bridge-on-applicationRetrofit.md)
+- [跨平台应用开发工程模块设计](./tutorial/how-to-design-arkui-x-app-development-engineering-module.md)
 - [跨平台工程文件引用和三方库依赖隔离指南](./tutorial/how-to-achieve-file-and-dependency-isolation.md)
 
 ### 开发工具
