@@ -29,7 +29,7 @@
 
 &emsp;&emsp;- **用户场景：** 应用Bridge场景如果希望不阻塞主UI线程场景下使用线程并发模式<br>
 &emsp;&emsp;- **优势：** 用户调度bridge都在Platform线程，然后由Platform线程切换到JS线程，数据编解码都会阻塞主UI线程，为了不阻塞主UI线程，将耗时处理放到后台异步线程中处理， 让Bridge调用者可连续发送数据<br>
-&emsp;&emsp;- **创建方式：** 线程并发模式目前只能在原生平台侧创建平台桥接实例时指定<br>
+&emsp;&emsp;- **创建方式：** 线程并发模式目前只能在原生平台侧创建平台桥接实例时指定<br>&emsp;&emsp;- **版本优化：** ArkUI-X SDK 版本大于**6.0.2.118**时，Bridge已经默认为多线程模式，无需额外设置<br>
 
 #### **能力二：支持原生平台和ArkTS侧数据互相传递**
 
@@ -43,6 +43,177 @@
 - **方法注册，** ArkTS侧需要通过方法[registerMethod](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-bridge.md#registermethod)定义被原生平台侧调用的方法，原生平台侧供ArkTS侧调用的方法无需注册
 - **方法移除和监听，** ArkTS侧可以通过方法[unregisterMethod](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-bridge.md#unregistermethod)来移除已注册的ArkTS端的方法，原生平台侧通过实现[IMethodResult](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-for-android/BridgePlugin.md#imethodresult%E6%8E%A5%E5%8F%A3)接口，基于其中的[onMethodCancel](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-for-android/BridgePlugin.md#onmethodcancel)方法来监听ArkTS侧的事件注销通知
 - **方法调用，** 参考: [callMethod（ArkTS）](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-bridge.md#callmethod)，[callMethodWithCallback（ArkTS）](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/apis/js-apis-bridge.md#callmethodwithcallback)， [callMethod（Android）](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-for-android/BridgePlugin.md#callmethod)，[ callMethod（iOS）](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-for-ios/BridgePlugin.md#callmethod)（**均支持带参数调用和无参数调用**）
+
+#### **能力四：支持应用全局创建、调用**
+
+为清晰界定Bridge的能力边界，以**ArkUI-X SDK版本6.0.2.118**为分界，将Bridge分为**旧版**（＜6.0.2.118）与**新版**（≥6.0.2.118）。核心差异在于：**仅新版Bridge支持全局调用**，彻底解决了旧版与原生组件的强绑定问题。<br>
+
+- 背景：复杂App的组件化架构<br>
+
+在大型App中，通常包含大量UIAbility（ArkTS），且每个UIAbility在原生侧（Android/iOS）均有对应载体，Android为**Activity**，iOS为**ViewController**。这种多组件架构对Bridge的跨组件复用能力提出了挑战。<br>
+
+- **旧版Bridge（＜6.0.2.118）：强绑定原生组件，仅限局部使用**<br>
+  - **核心规则**：Bridge实例与原生组件（Activity/ViewController）**强绑定**，其生命周期完全依赖于创建它的组件。<br>
+  - **使用限制**：<br>
+    - 仅能在**当前组件内**调用（如Activity A中创建的Bridge，无法在Activity A的其他方法外使用）。<br>
+    - 当页面跳转至**新组件**（如从Activity A跳转到Activity B）时，原Bridge实例自动失效，需在新组件中重新创建Bridge才能继续使用。<br>
+  - **举例**：若App从“首页UIAbility”（对应Activity A）跳转至“详情页UIAbility”（对应Activity B），Activity A中创建的Bridge在Activity B中无法调用，必须在Activity B中重新初始化Bridge。<br>
+
+- **新版Bridge（≥6.0.2.118）：解除强绑定，支持全局调用**<br>
+
+  - **核心改进**：通过**解耦Bridge与原生组件**，实现Bridge实例的全局共享。<br>
+  - **使用优势**：<br>
+    - 可在**任意原生组件**（如Activity A）中创建Bridge，创建后全局有效。<br>
+    - 即使跳转至新组件（如Activity B），也**无需重新创建**，可直接复用已创建的Bridge实例。<br>
+  - **举例**：同上场景，Activity A中创建的Bridge在跳转至Activity B后，Activity B中可直接调用该Bridge，无需重复初始化，大幅减少冗余代码。<br>
+
+- **单例模式思想管理Bridge**<br>
+
+  新版Bridge通过**延长生命周期至应用全局**，解决了旧版”随原生组件（Activity/ViewController）销毁而失效“的问题。为统一管理App中多个Bridge实例（如不同业务模块的桥接对象），建议采用**单例模式设计思想**：通过一个全局唯一的“容器”集中管理Bridge的创建、存储与访问，避免重复创建等问题。<br>
+
+  以下以**Android侧**为例阐述设计细节（ArkTS侧与iOS侧思想完全一致，仅开发语言不同）<br>
+
+  - **class BridgeUtil**，实现Bridge的核心业务逻辑，包括监听回调的实现、Android侧方法的实现等。作为“功能单元”，自身不管理生命周期，专注于业务逻辑实现（由容器类统一管控）。<br>
+
+    ```java
+    package com.example.bridge;
+    
+    import android.util.Log;
+    import ohos.ace.adapter.capability.bridge.BridgePlugin;
+    import ohos.ace.adapter.capability.bridge.IMessageListener;
+    import ohos.ace.adapter.capability.bridge.IMethodResult;
+    
+    /**
+     * BridgeUtil：实现Bridge的核心功能，包括监听回调实现、Android侧方法实现等
+     */
+    public class BridgeUtil extends BridgePlugin implements IMessageListener, IMethodResult {
+        private static final String TAG = "LOG";
+    
+        private static final String LOG_TAG = "[JAVA][BridgeUtil]:: ";
+    
+        public BridgeUtil(String bridgeName, BridgeType bridgeType) {
+            super(bridgeName, bridgeType);
+            setMessageListener(this);
+            setMethodResultListener(this);
+        }
+    
+        // 监听 IMessageListener
+        @Override
+        public Object onMessage(Object data) {
+            return "IMessageListener onMessage called";
+        }
+    
+        @Override
+        public void onMessageResponse(Object data) {
+            Log.i(TAG, LOG_TAG + "IMessageListener onMessageResponse called");
+        }
+    
+        // 监听 IMethodResult
+        @Override
+        public void onSuccess(Object resultValue) {
+            Log.i(TAG, LOG_TAG + "IMethodResult onSuccess called");
+        }
+    
+        @Override
+        public void onError(String methodName, int errorCode, String errorMessage) {
+            Log.i(TAG, LOG_TAG + "IMethodResult onError called; data is " + "{ methodName: " + methodName + "; errorCode:" +
+                    " " + errorCode + "; " + "errorMessage: " + errorMessage + " }");
+        }
+    
+        @Override
+        public void onMethodCancel(String methodName) {
+            Log.i(TAG, LOG_TAG + "IMethodResult onMethodCancel called; methodName is " + methodName);
+        }
+    
+        // 方法定义 ArkTS侧通过callMethod可以调用的方法
+        public String getString() {
+            Log.i(TAG, LOG_TAG + "Function getString called success");
+            return "";
+        }
+    }
+    ```
+
+  - **class BridgeObjectContainer**，单例容器类。作为**单例模式的具体实现**，承担App中所有BridgeUtil的管理，是外部访问BridgeUtil的唯一入口。解耦“功能实现”与“实例管理”，外部无需关心BridgeUtil的创建细节，仅需通过容器获取实例即可<br>
+
+    - **单例保障**：通过私有构造、静态实例、全局`getInstance()`方法，确保容器中仅存在一个实例。<br>
+    - **实例管理**：维护一个`ConcurrentHashMap<String, BridgeUtil>`（键为Bridge name，值为BridgeUtil实例），当已存在实例时可直接获取，避免重复创建。<br>
+
+    ```java
+    package com.example.bridge;
+    
+    import android.util.Log;
+    import java.util.concurrent.ConcurrentHashMap;
+    import ohos.ace.adapter.capability.bridge.BridgePlugin;
+    
+    /**
+     * BridgeObjectContainer Bridge对象管理类，用于管理多个 BridgeUtil 实例。
+     * 每个 BridgeUtil 实例通过一个唯一的 name（String）和BridgeType来标识。
+     * 对外提供 get(String name, BridgePlugin.BridgeType bridgeType) 方法，用于获取对应的 BridgeUtil 对象。
+     */
+    public class BridgeObjectContainer {
+        private static final String TAG = "LOG";
+    
+        private static final String LOG_TAG = "[JAVA][BridgeObjectContainer]:: ";
+    
+        private static final BridgeObjectContainer INSTANCE = new BridgeObjectContainer();
+    
+        private final ConcurrentHashMap<String, BridgeUtil> bridgeMap;
+    
+        private BridgeObjectContainer() {
+            bridgeMap = new ConcurrentHashMap<>();
+        }
+    
+        public static BridgeObjectContainer getInstance() {
+            return INSTANCE;
+        }
+    
+        public BridgeUtil get(String name, BridgePlugin.BridgeType bridgeType) {
+            // 开发者可根据实际需要修改逻辑，这里仅作参考
+            if (name == null || bridgeType == null) {
+                Log.e(TAG, LOG_TAG + "Invalid argument");
+                return null;
+            }
+    
+            BridgeUtil existingBridge = bridgeMap.get(name);
+            if (existingBridge == null) {
+                BridgeUtil newBridge = new BridgeUtil(name, bridgeType);
+                bridgeMap.put(name, newBridge);
+                return newBridge;
+            } else {
+                if (existingBridge.getBridgeType() == bridgeType) {
+                    return existingBridge;
+                } else {
+                    Log.e(TAG, LOG_TAG + "Bridge bridgeType incompatible");
+                    return null;
+                }
+            }
+        }
+    }
+    ```
+
+  - **外部使用方式**，开发者通过`BridgeObjectContainer`的单例实例访问BridgeUtil，流程如下：<br>
+
+    1. **获取容器实例**：调用`BridgeObjectContainer.getInstance()`（全局唯一入口）<br>
+    2. **获取BridgeUtil**：通过容器的`get(String name, BridgePlugin.BridgeType bridgeType)`方法获取BridgeUtil对象<br>
+    3. **使用Bridge功能**：直接调用BridgeUtil的方法（如`callMethod()`）<br>
+
+    ```java
+    package com.example.bridge;
+    
+    import android.os.Bundle;
+    import ohos.ace.adapter.capability.bridge.BridgePlugin;
+    import ohos.stage.ability.adapter.StageActivity;
+    
+    public class EntryEntryAbilityActivity extends StageActivity {
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            setInstanceName("com.example.bridge:entry:EntryAbility:");
+            super.onCreate(savedInstanceState);
+            // 外部使用时，通过BridgeObjectContainer获取BridgeUtil，即可使用Bridge的sendMessage发送消息
+            BridgeObjectContainer.getInstance().get("BasicBridge", BridgePlugin.BridgeType.JSON_TYPE).sendMessage("Message");
+        }
+    }
+    ```
 
 ### bridge如何做到"一码三平台"
 
