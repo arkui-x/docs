@@ -46,6 +46,7 @@
 - [预加载应用特性abc开发指南](./tutorial/how-to-use-preloadEtsModule-on-android.md)
 - [平台视图开发指南](./tutorial/how-to-use-platformview-on-android.md)
 - [以Hap为主体的共享逻辑包开发指南](./tutorial/how-to-decoupled-UI-and-Logic-on-android.md)
+- [Android原生页面与跨平台页面跳转开发指南](./tutorial/how-to-use-arkuix-on-nativePageLaunch-Android.md)
 
 ### iOS平台开发
 
@@ -62,6 +63,7 @@
 - [平台视图开发指南](./tutorial/how-to-use-platformview-on-ios.md)
 - [IOS跨平台页面实现手势返回指南](./quick-start/ios-slip-left-back.md)
 - [以Hap为主体的共享逻辑包开发指南](./tutorial/how-to-decoupled-UI-and-Logic-on-ios.md)
+- [iOS原生页面与跨平台页面跳转开发指南](./tutorial/how-to-use-arkuix-on-nativePageLaunch-iOS.md)
 
 ### 应用改造
 
@@ -69,7 +71,6 @@
 - [跨平台Bridge最佳实践](./tutorial/how-to-use-bridge-on-applicationRetrofit.md)
 - [跨平台应用开发工程模块设计](./tutorial/how-to-design-arkui-x-app-development-engineering-module.md)
 - [跨平台工程文件引用和三方库依赖隔离指南](./tutorial/how-to-achieve-file-and-dependency-isolation.md)
-- [跨平台与原生页面跳转开发指南](./tutorial/how-to-use-arkuix-on-nativePageLaunch.md)
 
 ### 开发工具
 
