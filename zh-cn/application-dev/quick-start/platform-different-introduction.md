@@ -17,9 +17,19 @@
 
 可以通过`let osName: string = deviceInfo.osFullName;`获取对应OS名字，该接口已支持跨平台，不同平台上其返回值如下:
 
-+ OpenHarmony上，osName等于`OpenHarmony XXX`
-+ Android上，osName等于`Android XXX`
-+ iOS上，osName等于`iOS XXX`
+| 平台 | osFullName 返回值示例 |
+|------|----------------------|
+| OpenHarmony | `OpenHarmony 4.1.0` |
+| Android | `Android 14` |
+| iOS (iPhone) | `iOS 17.0` |
+| iPadOS | `iPadOS 17.0` |
+| macOS | `macOS Version 17.0 (Build 21A359)` |
+| ... | ... |
+
+> **苹果设备底层实现说明**：
+> - 使用苹果系统 TARGET_OS_MACCATALYST 宏判断区分mac类型的设备
+> - 非mac场景：使用 `[[UIDevice currentDevice] systemName]` 方法获取系统名称，该接口在 iPhone/iPad/Apple TV/Apple Watch 上分别返回对应的系统名称。
+> - mac场景：使用 `[[NSProcessInfo processInfo] operatingSystemVersionString]` 获取 macOS 版本信息
 
 示例如下:
 
@@ -32,7 +42,13 @@ test() {
   } else if (osName.startsWith('Android')) {
     // Android应用平台上业务逻辑
   } else if (osName.startsWith('iOS')) {
-    // iOS应用平台上业务逻辑
+    // iPhone应用平台上业务逻辑
+  } else if (osName.startsWith('iPadOS')) {
+    // iPad应用平台上业务逻辑
+  } else if (osName.startsWith('macOS')) {
+    // Mac应用平台上业务逻辑
+  } else if(...) {
+    ...
   }
 }
 ```
