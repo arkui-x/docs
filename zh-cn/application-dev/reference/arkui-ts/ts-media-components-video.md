@@ -28,6 +28,7 @@ Video(value: {src?: string | Resource, currentProgressRate?: number | string | P
 | currentProgressRate | number&nbsp;\|&nbsp;string&nbsp;\|&nbsp;PlaybackSpeed<sup>8+</sup> | 否   | 视频播放倍速。<br/>**说明：**<br/>number取值仅支持：0.75，1.0，1.25，1.75，2.0。<br/>默认值：1.0 \| PlaybackSpeed.Speed_Forward_1_00_X |
 | previewUri          | string&nbsp;\|PixelMap&nbsp;\|&nbsp;[Resource](ts-types.md)  | 否   | 视频未播放时的预览图片路径，默认不显示图片。                 |
 | controller          | [VideoController](#videocontroller)                          | 否   | 设置视频控制器，可以控制视频的播放状态。                     |
+| posterOptions<sup>26+</sup>  | [PosterOptions](#posteroptions26对象说明) | 否   | 设置视频播放的首帧送显选项，可以控制视频是否支持首帧送显。 |
 
 ## PlaybackSpeed<sup>8+</sup>枚举说明
 
@@ -38,6 +39,11 @@ Video(value: {src?: string | Resource, currentProgressRate?: number | string | P
 | Speed_Forward_1_25_X | 1.25倍速播放。 |
 | Speed_Forward_1_75_X | 1.75倍速播放。 |
 | Speed_Forward_2_00_X | 2倍速播放。    |
+| SPEED_FORWARD_0_50_X<sup>26+</sup> | 0.5倍速播放。 |
+| SPEED_FORWARD_1_50_X<sup>26+</sup> | 1.5倍速播放。 |
+| SPEED_FORWARD_3_00_X<sup>26+</sup> | 3倍速播放。   |
+| SPEED_FORWARD_0_25_X<sup>26+</sup> | 0.25倍速播放。 |
+| SPEED_FORWARD_0_125_X<sup>26+</sup> | 0.125倍速播放。 |
 
 ## 属性
 
@@ -50,6 +56,7 @@ Video(value: {src?: string | Resource, currentProgressRate?: number | string | P
 | controls  | boolean                                  | 控制视频播放的控制栏是否显示。<br/>默认值：true |
 | objectFit | [ImageFit](ts-appendix-enums.md#imagefit) | 设置视频显示模式。<br/>默认值：Cover      |
 | loop      | boolean                                  | 是否单个视频循环播放。<br/>默认值：false    |
+| enableShortcutKey<sup>26+</sup>   | boolean    | 设置组件支持快捷键响应，目前支持在组件获焦后响应空格键播放/暂停、上下方向键调整视频音量、左右方向键快进/快退。<br/>默认值：false   |
 
 ## 事件
 
@@ -67,6 +74,13 @@ Video(value: {src?: string | Resource, currentProgressRate?: number | string | P
 | onUpdate(callback:(event?:&nbsp;{&nbsp;time:&nbsp;number&nbsp;})&nbsp;=&gt;&nbsp;void) | 播放进度变化时触发该事件。<br/>time：当前视频播放的进度，单位为s。 |
 | onFullscreenChange(callback:(event?:&nbsp;{&nbsp;fullscreen:&nbsp;boolean&nbsp;})&nbsp;=&gt;&nbsp;void) | 在全屏播放与非全屏播放状态之间切换时触发该事件。<br/>fullscreen：返回值为true表示进入全屏播放状态，为false则表示非全屏播放。 |
 
+## PosterOptions<sup>26+</sup>对象说明
+
+用于描述当前视频是否配置首帧送显。
+
+| 名称       | 类型    | 只读 | 可选 | 说明                         |
+| ----------- | ------- | ---- | ---- | ---------------------------- |
+| showFirstFrame   | boolean | 否 | 是 | 当前视频是否配置首帧送显，当开启首帧送显时，VideoOptions对象中的previewUri字段不生效。<br/>true：开启首帧送显；false：关闭首帧送显。    |
 
 ## VideoController
 
@@ -97,6 +111,12 @@ pause(): void
 stop(): void
 
 停止播放，显示当前帧，再次播放时从头开始播放。
+
+### reset<sup>26+</sup>
+
+reset(): void
+
+Video组件重置AVPlayer。显示当前帧，再次播放时从头开始播放。
 
 ### setCurrentTime
 
@@ -150,7 +170,7 @@ setCurrentTime(value: number, seekMode: SeekMode)
 | ClosestKeyframe  | 跳转到最近的关键帧。     |
 | Accurate         | 精准跳转，不论是否为关键帧。 |
 
-## 示例
+## 示例1
 
 ```ts
 // xxx.ets
@@ -257,5 +277,67 @@ interface DurationObject {
 
 interface TimeObject {
   time: number;
+}
+```
+
+## 示例2
+
+```ts
+// xxx.ets
+@Entry
+@Component
+struct VideoDemo2Component {
+  @State videoSrc: Resource = $rawfile('video2.mp4')
+  @State curRate: PlaybackSpeed = PlaybackSpeed.Speed_Forward_1_00_X
+  controller: VideoController = new VideoController()
+
+  build() {
+    Column() {
+      Video({
+        src: this.videoSrc,
+        currentProgressRate: this.curRate,
+        controller: this.controller,
+        posterOptions: {
+          showFirstFrame: true // 开启首帧送显
+        }
+      })
+        .enableShortcutKey(true)  // 设置支持快捷键响应
+        .width('100%')
+        .height(600)
+
+      Row() {
+        Button('start').onClick(() => {
+          this.controller.start() // 开始播放
+        }).margin(5)
+        Button('pause').onClick(() => {
+          this.controller.pause() // 暂停播放
+        }).margin(5)
+        Button('reset').onClick(() => {
+          this.controller.reset() // 播放重置
+        }).margin(5)
+      }
+
+      Row() {
+        Button('rate 0.50').onClick(() => {
+          this.curRate = PlaybackSpeed.SPEED_FORWARD_0_50_X // 0.5倍速播放
+        }).margin(5)
+        Button('rate 1.50').onClick(() => {
+          this.curRate = PlaybackSpeed.SPEED_FORWARD_1_50_X // 1.5倍速播放
+        }).margin(5)
+        Button('rate 3.0').onClick(() => {
+          this.curRate = PlaybackSpeed.SPEED_FORWARD_3_00_X // 3倍速播放
+        }).margin(5)
+      }
+
+      Row() {
+        Button('rate 0.25').onClick(() => {
+          this.curRate = PlaybackSpeed.SPEED_FORWARD_0_25_X // 0.25倍速播放
+        }).margin(5)
+        Button('rate 0.125').onClick(() => {
+          this.curRate = PlaybackSpeed.SPEED_FORWARD_0_125_X // 0.125倍速播放
+        }).margin(5)
+      }
+    }
+  }
 }
 ```
