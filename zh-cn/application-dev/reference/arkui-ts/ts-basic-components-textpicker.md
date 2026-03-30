@@ -52,6 +52,7 @@ TextPicker(options?: {range: string[] | string[][] | Resource | TextPickerRangeC
 | selectedTextStyle<sup>10+</sup> | [PickerTextStyle](ts-basic-components-datepicker.md#pickertextstyle10类型说明) | 设置选中项的文本颜色、字号、字体粗细。<br/>默认值：<br/>{<br/>color: '#ff007dff',<br/>font: {<br/>size: '20vp', <br/>weight: FontWeight.Medium<br/>}<br/>} |
 | selectedIndex<sup>10+</sup> | number&nbsp;\|&nbsp;number[] | 设置默认选中项在数组中的索引值，优先级高于options中的选中值。 <br/>**说明**：单列数据选择器使用number类型。多列、多列联动数据选择器使用number[]类型。 |
 | canLoop<sup>10+</sup> | boolean | 设置是否可循环滚动，true：可循环，false：不可循环，默认值：true。 |
+| enableHapticFeedback<sup>26+</sup> | [Optional](ts-universal-attributes-custom-property.md#optional12)\<boolean> | 是否支持触控反馈。<br/>默认值：true，true表示开启触控反馈，false表示不开启触控反馈。<br/>设置为true后是否生效，还取决于系统的硬件是否支持。<br/>iOS平台约束：静音模式下仍有振动效果；<br/>提示音量不会跟随滚动速度发生变化；<br/>iOS 10-13版本振感不会跟随滚动速度发生变化。 |
 
 ## 事件
 
