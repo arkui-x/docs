@@ -85,9 +85,9 @@
 
 ## API参考
 
-- [组件参考（基于ArkTS的声明式开发范式）](reference/arkui-ts/README.md)
-- [接口参考（ArkTS及JS API）](reference/apis/README.md)
-- 接口参考（Native API）
+- [ArkTS API参考](reference/arkts-apis/README.md)
+- [ArkUI API参考](reference/arkui-ts/README.md)
+- 接口参考
   - [ArkUI-X Native API](reference/native-apis/README.md)
   - [Native API标准库](./reference/native-lib/third_party_napi/napi.md)
 - 平台集成

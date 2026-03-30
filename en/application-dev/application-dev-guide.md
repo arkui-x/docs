@@ -27,8 +27,8 @@ The API references encompass the components and APIs available in ArkUI-X, helpi
 
 They are organized as follows:
 
-- [Component Reference (ArkTS-based Declarative Development Paradigm)](reference/arkui-ts/README.md)
-- [API Reference (ArkTS and JS APIs)](reference/apis/README.md)
+- [ArkTS API Reference](reference/arkts-apis/README.md)
+- [ArkUI API](reference/arkui-ts/README.md)
 - [API Reference (Native API)](reference/native-apis/README.md)
 - Platform Integration
   - [Android](reference/arkui-for-android/README.md)
