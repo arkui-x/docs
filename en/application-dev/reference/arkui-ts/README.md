@@ -1,5 +1,10 @@
 # ArkUI
-
+- Platform Bridge
+  - [@arkui-x.bridge (平台桥接)](../apis/js-apis-bridge.md)
+- Module Loader
+  - [@arkui-x.ModuleLoader](../js-apis-ModuleLoader.md)
+- Platformview
+  - [@arkui-x.platformview](../js-apis-PlatformView.md)
 - ArkTS API<!--arkui-arkts-->
   - UI<!--ui-->
     - [@ohos.animator (Animator)](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/js-apis-animator.md)
