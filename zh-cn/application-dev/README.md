@@ -81,6 +81,7 @@
 ### 测试
 
 - [单元/UI测试](./test/arkxtest.md)
+- [Appium](./test/how-to-use-appium.md)
 
 ### 常见问题
 
