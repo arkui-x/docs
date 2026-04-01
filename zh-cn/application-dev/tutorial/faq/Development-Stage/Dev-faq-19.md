@@ -59,11 +59,11 @@ export default class EntryAbility extends UIAbility {
   }
 
   setFont(context:UIContext) {
-    context.getFont.registerFont({
+    context.getFont().registerFont({
       familyName: 'Medium',
       familySrc: $rawfile('font/HarmonyOS_SansSC_Medium.ttf')
     })
-    getContext().getApplicationContext().setFont('Medium');
+    this.context.getApplicationContext().setFont('Medium');
   }
   ...
 }

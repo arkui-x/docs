@@ -1,18 +1,10 @@
 # OpenHarmony APIs with Cross-Platform Support
 - Platform Bridge
-  - [@arkui-x.bridge (Platform Bridget)](js-apis-bridge.md)
-
-- UI Page
-  - [@ohos.animator (Animator)](js-apis-animator.md)
-  - [@ohos.arkui.componentSnapshot (Component Snapshot)](js-apis-arkui-componentSnapshot.md)
-  - [@ohos.arkui.inspector (Layout Callback)](js-apis-arkui-inspector.md)
-  - [@ohos.arkui.UIContext (UIContext)](js-apis-arkui-UIContext.md)
-  - [@ohos.curves (Interpolation Calculation)](js-apis-curve.md)
-  - [@ohos.matrix4 (Matrix Transformation)](js-apis-matrix4.md)
-  - [@ohos.mediaquery (Media Query)](js-apis-mediaquery.md)
-  - [@ohos.promptAction (Prompt)](js-apis-promptAction.md)
-  - [@ohos.router (Page Routing)](js-apis-router.md)
-  
+  - [@arkui-x.bridge (Platform Bridge)](../apis/js-apis-bridge.md)
+- Module Loader
+  - [@arkui-x.ModuleLoader](../js-apis-ModuleLoader.md)
+- Platformview
+  - [@arkui-x.platformview](../js-apis-PlatformView.md)
 - Ability Framework
   - Stage Model (Recommended)
     - [@ohos.app.ability.abilityLifecycleCallback (AbilityLifecycleCallback)](js-apis-app-ability-abilityLifecycleCallback.md)
