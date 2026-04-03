@@ -217,6 +217,20 @@ maxLines(maxLines: Optional\<number\>)
 | ------ | ----------------------------------------- | ---- | ------------------------------------------------------------ |
 | maxLines  | Optional\<number> | 是   | 设置富文本可显示的最大行数。maxLines为可显示行数，当设置maxLines时，超出内容可滚动显示。同时设置组件高度和最大行数，组件高度优先生效。<br/>默认值：Infinity，可以无限输入，支持undefined类型。 <br/>取值范围：(0, +∞) |
 
+### enableHapticFeedback<sup>26+</sup>
+
+enableHapticFeedback(isEnabled: boolean)
+
+设置RichEditor是否支持触控反馈。
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名    | 类型    | 必填 | 说明                                                         |
+| --------- | ------- | ---- | ------------------------------------------------------------ |
+| isEnabled | boolean | 是   | 是否支持触控反馈。<br/>默认值：true，true表示开启触控反馈，false表示不开启触控反馈。<br/>设置为true后是否生效，还取决于系统的硬件是否支持。 |
+
 ## 事件
 
 除支持通用事件外，还支持OnDidChangeCallback、StyledStringChangedListener、StyledStringChangeValue和以下事件：
