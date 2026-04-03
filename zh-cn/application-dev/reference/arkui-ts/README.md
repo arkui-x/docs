@@ -1,10 +1,4 @@
 # ArkUI（方舟UI框架）
-- 平台桥接
-  - [@arkui-x.bridge (平台桥接)](../apis/js-apis-bridge.md)
-- 模块加载
-  - [@arkui-x.ModuleLoader](../js-apis-ModuleLoader.md)
-- 平台视图
-  - [@arkui-x.platformview](../js-apis-PlatformView.md)
 - ArkTS API<!--arkui-arkts-->
   - UI界面<!--ui-->
     - [@ohos.animator (动画)](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/js-apis-animator.md)

@@ -91,6 +91,7 @@
 
 - [ArkTS API参考](reference/arkts-apis/README.md)
 - [ArkUI API参考](reference/arkui-ts/README.md)
+- [子系统 API参考](reference/apis/README.md)
 - 接口参考
   - [ArkUI-X Native API](reference/native-apis/README.md)
   - [Native API标准库](./reference/native-lib/third_party_napi/napi.md)

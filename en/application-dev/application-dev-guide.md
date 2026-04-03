@@ -29,6 +29,7 @@ They are organized as follows:
 
 - [ArkTS API Reference](reference/arkts-apis/README.md)
 - [ArkUI API](reference/arkui-ts/README.md)
+- [Subsystem API](reference/apis/README.md)
 - [API Reference (Native API)](reference/native-apis/README.md)
 - Platform Integration
   - [Android](reference/arkui-for-android/README.md)
