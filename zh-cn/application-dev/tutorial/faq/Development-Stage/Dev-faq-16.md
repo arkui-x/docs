@@ -24,7 +24,7 @@ client.request('https://xxxxxx', {
 
 http使用BoringSSL进行证书校验，对证书校验比较严格，推荐使用pem证书。可搜索在线转换工具，将p12证书转为pem证书。使用如下，keyPath为转换生成的privatekey。
 
-```javaB
+```typescript
 const client = http.createHttp()
 client.request('https://xxxxxx', {
     caPath: ctx.cacheDir + '/ca.pem',

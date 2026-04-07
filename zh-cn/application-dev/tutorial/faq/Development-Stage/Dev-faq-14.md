@@ -17,4 +17,4 @@ PlatformView接口缺少自定义组件标签@uicomponent注解
 
 **【解决计划】**
 
-问题会在arkui-x 5.1.1.100 Release及以后版本中修复。
+问题会在ArkUI-X 5.1.1.100 Release及以后版本中修复。
