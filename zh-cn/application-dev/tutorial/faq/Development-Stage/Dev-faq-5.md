@@ -2,7 +2,9 @@
 
 HarmonyOS NEXT上Window.setWindowSystemBarProperties设置窗口内导航栏、状态栏属性，该能力当前不支持跨平台
 
-**【替代方案】**可以在android原生代码中设置状态栏，导航栏颜色，示例代码如下：
+**【替代方案】**
+
+可以在Android原生代码中设置状态栏，导航栏颜色，示例代码如下：
 
 ```java
 

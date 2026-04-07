@@ -2,7 +2,7 @@
 
 **问题描述**
 
-在安卓和iOS平台上使用PromptAction、Router、Font等功能不可用，以PromptAction功能为例，
+在Android和iOS平台上使用PromptAction、Router、Font等功能不可用，以PromptAction功能为例，
 按照如下ArkTS写法来使用PromptAction功能，安卓和iOS上运行时弹窗功能不可用：
 ```typescript
 import { BusinessError } from '@kit.BasicServicesKit';

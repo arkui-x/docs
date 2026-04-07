@@ -25,4 +25,4 @@ ArkUI-X在Ace Tools上提供了ace modify的能力，用来帮助开发者实现
 
 ### 实战教程参考
 
-从零开始或基于现有HarmonyOS Next App进行改造，使其可快速部署于Android、IOS平台，从架构设计和实际代码开发层面，详情请参考：[跨平台改造实战指南](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/tutorial/how-to-use-arkuix-on-applicationRetrofit.md)
+从零开始或基于现有HarmonyOS Next App进行改造，使其可快速部署于Android、iOS平台，从架构设计和实际代码开发层面，详情请参考：[跨平台改造实战指南](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/tutorial/how-to-use-arkuix-on-applicationRetrofit.md)
