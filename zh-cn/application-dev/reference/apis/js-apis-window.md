@@ -806,6 +806,7 @@ getWindowAvoidArea(type: AvoidAreaType): AvoidArea
 
 获取窗口内容规避的区域；如系统栏区域、刘海屏区域、手势区域、软键盘区域等与窗口内容重叠时，需要窗口内容避让的区域。
 从API 20开始，在Android中，非沉浸式的情况下，由于内部已经做了避让，除了键盘，其他避让区域返回为空。
+由于跨平台内部时序原因，###setWindowLayoutFullScreen设置沉浸式后，无法立刻获取避让区域的值，请使用[on('avoidAreaChange')](#onavoidareachange20)接口来实现，请参考对应示例。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
@@ -1802,6 +1803,18 @@ try {
   });
 } catch (exception) {
   console.error(`Failed to enable the listener for system avoid area changes. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+try {
+  windowClass.setWindowLayoutFullScreen(true, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
+      return;
+    }
+    console.info('Succeeded in setting the window layout to full-screen mode.');
+  });
+} catch (exception) {
+  console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(exception));
 }
 ```
 
