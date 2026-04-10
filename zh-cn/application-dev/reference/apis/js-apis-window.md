@@ -805,7 +805,10 @@ try {
 getWindowAvoidArea(type: AvoidAreaType): AvoidArea
 
 获取窗口内容规避的区域；如系统栏区域、刘海屏区域、手势区域、软键盘区域等与窗口内容重叠时，需要窗口内容避让的区域。
-从API 20开始，在Android中，非沉浸式的情况下，由于内部已经做了避让，除了键盘，其他避让区域返回为空。
+
+从API 20开始，非沉浸式的情况下，由于内部已经做了避让，除了键盘，其他避让区域返回为空。
+
+由于跨平台内部时序原因，[setWindowLayoutFullScreen](#setwindowlayoutfullscreen9)设置沉浸式后，无法立刻获取避让区域的值，请使用[on('avoidAreaChange')](#onavoidareachange20)接口来实现，请参考对应示例。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
@@ -1762,10 +1765,15 @@ try {
 on(type: 'avoidAreaChange', callback: Callback&lt;AvoidAreaOptions&gt;): void
 
 开启当前应用窗口系统规避区变化的监听。
+
 在Android中，子窗口会自动避让，不会返回避让区域。
-从API 20开始，在Android中，非沉浸式的情况下，由于内部已经做了避让，除了键盘，其他避让区域返回为空。
+
+从API 20开始，非沉浸式的情况下，由于内部已经做了避让，除了键盘，其他避让区域返回为空。
+
 暂不支持全屏子窗。
+
 部分场景可能回调多次，Android 非沉浸式的导航栏隐藏场景会返回两次，以最后一次为准。
+
 <!--RP7-->常见的触发避让区回调的场景如下：应用窗口在全屏模式、悬浮模式、分屏模式之间的切换；应用窗口旋转；多折叠设备在屏幕折叠态和展开态之间的切换。<!--RP7End-->
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
@@ -1802,6 +1810,18 @@ try {
   });
 } catch (exception) {
   console.error(`Failed to enable the listener for system avoid area changes. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+try {
+  windowClass.setWindowLayoutFullScreen(true, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
+      return;
+    }
+    console.info('Succeeded in setting the window layout to full-screen mode.');
+  });
+} catch (exception) {
+  console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(exception));
 }
 ```
 
