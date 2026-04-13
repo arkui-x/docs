@@ -5,7 +5,10 @@ UIAbility是包含UI界面的应用组件，提供组件创建、销毁、前后
 > **说明：**
 >
 > 本模块首批接口从API version 9 开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+>
 > 本模块接口仅可在Stage模型下使用。
+>
+> 若要实现跨平台基础能力及触发对应ability生命周期，所有iOS端应用级别的视图控制器均要继承于[StageViewController](../../quick-start/start-with-ability-on-ios.md#stageviewcontroller)。
 
 ## 导入模块
 
