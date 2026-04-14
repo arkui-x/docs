@@ -543,8 +543,10 @@ startAbility(want: Want, callback: AsyncCallback\<void>): void;
 
 以上错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)。
 
->  **说明：**
->  当在iOS平台上使用此接口时，无法从返回结果中判断参数[Want](js-apis-app-ability-want.md)中moduleName或者abilityName是否错误，需要参考[ArkUI应用实现页面跳转](../../quick-start/start-with-ability-on-ios.md#arkui应用实现页面跳转)识别错误。
+> ArkUI-X 支持 ArkTS 侧通过启动 Ability 的方式拉起原生页面。详情请参考：[ArkUI-X支持ArkTS侧用启动Ability的方式拉起原生Activity](../../tutorial/faq/Development-Stage/Dev-faq-8.md)。
+>
+> **说明：**js-apis-inner-application-abilityDelegator.md
+> 当在iOS平台上使用此接口时，无法从返回结果中判断参数[Want](js-apis-app-ability-want.md)中moduleName或者abilityName是否错误，需要参考[ArkUI应用实现页面跳转](../../quick-start/start-with-ability-on-ios.md#arkui应用实现页面跳转)识别错误。
 
 **示例：**
 
@@ -595,8 +597,10 @@ startAbility(want: Want): Promise\<void>;
 
 以上错误码详细介绍请参考[errcode-ability](../errorcodes/errorcode-ability.md)。
 
->  **说明：**
->  当在iOS平台上使用此接口时，无法从返回结果中判断参数[Want](js-apis-app-ability-want.md)中moduleName或者abilityName是否错误，需要参考[ArkUI应用实现页面跳转](../../quick-start/start-with-ability-on-ios.md#arkui应用实现页面跳转)识别错误。
+> ArkUI-X 支持 ArkTS 侧通过启动 Ability 的方式拉起原生页面。详情请参考：[ArkUI-X支持ArkTS侧用启动Ability的方式拉起原生Activity](../../tutorial/faq/Development-Stage/Dev-faq-8.md)。
+>
+> **说明：**
+> 当在iOS平台上使用此接口时，无法从返回结果中判断参数[Want](js-apis-app-ability-want.md)中moduleName或者abilityName是否错误，需要参考[ArkUI应用实现页面跳转](../../quick-start/start-with-ability-on-ios.md#arkui应用实现页面跳转)识别错误。
 
 **示例：**
 

@@ -362,6 +362,8 @@ setFont(font: string): void
 > **说明：**
 >
 > 调用该接口前，需要确保窗口已完成创建、且UIAbility对应的页面已完成加载，即在[onWindowStageCreate()](js-apis-app-ability-uiAbility.md#onwindowstagecreate)生命周期中通过[loadContent](js-apis-window.md#loadcontent9)方法加载页面之后调用。
+>
+> 全局使用非原生系统字体时，可通过 ApplicationContext.setFont 进行设置。示例请参考：[ArkUI-X上如何在全局使用非原生系统字体](../../tutorial/faq/Development-Stage/Dev-faq-19.md#全局，使用ApplicationContext.setFont)。
 
 **系统能力**：SystemCapability.Ability.AbilityRuntime.Core
 

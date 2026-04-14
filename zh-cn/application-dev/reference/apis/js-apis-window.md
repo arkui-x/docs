@@ -852,7 +852,7 @@ try {
 
 setWindowLayoutFullScreen(isLayoutFullScreen: boolean, callback: AsyncCallback&lt;void&gt;): void
 
-设置窗口的布局是否为沉浸式布局，使用callback异步回调。
+设置窗口布局是否为沉浸式，使用 callback 异步回调。示例请参考：[ArkUI-X如何设置沉浸式效果](../../tutorial/faq/Development-Stage/Dev-faq-6.md)。
 沉浸式布局是指布局不避让状态栏与导航栏，组件可能产生与其重叠的情况。
 非沉浸式布局是指布局避让状态栏与导航栏，组件不会与其重叠。
 
@@ -3306,4 +3306,3 @@ export default class EntryAbility extends UIAbility {
   }
 };
 ```
-
