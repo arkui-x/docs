@@ -5,6 +5,8 @@
 > **说明：**
 >
 > 该组件从API Version 8开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+>
+> 如果 Search 组件在 Android 上展开或收起时出现界面闪烁，解决方案请参考：[ArkUI-X Android界面在输入法展开收起时出现界面闪烁](../../tutorial/faq/Development-Stage/Dev-faq-15.md)。
 
 ## 子组件
 

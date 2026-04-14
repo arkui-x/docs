@@ -6,7 +6,8 @@
 > **说明：**
 >
 > 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
-
+>
+> 在 ArkUI-X API 20+ 版本中，若在原生侧 Bridge 调用必须在主线程执行的 API，会抛出运行时异常（RuntimeException）。解决方案请参考：[将原生侧 UI 操作等调度至主线程执行](../../tutorial/faq/Development-Stage/Dev-faq-22.md)。
 
 ## 导入模块
 
