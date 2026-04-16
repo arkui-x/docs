@@ -18,14 +18,14 @@
 
 ## 接口
 
-Video(value: {src?: string | Resource, currentProgressRate?: number | string | PlaybackSpeed, previewUri?: string | PixelMap | Resource, controller?: VideoController}) 
+Video(value: {src?: string | Resource, currentProgressRate?: number | string | PlaybackSpeed, previewUri?: string | PixelMap | Resource, controller?: VideoController, posterOptions?: PosterOptions}) 
 
 **参数：**
 
 | 参数名              | 参数类型                                                     | 必填 | 参数描述                                                     |
 | ------------------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
 | src                 | string \| [Resource](ts-types.md)                            | 否   | 视频播放源的路径，支持本地视频路径和网络路径。<br>支持在resources下面的video或rawfile文件夹里放置媒体资源。<br>支持dataability://的路径前缀，用于访问通过Data Ability提供的视频路径，具体路径信息详见 [DataAbility说明](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/application-models/dataability-overview.md)。<br/>- 支持file:///data/storage路径前缀的字符串，用于读取应用沙箱路径内的资源。需要保证目录包路径下的文件有可读权限。<br/>**说明：**<br/>视频支持的格式是：mp4、mkv、webm、TS。 |
-| currentProgressRate | number&nbsp;\|&nbsp;string&nbsp;\|&nbsp;PlaybackSpeed<sup>8+</sup> | 否   | 视频播放倍速。<br/>**说明：**<br/>number取值仅支持：0.75，1.0，1.25，1.75，2.0。<br/>默认值：1.0 \| PlaybackSpeed.Speed_Forward_1_00_X |
+| currentProgressRate | number&nbsp;\|&nbsp;string&nbsp;\|&nbsp;PlaybackSpeed<sup>8+</sup> | 否   | 视频播放倍速。<br/>**说明：**<br/>number取值仅支持：0.125，0.25，0.5，0.75，1.0，1.25，1.5，1.75，2.0，3.0。<br/>默认值：1.0 \| PlaybackSpeed.Speed_Forward_1_00_X |
 | previewUri          | string&nbsp;\|PixelMap&nbsp;\|&nbsp;[Resource](ts-types.md)  | 否   | 视频未播放时的预览图片路径，默认不显示图片。                 |
 | controller          | [VideoController](#videocontroller)                          | 否   | 设置视频控制器，可以控制视频的播放状态。                     |
 | posterOptions<sup>26+</sup>  | [PosterOptions](#posteroptions26对象说明) | 否   | 设置视频播放的首帧送显选项，可以控制视频是否支持首帧送显。 |
@@ -56,7 +56,7 @@ Video(value: {src?: string | Resource, currentProgressRate?: number | string | P
 | controls  | boolean                                  | 控制视频播放的控制栏是否显示。<br/>默认值：true |
 | objectFit | [ImageFit](ts-appendix-enums.md#imagefit) | 设置视频显示模式。<br/>默认值：Cover      |
 | loop      | boolean                                  | 是否单个视频循环播放。<br/>默认值：false    |
-| enableShortcutKey<sup>26+</sup>   | boolean    | 设置组件支持快捷键响应，目前支持在组件获焦后响应空格键播放/暂停、上下方向键调整视频音量、左右方向键快进/快退。<br/>默认值：false   |
+| enableShortcutKey<sup>26+</sup>   | boolean    | 设置组件支持快捷键响应，目前支持在组件获焦后响应空格键播放/暂停、上下方向键调整视频音量、左右方向键快进/快退。<br/>true：开启快捷键响应；false：关闭快捷键响应。<br/>默认值：false   |
 
 ## 事件
 
@@ -80,7 +80,7 @@ Video(value: {src?: string | Resource, currentProgressRate?: number | string | P
 
 | 名称       | 类型    | 只读 | 可选 | 说明                         |
 | ----------- | ------- | ---- | ---- | ---------------------------- |
-| showFirstFrame   | boolean | 否 | 是 | 当前视频是否配置首帧送显，当开启首帧送显时，VideoOptions对象中的previewUri字段不生效。<br/>true：开启首帧送显；false：关闭首帧送显。    |
+| showFirstFrame   | boolean | 否 | 是 | 当前视频是否配置首帧送显，当开启首帧送显时，VideoOptions对象中的previewUri字段不生效。<br/>true：开启首帧送显；false：关闭首帧送显。<br/>默认值：false    |
 
 ## VideoController
 
