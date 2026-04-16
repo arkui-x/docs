@@ -54,6 +54,7 @@
 - [关于 registerJavaScriptProxy使用说明](Development-Stage/Dev-faq-21.md)
 - [ArkUI-X API 20+版本，在原生侧Bridge里调用必须在主线程执行的 API 时，会抛出运行时异常(RuntimeException)](Development-Stage/Dev-faq-22.md)
 - [ArkUI-X iOS如何触发应用前后台切换回调](Development-Stage/Dev-faq-23.md)
+- [MacOS 提示“无法打开‘icupkg’，因为无法验证开发者”解决办法](Development-Stage/Dev-faq-25.md)
 
 ### 问题自排查
 
