@@ -35,6 +35,7 @@ show(options?: DatePickerDialogOptions)
 | onCancel | () => void | 否 | 点击弹窗中的“取消”按钮时触发该回调。 |
 | onDateAccept<sup>10+</sup> | (value:  Date) => void | 否 | 点击弹窗中的“确定”按钮时触发该回调。<br />**说明：**<br />当showTime设置为true时，回调接口返回值value中时和分为选择器选择的时和分。否则，返回值value中时和分为系统时间的时和分。 |
 | onDateChange<sup>10+</sup> | (value:  Date) => void | 否 | 滑动弹窗中的滑动选择器使当前选中项改变时触发该回调。<br />**说明：**<br />当showTime设置为true时，回调接口返回值value中时和分为选择器选择的时和分。否则，返回值value中时和分为系统时间的时和分。 |
+| enableHapticFeedback<sup>26+</sup> | boolean | 否 | 是否支持触控反馈。<br/>默认值：true，true表示开启触控反馈，false表示不开启触控反馈。<br/>设置为true后是否生效，还取决于系统的硬件是否支持。<br/>iOS平台约束：静音模式下仍有振动效果；<br/>提示音量不会跟随滚动速度发生变化；<br/>iOS 10-13版本振感不会跟随滚动速度发生变化。 |
 
 **异常情形说明:**
 

@@ -2,7 +2,7 @@
 
 ### 标准替换流程
 
-以MacOS为例，可以参考下图进行SDK的解压缩和拷贝替换：
+以macOS为例，可以参考下图进行SDK的解压缩和拷贝替换：
 ![image](../figures/dev-faq-1.png)
 
 替换的时候一定注意，下载下来的SDK中**apiVersion一定和要放置的API文件夹名称数字保持一致**：

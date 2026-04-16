@@ -53,7 +53,7 @@
 * build/misc/mac/find_sdk.py
 
   ```python
-  77 sdks = [re.findall('^MacOSX([1,2][0,1,2,3,4,5,6]\.\d+)\.sdk$', s) for s in # 添加MacOSX 15
+  77 sdks = [re.findall('^MacOSX([12][0-6]\.\d+)\.sdk$', s) for s in # 添加MacOSX 15
 
 * build_plugins/config/ios/BUILD.gn
 

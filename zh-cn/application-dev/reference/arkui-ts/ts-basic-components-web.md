@@ -128,7 +128,7 @@ Web(options: { src: ResourceStr, controller: WebviewController})
       </body>
   </html>
   ```
-  
+
   隐私模式Webview加载在线网页。
 
 ```ts
@@ -2974,6 +2974,22 @@ onSslErrorEventReceive接口返回的SSL错误的具体原因。
 | FileOpenMultipleMode | 打开上传多个文件。   | 支持        | 不支持    |
 | FileOpenFolderMode   | 打开上传文件夹模式。 | 支持        | 不支持    |
 | FileSaveMode         | 文件保存模式。       | 支持        | 不支持    |
+
+## enableHapticFeedback<sup>26+</sup>
+
+enableHapticFeedback(enabled: boolean)
+
+设置Web组件长按文本选择是否开启振动，默认开启。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名  | 类型    | 必填 | 说明                                                         |
+| ------- | ------- | ---- | ------------------------------------------------------------ |
+| enabled | boolean | 是   | 是否支持触控反馈。<br/>默认值：true，true表示开启触控反馈，false表示不开启触控反馈。<br/>设置为true后是否生效，还取决于系统的硬件是否支持。<br/>平台约束：无论该属性如何设置，在长按选中网页内容时都会振动。 |
 
 ## 事件
 

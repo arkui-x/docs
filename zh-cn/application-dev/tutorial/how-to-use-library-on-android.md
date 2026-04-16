@@ -23,7 +23,8 @@
 2. 通过执行Build APP(s)选项，构建出Android aar包
 ### AAR在应用工程的使用
 
-通过Android studio 创建一个应用工程，将我们上述的aar包添加到工程目录下的libs目录中
+通过Android studio 创建一个应用工程，将上述的aar包添加到工程目录下的libs目录中(app/libs)
+
 **Application部分**
 
 * 继承调用

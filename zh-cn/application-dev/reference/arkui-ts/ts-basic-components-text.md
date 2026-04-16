@@ -47,6 +47,7 @@ Text(content?: string | Resource)
 | font<sup>10+</sup> | [Font](ts-types.md#font) | 设置文本样式。包括字体大小、字体粗细、字体族和字体风格。 |
 | minFontScale<sup>20+</sup> | number&nbsp;\|&nbsp;[Resource](ts-types.md#resource) | 文本最小的字体缩放倍数。<br/>取值范围：[0, 1]<br/>**说明：** <br/>设置的值小于0时按0处理，大于1时按1处理，异常值默认不生效。 |
 | maxFontScale<sup>20+</sup> | number&nbsp;\|&nbsp;[Resource](ts-types.md#resource) | 文本最大的字体缩放倍数。<br/>取值范围：[1, +∞)<br/>**说明：** <br/>设置的值小于1时，按值为1处理，异常值默认不生效。 |
+| enableHapticFeedback<sup>26+</sup> | boolean | 是否支持触控反馈。<br/>默认值：true，true表示开启触控反馈，false表示不开启触控反馈。<br/>设置为true后是否生效，还取决于系统的硬件是否支持。 |
 
 >  **说明：**
 >

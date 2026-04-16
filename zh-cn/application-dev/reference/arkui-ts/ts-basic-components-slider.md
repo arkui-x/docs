@@ -57,6 +57,7 @@ Slider(options?: {value?: number, min?: number, max?: number, step?: number, sty
 | blockSize<sup>10+</sup> | [SizeOptions](ts-types.md#sizeoptions) | 设置滑块大小。 |
 | blockStyle<sup>10+</sup> | [SliderBlockStyle](#sliderblockstyle10) | 设置滑块形状参数。 |
 | stepSize<sup>10+</sup> | [Length](ts-types.md#length) | 设置刻度大小（直径）。 |
+| enableHapticFeedback<sup>26+</sup> | boolean | 是否支持触控反馈。<br/>默认值：true，true表示开启触控反馈，false表示不开启触控反馈。<br/>设置为true后是否生效，还取决于系统的硬件是否支持。 |
 
 ## SliderBlockStyle<sup>10+</sup>对象说明
 

@@ -5,6 +5,8 @@
 >  **说明：**
 >
 >  该组件从API version 11开始支持跨平台。后续版本新增内容，采用上角标单独标记该内容的起始版本。
+>
+> 如果 RichEditor 组件在 Android 上展开或收起时出现界面闪烁，解决方案请参考：[ArkUI-X Android界面在输入法展开收起时出现界面闪烁](../../tutorial/faq/Development-Stage/Dev-faq-15.md)。
 
 
 ## 子组件
@@ -216,6 +218,20 @@ maxLines(maxLines: Optional\<number\>)
 | 参数名 | 类型                                      | 必填 | 说明                                                         |
 | ------ | ----------------------------------------- | ---- | ------------------------------------------------------------ |
 | maxLines  | Optional\<number> | 是   | 设置富文本可显示的最大行数。maxLines为可显示行数，当设置maxLines时，超出内容可滚动显示。同时设置组件高度和最大行数，组件高度优先生效。<br/>默认值：Infinity，可以无限输入，支持undefined类型。 <br/>取值范围：(0, +∞) |
+
+### enableHapticFeedback<sup>26+</sup>
+
+enableHapticFeedback(isEnabled: boolean)
+
+设置RichEditor是否支持触控反馈。
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名    | 类型    | 必填 | 说明                                                         |
+| --------- | ------- | ---- | ------------------------------------------------------------ |
+| isEnabled | boolean | 是   | 是否支持触控反馈。<br/>默认值：true，true表示开启触控反馈，false表示不开启触控反馈。<br/>设置为true后是否生效，还取决于系统的硬件是否支持。 |
 
 ## 事件
 
