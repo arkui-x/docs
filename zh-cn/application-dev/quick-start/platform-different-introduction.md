@@ -77,20 +77,12 @@ COMPILE RESULT:FAIL {ERROR:2}
 > hvigor ERROR: BUILD FAILED in 10 s 753 ms 
 ```
 
-此时可以将涉及到的API写到一个后缀为**.ts**文件，然后在不支持的API上面增加`// @ts-ignore`或`// @ts-nocheck`屏蔽告警，开发者需要保证只在OpenHarmony应用平台上才运行这一段逻辑，Android和iOS应用平台上可以借用Bridge桥接机制处理，示例代码如下：
 
-1. 新建一个`WiFiUtil.ts`，并忽略告警：
+可以在工程中的.arkui-x/arkui-x-config.json5配置文件中增加ignoreCrossPlatform配置，并设置为true来屏蔽此告警，开发者需要保证只在OpenHarmony应用平台上才运行这一段逻辑，Android和iOS应用平台上可以借用Bridge桥接机制处理，示例代码如下：
 
-```ts
-import wifiManager from '@ohos.wifiManager'
+1. arkui-x-config.json5文件中增加ignoreCrossPlatform配置，并设置为true来屏蔽不支持跨平台的告警：
 
-export class WiFiUtil {
-  static isActive(): boolean {
-    //@ts-ignore
-    return wifiManager.isWifiActive();
-  }
-}
-```
+![ignoreCrossPlatform](figures/ignoreCrossPlatform-set.png)
 
 2. 根据不同平台差异化逻辑，Android和iOS应用平台上通过[Bridge机制](platform-bridge-introduction.md)桥接到对应平台的业务逻辑实现上：
 

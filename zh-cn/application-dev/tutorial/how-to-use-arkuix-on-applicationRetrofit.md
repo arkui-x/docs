@@ -794,27 +794,9 @@ export class DisplaySyncArkUIX implements DisplaySyncInterface {
 
 ​		解决方法：
 
-​		1、找到 IDE 里配套 OH-SDK；如果是HarmonyOS Next开发，则是HarmonyOS 里带的oh-sdk。
+​		在工程中的.arkui-x/arkui-x-config.json5配置文件中增加ignoreCrossPlatform配置，并设置为true来屏蔽此告警
 
-&emsp;&emsp;简便方法：前提需保证工程使用SDK为正确的。使用DevEco Studio打开任一工程，在工程中打开并查看任一d.ts文件，于文件名右键点击-->选择 打开范围-->选择 Explorer 点击，打开的文件窗口即为当前工程所使用的SDK路径，于文件窗口回到SDK根目录执行第2步。
-
-<img src=".\figures\ApplicationRetrofit_image_009.png" />
-
-​		2、找到文件：" api_check_util.js "。文件在SDK中的相对路径为：
-
-<span style="color: red;">sdk\default\openharmony\ets\build-tools\ets-loader\lib\fast_build\system_api\api_check_utils.js</span>
-
-​		3、在文件" api_check_util.js "中搜索关键字：**CROSSPLATFORM_TAG_CHECK_ERROER**，将其前一个的 **DiagnosticCategory.Error** 修改为 **DiagnosticCategory.Warning**。
-
-​		4、回到DevEco Studio 如果当前工程已编译过，先执行clean操作；之后执行操作： 点击文件-->选择 清理缓存 点击--> 勾选选项 -->  点击清除并重新启动。
-
-<div style="text-align: center;">
-  <img src=".\figures\ApplicationRetrofit_image_012.png" alt="" style="width: 30%; margin: 1%; display: inline-block;">
-  <img src=".\figures\ApplicationRetrofit_image_010.png" alt="" style="width: 30%; margin: 1%; display: inline-block;">
-  <img src=".\figures\ApplicationRetrofit_image_011.png" alt="" style="width: 30%; margin: 1%; display: inline-block;">
-</div>
-
-
+![ignoreCrossPlatform](../quick-start/figures/ignoreCrossPlatform-set.png)
 
 ## 六、约束与建议
 
