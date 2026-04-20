@@ -62,7 +62,7 @@ try to load abc file from /private/var/containers/Bundle/Application/98628FE0-A1
 
 ***Android平台：***
 
-请手动从对应API的ArkUI-X SDK路径下，将"libpromptaction.so、librouter.so、libfont.so"拷贝到工程目录".arkui-x\android\app\libs\arm64-v8a"文件夹下。
+请手动从对应的ArkUI-X SDK目录下，将组件的动态库（例如：libpromptaction.so、librouter.so、libfont.so等）拷贝到工程目录".arkui-x\android\app\libs\arm64-v8a"文件夹下。
 
 *so具体位置*
 
@@ -90,7 +90,7 @@ try to load abc file from /private/var/containers/Bundle/Application/98628FE0-A1
 
 ***iOS平台：***
 
-请手动从对应API的ArkUI-X SDK路径下，将"libpromptaction.xcframework、librouter.xcframework、libfont.xcframework"拷贝到工程目录".arkui-x/ios/frameworks"文件夹下。
+请手动从对应的ArkUI-X SDK目录下，将组件的动态库（例如：libpromptaction.xcframework、librouter.xcframework、libfont.xcframework等）拷贝到工程目录".arkui-x/ios/frameworks"文件夹下。
 
 *xcframework具体位置*
 
