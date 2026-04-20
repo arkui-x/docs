@@ -14,6 +14,8 @@
 
 以下API需先使用ohos.window中的[getUIContext()](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/js-apis-window.md#getuicontext10)方法获取UIContext实例，再通过此实例调用对应方法。本文中UIContext对象以uiContext表示。
 
+> 在Android和iOS平台上，通过UIContext获取组件能力（例如：PromptAction、Router、Font等）时，需要手动拷贝对应动态库，解决方案请参考：[ArkTS通过UIContext获取组件能力，运行态功能不可用](../../tutorial/faq/Development-Stage/Dev-faq-7.md)。
+
 ### getUIInspector
 
 getUIInspector(): UIInspector
