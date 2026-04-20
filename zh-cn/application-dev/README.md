@@ -47,6 +47,7 @@
 - [平台视图开发指南](./tutorial/how-to-use-platformview-on-android.md)
 - [以Hap为主体的共享逻辑包开发指南](./tutorial/how-to-decoupled-UI-and-Logic-on-android.md)
 - [Android原生页面与跨平台页面跳转开发指南](./tutorial/how-to-use-arkuix-on-nativePageLaunch-Android.md)
+- [hwSymbol文件按需加载开发指导](./tutorial/how-to-use-symbol-subset.md)
 
 ### iOS平台开发
 
@@ -64,6 +65,7 @@
 - [IOS跨平台页面实现手势返回指南](./quick-start/ios-slip-left-back.md)
 - [以Hap为主体的共享逻辑包开发指南](./tutorial/how-to-decoupled-UI-and-Logic-on-ios.md)
 - [iOS原生页面与跨平台页面跳转开发指南](./tutorial/how-to-use-arkuix-on-nativePageLaunch-iOS.md)
+- [hwSymbol文件按需加载开发指导](./tutorial/how-to-use-symbol-subset.md)
 
 ### 应用改造
 
