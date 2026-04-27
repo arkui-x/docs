@@ -1094,7 +1094,7 @@ getCustomUserAgent(): string
 
 在直接调用getCustomUserAgent的场景下，Android可以获取到手机型号信息，iOS返回空。
 
-**系统能力：**  SystemCapability.Web.Webview.Core
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **返回值：**
 
@@ -1145,7 +1145,7 @@ setCustomUserAgent(userAgent: string): void
 
 设置自定义用户代理。
 
-**系统能力：**  SystemCapability.Web.Webview.Core
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **参数：**
 
@@ -1737,7 +1737,7 @@ runJavaScriptExt(script: string | ArrayBuffer, callback : AsyncCallback\<JsMessa
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
-**支持平台：**Android、iOS
+**支持平台：** Android、iOS
 
 **参数：**
 
@@ -2074,7 +2074,7 @@ registerJavaScriptProxy提供了应用与Web组件加载的网页之间强大的
 > - 同步函数列表和异步函数列表不可同时为空，否则此次调用接口注册失败。
 > - 异步的作用在于：H5线程将异步JavaScript任务提交给ETS主线程后，无需等待任务执行完成并返回结果，H5线程即可继续执行后续任务。这在执行耗时较长的JavaScript任务或ETS线程较为拥堵的情况下，可以有效减少H5线程因JavaScript任务而被阻塞的情况。然而，异步JavaScript任务无法返回值，且任务执行的顺序无法保证，因此需要根据具体情境判断是否使用同步或异步方式。
 > - 由于iOS原生平台只有异步，故要实现同步效果并支持返回值，需要在JS调用注册的方法前加await实现同步效果等待返回值。
-> - 调用该接口前，Web 的 JS 环境必须已准备就绪，否则注入的方法不会生效。详情请参考：[调用该接口之前，web的js环境必须已经准备好了，否则调用该接口注入方法不会生效](../../tutorial/faq/Development-Stage/Dev-faq-21.md)。
+> - 调用该接口前，Web 的 JS 环境必须已准备就绪，否则注入的方法不会生效。详情请参考：[关于registerJavaScriptProxy使用说明](../../tutorial/faq/Development-Stage/Dev-faq-21.md)。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 

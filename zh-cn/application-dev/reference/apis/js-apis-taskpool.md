@@ -21,7 +21,7 @@ import taskpool from '@ohos.taskpool';
 
 表示所创建任务（Task）的优先级。
 
-**系统能力：**  SystemCapability.Utils.Lang
+**系统能力：** SystemCapability.Utils.Lang
 
 | 名称 | 值 | 说明 |
 | -------- | -------- | -------- |

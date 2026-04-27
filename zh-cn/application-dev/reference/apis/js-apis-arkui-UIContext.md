@@ -102,7 +102,7 @@ getOverlayManager(): OverlayManager
 
 获取OverlayManager对象。
 
-**系统能力：**: SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **支持平台：** Android、iOS
 
@@ -124,7 +124,7 @@ setOverlayManagerOptions(options: OverlayManagerOptions): boolean
 
 设置[OverlayManager](#overlaymanager12)参数。用于在使用OverlayManager能力之前先初始化overlayManager的参数，包括是否需要渲染overlay根节点等属性。该方法需要在执行getOverlayManager方法之前执行生效，且该方法只生效一次。
 
-**系统能力：**: SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **支持平台：** Android、iOS
 
@@ -152,7 +152,7 @@ getOverlayManagerOptions(): OverlayManagerOptions
 
 用于获取当前[OverlayManager](#overlaymanager12)参数。
 
-**系统能力：**: SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **支持平台：** Android、iOS
 
@@ -482,7 +482,7 @@ create(options: AnimatorOptions): AnimatorResult
 
 定义Animator类。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -518,7 +518,7 @@ runScopedTask(callback: () => void): void
 
 在当前UI上下文执行传入的回调函数。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -1323,7 +1323,7 @@ showDialog(options: ShowDialogOptions, callback: AsyncCallback&lt;ShowDialogSucc
 
 创建并显示对话框，对话框响应结果异步返回。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -1376,7 +1376,7 @@ showDialog(options: ShowDialogOptions): Promise&lt;ShowDialogSuccessResponse&gt;
 
 创建并显示对话框，对话框响应后同步返回结果。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 

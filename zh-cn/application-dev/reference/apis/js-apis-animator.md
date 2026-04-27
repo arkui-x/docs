@@ -21,9 +21,9 @@ create(options: AnimatorOptions): AnimatorResult
 
 定义Animator类。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
-**参数：** 
+**参数：**
 
 | 参数名     | 类型                                  | 必填   | 说明      |
 | ------- | ----------------------------------- | ---- | ------- |
@@ -61,9 +61,9 @@ reset(options: AnimatorOptions): void
 
 更新当前动画器。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
-**参数：** 
+**参数：**
 
 | 参数名     | 类型                                  | 必填   | 说明      |
 | ------- | ----------------------------------- | ---- | ------- |
@@ -103,7 +103,7 @@ play(): void
 
 启动动画。动画会保留上一次的播放状态，比如播放状态设置reverse后，再次播放会保留reverse的播放状态。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 
@@ -117,7 +117,7 @@ finish(): void
 
 结束动画。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 
@@ -131,7 +131,7 @@ pause(): void
 
 暂停动画。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 
@@ -145,7 +145,7 @@ cancel(): void
 
 删除动画。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 
@@ -159,7 +159,7 @@ reverse(): void
 
 以相反的顺序播放动画。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 
@@ -173,9 +173,9 @@ onframe: (progress: number) => void
 
 接收到帧时回调。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
-**参数：** 
+**参数：**
 
 | 参数名      | 类型     | 必填   | 说明       |
 | -------- | ------ | ---- | -------- |
@@ -196,7 +196,7 @@ onfinish: () => void
 
 动画完成时回调。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 
@@ -213,7 +213,7 @@ oncancel: () => void
 
 动画被取消时回调。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 
@@ -230,7 +230,7 @@ onrepeat: () => void
 
 动画重复时回调。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 

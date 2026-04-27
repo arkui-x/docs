@@ -238,7 +238,7 @@ concat(list: FastBuffer[] | Uint8Array[], totalLength?: number): FastBuffer
 
 **支持平台：** Android、iOS
 
-**注：**IOS对于Uint8Array数组仅支持单参数
+**注：** IOS对于Uint8Array数组仅支持单参数
 
 **参数：**
 
