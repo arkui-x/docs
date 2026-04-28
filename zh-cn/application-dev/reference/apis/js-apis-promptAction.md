@@ -60,7 +60,7 @@ try {
 
 文本提示框的选项。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full。
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full。
 
 | 名称       | 类型                                       | 必填   | 说明                                       |
 | -------- | ---------------------------------------- | ---- | ---------------------------------------- |
@@ -74,7 +74,7 @@ showDialog(options: ShowDialogOptions): Promise&lt;ShowDialogSuccessResponse&gt;
 
 创建并显示对话框，对话框响应后同步返回结果。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -133,7 +133,7 @@ showDialog(options: ShowDialogOptions, callback: AsyncCallback&lt;ShowDialogSucc
 
 创建并显示对话框，对话框响应结果异步返回。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -200,7 +200,7 @@ try {
 
 对话框的响应结果。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 | 名称  | 类型   | 必填 | 说明                            |
 | ----- | ------ | ---- | ------------------------------- |

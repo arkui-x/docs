@@ -21,7 +21,7 @@ initCurve(curve?: Curve): ICurve
 
 插值曲线的初始化函数，可以根据入参创建一个插值曲线对象。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -50,7 +50,7 @@ stepsCurve(count: number, end: boolean): ICurve
 
 构造阶梯曲线对象。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -80,7 +80,7 @@ cubicBezierCurve(x1: number, y1: number, x2: number, y2: number): ICurve
 
 构造三阶贝塞尔曲线对象，曲线的值必须处于0-1之间。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -113,7 +113,7 @@ springCurve(velocity: number, mass: number, stiffness: number, damping: number):
 
 构造弹簧曲线对象，曲线形状由弹簧参数决定，动画时长受animation、animateTo中的duration参数控制。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 | 参数名    | 类型   | 必填 | 说明                                                         |
@@ -145,7 +145,7 @@ springMotion(response?: number, dampingFraction?: number, overlapDuration?: numb
 
 构造弹性动画曲线对象。如果对同一对象的同一属性进行多个弹性动画，每个动画会替换掉前一个动画，并继承之前的速度。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -179,7 +179,7 @@ responsiveSpringMotion(response?: number, dampingFraction?: number, overlapDurat
 
 构造弹性跟手动画曲线对象，是[springMotion](#curvesspringmotion9)的一种特例，仅默认参数不同，可与springMotion混合使用。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -210,7 +210,7 @@ interpolatingSpring(velocity: number, mass: number, stiffness: number, damping: 
 
 构造插值器弹簧曲线对象，生成一条从0到1的动画曲线，实际动画值根据曲线进行插值计算。动画时间由曲线参数决定，不受animation、animateTo中的duration参数控制。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 | 参数名       | 类型     | 必填   | 说明    |
@@ -239,7 +239,7 @@ customCurve(interpolate: (fraction: number) => number): ICurve
 
 构造自定义曲线对象。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 
@@ -276,7 +276,7 @@ interpolate(fraction:&nbsp;number): number
 
 从API version 9开始，该接口支持在ArkTS卡片中使用。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：**
 

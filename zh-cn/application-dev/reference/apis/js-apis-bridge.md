@@ -23,7 +23,7 @@ createBridge(bridgeName: string): BridgeObject
 
 创建BridgeObject类的实例对象，数据编解码类型采用JSON格式。
 
-**系统能力：**   SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：** 
 
@@ -47,7 +47,7 @@ createBridge(bridgeName: string, type: BridgeType): BridgeObject;
 
 创建BridgeObject类的实例对象，自行设定编解码类型。<br>要求bridgeName与原生平台侧创建的平台桥接对象的bridgeName保持一致<br>要求type与原生平台侧创建的平台桥接对象的type保持一致
 
-**系统能力：**   SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：** 
 
@@ -88,7 +88,7 @@ callMethod(methodName: string, ...parameters: Array\<Parameter\>): Promise\<Resu
 调用原生平台侧已定义的方法。<br>接口具体使用方式详见[平台桥接开发指南-Android](../../tutorial/how-to-use-bridge-on-android.md#场景三arkui侧调用android侧的方法)或[平台桥接开发指南-iOS](../../tutorial/how-to-use-bridge-on-ios.md#场景三arkui侧调用ios侧的方法)。<br>
 关于数据类型的说明详见[平台桥接数据类型](../../quick-start/platform-bridge-introduction.md#数据类型支持)。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：** 
 
@@ -132,7 +132,7 @@ registerMethod(method: MethodData): Promise\<void\>
 
 注册ArkTS端方法，供Android或iOS平台端调用。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：** 
 
@@ -174,7 +174,7 @@ unRegisterMethod(methodName: string): Promise\<void\>
 | method   | string                | 是   | 已注册的ArkTS侧方法签名           |
 | callback | AsyncCallback\<void\> | 否   | callback方式的回调函数 |
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 
@@ -205,7 +205,7 @@ sendMessage(message: Message): Promise\<Response\>
 | --------------------- | ------------------------ |
 | [Response](#response) | 原生平台侧应答数据 |
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 
@@ -232,7 +232,7 @@ setMessageListener(callback: (message: Message) => Response)
 | callback | (message: Message) => Response | 是   | 回调函数，用于接收原生平台侧数据 |
 | message  | [Message](#message)          | 是   | 原生平台侧发送的数据               |
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **示例：**
 
@@ -256,7 +256,7 @@ callMethodWithCallback(methodName: string, method: (...parameters: Array\<Parame
 接口具体使用方式详见[平台桥接开发指南-Android](../../tutorial/how-to-use-bridge-on-android.md#场景六arkui侧注册callback且调用android侧的方法无参)或[平台桥接开发指南-iOS](../../tutorial/how-to-use-bridge-on-ios.md#场景六arkui侧注册callback且调用ios侧的方法无参)<br>
 关于数据类型的说明详见[平台桥接数据类型](../../quick-start/platform-bridge-introduction.md#数据类型支持)。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：** 
 
@@ -294,7 +294,7 @@ callMethodSync(methodName: string, ...parameters: Array<Parameter>): ResultValue
 使用同步方式调用原生平台侧已定义的方法，同步返回结果。
 使用该接口需用try-catch捕获异常错误。
 
-**系统能力：**  SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **参数：** 
 

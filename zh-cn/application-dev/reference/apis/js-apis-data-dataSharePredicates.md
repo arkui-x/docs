@@ -29,7 +29,7 @@ equalTo(field: string, value: ValueType): DataSharePredicates
 
 目前仅RDB及KVDB(schema)支持该谓词。
 
-**系统能力：**  SystemCapability.DistributedDataManager.DataShare.Core
+**系统能力：** SystemCapability.DistributedDataManager.DataShare.Core
 
 **参数：**
 
@@ -60,7 +60,7 @@ and(): DataSharePredicates
 
 目前仅RDB及KVDB(schema)支持该谓词。
 
-**系统能力：**  SystemCapability.DistributedDataManager.DataShare.Core
+**系统能力：** SystemCapability.DistributedDataManager.DataShare.Core
 
 **返回值：**
 
@@ -85,7 +85,7 @@ orderByAsc(field: string): DataSharePredicates
 
 目前仅RDB及KVDB(schema)支持该谓词。
 
-**系统能力：**  SystemCapability.DistributedDataManager.DataShare.Core
+**系统能力：** SystemCapability.DistributedDataManager.DataShare.Core
 
 **参数：**
 
@@ -114,7 +114,7 @@ orderByDesc(field: string): DataSharePredicates
 
 目前仅RDB及KVDB(schema)支持该谓词。
 
-**系统能力：**  SystemCapability.DistributedDataManager.DataShare.Core
+**系统能力：** SystemCapability.DistributedDataManager.DataShare.Core
 
 **参数：**
 
@@ -143,7 +143,7 @@ limit(total: number, offset: number): DataSharePredicates
 
 目前仅RDB及KVDB(schema)支持该谓词。
 
-**系统能力：**  SystemCapability.DistributedDataManager.DataShare.Core
+**系统能力：** SystemCapability.DistributedDataManager.DataShare.Core
 
 **参数：**
 
@@ -173,7 +173,7 @@ in(field: string, value: Array&lt;ValueType&gt;): DataSharePredicates
 
 目前仅RDB及KVDB(schema)支持该谓词。
 
-**系统能力：**  SystemCapability.DistributedDataManager.DataShare.Core
+**系统能力：** SystemCapability.DistributedDataManager.DataShare.Core
 
 **参数：**
 
