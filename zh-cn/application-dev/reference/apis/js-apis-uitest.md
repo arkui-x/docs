@@ -14,7 +14,7 @@ UiTest提供模拟UI操作的能力，供开发者在测试场景使用，主要
 ## 导入模块 
 
 ```js
-import {Component, Driver, ON, MatchPattern, PointerMatrix} from '@ohos.UiTest';
+import {Component, Driver, ON, MatchPattern, DisplayRotation, PointerMatrix} from '@ohos.UiTest';
 ```
 
 ## MatchPattern
@@ -41,7 +41,36 @@ import {Component, Driver, ON, MatchPattern, PointerMatrix} from '@ohos.UiTest';
 | x    | number | 是   | 否   | 坐标点的横坐标。 |
 | y    | number | 是   | 否   | 坐标点的纵坐标。 |
 
+## Rect<sup>26+</sup>
 
+控件的边框信息。
+
+**系统能力**：SystemCapability.Test.UiTest
+
+**支持平台：** Android、iOS
+
+<!--Table: 20%; 10%; 10%; 60%-->
+| 名称   | 类型   | 只读 | 可选 | 说明                      |
+| ------ | ------ | ---- | ---- | ------------------------- |
+| left   | number |  否   | 否 |控件边框的左上角的X坐标，取值大于0的整数。  |
+| top    | number |  否   | 否 |控件边框的左上角的Y坐标，取值大于0的整数。  |
+| right  | number |  否   | 否 |控件边框的右下角的X坐标，取值大于0的整数。  |
+| bottom | number |  否   | 否 |控件边框的右下角的Y坐标，取值大于0的整数。  |
+
+## DisplayRotation<sup>26+</sup>
+
+设备显示器的显示方向。
+
+**系统能力**：SystemCapability.Test.UiTest
+
+**支持平台：** Android、iOS
+
+| 名称         | 值   | 说明                                     |
+| ------------ | ---- | ---------------------------------------- |
+| ROTATION_0   | 0    | 设备显示器不旋转，初始形态垂直显示。     |
+| ROTATION_90  | 1    | 设备显示器顺时针旋转90°，水平显示。      |
+| ROTATION_180 | 2    | 设备显示器顺时针旋转180°，逆向垂直显示。 |
+| ROTATION_270 | 3    | 设备显示器顺时针旋转270°，逆向水平显示。 |
 
 ## On<sup>9+</sup>
 
@@ -1382,5 +1411,333 @@ fling(from: Point, to: Point, stepLen: number, speed: number): Promise\<void>
 async function demo() {
     let driver = Driver.create();
     await driver.fling({x: 500, y: 480},{x: 450, y: 480},5,600);
+}
+```
+
+### drag<sup>26+</sup>
+
+drag(startx: number, starty: number, endx: number, endy: number, speed?: number): Promise\<void>
+
+从起始坐标点拖拽至目的坐标点。使用Promise异步回调。
+
+**系统能力**：SystemCapability.Test.UiTest
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| startx | number | 是   | 以number的形式传入起始点的横坐标信息，取值范围：大于等于0的整数。              |
+| starty | number | 是   | 以number的形式传入起始点的纵坐标信息，取值范围：大于等于0的整数。              |
+| endx   | number | 是   | 以number的形式传入目的点的横坐标信息，取值范围：大于等于0的整数。              |
+| endy   | number | 是   | 以number的形式传入目的点的纵坐标信息，取值范围：大于等于0的整数。              |
+| speed  | number | 否   | 滑动速率，取值范围为200-40000的整数，默认值为600，单位：px/s。为不在范围内的非负数或为null/undefined时设为默认值600。为负数时抛出401错误码。|
+
+**返回值：**
+
+| 类型             | 说明              |
+|----------------|-----------------|
+| Promise\<void> | Promise对象。无返回结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[uitest测试框架错误码](../errorcodes/errorcode-uitest.md)和[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                               |
+| -------- | ---------------------------------------- |
+| 17000002 | The API does not support concurrent calls. |
+| 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.|
+
+**示例：**
+
+```ts
+async function demo() {
+  let driver: Driver = Driver.create();
+  await driver.drag(100, 100, 200, 200, 600);
+}
+```
+
+### waitForComponent<sup>26+</sup>
+
+waitForComponent(on: On, time: number): Promise\<Component>
+
+在用户给定的时间内，持续查找满足控件属性要求的目标控件。使用Promise异步回调。
+
+**系统能力**：SystemCapability.Test.UiTest
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型       | 必填 | 说明                                      |
+| ------ | ---------- | ---- | ----------------------------------------- |
+| on    | [On](#on9) | 是   | 目标控件的属性要求。                      |
+| time   | number     | 是   | 查找目标控件的持续时间。单位ms，取值范围：大于等于0的整数。 |
+
+**返回值：**
+
+| 类型                              | 说明                              |
+| --------------------------------- | --------------------------------- |
+| Promise\<[Component](#component9)> | Promise对象，返回控件对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[uitest测试框架错误码](../errorcodes/errorcode-uitest.md)和[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                               |
+| -------- | ---------------------------------------- |
+| 17000002 | The API does not support concurrent calls. |
+| 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.|
+
+**示例：**
+
+```ts
+async function demo() {
+  let driver: Driver = Driver.create();
+  let button: Component = await driver.waitForComponent(ON.text('next page'), 500);
+}
+```
+
+### waitForIdle<sup>26+</sup>
+
+waitForIdle(idleTime: number, timeout: number): Promise\<boolean>
+
+判断当前界面的所有控件是否已经空闲。使用Promise异步回调。
+
+**系统能力**：SystemCapability.Test.UiTest
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                                                         |
+| -------- | ------ | ---- | ------------------------------------------------------------ |
+| idleTime | number | 是   | 空闲时间的阈值。在这个时间段控件不发生变化，视为该控件空闲，单位：毫秒，取值范围：大于等于0的整数。 |
+| timeout  | number | 是   | 等待空闲的最大时间，单位：毫秒，取值范围：大于等于0的整数。                    |
+
+**返回值：**
+
+| 类型              | 说明                                                |
+| ----------------- |---------------------------------------------------|
+| Promise\<boolean> | Promise对象，返回当前界面的所有控件是否已经空闲。true：已经空闲，false：不空闲。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[uitest测试框架错误码](../errorcodes/errorcode-uitest.md)和[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                               |
+| -------- | ---------------------------------------- |
+| 17000002 | The API does not support concurrent calls. |
+| 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.|
+
+**示例：**
+
+```ts
+async function demo() {
+  let driver: Driver = Driver.create();
+  let idled: boolean = await driver.waitForIdle(4000, 5000);
+}
+```
+
+### screenCapture<sup>26+</sup>
+
+screenCapture(savePath: string, rect?: Rect): Promise\<boolean>
+
+捕获当前屏幕的指定区域，并保存为PNG格式的图片至给出的保存路径中。使用Promise异步回调。适用于支持截屏的场景。
+
+**系统能力**：SystemCapability.Test.UiTest
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型           | 必填 | 说明                                       |
+| -------- | -------------- | ---- | ------------------------------------------ |
+| savePath | string         | 是   | 文件保存路径。路径需为当前应用的沙箱路径。<br>（沙箱路径说明：<br>Android：只接收传入"/files"或"/cache"开头的路径。<br>(1)传入字符串"/files/xxx.png"会将截图保存在/data/user/0/[包名]/files/xxx.png<br>(2)传入字符串"/cache/xxx.png"会将截图保存在/data/user/0/[包名]/cache/xxx.png<br>iOS：只接收传入"/Documents"或"/Library/Caches"开头的路径。<br>(1)传入字符串"/Documents/files/xxx.png"会将截图保存在file:///var/mobile/Containers/Data/Application/28F15F69-CC27-46D6-8048-97E3F0977C92/Documents/files/xxx.png，其中28F15F69-CC27-46D6-8048-97E3F0977C92是UUID可变<br>(2)传入字符串"/Library/Caches/xxx.png"会将截图保存在file:///var/mobile/Containers/Data/Application/C1A903C5-6B25-411C-9FB5-2E841EA4B8F4/Library/Caches/xxx.png，其中C1A903C5-6B25-411C-9FB5-2E841EA4B8F4是UUID可变）<br> |
+| rect     | [Rect](#rect26) | 否   | 截图区域，默认为全屏。 |
+
+**返回值：**
+
+| 类型              | 说明                                          |
+| ----------------- |---------------------------------------------|
+| Promise\<boolean> | Promise对象，返回截图操作是否成功完成。true：成功完成，false：未成功完成。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[uitest测试框架错误码](../errorcodes/errorcode-uitest.md)和[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17000002 | The API does not support concurrent calls.             |
+| 401      | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.|
+
+**示例：**
+
+```ts
+async function demo() {
+  let driver: Driver = Driver.create();
+  await driver.screenCapture('/files/1.png', {
+    left: 1,
+    top: 1,
+    right: 100,
+    bottom: 100
+  });
+}
+```
+
+### isComponentPresentWhenLongClick<sup>26+</sup>
+
+isComponentPresentWhenLongClick(on: On, point: Point, duration?: number): Promise\<boolean>
+
+在坐标点长按，并查找目标控件是否存在。使用Promise异步回调。
+
+**系统能力**：SystemCapability.Test.UiTest
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型                                         | 必填 | 说明                                                             |
+| ------ |-----------------------------------------------|----|-------------------------------------------------------------------|
+| on     | [On](#on9) | 是   | 目标控件的属性要求。 |
+| point  | [Point](#point9) | 是   | 长按的坐标点。 |
+| duration   | number     | 否   | 长按持续的时间，取值范围为大于等于1500的整数，默认值为1500，单位：ms。 |
+
+**返回值：**
+
+| 类型             | 说明              |
+|----------------|-----------------|
+| Promise\<boolean> | Promise对象。返回长按操作期间目标控件是否存在。true：存在。false：不存在。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[uitest测试框架错误码](../errorcodes/errorcode-uitest.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17000002 | The API does not support concurrent calls.             |
+| 17000007 |  Parameter verification failed. |
+
+**示例：**
+
+```ts
+async function demo() {
+  let driver: Driver = Driver.create();
+  let isExist = await driver.isComponentPresentWhenLongClick(ON.id('123'), { x: 100, y: 100 }, 2000);
+}
+```
+
+### setDisplayRotation<sup>26+</sup>
+
+setDisplayRotation(rotation: DisplayRotation): Promise\<void>
+
+将当前场景的显示方向设置为指定的显示方向。使用Promise异步回调。适用于可旋转的应用场景。
+
+**系统能力**：SystemCapability.Test.UiTest
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                                 | 必填 | 说明             |
+| -------- | ------------------------------------ | ---- | ---------------- |
+| rotation | [DisplayRotation](#displayrotation26) | 是   | 设备的显示方向。传入 `ROTATION_180` 时，Android 和 iOS 设备本身需支持反向竖屏。 |
+
+**返回值：**
+
+| 类型             | 说明              |
+|----------------|-----------------|
+| Promise\<void> | Promise对象。无返回结果。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[uitest测试框架错误码](../errorcodes/errorcode-uitest.md)和[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                               |
+| -------- | ---------------------------------------- |
+| 17000002 | The API does not support concurrent calls. |
+| 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.|
+
+**示例：**
+
+```ts
+async function demo() {
+  let driver: Driver = Driver.create();
+  await driver.setDisplayRotation(DisplayRotation.ROTATION_180);
+}
+```
+
+### getDisplaySize<sup>26+</sup>
+
+getDisplaySize(): Promise\<Point>
+
+获取当前设备的屏幕大小。使用Promise异步回调。
+
+**系统能力**：SystemCapability.Test.UiTest
+
+**支持平台：** Android、iOS
+
+**返回值：**
+
+| 类型                       | 说明                                    |
+| -------------------------- | --------------------------------------- |
+| Promise\<[Point](#point9)> | Promise对象，返回Point对象，当前设备屏幕的大小为Point.x * Point.y。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[uitest测试框架错误码](../errorcodes/errorcode-uitest.md)。
+
+| 错误码ID | 错误信息                               |
+| -------- | ---------------------------------------- |
+| 17000002 | The API does not support concurrent calls. |
+
+**示例：**
+
+```ts
+async function demo() {
+  let driver: Driver = Driver.create();
+  let size = await driver.getDisplaySize();
+}
+```
+
+### getDisplaySize<sup>26+</sup>
+
+getDisplaySize(displayId: number): Promise\<Point>
+
+获取当前设备指定屏幕的大小。使用Promise异步回调。
+
+
+**系统能力**：SystemCapability.Test.UiTest
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型   | 必填 | 说明                                       |
+| -------- | ------ | ---- | ------------------------------------------ |
+| displayId     | number | 是  | 指定设备屏幕ID，取值范围：大于等于0的整数。 <br> **说明：** 传入displayId不存在时，将抛出17000007异常。跨平台目前只支持传入0               |
+
+**返回值：**
+
+| 类型                       | 说明                                    |
+| -------------------------- | --------------------------------------- |
+| Promise\<[Point](#point9)> | Promise对象，返回Point对象，当前设备指定屏幕的大小为Point.x * Point.y。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[uitest测试框架错误码](../errorcodes/errorcode-uitest.md)。
+
+| 错误码ID | 错误信息                               |
+| -------- | ---------------------------------------- |
+| 17000002 | The API does not support concurrent calls. |
+| 17000007 |  Parameter verification failed. |
+
+**示例：**
+
+```ts
+async function demo() {
+  let driver: Driver = Driver.create();
+  let size = await driver.getDisplaySize(0);
 }
 ```
