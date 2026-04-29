@@ -965,7 +965,11 @@ server端特征值发生变化时，主动通知已连接的client设备。
 
 **系统能力**：SystemCapability.Communication.Bluetooth.Core。
 
-**支持平台**：iOS (通知已连接的client设备的特征值value为发送广播添加服务时service中的对应特征值value，不是notifyCharacteristic中设置的value。)
+**支持平台**：Android 、iOS
+
+> **说明：**
+> 受iOS CoreBluetooth能力限制，iOS Server发送数据时，不能指定本次按Notification还是Indication发送；如需让Client区分业务类型，请在characteristicValue中自行携带类型字段。
+> 受iOS CoreBluetooth能力限制，该接口的Callback成功仅表示底层已接受本次发送请求，不表示Client已接收数据，也不表示Indication确认已返回。
 
 **参数：**
 
@@ -1021,7 +1025,11 @@ server端特征值发生变化时，主动通知已连接的client设备。
 
 **系统能力**：SystemCapability.Communication.Bluetooth.Core。
 
-**支持平台**：iOS （通知已连接的client设备的特征值value为发送广播添加服务时service中的对应特征值value，不是notifyCharacteristic中设置的value。）
+**支持平台**：Android 、iOS
+
+> **说明：**
+> 受iOS CoreBluetooth能力限制，iOS Server发送数据时，不能指定本次按Notification还是Indication发送；如需让Client区分业务类型，请在characteristicValue中自行携带类型字段。
+> 受iOS CoreBluetooth能力限制，该接口的Promise成功仅表示底层已接受本次发送请求，不表示Client已接收数据，也不表示Indication确认已返回。
 
 **参数：**
 
@@ -1392,7 +1400,10 @@ server端订阅描述符写请求事件。使用Callback异步回调。
 
 **系统能力**：SystemCapability.Communication.Bluetooth.Core。
 
-**支持平台**： Android 
+**支持平台**： Android 、iOS
+
+> **说明：**
+> iOS支持在Client订阅状态变化时触发该回调，但不支持获取真实CCCD写入内容。Client开启订阅后，iOS Server只能知道有设备订阅了该特征值，不能通过该接口判断Client开启的是Notification还是Indication。
 
 **参数：**
 
@@ -1442,7 +1453,10 @@ server端取消订阅描述符写请求事件。
 
 **系统能力**：SystemCapability.Communication.Bluetooth.Core。
 
-**支持平台**： Android 
+**支持平台**： Android 、iOS
+
+> **说明：**
+> iOS支持取消该事件回调。该接口只取消应用侧descriptorWrite监听，不会改变Client已经开启的订阅状态。
 
 **参数：**
 
@@ -2549,6 +2563,401 @@ try {
 }
 ```
 
+### setCharacteristicChangeNotification<sup>26+</sup>
+
+setCharacteristicChangeNotification(characteristic: BLECharacteristic, enable: boolean, callback: AsyncCallback&lt;void&gt;): void
+
+client端启用或者禁用接收server端特征值内容变更通知的能力。使用Callback异步回调。<br>
+- 需要先调用[getServices](#getservices)，获取到server端所有支持的能力，且需包含指定的入参特征值UUID。<br>
+- server端对应的特征值需包含标准协议定义的Client Characteristic Configuration描述符UUID（00002902-0000-1000-8000-00805f9b34fb），server端才能支持发送变更通知。<br>
+- 若启用该能力，系统蓝牙服务会自动往server端写Client Characteristic Configuration描述符，启用server端的通知能力。<br>
+- 若禁用该能力，系统蓝牙服务会自动往server端写Client Characteristic Configuration描述符，禁用server端的通知能力。<br>
+- 通过[on('BLECharacteristicChange')](#onblecharacteristicchange)接收server端特征值内容变更通知。<br>
+- 若client端收到server端特征值内容变更通知后，无需回复确认。
+- 异步回调结果返回后，才能调用下一次读取或者写入操作，如[readCharacteristicValue](#readcharacteristicvalue)、[readDescriptorValue](#readdescriptorvalue)、[writeCharacteristicValue](#writecharacteristicvalue)、[writeDescriptorValue](#writedescriptorvalue)、[setCharacteristicChangeNotification](#setcharacteristicchangenotification)和[setCharacteristicChangeIndication](#setcharacteristicchangeindication)。
+
+**需要权限**：ohos.permission.ACCESS_BLUETOOTH
+
+**系统能力**：SystemCapability.Communication.Bluetooth.Core
+
+**支持平台**： Android 、iOS
+
+> **说明：**
+> iOS开启特征值变化接收能力时，底层不区分Notification和Indication，本接口与setCharacteristicChangeIndication语义相同，都是开启或关闭接收特征值变化。如果同一个特征值同时支持Notification和Indication，不能通过该接口把订阅类型固定为Notification。
+
+**参数：**
+
+| 参数名            | 类型                                      | 必填   | 说明                            |
+| -------------- | --------------------------------------- | ---- | ----------------------------- |
+| characteristic | [BLECharacteristic](#blecharacteristic) | 是    | 需要管理的server端特征值。                      |
+| enable         | boolean                                 | 是    | 是否启用接收server端特征值通知的能力。<br>true表示启用，false表示禁用。 |
+| callback   | AsyncCallback&lt;void&gt; | 是    | 回调函数。当调用成功，err为undefined，否则为错误对象。 |
+
+**错误码**：
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)和[蓝牙服务错误码](../errorcodes/errorcode-bluetooth.md)。
+
+| 错误码ID | 错误信息 |
+| -------- | ---------------------------- |
+|201 | Permission denied.                 |
+|401 | Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3. Parameter verification failed.                 |
+|801 | Capability not supported.          |
+|2900001 | Service stopped.                         |
+|2900011 | The operation is busy. The last operation is not complete.             |
+|2900099 | Operation failed.                        |
+|2901003 | The connection is not established.                |
+
+**示例：**
+
+```js
+import { AsyncCallback, BusinessError } from '@kit.BasicServicesKit';
+// 创建descriptors。
+let descriptors: Array<ble.BLEDescriptor> = [];
+let arrayBuffer = new ArrayBuffer(2);
+let descV = new Uint8Array(arrayBuffer);
+descV[0] = 0; // 以Client Characteristic Configuration描述符为例，表示bit0、bit1均为0，notification和indication均不开启
+let descriptor: ble.BLEDescriptor = {serviceUuid: '00001810-0000-1000-8000-00805F9B34FB',
+  characteristicUuid: '00001820-0000-1000-8000-00805F9B34FB',
+  descriptorUuid: '00002902-0000-1000-8000-00805F9B34FB', descriptorValue: arrayBuffer};
+descriptors[0] = descriptor;
+let arrayBufferC = new ArrayBuffer(8);
+let characteristic: ble.BLECharacteristic = {serviceUuid: '00001810-0000-1000-8000-00805F9B34FB',
+  characteristicUuid: '00001820-0000-1000-8000-00805F9B34FB', characteristicValue: arrayBufferC, descriptors:descriptors};
+try {
+    let device: ble.GattClientDevice = ble.createGattClientDevice('XX:XX:XX:XX:XX:XX');
+    device.setCharacteristicChangeNotification(characteristic, false, (err: BusinessError) => {
+        if (err) {
+            console.error('notifyCharacteristicChanged callback failed');
+        } else {
+            console.info('notifyCharacteristicChanged callback successful');
+        }
+    });
+} catch (err) {
+    console.error('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);
+}
+
+```
+
+
+### setCharacteristicChangeNotification<sup>26+</sup>
+
+setCharacteristicChangeNotification(characteristic: BLECharacteristic, enable: boolean): Promise&lt;void&gt;
+
+client端启用或者禁用接收server端特征值内容变更通知的能力。使用Promise异步回调。<br>
+- 需要先调用[getServices](#getservices)，获取到server端所有支持的能力，且需包含指定的入参特征值UUID。<br>
+- server端对应的特征值需包含标准协议定义的Client Characteristic Configuration描述符UUID（00002902-0000-1000-8000-00805f9b34fb），server端才能支持发送变更通知。<br>
+- 若启用该能力，系统蓝牙服务会自动往server端写Client Characteristic Configuration描述符，启用server端的通知能力。<br>
+- 若禁用该能力，系统蓝牙服务会自动往server端写Client Characteristic Configuration描述符，禁用server端的通知能力。<br>
+- 通过[on('BLECharacteristicChange')](#onblecharacteristicchange)接收server端特征值内容变更通知。<br>
+- 若client端收到server端特征值内容变更通知后，无需回复确认。
+- 异步回调结果返回后，才能调用下一次读取或者写入操作，如[readCharacteristicValue](#readcharacteristicvalue)、[readDescriptorValue](#readdescriptorvalue)、[writeCharacteristicValue](#writecharacteristicvalue)、[writeDescriptorValue](#writedescriptorvalue)、[setCharacteristicChangeNotification](#setcharacteristicchangenotification)和[setCharacteristicChangeIndication](#setcharacteristicchangeindication)。
+
+**需要权限**：ohos.permission.ACCESS_BLUETOOTH
+
+**系统能力**：SystemCapability.Communication.Bluetooth.Core
+
+**支持平台**： Android 、iOS
+
+> **说明：**
+> iOS开启特征值变化接收能力时，底层不区分Notification和Indication，本接口与setCharacteristicChangeIndication语义相同，都是开启或关闭接收特征值变化。如果同一个特征值同时支持Notification和Indication，不能通过该接口把订阅类型固定为Notification。
+
+**参数：**
+
+| 参数名            | 类型                                      | 必填   | 说明                            |
+| -------------- | --------------------------------------- | ---- | ----------------------------- |
+| characteristic | [BLECharacteristic](#blecharacteristic) | 是    | 需要管理的server端特征值。                      |
+| enable         | boolean                                 | 是    | 是否启用接收server端特征值通知的能力。<br>true表示启用，false表示禁用。 |
+
+**返回值：**
+
+| 类型                                       | 说明                         |
+| ---------------------------------------- | -------------------------- |
+| Promise&lt;void&gt; | Promise对象。无返回结果的Promise对象。 |
+
+**错误码**：
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)和[蓝牙服务错误码](../errorcodes/errorcode-bluetooth.md)。
+
+| 错误码ID | 错误信息 |
+| -------- | ---------------------------- |
+|201 | Permission denied.                 |
+|401 | Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3. Parameter verification failed.                 |
+|801 | Capability not supported.          |
+|2900001 | Service stopped.                         |
+|2900011 | The operation is busy. The last operation is not complete.             |
+|2900099 | Operation failed.                        |
+|2901003 | The connection is not established.                |
+
+**示例：**
+
+```js
+import { AsyncCallback, BusinessError } from '@kit.BasicServicesKit';
+// 创建descriptors。
+let descriptors: Array<ble.BLEDescriptor> = [];
+let arrayBuffer = new ArrayBuffer(2);
+let descV = new Uint8Array(arrayBuffer);
+descV[0] = 0; // 以Client Characteristic Configuration描述符为例，表示bit0、bit1均为0，notification和indication均不开启
+let descriptor: ble.BLEDescriptor = {serviceUuid: '00001810-0000-1000-8000-00805F9B34FB',
+  characteristicUuid: '00001820-0000-1000-8000-00805F9B34FB',
+  descriptorUuid: '00002902-0000-1000-8000-00805F9B34FB', descriptorValue: arrayBuffer};
+descriptors[0] = descriptor;
+let arrayBufferC = new ArrayBuffer(8);
+let characteristic: ble.BLECharacteristic = {serviceUuid: '00001810-0000-1000-8000-00805F9B34FB',
+  characteristicUuid: '00001820-0000-1000-8000-00805F9B34FB', characteristicValue: arrayBufferC, descriptors:descriptors};
+try {
+  let device: ble.GattClientDevice = ble.createGattClientDevice('XX:XX:XX:XX:XX:XX');
+  device.setCharacteristicChangeNotification(characteristic, false);
+} catch (err) {
+  console.error('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);
+}
+
+```
+
+### setCharacteristicChangeIndication<sup>26+</sup>
+
+setCharacteristicChangeIndication(characteristic: BLECharacteristic, enable: boolean, callback: AsyncCallback&lt;void&gt;): void
+
+client端启用或者禁用接收server端特征值内容变更指示的能力。使用Callback异步回调。<br>
+- 需要先调用[getServices](#getservices)，获取到server端所有支持的能力，且需包含指定的入参特征值UUID。<br>
+- server端对应的特征值需包含标准协议定义的Client Characteristic Configuration描述符UUID（00002902-0000-1000-8000-00805f9b34fb），server端才能支持发送变更指示。<br>
+- 若启用该能力，系统蓝牙服务会自动往server端写Client Characteristic Configuration描述符，启用server端的指示能力。<br>
+- 若禁用该能力，系统蓝牙服务会自动往server端写Client Characteristic Configuration描述符，禁用server端的指示能力。<br>
+- 通过[on('BLECharacteristicChange')](#onblecharacteristicchange)接收server端特征值内容变更指示。<br>
+- 若client端收到server端特征值内容变更指示后，系统蓝牙服务会主动回复确认，应用无需关注。
+- 异步回调结果返回后，才能调用下一次读取或者写入操作，如[readCharacteristicValue](#readcharacteristicvalue)、[readDescriptorValue](#readdescriptorvalue)、[writeCharacteristicValue](#writecharacteristicvalue)、[writeDescriptorValue](#writedescriptorvalue)、[setCharacteristicChangeNotification](#setcharacteristicchangenotification)和[setCharacteristicChangeIndication](#setcharacteristicchangeindication)。
+
+**需要权限**：ohos.permission.ACCESS_BLUETOOTH
+
+**系统能力**：SystemCapability.Communication.Bluetooth.Core
+
+**支持平台**： Android 、iOS
+
+> **说明：**
+> iOS开启特征值变化接收能力时，底层不区分Notification和Indication，本接口与setCharacteristicChangeNotification语义相同，都是开启或关闭接收特征值变化。如果同一个特征值同时支持Notification和Indication，iOS不能强制只开启Indication；如需明确使用Indication，建议服务端使用只支持Indication的独立特征值。
+
+**参数：**
+
+| 参数名            | 类型                                      | 必填   | 说明                            |
+| -------------- | --------------------------------------- | ---- | ----------------------------- |
+| characteristic | [BLECharacteristic](#blecharacteristic) | 是    | 需要管理的server端特征值。                      |
+| enable         | boolean                                 | 是    | 是否启用接收server端特征值指示的能力。<br>true表示启用，false表示禁用。 |
+| callback   | AsyncCallback&lt;void&gt; | 是    | 回调函数。当调用成功，err为undefined，否则为错误对象。 |
+
+**错误码**：
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)和[蓝牙服务错误码](../errorcodes/errorcode-bluetooth.md)。
+
+| 错误码ID | 错误信息 |
+| -------- | ---------------------------- |
+|201 | Permission denied.                 |
+|401 | Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3. Parameter verification failed.                 |
+|801 | Capability not supported.          |
+|2900001 | Service stopped.                         |
+|2900011 | The operation is busy. The last operation is not complete.             |
+|2900099 | Operation failed.                        |
+|2901003 | The connection is not established.                |
+
+**示例：**
+
+```js
+import { AsyncCallback, BusinessError } from '@kit.BasicServicesKit';
+// 创建descriptors。
+let descriptors: Array<ble.BLEDescriptor> = [];
+let arrayBuffer = new ArrayBuffer(2);
+let descV = new Uint8Array(arrayBuffer);
+descV[0] = 0; // 以Client Characteristic Configuration描述符为例，表示bit0、bit1均为0，notification和indication均不开启
+let descriptor: ble.BLEDescriptor = {serviceUuid: '00001810-0000-1000-8000-00805F9B34FB',
+  characteristicUuid: '00001820-0000-1000-8000-00805F9B34FB',
+  descriptorUuid: '00002902-0000-1000-8000-00805F9B34FB', descriptorValue: arrayBuffer};
+descriptors[0] = descriptor;
+let arrayBufferC = new ArrayBuffer(8);
+let characteristic: ble.BLECharacteristic = {serviceUuid: '00001810-0000-1000-8000-00805F9B34FB',
+  characteristicUuid: '00001820-0000-1000-8000-00805F9B34FB', characteristicValue: arrayBufferC, descriptors:descriptors};
+try {
+  let device: ble.GattClientDevice = ble.createGattClientDevice('XX:XX:XX:XX:XX:XX');
+  device.setCharacteristicChangeIndication(characteristic, false, (err: BusinessError) => {
+    if (err) {
+      console.error('notifyCharacteristicChanged callback failed');
+    } else {
+      console.info('notifyCharacteristicChanged callback successful');
+    }
+  });
+} catch (err) {
+  console.error('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);
+}
+
+```
+
+
+### setCharacteristicChangeIndication<sup>26+</sup>
+
+setCharacteristicChangeIndication(characteristic: BLECharacteristic, enable: boolean): Promise&lt;void&gt;
+
+client端启用或者禁用接收server端特征值内容变更指示的能力。使用Promise异步回调。<br>
+- 需要先调用[getServices](#getservices)，获取到server端所有支持的能力，且需包含指定的入参特征值UUID。<br>
+- server端对应的特征值需包含标准协议定义的Client Characteristic Configuration描述符UUID（00002902-0000-1000-8000-00805f9b34fb），server端才能支持发送变更指示。<br>
+- 若启用该能力，系统蓝牙服务会自动往server端写Client Characteristic Configuration描述符，启用server端的指示能力。<br>
+- 若禁用该能力，系统蓝牙服务会自动往server端写Client Characteristic Configuration描述符，禁用server端的指示能力。<br>
+- 通过[on('BLECharacteristicChange')](#onblecharacteristicchange)接收server端特征值内容变更指示。<br>
+- 若client端收到server端特征值内容变更指示后，系统蓝牙服务会主动回复确认，应用无需关注。
+- 异步回调结果返回后，才能调用下一次读取或者写入操作，如[readCharacteristicValue](#readcharacteristicvalue)、[readDescriptorValue](#readdescriptorvalue)、[writeCharacteristicValue](#writecharacteristicvalue)、[writeDescriptorValue](#writedescriptorvalue)、[setCharacteristicChangeNotification](#setcharacteristicchangenotification)和[setCharacteristicChangeIndication](#setcharacteristicchangeindication)。
+
+**需要权限**：ohos.permission.ACCESS_BLUETOOTH
+
+**系统能力**：SystemCapability.Communication.Bluetooth.Core
+
+**支持平台**： Android 、iOS
+
+> **说明：**
+> iOS开启特征值变化接收能力时，底层不区分Notification和Indication，本接口与setCharacteristicChangeNotification语义相同，都是开启或关闭接收特征值变化。如果同一个特征值同时支持Notification和Indication，iOS不能强制只开启Indication；如需明确使用Indication，建议服务端使用只支持Indication的独立特征值。
+
+**参数：**
+
+| 参数名            | 类型                                      | 必填   | 说明                            |
+| -------------- | --------------------------------------- | ---- | ----------------------------- |
+| characteristic | [BLECharacteristic](#blecharacteristic) | 是    | 需要管理的server端特征值。                      |
+| enable         | boolean                                 | 是    | 是否启用接收server端特征值指示的能力。<br>true表示启用，false表示禁用。 |
+
+**返回值：**
+
+| 类型                                       | 说明                         |
+| ---------------------------------------- | -------------------------- |
+| Promise&lt;void&gt; | Promise对象。无返回结果的Promise对象。 |
+
+**错误码**：
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)和[蓝牙服务错误码](../errorcodes/errorcode-bluetooth.md)。
+
+| 错误码ID | 错误信息 |
+| -------- | ---------------------------- |
+|201 | Permission denied.                 |
+|401 | Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3. Parameter verification failed.                 |
+|801 | Capability not supported.          |
+|2900001 | Service stopped.                         |
+|2900011 | The operation is busy. The last operation is not complete.             |
+|2900099 | Operation failed.                        |
+|2901003 | The connection is not established.                |
+
+**示例：**
+
+```js
+import { AsyncCallback, BusinessError } from '@kit.BasicServicesKit';
+// 创建descriptors。
+let descriptors: Array<ble.BLEDescriptor> = [];
+let arrayBuffer = new ArrayBuffer(2);
+let descV = new Uint8Array(arrayBuffer);
+descV[0] = 0; // 以Client Characteristic Configuration描述符为例，表示bit0、bit1均为0，notification和indication均不开启
+let descriptor: ble.BLEDescriptor = {serviceUuid: '00001810-0000-1000-8000-00805F9B34FB',
+  characteristicUuid: '00001820-0000-1000-8000-00805F9B34FB',
+  descriptorUuid: '00002902-0000-1000-8000-00805F9B34FB', descriptorValue: arrayBuffer};
+descriptors[0] = descriptor;
+let arrayBufferC = new ArrayBuffer(8);
+let characteristic: ble.BLECharacteristic = {serviceUuid: '00001810-0000-1000-8000-00805F9B34FB',
+  characteristicUuid: '00001820-0000-1000-8000-00805F9B34FB', characteristicValue: arrayBufferC, descriptors:descriptors};
+try {
+  let device: ble.GattClientDevice = ble.createGattClientDevice('XX:XX:XX:XX:XX:XX');
+  device.setCharacteristicChangeIndication(characteristic, false);
+} catch (err) {
+  console.error('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);
+}
+
+```
+
+
+### on('BLECharacteristicChange')<sup>26+</sup>
+
+on(type: 'BLECharacteristicChange', callback: Callback&lt;BLECharacteristic&gt;): void
+
+client端订阅server端特征值变化事件。使用Callback异步回调。<br>
+-  需调用[setCharacteristicChangeNotification](#setcharacteristicchangenotification)或者[setCharacteristicChangeIndication](#setcharacteristicchangeindication)，且启用通知或者指示能力后，才能接收到server端的特征值内容变更通知或者指示。
+
+**需要权限**：ohos.permission.ACCESS_BLUETOOTH
+
+**系统能力**：SystemCapability.Communication.Bluetooth.Core
+
+**支持平台**： Android 、iOS
+
+> **说明：**
+> 该回调只返回变化后的特征值数据，不会告诉应用本次收到的是Notification还是Indication。只开启一种接收能力时，应用可按自己开启的类型处理；如果同时开启两种能力，单次回调无法区分来源类型，建议服务端在characteristicValue中携带业务类型字段。
+
+**参数：**
+
+| 参数名      | 类型                                       | 必填   | 说明                                       |
+| -------- | ---------------------------------------- | ---- | ---------------------------------------- |
+| type     | string                                   | 是    | 事件回调类型，支持的事件为'BLECharacteristicChange'，表示server端特征值变化事件。<br>当client端收到server端特征值内容变更的通知或者指示时，触发该事件。 |
+| callback | Callback&lt;[BLECharacteristic](#blecharacteristic)&gt; | 是    | 指定订阅的回调函数，会携带server端变化后的特征值内容。                  |
+
+**错误码**：
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| -------- | ---------------------------- |
+|201 | Permission denied.                 |
+|401 | Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3. Parameter verification failed.                 |
+|801 | Capability not supported.          |
+
+**示例：**
+
+```js
+import { AsyncCallback, BusinessError } from '@kit.BasicServicesKit';
+function CharacteristicChange(characteristicChangeReq: ble.BLECharacteristic) {
+    let serviceUuid: string = characteristicChangeReq.serviceUuid;
+    let characteristicUuid: string = characteristicChangeReq.characteristicUuid;
+    let value: Uint8Array = new Uint8Array(characteristicChangeReq.characteristicValue);
+}
+try {
+    let device: ble.GattClientDevice = ble.createGattClientDevice('XX:XX:XX:XX:XX:XX');
+    device.on('BLECharacteristicChange', CharacteristicChange);
+} catch (err) {
+    console.error('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);
+}
+```
+
+
+### off('BLECharacteristicChange')<sup>26+</sup>
+
+off(type: 'BLECharacteristicChange', callback?: Callback&lt;BLECharacteristic&gt;): void
+
+client端取消订阅server端特征值变化事件。
+
+**需要权限**：ohos.permission.ACCESS_BLUETOOTH
+
+**系统能力**：SystemCapability.Communication.Bluetooth.Core
+
+**支持平台**： Android 、iOS
+
+> **说明：**
+> 本接口只取消BLECharacteristicChange回调，不提供Notification或Indication类型信息。
+
+**参数：**
+
+| 参数名      | 类型                                       | 必填   | 说明                                       |
+| -------- | ---------------------------------------- | ---- | ---------------------------------------- |
+| type     | string                                   | 是    | 事件回调类型，支持的事件为'BLECharacteristicChange'，表示server端特征值变化事件。 |
+| callback | Callback&lt;[BLECharacteristic](#blecharacteristic)&gt; | 否    | 指定取消订阅的回调函数通知。<br>若传参，则需与[on('BLECharacteristicChange')](#onblecharacteristicchange)中的回调函数一致；若无传参，则取消订阅该type对应的所有回调函数通知。 |
+
+**错误码**：
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| -------- | ---------------------------- |
+|201 | Permission denied.                 |
+|401 | Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3. Parameter verification failed.                 |
+|801 | Capability not supported.          |
+
+**示例：**
+
+```js
+import { AsyncCallback, BusinessError } from '@kit.BasicServicesKit';
+try {
+    let device: ble.GattClientDevice = ble.createGattClientDevice('XX:XX:XX:XX:XX:XX');
+    device.off('BLECharacteristicChange');
+} catch (err) {
+    console.error('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);
+}
+```
 
 ### on('BLEConnectionStateChange')
 
@@ -2753,9 +3162,14 @@ try {
 
 | 名称                | 类型        | 可读 | 可写 | 说明                                                         | Android平台 | iOS平台 |
 | :------------------ | :---------- | :--- | :--- | :----------------------------------------------------------- | ----------- | ------- |
-| serviceUuid         | string      | 是   | 是   | 特定服务（service）的UUID，例如：00001888-0000-1000-8000-00805f9b34fb。 | 不支持      | 支持    |
-| characteristicUuid  | string      | 是   | 是   | 特定特征（characteristic）的UUID，例如：00002a11-0000-1000-8000-00805f9b34fb。 | 不支持      | 支持    |
-| characteristicValue | ArrayBuffer | 是   | 是   | 特征对应的二进制值。                                         | 不支持      | 支持    |
+| serviceUuid         | string      | 是   | 是   | 特定服务（service）的UUID，例如：00001888-0000-1000-8000-00805f9b34fb。 | 支持      | 支持    |
+| characteristicUuid  | string      | 是   | 是   | 特定特征（characteristic）的UUID，例如：00002a11-0000-1000-8000-00805f9b34fb。 | 支持      | 支持    |
+| characteristicValue | ArrayBuffer | 是   | 是   | 特征对应的二进制值。                                         | 支持      | 支持    |
+| confirm             | boolean     | 是   | 是   | 是否需要确认。true表示按Indication语义发送，false表示按Notification语义发送。 | 支持      | 不支持    |
+
+> **说明：**
+> characteristicValue是实际发送的数据内容，可以放入业务自定义类型字段。受iOS CoreBluetooth能力限制，confirm在iOS上不用于指定本次发送类型，不会让iOS指定本次按Notification还是Indication发送。
+> 受iOS CoreBluetooth能力限制，iOS上notifyCharacteristicChanged调用成功仅表示底层已接受发送请求，不表示Client已接收数据，也不表示Indication确认已返回。
 
 ## ServerResponse
 
@@ -3003,7 +3417,10 @@ try {
 | writeNoResponse | boolean | 否    | 表示该特征支持写操作，无需对端设备回复。 | 支持 | 支持 |
 | read | boolean   |  否    | 表示该特征支持读操作。 | 支持 | 支持 |
 | notify | boolean   | 否    | 表示该特征可通知对端设备。 | 支持 | 支持 |
+| indicate | boolean   | 否    | 表示该特征可指示对端设备。 | 支持 | 支持 |
 
+> **说明：**
+> 在iOS上，read、write、writeNoResponse仍表示读写能力；notify和indicate不作为消息类型开关使用。即使配置notify: true和indicate: true，也不能让iOS Server发送时选择本次使用Notification或Indication，iOS Client接收回调也不会返回本次是哪一种。因此，notify和indicate在iOS上对“指定或识别消息类型”无效。
 
 ## GattWriteType<a name="GattWriteType"></a>
 
