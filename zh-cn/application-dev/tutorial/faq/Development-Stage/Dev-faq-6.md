@@ -62,3 +62,10 @@
 | windowClass.setWindowSystemBarEnable([])             | ![Dev-faq-6-ios](../figures/Dev-faq-6-ios.png)                | ![Dev-faq-6-android](../figures/Dev-faq-6-android.png)        | ![Dev-faq-6-oh](../figures/Dev-faq-6-oh.png)    |
 | windowClass.setWindowSystemBarEnable(['status'])     | ![Dev-faq-6-ios-status](../figures/Dev-faq-6-ios-status.png)  | ![Dev-faq-6-android-status](../figures/Dev-faq-6-android-status.png) | ![Dev-faq-6-oh-status](../figures/Dev-faq-6-oh-status.png) |
 | windowClass.setWindowSystemBarEnable(['navigation']) | ![Dev-faq-6-ios-navigation](../figures/Dev-faq-6-ios-navigation.png) | ![Dev-faq-6-android-navigation](../figures/Dev-faq-6-android-navigation.png) | ![Dev-faq-6-oh-navigation](../figures/Dev-faq-6-oh-navigation.png) |
+
+**【版本说明】**
+以上沉浸式方案在ArkUI-X SDk 6.0.2.130及以上版本生效
+
+版本下载链接：[下载地址](https://repo.huaweicloud.com/arkui-crossplatform/sdk/6.0.2.130)
+
+手动替换IDE集成的SDK操作参考：[如何手动替换ArkUI-X SDK](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/tutorial/faq/Development-Stage/Dev-faq-1.md)
