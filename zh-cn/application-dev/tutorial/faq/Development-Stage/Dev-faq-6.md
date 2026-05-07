@@ -1,9 +1,19 @@
 # ArkUI-X如何设置沉浸式效果
 
-**【问题描述】**
+### 问题描述
+
 在ArkTS侧，组件设置expandSafeArea属性，实际Android和iOS运行不能达到沉浸式效果
 
-**【解决方案】**
+### 版本说明
+
+以下沉浸式方案在ArkUI-X SDk 6.0.2.130及以上版本生效
+
+版本下载链接：[下载地址](https://repo.huaweicloud.com/arkui-crossplatform/sdk/6.0.2.130)
+
+手动替换IDE集成的SDK操作参考：[如何手动替换ArkUI-X SDK](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/tutorial/faq/Development-Stage/Dev-faq-1.md)
+
+### 解决方案
+
 如果想设置整应用的沉浸式效果，在Ability的`onWindowStageCreate`方法中，使用`setWindowLayoutFullScreen`方法达到沉浸式效果，在跨平台端，需要通过`setWindowSystemBarEnable`方法隐藏状态栏和导航栏，代码示例：
 
 ```typescript
