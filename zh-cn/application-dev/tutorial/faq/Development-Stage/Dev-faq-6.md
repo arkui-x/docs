@@ -4,14 +4,6 @@
 
 在ArkTS侧，组件设置expandSafeArea属性，实际Android和iOS运行不能达到沉浸式效果
 
-### 版本说明
-
-以下沉浸式方案在ArkUI-X SDk 6.0.2.130及以上版本生效
-
-版本下载链接：[下载地址](https://repo.huaweicloud.com/arkui-crossplatform/sdk/6.0.2.130)
-
-手动替换IDE集成的SDK操作参考：[如何手动替换ArkUI-X SDK](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/tutorial/faq/Development-Stage/Dev-faq-1.md)
-
 ### 解决方案
 
 如果想设置整应用的沉浸式效果，在Ability的`onWindowStageCreate`方法中，使用`setWindowLayoutFullScreen`方法达到沉浸式效果，在跨平台端，需要通过`setWindowSystemBarEnable`方法隐藏状态栏和导航栏，代码示例：
@@ -72,3 +64,15 @@
 | windowClass.setWindowSystemBarEnable([])             | ![Dev-faq-6-ios](../figures/Dev-faq-6-ios.png)                | ![Dev-faq-6-android](../figures/Dev-faq-6-android.png)        | ![Dev-faq-6-oh](../figures/Dev-faq-6-oh.png)    |
 | windowClass.setWindowSystemBarEnable(['status'])     | ![Dev-faq-6-ios-status](../figures/Dev-faq-6-ios-status.png)  | ![Dev-faq-6-android-status](../figures/Dev-faq-6-android-status.png) | ![Dev-faq-6-oh-status](../figures/Dev-faq-6-oh-status.png) |
 | windowClass.setWindowSystemBarEnable(['navigation']) | ![Dev-faq-6-ios-navigation](../figures/Dev-faq-6-ios-navigation.png) | ![Dev-faq-6-android-navigation](../figures/Dev-faq-6-android-navigation.png) | ![Dev-faq-6-oh-navigation](../figures/Dev-faq-6-oh-navigation.png) |
+
+### 注意事项
+
+IOS系统中如果使用上述方案无法实现沉浸式效果，可尝试如下方式设置沉浸式。
+
+在StageViewController的viewDidLoad生命周期中增加self.navigationController.navigationBarHidden = YES设置隐藏导航栏的逻辑以达到沉浸式效果。
+```typescript
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationController.navigationBarHidden = YES;
+}
+```
