@@ -67,9 +67,12 @@
 
 ### 补充说明
 
-IOS系统中如果使用上述方案无法实现沉浸式效果，可尝试如下方式设置沉浸式。
+IOS系统中如果使用上述方案无法实现沉浸式效果，可尝试如下方式设置跨平台页面的沉浸式。
 
-在StageViewController的viewDidLoad生命周期中增加self.navigationController.navigationBarHidden = YES设置隐藏导航栏的逻辑以达到沉浸式效果。
+以DevEco Studio中跨平台的基础模版工程[ArkUI-X]Empty Ability为例，开发者可以修改.arkui-x/ios/app/EntryEntryAbilityViewController.m文件，
+
+在继承自StageViewController的EntryEntryAbilityViewController中的viewDidLoad生命周期增加以下代码:
+self.navigationController.navigationBarHidden = YES设置隐藏导航栏的逻辑以达到沉浸式效果。
 ```typescript
 - (void)viewDidLoad {
     [super viewDidLoad];
