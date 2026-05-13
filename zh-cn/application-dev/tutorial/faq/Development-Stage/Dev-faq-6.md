@@ -96,7 +96,7 @@ onWindowStageCreate(windowStage: window.WindowStage): void {
 2、如果开发者只想设置单个跨平台ArkTS页面的沉浸式效果，建议开发者升级至ArkUI-X 6.0.2.130及以上版本后使用[设置单跨平台页面沉浸式](#pageSet)方案。 
  
  
- 版本下载链接：[下载地址](https://repo.huaweicloud.com/arkui-crossplatform/sdk/6.0.2.130) 
+ 版本下载链接：[下载地址](https://repo.huaweicloud.com/arkui-crossplatform/sdk) 
  
  
  手动替换IDE集成的SDK操作参考：[如何手动替换ArkUI-X SDK](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/tutorial/faq/Development-Stage/Dev-faq-1.md)
