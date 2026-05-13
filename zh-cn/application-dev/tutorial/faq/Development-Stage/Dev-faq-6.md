@@ -4,11 +4,13 @@
 
 在ArkTS侧，组件设置expandSafeArea属性，实际Android和iOS运行不能达到沉浸式效果
 
-### 解决方案
+### 解决方案<a id="Solution"></a>
 
+#### 批量设置页面沉浸式
 如果想设置某个跨平台Ability下所有ArkTS页面的沉浸式效果，需要在该Ability的`onWindowStageCreate`方法中，使用`setWindowLayoutFullScreen`方法达到沉浸式效果，在跨平台端，需要通过`setWindowSystemBarEnable`方法隐藏状态栏和导航栏，代码示例：
 
 ```typescript
+onWindowStageCreate(windowStage: window.WindowStage): void {
   let windowClass: window.Window | undefined = undefined;
   windowStage.getMainWindow((err: BusinessError, data) => {
     const errCode: number = err.code;
@@ -32,9 +34,12 @@
     // 设置导航栏隐藏,此处设置为保留状态栏,隐藏导航栏
     let names: Array<'status' | 'navigation'> = ['status'];
     windowClass.setWindowSystemBarEnable(names);
-  });
+  })
+};
 ```
-<a id="pageSet"></a>单独设置某个跨平台Ability下某一ArkTS页面的沉浸式效果，可以在页面的`aboutToAppear`方法中进行相关设置，代码实例
+
+#### 设置单跨平台页面沉浸式<a id="pageSet"></a>
+单独设置某个跨平台Ability下某一ArkTS页面的沉浸式效果，可以在页面的`aboutToAppear`方法中进行相关设置，代码示例：
 
 ```typescript
   aboutToAppear(): void {
@@ -67,20 +72,28 @@
 
 ### 补充说明
 
-1、IOS系统中如果使用上述方案无法实现某个跨平台Ability下所有ArkTS页面的沉浸式效果，可尝试如下方式设置。
+1、IOS系统中如果使用上述方案无法实现沉浸式效果，还可尝试如下方式。
 
-以DevEco Studio中跨平台的基础模版工程[ArkUI-X]Empty Ability为例，开发者可以修改.arkui-x/ios/app/EntryEntryAbilityViewController.m文件，
+注意：
 
-在继承自StageViewController的EntryEntryAbilityViewController中的viewDidLoad生命周期增加以下代码:
-self.navigationController.navigationBarHidden = YES设置隐藏导航栏的逻辑以达到沉浸式效果。
+（1）iOS需要去掉上述[沉浸式](#Solution)方案的ArkTS代码，单独在原生平台进行以下设置。
+
+（2）如果Android仍需要使用上述方案设置沉浸式，请使用[平台差异化](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/quick-start/platform-different-introduction.md)进行平台隔离，确保iOS不走ArkTS方案逻辑。
+
+在需要实现沉浸式的跨平台ArkTS页面对应的xxxViewController.m文件中的viewDidLoad方法（跨平台ViewController同跨平台的ArkTS UIAbility一一对应），增加隐藏导航栏和状态栏的逻辑：self.navigationController.navigationBarHidden = YES，以达到沉浸式效果。
+
+以DevEco Studio中跨平台的基础模版工程[ArkUI-X]Empty Ability为例，开发者可以修改.arkui-x/ios/app/EntryEntryAbilityViewController.m文件，在继承自StageViewController的EntryEntryAbilityViewController中viewDidLoad方法增加代码: self.navigationController.navigationBarHidden = YES设置导航栏和状态栏隐藏。
+
+请注意该方法会将Entry Ability下所有ArkTS页面设置为沉浸式。示例如下：
 ```typescript
+// xxxViewController.m（继承自跨平台提供的StageViewController）
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
 }
 ```
 
-2、IOS系统中对于单独设置某个跨平台Ability下某一ArkTS页面的沉浸式效果，[上述正式方案](#pageSet)如不生效，建议开发者升级至ArkUI-X 6.0.2.130及以上版本后再尝试。 
+2、如果开发者只想设置单个跨平台ArkTS页面的沉浸式效果，建议开发者升级至ArkUI-X 6.0.2.130及以上版本后使用[设置单跨平台页面沉浸式](#pageSet)方案。 
  
  
  版本下载链接：[下载地址](https://repo.huaweicloud.com/arkui-crossplatform/sdk/6.0.2.130) 
