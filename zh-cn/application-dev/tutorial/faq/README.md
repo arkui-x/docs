@@ -56,6 +56,7 @@
 - [ArkUI-X iOS如何触发应用前后台切换回调](Development-Stage/Dev-faq-23.md)
 - [ArkUI-X iOS中使用控制器直接添加另一个控制器作为子view后出现白屏](Development-Stage/Dev-faq-24.md)
 - [MacOS 提示“无法打开‘icupkg’，因为无法验证开发者”解决办法](Development-Stage/Dev-faq-25.md)
+- [SDK版本切换 iOS白屏问题分析-symbol not found错误处理](Development-Stage/Dev-faq-26.md)
 
 ### 问题自排查
 
