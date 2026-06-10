@@ -13,4 +13,7 @@
 | 名称       | 类型                 | 可读 | 可写 | 说明                                                    |
 | ---------- |-------------------- | ---- | ---- |  ------------------------------------------------------- |
 | event      | string               | 是  | 否  | 表示当前接收的公共事件名称。                              |
-| data       | string               | 是  | 否  | 表示公共事件的自定义结果数据，用于传递string类型的数据。 |
+| data       | string               | 是  | 否  | 表示订阅者接收到的公共事件数据（string类型）。该字段取值与发布者使用[commonEventManager.publish](./js-apis-commonEventManager.md#commoneventmanagerpublish-1)发布公共事件时，通过[CommonEventPublishData](./js-apis-inner-commonEvent-commonEventPublishData.md)中的`data`字段传递的数据一致。 |
+| bundleName<sup>26+</sup> | string | 是 | 否 | 表示包名称，默认为空字符串。 |
+| code<sup>26+</sup> | number | 是 | 否 | 表示订阅者接收到的公共事件数据（number类型）。该字段取值与发布者使用[commonEventManager.publish](./js-apis-commonEventManager.md#commoneventmanagerpublish-1)发布公共事件时，通过[CommonEventPublishData](./js-apis-inner-commonEvent-commonEventPublishData.md)中的`code`字段传递的数据一致。默认值为0。 |
+| parameters<sup>26+</sup> | {[key: string]: any} | 是 | 否 | 表示订阅者接收到的公共事件的附加信息。该字段取值与发布者使用[commonEventManager.publish](./js-apis-commonEventManager.md#commoneventmanagerpublish-1)发布公共事件时，通过[CommonEventPublishData](./js-apis-inner-commonEvent-commonEventPublishData.md)中的`parameters`字段传递的数据一致。 |
