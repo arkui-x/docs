@@ -44,7 +44,7 @@ enableBluetooth(): void
 
 **系统能力**：SystemCapability.Communication.Bluetooth.Core。
 
-**支持平台：** Android（AndroidAPI33以下支持）
+**支持平台：** Android
 
 **错误码**：
 
