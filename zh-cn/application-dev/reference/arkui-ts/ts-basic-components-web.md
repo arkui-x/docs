@@ -1924,6 +1924,90 @@ textZoomRatio(textZoomRatio: number)
   }
   ```
 
+### initialScale<sup>26+</sup>
+
+initialScale(percent: number)
+
+设置整体页面的缩放百分比。该属性没有显式调用时，缩放百分比会由网页自身决定。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名  | 类型   | 必填 | 说明                                                         |
+| ------- | ------ | ---- | ------------------------------------------------------------ |
+| percent | number | 是   | 要设置的整体页面的缩放百分比。<br>取值范围：(0, 1000]。<br>传入undefined或null时属性设置不生效。<br />在Android平台上，设置的缩放百分比不锁定。屏幕旋转至横屏时，系统会自动放大缩放以适应新的视口宽度；再次旋转回竖屏时，缩放恢复为设置值。<br />在iOS平台上，设置的缩放百分比全局锁定。屏幕旋转时，缩放始终保持为设定值，不会因方向变化而自动改变。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+    @State percent: number = 100;
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .initialScale(this.percent)
+      }
+    }
+  }
+  ```
+
+### overScrollMode<sup>26+</sup>
+
+overScrollMode(mode: OverScrollMode)
+
+设置Web过滚动模式。当过滚动模式开启时，当用户在Web根页面上滑动到边缘时，Web会通过弹性动画弹回界面，根页面上的内部页面不会触发回弹。该属性没有显式调用时，默认关闭过滚动模式。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型                                        | 必填 | 说明                                                         |
+| ------ | ------------------------------------------- | ---- | ------------------------------------------------------------ |
+| mode   | [OverScrollMode](#overscrollmode枚举说明26) | 是   | 设置Web的过滚动模式为关闭或开启。<br>传入undefined或null时为OverScrollMode.NEVER。<br/>当过滚动模式设置为OverScrollMode.ALWAYS时，iOS平台过滚动动画为平移回弹效果，Android 12及以上平台为拉伸回弹效果、Android 11及以下平台为边缘阴影泛出效果。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+    @State mode: OverScrollMode = OverScrollMode.ALWAYS;
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .overScrollMode(this.mode)
+      }
+    }
+  }
+  ```
+
+#### OverScrollMode枚举说明<sup>26+</sup>
+
+设置Web的过滚动模式为关闭或开启。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称    | 值 | 说明    | Android平台 | iOS平台 |
+| ----- | -- | ---- | ---- | ---- |
+| NEVER | 0 | Web过滚动模式关闭。 | 支持 | 支持 |
+| ALWAYS | 1 | Web过滚动模式开启。 | 支持 | 支持 |
+
 ### nestedScroll<sup>23+</sup>
 
 nestedScroll(value: NestedScrollOptions | NestedScrollOptionsExt)
