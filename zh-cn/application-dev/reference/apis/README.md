@@ -99,6 +99,7 @@
   - [@ohos.file.statvfs (文件系统空间统计)](js-apis-file-statvfs.md)
   - [@ohos.file.photoAccessHelper (相册管理模块)](js-apis-photoAccessHelper.md)
   - [@ohos.file.picker(选择器)](js-apis-file-picker.md)
+  - [@ohos.file.fileuri (文件URI)](js-apis-file-fileuri.md)
 - 设备管理
   - [@ohos.deviceInfo (设备信息)](js-apis-device_Info.md)
 - 数据管理
