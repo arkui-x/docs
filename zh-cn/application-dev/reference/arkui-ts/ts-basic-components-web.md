@@ -2991,6 +2991,249 @@ enableHapticFeedback(enabled: boolean)
 | ------- | ------- | ---- | ------------------------------------------------------------ |
 | enabled | boolean | 是   | 是否支持触控反馈。<br/>默认值：true，true表示开启触控反馈，false表示不开启触控反馈。<br/>设置为true后是否生效，还取决于系统的硬件是否支持。<br/>平台约束：无论该属性如何设置，在长按选中网页内容时都会振动。 |
 
+## overviewModeAccess<sup>26+</sup>
+
+overviewModeAccess(overviewModeAccess: boolean)
+
+设置是否使用概览模式加载网页，即缩小内容以适应屏幕宽度。当属性没有显式调用时，默认允许使用概览模式加载网页。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名             | 类型    | 必填 | 说明                                                         |
+| ------------------ | ------- | ---- | ------------------------------------------------------------ |
+| overviewModeAccess | boolean | 是   | 设置是否使用概览模式加载网页。<br>true表示设置使用概览模式加载网页，false表示设置不使用概览模式加载网页。<br>传入undefined或null时为false。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .overviewModeAccess(true)
+      }
+    }
+  }
+  ```
+
+## defaultFontSize<sup>26+</sup>
+
+defaultFontSize(size: number)
+
+
+设置网页的默认字体大小。对于html前端使用非monospace字体且未指定font-size样式的元素，将按此值渲染字体大小。
+
+当属性没有显式调用时，网页的默认字体大小为16。
+
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                                                         |
+| ------ | ------ | ---- | ------------------------------------------------------------ |
+| size   | number | 是   | 设置网页的默认字体大小，单位px。<br>输入值的范围为[-2^31, 2^31-1]，实际渲染时超过72px的值按照72px进行渲染，低于1px的值按照1px进行渲染。<br>传入null或undefined时为16。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+    @State fontSize: number = 13;
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .defaultFontSize(this.fontSize)
+      }
+    }
+  }
+  ```
+
+## darkMode<sup>26+</sup>
+
+darkMode(mode: WebDarkMode)
+
+设置Web深色模式。当属性没有显式调用时，默认Web深色模式关闭。
+
+当深色模式开启时，Web将启用媒体查询prefers-color-scheme中网页所定义的深色样式，若网页未定义深色样式，则保持原状。如需开启强制深色模式，建议配合[forceDarkAccess](./ts-basic-components-web.md#forcedarkaccess26)使用。
+
+> **说明：**
+> Android该接口单独使用无实际作用，配合forceDarkAccess逻辑判断。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：**iOS
+
+**参数：**
+
+| 参数名 | 类型                                                      | 必填 | 说明                                                         |
+| ------ | --------------------------------------------------------- | ---- | ------------------------------------------------------------ |
+| mode   | [WebDarkMode](./ts-basic-components-web.md#webdarkmode26) | 是   | 设置Web的深色模式为关闭、开启或跟随系统。<br>传入null或undefined时为`WebDarkMode.Off`。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+    @State mode: WebDarkMode = WebDarkMode.On;
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .darkMode(this.mode)
+      }
+    }
+  }
+  ```
+
+## WebDarkMode<sup>26+</sup>
+
+Web深色模式的配置。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称 | 值   | 说明                  | Android平台 | iOS平台 |
+| ---- | ---- | --------------------- | ----------- | ------- |
+| Off  | 0    | Web深色模式关闭。     | 不支持      | 支持    |
+| On   | 1    | Web深色模式开启。     | 不支持      | 支持    |
+| Auto | 2    | Web深色模式跟随系统。 | 不支持      | 支持    |
+
+## forceDarkAccess<sup>26+</sup>
+
+forceDarkAccess(access: boolean)
+
+设置网页是否开启强制深色模式。该属性仅在[darkMode](./ts-basic-components-web.md#darkmode26)开启深色模式时生效。当属性没有显式调用时，默认网页不开启强制深色模式。
+
+> **说明：**
+>
+> iOS平台实现是利用CSS滤镜对页面进行物理颜色反转，色值可能与OH平台存在差异。
+>
+> Android该接口使用有以下限制：
+>
+> - Android在API28及其以下，该接口没有任何作用；
+>
+> - Android在API29~32，需要将arkui-x的DevEco Studio工程中.arkui-x\android\app\build.gradle文件中defaultConfig配置项中targetSdkVersion字段设置为[29,32]中的值；
+> - Android在API33+，需要将arkui-x的DevEco Studio工程中.arkui-x\android\app\build.gradle文件中defaultConfig配置项中targetSdkVersion字段设置为33，并且系统需要开启深色模式；
+> - Android平台只有在WebDarkMode.On模式下，网页才开启强制深色模式。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型    | 必填 | 说明                                                         |
+| ------ | ------- | ---- | ------------------------------------------------------------ |
+| access | boolean | 是   | 设置网页是否开启强制深色模式。<br>true表示设置网页开启强制深色模式，false表示设置网页不开启强制深色模式。<br>传入null或undefined时为false。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+    @State mode: WebDarkMode = WebDarkMode.On;
+    @State access: boolean = true;
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .darkMode(this.mode)
+          .forceDarkAccess(this.access)
+      }
+    }
+  }
+  ```
+
+## layoutMode<sup>26+</sup>
+
+layoutMode(mode: WebLayoutMode)
+
+设置Web布局模式。当属性没有显式调用时，默认Web布局跟随系统模式。
+
+> **说明：**
+>
+> 目前只支持两种Web布局模式，分别为Web布局跟随系统（`WebLayoutMode.NONE`）和Web组件高度基于前端页面高度的自适应网页布局（`WebLayoutMode.FIT_CONTENT`）。
+>
+> Web组件高度基于前端页面自适应布局有如下限制：
+>
+> - Web组件创建后不支持动态切换layoutMode模式。
+> - 频繁更改页面宽高会触发Web组件重新布局，影响体验。
+> - 不支持对页面进行缩放。
+> - 不支持瀑布流网页（下拉到底部加载更多）。
+> - 不支持宽度自适应，仅支持高度自适应。
+> - 由于高度自适应网页高度，您无法通过修改组件高度属性来修改组件高度。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型                              | 必填 | 说明                                                         |
+| ------ | --------------------------------- | ---- | ------------------------------------------------------------ |
+| mode   | [WebLayoutMode](#weblayoutmode26) | 是   | 设置web布局模式，跟随系统或自适应布局。<br>传入null或undefined时为`WebLayoutMode.NONE` |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+    mode: WebLayoutMode = WebLayoutMode.FIT_CONTENT;
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .layoutMode(this.mode)
+      }
+    }
+  }
+  ```
+
+## WebLayoutMode<sup>26+</sup>
+
+Web布局模式的配置。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称        | 值   | 说明                              | Android平台 | iOS平台 |
+| ----------- | ---- | --------------------------------- | ----------- | ------- |
+| NONE        | 0    | Web布局跟随系统。                 | 支持        | 支持    |
+| FIT_CONTENT | 1    | Web基于页面大小的自适应网页布局。 | 支持        | 支持    |
+
 ## 事件
 
 ###  onBeforeUnload<sup>16+</sup>
