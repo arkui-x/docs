@@ -399,6 +399,36 @@ try {
 | navigation          | string   | 导航栏。   |
 | navigationIndicator | string   | 底部导航条。 |
 
+## SubWindowOptions<sup>26+</sup>
+
+子窗口创建参数。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**说明：** 
+
+在 Android 和 iOS 平台上，必选参数 `title` 和 `decorEnabled` 的设置不会生效，无任何异常提示。
+
+在 Android 平台上，若在模态窗口（设置isModal属性的窗口）之后创建普通窗口，会出现短暂的闪烁现象，此为平台的正常行为。
+
+| 名称         | 类型                            | 只读 | 可选 | 说明                                                         | Android | iOS    |
+| :----------- | :------------------------------ | :--- | :--- | :----------------------------------------------------------- | ------- | ------ |
+| title        | string                          | 否   | 否   | 子窗口标题。                                                 | 不支持  | 不支持 |
+| decorEnabled | boolean                         | 否   | 否   | 子窗口是否显示装饰。true表示子窗口显示装饰，false表示子窗口不显示装饰。 | 不支持  | 不支持 |
+| isModal      | boolean                         | 否   | 是   | 子窗口是否启用模态属性。<br>true表示子窗口启用模态属性，false表示子窗口禁用模态属性。<br/>不设置，则默认为false。 | 支持    | 支持   |
+| modalityType | [ModalityType](#modalitytype26) | 否   | 是   | 子窗口模态类型，仅当子窗口启用模态属性时生效。               | 支持    | 支持   |
+| windowRect   | [Rect](#rect7)                  | 否   | 是   | 子窗口矩形区域，其中子窗口存在大小限制，具体参考[resize()](#resize9)方法。<br/>不设置且未调用[showWindow()](#showwindow9)显示前，则默认为{left: 0, top: 0, width: 0, height: 0}。 | 支持    | 支持   |
+
+## ModalityType<sup>26+</sup>
+
+子窗口模态类型枚举。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称            | 值   | 说明                                             | Android | iOS  |
+| :-------------- | :--- | :----------------------------------------------- | ------- | ---- |
+| WINDOW_MODALITY | 0    | 当仅需要其父级窗口不响应用户操作时，可选此参数。 | 支持    | 支持 |
+
 ## Window
 
 当前窗口实例，窗口管理器管理的基本单元。
@@ -2161,6 +2191,194 @@ try {
   console.error(`Failed to set the window to privacy mode. Cause code: ${exception.code}, message: ${exception.message}`);
 }
 ```
+
+### isFocused<sup>26+</sup>
+
+isFocused(): boolean
+
+判断当前窗口是否已获焦。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**支持平台：** Android、iOS
+
+**返回值：**
+
+| 类型    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| boolean | 当前窗口是否已获焦。true表示当前窗口已获焦，false则表示当前窗口未获焦。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 1300002  | This window state is abnormal. Possible cause: The window is not created or destroyed. |
+
+**示例：**
+
+```ts
+try {
+  let focus = windowClass.isFocused();
+  console.info(`Succeeded in checking whether the window is focused. Data: ${focus}`);
+} catch (exception) {
+  console.error(`Failed to check whether the window is focused. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### setWindowFocusable<sup>26+</sup>
+
+setWindowFocusable(isFocusable: boolean, callback: AsyncCallback&lt;void&gt;): void
+
+设置窗口是否具有获得焦点的能力，使用callback异步回调。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名      | 类型                      | 必填 | 说明                                            |
+| ----------- | ------------------------- | ---- | ----------------------------------------------- |
+| isFocusable | boolean                   | 是   | 窗口是否可获焦。true表示支持；false表示不支持。 |
+| callback    | AsyncCallback&lt;void&gt; | 是   | 回调函数。                                      |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 1300002  | This window state is abnormal.                               |
+| 1300003  | This window manager service works abnormally.                |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let isFocusable: boolean = true;
+try {
+  windowClass.setWindowFocusable(isFocusable, (err: BusinessError) => {
+    const errCode: number = err.code;
+    if (errCode) {
+      console.error(`Failed to set the window to be focusable. Cause code: ${err.code}, message: ${err.message}`);
+      return;
+    }
+    console.info('Succeeded in setting the window to be focusable.');
+  });
+} catch (exception) {
+  console.error(`Failed to set the window to be focusable. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### setWindowFocusable<sup>26+</sup>
+
+setWindowFocusable(isFocusable: boolean): Promise&lt;void&gt;
+
+设置窗口是否具有获得焦点的能力，使用Promise异步回调。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名      | 类型    | 必填 | 说明                                            |
+| ----------- | ------- | ---- | ----------------------------------------------- |
+| isFocusable | boolean | 是   | 窗口是否可获焦。true表示支持；false表示不支持。 |
+
+**返回值：**
+
+| 类型                | 说明                      |
+| ------------------- | ------------------------- |
+| Promise&lt;void&gt; | 无返回结果的Promise对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 401      | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types. |
+| 1300002  | This window state is abnormal.                               |
+| 1300003  | This window manager service works abnormally.                |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let isFocusable: boolean = true;
+try {
+  let promise = windowClass.setWindowFocusable(isFocusable);
+  promise.then(() => {
+    console.info('Succeeded in setting the window to be focusable.');
+  }).catch((err: BusinessError) => {
+    console.error(`Failed to set the window to be focusable. Cause code: ${err.code}, message: ${err.message}`);
+  });
+} catch (exception) {
+  console.error(`Failed to set the window to be focusable. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### getPreferredOrientation<sup>26+</sup>
+
+getPreferredOrientation(): Orientation
+
+获取窗口的显示方向属性。未指定方向时，返回window.Orientation.UNSPECIFIED。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**支持平台：** Android、iOS
+
+**返回值：**
+
+| 类型                         | 说明                 |
+| ---------------------------- | -------------------- |
+| [Orientation](#orientation9) | 窗口显示方向的属性。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 1300002  | This window state is abnormal. Possible cause: 1. The window is not created or destroyed; 2. Internal task error. |
+
+**示例：**
+
+```ts
+// EntryAbility.ets
+import { UIAbility } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { window } from '@kit.ArkUI';
+
+export default class EntryAbility extends UIAbility {
+  // ...
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.info('onWindowStageCreate');
+    let windowClass: window.Window | undefined = undefined;
+    windowStage.getMainWindow((err: BusinessError, data) => {
+      const errCode: number = err.code;
+      if (errCode) {
+        console.error(`Failed to obtain the main window. Cause code: ${err.code}, message: ${err.message}`);
+        return;
+      }
+      windowClass = data;
+      try {
+        let orientation = windowClass.getPreferredOrientation();
+      } catch (exception) {
+        console.error(`Failed to get window orientation. Cause code: ${exception.code}, message: ${exception.message}`);
+      }
+    });
+  }
+};
+```
+
 ## WindowStageEventType<sup>9+</sup>
 
 WindowStage生命周期。
@@ -3302,6 +3520,76 @@ export default class EntryAbility extends UIAbility {
     } catch (exception) {
       console.error('Failed to disable the listener for window stage event changes. Cause:' +
       JSON.stringify(exception));
+    }
+  }
+};
+```
+
+### createSubWindowWithOptions<sup>26+</sup>
+
+createSubWindowWithOptions(name: string, options: SubWindowOptions): Promise<Window>
+
+创建主窗口、子窗口或全局悬浮窗下的子窗口，使用Promise异步回调。
+
+**模型约束：** 此接口仅可在Stage模型下使用。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名  | 类型                                    | 必填 | 说明           |
+| :------ | :-------------------------------------- | :--- | :------------- |
+| name    | string                                  | 是   | 子窗口的名字。 |
+| options | [SubWindowOptions](#subwindowoptions26) | 是   | 子窗口参数。   |
+
+**返回值：**
+
+| 类型                       | 说明                                            |
+| :------------------------- | :---------------------------------------------- |
+| Promise<[Window](#window)> | Promise对象。返回当前Window下创建的子窗口对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息                                                     |
+| :------- | :----------------------------------------------------------- |
+| 401      | Parameter error. Possible cause: Incorrect parameter types.  |
+| 801      | Capability not supported. Failed to call the API due to limited device capabilities. |
+| 1300002  | This window state is abnormal. Possible cause: 1. The window is not created or destroyed; 2. Internal task error; 3. The subWindow has been created and can not be created again. |
+| 1300003  | This window manager service works abnormally.                |
+| 1300004  | Unauthorized operation. Possible cause: Invalid window type. Only main windows, subwindows, and floating windows are supported. |
+
+**示例：**
+
+```ts
+// EntryAbility.ets
+import { UIAbility } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { window } from '@kit.ArkUI';
+
+export default class EntryAbility extends UIAbility {
+  // ...
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    console.info('onWindowStageCreate');
+    let windowClass: window.Window | undefined = undefined;
+    try {
+      let options : window.SubWindowOptions = {
+        title: 'title',
+        decorEnabled: true
+      };
+      let promise = windowStage.createSubWindowWithOptions('mySubWindow', options);
+      promise.then((data) => {
+        windowClass = data;
+        console.info(`Succeeded in creating the subwindow. Data: ${JSON.stringify(data)}`);
+      }).catch((err: BusinessError) => {
+        console.error(`Failed to create the subwindow. Cause code: ${err.code}, message: ${err.message}`);
+      });
+    } catch (exception) {
+      console.error(`Failed to create the subwindow. Cause code: ${exception.code}, message: ${exception.message}`);
     }
   }
 };
