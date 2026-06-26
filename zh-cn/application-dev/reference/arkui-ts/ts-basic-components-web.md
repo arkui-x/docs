@@ -3318,6 +3318,127 @@ Web布局模式的配置。
 | NONE        | 0    | Web布局跟随系统。                 | 支持        | 支持    |
 | FIT_CONTENT | 1    | Web基于页面大小的自适应网页布局。 | 支持        | 支持    |
 
+## allowWindowOpenMethod<sup>26+</sup>
+
+allowWindowOpenMethod(flag: boolean)
+
+设置网页是否可以通过JavaScript自动打开新窗口。
+
+> **说明：**
+>
+> - 该属性仅在[javaScriptAccess](#javascriptaccess)开启时生效。
+> - 该属性在[multiWindowAccess](#multiwindowaccess26)开启时打开新窗口，关闭时打开本地窗口。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名 | 类型    | 必填 | 说明                                                         |
+| ------ | ------- | ---- | ------------------------------------------------------------ |
+| flag   | boolean | 是   | true表示网页可以通过JavaScript自动打开新窗口，该属性为false时，用户行为仍可通过JavaScript自动打开新窗口，但非用户行为不能通过JavaScript自动打开新窗口。 此处的用户行为是指，在用户对Web组件进行点击等操作后，同时在5秒内请求打开新窗口（window.open）的行为。 |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+// 在同一界面有两个Web组件。在WebComponent新开窗口时，会跳转到NewWebViewComp。
+@CustomDialog
+struct NewWebViewComp {
+    controller?: CustomDialogController;
+    webviewController1: webview.WebviewController = new webview.WebviewController();
+
+    build() {
+        Column() {
+            Web({ src: "", controller: this.webviewController1 })
+                .javaScriptAccess(true)
+                .multiWindowAccess(false)
+                .onWindowExit(() => {
+                    console.info("NewWebViewComp onWindowExit");
+                    if (this.controller) {
+                        this.controller.close();
+                    }
+                })
+        }
+    }
+}
+
+@Entry
+@Component
+struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+    dialogController: CustomDialogController | null = null;
+
+    build() {
+        Column() {
+            Web({ src: $rawfile("index.html"), controller: this.controller })
+                .javaScriptAccess(true)
+                // 需要使能multiWindowAccess
+                .multiWindowAccess(true)
+                .allowWindowOpenMethod(true)
+                .onWindowNew((event) => {
+                    if (this.dialogController) {
+                        this.dialogController.close()
+                    }
+                    let popController: webview.WebviewController = new webview.WebviewController();
+                    this.dialogController = new CustomDialogController({
+                        builder: NewWebViewComp({ webviewController1: popController }),
+                        // isModal设置为false，防止新窗口被销毁而无法触发onActivateContent回调
+                        isModal: false
+                    })
+                    this.dialogController.open();
+                    // 将新窗口对应WebviewController返回给Web内核。
+                    // 若不调用event.handler.setWebController接口，会造成render进程阻塞。
+                    // 如果没有创建新窗口，调用event.handler.setWebController接口时设置成null，通知Web没有创建新窗口。
+                    event.handler.setWebController(popController);
+                })
+        }
+    }
+}
+```
+
+
+
+**HTML示例：**
+
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<body>
+<div>
+    <button type="button" onclick="delayOpenwindow(5000)">delayOpenwindow_5s</button>
+</div>
+
+<script>
+    function openwindowAll(){
+        open("https://www.example.com","_blank","height=400,width=600,top=100,left=100,scrollbars=no")
+    }
+    function delayOpenwindow(t){
+        setTimeout(openwindowAll, t);
+    }
+</script>
+</body>
+</html>
+```
+
+## multiWindowAccess<sup>26+</sup>
+
+multiWindowAccess(multiWindow: boolean)
+
+设置是否开启多窗口权限。当属性没有显式调用时，默认不开启多窗口权限。
+
+使能多窗口权限时，需要实现onWindowNew事件，示例代码参考[onWindowNew](#onwindownew26)。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**参数：**
+
+| 参数名      | 类型    | 必填 | 说明                                                         |
+| ----------- | ------- | ---- | ------------------------------------------------------------ |
+| multiWindow | boolean | 是   | 设置是否开启多窗口权限。 true表示设置开启多窗口权限，false表示设置不开启多窗口权限。 |
+
 ## 事件
 
 ###  onBeforeUnload<sup>16+</sup>
@@ -4196,4 +4317,330 @@ onOverrideUrlLoading的回调。
 | 类型    | 说明                                         |
 | ------- | -------------------------------------------- |
 | boolean | 返回true表示阻止此次加载，否则允许此次加载。 |
+
+## onWindowNew<sup>26+</sup>
+
+onWindowNew(callback: Callback\<OnWindowNewEvent>)
+
+使能multiWindowAccess情况下，通知用户新建窗口请求。
+
+若不调用[setWebController](./arkts-basic-components-web-ControllerHandler.md#setwebcontroller)接口，会直接加载用户直接构建的web。
+
+如果没有创建新窗口，调用[setWebController](./arkts-basic-components-web-ControllerHandler.md#setwebcontroller)接口时设置成null，通知Web没有创建新窗口。
+
+新窗口需避免直接覆盖在原Web组件上，且应与主页面以相同形式明确显示其URL（如地址栏）以防止用户混淆。若无法实现可信的URL可视化管理，则需考虑禁止创建新窗口。
+
+需注意：新窗口请求来源无法可靠追溯，可能由第三方iframe发起，应用需默认采取沙箱隔离、限制权限等防御性措施以确保安全。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                                              | 必填 | 说明                               |
+| -------- | ------------------------------------------------- | ---- | ---------------------------------- |
+| callback | Callback<[OnWindowNewEvent](#onwindownewevent26)> | 是   | 网页要求用户创建窗口时触发的回调。 |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+// 在同一page页有两个Web组件。在WebComponent新开窗口时，会跳转到NewWebViewComp。
+@CustomDialog
+struct NewWebViewComp {
+  controller?: CustomDialogController;
+  webviewController1: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: "www.example.com", controller: this.webviewController1 })
+        .javaScriptAccess(true)
+        .multiWindowAccess(false)
+        .onWindowExit(() => {
+          console.info("NewWebViewComp onWindowExit");
+          if (this.controller) {
+            this.controller.close();
+          }
+        })
+    }
+  }
+}
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+  dialogController: CustomDialogController | null = null;
+
+  build() {
+    Column() {
+      Web({ src: $rawfile("window.html"), controller: this.controller })
+        .javaScriptAccess(true)
+        // 需要使能multiWindowAccess
+        .multiWindowAccess(true)
+        .allowWindowOpenMethod(true)
+        .onWindowNew((event) => {
+          if (this.dialogController) {
+            this.dialogController.close();
+          }
+          let popController: webview.WebviewController = new webview.WebviewController();
+          this.dialogController = new CustomDialogController({
+            builder: NewWebViewComp({ webviewController1: popController })
+          })
+          this.dialogController.open();
+          // 将新窗口对应WebviewController返回给Web内核。
+          // 若不调用event.handler.setWebController接口，会造成render进程阻塞。
+          // 如果没有创建新窗口，调用event.handler.setWebController接口时设置成null，通知Web没有创建新窗口。
+          event.handler.setWebController(popController);
+        })
+    }
+  }
+}
+```
+
+
+
+```html
+<!-- window.html页面代码 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<a href="#" onclick="openNewWindow('https://www.example.com')">打开新页面</a>
+<script type="text/javascript">
+    function openNewWindow(url) {
+      window.open(url, 'example');
+      return false;
+    }
+</script>
+</body>
+</html>
+```
+
+## OnWindowNewEvent<sup>26+</sup>
+
+定义网页要求用户创建窗口时触发的回调。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称          | 类型                                                         | 只读 | 可选 | 说明                                        | Android平台 | iOS平台 |
+| ------------- | ------------------------------------------------------------ | ---- | ---- | ------------------------------------------- | ----------- | ------- |
+| isAlert       | boolean                                                      | 否   | 否   | true代表请求创建对话框，false代表新标签页。 | 支持        | 支持    |
+| isUserTrigger | boolean                                                      | 否   | 否   | true代表用户触发，false代表非用户触发。     | 支持        | 支持    |
+| targetUrl     | string                                                       | 否   | 否   | 目标url。                                   | 支持        | 支持    |
+| handler       | [ControllerHandler](./arkts-basic-components-web-ControllerHandler.md) | 否   | 否   | 用于设置新建窗口的WebviewController实例。   | 支持        | 支持    |
+
+## onWindowExit<sup>26+</sup>
+
+onWindowExit(callback: () => void)
+
+通知用户窗口关闭请求。和[onWindowNew](#onwindownew26)一样，从安全角度讲，应用应该确保用户可以知道他们交互的页面已关闭。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型       | 必填 | 说明                     |
+| -------- | ---------- | ---- | ------------------------ |
+| callback | () => void | 是   | 窗口请求关闭的回调函数。 |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'www.example.com', controller: this.controller })
+        .onWindowExit(() => {
+          console.info("onWindowExit...");
+        })
+    }
+  }
+}
+```
+
+## onRenderExited<sup>26+</sup>
+
+onRenderExited(callback: Callback\<OnRenderExitedEvent>)
+
+应用渲染进程异常退出时触发该回调。
+
+多个Web组件可能共享单个渲染进程，每个受影响的Web组件都会触发该回调。
+
+应用处理该回调时，可以调用绑定的webviewController相关接口来恢复页面。例如[refresh](../apis/js-apis-webview.md#refresh)、[loadUrl](../apis/js-apis-webview.md#loadurl)等。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                                                    | 必填 | 说明                 |
+| -------- | ------------------------------------------------------- | ---- | -------------------- |
+| callback | Callback<[OnRenderExitedEvent](#onrenderexitedevent26)> | 是   | 渲染过程退出时触发。 |
+
+**示例：**
+
+Android平台
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: 'chrome://crash/', controller: this.controller })
+        .onRenderExited((event) => {
+          if (event) {
+            console.info('reason:' + event.renderExitReason);
+          }
+        })
+    }
+  }
+}
+```
+
+iOS平台
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Web({ src: $rawfile('crash_oom.html'), controller: this.controller })
+        .onRenderExited((event) => {
+          if (event) {
+            console.info('reason:' + event.renderExitReason);
+          }
+        })
+    }
+  }
+}
+```
+
+```html
+<!-- crash_oom.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crash OOM Test</title>
+</head>
+<body>
+  <h2>OOM Pressure Test</h2>
+  <div>高内存占用，仅用于 onRenderExited 测试</div>
+  <div>已申请块数: <span id="chunkCount">0</span></div>
+  <div>理论占用: <span id="allocated">0 MB</span></div>
+  <div id="status">状态：初始化中...</div>
+
+  <script>
+    (function () {
+      var chunks = [];
+      var canvases = [];
+      var chunkSize = 32 * 1024 * 1024;
+      var totalBytes = 0;
+      var rounds = 0;
+      var statusNode = document.getElementById('status');
+      var allocatedNode = document.getElementById('allocated');
+      var chunkCountNode = document.getElementById('chunkCount');
+
+      function updateStatus(msg) {
+        statusNode.textContent = '状态：' + msg;
+        allocatedNode.textContent = Math.floor(totalBytes / 1024 / 1024) + ' MB';
+        chunkCountNode.textContent = chunks.length;
+      }
+
+      function allocateChunk() {
+        var block = new Uint8Array(chunkSize);
+        for (var i = 0; i < block.length; i += 4096) {
+          block[i] = (i + rounds) % 251;
+        }
+        chunks.push(block);
+        totalBytes += block.byteLength;
+      }
+
+      function allocateCanvas() {
+        var canvas = document.createElement('canvas');
+        canvas.width = 4096;
+        canvas.height = 4096;
+        var ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.fillStyle = 'rgb(' + (rounds % 255) + ',40,40)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.getImageData(0, 0, canvas.width, canvas.height);
+        }
+        canvases.push(canvas);
+      }
+
+      function pressureLoop() {
+        rounds += 1;
+        updateStatus('第 ' + rounds + ' 轮压测');
+        try {
+          allocateChunk();
+          allocateChunk();
+          if (rounds % 2 === 0) allocateCanvas();
+          setTimeout(pressureLoop, 0);
+        } catch (e) {
+          updateStatus('异常：' + e + '，继续压测');
+          setTimeout(pressureLoop, 0);
+        }
+      }
+
+      window.addEventListener('load', function () {
+        updateStatus('3 秒后开始');
+        setTimeout(pressureLoop, 3000);
+      });
+    })();
+  </script>
+</body>
+</html>
+```
+
+## OnRenderExitedEvent<sup>26+</sup>
+
+定义渲染过程退出时触发。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称             | 类型                                    | 只读 | 可选 | 说明                         |
+| ---------------- | --------------------------------------- | ---- | ---- | ---------------------------- |
+| renderExitReason | [RenderExitReason](#renderexitreason26) | 否   | 否   | 渲染进程异常退出的具体原因。 |
+
+## RenderExitReason<sup>26+</sup>
+
+onRenderExited接口返回的渲染进程退出的具体原因。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+| 名称               | 值   | 说明                             | Android平台 | iOS平台 |
+| ------------------ | ---- | -------------------------------- | ----------- | ------- |
+| ProcessCrashed     | 2    | 渲染进程崩溃退出，如段错误。     | 支持        | 不支持  |
+| ProcessExitUnknown | 4    | 其他原因，比如渲染进程孵化失败。 | 支持        | 支持    |
 
