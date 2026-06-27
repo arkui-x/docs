@@ -2522,6 +2522,121 @@ struct WebComponent {
 }
 ```
 
+### setNetworkAvailable<sup>26+</sup>
+
+setNetworkAvailable(enable: boolean): void
+
+设置JavaScript中的`window.navigator.onLine`属性。
+
+iOS无对应WKWebView原生能力，当前仅通过脚本模拟页面JavaScript读取到的`navigator.onLine`值，不改变WKWebView真实网络状态，无法保证资源加载、网络请求及online/offline事件行为与Android一致。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型    | 必填 | 说明                              |
+| ------ | ------- | ---- | --------------------------------- |
+| enable | boolean | 是   | 设置JavaScript中的`window.navigator.onLine`属性。<br>true表示设置JavaScript中的`window.navigator.onLine`属性为true，false表示设置JavaScript中的`window.navigator.onLine`属性为false。<br>默认值：true。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Webview错误码](../errorcodes/errorcode-webview.md)、[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 17100001 | Init error. The WebviewController must be associated with a Web component. |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('setNetworkAvailable')
+        .onClick(() => {
+          try {
+            this.controller.setNetworkAvailable(true);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: $rawfile('index.html'), controller: this.controller })
+    }
+  }
+}
+```
+
+加载的html文件。
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<body>
+<h1>online 属性</h1>
+<p id="demo"></p>
+<button onclick="func()">click</button>
+<script>
+    // 检测浏览器是否在线。
+    var online1 = navigator.onLine;
+    document.getElementById("demo").innerHTML = "浏览器在线：" + online1;
+
+    function func(){
+      var online2 = navigator.onLine;
+      document.getElementById("demo").innerHTML = "浏览器在线：" + online2;
+    }
+</script>
+</body>
+</html>
+```
+
+### getDefaultUserAgent<sup>26+</sup>
+
+static getDefaultUserAgent(): string
+
+获取默认用户代理。
+
+此接口只允许在UI线程调用。
+
+默认User-Agent由平台WebView内核提供，Android和iOS返回值以各平台行为为准。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**返回值：**
+
+| 类型     | 说明           |
+| ------ | ------------ |
+| string | 平台WebView默认User-Agent字符串。 |
+
+**示例：**
+
+```ts
+// EntryAbility.ets
+import { webview } from '@kit.ArkWeb';
+import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
+
+export default class EntryAbility extends UIAbility {
+  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
+    console.info("EntryAbility onCreate");
+    webview.WebviewController.initializeWebEngine();
+    let defaultUserAgent = webview.WebviewController.getDefaultUserAgent();
+    console.info("defaultUserAgent: " + defaultUserAgent);
+  }
+}
+```
+
 ## WebMessagePort<sup>11+</sup>
 
 通过WebMessagePort可以进行消息的发送以及接收。
@@ -3853,6 +3968,155 @@ struct WebComponent {
 >
 > 目前调用WebCookieManager下的方法，都需要先加载Web组件。
 
+### configCookieSync<sup>26+</sup>
+
+static configCookieSync(url: string, value: string, incognito?: boolean): void
+
+为指定url设置单个cookie的值。
+
+> **说明：**
+>
+> - configCookieSync中的url，可以指定域名的方式来使得页面内请求也附带上cookie。
+>
+> - 同步cookie的时机建议在Web组件加载之前完成。
+>
+> - value参数必须遵循Set-Cookie HTTP响应头的格式。形式为"key=value"的键值对，后面可跟随以分号分隔的cookie属性列表（例如"key=value;Max-Age=100"）。
+> 
+> - 若存在相同host、path和名称的cookie，将被新cookie替换。若设置的cookie已过期，则不会存储该cookie。如需设置多个cookie，应多次调用此方法。
+>
+> - 若通过configCookieSync进行两次或多次设置cookie，则每次设置的cookie之间会通过"; "进行分隔。
+>
+> - 如果指定的值包含"Secure"属性，则url必须使用"https://"协议。
+>
+> - 如果要覆盖HttpOnly的cookies，需要在value中指定HttpOnly属性。
+>
+> - Android不支持独立隐私Cookie Store，incognito参数按false处理。
+>
+> - iOS在iOS 11及以上版本支持incognito为true的隐私Cookie Store；iOS 10及以下版本不支持隐私Cookie Store。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                      |
+| ------ | ------ | ---- | :------------------------ |
+| url    | string | 是   | 要设置的cookie所属的url，建议使用完整的url。 |
+| value  | string | 是   | 要设置的cookie的值。      |
+| incognito    | boolean | 否   | true表示设置隐私模式下对应url的cookies，false表示设置正常非隐私模式下对应url的cookies。<br>默认值：false。<br>Android不支持独立隐私Cookie Store，incognito参数按false处理。iOS 11及以上版本支持true，iOS 10及以下版本不支持true。<br>传入undefined或null会抛出异常错误码401。|
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Webview错误码](../errorcodes/errorcode-webview.md)、[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                               |
+| -------- | ------------------------------------------------------ |
+| 17100002 | URL error. No valid cookie found for the specified URL.  |
+| 17100005 | The provided cookie value is invalid. It must follow the format specified in RFC 6265. |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('configCookieSync')
+        .onClick(() => {
+          try {
+            // configCookieSync每次仅支持设置单个cookie值。
+            webview.WebCookieManager.configCookieSync('https://www.example.com', 'a=b');
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### configCookieSync<sup>26+</sup>
+
+static configCookieSync(url: string, value: string, incognito: boolean, includeHttpOnly: boolean): void
+
+为指定url设置cookie的值。
+
+> **说明：**
+>
+> - configCookieSync中的url，可以指定域名的方式来使得页面内请求也附带上cookie。
+>
+> - 同步cookie的时机建议在Web组件加载之前完成。
+>
+> - value参数必须遵循Set-Cookie HTTP响应头的格式。形式为"key=value"的键值对，后面可跟随以分号分隔的cookie属性列表（例如"key=value;Max-Age=100"）。
+> 
+> - 若存在相同host、path和名称的cookie，将被新cookie替换。若设置的cookie已过期，则不会存储该cookie。如需设置多个cookie，应多次调用此方法。
+>
+> - 若通过configCookieSync进行两次或多次设置cookie，则每次设置的cookie之间会通过"; "进行分隔。
+>
+> - 如果指定的值包含"Secure"属性，则url必须使用"https://"协议。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                      |
+| ------ | ------ | ---- | :------------------------ |
+| url    | string | 是   | 要设置的cookie所属的url，建议使用完整的url。 |
+| value  | string | 是   | 要设置的cookie的值。      |
+| incognito    | boolean | 是   | true表示设置隐私模式下对应url的cookies，false表示设置正常非隐私模式下对应url的cookies。Android不支持独立隐私Cookie Store，incognito参数按false处理；iOS 11及以上版本支持true，iOS 10及以下版本不支持true。 |
+| includeHttpOnly    | boolean | 是   | true表示允许覆盖含有http-only的cookies，false表示不允许覆盖含有http-only的cookies。Android不支持精确控制HttpOnly Cookie覆盖，includeHttpOnly=false仍会覆盖；iOS支持该参数。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Webview错误码](../errorcodes/errorcode-webview.md)、[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                               |
+| -------- | ------------------------------------------------------ |
+| 17100002 | URL error. No valid cookie found for the specified URL.  |
+| 17100005 | The provided cookie value is invalid. It must follow the format specified in RFC 6265. |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('configCookieSync')
+        .onClick(() => {
+          try {
+            // 仅支持设置单个cookie值。
+            webview.WebCookieManager.configCookieSync('https://www.example.com', 'a=b', false, false);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
 ###  configCookie<sup>11+<sup>
 
 static configCookie(url: string, value: string, callback: AsyncCallback\<void>): void
@@ -3961,6 +4225,150 @@ struct WebComponent {
           }
         })
       Web({ src: 'https://www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### configCookie<sup>26+</sup>
+
+static configCookie(url: string, value: string, incognito: boolean, includeHttpOnly: boolean): Promise\<void>
+
+指定url设置单个cookie的值。使用Promise异步回调。
+
+Android不支持独立隐私Cookie Store，incognito参数按false处理；Android不支持精确控制HttpOnly Cookie覆盖，includeHttpOnly=false仍会覆盖。iOS在iOS 11及以上版本支持incognito为true的隐私Cookie Store和includeHttpOnly控制；iOS 10及以下版本不支持隐私Cookie Store。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                      |
+| ------ | ------ | ---- | :------------------------ |
+| url    | string | 是   | 要设置的cookie所属的url，建议使用完整的url。 |
+| value  | string | 是   | 要设置的cookie的值。      |
+| incognito    | boolean | 是   | true表示设置隐私模式下对应url的cookies，false表示设置正常非隐私模式下对应url的cookies。Android不支持独立隐私Cookie Store，incognito参数按false处理；iOS 11及以上版本支持true，iOS 10及以下版本不支持true。 |
+| includeHttpOnly    | boolean | 是   | true表示允许覆盖含有http-only的cookies，false表示不允许覆盖含有http-only的cookies。Android不支持精确控制HttpOnly Cookie覆盖，includeHttpOnly=false仍会覆盖；iOS支持该参数。 |
+
+**返回值：**
+
+| 类型   | 说明                      |
+| ------ | ------------------------- |
+| Promise\<void> | Promise实例，用于获取指定url设置单个cookie值是否成功。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Webview错误码](../errorcodes/errorcode-webview.md)、[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                |
+| -------- | ------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. |
+| 17100002 | URL error. No valid cookie found for the specified URL. |
+| 17100005 | The provided cookie value is invalid. It must follow the format specified in RFC 6265. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('configCookie')
+        .onClick(() => {
+          try {
+            webview.WebCookieManager.configCookie('https://www.example.com', 'a=b', false, false)
+              .then(() => {
+                console.info('configCookie success!');
+              })
+              .catch((error: BusinessError) => {
+                console.info('error: ' + JSON.stringify(error));
+              })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### fetchCookieSync<sup>26+</sup>
+
+static fetchCookieSync(url: string, incognito?: boolean): string
+
+获取指定url对应cookie的值。
+
+> **说明：**
+>
+> - 系统会自动清理过期的cookie，对于同名key的数据，新数据将会覆盖前一个数据。
+> 
+> - 为了获取可正常使用的cookie值，fetchCookieSync需传入完整链接。
+> 
+> - fetchCookieSync用于获取所有的cookie值，每条cookie值之间会通过"; "进行分隔，但无法单独获取某一条特定的cookie值。
+>
+> - Android不支持独立隐私Cookie Store，incognito参数按false处理。
+>
+> - iOS在iOS 11及以上版本支持incognito为true的隐私Cookie Store；iOS 10及以下版本不支持隐私Cookie Store。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 说明                      |
+| ------ | ------ | ---- | :------------------------ |
+| url    | string | 是   | 要获取的cookie所属的url，建议使用完整的url。 |
+| incognito    | boolean | 否   | true表示获取隐私模式下webview的内存cookies，false表示正常非隐私模式下的cookies。<br>默认值：false。<br>Android不支持独立隐私Cookie Store，incognito参数按false处理。iOS 11及以上版本支持true，iOS 10及以下版本不支持true。<br>传入undefined或null会抛出异常错误码401。 |
+
+**返回值：**
+
+| 类型   | 说明                      |
+| ------ | ------------------------- |
+| string | 指定url对应的cookie的值。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[Webview错误码](../errorcodes/errorcode-webview.md)、[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                               |
+| -------- | ------------------------------------------------------ |
+| 17100002 | URL error. No valid cookie found for the specified URL. |
+| 401 | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('fetchCookieSync')
+        .onClick(() => {
+          try {
+            let value = webview.WebCookieManager.fetchCookieSync('https://www.example.com');
+            console.info("fetchCookieSync cookie = " + value);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
     }
   }
 }
@@ -4080,6 +4488,41 @@ struct WebComponent {
             let e:business_error.BusinessError = error as business_error.BusinessError;
             console.error(`ErrorCode: ${e.code},  Message: ${e.message}`);
           }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### clearSessionCookieSync<sup>26+</sup>
+
+static clearSessionCookieSync(): void
+
+清除所有会话cookie。
+
+Android平台会在后台异步执行清理。接口立即返回，不会等待清理完成。如果在极短时间内查询 Cookie 是否存在，可能会因为清理尚未完成而得到旧的结果。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('clearSessionCookieSync')
+        .onClick(() => {
+          webview.WebCookieManager.clearSessionCookieSync();
         })
       Web({ src: 'www.example.com', controller: this.controller })
     }
@@ -4272,6 +4715,275 @@ struct WebComponent {
           } catch (error) {
             console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
           }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### saveCookieAsync<sup>26+</sup>
+
+static saveCookieAsync(callback: AsyncCallback\<void>): void
+
+将当前可通过fetchCookie获取到的所有需要持久化的cookie异步保存到磁盘中。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
+
+**参数：**
+
+| 参数名   | 类型                   | 必填 | 说明                                               |
+| -------- | ---------------------- | ---- | :------------------------------------------------- |
+| callback | AsyncCallback\<void> | 是   | callback回调，用于获取cookie是否成功保存。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                |
+| -------- | ------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('saveCookieAsync')
+        .onClick(() => {
+          try {
+            webview.WebCookieManager.saveCookieAsync((error) => {
+              if (error) {
+                console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+              }
+            })
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### saveCookieAsync<sup>26+</sup>
+
+static saveCookieAsync(): Promise\<void>
+
+将当前可通过fetchCookie获取到的所有需要持久化的cookie以Promise方法异步保存到磁盘中。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
+
+**返回值：**
+
+| 类型             | 说明                                      |
+| ---------------- | ----------------------------------------- |
+| Promise\<void> | Promise实例，用于获取cookie是否成功保存。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                |
+| -------- | ------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('saveCookieAsync')
+        .onClick(() => {
+          try {
+            webview.WebCookieManager.saveCookieAsync()
+              .then(() => {
+                console.info("saveCookieAsyncCallback success!");
+              })
+              .catch((error: BusinessError) => {
+                console.error("error: " + error);
+              });
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### putAcceptCookieEnabled<sup>26+</sup>
+
+static putAcceptCookieEnabled(accept: boolean): void
+
+设置WebCookieManager实例是否拥有发送和接收cookie的权限。
+
+iOS仅iOS 17及以上版本支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型    | 必填 | 说明                                 |
+| ------ | ------- | ---- | :----------------------------------- |
+| accept | boolean | 是   | 设置是否拥有发送和接收cookie的权限，默认为true，表示拥有发送和接收cookie的权限。false表示没有发送和接收cookie的权限。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                |
+| -------- | ------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('putAcceptCookieEnabled')
+        .onClick(() => {
+          try {
+            webview.WebCookieManager.putAcceptCookieEnabled(false);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### putAcceptThirdPartyCookieEnabled<sup>26+</sup>
+
+static putAcceptThirdPartyCookieEnabled(accept: boolean): void
+
+设置WebCookieManager实例是否拥有发送和接收第三方cookie的权限。
+
+iOS不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android
+
+**参数：**
+
+| 参数名 | 类型    | 必填 | 说明                                       |
+| ------ | ------- | ---- | :----------------------------------------- |
+| accept | boolean | 是   | 是否允许设置、获取第三方cookie。<br>true表示允许设置、获取第三方cookie，false表示不允许设置、获取第三方cookie。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息                                                |
+| -------- | ------------------------------------------------------ |
+| 401      | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types. 3.Parameter verification failed. |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('putAcceptThirdPartyCookieEnabled')
+        .onClick(() => {
+          try {
+            webview.WebCookieManager.putAcceptThirdPartyCookieEnabled(false);
+          } catch (error) {
+            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+          }
+        })
+      Web({ src: 'www.example.com', controller: this.controller })
+    }
+  }
+}
+```
+
+### clearAllCookiesSync<sup>26+</sup>
+
+static clearAllCookiesSync(incognito?: boolean): void
+
+清除所有cookie。
+
+Android会在后台异步执行清理。接口立即返回，不会等待清理完成。如果在极短时间内查询 Cookie 是否存在，可能会因为清理尚未完成而得到旧的结果。
+
+Android在incognito为true时按会话Cookie清理处理，无法精确清理指定隐私WebView实例的Cookie；iOS在iOS 11及以上版本支持incognito为true的隐私Cookie Store清理，iOS 10及以下版本不支持。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名 | 类型    | 必填 | 说明                                       |
+| ------ | ------- | ---- | :----------------------------------------- |
+| incognito    | boolean | 否   | true表示清除隐私模式下Webview的所有内存cookies，false表示清除正常非隐私模式下的持久化cookies。<br>默认值：false。<br>Android在true时按会话Cookie清理处理，无法精确清理指定隐私WebView实例的Cookie。iOS 11及以上版本支持true，iOS 10及以下版本不支持true。<br>传入undefined或null时不清除cookies。 |
+
+**示例：**
+
+```ts
+// xxx.ets
+import { webview } from '@kit.ArkWeb';
+
+@Entry
+@Component
+struct WebComponent {
+  controller: webview.WebviewController = new webview.WebviewController();
+
+  build() {
+    Column() {
+      Button('clearAllCookiesSync')
+        .onClick(() => {
+          webview.WebCookieManager.clearAllCookiesSync();
         })
       Web({ src: 'www.example.com', controller: this.controller })
     }
