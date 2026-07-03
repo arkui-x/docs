@@ -144,7 +144,7 @@ entry/
       "name": "harmonyOS",
       "source": {
         "pages": [
-          "harmonyOS_util/harmonyPage"     // harmonyOS product为hormonyOS使用的页面
+          "harmonyOS_util/harmonyPage"     // harmonyOS product为harmonyOS使用的页面
         ],
         "sourceRoots": [
           "./src/main"

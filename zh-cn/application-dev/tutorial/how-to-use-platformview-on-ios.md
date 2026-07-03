@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_END
 // 当前为空实现，可用于释放地图视图或其它资源
 - (void)onDispose {
     // 示例：如果需要清理，可在此添加代码
-  	webView = nil;
+   	_mapView = nil;
     return;
 }
 
@@ -159,7 +159,7 @@ NS_ASSUME_NONNULL_END
  初始化工厂实例
  @return 初始化后的工厂实例
  */
-- (instancetype)initWithFrame:{
+- (instancetype)initWithFrame {
     return self;
 }
 
@@ -298,7 +298,7 @@ NS_ASSUME_NONNULL_END
     
     // 创建实例名称
     // 格式：资源包名称 + "entry" + "EntryAbility"
-    NSString *instanceName = [NSString stringWithFormat:@"%@%@", BUNDLE_NAME, @"entry", @"EntryAbility"];
+    NSString *instanceName = [NSString stringWithFormat:@"%@%@%@", BUNDLE_NAME, @"entry", @"EntryAbility"];
     
     // 创建EntryEntryAbilityViewController实例
     EntryEntryAbilityViewController *mainView = [[EntryEntryAbilityViewController alloc] initWithInstanceName:instanceName];
