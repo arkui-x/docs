@@ -25,6 +25,17 @@ import display from '@ohos.display';
 | PORTRAIT_INVERTED | 2 | 表示设备当前以反向竖屏方式显示。|
 | LANDSCAPE_INVERTED | 3 | 表示设备当前以反向横屏方式显示。|
 
+## FoldCreaseRegion<sup>26+</sup>
+
+折叠设备屏幕的折痕区域。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称        | 类型                  | 只读 | 可选 | 说明                             | Android | iOS    |
+| ----------- | --------------------- | ---- | ---- | -------------------------------- | ------- | ------ |
+| displayId   | number                | 是   | 否   | 屏幕ID，用于识别折痕所在的屏幕。 | 支持    | 不支持 |
+| creaseRects | Array<[Rect](#rect9)> | 是   | 否   | 折痕区域。                       | 支持    | 不支持 |
+
 ## Rect<sup>9+</sup>
 
 矩形区域。
@@ -100,9 +111,90 @@ try {
 | id | number | 是 | 否 | 显示设备的id号，该参数应为整数。                                                                                             |
 | width | number | 是 | 否 | 显示设备的宽度，单位为像素，该参数应为整数。                                                                                        |
 | height | number | 是 | 否 | 显示设备的高度，单位为像素，该参数应为整数。                                                                                        |
+| rotation<sup>26+</sup> | number | 是 | 否 | 显示设备的屏幕顺时针旋转角度。<br>值为0时，表示显示设备屏幕顺时针旋转为0°，表示显示设备的标准显示方向；<br/>值为1时，表示显示设备屏幕顺时针旋转为90°；<br/>值为2时，表示显示设备屏幕顺时针旋转为180°；<br/>值为3时，表示显示设备屏幕顺时针旋转为270°。 |
 | orientation<sup>10+</sup> | [Orientation](#orientation10) | 是 | 否 | 表示屏幕当前显示的方向。                                                                                                  |
 | xDPI<sup>20+</sup> | number | 是 | 否 | x方向中每英寸屏幕的确切物理像素值，该参数为浮点数。                                                                                                  |
 | yDPI<sup>20+</sup> | number | 是 | 否 | y方向中每英寸屏幕的确切物理像素值，该参数为浮点数。                                                                                                  |
+
+## display.getAllDisplays<sup>26+</sup>
+
+getAllDisplays(callback: AsyncCallback<Array<Display>>): void
+
+获取当前所有的Display对象，使用callback异步回调。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                                      | 必填 | 说明                                  |
+| -------- | ----------------------------------------- | ---- | ------------------------------------- |
+| callback | AsyncCallback<Array<[Display](#display)>> | 是   | 回调函数。返回当前所有的Display对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[屏幕错误码](../errorcodes/errorcode-display.md)。
+
+| 错误码ID | 错误信息                   |
+| -------- | -------------------------- |
+| 1400001  | Invalid display or screen. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let displayClass: Array<display.Display> = [];
+display.getAllDisplays((err: BusinessError, data: Array<display.Display>) => {
+  displayClass = data;
+  const errCode: number = err.code;
+  if (errCode) {
+    console.error(`Failed to obtain all the display objects. Code: ${err.code}, message: ${err.message}`);
+    return;
+  }
+  console.info(`Succeeded in obtaining all the display objects. Data: ${JSON.stringify(data)}`);
+});
+```
+
+## display.getAllDisplays<sup>26+</sup>
+
+getAllDisplays(): Promise<Array<Display>>
+
+获取当前所有的Display对象，使用Promise异步回调。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**支持平台：** Android、iOS
+
+**返回值：**
+
+| 类型                                | 说明                                     |
+| ----------------------------------- | ---------------------------------------- |
+| Promise<Array<[Display](#display)>> | Promise对象。返回当前所有的Display对象。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[屏幕错误码](../errorcodes/errorcode-display.md)。
+
+| 错误码ID | 错误信息                   |
+| -------- | -------------------------- |
+| 1400001  | Invalid display or screen. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let displayClass: Array<display.Display> =[];
+let promise: Promise<Array<display.Display>> = display.getAllDisplays();
+promise.then((data: Array<display.Display>) => {
+  displayClass = data;
+  console.info(`Succeeded in obtaining all the display objects. Data:  ${JSON.stringify(data)}`);
+}).catch((err: BusinessError) => {
+  console.error(`Failed to obtain all the display objects. Code: ${err.code}, message: ${err.message}`);
+});
+```
 
 ## display.on('add'|'remove'|'change')<sup>20+</sup>
 
@@ -338,3 +430,48 @@ let callback: Callback<display.FoldStatus> = (data: display.FoldStatus) => {
 // 关闭传入的callback监听
 display.off('foldStatusChange', callback);
 ```
+
+## getLiveCreaseRegion<sup>26+</sup>
+
+getLiveCreaseRegion(): FoldCreaseRegion
+
+获取当前显示模式下的实时折痕区域。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**支持平台：** Android
+
+**接口依赖：** 修改.arkui-x\android目录相关文件配置:
+<br/>- gradle.properties中android.useAndroidX=true
+<br/>- APP目录下build.gradle中增加androidx库依赖
+<br/>-- implementation "androidx.window:window-java:1.0.0"
+<br/>-- implementation "androidx.core:core:1.8.0"
+
+**返回值：**
+
+| 类型                                    | 说明                                     |
+| --------------------------------------- | ---------------------------------------- |
+| [FoldCreaseRegion](#foldcreaseregion26) | 返回折叠设备在当前显示模式下的折痕区域。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[屏幕错误码](../errorcodes/errorcode-display.md)。
+
+| 错误码ID | 错误信息                                                     |
+| -------- | ------------------------------------------------------------ |
+| 801      | Capability not supported. Failed to call the API due to limited device capabilities. |
+| 1400003  | This display manager service works abnormally.               |
+
+**示例：**
+
+```ts
+let displayClass: display.Display | null = null;
+try {
+  displayClass = display.getDefaultDisplaySync();
+  let data: display.FoldCreaseRegion = displayClass.getLiveCreaseRegion();
+  console.info(`Succeeded in getting the live crease region. Data: ${JSON.stringify(data)}`);
+} catch (exception) {
+  console.error(`Failed to get the live crease region. Code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
