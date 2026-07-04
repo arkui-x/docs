@@ -29,6 +29,8 @@ export default class EntryAbility extends UIAbility {
 }
  ```
 
+对于只支持沙箱路径作为入参的接口，可以使用构造fileUri对象并获取其沙箱路径的属性的方式将URI转换为沙箱路径，然后使用文件接口。URI定义及其转换方式请参考：[文件URI](./js-apis-file-fileuri.md)。
+
 ## fs.stat
 
 stat(file: string | number): Promise&lt;Stat&gt;
@@ -1057,7 +1059,7 @@ mkdirSync(path: string, recursion: boolean): void
 
 open(path: string, mode?: number): Promise&lt;File&gt;
 
-打开文件，使用Promise异步返回。目前仅支持打开文件的应用沙箱路径。
+打开文件，使用Promise异步返回。目前支持应用沙箱路径和file://协议格式的URI。
 
 **支持平台**：Android、iOS
 
@@ -1067,7 +1069,7 @@ open(path: string, mode?: number): Promise&lt;File&gt;
 
 | 参数名 | 类型   | 必填 | 说明                                                         |
 | ------ | ------ | ---- | ------------------------------------------------------------ |
-| path   | string | 是   | 文件的应用沙箱路径。                                   |
+| path   | string | 是   | 文件的应用沙箱路径和file://协议格式的URI。 |
 | mode  | number | 否   | 打开文件的[选项](#openmode)，必须指定如下选项中的一个，默认以只读方式打开：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读打开。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写打开。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写打开。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果文件存在且以只写或读写的方式打开文件，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到文件末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式打开文件。 |
 
 **返回值：**
@@ -1097,7 +1099,7 @@ open(path: string, mode: number, callback: AsyncCallback&lt;File&gt;): void
 
 打开文件，可设置打开文件的选项。使用callback异步回调。
 
-目前仅支持打开文件的应用沙箱路径。
+目前支持应用沙箱路径和file://协议格式的URI。
 
 **支持平台**：Android、iOS
 
@@ -1131,7 +1133,7 @@ open(path: string, mode: number, callback: AsyncCallback&lt;File&gt;): void
 
 open(path: string, callback: AsyncCallback&lt;File&gt;): void
 
-打开文件，使用callback异步回调。目前仅支持打开文件的应用沙箱路径。
+打开文件，使用callback异步回调。目前支持应用沙箱路径和file://协议格式的URI。
 
 **支持平台**：Android、iOS
 
@@ -2480,11 +2482,7 @@ fdatasyncSync(fd: number): void
 
 ## fs.listFile
 
-listFile(path: string, options?: {
-    recursion?: boolean;
-    listNum?: number;
-    filter?: Filter;
-}): Promise<string[]>
+listFile(path: string, options?: ListFileOptions): Promise&lt;string[]&gt;
 
 列出文件夹下所有文件名，支持递归列出所有文件名（包含子目录下），支持文件过滤，使用Promise异步返回。
 
@@ -2497,15 +2495,7 @@ listFile(path: string, options?: {
   | 参数名    | 类型     | 必填   | 说明                          |
   | ------ | ------ | ---- | --------------------------- |
   | path | string | 是    | 文件夹的应用沙箱路径。 |
-  | options | Object | 否    | 文件过滤选项。默认不进行过滤。 |
-
-**options参数说明：**
-
-  | 参数名    | 类型     | 必填   | 说明                          |
-  | ------ | ------ | ---- | --------------------------- |
-  | recursion | boolean | 否    | 是否递归子目录下文件名，默认为false。 |
-  | listNum | number | 否    | 列出文件名数量。当设置0时，列出所有文件，默认为0。 |
-  | filter | [Filter](#filter) | 否    | 文件过滤选项。当前仅支持后缀名匹配、文件名模糊查询、文件大小过滤、最近修改时间过滤。 |
+  | options | [ListFileOptions](#listfileoptions) | 否 | 文件过滤选项。默认不进行过滤。 |
 
 **返回值：**
 
@@ -2520,14 +2510,16 @@ listFile(path: string, options?: {
 **示例：**
 
   ```js
-  let options = {
-    "recursion": false,
-    "listNum": 0,
-    "filter": {
-      "suffix": [".png", ".jpg", ".jpeg"],
-      "displayName": ["%abc", "efg%"],
-      "fileSizeOver": 1024,
-      "lastModifiedAfter": new Date().getTime(),
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { ListFileOptions } from '@kit.CoreFileKit';
+
+  let options: ListFileOptions = {
+    recursion: false,
+    listNum: 0,
+    filter: {
+      suffix: [".png", ".jpg", ".jpeg"],
+      displayName: ["*abc", "efg*"],
+      fileSizeOver: 1024
     }
   };
   fs.listFile(pathDir, options).then((filenames) => {
@@ -2535,18 +2527,14 @@ listFile(path: string, options?: {
     for (let i = 0; i < filenames.length; i++) {
       console.info("fileName: %s", filenames[i]);
     }
-  }).catch((err) => {
+  }).catch((err: BusinessError) => {
       console.info("list file failed with error message: " + err.message + ", error code: " + err.code);
   });
   ```
 
 ## fs.listFile
 
-listFile(path: string, options?: {
-    recursion?: boolean;
-    listNum?: number;
-    filter?: Filter;
-}, callback: AsyncCallback<string[]>): void
+listFile(path: string, options: ListFileOptions, callback: AsyncCallback&lt;string[]&gt;): void
 
 列出文件夹下所有文件名，支持递归列出所有文件名（包含子目录下），支持文件过滤，使用Callback异步回调。
 
@@ -2559,16 +2547,8 @@ listFile(path: string, options?: {
   | 参数名    | 类型     | 必填   | 说明                          |
   | ------ | ------ | ---- | --------------------------- |
   | path | string | 是    | 文件夹的应用沙箱路径。 |
-  | options | Object | 否    | 文件过滤选项。默认不进行过滤。 |
+  | options | [ListFileOptions](#listfileoptions) | 是 | 文件过滤选项。 |
   | callback | AsyncCallback&lt;string[]&gt; | 是    | 异步列出文件名数组之后的回调。              |
-
-**options参数说明：**
-
-  | 参数名    | 类型     | 必填   | 说明                          |
-  | ------ | ------ | ---- | --------------------------- |
-  | recursion | boolean | 否    | 是否递归子目录下文件名，默认为false。 |
-  | listNum | number | 否    | 列出文件名数量。当设置0时，列出所有文件，默认为0。 |
-  | filter | [Filter](#filter) | 否    | 文件过滤选项。当前仅支持后缀名匹配、文件名模糊查询、文件大小过滤、最近修改时间过滤。 |
 
 **错误码：**
 
@@ -2577,17 +2557,20 @@ listFile(path: string, options?: {
 **示例：**
 
   ```js
-  let options = {
-    "recursion": false,
-    "listNum": 0,
-    "filter": {
-      "suffix": [".png", ".jpg", ".jpeg"],
-      "displayName": ["%abc", "efg%"],
-      "fileSizeOver": 1024,
-      "lastModifiedAfter": new Date().getTime(),
+  import { BusinessError } from '@kit.BasicServicesKit';
+  import { ListFileOptions } from '@kit.CoreFileKit';
+
+  let options: ListFileOptions = {
+    recursion: false,
+    listNum: 0,
+    filter: {
+      suffix: [".png", ".jpg", ".jpeg"],
+      displayName: ["%abc", "efg%"],
+      fileSizeOver: 1024,
+      lastModifiedAfter: new Date().getTime(),
     }
   };
-  fs.listFile(pathDir, options, (err, filenames) => {
+  fs.listFile(pathDir, options, (err: BusinessError, filenames: Array<string>) => {
     if (err) {
       console.info("list file failed with error message: " + err.message + ", error code: " + err.code);
     } else {
@@ -2601,11 +2584,7 @@ listFile(path: string, options?: {
 
 ## fs.listFileSync
 
-listFileSync(path: string, options?: {
-    recursion?: boolean;
-    listNum?: number;
-    filter?: Filter;
-}): string[]
+listFileSync(path: string, options?: ListFileOptions): string[]
 
 以同步方式列出文件夹下所有文件名，支持递归列出所有文件名（包含子目录下），支持文件过滤。
 
@@ -2618,15 +2597,7 @@ listFileSync(path: string, options?: {
   | 参数名    | 类型     | 必填   | 说明                          |
   | ------ | ------ | ---- | --------------------------- |
   | path | string | 是    | 文件夹的应用沙箱路径。 |
-  | options | Object | 否    | 文件过滤选项。默认不进行过滤。 |
-
-**options参数说明：**
-
-  | 参数名    | 类型     | 必填   | 说明                          |
-  | ------ | ------ | ---- | --------------------------- |
-  | recursion | boolean | 否    | 是否递归子目录下文件名，默认为false。 |
-  | listNum | number | 否    | 列出文件名数量。当设置0时，列出所有文件，默认为0。 |
-  | filter | [Filter](#filter) | 否    | 文件过滤选项。当前仅支持后缀名匹配、文件名模糊查询、文件大小过滤、最近修改时间过滤。 |
+  | options | [ListFileOptions](#listfileoptions) | 否 | 文件过滤选项。默认不进行过滤。 |
 
 **返回值：**
 
@@ -2641,14 +2612,16 @@ listFileSync(path: string, options?: {
 **示例：**
 
   ```js
-  let options = {
-    "recursion": false,
-    "listNum": 0,
-    "filter": {
-      "suffix": [".png", ".jpg", ".jpeg"],
-      "displayName": ["%abc", "efg%"],
-      "fileSizeOver": 1024,
-      "lastModifiedAfter": new Date().getTime(),
+  import { ListFileOptions } from '@kit.CoreFileKit';
+
+  let options: ListFileOptions = {
+    recursion: false,
+    listNum: 0,
+    filter: {
+      suffix: [".png", ".jpg", ".jpeg"],
+      displayName: ["%abc", "efg%"],
+      fileSizeOver: 1024,
+      lastModifiedAfter: new Date().getTime(),
     }
   };
   let filenames = fs.listFileSync(pathDir, options);
@@ -4817,6 +4790,8 @@ readSync(buffer: ArrayBuffer, options?: ReadOptions): number
 | 名称   | 类型   | 可读   | 可写   | 说明      |
 | ---- | ------ | ---- | ---- | ------- |
 | fd | number | 是    | 否    | 打开的文件描述符。 |
+| path | string | 是 | 否 | 文件路径。 |
+| name | string | 是 | 否 | 文件名。 |
 
 ### getParent<sup>20+</sup>
 
@@ -5569,3 +5544,16 @@ close(): void
 | ----------- | --------------- | ------------------ | ------------------ |
 | start   | number     | 否 | 表示期望写入文件的位置，单位为字节。可选，默认文件起始位置。           |
 | mode     | number     | 否 | 创建文件可写流的[选项](#openmode)，必须指定如下选项中的一个，默认只写方式创建：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果文件存在且文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到文件末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式打开文件。 |
+
+## ListFileOptions
+
+可选项类型，支持listFile接口使用。
+
+**系统能力**：SystemCapability.FileManagement.File.FileIO
+
+| 名称 | 类型 | 必选 | 说明 |
+| ---- | ---- | ---- | ---- |
+| recursion | boolean | 否 | 是否递归子目录下文件名。可选，默认为false。当recursion为false时，返回当前目录下满足过滤要求的文件名及目录名。当recursion为true时，返回此目录下所有满足过滤要求的文件的相对路径（以“/”开头）。 |
+| listNum | number | 否 | 列出文件名数量。可选，当设置0时，列出所有文件，默认为0。 |
+| filter | [Filter](#filter) | 否 | 文件过滤配置项。 可选，设置过滤条件。 |
+
