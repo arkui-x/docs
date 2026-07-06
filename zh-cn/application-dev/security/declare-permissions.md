@@ -31,7 +31,7 @@
 ```
 
 #### Android:
-在在工程根目录下.arkui-x/android/app/src/main/AndroidManifest.xml的uses-permission字段中加入指定权限。
+在工程根目录下.arkui-x/android/app/src/main/AndroidManifest.xml的uses-permission字段中加入指定权限。
 
 示例如下：
 

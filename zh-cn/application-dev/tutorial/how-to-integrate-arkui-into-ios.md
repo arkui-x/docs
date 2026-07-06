@@ -113,8 +113,8 @@ ArkUI-X编译产物生成后，自动拷贝到iOS应用工程arkui-x目录下。
         ├── entry
         |   ├── ets
         |   |   └── modules.abc
-        |   ├── resouces.index
-        |   ├── resouces
+        |   ├── resources.index
+        |   ├── resources
         |   └── module.json
         └── systemres
 ```

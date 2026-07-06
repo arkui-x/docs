@@ -160,7 +160,7 @@
 }
 
 - (NSObject<IPlatformView>*) getPlatformView:(NSString*) platformViewId {
-    NSLog(@"[PlatformViewUI] getPlatfformView");
+    NSLog(@"[PlatformViewUI] getPlatformView");
     if ([platformViewId isEqualToString:@"WebView"]) {
         NSObject<IPlatformView> * view = [[MyWebview alloc] initWithFrame:nil];
         return view;

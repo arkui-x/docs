@@ -20,7 +20,7 @@ public void onRegistry(PluginContext pluginContext);
 
 | Name          | 类型          | 必填 | 描述               |
 | ------------- | ------------- | ---- | ------------------ |
-| PluginContext | pluginContext | 是   | 插件所需的上下文。 |
+| pluginContext | PluginContext | 是   | 插件所需的上下文。 |
 
 关于参数的详细说明参考[PluginContext](#plugincontext)。
 
@@ -46,7 +46,7 @@ public void onUnRegistry(PluginContext pluginContext);
 
 | Name          | 类型          | 必填 | 描述               |
 | ------------- | ------------- | ---- | ------------------ |
-| PluginContext | pluginContext | 是   | 插件所需的上下文。 |
+| pluginContext | PluginContext | 是   | 插件所需的上下文。 |
 
 关于参数的详细说明参考[PluginContext](#plugincontext)。
 

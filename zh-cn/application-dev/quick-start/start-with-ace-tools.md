@@ -67,7 +67,7 @@ ohos@user Desktop % ace create demo
 ? Enter the project name(demo): # 输入工程名称，不输入默认为文件夹名称
 ? Enter the bundleName (com.example.demo):  # 输入包名，不输入默认为com.example.工程名
 ? Enter the runtimeOS (1: OpenHarmony, 2: HarmonyOS): 1 # 输入RuntimeOS系统
-? Please select the Complie SDk (1: 10, 2: 11, 3: 12): 2 # 输入编译SDK版本
+? Please select the Compile SDK (1: 10, 2: 11, 3: 12): 2 # 输入编译SDK版本
 Signing iOS app for device deployment using developer identity: "Apple Development: xxxxx"
 
 Project created. Target directory:  ${当前目录}/demo.

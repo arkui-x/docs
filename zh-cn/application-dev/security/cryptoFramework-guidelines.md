@@ -38,7 +38,7 @@
 | AsyKeyGenerator          | convertKey(pubKey : DataBlob, priKey : DataBlob, callback : AsyncCallback\<KeyPair>) : void | 使用callback方式，根据指定的公钥和私钥二进制数据生成KeyPair对象<br/>（允许公钥/私钥为null，即只传入单一公钥或私钥，生成只携带公钥或私钥的KeyPair对象） |
 | AsyKeyGenerator          | convertKey(pubKey : DataBlob, priKey : DataBlob) : Promise\<KeyPair> | 使用Promise方式，根据指定的公钥和私钥二进制数据生成KeyPair对象<br/>（允许公钥/私钥为null，即只传入单一公钥或私钥，生成只携带公钥或私钥的KeyPair对象） |
 | SymKeyGenerator         | convertKey(key : DataBlob, callback : AsyncCallback\<SymKey>) : void| 使用callback方式，根据指定的二进制数据，生成对称密钥对象SymKey |
-| SymKeyGenerator         |convertKey(pubKey : DataBlob, priKey : DataBlob) : Promise\<KeyPair>| 使用Promise方式，根据指定的二进制数据，生成对称密钥对象SymKey |
+| SymKeyGenerator         |convertKey(key : DataBlob) : Promise\<SymKey>| 使用Promise方式，根据指定的二进制数据，生成对称密钥对象SymKey |
 | Key | getEncoded() : DataBlob;  | 获取Key密钥对象的二进制数据（Key的子类实例包括对称密钥SymKey、公钥PubKey、私钥PriKey） |
 
 ### 随机生成RSA密钥对，并获得二进制数据
@@ -594,6 +594,10 @@ function rsaUsePubKeySpecGetCallback() {
   let rsaPubKeySpec = genRsa2048PubKeySpec();
   let rsaGeneratorSpec = cryptoFramework.createAsyKeyGeneratorBySpec(rsaPubKeySpec);
   rsaGeneratorSpec.generatePubKey((error, key) => {
+    if (error) {
+      console.error("generate pubKey error" + "error code: " + error.code + "error message" + error.message);
+      return;
+    }
     let pubKey = key;
     let nBN = pubKey.getAsyKeySpec(cryptoFramework.AsyKeySpecItem.RSA_N_BN);
     let eBN = pubKey.getAsyKeySpec(cryptoFramework.AsyKeySpecItem.RSA_PK_BN);
@@ -601,9 +605,6 @@ function rsaUsePubKeySpecGetCallback() {
       AlertDialog.show({ message: "error pub key big number" });
     } else {
       console.info("n, e in the pubKey are same as the spec.");
-    }
-    if (error) {
-      console.error("generate pubKey error" + "error code: " + error.code + "error message" + error.message);
     }
   });
 }
@@ -1150,10 +1151,10 @@ function decryptMessageCallback() {
           decoder.doFinal(cipherData, (err, data) => {
             // Check whether the decrypted data is consistent with the original data.
             if (input.data.toString() === data.data.toString()) {
-              AlertDialog.show({ message: "decrype success" });
+              AlertDialog.show({ message: "decrypt success" });
               return;
             }
-            AlertDialog.show({ message: "decrype fail" });
+            AlertDialog.show({ message: "decrypt fail" });
           });
         });
       });
