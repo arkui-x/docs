@@ -384,6 +384,22 @@ class EntryAbility extends UIAbility {
 | kdfAlgo | [KdfAlgo](#kdfalgo14) | 否 | 指定数据库加解密使用的PBKDF2算法。如不指定，默认使用和HMAC算法相等的算法。 |
 | cryptoPageSize | number | 否 | 整数类型，指定数据库加解密使用的页大小。如不指定，默认值为1024字节。<br/>用户指定的页大小应为1024到65536范围内的整数，并且为2<sup>n</sup>。若指定值非整数，则向下取整。 |
 
+## ChangeInfo<sup>26+</sup>
+
+记录数据库数据变更的详细信息。
+
+**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
+
+**支持平台：** Android、iOS
+
+| 名称     | 类型                               | 只读 | 可选  | 说明                                                         | Android平台                                                | iOS平台                                                    |
+| -------- | ---------------------------------- | ---- | ---- |------------------------------------------------------------ |------------------------------------------------------------ |------------------------------------------------------------ |
+| table<sup>26+</sup>    | string                             | 否   |   否   | 表示发生变化的表的名称。                                     | 支持                                   | 支持                                   |
+| type<sup>26+</sup>     | [ChangeType](#changetype26)        | 否   |   否   | 表示发生变化的数据的类型，数据或者资产附件发生变化。         | 支持       | 支持       |
+| inserted<sup>26+</sup> | Array\<string\> \| Array\<number\> | 否   |   否   | 记录插入数据的位置，如果该表的主键是string类型，该值是主键的值，否则该值表示插入数据的行号。 | 支持 | 支持 |
+| updated<sup>26+</sup>  | Array\<string\> \| Array\<number\> | 否   |   否   | 记录更新数据的位置，如果该表的主键是string类型，该值是主键的值，否则该值表示更新数据的行号。 | 支持 | 支持 |
+| deleted<sup>26+</sup>  | Array\<string\> \| Array\<number\> | 否   |   否   | 记录删除数据的位置，如果该表的主键是string类型，该值是主键的值，否则该值表示删除数据的行号。 | 支持 | 支持 |
+
 ## HmacAlgo<sup>20+</sup>
 
 数据库的HMAC算法枚举。请使用枚举名称而非枚举值。
@@ -423,6 +439,28 @@ class EntryAbility extends UIAbility {
 | OWNER_FIELD  | '#_cloud_owner' | 用于共享表中查找owner时，返回的结果集中填充的字段，表示当前共享记录的共享发起者。|
 | PRIVILEGE_FIELD  | '#_cloud_privilege' | 用于共享表中查找共享数据权限时，返回的结果集中填充的字段，表示当前共享记录的允许的操作权限。|
 | SHARING_RESOURCE_FIELD   | '#_sharing_resource_field' | 用于数据共享查找共享数据的共享资源时，返回的结果集中填充的字段，表示共享数据的共享资源标识。|
+
+## SubscribeType<sup>26+</sup>
+
+**支持平台：** Android、iOS
+
+描述订阅类型。请使用枚举名称而非枚举值。
+
+| 名称                  | 值   | 说明               | Android平台    | iOS平台          |
+| --------------------- | ---- | ------------------ | ------------------ | ------------------ |
+| SUBSCRIBE_TYPE_LOCAL_DETAILS<sup>26+</sup> | 3  | 订阅本地数据更改详情。<br>**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core | 支持 | 支持 |
+
+## ChangeType<sup>26+</sup>
+
+**支持平台：** Android、iOS
+
+描述数据变更类型的枚举。请使用枚举名称而非枚举值。
+
+**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
+
+| 名称                         | 值   | 说明                         | Android平台                | iOS平台                    |
+| -------------------------- | --- | -------------------------- | -------------------------- | -------------------------- |
+| DATA_CHANGE<sup>26+</sup>  | 0   | 表示是数据发生变更。   | 支持 | 支持 |
 
 ## AssetStatus<sup>10+</sup>
 
@@ -2933,6 +2971,78 @@ if(store != undefined) {
 }
 ```
 
+### on('dataChange')<sup>26+</sup>
+
+on(event: 'dataChange', type: SubscribeType, observer: Callback&lt;Array&lt;string&gt;&gt;\| Callback&lt;Array&lt;ChangeInfo&gt;&gt;): void
+
+注册数据库的数据变更的事件监听。当本地数据库中的数据发生更改时，将调用回调。
+
+**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                                | 必填 | 说明                                        |
+| -------- | ----------------------------------- | ---- | ------------------------------------------- |
+| event    | string                              | 是   | 取值为'dataChange'，表示数据更改。          |
+| type     | [SubscribeType](#subscribetype26)    | 是   | 订阅类型。 **注意** ：在Android和iOS平台上此参数仅支持SUBSCRIBE_TYPE_LOCAL_DETAILS的本地监听。 |
+| observer | Callback&lt;Array&lt;string&gt;&gt; \| Callback&lt;Array&lt;[ChangeInfo](#changeinfo26)&gt;&gt; | 是   | 回调函数。<br>当type为SUBSCRIBE_TYPE_LOCAL_DETAILS，observer类型需为Callback&lt;Array&lt;ChangeInfo&gt;&gt;，其中Array&lt;ChangeInfo&gt;为本地数据库中的数据更改的详情。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[关系型数据库错误码](../errorcodes/errorcode-data-rdb.md)。
+
+| **错误码ID** | **错误信息**        |
+|-----------|-------------|
+| 401       | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+| 801       | Capability not supported. |
+| 14800014  | The target instance is already closed.    |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let changeInfos = (changeInfos: Array<relationalStore.ChangeInfo>) => {
+  for (let i = 0; i < changeInfos.length; i++) {
+    console.info(`changeInfos = ${JSON.stringify(changeInfos[i])}`);
+  }
+};
+
+try {
+  if (store != undefined) {
+    (store as relationalStore.RdbStore).on('dataChange', relationalStore.SubscribeType.SUBSCRIBE_TYPE_LOCAL_DETAILS, changeInfos);
+  }
+} catch (err) {
+  let code = (err as BusinessError).code;
+  let message = (err as BusinessError).message;
+  console.error(`on dataChange fail, code is ${code},message is ${message}`);
+}
+
+let value1 = "Lisa";
+let value2 = 18;
+let value3 = 100.5;
+let value4 = new Uint8Array([1, 2, 3]);
+
+try {
+  const valueBucket: relationalStore.ValuesBucket = {
+    'name': value1,
+    'age': value2,
+    'salary': value3,
+    'blobType': value4
+  };
+
+  if (store != undefined) {
+    await (store as relationalStore.RdbStore).insert('test', valueBucket);
+  }
+} catch (err) {
+  let code = (err as BusinessError).code;
+  let message = (err as BusinessError).message;
+  console.error(`insert fail, code is ${code},message is ${message}`);
+}
+```
+
 ### on('statistics')<sup>20+</sup>
 
 on(event: 'statistics', observer: Callback&lt;SqlExecutionInfo&gt;): void
@@ -2999,6 +3109,66 @@ try {
   }
 } catch (err) {
   console.error(`insert fail, code:${err.code}, message: ${err.message}`);
+}
+```
+
+### off('dataChange')<sup>26+</sup>
+
+off(event:'dataChange', type: SubscribeType, observer?: Callback&lt;Array&lt;string&gt;&gt;\| Callback&lt;Array&lt;ChangeInfo&gt;&gt;): void
+
+取消数据变更的事件监听。
+
+**系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名   | 类型                                | 必填 | 说明                                        |
+| -------- | ---------------------------------- | ---- | ------------------------------------------ |
+| event    | string                              | 是   | 取值为'dataChange'，表示数据更改。          |
+| type     | [SubscribeType](#subscribetype26)     | 是   | 订阅类型。**注意** ：在Android和iOS平台上此参数仅支持SUBSCRIBE_TYPE_LOCAL_DETAILS的本地取消。 |
+| observer | Callback&lt;Array&lt;string&gt;&gt;\| Callback&lt;Array&lt;[ChangeInfo](#changeinfo26)&gt;&gt; | 否 | 回调函数。<br/>当type为SUBSCRIBE_TYPE_LOCAL_DETAILS，observer类型需为Callback&lt;Array&lt;ChangeInfo&gt;&gt;，其中Array&lt;ChangeInfo&gt;为本地数据库中的数据更改的详情。<br>当observer没有传入时，表示取消当前type类型下所有数据变更的事件监听。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[关系型数据库错误码](../errorcodes/errorcode-data-rdb.md)。
+
+| **错误码ID** | **错误信息**        |
+|-----------|-------------|
+| 401       | Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+| 801       | Capability not supported. |
+| 14800014  | The target instance is already closed.    |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+let storeObserver = (data: Array<relationalStore.ChangeInfo>) => {
+  for (let i = 0; i < data.length; i++) {
+    console.info(`changeInfos = ${JSON.stringify(data[i])}`);
+  }
+};
+
+try {
+  if (store != undefined) {
+    (store as relationalStore.RdbStore).on('dataChange', relationalStore.SubscribeType.SUBSCRIBE_TYPE_LOCAL_DETAILS, storeObserver);
+  }
+} catch (err) {
+  let code = (err as BusinessError).code;
+  let message = (err as BusinessError).message;
+  console.error(`Register observer failed, code is ${code},message is ${message}`);
+}
+
+try {
+  if (store != undefined) {
+    (store as relationalStore.RdbStore).off('dataChange', relationalStore.SubscribeType.SUBSCRIBE_TYPE_LOCAL_DETAILS, storeObserver);
+  }
+} catch (err) {
+  let code = (err as BusinessError).code;
+  let message = (err as BusinessError).message;
+  console.error(`Unregister observer failed, code is ${code},message is ${message}`);
 }
 ```
 
