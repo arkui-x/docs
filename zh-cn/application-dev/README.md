@@ -48,6 +48,7 @@
 - [以Hap为主体的共享逻辑包开发指南](./tutorial/how-to-decoupled-UI-and-Logic-on-android.md)
 - [Android原生页面与跨平台页面跳转开发指南](./tutorial/how-to-use-arkuix-on-nativePageLaunch-Android.md)
 - [hwSymbol文件按需加载开发指导](./tutorial/how-to-use-symbol-subset.md)
+- [特性级跨平台场景，退出跨平台页面，主动释放ArkTS运行时占用开发指导](./tutorial/how-to-use-destroyVm-on-android.md)
 - [跨平台方舟Debug应用堆栈查看开发指导](./tutorial/how-to-debug-arkui-x-application.md)
 
 ### iOS平台开发
@@ -67,6 +68,7 @@
 - [以Hap为主体的共享逻辑包开发指南](./tutorial/how-to-decoupled-UI-and-Logic-on-ios.md)
 - [iOS原生页面与跨平台页面跳转开发指南](./tutorial/how-to-use-arkuix-on-nativePageLaunch-iOS.md)
 - [hwSymbol文件按需加载开发指导](./tutorial/how-to-use-symbol-subset.md)
+- [特性级跨平台场景，退出跨平台页面，主动释放ArkTS运行时占用开发指导](./tutorial/how-to-use-destroyVm-on-ios.md)
 - [跨平台方舟Debug应用堆栈查看开发指导](./tutorial/how-to-debug-arkui-x-application.md)
 
 ### 应用改造

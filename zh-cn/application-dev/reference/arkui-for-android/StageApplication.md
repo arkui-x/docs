@@ -48,3 +48,57 @@ public class MyStageApplication extends StageApplication {
 }
 ```
 
+### destroyVm
+
+public static boolean destroyVm()
+
+主动销毁ArkUI引擎的运行时及关联的Worker运行时资源。
+
+**参数：** 无
+
+**返回值：** 
+
+| 类型    | 说明                                                |
+| ------- | --------------------------------------------------- |
+| boolean | true 表示运行时销毁成功；false 表示运行时销毁失败。 |
+
+**返回值 false 的常见原因：**
+
+| 原因              | 说明                                         |
+| ----------------- | -------------------------------------------- |
+| Runtime 已销毁    | 运行时已被销毁，无需重复操作。               |
+| 存在活跃的 Worker | 当前仍有Worker线程在运行，运行时无法被销毁。 |
+
+**示例：** 
+
+  ```java
+// OtherActivity.java Android原生业务逻辑文件
+
+package xxx; // xxx为应用包名
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+
+import ohos.stage.ability.adapter.StageApplication;
+
+public class OtherActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 从ArkUI页面返回时，主动销毁运行时，释放资源。
+        boolean result = StageApplication.destroyVm();
+        if (!result) {
+            // 销毁失败，可记录日志或稍后重试。
+            Log.e("OtherActivity", "destroyVm failed, ArkTS runtime may still have active workers.");
+        }
+    }
+}
+  ```
+
