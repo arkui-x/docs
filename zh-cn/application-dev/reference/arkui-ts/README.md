@@ -301,7 +301,7 @@
     - [Rect](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-drawing-components-rect.md)
     - [Shape](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-drawing-components-shape.md)
   - 渲染绘制<!--rendering-drawing-->
-    - [XComponent](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-xcomponent.md)
+    - [XComponent](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/ts-basic-components-xcomponent.md)
   - 菜单<!--menus-->
     - [Menu](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-menu.md)
     - [MenuItem](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-menuitem.md)
@@ -395,15 +395,14 @@
     - [栅格设置](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-universal-attributes-grid.md)
     - [Stepper](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-stepper.md)
     - [StepperItem](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-stepperitem.md)
-<!--
-- C API<!--arkui-c--&gt;
-  - 模块<!--arkui-module--&gt;
+- C API<!--arkui-c-->
+  - 模块<!--arkui-module-->
     - [ArkUI_NativeModule](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-arkui-nativemodule.md) 
     - [ArkUI_Accessibility](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-arkui-accessibility.md) 
     - [ArkUI_EventModule](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-arkui-eventmodule.md) 
     - [ArkUI_RenderNodeUtils](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-arkui-rendernodeutils.md) 
     - [OH_NativeXComponent Native XComponent](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-oh-nativexcomponent-native-xcomponent.md) 
-  - 头文件<!--arkui-headerfile--&gt;
+  - 头文件<!--arkui-headerfile-->
     - [drag_and_drop.h](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-drag-and-drop-h.md) 
     - [drawable_descriptor.h](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-drawable-descriptor-h.md) 
     - [native_animate.h](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-native-animate-h.md) 
@@ -420,7 +419,7 @@
     - [native_type.h](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-native-type-h.md) 
     - [styled_string.h](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-styled-string-h.md)
     - [ui_input_event.h](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-ui-input-event-h.md) 
-  - 结构体<!--arkui-struct--&gt;
+  - 结构体<!--arkui-struct-->
     - [ArkUI_NodeEvent](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-arkui-nativemodule-arkui-nodeevent.md) 
     - [ArkUI_Context](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-arkui-nativemodule-arkui-context.md) 
     - [ArkUI_Context*](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-arkui-nativemodule-arkui-context8h.md) 
@@ -583,7 +582,6 @@
     - [OH_Drawing_PlaceholderSpan](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkgraphics2d/capi-drawing-oh-drawing-placeholderspan.md) 
     - [OH_Drawing_TextBox](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkgraphics2d/capi-drawing-oh-drawing-textbox.md) 
     - [OH_Drawing_RectWidthStyle](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkgraphics2d/capi-drawing-text-typography-h.md#oh_drawing_rectwidthstyle)
--->
 - 错误码<!--arkui-arkts-errcode-->
   - UI界面<!--arkui-ui-arkts-errcode-->
     - [接口调用异常错误码](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/errorcode-internal.md)
