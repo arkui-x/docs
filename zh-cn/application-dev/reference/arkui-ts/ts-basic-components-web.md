@@ -3028,6 +3028,7 @@ onSslErrorEventReceive接口返回的SSL错误的具体原因。
 
 | 名称         | 值   | 说明                   | Android平台 | iOS平台 |
 | ------------ | ---- | ---------------------- | ----------- | ------- |
+| Invalid<sup>26+</sup> | 0    | 一般错误。         | 支持        | 支持    |
 | HostMismatch | 1    | 主机名不匹配。         | 支持        | 支持    |
 | DateInvalid  | 2    | 证书日期无效。         | 支持        | 支持    |
 | Untrusted    | 3    | 证书颁发机构不受信任。 | 支持        | 支持    |
@@ -3752,6 +3753,257 @@ exitFullScreen(): void
 通知开发者Web组件退出全屏。
 
 **系统能力：** SystemCapability.Web.Webview.Core
+
+### onResourceLoad<sup>26+</sup>
+
+onResourceLoad(callback: Callback\<OnResourceLoadEvent\>)
+
+通知Web组件所加载的资源文件url信息。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**注意：** Android基于WebView资源加载回调上报资源URL。iOS当前仅在主文档提交加载和自定义Scheme资源处理链路上报，可能不会覆盖所有子资源加载。
+
+**参数：**
+
+| 参数名    | 类型   | 必填   | 说明                  |
+| ------ | ------ | ---- | --------------------- |
+| callback  | Callback\<[OnResourceLoadEvent](#onresourceloadevent26)\> | 是 | 加载url时触发。 |
+
+**示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct WebComponent {
+    controller: webview.WebviewController = new webview.WebviewController();
+
+    build() {
+      Column() {
+        Web({ src: 'www.example.com', controller: this.controller })
+          .onResourceLoad((event) => {
+            console.info('onResourceLoad: ' + event.url);
+          })
+      }
+    }
+  }
+  ```
+
+#### OnResourceLoadEvent<sup>26+</sup>
+
+定义加载url时触发。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+| 名称             | 类型      | 只读 | 可选   | 说明                                       |
+| -------------- | ---- | ---- | ------------|---------------------------- |
+| url  | string | 否 | 否 | 所加载的资源文件url信息。 |
+
+### runJavaScriptOnDocumentStart<sup>26+</sup>
+
+runJavaScriptOnDocumentStart(scripts: Array\<ScriptItem>)
+
+将JavaScript脚本注入到Web组件中，当指定页面或者文档开始加载时，该脚本将在其来源与scriptRules或urlRegexRules匹配的页面中执行。当属性没有显式调用时，默认不将JavaScript脚本注入到Web组件中。
+
+> **说明：**
+>
+> - 网页文档根元素（HTML Element）创建后、但尚未加载任何其他内容之前注入脚本。
+>
+> - 该脚本按照数组本身顺序执行。
+>
+> - 不建议与javaScriptOnDocumentStart接口同时使用。
+>
+> - Android当前不支持该接口。iOS通过WKUserScript在文档开始阶段注入脚本，注入时机以WKWebView实际行为为准。
+>
+> - 当前iOS实现支持scriptRules和urlRegexRules匹配规则。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** iOS
+
+**参数：**
+
+| 参数名     | 类型                                | 必填   | 说明               |
+| ------- | ----------------------------------- | ---- | ------------------ |
+| scripts | Array\<[ScriptItem](#scriptitem26)> | 是    | 需要注入的ScriptItem数组。<br>传入undefined或null时不将JavaScript脚本注入到Web组件中。 |
+
+**ets示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct Index {
+      controller: webview.WebviewController = new webview.WebviewController();
+      private localStorage: string =
+          "if (typeof(Storage) !== 'undefined') {" +
+          "   localStorage.setItem('color', 'Red');" +
+          "}";
+      @State scripts: Array<ScriptItem> = [
+          { script: this.localStorage, scriptRules: ["*"] }
+      ];
+
+      build() {
+          Column({ space: 20 }) {
+              Web({ src: $rawfile('index.html'), controller: this.controller })
+                  .javaScriptAccess(true)
+                  .domStorageAccess(true)
+                  .backgroundColor(Color.Grey)
+                  .runJavaScriptOnDocumentStart(this.scripts)
+                  .width('100%')
+                  .height('100%')
+          }
+      }
+  }
+  ```
+**HTML示例：**
+
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body style="font-size: 30px;" onload='bodyOnLoadLocalStorage()'>
+      Hello world!
+      <div id="result"></div>
+  </body>
+  <script type="text/javascript">
+    function bodyOnLoadLocalStorage() {
+      if (typeof(Storage) !== 'undefined') {
+        document.getElementById('result').innerHTML = localStorage.getItem('color');
+      } else {
+        document.getElementById('result').innerHTML = 'Your browser does not support localStorage.';
+      }
+    }
+  </script>
+</html>
+```
+
+### runJavaScriptOnDocumentEnd<sup>26+</sup>
+
+runJavaScriptOnDocumentEnd(scripts: Array\<ScriptItem>)
+
+将JavaScript脚本注入到Web组件中，当指定页面文档解析完成时，该脚本将在其来源与scriptRules或urlRegexRules匹配的页面中执行。当属性没有显式调用时，默认不将JavaScript脚本注入到Web组件中。
+
+> **说明：**
+>
+> - 该脚本将在页面的任何JavaScript代码之后运行，并且DOM树此时已经加载、渲染完毕。
+>
+> - 该脚本按照字典序执行，非数组本身顺序。
+>
+> - 不建议与javaScriptOnDocumentEnd接口同时使用。
+>
+> - Android、iOS均支持该接口。
+>
+> - 当前iOS实现会向主 frame 和子 frame 注入脚本，并通过WKUserScript在文档结束阶段注入，注入时机以WKWebView实际行为为准。
+>
+> - 当前iOS实现支持scriptRules和urlRegexRules匹配规则。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+**参数：**
+
+| 参数名     | 类型                                | 必填   | 说明               |
+| ------- | ----------------------------------- | ---- | ------------------ |
+| scripts | Array\<[ScriptItem](#scriptitem26)> | 是    | 需要注入的ScriptItem数组。<br>传入undefined或null时不将JavaScript脚本注入到Web组件中。 |
+
+**ets示例：**
+
+  ```ts
+  // xxx.ets
+  import { webview } from '@kit.ArkWeb';
+
+  @Entry
+  @Component
+  struct Index {
+      controller: webview.WebviewController = new webview.WebviewController();
+      private localStorage: string =
+          "if (typeof(Storage) !== 'undefined') {" +
+          "   localStorage.setItem('color', 'Red');" +
+          "}";
+      @State scripts: Array<ScriptItem> = [
+          { script: this.localStorage, scriptRules: ["*"] }
+      ];
+
+      build() {
+          Column({ space: 20 }) {
+              Web({ src: $rawfile('index.html'), controller: this.controller })
+                  .javaScriptAccess(true)
+                  .domStorageAccess(true)
+                  .backgroundColor(Color.Grey)
+                  .runJavaScriptOnDocumentEnd(this.scripts)
+                  .width('100%')
+                  .height('100%')
+          }
+      }
+  }
+  ```
+**HTML示例：**
+
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body style="font-size: 30px;" onload='bodyOnLoadLocalStorage()'>
+      Hello world!
+      <div id="result"></div>
+  </body>
+  <script type="text/javascript">
+    function bodyOnLoadLocalStorage() {
+      if (typeof(Storage) !== 'undefined') {
+        document.getElementById('result').innerHTML = localStorage.getItem('color');
+      } else {
+        document.getElementById('result').innerHTML = 'Your browser does not support localStorage.';
+      }
+    }
+  </script>
+</html>
+```
+
+#### ScriptItem<sup>26+</sup>
+
+通过[runJavaScriptOnDocumentStart](#runjavascriptondocumentstart26)或[runJavaScriptOnDocumentEnd](#runjavascriptondocumentend26)属性注入到Web组件的ScriptItem对象。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+| 名称         | 类型           | 只读 | 可选   | 说明           |
+| ----------- | -------------- | --- | ------|--------------- |
+| script      | string         | 否  |  否    | 需要注入、执行的JavaScript脚本。 |
+| scriptRules | Array\<string> | 否  |  否    | 一组允许来源的匹配规则。<br>1.如果需要允许所有来源的网址，使用通配符“ * ”。<br>2.如果需要精确匹配，则描述网站地址，如"https:\//www\.example.com"。<br>3.如果模糊匹配网址，可以使用“ * ”通配符替代，如"https://*.example.com"。不允许使用"x. * .y.com"、" * foobar.com"等。<br>4.如果来源是ip地址，则使用规则2。<br>5.对于http/https以外的协议（自定义协议），不支持使用精确匹配和模糊匹配，且必须以`://`结尾，例如"resource://"。<br>6.一组scriptRule中，如果其中一条不满足以上规则，则整组scriptRule都不生效。 |
+| urlRegexRules<sup>26+</sup>  | Array\<[UrlRegexRule](#urlregexrule26)\> | 否  |  是    | 一组允许来源的正则匹配规则。该字段用于runJavaScriptOnDocumentStart和runJavaScriptOnDocumentEnd接口按正则规则匹配URL。<br> **模型约束：** 此接口仅可在Stage模型下使用。 |
+
+#### UrlRegexRule<sup>26+</sup>
+
+定义Url正则表达式规则。
+
+**模型约束：** 此接口仅可在Stage模型下使用。
+
+**系统能力：** SystemCapability.Web.Webview.Core
+
+**支持平台：** Android、iOS
+
+| 名称          | 类型  | 只读 | 可选 | 说明            |
+| ----------- | ------ | --- | -----|---------------- |
+| secondLevelDomain | string | 否  | 否    | 二级域名的精确匹配。例如，"https://www.example.com"的二级域名为example.com；"https://www.example.com.cn"二级域名为example.com.cn。网址没有二级域名则为空。 |
+| rule | string | 否  | 否    | url正则表达式。 在secondLevelDomain匹配成功后，才进行url正则匹配。 |
 
 ## OnPageEndEvent
 
