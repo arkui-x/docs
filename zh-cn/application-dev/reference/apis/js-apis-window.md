@@ -1900,6 +1900,94 @@ try {
   console.error(`Failed to enable or disable the listener for system avoid area changes. Cause code: ${exception.code}, message: ${exception.message}`);
 }
 ```
+
+### on('keyboardHeightChange')
+
+on(type: 'keyboardHeightChange', callback: Callback&lt;number&gt;): void
+
+开启固定态软键盘高度变化的监听。当软键盘从本窗口唤出且与窗口有重叠区域时，通知键盘高度变化。
+
+**起始版本：** 26.1.0。
+
+**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**参数：**
+
+| 参数名   | 类型                | 必填 | 说明                                        |
+| -------- | ------------------- | ---- |-------------------------------------------|
+| type     | string              | 是   | 监听事件，固定为'keyboardHeightChange'，即键盘高度变化事件。 |
+| callback | Callback&lt;number&gt; | 是   | 回调函数。返回当前的键盘高度。返回值为整数，单位为px。     |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 401     | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+try {
+  windowClass.on('keyboardHeightChange', (data) => {
+    console.info('Succeeded in enabling the listener for keyboard height changes. Data: ' + JSON.stringify(data));
+  });
+} catch (exception) {
+  console.error(`Failed to enable the listener for keyboard height changes. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### off('keyboardHeightChange')
+
+off(type: 'keyboardHeightChange', callback?: Callback&lt;number&gt;): void
+
+关闭固定态软键盘高度变化的监听，使应用程序不再接收键盘高度变化的通知。
+
+**起始版本：** 26.1.0。
+
+**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。
+
+**系统能力：** SystemCapability.WindowManager.WindowManager.Core
+
+**参数：**
+
+| 参数名   | 类型                   | 必填 | 说明                                                         |
+| -------- | ---------------------- | ---- | ------------------------------------------------------------ |
+| type     | string                 | 是   | 监听事件，固定为'keyboardHeightChange'，即键盘高度变化事件。 |
+| callback | Callback&lt;number&gt; | 否   | 回调函数。返回当前的键盘高度，返回值为整数，单位为px。若传入参数，则关闭该监听；未传入参数，则关闭所有固定态软键盘高度变化的监听。                               |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 401     | Parameter error. Possible cause: 1. Incorrect parameter types; 2. Parameter verification failed. |
+
+**示例：**
+
+```ts
+import { BusinessError } from '@kit.BasicServicesKit';
+
+const callback = (height: number) => {
+  // ...
+}
+try {
+  windowClass.on('keyboardHeightChange', callback);
+
+  windowClass.off('keyboardHeightChange', callback);
+  // 如果通过on开启多个callback进行监听，同时关闭所有监听：
+  windowClass.off('keyboardHeightChange');
+} catch (exception) {
+  console.error(`Failed to disable the listener for keyboard height changes. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
 ### setWindowBrightness<sup>9+</sup>
 
 setWindowBrightness(brightness: number, callback: AsyncCallback&lt;void&gt;): void
