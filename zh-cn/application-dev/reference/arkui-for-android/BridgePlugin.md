@@ -288,7 +288,7 @@ public void callMethod(MethodData methodData);
 
 **描述：**
 
- 调用ArkTS侧定义的方法，ArkTS侧方法的函数返回值通过 IMethodResult.onSucessess 接口接收。
+ 调用ArkTS侧定义的方法，ArkTS侧方法的函数返回值通过 IMethodResult.onSuccess 接口接收。
 
 **参数：** 
 
@@ -359,7 +359,7 @@ public void callMethod(String methodName, Object... parameters);
 
 **描述：**
 
- 调用ArkTS侧定义的方法，ArkTS侧方法的函数返回值通过 IMethodResult.onSucessess 接口接收。
+ 调用ArkTS侧定义的方法，ArkTS侧方法的函数返回值通过 IMethodResult.onSuccess 接口接收。
 
 **参数：** 
 
@@ -460,7 +460,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
     
     protected void onCreate(Bundle savedInstanceState) {
         // 创建平台桥接对象实例
-        bridgeImpl = new BridgeImpl("BridgeName", BridgePlugin.BridgeType.BINARY_TYPE());
+        bridgeImpl = new BridgeImpl("BridgeName", BridgePlugin.BridgeType.BINARY_TYPE);
         // bundleName需根据实际情况调整。
         setInstanceName("bundleName:entry:EntryAbility:");
         super.onCreate(savedInstanceState);

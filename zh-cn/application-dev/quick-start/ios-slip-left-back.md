@@ -74,7 +74,7 @@ ArkUI-X跨平台开发中，框架通过StageViewController提供了一个可以
 
 当processBackPress方法调用成功，返回为true，则表示已操作跨平台页面返回上级页面。则原生侧StageViewController不用返回，gestureRecognizerShouldBegin方法返回NO。
 
-当processBackPress方法调用返回为false，则表示跨平台页面已是跟页面，无法返回。则原生侧从StageViewController返回上级ViewController页面，gestureRecognizerShouldBegin方法返回YES。
+当processBackPress方法调用返回为false，则表示跨平台页面已是根页面，无法返回。则原生侧从StageViewController返回上级ViewController页面，gestureRecognizerShouldBegin方法返回YES。
 
 ```objc
 @interface GestureTestStageViewController ()<UIGestureRecognizerDelegate>
@@ -106,7 +106,7 @@ ArkUI-X跨平台开发中，框架通过StageViewController提供了一个可以
 
 如果容器类StageViewController在界面UI结构中未包裹在UINavigationController中，则可以在StageViewController添加自定义手势识别侧滑返回，并在手势实现中调用processBackPress方法。
 
-同样的如果processBackPress方法返回ture，则代表跨平台页面成功返回上级页面，手势实现中不用做其他操作。如果返回false，则代表跨平台页面已是根页面，无法返回，此种情况下需添加原生侧返回上级页面的处理逻辑。
+同样的如果processBackPress方法返回true，则代表跨平台页面成功返回上级页面，手势实现中不用做其他操作。如果返回false，则代表跨平台页面已是根页面，无法返回，此种情况下需添加原生侧返回上级页面的处理逻辑。
 
 ```objc
 @implementation GestureTestStageViewController
