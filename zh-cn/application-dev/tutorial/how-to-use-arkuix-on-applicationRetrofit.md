@@ -419,7 +419,7 @@ iOS侧：
    
    - (void)initBridgePlugin {
        self.bridgeNetWorkUtil = [
-           [BridgeNetWorkUtil alloc] initBridgePlugin:@"NetWorkUtil" bridgeManager:[selfgetBridgeManager]
+           [BridgeNetWorkUtil alloc] initBridgePlugin:@"NetWorkUtil" bridgeManager:[self getBridgeManager]
        ];
        self.bridgeNetWorkUtil.messageListener = self.bridgeNetWorkUtil;
        self.bridgeNetWorkUtil.methodResult = self.bridgeNetWorkUtil;

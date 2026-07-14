@@ -323,7 +323,7 @@
 
 **描述：**
 
- 调用ArkTS侧定义的方法，ArkTS侧方法的函数返回值通过 IMethodResult.onSucessess 接口接收。
+ 调用ArkTS侧定义的方法，ArkTS侧方法的函数返回值通过 IMethodResult.onSuccess 接口接收。
 
 **参数：** 
 

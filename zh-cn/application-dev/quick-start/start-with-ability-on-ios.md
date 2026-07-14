@@ -66,7 +66,7 @@ StageApplication本质上是一个调度类，主要用于触发内部相关类�
 + (BOOL)handleSingleton:(NSString *)bundleName moduleName:(NSString *)moduleName abilityName:(NSString *)abilityName;
 ```
 
-* 释放导航视图栈内的所有viewController，触发OnDestory事件。
+* 释放导航视图栈内的所有viewController，触发onDestroy事件。
 
 ```objc
 + (void)releaseViewControllers;
@@ -344,7 +344,7 @@ export default class EntryAbility extends UIAbility {
     
     NSNumber *numberYes = [NSNumber numberWithBool:true];
     NSNumber *numberInt = [NSNumber numberWithInt:12];
-    NSNumber *numberDouble = [NSNumber numberWithDouble:1.1415926];
+    NSNumber *numberDouble = [NSNumber numberWithDouble:1.141593];
     WantParams *wp = [[WantParams alloc]init];
     [wp addValue:@"strkey" value:@"strWantParams"];
     NSArray *arr = @[@(123) , @(1) , @(2)];

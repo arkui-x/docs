@@ -144,17 +144,17 @@
   
   public class BridgeImpl extends BridgePlugin {
   
-      public BridgeImpl(String name, BridgeType bridgeType) {
-          super(name, bridgeType);
-      }
-  
-  }
-  ```
-
-##### 接口调用时机
-
-- ArkUI端：Bridge 接口调用时机必须在UIAbility onCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
-- 原生端(Android)：Bridge 接口调用时机必须在Activity onCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
+      public BridgeImpl(String name, BridgePlugin.BridgeType bridgeType) {
+            super(name, bridgeType);
+        }
+    
+    }
+    ```
+    
+    ##### 接口调用时机
+    
+    - ArkUI端：Bridge 接口调用时机必须在UIAbility onCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
+    - 原生端(Android)：Bridge 接口调用时机必须在Activity onCreate()函数执行完毕后。具体示例代码参考下文场景示例。<br>
 
 
 以下示例代码**基于SDK版本大于等于6.0.2.118**编写，原生端(Android)使用该[Bridge构造方法](../reference/arkui-for-android/BridgePlugin.md#bridgeplugin22)。<br>
@@ -325,7 +325,7 @@ bridgeImpl.registerMethod({name: "getArkTSData", method: this.getArkTSData});
 // 方式一: 构造ArkUI侧方法描述对象实例调用
 Object[] paramObject = { 100 };
 MethodData methodData = new MethodData("getArkTSData", paramObject);
-bridge.callMethod(methodData);
+bridgeImpl.callMethod(methodData);
     
 // 方式二: ArkUI侧函数名加ArkUI侧方法形参对应的实参调用
 bridgeImpl.callMethod("getArkTSData", 100);
@@ -377,7 +377,6 @@ public class BridgeMethodResult implements IMethodResult {
         System.out.println("ArkTS cancel method is " + methodName);
     }
 }
-public void onMethodCancel(String s) {}
 ```
 
 ### 场景六：ArkUI侧注册callBack且调用Android侧的方法（无参）

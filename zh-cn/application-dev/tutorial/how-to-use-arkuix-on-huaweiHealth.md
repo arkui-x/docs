@@ -126,7 +126,7 @@ public class EntryMainAbilityActivity extends StageActivity {
   * @param funcName native函数名
   * @param params 参数列表
   */
-public execNativeAsync(moduleName: string, funName: string, ...params: any): Promise<any> {
+public execNativeAsync(moduleName: string, funcName: string, ...params: any): Promise<any> {
     return this.wrapFunc(moduleName, funcName, ...params);
 }
 
@@ -161,13 +161,13 @@ private wrapFunc(moduleName: string, funcName: string, ...params: any): Promise<
 （2）将上层业务对A包的依赖导入收编到一个文件内（对A包的数据结构和接口进行import 和 export，通过该形式实现依赖中转），我们在这里将文件命名为**import-sdk.ts**，举个简单的示例：
 
 ```ts
-import { xxx } from ‘a-sdk’ // A包是鸿蒙Next系统原生能力包
+import { xxx } from 'a-sdk' // A包是鸿蒙Next系统原生能力包
 ```
 
 修改为：
 
 ```ts
-import { xxx } from ‘import-sdk’// import-sdk.ts 是包名统一收编包
+import { xxx } from 'import-sdk'// import-sdk.ts 是包名统一收编包
 ```
 
 其中，**import-sdk.ts**文件的简单示例如下所示：

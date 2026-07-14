@@ -368,10 +368,10 @@ struct Index {
       console.log(`IOS->Ts bridge funTestRecord p1 is Key: ${key}, Value: ${p1[key]}`);
     });
     Object.keys(p2).forEach(key => {
-      console.log(`IOS->Ts bridge funTestRecord p2 is Key: ${key}, Value: ${p1[key]}`);
+      console.log(`IOS->Ts bridge funTestRecord p2 is Key: ${key}, Value: ${p2[key]}`);
     });
     Object.keys(p3).forEach(key => {
-      console.log(`IOS->Ts bridge funTestRecord p3 is Key: ${key}, Value: ${p1[key]}`);
+      console.log(`IOS->Ts bridge funTestRecord p3 is Key: ${key}, Value: ${p3[key]}`);
     });
     return "call success";
   }
@@ -469,7 +469,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 #pragma mark -- callMethod
-//调用Arkui 测注册的方法，调用之前要实现methodResult代理，通过代理回调的到调用结果 注意method name 必须与Arkui测方法名保持一致
+//调用ArkUI侧注册的方法，调用之前要实现methodResult代理，通过代理回调得到调用结果 注意method name 必须与ArkUI侧方法名保持一致
 
 //调用JS测注册的funTest方法
 - (void)testCallMethod1 {
@@ -492,13 +492,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - IMessageListener ArkUI侧发送的消息代理实现
 /**
-  *  Arkui测调用sendMessage 发送消息到IOS测，将会触发次方法的回调
+  *  ArkUI侧调用sendMessage 发送消息到iOS侧，将会触发此方法的回调
   *  @param data Arkui 传递过来的数据
   *   return 返回值传递传递给Arkui测
 */
 - (NSString*)onMessage:(id)data {
 //    NSLog(@"Arkui 传递消息给iOS message: %@", data);
-    return @"ios onMessage respone message";
+    return @"ios onMessage response message";
 }
 
 /**
@@ -516,7 +516,7 @@ NS_ASSUME_NONNULL_BEGIN
   *  @param resultValue ResultValue 类 ，并将ArkUI侧方法的返回值传递给平台侧
 */
 - (void)onSuccess:(nonnull NSString *)methodName resultValue:(nonnull id)resultValue {
-    //NSLog(@"%@", [NSString stringWithFormat:@"methondName:%@, respone: %@",methodName, resultValue]);
+    //NSLog(@"%@", [NSString stringWithFormat:@"methodName:%@, response: %@",methodName, resultValue]);
 }
 
 /**
@@ -526,7 +526,7 @@ NS_ASSUME_NONNULL_BEGIN
   *  @param errorMessage 错误信息
 */
 - (void)onError:(nonnull NSString *)methodName errorCode:(ErrorCode)errorCode errorMessage:(nonnull NSString *)errorMessage {
-    //NSLog(@"iOS call arkui method fail, methtod name: %@ errorCode: %d errorMessage: %@",methodName, errorCode, errorMessage);
+    //NSLog(@"iOS call arkui method fail, method name: %@ errorCode: %d errorMessage: %@",methodName, errorCode, errorMessage);
 }
 
 /**
@@ -534,7 +534,7 @@ NS_ASSUME_NONNULL_BEGIN
   *  @param methodName ArkUI侧方法的名称
 */
 - (void)onMethodCancel:(nonnull NSString *)methodName {
-    //NSLog(@"iOS call arkui method cancel, methtod name: %@", methodName);
+    //NSLog(@"iOS call arkui method cancel, method name: %@", methodName);
 }
 
 @end

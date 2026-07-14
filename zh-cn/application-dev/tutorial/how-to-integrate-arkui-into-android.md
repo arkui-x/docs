@@ -67,8 +67,8 @@
         ├── entry
         |   ├── ets
         |   |   └── modules.abc
-        |   ├── resouces.index
-        |   ├── resouces
+        |   ├── resources.index
+        |   ├── resources
         |   └── module.json
         └── systemres
     ```

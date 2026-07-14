@@ -13,7 +13,7 @@
 * ACE Tools命令行集成
   ACE Tools作为ArkUI跨平台应用构建的命令行工具，通过集成ArkUI-X SDK具有创建、编译构建OpenHarmony/HarmonyOS、Android和iOS应用的能力。
 * DevEco Studio集成
-  DecEco Studio作为ArkUI跨平台应用构建的IDE工具，通过集成ArkUI-X SDK支持一键构建出OpenHarmony/HarmonyOS应用、Android应用、iOS应用的能力。
+  DevEco Studio作为ArkUI跨平台应用构建的IDE工具，通过集成ArkUI-X SDK支持一键构建出OpenHarmony/HarmonyOS应用、Android应用、iOS应用的能力。
 
 # ArkUI-X SDK构建规则
 
@@ -239,7 +239,7 @@ arkui-x_windows_x64_1.0.0.0_Release.zip/arkui-x/engine
 │   │   ├── android-arm64
 │   │   ├── android-arm64-profile
 │   │   ├── android-arm64-release
-│   │   │   └── libarkui_android.so               // ArkUI跨平台引擎，包含：ArkUI\NAPI\ARk三部分。
+│   │   │   └── libarkui_android.so               // ArkUI跨平台引擎，包含：ArkUI\NAPI\Ark三部分。
 │   │   └── android-x86_64
 │   ├── third_party
 │   └── utils
@@ -306,7 +306,7 @@ arkui-x_linux_x64_1.0.0.0_Release.zip/arkui-x/engine
 │   │   ├── android-arm64
 │   │   ├── android-arm64-profile
 │   │   ├── android-arm64-release
-│   │   │   └── libarkui_android.so               // ArkUI跨平台引擎，包含：ArkUI\NAPI\ARk三部分。
+│   │   │   └── libarkui_android.so               // ArkUI跨平台引擎，包含：ArkUI\NAPI\Ark三部分。
 │   │   └── android-x86_64
 │   ├── third_party
 │   └── utils
@@ -373,7 +373,7 @@ arkui-x_darwin_x64_1.0.0.0_Release.zip/arkui-x/engine
 │   │   ├── android-arm64
 │   │   ├── android-arm64-profile
 │   │   ├── android-arm64-release
-│   │   │   └── libarkui_android.so                     // ArkUI跨平台引擎，包含：ArkUI\NAPI\ARk\Ability等部分。
+│   │   │   └── libarkui_android.so                     // ArkUI跨平台引擎，包含：ArkUI\NAPI\Ark\Ability等部分。
 │   │   └── android-x86_64
 │   ├── third_party
 │   └── utils
