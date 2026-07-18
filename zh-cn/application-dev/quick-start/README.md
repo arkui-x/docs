@@ -26,5 +26,5 @@
 
 - [动态化介绍](dynamic-introduction.md)
 
-- Platformview(平台视图)开发说明
-  - [Platformview(平台视图)](platform-view-introduction.md)
+- PlatformView(平台视图)开发说明
+  - [PlatformView(平台视图)](platform-view-introduction.md)

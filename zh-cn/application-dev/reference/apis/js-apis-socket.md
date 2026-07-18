@@ -6622,7 +6622,7 @@ tlsServer.on('error', (err: BusinessError) => {
 
 off(type: 'error', callback?: ErrorCallback): void
 
-取消订阅TLSSocketServer连接的error事件。使用callback异步回调。。
+取消订阅TLSSocketServer连接的error事件。使用callback异步回调。
 
 > **说明：**
 > listen方法调用成功后，才可调用此方法。

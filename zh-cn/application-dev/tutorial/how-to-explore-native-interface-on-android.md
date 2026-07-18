@@ -21,7 +21,7 @@ ace create demo -t plugin_napi
 ? Enter the project name(demo):
 ? Enter the bundleName (com.example.demo):
 ? Enter the runtimeOS (1: OpenHarmony; 2: HarmonyOS): 1
-? Please select the Complie SDk (1: 10; 2: 11; 3: 12; 4: 13; 5: 14; 6: 15; 7: 16; 8: 17; 9: 18; 10: 19; 11: 20; 12: 21; 13: 22; 14: 23): 12 # 输入需要使用的SDK版本
+? Please select the Compile SDK (1: 10; 2: 11; 3: 12; 4: 13; 5: 14; 6: 15; 7: 16; 8: 17; 9: 18; 10: 19; 11: 20; 12: 21; 13: 22; 14: 23): 12 # 输入需要使用的SDK版本
 ? Please select the project platform (1: Default(Android, iOS); 2: Android; 3: iOS): 2
 
 Project created successfully! Target directory: ${当前目录}/demo.

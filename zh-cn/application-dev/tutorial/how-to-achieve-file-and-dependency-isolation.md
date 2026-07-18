@@ -43,7 +43,7 @@ entry/
     └── main/
         └── ets/
             ├── arkuix_util/
-            │   └── arkuixPage.ets    # default product Arkui-X跨平台使用的页面  
+            │   └── arkuixPage.ets    # default product ArkUI-X跨平台使用的页面  
             └── harmonyOS_util/
                 └── harmonyPage.ets   # harmonyOS product harmonyOS使用的页面
 ```

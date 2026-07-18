@@ -18,7 +18,7 @@
 **特别说明：编译态屏蔽后，所有不支持跨平台API的场景，需要通过运行态的方式来处理，不然会有Crash。**
 参考[运行态平台差异化](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/quick-start/platform-different-introduction.md)。
 
-除了以上关于平台判断处理外，针对不支持跨平台的HMS API或者HMS 组件，不能直接在文件头中import引用，会造成Android/iOS运行时错误，虚参考以下处理：
+除了以上关于平台判断处理外，针对不支持跨平台的HMS API或者HMS组件，不能直接在文件头中import引用，会造成Android/iOS运行时错误，请参考以下处理：
 
 **不支持跨平台的HMS API：**
 

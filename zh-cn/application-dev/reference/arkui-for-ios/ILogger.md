@@ -141,7 +141,7 @@
 | LOG_INFO  | 信息日志 | LOG_INFO     |
 | LOG_WARN  | 警告日志 | LOG_WARN     |
 | LOG_ERROR | 错误日志 | LOG_ERROR    |
-| LOG_FATAL | 错误日志 | LOG_FATAL    |
+| LOG_FATAL | 致命日志 | LOG_FATAL    |
 
 ## 完整示例
 

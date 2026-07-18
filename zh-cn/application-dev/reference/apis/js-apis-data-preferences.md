@@ -1018,7 +1018,7 @@ try {
 
 getAllSync(): Object
 
-从缓存的Preferences实例中获取所有键值数据。，此为同步接口。
+从缓存的Preferences实例中获取所有键值数据，此为同步接口。
 
 **系统能力：** SystemCapability.DistributedDataManager.Preferences.Core
 

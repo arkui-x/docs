@@ -214,7 +214,7 @@ plugins
 
 - **apiVersion:** ArkUI-X SDK依赖OpenHarmony SDK的版本。
 - **displayName:** ArkUI-X SDK在DevEco Studio的显示名称。
-- **path:** ArkUI-X SDK下载的后的路径名称。
+- **path:** ArkUI-X SDK下载后的路径名称。
 - **version:** ArkUI-X SDK编译构建版本号，用于转测试。
 
 # ArkUI-X SDK内容详细规格
