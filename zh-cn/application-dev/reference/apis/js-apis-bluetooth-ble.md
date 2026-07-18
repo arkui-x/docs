@@ -2807,7 +2807,7 @@ try {
 
 | 名称               | 类型   | 可读 | 可写 | 说明                                                         | Android平台 | iOS平台 |
 | ------------------ | ------ | ---- | ---- | ------------------------------------------------------------ | ----------- | ------- |
-| deviceId           | string | 是   | 否   | 表示发送特征值读请求的远端设备地址，例如："XX:XX:XX:XX:XX:XX"。android deviceId:"XX:XX:XX:XX:XX:XX", ios deviceId:"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" | 支持        | 支持    |
+| deviceId           | string | 是   | 否   | 表示发送特征值读请求的远端设备地址，例如："XX:XX:XX:XX:XX:XX"。android deviceId:"XX:XX:XX:XX:XX:XX", iOS deviceId:"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" | 支持        | 支持    |
 | transId            | number | 是   | 否   | 表示读请求的传输ID，server端回复响应时需填写相同的传输ID。   | 支持        | 支持    |
 | characteristicUuid | string | 是   | 否   | 特定特征（characteristic）的UUID，例如：00002a11-0000-1000-8000-00805f9b34fb。 | 支持        | 支持    |
 | serviceUuid        | string | 是   | 否   | 特定服务（service）的UUID，例如：00001888-0000-1000-8000-00805f9b34fb。 | 支持        | 支持    |
@@ -2821,7 +2821,7 @@ try {
 
 | 名称                 | 类型   | 可读   | 可写   | 说明                                       | Android平台                              | iOS平台                                  |
 | ------------------ | ------ | ---- | ---- | ---------------------------------------- | ------------------ | ------------------ |
-| deviceId           | string | 是    | 否    | 表示发送特征值写请求的远端设备地址，例如："XX:XX:XX:XX:XX:XX"。android deviceId:"XX:XX:XX:XX:XX:XX", ios deviceId:"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" | 支持 | 支持 |
+| deviceId           | string | 是    | 否    | 表示发送特征值写请求的远端设备地址，例如："XX:XX:XX:XX:XX:XX"。android deviceId:"XX:XX:XX:XX:XX:XX", iOS deviceId:"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" | 支持 | 支持 |
 | transId            | number | 是    | 否    | 表示写请求的传输ID，server端回复响应时需填写相同的传输ID。       | 支持     | 支持 |
 | value | ArrayBuffer | 是 | 否 | 表示写入的描述符二进制数据。 | 支持 | 支持 |
 | characteristicUuid | string | 是    | 否    | 特定特征（characteristic）的UUID，例如：00002a11-0000-1000-8000-00805f9b34fb。 | 支持 | 支持 |
@@ -2836,7 +2836,7 @@ try {
 
 | 名称               | 类型   | 可读 | 可写 | 说明                                                         | Android平台 | iOS平台 |
 | ------------------ | ------ | ---- | ---- | ------------------------------------------------------------ | ----------- | ------- |
-| deviceId           | string | 是   | 否   | 表示发送描述符读请求的远端设备地址，例如："XX:XX:XX:XX:XX:XX"。android deviceId:"XX:XX:XX:XX:XX:XX", ios deviceId:"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" | 支持        | 支持    |
+| deviceId           | string | 是   | 否   | 表示发送描述符读请求的远端设备地址，例如："XX:XX:XX:XX:XX:XX"。android deviceId:"XX:XX:XX:XX:XX:XX", iOS deviceId:"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" | 支持        | 支持    |
 | transId            | number | 是   | 否   | 表示读请求的传输ID，server端回复响应时需填写相同的传输ID。   | 支持        | 支持    |
 | descriptorUuid     | string | 是   | 否   | 表示描述符（descriptor）的UUID，例如：00002902-0000-1000-8000-00805f9b34fb。 | 支持        | 支持    |
 | characteristicUuid | string | 是   | 否   | 特定特征（characteristic）的UUID，例如：00002a11-0000-1000-8000-00805f9b34fb。 | 支持        | 支持    |
@@ -2866,7 +2866,7 @@ try {
 
 | 名称     | 类型                                                         | 可读 | 可写 | 说明                                                         | Android平台 | iOS平台 |
 | -------- | ------------------------------------------------------------ | ---- | ---- | ------------------------------------------------------------ | ----------- | ------- |
-| deviceId | string                                                       | 是   | 否   | 表示远端设备地址，例如："XX:XX:XX:XX:XX:XX"。<br />android deviceId:"XX:XX:XX:XX:XX:XX", ios deviceId:"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" | 支持        | 支持    |
+| deviceId | string                                                       | 是   | 否   | 表示远端设备地址，例如："XX:XX:XX:XX:XX:XX"。<br />android deviceId:"XX:XX:XX:XX:XX:XX", iOS deviceId:"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" | 支持        | 支持    |
 | state    | [ProfileConnectionState](js-apis-bluetooth-constant.md#profileconnectionstate) | 是   | 是   | 表示BLE连接状态的枚举。                                      | 支持        | 支持    |
 
 
@@ -2878,7 +2878,7 @@ try {
 
 | 名称       | 类型        | 可读   | 可写   | 说明                                 | Android平台                        | iOS平台                            |
 | -------- | ----------- | ---- | ---- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| deviceId | string      | 是    | 否    | 表示扫描到的设备地址，例如："XX:XX:XX:XX:XX:XX"。基于信息安全考虑，此处获取的设备地址为随机MAC地址。配对成功后，该地址不会变更；已配对设备取消配对后重新扫描或蓝牙服务下电时，该随机地址会变更。android deviceId:"XX:XX:XX:XX:XX:XX", ios deviceId:"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" | 支持 | 支持 |
+| deviceId | string      | 是    | 否    | 表示扫描到的设备地址，例如："XX:XX:XX:XX:XX:XX"。基于信息安全考虑，此处获取的设备地址为随机MAC地址。配对成功后，该地址不会变更；已配对设备取消配对后重新扫描或蓝牙服务下电时，该随机地址会变更。android deviceId:"XX:XX:XX:XX:XX:XX", iOS deviceId:"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" | 支持 | 支持 |
 | rssi     | number      | 是    | 否    | 表示扫描到的设备的rssi值。                    | 支持                  | 支持 |
 | data     | ArrayBuffer | 是    | 否    | 表示扫描到的设备发送的广播包。                    | 支持                  | 支持 |
 | deviceName | string | 是    | 否    | 表示扫描到的设备名称。                    | 支持                  | 支持 |

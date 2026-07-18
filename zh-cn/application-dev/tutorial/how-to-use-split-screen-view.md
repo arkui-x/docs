@@ -210,7 +210,7 @@
 
   目前对于整个配置文件的建议是不大于500KB，对于具体配置条目个数没有限制。
 
-- **配置Activity A B的跳转关系对（activityPairs）时，如果即希望A打开B能分屏，也希望B打开A能分屏，配置一条关系可以吗？**
+- **配置Activity A B的跳转关系对（activityPairs）时，如果既希望A打开B能分屏，也希望B打开A能分屏，配置一条关系可以吗？**
 
   在easygo.json中activityPairs配置中区分from和to，如果相互打开都能触发分屏，需要配置两条，分别是from A to B和from B to A。
 
