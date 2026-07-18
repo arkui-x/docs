@@ -670,7 +670,7 @@ public boolean unRegister(String bridgeName);
 
 ## BridgeManager类
 
-用于管理BridgePlugin实例，由StageActiivty负责创建和销毁。开发者通过StageActivity的getBridgeManager() 获取BridgeManager实例，用于构建BridgePlugin实例。
+用于管理BridgePlugin实例，由StageActivity负责创建和销毁。开发者通过StageActivity的getBridgeManager() 获取BridgeManager实例，用于构建BridgePlugin实例。
 
 **开发者不需要关心BridgeManager类中的接口。**
 

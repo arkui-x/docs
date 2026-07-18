@@ -212,7 +212,7 @@ const systemPasteboard: pasteboard.SystemPasteboard = pasteboard.getSystemPasteb
 | want | [Want](js-apis-app-ability-want.md) | 否 | 否 | Want内容。 | 支持 | 支持 |
 | mimeType | string | 否 | 否 | 默认数据类型。 | 不支持 | 支持 |
 | plainText | string | 否 | 否 | 纯文本内容。 | 支持 | 支持 |
-| uri | string | 否 | 否 | URI内容。**注意**  ：Android平台需考虑设备限制，如不支持“file://”等开头的URI写入系统剪切板。 | 支持 | 支持 |
+| uri | string | 否 | 否 | URI内容。**注意**  ：Android平台需考虑设备限制，如不支持“file://”等开头的URI写入系统剪贴板。 | 支持 | 支持 |
 | pixelMap | [image.PixelMap](js-apis-image.md#pixelmap7) | 否 | 否 | PixelMap内容。**注意** ： pixelMap跟原生APP交互只支持JPEG和PNG格式。 | 不支持 | 支持 |
 | data | {[mimeType:&nbsp;string]:&nbsp;ArrayBuffer} | 否 | 否 | 自定义数据内容。 | 不支持 | 支持 |
 
@@ -982,7 +982,7 @@ clearData(callback: AsyncCallback&lt;void&gt;): void
 
 **支持平台：** Android、iOS
 
-**说明：** Android API level 28（对应 Android 9.0）以下版本，无法彻底清空系统剪贴板内容：调用此接口后，系统不会移除剪贴板中的所有条目，而是会写入一条“内容为空字符串的纯文本的剪切板数据”将原有数据完全覆盖（即剪贴板仍保留 1 条空文本条目，而非完全空白）；
+**说明：** Android API level 28（对应 Android 9.0）以下版本，无法彻底清空系统剪贴板内容：调用此接口后，系统不会移除剪贴板中的所有条目，而是会写入一条“内容为空字符串的纯文本的剪贴板数据”将原有数据完全覆盖（即剪贴板仍保留 1 条空文本条目，而非完全空白）；
 
 **参数：**
 
@@ -1021,7 +1021,7 @@ clearData(): Promise&lt;void&gt;
 
 **支持平台：** Android、iOS
 
-> **说明：** Android API level 28（对应 Android 9.0）以下版本，无法彻底清空系统剪贴板内容：调用此接口后，系统不会移除剪贴板中的所有条目，而是会写入一条"内容为空字符串的纯文本的剪切板数据”将原有数据全部覆盖（即剪贴板仍保留 1 条空文本条目，而非完全空白）。
+> **说明：** Android API level 28（对应 Android 9.0）以下版本，无法彻底清空系统剪贴板内容：调用此接口后，系统不会移除剪贴板中的所有条目，而是会写入一条“内容为空字符串的纯文本的剪贴板数据”将原有数据全部覆盖（即剪贴板仍保留 1 条空文本条目，而非完全空白）。
 
 **返回值：**
 
@@ -1329,7 +1329,7 @@ clearDataSync(): void
 
 **支持平台：** Android、iOS
 
-**说明：** Android API level 28（对应 Android 9.0）以下版本，无法彻底清空系统剪贴板内容：调用此接口后，系统不会移除剪贴板中的所有条目，而是会写入一条“内容为空字符串的纯文本的剪切板数据”将原有数据全部覆盖（即剪贴板仍保留 1 条空文本条目，而非完全空白）；
+**说明：** Android API level 28（对应 Android 9.0）以下版本，无法彻底清空系统剪贴板内容：调用此接口后，系统不会移除剪贴板中的所有条目，而是会写入一条“内容为空字符串的纯文本剪贴板数据”将原有数据全部覆盖（即剪贴板仍保留 1 条空文本条目，而非完全空白）；
 
 **错误码：**
 

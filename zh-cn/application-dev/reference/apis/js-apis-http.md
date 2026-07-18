@@ -457,7 +457,7 @@ requestInStream(url: string, callback: AsyncCallback\<number\>): void
 | 2300999 | Unknown error.                                                 |
 
 > **部分场景跨平台错误码不一致说明：**
->  使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Andriod平台会返回错误码2300007，IOS平台会返回错误码2300008。
+>  使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Android平台会返回错误码2300007，iOS平台会返回错误码2300008。
 
 > **错误码说明：**
 > 以上错误码的详细介绍参见[HTTP错误码](../errorcodes/errorcode-net-http.md)。
@@ -536,9 +536,9 @@ requestInStream(url: string, options: HttpRequestOptions, callback: AsyncCallbac
 | 2300999 | Unknown error.                                                 |
 
 > **部分场景跨平台错误码不一致说明：**
-> （1）使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Andriod平台会返回错误码2300007，IOS平台会返回错误码2300008。
-> （2）使用错误的代理协议发起http流式请求时，OH和Andriod平台会返回错误码2300005，IOS平台会返回错误码2300999。
-> （3）使用DELETE方法和HTTP2协议或HTTP3协议发起流式请求时，请求成功后，OH和IOS平台会返回405，Android平台会返回400。
+> （1）使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Android平台会返回错误码2300007，iOS平台会返回错误码2300008。
+> （2）使用错误的代理协议发起http流式请求时，OH和Android平台会返回错误码2300005，iOS平台会返回错误码2300999。
+> （3）使用DELETE方法和HTTP2协议或HTTP3协议发起流式请求时，请求成功后，OH和iOS平台会返回405，Android平台会返回400。
 
 > **错误码说明：**
 > 以上错误码的详细介绍参见[HTTP错误码](../errorcodes/errorcode-net-http.md)。
@@ -644,8 +644,8 @@ requestInStream(url: string, options? : HttpRequestOptions): Promise\<number\>
 | 2300999 | Unknown error.                                                 |
 
 > **部分场景跨平台错误码不一致说明：**
-> （1）使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Andriod平台会返回错误码2300007，IOS平台会返回错误码2300008。
-> （2）使用错误的代理协议发起http流式请求时，OH和Andriod平台会返回错误码2300005，IOS平台会返回错误码2300999。
+> （1）使用异常URL（例如https://0.0.0.0/）发起http流式请求时，OH和Android平台会返回错误码2300007，iOS平台会返回错误码2300008。
+> （2）使用错误的代理协议发起http流式请求时，OH和Android平台会返回错误码2300005，iOS平台会返回错误码2300999。
 
 > **错误码说明：**
 > 以上错误码的详细介绍参见[HTTP错误码](../errorcodes/errorcode-net-http.md)。
@@ -1057,7 +1057,7 @@ HTTP 请求方法。
 | NOT_ACCEPTABLE    | 406  | 服务器无法根据客户端请求的内容特性完成请求。                 |
 | PROXY_AUTH        | 407  | 请求要求代理的身份认证。                                     |
 | CLIENT_TIMEOUT    | 408  | 请求时间过长，超时。                                         |
-| CONFLICT          | 409  | 服务器完成客户端的PUT请求是可能返回此代码，服务器处理请求时发生了冲突。 |
+| CONFLICT          | 409  | 服务器完成客户端的PUT请求时可能返回此代码，服务器处理请求时发生了冲突。 |
 | GONE              | 410  | 客户端请求的资源已经不存在。                                 |
 | LENGTH_REQUIRED   | 411  | 服务器无法处理客户端发送的不带Content-Length的请求信息。     |
 | PRECON_FAILED     | 412  | 客户端请求信息的先决条件错误。                               |
@@ -1067,7 +1067,7 @@ HTTP 请求方法。
 | INTERNAL_ERROR    | 500  | 服务器内部错误，无法完成请求。                               |
 | NOT_IMPLEMENTED   | 501  | 服务器不支持请求的功能，无法完成请求。                       |
 | BAD_GATEWAY       | 502  | 充当网关或代理的服务器，从远端服务器接收到了一个无效的请求。 |
-| UNAVAILABLE       | 503  | 由于超载或系统维护，服务器暂时的无法处理客户端的请求。       |
+| UNAVAILABLE       | 503  | 由于超载或系统维护，服务器暂时无法处理客户端的请求。         |
 | GATEWAY_TIMEOUT   | 504  | 充当网关或代理的服务器，未及时从远端服务器获取请求。         |
 | VERSION           | 505  | 服务器请求的HTTP协议的版本。                                 |
 

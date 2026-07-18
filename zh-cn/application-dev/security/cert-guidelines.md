@@ -43,8 +43,8 @@
 | X509Cert        | getSignatureAlgName() : string                               | 获取证书签名算法名称                         |
 | X509Cert        | getSignatureAlgOid() : string                                | 获取证书签名算法OID                          |
 | X509Cert        | getSignatureAlgParams() : DataBlob                           | 获取证书签名算法参数                         |
-| X509Cert        | getKeyUsage() : DataBlob                                     | 获取证书秘钥用途                             |
-| X509Cert        | getExtKeyUsage() : DataArray                                 | 获取证书扩展秘钥用途                         |
+| X509Cert        | getKeyUsage() : DataBlob                                     | 获取证书密钥用途                             |
+| X509Cert        | getExtKeyUsage() : DataArray                                 | 获取证书扩展密钥用途                         |
 | X509Cert        | getBasicConstraints() : number                               | 获取证书基本约束                             |
 | X509Cert        | getSubjectAltNames() : DataArray                             | 获取证书主体可选名称                         |
 | X509Cert        | getIssuerAltNames() : DataArray                              | 获取证书颁发者可选名称                       |

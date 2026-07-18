@@ -185,7 +185,7 @@ class A {
 
 ## 泛型类中的Sendable class，collections.Array，collections.Map，collections.Set的模板类型必须是Sendable类型
 
-Sendable数据不能持有非Sendable数据，因此泛型类中的Sendable数据的模版类型必须是Sendable类型。
+Sendable数据不能持有非Sendable数据，因此泛型类中的Sendable数据的模板类型必须是Sendable类型。
 
 **正例：**
 

@@ -71,7 +71,7 @@ ChipOptions定义Chip的样式及具体式样参数。
 >
 > 4. prefixIcon的fillColor默认值为：`$r('sys.color.ohos_id_color_secondary')`，suffixIcon的fillColor默认值为：`$r('sys.color.ohos_id_color_primary')`。fillColor对颜色的解析与Image组件保持一致。
 >5. prefixIcon和suffixIcon的activatedFillColor默认值均为：`$r('sys.color.ohos_id_color_text_primary_contrary')`。activatedFillColor对颜色的解析与Image组件保持一致。
->6. IOS端chip组件底层，由于最外层button组件accessibilityGroup属性设置为true，button该组件及其所有子组件为一整个可以选中的组件，无障碍服务将不再关注其子组件内容。
+>6. iOS端chip组件底层，由于最外层button组件accessibilityGroup属性设置为true，该button组件及其所有子组件为一整个可以选中的组件，无障碍服务将不再关注其子组件内容。
 
 ## ChipSize
 
