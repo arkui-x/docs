@@ -1,6 +1,6 @@
 # ArkUI-X SDK包中的内容及作用
 
-![image](../figures/Pre-faq-1.png)
+![image](../figures/pre-faq-1.png)
 
 ArkUI-X SDK从2D视角来看，入口在DevEco Studio->Preferences->ArkUI-X集成，主要包含三部分，即上图中的engine（引擎库）、plugins（插件库）、toolchains（编译工具链），
 	
