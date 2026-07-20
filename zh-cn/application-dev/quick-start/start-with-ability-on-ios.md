@@ -103,7 +103,7 @@ StageApplication本质上是一个调度类，主要用于触发内部相关类�
 ```
 
 ### ArkUI应用实现页面跳转
-当在iOS平台上使用[startability](../reference/apis/js-apis-inner-application-uiAbilityContext.md#uiabilitycontextstartability)接口传递参数信息，并实现页面跳转时，需要参考下述示例进行开发。
+当在iOS平台上使用[startAbility](../reference/apis/js-apis-inner-application-uiAbilityContext.md#uiabilitycontextstartability)接口传递参数信息，并实现页面跳转时，需要参考下述示例进行开发。
 
 - 通过路由模式（openURL:）实现的iOS应用页面跳转回调，获取传递参数
 
@@ -306,7 +306,7 @@ value为json格式
 | string  |    10     |
 
 #### 示例代码
-* Object-C
+* Objective-C
 
 ```
 NSString *strParams = @"{\"params\":[{\"key\":\"keyfirst\",\"type\":1,\"value\":\"true\"},{\"key\":\"keysecond\",\"type\":9,\"value\":\"2.3\"},{\"key\":\"keythird\",\"type\":5,\"value\":\"2\"},{\"key\":\"keyfourth\",\"type\":10,\"value\":\"test\"}]}";
@@ -336,7 +336,7 @@ export default class EntryAbility extends UIAbility {
 ### 2. WantParams工具类
 推荐使用。
 #### 示例代码
-* Object-C
+* Objective-C
 此示例展示了在启动一个新的 Ability 时，如何通过 WantParams 实现参数传递。具体涉及使用 WantParams 中的 addValue、getValue 和 toWantParamsString 接口，完成数据的自定义、获取和修改。
 ```
     NSString *instanceName = [NSString stringWithFormat:@"%@:%@:%@",@"com.example.iosabilitystage", @"entry", @"EntryAbility"];

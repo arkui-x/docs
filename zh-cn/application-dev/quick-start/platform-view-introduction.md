@@ -2,9 +2,9 @@
 
 ## 简介
 
-平台视图，为了利用原生组件，减少开发成本，提供了ArkUI-X与原生view进行混合显示。
+平台视图，为了利用原生组件、减少开发成本，提供了ArkUI-X与原生View进行混合显示。
 
-以Android为例，ArkUI-X框架支持将原生View和ArkUI组件混合显示的能力，用户可以编写ArkTS代码，java原生代码，就可以在ArkUI-X框架上显示原生组件的视图。
+以Android为例，ArkUI-X框架支持将原生View和ArkUI组件混合显示的能力，用户可以编写ArkTS代码、Java原生代码，就可以在ArkUI-X框架上显示原生组件的视图。
 
 本文介绍如何通过编写自定义的Android、iOS平台的代码。具体用法，Android侧参考[PlatformView](../tutorial/how-to-use-platformview-on-android.md)，iOS侧参考[PlatformView](../tutorial/how-to-use-platformview-on-ios.md)。
 

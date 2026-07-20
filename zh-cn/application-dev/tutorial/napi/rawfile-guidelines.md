@@ -180,7 +180,7 @@
         // argv[0]即为函数第一个参数Js资源对象，OH_ResourceManager_InitNativeResourceManager转为Native对象。
         NativeResourceManager *mNativeResMgr = OH_ResourceManager_InitNativeResourceManager(env, argv[0]);
 
-        // 获取函数argv[1]，此为为rawfile相对路径
+        // 获取函数argv[1]，此为rawfile相对路径
         size_t strSize;
         char strBuf[256];
         napi_get_value_string_utf8(env, argv[1], strBuf, sizeof(strBuf), &strSize);

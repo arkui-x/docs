@@ -1817,7 +1817,7 @@ let line : text.TextLine = lineTypeset.createLine(startIndex, count);
 
 **系统能力：** SystemCapability.Graphics.Drawing
 
-| 名称        | 类型                                                         | 只读 | 可选 | 说明             | Andriod平台 | iOS平台 |
+| 名称        | 类型                                                         | 只读 | 可选 | 说明             | Android平台 | iOS平台 |
 | ----------- | ------------------------------------------------------------ | ---- | ---- | ---------------- | ----------- | ------- |
 | textStyle   | [TextStyle](#textstyle)                                      | 否   | 否   | 字体的样式信息。 | 支持        | 支持    |
 | fontMetrics | [drawing.FontMetrics](arkts-apis-graphics-drawing-i.md#fontmetrics) | 否   | 否   | 字体度量信息。   | 支持        | 支持    |
@@ -1828,7 +1828,7 @@ let line : text.TextLine = lineTypeset.createLine(startIndex, count);
 
 **系统能力：** SystemCapability.Graphics.Drawing
 
-| 名称      | 类型                                                | 只读 | 可选 | 说明        | Andriod平台 | iOS平台 |
+| 名称      | 类型                                                | 只读 | 可选 | 说明        | Android平台 | iOS平台 |
 | --------- | -------------------------------------------------- | ---- | ---- | ----------- |----------- |----------- |
 | startIndex | number                                            | 否   | 否   | 文本缓冲区中该行开始的索引位置。| 支持 | 支持 |
 | endIndex   | number                                            | 否   | 否   | 文本缓冲区中该行结束的索引位置。| 支持 | 支持 |
@@ -1848,7 +1848,7 @@ let line : text.TextLine = lineTypeset.createLine(startIndex, count);
 
 **系统能力：** SystemCapability.Graphics.Drawing
 
-| 名称      | 类型                                                | 只读 | 可选 | 说明        | Andriod平台 | iOS平台 |
+| 名称      | 类型                                                | 只读 | 可选 | 说明        | Android平台 | iOS平台 |
 | --------- | -------------------------------------------------- | ---- | ---- | ----------- |----------- |----------- |
 | rect      | [common2D.Rect](js-apis-graphics-common2D.md#rect) | 否   | 否   | 矩形区域信息。| 支持 | 支持 |
 | direction | [TextDirection](#textdirection)                    | 否   | 否   | 文本方向。    | 支持 | 支持 |
@@ -1859,7 +1859,7 @@ let line : text.TextLine = lineTypeset.createLine(startIndex, count);
 
 **系统能力：** SystemCapability.Graphics.Drawing
 
-| 名称      | 类型                   | 只读 | 可选 | 说明                      | Andriod平台 | iOS平台 |
+| 名称      | 类型                   | 只读 | 可选 | 说明                      | Android平台 | iOS平台 |
 | --------- | --------------------- | ---- | ---- | ------------------------ |----------- |----------- |
 | position  | number                | 否   | 否   | 字形相对于段落的索引，整数。  | 支持 | 支持 |
 | affinity  | [Affinity](#affinity) | 否   | 否   | 位置亲和度。               | 支持 | 支持 |
@@ -1870,7 +1870,7 @@ let line : text.TextLine = lineTypeset.createLine(startIndex, count);
 
 **系统能力：** SystemCapability.Graphics.Drawing
 
-| 名称  | 值 | 说明                                   | Andriod平台 | iOS平台 |
+| 名称  | 值 | 说明                                   | Android平台 | iOS平台 |
 | ----- | - | -------------------------------------- |----------- |----------- |
 | TIGHT | 0 | 不设置letterSpacing时，与字形紧贴，否则包含letterSpacing的宽度。| 支持 | 支持 |
 | MAX   | 1 | 扩展宽度，以匹配所有行上最宽矩形的位置。   | 支持 | 支持 |
@@ -1881,7 +1881,7 @@ let line : text.TextLine = lineTypeset.createLine(startIndex, count);
 
 **系统能力：** SystemCapability.Graphics.Drawing
 
-| 名称                      | 值 | 说明                                           | Andriod平台 | iOS平台 |
+| 名称                      | 值 | 说明                                           | Android平台 | iOS平台 |
 | ------------------------- | - | ---------------------------------------------- |----------- |----------- |
 | TIGHT                     | 0 | 与字形紧贴。                                    | 支持 | 支持 |
 | MAX                       | 1 | 扩展高度，以匹配所有行上最高矩形的位置。           | 支持 | 支持 |
@@ -1896,7 +1896,7 @@ let line : text.TextLine = lineTypeset.createLine(startIndex, count);
 
 **系统能力：** SystemCapability.Graphics.Drawing
 
-| 名称       | 值 | 说明                          | Andriod平台 | iOS平台 |
+| 名称       | 值 | 说明                          | Android平台 | iOS平台 |
 | ---------- | - | ----------------------------- |----------- |----------- |
 | UPSTREAM   | 0 | 该位置与文本位置的前一位有关联。 | 支持 | 支持 |
 | DOWNSTREAM | 1 | 该位置与文本位置的后一位有关联。 | 支持 | 支持 |
@@ -2318,7 +2318,7 @@ struct Index {
 
 **系统能力：** SystemCapability.Graphics.Drawing
 
-| 名称 | 类型 | 只读 | 可选 | 说明 | Andriod平台 | iOS平台 |
+| 名称 | 类型 | 只读 | 可选 | 说明 | Android平台 | iOS平台 |
 | - | - | - | - | - | - | - |
 | ascent | number | 否 | 否 | 文本行的上升高度，浮点数。 | 支持 | 支持 |
 | descent | number | 否 | 否 | 文本行的下降高度，浮点数。 | 支持 | 支持 |
@@ -3207,7 +3207,7 @@ let advancesNull = runs[0].getAdvances(null); // null是非法参数，将返回
 
 **系统能力：** SystemCapability.Graphics.Drawing
 
-| 名称               | 类型                    | 只读 | 可选 | 说明                                               | Andriod平台 | iOS平台 |
+| 名称               | 类型                    | 只读 | 可选 | 说明                                               | Android平台 | iOS平台 |
 | -----------------  | ----------------------- | ---- | ---  | -------------------------------------------------- |----------- |----------- |
 | alignment          | [TextAlign](#textalign) | 否   |  否  | 段落中制表符之后的文本对齐方式，支持设置[TextAlign](#textalign)的LEFT左对齐、RIGHT右对齐和CENTER居中对齐方式，其他枚举值为左对齐，默认为左对齐。 | 支持 | 支持 |
 | location           | number                  | 否   |  否  | 制表符之后的文本对齐位置，浮点数，单位为物理像素px，最小值为1.0，当该值小于1.0时，该制表符会被替换为一个空格。 | 支持 | 支持 |
@@ -3232,7 +3232,7 @@ alignment为RIGHT，location为100，文本为"aabcdef\\tg hi\\tjkl\\tmno\\tp qr
 
 **系统能力：** SystemCapability.Graphics.Drawing
 
-| 名称 | 值 | 说明 | Andriod平台 | iOS平台 |
+| 名称 | 值 | 说明 | Android平台 | iOS平台 |
 | - | - | - |----------- |----------- |
 | ALL | 1 << 0 | 所有字体类型，包括系统字体类型和自定义字体类型。| 支持 | 支持 |
 | GENERIC  | 1 << 1 | 系统字体类型。 | 支持 | 支持 |

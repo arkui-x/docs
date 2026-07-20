@@ -10,7 +10,7 @@
 
 ![image](../figures/pre-faq-6.png)
 
-3、使用DevEco Studio创建模版工程请参考：[创建指导](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/quick-start/start-with-deveco-studio.md)
+3、使用DevEco Studio创建模板工程请参考：[创建指导](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/quick-start/start-with-deveco-studio.md)
 
 （1）当前支持三种工程模板，包括：
 

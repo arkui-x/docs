@@ -1,6 +1,6 @@
 # IArkUIXPlugin
 
-本模块提供Android平台端的插件的功能，包括插件的生命周期回调，获取应用的context和BridgeManger，并通过Bridge与ArkUI页面进行交互，Bridge相关参考[BridgePlugin](BridgePlugin.md)。
+本模块提供Android平台端的插件的功能，包括插件的生命周期回调，获取应用的context和BridgeManager，并通过Bridge与ArkUI页面进行交互，Bridge相关参考[BridgePlugin](BridgePlugin.md)。
 
 > 说明：
 >
@@ -74,7 +74,7 @@ public Context getContext();
 
 **描述：**
 
-返回当前StageActvity的context。
+返回当前StageActivity的context。
 
 **参数：** 
 

@@ -8,9 +8,9 @@
 
 
 ### 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行Android AAR开发
-可以通过通过ACE Tools或DevEco Studio完成
+可以通过ACE Tools或DevEco Studio完成
 * ACE Tools
-1. ace create 命令创建一个跨平台的library模版工程：
+1. ace create 命令创建一个跨平台的library模板工程：
     ```
     ace create [project] -t library
     ```

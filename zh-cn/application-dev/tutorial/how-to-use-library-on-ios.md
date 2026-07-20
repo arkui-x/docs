@@ -6,8 +6,8 @@
 * 跨平台Library工程开发介绍
 * Framework在iOS应用工程的使用
 
-### 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行Android AAR开发
-可以通过通过ACE Tools或DevEco Studio完成
+### 使用ACE Tools和DevEco Studio集成ArkUI-X SDK进行iOS Framework开发
+可以通过ACE Tools或DevEco Studio完成
 * ACE Tools
 1. ace create 命令创建一个跨平台应用工程，示例工程名为demo,选择工程类型为library：
     ```
@@ -23,7 +23,7 @@
 
 ### Framework在应用工程的使用
 
-通过xcode创建一个应用工程，删除其他xcode自动生成的的代码头文件和源文件(参考[ios工程集成 ArkUI sdk](../tutorial/how-to-integrate-arkui-into-ios.md))。将上述myframework.framework与libarkui_ios.framework以及其他framework引入到工程中。
+通过Xcode创建一个应用工程，删除其他Xcode自动生成的代码头文件和源文件（参考[iOS工程集成 ArkUI SDK](../tutorial/how-to-integrate-arkui-into-ios.md)）。将上述myframework.framework与libarkui_ios.framework以及其他framework引入到工程中。
 **AppDelegate部分**
 * AppDelegate.h
 ```objective-c

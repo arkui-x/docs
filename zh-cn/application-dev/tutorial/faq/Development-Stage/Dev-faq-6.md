@@ -76,11 +76,11 @@ onWindowStageCreate(windowStage: window.WindowStage): void {
 
 ### 补充说明
 
-1、IOS系统中如果使用上述方案无法实现沉浸式效果，还可尝试如下方式。
+1、iOS系统中如果使用上述方案无法实现沉浸式效果，还可尝试如下方式。
 
 在需要实现沉浸式的跨平台ArkTS页面对应的xxxViewController.m文件中的viewDidLoad方法（跨平台ViewController同跨平台的ArkTS UIAbility一一对应），增加隐藏导航栏和状态栏的逻辑：self.navigationController.navigationBarHidden = YES，以达到沉浸式效果。
 
-以DevEco Studio中跨平台的基础模版工程[ArkUI-X]Empty Ability为例，开发者可以修改.arkui-x/ios/app/EntryEntryAbilityViewController.m文件。
+以DevEco Studio中跨平台的基础模板工程[ArkUI-X]Empty Ability为例，开发者可以修改.arkui-x/ios/app/EntryEntryAbilityViewController.m文件。
 
 示例如下：
 ```typescript
