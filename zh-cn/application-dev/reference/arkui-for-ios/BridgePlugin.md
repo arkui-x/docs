@@ -42,7 +42,7 @@
 
 **描述：** 
 
-获取当前StageViewController的绑定的bridgeManager。
+获取当前StageViewController绑定的bridgeManager。
 
 **参数：** 
 

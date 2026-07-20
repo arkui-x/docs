@@ -5,7 +5,7 @@
 
 ### 创建工程
 
-在DevEco Studio中创建跨平台模版工程。
+在DevEco Studio中创建跨平台模板工程。
 
 1. 点击**File > New > Create Project**。
    ![create_project](figures/create-project.png)
@@ -13,7 +13,7 @@
 2. 在打开的模板市场中，选择[ArkUI-X]Empty Ability，点击**Next**。
    ![ability_template](figures/ability_template.png)
 
-3. 在工程配置页面，填写Project name和Save location，点击**Finish**，等待模版工程创建完成。
+3. 在工程配置页面，填写Project name和Save location，点击**Finish**，等待模板工程创建完成。
 
 ### 编译构建生成跨平台应用
 

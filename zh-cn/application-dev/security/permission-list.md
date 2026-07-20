@@ -8,7 +8,7 @@
 
 **Android平台**：支持，对应权限为android.permission.CAMERA, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#android)。
 
-**IOS平台**：支持，对应标签关键字为NSCameraUsageDescription, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#ios)。
+**iOS平台**：支持，对应标签关键字为NSCameraUsageDescription, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#ios)。
 
 **授权方式**：user_grant
 
@@ -18,7 +18,7 @@
 
 **Android平台**：支持，对应权限为android.permission.RECORD_AUDIO, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#android)。
 
-**IOS平台**：支持，对应标签关键字为NSMicrophoneUsageDescription, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#ios)。
+**iOS平台**：支持，对应标签关键字为NSMicrophoneUsageDescription, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#ios)。
 
 **授权方式**：user_grant
 
@@ -28,7 +28,7 @@
 
 **Android平台**：支持，对应权限为android.permission.ACCESS_COARSE_LOCATION, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#android)。
 
-**IOS平台**：不支持。
+**iOS平台**：不支持。
 
 **授权方式**：user_grant
 
@@ -52,7 +52,7 @@ android.permission.ACCESS_FINE_LOCATION
 
 android.permission.ACCESS_COARSE_LOCATION
 
-**IOS平台**：不支持。
+**iOS平台**：不支持。
 
 **授权方式**：user_grant
 
@@ -62,7 +62,7 @@ android.permission.ACCESS_COARSE_LOCATION
 
 **Android平台**：支持，对应权限为android.permission.READ_EXTERNAL_STORAGE, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#android)。
 
-**IOS平台**：支持，对应标签关键字为NSPhotoLibraryUsageDescription, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#ios)。
+**iOS平台**：支持，对应标签关键字为NSPhotoLibraryUsageDescription, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#ios)。
 
 
 **授权方式**：user_grant
@@ -73,6 +73,6 @@ android.permission.ACCESS_COARSE_LOCATION
 
 **Android平台**：支持，对应权限为android.permission.WRITE_EXTERNAL_STORAGE, 权限声明方式参考[权限声明指导](../security/declare-permissions.md#android)。
 
-**IOS平台**：不支持。
+**iOS平台**：不支持。
 
 **授权方式**：user_grant

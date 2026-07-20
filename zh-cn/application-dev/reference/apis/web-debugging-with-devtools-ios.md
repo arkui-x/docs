@@ -1,7 +1,7 @@
 # 使用Safari浏览器调试前端页面
 
 
-Web组件支持在Safari浏览器调试前端页面。DevTools是一个 Web前端开发调试工具，提供了电脑上调试移动设备前端页面的能力。开发者通过[setWebDebuggingAccess()](./js-apis-webview.md#setwebdebuggingaccess16)接口开启Web组件前端页面调试能力，利用Safari浏览器自带的开发功能可以在电脑上调试移动设备上的前端网页，设备需为ios16.4及以上版本。
+Web组件支持在Safari浏览器调试前端页面。DevTools是一个 Web前端开发调试工具，提供了电脑上调试移动设备前端页面的能力。开发者通过[setWebDebuggingAccess()](./js-apis-webview.md#setwebdebuggingaccess16)接口开启Web组件前端页面调试能力，利用Safari浏览器自带的开发功能可以在电脑上调试移动设备上的前端网页，设备需为iOS 16.4及以上版本。
 
 
 ## 调试步骤
@@ -48,7 +48,7 @@ Web组件支持在Safari浏览器调试前端页面。DevTools是一个 Web前�
 
 请将设备连接至电脑，随后开启开发者模式，为后续的端口转发操作做好准备。
 
-1. 请开启设备上的开发者模式：手机系统打开 “设置”  > “safari浏览器” > “高级”，打开 “Javascript” 和 “网页检查器” 开关。  
+1. 请开启设备上的开发者模式：手机系统打开 “设置”  > “Safari浏览器” > “高级”，打开 “JavaScript” 和 “网页检查器” 开关。  
 
 
 ### 在Safari浏览器上打开调试工具页面

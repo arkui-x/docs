@@ -6,13 +6,13 @@
 
 &emsp;&emsp;随着 HarmonyOS Next 5.0 版本正式发布，众多开发者基于 ArkTS 语言为 HarmonyOS Next 系统开发了大量应用，这极大地丰富了 HarmonyOS 的生态。越来越多的应用上线，也给开发者带来了挑战，开发者需要同时开发和维护适用于 HarmonyOS Next、Android、iOS 三个平台的应用程序。这不仅意味着开发工作量大幅增加，开发成本也随之上升，而且很难保持一致的交互体验。<br>
 &emsp;&emsp;ArkUI-X 跨平台框架是基于 HarmonyOS 打造的跨端跨平台框架，能实现 “一次开发、三平台部署”。 基于ArkTS开发的HarmonyOS Next应用，配套ArkUI-X跨平台框架，可以快速改造为跨平台应用，缩短开发周期，同时还能确保应用在 HarmonyOS Next、Android、iOS 多个平台上，为用户提供一致的交互体验。
-<br>&emsp;&emsp;本文重点介绍如何将HarmonyNext应用工程转换为跨平台工程，实现一码多平台。<br>
+<br>&emsp;&emsp;本文重点介绍如何将HarmonyOS Next应用工程转换为跨平台工程，实现一码多平台。<br>
 
 
 
 ## 二、改造目标
 
-- 从零开始或基于现有HarmonyOS Next App进行改造，使其可快速部署于Android、IOS平台。<br>
+- 从零开始或基于现有HarmonyOS Next App进行改造，使其可快速部署于Android、iOS平台。<br>
 - 通过ArkUI-X框架Bridge能力实现ArkTS与原生平台交互。<br>
 
 
@@ -52,7 +52,7 @@
 
 ​		（1） 开发者进行设计时需首先考虑ArkUI-X框架的实际适配状况，使用支持跨平台的UI控件、属性、方法进行跨平台开发，因为在UI组件方面存在的差异，是无法借助Bridge能力来弥补的。 关于ArkUI-X框架组件适配情况可参考：[ArkTS声明式开发范式跨平台支持列表](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/reference/arkui-ts/README.md)。可参考案例：[案例解析](#四、案例解析)。<br>
 
-​		（2） API接口的使用：在使用API接口时可能会遇到以下两种情况：1、API不支持跨平台。2、API在Android、IOS平台支持能力有差异（具体信息可参考相应的API文档）。因此不建议开发者在features层直接调用API接口实现功能。应尽可能对其抽象，于commons层创建功能模块实现，使用时调用commons层相应功能模块接口。具体实现详见“第三部分：公共能力层（commons）”。<br>
+​		（2） API接口的使用：在使用API接口时可能会遇到以下两种情况：1、API不支持跨平台。2、API在Android、iOS平台支持能力有差异（具体信息可参考相应的API文档）。因此不建议开发者在features层直接调用API接口实现功能。应尽可能对其抽象，于commons层创建功能模块实现，使用时调用commons层相应功能模块接口。具体实现详见“第三部分：公共能力层（commons）”。<br>
 
 ​		（3）共通组件：在实际开发过程中，可以抽象出部分满足多种场景的共通UI。可以在commons层创建模块“**uicomponents**”，将共通UI抽象并实现，实现代码复用的效果。详见[架构图commons层 uicomponents](#三、方案说明)。<br>
 
@@ -290,7 +290,7 @@ export class PlatformInfo {
 }
 ```
 
-（4）创建实例类： NetWork。暴露给features层和products层，于运行时根据设备平台创建 NetWorkLoca l和 NetWorkArkUIX。
+（4）创建实例类：NetWork。暴露给features层和products层，于运行时根据设备平台创建NetWorkLocal和NetWorkArkUIX。
 
 ```tsx
 //NetWork.ets
@@ -572,7 +572,7 @@ export class NetWorkArkUIX implements NetWorkInterface {
 │   └── 特性...
 ├── products
 │   └── phone
-│       ├── arkuix							// 入口Module：Android、IOS平台
+│       ├── arkuix							// 入口Module：Android、iOS平台
 │       |	├── src\main
 │       |	|	├── ets
 │       |	|	|	├── entryability
@@ -790,7 +790,7 @@ export class DisplaySyncArkUIX implements DisplaySyncInterface {
 
 <img src=".\figures\ApplicationRetrofit_image_008.png" />
 
-&emsp;&emsp;问题解析：由于使用了跨平台工程模版，DevEco Studio在进行静态编译检查时会检查跨平台标签“@crossplatform”。而在工程中会使用一些当前不支持跨平台的HarmonyOS 接口导致静态编译检查失败。
+&emsp;&emsp;问题解析：由于使用了跨平台工程模板，DevEco Studio在进行静态编译检查时会检查跨平台标签“@crossplatform”。而在工程中会使用一些当前不支持跨平台的HarmonyOS 接口导致静态编译检查失败。
 
 ​		解决方法：
 

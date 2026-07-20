@@ -37,7 +37,7 @@ StageViewController是UIViewController的子类，是iOS应用的生命周期入
 ```
 
 - processBackPress
-具体用法请参考[IOS中实现跨平台页面左滑返回指南](../../quick-start/ios-slip-left-back.md)。
+具体用法请参考[iOS中实现跨平台页面左滑返回指南](../../quick-start/ios-slip-left-back.md)。
 
 ```
 /**
