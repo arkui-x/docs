@@ -64,7 +64,7 @@
 - [ArkUI-X框架LogInterface使用指南](./tutorial/how-to-use-arkui-x-loginterface-on-ios.md)
 - [预加载应用特性abc开发指南](./tutorial/how-to-use-preloadEtsModule-on-ios.md)
 - [平台视图开发指南](./tutorial/how-to-use-platformview-on-ios.md)
-- [IOS跨平台页面实现手势返回指南](./quick-start/ios-slip-left-back.md)
+- [iOS跨平台页面实现手势返回指南](./quick-start/ios-slip-left-back.md)
 - [以Hap为主体的共享逻辑包开发指南](./tutorial/how-to-decoupled-UI-and-Logic-on-ios.md)
 - [iOS原生页面与跨平台页面跳转开发指南](./tutorial/how-to-use-arkuix-on-nativePageLaunch-iOS.md)
 - [hwSymbol文件按需加载开发指导](./tutorial/how-to-use-symbol-subset.md)

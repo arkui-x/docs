@@ -8,7 +8,7 @@
 
 **错误信息**
 
-Unspported para value.
+Unsupported para value.
 
 **错误描述**
 

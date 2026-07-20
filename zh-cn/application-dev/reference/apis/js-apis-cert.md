@@ -30,8 +30,8 @@ import cryptoFramework from '@ohos.security.cryptoFramework';
 | ERR_CERT_NOT_YET_VALID                | 19030003 | 证书尚未生效。                |
 | ERR_CERT_HAS_EXPIRED                  | 19030004 | 证书过期。                   |
 | ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY | 19030005 | 无法获取证书的颁发者。        |
-| ERR_KEYUSAGE_NO_CERTSIGN              | 19030006 | 证书的秘钥用途不含证书签名。   |
-| ERR_KEYUSAGE_NO_DIGITAL_SIGNATURE     | 19030007 |  证书的秘钥用途不含数字签名。  |
+| ERR_KEYUSAGE_NO_CERTSIGN              | 19030006 | 证书的密钥用途不含证书签名。   |
+| ERR_KEYUSAGE_NO_DIGITAL_SIGNATURE     | 19030007 |  证书的密钥用途不含数字签名。  |
 
 ## DataBlob
 buffer数组。
@@ -1490,7 +1490,7 @@ certFramework.createX509Cert(encodingBlob, (error, x509Cert) => {
 
 getKeyUsage() : DataBlob
 
-表示获取X509证书秘钥用途。
+表示获取X509证书密钥用途。
 
 **系统能力：** SystemCapability.Security.Cert
 
@@ -1498,7 +1498,7 @@ getKeyUsage() : DataBlob
 
 | 类型                  | 说明                 |
 | --------------------- | -------------------- |
-| [DataBlob](#datablob) | 表示X509证书秘钥用途 |
+| [DataBlob](#datablob) | 表示X509证书密钥用途 |
 
 **错误码：**
 
@@ -1560,7 +1560,7 @@ certFramework.createX509Cert(encodingBlob, (error, x509Cert) => {
 
 getExtKeyUsage() : DataArray
 
-表示获取X509证书扩展秘钥用途。
+表示获取X509证书扩展密钥用途。
 
 **系统能力：** SystemCapability.Security.Cert
 
@@ -1568,7 +1568,7 @@ getExtKeyUsage() : DataArray
 
 | 类型                    | 说明                     |
 | ----------------------- | ------------------------ |
-| [DataArray](#dataarray) | 表示X509证书扩展秘钥用途 |
+| [DataArray](#dataarray) | 表示X509证书扩展密钥用途 |
 
 **错误码：**
 

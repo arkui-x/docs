@@ -549,7 +549,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 try {
   let data: bridge.ResultValue = bridgeImpl.callMethodSync('funcWithString', 'text')
-  console.info(LOG_TAG + 'callMethodSync success; data ：： ' + data)
+  console.info(LOG_TAG + 'callMethodSync success; data: ' + data)
 } catch (error) {
   console.error(LOG_TAG + `callMethodSync failed, error: ${error.toString()}`)
 }

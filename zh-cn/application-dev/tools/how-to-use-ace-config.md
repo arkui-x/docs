@@ -26,7 +26,7 @@
 
 
 - openharmony-sdk配置应与DevEco设置中的OpenHarmony SDK配置的地址一致,如下图所示。
-注：不能配置成DevEco工具自身包含的的sdk目录下的openharmony路径。
+注：不能配置成DevEco工具自身包含的sdk目录下的openharmony路径。
 ![openharmony-sdk-setting](figures/openharmony-sdk-setting.png)
 
 - harmonyos-sdk配置在大于等于5.0.0的DevEco版本中，应配置到DevEco工具自身包含的sdk目录下。

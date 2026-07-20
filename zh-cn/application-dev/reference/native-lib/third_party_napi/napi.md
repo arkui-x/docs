@@ -31,8 +31,8 @@ OpenHarmony的N-API组件对Node-API的接口进行了重新实现，ArkUI-X在�
 |FUNC|napi_fatal_error|引发致命错误以立即终止进程。|
 |FUNC|napi_open_handle_scope|创建一个上下文环境使用。|
 |FUNC|napi_close_handle_scope|关闭传入的上下文环境，关闭后，在其中声明的全部`napi_value`都将被回收。|
-|FUNC|napi_open_escapable_handle_scope|创建出一个可逃逸的handel scope，可将范围内声明的值返回到父作用域。|
-|FUNC|napi_close_escapable_handle_scope|关闭传入的可逃逸的handel scope。|
+|FUNC|napi_open_escapable_handle_scope|创建出一个可逃逸的handle scope，可将范围内声明的值返回到父作用域。|
+|FUNC|napi_close_escapable_handle_scope|关闭传入的可逃逸的handle scope。|
 |FUNC|napi_escape_handle|提升传入的js object的生命周期到其父作用域。|
 |FUNC|napi_create_reference|为`napi_value`创建一个reference，提升js对象生命周期。调用者需要自己管理reference生命周期。|
 |FUNC|napi_delete_reference|删除传入的reference。|
@@ -46,7 +46,7 @@ OpenHarmony的N-API组件对Node-API的接口进行了重新实现，ArkUI-X在�
 |FUNC|napi_create_external_arraybuffer|分配一个附加有外部数据的js `ArrayBuffer`。|
 |FUNC|napi_create_object|创建一个默认的js `Object`。|
 |FUNC|napi_create_symbol|创建一个js `Symbol`。|
-|FUNC|napi_create_typedarray|通过现有的`ArrayBuffer`创建一个js `TypeArray`。|
+|FUNC|napi_create_typedarray|通过现有的`ArrayBuffer`创建一个js `TypedArray`。|
 |FUNC|napi_create_dataview|通过现有的`ArrayBuffer`创建一个js `DataView`。|
 |FUNC|napi_create_int32|通过一个C的`int32_t`数据创建js `Number`。|
 |FUNC|napi_create_uint32|通过一个C的`uint32_t`数据创建js `Number`。|
@@ -65,9 +65,9 @@ OpenHarmony的N-API组件对Node-API的接口进行了重新实现，ArkUI-X在�
 |FUNC|napi_get_value_external|获取先前通过napi_create_external()传递的外部数据指针。|
 |FUNC|napi_get_value_int32|获取给定js `Number`对应的C int32值。|
 |FUNC|napi_get_value_int64|获取给定js `Number`对应的C int64值。|
-|FUNC|napi_get_value_string_latin1|获取给定js vaule对应的ISO-8859-1编码的字符串。|
-|FUNC|napi_get_value_string_utf8|获取给定js vaule对应的UTF8编码的字符串。|
-|FUNC|napi_get_value_string_utf16|获取给定js vaule对应的UTF16编码的字符串。|
+|FUNC|napi_get_value_string_latin1|获取给定js value对应的ISO-8859-1编码的字符串。|
+|FUNC|napi_get_value_string_utf8|获取给定js value对应的UTF8编码的字符串。|
+|FUNC|napi_get_value_string_utf16|获取给定js value对应的UTF16编码的字符串。|
 |FUNC|napi_get_value_uint32|获取给定js `Number`对应的C uint32值。|
 |FUNC|napi_get_boolean|根据给定的C boolean值，获取js bool对象。|
 |FUNC|napi_get_global|获取`global`对象。|

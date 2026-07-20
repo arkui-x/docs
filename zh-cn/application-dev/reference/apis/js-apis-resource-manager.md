@@ -2359,7 +2359,7 @@ getDrawableDescriptor(resId: number, density?: number, type?: number): DrawableD
 | ------------------------- | ------ | ---- | ------------------------------------------------------- |
 | resId                     | number | 是   | 资源ID值。                                              |
 | [density](#screendensity) | number | 否   | 资源获取需要的屏幕密度，0或缺省表示默认屏幕密度。       |
-| type<sup>11+</sup>        | number | 否   | Android和ios平台仅支持0或缺省，表示取应用自身图标资源。 |
+| type<sup>11+</sup>        | number | 否   | Android和iOS平台仅支持0或缺省，表示取应用自身图标资源。 |
 
 **返回值：**
 
@@ -2423,7 +2423,7 @@ getDrawableDescriptor(resource: Resource, density?: number, type?: number): Draw
 | ------------------------- | ---------------------- | ---- | ------------------------------------------------------- |
 | resource                  | [Resource](#resource9) | 是   | 资源信息。                                              |
 | [density](#screendensity) | number                 | 否   | 资源获取需要的屏幕密度，0或缺省表示默认屏幕密度。       |
-| type<sup>11+</sup>        | number                 | 否   | Android和ios平台仅支持0或缺省，表示取应用自身图标资源。 |
+| type<sup>11+</sup>        | number                 | 否   | Android和iOS平台仅支持0或缺省，表示取应用自身图标资源。 |
 
 **返回值：**
 
@@ -2491,7 +2491,7 @@ getDrawableDescriptorByName(resName: string, density?: number, type?: number): D
 | ------------------------- | ------ | ---- | ------------------------------------------------------- |
 | resName                   | string | 是   | 资源名称。                                              |
 | [density](#screendensity) | number | 否   | 资源获取需要的屏幕密度，0或缺省表示默认屏幕密度。       |
-| type<sup>11+</sup>        | number | 否   | Android和ios平台仅支持0或缺省，表示取应用自身图标资源。 |
+| type<sup>11+</sup>        | number | 否   | Android和iOS平台仅支持0或缺省，表示取应用自身图标资源。 |
 
 **返回值：**
 
@@ -2675,7 +2675,7 @@ getStringSync(resId: number, ...args: Array<string | number>): string
 | 参数名   | 类型     | 必填   | 说明    |
 | ----- | ------ | ---- | ----- |
 | resId | number | 是    | 资源ID值 |
-| args | Array<string \| number> | 否    | 格式化字符串资源参数 <br> 支持参数类型：<br /> -%d、%f、%s、%% <br> 说明：%%转译符，转译%<br>举例：%%d格式化后为%d字符串|
+| args | Array<string \| number> | 否    | 格式化字符串资源参数 <br> 支持参数类型：<br /> -%d、%f、%s、%% <br> 说明：%%转义符，转义%<br>举例：%%d格式化后为%d字符串|
 
 **返回值：**
 
@@ -2760,7 +2760,7 @@ getStringSync(resource: Resource, ...args: Array<string | number>): string
 | 参数名      | 类型                     | 必填   | 说明   |
 | -------- | ---------------------- | ---- | ---- |
 | resource | [Resource](#resource9) | 是    | 资源信息 |
-| args | Array<string \| number> | 否    | 格式化字符串资源参数 <br> 支持参数类型：<br /> -%d、%f、%s、%% <br> 说明：%%转译符，转译%<br>举例：%%d格式化后为%d字符串|
+| args | Array<string \| number> | 否    | 格式化字符串资源参数 <br> 支持参数类型：<br /> -%d、%f、%s、%% <br> 说明：%%转义符，转义%<br>举例：%%d格式化后为%d字符串|
 
 **返回值：**
 
@@ -2845,7 +2845,7 @@ getStringByNameSync(resName: string, ...args: Array<string | number>): string
 | 参数名     | 类型     | 必填   | 说明   |
 | ------- | ------ | ---- | ---- |
 | resName | string | 是    | 资源名称 |
-| args | Array<string \| number> | 否    | 格式化字符串资源参数 <br> 支持参数类型：<br /> -%d、%f、%s、%% <br> 说明：%%转译符，转译%<br>举例：%%d格式化后为%d字符串|
+| args | Array<string \| number> | 否    | 格式化字符串资源参数 <br> 支持参数类型：<br /> -%d、%f、%s、%% <br> 说明：%%转义符，转义%<br>举例：%%d格式化后为%d字符串|
 
 **返回值：**
 

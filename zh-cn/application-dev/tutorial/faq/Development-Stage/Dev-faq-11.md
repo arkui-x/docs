@@ -143,7 +143,7 @@ libcrypto_openssl.so作为二级依赖的二进制库需要预置到apk中，不
 #### **问题二：应用ArkTS代码未做异常保护**
 
 **具体示例：**
-例如：在aboutToappear方法中使用了未赋值的对象test[0]
+例如：在aboutToAppear方法中使用了未赋值的对象test[0]
 
 ```typescript
 aboutToAppear(): void {
@@ -232,7 +232,7 @@ ArkCompiler: [default] ReferenceError: xxx is not defined
 一些组件或API误标了跨平台标签，实际未适配无法使用。
 
 **解决办法**：
-请在[社区提issue](https://gitcode.com/org/arkui-x/issues)，基于以下模板反馈问题，SDK内部会即使查看确认并回复。
+请在[社区提issue](https://gitcode.com/org/arkui-x/issues)，基于以下模板反馈问题，SDK内部会及时查看确认并回复。
 【示例代码】
 【ArkUI-X SDK版本】
 【报错日志】

@@ -16,7 +16,7 @@ rom size 的使用是通过给 ace build apk/hap/ios 增加 --analyze 参数来�
 
 ![zh-cn_image_1702436822004-c7r](figures/zh-cn_image_1702436822004-c7r.png)
 
-并且会在c盘当前用户文件夹下的 .ace-devtools\apk文件夹中生成apk安装包对应的体积分析json文件，
+并且会在C盘当前用户文件夹下的 .ace-devtools\apk文件夹中生成apk安装包对应的体积分析json文件，
 
 ![1702437668689-2to](figures/1702437668689-2to.png)
 
@@ -29,7 +29,7 @@ rom size 的使用是通过给 ace build apk/hap/ios 增加 --analyze 参数来�
 
 ![1702438744145-5s4](figures/1702438744145-5s4.png)
 
-并且会在c盘当前用户文件夹下的 .ace-devtools\hap文件夹中生成hap安装包对应的体积分析json文件，
+并且会在C盘当前用户文件夹下的 .ace-devtools\hap文件夹中生成hap安装包对应的体积分析json文件，
 
 ![1702438849410-o2m](figures/1702438849410-o2m.png)
 

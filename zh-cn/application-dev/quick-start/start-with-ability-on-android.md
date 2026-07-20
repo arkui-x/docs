@@ -4,11 +4,11 @@
 
 本文介绍将ArkUI框架扩展到Android平台所需要的必要的类及其使用说明，开发者基于OpenHarmony，可复用大部分的应用代码（生命周期等）并可以部署到Android平台，降低跨平台应用开发成本。
 
-## AndroidStudio配置
+## Android Studio配置
 
-使用AndroidStudio所创建Android工程的PackageName需要与OpenHarmony工程的BundleName一致。
+使用Android Studio所创建Android工程的PackageName需要与OpenHarmony工程的BundleName一致。
 
-**注:** AndroidStudio:Android应用的开发工具。
+**注:** Android Studio：Android应用的开发工具。
 
 ## ArkUI-X和Android平台集成所用关键类
 
