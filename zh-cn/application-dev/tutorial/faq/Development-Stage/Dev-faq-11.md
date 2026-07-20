@@ -2,7 +2,7 @@
 
 ## 应用闪退问题
 
-**问题一：找不到native方法实现**
+#### **问题一：找不到native方法实现**
 
 **关键报错日志：**
 
@@ -41,7 +41,7 @@ appDelegate.initApplication(this);
 
 
 
-**问题二：依赖预置hsp的模块不支持跨平台**
+#### **问题二：依赖预置hsp的模块不支持跨平台**
 
 **关键报错日志：**
 
@@ -59,7 +59,7 @@ Abort message: '[default] [LoadJSPandaFile:106] resolveBufferCallback get hsp bu
 
 这个异常是在ArkTS代码中import { interactiveLiveness } from "@kit.VisionKit"，会加载interactiveLiveness API实现的hsp，该API属于HarmonyOS闭源SDK，不支持跨平台，可以参考[部分API不支持跨平台场景的解决](./Dev-faq-10.md)
 
-**问题三：严格模式下跨平台漏拷贝pkgContextinfo.json**
+#### **问题三：严格模式下跨平台漏拷贝pkgContextinfo.json**
 
 **关键报错日志**：
 ```shell
@@ -78,10 +78,10 @@ E ArkCompiler: [default] Cannot execute module buffer file 'Cross_platform/ets/a
 
 将跨平台module A编译生成的hap包，先改成.zip格式，再解压zip包，将压缩包中的pkgContextinfo.json文件拷贝到.arkui-x/android/app/src/main/assets/arkui-x/A对应目录下。
 
-![image](../figures/pkgContextinfo.png)
+![image](../figures/pkgContextInfo.png)
 
 
-**问题四：abc镜像文件不匹配导致推包crash**
+#### **问题四：abc镜像文件不匹配导致推包crash**
 
 **关键报错日志**：
 
@@ -109,7 +109,8 @@ ArkCompiler: [default] Throw error: Cannot read property ...
 ```
 
 **具体示例：**
-**场景一：**未集成对应的动态库
+
+**场景一：** 未集成对应的动态库
 
 ```shell
 08-14 08:55:20.603  4354  4354 W ArkCompiler: [default] GetNativeModuleValue:185 GetNativeModuleValueByIndex: currentModule /data/storage/el1/bundle/entry/ets/modules.abc, find requireModule @ohos:intl failed
@@ -125,8 +126,7 @@ ArkCompiler: [default] Throw error: Cannot read property ...
 **解决办法：**
 查看应用是否是通过DevEco Studio编译实现的.abc生成和.so自动拷贝，如果是，IDE没帮忙拷贝需要的二进制库，请[社区提issue](https://gitcode.com/org/arkui-x/issues)，并提供环境信息及复现Demo告知SDK，临时规避方案可以从ArkUI-X SDK目录中拷贝libintl.so到.arkui-x/android/app/libs
 
-
-**场景二：**插件化场景，被依赖的so库无法指定到沙箱目录加载，需要在apk预置
+**场景二：** 插件化场景，被依赖的so库无法指定到沙箱目录加载，需要在apk预置
 
 ```shell
 09-12 19:20:28.133 6265 6265 W NAPI : [native_module_manager.cpp(LoadModuleLibrary)] dlopen failed: dlopen failed: library "libcrypto_openssl.so" not found
@@ -183,7 +183,7 @@ web组件加载失败，也会导致白屏。
 **问题原因：**
 Android P以上手机，不可多进程使用同一个目录webView，需要为不同进程webView设置不同目录
 
-**解决办法：**在应用android代码中设置不同目录
+**解决办法：** 在应用android代码中设置不同目录
 
 ```java
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
