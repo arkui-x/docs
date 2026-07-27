@@ -87,6 +87,24 @@ import window from '@ohos.window';
 | width  | number   | 否   | 否   | 矩形区域的宽度，单位为vp。 |
 | height | number   | 否   | 否   | 矩形区域的高度，单位为vp。 |
 
+## RectChangeReason<sup>26+</sup>
+
+窗口矩形（窗口位置及窗口大小）变化的原因。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**原子化服务API：** 从API version 26开始，该接口支持在原子化服务中使用。
+
+| 名称                  | 值   | 说明                                                         |
+| --------------------- | ---- | ------------------------------------------------------------ |
+| UNDEFINED                 | 0    | 默认值，表示窗口矩形变化的原因未定义。      |
+| MAXIMIZE                | 1    | 窗口进入最大化或全屏模式。 |
+| RECOVER              | 2    | 窗口从最大化模式、全屏模式或分屏模式恢复到自由悬浮窗口模式。    |
+| MOVE | 3    | 窗口拖拽移动。 |
+| DRAG  | 4    | 窗口拖拽缩放。 |
+| DRAG_START  | 5    | 窗口开始拖拽缩放。 |
+| DRAG_END  | 6    | 窗口结束拖拽缩放。 |
+
 ## AvoidArea<sup>7+</sup>
 
 窗口内容规避区域。
@@ -162,6 +180,19 @@ import window from '@ohos.window';
 | ------ | -------- | ---- | ---- | ---------- |
 | width  | number   | 否   | 否   | 窗口宽度，单位为vp，该参数为浮点数。 |
 | height | number   | 否   | 否   | 窗口高度，单位为vp，该参数为浮点数。 |
+
+## RectChangeOptions<sup>26+</sup>
+
+窗口矩形（窗口位置及窗口大小）变化返回的值及变化原因。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**原子化服务API：** 从API version 26开始，该接口支持在原子化服务中使用。
+
+| 名称       | 类型      | 只读 | 可选 | 说明               |
+| ---------- | ------------- | ---- | ---- | ------------------ |
+| rect   | [Rect](#rect7) | 否   | 否   | 窗口矩形变化后的值。 |
+| reason    | [RectChangeReason](#rectchangereason26) | 否   | 否   | 窗口矩形变化的原因。 |
 
 ## AvoidAreaOptions<sup>20+</sup>
 
@@ -1786,6 +1817,206 @@ try {
     windowClass.off('windowStatusChange');
 } catch (exception) {
     console.error(`Failed to unregister callback. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### on('windowStatusDidChange')<sup>26+</sup>
+
+on(type: 'windowStatusDidChange', callback: Callback&lt;WindowStatusType&gt;): void
+
+开启窗口模式变化的监听(当前仅支持iOS，Android 暂不支持)，当窗口windowStatus发生变化后进行通知（此时窗口[Rect](#rect7)属性已经完成更新）。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**参数：**
+
+| 参数名   | 类型                           | 必填 | 说明                                                     |
+| -------- | ------------------------------ | ---- | -------------------------------------------------------- |
+| type     | string                         | 是   | 监听事件，固定为'windowStatusDidChange'，即窗口模式变化完成事件。 |
+| callback | Callback&lt;[WindowStatusType](#windowstatustype20)&gt; | 是   | 回调函数。返回当前的窗口模式。                           |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | ------------------------------ |
+| 801     | Capability not supported. Failed to call the API due to limited device capabilities. |
+| 1300002 | This window state is abnormal. |
+
+**示例：**
+
+```ts
+try {
+    windowClass.on('windowStatusDidChange', (WindowStatusType) => {
+        console.info(`Succeeded in enabling the listener for window status changes. Data: ${JSON.stringify(WindowStatusType)}`);
+    });
+} catch (exception) {
+    console.error(`Failed to register callback. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### off('windowStatusDidChange')<sup>26+</sup>
+
+off(type: 'windowStatusDidChange', callback?: Callback&lt;WindowStatusType&gt;): void
+
+关闭窗口模式变化的监听(当前仅支持iOS，Android 暂不支持)。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**参数：**
+
+| 参数名   | 类型                          | 必填 | 说明                                                     |
+| -------- | ----------------------------- | ---- | -------------------------------------------------------- |
+| type     | string                        | 是   | 监听事件，固定为'windowStatusDidChange'，即窗口模式变化完成事件。 |
+| callback | Callback&lt;[WindowStatusType](#windowstatustype20)&gt; | 否   | 回调函数。返回当前的窗口模式。如果传入参数，则关闭该监听。如果未传入参数，则关闭所有窗口模式变化的监听。                           |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | ------------------------------ |
+| 801     | Capability not supported. Failed to call the API due to limited device capabilities. |
+| 1300002 | This window state is abnormal. |
+
+**示例：**
+
+```ts
+const callback = (windowStatusType: window.WindowStatusType) => {
+    // ...
+}
+try {
+    windowClass.on('windowStatusDidChange', callback);
+    windowClass.off('windowStatusDidChange', callback);
+    // 如果通过on开启多个callback进行监听，同时关闭所有监听：
+    windowClass.off('windowStatusDidChange');
+} catch (exception) {
+    console.error(`Failed to unregister callback. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### on('windowRectChange')<sup>26+</sup>
+
+on(type:  'windowRectChange', callback: Callback&lt;RectChangeOptions&gt;): void
+
+开启窗口矩形（窗口位置及窗口大小）变化的监听。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**原子化服务API：** 从API version 26开始，该接口支持在原子化服务中使用。
+
+> **说明：**
+>
+> 当前Android和iOS平台仅支持返回变化后的窗口矩形信息，回调参数中的reason固定返回RectChangeReason.UNDEFINED。
+
+**参数：**
+
+| 参数名   | 类型                           | 必填 | 说明                                                     |
+| -------- | ------------------------------ | ---- | -------------------------------------------------------- |
+| type     | string                         | 是   | 监听事件，固定为'windowRectChange'，即窗口矩形变化事件。 |
+| callback | Callback&lt;[RectChangeOptions](#rectchangeoptions26)&gt; | 是   | 回调函数。返回当前窗口矩形变化值及变化原因。                           |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 401     | Parameter error. Possible cause: 1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+| 801     | Capability not supported. Failed to call the API due to limited device capabilities. |
+| 1300002 | This window state is abnormal. |
+| 1300003 | This window manager service works abnormally. |
+
+**示例：**
+
+```ts
+try {
+  windowClass.on('windowRectChange', (data: window.RectChangeOptions) => {
+      console.info(`Succeeded in enabling the listener for window rect changes. Data: ${JSON.stringify(data)}`);
+  });
+} catch (exception) {
+  console.error(`Failed to enable the listener for window rect changes. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### off('windowRectChange')<sup>26+</sup>
+
+off(type: 'windowRectChange', callback?: Callback&lt;RectChangeOptions&gt;): void
+
+关闭窗口矩形（窗口位置及窗口大小）变化的监听。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**原子化服务API：** 从API version 26开始，该接口支持在原子化服务中使用。
+
+**参数：**
+
+| 参数名   | 类型                           | 必填 | 说明                                                         |
+| -------- | ------------------------------ | ---- | ------------------------------------------------------------ |
+| type     | string                         | 是   | 监听事件，固定为'windowRectChange'，即窗口矩形变化事件。     |
+| callback | Callback&lt;[RectChangeOptions](#rectchangeoptions26)&gt; | 否   | 回调函数。返回当前的窗口矩形及变化原因。如果传入参数，则关闭该监听。如果未传入参数，则关闭所有窗口矩形变化的监听。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | -------------------------------------------- |
+| 401     | Parameter error. Possible cause: 1. Incorrect parameter types; 2. Parameter verification failed. |
+| 801     | Capability not supported. Failed to call the API due to limited device capabilities. |
+| 1300002 | This window state is abnormal. |
+| 1300003 | This window manager service works abnormally. |
+
+**示例：**
+
+```ts
+const callback = (rectChangeOptions: window.RectChangeOptions) => {
+  // ...
+}
+
+try {
+  windowClass.on('windowRectChange', callback);
+  windowClass.off('windowRectChange', callback);
+  // 如果通过on开启多个callback进行监听，同时关闭所有监听：
+  windowClass.off('windowRectChange');
+} catch (exception) {
+  console.error(`Failed to disable the listener for window rect changes. Cause code: ${exception.code}, message: ${exception.message}`);
+}
+```
+
+### getWindowStatus<sup>26+</sup>
+
+getWindowStatus(): WindowStatusType
+
+获取当前应用窗口的模式(当前仅支持iOS，Android 暂不支持)。
+
+**原子化服务API：** 从API version 26开始，该接口支持在原子化服务中使用。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**返回值：**
+
+| 类型                           | 说明                                   |
+| ------------------------------ | ----------------------------------------|
+| [WindowStatusType](#windowstatustype20) | 当前窗口模式。                              |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
+
+| 错误码ID | 错误信息 |
+| ------- | ------------------------------ |
+| 801     | Capability not supported. Failed to call the API due to limited device capabilities. |
+| 1300002  | This window state is abnormal. Possible cause: The window is not created or destroyed. |
+
+**示例：**
+
+```ts
+try {
+  let windowStatusType = windowClass.getWindowStatus();
+} catch (exception) {
+  console.error(`Failed to obtain the window status of window. Cause code: ${exception.code}, message: ${exception.message}`);
 }
 ```
 
