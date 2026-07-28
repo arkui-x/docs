@@ -10,11 +10,13 @@ Debug 应用构建流程会携带 Source Map 资源，支持以下能力：
 
 - TS 堆栈到 ETS 源文件行号的还原
 - 运行时日志输出与查看
-- 调试符号表加载
+- Source Map 资源的加载
+
+TS 堆栈还原为 ETS 源文件行号的功能在 Debug 应用中自动生效，当应用启动时，会自动加载 Source Map 资源；发生异常时，会自动将 TS 堆栈中的行号映射到 ETS 源文件行号并输出到应用日志中。
 
 ## 前置条件
 
-- MacOS 需要 11.6.2 及以上版本，Windows 需要 Windows 10 及以上版本。
+- macOS 需要 11.6.2 及以上版本，Windows 需要 Windows 10 及以上版本。
 - 需配置 ACE Tools 环境，配置可参考：[ACE Tools环境配置指导](./how-to-configure-dev-environment.md)
 - 如果使用 DevEco Studio，需安装 Android Studio 或 Xcode，并配置好对应的 ArkUI-X SDK 及工程。
 
@@ -44,7 +46,7 @@ ace build ios --debug
 
 ### 安装应用到设备
 
-构建完成后，执行安装命令：
+构建完成后，在工程根目录下执行安装命令(无需指定安装路径)：
 
 ```bash
 ace install apk
@@ -56,12 +58,50 @@ ace install apk
 ace install ios
 ```
 
+在多设备的场景下，可以按照如下命令指定安装设备：
+
+* Android 平台
+```bash
+ace install apk -d <deviceId>
+```
+* iOS 平台
+```bash
+ace install ios -d <deviceId>
+```
+
+deviceId 可以通过如下的命令去获取：
+
+```bash
+ace devices
+
+Tools info :[√] OpenHarmony hdc installed
+            [√] HarmonyOS hdc installed
+            [√] adb installed
+
+[√] Connected device (2 available)
+  •  BKQ_AN00 (AS6VVB5A2300XXXX) [Android]
+  •  YAL_AL50 (NDYDU1981901XXXX) [Android]
+```
+上述的 AS6VVB5A2300XXXX 就是 deviceId。
+
+Ace Tools 的详细使用说明请参考：[ACE Tools 使用说明](https://gitcode.com/arkui-x/cli/blob/master/README.md)
+
 ### 查看应用日志
 
 推荐使用 ACE Tools 提供的 `ace log` 命令查看应用日志：
 
 ```bash
 ace log
+```
+输出的堆栈日志的格式如下：
+
+```bash
+Error: Nested function error
+    at nestedFunctionC entry (entry/src/main/ets/pages/StackTestEntry.ets:21:11)
+    at nestedFunctionB entry (entry/src/main/ets/pages/StackTestEntry.ets:17:10)
+    at nestedFunctionA entry (entry/src/main/ets/pages/StackTestEntry.ets:13:10)
+    at handleUncaughtNested entry (entry/src/main/ets/pages/StackTestEntry.ets:31:10)
+    at anonymous entry (entry/src/main/ets/pages/StackTestEntry.ets:99:35)
 ```
 
 或指定平台：
@@ -135,10 +175,7 @@ DevEco Studio 可以编译生成 iOS 工程，但无法自动安装和拉起应�
 
 ## 注意事项
 
-Release 模式下不会打包 Source Map 文件，堆栈将显示TS中间代码行号，无法还原到ETS源文件行号。<br/>
-
-iOS 设备查看日志时，需确保设备已信任开发证书，并在设置中开启开发者模式。<br/>
-
-Android 设备查看日志时，需确保 USB 调试已开启，并授权 adb 调试权限。<br/>
-
-确保使用的 SDK 版本支持 debug 构建（API 10 及以上 Stage 模型均支持）。<br/>
+- Release 模式下不会打包 Source Map 文件，堆栈将显示TS中间代码行号，无法还原到 ETS 源文件行号。
+- iOS 设备查看日志时，需确保设备已信任开发证书，并在设置中开启开发者模式。
+- Android 设备查看日志时，需确保 USB 调试已开启，并授权 adb 调试权限。
+- 确保使用的 SDK 版本支持 debug 构建（API 10 及以上 Stage 模型均支持）。
