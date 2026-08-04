@@ -74,6 +74,19 @@ import window from '@ohos.window';
 | width  | number   | 是   | 是   | 矩形区域的宽度，单位为px，该参数应为整数。 |
 | height | number   | 是   | 是   | 矩形区域的高度，单位为px，该参数应为整数。 |
 
+## RectInVP<sup>23+</sup>
+
+窗口矩形区域，单位为vp。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称   | 类型 | 只读 | 可选 | 说明               |
+| ------ | -------- | ---- | ---- | ------------------ |
+| left   | number   | 否   | 否   | 矩形区域的左边界值，单位为vp。 |
+| top    | number   | 否   | 否   | 矩形区域的上边界值，单位为vp。 |
+| width  | number   | 否   | 否   | 矩形区域的宽度，单位为vp。 |
+| height | number   | 否   | 否   | 矩形区域的高度，单位为vp。 |
+
 ## AvoidArea<sup>7+</sup>
 
 窗口内容规避区域。
@@ -88,6 +101,46 @@ import window from '@ohos.window';
 | rightRect  | [Rect](#rect7) | 是   | 是   | 屏幕右侧的矩形区。 |
 | bottomRect | [Rect](#rect7) | 是   | 是   | 屏幕底部的矩形区。 |
 
+## UIEnvAvoidAreaVP<sup>23+</sup>
+
+以vp为单位表示的窗口避让区域信息。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称       | 类型      | 只读 | 可选 | 说明               |
+| ---------- | ------------- | ---- | ---- | ------------------ |
+| visible    | boolean       | 否   | 否   | 无实际意义，暂不支持使用。 |
+| leftRect   | [RectInVP](#rectinvp23) | 否   | 否   | 中心位于窗口的两条对角线的左侧的矩形区，单位为vp。 |
+| topRect    | [RectInVP](#rectinvp23) | 否   | 否   | 中心位于窗口的两条对角线的顶部的矩形区，单位为vp。 |
+| rightRect  | [RectInVP](#rectinvp23) | 否   | 否   | 中心位于窗口的两条对角线的右侧的矩形区，单位为vp。 |
+| bottomRect | [RectInVP](#rectinvp23) | 否   | 否   | 中心位于窗口的两条对角线的底部的矩形区，单位为vp。 |
+
+## UIEnvWindowAvoidAreaInfoPX<sup>23+</sup>
+
+窗口不同类型避让区域信息组成的环境变量数据类型，每种类型避让区域单位为px。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称       | 类型      | 只读 | 可选 | 说明               |
+| ---------- | ------------- | ---- | ---- | ------------------ |
+| statusBar            | [AvoidArea](#avoidarea7) | 否   | 否   | 表示[AvoidAreaType](#avoidareatype7)为TYPE_SYSTEM类型的避让区域，单位为px。 |
+| cutout               | [AvoidArea](#avoidarea7) | 否   | 否   | 表示[AvoidAreaType](#avoidareatype7)为TYPE_CUTOUT类型的避让区域，单位为px。 |
+| keyboard             | [AvoidArea](#avoidarea7) | 否   | 否   | 表示[AvoidAreaType](#avoidareatype7)为TYPE_KEYBOARD类型的避让区域，单位为px。 |
+| navigationIndicator  | [AvoidArea](#avoidarea7) | 否   | 否   | 表示[AvoidAreaType](#avoidareatype7)为TYPE_NAVIGATION_INDICATOR类型的避让区域，单位为px。 |
+
+## UIEnvWindowAvoidAreaInfoVP<sup>23+</sup>
+
+窗口不同类型避让区域信息组成的环境变量数据类型，每种类型避让区域单位为vp。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称       | 类型      | 只读 | 可选 | 说明               |
+| ---------- | ------------- | ---- | ---- | ------------------ |
+| statusBar            | [UIEnvAvoidAreaVP](#uienvavoidareavp23) | 否   | 否   | 表示[AvoidAreaType](#avoidareatype7)为TYPE_SYSTEM类型的避让区域，单位为vp。 |
+| cutout               | [UIEnvAvoidAreaVP](#uienvavoidareavp23) | 否   | 否   | 表示[AvoidAreaType](#avoidareatype7)为TYPE_CUTOUT类型的避让区域，单位为vp。 |
+| keyboard             | [UIEnvAvoidAreaVP](#uienvavoidareavp23) | 否   | 否   | 表示[AvoidAreaType](#avoidareatype7)为TYPE_KEYBOARD类型的避让区域，单位为vp。 |
+| navigationIndicator  | [UIEnvAvoidAreaVP](#uienvavoidareavp23) | 否   | 否   | 表示[AvoidAreaType](#avoidareatype7)为TYPE_NAVIGATION_INDICATOR类型的避让区域，单位为vp。 |
+
 ## Size<sup>7+</sup>
 
 窗口大小。
@@ -98,6 +151,17 @@ import window from '@ohos.window';
 | ------ | -------- | ---- | ---- | ---------- |
 | width  | number   | 是   | 是   | 窗口宽度，单位为px，该参数应为整数。 |
 | height | number   | 是   | 是   | 窗口高度，单位为px，该参数应为整数。 |
+
+## SizeInVP<sup>23+</sup>
+
+窗口大小，单位为vp。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称   | 类型 | 只读 | 可选 | 说明       |
+| ------ | -------- | ---- | ---- | ---------- |
+| width  | number   | 否   | 否   | 窗口宽度，单位为vp，该参数为浮点数。 |
+| height | number   | 否   | 否   | 窗口高度，单位为vp，该参数为浮点数。 |
 
 ## AvoidAreaOptions<sup>20+</sup>
 
