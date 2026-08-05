@@ -26,7 +26,8 @@ import window from '@ohos.window';
 | 名称 | 类型 | 必填 | 说明                                                                          |
 | ---------- | -------------------------- | -- |-----------------------------------------------------------------------------|
 | name       | string                     | 是 | 窗口名字。                                                                       |
-| ctx        | BaseContext | 否 | 当前应用上下文信息。不设置，则默认为空。<br>Stage模型下不需要使用该参数，用于创建系统窗口。 |
+| windowType | [WindowType](#windowtype2610) | 是 | 窗口类型。                                            |
+| ctx        | BaseContext | 否 | 当前应用上下文信息。不设置，则默认为空。<br>Stage模型必须使用该参数，用于创建模态窗口。 |
 | displayId  | number                     | 否 | 当前物理屏幕id。不设置，则默认为-1，该参数应为整数。                                             |
 | parentId   | number                     | 否 | 父窗口id。不设置，则默认为-1，该参数应为整数。                                                           |
 
@@ -199,6 +200,17 @@ import window from '@ohos.window';
 | systemDensity  | number   | 否   | 否   | 窗口所在屏幕的系统显示大小缩放系数，跟随用户设置变化，该参数变化范围为0.5-4.0。 |
 | defaultDensity | number   | 否   | 否   | 窗口所在屏幕的系统默认显示大小缩放系数，跟随窗口所在屏幕变化，该参数变化范围为0.5-4.0。 |
 | customDensity | number   | 否   | 否   | 窗口自定义设置的显示大小缩放系数，该参数取值范围为0.5-4.0。未设置该参数时，将跟随系统显示大小缩放系数变化。该参数仅主窗口生效，在子窗、模态窗、全局悬浮窗或系统窗口上等于系统显示大小缩放系数(systemDensity)。 |
+## WindowType<sup>26.1.0+</sup>
+
+窗口类型枚举。
+
+**原子化服务API：** 从API version 26.1.0开始，该接口支持在原子化服务中使用。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+| 名称       | 值   | 说明                          |
+| ---------- | ---- | ----------------------------- |
+| TYPE_DIALOG<sup>26.1.0+</sup>    | 16    | 表示模态窗口。<br>此接口仅可在Stage模型下使用。 |
 ## WindowStatusType<sup>20+</sup>
 
 窗口模式枚举。
@@ -232,11 +244,14 @@ createWindow(config: Configuration, callback: AsyncCallback&lt;Window&gt;): void
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
 
 | 错误码ID | 错误信息 |
 | ------- | -------------------------------- |
+| 401     | Parameter error. |
 | 1300001 | Repeated operation. |
+| 1300002 | This window state is abnormal. |
+| 1300004 | Unauthorized operation. |
 | 1300006 | This window context is abnormal. |
 | 1300008 | The operation is on invalid display. |
 | 1300009 | The parent window is invalid. |
@@ -297,11 +312,14 @@ createWindow(config: Configuration): Promise&lt;Window&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
 
 | 错误码ID | 错误信息 |
 | ------- | -------------------------------- |
+| 401     | Parameter error. |
 | 1300001 | Repeated operation. |
+| 1300002 | This window state is abnormal. |
+| 1300004 | Unauthorized operation. |
 | 1300006 | This window context is abnormal. |
 | 1300008 | The operation is on invalid display. |
 | 1300009 | The parent window is invalid. |
@@ -2593,6 +2611,8 @@ WindowStage生命周期。
 | ACTIVE     | 2      | 获焦状态。 |
 | INACTIVE   | 3      | 失焦状态。 |
 | HIDDEN     | 4      | 切到后台。 |
+| RESUMED<sup>26.1.0+</sup> | 5      | 前台可交互状态。 |
+| PAUSED<sup>26.1.0+</sup>  | 6      | 前台不可交互状态。 |
 
 ## WindowStage<sup>9+</sup>
 
