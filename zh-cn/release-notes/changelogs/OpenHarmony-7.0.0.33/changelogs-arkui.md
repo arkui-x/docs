@@ -80,7 +80,34 @@ dependencies {
 
 **适配指导**
 
-开发者需取消原有应用中额外设置的避让内容。
+- 方案一 开发者可取消原有应用中通过Padding等方式额外设置的避让内容。
+  
+- 方案二 开发者可在EntryAbility.ets中调用 setWindowLayoutFullScreen(isLayoutFullScreen: boolean): Promise<void> 接口，并且将isLayoutFullScreen设置为true，设置窗口沉浸式布局。
+  
+```
+// EntryAbility.ets
+import { UIAbility } from '@kit.AbilityKit';
+import { window } from '@kit.ArkUI';
+
+export default class EntryAbility extends UIAbility {
+  // ...
+  onWindowStageCreate(windowStage: window.WindowStage): void {
+    windowStage.loadContent('pages/Index', async (err) => {
+      if (err.code) {
+        return;
+      }
+
+      try {
+        const mainWindow: window.Window = windowStage.getMainWindowSync();
+        await mainWindow.setWindowLayoutFullScreen(true);
+      } catch (e) {
+        console.error(`Failed to set status bar to invisible`);
+      }
+    });
+  }
+}
+// ...
+```
 
 ## cl.arkui.3 Android原生侧应用避让问题变更说明
 
