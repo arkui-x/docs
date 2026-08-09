@@ -396,6 +396,19 @@
     - [Stepper](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-stepper.md)
     - [StepperItem](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-stepperitem.md)
 - C API<!--arkui-c-->
+  - Android应用C API接口说明
+    - 使用OpenHarmony SDK 7.0.0.33及以上版本，需在Android应用工程的CMakeLists.txt文件中添加以下配置：
+      ```
+      ···
+      add_library(arkui_ndk SHARED IMPORTED GLOBAL)
+      set_target_properties(
+        arkui_ndk
+        PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libace_ndk.so
+      )
+      ···
+      target_link_libraries(entry PUBLIC arkui_android log arkui_ndk)
+      ```
   - 模块<!--arkui-module-->
     - [ArkUI_NativeModule](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-arkui-nativemodule.md) 
     - [ArkUI_Accessibility](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/capi-arkui-accessibility.md) 
