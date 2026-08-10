@@ -220,3 +220,49 @@ protected void onCreate(Bundle savedInstanceState){
     ···
 >
 ```
+
+## cl.arkui.5 ArkUI-X Android应用NDK动态库按需加载变更说明
+
+**访问级别**
+
+其它
+
+**变更原因**
+
+新版本下ArkUI中NDK库改为动态库，采用按需加载策略。
+
+**变更影响**
+
+此变更涉及应用适配。
+
+- 变更前：ArkUI-X Android应用使用C API方法时仅需引用头文件。
+
+- 变更后：ArkUI-X Android应用使用C API方法时需要引用头文件，并在CMakeLists.txt文件中进行适配。
+
+**起始 API Level**
+
+不涉及API
+
+**变更发生版本**
+
+从OpenHarmony SDK 7.0.0.33开始。
+
+**变更的接口/组件**
+
+不涉及具体接口/组件
+
+**适配指导**
+
+需在Android应用工程的CMakeLists.txt文件中添加以下配置：
+
+```
+···
+add_library(arkui_ndk SHARED IMPORTED GLOBAL)
+set_target_properties(
+    arkui_ndk
+    PROPERTIES IMPORTED_LOCATION
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libace_ndk.so
+)
+···
+target_link_libraries(entry PUBLIC arkui_android log arkui_ndk)
+```
