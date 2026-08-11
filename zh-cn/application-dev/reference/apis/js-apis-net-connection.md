@@ -50,6 +50,43 @@ let netConnectionCellular = connection.createNetConnection({
 
 ## connection.hasDefaultNet<sup>8+</sup>
 
+hasDefaultNet(callback: AsyncCallback\<boolean>): void
+
+检查默认数据网络是否被激活，使用callback方式作为异步方法。如果有默认数据网路，可以使用[getDefaultNet](#connectiongetdefaultnet)去获取。
+
+**需要权限**：ohos.permission.GET_NETWORK_INFO
+
+**系统能力**：SystemCapability.Communication.NetManager.Core
+
+**参数：**
+
+| 参数名   | 类型                    | 必填 | 说明                                   |
+| -------- | ----------------------- | ---- | -------------------------------------- |
+| callback | AsyncCallback\<boolean> | 是   | 回调函数。默认数据网络被激活返回true。 |
+
+**错误码：**
+
+| 错误码ID | 错误信息                        |
+| ------- | -----------------------------  |
+| 201     | Permission denied.             |
+| 401     | Parameter error.             |
+| 2100002 | Operation failed. Cannot connect to service.|
+| 2100003 | System internal error.         |
+
+**示例：**
+
+```ts
+import connection from '@ohos.net.connection'
+import { BusinessError } from '@ohos.base'
+
+connection.hasDefaultNet((error: BusinessError, data: boolean) => {
+  console.log(JSON.stringify(error))
+  console.log('data: ' + data)
+})
+```
+
+## connection.hasDefaultNet<sup>8+</sup>
+
 hasDefaultNet(): Promise\<boolean>
 
 检查默认数据网络是否被激活，使用Promise方式作为异步方法。如果有默认数据网路，可以使用[getDefaultNet](#connectiongetdefaultnet)去获取。
