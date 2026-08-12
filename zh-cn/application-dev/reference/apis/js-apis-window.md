@@ -54,13 +54,26 @@ import window from '@ohos.window';
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
-| 名称                                  | 值   | 说明                          |
+| 名称                                  | 值   | 说明                           |
 | ------------------------------------- | ---- | ----------------------------- |
-| UNSPECIFIED                           | 0    | 表示未定义方向模式，由系统判定。 |
-| PORTRAIT                              | 1    | 表示竖屏显示模式。             |
-| LANDSCAPE                             | 2    | 表示横屏显示模式。   |
-| PORTRAIT_INVERTED                     | 3    | 表示反向竖屏显示模式。   |
-| LANDSCAPE_INVERTED                    | 4    | 表示反向横屏显示模式。 |
+| UNSPECIFIED                           | 0    | 表示未定义方向模式，由系统判定。<br/>**原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core|
+| PORTRAIT                              | 1    | 表示竖屏显示模式。<br> Android平台：类平板使用该枚举时以信箱模式显示在横屏，且可以四方向旋转。<br> **原子化服务API：** 从API version 11开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core|
+| LANDSCAPE                             | 2    | 表示横屏显示模式。<br> **原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core|
+| PORTRAIT_INVERTED                     | 3    | 表示反向竖屏显示模式。<br> Android平台：类平板使用该枚举时以信箱模式显示在横屏，且可以四方向旋转。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core<br> **原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。|
+| LANDSCAPE_INVERTED                    | 4    | 表示反向横屏显示模式。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core<br> **原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。|
+| AUTO_ROTATION                         | 5    | 跟随传感器自动旋转，可以旋转到竖屏、横屏、反向竖屏、反向横屏四个方向，且不受控制中心的旋转开关控制。<br> iOS平台：与AUTO_ROTATION_UNSPECIFIED行为一致。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core<br> **原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。|
+| AUTO_ROTATION_PORTRAIT                | 6    | 跟随传感器自动竖向旋转，可以旋转到竖屏、反向竖屏，无法旋转到横屏、反向横屏，且不受控制中心的旋转开关控制。<br> Android平台：直板机使用该枚举时无法转到反向竖屏；类平板使用该枚举时以信箱模式显示在横屏，且可以四方向旋转。<br> iOS平台：与AUTO_ROTATION_PORTRAIT_RESTRICTED行为一致。<br/>**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core |
+| AUTO_ROTATION_LANDSCAPE               | 7    | 跟随传感器自动横向旋转，可以旋转到横屏、反向横屏，无法旋转到竖屏、反向竖屏，且不受控制中心的旋转开关控制。<br> iOS平台：与AUTO_ROTATION_LANDSCAPE_RESTRICTED行为一致。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core。<br> **原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。|
+| AUTO_ROTATION_RESTRICTED              | 8    | 跟随传感器自动旋转，可以旋转到竖屏、横屏、反向竖屏、反向横屏四个方向，且受控制中心的旋转开关控制。<br> iOS平台：与AUTO_ROTATION_UNSPECIFIED行为一致。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core<br> **原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。|
+| AUTO_ROTATION_PORTRAIT_RESTRICTED     | 9    | 跟随传感器自动竖向旋转，可以旋转到竖屏、反向竖屏，无法旋转到横屏、反向横屏，且受控制中心的旋转开关控制。<br> Android平台：直板机使用该枚举时无法转到反向竖屏；类平板使用该枚举时以信箱模式显示在横屏，且可以四方向旋转。<br/>**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core |
+| AUTO_ROTATION_LANDSCAPE_RESTRICTED    | 10   | 跟随传感器自动横向旋转，可以旋转到横屏、反向横屏，无法旋转到竖屏、反向竖屏，且受控制中心的旋转开关控制。<br/>**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core |
+| LOCKED                                | 11   | 表示锁定模式，窗口显示方向与屏幕当前方向一致。<br> Android平台：与SCREEN_ORIENTATION_LOCKED保持一致。<br/>**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.WindowManager.WindowManager.Core |
+| AUTO_ROTATION_UNSPECIFIED             | 12   | 跟随传感器自动旋转，受控制中心的旋转开关控制，且可旋转方向受系统判定（如在某种设备，可以旋转到竖屏、横屏、反向横屏三个方向，无法旋转到反向竖屏）。<br/>**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.Window.SessionManager|
+| USER_ROTATION_PORTRAIT                | 13   | 调用时临时旋转到竖屏，之后跟随传感器自动旋转，受控制中心的旋转开关控制，且可旋转方向受系统判定（如在某种设备，可以旋转到竖屏、横屏、反向横屏三个方向，无法旋转到反向竖屏）。<br> Android平台：类平板使用该枚举时表现与AUTO_ROTATION_UNSPECIFIED一致。<br/>**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.Window.SessionManager |
+| USER_ROTATION_LANDSCAPE               | 14   | 调用时临时旋转到横屏，之后跟随传感器自动旋转，受控制中心的旋转开关控制，且可旋转方向受系统判定（如在某种设备，可以旋转到竖屏、横屏、反向横屏三个方向，无法旋转到反向竖屏）。<br/>**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.Window.SessionManager|
+| USER_ROTATION_PORTRAIT_INVERTED       | 15   | 调用时临时旋转到反向竖屏，之后跟随传感器自动旋转，受控制中心的旋转开关控制，且可旋转方向受系统判定（如在某种设备，可以旋转到竖屏、横屏、反向横屏三个方向，无法旋转到反向竖屏）。<br> Android平台：类平板使用该枚举时表现与AUTO_ROTATION_UNSPECIFIED一致<br/>**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.Window.SessionManager |
+| USER_ROTATION_LANDSCAPE_INVERTED       | 16   | 调用时临时旋转到反向横屏，之后跟随传感器自动旋转，受控制中心的旋转开关控制，且可旋转方向受系统判定（如在某种设备，可以旋转到竖屏、横屏、反向横屏三个方向，无法旋转到反向竖屏）。<br/>**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.Window.SessionManager|
+| FOLLOW_DESKTOP                         | 17   | 表示跟随桌面的旋转模式，如果桌面可以旋转则可旋转，桌面不可旋转则不可旋转。<br> iOS平台：受控制中心旋转开关控制。<br/>**原子化服务API：** 从API版本26.1.0开始，该接口支持在原子化服务中使用。<br> **系统能力：** SystemCapability.Window.SessionManager|
 
 ## Rect<sup>7+</sup>
 
@@ -1356,7 +1369,7 @@ export default class EntryAbility extends UIAbility {
 
 setPreferredOrientation(orientation: Orientation, callback: AsyncCallback&lt;void&gt;): void
 
-设置窗口的显示方向属性，使用callback异步回调。
+设置窗口的显示方向属性，使用callback异步回调。在Android和iOS平台上，此接口设置的为建议方向，最终显示方向以对应平台的屏幕方向策略为优先，当建议值与平台规则冲突时平台行为优先生效。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
@@ -1400,7 +1413,7 @@ try {
 
 setPreferredOrientation(orientation: Orientation): Promise&lt;void&gt;
 
-设置窗口的显示方向属性，使用Promise异步回调。
+设置窗口的显示方向属性，使用Promise异步回调。在Android和iOS平台上，此接口设置的为建议方向，最终显示方向以对应平台的屏幕方向策略为优先，当建议值与平台规则冲突时平台行为优先生效。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
