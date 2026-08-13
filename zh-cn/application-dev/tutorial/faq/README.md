@@ -58,6 +58,7 @@
 - [MacOS 提示“无法打开‘icupkg’，因为无法验证开发者”解决办法](Development-Stage/Dev-faq-25.md)
 - [SDK版本切换 iOS白屏问题分析-symbol not found错误处理](Development-Stage/Dev-faq-26.md)
 - [ArkUI-X使用C API方法编译失败，报错为有未定义符号](Development-Stage/Dev-faq-27.md)
+- [ArkUI-X Android应用设置非沉浸式失效问题](Development-Stage/Dev-faq-28.md)
 
 ### 问题自排查
 
