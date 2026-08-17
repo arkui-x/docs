@@ -924,6 +924,10 @@ try {
 }
 ```
 
+**注意事项：**
+
+从ArkUI-X SDK 7.0.0.33开始，默认使能Android全面屏模式和避让区默认避让，避让区信息获取依赖androidx.core接口，需开发者在应用侧显式引入依赖。详细内容请参见[ArkUI-X Android应用设置非沉浸式失效问题](../../../application-dev/tutorial/faq/Development-Stage/Dev-faq-28.md)。
+
 ### setWindowLayoutFullScreen<sup>9+</sup>
 
 setWindowLayoutFullScreen(isLayoutFullScreen: boolean): Promise&lt;void&gt;
@@ -972,6 +976,10 @@ try {
   console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(exception));
 }
 ```
+
+**注意事项：**
+
+从ArkUI-X SDK 7.0.0.33开始，默认使能Android全面屏模式和避让区默认避让，避让区信息获取依赖androidx.core接口，需开发者在应用侧显式引入依赖。详细内容请参见[ArkUI-X Android应用设置非沉浸式失效问题](../../../application-dev/tutorial/faq/Development-Stage/Dev-faq-28.md)。
 
 ### setWindowSystemBarEnable<sup>9+</sup>
 
