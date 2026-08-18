@@ -16,7 +16,7 @@
 android.useAndroidX=true
 ```
 
-- 需在Android应用的build.gradle文件增加依赖项：
+- 需在Android应用的build.gradle文件增加androidx.core:core:1.8.0及以上版本依赖项：
 
 ```
 dependencies {
