@@ -244,7 +244,7 @@ import window from '@ohos.window';
 | FULL_SCREEN | 1    | 表示APP全屏模式。             |
 | MAXIMIZE    | 2    | 表示APP窗口最大化模式（跨平台暂不支持）。   |
 | MINIMIZE    | 3    | 表示APP窗口最小化模式。   |
-| FLOATING    | 4    | 表示APP自由悬浮形式窗口模式（跨平台暂不支持）。   |
+| FLOATING    | 4    | 表示APP自由悬浮形式窗口模式。   |
 | SPLIT_SCREEN  | 5    | 表示APP分屏模式。   |
 ## window.createWindow<sup>9+</sup>
 
