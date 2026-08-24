@@ -1,22 +1,34 @@
 # ArkUI-X应用C API接口使用指导
 
-从OpenHarmony SDK **7.0.0.33**版本开始，ArkUI NDK库（Android的`libace_ndk.so` / iOS的`libace_ndk.xcframework`）由静态库调整为动态库，采用按需加载策略。ArkUI-X Android和iOS应用在使用C API（NDK）时，除引用头文件外，还需按以下章节完成工程配置，否则运行时将因找不到NDK符号而崩溃。
+从ArkUI-X SDK **7.0.0.33**版本开始，ArkUI NDK库（Android的`libace_ndk.so` / iOS的`libace_ndk.xcframework`）由静态库调整为动态库，采用按需加载策略。ArkUI-X Android和iOS应用在使用C API（NDK）时，除引用头文件外，还需按以下章节完成工程配置，否则运行时将因找不到NDK符号而崩溃。
 
 ## Android应用适配
 
 在Android应用工程的`CMakeLists.txt`中添加以下配置，将`libace_ndk.so`以动态库方式引入并链接到目标：
 
 ```
-···
+...
+if(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "arm64-v8a")
+    set(ARKUI_ABI_DIR "android-arm64-release")
+elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "armeabi-v7a")
+    set(ARKUI_ABI_DIR "android-arm-release")
+elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "x86_64")
+    set(ARKUI_ABI_DIR "android-x86_64")
+else()
+    message(FATAL_ERROR "Unsupported ABI: ${CMAKE_ANDROID_ARCH_ABI}")
+endif()
+
 add_library(arkui_ndk SHARED IMPORTED GLOBAL)
 set_target_properties(
     arkui_ndk
     PROPERTIES IMPORTED_LOCATION
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libace_ndk.so
+    $ENV{ARKUIX_SDK_HOME}/26.0.0/arkui-x/plugins/api/lib/arkui/${ARKUI_ABI_DIR}/libace_ndk.so
 )
-···
+...
 target_link_libraries(entry PUBLIC arkui_android log arkui_ndk)
 ```
+
+说明：`$ENV{ARKUIX_SDK_HOME}`为ArkUI-X SDK安装路径，`26.0.0`为启用的ArkUI-X SDK版本号，需根据开发环境实际情况进行修改。
 
 ## iOS应用适配
 
@@ -31,7 +43,7 @@ target_link_libraries(entry PUBLIC arkui_android log arkui_ndk)
 <UUID_A> /* libace_ndk.xcframework in Embed Frameworks */,
 
 /* Begin PBXFileReference section，新增一条 */
-<UUID_C> /* libace_ndk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libace_ndk.xcframework; path = frameworks/libace_ndk.xcframework; sourceTree = "<group>"; };
+<UUID_C> /* libace_ndk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libace_ndk.xcframework; path = "$(ARKUIX_SDK_HOME)/26.0.0/arkui-x/plugins/api/xcframework/ios-release/libace_ndk.xcframework"; sourceTree = "<group>"; };
 
 /* Begin PBXFrameworksBuildPhase section，Frameworks的files数组追加一行 */
 <UUID_B> /* libace_ndk.xcframework in Frameworks */,
@@ -42,4 +54,4 @@ target_link_libraries(entry PUBLIC arkui_android log arkui_ndk)
 ```
 
 - **UUID说明**：`<UUID_A>`、`<UUID_B>`、`<UUID_C>`需替换为三个不同的24位十六进制字符串（如`A00A58500E4E28A663A9816C`），且在pbxproj文件内全局唯一。
-- **Embed说明**：`libace_ndk.xcframework`是动态库（在`ace_engine`的`BUILD.gn`中定义为`ohos_shared_library`），必须同时加入Frameworks（链接）和Embed Frameworks（嵌入）两个阶段，否则运行时会因镜像内无此动态库而崩溃。
+- **Embed说明**：`libace_ndk.xcframework`是动态库（在`ace_engine`的`BUILD.gn`中定义为`ohos_shared_library`），必须同时加入Frameworks（链接）和Embed Frameworks（嵌入）两个阶段，否则运行时会因镜像内无此动态库而崩溃。`$(ARKUIX_SDK_HOME)`为ArkUI-X SDK安装路径，`26.0.0`为启用的ArkUI-X SDK版本号，需根据开发环境实际情况进行修改。
