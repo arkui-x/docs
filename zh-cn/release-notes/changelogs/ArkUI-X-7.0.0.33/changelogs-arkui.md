@@ -71,7 +71,7 @@ target_link_libraries(entry PUBLIC arkui_android log arkui_ndk)
 <UUID_A> /* libace_ndk.xcframework in Embed Frameworks */,
 
 /* Begin PBXFileReference section，新增一条 */
-<UUID_C> /* libace_ndk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libace_ndk.xcframework; path = "$(ARKUIX_SDK_HOME)/26.0.0/arkui-x/engine/xcframework/arkui/ios-release/libace_ndk.xcframework"; sourceTree = "<group>"; };
+<UUID_C> /* libace_ndk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libace_ndk.xcframework; path = "$(ARKUIX_SDK_HOME)/26.0.0/arkui-x/plugins/api/xcframeworkios-release/libace_ndk.xcframework"; sourceTree = "<group>"; };
 
 /* Begin PBXFrameworksBuildPhase section，Frameworks的files数组追加一行 */
 <UUID_B> /* libace_ndk.xcframework in Frameworks */,
