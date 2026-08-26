@@ -73,30 +73,6 @@ constructor是FileUri的构造函数。
   console.info("The name of FileUri is " + fileUriObject.name);
   ```
 
-### toString
-
-toString(): string
-
-**系统能力**：SystemCapability.FileManagement.AppFileService
-
-**支持平台：** Android、iOS
-
-返回字符串类型URI。
-
-**返回值：**
-
-| 类型 | 说明 |
-| -------- | -------- |
-| string | 返回字符串类型URI。 |
-
-**示例：**
-
-  ```ts
-  let path = pathDir + '/test';
-  let fileUriObject = new fileUri.FileUri(path);
-  console.info("The uri of FileUri is " + fileUriObject.toString());
-  ```
-
 ### getFullDirectoryUri
 
 getFullDirectoryUri(): string
