@@ -1377,7 +1377,7 @@ export default class EntryAbility extends UIAbility {
 
 setPreferredOrientation(orientation: Orientation, callback: AsyncCallback&lt;void&gt;): void
 
-设置窗口的显示方向属性，使用callback异步回调。在Android和iOS平台上，此接口设置的为建议方向，不同平台的实际行为存在差异，具体差异请参见[Orientation](#orientation9)。
+设置主窗口的显示方向属性，使用callback异步回调。在Android和iOS平台上，此接口设置的为建议方向，不同平台的实际行为存在差异，具体差异请参见[Orientation](#orientation9)。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
@@ -1421,7 +1421,7 @@ try {
 
 setPreferredOrientation(orientation: Orientation): Promise&lt;void&gt;
 
-设置窗口的显示方向属性，使用Promise异步回调。在Android和iOS平台上，此接口设置的为建议方向，不同平台的实际行为存在差异，具体差异请参见[Orientation](#orientation9)。
+设置主窗口的显示方向属性，使用Promise异步回调。在Android和iOS平台上，此接口设置的为建议方向，不同平台的实际行为存在差异，具体差异请参见[Orientation](#orientation9)。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
