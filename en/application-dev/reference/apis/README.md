@@ -52,6 +52,7 @@
 
 - Network Management
   - [@ohos.request (Upload and Download)](js-apis-request.md)
+  - [@ohos.request.cacheDownload (Cache Download)](js-apis-request-cacheDownload.md)
   - [@ohos.net.webSocket (WebSocket Connection)](js-apis-webSocket.md)
   - [@ohos.net.socket (Socket Connection)](js-apis-socket.md)
   - [@ohos.net.http (Data Request)](js-apis-http.md)

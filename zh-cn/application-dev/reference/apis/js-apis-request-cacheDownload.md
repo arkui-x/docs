@@ -1,0 +1,737 @@
+# @ohos.request.cacheDownload (缓存下载)
+
+request部件主要给应用提供上传下载文件、后台传输代理的基础能力。
+
+- request的cacheDownload子组件主要给应用提供应用资源提前缓存的基础能力。
+
+- cacheDownload组件使用HTTP和HTTPS协议进行数据下载，并将数据资源缓存至应用内存或应用沙箱目录的指定文件中。
+
+- 这些缓存数据可以被特定的ArkUI组件（例如：Image组件）使用，从而提升资源加载效率。请查看ArkUI组件文档确定组件是否支持该功能。
+- ArkUI-X平台支持说明：cacheDownload在ArkUI-X上支持Android和iOS平台；缓存的资源可被ArkUI的Image组件（网络图片）直接使用，建议先通过cacheDownload.download预缓存再使用Image加载，以获得最佳加载体验。
+
+> **说明：**
+>
+> 本模块首批接口从API version 18开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+
+## 依赖权限
+
+#### Android平台
+
+**说明：** 在Android平台上使用缓存下载接口时，需要配置网络权限。**如果没有配置网络权限会导致运行异常**。
+
+**配置方法：** 在.arkui-x/android/app/src/main/AndroidManifest.xml的uses-permission字段中加入android.permission.INTERNET（网络访问与DNS解析均依赖该权限）。
+
+示例如下：
+
+```
+    <uses-permission android:name="android.permission.INTERNET"/>
+```
+
+## 导入模块
+
+```js
+import { cacheDownload } from '@kit.BasicServicesKit';
+```
+
+## ArkUI-X平台差异说明
+
+ArkUI-X实现与HarmonyOS原生存在以下行为差异，使用时请注意：
+
+- **cancel**：Android平台调用[cancel](#cachedownloadcancel)后任务回调被移除，但已开始的网络传输不会被中断（传输可能在后台继续至完成，其已接收数据将作废，不会写入缓存）；iOS平台会真正取消网络传输。
+- **clearMemoryCache/clearFileCache**：不会清除正在执行任务的缓存内容，任务完成后其结果仍会进入缓存；文件缓存清理仅覆盖当前会话内已建立索引的缓存文件，应用重启后遗留的缓存文件不在清理范围内（此类文件在被再次访问时会重新纳入缓存管理）。
+- **重试范围**：仅传输类错误（DNS、TCP、SSL等枚举错误）会触发重试；HTTP状态码错误（100-599，如404、503）不会重试。
+- **headers**：请求头中值类型非string的条目会被静默忽略，不会报错。
+- **超限资源**：超过20MB的资源不进内存缓存，但当前版本仍会写入文件缓存（详见[cacheDownload.download](#cachedownloaddownload)）。
+- **性能数据**：PerformanceInfo采集范围按平台区分，详见[PerformanceInfo](#performanceinfo20)说明。
+
+## SslType<sup>21+</sup>
+
+表示安全通信协议的枚举。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称 | 值 |说明 |
+| -------- | -------- |-------- |
+| TLS | 'TLS' | 使用TLS安全通信协议。|
+| TLCP | 'TLCP' | 使用TLCP安全通信协议。 |
+
+> **说明：** iOS平台不支持TLCP协议（sslType设置为TLCP时，任务将失败并通过onDownloadError返回SSL错误）。
+
+## ErrorCode<sup>23+</sup>
+
+表示错误返回信息的特定类型枚举。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称 | 值 |说明 |
+| -------- | -------- |-------- |
+| OTHERS | 0xFF | 表示未分类的其他类型错误。|
+| DNS | 0x00 | 表示DNS相关错误。|
+| TCP | 0x10 | 表示TCP相关错误。|
+| SSL | 0x20 | 表示SSL相关错误。|
+| HTTP | 0x30 | 表示HTTP相关错误。|
+
+## CacheStrategy<sup>23+</sup>
+
+表示缓存刷新策略的枚举。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称 | 值 |说明 |
+| -------- | -------- |-------- |
+| FORCE | 0 | 强制更新缓存，无论缓存是否已经存在。|
+| LAZY | 1 | 延迟更新缓存，只有当缓存不存在时才会更新。|
+
+## TimeoutOptions
+
+任务超时配置选项。包括建立网络连接的超时时间和完成HTTP请求的超时时间。
+
+**起始版本：** 26.0.0
+
+
+**系统能力：** SystemCapability.Request.FileTransferAgent
+
+| 名称   | 类型     | 只读 | 可选 | 说明                            |
+|------|--------|----|----|-------------------------------|
+| networkCheckTimeout | number | 否 | 是 | 网络连接检查的超时时间，单位为秒。默认值为20，最小值为0，最大值为20，超出取值范围时抛出异常。<br>ArkUI-X平台差异：该值在Android上映射为TCP连接超时（connectTimeout，取值为0时表示不限时等待而非跳过检查）；iOS平台当前不使用该参数。 |
+| httpTotalTimeout | number | 否  | 是 | 完成HTTP请求的超时时间，单位为秒。默认值为60，最小值为1，最大值为4294967 |
+
+## RetryOptions
+
+任务重试配置选项。设置任务的最大重试次数。
+
+**起始版本：** 26.0.0
+
+
+**系统能力：** SystemCapability.Request.FileTransferAgent
+
+| 名称   | 类型     | 只读 | 可选 | 说明                            |
+|------|--------|----|----|-------------------------------|
+| maxRetryCount | number | 否  | 是 | 任务失败时的最大重试次数。默认值为1，最小值为0，最大值为10，超出取值范围时抛出异常。 |
+
+## CacheDownloadOptions
+
+缓存下载的配置选项。包括HTTP选项、传输选项和任务选项。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称   | 类型     | 只读 | 可选 | 说明                            |
+|------|--------|----|----|-------------------------------|
+| headers | Record\<string, string\> | 否  | 是 | 缓存下载任务在HTTP传输时使用的请求头。默认值为空。 |
+| sslType<sup>21+</sup> | [SslType](#ssltype21) | 否  | 是 | 使用安全通信协议TLS或TLCP，默认使用TLS。当前TLS和TLCP均不支持双向认证。 |
+| caPath<sup>21+</sup> | string | 否  | 是 | CA证书路径。目前仅支持.pem格式证书，默认使用系统预设的CA证书。ArkUI-X上仅Android平台生效；iOS平台该参数当前不生效（使用系统默认信任链）。 |
+| cacheStrategy<sup>23+</sup> | [CacheStrategy](#cachestrategy23) | 否  | 是 | 使用缓存刷新策略FORCE或LAZY，默认使用FORCE。 |
+| retry | [RetryOptions](#retryoptions) | 否  | 是 | 任务的重试配置，用于为单个任务自定义重试行为。当需要为该任务单独指定重试次数时设置；不设置时回退到全局重试配置（setGlobalRetryOptions），再回退到默认值（maxRetryCount默认为1）。<br>**起始版本：** 26.0.0 |
+| timeout | [TimeoutOptions](#timeoutoptions) | 否  | 是 | 任务的超时配置，用于为单个任务自定义超时行为。当需要为该任务单独指定网络连接超时或HTTP请求超时时设置；不设置时回退到全局超时配置（setGlobalTimeoutOptions），再回退到默认值（networkCheckTimeout默认为20、httpTotalTimeout默认为60）。<br>**起始版本：** 26.0.0 |
+
+## ResourceInfo<sup>20+</sup>
+
+预下载的资源信息。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称   | 类型     | 只读 | 可选 | 说明                            |
+|------|--------|----|----|-------------------------------|
+| size | number | 是  | 否  | 预下载资源解压后的大小，单位为字节（B）。当值为正整数时表示资源下载成功，-1表示下载失败。 |
+
+## NetworkInfo<sup>20+</sup>
+
+预下载的网络信息。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称         | 类型       | 只读 | 可选 | 说明                |
+|------------|----------|----|----|-------------------|
+| dnsServers | string[] | 是  | 否  | 下载资源时使用的DNS服务器列表。ArkUI-X当前版本不采集DNS服务器信息，恒返回空数组。 |
+| ip<sup>23+</sup> | string | 是  | 是  | 下载资源时url的IP地址。当DNS解析失败时，IP为undefined。 |
+
+## PerformanceInfo<sup>20+</sup>
+
+预下载的性能信息。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称               | 类型     | 只读 | 可选 | 说明                            |
+|------------------|--------|----|----|-------------------------------|
+| dnsTime          | number | 是  | 否  | 从启动到DNS解析完成所需的时间，单位：毫秒（ms）。   |
+| connectTime      | number | 是  | 否  | 从启动到TCP连接完成所需的时间，单位：毫秒（ms）。   |
+| tlsTime          | number | 是  | 否  | 从启动到TLS连接完成所需的时间，单位：毫秒（ms）。   |
+| firstSendTime    | number | 是  | 否  | 从启动到开始发送第一个字节所需的时间，单位：毫秒（ms）。 |
+| firstReceiveTime | number | 是  | 否  | 从启动到接收第一个字节所需的时间，单位：毫秒（ms）。   |
+| totalTime        | number | 是  | 否  | 从启动到完成请求所需的时间，单位：毫秒（ms）。      |
+| redirectTime     | number | 是  | 否  | 从启动到完成所有重定向步骤所需的时间，单位：毫秒（ms）。 |
+
+> **说明：**
+>
+> ArkUI-X当前版本按平台区分采集范围：Android平台采集firstReceiveTime与totalTime两项；iOS平台仅采集totalTime一项。未采集的各项（dnsTime、connectTime、tlsTime、firstSendTime、redirectTime，以及iOS上的firstReceiveTime）返回0。
+
+## DownloadInfo<sup>20+</sup>
+
+预下载的下载信息。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称          | 类型                                    | 只读 | 可选 | 说明        |
+|-------------|---------------------------------------|----|----|-----------|
+| resource    | [ResourceInfo](#resourceinfo20)       | 是  | 否  | 预下载的资源信息。 |
+| network     | [NetworkInfo](#networkinfo20)         | 是  | 否  | 预下载的网络信息。 |
+| performance | [PerformanceInfo](#performanceinfo20) | 是  | 否  | 预下载的性能信息。 |
+
+## DownloadError<sup>23+</sup>
+
+预下载错误回调的返回信息。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+| 名称          | 类型                                    | 只读 | 可选 | 说明        |
+|-------------|---------------------------------------|----|----|-----------|
+| errorCode    | [ErrorCode](#errorcode23)       | 是  | 否  | 预下载错误回调返回的特定错误类型。 |
+| message     | string         | 是  | 否  | 返回[通用错误码](../errorcodes/errorcode-universal.md)或[HTTP错误码](../errorcodes/errorcode-net-http.md)。 |
+
+## cacheDownload.download
+
+download(url: string, options: CacheDownloadOptions): void
+
+启动一个缓存下载任务，若传输成功，则将数据下载到内存缓存和文件缓存中。
+
+- 目标资源经过HTTP传输自动解压后的大小不能超过20971520B（即20MB），否则不会保存到内存缓存中。ArkUI-X当前版本中，超限资源仍会写入文件缓存（作为实现侧已知偏差，后续版本可能对齐内存缓存行为）。
+
+- 在缓存下载数据时，缓存刷新行为由cacheStrategy决定：使用FORCE（默认）策略时，如果在该url下已存在缓存内容，新的缓存内容会覆盖旧缓存内容；使用LAZY策略时，仅当缓存不存在时才会更新缓存。
+
+- 目标资源在存储到内存缓存或文件缓存中时，若超出对应类型缓存的容量上限，默认使用“LRU”（最近最少使用）方式替换（淘汰）已有缓存内容。
+
+- 该方法为同步方法，不阻塞调用线程。
+
+**需要权限**：ohos.permission.INTERNET
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名     | 类型                                                         | 必填 | 说明                             |
+|---------|------------------------------------------------------------|----|--------------------------------|
+| url     | string                                                     | 是  | 目标资源的地址。支持HTTP和HTTPS协议，长度不超过8192字节。 |
+| options | [CacheDownloadOptions](#cachedownloadoptions) | 是  | 目标资源的缓存下载选项。                   |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID    | 错误信息                                                                                                                                      |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| 401      | parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+
+  // 提供缓存下载任务的配置选项。
+  let options: cacheDownload.CacheDownloadOptions = {
+    headers: { 'Accept': 'application/json' },
+    sslType: cacheDownload.SslType.TLS,
+    caPath: '/path/to/ca.pem',
+    cacheStrategy: cacheDownload.CacheStrategy.FORCE,
+    retry: { maxRetryCount: 1 },
+    timeout: {
+      networkCheckTimeout: 20,
+      httpTotalTimeout: 60,
+    }
+  };
+
+  try {
+    // 进行缓存下载，资源若下载成功会被缓存到应用内存或应用沙箱目录的特定文件中。
+    cacheDownload.download("https://www.example.com", options);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to download the resource. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+## cacheDownload.cancel
+
+cancel(url: string): void
+
+根据url移除一个正在执行的缓存下载任务，已保存的内存缓存和文件缓存不会受到影响。
+
+- 当不存在对应url的任务时无其他效果。
+
+- 使用该方法同步执行时，不阻塞调用线程。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名  | 类型     | 必填 | 说明                             |
+|------|--------|----|--------------------------------|
+| url  | string | 是  | 目标资源的地址。支持HTTP和HTTPS协议，长度不超过8192字节。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID    | 错误信息                                                                                                                                      |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| 401      | parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+
+  // 提供缓存下载任务的配置选项。
+  let options: cacheDownload.CacheDownloadOptions = {};
+  
+  try {
+    // 进行缓存下载，资源若下载成功会被缓存到应用内存或应用沙箱目录的特定文件中。  
+    cacheDownload.download("https://www.example.com", options);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to download the resource. err code: ${err.code}, err message: ${err.message}`);
+  }
+
+  // 处理其他业务逻辑。
+  
+  try {
+    // 在不需要特定任务缓存时，移除缓存下载任务，已缓存的内容不受影响。
+    cacheDownload.cancel("https://www.example.com");
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to cancel the task. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+## cacheDownload.setMemoryCacheSize
+
+setMemoryCacheSize(bytes: number): void
+
+设置缓存下载组件能够保存的内存缓存上限。
+
+- 使用该接口调整缓存大小时，默认使用"LRU"（最近最少使用）方式清除多余的已缓存的内存缓存内容。使用该接口时，若bytes设置为0，将清除所有已缓存的内存缓存内容。
+
+- 该方法为同步方法，不阻塞调用线程。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名   | 类型     | 必填 | 说明                                      |
+|-------|--------|----|-----------------------------------------|
+| bytes | number | 是  | 设置的缓存上限。ArkUI-X上默认值为20MB，最小值为0，最大值不超过1073741824B（即1GB）。若bytes设置为0，将清除所有已缓存的内存缓存内容。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID    | 错误信息                                                                                                                                      |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| 401      | parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+  
+  try {
+    // 设置内存缓存大小上限。  
+    cacheDownload.setMemoryCacheSize(10 * 1024 * 1024);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to set memory cache size. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+## cacheDownload.setFileCacheSize
+
+setFileCacheSize(bytes: number): void
+
+设置缓存下载组件能够保存的文件缓存的上限。
+
+- 使用该接口调整缓存大小时，默认使用“LRU”（最近最少使用）方式清除多余的已缓存的文件缓存内容。
+
+- 使用该接口时，若bytes设置为0，将会删除所有缓存文件。ArkUI-X平台差异：该删除仅对当前会话内已建立索引的缓存文件生效，应用重启后遗留的缓存文件不在本接口清理范围内（此类文件在被再次访问时会重新纳入缓存管理）。
+
+- 该方法为同步方法，不会阻塞调用线程。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名   | 类型     | 必填 | 说明                                                         |
+|-------|--------|----|------------------------------------------------------------|
+| bytes | number | 是  | 设置的缓存上限。默认值为104857600B（即100MB），最小值为0，最大值不超过4294967296B（即4GB）。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+| 错误码ID    | 错误信息                                                                                                                                      |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| 401      | parameter error. Possible causes: 1. Missing mandatory parameters. 2. Incorrect parameter type. 3. Parameter verification failed. |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+  
+  try {
+    // 设置文件缓存大小上限。  
+    cacheDownload.setFileCacheSize(100 * 1024 * 1024);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to set file cache size. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+> **说明：**
+> 
+> * 预下载模块下载的网络缓存文件会保存在应用沙箱的缓存目录中。
+> * 应用可以借助该接口的能力达成清理缓存文件的目的。注意：ArkUI-X上该清理仅覆盖当前会话内已建立索引的缓存文件（应用重启后遗留的缓存文件不受影响，如需彻底清理可由应用自行管理沙箱缓存目录）。
+> * 不建议应用直接对缓存目录和文件进行修改，以避免功能异常。
+
+## cacheDownload.setDownloadInfoListSize<sup>20+</sup>
+
+setDownloadInfoListSize(size: number): void
+
+设置下载信息列表的大小。
+
+- 下载信息列表用于存储预下载信息。
+
+- 下载信息和url一一对应，每次预下载都会生成一个下载信息，相同url下只会保存最新的下载信息。
+
+- 使用该接口调整列表大小时，若size增大，列表中原有的信息不变；若size减小，默认使用"LRU"（最近最少使用）方式清除多余的已缓存信息。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名  | 类型     | 必填 | 说明                                            |
+|------|--------|----|-----------------------------------------------|
+| size | number | 是  | 设置的下载信息列表大小。取值范围：[0, 8192]，默认为0，表示不会存储任何下载信息。超出取值范围时抛出异常。 |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+  
+  try {
+    // 设置下载信息列表大小。  
+    cacheDownload.setDownloadInfoListSize(2048);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to set download information list size. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+## cacheDownload.getDownloadInfo<sup>20+</sup>
+
+getDownloadInfo(url: string): DownloadInfo | undefined
+
+基于url获取预下载的下载信息。信息存储在内存中的下载信息列表，当应用程序退出时清除。需先调用[setDownloadInfoListSize](#cachedownloadsetdownloadinfolistsize20)设置列表大小（大于0）后，预下载信息才会被存储到列表中，否则列表默认大小为0，不存储任何下载信息，getDownloadInfo将返回undefined。
+
+- 如果下载信息列表中能够找到指定url，返回该url对应的最新[DownloadInfo](#downloadinfo20)。
+
+- 如果下载信息列表中找不到指定url，返回undefined。
+
+- 在缓存下载信息时，如果在该url下已存在缓存信息，新的缓存内容会覆盖旧缓存。
+
+- 目标信息在存储到内存时，使用“LRU”（最近最少使用）方式替换已存在的缓存数据。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名 | 类型     | 必填 | 说明                   |
+|-----|--------|----|----------------------|
+| url | string | 是  | 待查询的url，支持HTTP和HTTPS协议，最大长度为8192字节，超出长度限制时抛出异常。 |
+
+**返回值：**
+
+| 类型                                           | 说明                               |
+|----------------------------------------------|----------------------------------|
+| [DownloadInfo](#downloadinfo20) \| undefined | 返回对应url的下载信息，url未记录时返回undefined。 |
+
+**错误码：**
+
+以下错误码的详细介绍请参见[通用错误码说明文档](../errorcodes/errorcode-universal.md)。
+
+ArkUI-X上该接口不执行权限校验，不会抛出201错误码；参数非法时抛出401（通用错误码）。
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+
+  try {
+    // 设置下载信息列表大小。  
+    cacheDownload.setDownloadInfoListSize(2048);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to set download information list size. err code: ${err.code}, err message: ${err.message}`);
+  }
+
+  // 提供缓存下载任务的配置选项。
+  let options: cacheDownload.CacheDownloadOptions = {};
+  
+  try {
+    // 进行缓存下载，资源若下载成功会被缓存到应用内存或应用沙箱目录的特定文件中。  
+    cacheDownload.download("https://www.example.com", options);
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to download the resource. err code: ${err.code}, err message: ${err.message}`);
+  }
+
+  // 处理其他业务逻辑。
+  
+  try {
+    // 在缓存下载完成后，获取缓存下载的信息。
+    let downloadInfo = cacheDownload.getDownloadInfo("https://www.example.com");
+    if (downloadInfo == undefined) {
+      console.error(`CacheDownload get download info undefined.`);
+    } else {
+      console.info(`CacheDownload get download info : ${JSON.stringify(downloadInfo)}`);
+    }
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to get download info. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+## cacheDownload.clearMemoryCache<sup>23+</sup>
+
+clearMemoryCache(): void
+
+清除缓存下载内容的内存缓存。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**示例：**
+
+```ts
+import { cacheDownload } from '@kit.BasicServicesKit';
+  
+cacheDownload.clearMemoryCache();
+```
+
+## cacheDownload.clearFileCache<sup>23+</sup>
+
+clearFileCache(): void
+
+清除保存下载内容的文件缓存。ArkUI-X平台差异：仅清除当前会话内已建立索引的缓存文件，应用重启后遗留的缓存文件不受影响（在被再次访问时重新纳入缓存管理），如需彻底清理可由应用自行管理沙箱缓存目录。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**示例：**
+
+```ts
+import { cacheDownload } from '@kit.BasicServicesKit';
+  
+cacheDownload.clearFileCache();
+```
+
+## cacheDownload.onDownloadSuccess<sup>23+</sup>
+
+onDownloadSuccess(url: string, callback: Callback&lt;void&gt;): void
+
+订阅预下载的完成事件。使用callback异步回调。与offDownloadSuccess()方法配合使用，在不再需要接收完成事件时应调用offDownloadSuccess()取消订阅，以避免不必要的回调开销。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名 | 类型     | 必填 | 说明                   |
+|-----|--------|----|----------------------|
+| url | string | 是  | 待注册回调的url，支持HTTP和HTTPS协议，url字符串的最大长度为8192字节，超出长度限制时抛出异常。 |
+| callback | Callback&lt;void&gt; | 是 | 下载成功时触发的回调函数，无回调参数。 |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+  
+  try {
+    const successCallback = () => {
+      console.info("Succeeded in getting callback from cacheDownload");
+    };
+    // 订阅预下载的完成事件，当下载完成时执行回调
+    cacheDownload.onDownloadSuccess("https://www.example.com", successCallback);
+    // 进行缓存下载，资源若下载成功会被缓存到应用内存或应用沙箱目录的特定文件中。  
+    cacheDownload.download("https://www.example.com", {});
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to download the resource. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+## cacheDownload.onDownloadError<sup>23+</sup>
+
+onDownloadError(url: string, callback: Callback&lt;DownloadError&gt;): void
+
+订阅预下载的错误事件。使用callback异步回调。与offDownloadError()方法配合使用，在不再需要接收错误事件时应调用offDownloadError()取消订阅，以避免不必要的回调开销。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名 | 类型     | 必填 | 说明                   |
+|-----|--------|----|----------------------|
+| url | string | 是  | 待注册回调的url，支持HTTP和HTTPS协议，url字符串的最大长度为8192字节，超出长度限制时抛出异常。 |
+| callback | Callback&lt;[DownloadError](#downloaderror23)&gt; | 是 | 回调函数，返回预下载的错误信息。 |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+  
+  try {
+    const errorCallback = (error: cacheDownload.DownloadError) => {
+      console.error(`Error callback from cacheDownload. error code: ${error.errorCode}, error message: ${error.message}`);
+    };
+    // 订阅预下载的错误事件，当下载错误时执行回调，返回错误信息
+    cacheDownload.onDownloadError("https://www.example.com", errorCallback);
+    // 进行缓存下载，资源若下载成功会被缓存到应用内存或应用沙箱目录的特定文件中。  
+    cacheDownload.download("https://www.example.com", {});
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to download the resource. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+## cacheDownload.offDownloadSuccess<sup>23+</sup>
+
+offDownloadSuccess(url: string, callback?: Callback&lt;void&gt;): void
+
+取消订阅预下载的完成事件。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名 | 类型     | 必填 | 说明                   |
+|-----|--------|----|----------------------|
+| url | string | 是  | 待注册回调的url，支持HTTP和HTTPS协议，url字符串的最大长度为8192字节，超出长度限制时抛出异常。 |
+| callback | Callback&lt;void&gt; | 否 | 需要取消订阅的回调函数。若不填该参数，表示取消该url下的所有完成回调函数。 |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+  
+  try {
+    const successCallback = () => {
+      console.info("Succeeded in getting callback from cacheDownload");
+    };
+    // 订阅预下载的完成事件，当下载完成时执行回调
+    cacheDownload.onDownloadSuccess("https://www.example.com", successCallback);
+    // 取消订阅预下载的完成事件
+    cacheDownload.offDownloadSuccess("https://www.example.com", successCallback);
+    // 进行缓存下载，资源若下载成功会被缓存到应用内存或应用沙箱目录的特定文件中。  
+    cacheDownload.download("https://www.example.com", {});
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to download the resource. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+## cacheDownload.offDownloadError<sup>23+</sup>
+
+offDownloadError(url: string, callback?: Callback&lt;DownloadError&gt;): void
+
+取消订阅预下载的错误事件。
+
+**系统能力**：SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名 | 类型     | 必填 | 说明                   |
+|-----|--------|----|----------------------|
+| url | string | 是  | 待注册回调的url，支持HTTP和HTTPS协议，url字符串的最大长度为8192字节，超出长度限制时抛出异常。 |
+| callback | Callback&lt;[DownloadError](#downloaderror23)&gt; | 否 | 需要取消订阅的回调函数。若不填该参数，表示取消该url下的所有错误回调函数。 |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+  
+  try {
+    const errorCallback = (error: cacheDownload.DownloadError) => {
+      console.error(`Error callback from cacheDownload. error code: ${error.errorCode}, error message: ${error.message}`);
+    };
+    // 订阅预下载的错误事件，当下载错误时执行回调，返回错误信息
+    cacheDownload.onDownloadError("https://www.example.com", errorCallback);
+    // 取消订阅预下载的错误事件
+    cacheDownload.offDownloadError("https://www.example.com", errorCallback);
+    // 进行缓存下载，资源若下载成功会被缓存到应用内存或应用沙箱目录的特定文件中。  
+    cacheDownload.download("https://www.example.com", {});
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to download the resource. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+## cacheDownload.setGlobalRetryOptions
+
+setGlobalRetryOptions(options?: RetryOptions): void
+
+设置全局的任务重试配置。当任务未设置特定的重试配置时此配置生效。重试配置优先级：任务设置 > 全局设置 > 默认设置。
+
+**起始版本：** 26.0.0
+
+
+**系统能力：** SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名 | 类型     | 必填 | 说明                   |
+|-----|--------|----|----------------------|
+| options | [RetryOptions](#retryoptions) | 否  | 任务重试配置，用于自定义全局任务的重试行为。当需要调整全局重试次数等策略时传入此参数；不传入时保持当前全局重试配置不变。 |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+
+  try {
+    // 设置全局的任务最大重试次数
+    cacheDownload.setGlobalRetryOptions({
+      maxRetryCount: 1
+    });
+    cacheDownload.download("https://www.example.com", {});
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to download the resource. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
+
+## cacheDownload.setGlobalTimeoutOptions
+
+setGlobalTimeoutOptions(options?: TimeoutOptions): void
+
+设置全局的任务超时配置。当任务未设置特定的超时配置时此配置生效。超时配置优先级：任务设置 > 全局设置 > 默认设置。
+
+**起始版本：** 26.0.0
+
+
+**系统能力：** SystemCapability.Request.FileTransferAgent
+
+**参数：**
+
+| 参数名 | 类型     | 必填 | 说明                   |
+|-----|--------|----|----------------------|
+| options | [TimeoutOptions](#timeoutoptions) | 否  | 任务超时配置，用于自定义全局任务的超时行为。当需要调整全局网络连接超时或HTTP请求超时时传入此参数；不传入时保持当前全局超时配置不变。 |
+
+**示例：**
+
+  ```ts
+  import { cacheDownload, BusinessError } from '@kit.BasicServicesKit';
+  
+  try {
+    // 设置全局任务超时配置
+    cacheDownload.setGlobalTimeoutOptions({
+      networkCheckTimeout: 20,
+      httpTotalTimeout: 60,
+    });
+    cacheDownload.download("https://www.example.com", {});
+  } catch (error) {
+    let err: BusinessError = error as BusinessError;
+    console.error(`Failed to download the resource. err code: ${err.code}, err message: ${err.message}`);
+  }
+  ```
