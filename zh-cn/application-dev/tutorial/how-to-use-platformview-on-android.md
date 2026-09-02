@@ -51,6 +51,16 @@ public class MyWebView implements IPlatformView {
     public String getPlatformViewID() {
         return id;
     }
+    // 可选实现。示例为platformview嵌套在一个可以垂直方向滑动的容器组件中
+    @Override
+    public boolean onGestureJudge(float offsetX, float offsetY) {
+        // 垂直方向滑动
+        if (Math.abs(offsetY) >= Math.abs(offsetX)) {
+            int dir = offsetY > 0 ? -1 : 1;
+            return mWebView.canScrollVertically(dir);
+        }
+        return true;
+    }
 }
 
 ```
