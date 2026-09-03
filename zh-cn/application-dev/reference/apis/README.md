@@ -80,6 +80,7 @@
   - [@ohos.resourceManager (资源管理)](js-apis-resource-manager.md)
 - 网络管理
   - [@ohos.request (上传下载)](js-apis-request.md)
+  - [@ohos.request.cacheDownload (缓存下载)](js-apis-request-cacheDownload.md)
   - [@ohos.net.webSocket (WebSocket连接)](js-apis-webSocket.md)
   - [@ohos.net.socket (Socket连接)](js-apis-socket.md)
   - [@ohos.net.http (数据请求)](js-apis-http.md)
