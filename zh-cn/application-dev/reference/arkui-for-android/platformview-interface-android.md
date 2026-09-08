@@ -57,6 +57,26 @@ String getPlatformViewID()
 | --------------------------------- | -------------- |
 | String | 返回原生组件的ID。 |
 
+## onGestureJudge
+
+boolean onGestureJudge(float offsetX, float offsetY)<sup>26+</sup>
+> **说明：**
+>
+> 可选实现，用于需要将滑动手势传递到父容器组件的场景。
+
+**参数：** 
+
+| 参数名          | 类型             | 必填 | 说明           |
+| --------------- | ---------------- | ---- | -------------- |
+| offsetX | float | 是   | 水平方向滑动的距离。单位px，大于0时手指右滑，小于0时手指左滑。 |
+| offsetY | float | 是   | 垂直方向滑动的距离。单位px，大于0时手指上滑，小于0时手指下滑。 |
+
+**返回值：** 
+
+| 类型                              | 说明           |
+| --------------------------------- | -------------- |
+| boolean | true: 原生组件消费手势，false: 父容器组件处理手势。未实现该方法时默认按 true 处理 。|
+
 
 **示例：**
 
@@ -89,6 +109,17 @@ public class MyWebView implements IPlatformView {
     @Override
     public String getPlatformViewID() {
         return id;
+    }
+
+    // 可选实现。示例为platformview嵌套在一个可以垂直方向滑动的容器组件中
+    @Override
+    public boolean onGestureJudge(float offsetX, float offsetY) {
+        // 垂直方向滑动
+        if (Math.abs(offsetY) >= Math.abs(offsetX)) {
+            int dir = offsetY > 0 ? -1 : 1;
+            return mWebView.canScrollVertically(dir);
+        }
+        return true;
     }
 }
 ```
