@@ -2374,9 +2374,15 @@ try {
 
 setWindowBrightness(brightness: number, callback: AsyncCallback&lt;void&gt;): void
 
-设置屏幕亮度值，使用callback异步回调。
+设置窗口亮度值，使用callback异步回调。
 
-当前屏幕亮度规格：窗口设置屏幕亮度生效时，控制中心不可以调整系统屏幕亮度，窗口恢复默认系统亮度之后，控制中心可以调整系统屏幕亮度。
+设置窗口亮度只会影响当前设备内置屏的屏幕亮度，无法修改外接屏、虚拟屏（如投屏所在的屏幕）的屏幕亮度。
+
+当前屏幕亮度规格：窗口设置屏幕亮度生效时，控制中心不可以调整系统屏幕亮度。当接口入参为-1时，窗口恢复默认系统亮度，控制中心可以调整系统屏幕亮度。
+
+当窗口退至后台时，窗口亮度失效，可以通过控制中心或快捷键调整。不建议连续调用或窗口退至后台时调用此接口，否则可能产生时序问题。
+
+**设备行为差异：** 针对TV设备：当前接口不生效也不报错。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
@@ -2389,10 +2395,11 @@ setWindowBrightness(brightness: number, callback: AsyncCallback&lt;void&gt;): vo
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
 
 | 错误码ID | 错误信息 |
 | ------- | -------------------------------------------- |
+| 401     | Parameter error.                             |
 | 1300002 | This window state is abnormal.               |
 | 1300003 | This window manager service works abnormally. |
 
@@ -2421,9 +2428,15 @@ try {
 
 setWindowBrightness(brightness: number): Promise&lt;void&gt;
 
-设置屏幕亮度值，使用Promise异步回调。
+设置窗口亮度值，使用Promise异步回调。
 
-当前屏幕亮度规格：窗口设置屏幕亮度生效时，控制中心不可以调整系统屏幕亮度，窗口恢复默认系统亮度之后，控制中心可以调整系统屏幕亮度。
+设置窗口亮度只会影响当前设备内置屏的屏幕亮度，无法修改外接屏、虚拟屏（如投屏所在的屏幕）的屏幕亮度。
+
+当前屏幕亮度规格：窗口设置屏幕亮度生效时，控制中心不可以调整系统屏幕亮度。当接口入参为-1时，窗口恢复默认系统亮度，控制中心可以调整系统屏幕亮度。
+
+当窗口退至后台时，窗口亮度失效，可以通过控制中心或快捷键调整。不建议连续调用或窗口退至后台时调用此接口，否则可能产生时序问题。
+
+**设备行为差异：** 针对TV设备：当前接口不生效也不报错。
 
 **系统能力：** SystemCapability.WindowManager.WindowManager.Core
 
@@ -2441,10 +2454,11 @@ setWindowBrightness(brightness: number): Promise&lt;void&gt;
 
 **错误码：**
 
-以下错误码的详细介绍请参见[窗口错误码](../errorcodes/errorcode-window.md)。
+以下错误码的详细介绍请参见[通用错误码](../errorcodes/errorcode-universal.md)和[窗口错误码](../errorcodes/errorcode-window.md)。
 
 | 错误码ID | 错误信息 |
 | ------- | -------------------------------------------- |
+| 401     | Parameter error.                             |
 | 1300002 | This window state is abnormal.               |
 | 1300003 | This window manager service works abnormally. |
 
