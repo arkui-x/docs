@@ -8,7 +8,7 @@ ACE Tools是一套为ArkUI-X应用开发者提供的命令行工具，支持在W
 
 针对Windows和macOS的平台环境，使用ACE Tools前：
 
-1、建议优先下载DevEco Studio，请参考[社区版本软件和工具配套关系](../../release-notes/ArkUI-X-v1.1.6-release.md#配套关系)完成DevEco Studio的下载和安装，通过DevEco Studio，可以下载到HarmonyOS SDK、OpenHarmony SDK、ArkUI-X SDK、OHPM、Node。
+1、建议优先下载DevEco Studio，请参考[社区版本软件和工具配套关系](../../release-notes/ArkUI-X-v6.1.1-release.md#配套关系)完成DevEco Studio的下载和安装，通过DevEco Studio，可以下载到HarmonyOS SDK、OpenHarmony SDK、ArkUI-X SDK、OHPM、Node。
 
 ![image](figures/SDK_setting.png)
 
