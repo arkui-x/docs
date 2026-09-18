@@ -111,7 +111,7 @@ ace run apk
 
 ```shell
 cd demo
-ace run app
+ace run ios
 ```
 
 * Installing and running your application on an OpenHarmony device
