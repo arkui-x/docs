@@ -2374,7 +2374,7 @@ try {
 
 setWindowBrightness(brightness: number, callback: AsyncCallback&lt;void&gt;): void
 
-设置窗口亮度值，使用callback异步回调。
+设置主窗口亮度值，使用callback异步回调。
 
 设置窗口亮度只会影响当前设备内置屏的屏幕亮度，无法修改外接屏、虚拟屏（如投屏所在的屏幕）的屏幕亮度。
 
@@ -2428,7 +2428,7 @@ try {
 
 setWindowBrightness(brightness: number): Promise&lt;void&gt;
 
-设置窗口亮度值，使用Promise异步回调。
+设置主窗口亮度值，使用Promise异步回调。
 
 设置窗口亮度只会影响当前设备内置屏的屏幕亮度，无法修改外接屏、虚拟屏（如投屏所在的屏幕）的屏幕亮度。
 
