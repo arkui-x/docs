@@ -140,34 +140,8 @@ ArkTS代码中使用了类似“import XXX from '@ohos.util.xxx'”，libutil.so
 **解决办法：**
 libcrypto_openssl.so作为二级依赖的二进制库需要预置到apk中，不支持动态下载。
 
-#### **问题二：应用ArkTS代码未做异常保护**
 
-**具体示例：**
-例如：在aboutToAppear方法中使用了未赋值的对象test[0]
-
-```typescript
-aboutToAppear(): void {
- let my=this.test[0].toString();
-}
-```
-
-具体报错日志如下：
-```shell
-08-14 10:38:17.485 25500 25500 D ArkCompiler: [default] Throw error: Cannot read property toString of undefined
-08-14 10:38:17.485 25500 25500 D ArkCompiler: [default] at aboutToAppear (entry/src/main/ets/pages/CategoryPage.ets:138:31)
-08-14 10:38:17.485 25500 25500 E ArkCompiler: [default] Call:2170 occur exception need return
-08-14 10:38:17.485 25500 25500 E ArkCompiler: [default] Pending exception before ExecutePendingJob called, in line:3518, exception details as follows:
-08-14 10:38:17.485 25500 25500 E ArkCompiler: [default] TypeError: Cannot read property toString of undefined
-```
-
-**问题原因：**
-在ability生命周期方法中，应用代码未做异常保护，会导致白屏
-
-**解决办法：**
-应用ArkTS代码需要做异常保护
-
-
-#### **问题三：Android P以上环境web组件加载失败**
+#### **问题二：Android P以上环境web组件加载失败**
 
 **具体示例：**
 web组件加载失败，也会导致白屏。
@@ -195,7 +169,7 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 }
 ```
 
-#### **问题四：apk构建异常，assets漏拷贝对应模块**
+#### **问题三：app构建异常，assets漏拷贝对应模块**
 
 apk（非动态化加载）构建时，assets目录下没有拷贝对应的模块文件。
 
@@ -217,7 +191,7 @@ apk（非动态化加载）构建时，assets目录下没有拷贝对应的模�
 先删除.arkui-x/android/app/src/main/assets目录下全部内容，执行Clean Project动作，用DevEco Studio或ACE Tools重新构建apk或者iOS应用
 
 
-#### **问题五：不支持跨平台，标签误标**
+#### **问题四：不支持跨平台，标签误标**
 
 **关键日志**
 
