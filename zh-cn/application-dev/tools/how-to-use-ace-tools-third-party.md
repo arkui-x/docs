@@ -3,12 +3,11 @@
 > 本文档介绍 ArkUI-X 三方件（HAR）的开发与集成全流程，涵盖以下内容：
 > - 三方件类型选型（`package` / `ffi` / `plugin`）与平台配置
 > - 使用 `ace create` 创建三方件工程
-> - 使用 `ace build plugin` 构建 HAR 包
+> - 使用 `ace build plugin` 构建 HAR 插件包
 > - 使用 `ace install` 将 HAR 集成到消费工程
 > - 编写 Index.ets 导入并调用三方件方法
-> - 使用 `ace run hap/apk/ios` 安装到真机验证
-> - 单平台包跨端导入白屏的已知问题与规避
-> - 已集成包的手动卸载方法
+> - 单平台插件包跨端导入白屏的已知问题与规避
+> - 已集成插件包的手动卸载方法
 
 ---
 
@@ -29,15 +28,6 @@
 | **Package** | `package` | 无，纯 ArkTS | UI 组件库、工具函数库 |
 | **FFI** | `ffi` | 预编译 C++（AAR + xcframework + .so） | MQTT、加密、图像处理等 C 库 |
 | **Plugin** | `plugin` | 预编译 C++ & Java/Kotlin（AAR + xcframework + .so） | 藍牙、相机、传感器等平台 API |
-
-> 区分：**Package=纯 TS 逻辑；FFI=C++ 纯计算（平台无关）；Plugin=C++ 调平台能力（含 Java/Kotlin 桥）**。仅 package 无 `.so` 依赖、三端零成本；ffi/plugin 需各端原生产物。
-
-### 平台（`crossplatform-config.json5` 的 `platform`）
-- `['android']` — 仅 Android（+ HarmonyOS 原生）
-- `['iOS']` — 仅 iOS（+ HarmonyOS 原生）
-- `['android','iOS']`（创建时选 Default/both）— 三端
-
-> 单平台包（android-only / ios-only）只能在该平台被导入调用，跨平台导入会白屏（见第 8 节）。package 不受此限。
 
 ---
 
@@ -68,8 +58,6 @@ In order to run your app, type:
 Your app code is in /path/to/my_ffi_both/entry.
 ```
 
-> 说明：`Framework integration approach` 仅在 iOS/both 平台且 macOS 上出现；android-only 工程无此项。
-
 创建后结构（以 `my_ffi_bothlib` 为 lib 模块）：
 ```
 my_ffi_both/
@@ -85,6 +73,16 @@ my_ffi_both/
 ├── .arkui-x/                         # android/ios 工程壳 + crossplatform-config.json5
 └── build-profile.json5
 ```
+
+> 区分：**Package=纯 TS 逻辑；FFI=C++ 纯计算（平台无关）；Plugin=C++ 调平台能力（含 Java/Kotlin 桥）**。仅 package 无 `.so` 依赖、三端零成本；ffi/plugin 需各端原生产物。
+
+### 平台（`crossplatform-config.json5` 的 `platform`）
+- `['android']` — 仅 Android（+ HarmonyOS 原生）
+- `['iOS']` — 仅 iOS（+ HarmonyOS 原生）
+- `['android','iOS']`（创建时选 Default/both）— 三端
+
+> 单平台插件包（android-only / ios-only）只能在该平台被导入调用，跨平台导入会白屏（见第 8 节）。package 不受此限。
+
 ---
 
 ## 3. 自身编译运行验证
@@ -95,7 +93,7 @@ my_ffi_both/
 cd my_ffi_both
 ace run hap      # 鸿蒙真机
 ace run apk      # Android 真机
-ace run ios      # iOS 真机/模拟器
+ace run ios      # iOS 真机/模拟器（需先完成 iOS 签名配置）
 ```
 
 - package/ffi/plugin 在自身工程内，entry 导入的是本工程 lib，三端原生均已链接，应正常。
@@ -135,7 +133,7 @@ my_ffi_bothlib.har
 ├── ios/my_ffi_bothlib.xcframework/             # 平台含 iOS 时
 └── package/
     ├── libs/arm64-v8a/libmy_ffi_bothlib.so     # 鸿蒙原生
-    ├── libs/arm64-v8a/libc++_shared.so   # C++ 运行时（hvigor 自动随包）
+    ├── libs/arm64-v8a/libc++_shared.so   # C++ 运行时（hvigor 自动随插件包）
     ├── Index.ets / oh-package.json5 / src/main/...
     └── META-INF/MANIFEST.MF
 ```
@@ -183,10 +181,9 @@ my_ffi_bothlib@1.0.0 installed.
 
 ## 6. 消费工程：编写 Index.ets 导入并测试
 
-`consumer_app/entry/src/main/ets/pages/Index.ets`：
-
 ```typescript
-import { add, greet } from 'my_ffi_bothlib'   // 导入包的方法
+// consumer_app/entry/src/main/ets/pages/Index.ets
+import { add, greet } from 'my_ffi_bothlib'   // 导入插件包的方法
 
 @Entry
 @Component
@@ -205,7 +202,7 @@ struct Index {
 }
 ```
 
-> 多包集成时注意**命名冲突**，用别名：`import { add as ffiA_add } from '...'`。
+> 多插件包集成时注意**命名冲突**，用别名：`import { add as ffiA_add } from '...'`。
 
 ---
 
@@ -222,11 +219,11 @@ ace run ios      # iOS
 
 ---
 
-## 8. 已知问题：单平台包跨端导入白屏
+## 8. 已知问题：单平台插件包跨端导入白屏
 
 ### 现象
 
-单平台三方件工程（`platform: ['android']` 或 `['iOS']` 的 ffi/plugin）生成的 HAR 包在消费工程中被导入后，在**非目标平台**运行时：**编译通过，启动白屏**。
+单平台三方件工程（`platform: ['android']` 或 `['iOS']` 的 ffi/plugin）生成的 HAR 插件包在消费工程中被导入后，在**非目标平台**运行时：**编译通过，启动白屏**。
 
 | 三方件（platform） | 消费工程运行 | 结果 |
 |---|---|---|
@@ -235,17 +232,17 @@ ace run ios      # iOS
 | `my_plugin_android`（android） | `ace run ios` | 编译正常，启动**白屏** |
 | `my_plugin_ios`（iOS） | `ace run apk` | 编译正常，启动**白屏** |
 
-> package（纯 ETS）包无此问题，三端均可导入。both 平台的 ffi/plugin 也无此问题（三端原生均已链接）。
+> package（纯 ETS）插件包无此问题，三端均可导入。both 平台的 ffi/plugin 也无此问题（三端原生均已链接）。
 
 ### 根因
 
-ffi/plugin 包的 `Index.ets` 顶层存在 NAPI 原生导入：
+ffi/plugin 插件包的 `Index.ets` 顶层存在 NAPI 原生导入：
 ```typescript
 import nativeModule from 'libmy_ffi_android.so'   // ← 模块加载时执行
 export const add = nativeModule.add                 // ← 立即访问 .add
 ```
 
-在非目标平台运行时，该包未链接对应原生产物（android-only 包无 iOS xcframework；ios-only 包无 Android aar），导致：
+在非目标平台运行时，该插件包未链接对应原生产物（android-only 插件包无 iOS xcframework；ios-only 插件包无 Android aar），导致：
 
 ```
 import nativeModule from 'libxxx.so'
@@ -265,29 +262,29 @@ E Ace: Failed to create reference for global.requireNapi
 
 ### 规避
 
-**方案一（推荐）：跨端消费使用 `both` 包**
+**方案一（推荐）：跨端消费使用 `both` 插件包**
 
-`platform: ['android','iOS']` 的 ffi/plugin 三端原生均链接，无条件导入即正常。三端通用的消费工程应优先集成 both 包。
+`platform: ['android','iOS']` 的 ffi/plugin 三端原生均链接，无条件导入即正常。三端通用的消费工程应优先集成 both 插件包。
 
 **方案二：按平台选择性导入**
 
-在消费工程中，仅导入当前平台支持的原生包：
+在消费工程中，仅导入当前平台支持的原生插件包：
 
 | 运行平台 | 可导入 | 不可导入 |
 |---|---|---|
-| Android | android-only + both | ~~ios-only~~ |
-| iOS | ios-only + both | ~~android-only~~ |
+| Android | android-only + both | ios-only |
+| iOS | ios-only + both | android-only |
 | HarmonyOS | 三类均可 | —（原生 `.so` 随 HAR 提供） |
 
-> 单平台包仅用于目标平台的定制能力封装，不要无条件跨端导入。若需单份代码三端通用，需按平台条件加载（动态 import 或平台特定源码目录）。
+> 单平台插件包仅用于目标平台的定制能力封装，不要无条件跨端导入。若需单份代码三端通用，需按平台条件加载（动态 import 或平台特定源码目录）。
 
 > 此为 ArkUI-X 跨端 HAR 原生分发的已知限制：平台过滤只裁原生产物（aar/xcframework），不剔除 ETS；顶层 `.so` 导入在未链接平台解析为 undefined 致白屏。
 
 ---
 
-## 9. 卸载/移除已集成的包（手动）
+## 9. 卸载/移除已集成的插件包（手动）
 
-`ace` 没有移除消费工程已集成的 HAR 包的命令。移除一个已集成包需手动删除以下内容（以 `my_ffi_bothlib` 为包名）：
+`ace` 没有移除消费工程已集成的 HAR 插件包的命令。移除一个已集成插件包需手动删除以下内容（以 `my_ffi_bothlib` 为插件包名）：
 
 ### 9.1 三方件本体
 - 删除 `.arkui-x/plugins/my_ffi_bothlib/`（整目录，含 `.so`/aar/xcframework）
@@ -308,19 +305,9 @@ E Ace: Failed to create reference for global.requireNapi
 - 删除 `.arkui-x/ios/frameworks/my_ffi_bothlib.xcframework/`（整目录）
 - `.arkui-x/ios/app.xcodeproj/project.pbxproj`：删除该 framework 的引用行（搜索 `my_ffi_bothlib` 关键字，移除 `PBXFileReference` / `PBXBuildFile` / `Frameworks` build phase 中的相关条目）
 
-### 9.6 清理后
+### 9.6 清理构建产物
+移除插件包后，需清理残留的构建产物：
+
 - 删除工程构建产物：`entry/build/`、`build/`、`.arkui-x/android/app/build/`、`.arkui-x/ios/build/`（或重新 `ace build`）
-- 重新 `ohpm install` 刷新依赖锁
 
-> 移除完成后，Index.ets 中对该包的 `import` 语句也要一并删除，否则编译报 `Cannot find module`。
-
----
-
-## 10. 小结
-
-| 场景 | 推荐做法 |
-|---|---|
-| 纯 ETS 逻辑库，三端通用 | 用 `package` 类型 |
-| 跨端原生能力，三端都要 | 用 `ffi`/`plugin` + platform=both |
-| 单平台能力 | 用 `ffi`/`plugin` + platform=android 或 iOS，**仅在目标平台消费工程导入** |
-| 消费工程三端跑同一份代码 | 只导入 both 包 + package 包；单平台包按平台条件加载 |
+> 移除完成后，Index.ets 中对该插件包的 `import` 语句也要一并删除，否则编译报 `Cannot find module`。
