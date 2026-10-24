@@ -5,7 +5,7 @@
 > - 使用 `ace create` 创建三方件工程
 > - 使用 `ace build plugin` 构建 HAR 插件包
 > - 使用 `ace install` 将 HAR 集成到消费工程
-> - 编写 Index.ets 导入并调用三方件方法
+> - 跨平台宿主工程导入并调用三方件方法
 > - 单平台插件包跨端导入白屏的已知问题与规避
 > - 已集成插件包的手动卸载方法
 
@@ -13,7 +13,7 @@
 
 ## 0. 前置准备
 
-环境与工具链准备请参考官方文档：[《使用 ArkUI-X CLI 工具开始》](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/quick-start/start-with-ace-tools.md)
+环境与工具链准备请参考官方文档：[使用 ArkUI-X CLI 工具开始](https://gitcode.com/arkui-x/docs/blob/master/zh-cn/application-dev/quick-start/start-with-ace-tools.md)
 
 环境自检：`ace check -v`
 
@@ -95,8 +95,6 @@ ace run hap      # 鸿蒙真机
 ace run apk      # Android 真机
 ace run ios      # iOS 真机/模拟器（需先完成 iOS 签名配置）
 ```
-
-- package/ffi/plugin 在自身工程内，entry 导入的是本工程 lib，三端原生均已链接，应正常。
 
 ---
 
@@ -202,7 +200,7 @@ struct Index {
 }
 ```
 
-> 多插件包集成时注意**命名冲突**，用别名：`import { add as ffiA_add } from '...'`。
+> 推荐使用别名进行区分：import { add as ffiA_add } from '...'。
 
 ---
 
@@ -212,7 +210,7 @@ struct Index {
 cd consumer_app
 ace run hap      # 鸿蒙
 ace run apk      # Android
-ace run ios      # iOS
+ace run ios      # iOS（需先完成 iOS 签名配置）
 ```
 
 `ace run <平台>` = 构建 + 安装 + 启动。
@@ -262,9 +260,7 @@ E Ace: Failed to create reference for global.requireNapi
 
 ### 规避
 
-**方案一（推荐）：跨端消费使用 `both` 插件包**
-
-`platform: ['android','iOS']` 的 ffi/plugin 三端原生均链接，无条件导入即正常。三端通用的消费工程应优先集成 both 插件包。
+**方案一（推荐）：优先使用支持多平台的插件包
 
 **方案二：按平台选择性导入**
 
@@ -276,7 +272,6 @@ E Ace: Failed to create reference for global.requireNapi
 | iOS | ios-only + both | android-only |
 | HarmonyOS | 三类均可 | —（原生 `.so` 随 HAR 提供） |
 
-> 单平台插件包仅用于目标平台的定制能力封装，不要无条件跨端导入。若需单份代码三端通用，需按平台条件加载（动态 import 或平台特定源码目录）。
 
 > 此为 ArkUI-X 跨端 HAR 原生分发的已知限制：平台过滤只裁原生产物（aar/xcframework），不剔除 ETS；顶层 `.so` 导入在未链接平台解析为 undefined 致白屏。
 
@@ -284,7 +279,7 @@ E Ace: Failed to create reference for global.requireNapi
 
 ## 9. 卸载/移除已集成的插件包（手动）
 
-`ace` 没有移除消费工程已集成的 HAR 插件包的命令。移除一个已集成插件包需手动删除以下内容（以 `my_ffi_bothlib` 为插件包名）：
+`ace` 没有移除消费工程已集成的 HAR 插件包的命令。移除一个已集成插件包需手动删除以下内容（以 my_ffi_bothlib 插件包为例）：
 
 ### 9.1 三方件本体
 - 删除 `.arkui-x/plugins/my_ffi_bothlib/`（整目录，含 `.so`/aar/xcframework）
