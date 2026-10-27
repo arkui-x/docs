@@ -27,7 +27,7 @@
 |---|---|---|---|
 | **Package** | `package` | 无，纯 ArkTS | UI 组件库、工具函数库 |
 | **FFI** | `ffi` | 预编译 C++（AAR + xcframework + .so） | MQTT、加密、图像处理等 C 库 |
-| **Plugin** | `plugin` | 预编译 C++ & Java/Kotlin（AAR + xcframework + .so） | 藍牙、相机、传感器等平台 API |
+| **Plugin** | `plugin` | 预编译 C++ & Java/Kotlin（AAR + xcframework + .so） | 蓝牙、相机、传感器等平台 API |
 
 ---
 
