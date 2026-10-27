@@ -83,6 +83,7 @@
 - [ArkUI-X SDK](tools/how-to-use-arkui-x-sdk.md)
 - [DevEco Studio](tools/how-to-use-deveco-studio.md)
 - [ACE Tools](tools/how-to-use-ace-tools.md)
+- [ACE Tools三方件](tools/how-to-use-ace-tools-third-party.md)
 
 ### 测试
 
