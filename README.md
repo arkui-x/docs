@@ -15,7 +15,7 @@
 ### 最新版本
 
 - master：最新开发版本。
-- ArkUI-X 6.0.2 Release版本：点击[此处](zh-cn/release-notes/ArkUI-X-v6.0.2-release.md)了解版本详情。
+- ArkUI-X 6.1.1 Release版本：点击[此处](zh-cn/release-notes/ArkUI-X-v6.1.1-release.md)了解版本详情。
 
 ## 第三方开源软件及许可说明
 
