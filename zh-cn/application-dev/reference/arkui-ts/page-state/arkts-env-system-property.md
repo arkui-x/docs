@@ -52,7 +52,7 @@
 | widthBreakpoint | [WidthBreakpoint](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#widthbreakpoint13) | 窗口宽度所在的布局断点枚举。 |
 | heightBreakpoint | [HeightBreakpoint](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#heightbreakpoint13) | 窗口高度所在的布局断点枚举。 |
 
-下面的示例中，在\@Component中声明\@Env装饰的变量`breakpoint`，并在build方法中读取其宽高断点值。窗口尺寸变化引起断点变化时，框架会通知`breakpoint`更新，并触发关联的Text组件刷新。
+下面的示例中，在\@Component中声明\@Env装饰的变量`breakpoint`，并在build方法中读取其宽高断点值。点击`Button('Landscape')`和`Button('Portrait')`切换横竖屏，窗口尺寸变化引起断点变化时，框架会通知`breakpoint`更新，并触发关联的Text组件刷新。
 
 ```ts
 import { uiObserver } from '@kit.ArkUI';
@@ -83,24 +83,49 @@ struct Index {
 结合宽度断点值，开发者可以为不同窗口形态提供不同的布局结构，实现在手机、折叠屏、平板上的自适应布局。
 
 ```ts
-import { uiObserver } from '@kit.ArkUI';
+import { uiObserver, window } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
 
 @Entry
 @Component
 struct Index {
   @Env(SystemProperties.BREAK_POINT) breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;
 
+  private changeOrientation(isLandscape: boolean) {
+    const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+    window.getLastWindow(context).then((lastWindow) => {
+      lastWindow.setPreferredOrientation(
+        isLandscape ? window.Orientation.LANDSCAPE : window.Orientation.PORTRAIT);
+    });
+  }
+
   @Builder
   SideBar() {
-    Text('Sidebar').width(200).height('100%').backgroundColor('#f1f1f1')
+    Column() {
+      Text('SideBar').fontSize(20)
+    }
+    .width(200)
+    .height('100%')
+    .backgroundColor('#f1f1f1')
+    .justifyContent(FlexAlign.Center)
   }
 
   @Builder
   Content() {
-    Column() {
+    Column({ space: 16 }) {
+      Text('Content').fontSize(20)
       Text(`widthBreakpoint: ${this.breakpoint.widthBreakpoint}`).fontSize(20)
+
+      Button('Landscape').width(200).onClick(() => {
+        this.changeOrientation(true);
+      })
+      Button('Portrait').width(200).onClick(() => {
+        this.changeOrientation(false);
+      })
     }
     .width('100%')
+    .height('100%')
+    .justifyContent(FlexAlign.Center)
   }
 
   build() {
@@ -128,15 +153,24 @@ struct Index {
 
 ### \@Watch监听断点变化
 
-在\@Component中，可以通过[\@Watch](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/state-management/arkts-watch.md)监听\@Env装饰变量的变化。需要注意的是，仅当\@Env装饰的变量被整体赋值时才会触发\@Watch监听回调，其内部属性的变化不会触发回调。
+在\@Component中，可以通过[\@Watch](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/state-management/arkts-watch.md)监听\@Env装饰变量的变化。需要注意的是，仅当\@Env装饰的变量被整体赋值时才会触发\@Watch监听回调，其内部属性的变化不会触发回调。下面的示例中，点击`Button('Landscape')`和`Button('Portrait')`切换横竖屏触发断点变化，`onBreakpointChange`回调被触发并打印日志。
 
 ```ts
-import { uiObserver } from '@kit.ArkUI';
+import { uiObserver, window } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
 
 @Entry
 @Component
 struct Index {
   @Env(SystemProperties.BREAK_POINT) @Watch('onBreakpointChange') breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;
+
+  private changeOrientation(isLandscape: boolean) {
+    const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+    window.getLastWindow(context).then((lastWindow) => {
+      lastWindow.setPreferredOrientation(
+        isLandscape ? window.Orientation.LANDSCAPE : window.Orientation.PORTRAIT);
+    });
+  }
 
   onBreakpointChange(propName: string) {
     console.info(`the value of this.${propName} has changed`);
@@ -146,9 +180,17 @@ struct Index {
     Column() {
       Text(`widthBreakpoint: ${this.breakpoint.widthBreakpoint}`).fontSize(20)
       Text(`heightBreakpoint: ${this.breakpoint.heightBreakpoint}`).fontSize(20)
+
+      Button('Landscape').width(200).onClick(() => {
+        this.changeOrientation(true);
+      })
+      Button('Portrait').width(200).onClick(() => {
+        this.changeOrientation(false);
+      })
     }
     .width('100%')
     .height('100%')
+    .justifyContent(FlexAlign.Center)
   }
 }
 ```

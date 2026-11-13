@@ -52,23 +52,40 @@ When \@Env uses `SystemProperties.BREAK_POINT`, it returns the layout breakpoint
 | widthBreakpoint | [WidthBreakpoint](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#widthbreakpoint13) | Layout breakpoint enumeration for the window width. |
 | heightBreakpoint | [HeightBreakpoint](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#heightbreakpoint13) | Layout breakpoint enumeration for the window height. |
 
-In the following example, an \@Env decorated variable `breakpoint` is declared in \@Component, and its width and height breakpoint values are read in the build method. When a window size change causes the breakpoint to change, the framework notifies `breakpoint` to update and refreshes the associated Text components.
+In the following example, an \@Env decorated variable `breakpoint` is declared in \@Component, and its width and height breakpoint values are read in the build method. Tapping `Button('Landscape')` or `Button('Portrait')` switches the screen orientation. When the window size change causes the breakpoint to change, the framework notifies `breakpoint` to update and refreshes the associated Text components.
 
 ```ts
-import { uiObserver } from '@kit.ArkUI';
+import { uiObserver, window } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
 
 @Entry
 @Component
 struct Index {
   @Env(SystemProperties.BREAK_POINT) breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;
 
+  private changeOrientation(isLandscape: boolean) {
+    const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+    window.getLastWindow(context).then((lastWindow) => {
+      lastWindow.setPreferredOrientation(
+        isLandscape ? window.Orientation.LANDSCAPE : window.Orientation.PORTRAIT);
+    });
+  }
+
   build() {
     Column() {
       Text(`widthBreakpoint: ${this.breakpoint.widthBreakpoint}`).fontSize(20)
       Text(`heightBreakpoint: ${this.breakpoint.heightBreakpoint}`).fontSize(20)
+
+      Button('Landscape').width(200).onClick(() => {
+        this.changeOrientation(true);
+      })
+      Button('Portrait').width(200).onClick(() => {
+        this.changeOrientation(false);
+      })
     }
     .width('100%')
     .height('100%')
+    .justifyContent(FlexAlign.Center)
   }
 }
 ```
@@ -83,24 +100,49 @@ The running effect is shown below.
 Based on the width breakpoint value, you can provide different layout structures for different window forms to implement adaptive layout across phones, foldables, and tablets.
 
 ```ts
-import { uiObserver } from '@kit.ArkUI';
+import { uiObserver, window } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
 
 @Entry
 @Component
 struct Index {
   @Env(SystemProperties.BREAK_POINT) breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;
 
+  private changeOrientation(isLandscape: boolean) {
+    const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+    window.getLastWindow(context).then((lastWindow) => {
+      lastWindow.setPreferredOrientation(
+        isLandscape ? window.Orientation.LANDSCAPE : window.Orientation.PORTRAIT);
+    });
+  }
+
   @Builder
   SideBar() {
-    Text('Sidebar').width(200).height('100%').backgroundColor('#f1f1f1')
+    Column() {
+      Text('SideBar').fontSize(20)
+    }
+    .width(200)
+    .height('100%')
+    .backgroundColor('#f1f1f1')
+    .justifyContent(FlexAlign.Center)
   }
 
   @Builder
   Content() {
-    Column() {
+    Column({ space: 16 }) {
+      Text('Content').fontSize(20)
       Text(`widthBreakpoint: ${this.breakpoint.widthBreakpoint}`).fontSize(20)
+
+      Button('Landscape').width(200).onClick(() => {
+        this.changeOrientation(true);
+      })
+      Button('Portrait').width(200).onClick(() => {
+        this.changeOrientation(false);
+      })
     }
     .width('100%')
+    .height('100%')
+    .justifyContent(FlexAlign.Center)
   }
 
   build() {
@@ -128,15 +170,24 @@ The running effect is shown below.
 
 ### Listening for Breakpoint Changes with \@Watch
 
-In \@Component, you can use [\@Watch](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/state-management/arkts-watch.md) to listen for changes of \@Env decorated variables. Note that the \@Watch callback is triggered only when the \@Env decorated variable is assigned as a whole. Changes of its internal attributes do not trigger the callback.
+In \@Component, you can use [\@Watch](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/state-management/arkts-watch.md) to listen for changes of \@Env decorated variables. Note that the \@Watch callback is triggered only when the \@Env decorated variable is assigned as a whole. Changes of its internal attributes do not trigger the callback. In the following example, tapping `Button('Landscape')` or `Button('Portrait')` switches the screen orientation and triggers breakpoint changes, and the `onBreakpointChange` callback is invoked to print logs.
 
 ```ts
-import { uiObserver } from '@kit.ArkUI';
+import { uiObserver, window } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
 
 @Entry
 @Component
 struct Index {
   @Env(SystemProperties.BREAK_POINT) @Watch('onBreakpointChange') breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;
+
+  private changeOrientation(isLandscape: boolean) {
+    const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+    window.getLastWindow(context).then((lastWindow) => {
+      lastWindow.setPreferredOrientation(
+        isLandscape ? window.Orientation.LANDSCAPE : window.Orientation.PORTRAIT);
+    });
+  }
 
   onBreakpointChange(propName: string) {
     console.info(`the value of this.${propName} has changed`);
@@ -146,9 +197,17 @@ struct Index {
     Column() {
       Text(`widthBreakpoint: ${this.breakpoint.widthBreakpoint}`).fontSize(20)
       Text(`heightBreakpoint: ${this.breakpoint.heightBreakpoint}`).fontSize(20)
+
+      Button('Landscape').width(200).onClick(() => {
+        this.changeOrientation(true);
+      })
+      Button('Portrait').width(200).onClick(() => {
+        this.changeOrientation(false);
+      })
     }
     .width('100%')
     .height('100%')
+    .justifyContent(FlexAlign.Center)
   }
 }
 ```
