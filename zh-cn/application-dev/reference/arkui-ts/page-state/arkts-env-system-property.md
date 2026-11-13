@@ -49,8 +49,8 @@
 
 | 属性 | 类型 | 说明 |
 | -------- | -------- | -------- |
-| widthBreakpoint | [WidthBreakpoint](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#widthbreakpoint13) | 窗口宽度断点。WIDTH_XS：宽度小于320vp；WIDTH_SM：宽度大于等于320vp且小于600vp；WIDTH_MD：宽度大于等于600vp且小于840vp；WIDTH_LG：宽度大于等于840vp且小于1440vp；WIDTH_XL：宽度大于等于1440vp。 |
-| heightBreakpoint | [HeightBreakpoint](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#heightbreakpoint13) | 窗口高度断点。HEIGHT_SM：窗口宽高比小于0.8；HEIGHT_MD：窗口宽高比大于等于0.8且小于1.2；HEIGHT_LG：窗口宽高比大于等于1.2。 |
+| widthBreakpoint | [WidthBreakpoint](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#widthbreakpoint13) | 窗口宽度所在的布局断点枚举。 |
+| heightBreakpoint | [HeightBreakpoint](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#heightbreakpoint13) | 窗口高度所在的布局断点枚举。 |
 
 下面的示例中，在\@Component中声明\@Env装饰的变量`breakpoint`，并在build方法中读取其宽高断点值。窗口尺寸变化引起断点变化时，框架会通知`breakpoint`更新，并触发关联的Text组件刷新。
 
@@ -73,6 +73,10 @@ struct Index {
 }
 ```
 
+
+运行效果图如下。
+
+![gif](./figures/env-breakpoint-info.gif)
 
 ### 使用断点进行自适应布局
 
@@ -118,6 +122,10 @@ struct Index {
 ```
 
 
+运行效果图如下。
+
+![gif](./figures/env-breakpoint-adaptive.gif)
+
 ### \@Watch监听断点变化
 
 在\@Component中，可以通过[\@Watch](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/ui/state-management/arkts-watch.md)监听\@Env装饰变量的变化。需要注意的是，仅当\@Env装饰的变量被整体赋值时才会触发\@Watch监听回调，其内部属性的变化不会触发回调。
@@ -144,3 +152,7 @@ struct Index {
   }
 }
 ```
+
+运行效果图如下。
+
+![gif](./figures/env-breakpoint-watch.gif)

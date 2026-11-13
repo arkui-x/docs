@@ -49,8 +49,8 @@ When \@Env uses `SystemProperties.BREAK_POINT`, it returns the layout breakpoint
 
 | Attribute | Type | Description |
 | -------- | -------- | -------- |
-| widthBreakpoint | [WidthBreakpoint](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#widthbreakpoint13) | Window width breakpoint. WIDTH_XS: width less than 320 vp; WIDTH_SM: width greater than or equal to 320 vp and less than 600 vp; WIDTH_MD: width greater than or equal to 600 vp and less than 840 vp; WIDTH_LG: width greater than or equal to 840 vp and less than 1440 vp; WIDTH_XL: width greater than or equal to 1440 vp. |
-| heightBreakpoint | [HeightBreakpoint](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#heightbreakpoint13) | Window height breakpoint. HEIGHT_SM: window aspect ratio less than 0.8; HEIGHT_MD: window aspect ratio greater than or equal to 0.8 and less than 1.2; HEIGHT_LG: window aspect ratio greater than or equal to 1.2. |
+| widthBreakpoint | [WidthBreakpoint](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#widthbreakpoint13) | Layout breakpoint enumeration for the window width. |
+| heightBreakpoint | [HeightBreakpoint](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#heightbreakpoint13) | Layout breakpoint enumeration for the window height. |
 
 In the following example, an \@Env decorated variable `breakpoint` is declared in \@Component, and its width and height breakpoint values are read in the build method. When a window size change causes the breakpoint to change, the framework notifies `breakpoint` to update and refreshes the associated Text components.
 
@@ -73,6 +73,10 @@ struct Index {
 }
 ```
 
+
+The running effect is shown below.
+
+![gif](./figures/env-breakpoint-info.gif)
 
 ### Implementing Adaptive Layout with Breakpoints
 
@@ -118,6 +122,10 @@ struct Index {
 ```
 
 
+The running effect is shown below.
+
+![gif](./figures/env-breakpoint-adaptive.gif)
+
 ### Listening for Breakpoint Changes with \@Watch
 
 In \@Component, you can use [\@Watch](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/state-management/arkts-watch.md) to listen for changes of \@Env decorated variables. Note that the \@Watch callback is triggered only when the \@Env decorated variable is assigned as a whole. Changes of its internal attributes do not trigger the callback.
@@ -144,3 +152,7 @@ struct Index {
   }
 }
 ```
+
+The running effect is shown below.
+
+![gif](./figures/env-breakpoint-watch.gif)
