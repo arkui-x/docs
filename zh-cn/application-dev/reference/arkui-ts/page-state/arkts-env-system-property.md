@@ -62,8 +62,10 @@ import { common } from '@kit.AbilityKit';
 @Entry
 @Component
 struct Index {
+  // 获取当前窗口的断点信息，值由框架提供并随窗口尺寸变化更新。
   @Env(SystemProperties.BREAK_POINT) breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;
 
+  // 切换窗口方向，用于演示窗口尺寸变化时的断点更新。
   private changeOrientation(isLandscape: boolean) {
     const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
     window.getLastWindow(context).then((lastWindow) => {
@@ -73,21 +75,25 @@ struct Index {
   }
 
   onBreakpointChange(monitor: IMonitor) {
+    // 遍历本次变化的属性，读取变化前后的断点值。
     monitor.dirty.forEach((path: string) => {
       console.info(`${path} changed from ${monitor.value(path)?.before} to ${monitor.value(path)?.now}`);
     });
   }
 
   aboutToAppear(): void {
+    // 监听断点对象内部的宽高属性，属性变化时执行回调。
     UIUtils.addMonitor(this.breakpoint, ['widthBreakpoint', 'heightBreakpoint'], this.onBreakpointChange);
   }
 
   aboutToDisappear(): void {
+    // 组件离开时清理对应监听，与aboutToAppear中的注册配对。
     UIUtils.clearMonitor(this.breakpoint, ['widthBreakpoint', 'heightBreakpoint'], this.onBreakpointChange);
   }
 
   build() {
     Column({ space: 8 }) {
+      // 在build中读取断点属性，断点更新时关联的Text组件自动刷新。
       Text(`widthBreakpoint: ${this.breakpoint.widthBreakpoint}`).fontSize(20)
       Text(`heightBreakpoint: ${this.breakpoint.heightBreakpoint}`).fontSize(20)
 
@@ -120,8 +126,10 @@ import { common } from '@kit.AbilityKit';
 @Entry
 @Component
 struct Index {
+  // 获取当前窗口的断点信息，值由框架提供并随窗口尺寸变化更新。
   @Env(SystemProperties.BREAK_POINT) breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;
 
+  // 切换窗口方向，用于演示窗口尺寸变化时的断点更新。
   private changeOrientation(isLandscape: boolean) {
     const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
     window.getLastWindow(context).then((lastWindow) => {
@@ -154,6 +162,7 @@ struct Index {
         this.changeOrientation(false);
       })
     }
+    // 内容区占据剩余宽度，侧边栏使用固定宽度。
     .layoutWeight(1)
     .height('100%')
     .justifyContent(FlexAlign.Center)
@@ -162,15 +171,16 @@ struct Index {
   build() {
     Row() {
       if (this.breakpoint.widthBreakpoint >= WidthBreakpoint.WIDTH_MD) {
-        // 宽窗口：左右结构
+        // WIDTH_MD及以上显示侧边栏和内容区。
         this.SideBar()
         this.Content()
       } else {
-        // 窄窗口：仅显示内容
+        // 较小宽度断点仅显示内容区。
         this.Content()
       }
     }
     .width('100%')
+    // 设置布局演示区域的高度，断点信息取自整个窗口。
     .height(240)
   }
 }

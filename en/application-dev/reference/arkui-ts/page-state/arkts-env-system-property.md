@@ -62,8 +62,10 @@ import { common } from '@kit.AbilityKit';
 @Entry
 @Component
 struct Index {
+  // The framework provides and updates breakpoint information for the current window.
   @Env(SystemProperties.BREAK_POINT) breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;
 
+  // Switch the window orientation to demonstrate breakpoint updates after resizing.
   private changeOrientation(isLandscape: boolean) {
     const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
     window.getLastWindow(context).then((lastWindow) => {
@@ -73,21 +75,25 @@ struct Index {
   }
 
   onBreakpointChange(monitor: IMonitor) {
+    // Read the previous and current breakpoint values for each changed property.
     monitor.dirty.forEach((path: string) => {
       console.info(`${path} changed from ${monitor.value(path)?.before} to ${monitor.value(path)?.now}`);
     });
   }
 
   aboutToAppear(): void {
+    // Listen for changes to the width and height properties of the breakpoint object.
     UIUtils.addMonitor(this.breakpoint, ['widthBreakpoint', 'heightBreakpoint'], this.onBreakpointChange);
   }
 
   aboutToDisappear(): void {
+    // Remove the listener registered in aboutToAppear when the component disappears.
     UIUtils.clearMonitor(this.breakpoint, ['widthBreakpoint', 'heightBreakpoint'], this.onBreakpointChange);
   }
 
   build() {
     Column({ space: 8 }) {
+      // Reading breakpoint properties in build lets the Text components refresh on changes.
       Text(`widthBreakpoint: ${this.breakpoint.widthBreakpoint}`).fontSize(20)
       Text(`heightBreakpoint: ${this.breakpoint.heightBreakpoint}`).fontSize(20)
 
@@ -120,8 +126,10 @@ import { common } from '@kit.AbilityKit';
 @Entry
 @Component
 struct Index {
+  // The framework provides and updates breakpoint information for the current window.
   @Env(SystemProperties.BREAK_POINT) breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;
 
+  // Switch the window orientation to demonstrate breakpoint updates after resizing.
   private changeOrientation(isLandscape: boolean) {
     const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
     window.getLastWindow(context).then((lastWindow) => {
@@ -154,6 +162,7 @@ struct Index {
         this.changeOrientation(false);
       })
     }
+    // The content area fills the remaining width beside the fixed-width sidebar.
     .layoutWeight(1)
     .height('100%')
     .justifyContent(FlexAlign.Center)
@@ -162,15 +171,16 @@ struct Index {
   build() {
     Row() {
       if (this.breakpoint.widthBreakpoint >= WidthBreakpoint.WIDTH_MD) {
-        // Wide window: sidebar on the left and content on the right
+        // Show the sidebar and content area at WIDTH_MD and higher.
         this.SideBar()
         this.Content()
       } else {
-        // Narrow window: content only
+        // Show only the content area at smaller width breakpoints.
         this.Content()
       }
     }
     .width('100%')
+    // Set the demo area height. Breakpoints are determined by the window size.
     .height(240)
   }
 }
