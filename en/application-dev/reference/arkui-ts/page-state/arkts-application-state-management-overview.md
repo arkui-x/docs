@@ -12,4 +12,4 @@ The decorators described in the previous topics are used to share state variable
 
 - [Environment](arkts-environment.md): a range of environment parameters regarding the device where the application runs. The environment parameters are synchronized to the AppStorage and can be used together with the AppStorage.
 
-- [\@Env](arkts-env-system-property.md): reactive system environment variable decorator, which senses changes of system environment variables such as the window breakpoint and triggers refresh of the associated components.
+- [\@Env](arkts-env-system-property.md): a reactive system environment variable decorator that obtains window breakpoint information and refreshes the associated components when breakpoints change.

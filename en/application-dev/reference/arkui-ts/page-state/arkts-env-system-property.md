@@ -1,15 +1,14 @@
 # \@Env: System Environment Variables
 
 
-In multi-device development scenarios (such as phones, foldables, and tablets), you can use the [\@Env](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-env-system-property.md) decorator to listen for changes to system environment variables and adapt your application to the corresponding scenarios, reducing adaptation logic and redundant development across devices.
+In ArkUI-X multi-device development, you can use the [\@Env](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-env-system-property.md) decorator to obtain window breakpoint information and update the associated UI when the window size or screen orientation changes, enabling adaptive layouts.
 
 
 ## Overview
 
-\@Env is a reactive system environment variable decorator. It provides the following capabilities:
+\@Env is a reactive system environment variable decorator that obtains and responds to window breakpoint changes.
 
-- Reads the corresponding environment variable information based on the decorator argument. The following environment variable is currently supported:
-  - [`SystemProperties.BREAK_POINT`](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-env-system-property.md#systemproperties): obtains the breakpoint information corresponding to the window's width and height thresholds, of the [`uiObserver.WindowSizeLayoutBreakpointInfo`](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/js-apis-arkui-observer.md#windowsizelayoutbreakpointinfo22) type.
+- Uses [`SystemProperties.BREAK_POINT`](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-env-system-property.md#systemproperties) to obtain window breakpoint information of the [`uiObserver.WindowSizeLayoutBreakpointInfo`](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/js-apis-arkui-observer.md#windowsizelayoutbreakpointinfo22) type.
 - When a system environment variable changes (for example, when the window size changes or the screen orientation switches), the \@Env decorated variable is notified to update, and the components associated with \@Env are refreshed, keeping the UI content up to date.
 - Variables decorated by \@Env must not be initialized by developers. Their values are automatically provided by the framework based on the environment variables of the current window.
 
@@ -35,27 +34,29 @@ In multi-device development scenarios (such as phones, foldables, and tablets), 
   }
   ```
 
-- \@Env cannot be used together with other state variable decorators. Otherwise, a compile-time error occurs. In \@Component, you can use [\@Watch](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/state-management/arkts-watch.md) to listen for changes of \@Env decorated variables. For details, see [Listening for Breakpoint Changes with \@Watch](#listening-for-breakpoint-changes-with-watch).
-- When an \@Env decorated variable is passed to a child component, the following rules apply:
-  - In a custom component decorated by \@Component, it can only be used to initialize regular variables (not decorated by any state decorator) of the child component.
-  - In a custom component decorated by \@ComponentV2, it can only be used to initialize variables decorated by [\@Param](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/state-management/arkts-new-param.md) of the child component.
+- \@Env cannot be used together with other state variable decorators or \@Require. Otherwise, a compile-time error occurs.
+- When an \@Env decorated variable is passed to a child component, the following rules apply.
+  - When passed to a child component decorated by \@Component, it can only initialize regular variables in that child component.
+  - When passed to a child component decorated by \@ComponentV2, it can only initialize variables decorated by [\@Param](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/state-management/arkts-new-param.md) of the child component.
 
 
 ## Application Scenarios
 
 ### Obtaining Window Breakpoint Information
 
-When \@Env uses `SystemProperties.BREAK_POINT`, it returns the layout breakpoint information `WindowSizeLayoutBreakpointInfo` of the current window size, which contains the following attributes:
+When \@Env uses `SystemProperties.BREAK_POINT`, it returns the layout breakpoint information `WindowSizeLayoutBreakpointInfo` of the current window size, which contains the following attributes.
 
 | Attribute | Type | Description |
 | -------- | -------- | -------- |
 | widthBreakpoint | [WidthBreakpoint](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#widthbreakpoint13) | Layout breakpoint enumeration for the window width. |
 | heightBreakpoint | [HeightBreakpoint](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-appendix-enums.md#heightbreakpoint13) | Layout breakpoint enumeration for the window height. |
 
-In the following example, an \@Env decorated variable `breakpoint` is declared in \@Component, and its width and height breakpoint values are read in the build method. Tapping `Button('Landscape')` or `Button('Portrait')` switches the screen orientation. When the window size change causes the breakpoint to change, the framework notifies `breakpoint` to update and refreshes the associated Text components.
+In the following example, an \@Env decorated variable `breakpoint` is declared in \@Component, and its width and height breakpoint values are read in the build method. Tapping the `Landscape` and `Portrait` buttons switches the screen orientation. When the window size change causes a breakpoint change, the associated Text components refresh automatically.
+
+[`UIUtils.addMonitor`](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/state-management/arkts-new-addMonitor-clearMonitor.md) listens for changes to the `widthBreakpoint` and `heightBreakpoint` properties. The `onBreakpointChange` callback logs the previous and current breakpoint values. When the component is destroyed, `UIUtils.clearMonitor` removes the registered listener.
 
 ```ts
-import { uiObserver, window } from '@kit.ArkUI';
+import { uiObserver, UIUtils, window } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
 
 @Entry
@@ -71,8 +72,22 @@ struct Index {
     });
   }
 
+  onBreakpointChange(monitor: IMonitor) {
+    monitor.dirty.forEach((path: string) => {
+      console.info(`${path} changed from ${monitor.value(path)?.before} to ${monitor.value(path)?.now}`);
+    });
+  }
+
+  aboutToAppear(): void {
+    UIUtils.addMonitor(this.breakpoint, ['widthBreakpoint', 'heightBreakpoint'], this.onBreakpointChange);
+  }
+
+  aboutToDisappear(): void {
+    UIUtils.clearMonitor(this.breakpoint, ['widthBreakpoint', 'heightBreakpoint'], this.onBreakpointChange);
+  }
+
   build() {
-    Column() {
+    Column({ space: 8 }) {
       Text(`widthBreakpoint: ${this.breakpoint.widthBreakpoint}`).fontSize(20)
       Text(`heightBreakpoint: ${this.breakpoint.heightBreakpoint}`).fontSize(20)
 
@@ -84,8 +99,7 @@ struct Index {
       })
     }
     .width('100%')
-    .height('100%')
-    .justifyContent(FlexAlign.Center)
+    .padding(16)
   }
 }
 ```
@@ -97,7 +111,7 @@ The running effect is shown below.
 
 ### Implementing Adaptive Layout with Breakpoints
 
-Based on the width breakpoint value, you can provide different layout structures for different window forms to implement adaptive layout across phones, foldables, and tablets.
+In the following example, the sidebar and content area are displayed when the window width breakpoint is `WIDTH_MD` or higher. Otherwise, only the content area is displayed. The content area uses `layoutWeight(1)` to occupy the remaining width.
 
 ```ts
 import { uiObserver, window } from '@kit.ArkUI';
@@ -140,15 +154,14 @@ struct Index {
         this.changeOrientation(false);
       })
     }
-    .width('100%')
+    .layoutWeight(1)
     .height('100%')
     .justifyContent(FlexAlign.Center)
   }
 
   build() {
     Row() {
-      if (this.breakpoint.widthBreakpoint === WidthBreakpoint.WIDTH_LG ||
-        this.breakpoint.widthBreakpoint === WidthBreakpoint.WIDTH_XL) {
+      if (this.breakpoint.widthBreakpoint >= WidthBreakpoint.WIDTH_MD) {
         // Wide window: sidebar on the left and content on the right
         this.SideBar()
         this.Content()
@@ -158,7 +171,7 @@ struct Index {
       }
     }
     .width('100%')
-    .height('100%')
+    .height(240)
   }
 }
 ```
@@ -167,51 +180,3 @@ struct Index {
 The running effect is shown below.
 
 ![gif](./figures/env-breakpoint-adaptive.gif)
-
-### Listening for Breakpoint Changes with \@Watch
-
-In \@Component, you can use [\@Watch](https://gitcode.com/openharmony/docs/blob/master/en/application-dev/ui/state-management/arkts-watch.md) to listen for changes of \@Env decorated variables. Note that the \@Watch callback is triggered only when the \@Env decorated variable is assigned as a whole. Changes of its internal attributes do not trigger the callback. In the following example, tapping `Button('Landscape')` or `Button('Portrait')` switches the screen orientation and triggers breakpoint changes, and the `onBreakpointChange` callback is invoked to print logs.
-
-```ts
-import { uiObserver, window } from '@kit.ArkUI';
-import { common } from '@kit.AbilityKit';
-
-@Entry
-@Component
-struct Index {
-  @Env(SystemProperties.BREAK_POINT) @Watch('onBreakpointChange') breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;
-
-  private changeOrientation(isLandscape: boolean) {
-    const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-    window.getLastWindow(context).then((lastWindow) => {
-      lastWindow.setPreferredOrientation(
-        isLandscape ? window.Orientation.LANDSCAPE : window.Orientation.PORTRAIT);
-    });
-  }
-
-  onBreakpointChange(propName: string) {
-    console.info(`the value of this.${propName} has changed`);
-  }
-
-  build() {
-    Column() {
-      Text(`widthBreakpoint: ${this.breakpoint.widthBreakpoint}`).fontSize(20)
-      Text(`heightBreakpoint: ${this.breakpoint.heightBreakpoint}`).fontSize(20)
-
-      Button('Landscape').width(200).onClick(() => {
-        this.changeOrientation(true);
-      })
-      Button('Portrait').width(200).onClick(() => {
-        this.changeOrientation(false);
-      })
-    }
-    .width('100%')
-    .height('100%')
-    .justifyContent(FlexAlign.Center)
-  }
-}
-```
-
-The running effect is shown below.
-
-![gif](./figures/env-breakpoint-watch.gif)

@@ -12,4 +12,4 @@
 
 - [Environment](arkts-environment.md)：应用程序运行的设备的环境参数，环境参数会同步到AppStorage中，可以和AppStorage搭配使用。
 
-- [\@Env](arkts-env-system-property.md)：响应式系统环境变量装饰器，可感知窗口断点等系统环境变量的变化，并触发关联组件刷新。
+- [\@Env](arkts-env-system-property.md)：响应式系统环境变量装饰器，可感知窗口断点的变化，并触发关联组件刷新。
