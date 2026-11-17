@@ -247,14 +247,30 @@ protected void onCreate(Bundle savedInstanceState){
 
 **方案二：**
 
-- 可在Android侧创建app/src/main/res/values/themes.xml文件，并自定义主题。深色主题下启动应用，则设置"android:windowLightStatusBar"为false。
+- 可在Android侧分别创建浅色主题app/src/main/res/values/themes.xml和深色主题app/src/main/res/values-night/themes.xml文件，并自定义主题。
 
 ```
+//浅色主题
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="myTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
+    <style name="AppTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+    </style>
+</resources>
+```
+
+```
+//深色主题
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
     </style>
 </resources>
 ```
@@ -263,7 +279,10 @@ protected void onCreate(Bundle savedInstanceState){
 ```
 <application
     ...
-    android:theme="@style/myTheme"
+    android:theme="@style/AppTheme"
     ...
 >
 ```
+
+**注意**
+若开发者使用Android SDK API26版本及以下设备，在浅色模式下需自行设置底部导航栏的字体及符号颜色以产生反差。
