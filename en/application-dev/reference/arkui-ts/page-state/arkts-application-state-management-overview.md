@@ -11,3 +11,5 @@ The decorators described in the previous topics are used to share state variable
 - [PersistentStorage](arkts-persiststorage.md): API for persisting application attributes. It is usually used together with AppStorage to persist selected AppStorage attributes to the disk so that their values are the same upon application re-start as they were when the application was closed.
 
 - [Environment](arkts-environment.md): a range of environment parameters regarding the device where the application runs. The environment parameters are synchronized to the AppStorage and can be used together with the AppStorage.
+
+- [\@Env](arkts-env-system-property.md): a reactive system environment variable decorator that obtains window breakpoint information and refreshes the associated components when breakpoints change.
