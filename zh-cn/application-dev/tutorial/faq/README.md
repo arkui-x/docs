@@ -60,6 +60,7 @@
 - [ArkUI-X使用C API方法编译失败，报错为有未定义符号](Development-Stage/Dev-faq-27.md)
 - [ArkUI-X Android应用设置非沉浸式失效问题](Development-Stage/Dev-faq-28.md)
 - [ArkUI-X iOS 编译提示 double-quoted include 警告](Development-Stage/Dev-faq-29.md)
+- [ArkUI-X开启二进制裁剪（ace_engine_enable_reduce_eh_frame）后如何获取和解析native崩溃堆栈](Development-Stage/Dev-faq-30.md)
 
 ### 问题自排查
 
