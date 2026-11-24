@@ -298,6 +298,8 @@ onErrorReceive(callback: Callback\<OnErrorReceiveEvent\>)
 
 网页加载遇到错误时触发该回调。主资源与子资源出错都会回调该接口，可以通过request.isMainFrame来判断是否是主资源报错。出于性能考虑，建议此回调中尽量执行简单逻辑。在无网络的情况下，触发此回调。
 
+**注意：** iOS平台仅主文档导航失败会触发该回调，子资源（如图片、JS、CSS等）加载失败不经过该接口（iOS系统WKWebView未提供子资源加载错误的回调能力），因此request.isMainFrame无法用于区分主/子资源报错（始终返回true）；Android、OpenHarmony平台可正常使用。如需监控iOS侧子资源加载失败，可通过runJavaScriptOnDocumentStart注入脚本在页面内捕获error事件并上报（仅能感知加载失败，无法获取HTTP响应码）。
+
 **系统能力：** SystemCapability.Web.Webview.Core
 
 **支持平台：** Android、iOS
@@ -569,6 +571,8 @@ iOS：不支持。
 onHttpErrorReceive(callback: Callback\<OnHttpErrorReceiveEvent\>)
 
 网页加载资源遇到的HTTP错误（响应码>=400）时触发该回调。
+
+**注意：** iOS平台仅主文档导航收到HTTP错误响应（响应码>=400）时触发该回调，子资源（如图片、JS、CSS等）的HTTP错误不经过该接口（iOS系统WKWebView未提供子资源加载的回调能力）。如需监控iOS侧子资源加载失败，可通过runJavaScriptOnDocumentStart注入脚本在页面内捕获error事件并上报（仅能感知加载失败，无法获取HTTP响应码）。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -1519,7 +1523,11 @@ onlineImageAccess(onlineImageAccess: boolean)
 
 设置是否允许从网络加载图片资源（通过HTTP和HTTPS访问的资源），默认允许访问。
 
+设置为false时仅阻止通过网络（HTTP/HTTPS）加载的图片资源，本地文件中的图片不受影响。
+
 iOS不支持。
+
+**注意：** iOS系统WKWebView未提供图片加载开关，因此该接口在iOS平台不生效，规避方案同imageAccess。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -1553,7 +1561,11 @@ domStorageAccess(domStorageAccess: boolean)
 
 设置是否开启文档对象模型存储接口（DOM Storage API）权限，默认未开启。
 
+该接口在部分平台版本上实测仅控制localStorage的访问权限，sessionStorage可能不受该接口控制。
+
 iOS不支持。
+
+**注意：** iOS系统WKWebView未提供禁用DOM Storage的设置项（其存储相关能力仅支持控制是否持久化），因此该接口在iOS平台不生效。如需在iOS侧实现类似效果：防止数据持久化可使用incognitoMode（存储不落盘）；严格禁用存储可通过runJavaScriptOnDocumentStart注入脚本覆写存储接口（近似实现）。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -1587,7 +1599,11 @@ imageAccess(imageAccess: boolean)
 
 设置是否允许自动加载图片资源，默认允许。
 
+设置为false时停止所有图片资源（包含本地文件中的图片）的自动加载。
+
 iOS不支持。
+
+**注意：** iOS系统WKWebView未提供图片加载开关，因此该接口在iOS平台不生效。如需在iOS侧实现省流量等类似效果，建议内容侧提供无图版页面，或通过runJavaScriptOnDocumentStart注入脚本移除页面中的图片（近似实现）。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -1856,6 +1872,8 @@ struct WebComponent {
 fileAccess(fileAccess: boolean)
 
 设置是否开启应用中文件系统的访问。[$rawfile(filepath/filename)](../../quick-start/resource-categories-and-access.md)中的文件不受该属性影响而被限制访问。
+
+**注意：** iOS系统WKWebView按次声明文件读取范围，未提供全局文件访问开关，因此该接口在iOS平台不生效。如需在iOS侧限制页面导航访问本地文件，可通过onLoadIntercept拦截file://协议的导航并自行维护放行路径白名单（仅限制导航级访问；页面内引用的file://子资源不受导航拦截，其读取范围主要由加载时声明的allowingReadAccessToURL约束）。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
@@ -2328,6 +2346,8 @@ Web组件返回的请求/响应头对象。
 ## WebResourceResponse
 
 Web组件资源响应对象。示例代码参考[onHttpErrorReceive事件](#onhttperrorreceive)。
+
+**注意：** iOS平台该对象仅在主文档导航拦截场景下生效（iOS系统限制onInterceptRequest仅能拦截主文档导航，详见onInterceptRequest说明）。
 
 ### constructor
 
@@ -4219,6 +4239,8 @@ runJavaScriptOnDocumentEnd(scripts: Array\<ScriptItem>)
 onInterceptRequest(callback: Callback<OnInterceptRequestEvent, WebResourceResponse>)
 
 当Web组件加载URL之前触发该回调，用于拦截URL并返回响应数据。`onInterceptRequest`可拦截所有跳转请求并返回响应数据，但无法访问POST请求体（Body）内容，且不支持分片缓冲（buffer）类型数据获取。此类场景需改用[WebSchemeHandler](../apis/arkts-apis-webview-WebSchemeHandler.md)实现，依据具体业务需求进行判断。
+
+**注意：** iOS平台仅拦截主文档导航请求，css/js/图片等子资源请求不经过该回调（iOS系统WKWebView的URL Scheme Handler机制不支持注册http/https协议，故无法拦截子资源请求）。依赖子资源拦截的功能建议仅在Android、OpenHarmony平台使用，或iOS侧通过原生桥接实现。
 
 **系统能力：** SystemCapability.Web.Webview.Core
 
